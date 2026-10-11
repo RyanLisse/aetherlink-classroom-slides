@@ -391,3 +391,11 @@ yourself before teaching:
 8. **Read every `notes` field once** — they're written for a solo facilitator
    who hasn't taught this content before; flag anything that doesn't match
    how you actually plan to run a slide.
+
+## Workshop 5 deck (proposal, branch `workshop-5-sre-agent`)
+
+`workshop5.html` loads `workshop5-slides.js` (60 slides: AI-native SDLC with an SRE agent, English) with the same
+`app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
+Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
+`presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
+(default stays `presenter.html` / `index.html`).

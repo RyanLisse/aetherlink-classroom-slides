@@ -35,7 +35,7 @@ function showInFrame(frame, index) {
   const hash = '#' + (index + 1);
   // once the deck has loaded inside the frame, only change its hash (no reload); before that, (re)load it
   try { if (frame.dataset.ready) { frame.contentWindow.location.hash = hash; return; } } catch {}
-  frame.src = 'index.html?embed=1' + hash;
+  frame.src = (window.DECK_PAGE || 'index.html') + '?embed=1' + hash;
 }
 [$('p-frame'), $('p-next-frame')].forEach(f => f.addEventListener('load', () => { f.dataset.ready = '1'; }));
 const ro = new ResizeObserver(entries => entries.forEach(e => fitShot(e.target)));
