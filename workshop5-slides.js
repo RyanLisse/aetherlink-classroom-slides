@@ -15,17 +15,12 @@ window.SLIDES = [
       "place": "beside",
       "stagger": "pop"
     },
-    "cards": [
-      {
-        "title": "Method",
-        "body": "Concept. Demo. Your turn."
-      }
-    ],
+    "cards": [],
     "keyPoints": [
       "Welcome the room.",
       "Check the setup."
     ],
-    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n3. If a person has no setup: do not fix it now. Help them at slide 18 and in the 11:00 break."
+    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n3. If a person has no setup: do not fix it now. Help them at slide 17 and in the 11:00 break."
   },
   {
     "title": "Goal of the day",
@@ -107,89 +102,24 @@ window.SLIDES = [
       "Five skill showcases.",
       "15:40: your hackathon intent.md."
     ],
-    "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (13:52), /verify-this (15:00), /review-and-ship + /visual-pr (15:18), /handoff (15:45).\n5. Say: “At the start of each block, open progress.md. Show me your counter. This takes 30 seconds.”"
+    "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (13:52), /verify-this (15:00), /review-and-ship + /visual-pr (15:18), /handoff (15:45).\n5. Say: “At the start of each block, open progress.md. Show the current checks and your latest dated evidence. This takes 30 seconds.”"
   },
   {
-    "title": "What did your agent do alone?",
-    "subtitle": "Think about your W4 agent. Give one sentence per table.",
-    "cards": [
-      {
-        "title": "Alone",
-        "body": "Which step ran without you?"
-      },
-      {
-        "title": "You",
-        "body": "Where did you correct, approve, or stop it?"
-      }
-    ],
-    "kicker": "W5 · W4 RECAP · QUESTION 1 / 4",
+    "title": "What was most useful in the last session?",
+    "kicker": "W5 · RECAP",
+    "subtitle": "Share one thing you learned or used.",
     "type": "context",
+    "cards": [],
     "visual": {
       "opener": "ask",
-      "stagger": "pop"
-    },
-    "keyPoints": [
-      "Open question.",
-      "Three answers on the board.",
-      "The answers return on slide 8."
-    ],
-    "notes": "Time: 10:10 · 4 min.\n1. Let them do: each table talks for 1 minute.\n2. Ask three tables for an answer.\n3. Write the answers on the board in two columns: “agent alone” and “human stepped in”.\n4. Do not give the answer now. Slide 8 gives it.\n5. If the room is quiet, ask: “Which agent action did you undo later?”"
-  },
-  {
-    "title": "When n8n, when the Agent SDK?",
-    "subtitle": "You used both in W4. Which one fits which task?",
-    "cards": [
-      {
-        "title": "n8n",
-        "body": "Which task fit n8n?"
-      },
-      {
-        "title": "Agent SDK",
-        "body": "When did you need code and an agent loop?"
-      }
-    ],
-    "kicker": "W5 · W4 RECAP · QUESTION 2 / 4",
-    "type": "context",
-    "visual": {
       "bot": "think",
-      "place": "beside",
-      "tool": "thought",
-      "stepThrough": true
+      "place": "beside"
     },
     "keyPoints": [
-      "Two columns on the board.",
-      "Ask for a real example.",
-      "Collect. Do not judge."
+      "One useful takeaway per table.",
+      "Ask for a concrete example."
     ],
-    "notes": "Time: 10:14 · 4 min.\n1. Let them do: hands up for each side.\n2. Write two examples per column on the board.\n3. Ask: “What decided it: speed, control, or tests?”\n4. Keep the answers for slide 8."
-  },
-  {
-    "title": "Which tool or MCP helped most?",
-    "subtitle": "Name one tool per table. Give the reason.",
-    "cards": [
-      {
-        "title": "Tool or MCP",
-        "body": "Which connection did you really use?"
-      },
-      {
-        "title": "Value",
-        "body": "What could the agent do with it?"
-      }
-    ],
-    "kicker": "W5 · W4 RECAP · QUESTION 3 / 4",
-    "type": "context",
-    "visual": {
-      "bot": "point",
-      "place": "beside",
-      "stagger": "pop",
-      "stepThrough": true
-    },
-    "keyPoints": [
-      "Hands up per tool.",
-      "Ask: read-only or write?",
-      "This leads to today's local MCP."
-    ],
-    "notes": "Time: 10:18 · 4 min.\n1. Say 3–4 tools from W4. Ask for hands per tool.\n2. Ask: “Could that tool only read, or could it also write?”\n3. Say: “Today our MCP is local and read-only.”"
+    "notes": "Time: 10:10 · 7 min.\n1. Give each table 2 minutes to discuss.\n2. Ask each table to share one useful takeaway from the last session.\n3. Ask how they used it, or where they could use it.\n4. Write the main takeaways on the board."
   },
   {
     "title": "What went wrong? What did you learn?",
@@ -204,7 +134,7 @@ window.SLIDES = [
         "body": "What must you write down before the agent starts?"
       }
     ],
-    "kicker": "W5 · W4 RECAP · QUESTION 4 / 4",
+    "kicker": "W5 · W4 RECAP · LESSONS",
     "type": "context",
     "visual": {
       "bot": "point",
@@ -213,42 +143,27 @@ window.SLIDES = [
     },
     "keyPoints": [
       "One lesson per table.",
-      "Listen for “I did not write it down”.",
-      "Today that becomes intent.md."
+      "Listen for unclear goals or missing boundaries.",
+      "Connect the lessons to today’s intent.md."
     ],
-    "notes": "Time: 10:22 · 4 min.\n1. Let them do: each table says one lesson.\n2. Listen for three types: “the goal was not clear”, “it did more than I asked”, “I could not see why”.\n3. Say: “Today intent.md, hooks, and evals solve these three problems.”"
+    "notes": "Time: 10:17 · 6 min.\n1. Ask each table to share one unexpected agent action and one lesson.\n2. Write the lessons on the board.\n3. Connect unclear goals to intent.md, boundaries to hooks, and checks to evals."
   },
   {
-    "title": "W4: the answers",
-    "subtitle": "Today: the process around the agent.",
-    "cards": [
-      {
-        "title": "W4 build",
-        "body": "1 agent + CLAUDE.md · 2 subagents · 1 MCP tool · 1 review."
-      },
-      {
-        "title": "n8n or SDK",
-        "body": "n8n: fixed flows. SDK: a loop with tools and tests."
-      },
-      {
-        "title": "Today",
-        "body": "Who decides. What is evidence. Where the boundary is."
-      }
-    ],
-    "kicker": "W5 · W4 RECAP · ANSWERS",
-    "type": "review",
+    "title": "What would success look like for you today?",
+    "kicker": "W5 · YOUR GOAL",
+    "subtitle": "Name one thing you want to be able to do after this workshop.",
+    "type": "context",
+    "cards": [],
     "visual": {
-      "reveal": "click",
-      "buttons": true,
-      "bot": "think",
-      "place": "slot"
+      "opener": "ask",
+      "bot": "point",
+      "place": "beside"
     },
     "keyPoints": [
-      "Connect each answer to the board.",
-      "The process was the problem, not the agent.",
-      "Next: the AI-native SDLC."
+      "One concrete outcome per person.",
+      "Keep the outcomes for the closing discussion."
     ],
-    "notes": "Time: 10:26 · 4 min.\n1. For each card, show the matching answer on the board.\n2. Question 1: say “There, a human must decide.”\n3. Question 2: say “n8n is a fixed flow. The SDK is a loop with tools and tests.”\n4. Questions 3–4: connect the answers to the MCP and to intent.md.\n5. Say: “Today is not about a smarter agent. It is about the process around the agent.”"
+    "notes": "Time: 10:23 · 7 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Let them share at their table.\n3. Collect one or two outcomes per table on the board.\n4. Connect these outcomes to the workshop goal. Explain what fits today and what falls outside the scope.\n5. Keep the outcomes visible. Return to them at the end of the workshop."
   },
   {
     "title": "“AI writes code faster than one year ago.”",
@@ -287,35 +202,21 @@ window.SLIDES = [
   },
   {
     "title": "Code is not the bottleneck",
-    "subtitle": "Code is cheap now. The work moves to decisions and checks.",
-    "cards": [
-      {
-        "title": "1 · More code",
-        "body": "People cannot read all new code line by line."
-      },
-      {
-        "title": "2 · More risk",
-        "body": "Security and compliance become the bottleneck."
-      },
-      {
-        "title": "3 · New work",
-        "body": "Specify, test, and approve."
-      }
-    ],
+    "subtitle": "Build gets faster. Decisions and checks still take time.",
+    "cards": [],
     "kicker": "W5 · WHY AI-NATIVE · FIG. 1",
     "type": "concept",
     "visual": {
-      "spotlight": 2,
-      "bot": "stretchLeft",
-      "place": "pointer",
-      "pointAt": 2
+      "opener": "sdlc-loop",
+      "image": "assets/workshop5-bottleneck.svg",
+      "imageAlt": "Before agents, Build takes the largest part of the delivery cycle. With AI agents, Build is much shorter while Plan, Design, Test, Deploy, and Maintain still take time, leaving free time on the right."
     },
     "keyPoints": [
-      "Three results.",
-      "Security matters in payments.",
-      "Agents make Build fast. Judgment stays human."
+      "Waiting time shifts to Plan, Test, and Deploy.",
+      "Manual line-by-line review does not scale with more code.",
+      "Exceptions and approvals still create waiting time. Review and approval must keep pace."
     ],
-    "notes": "Time: 10:32 · 2 min.\n1. Say the three results on the cards.\n2. Say: “In a payment company, a fast agent without a boundary is a risk.”\n3. Say the key sentence: “Agents collapse Build, not judgment.”"
+    "notes": "Time: 10:32 · 2 min.\n1. Show the top row. Say: “Before agents, Build takes a large part of the cycle.”\n2. Show the bottom row. Say: “Agents make Build faster. Plan, Test, and Deploy still need decisions and checks.”\n3. Say: “Manual line-by-line review does not scale when agents produce more code.”\n4. Say: “Exceptions and approvals still cause waiting time. Review and approval must keep pace.”\n5. Point to the note. Say: “This is illustrative, not a time guarantee.”"
   },
   {
     "title": "AI-native SDLC",
@@ -360,6 +261,24 @@ window.SLIDES = [
     "notes": "Time: 10:34 · 2 min.\n1. Read the definition from playbook p.5 aloud, word for word.\n2. Say: “Four-eyes review, test evidence, and separation of duties stay.”\n3. Say: “The enforcement is new: hooks, evals, and a gate.”\n4. Say: “Humans stay accountable” (p.7)."
   },
   {
+    "title": "The AI-native loop",
+    "kicker": "W5 · WHY AI-NATIVE · THE LOOP",
+    "subtitle": "One loop. Six stages. Human control.",
+    "type": "concept",
+    "cards": [],
+    "visual": {
+      "opener": "sdlc-loop",
+      "image": "assets/workshop5-sdlc-loop.svg",
+      "imageAlt": "A clockwise loop with Plan, Design, Build, Test, Deploy, and Maintain around the AetherLink bot. Humans set goals, direct, and approve."
+    },
+    "keyPoints": [
+      "The six stages form one continuous loop.",
+      "The AI agent supports every stage.",
+      "Humans set goals, direct, and approve."
+    ],
+    "notes": "Time: 10:36 · 1 min.\n1. Trace the six stages clockwise, from Plan to Maintain.\n2. Say: “The agent supports every stage. The work returns to Plan.”\n3. Point to the top line. Say: “Humans set the goals, direct the work, and approve.”"
+  },
+  {
     "title": "The line and the loop",
     "kicker": "W5 · WHY AI-NATIVE · FIG. 2",
     "type": "concept",
@@ -390,7 +309,7 @@ window.SLIDES = [
       "Humans are above the loop.",
       "Humans start, direct, and approve."
     ],
-    "notes": "Time: 10:36 · 2 min.\n1. Show the left column, then the right column.\n2. Say: “Hours, not weeks. Humans stay above the loop.”\n3. Do not discuss now. We build the loop for the rest of the day."
+    "notes": "Time: 10:37 · 1 min.\n1. Show the left column, then the right column.\n2. Say: “Hours, not weeks. Humans stay above the loop.”\n3. Do not discuss now. We build the loop for the rest of the day."
   },
   {
     "title": "What changes per stage",
@@ -429,9 +348,9 @@ window.SLIDES = [
     "keyPoints": [
       "Show Test, Deploy, and Maintain.",
       "We do those this afternoon.",
-      "Connect to the recap answers."
+      "Connect to the outcomes participants want today."
     ],
-    "notes": "Time: 10:38 · 3 min.\n1. Show the right column. Say: “We do Test, Deploy, and Maintain this afternoon.”\n2. Say: “Today each box becomes a file in the repo.”\n3. Connect to the board: “Where you stepped in” is the Deploy gate."
+    "notes": "Time: 10:38 · 3 min.\n1. Show the right column. Say: “We do Test, Deploy, and Maintain this afternoon.”\n2. Say: “Today each box becomes a file in the repo.”\n3. Connect to the board: At the Deploy gate, a human checks the evidence and approves the release."
   },
   {
     "title": "Each stage commits a file",
@@ -506,7 +425,7 @@ window.SLIDES = [
       "3 incidents built, 2 stretch.",
       "Sample data only."
     ],
-    "notes": "Time: 10:45 · 2 min.\n1. Say: “checkout-api has about 20 lines. All data is fictional. The PSP is psp-sandbox.”\n2. Say inc-001: the DB pool is full after a config change.\n3. Say inc-002: a bad deploy behind a feature flag. Only EUR fails.\n4. Say inc-004: an upstream timeout. A docs deploy is the distractor.\n5. Say: “inc-003 and inc-005 are stretch tasks on paper.”\n6. Say: “The repo is aetherlink-sre-agent-lab on GitHub. It is not published yet. I give you the link today.”"
+    "notes": "Time: 10:45 · 2 min.\n1. Say: “checkout-api has about 20 lines. All data is fictional. The PSP is psp-sandbox.”\n2. Say inc-001: the DB pool is full after a config change.\n3. Say inc-002: a bad deploy behind a feature flag. Only EUR fails.\n4. Say inc-004: an upstream timeout. A docs deploy is the distractor.\n5. Say: “inc-003 and inc-005 are stretch tasks on paper.”\n6. Show: https://github.com/RyanLisse/aetherlink-sre-agent-lab."
   },
   {
     "title": "The rules for today",
@@ -583,6 +502,10 @@ window.SLIDES = [
     "title": "Assignment 1: Setup check",
     "kicker": "W5 · SETUP · YOUR TURN",
     "subtitle": "Native on your laptop. Docker is optional.",
+    "repo": {
+      "url": "https://github.com/RyanLisse/aetherlink-sre-agent-lab",
+      "label": "github.com/RyanLisse/aetherlink-sre-agent-lab"
+    },
     "type": "practice",
     "layout": "exercise",
     "steps": [
@@ -597,7 +520,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "In the lab repo",
-        "body": "npm ci\nnpm test\nclaude\n/status"
+        "body": "git clone https://github.com/RyanLisse/aetherlink-sre-agent-lab.git\ncd aetherlink-sre-agent-lab\nnpm ci\nnpm test\nclaude\n/status"
       }
     ],
     "visual": {
@@ -956,31 +879,46 @@ window.SLIDES = [
       "Keep it short.",
       "People maintain it."
     ],
-    "notes": "Time: 13:00 · 3 min.\n1. Progress check (30 s).\n2. Show: the lab CLAUDE.md. Show the commands, the rules (“propose, never execute”), and how to verify.\n3. Say: “If the agent makes the same mistake two times, add the rule here.”\n4. Say: “AGENTS.md, progress.md, and SOLO.md are next to CLAUDE.md.”"
+    "notes": "Time: 13:00 · 3 min.\n1. Progress check (30 s): show the current AUTO checks and the latest dated evidence. Ask which current check supports it. Do not call it verified from an agent claim.\n2. Show: the lab CLAUDE.md. Show the commands, the rules (“propose, never execute”), and how to verify.\n3. Say: “If the agent makes the same mistake two times, add the rule here.”\n4. Say: “AGENTS.md, progress.md, and SOLO.md are next to CLAUDE.md.”"
   },
   {
     "title": "progress.md",
     "kicker": "W5 · DEFINITION · BUILD 1",
-    "subtitle": "A checklist. A hook updates it from real evidence.",
+    "subtitle": "Current checks above. Append-only build log below.",
     "type": "concept",
+    "source": {
+      "url": "https://github.com/RyanLisse/claude-code-skills-pack/blob/main/PROGRESS.md",
+      "label": "Open the progress.md template"
+    },
     "cards": [
       {
-        "title": "AUTO block",
-        "body": "0 · Setup\n1 · Plan\n2 · Design\n3 · Build 1\n4 · Build 2\n5 · Test\n6 · Deploy\n7 · Maintain\n8 · Hackathon"
+        "title": "Timestamp",
+        "body": "Example: 2026-10-11T21:30:00+02:00"
+      },
+      {
+        "title": "Change + mechanism",
+        "body": "What shipped · Why"
+      },
+      {
+        "title": "Validation",
+        "body": "Commands, results, and evidence"
+      },
+      {
+        "title": "Open scope",
+        "body": "Deliberately not done · Known limits"
       }
     ],
-    "tagline": "The hook ticks each step from files. The agent cannot edit progress.md (deny).",
+    "tagline": "AUTO = current overview. Dated entries = append-only history.",
     "visual": {
-      "checklist": 0,
-      "bot": "point",
-      "place": "left"
+      "compact": true,
+      "stagger": "pop"
     },
     "keyPoints": [
-      "Evidence, not claims.",
-      "“0 · Setup” is already ticked.",
-      "I ask for your counter each block."
+      "AUTO keeps the current overview and checklist.",
+      "Dated log entries preserve history. Never rewrite them.",
+      "A correction gets its own timestamp and evidence."
     ],
-    "notes": "Time: 13:03 · 3 min.\n1. Show: progress.md. Between AUTO:START and AUTO:END, “0 · Setup [x]” is ticked.\n2. Say: “The hook ticks Setup because node_modules and audit lines exist.”\n3. Say: “A tick comes from evidence: a file, a PASS, an approval. It does not come from what Claude says.”\n4. Say: “Run npm run progress to update it manually.”"
+    "notes": "Time: 13:03 · 3 min.\n1. Show: progress.md. The AUTO block is the current overview and checklist. The hook updates it from files and checks.\n2. Show: below AUTO, each build-log entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made.\n3. Read the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and add the new evidence.”\n6. Say: “A claim is not verified until a current check supports it.”"
   },
   {
     "title": "MCP",

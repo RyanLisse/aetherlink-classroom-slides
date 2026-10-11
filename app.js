@@ -553,6 +553,10 @@ function buildOpener(stage, main, s, v) {
     const img = document.createElement('img'); img.src = v.image; img.alt = ''; shot.append(bar, img);
     main.classList.add('with-showcase'); main.prepend(shot);
   }
+  if (v.opener === 'sdlc-loop' && v.image) {
+    const figure = node('figure', 'sdlc-loop'); const img = document.createElement('img'); img.src = v.image; img.alt = v.imageAlt || '';
+    figure.append(img); main.prepend(figure);
+  }
   if (v.opener === 'team') main.querySelectorAll('.card').forEach(c => {
     const name = c.querySelector('h2,h3,strong,.card-title')?.textContent || c.textContent;
     const ini = name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).slice(0, 2).join('');
@@ -800,6 +804,10 @@ function renderAssignment(stage, s) {
   const right = node('div', 'asg-top-right'); right.append(timerPill(s), node('p', 'slide-count', String(current + 1) + ' / ' + slides.length));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
   if (s.subtitle) head.append(node('p', 'subtitle', s.subtitle));
+  if (s.repo?.url) {
+    const link = node('a', 'asg-repo', s.repo.label || s.repo.url); link.href = s.repo.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+    head.append(link);
+  }
   stage.append(head);
   const body = node('div', 'asg-body'); const main = node('div', 'asg-main');
   const st = loadState(); const done = Array.isArray(st.done) ? st.done.slice() : [];
@@ -847,6 +855,10 @@ function render() {
   top.append(eyebrow, node('p', 'slide-count', String(current + 1) + ' / ' + slides.length));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
   head.append(top, node('h1', null, s.title), node('p', 'subtitle', s.subtitle));
+  if (s.source?.url) {
+    const link = node('a', 'asg-repo', s.source.label || s.source.url); link.href = s.source.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+    head.append(link);
+  }
   stage.append(head);
   const body = node('div', 'slide-body'); const main = node('div', 'slide-main'); body.append(main); stage.append(body);
   renderLayout(main, s);
