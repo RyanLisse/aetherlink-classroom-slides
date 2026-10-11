@@ -7,7 +7,7 @@ window.SLIDES = [
   {
     "title": "Welcome to Workshop 5",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
-    "subtitle": "Today we build an SRE agent. We stay inside the rules of your organization.",
+    "subtitle": "Today we build an SRE agent.",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -17,20 +17,58 @@ window.SLIDES = [
     },
     "cards": [
       {
-        "title": "Goal",
-        "body": "Your team can run a 2-day hackathon with Claude in W6–W7."
-      },
-      {
         "title": "Method",
         "body": "Concept. Demo. Your turn."
       }
     ],
     "keyPoints": [
-      "The agent proposes. It never executes.",
-      "We do the full loop.",
-      "You finish with your hackathon intent.md."
+      "Welcome the room.",
+      "Check the setup."
     ],
-    "notes": "Time: 10:00 · 3 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Say: “The agent reads alerts, logs, and metrics. It writes a diagnosis. It proposes a fix as a PR or MR. It never executes.”\n3. Say: “Goal: you are ready for the hackathon in W6–W7.”\n4. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n5. If a person has no setup: do not fix it now. Help them at slide 17 and in the 11:00 break."
+    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n3. If a person has no setup: do not fix it now. Help them at slide 18 and in the 11:00 break."
+  },
+  {
+    "title": "Goal of the day",
+    "kicker": "W5 · OPENING · GOAL",
+    "subtitle": "Your team can run a 2-day hackathon with Claude in W6–W7.",
+    "type": "context",
+    "cards": [
+      {
+        "title": "A working SRE agent loop, with a human gate",
+        "body": ""
+      },
+      {
+        "title": "Your hackathon intent.md",
+        "body": ""
+      },
+      {
+        "title": "The skills pack",
+        "body": ""
+      }
+    ],
+    "tagline": "You take these home.",
+    "visual": {
+      "badges": [
+        "🤖",
+        "📄",
+        "🧰"
+      ],
+      "bot": "happy",
+      "place": "aside",
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "2-day hackathon",
+          "tone": "orange"
+        }
+      ]
+    },
+    "keyPoints": [
+      "Goal: the W6–W7 hackathon.",
+      "Three things to take home.",
+      "The agent proposes. It never executes."
+    ],
+    "notes": "Time: 10:01 · 2 min.\n1. Say: “Goal: your team can run a 2-day hackathon with Claude in W6–W7.”\n2. Show: the three badges. Say each one in one sentence.\n3. Say: “The agent reads alerts, logs, and metrics. It writes a diagnosis. It proposes a fix as a PR or MR. It never executes.”\n4. Say: “The human gate: a named human approves. Not the agent.”\n5. Say: “At 15:40 you write your hackathon intent.md. You take the skills pack home.”"
   },
   {
     "title": "What we do today",
@@ -93,9 +131,9 @@ window.SLIDES = [
     "keyPoints": [
       "Open question.",
       "Three answers on the board.",
-      "The answers return on slide 7."
+      "The answers return on slide 8."
     ],
-    "notes": "Time: 10:10 · 4 min.\n1. Let them do: each table talks for 1 minute.\n2. Ask three tables for an answer.\n3. Write the answers on the board in two columns: “agent alone” and “human stepped in”.\n4. Do not give the answer now. Slide 7 gives it.\n5. If the room is quiet, ask: “Which agent action did you undo later?”"
+    "notes": "Time: 10:10 · 4 min.\n1. Let them do: each table talks for 1 minute.\n2. Ask three tables for an answer.\n3. Write the answers on the board in two columns: “agent alone” and “human stepped in”.\n4. Do not give the answer now. Slide 8 gives it.\n5. If the room is quiet, ask: “Which agent action did you undo later?”"
   },
   {
     "title": "When n8n, when the Agent SDK?",
@@ -123,7 +161,7 @@ window.SLIDES = [
       "Ask for a real example.",
       "Collect. Do not judge."
     ],
-    "notes": "Time: 10:14 · 4 min.\n1. Let them do: hands up for each side.\n2. Write two examples per column on the board.\n3. Ask: “What decided it: speed, control, or tests?”\n4. Keep the answers for slide 7."
+    "notes": "Time: 10:14 · 4 min.\n1. Let them do: hands up for each side.\n2. Write two examples per column on the board.\n3. Ask: “What decided it: speed, control, or tests?”\n4. Keep the answers for slide 8."
   },
   {
     "title": "Which tool or MCP helped most?",
@@ -1865,7 +1903,7 @@ window.SLIDES = [
     "visual": {
       "levelUp": true
     },
-    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (slides 57–60). Else it is homework before W6."
+    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (slides 58–61). Else it is homework before W6."
   },
   {
     "title": "Time left? The loop, solo",
