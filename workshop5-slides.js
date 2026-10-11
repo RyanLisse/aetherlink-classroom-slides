@@ -1841,7 +1841,7 @@ window.SLIDES = [
     "visual": {
       "levelUp": true
     },
-    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (slides 58–61). Else it is homework before W6."
+    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (slides 57–60). Else it is homework before W6."
   },
   {
     "title": "Time left? The loop, solo",
