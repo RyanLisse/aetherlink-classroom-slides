@@ -519,7 +519,7 @@ window.SLIDES = [
       "Run npm test. Expect fail 0.",
       "Run claude. Approve MCP sre.",
       "Run /status. Check your account.",
-      "Type /. Find the 8 lab skills."
+      "Type /. Find incident-triage and verify-this."
     ],
     "expected": "Tests green. Status: [x] STEP-0 Setup.",
     "stepsHeading": "Do this now:",
@@ -537,6 +537,7 @@ window.SLIDES = [
     },
     "keyPoints": [
       "This is a check, not an install.",
+      "/ lists 17 skills: 8 lab skills + the skills pack.",
       "Red? We help in the break.",
       "npm run progress -- --status shows current evidence."
     ],
@@ -809,8 +810,8 @@ window.SLIDES = [
     "layout": "exercise",
     "steps": [
       "Write docs/spec.md. One example per field.",
-      "Make the schema test fail.",
-      "Edit evals/schema.ts until green.",
+      "In test/schema.test.ts, require blast_radius. npm test: red.",
+      "Add blast_radius to evals/schema.ts + good fixtures. Green.",
       "Open a PR/MR. Another team reviews."
     ],
     "expected": "npm test green. The test commit is first.",
@@ -818,7 +819,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "You write",
-        "body": "docs/spec.md"
+        "body": "docs/spec.md\ntest/schema.test.ts\nevals/schema.ts"
       }
     ],
     "visual": {
@@ -830,7 +831,7 @@ window.SLIDES = [
       "Each field has an example.",
       "Another team reviews."
     ],
-    "notes": "Time: 11:47 · 12 min.\n1. Let them do: each team writes the spec and the schema.\n2. Check: git log shows the test before schema.ts (yes or no).\n3. Another team reads the spec against intent.md.\n4. If zod or tsx fails: run npm ci again.\n5. Stop at 12:00. Teams can finish after lunch."
+    "notes": "Time: 11:47 · 12 min.\n1. Let them do: each team writes the spec. Then the red→green exercise from FACILITATOR.md: a test that requires blast_radius (red), then the schema field and the good fixtures (green).\n2. Check: npm test shows fail 1 before the schema edit and fail 0 after it.\n3. Check: git log shows the test before schema.ts (yes or no).\n4. Another team reads the spec against intent.md.\n5. If zod or tsx fails: run npm ci again. Stuck: git diff main step-2 -- docs/ evals/.\n6. Stop at 12:00. Teams can finish after lunch."
   },
   {
     "title": "Lunch",
@@ -1195,7 +1196,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "npm run test:hooks",
-        "body": "curl to a URL\nread .env\nedit runbooks/\nyour rule: kubectl delete"
+        "body": "curl to a URL\nread .env\nedit runbooks/\nyour rule: rm -rf"
       }
     ],
     "visual": {
@@ -1220,11 +1221,11 @@ window.SLIDES = [
       ]
     },
     "keyPoints": [
-      "Test first.",
-      "The agent cannot edit .claude/.",
+      "Test first. Pick rm -rf, git reset --hard or terraform destroy.",
+      "You edit guard.mjs and the test. The agent cannot edit .claude/.",
       "STEP-4 is [x] after your first deny."
     ],
-    "notes": "Time: 13:30 · 20 min.\n1. Let them do: the five steps on the slide.\n2. Say: “The agent cannot edit .claude/ (deny). You edit guard.mjs yourself. The human owns the boundary.”\n3. Check: npm run test:hooks is green, including the new test.\n4. Check: npm run progress -- --status shows “[x] STEP-4 Build” after one deny in audit.jsonl.\n5. At 13:50, go to the next block."
+    "notes": "Time: 13:30 · 20 min.\n1. Let them do: the five steps on the slide. Do not use kubectl as the new rule: it is already gated, so the test is green at once and nobody sees red.\n2. Say: “The agent cannot edit .claude/ (deny). You edit guard.mjs yourself. The human owns the boundary.”\n3. Check: npm run test:hooks is green, including the new test.\n4. Check: npm run progress -- --status shows “[x] STEP-4 Build” after one deny in audit.jsonl.\n5. At 13:50, go to the next block."
   },
   {
     "title": "plan.md",
@@ -1837,6 +1838,10 @@ window.SLIDES = [
   {
     "title": "Time left? The loop, solo",
     "kicker": "W5 · BONUS · DAILY BRIEF SOLO",
+    "repo": {
+      "url": "https://github.com/RyanLisse/aetherlink-daily-brief-lab-s1",
+      "label": "github.com/RyanLisse/aetherlink-daily-brief-lab-s1"
+    },
     "type": "concept",
     "layout": "steps",
     "items": [
@@ -1862,7 +1867,7 @@ window.SLIDES = [
       },
       {
         "label": "Gate",
-        "caption": "approve.sh, a neighbor"
+        "caption": "PR + docs/gate.md"
       },
       {
         "label": "Maintain",
@@ -1877,7 +1882,7 @@ window.SLIDES = [
       "Solo and small.",
       "Repo only, sample data, no network."
     ],
-    "notes": "Time: 1 min.\n1. Say: “This is the same loop as this afternoon. It is solo and small: one source, sample/work.json, three sections.”\n2. Say the rules: all in the repo, sample data only, no external MCP or API, a human gate with approve.sh and audit.\n3. Say: “The base is aetherlink-daily-brief-lab-s1, from tag step-4-build-render.”"
+    "notes": "Time: 1 min.\n1. Say: “This is the same loop as this afternoon, solo and small. The guide is SOLO.md in aetherlink-daily-brief-lab-s1.”\n2. Say the rules: work on my/<your-name>, sample data first (npm run brief:sample needs no API key), tokens only read-only and only in .env, a human reads the PR against intent.md.\n3. Say: “Today: steps 1–4 (about 40 min). Steps 5–7 are homework before W6.”"
   },
   {
     "title": "Watch: one source, one gate",
@@ -1887,60 +1892,66 @@ window.SLIDES = [
     "cards": [
       {
         "title": "0–8 min",
-        "body": "Start → Intent (prompt 1) → Spec (prompt 2) → Plan (prompt 3)"
+        "body": "Branch my/ryan → Intent (step 1) → Spec, test first (step 2)"
       },
       {
         "title": "8–14 min",
-        "body": "Build test first (prompt 4) → 10 tests green → brief:solo"
+        "body": "Plan mode (step 3) → render.test.ts red → green → brief:sample"
       },
       {
         "title": "14–18 min",
-        "body": "Push → deny → approve.sh → ask → AL-198 High → new OPEN"
+        "body": "out/latest.html → docs/evidence.md → PR → docs/gate.md: PASS / FAIL / OPEN"
       }
     ],
     "visual": {
       "stagger": "pop",
       "stepThrough": true
     },
-    "prompt": "We are doing a solo loop on the daily brief. Read CLAUDE.md, AGENTS.md, intent.md and sample/work.json. Interview me one question at a time to rewrite intent.md for this goal: render push, to-dos and my day from sample/work.json only. Boundary: no network, no real data, no model at runtime. Three checks a stranger can verify, at least one OPEN. Stop for my review.",
+    "prompt": "We are on step 1 of SOLO.md. Read SOLO step 1, AGENTS.md, intent.md and progress.md. Interview me one question at a time to fill intent.md: goal, boundary (read-only, no secrets in the repo, sample data first), three checks a stranger can verify, at least one OPEN. Stop for my review.",
     "keyPoints": [
-      "Follow DAILY-BRIEF-SOLO §2 minute by minute.",
+      "Follow SOLO.md steps 1–4.",
       "Two terminals: Claude left, your shell right.",
-      "No model at runtime."
+      "No API key until step 5."
     ],
-    "notes": "Time: 18 min.\n1. Prepare: clone the repo. Run npm ci. Run claude and /status. Have sample/work.json ready. Open two terminals. Use font size 18+.\n2. 0–1 min: git switch -c solo/ryan step-4-build-render. Run npm test (6 green).\n3. 1–4 min: Intent. Paste prompt 1.\n4. 4–6 min: Spec. Paste prompt 2 (table source → Brief field).\n5. 6–8 min: Plan. Press Shift+Tab. Paste prompt 3. Ask “What can break?” (p.19).\n6. 8–12 min: Build. test/compose.test.ts is red first. Then src/compose.ts and src/solo.ts make it green (10 tests).\n7. 12–14 min: Test. Run typecheck and npm run brief:solo. Compare out/latest.html with sample/work.json (AL-240, no AL-198, 11:00 and 14:00).\n8. 14–16 min: Gate. Claude tries git push. The hook denies it. In your own shell, run scripts/approve.sh ryan solo/ryan \"evidence ok\". Claude tries again. The hook asks.\n9. Say: “Claude goes to the gate, not through it. The hook enforces that a named human has approved.”\n10. 16–18 min: Maintain. Set AL-198 to High. Run npm test. Add a new OPEN to intent.md.\n11. If brief:sample hangs: set BRIEF_ARTWORK=off, or use brief:solo.\n12. If the hook does not run on Windows: use the Node hook or WSL.\n13. If package.json is denied: add the script yourself."
+    "notes": "Time: 18 min.\n1. Prepare: clone aetherlink-daily-brief-lab-s1. Run npm ci. Run claude and /status. Open SOLO.md. Two terminals, font size 18+.\n2. 0–1 min: git switch -c my/ryan. Run npm test.\n3. 1–4 min: step 1, intent. Paste the step 1 prompt from SOLO.md.\n4. 4–8 min: step 2, spec. Test commit first, then src/brief.ts.\n5. 8–10 min: step 3, plan. Shift+Tab for plan mode. Ask “What can break?”\n6. 10–14 min: step 4. test/render.test.ts red, then src/render.ts green. Run npm run brief:sample. Open out/latest.html.\n7. 14–18 min: step 6–7 preview. Fill one row of docs/evidence.md. Open the PR. Read it against intent.md in docs/gate.md.\n8. Stuck: git checkout step-4-build-render -- src/render.ts, then read the diff.\n9. Say: “No PASS without a check you read. The gate is a human reading the PR.”"
   },
   {
     "title": "Assignment 9: Daily Brief solo",
     "kicker": "W5 · BONUS · YOUR TURN",
-    "subtitle": "Each step has a done check.",
+    "subtitle": "Follow SOLO.md. Each step has a check.",
+    "repo": {
+      "url": "https://github.com/RyanLisse/aetherlink-daily-brief-lab-s1",
+      "label": "github.com/RyanLisse/aetherlink-daily-brief-lab-s1"
+    },
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "0 · Branch solo/<name>. npm test.",
-      "1–3 · Intent, spec, plan (plan mode).",
-      "4 · Build. ≥ 4 green tests.",
-      "5 · brief:solo. Write docs/evidence.md.",
-      "6–7 · A neighbor approves. Add a finding."
+      "0 · Clone. git switch -c my/<name>. npm ci.",
+      "1–3 · intent.md, spec (test first), plan mode.",
+      "4 · Render test red → green. npm run brief:sample.",
+      "5 · Homework: one read-only tool (token in .env).",
+      "6–7 · docs/evidence.md. PR. docs/gate.md."
     ],
-    "expected": "PR with approvals/. 3 sections in out/latest.html. A new OPEN.",
+    "expected": "out/latest.html renders without an API key. npm test green. A PR from my/<name>.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Only source",
-        "body": "sample/work.json"
+        "title": "In the lab repo",
+        "body": "git clone https://github.com/RyanLisse/aetherlink-daily-brief-lab-s1.git\ncd aetherlink-daily-brief-lab-s1\ngit switch -c my/<name>\nnpm ci && npm test\nnpm run brief:sample"
       }
     ],
     "visual": {
-      "shotLabel": "Start: step-4-build-render",
-      "tree": 0
+      "shotLabel": "aetherlink-daily-brief-lab-s1 · SOLO.md",
+      "cmdCards": [
+        0
+      ]
     },
     "keyPoints": [
-      "30–40 minutes.",
-      "A neighbor approves with approve.sh.",
-      "Stretch: a New updates section."
+      "30–40 minutes: steps 0–4.",
+      "Stuck? git checkout step-N-… -- <file>.",
+      "A neighbor reruns one command (step 6)."
     ],
-    "notes": "Time: 30–40 min.\n1. Let them do: steps 0–7 from DAILY-BRIEF-SOLO §3.\n2. Say: “Approve the branch of your neighbor with scripts/approve.sh <name> solo/<their-name> \"<reason>\".”\n3. Stretch: add a 4th section New updates, for example pipelines that are green again today.\n4. If a person is behind: use the reference in docs/plan.md."
+    "notes": "Time: 30–40 min.\n1. Let them do: steps 0–4 of SOLO.md. Steps 5–7 are homework before W6.\n2. Check step 2: git log shows the test commit before src/brief.ts.\n3. Check step 4: npm run brief:sample prints the path of out/brief-<date>.html and writes out/latest.html. The page opens without an API key.\n4. Catch-up: each step has a tag (step-1-intent … step-7-gate-deploy). Use git checkout <tag> -- <file>, then read the diff. Do not reset the whole branch.\n5. Step 5 needs a read-only token in .env (GitHub, Linear or Notion). Never in the repo.\n6. Step 6: a neighbor reruns one command from docs/evidence.md and writes their name."
   },
   {
     "title": "What changes when you work alone",
@@ -1962,7 +1973,7 @@ window.SLIDES = [
         "items": [
           "Plan mode",
           "Tests",
-          "Hook + approve.sh",
+          "PR + docs/gate.md",
           "Evals"
         ]
       }
@@ -1975,6 +1986,6 @@ window.SLIDES = [
       "This leads to the hackathon.",
       "The gate stays human."
     ],
-    "notes": "Time: 2 min.\n1. Say: “Solo work still has controls.”\n2. Say: “Plan mode is your reviewer. Tests are your QA. The hook plus approve.sh is your four eyes. Evals are your memory.”\n3. Say: “Use this loop between the hackathon sessions in W6–W7.”"
+    "notes": "Time: 2 min.\n1. Say: “Solo work still has controls.”\n2. Say: “Plan mode is your reviewer. Tests are your QA. A neighbor reading your PR against intent.md is your four eyes. Evals are your memory.”\n3. Say: “Use this loop between the hackathon sessions in W6–W7.”"
   }
 ];
