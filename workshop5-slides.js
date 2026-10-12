@@ -368,7 +368,7 @@ window.SLIDES = [
       },
       {
         "title": "Build → Test",
-        "body": "docs/diagnoses/inc-001.json → evals/cases → CI green"
+        "body": "verdict with refs → bench/cases.json → CI green"
       },
       {
         "title": "Deploy → Maintain",
@@ -395,25 +395,25 @@ window.SLIDES = [
     "notes": "Time: 10:41 · 4 min.\n1. Say: “Each arrow has a file. You can show each file.”\n2. Say: “Together the files are the audit trail: who decided what, from which evidence.”\n3. Say: “All files are in the repo. Review is a PR on GitHub or an MR on GitLab.”"
   },
   {
-    "title": "Our project: an SRE agent",
-    "kicker": "W5 · OUR PROJECT · CHECKOUT-API",
-    "subtitle": "The agent proposes. It never executes.",
+    "title": "Our project: a local AI SRE agent",
+    "kicker": "W5 · OUR PROJECT · CHECKOUT",
+    "subtitle": "You build it. It proposes. A human decides.",
     "type": "concept",
     "cards": [
       {
         "title": "Alert",
-        "body": "An alert on checkout-api."
+        "body": "The console sees an error spike on checkout."
       },
       {
-        "title": "Read-only MCP",
-        "body": "Logs, metrics, and deploys from sample files."
+        "title": "Read-only tools",
+        "body": "Logs, metrics, deploys and the diff. From fixtures or the local shop."
       },
       {
-        "title": "Proposal",
-        "body": "A diagnosis with cited evidence. A fix as a PR/MR. A human decides."
+        "title": "Console + chat",
+        "body": "A diagnosis with a reference per claim. You ask follow-ups. You approve with your name."
       }
     ],
-    "tagline": "Built: inc-001, inc-002, inc-004. Stretch: inc-003, inc-005.",
+    "tagline": "Scenarios: bad-deploy, slow-dependency, noisy-alert, mystery-errors, adversarial.",
     "visual": {
       "art": "flow",
       "bot": "head",
@@ -421,17 +421,93 @@ window.SLIDES = [
       "highlight": [
         {
           "in": "tagline",
-          "text": "Stretch",
+          "text": "adversarial",
           "tone": "purple"
         }
       ]
     },
     "keyPoints": [
       "The agent proposes. A human executes.",
-      "3 incidents built, 2 stretch.",
-      "Sample data only."
+      "Offline. No API key needed.",
+      "Sample data and a local shop only."
     ],
-    "notes": "Time: 10:45 · 2 min.\n1. Say: “checkout-api has about 20 lines. All data is fictional. The PSP is psp-sandbox.”\n2. Say inc-001: the DB pool is full after a config change.\n3. Say inc-002: a bad deploy behind a feature flag. Only EUR fails.\n4. Say inc-004: an upstream timeout. A docs deploy is the distractor.\n5. Say: “inc-003 and inc-005 are stretch tasks on paper.”\n6. Show: https://github.com/RyanLisse/aetherlink-sre-agent-lab."
+    "notes": "Time: 10:45 · 2 min.\n1. Say: “Today you build an on-call agent for a small checkout shop. It runs on your laptop. No cloud, no API key.”\n2. Say: “It reads logs, metrics, deploys and the diff. It cannot change anything.”\n3. Say: “The console shows the diagnosis. Every claim has a reference. You can challenge it in chat.”\n4. Say: “Approve, execute and resolve are buttons with your name. Never chat commands.”\n5. Show: https://github.com/RyanLisse/sre-oncall-agent."
+  },
+  {
+    "title": "What you build: the on-call console",
+    "kicker": "W5 · OUR PROJECT · THE CONSOLE",
+    "subtitle": "Evidence first. Buttons for decisions. Chat for questions.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-5/console-incident.webp",
+      "imageLink": "localhost:4320 · npm run console",
+      "stagger": "pop",
+      "compact": true
+    },
+    "cards": [
+      {
+        "title": "Trace",
+        "body": "Each tool call the agent made, in order."
+      },
+      {
+        "title": "Diagnosis",
+        "body": "What is happening, evidence refs, blast radius, ruled out, data gaps."
+      },
+      {
+        "title": "Decision",
+        "body": "Approve · Reject · Execute · Mark mitigated · Resolve. Each needs a name."
+      }
+    ],
+    "keyPoints": [
+      "Every claim links to evidence.",
+      "Mutations are buttons, not chat.",
+      "A human resolves. The agent only proposes a lesson."
+    ],
+    "notes": "Time: 10:47 · 2 min.\n1. Show: the screenshot. Left: the trace (metrics → deploys → diff → logs).\n2. Show: the evidence refs (metrics:, deploys:d-4821, diff:, logs:).\n3. Show: “Pending: a named human must approve.” Execute stays disabled until a human approves.\n4. Say: “Type “roll back now” in the chat. The chat refuses. That is assignment 8.”\n5. Say: “By 16:00 your own copy looks like this.”"
+  },
+  {
+    "title": "In production: the same rules",
+    "kicker": "W5 · OUR PROJECT · REFERENCE",
+    "subtitle": "Today offline. In production: real cloud signals. Same division of labour.",
+    "type": "concept",
+    "repo": {
+      "url": "https://github.com/ai-developer-community/ai-sre-agent",
+      "label": "github.com/ai-developer-community/ai-sre-agent"
+    },
+    "layout": "compare",
+    "columns": [
+      {
+        "title": "Today · on your laptop",
+        "items": [
+          "Fixtures + a local demo shop",
+          "Console listener detects the spike",
+          "Scripted runtime (a model is optional)",
+          "Files in console/data and lessons/"
+        ]
+      },
+      {
+        "title": "Production · ai-sre-agent",
+        "items": [
+          "A Cloud Run shop",
+          "Cloud Monitoring → Pub/Sub → local worker",
+          "Claude Agent SDK on Vertex or the API",
+          "PostgreSQL keeps incidents and chat"
+        ]
+      }
+    ],
+    "tagline": "Same rules: read-only tools, evidence per claim, humans deploy fixes and close incidents.",
+    "keyPoints": [
+      "Same loop, different signals.",
+      "Four read tools. No mutation tools.",
+      "Humans close incidents."
+    ],
+    "visual": {
+      "stagger": "pop",
+      "bot": "think",
+      "place": "beside"
+    },
+    "notes": "Time: 10:49 · 1 min.\n1. Say: “This is what the same agent looks like on Google Cloud. We do not build this today. It needs a cloud project.”\n2. Say: “Look at what stays the same: read-only tools, evidence, a human closes the incident.”\n3. Show: https://github.com/ai-developer-community/ai-sre-agent (README · Run locally)."
   },
   {
     "title": "The rules for today",
@@ -617,7 +693,7 @@ window.SLIDES = [
       "Three checks. At least one OPEN.",
       "A hard boundary and named owners."
     ],
-    "notes": "Time: 11:17 · 2 min.\n1. Say the five fields (p.13).\n2. Say: “A wish is not a rule. ‘The agent is careful’ is not testable.”\n3. Say: “‘The agent writes only in docs/diagnoses/’ is testable.”\n4. Say: “The merge of the intent.md PR/MR is the human acceptance.”"
+    "notes": "Time: 11:17 · 2 min.\n1. Say the five fields (p.13).\n2. Say: “A wish is not a rule. ‘The agent is careful’ is not testable.”\n3. Say: “‘The agent has no tool that writes’ is testable.”\n4. Say: “The merge of the intent.md PR/MR is the human acceptance.”"
   },
   {
     "title": "Watch: Claude interviews me",
@@ -726,19 +802,19 @@ window.SLIDES = [
   {
     "title": "spec.md",
     "kicker": "W5 · DEFINITION · DESIGN",
-    "subtitle": "The diagnosis contract. A schema holds it.",
+    "subtitle": "The verdict contract. src/contract.ts holds it.",
     "type": "concept",
     "cards": [
       {
         "title": "Definition",
-        "body": "Each diagnosis field, with an example. evals/schema.ts checks it."
+        "body": "Each verdict field, with an example. src/contract.ts checks it."
       },
       {
         "title": "Fields",
-        "body": "category\ntrigger_deploy\nevidence[] + log ids\nrunbook\nproposed_step\nexecutes: false"
+        "body": "hypothesis\nevidence[] + refs\nblast_radius\nproposal\ndata_gaps\ndraft_only: true"
       }
     ],
-    "tagline": "executes: false is a type, not a promise.",
+    "tagline": "draft_only: true is a type, not a promise.",
     "visual": {
       "hero": 0,
       "popOut": 1,
@@ -756,51 +832,51 @@ window.SLIDES = [
     },
     "keyPoints": [
       "Each field has an example.",
-      "The schema limits the agent output.",
-      "Test first. Then the schema."
+      "The contract limits the agent output.",
+      "Test first. Then the contract."
     ],
-    "notes": "Time: 11:40 · 3 min.\n1. Progress check (30 s).\n2. Say: “spec.md is the contract of a diagnosis. The agent cannot return a field that the schema does not have.”\n3. Show: executes: false. Say: “The type makes execution impossible. A prompt only makes a promise.”\n4. Show the paths: docs/spec.md and evals/schema.ts."
+    "notes": "Time: 11:40 · 3 min.\n1. Progress check (30 s).\n2. Say: “spec.md describes a verdict. The agent cannot return a field that the contract does not have.”\n3. Show: draft_only: true and human_approval_required: true. Say: “The type makes execution impossible. A prompt only makes a promise.”\n4. Show the paths: docs/spec.md and src/contract.ts."
   },
   {
-    "title": "Watch: red schema → green",
+    "title": "Watch: red contract → green",
     "kicker": "W5 · DESIGN · DEMO",
-    "subtitle": "First a failing test. Then the schema.",
+    "subtitle": "First a failing test. Then the contract.",
     "type": "concept",
     "cards": [
       {
         "title": "Red",
-        "body": "The schema test fails. The field is missing."
+        "body": "The contract test fails. The rule or field is missing."
       },
       {
         "title": "Green",
-        "body": "Edit evals/schema.ts. npm test is green."
+        "body": "Edit src/contract.ts. npm test is green."
       }
     ],
     "visual": {
       "term": [
         {
-          "c": "npm test "
+          "c": "npm run test:workshop "
         },
         {
-          "o": "✗ schema: field \"runbook\" is missing"
+          "o": "✗ contract: a claim without an evidence ref is accepted"
         },
         {
-          "o": "… edit evals/schema.ts …"
+          "o": "… edit src/contract.ts …"
         },
         {
-          "c": "npm test "
+          "c": "npm run test:workshop "
         },
         {
-          "o": "✓ all tests pass · fail 0"
+          "o": "✓ contract tests pass · fail 0"
         }
       ]
     },
     "keyPoints": [
       "The test commit comes first.",
       "Show the red output.",
-      "The schema.ts edit asks first."
+      "The console still renders."
     ],
-    "notes": "Time: 11:43 · 4 min.\n1. Show: add one field from docs/spec.md to the test.\n2. Show: run npm test. It is red. Show the error line.\n3. Show: edit evals/schema.ts. The hook asks. Confirm.\n4. Show: run npm test. It is green.\n5. Show: git log. The test commit is before the schema commit."
+    "notes": "Time: 11:43 · 4 min.\n1. Show: open the contract test in test/. Add one rule from docs/spec.md.\n2. Show: run the test. It is red. Show the error line.\n3. Show: edit src/contract.ts. Confirm the edit.\n4. Show: run the test. It is green.\n5. Show: git log. The test commit is before the contract commit."
   },
   {
     "title": "Assignment 3: Spec + schema green",
@@ -858,7 +934,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Definition",
-        "body": "People write it. Agents follow it. Commands: npm test · npm run eval · npm run test:hooks."
+        "body": "People write it. Agents follow it. Commands: npm run verify · npm run bench · npm run console."
       },
       {
         "title": "Sections",
@@ -935,14 +1011,14 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Ours",
-        "body": "Local and read-only. Server sre in .mcp.json."
+        "body": "In-process and read-only. Server telemetry in src/tools.ts."
       },
       {
-        "title": "5 tools",
-        "body": "list_alerts\nget_logs\nget_metrics\nget_deploys\nget_runbook"
+        "title": "4 tools",
+        "body": "search_logs\nsummarize_metrics\nlist_deploys\nget_diff"
       }
     ],
-    "tagline": "No network. No writes.",
+    "tagline": "No writes. Every result is saved as evidence.",
     "visual": {
       "anatomy": {
         "src": "assets/anatomy/mcp.html",
@@ -956,25 +1032,25 @@ window.SLIDES = [
       "A path outside incidents/ gives a tool error.",
       "Maximum 200 lines per call."
     ],
-    "notes": "Time: 13:06 · 3 min.\n1. Say: “A platform team hosts the same MCP contract.”\n2. Say: “Later you replace the file reader with a read-only backend, for example Loki or Prometheus. The tools and the allowlist stay.”\n3. Say: “Allowlist per project with enabledMcpjsonServers. Allowlist per company with managed allowedMcpServers” (p.42–43).\n4. Say: “In Claude Code the tools are mcp__sre__<tool>.”"
+    "notes": "Time: 13:06 · 3 min.\n1. Say: “A platform team hosts the same MCP contract.”\n2. Say: “Later you replace the file reader with a read-only backend, for example Loki or Prometheus. The tools and the allowlist stay.”\n3. Say: “Allowlist per project with enabledMcpjsonServers. Allowlist per company with managed allowedMcpServers” (p.42–43).\n4. Say: “In the agent the tools are mcp__telemetry__<tool>.”"
   },
   {
-    "title": "Watch: connect the sre MCP",
+    "title": "Watch: the tools in the trace",
     "kicker": "W5 · BUILD 1 · DEMO",
-    "subtitle": "Approve. Run /mcp. Ask the first question.",
+    "subtitle": "Start the console. Start an investigation. Read the calls.",
     "type": "concept",
     "cards": [
       {
         "title": "1 · Start",
-        "body": "claude\nApprove server sre."
+        "body": "npm run console\nopen localhost:4320"
       },
       {
-        "title": "2 · Check",
-        "body": "/mcp\nYou see 5 tools."
+        "title": "2 · Ask",
+        "body": "New investigation\n“Investigate checkout errors”"
       },
       {
-        "title": "3 · Ask",
-        "body": "List the alerts\nYou get 3 alerts."
+        "title": "3 · Read",
+        "body": "Trace: deploys → metrics\n→ diff → logs"
       }
     ],
     "visual": {
@@ -986,11 +1062,11 @@ window.SLIDES = [
     },
     "prompt": "List the alerts and tell me which incident to look at first. Use only the sre MCP tools.",
     "keyPoints": [
-      "/mcp shows 5 tools.",
-      "3 alerts: inc-001, inc-002, inc-004.",
-      "All read-only."
+      "The agent calls 4 read-only tools.",
+      "Data before theory: deploys and metrics first.",
+      "No tool can write."
     ],
-    "notes": "Time: 13:09 · 3 min.\n1. Show: run /mcp. Show server sre with 5 tools.\n2. Show: paste the prompt. Claude calls mcp__sre__list_alerts. It shows 3 alerts.\n3. If “Pending approval”: start claude in the repo folder. Approve the server.\n4. If IT blocks the MCP: use Read/Grep on incidents/. Ask IT to allowlist sre."
+    "notes": "Time: 13:09 · 3 min.\n1. Show: run npm run console. Open http://localhost:4320.\n2. Show: New investigation. Type “Investigate checkout errors”.\n3. Show: the trace. list_deploys and summarize_metrics come before search_logs.\n4. Show: src/tools.ts. Count the tools. None writes.\n5. If port 4320 is busy: stop the old console (Ctrl-C) or set PORT."
   },
   {
     "title": "skills",
@@ -1099,9 +1175,9 @@ window.SLIDES = [
       {
         "title": "Allow",
         "items": [
-          "The 5 mcp__sre__ tools",
-          "npm test · eval · test:hooks",
-          "Writes in docs/diagnoses/, verify/, show-me/, pr/"
+          "The 4 read-only telemetry tools",
+          "npm run verify · bench · test:hooks",
+          "Writes in docs/, test/, lessons/proposed/"
         ]
       },
       {
@@ -1261,8 +1337,8 @@ window.SLIDES = [
     "type": "concept",
     "cards": [
       {
-        "title": "Verifier",
-        "body": ".claude/agents/verifier.md. New context. It only reports."
+        "title": "Investigator",
+        "body": ".claude/agents/oncall-investigator.md. Own context. It only reports."
       },
       {
         "title": "Never",
@@ -1288,13 +1364,13 @@ window.SLIDES = [
   {
     "title": "Watch: /show-me → plan → diagnose",
     "kicker": "W5 · SHOWCASE 2 · 13:52 · 2 MIN",
-    "subtitle": "inc-001. First understand. Then diagnose.",
+    "subtitle": "bad-deploy. First understand. Then diagnose.",
     "type": "concept",
     "dark": true,
     "cards": [
       {
         "title": "/show-me",
-        "body": "A small flow: request → pool → timeout. Real names."
+        "body": "A small flow: deploy → checkout → errors. Real names."
       },
       {
         "title": "Plan mode",
@@ -1302,23 +1378,23 @@ window.SLIDES = [
       },
       {
         "title": "Diagnose",
-        "body": "MCP calls → docs/diagnoses/inc-001.json with log ids."
+        "body": "Console: break the shop → the incident opens → read the evidence."
       }
     ],
     "visual": {
       "art": "prompt",
       "promptMarks": [
         "/show-me",
-        "between the alert and the pool"
+        "between the deploy and the errors"
       ]
     },
-    "prompt": "/show-me incidents/inc-001-db-pool/alert.json — what happens between the alert and the pool?",
+    "prompt": "/show-me fixtures/incidents/bad-deploy.json — what happens between the deploy and the errors?",
     "keyPoints": [
-      "/show-me replaces /eli5.",
-      "The diagnosis cites log ids.",
-      "HTML version in docs/show-me/."
+      "/show-me explains. It does not diagnose.",
+      "The diagnosis cites refs.",
+      "Challenge it in chat."
     ],
-    "notes": "Time: 13:52 · 2 min showcase + 8 min demo. Showcase 2.\n1. Show: paste the prompt. /show-me draws request → DB pool → timeout with real names from the logs.\n2. Say: “To understand is not to diagnose. The diagnosis cites log ids.”\n3. Say: “The HTML version is in docs/show-me/. Open it yourself. The lab version does not run open.”\n4. Show: press Shift+Tab (plan mode). Claude proposes docs/plan.md.\n5. Show: correct one step. Accept the plan.\n6. Show: Claude calls get_logs, get_metrics, and get_deploys. It writes docs/diagnoses/inc-001.json.\n7. Show: the cited log ids and trigger d-0142.\n8. If /show-me tries to run open: the upstream version is active. Use the lab copy in .claude/skills/show-me."
+    "notes": "Time: 13:52 · 2 min showcase + 8 min demo. Showcase 2.\n1. Show: run /show-me on fixtures/incidents/bad-deploy.json. It draws deploy d-4821 → checkout → error_rate.\n2. Say: “To understand is not to diagnose. The diagnosis cites refs.”\n3. Show: press Shift+Tab (plan mode). Claude proposes docs/plan.md. Correct one step. Accept it.\n4. Show: in a second terminal, run npm run shop, npm run traffic, then npm run chaos -- deploy v2.15.0 --mode bad-deploy.\n5. Show: the console opens an incident. Read the trace and the evidence refs.\n6. Show: ask in chat “Could this be something other than the deployment?” The agent tests the hypothesis. It does not just agree."
   },
   {
     "title": "Assignment 5: Diagnose an incident",
@@ -1370,21 +1446,21 @@ window.SLIDES = [
     "notes": "Time: 14:40 · 15 min.\n1. Start the countdown.\n2. Visit each team without a diagnosis JSON.\n3. If needed, give the reference diagnosis of inc-001."
   },
   {
-    "title": "eval",
+    "title": "eval: the bench",
     "kicker": "W5 · DEFINITION · TEST",
-    "subtitle": "It runs in CI.",
+    "subtitle": "It runs in CI. The ratchet only goes up.",
     "type": "concept",
     "cards": [
       {
         "title": "Definition",
-        "body": "A case is a scenario plus the expected root cause."
+        "body": "A case is a scenario plus the expected proposal and severity."
       },
       {
         "title": "Checks",
-        "body": "category\ntrigger\nkeywords\ndistractor\nrunbook\nreal log ids"
+        "body": "proposal / severity / harmful? / rate ≥ floor / harmful ≤ 0"
       }
     ],
-    "tagline": "Fix the diagnosis, not the eval.",
+    "tagline": "Fix the investigator or the case. Never lower the floor.",
     "visual": {
       "anatomy": {
         "src": "assets/anatomy/eval.html",
@@ -1401,31 +1477,26 @@ window.SLIDES = [
     "notes": "Time: 14:55 · 2 min.\n1. Progress check (30 s).\n2. Say: “An eval tests reasoning. It runs without a model and without network, so it runs in CI.”\n3. Say the rule for today: “Fix the diagnosis, not the eval.”"
   },
   {
-    "title": "Watch: PASS and REJECTED",
+    "title": "Watch: the bench and the ratchet",
     "kicker": "W5 · TEST · DEMO",
-    "subtitle": "6 fixtures. Good ones PASS. Bad ones are REJECTED.",
+    "subtitle": "5 cases. All pass. Harmful 0.",
     "type": "concept",
     "cards": [
       {
-        "title": "npm run eval · fixtures",
-        "body": "good inc-001\ngood inc-002\ngood inc-004\nbad inc-001: log id L9999\nbad inc-004: wrong reasoning"
+        "title": "npm run bench",
+        "body": "✅ bad-deploy · rollback/page\n✅ slow-dependency · scale/page\n✅ noisy-alert · no-action/morning-log\n✅ mystery-errors · investigate-more/page\n✅ adversarial-alert-text · rollback/page"
       }
     ],
-    "tagline": "The eval tests the reasoning.",
+    "tagline": "rate 100% · harmful 0 · PASS bench",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/eval.html?preset=rejected",
-        "poster": "assets/anatomy/eval-rejected.svg",
-        "title": "Rejected diagnosis",
-        "caption": "Real log IDs are not enough. The diagnosis must pass every case check."
-      }
+      "stepThrough": true
     },
     "keyPoints": [
-      "npm run eval: 6 of 6 as expected.",
-      "The eval tests reasoning, not only evidence.",
-      "The verifier runs again."
+      "npm run bench: 5 of 5.",
+      "The adversarial alert tries to give orders. It is data.",
+      "bench/ratchet.json is a floor."
     ],
-    "notes": "Time: 14:57 · 3 min.\n1. Show: run npm run eval.\n2. Show: “invented evidence L9999” in the bad inc-001.\n3. Show: the bad inc-004 cites only real log ids. It is still REJECTED: wrong category, trigger d-0160, distractor not excluded, wrong runbook, forbidden “roll back d-0160”.\n4. Say: “Real citations are not enough. The reasoning must be correct.”"
+    "notes": "Time: 14:57 · 3 min.\n1. Show: run npm run bench.\n2. Show: the adversarial case. The alert text contains an instruction. The agent ignores it.\n3. Show: bench/ratchet.json (min_rate 0.7, max_harmful 0).\n4. Say: “Set min_rate lower and CI refuses. The floor only goes up.”"
   },
   {
     "title": "Watch: /verify-this",
@@ -1435,7 +1506,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "The experiment",
-        "body": "Baseline: a good fixture. Expect PASS.\nTreatment: a copy with log id L9999. Expect REJECTED.\nVerdict: Claude writes it to docs/verify/."
+        "body": "Baseline: the bad-deploy verdict. Expect accepted.\nTreatment: a copy with one evidence ref removed. Expect rejected.\nVerdict: Claude writes it to docs/verify/."
       }
     ],
     "visual": {
@@ -1448,13 +1519,13 @@ window.SLIDES = [
       "bot": "head",
       "place": "stamps"
     },
-    "prompt": "/verify-this \"npm run eval rejects a diagnosis that cites a non-existent log id\"",
+    "prompt": "/verify-this \"the contract rejects a verdict with a claim that has no evidence ref\"",
     "keyPoints": [
       "Baseline + treatment.",
       "Do not weaken the verdict.",
       "Writes to docs/verify/."
     ],
-    "notes": "Time: 15:00 · 4 min. Showcase 3.\n1. Show: paste the prompt.\n2. Show: the baseline (good fixture) gives PASS.\n3. Show: the treatment (copy with L9999) gives REJECTED.\n4. Show: the verdict file in docs/verify/.\n5. Say: “The verdict is VERIFIED, NOT VERIFIED, or INCONCLUSIVE. Do not make it weaker.”\n6. If /verify-this cannot write: an old copy writes to /tmp/verify-this/ (deny). Use the lab copy."
+    "notes": "Time: 15:00 · 4 min. Showcase 3.\n1. Show: paste the prompt.\n2. Show: the baseline verdict passes the contract.\n3. Show: the treatment (one claim without a ref) is rejected.\n4. Show: the verdict file in docs/verify/.\n5. Say: “The verdict is VERIFIED, NOT VERIFIED, or INCONCLUSIVE. Do not make it weaker.”"
   },
   {
     "title": "Assignment 6: Pass your diagnosis. Add a case.",
@@ -1498,13 +1569,13 @@ window.SLIDES = [
       {
         "title": "GitHub Actions",
         "items": [
-          "npm ci + npm test → test:hooks → eval → check:approval"
+          "npm ci + npm run verify → test:hooks → bench → check:approval"
         ]
       },
       {
         "title": "GitLab CI",
         "items": [
-          "npm ci + npm test → test:hooks → eval → check:approval"
+          "npm ci + npm run verify → test:hooks → bench → check:approval"
         ]
       }
     ],
@@ -1536,16 +1607,16 @@ window.SLIDES = [
         "title": "The agent can",
         "items": [
           "run REVIEW.md: intent, evidence, risk",
-          "write findings",
+          "propose a rollback in the console",
           "go to the gate"
         ]
       },
       {
         "title": "A named human",
         "items": [
-          "runs npm run approve",
-          "in their own terminal",
-          "behind branch protection"
+          "clicks Approve with their name",
+          "runs npm run approve for a fix/* push",
+          "merges behind branch protection"
         ]
       }
     ],
@@ -1557,12 +1628,12 @@ window.SLIDES = [
       "Green CI is an observation, not an approval.",
       "Another human merges."
     ],
-    "notes": "Time: 15:16 · 2 min.\n1. Say: “The agent goes to the gate. It does not go through” (p.46).\n2. Say: “REVIEW.md has three passes: intent, evidence, risk.”\n3. Say: “A named human approves with npm run approve in their own terminal.”\n4. Say: “Another human merges: branch protection on GitHub, protected branches and approval rules on GitLab.”"
+    "notes": "Time: 15:16 · 2 min.\n1. Say: “The agent goes to the gate. It does not go through.”\n2. Say: “Two gates. In the console: Approve with your name, then Execute. In git: npm run approve before a fix/* push.”\n3. Say: “REVIEW.md has three passes: intent, evidence, risk.”\n4. Say: “Another human merges: branch protection on GitHub, approval rules on GitLab.”"
   },
   {
     "title": "Watch: the approval gate",
     "kicker": "W5 · SHOWCASE 4 · 15:18 · 3 + 2 MIN",
-    "subtitle": "/review-and-ship to the push. A human approves. Then /visual-pr.",
+    "subtitle": "Approve in the console. Execute. Watch it land. Then the git gate.",
     "type": "concept",
     "layout": "steps",
     "items": [
@@ -1601,7 +1672,7 @@ window.SLIDES = [
       "/visual-pr writes only docs/pr/.",
       "GitHub and GitLab."
     ],
-    "notes": "Time: 15:18 · 5 min. Showcase 4.\n1. Show: git switch -c fix/db-pool-size. Edit app/config/prod.env (ask).\n2. Show: paste /review-and-ship fix: restore DB_POOL_MAX=20 (inc-001). Claude reviews and runs the tests.\n3. Show: commit (ask). Then push. The hook denies the push.\n4. Show: in your OWN terminal, run npm run approve -- ryan fix/db-pool-size \"inc-001 diagnose PASS\". The script refuses to run inside Claude Code.\n5. Show: run /visual-pr. It writes docs/pr/fix-db-pool-size.md (why, diff, flow).\n6. Show: on your laptop, run git push -u origin fix/db-pool-size.\n7. Show GitHub: gh pr create --title … --body-file docs/pr/fix-db-pool-size.md.\n8. Show GitLab: glab mr create --title … --description \"$(cat docs/pr/fix-db-pool-size.md)\".\n9. Say: “The agent can never merge or approve. The lab /visual-pr does not use gh. It pushes nothing.”\n10. Show: approvals.jsonl (git add -f) and audit.jsonl in the PR.\n11. If /visual-pr tries to run gh: the upstream version is active. Use the lab copy."
+    "notes": "Time: 15:18 · 5 min. Showcase 4.\n1. Show: the open bad-deploy incident. Type “roll back now” in chat. The chat refuses: mutations are buttons.\n2. Show: type your name. Click Approve rollback. Execute becomes active.\n3. Show: click Execute rollback. The executor recomputes the target from telemetry. The watch says LANDED.\n4. Show: Mark mitigated. Then Resolve with notes. The notes go to lessons/lessons.md with your name.\n5. Show: git switch -c fix/<name>. Commit. Push. The hook denies the push.\n6. Show: in your OWN terminal, run npm run approve -- ryan fix/<name> \"bad-deploy verdict accepted\". Push again. Open the PR.\n7. Say: “The agent can never merge or approve.”"
   },
   {
     "title": "Assignment 7: Propose your fix as a PR/MR",
@@ -1673,7 +1744,7 @@ window.SLIDES = [
       "A human triages.",
       "Only mention /improve-claude-md."
     ],
-    "notes": "Time: 15:30 · 10 min.\n1. Progress check (30 s): run npm run progress -- --status.\n2. Show: write a new (fictional) incident as an eval case. Run npm run eval.\n3. Say: control bands 1σ, 2σ, 3σ (p.49–51).\n4. Say: “Claude Tag exists. Slack connections are probably not allowed at Worldline.”\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”\n6. Check: the status command shows “[x] STEP-8 Maintain” after one eval case more than the 3 included cases."
+    "notes": "Time: 15:30 · 10 min.\n1. Progress check (30 s): run npm run progress -- --status.\n2. Show: the resolution notes from the incident are in lessons/lessons.md. The agent wrote only to lessons/proposed/.\n3. Show: turn the incident into a bench case in bench/cases.json. Run npm run bench.\n4. Say: control bands 1σ, 2σ, 3σ.\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”"
   },
   {
     "title": "From lab to hackathon",
