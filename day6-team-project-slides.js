@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aetherlink x Worldline — Support Day 4 deck: the team project
+   Aetherlink x Worldline — Day 6 deck: the team project (first hackathon day)
    23 slides. One slide = one object in order. See README.md "How to edit
    a slide" before changing anything here.
 
@@ -117,16 +117,16 @@
 window.SLIDES = [
 
 /* ==========================================================================
-   SUPPORT DAY 4 — The team project: from idea to a plan you can build
+   DAY 6 — The team project: from idea to a plan you can build
    ========================================================================== */
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — Welcome and recap                                                */
+/* DAY 6 — Welcome and recap                                                */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 1
-  title: "Welcome to Day 4!",
-  kicker: "AETHERLINK × WORLDLINE · DAY 4",
+  title: "Welcome to Day 6!",
+  kicker: "AETHERLINK × WORLDLINE · DAY 6",
   subtitle: "",
   type: "context",
   visual: { opener: 'welcome', bot: 'wave', place: 'beside' },
@@ -136,21 +136,21 @@ window.SLIDES = [
 
 { // Slide 2
   title: "Where we are",
-  kicker: "DAY 4 · ROUTE",
+  kicker: "DAY 6 · ROUTE",
   subtitle: "Everything so far was practice. Today the team project starts for real.",
   type: "context",
-  visual: { bot: 'wave', place: 'left', dayRoute: ['Teaching day 1', 'Teaching day 2', 'n8n', 'n8n + Claude', 'SDLC', 'Today: team project', 'Day 5: AI app'] },
+  visual: { bot: 'wave', place: 'left', dayRoute: ['Teaching day 1', 'Teaching day 2', 'n8n', 'Agent SDK', 'SDLC', 'Today: team project', 'Day 7: AI app'] },
   cards: [
     { title: "Today", body: "Your team turns an idea into a plan you can build, and starts building." },
-    { title: "Day 5", body: "Your team shows a working AI app." }
+    { title: "Day 7", body: "Your team shows a working AI app." }
   ],
-  keyPoints: ["Walk the route left to right","Each day added one piece","Today: idea becomes a plan","Day 5: a working app"],
-  notes: "Walk the route once: the two teaching days gave them the working method and Claude Code, the n8n days gave them workflows and connecting n8n with Claude, yesterday placed it all in the software development life cycle. Today all of that comes together in one team project. Day 5 is the finish line: a working AI app the team can show."
+  keyPoints: ["Walk the route left to right","Each day added one piece","Today: idea becomes a plan","Day 7: a working app"],
+  notes: "Walk the route once: the two teaching days gave them the working method and Claude Code, Day 3 gave them workflows in n8n, Day 6 the Claude Agent SDK, and yesterday placed it all in the software development life cycle. Today all of that comes together in one team project. Day 7 is the finish line: a working AI app the team can show."
 },
 
 { // Slide 3
   title: "What do you remember?",
-  kicker: "DAY 4 · RECAP",
+  kicker: "DAY 6 · RECAP",
   subtitle: "Without looking back, explain:",
   type: "recap",
   tagline: "Answer from memory first, no peeking.",
@@ -168,7 +168,7 @@ window.SLIDES = [
 
 { // Slide 4
   title: "Write it down, and AI works better",
-  kicker: "DAY 4 · RECAP · WORKING WITH AI",
+  kicker: "DAY 6 · RECAP · WORKING WITH AI",
   subtitle: "The more your team writes down, the better Claude can help.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
@@ -185,7 +185,7 @@ window.SLIDES = [
 
 { // Slide 5
   title: "The software development life cycle",
-  kicker: "DAY 4 · RECAP · SDLC",
+  kicker: "DAY 6 · RECAP · SDLC",
   subtitle: "Yesterday in one slide. Today you walk the first part of it as a team.",
   type: "concept",
   layout: "steps",
@@ -195,21 +195,21 @@ window.SLIDES = [
     { label: "Design", caption: "What does it do, which data, which tools, which risks?" },
     { label: "Build", caption: "Short rounds in plan mode, with Claude Code and n8n." },
     { label: "Test", caption: "Does it do what we said, also with wrong input?" },
-    { label: "Deploy", caption: "Day 5: show it working." },
+    { label: "Deploy", caption: "Day 7: show it working." },
     { label: "Maintain", caption: "Who owns it after this week?" }
   ],
   tagline: "Plan and Design first, about 30 minutes. Then build in short rounds.",
-  keyPoints: ["Short recap, not a new lesson","Plan + Design: about 30 minutes","Build in short rounds, plan mode","Day 5 = Test and show","Maintain: who owns it later?"],
-  notes: "Keep it short: this was yesterday's topic. Click through the phases and say where the team will be today. Plan and Design together take about 30 minutes once the idea is chosen; don't let them take the whole morning. Then Build in short rounds: plan mode first, build a little, test it, adjust. Expect to go back and change the plan during the build; that is normal. Day 5 is Test and showing it. Don't skip Maintain: asking who owns the app after this week is a good reality check."
+  keyPoints: ["Short recap, not a new lesson","Plan + Design: about 30 minutes","Build in short rounds, plan mode","Day 7 = Test and show","Maintain: who owns it later?"],
+  notes: "Keep it short: this was yesterday's topic. Click through the phases and say where the team will be today. Plan and Design together take about 30 minutes once the idea is chosen; don't let them take the whole morning. Then Build in short rounds: plan mode first, build a little, test it, adjust. Expect to go back and change the plan during the build; that is normal. Day 7 is Test and showing it. Don't skip Maintain: asking who owns the app after this week is a good reality check."
 },
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — Today is yours                                                   */
+/* DAY 6 — Today is yours                                                   */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 6
   title: "Today is yours",
-  kicker: "DAY 4 · HOW TODAY WORKS",
+  kicker: "DAY 6 · HOW TODAY WORKS",
   subtitle: "We facilitate. You decide and build.",
   type: "context",
   layout: "compare",
@@ -235,7 +235,7 @@ window.SLIDES = [
 
 { // Slide 7
   title: "What you can build with",
-  kicker: "DAY 4 · YOUR TOOLBOX",
+  kicker: "DAY 6 · YOUR TOOLBOX",
   subtitle: "Everything from the last days is now a tool for your team.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'head', place: 'beside', tool: 'toolbox' },
@@ -253,12 +253,12 @@ window.SLIDES = [
 },
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — Choosing one idea                                                */
+/* DAY 6 — Choosing one idea                                                */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 8
   title: "From many ideas to one team idea",
-  kicker: "DAY 4 · CHOOSING AN IDEA",
+  kicker: "DAY 6 · CHOOSING AN IDEA",
   subtitle: "Start with everyone's ideas. End with one idea the whole team wants.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'point', place: 'beside' },
@@ -275,7 +275,7 @@ window.SLIDES = [
 
 { // Slide 9
   title: "Five pillars for choosing an idea",
-  kicker: "DAY 4 · CHOOSING AN IDEA",
+  kicker: "DAY 6 · CHOOSING AN IDEA",
   subtitle: "Ask every idea the same five questions.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
@@ -293,7 +293,7 @@ window.SLIDES = [
 
 { // Slide 10
   title: "Assignment: Score your ideas",
-  kicker: "DAY 4 · TEAM ASSIGNMENT 1",
+  kicker: "DAY 6 · TEAM ASSIGNMENT 1",
   subtitle: "Put every idea on the board and score it from 1 to 5 on each pillar.",
   type: "practice",
   layout: "exercise",
@@ -316,12 +316,12 @@ window.SLIDES = [
 },
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — The questions every team has to answer                          */
+/* DAY 6 — The questions every team has to answer                          */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 11
   title: "Before you build: the problem",
-  kicker: "DAY 4 · QUESTIONS TO ANSWER",
+  kicker: "DAY 6 · QUESTIONS TO ANSWER",
   subtitle: "Most team projects fail here, not in the code.",
   type: "concept",
   visual: { reveal: 'click', bot: 'think', place: 'slot', noReact: true },
@@ -333,12 +333,12 @@ window.SLIDES = [
   ],
   tagline: "If you can't answer these four, you're not ready to build yet.",
   keyPoints: ["Who, what, why AI, when successful","One real user","'Why AI?' is a fair question","Success = written down, checkable"],
-  notes: "These are the questions teams skip because building is more fun. Open them one by one. 'Why AI?' is worth pushing on: sometimes the honest answer is that a plain form or an n8n workflow without AI is better, and that's a good outcome too. 'When is this app successful?' becomes the definition of done for Day 5. Push for something checkable: not 'it helps', but 'the user gets a short summary with enough information to act on it'."
+  notes: "These are the questions teams skip because building is more fun. Open them one by one. 'Why AI?' is worth pushing on: sometimes the honest answer is that a plain form or an n8n workflow without AI is better, and that's a good outcome too. 'When is this app successful?' becomes the definition of done for Day 7. Push for something checkable: not 'it helps', but 'the user gets a short summary with enough information to act on it'."
 },
 
 { // Slide 12
   title: "Input: start from the source of truth",
-  kicker: "DAY 4 · DESIGN · INPUT",
+  kicker: "DAY 6 · DESIGN · INPUT",
   subtitle: "Your app is only as good as the data it gets.",
   type: "concept",
   layout: "steps",
@@ -356,25 +356,25 @@ window.SLIDES = [
 
 { // Slide 13
   title: "Before you build: the team and the plan",
-  kicker: "DAY 4 · QUESTIONS TO ANSWER",
+  kicker: "DAY 6 · QUESTIONS TO ANSWER",
   subtitle: "The questions you need answers on as a team.",
   type: "concept",
   visual: { checklist: 0, bot: 'point', place: 'left' },
   cards: [
-    { title: "Answer as a team", body: "Who does what: product owner, builders, tester, presenter?\nWhat is in for Day 5, and what is not?\nWhich data do we use, and are we allowed to?\nClaude Code, n8n, or both?\nWhere does a person approve or decide?\nHow do we work together: one repo, who merges?\nWhat is our first small slice that works?" }
+    { title: "Answer as a team", body: "Who does what: product owner, builders, tester, presenter?\nWhat is in for Day 7, and what is not?\nWhich data do we use, and are we allowed to?\nClaude Code, n8n, or both?\nWhere does a person approve or decide?\nHow do we work together: one repo, who merges?\nWhat is our first small slice that works?" }
   ],
   tagline: "Write the answers down. They become your CLAUDE.md and your plan.",
-  keyPoints: ["Roles: who owns what","Scope: in and out for Day 5","Data: allowed or not","Tools: Claude Code, n8n, both","Human checkpoint","Way of working: repo and merging","First small slice"],
+  keyPoints: ["Roles: who owns what","Scope: in and out for Day 7","Data: allowed or not","Tools: Claude Code, n8n, both","Human checkpoint","Way of working: repo and merging","First small slice"],
   notes: "The practical questions for building together. Two often cause trouble: scope (teams plan far more than fits in two days; push for a small first slice that works end to end) and working together in one codebase (agree who merges and how, or they will overwrite each other). The answers aren't paperwork: they go straight into CLAUDE.md and the team plan, exactly like the AetherBOT exercise on Day 2."
 },
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — Security                                                         */
+/* DAY 6 — Security                                                         */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 14
   title: "Security is a requirement",
-  kicker: "DAY 4 · SECURITY",
+  kicker: "DAY 6 · SECURITY",
   subtitle: "Not a check at the end, but a question from the start.",
   type: "concept",
   layout: "compare",
@@ -393,14 +393,14 @@ window.SLIDES = [
       "becomes a yes, if…"
     ] }
   ],
-  tagline: "A security question now is cheaper than a security problem on Day 5.",
+  tagline: "A security question now is cheaper than a security problem on Day 7.",
   keyPoints: ["Security is part of the design","Early question = cheap","Sandbox first, not production","Production needs permission","Aim for 'yes, if…'"],
-  notes: "Frame security as part of good software, not as someone else's veto. There is a security specialist in the room today: introduce them here as a resource for every team. Their questions will feel like friction at times; that's legitimate, because a question answered during design costs minutes and the same problem found on Day 5 costs the demo. Make the difference between environments clear: a sandbox is easier to get access to and the place to try things; changes on production (and pre-production) need permission from legal and management. The goal is a 'yes, if…' for every team: what has to be true for this to be safe enough?"
+  notes: "Frame security as part of good software, not as someone else's veto. There is a security specialist in the room today: introduce them here as a resource for every team. Their questions will feel like friction at times; that's legitimate, because a question answered during design costs minutes and the same problem found on Day 7 costs the demo. Make the difference between environments clear: a sandbox is easier to get access to and the place to try things; changes on production (and pre-production) need permission from legal and management. The goal is a 'yes, if…' for every team: what has to be true for this to be safe enough?"
 },
 
 { // Slide 15
   title: "Questions security will ask",
-  kicker: "DAY 4 · SECURITY",
+  kicker: "DAY 6 · SECURITY",
   subtitle: "Have an answer ready, or write it down as OPEN.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
@@ -418,7 +418,7 @@ window.SLIDES = [
 
 { // Slide 16
   title: "A human in the loop",
-  kicker: "DAY 4 · SECURITY",
+  kicker: "DAY 6 · SECURITY",
   subtitle: "Fixed rules miss things. AI reasoning catches more, but it doesn't act alone.",
   type: "concept",
   layout: "compare",
@@ -443,7 +443,7 @@ window.SLIDES = [
 
 { // Slide 17
   title: "Assignment: The team canvas",
-  kicker: "DAY 4 · TEAM ASSIGNMENT 2",
+  kicker: "DAY 6 · TEAM ASSIGNMENT 2",
   subtitle: "Answer the questions as a team and put them on one page.",
   type: "practice",
   layout: "exercise",
@@ -467,7 +467,7 @@ window.SLIDES = [
 
 { // Slide 18
   title: "Short break",
-  kicker: "DAY 4 · BREAK",
+  kicker: "DAY 6 · BREAK",
   subtitle: "Return in 15 minutes.",
   type: "pause",
   visual: { countdown: 15, bot: 'wave', place: 'beside' },
@@ -479,12 +479,12 @@ window.SLIDES = [
 },
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — Build                                                            */
+/* DAY 6 — Build                                                            */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 19
   title: "Assignment: Set up and build the first slice",
-  kicker: "DAY 4 · TEAM ASSIGNMENT 3",
+  kicker: "DAY 6 · TEAM ASSIGNMENT 3",
   subtitle: "From canvas to something that works, end to end, however small.",
   type: "practice",
   layout: "exercise",
@@ -507,7 +507,7 @@ window.SLIDES = [
 
 { // Slide 20
   title: "Check-in",
-  kicker: "DAY 4 · CHECK-IN",
+  kicker: "DAY 6 · CHECK-IN",
   subtitle: "Every team, two minutes. Short answers.",
   type: "review",
   visual: { reveal: 'click', bot: 'peek', place: 'slot', noReact: true },
@@ -523,12 +523,12 @@ window.SLIDES = [
 },
 
 /* ---------------------------------------------------------------------- */
-/* DAY 4 — Closing                                                          */
+/* DAY 6 — Closing                                                          */
 /* ---------------------------------------------------------------------- */
 
 { // Slide 21
-  title: "Day 5: your presentation",
-  kicker: "DAY 4 · LOOKING AHEAD",
+  title: "Day 7: your presentation",
+  kicker: "DAY 6 · LOOKING AHEAD",
   subtitle: "Tomorrow every team presents what it built.",
   type: "context",
   visual: { stagger: 'pop', stepThrough: true, bot: 'wave', place: 'beside' },
@@ -544,8 +544,8 @@ window.SLIDES = [
 },
 
 { // Slide 22
-  title: "Ready for Day 5?",
-  kicker: "DAY 4 · CLOSING",
+  title: "Ready for Day 7?",
+  kicker: "DAY 6 · CLOSING",
   subtitle: "Tomorrow your team shows a working AI app.",
   type: "recap",
   visual: { checklist: 0, bot: 'happy', place: 'left' },
@@ -553,13 +553,13 @@ window.SLIDES = [
     { title: "By the end of today", body: "the canvas is in the repo\nyou know when your app is successful\nthe first slice works\nCLAUDE.md and settings.json are in place\nsecurity questions are answered or OPEN\nyou have a plan for the presentation\nyou know what to build tomorrow morning" }
   ],
   tagline: "Tomorrow: finish, test, and show what you built.",
-  keyPoints: ["Seven checks per team","Missing one? Plan it first thing tomorrow","Day 5 = finish, test, show"],
-  notes: "Go through the list with each team. Anything that isn't ticked becomes the first task for tomorrow morning. Tell them what Day 5 looks like: finish, test, and present a working app."
+  keyPoints: ["Seven checks per team","Missing one? Plan it first thing tomorrow","Day 7 = finish, test, show"],
+  notes: "Go through the list with each team. Anything that isn't ticked becomes the first task for tomorrow morning. Tell them what Day 7 looks like: finish, test, and present a working app."
 },
 
 { // Slide 23
   title: "What did you learn?",
-  kicker: "DAY 4 · CLOSING",
+  kicker: "DAY 6 · CLOSING",
   subtitle: "Complete these statements.",
   type: "recap",
   tagline: "Complete each statement for yourself.",
