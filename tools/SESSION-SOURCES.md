@@ -4,7 +4,7 @@ Days 1 and 2 use the existing `slides.js` deck. Their opening slides are 7 and 6
 Day 5 retains the local SRE workshop and its reviewed changes.
 
 The four additional decks were imported as plain data from
-https://github.com/RyanLisse/aetherlink-academy-app/tree/234fabcb472fb3ff87ec48545b919a95b7cb5375/apps/web/src/deck.
+https://github.com/RyanLisse/aetherlink-academy-app/tree/159564d9db478bbdf50a506260622ac5fbad3a38/apps/web/src/deck.
 
 | Session | Source | Slides |
 | --- | --- | --- |

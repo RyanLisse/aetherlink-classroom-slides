@@ -1,4 +1,4 @@
-/* Imported from RyanLisse/aetherlink-academy-app @ 234fabcb472fb3ff87ec48545b919a95b7cb5375
+/* Imported from RyanLisse/aetherlink-academy-app @ 159564d9db478bbdf50a506260622ac5fbad3a38
  * Source: apps/web/src/deck/workshop4-slides.ts. Authored content retained; image paths adapted. */
 'use strict';
 window.SLIDES = [
@@ -17,7 +17,7 @@ window.SLIDES = [
   {
     "lessonId": "workshop-4",
     "title": "Yesterday’s recap · Maarten’s n8n build",
-    "kicker": "Recap · one ticket, three levels",
+    "kicker": "Recap · Maarten's flow, node by node",
     "type": "recap",
     "layout": "recap",
     "items": [
@@ -463,7 +463,6 @@ window.SLIDES = [
     "title": "Structured output: parser to JSON schema",
     "kicker": "Concept · structured output",
     "type": "concept",
-    "layout": "compare",
     "visual": {
       "bot": "think",
       "place": "beside"
@@ -499,7 +498,6 @@ window.SLIDES = [
     "title": "Memory is the session",
     "kicker": "Concept · memory",
     "type": "concept",
-    "layout": "compare",
     "visual": {
       "bot": "point",
       "place": "beside"
@@ -527,7 +525,6 @@ window.SLIDES = [
     "title": "Two ways to run the same agent",
     "kicker": "Concept · choose a backend",
     "type": "concept",
-    "layout": "compare",
     "visual": {
       "bot": "think",
       "place": "beside"
