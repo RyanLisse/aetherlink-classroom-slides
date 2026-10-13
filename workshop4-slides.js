@@ -1,4 +1,4 @@
-/* Imported from RyanLisse/aetherlink-academy-app @ 159564d9db478bbdf50a506260622ac5fbad3a38
+/* Imported from RyanLisse/aetherlink-academy-app @ 431760fd2bfe0ee428a66816b1d43075f4b324fe
  * Source: apps/web/src/deck/workshop4-slides.ts. Authored content retained; image paths adapted. */
 'use strict';
 window.SLIDES = [
@@ -538,19 +538,15 @@ window.SLIDES = [
     "cards": [
       {
         "title": "claude-code · default",
-        "body": "claude -p · use the participant's Claude Code login"
+        "body": "claude -p · your own Claude Code login · no API key"
       },
       {
-        "title": "sdk",
-        "body": "query() · ANTHROPIC_API_KEY"
+        "title": "sdk · sdk-login",
+        "body": "sdk: query() + ANTHROPIC_API_KEY\nsdk-login: opt-in, query() on your Claude Code login · local learning only"
       },
       {
-        "title": "sdk-login · opt-in",
-        "body": "query() with a Claude Code login · local learning only; check policy before using in a product"
-      },
-      {
-        "title": "Options → CLI",
-        "body": "maxTurns → --max-turns · agents → --agents · mcpServers → --mcp-config · outputFormat → --json-schema · resume → --resume"
+        "title": "Same options, CLI flags",
+        "body": "maxTurns: --max-turns\nagents: --agents\nmcpServers: --mcp-config\noutputFormat: --json-schema\nresume: --resume"
       }
     ],
     "notes": "The default backend is claude-code and spawns claude -p using the participant's existing Claude Code login. Select --backend sdk to use query() with ANTHROPIC_API_KEY; --backend sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume. canUseTool is SDK-only; the transaction clerk uses interactive claude in Claude Code mode."
