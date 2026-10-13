@@ -2,11 +2,13 @@
 window.CLASSROOM_SESSIONS = [
   {id:'day-1',label:'Day 1 · AI and Claude Code',href:'index.html#7',deck:'index.html',start:7},
   {id:'day-2',label:'Day 2 · Reusable workflows',href:'index.html#63',deck:'index.html',start:63},
-  {id:'workshop-3',label:'Day 3 · Agents in n8n',href:'workshop3.html#1',deck:'workshop3.html',start:1},
-  {id:'workshop-4',label:'Day 4 · Claude Agent SDK',href:'workshop4.html#1',deck:'workshop4.html',start:1},
-  {id:'workshop-5',label:'Day 5 · AI-native SDLC',href:'workshop5.html#1',deck:'workshop5.html',start:1},
-  {id:'hackathon-1',label:'Day 6 · Hackathon: thin slice',href:'workshop6.html#1',deck:'workshop6.html',start:1},
-  {id:'hackathon-2',label:'Day 7 · Hackathon: ship and present',href:'workshop7.html#1',deck:'workshop7.html',start:1}
+  {id:'workshop-3',label:'Day 3 · Agents in n8n (Ryan)',href:'workshop3.html#1',deck:'workshop3.html',start:1},
+  {id:'day-3-n8n',label:'Day 3 · n8n (Jessy)',href:'day3-n8n.html#1',deck:'day3-n8n.html',start:1},
+  {id:'workshop-4',label:'Day 4 · Claude Agent SDK (Ryan)',href:'workshop4.html#1',deck:'workshop4.html',start:1},
+  {id:'day-4-team-project',label:'Day 4 · Team project (Jessy)',href:'day4-team-project.html#1',deck:'day4-team-project.html',start:1},
+  {id:'workshop-5',label:'Day 5 · AI-native SDLC (Ryan)',href:'workshop5.html#1',deck:'workshop5.html',start:1},
+  {id:'hackathon-1',label:'Day 6 · Hackathon: thin slice (Ryan)',href:'workshop6.html#1',deck:'workshop6.html',start:1},
+  {id:'hackathon-2',label:'Day 7 · Hackathon: ship and present (Ryan)',href:'workshop7.html#1',deck:'workshop7.html',start:1}
 ];
 if(!new URLSearchParams(location.search).has('embed')){
   const label=document.createElement('label'); label.className='session-picker';

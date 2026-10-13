@@ -7,8 +7,8 @@ const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
 const context={window:{},location:{search:'?embed=1'},URLSearchParams};
 vm.runInNewContext(read('sessions.js'),context);
 const sessions=context.window.CLASSROOM_SESSIONS;
-test('All seven sessions open real decks with real assets and matching presenters',()=>{
- assert.equal(sessions.length,7); assert.equal(new Set(sessions.map(s=>s.id)).size,7);
+test('All nine sessions open real decks with real assets and matching presenters',()=>{
+ assert.equal(sessions.length,9); assert.equal(new Set(sessions.map(s=>s.id)).size,9);
  for(const session of sessions){
   const html=read(session.deck);const data=html.match(/src="([^"?]*slides.js)/)[1];const deck={window:{}};vm.runInNewContext(read(data),deck);
   assert.ok(deck.window.SLIDES.length>=session.start);
