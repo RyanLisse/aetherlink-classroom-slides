@@ -1,6 +1,6 @@
 {
   "repo": "RyanLisse/aetherlink-academy-app",
-  "revision": "b491cc0187b948a9717186fa9d2cb3f79dbc59ca",
+  "revision": "234fabcb472fb3ff87ec48545b919a95b7cb5375",
   "decks": [
     {
       "file": "workshop3-slides.js",
@@ -12,9 +12,9 @@
     {
       "file": "workshop4-slides.js",
       "source": "apps/web/src/deck/workshop4-slides.ts",
-      "slides": 28,
-      "sourceSha256": "db561638c82091986771f5b907618e2caab8944acb8a47bf750d0be78fdde5e8",
-      "normalizedDataSha256": "07aa80ab821ca8e3ec416c84f2efb4239dde21a9f1ec43120c1982972d11d04a"
+      "slides": 36,
+      "sourceSha256": "c930085291f54df058b38e10868eec1c505f8ccdfcd2a725692d60b5282673c1",
+      "normalizedDataSha256": "8b8c52a175cca64310a109cfc686d42356ae775b2a15e07cbaddc231bee230f8"
     },
     {
       "file": "workshop6-slides.js",

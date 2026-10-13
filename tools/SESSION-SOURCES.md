@@ -4,12 +4,12 @@ Days 1 and 2 use the existing `slides.js` deck. Their opening slides are 7 and 6
 Day 5 retains the local SRE workshop and its reviewed changes.
 
 The four additional decks were imported as plain data from
-https://github.com/RyanLisse/aetherlink-academy-app/tree/b491cc0187b948a9717186fa9d2cb3f79dbc59ca/apps/web/src/deck.
+https://github.com/RyanLisse/aetherlink-academy-app/tree/234fabcb472fb3ff87ec48545b919a95b7cb5375/apps/web/src/deck.
 
 | Session | Source | Slides |
 | --- | --- | --- |
 | Day 3: agents in n8n | workshop3-slides.ts | 18 |
-| Day 4: Claude Agent SDK | workshop4-slides.ts | 28 |
+| Day 4: Claude Agent SDK | workshop4-slides.ts | 36 |
 | Day 6: hackathon, thin slice | workshop6-slides.ts | 14 |
 | Day 7: hackathon, ship and present | workshop7-slides.ts | 14 |
 
