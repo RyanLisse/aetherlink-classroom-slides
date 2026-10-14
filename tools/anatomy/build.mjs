@@ -3,7 +3,7 @@ import {existsSync,readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 const root=path.dirname(fileURLToPath(import.meta.url));
-for(const id of ['bottleneck','loop','mcp','hooks','subagents','eval']){
+for(const id of ['bottleneck','loop','mcp','hooks','subagents','eval','agent-loop','permissions']){
  const script=path.join(root,id,'build.mjs');
  if(!existsSync(script))throw new Error(`Missing Anatomy builder: ${script}`);
  const audit=process.argv.includes('--audit')&&readFileSync(script,'utf8').includes('--audit');
