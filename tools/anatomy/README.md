@@ -1,6 +1,6 @@
-# Workshop 5 Anatomy figures
+# Workshop 4 and 5 Anatomy figures
 
-Build all six standalone figures with `node tools/anatomy/build.mjs` from the deck root.
+Build all eight standalone figures with `node tools/anatomy/build.mjs` from the deck root.
 Individual builders live in `tools/anatomy/<id>/build.mjs`.
 They write self-contained HTML and SVG posters to `assets/anatomy/`.
 No network request or external script is required when opening the figures.
@@ -17,6 +17,11 @@ Changing slides removes the iframe and stops its animation.
 The deck's navigation keys apply when focus is outside the figure.
 
 Slide 44 uses `eval.html?preset=rejected` and `eval-rejected.svg`.
+
+Workshop 4 adds `agent-loop` (slide 8: a four-station turntable with a maxTurns counter and stop pawl)
+and `permissions` (slide 41: a drawer cabinet with one key ring per agent, an amount dial, allow/ask/deny lamps
+and a y/N lever). Both models use the agent and tool names as the Workshop 4 slides teach them; the
+`aetherlink-day5-n8n-to-agent` repo names its agents differently, see the slide notes before changing either.
 Illustrative throughput values are not measured delivery estimates.
 Hook demonstrations do not constitute an operating-system sandbox.
 Fixture evaluation checks known criteria; it does not prove unrestricted model reasoning.

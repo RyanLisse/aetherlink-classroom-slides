@@ -19,6 +19,16 @@ test('Workshop keeps 60 slides and seven usable Anatomy figures',()=>{
   assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`Slide ${number} retains teaching content`);
  }
 });
+test('Workshop 4 wires its two Anatomy figures',()=>{
+ const ctx={window:{}};vm.runInNewContext(read('workshop4-slides.js'),ctx);
+ assert.equal(ctx.window.SLIDES.length,51);
+ for(const[number,id]of[[8,'agent-loop'],[41,'permissions']]){
+  const slide=ctx.window.SLIDES[number-1],a=slide.visual.anatomy;
+  assert.equal(a.src,`assets/anatomy/${id}.html`);assert.equal(a.poster,`assets/anatomy/${id}.svg`);
+  for(const target of[a.src,a.poster,`assets/anatomy/${id}-light.html`])assert.ok(existsSync(path.join(root,target)),target);
+  assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`Slide ${number} retains teaching content`);
+ }
+});
 test('Presenter uses posters before the legacy bot renderer',()=>{
  const app=read('app.js');
  const anatomy=app.indexOf('if (v.anatomy)');
