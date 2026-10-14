@@ -19,6 +19,8 @@
     window.addEventListener('resize', queue);
     document.addEventListener('fullscreenchange', queue);
     stage.addEventListener('load', queue, true);
+    stage.addEventListener('transitionend', queue, true);
+    stage.addEventListener('animationend', queue, true);
     queue();
   });
 })();

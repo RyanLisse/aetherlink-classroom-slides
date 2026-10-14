@@ -46,46 +46,6 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Quiz: yesterday's n8n flow",
-    "kicker": "Recap · Quiz",
-    "type": "quiz",
-    "subtitle": "Which n8n node makes the priority structured?",
-    "visual": {
-      "quiz": {
-        "answer": 1
-      },
-      "bot": "stretchLeft",
-      "place": "pointer",
-      "pointAt": 1
-    },
-    "cards": [
-      {
-        "title": "A",
-        "body": "The Switch node."
-      },
-      {
-        "title": "B",
-        "body": "The Priority Parser (Structured Output Parser)."
-      },
-      {
-        "title": "C",
-        "body": "Simple Memory."
-      },
-      {
-        "title": "D",
-        "body": "The Chat trigger."
-      }
-    ],
-    "check": "Answer: B",
-    "keyPoints": [
-      "Vote first.",
-      "Answer: B.",
-      "Today: outputFormat with a JSON schema does this."
-    ],
-    "notes": "Let the room vote first. Then press → to strike the wrong answers. The answer is B. The Switch routes after the parser. Today the same job is outputFormat with a JSON schema in Step 1."
-  },
-  {
-    "lessonId": "workshop-4",
     "title": "Today · agenda",
     "kicker": "Run of show · 10:00–16:00",
     "type": "context",
@@ -246,7 +206,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
+        "title": "Claude Agent SDK · Workshop 4",
         "items": [
           "npm run chat → query()",
           "CLAUDE.md",
@@ -288,7 +248,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
+        "title": "Claude Agent SDK · Workshop 4",
         "items": [
           "for await (… of query({ prompt, options }))",
           "prompt → model turn → tool_use → tool_result → next turn → result message",
@@ -325,7 +285,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
+        "title": "Claude Agent SDK · Workshop 4",
         "items": [
           "CLAUDE.md: Purpose · Rules · Priority definitions",
           "settingSources: ['project'] loads CLAUDE.md",
@@ -361,7 +321,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
+        "title": "Claude Agent SDK · Workshop 4",
         "items": [
           "tools: what exists (Lesson 1: [] · Lesson 2: ['Agent','Write'])",
           "allowedTools: what runs without asking",
@@ -396,7 +356,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
+        "title": "Claude Agent SDK · Workshop 4",
         "items": [
           "docs/transactions.xlsx → server.js (MCP, stdio)",
           "The SDK starts the server on demand",
@@ -407,212 +367,6 @@ window.SLIDES = [
       }
     ],
     "notes": "The customers MCP server reads docs/customer_context.csv and exposes get_customer; the transactions MCP server reads docs/transactions.xlsx and exposes get_transaction. The Agent SDK starts both over stdio. Claude Code reads the equivalent .mcp.json. The W3 export has no HTTP Request node; its n8n side is conceptual. Run npm run smoke:mcp to test the servers without a model."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Control: hooks and approval",
-    "kicker": "Concept 5 · Control",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/05-hooks.png",
-      "imageLink": "Control: hooks and approval: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "A human or a rule decides before a tool changes anything.",
-    "keyPoints": [
-      "A human or a rule decides before a tool changes anything."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "IF node: check before the action",
-          "Wait node: wait for approval",
-          "Error Workflow: on failure"
-        ]
-      },
-      {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
-        "items": [
-          "PreToolUse hook: allow, ask, or deny per call",
-          "Human review stays on reply drafts",
-          "permissionMode: 'acceptEdits' → --permission-mode acceptEdits",
-          "Assignment: hooks gate writes by situation"
-        ]
-      }
-    ],
-    "notes": "Hooks run in both backends: the SDK hooks option and .claude/settings.json for Claude Code. In the assignment a PreToolUse hook allows reads, auto-allows small updates and asks a person before large updates, adds and deletes; a PostToolUse hook writes the audit log. Human review still applies to every reply draft. permissionMode maps to --permission-mode."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Subagents",
-    "kicker": "Concept 6 · Subagents",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/06-subagents.png",
-      "imageLink": "Subagents: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "The orchestrator delegates. Each specialist does one task.",
-    "keyPoints": [
-      "The orchestrator delegates. Each specialist does one task."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "AI Agent as coordinator",
-          "Customer Reply Agent + Risk Agent (own model + memory)",
-          "Code → Switch afterwards"
-        ]
-      },
-      {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
-        "items": [
-          "Orchestrator follows CLAUDE.md: delegate, don't do it yourself",
-          "Agent → risk-agent (priority)",
-          "Agent → customer-reply-agent (draft email)",
-          "Agent → customer-context-agent (customer facts)",
-          "output/MSG-05.md = draft for the human"
-        ]
-      }
-    ],
-    "notes": "The final chain maps n8n Description to frontmatter description and System Message to the prompt body. Step 2 delegates first to risk-agent, then customer-reply-agent; Step 3 adds customer-context-agent. Claude Code reads the same .claude/agents/*.md files directly."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Skills",
-    "kicker": "Concept 7 · Skills",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/07-skills.png",
-      "imageLink": "Skills: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "A skill is a recipe Claude picks up by itself when it fits.",
-    "keyPoints": [
-      "A skill is a recipe Claude picks up by itself when it fits."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "Execute Workflow node calls a sub-workflow",
-          "Reusable sub-workflow or template",
-          "You choose when it runs"
-        ]
-      },
-      {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
-        "items": [
-          ".claude/skills/<name>/SKILL.md (name + description)",
-          "At start: only the description",
-          "Claude picks the skill → full content loads",
-          "settingSources: ['project'] · option skills"
-        ]
-      }
-    ],
-    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png)."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Fixed workflow vs. dynamic agent",
-    "kicker": "Concept 8 · Workflows",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/08-workflows-vs-dynamisch.png",
-      "imageLink": "Fixed workflow vs. dynamic agent: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "Code where it must. The agent chooses where it may. Always a human at the end.",
-    "keyPoints": [
-      "Code where it must. The agent chooses where it may. Always a human at the end."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "Input → Switch → Low / Medium / High",
-          "You draw every path up front",
-          "Works well for fixed rules"
-        ]
-      },
-      {
-        "title": "From n8n to Claude Agents SDK · Workshop 4",
-        "items": [
-          "Fixed code: npm run check (check.mjs)",
-          "Agent chooses: which subagent, which tool",
-          "Fixed = rules, money, compliance · Agent = open questions"
-        ]
-      }
-    ],
-    "notes": "The n8n Switch rules are fixed: priority equals low, medium, or high. In the final participant chain, lib/switch.mjs maps structured priority to a fixed action and check.mjs validates labels. The Step 2 orchestrator dynamically delegates to specialist agents. Discuss: when do you choose a fixed route or agent delegation?"
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Structured output: parser to JSON schema",
-    "kicker": "Concept · structured output",
-    "type": "concept",
-    "visual": {
-      "bot": "think",
-      "place": "beside"
-    },
-    "subtitle": "The parser becomes a schema; the Switch stays deterministic code.",
-    "keyPoints": [
-      "Structured Output Parser / Priority Parser defines the shape.",
-      "outputFormat uses json_schema.",
-      "lib/switch.mjs routes the parsed priority."
-    ],
-    "cards": [
-      {
-        "title": "n8n · Workshop 3",
-        "body": "Structured Output Parser → Priority Parser"
-      },
-      {
-        "title": "Agent SDK",
-        "body": "outputFormat: { type: 'json_schema', schema }"
-      },
-      {
-        "title": "Claude Code",
-        "body": "claude -p --json-schema"
-      },
-      {
-        "title": "Route",
-        "body": "Switch → priority → lib/switch.mjs"
-      }
-    ],
-    "notes": "Map the Structured Output Parser / Priority Parser to outputFormat with type json_schema and to Claude Code's --json-schema flag. The runner prints structured output, then lib/switch.mjs maps low, medium, and high to a fixed action and team."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Memory is the session",
-    "kicker": "Concept · memory",
-    "type": "concept",
-    "visual": {
-      "bot": "point",
-      "place": "beside"
-    },
-    "subtitle": "Chat resumes a session; a fresh session starts when memory is off.",
-    "keyPoints": [
-      "Simple Memory carries a favourite-colour test across turns.",
-      "npm run chat resumes with the previous sessionId.",
-      "--no-memory starts each turn without resume."
-    ],
-    "cards": [
-      {
-        "title": "n8n · Workshop 3",
-        "body": "Simple Memory → test it by asking for a favourite colour."
-      },
-      {
-        "title": "Participant chain",
-        "body": "npm run chat resumes the session; npm run chat -- --no-memory starts fresh."
-      }
-    ],
-    "notes": "The session is the memory in chat: lib/chat.mjs passes resume: sessionId to the next turn unless --no-memory is set. In n8n, the Chat trigger uses Simple Memory; Maarten's favourite-colour test makes the cross-turn behavior visible."
   },
   {
     "lessonId": "workshop-4",
@@ -732,6 +486,68 @@ window.SLIDES = [
       "Check that everyone passed Step 0."
     ],
     "notes": "Say the return time out loud: 11:15. Use the break to help people who did not pass npm run verify in Step 0."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Structured output: parser to JSON schema",
+    "kicker": "Concept · structured output",
+    "type": "concept",
+    "visual": {
+      "bot": "think",
+      "place": "beside"
+    },
+    "subtitle": "The parser becomes a schema; the Switch stays deterministic code.",
+    "keyPoints": [
+      "Structured Output Parser / Priority Parser defines the shape.",
+      "outputFormat uses json_schema.",
+      "lib/switch.mjs routes the parsed priority."
+    ],
+    "cards": [
+      {
+        "title": "n8n · Workshop 3",
+        "body": "Structured Output Parser → Priority Parser"
+      },
+      {
+        "title": "Agent SDK",
+        "body": "outputFormat: { type: 'json_schema', schema }"
+      },
+      {
+        "title": "Claude Code",
+        "body": "claude -p --json-schema"
+      },
+      {
+        "title": "Route",
+        "body": "Switch → priority → lib/switch.mjs"
+      }
+    ],
+    "notes": "Map the Structured Output Parser / Priority Parser to outputFormat with type json_schema and to Claude Code's --json-schema flag. The runner prints structured output, then lib/switch.mjs maps low, medium, and high to a fixed action and team."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Memory is the session",
+    "kicker": "Concept · memory",
+    "type": "concept",
+    "visual": {
+      "bot": "point",
+      "place": "beside"
+    },
+    "subtitle": "Chat resumes a session; a fresh session starts when memory is off.",
+    "keyPoints": [
+      "Simple Memory carries a favourite-colour test across turns.",
+      "npm run chat resumes with the previous sessionId.",
+      "--no-memory starts each turn without resume."
+    ],
+    "cards": [
+      {
+        "title": "n8n · Workshop 3",
+        "body": "Simple Memory → test it by asking for a favourite colour."
+      },
+      {
+        "title": "Participant chain",
+        "body": "npm run chat resumes the session; npm run chat -- --no-memory starts fresh."
+      }
+    ],
+    "notes": "The session is the memory in chat: lib/chat.mjs passes resume: sessionId to the next turn unless --no-memory is set. In n8n, the Chat trigger uses Simple Memory; Maarten's favourite-colour test makes the cross-turn behavior visible."
   },
   {
     "lessonId": "workshop-4",
@@ -888,6 +704,43 @@ window.SLIDES = [
       "Check your Claude Code login."
     ],
     "notes": "Say the return time: 13:00. Participants who fell behind can catch up with git switch step-1 after lunch."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Subagents",
+    "kicker": "Concept 6 · Subagents",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/06-subagents.png",
+      "imageLink": "Subagents: n8n left, Claude Agent SDK right"
+    },
+    "subtitle": "The orchestrator delegates. Each specialist does one task.",
+    "keyPoints": [
+      "The orchestrator delegates. Each specialist does one task."
+    ],
+    "columns": [
+      {
+        "title": "n8n · Workshop 3",
+        "items": [
+          "AI Agent as coordinator",
+          "Customer Reply Agent + Risk Agent (own model + memory)",
+          "Code → Switch afterwards"
+        ]
+      },
+      {
+        "title": "Claude Agent SDK · Workshop 4",
+        "items": [
+          "Orchestrator follows CLAUDE.md: delegate, don't do it yourself",
+          "Agent → risk-agent (priority)",
+          "Agent → customer-reply-agent (draft email)",
+          "Agent → customer-context-agent (customer facts)",
+          "output/MSG-05.md = draft for the human"
+        ]
+      }
+    ],
+    "notes": "The final chain maps n8n Description to frontmatter description and System Message to the prompt body. Step 2 delegates first to risk-agent, then customer-reply-agent; Step 3 adds customer-context-agent. Claude Code reads the same .claude/agents/*.md files directly."
   },
   {
     "lessonId": "workshop-4",
@@ -1175,6 +1028,77 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Skills",
+    "kicker": "Concept 7 · Skills",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/07-skills.png",
+      "imageLink": "Skills: n8n left, Claude Agent SDK right"
+    },
+    "subtitle": "A skill is a recipe Claude picks up by itself when it fits.",
+    "keyPoints": [
+      "A skill is a recipe Claude picks up by itself when it fits."
+    ],
+    "columns": [
+      {
+        "title": "n8n · Workshop 3",
+        "items": [
+          "Execute Workflow node calls a sub-workflow",
+          "Reusable sub-workflow or template",
+          "You choose when it runs"
+        ]
+      },
+      {
+        "title": "Claude Agent SDK · Workshop 4",
+        "items": [
+          ".claude/skills/<name>/SKILL.md (name + description)",
+          "At start: only the description",
+          "Claude picks the skill → full content loads",
+          "settingSources: ['project'] · option skills"
+        ]
+      }
+    ],
+    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png)."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Fixed workflow vs. dynamic agent",
+    "kicker": "Concept 8 · Workflows",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/08-workflows-vs-dynamisch.png",
+      "imageLink": "Fixed workflow vs. dynamic agent: n8n left, Claude Agent SDK right"
+    },
+    "subtitle": "Code where it must. The agent chooses where it may. Always a human at the end.",
+    "keyPoints": [
+      "Code where it must. The agent chooses where it may. Always a human at the end."
+    ],
+    "columns": [
+      {
+        "title": "n8n · Workshop 3",
+        "items": [
+          "Input → Switch → Low / Medium / High",
+          "You draw every path up front",
+          "Works well for fixed rules"
+        ]
+      },
+      {
+        "title": "Claude Agent SDK · Workshop 4",
+        "items": [
+          "Fixed code: npm run check (check.mjs)",
+          "Agent chooses: which subagent, which tool",
+          "Fixed = rules, money, compliance · Agent = open questions"
+        ]
+      }
+    ],
+    "notes": "The n8n Switch rules are fixed: priority equals low, medium, or high. In the final participant chain, lib/switch.mjs maps structured priority to a fixed action and check.mjs validates labels. The Step 2 orchestrator dynamically delegates to specialist agents. Discuss: when do you choose a fixed route or agent delegation?"
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Step 5 · Build your own agent",
     "kicker": "Explain · Step 5",
     "type": "concept",
@@ -1291,6 +1215,42 @@ window.SLIDES = [
       "Fell behind? Switch to step-4."
     ],
     "notes": "Say the return time: 15:00. The assignment starts from step-4. Participants who fell behind switch to step-4 now."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Control: hooks and approval",
+    "kicker": "Concept 5 · Control",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/05-hooks.png",
+      "imageLink": "Control: hooks and approval: n8n left, Claude Agent SDK right"
+    },
+    "subtitle": "A human or a rule decides before a tool changes anything.",
+    "keyPoints": [
+      "A human or a rule decides before a tool changes anything."
+    ],
+    "columns": [
+      {
+        "title": "n8n · Workshop 3",
+        "items": [
+          "IF node: check before the action",
+          "Wait node: wait for approval",
+          "Error Workflow: on failure"
+        ]
+      },
+      {
+        "title": "Claude Agent SDK · Workshop 4",
+        "items": [
+          "PreToolUse hook: allow, ask, or deny per call",
+          "Human review stays on reply drafts",
+          "permissionMode: 'acceptEdits' → --permission-mode acceptEdits",
+          "Assignment: hooks gate writes by situation"
+        ]
+      }
+    ],
+    "notes": "Hooks run in both backends: the SDK hooks option and .claude/settings.json for Claude Code. In the assignment a PreToolUse hook allows reads, auto-allows small updates and asks a person before large updates, adds and deletes; a PostToolUse hook writes the audit log. Human review still applies to every reply draft. permissionMode maps to --permission-mode."
   },
   {
     "lessonId": "workshop-4",
