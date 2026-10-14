@@ -4,7 +4,7 @@
 window.SLIDES = [
   {
     "lessonId": "workshop-4",
-    "title": "Welcome to Workshop 4 · Support agents with Claude Code and the Agent SDK",
+    "title": "Welcome to Workshop 4 · From n8n to Claude Agents SDK",
     "kicker": "Workshop 4 · Thu 8 Oct",
     "type": "concept",
     "visual": {
@@ -246,7 +246,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "npm run chat → query()",
           "CLAUDE.md",
@@ -288,7 +288,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "for await (… of query({ prompt, options }))",
           "prompt → model turn → tool_use → tool_result → next turn → result message",
@@ -325,7 +325,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "CLAUDE.md: Purpose · Rules · Priority definitions",
           "settingSources: ['project'] loads CLAUDE.md",
@@ -361,7 +361,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "tools: what exists (Lesson 1: [] · Lesson 2: ['Agent','Write'])",
           "allowedTools: what runs without asking",
@@ -396,7 +396,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "docs/transactions.xlsx → server.js (MCP, stdio)",
           "The SDK starts the server on demand",
@@ -433,7 +433,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "PreToolUse hook: allow, ask, or deny per call",
           "Human review stays on reply drafts",
@@ -469,7 +469,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "Orchestrator follows CLAUDE.md: delegate, don't do it yourself",
           "Agent → risk-agent (priority)",
@@ -506,7 +506,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           ".claude/skills/<name>/SKILL.md (name + description)",
           "At start: only the description",
@@ -542,7 +542,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "From n8n to Claude Agents SDK · Workshop 4",
         "items": [
           "Fixed code: npm run check (check.mjs)",
           "Agent chooses: which subagent, which tool",
