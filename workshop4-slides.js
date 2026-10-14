@@ -350,9 +350,9 @@ window.SLIDES = [
       {
         "title": "n8n · Workshop 3",
         "items": [
-          "HTTP Request node per API",
-          "External service",
-          "(Concept: the W3 export has no HTTP node)"
+          "Customer Context Agent as a tool of the AI Agent",
+          "Data Table reads customer_context.csv",
+          "Same idea: one HTTP Request node per API"
         ]
       },
       {
