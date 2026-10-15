@@ -17,38 +17,116 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday’s recap · Maarten’s n8n build",
-    "kicker": "Recap · Maarten's flow, node by node",
+    "title": "Yesterday’s flow · 1. Ticket in, Switch out",
+    "kicker": "Recap · n8n flow 1/4",
     "type": "recap",
-    "layout": "recap",
     "visual": {
-      "recapKeys": true,
-      "bot": "head",
-      "place": "beside"
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/01-switch.png",
+      "imageLink": "n8n · Ticket Input → Switch"
     },
-    "items": [
+    "subtitle": "A ticket goes in. The Switch picks LOW, MEDIUM or HIGH.",
+    "cards": [
       {
-        "label": "Ticket Input",
-        "caption": "A Switch routes LOW, MEDIUM or HIGH."
+        "title": "Ticket Input",
+        "body": "One support message."
       },
       {
-        "label": "Chat + memory",
-        "caption": "Simple Memory keeps your favourite colour."
-      },
-      {
-        "label": "AI Agent",
-        "caption": "The Priority Parser gives structured output."
-      },
-      {
-        "label": "Specialists",
-        "caption": "Risk and Customer Reply agents use the customer Data Table."
-      },
-      {
-        "label": "Person",
-        "caption": "A person reviews each reply."
+        "title": "Switch",
+        "body": "Three routes: low, medium, high."
       }
     ],
-    "notes": "Recap Maarten's Workshop 3 build: Ticket Input → Switch; Chat trigger + Simple Memory with the favourite-colour test; AI Agent + Priority Parser; Risk, Customer Reply, and Customer Context subagents + Data Table imported from customer_context.csv; assignment chat in → chat out."
+    "keyPoints": [
+      "Ticket Input: One support message.",
+      "Switch: Three routes: low, medium, high."
+    ],
+    "notes": "Recap 1/4 (10:05). Show Maarten’s first flow: manual trigger, Ticket Input, Switch with three routes. Say: today the Switch becomes lib/switch.mjs."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 2. Chat and an AI Agent",
+    "kicker": "Recap · n8n flow 2/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/02-chat-agent.png",
+      "imageLink": "n8n · Chat trigger → AI Agent"
+    },
+    "subtitle": "The chat sends a message to the AI Agent. Memory keeps the session.",
+    "cards": [
+      {
+        "title": "Chat trigger",
+        "body": "When chat message received."
+      },
+      {
+        "title": "Simple Memory",
+        "body": "Remembers your favourite colour."
+      }
+    ],
+    "keyPoints": [
+      "Chat trigger: When chat message received.",
+      "Simple Memory: Remembers your favourite colour."
+    ],
+    "notes": "Recap 2/4. Chat trigger + AI Agent + OpenAI Chat Model. Ask: who did the favourite-colour test? With Simple Memory the agent remembers; without it, it forgets. Today: npm run chat resumes the session."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 3. Structured output",
+    "kicker": "Recap · n8n flow 3/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/03-parser.png",
+      "imageLink": "n8n · AI Agent + Structured Output Parser"
+    },
+    "subtitle": "The Priority Parser gives a fixed shape. Then the Switch routes.",
+    "cards": [
+      {
+        "title": "Structured Output Parser",
+        "body": "Gives { priority, reason }."
+      },
+      {
+        "title": "Switch",
+        "body": "Routes on priority."
+      }
+    ],
+    "keyPoints": [
+      "Structured Output Parser: Gives { priority, reason }.",
+      "Switch: Routes on priority."
+    ],
+    "notes": "Recap 3/4. AI Agent with Chat Model, Memory and Structured Output Parser, then Switch. Today the parser becomes outputFormat: json_schema."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 4. Three specialist agents",
+    "kicker": "Recap · n8n flow 4/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/05-three-agents.png",
+      "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
+    },
+    "subtitle": "Each specialist does one task. A person reads each reply.",
+    "cards": [
+      {
+        "title": "Customer Reply Agent",
+        "body": "Writes the reply."
+      },
+      {
+        "title": "Risk Agent",
+        "body": "Decides the risk."
+      },
+      {
+        "title": "Customer Context Agent",
+        "body": "Reads the Data Table."
+      }
+    ],
+    "keyPoints": [
+      "Customer Reply Agent: Writes the reply.",
+      "Risk Agent: Decides the risk.",
+      "Customer Context Agent: Reads the Data Table."
+    ],
+    "notes": "Recap 4/4. Three sub agents, each with its own model and memory. Customer Context reads the Data Table from customer_context.csv. The assignment: chat in → chat out, with a person who reviews. Today these become subagents and MCP tools."
   },
   {
     "lessonId": "workshop-4",
