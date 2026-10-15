@@ -68,7 +68,7 @@ window.SLIDES = [
     "kicker": "W4 · YOUR GOAL",
     "visual": {
       "opener": "ask",
-      "bot": "point",
+      "bot": "happy",
       "place": "beside"
     },
     "subtitle": "Name one thing you want to be able to do after this workshop.",
@@ -458,7 +458,7 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 10,
     "visual": {
-      "bot": "point",
+      "bot": "wave",
       "place": "left",
       "oneCol": true,
       "cmdCards": [
@@ -489,6 +489,33 @@ window.SLIDES = [
       "With ANTHROPIC_API_KEY in your shell, the runner picks sdk. Use --backend to choose."
     ],
     "notes": "Participants follow docs/SETUP.md, then the exact Step 0 commands in SOLO.md. Confirm npm ci, doctor, verify, and both dry runs finish without ANTHROPIC_API_KEY. The output includes backend: and Claude Code equivalent:. claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What you see · Step 0",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-step0.png",
+      "imageLink": "Terminal: npm run verify passes, then the lesson 1 dry run"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "npm run verify: pass 9, fail 0. Your setup is correct.",
+      "Dry run: The last line says: dry run — no model call. That is correct."
+    ],
+    "cards": [
+      {
+        "title": "npm run verify",
+        "body": "pass 9, fail 0. Your setup is correct."
+      },
+      {
+        "title": "Dry run",
+        "body": "The last line says: dry run — no model call. That is correct."
+      }
+    ],
+    "notes": "Show this screen after Step 0. The first line of the dry run shows the backend: claude-code or sdk. A dry run prints the command but does not call the model, so it is not model evidence."
   },
   {
     "lessonId": "workshop-4",
@@ -558,8 +585,8 @@ window.SLIDES = [
       "cardArt": {
         "3": "route"
       },
-      "bot": "head",
-      "place": "beside",
+      "bot": "think",
+      "place": "left",
       "highlight": [
         {
           "in": "subtitle",
@@ -635,8 +662,8 @@ window.SLIDES = [
     "visual": {
       "stagger": "pop",
       "stepThrough": true,
-      "bot": "head",
-      "place": "beside"
+      "bot": "point",
+      "place": "left"
     },
     "subtitle": "One agent gives a fixed priority. Code routes it.",
     "cards": [
@@ -737,12 +764,39 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "What you see · Step 1",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-step1.png",
+      "imageLink": "Sample trace: the agent returns JSON, then the Switch picks a route"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "Structured output: JSON with priority and reason.",
+      "Switch line: Switch → low → AUTO_REPLY. Code picks the route, not the model."
+    ],
+    "cards": [
+      {
+        "title": "Structured output",
+        "body": "JSON with priority and reason."
+      },
+      {
+        "title": "Switch line",
+        "body": "Switch → low → AUTO_REPLY. Code picks the route, not the model."
+      }
+    ],
+    "notes": "This is the labelled sample in docs/sample-trace.md. A live run shows the same labels with other text. The [result] line shows turns, time and cost."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Discuss: what makes the route predictable?",
     "kicker": "Discuss · Step 1",
     "type": "review",
     "visual": {
       "reveal": "click",
-      "bot": "head",
+      "bot": "peek",
       "place": "slot",
       "faces": [
         "verward",
@@ -853,6 +907,85 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Where do the agents live?",
+    "kicker": "Concept · Agent files",
+    "type": "concept",
+    "visual": {
+      "oneCol": true,
+      "stepThrough": true,
+      "bot": "point",
+      "place": "left",
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": ".claude/agents/",
+          "tone": "orange"
+        }
+      ]
+    },
+    "subtitle": "One Markdown file per agent, in .claude/agents/.",
+    "cards": [
+      {
+        "title": ".claude/agents/risk-agent.md",
+        "body": "From step-2. Claude Code and the SDK load this folder."
+      },
+      {
+        "title": "Name, tools, prompt",
+        "body": "The frontmatter gives the name and the tools. The text is the prompt."
+      },
+      {
+        "title": "Not .agents/ · not AGENTS.md",
+        "body": "No tool loads .agents/ as subagents. AGENTS.md is a note for coding agents."
+      }
+    ],
+    "keyPoints": [
+      "Each agent is one file in .claude/agents/.",
+      "The folder starts with a dot. Use ls -a to see it.",
+      "main has no agents yet. They come in step-2."
+    ],
+    "notes": "Show the folder on step-2: git switch step-2, then ls -a and ls .claude/agents. main is Step 0, so it has no .claude/agents yet. Claude Code looks for project subagents in .claude/agents/, walking up from the working folder; the SDK reads the same folder with settingSources: ['project']. A .agents/ folder is not loaded as subagents by Claude Code or the SDK. AGENTS.md is the cross-tool note for coding agents, not a subagent definition. In the assignment the new agents live in 03-mcp/claude-project/.claude/agents/."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Why this folder? Claude finds the agents.",
+    "kicker": "Concept · Agent files · why",
+    "type": "concept",
+    "visual": {
+      "stepThrough": true,
+      "bot": "head",
+      "place": "beside",
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "no import, no code",
+          "tone": "orange"
+        }
+      ]
+    },
+    "subtitle": "Put the file in the folder. Claude loads it: no import, no code.",
+    "cards": [
+      {
+        "title": "1 · Claude Code starts",
+        "body": "It reads .claude/agents/ in your project and in ~/.claude/agents/."
+      },
+      {
+        "title": "2 · It reads the description",
+        "body": "The description says when to use the agent. Write it clearly."
+      },
+      {
+        "title": "3 · It delegates",
+        "body": "A task fits the description. Claude sends it to that agent."
+      }
+    ],
+    "keyPoints": [
+      "Claude Code loads the folder by itself.",
+      "The description decides when Claude uses the agent.",
+      "The SDK reads the same folder with settingSources: ['project']."
+    ],
+    "notes": "Why this folder: Claude Code and the Agent SDK look for project subagents in .claude/agents/, so you add an agent by adding a file. No registration code. Claude uses each subagent description to decide when to delegate (code.claude.com/docs/en/sub-agents). Show risk-agent.md on step-2: the description line is the trigger. Claude Code also watches the folder: edit the file and the next delegation uses the new version. In our lessons the orchestrator prompt also names the agents, so the order stays fixed. Check it in the trace: [tool_use] Agent → risk-agent."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Step 2 · Risk analysis and customer reply agents",
     "kicker": "Explain · orchestrator and agents",
     "type": "concept",
@@ -957,12 +1090,39 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "What you see · Step 2",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-step2.png",
+      "imageLink": "Sample trace: the orchestrator calls risk-agent, then customer-reply-agent"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "Two Agent calls: First risk-agent, then customer-reply-agent.",
+      "The draft: It asks only for the facts that are missing."
+    ],
+    "cards": [
+      {
+        "title": "Two Agent calls",
+        "body": "First risk-agent, then customer-reply-agent."
+      },
+      {
+        "title": "The draft",
+        "body": "It asks only for the facts that are missing."
+      }
+    ],
+    "notes": "This is the labelled MSG-10 sample. In a live run, check each claim in the draft. If no tool gave the fact, the draft must not say it."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Discuss: which facts came from a tool?",
     "kicker": "Discuss · Step 2",
     "type": "review",
     "visual": {
       "reveal": "click",
-      "bot": "head",
+      "bot": "peek",
       "place": "slot",
       "faces": [
         "verrast",
@@ -1102,8 +1262,8 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 20,
     "visual": {
-      "bot": "head",
-      "place": "beside"
+      "bot": "wave",
+      "place": "left"
     },
     "subtitle": "Find the read tools in the trace.",
     "cards": [
@@ -1128,12 +1288,39 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "What you see · Step 3",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-step3.png",
+      "imageLink": "Terminal: npm run smoke:mcp lists read-only tools and real lookups"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "Read-only tools: list_transactions and get_transaction. No write tools yet.",
+      "Last line: MCP servers OK. No model call."
+    ],
+    "cards": [
+      {
+        "title": "Read-only tools",
+        "body": "list_transactions and get_transaction. No write tools yet."
+      },
+      {
+        "title": "Last line",
+        "body": "MCP servers OK. No model call."
+      }
+    ],
+    "notes": "smoke:mcp starts both MCP servers and calls each tool once. CUST-999 does not exist, so the tool says so. That is correct."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Discuss: tools and external data.",
     "kicker": "Discuss · Step 3",
     "type": "review",
     "visual": {
       "reveal": "click",
-      "bot": "head",
+      "bot": "peek",
       "place": "slot",
       "faces": [
         "dubbel",
@@ -1217,7 +1404,8 @@ window.SLIDES = [
     "steps": [
       "Fill the acceptance table for MSG-01, 05, 07, 08 and 09.",
       "Take the facts from get_customer and get_transaction.",
-      "Fill labels.json. Then run npm run check.",
+      "Run npm run check. The first run makes labels.json.",
+      "Fill labels.json. Run npm run check again.",
       "Save the table in participant-output/."
     ],
     "expected": "npm run check passes. The table is saved.",
@@ -1225,6 +1413,33 @@ window.SLIDES = [
       "A fixed check tells you if the agent is right. The model does not grade itself."
     ],
     "notes": "Give participants 15 minutes to complete the acceptance table and run npm run check. Save the acceptance table and check results in participant-output/ or the squad's intent.md. A dry run is not model evidence."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What you see · Step 4",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-step4.png",
+      "imageLink": "Terminal: the first npm run check creates labels.json"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "First run: Created labels.json. This is not an error.",
+      "Next: Write low, medium or high for each message. Run npm run check again."
+    ],
+    "cards": [
+      {
+        "title": "First run",
+        "body": "Created labels.json. This is not an error."
+      },
+      {
+        "title": "Next",
+        "body": "Write low, medium or high for each message. Run npm run check again."
+      }
+    ],
+    "notes": "The first run exits with code 1 because labels.json is empty. After the participants fill in the labels, npm run check compares their labels with the expected priority."
   },
   {
     "lessonId": "workshop-4",
@@ -1464,7 +1679,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Where you change what",
+    "title": "Where you change what · core",
     "kicker": "Explain · Where and why",
     "type": "concept",
     "visual": {
@@ -1473,23 +1688,23 @@ window.SLIDES = [
       "bot": "point",
       "place": "left"
     },
-    "subtitle": "Four files. Each has one job.",
+    "subtitle": "Four files. Each has one job and one reason.",
     "cards": [
       {
         "title": "transaction-mcp/server.js",
-        "body": "Add the write tools."
+        "body": "Add the write tools. Why: they write to a working copy, not to the workbook."
       },
       {
         "title": ".claude/agents/transaction-agent.md",
-        "body": "Give this agent get, update and add."
+        "body": "Give this agent get, update and add. Why: only one agent writes."
       },
       {
         "title": "CLAUDE.md",
-        "body": "Who writes, and when to stop."
+        "body": "Who writes, and when to stop. Why: the orchestrator must delegate."
       },
       {
         "title": "hooks/transaction-guard.mjs",
-        "body": "Code decides each write."
+        "body": "Code decides each write. Why: the model cannot skip a hook."
       }
     ],
     "keyPoints": [
@@ -1501,6 +1716,33 @@ window.SLIDES = [
       "The workflow fixes the order."
     ],
     "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction; they write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft; it writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists.\n\nCLAUDE.md is advice to the model: the model can make a mistake. The tools list and the hook are code: the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs lookup, fraud check, update, hook and draft in a fixed order."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What you see · Assignment start",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-asg-start.png",
+      "imageLink": "Terminal: check:assignment on step-4 lists the core items to fix"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "Core · Parts 1–2: 14 to fix. Each line names one file and one change.",
+      "Stretch · Parts 3–4: 20 open. These are optional. Do the core first."
+    ],
+    "cards": [
+      {
+        "title": "Core · Parts 1–2: 14 to fix",
+        "body": "This is the start. Each line names one file and one change."
+      },
+      {
+        "title": "Stretch: 20 open",
+        "body": "These are optional. Do the core first."
+      }
+    ],
+    "notes": "Show this before the participants start. Red at the start is correct. They fix one line at a time and run the check again."
   },
   {
     "lessonId": "workshop-4",
@@ -1599,6 +1841,39 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Where you change what · stretch",
+    "kicker": "Explain · Where and why",
+    "type": "concept",
+    "visual": {
+      "oneCol": true,
+      "stepThrough": true,
+      "bot": "think",
+      "place": "left"
+    },
+    "subtitle": "Three more files. Do them after the core passes.",
+    "cards": [
+      {
+        "title": "transaction-mcp/drafts-server.js",
+        "body": "Add save_reply_draft. Why: a person reads the draft before it goes out."
+      },
+      {
+        "title": ".claude/agents/fraud-check-agent.md",
+        "body": "A read-only agent that runs before each write. Why: a fraud hold stops the write."
+      },
+      {
+        "title": "resolve.mjs",
+        "body": "The workflow and AskUserQuestion. Why: the same safe order runs every time."
+      }
+    ],
+    "keyPoints": [
+      "save_reply_draft writes to participant-output/drafts/.",
+      "fraud-check-agent only reads. Hold or high means ESCALATE.",
+      "Only the orchestrator has AskUserQuestion."
+    ],
+    "notes": "Stretch only. drafts-server.js gives customer-reply-agent one tool, save_reply_draft. The draft starts with \"DRAFT - a person reviews this before sending\". fraud-check-agent reads the customer and the transaction and returns fraud_risk and hold; with hold or high the workflow writes nothing and reports ESCALATE. resolve.mjs runs the fixed order: look up, fraud check, propose, hook, draft. AskUserQuestion is for the orchestrator only; subagents cannot use it. With no terminal, the question becomes ESCALATE."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Assignment stretch: drafts, fraud check, a question.",
     "kicker": "SOLO 6 · Stretch · optional",
     "type": "practice",
@@ -1637,7 +1912,7 @@ window.SLIDES = [
     "type": "review",
     "visual": {
       "reveal": "click",
-      "bot": "head",
+      "bot": "peek",
       "place": "slot",
       "faces": [
         "verward",
@@ -1768,6 +2043,33 @@ window.SLIDES = [
       "Explain the tool-use and result messages."
     ],
     "notes": "Give participants 15–20 minutes. Keep the API key optional: without a model call they can use the dry run; participants with a Claude Code login can use the equivalent CLI command."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What you see · Step 5",
+    "kicker": "What you see · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/see-step5.png",
+      "imageLink": "Terminal: the Step 5 starter prints the Claude Code command"
+    },
+    "subtitle": "Compare your terminal with this screen.",
+    "keyPoints": [
+      "Claude Code equivalent: The prompt, the allowed tools and the permission mode.",
+      "Your change: Change the prompt or the tools. Run the dry run again and compare."
+    ],
+    "cards": [
+      {
+        "title": "Claude Code equivalent",
+        "body": "The prompt, the allowed tools and the permission mode."
+      },
+      {
+        "title": "Your change",
+        "body": "Change the prompt or the tools. Run the dry run again and compare."
+      }
+    ],
+    "notes": "The starter has three tools: Read, Edit and Glob. acceptEdits lets the agent edit files without a question. Use it only in a test folder."
   },
   {
     "lessonId": "workshop-4",
