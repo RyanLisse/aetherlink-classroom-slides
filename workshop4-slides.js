@@ -17,6 +17,70 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "type": "context",
+    "title": "What was most useful in the last session?",
+    "kicker": "W4 · RECAP",
+    "visual": {
+      "opener": "ask",
+      "bot": "think",
+      "place": "beside"
+    },
+    "subtitle": "Share one thing you learned or used.",
+    "cards": [],
+    "keyPoints": [
+      "One useful takeaway per table.",
+      "Ask for a concrete example."
+    ],
+    "notes": "Time: 3 min.\n1. Give each table 1 minute to discuss.\n2. Ask each table to share one useful takeaway from the n8n session.\n3. Ask where they could use it.\n4. Write the main takeaways on the board."
+  },
+  {
+    "lessonId": "workshop-4",
+    "type": "context",
+    "title": "What went wrong? What did you learn?",
+    "kicker": "W4 · W3 RECAP · LESSONS",
+    "visual": {
+      "bot": "point",
+      "place": "left",
+      "stepThrough": true
+    },
+    "subtitle": "Give one lesson per table.",
+    "cards": [
+      {
+        "title": "Wrong",
+        "body": "What did the flow do that you did not expect?"
+      },
+      {
+        "title": "Lesson",
+        "body": "What was hard to see or to test in n8n?"
+      }
+    ],
+    "keyPoints": [
+      "One lesson per table.",
+      "Listen for things that were hard to test or to limit.",
+      "Connect the lessons to today: tests, tool lists and hooks."
+    ],
+    "notes": "Time: 3 min.\n1. Ask each table to share one unexpected result and one lesson.\n2. Write the lessons on the board.\n3. Connect them to today: hard to test → npm run check; every tool allowed → a tools list per agent; no stop before a write → a hook."
+  },
+  {
+    "lessonId": "workshop-4",
+    "type": "context",
+    "title": "What would success look like for you today?",
+    "kicker": "W4 · YOUR GOAL",
+    "visual": {
+      "opener": "ask",
+      "bot": "point",
+      "place": "beside"
+    },
+    "subtitle": "Name one thing you want to be able to do after this workshop.",
+    "cards": [],
+    "keyPoints": [
+      "One concrete outcome per person.",
+      "Keep the outcomes for the close."
+    ],
+    "notes": "Time: 3 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Collect one or two outcomes per table on the board.\n3. Connect them to the goal of today. Say what fits today and what does not.\n4. Return to the outcomes at the close."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Yesterday’s flow · 1. Ticket in, Switch out",
     "kicker": "Recap · n8n flow 1/4",
     "type": "recap",
@@ -127,70 +191,6 @@ window.SLIDES = [
       "Customer Context Agent: Reads the Data Table."
     ],
     "notes": "Recap 4/4. Three sub agents, each with its own model and memory. Customer Context reads the Data Table from customer_context.csv. The assignment: chat in → chat out, with a person who reviews. Today these become subagents and MCP tools."
-  },
-  {
-    "lessonId": "workshop-4",
-    "type": "context",
-    "title": "What was most useful in the last session?",
-    "kicker": "W4 · RECAP",
-    "visual": {
-      "opener": "ask",
-      "bot": "think",
-      "place": "beside"
-    },
-    "subtitle": "Share one thing you learned or used.",
-    "cards": [],
-    "keyPoints": [
-      "One useful takeaway per table.",
-      "Ask for a concrete example."
-    ],
-    "notes": "Time: 3 min.\n1. Give each table 1 minute to discuss.\n2. Ask each table to share one useful takeaway from the n8n session.\n3. Ask where they could use it.\n4. Write the main takeaways on the board."
-  },
-  {
-    "lessonId": "workshop-4",
-    "type": "context",
-    "title": "What went wrong? What did you learn?",
-    "kicker": "W4 · W3 RECAP · LESSONS",
-    "visual": {
-      "bot": "point",
-      "place": "left",
-      "stepThrough": true
-    },
-    "subtitle": "Give one lesson per table.",
-    "cards": [
-      {
-        "title": "Wrong",
-        "body": "What did the flow do that you did not expect?"
-      },
-      {
-        "title": "Lesson",
-        "body": "What was hard to see or to test in n8n?"
-      }
-    ],
-    "keyPoints": [
-      "One lesson per table.",
-      "Listen for things that were hard to test or to limit.",
-      "Connect the lessons to today: tests, tool lists and hooks."
-    ],
-    "notes": "Time: 3 min.\n1. Ask each table to share one unexpected result and one lesson.\n2. Write the lessons on the board.\n3. Connect them to today: hard to test → npm run check; every tool allowed → a tools list per agent; no stop before a write → a hook."
-  },
-  {
-    "lessonId": "workshop-4",
-    "type": "context",
-    "title": "What would success look like for you today?",
-    "kicker": "W4 · YOUR GOAL",
-    "visual": {
-      "opener": "ask",
-      "bot": "point",
-      "place": "beside"
-    },
-    "subtitle": "Name one thing you want to be able to do after this workshop.",
-    "cards": [],
-    "keyPoints": [
-      "One concrete outcome per person.",
-      "Keep the outcomes for the close."
-    ],
-    "notes": "Time: 3 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Collect one or two outcomes per table on the board.\n3. Connect them to the goal of today. Say what fits today and what does not.\n4. Return to the outcomes at the close."
   },
   {
     "lessonId": "workshop-4",
