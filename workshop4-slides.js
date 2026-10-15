@@ -8,68 +8,228 @@ window.SLIDES = [
     "kicker": "Workshop 4 · Thu 8 Oct",
     "type": "concept",
     "visual": {
+      "opener": "welcome",
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Thu 8 Oct · 10:00–16:00 · today we rebuild yesterday’s n8n ticket flow in code.",
+    "subtitle": "Today we build yesterday’s n8n ticket flow again, in code.",
     "notes": "Welcome (10:00; session 10:00–16:00). Today: the same ticket flow as yesterday in n8n, now in code with the Claude Agent SDK."
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday’s recap · Maarten’s n8n build",
-    "kicker": "Recap · Maarten's flow, node by node",
-    "type": "recap",
-    "layout": "recap",
-    "items": [
+    "type": "context",
+    "title": "What was most useful in the last session?",
+    "kicker": "W4 · RECAP",
+    "visual": {
+      "opener": "ask",
+      "bot": "think",
+      "place": "beside"
+    },
+    "subtitle": "Share one thing you learned or used.",
+    "cards": [],
+    "keyPoints": [
+      "One useful takeaway per table.",
+      "Ask for a concrete example."
+    ],
+    "notes": "Time: 3 min.\n1. Give each table 1 minute to discuss.\n2. Ask each table to share one useful takeaway from the n8n session.\n3. Ask where they could use it.\n4. Write the main takeaways on the board."
+  },
+  {
+    "lessonId": "workshop-4",
+    "type": "context",
+    "title": "What went wrong? What did you learn?",
+    "kicker": "W4 · W3 RECAP · LESSONS",
+    "visual": {
+      "bot": "point",
+      "place": "left",
+      "stepThrough": true
+    },
+    "subtitle": "Give one lesson per table.",
+    "cards": [
       {
-        "label": "Ticket Input",
-        "caption": "Ticket Input → Switch routes LOW, MEDIUM, or HIGH."
+        "title": "Wrong",
+        "body": "What did the flow do that you did not expect?"
       },
       {
-        "label": "Chat + memory",
-        "caption": "Chat trigger + Simple Memory; test it with your favourite colour."
-      },
-      {
-        "label": "AI Agent",
-        "caption": "Priority Parser returns structured output."
-      },
-      {
-        "label": "Specialists + data",
-        "caption": "Risk, Customer Reply, and Customer Context use the Data Table from customer_context.csv."
-      },
-      {
-        "label": "Human",
-        "caption": "The assignment is chat in → chat out, with human review."
+        "title": "Lesson",
+        "body": "What was hard to see or to test in n8n?"
       }
     ],
-    "notes": "Recap Maarten's Workshop 3 build: Ticket Input → Switch; Chat trigger + Simple Memory with the favourite-colour test; AI Agent + Priority Parser; Risk, Customer Reply, and Customer Context subagents + Data Table imported from customer_context.csv; assignment chat in → chat out."
+    "keyPoints": [
+      "One lesson per table.",
+      "Listen for things that were hard to test or to limit.",
+      "Connect the lessons to today: tests, tool lists and hooks."
+    ],
+    "notes": "Time: 3 min.\n1. Ask each table to share one unexpected result and one lesson.\n2. Write the lessons on the board.\n3. Connect them to today: hard to test → npm run check; every tool allowed → a tools list per agent; no stop before a write → a hook."
+  },
+  {
+    "lessonId": "workshop-4",
+    "type": "context",
+    "title": "What would success look like for you today?",
+    "kicker": "W4 · YOUR GOAL",
+    "visual": {
+      "opener": "ask",
+      "bot": "point",
+      "place": "beside"
+    },
+    "subtitle": "Name one thing you want to be able to do after this workshop.",
+    "cards": [],
+    "keyPoints": [
+      "One concrete outcome per person.",
+      "Keep the outcomes for the close."
+    ],
+    "notes": "Time: 3 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Collect one or two outcomes per table on the board.\n3. Connect them to the goal of today. Say what fits today and what does not.\n4. Return to the outcomes at the close."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 1. Ticket in, Switch out",
+    "kicker": "Recap · n8n flow 1/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/01-switch.png",
+      "imageLink": "n8n · Ticket Input → Switch"
+    },
+    "subtitle": "A ticket goes in. The Switch picks LOW, MEDIUM or HIGH.",
+    "cards": [
+      {
+        "title": "Ticket Input",
+        "body": "One support message."
+      },
+      {
+        "title": "Switch",
+        "body": "Three routes: low, medium, high."
+      }
+    ],
+    "keyPoints": [
+      "Ticket Input: One support message.",
+      "Switch: Three routes: low, medium, high."
+    ],
+    "notes": "Recap 1/4 (10:05). Show Maarten’s first flow: manual trigger, Ticket Input, Switch with three routes. Say: today the Switch becomes lib/switch.mjs."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 2. Chat and an AI Agent",
+    "kicker": "Recap · n8n flow 2/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/02-chat-agent.png",
+      "imageLink": "n8n · Chat trigger → AI Agent"
+    },
+    "subtitle": "The chat sends a message to the AI Agent. Memory keeps the session.",
+    "cards": [
+      {
+        "title": "Chat trigger",
+        "body": "When chat message received."
+      },
+      {
+        "title": "Simple Memory",
+        "body": "Remembers your favourite colour."
+      }
+    ],
+    "keyPoints": [
+      "Chat trigger: When chat message received.",
+      "Simple Memory: Remembers your favourite colour."
+    ],
+    "notes": "Recap 2/4. Chat trigger + AI Agent + OpenAI Chat Model. Ask: who did the favourite-colour test? With Simple Memory the agent remembers; without it, it forgets. Today: npm run chat resumes the session."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 3. Structured output",
+    "kicker": "Recap · n8n flow 3/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/03-parser.png",
+      "imageLink": "n8n · AI Agent + Structured Output Parser"
+    },
+    "subtitle": "The Priority Parser gives a fixed shape. Then the Switch routes.",
+    "cards": [
+      {
+        "title": "Structured Output Parser",
+        "body": "Gives { priority, reason }."
+      },
+      {
+        "title": "Switch",
+        "body": "Routes on priority."
+      }
+    ],
+    "keyPoints": [
+      "Structured Output Parser: Gives { priority, reason }.",
+      "Switch: Routes on priority."
+    ],
+    "notes": "Recap 3/4. AI Agent with Chat Model, Memory and Structured Output Parser, then Switch. Today the parser becomes outputFormat: json_schema."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Yesterday’s flow · 4. Three specialist agents",
+    "kicker": "Recap · n8n flow 4/4",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/n8n/05-three-agents.png",
+      "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
+    },
+    "subtitle": "Each specialist does one task. A person reads each reply.",
+    "cards": [
+      {
+        "title": "Customer Reply Agent",
+        "body": "Writes the reply."
+      },
+      {
+        "title": "Risk Agent",
+        "body": "Decides the risk."
+      },
+      {
+        "title": "Customer Context Agent",
+        "body": "Reads the Data Table."
+      }
+    ],
+    "keyPoints": [
+      "Customer Reply Agent: Writes the reply.",
+      "Risk Agent: Decides the risk.",
+      "Customer Context Agent: Reads the Data Table."
+    ],
+    "notes": "Recap 4/4. Three sub agents, each with its own model and memory. Customer Context reads the Data Table from customer_context.csv. The assignment: chat in → chat out, with a person who reviews. Today these become subagents and MCP tools."
   },
   {
     "lessonId": "workshop-4",
     "title": "Today · agenda",
     "kicker": "Run of show · 10:00–16:00",
     "type": "context",
-    "subtitle": "I show it, you do it.",
     "visual": {
-      "bot": "point",
-      "place": "beside"
+      "bot": "wave",
+      "place": "left",
+      "dayRoute": [
+        "Recap",
+        "Concepts",
+        "Step 0",
+        "Step 1",
+        "Lunch",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Assignment",
+        "Close"
+      ]
     },
+    "subtitle": "I show it. Then you do it.",
     "cards": [
       {
-        "title": "10:00–11:00 · Start",
-        "body": "Welcome, recap and goal. n8n → Agent SDK. Step 0: set up."
+        "title": "10:00 · Start",
+        "body": "Recap, concepts, Step 0."
       },
       {
-        "title": "11:15–12:00 · Step 1",
-        "body": "Break 11:00–11:15. Then structured output and memory."
+        "title": "11:15 · Step 1",
+        "body": "Structured output and memory."
       },
       {
-        "title": "13:00–14:45 · Steps 2–4",
-        "body": "Lunch 12:00–13:00. Then subagents, MCP tools and the check."
+        "title": "13:00 · Steps 2–4",
+        "body": "Subagents, MCP tools, the check."
       },
       {
-        "title": "15:00–16:00 · Assignment",
-        "body": "Break 14:45–15:00. Extend the MCP: core first. Close at 15:50. Step 5 is homework."
+        "title": "15:00 · Assignment",
+        "body": "Extend the MCP. Close at 15:50."
       }
     ],
     "keyPoints": [
@@ -86,23 +246,25 @@ window.SLIDES = [
     "title": "Goal of today",
     "kicker": "Welcome · Goal of today",
     "type": "context",
-    "subtitle": "At 16:00 you have your own controlled agent system.",
     "visual": {
-      "bot": "wave",
-      "place": "beside"
+      "keyLine": 2,
+      "stamp": "EXPLAIN",
+      "bot": "head",
+      "place": "key"
     },
+    "subtitle": "At 16:00 you have an agent system that you control.",
     "cards": [
       {
         "title": "Morning",
-        "body": "Rebuild Maarten's n8n flow in code: one agent, structured output, memory."
+        "body": "One agent in code. Structured output and memory."
       },
       {
         "title": "Afternoon",
-        "body": "Add subagents and MCP tools, then extend the MCP with writes, hooks and a workflow."
+        "body": "Subagents, MCP tools and a hook for each write."
       },
       {
         "title": "You can explain",
-        "body": "Which agent has which tool, and when a person must approve."
+        "body": "Which agent has which tool. When a person must approve."
       }
     ],
     "keyPoints": [
@@ -114,61 +276,35 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday's n8n. Today's Agent SDK.",
-    "kicker": "Workshop 4 · Day 4 · five steps",
-    "type": "concept",
-    "visual": {
-      "bot": "wave",
-      "place": "beside"
-    },
-    "subtitle": "Carry Maarten’s n8n flow into Claude Code and the Agent SDK, then make a small agent of your own.",
-    "keyPoints": [
-      "Keep LOW, MEDIUM, and HIGH.",
-      "Separate analysis from reply writing.",
-      "Review drafts before they reach a customer."
-    ],
-    "cards": [
-      {
-        "title": "Workshop 3",
-        "body": "n8n routes a support message."
-      },
-      {
-        "title": "Workshop 4",
-        "body": "The same flow uses Claude Code or query(), JSON schema, subagents, MCP, and a human gate."
-      }
-    ],
-    "notes": "Open with Maarten’s Workshop 3 build, then explain, demo, let participants try, and discuss. Keep the labels, specialist split, and human review gate."
-  },
-  {
-    "lessonId": "workshop-4",
     "title": "Why move the flow to code?",
     "kicker": "Context · why code",
     "type": "context",
     "visual": {
-      "bot": "wave",
+      "stack": [
+        "test",
+        "limit",
+        "control"
+      ],
+      "bot": "think",
       "place": "beside"
     },
-    "subtitle": "n8n showed the flow. Code lets you test it, limit it and control it.",
-    "keyPoints": [
-      "n8n showed the flow. Code lets you test it, limit it and control it."
-    ],
+    "subtitle": "n8n shows the flow. Code lets you test it and control it.",
     "cards": [
       {
-        "title": "You can test it",
-        "body": "npm run verify and npm run check run the same checks on every laptop."
+        "title": "Test it",
+        "body": "npm run check gives the same result on each laptop."
       },
       {
-        "title": "Each agent gets only its tools",
-        "body": "In n8n every attached tool is allowed. In code you give each agent a list."
+        "title": "Limit it",
+        "body": "Each agent gets a list of its tools."
       },
       {
-        "title": "Rules run as code",
-        "body": "A hook decides each write. The model cannot skip it."
-      },
-      {
-        "title": "It runs on your Claude Code",
-        "body": "No API key. The same options also run in the SDK."
+        "title": "Control it",
+        "body": "A hook decides each write. The model cannot skip the hook."
       }
+    ],
+    "keyPoints": [
+      "n8n showed the flow. Code lets you test it, limit it and control it."
     ],
     "notes": "Say why we leave n8n for code: tests, least privilege per agent, hooks as code, and the same flow on your own Claude Code. The mapping itself is on the next slide."
   },
@@ -179,45 +315,44 @@ window.SLIDES = [
     "type": "concept",
     "layout": "compare",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/00-overview.png",
-      "imageLink": "n8n ↔ Agent SDK at a glance: n8n left, Claude Agent SDK right"
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "Same person at the end",
+          "tone": "orange"
+        }
+      ]
     },
-    "subtitle": "Same labels, same specialists, same human at the end.",
-    "keyPoints": [
-      "Same labels, same specialists, same human at the end."
-    ],
+    "subtitle": "Same labels. Same specialists. Same person at the end.",
     "columns": [
       {
         "title": "n8n · Workshop 3",
         "items": [
-          "Chat trigger",
           "AI Agent",
           "System Message",
-          "Options → Max Iterations",
+          "Max Iterations",
           "Simple Memory",
-          "Structured Output Parser / Priority Parser",
-          "Description",
-          "Customer Context Agent + Data Table",
-          "Transaction workbook lookup",
-          "Switch"
+          "Priority Parser",
+          "Switch",
+          "Data Table"
         ]
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
+        "title": "Agent SDK · Workshop 4",
         "items": [
-          "npm run chat → query()",
+          "query()",
           "CLAUDE.md",
           "maxTurns",
           "session resume",
-          "outputFormat: json_schema",
-          "frontmatter description",
-          "customer-context-agent → customers MCP get_customer",
-          "risk-agent → transactions MCP get_transaction",
+          "json_schema",
           "lib/switch.mjs",
-          "human reviews each draft"
+          "MCP tool"
         ]
       }
+    ],
+    "keyPoints": [
+      "Same labels, same specialists, same human at the end."
     ],
     "notes": "Map the final participant README table row by row: Chat trigger → npm run chat; AI Agent → query(); System Message → CLAUDE.md; Max Iterations → maxTurns; Simple Memory → session resume; Priority Parser → outputFormat json_schema; n8n Description → frontmatter description; Customer Context Agent + Data Table → customer-context-agent → customers MCP get_customer over customer_context.csv; transaction workbook lookup → risk-agent → transactions MCP get_transaction over transactions.xlsx; Switch → lib/switch.mjs. Every draft has human review."
   },
@@ -226,69 +361,22 @@ window.SLIDES = [
     "title": "Agent and agent loop",
     "kicker": "Concept · Agent",
     "type": "concept",
-    "layout": "compare",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/01-agent-loop.png",
-      "imageLink": "Agent and agent loop: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "The AI Agent node becomes a loop in code: think, tool, observe, repeat, answer.",
-    "keyPoints": [
-      "The AI Agent node becomes a loop in code: think, tool, observe, repeat, answer."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "AI Agent node: Chat Model, Memory, Tools",
-          "Options → Max Iterations",
-          "One run per message"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "query({ prompt, options }) runs the loop",
-          "Think → call a tool → read the result → repeat → answer",
-          "maxTurns stops the loop, like Max Iterations"
-        ]
+      "anatomy": {
+        "src": "assets/anatomy/agent-loop.html",
+        "poster": "assets/anatomy/agent-loop.svg",
+        "title": "Agent loop",
+        "caption": "One model turn per lap. A tool call goes out and comes back. At maxTurns the loop stops."
       }
+    },
+    "subtitle": "The AI Agent node becomes a loop: think, call a tool, read, repeat.",
+    "cards": [],
+    "keyPoints": [
+      "The AI Agent node becomes a loop in code: think, tool, observe, repeat, answer.",
+      "query({ prompt, options }) runs the loop.",
+      "maxTurns stops the loop, like Max Iterations."
     ],
     "notes": "The loop is prompt → model turn → tool calls → tool results → next turn → result message. The runner prints [system:init], [assistant], [tool_use], [tool_result], and [result]. The result subtype is printed with turn count, duration, and cost; structured_output is printed before the deterministic Switch route. maxTurns limits the model turns; it maps to n8n Max Iterations. docs/sample-trace.md is illustrative, not model evidence. Detail: for await (… of query({ prompt, options })) · prompt → model turn → tool_use → tool_result → next turn → result message · Events: [system:init] · [assistant] · [tool_use] · [tool_result] · [result] · result prints its subtype, turns, time, and cost; structured output shows parsed JSON · maxTurns limits model turns; n8n Options → Max Iterations"
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "System prompt",
-    "kicker": "Concept · System prompt",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/02-systeemprompt.png",
-      "imageLink": "System prompt: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "The system message now lives in a file next to the code.",
-    "keyPoints": [
-      "The system message now lives in a file next to the code."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "Options → System Message",
-          "One text field in the node"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "CLAUDE.md holds Purpose, Rules and Priority definitions",
-          "settingSources: ['project'] loads CLAUDE.md",
-          "You change the rules in a file, not in a node"
-        ]
-      }
-    ],
-    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['project'] loads CLAUDE.md · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)"
   },
   {
     "lessonId": "workshop-4",
@@ -296,13 +384,11 @@ window.SLIDES = [
     "kicker": "Concept · choose a backend",
     "type": "concept",
     "visual": {
-      "bot": "think",
+      "spotlight": 0,
+      "bot": "point",
       "place": "beside"
     },
     "subtitle": "Claude Code is the default. The SDK is the second way.",
-    "keyPoints": [
-      "Claude Code is the default. The SDK is the second way."
-    ],
     "cards": [
       {
         "title": "claude-code · default",
@@ -310,12 +396,15 @@ window.SLIDES = [
       },
       {
         "title": "sdk",
-        "body": "Uses query() and ANTHROPIC_API_KEY. The runner picks it when the key is set."
+        "body": "Uses query() and ANTHROPIC_API_KEY."
       },
       {
         "title": "Same options",
-        "body": "Each SDK option has a CLI flag. The trace shows both."
+        "body": "Each SDK option has a CLI flag."
       }
+    ],
+    "keyPoints": [
+      "Claude Code is the default. The SDK is the second way."
     ],
     "notes": "claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. The SDK backend uses query() with ANTHROPIC_API_KEY; sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume."
   },
@@ -325,24 +414,39 @@ window.SLIDES = [
     "kicker": "Demo · Step 0",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside"
+      "term": [
+        {
+          "c": "npm ci"
+        },
+        {
+          "c": "npm run doctor"
+        },
+        {
+          "c": "npm run lesson1 -- MSG-01 --dry-run"
+        },
+        {
+          "o": "backend: claude-code (claude -p)"
+        },
+        {
+          "o": "dry run — no model call"
+        }
+      ]
     },
-    "subtitle": "Prove your setup before you spend a model call.",
+    "subtitle": "Prove your setup first. A dry run makes no model call.",
+    "cards": [
+      {
+        "title": "Facilitator demo",
+        "body": "npm ci\nnpm run doctor\nnpm run verify\nnpm run lesson1 -- MSG-01 --dry-run"
+      },
+      {
+        "title": "Point at the trace",
+        "body": "backend: claude-code (claude -p)"
+      }
+    ],
     "keyPoints": [
       "docs/SETUP.md: Windows, WSL, Linux/macOS or Docker.",
       "npm run doctor checks the backend. npm run verify runs the tests.",
       "A dry run makes no model call."
-    ],
-    "cards": [
-      {
-        "title": "Facilitator demo",
-        "body": "Choose a platform in docs/SETUP.md\nnpm ci\nnpm run doctor\nnpm run verify\nnpm run lesson1 -- MSG-01 --dry-run"
-      },
-      {
-        "title": "Point at the trace",
-        "body": "backend: claude-code (claude -p)\nClaude Code equivalent: claude -p ..."
-      }
     ],
     "notes": "Choose the platform instructions in docs/SETUP.md. Run the facilitator commands exactly as in SOLO.md. Point to the backend: line and Claude Code equivalent: line; claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. A dry run is not model evidence."
   },
@@ -355,8 +459,13 @@ window.SLIDES = [
     "timer": 10,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "left",
+      "oneCol": true,
+      "cmdCards": [
+        1
+      ]
     },
+    "subtitle": "Install the repo. Then do a dry run.",
     "cards": [
       {
         "title": "Level",
@@ -364,18 +473,16 @@ window.SLIDES = [
       },
       {
         "title": "Workshop repo",
-        "body": "https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent\ngit clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git\ncd aetherlink-day5-n8n-to-agent\nnpm ci\nnpm run doctor\nnpm run verify\nnpm run lesson1 -- MSG-01 --dry-run\nnpm run chat -- --dry-run"
+        "body": "git clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git\ncd aetherlink-day5-n8n-to-agent\nnpm ci"
       }
     ],
     "steps": [
-      "Choose Windows, WSL, Linux/macOS, or Docker in docs/SETUP.md.",
-      "Run npm ci, npm run doctor, and npm run verify.",
-      "Run npm run lesson1 -- MSG-01 --dry-run and inspect the backend: line.",
-      "Run npm run chat -- --dry-run and inspect the Claude Code equivalent: line.",
-      "A dry run makes no model call. It only proves your setup."
+      "Choose your platform in docs/SETUP.md.",
+      "Run npm run doctor. Then run npm run verify.",
+      "Run npm run lesson1 -- MSG-01 --dry-run. Find the backend: line.",
+      "Run npm run chat -- --dry-run."
     ],
-    "expected": "npm run verify shows fail 0, and the dry run prints the prompt and options and ends with dry run — no model call, not model evidence.",
-    "subtitle": "Choose your platform, install with npm ci, and inspect a dry run before a model call.",
+    "expected": "verify shows fail 0. The dry run ends with “dry run — no model call”.",
     "keyPoints": [
       "Use docs/SETUP.md for Windows, WSL, Linux/macOS, or Docker.",
       "main is Step 0; step-1 through step-4 contain the finished steps.",
@@ -388,12 +495,12 @@ window.SLIDES = [
     "title": "Short break",
     "kicker": "Day 4 · Break",
     "type": "pause",
-    "subtitle": "Return in 15 minutes.",
     "visual": {
       "countdown": 15,
-      "bot": "wave",
+      "bot": "sleepy",
       "place": "beside"
     },
+    "subtitle": "Return in 15 minutes.",
     "cards": [
       {
         "title": "Back at 11:15",
@@ -409,27 +516,67 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "System prompt",
+    "kicker": "Concept · System prompt",
+    "type": "concept",
+    "visual": {
+      "mdfile": 0,
+      "mdName": "CLAUDE.md",
+      "guides": [
+        [
+          "🧩",
+          "System Message",
+          "lives in the node"
+        ],
+        [
+          "📄",
+          "CLAUDE.md",
+          "lives next to the code"
+        ]
+      ]
+    },
+    "subtitle": "The System Message is now a file next to the code.",
+    "cards": [
+      {
+        "title": "CLAUDE.md",
+        "body": "Purpose\nRules\nPriority definitions"
+      }
+    ],
+    "keyPoints": [
+      "The system message now lives in a file next to the code."
+    ],
+    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['project'] loads CLAUDE.md · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)"
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Structured output: parser to JSON schema",
     "kicker": "Concept · structured output",
     "type": "concept",
     "visual": {
-      "bot": "think",
-      "place": "beside"
+      "stagger": "pop",
+      "stepThrough": true,
+      "cardArt": {
+        "3": "route"
+      },
+      "bot": "head",
+      "place": "beside",
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "The Switch stays code",
+          "tone": "orange"
+        }
+      ]
     },
-    "subtitle": "The parser becomes a schema; the Switch stays deterministic code.",
-    "keyPoints": [
-      "Structured Output Parser / Priority Parser defines the shape.",
-      "outputFormat uses json_schema.",
-      "lib/switch.mjs routes the parsed priority."
-    ],
+    "subtitle": "The parser becomes a JSON schema. The Switch stays code.",
     "cards": [
       {
-        "title": "n8n · Workshop 3",
-        "body": "Structured Output Parser → Priority Parser"
+        "title": "n8n",
+        "body": "Priority Parser"
       },
       {
         "title": "Agent SDK",
-        "body": "outputFormat: { type: 'json_schema', schema }"
+        "body": "outputFormat: json_schema"
       },
       {
         "title": "Claude Code",
@@ -437,8 +584,13 @@ window.SLIDES = [
       },
       {
         "title": "Route",
-        "body": "Switch → priority → lib/switch.mjs"
+        "body": "lib/switch.mjs"
       }
+    ],
+    "keyPoints": [
+      "Structured Output Parser / Priority Parser defines the shape.",
+      "outputFormat uses json_schema.",
+      "lib/switch.mjs routes the parsed priority."
     ],
     "notes": "Map the Structured Output Parser / Priority Parser to outputFormat with type json_schema and to Claude Code's --json-schema flag. The runner prints structured output, then lib/switch.mjs maps low, medium, and high to a fixed action and team."
   },
@@ -448,24 +600,30 @@ window.SLIDES = [
     "kicker": "Concept · memory",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside"
+      "art": "window",
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "continues the session",
+          "tone": "orange"
+        }
+      ]
     },
-    "subtitle": "Chat resumes a session; a fresh session starts when memory is off.",
+    "subtitle": "npm run chat continues the session. --no-memory starts a new one.",
+    "cards": [
+      {
+        "title": "n8n",
+        "body": "Simple Memory keeps your favourite colour."
+      },
+      {
+        "title": "Agent SDK",
+        "body": "The chat resumes the last sessionId."
+      }
+    ],
     "keyPoints": [
       "Simple Memory carries a favourite-colour test across turns.",
       "npm run chat resumes with the previous sessionId.",
       "--no-memory starts each turn without resume."
-    ],
-    "cards": [
-      {
-        "title": "n8n · Workshop 3",
-        "body": "Simple Memory → test it by asking for a favourite colour."
-      },
-      {
-        "title": "Participant chain",
-        "body": "npm run chat resumes the session; npm run chat -- --no-memory starts fresh."
-      }
     ],
     "notes": "The session is the memory in chat: lib/chat.mjs passes resume: sessionId to the next turn unless --no-memory is set. In n8n, the Chat trigger uses Simple Memory; Maarten's favourite-colour test makes the cross-turn behavior visible."
   },
@@ -475,27 +633,28 @@ window.SLIDES = [
     "kicker": "Explain · one agent",
     "type": "concept",
     "visual": {
-      "bot": "think",
-      "place": "beside",
-      "stepThrough": true
+      "stagger": "pop",
+      "stepThrough": true,
+      "bot": "head",
+      "place": "beside"
     },
-    "subtitle": "One agent returns a fixed priority. Code routes it.",
-    "keyPoints": [
-      "One agent returns a fixed priority. Code routes it."
-    ],
+    "subtitle": "One agent gives a fixed priority. Code routes it.",
     "cards": [
       {
         "title": "What you build",
-        "body": "One agent that returns { priority, reason } as JSON, and a chat that remembers."
+        "body": "One agent that returns { priority, reason } as JSON."
       },
       {
         "title": "Why",
-        "body": "n8n used the Priority Parser and Simple Memory. A schema makes the output predictable, so lib/switch.mjs can route it."
+        "body": "A schema makes the output predictable. Then code can route it."
       },
       {
         "title": "Done when",
-        "body": "The trace shows the JSON and the Switch → line. The chat remembers your colour."
+        "body": "The trace shows the JSON and a Switch → line."
       }
+    ],
+    "keyPoints": [
+      "One agent returns a fixed priority. Code routes it."
     ],
     "notes": "Explain Step 1 using the final chain. The n8n Structured Output Parser / Priority Parser maps to outputFormat json_schema, and Switch maps to lib/switch.mjs. Simple Memory maps to session resume in npm run chat; --no-memory starts without resume. The main agent reads the project instructions and supplied message."
   },
@@ -505,30 +664,44 @@ window.SLIDES = [
     "kicker": "Demo · Step 1",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside",
-      "cmdCards": [
-        0,
-        2
+      "term": [
+        {
+          "c": "npm run lesson1 -- MSG-01 --dry-run"
+        },
+        {
+          "o": "dry run — no model call"
+        },
+        {
+          "c": "npm run lesson1 -- MSG-01"
+        },
+        {
+          "o": "Switch → low → AUTO_REPLY"
+        },
+        {
+          "c": "npm run chat"
+        },
+        {
+          "o": "resumes the session"
+        }
       ]
     },
-    "subtitle": "Show the dry run first. Then show a live run or the sample trace.",
-    "keyPoints": [
-      "Show the dry run first. Then show a live run or the sample trace."
-    ],
+    "subtitle": "Show the dry run first. Then a live run or the sample trace.",
     "cards": [
       {
-        "title": "Offline inspection",
-        "body": "npm run lesson1 -- MSG-01 --dry-run\npriority-schema.mjs · outputFormat · lib/switch.mjs"
+        "title": "Offline",
+        "body": "npm run lesson1 -- MSG-01 --dry-run"
       },
       {
-        "title": "Completed result",
-        "body": "Structured output: + Switch → low\nLive run, or docs/sample-trace.md (sample)"
+        "title": "Result",
+        "body": "Structured output + Switch → low"
       },
       {
-        "title": "Chat memory",
-        "body": "npm run chat · share a colour, ask again"
+        "title": "Memory",
+        "body": "npm run chat"
       }
+    ],
+    "keyPoints": [
+      "Show the dry run first. Then show a live run or the sample trace."
     ],
     "notes": "Run npm run lesson1 -- MSG-01 --dry-run and point out the prompt, options, and Claude Code equivalent. The dry run does not produce model JSON or a Switch → result. Inspect 01-single-agent/priority-schema.mjs, outputFormat in the dry-run options, and lib/switch.mjs offline. Then show a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md explicitly labelled as an illustrative sample; point out Structured output: and Switch → low. Start npm run chat, ask for a favourite colour, then ask for it again to show resumed session memory. Compare with npm run chat -- --no-memory."
   },
@@ -540,9 +713,10 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 15,
     "visual": {
-      "bot": "point",
+      "bot": "multiarm",
       "place": "beside"
     },
+    "subtitle": "Do the dry run. Then test the chat with and without memory.",
     "cards": [
       {
         "title": "Level",
@@ -550,13 +724,12 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Dry run: npm run lesson1 -- MSG-01 --dry-run. Open priority-schema.mjs and lib/switch.mjs.",
-      "Find the JSON and Switch → line in a live run or docs/sample-trace.md.",
-      "npm run chat: share a favourite colour, then ask for it again.",
-      "Repeat with npm run chat -- --no-memory and compare."
+      "Run npm run lesson1 -- MSG-01 --dry-run.",
+      "Open priority-schema.mjs and lib/switch.mjs.",
+      "Run npm run chat. Give a colour. Ask for it again.",
+      "Do it again with npm run chat -- --no-memory."
     ],
-    "expected": "You can point to the schema and the route, show a live or sample Switch → line, and explain why only the resumed chat remembers the colour.",
-    "subtitle": "Do the dry run. Then compare chat with and without memory.",
+    "expected": "You can show the schema and the route. You can say why only one chat remembers the colour.",
     "keyPoints": [
       "Do the dry run. Then compare chat with and without memory."
     ],
@@ -568,30 +741,34 @@ window.SLIDES = [
     "kicker": "Discuss · Step 1",
     "type": "review",
     "visual": {
-      "bot": "peek",
-      "place": "slot",
       "reveal": "click",
-      "noReact": true
+      "bot": "head",
+      "place": "slot",
+      "faces": [
+        "verward",
+        "dubbel",
+        "eigenwijs"
+      ]
     },
-    "subtitle": "Separate model judgment from the fixed priority route and session state.",
+    "subtitle": "What does the model decide? What does code decide?",
+    "cards": [
+      {
+        "title": "Schema",
+        "body": "Which values can priority have?"
+      },
+      {
+        "title": "Route",
+        "body": "Which part picks the next action?"
+      },
+      {
+        "title": "Memory",
+        "body": "What changes when the session resumes?"
+      }
+    ],
     "keyPoints": [
       "The schema constrains the agent's output.",
       "lib/switch.mjs routes the parsed priority.",
       "Chat session resume carries memory across turns."
-    ],
-    "cards": [
-      {
-        "title": "Structured output",
-        "body": "Which fields and values does the schema allow?"
-      },
-      {
-        "title": "Routing",
-        "body": "Which part chooses the next action?"
-      },
-      {
-        "title": "Memory",
-        "body": "What changes when the session is resumed?"
-      }
     ],
     "notes": "Discuss how a schema differs from a routing rule and from chat memory. Ask participants which behavior is model output, which is deterministic code, and which depends on session resume."
   },
@@ -600,12 +777,12 @@ window.SLIDES = [
     "title": "Lunch",
     "kicker": "Day 4 · Lunch",
     "type": "pause",
-    "subtitle": "Enjoy your lunch.",
     "visual": {
       "countdown": 60,
-      "bot": "wave",
+      "bot": "sleepy",
       "place": "beside"
     },
+    "subtitle": "Enjoy your lunch.",
     "cards": [
       {
         "title": "Back at 13:00",
@@ -624,32 +801,25 @@ window.SLIDES = [
     "title": "Tools",
     "kicker": "Concept · Tools",
     "type": "concept",
-    "layout": "compare",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/03-tools.png",
-      "imageLink": "Tools: n8n left, Claude Agent SDK right"
+      "fence": 0,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "which are allowed",
+          "tone": "orange"
+        }
+      ]
     },
-    "subtitle": "In code you state exactly which tools exist and which are allowed.",
+    "subtitle": "In code you say which tools exist and which are allowed.",
+    "cards": [
+      {
+        "title": "Boundaries in code",
+        "body": "tools: what exists\nallowedTools: runs without a question\ndisallowedTools: never runs"
+      }
+    ],
     "keyPoints": [
       "In code you state exactly which tools exist and which are allowed."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "You attach tools to the AI Agent",
-          "Every attached tool is allowed"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "tools: the tools that exist",
-          "allowedTools: the tools that run without a question",
-          "disallowedTools: the tools that never run"
-        ]
-      }
     ],
     "notes": "SDK: 01-single-agent/options.mjs:12-13 (tools: [], disallowedTools); 02-subagents/options.mjs:13-15 (tools/allowedTools/disallowedTools); 03-mcp/options.mjs:17-20 (allowedTools incl. mcp__transactions__get_transaction and list_transactions). day5: src/tools.ts COORDINATOR_TOOLS = ['Agent']. Live: Steps 1–3. Visual: concepts/visuals/03-tools.png (light: visuals/light/03-tools.png). Detail: tools: what exists (Lesson 1: [] · Lesson 2: ['Agent','Write']) · allowedTools: what runs without asking · disallowedTools: ['WebSearch','WebFetch','Bash']"
   },
@@ -658,35 +828,26 @@ window.SLIDES = [
     "title": "Subagents",
     "kicker": "Concept · Subagents",
     "type": "concept",
-    "layout": "compare",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/06-subagents.png",
-      "imageLink": "Subagents: n8n left, Claude Agent SDK right"
+      "swap": true
     },
     "subtitle": "The orchestrator delegates. Each specialist does one task.",
-    "keyPoints": [
-      "The orchestrator delegates. Each specialist does one task."
-    ],
-    "columns": [
+    "cards": [
       {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "AI Agent as coordinator",
-          "Customer Reply Agent + Risk Agent (own model + memory)",
-          "Code → Switch afterwards"
-        ]
+        "title": "Orchestrator",
+        "body": "Sends the ticket to the specialists."
       },
       {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "Orchestrator follows CLAUDE.md: delegate, don't do it yourself",
-          "Agent → risk-agent (priority)",
-          "Agent → customer-reply-agent (draft email)",
-          "Agent → customer-context-agent (customer facts)",
-          "output/MSG-05.md = draft for the human"
-        ]
+        "title": "risk-agent",
+        "body": "Decides the priority."
+      },
+      {
+        "title": "customer-reply-agent",
+        "body": "Writes the draft reply."
       }
+    ],
+    "keyPoints": [
+      "The orchestrator delegates. Each specialist does one task."
     ],
     "notes": "The final chain maps n8n Description to frontmatter description and System Message to the prompt body. Step 2 delegates first to risk-agent, then customer-reply-agent; Step 3 adds customer-context-agent. Claude Code reads the same .claude/agents/*.md files directly."
   },
@@ -696,29 +857,33 @@ window.SLIDES = [
     "kicker": "Explain · orchestrator and agents",
     "type": "concept",
     "visual": {
+      "stack": [
+        "build",
+        "why",
+        "done"
+      ],
       "bot": "think",
-      "place": "beside",
-      "stepThrough": true
+      "place": "beside"
     },
-    "subtitle": "The orchestrator delegates analysis and reply writing to separate agents.",
+    "subtitle": "Two agents: one analyses, one writes.",
+    "cards": [
+      {
+        "title": "What you build",
+        "body": "An orchestrator that calls risk-agent, then customer-reply-agent."
+      },
+      {
+        "title": "Why",
+        "body": "One agent per task. Each prompt stays short."
+      },
+      {
+        "title": "Done when",
+        "body": "The trace shows two Agent calls. output/MSG-05.md has the draft."
+      }
+    ],
     "keyPoints": [
       "risk-agent analyzes and decides the priority.",
       "customer-reply-agent writes the reply draft.",
       "The orchestrator delegates in order and saves a file."
-    ],
-    "cards": [
-      {
-        "title": "What you build",
-        "body": "An orchestrator that sends the ticket to risk-agent, then to customer-reply-agent."
-      },
-      {
-        "title": "Why",
-        "body": "One agent per task, like the specialist agents in n8n. Each prompt stays short, and you can test each agent."
-      },
-      {
-        "title": "Done when",
-        "body": "The trace shows two Agent calls. output/MSG-05.md holds the draft."
-      }
     ],
     "notes": "Explain Step 2. The final names are risk-agent and customer-reply-agent. The orchestrator delegates first to Agent → risk-agent, then Agent → customer-reply-agent. In n8n terms, Description maps to frontmatter description and System Message maps to the prompt body."
   },
@@ -728,29 +893,34 @@ window.SLIDES = [
     "kicker": "Demo · Step 2",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside",
-      "cmdCards": [
-        0
+      "term": [
+        {
+          "c": "npm run lesson2 -- MSG-05"
+        },
+        {
+          "o": "[tool_use] Agent → risk-agent"
+        },
+        {
+          "o": "[tool_use] Agent → customer-reply-agent"
+        },
+        {
+          "o": "output/MSG-05.md · draft for a person"
+        }
       ]
     },
-    "subtitle": "Show the dry run first. Then show a live run or the sample trace.",
-    "keyPoints": [
-      "Show the dry run first. Then show a live run or the sample trace."
-    ],
+    "subtitle": "Show the dry run first. Then a live run or the sample trace.",
     "cards": [
       {
         "title": "Commands",
         "body": "npm run lesson2 -- MSG-05 --dry-run\nnpm run lesson2 -- MSG-05"
       },
       {
-        "title": "First agent call",
-        "body": "[tool_use] Agent → risk-agent\nLive run, or docs/sample-trace.md (sample)"
-      },
-      {
-        "title": "Second call + draft",
-        "body": "[tool_use] Agent → customer-reply-agent\nLive draft: 02-subagents/claude-project/output/MSG-05.md"
+        "title": "Trace",
+        "body": "Agent → risk-agent\nAgent → customer-reply-agent"
       }
+    ],
+    "keyPoints": [
+      "Show the dry run first. Then show a live run or the sample trace."
     ],
     "notes": "Run npm run lesson2 -- MSG-05 --dry-run, then run it live (Claude Code login, or --backend sdk with a key). The dry run prints the Claude Code equivalent and setup only; it does not call agents or produce a model result. Show the completed trace or docs/sample-trace.md, explicitly labelled as an illustrative sample. Point out [tool_use] Agent → risk-agent before [tool_use] Agent → customer-reply-agent, then the draft written for human review. The description test shows why n8n Description maps to the agent frontmatter description."
   },
@@ -762,9 +932,11 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 20,
     "visual": {
-      "bot": "point",
-      "place": "beside"
+      "bot": "stretchLeft",
+      "place": "pointer",
+      "pointAt": 0
     },
+    "subtitle": "Find the two agent calls. Then read the draft.",
     "cards": [
       {
         "title": "Level",
@@ -772,13 +944,12 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Dry run: npm run lesson2 -- MSG-05 --dry-run (setup only, no agent calls).",
-      "Live run or docs/sample-trace.md: find Agent → risk-agent, then customer-reply-agent.",
-      "After a live run, open 02-subagents/claude-project/output/MSG-05.md.",
-      "Compare each agent's description with its prompt body; then try MSG-10 live."
+      "Run npm run lesson2 -- MSG-05 --dry-run.",
+      "In a live run or docs/sample-trace.md, find risk-agent and customer-reply-agent.",
+      "After a live run, open output/MSG-05.md.",
+      "Read the draft before you use it."
     ],
-    "expected": "risk-agent runs before customer-reply-agent, and you reviewed the draft before using it.",
-    "subtitle": "Do the dry run. Then read a live run or the sample trace.",
+    "expected": "risk-agent runs before customer-reply-agent. You read the draft.",
     "keyPoints": [
       "Do the dry run. Then read a live run or the sample trace."
     ],
@@ -790,26 +961,29 @@ window.SLIDES = [
     "kicker": "Discuss · Step 2",
     "type": "review",
     "visual": {
-      "bot": "peek",
-      "place": "slot",
       "reveal": "click",
-      "noReact": true
+      "bot": "head",
+      "place": "slot",
+      "faces": [
+        "verrast",
+        "betrapt"
+      ]
     },
-    "subtitle": "Trace each claim to the input, a specialist, or an MCP tool.",
+    "subtitle": "Where did each fact come from?",
+    "cards": [
+      {
+        "title": "Order",
+        "body": "Which agent runs first? Why?"
+      },
+      {
+        "title": "Prompt",
+        "body": "Where is the n8n Description now?"
+      }
+    ],
     "keyPoints": [
       "risk-agent provides the priority and risk analysis.",
       "customer-reply-agent uses the original message and risk-agent result.",
       "A human reviews every draft before it goes to a customer."
-    ],
-    "cards": [
-      {
-        "title": "Delegation",
-        "body": "Agent → risk-agent → Agent → customer-reply-agent"
-      },
-      {
-        "title": "Prompt mapping",
-        "body": "n8n Description ↔ frontmatter description · System Message ↔ prompt body"
-      }
     ],
     "notes": "Discuss how the two subagents divide the work. Ask what the orchestrator passes to the reply agent and why the draft remains subject to human review."
   },
@@ -818,35 +992,25 @@ window.SLIDES = [
     "title": "MCP: external data",
     "kicker": "Concept · MCP",
     "type": "concept",
-    "layout": "compare",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/04-mcp.png",
-      "imageLink": "MCP: external data: n8n left, Claude Agent SDK right"
+      "plugs": 0,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "sees only what the tool returns",
+          "tone": "purple"
+        }
+      ]
     },
-    "subtitle": "The MCP server owns the data. The agent only sees what the tool returns.",
+    "subtitle": "The MCP server owns the data. The agent sees only what the tool returns.",
+    "cards": [
+      {
+        "title": "Two MCP servers",
+        "body": "customers → get_customer\ntransactions → get_transaction"
+      }
+    ],
     "keyPoints": [
       "The MCP server owns the data. The agent only sees what the tool returns."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "Customer Context Agent as a tool of the AI Agent",
-          "Data Table reads customer_context.csv",
-          "Same idea: one HTTP Request node per API"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "docs/transactions.xlsx → server.js (MCP, stdio)",
-          "The SDK starts the server on demand",
-          "customers MCP get_customer reads docs/customer_context.csv",
-          "transactions MCP get_transaction reads docs/transactions.xlsx",
-          "customer-context-agent and risk-agent report \"External data:\""
-        ]
-      }
     ],
     "notes": "The customers MCP server reads docs/customer_context.csv and exposes get_customer; the transactions MCP server reads docs/transactions.xlsx and exposes get_transaction. The Agent SDK starts both over stdio. Claude Code reads the equivalent .mcp.json. The W3 export has no HTTP Request node; its n8n side is conceptual. Run npm run smoke:mcp to test the servers without a model."
   },
@@ -856,27 +1020,35 @@ window.SLIDES = [
     "kicker": "Explain · stdio MCP",
     "type": "concept",
     "visual": {
-      "bot": "think",
+      "stagger": "pop",
+      "stepThrough": true,
+      "bot": "head",
       "place": "beside",
-      "stepThrough": true
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "cannot change data",
+          "tone": "orange"
+        }
+      ]
     },
     "subtitle": "The agents get facts from tools. They cannot change data yet.",
-    "keyPoints": [
-      "The agents get facts from tools. They cannot change data yet."
-    ],
     "cards": [
       {
         "title": "What you build",
-        "body": "Two read-only MCP servers: customers (get_customer) and transactions (get_transaction, list_transactions)."
+        "body": "Two read-only MCP servers: customers and transactions."
       },
       {
         "title": "Why",
-        "body": "The agent takes facts from a tool, not from its memory. The MCP server owns the data."
+        "body": "The agent takes facts from a tool, not from its memory."
       },
       {
         "title": "Done when",
-        "body": "The trace shows both MCP tools. The result lists External data."
+        "body": "The trace shows both MCP tools."
       }
+    ],
+    "keyPoints": [
+      "The agents get facts from tools. They cannot change data yet."
     ],
     "notes": "Explain Step 3. The customer CSV is read by the customers MCP server and get_customer is assigned to customer-context-agent. transactions.xlsx is read by the transactions MCP server; get_transaction and list_transactions are read-only lookups assigned to risk-agent. Both servers use stdio and return external data. The reply remains a draft for human review before sending."
   },
@@ -886,28 +1058,39 @@ window.SLIDES = [
     "kicker": "Demo · Step 3",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside"
+      "term": [
+        {
+          "c": "(cd 03-mcp/transaction-mcp && npm ci)"
+        },
+        {
+          "c": "npm run smoke:mcp"
+        },
+        {
+          "o": "MCP servers verified · no model call"
+        },
+        {
+          "c": "npm run lesson3 -- MSG-08"
+        },
+        {
+          "o": "[tool_use] mcp__customers__get_customer"
+        }
+      ]
     },
-    "subtitle": "Follow customer and transaction facts from each MCP tool to the specialist.",
+    "subtitle": "Follow each fact from the MCP tool to the agent.",
+    "cards": [
+      {
+        "title": "Setup",
+        "body": "(cd 03-mcp/transaction-mcp && npm ci)\nnpm run smoke:mcp"
+      },
+      {
+        "title": "Tools in the trace",
+        "body": "mcp__customers__get_customer\nmcp__transactions__get_transaction"
+      }
+    ],
     "keyPoints": [
       "customer-context-agent calls get_customer.",
       "risk-agent uses get_transaction and list_transactions.",
       "Review the customer-reply-agent draft before sending."
-    ],
-    "cards": [
-      {
-        "title": "MCP setup and smoke",
-        "body": "(cd 03-mcp/transaction-mcp && npm ci)\nnpm run smoke:mcp"
-      },
-      {
-        "title": "Customer tool",
-        "body": "mcp → mcp__customers__get_customer"
-      },
-      {
-        "title": "Transaction tool",
-        "body": "mcp → mcp__transactions__get_transaction"
-      }
     ],
     "notes": "Run (cd 03-mcp/transaction-mcp && npm ci), then npm run smoke:mcp; it verifies the servers without a model. Demo a live lesson3 customer and transaction lookup, point to both MCP tool traces and the External data: line. Keep the generated reply as a draft for human review. Do not treat dry-run output as model evidence."
   },
@@ -919,9 +1102,10 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 20,
     "visual": {
-      "bot": "point",
+      "bot": "head",
       "place": "beside"
     },
+    "subtitle": "Find the read tools in the trace.",
     "cards": [
       {
         "title": "Level",
@@ -929,13 +1113,12 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Once: (cd 03-mcp/transaction-mcp && npm ci), then npm run smoke:mcp (no model).",
-      "Dry run: npm run lesson3 -- MSG-08 --dry-run; check both MCP servers.",
-      "Live or sample trace: find mcp__customers__get_customer and mcp__transactions__get_transaction.",
-      "Tie every customer and transaction fact to an MCP result; a person reviews the draft."
+      "Once: (cd 03-mcp/transaction-mcp && npm ci).",
+      "Run npm run smoke:mcp. It makes no model call.",
+      "Run npm run lesson3 -- MSG-08 --dry-run. Find both MCP servers.",
+      "In the trace, find get_customer and get_transaction."
     ],
-    "expected": "Both MCP servers show in the dry run, the trace shows the read-only lookups, and the draft waits for human review.",
-    "subtitle": "Trace the read tools and review the reply draft.",
+    "expected": "The trace shows both read-only lookups. The draft waits for a person.",
     "keyPoints": [
       "Smoke-test without a model.",
       "Trace get_customer, get_transaction, and list_transactions.",
@@ -949,28 +1132,69 @@ window.SLIDES = [
     "kicker": "Discuss · Step 3",
     "type": "review",
     "visual": {
-      "bot": "peek",
-      "place": "slot",
       "reveal": "click",
-      "noReact": true
+      "bot": "head",
+      "place": "slot",
+      "faces": [
+        "dubbel",
+        "blij"
+      ]
     },
-    "subtitle": "Name when a tool is needed, where each fact came from, and who reviews the draft.",
+    "subtitle": "When does the agent need a tool?",
+    "cards": [
+      {
+        "title": "Facts",
+        "body": "Which facts came from a tool?"
+      },
+      {
+        "title": "Review",
+        "body": "Who reads the draft before it is sent?"
+      }
+    ],
     "keyPoints": [
       "Use get_customer for customer context.",
       "Use get_transaction or list_transactions for transaction facts.",
       "A person reviews reply drafts before they are sent."
     ],
-    "cards": [
+    "notes": "Discuss when each lookup tool is needed and which facts came from customer_context.csv or transactions.xlsx. The tool result is external data. All customer and transaction tools are read-only; a person reviews the reply draft before it is sent."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Fixed workflow vs. dynamic agent",
+    "kicker": "Concept · Workflows",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "pairs": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "A person at the end",
+          "tone": "orange"
+        }
+      ]
+    },
+    "subtitle": "Code where it must. The agent where it may. A person at the end.",
+    "columns": [
       {
-        "title": "Read-only tools",
-        "body": "Customer and transaction lookups return external facts."
+        "title": "Fixed workflow",
+        "items": [
+          "You draw each path",
+          "Rules, money, compliance"
+        ]
       },
       {
-        "title": "Human review",
-        "body": "A person reviews the reply draft before sending."
+        "title": "Dynamic agent",
+        "items": [
+          "The agent picks the tool",
+          "Open questions"
+        ]
       }
     ],
-    "notes": "Discuss when each lookup tool is needed and which facts came from customer_context.csv or transactions.xlsx. The tool result is external data. All customer and transaction tools are read-only; a person reviews the reply draft before it is sent."
+    "keyPoints": [
+      "Code where it must. The agent chooses where it may. Always a human at the end."
+    ],
+    "notes": "The n8n Switch rules are fixed: priority equals low, medium, or high. In the final participant chain, lib/switch.mjs maps structured priority to a fixed action and check.mjs validates labels. The Step 2 orchestrator dynamically delegates to specialist agents. Discuss: when do you choose a fixed route or agent delegation?"
   },
   {
     "lessonId": "workshop-4",
@@ -980,9 +1204,10 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 15,
     "visual": {
-      "bot": "point",
-      "place": "beside"
+      "bot": "think",
+      "place": "left"
     },
+    "subtitle": "A fixed check says if the agent is right. The model does not grade itself.",
     "cards": [
       {
         "title": "Level",
@@ -990,14 +1215,12 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Complete the acceptance table for MSG-01, MSG-05, MSG-07, MSG-08, and MSG-09.",
-      "Take customer and transaction facts from get_customer and get_transaction.",
-      "Run npm run check; fill labels.json and run npm run check again.",
-      "Save the acceptance table in participant-output/ or the squad's intent.md.",
-      "A person reviews every draft."
+      "Fill the acceptance table for MSG-01, 05, 07, 08 and 09.",
+      "Take the facts from get_customer and get_transaction.",
+      "Fill labels.json. Then run npm run check.",
+      "Save the table in participant-output/."
     ],
-    "expected": "The acceptance table is complete, labels pass npm run check, and results are saved in participant-output/ or the squad's intent.md.",
-    "subtitle": "A fixed check tells you if the agent is right. The model does not grade itself.",
+    "expected": "npm run check passes. The table is saved.",
     "keyPoints": [
       "A fixed check tells you if the agent is right. The model does not grade itself."
     ],
@@ -1008,12 +1231,12 @@ window.SLIDES = [
     "title": "Short break",
     "kicker": "Day 4 · Break",
     "type": "pause",
-    "subtitle": "Return in 15 minutes.",
     "visual": {
       "countdown": 15,
-      "bot": "wave",
+      "bot": "sleepy",
       "place": "beside"
     },
+    "subtitle": "Return in 15 minutes.",
     "cards": [
       {
         "title": "Back at 15:00",
@@ -1029,102 +1252,70 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Control: hooks and approval",
-    "kicker": "Concept · Control",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/05-hooks.png",
-      "imageLink": "Control: hooks and approval: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "A human or a rule decides before a tool changes anything.",
-    "keyPoints": [
-      "A human or a rule decides before a tool changes anything."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "IF node: check before the action",
-          "Wait node: wait for approval",
-          "Error Workflow: on failure"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "PreToolUse hook: allow, ask, or deny per call",
-          "Human review stays on reply drafts",
-          "permissionMode: 'acceptEdits' → --permission-mode acceptEdits",
-          "Assignment: hooks gate writes by situation"
-        ]
-      }
-    ],
-    "notes": "Hooks run in both backends: the SDK hooks option and .claude/settings.json for Claude Code. In the assignment a PreToolUse hook allows reads, auto-allows small updates and asks a person before large updates, adds and deletes; a PostToolUse hook writes the audit log. Human review still applies to every reply draft. permissionMode maps to --permission-mode."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Fixed workflow vs. dynamic agent",
-    "kicker": "Concept · Workflows",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/08-workflows-vs-dynamisch.png",
-      "imageLink": "Fixed workflow vs. dynamic agent: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "Code where it must. The agent chooses where it may. Always a human at the end.",
-    "keyPoints": [
-      "Code where it must. The agent chooses where it may. Always a human at the end."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "Input → Switch → Low / Medium / High",
-          "You draw every path up front",
-          "Works well for fixed rules"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          "Fixed code: npm run check (check.mjs)",
-          "Agent chooses: which subagent, which tool",
-          "Fixed = rules, money, compliance · Agent = open questions"
-        ]
-      }
-    ],
-    "notes": "The n8n Switch rules are fixed: priority equals low, medium, or high. In the final participant chain, lib/switch.mjs maps structured priority to a fixed action and check.mjs validates labels. The Step 2 orchestrator dynamically delegates to specialist agents. Discuss: when do you choose a fixed route or agent delegation?"
-  },
-  {
-    "lessonId": "workshop-4",
     "title": "Assignment · Extend the MCP",
     "kicker": "Explain · Assignment",
     "type": "concept",
     "visual": {
-      "bot": "think",
-      "place": "beside",
-      "stepThrough": true
+      "stagger": "pop",
+      "stepThrough": true,
+      "bot": "multiarm",
+      "place": "beside"
     },
-    "subtitle": "Why: a real agent changes data. Do the core first (35 min).",
+    "subtitle": "A real agent changes data. Do the core first.",
+    "cards": [
+      {
+        "title": "Core · 35 min",
+        "body": "Write tools on a working copy. A hook for each write."
+      },
+      {
+        "title": "Stretch · optional",
+        "body": "A drafts tool, a fraud check and a question to a person."
+      }
+    ],
     "keyPoints": [
       "Core: Part 1 and Part 2.",
       "Stretch: Part 3 and Part 4.",
       "Step 3 stays read-only. Writes go to a working copy."
     ],
-    "cards": [
+    "notes": "The room target is the core: Part 1 and Part 2. Fast squads do the stretch, the rest can do it at home. npm run check:assignment reports core and stretch apart; it exits 0 when the core passes. Explain the final assignment. Step 3 stays read-only. The assignment adds add_transaction, update_transaction and delete_transaction to the transactions MCP server. These tools write only to participant-output/transactions.working.json; docs/transactions.xlsx does not change. A new drafts MCP server adds save_reply_draft: it writes the reply draft to participant-output/drafts/. Participants make transaction-agent and fraud-check-agent, add rules to CLAUDE.md, write the PreToolUse and PostToolUse hooks, and run the npm run resolve workflow. npm run reset:mcp removes the working copy and the drafts."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Control: hooks and approval",
+    "kicker": "Concept · Control",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "before",
+          "tone": "orange"
+        }
+      ]
+    },
+    "subtitle": "A rule or a person decides before a tool changes data.",
+    "columns": [
       {
-        "title": "Core · Parts 1–2 · 35 min",
-        "body": "CRUD tools on a working copy. Only transaction-agent writes. A hook allows, asks or denies each write."
+        "title": "n8n · Workshop 3",
+        "items": [
+          "IF node: check first",
+          "Wait node: wait for approval"
+        ]
       },
       {
-        "title": "Stretch · Parts 3–4 · optional",
-        "body": "A drafts tool and fraud-check-agent. AskUserQuestion and npm run resolve."
+        "title": "Agent SDK · Workshop 4",
+        "items": [
+          "PreToolUse hook: allow, ask or deny",
+          "A person reads each draft"
+        ]
       }
     ],
-    "notes": "The room target is the core: Part 1 and Part 2. Fast squads do the stretch, the rest can do it at home. npm run check:assignment reports core and stretch apart; it exits 0 when the core passes. Explain the final assignment. Step 3 stays read-only. The assignment adds add_transaction, update_transaction and delete_transaction to the transactions MCP server. These tools write only to participant-output/transactions.working.json; docs/transactions.xlsx does not change. A new drafts MCP server adds save_reply_draft: it writes the reply draft to participant-output/drafts/. Participants make transaction-agent and fraud-check-agent, add rules to CLAUDE.md, write the PreToolUse and PostToolUse hooks, and run the npm run resolve workflow. npm run reset:mcp removes the working copy and the drafts."
+    "keyPoints": [
+      "A human or a rule decides before a tool changes anything."
+    ],
+    "notes": "Hooks run in both backends: the SDK hooks option and .claude/settings.json for Claude Code. In the assignment a PreToolUse hook allows reads, auto-allows small updates and asks a person before large updates, adds and deletes; a PostToolUse hook writes the audit log. Human review still applies to every reply draft. permissionMode maps to --permission-mode."
   },
   {
     "lessonId": "workshop-4",
@@ -1132,29 +1323,23 @@ window.SLIDES = [
     "kicker": "Explain · Permissions",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside",
-      "stepThrough": true
+      "anatomy": {
+        "src": "assets/anatomy/permissions.html",
+        "poster": "assets/anatomy/permissions.svg",
+        "title": "Who may open which drawer",
+        "caption": "Four layers decide one write: the agent’s key ring, no write key for the orchestrator, the amount hook, a person’s y/N."
+      }
     },
-    "subtitle": "Four layers decide if a tool call can run.",
+    "subtitle": "Four layers decide if a write can run.",
+    "cards": [],
     "keyPoints": [
       "Each agent gets only the tools it needs.",
       "The orchestrator delegates writes.",
-      "The hook decides; a person approves."
-    ],
-    "cards": [
-      {
-        "title": "1 · Agent tools list",
-        "body": "risk-, customer-context-, fraud-check-agent: read only.\ncustomer-reply-agent: save_reply_draft only.\ntransaction-agent: get, update, add."
-      },
-      {
-        "title": "2 · allowedTools",
-        "body": "The orchestrator has no write tools.\nIt must delegate a change to transaction-agent."
-      },
-      {
-        "title": "3 · PreToolUse hook → 4 · person",
-        "body": "The hook allows, asks or denies each write.\nOnly the orchestrator has AskUserQuestion."
-      }
+      "The hook decides; a person approves.",
+      "1 · Agent tools list: only transaction-agent has update and add.",
+      "2 · allowedTools: the orchestrator has no write tools.",
+      "3 · PreToolUse hook: allows, asks or denies each write.",
+      "4 · A person: only the orchestrator has AskUserQuestion."
     ],
     "notes": "Show the layers in order. The tools list in the agent frontmatter limits what each agent can call. The orchestrator allowedTools has no write tools, so it must delegate. The PreToolUse hook in 03-mcp/hooks/transaction-guard.mjs then allows, asks or denies each call. When the hook asks, a person answers y or N. The same hook runs in the SDK hooks option and in .claude/settings.json for Claude Code. AskUserQuestion is the built-in ask-a-person tool. Only the orchestrator has it; subagents do not get it."
   },
@@ -1163,7 +1348,6 @@ window.SLIDES = [
     "title": "Quiz: who may change a transaction?",
     "kicker": "Assignment · Quiz",
     "type": "quiz",
-    "subtitle": "Which agent may call update_transaction?",
     "visual": {
       "quiz": {
         "answer": 1
@@ -1172,6 +1356,7 @@ window.SLIDES = [
       "place": "pointer",
       "pointAt": 1
     },
+    "subtitle": "Which agent may call update_transaction?",
     "cards": [
       {
         "title": "A",
@@ -1203,100 +1388,37 @@ window.SLIDES = [
     "title": "When does the hook ask?",
     "kicker": "Explain · Hook triggers",
     "type": "concept",
-    "subtitle": "The hook asks only in some situations. Each card is one situation.",
+    "visual": {
+      "stamps": [
+        "ALLOW",
+        "ASK",
+        "DENY"
+      ],
+      "bot": "head",
+      "place": "stamps",
+      "stepThrough": true
+    },
+    "subtitle": "The hook gives one of three answers.",
+    "cards": [
+      {
+        "title": "ALLOW",
+        "body": "A read, a draft, or an update below 100."
+      },
+      {
+        "title": "ASK",
+        "body": "An update of 100 or more, an add, or a delete."
+      },
+      {
+        "title": "DENY",
+        "body": "A fraud hold, or the answer N. Report ESCALATE."
+      }
+    ],
     "keyPoints": [
       "Reads, drafts and small updates do not ask.",
       "Large updates, adds and deletes ask a person.",
       "No person to ask means deny."
     ],
-    "notes": "Read the cards one by one. The threshold is one constant: AUTO_APPROVE_TRANSACTION_AMOUNT = 100 in 03-mcp/hooks/transaction-guard.mjs. In interactive claude the hook returns ask and Claude Code shows the prompt. When fraud-check-agent says medium, or a fact is missing, the orchestrator asks the person with AskUserQuestion. Under claude -p, or in the SDK without a terminal, no person can answer: the write is denied. A denied write is final: the agent reports it and stops.",
-    "cards": [
-      {
-        "title": "risk-agent tries a write",
-        "body": "Blocked: the tool is not in its list."
-      },
-      {
-        "title": "A read, a draft, or an update below 100",
-        "body": "Allowed. Each write gets one audit line."
-      },
-      {
-        "title": "Update of 100 or more, add, delete, or fraud medium",
-        "body": "A person decides: y/N, or AskUserQuestion."
-      },
-      {
-        "title": "Fraud hold, claude -p, or the answer N",
-        "body": "No write. Report ESCALATE. No retry, no other agent."
-      }
-    ],
-    "visual": {
-      "bot": "think",
-      "place": "beside",
-      "stepThrough": true
-    }
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Where you change what, and why (1/2)",
-    "kicker": "Explain · Where and why",
-    "type": "concept",
-    "visual": {
-      "bot": "point",
-      "place": "beside",
-      "stepThrough": true
-    },
-    "subtitle": "Each change has one file and one reason.",
-    "keyPoints": [
-      "Tools go in the MCP servers.",
-      "Agents go in .claude/agents/.",
-      "Each agent gets only its tools."
-    ],
-    "cards": [
-      {
-        "title": "03-mcp/transaction-mcp/server.js",
-        "body": "Add the write tools. Why: the working copy keeps the workbook unchanged."
-      },
-      {
-        "title": "03-mcp/transaction-mcp/drafts-server.js · stretch",
-        "body": "Add save_reply_draft. Why: a person reads the draft before it is sent."
-      },
-      {
-        "title": "03-mcp/claude-project/.claude/agents/",
-        "body": "Make transaction-agent (core) and fraud-check-agent (stretch). Why: least privilege."
-      }
-    ],
-    "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction; they write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft; it writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Where you change what, and why (2/2)",
-    "kicker": "Explain · Where and why",
-    "type": "concept",
-    "visual": {
-      "bot": "think",
-      "place": "beside",
-      "stepThrough": true
-    },
-    "subtitle": "Rules tell the model; code makes sure.",
-    "keyPoints": [
-      "CLAUDE.md gives the rules.",
-      "The hook makes the decision in code.",
-      "The workflow fixes the order."
-    ],
-    "cards": [
-      {
-        "title": "03-mcp/claude-project/CLAUDE.md",
-        "body": "Add the write rules (core). Add the fraud and question rules (stretch). Why: the orchestrator must know who writes and when to stop."
-      },
-      {
-        "title": "03-mcp/hooks/transaction-guard.mjs + .claude/settings.json",
-        "body": "Add the hooks. Why: code decides each write, not the model."
-      },
-      {
-        "title": "03-mcp/resolve.mjs · stretch",
-        "body": "Add the workflow. Why: the same safe order runs every time."
-      }
-    ],
-    "notes": "CLAUDE.md is advice to the model: the model can make a mistake. The tools list and the hook are code: the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs lookup, fraud check, update, hook and draft in a fixed order."
+    "notes": "Read the cards one by one. The threshold is one constant: AUTO_APPROVE_TRANSACTION_AMOUNT = 100 in 03-mcp/hooks/transaction-guard.mjs. In interactive claude the hook returns ask and Claude Code shows the prompt. When fraud-check-agent says medium, or a fact is missing, the orchestrator asks the person with AskUserQuestion. Under claude -p, or in the SDK without a terminal, no person can answer: the write is denied. A denied write is final: the agent reports it and stops."
   },
   {
     "lessonId": "workshop-4",
@@ -1304,38 +1426,85 @@ window.SLIDES = [
     "kicker": "Demo · Assignment",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside",
-      "cmdCards": [
-        0,
-        1
+      "term": [
+        {
+          "c": "npm run check:assignment"
+        },
+        {
+          "c": "npm run hook:demo -- small"
+        },
+        {
+          "o": "TX-1002 49.99 · Decision allow"
+        },
+        {
+          "c": "npm run hook:demo -- large"
+        },
+        {
+          "o": "TX-1007 899 · Decision ask"
+        }
       ]
     },
-    "subtitle": "Run the check, run the workflow, and read the audit log.",
+    "subtitle": "One write, three outcomes.",
+    "cards": [
+      {
+        "title": "Check",
+        "body": "npm run check:assignment"
+      },
+      {
+        "title": "Small and large",
+        "body": "npm run hook:demo -- small\nnpm run hook:demo -- large"
+      }
+    ],
     "keyPoints": [
       "npm run check:assignment lists the core items on step-4.",
       "MSG-07 shows ask, allow and deny.",
       "MSG-08 and MSG-09 show hold and ask."
     ],
-    "cards": [
-      {
-        "title": "Check first",
-        "body": "npm run check:assignment\nOn step-4 it lists the core items to fix."
-      },
-      {
-        "title": "Small and large writes",
-        "body": "npm run hook:demo -- small\nnpm run resolve -- MSG-07: answer y, then N."
-      },
-      {
-        "title": "Hold and ask",
-        "body": "MSG-08: fraud hold → ESCALATE.\nMSG-09: AskUserQuestion."
-      }
-    ],
     "notes": "Run npm run check:assignment on step-4 and read the hints. Switch to the solution. Run npm run hook:demo -- small: the hook allows the update of TX-1002 (49.99) with no question. Run npm run resolve -- MSG-07 and answer y: the working copy changes, audit.jsonl gets one line and drafts/MSG-07.md is saved. Run npm run reset:mcp. Run MSG-07 again and answer N: the agent reports the denied write and stops. Run MSG-08: fraud-check-agent says hold, so no write. Run MSG-09: the customer and the transaction do not match, so the orchestrator asks you with AskUserQuestion."
   },
   {
     "lessonId": "workshop-4",
-    "title": "What good looks like (1/2): offline checks",
+    "title": "Where you change what",
+    "kicker": "Explain · Where and why",
+    "type": "concept",
+    "visual": {
+      "oneCol": true,
+      "stepThrough": true,
+      "bot": "point",
+      "place": "left"
+    },
+    "subtitle": "Four files. Each has one job.",
+    "cards": [
+      {
+        "title": "transaction-mcp/server.js",
+        "body": "Add the write tools."
+      },
+      {
+        "title": ".claude/agents/transaction-agent.md",
+        "body": "Give this agent get, update and add."
+      },
+      {
+        "title": "CLAUDE.md",
+        "body": "Who writes, and when to stop."
+      },
+      {
+        "title": "hooks/transaction-guard.mjs",
+        "body": "Code decides each write."
+      }
+    ],
+    "keyPoints": [
+      "Tools go in the MCP servers.",
+      "Agents go in .claude/agents/.",
+      "Each agent gets only its tools.",
+      "CLAUDE.md gives the rules.",
+      "The hook makes the decision in code.",
+      "The workflow fixes the order."
+    ],
+    "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction; they write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft; it writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists.\n\nCLAUDE.md is advice to the model: the model can make a mistake. The tools list and the hook are code: the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs lookup, fraud check, update, hook and draft in a fixed order."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What good looks like: core",
     "kicker": "Assignment · Expected output",
     "type": "concept",
     "visual": {
@@ -1344,83 +1513,53 @@ window.SLIDES = [
       "imageLink": "Terminal: check:assignment passes the core, the small update is allowed, the large update asks"
     },
     "subtitle": "Compare your terminal with this screen.",
+    "cards": [
+      {
+        "title": "check:assignment",
+        "body": "Core · Parts 1–2: passed."
+      },
+      {
+        "title": "hook:demo small",
+        "body": "Decision allow."
+      },
+      {
+        "title": "hook:demo large",
+        "body": "Decision ask."
+      }
+    ],
     "keyPoints": [
       "check:assignment says: Core · Parts 1–2: passed.",
       "hook:demo small: Decision allow. No question.",
       "hook:demo large: Decision ask. The reason shows amount and limit."
     ],
-    "cards": [
-      {
-        "title": "check:assignment",
-        "body": "Core · Parts 1–2: passed. When the stretch is done too: Assignment check passed."
-      },
-      {
-        "title": "hook:demo small",
-        "body": "TX-1002, 49.99: Decision allow. No question."
-      },
-      {
-        "title": "hook:demo large",
-        "body": "TX-1007, 899: Decision ask. Amount and limit in the reason."
-      }
-    ],
     "notes": "Show this screen after the participants run npm run check:assignment and npm run hook:demo -- small and -- large. These checks run offline and need no key. If check:assignment fails, read the hints: each hint names a file. The fixtures do not call the tool and do not change data."
   },
   {
     "lessonId": "workshop-4",
-    "title": "What good looks like (2/2): live runs",
-    "kicker": "Assignment · Expected output",
-    "type": "concept",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/11-good-live.png",
-      "imageLink": "Terminal: MSG-07 denied write, MSG-08 fraud hold, MSG-09 AskUserQuestion"
-    },
-    "subtitle": "Stretch: three tickets, three safe stops.",
-    "keyPoints": [
-      "Stretch: three tickets, three safe stops."
-    ],
-    "cards": [
-      {
-        "title": "MSG-07 · answer N",
-        "body": "The hook denies. The agent reports it and stops. No retry."
-      },
-      {
-        "title": "MSG-08 · fraud flag",
-        "body": "fraud-check-agent holds. ESCALATE. No write."
-      },
-      {
-        "title": "MSG-09 · mismatch",
-        "body": "AskUserQuestion. Choose 1: ESCALATE. No write."
-      }
-    ],
-    "notes": "These are real runs on the solution branch. The model words can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Extend the MCP: tools, agent, hooks.",
-    "kicker": "SOLO 6 · Your turn",
+    "title": "Assignment core: write tools and a hook.",
+    "kicker": "SOLO 6 · Core · Your turn",
     "type": "practice",
     "layout": "exercise",
-    "timer": 45,
+    "timer": 35,
     "visual": {
-      "bot": "point",
+      "bot": "multiarm",
       "place": "beside"
     },
+    "subtitle": "Do the core first.",
     "cards": [
       {
         "title": "Level",
-        "body": "SOLO 6 · Assignment"
+        "body": "SOLO 6 · Core"
       }
     ],
     "steps": [
-      "Core: add the write tools to server.js. Make transaction-agent and give it get, update and add.",
-      "Core: add the write rules to CLAUDE.md. Write the hooks in 03-mcp/hooks/transaction-guard.mjs.",
-      "Core: run npm run check:assignment until it says Core · Parts 1–2: passed.",
-      "Stretch: add save_reply_draft and fraud-check-agent. Give each agent only its tools.",
-      "Stretch: add AskUserQuestion and npm run resolve. Run npm run resolve -- MSG-07."
+      "Add the write tools to server.js.",
+      "Make transaction-agent. Give it get, update and add.",
+      "Add the write rules to CLAUDE.md.",
+      "Write the hook in hooks/transaction-guard.mjs.",
+      "Run npm run check:assignment."
     ],
-    "expected": "Core: check:assignment says Core passed and a large write asks a person. Stretch: Assignment check passed, drafts/ has the draft, a denied write stops the run.",
-    "subtitle": "Do the core first. Then do the stretch if you have time.",
+    "expected": "check:assignment says Core passed. A large write asks a person.",
     "keyPoints": [
       "Core first: Part 1 and Part 2.",
       "Only transaction-agent writes.",
@@ -1430,72 +1569,103 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "What good looks like: stretch",
+    "kicker": "Assignment · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/11-good-live.png",
+      "imageLink": "Terminal: MSG-07 denied write, MSG-08 fraud hold, MSG-09 AskUserQuestion"
+    },
+    "subtitle": "Stretch: three tickets, three safe stops.",
+    "cards": [
+      {
+        "title": "MSG-07 · answer N",
+        "body": "The hook denies. The agent stops."
+      },
+      {
+        "title": "MSG-08 · fraud",
+        "body": "Hold. ESCALATE. No write."
+      },
+      {
+        "title": "MSG-09 · mismatch",
+        "body": "The agent asks a person."
+      }
+    ],
+    "keyPoints": [
+      "Stretch: three tickets, three safe stops."
+    ],
+    "notes": "These are real runs on the solution branch. The model words can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Assignment stretch: drafts, fraud check, a question.",
+    "kicker": "SOLO 6 · Stretch · optional",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 10,
+    "subtitle": "Only when the core passes.",
+    "cards": [
+      {
+        "title": "Level",
+        "body": "SOLO 6 · Stretch"
+      }
+    ],
+    "steps": [
+      "Add save_reply_draft and fraud-check-agent.",
+      "Give each agent only its tools.",
+      "Add AskUserQuestion and npm run resolve.",
+      "Run npm run resolve -- MSG-07."
+    ],
+    "expected": "Assignment check passed. A denied write stops the run.",
+    "keyPoints": [
+      "Stretch only after the core passes.",
+      "Each agent gets only its tools.",
+      "A denied write stops the run."
+    ],
+    "visual": {
+      "bot": "stretchLeft",
+      "place": "pointer",
+      "pointAt": 0
+    },
+    "notes": "Optional stretch, only after check:assignment says Core passed. Parts 3–4: save_reply_draft, fraud-check-agent, AskUserQuestion and npm run resolve. Show MSG-07 with the answer N: the hook denies and the run stops."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Discuss: who can change data, and when?",
     "kicker": "Discuss · Assignment",
     "type": "review",
     "visual": {
-      "bot": "peek",
-      "place": "slot",
       "reveal": "click",
-      "noReact": true
+      "bot": "head",
+      "place": "slot",
+      "faces": [
+        "verward",
+        "eigenwijs",
+        "blij"
+      ]
     },
-    "subtitle": "Compare the n8n Wait node with the hook and the person.",
+    "subtitle": "Who may change data, and when?",
+    "cards": [
+      {
+        "title": "Tools",
+        "body": "Which agent needs write tools?"
+      },
+      {
+        "title": "Limit",
+        "body": "Which amount needs a person?"
+      },
+      {
+        "title": "Place",
+        "body": "CLAUDE.md, tools list or hook?"
+      }
+    ],
     "keyPoints": [
       "Which agent needs write tools?",
       "Which writes need a person?",
       "Where do you put the rule?"
     ],
-    "cards": [
-      {
-        "title": "Least privilege",
-        "body": "Which agent needs write tools? Which agent needs none?"
-      },
-      {
-        "title": "Threshold",
-        "body": "Which amount needs a person? Who sets that number?"
-      },
-      {
-        "title": "Rule location",
-        "body": "CLAUDE.md, the tools list or the hook: which rule goes where?"
-      }
-    ],
     "notes": "Ask each squad for one answer per card. A rule in CLAUDE.md is advice to the model. A tools list and a hook are code: the model cannot go around them. In n8n, the Wait node and the IF node do this work."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Skills",
-    "kicker": "Concept · optional",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/07-skills.png",
-      "imageLink": "Skills: n8n left, Claude Agent SDK right"
-    },
-    "subtitle": "Optional. A skill is a recipe that Claude loads when it fits. No step uses it.",
-    "keyPoints": [
-      "Optional. A skill is a recipe that Claude loads when it fits. No step uses it."
-    ],
-    "columns": [
-      {
-        "title": "n8n · Workshop 3",
-        "items": [
-          "Execute Workflow node calls a sub-workflow",
-          "Reusable sub-workflow or template",
-          "You choose when it runs"
-        ]
-      },
-      {
-        "title": "Claude Agent SDK · Workshop 4",
-        "items": [
-          ".claude/skills/<name>/SKILL.md (name + description)",
-          "At start: only the description",
-          "Claude picks the skill → full content loads",
-          "settingSources: ['project'] · option skills"
-        ]
-      }
-    ],
-    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png)."
   },
   {
     "lessonId": "workshop-4",
@@ -1503,27 +1673,28 @@ window.SLIDES = [
     "kicker": "Explain · Step 5 · homework",
     "type": "concept",
     "visual": {
+      "hero": 0,
+      "stepThrough": true,
       "bot": "think",
-      "place": "beside",
-      "stepThrough": true
+      "place": "beside"
     },
-    "subtitle": "Homework, or after 15:50 if you have time. Build a small agent from zero.",
-    "keyPoints": [
-      "Homework, or after 15:50 if you have time. Build a small agent from zero."
-    ],
+    "subtitle": "Homework. Build a small agent from zero.",
     "cards": [
       {
         "title": "What you build",
-        "body": "A small agent that finds and fixes a bug in utils.js."
+        "body": "An agent that finds and fixes a bug in utils.js."
       },
       {
         "title": "Why",
-        "body": "You write the loop yourself: prompt, tools, result. Then you can build your own agent in Workshop 5."
+        "body": "You write the loop yourself: prompt, tools, result."
       },
       {
         "title": "Done when",
-        "body": "You can name the prompt, the allowed tools, the tool call and the result."
+        "body": "You can name the prompt, the tools and the result."
       }
+    ],
+    "keyPoints": [
+      "Homework, or after 15:50 if you have time. Build a small agent from zero."
     ],
     "notes": "Explain the final Step 5 in the step-4 branch. The starter is 05-build-your-own/agent.mjs. Participants identify the prompt, allowed tools, and result handling."
   },
@@ -1533,27 +1704,36 @@ window.SLIDES = [
     "kicker": "Demo · Step 5",
     "type": "concept",
     "visual": {
-      "bot": "point",
-      "place": "beside",
-      "cmdCards": [
-        1
+      "term": [
+        {
+          "c": "cd 05-build-your-own"
+        },
+        {
+          "c": "node agent.mjs --dry-run"
+        },
+        {
+          "o": "dry run — no model call"
+        },
+        {
+          "c": "claude -p \"Find and fix the bug in utils.js.\" --allowedTools Read,Edit,Glob"
+        }
       ]
     },
-    "subtitle": "Show the offline dry run, then the Claude Code equivalent.",
-    "keyPoints": [
-      "The dry run makes no model call.",
-      "The CLI command uses Read, Edit, and Glob.",
-      "The permission mode accepts edits within that scope."
-    ],
+    "subtitle": "Show the dry run. Then the Claude Code command.",
     "cards": [
       {
         "title": "From step-4",
         "body": "cd 05-build-your-own\nnode agent.mjs --dry-run"
       },
       {
-        "title": "Claude Code equivalent",
-        "body": "claude -p \"Find and fix the bug in utils.js. Explain the change.\" --allowedTools Read,Edit,Glob --permission-mode acceptEdits"
+        "title": "Claude Code",
+        "body": "claude -p \"Find and fix the bug in utils.js.\" --allowedTools Read,Edit,Glob"
       }
+    ],
+    "keyPoints": [
+      "The dry run makes no model call.",
+      "The CLI command uses Read, Edit, and Glob.",
+      "The permission mode accepts edits within that scope."
     ],
     "notes": "Run the exact Step 5 demo commands from SOLO.md. Point out that the dry run is not model evidence and then show the Claude Code equivalent command."
   },
@@ -1565,9 +1745,10 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 20,
     "visual": {
-      "bot": "point",
+      "bot": "wave",
       "place": "beside"
     },
+    "subtitle": "Run the starter. Then explain the tool call.",
     "cards": [
       {
         "title": "Level",
@@ -1575,14 +1756,12 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Catch up with git switch step-4; Step 5 is carried by step-4.",
-      "Follow 05-build-your-own/README.md to initialize the folder and install the SDK.",
-      "Run node agent.mjs --dry-run and inspect the Claude Code equivalent.",
-      "If logged into Claude Code, run the command shown in the Step 5 demo.",
-      "Identify the prompt, allowed tools, tool-use message, and final result."
+      "Run git switch step-4.",
+      "Follow 05-build-your-own/README.md.",
+      "Run node agent.mjs --dry-run.",
+      "Find the prompt, the tools and the result."
     ],
-    "expected": "The starter dry run is understood and participants can point to the prompt, tool scope, tool-use event, and result.",
-    "subtitle": "Build or inspect the starter, then explain its tool call and result.",
+    "expected": "You can show the prompt, the tool call and the result.",
     "keyPoints": [
       "Follow the starter README.",
       "Keep model calls optional.",
@@ -1592,31 +1771,54 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Skills",
+    "kicker": "Concept · optional",
+    "type": "concept",
+    "visual": {
+      "tree": 0,
+      "stepThrough": true,
+      "bot": "head",
+      "place": "beside"
+    },
+    "subtitle": "Optional. A skill is a recipe. Claude loads it when it fits.",
+    "cards": [
+      {
+        "title": "Where it lives",
+        "body": ".claude/skills/<name>/SKILL.md"
+      }
+    ],
+    "keyPoints": [
+      "Optional. A skill is a recipe that Claude loads when it fits. No step uses it."
+    ],
+    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png)."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Close: keep a human in the loop.",
     "kicker": "Done when · bridge to Workshop 5",
     "type": "recap",
     "layout": "recap",
     "visual": {
-      "recapKeys": true,
-      "bot": "point",
+      "levelUp": true,
+      "bot": "happy",
       "place": "beside"
     },
     "items": [
       {
         "label": "Structured output",
-        "caption": "Priority Parser → JSON schema → fixed Switch route."
+        "caption": "A JSON schema. Code routes."
       },
       {
         "label": "Least privilege",
-        "caption": "Only transaction-agent writes. Each agent has only its tools."
+        "caption": "Only transaction-agent writes."
       },
       {
         "label": "Hooks + a person",
-        "caption": "Reads run. Large writes ask a person. A denied write is final."
+        "caption": "Large writes ask. A deny is final."
       },
       {
         "label": "Next: Workshop 5",
-        "caption": "Step 5 is homework. Build your own agent with these parts."
+        "caption": "Build your own agent."
       }
     ],
     "notes": "Close with the chat-in/chat-out assignment: npm run chat -- --lesson 3, or claude from the repository. Bridge from this agent loop to Workshop 5."

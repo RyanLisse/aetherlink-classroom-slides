@@ -105,6 +105,45 @@ window.SLIDES = [
     "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (13:52), /verify-this (15:00), /review-and-ship + /visual-pr (15:18), /handoff (15:45).\n5. Say: “At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”"
   },
   {
+    "title": "Last session’s recap · Workshop 4",
+    "kicker": "W5 · OPENING · RECAP",
+    "type": "recap",
+    "layout": "recap",
+    "visual": {
+      "recapKeys": true,
+      "bot": "head",
+      "place": "beside"
+    },
+    "items": [
+      {
+        "label": "n8n → code",
+        "caption": "The same ticket flow runs in the Agent SDK."
+      },
+      {
+        "label": "Structured output",
+        "caption": "A JSON schema. Code routes the priority."
+      },
+      {
+        "label": "Subagents",
+        "caption": "One agent per task. The orchestrator delegates."
+      },
+      {
+        "label": "MCP tools",
+        "caption": "The agent takes facts from a tool."
+      },
+      {
+        "label": "Hooks + a person",
+        "caption": "Large writes ask. A deny is final."
+      }
+    ],
+    "keyPoints": [
+      "Same flow as n8n, now in code.",
+      "Each agent gets only its tools.",
+      "A hook and a person control each write."
+    ],
+    "notes": "Time: 10:03 · 3 min.\n1. Press → to show each item.\n2. Ask: “Which part did you use after Workshop 4?”\n3. Say: “Today we use the same parts. We build an on-call agent, and each stage commits a file.”"
+  },
+  {
     "title": "What was most useful in the last session?",
     "kicker": "W5 · RECAP",
     "subtitle": "Share one thing you learned or used.",
