@@ -21,8 +21,8 @@ test('Workshop keeps 60 slides and seven usable Anatomy figures',()=>{
 });
 test('Workshop 4 wires its two Anatomy figures',()=>{
  const ctx={window:{}};vm.runInNewContext(read('workshop4-slides.js'),ctx);
- assert.equal(ctx.window.SLIDES.length,58);
- for(const[number,id]of[[14,'agent-loop'],[43,'permissions']]){
+ assert.equal(ctx.window.SLIDES.length,56);
+ for(const[number,id]of[[13,'agent-loop'],[42,'permissions']]){
   const slide=ctx.window.SLIDES[number-1],a=slide.visual.anatomy;
   assert.equal(a.src,`assets/anatomy/${id}.html`);assert.equal(a.poster,`assets/anatomy/${id}.svg`);
   for(const target of[a.src,a.poster,`assets/anatomy/${id}-light.html`])assert.ok(existsSync(path.join(root,target)),target);

@@ -276,42 +276,6 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday's n8n. Today's Agent SDK.",
-    "kicker": "Workshop 4 · Day 4 · five steps",
-    "type": "concept",
-    "visual": {
-      "stagger": "pop",
-      "stepThrough": true,
-      "bot": "multiarm",
-      "place": "beside",
-      "highlight": [
-        {
-          "in": "subtitle",
-          "text": "small agent of your own",
-          "tone": "orange"
-        }
-      ]
-    },
-    "subtitle": "Same flow, new tools. Then you make a small agent of your own.",
-    "cards": [
-      {
-        "title": "Workshop 3 · n8n",
-        "body": "n8n routes a support message."
-      },
-      {
-        "title": "Workshop 4 · code",
-        "body": "The same flow runs in Claude Code and the Agent SDK."
-      }
-    ],
-    "keyPoints": [
-      "Keep LOW, MEDIUM, and HIGH.",
-      "Separate analysis from reply writing.",
-      "Review drafts before they reach a customer."
-    ],
-    "notes": "Open with Maarten’s Workshop 3 build, then explain, demo, let participants try, and discuss. Keep the labels, specialist split, and human review gate."
-  },
-  {
-    "lessonId": "workshop-4",
     "title": "Why move the flow to code?",
     "kicker": "Context · why code",
     "type": "context",
@@ -413,39 +377,6 @@ window.SLIDES = [
       "maxTurns stops the loop, like Max Iterations."
     ],
     "notes": "The loop is prompt → model turn → tool calls → tool results → next turn → result message. The runner prints [system:init], [assistant], [tool_use], [tool_result], and [result]. The result subtype is printed with turn count, duration, and cost; structured_output is printed before the deterministic Switch route. maxTurns limits the model turns; it maps to n8n Max Iterations. docs/sample-trace.md is illustrative, not model evidence. Detail: for await (… of query({ prompt, options })) · prompt → model turn → tool_use → tool_result → next turn → result message · Events: [system:init] · [assistant] · [tool_use] · [tool_result] · [result] · result prints its subtype, turns, time, and cost; structured output shows parsed JSON · maxTurns limits model turns; n8n Options → Max Iterations"
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "System prompt",
-    "kicker": "Concept · System prompt",
-    "type": "concept",
-    "visual": {
-      "mdfile": 0,
-      "mdName": "CLAUDE.md",
-      "guides": [
-        [
-          "🧩",
-          "System Message",
-          "lives in the node"
-        ],
-        [
-          "📄",
-          "CLAUDE.md",
-          "lives next to the code"
-        ]
-      ]
-    },
-    "subtitle": "The System Message is now a file next to the code.",
-    "cards": [
-      {
-        "title": "CLAUDE.md",
-        "body": "Purpose\nRules\nPriority definitions"
-      }
-    ],
-    "keyPoints": [
-      "The system message now lives in a file next to the code."
-    ],
-    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['project'] loads CLAUDE.md · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)"
   },
   {
     "lessonId": "workshop-4",
@@ -582,6 +513,39 @@ window.SLIDES = [
       "Check that everyone passed Step 0."
     ],
     "notes": "Say the return time out loud: 11:15. Use the break to help people who did not pass npm run verify in Step 0."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "System prompt",
+    "kicker": "Concept · System prompt",
+    "type": "concept",
+    "visual": {
+      "mdfile": 0,
+      "mdName": "CLAUDE.md",
+      "guides": [
+        [
+          "🧩",
+          "System Message",
+          "lives in the node"
+        ],
+        [
+          "📄",
+          "CLAUDE.md",
+          "lives next to the code"
+        ]
+      ]
+    },
+    "subtitle": "The System Message is now a file next to the code.",
+    "cards": [
+      {
+        "title": "CLAUDE.md",
+        "body": "Purpose\nRules\nPriority definitions"
+      }
+    ],
+    "keyPoints": [
+      "The system message now lives in a file next to the code."
+    ],
+    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['project'] loads CLAUDE.md · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)"
   },
   {
     "lessonId": "workshop-4",
@@ -1196,6 +1160,44 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Fixed workflow vs. dynamic agent",
+    "kicker": "Concept · Workflows",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "pairs": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "A person at the end",
+          "tone": "orange"
+        }
+      ]
+    },
+    "subtitle": "Code where it must. The agent where it may. A person at the end.",
+    "columns": [
+      {
+        "title": "Fixed workflow",
+        "items": [
+          "You draw each path",
+          "Rules, money, compliance"
+        ]
+      },
+      {
+        "title": "Dynamic agent",
+        "items": [
+          "The agent picks the tool",
+          "Open questions"
+        ]
+      }
+    ],
+    "keyPoints": [
+      "Code where it must. The agent chooses where it may. Always a human at the end."
+    ],
+    "notes": "The n8n Switch rules are fixed: priority equals low, medium, or high. In the final participant chain, lib/switch.mjs maps structured priority to a fixed action and check.mjs validates labels. The Step 2 orchestrator dynamically delegates to specialist agents. Discuss: when do you choose a fixed route or agent delegation?"
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Step 4 · Acceptance table and npm run check",
     "kicker": "SOLO 4 · Your turn",
     "type": "practice",
@@ -1250,6 +1252,35 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Assignment · Extend the MCP",
+    "kicker": "Explain · Assignment",
+    "type": "concept",
+    "visual": {
+      "stagger": "pop",
+      "stepThrough": true,
+      "bot": "multiarm",
+      "place": "beside"
+    },
+    "subtitle": "A real agent changes data. Do the core first.",
+    "cards": [
+      {
+        "title": "Core · 35 min",
+        "body": "Write tools on a working copy. A hook for each write."
+      },
+      {
+        "title": "Stretch · optional",
+        "body": "A drafts tool, a fraud check and a question to a person."
+      }
+    ],
+    "keyPoints": [
+      "Core: Part 1 and Part 2.",
+      "Stretch: Part 3 and Part 4.",
+      "Step 3 stays read-only. Writes go to a working copy."
+    ],
+    "notes": "The room target is the core: Part 1 and Part 2. Fast squads do the stretch, the rest can do it at home. npm run check:assignment reports core and stretch apart; it exits 0 when the core passes. Explain the final assignment. Step 3 stays read-only. The assignment adds add_transaction, update_transaction and delete_transaction to the transactions MCP server. These tools write only to participant-output/transactions.working.json; docs/transactions.xlsx does not change. A new drafts MCP server adds save_reply_draft: it writes the reply draft to participant-output/drafts/. Participants make transaction-agent and fraud-check-agent, add rules to CLAUDE.md, write the PreToolUse and PostToolUse hooks, and run the npm run resolve workflow. npm run reset:mcp removes the working copy and the drafts."
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Control: hooks and approval",
     "kicker": "Concept · Control",
     "type": "concept",
@@ -1285,73 +1316,6 @@ window.SLIDES = [
       "A human or a rule decides before a tool changes anything."
     ],
     "notes": "Hooks run in both backends: the SDK hooks option and .claude/settings.json for Claude Code. In the assignment a PreToolUse hook allows reads, auto-allows small updates and asks a person before large updates, adds and deletes; a PostToolUse hook writes the audit log. Human review still applies to every reply draft. permissionMode maps to --permission-mode."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Fixed workflow vs. dynamic agent",
-    "kicker": "Concept · Workflows",
-    "type": "concept",
-    "layout": "compare",
-    "visual": {
-      "pairs": true,
-      "highlight": [
-        {
-          "in": "subtitle",
-          "text": "A person at the end",
-          "tone": "orange"
-        }
-      ]
-    },
-    "subtitle": "Code where it must. The agent where it may. A person at the end.",
-    "columns": [
-      {
-        "title": "Fixed workflow",
-        "items": [
-          "You draw each path",
-          "Rules, money, compliance"
-        ]
-      },
-      {
-        "title": "Dynamic agent",
-        "items": [
-          "The agent picks the tool",
-          "Open questions"
-        ]
-      }
-    ],
-    "keyPoints": [
-      "Code where it must. The agent chooses where it may. Always a human at the end."
-    ],
-    "notes": "The n8n Switch rules are fixed: priority equals low, medium, or high. In the final participant chain, lib/switch.mjs maps structured priority to a fixed action and check.mjs validates labels. The Step 2 orchestrator dynamically delegates to specialist agents. Discuss: when do you choose a fixed route or agent delegation?"
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Assignment · Extend the MCP",
-    "kicker": "Explain · Assignment",
-    "type": "concept",
-    "visual": {
-      "stagger": "pop",
-      "stepThrough": true,
-      "bot": "multiarm",
-      "place": "beside"
-    },
-    "subtitle": "A real agent changes data. Do the core first.",
-    "cards": [
-      {
-        "title": "Core · 35 min",
-        "body": "Write tools on a working copy. A hook for each write."
-      },
-      {
-        "title": "Stretch · optional",
-        "body": "A drafts tool, a fraud check and a question to a person."
-      }
-    ],
-    "keyPoints": [
-      "Core: Part 1 and Part 2.",
-      "Stretch: Part 3 and Part 4.",
-      "Step 3 stays read-only. Writes go to a working copy."
-    ],
-    "notes": "The room target is the core: Part 1 and Part 2. Fast squads do the stretch, the rest can do it at home. npm run check:assignment reports core and stretch apart; it exits 0 when the core passes. Explain the final assignment. Step 3 stays read-only. The assignment adds add_transaction, update_transaction and delete_transaction to the transactions MCP server. These tools write only to participant-output/transactions.working.json; docs/transactions.xlsx does not change. A new drafts MCP server adds save_reply_draft: it writes the reply draft to participant-output/drafts/. Participants make transaction-agent and fraud-check-agent, add rules to CLAUDE.md, write the PreToolUse and PostToolUse hooks, and run the npm run resolve workflow. npm run reset:mcp removes the working copy and the drafts."
   },
   {
     "lessonId": "workshop-4",
@@ -1458,75 +1422,6 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Where you change what, and why (1/2)",
-    "kicker": "Explain · Where and why",
-    "type": "concept",
-    "visual": {
-      "oneCol": true,
-      "stepThrough": true,
-      "bot": "point",
-      "place": "left"
-    },
-    "subtitle": "Tools and agents: one file each.",
-    "cards": [
-      {
-        "title": "transaction-mcp/server.js",
-        "body": "Add the write tools."
-      },
-      {
-        "title": ".claude/agents/transaction-agent.md",
-        "body": "Give this agent get, update and add."
-      }
-    ],
-    "keyPoints": [
-      "Tools go in the MCP servers.",
-      "Agents go in .claude/agents/.",
-      "Each agent gets only its tools."
-    ],
-    "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction; they write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft; it writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Where you change what, and why (2/2)",
-    "kicker": "Explain · Where and why",
-    "type": "concept",
-    "visual": {
-      "guides": [
-        [
-          "🧭",
-          "CLAUDE.md",
-          "tells the model"
-        ],
-        [
-          "🔒",
-          "tools list + hook",
-          "make sure"
-        ]
-      ],
-      "stepThrough": true,
-      "bot": "think",
-      "place": "beside"
-    },
-    "subtitle": "The rules tell the model. The hook makes sure.",
-    "cards": [
-      {
-        "title": "CLAUDE.md",
-        "body": "Who writes, and when to stop."
-      },
-      {
-        "title": "hooks/transaction-guard.mjs",
-        "body": "Code decides each write."
-      }
-    ],
-    "keyPoints": [
-      "CLAUDE.md gives the rules.",
-      "The hook makes the decision in code.",
-      "The workflow fixes the order."
-    ],
-    "notes": "CLAUDE.md is advice to the model: the model can make a mistake. The tools list and the hook are code: the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs lookup, fraud check, update, hook and draft in a fixed order."
-  },
-  {
-    "lessonId": "workshop-4",
     "title": "Demo · Assignment: one write, three outcomes",
     "kicker": "Demo · Assignment",
     "type": "concept",
@@ -1569,7 +1464,47 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "What good looks like (1/2): offline checks",
+    "title": "Where you change what",
+    "kicker": "Explain · Where and why",
+    "type": "concept",
+    "visual": {
+      "oneCol": true,
+      "stepThrough": true,
+      "bot": "point",
+      "place": "left"
+    },
+    "subtitle": "Four files. Each has one job.",
+    "cards": [
+      {
+        "title": "transaction-mcp/server.js",
+        "body": "Add the write tools."
+      },
+      {
+        "title": ".claude/agents/transaction-agent.md",
+        "body": "Give this agent get, update and add."
+      },
+      {
+        "title": "CLAUDE.md",
+        "body": "Who writes, and when to stop."
+      },
+      {
+        "title": "hooks/transaction-guard.mjs",
+        "body": "Code decides each write."
+      }
+    ],
+    "keyPoints": [
+      "Tools go in the MCP servers.",
+      "Agents go in .claude/agents/.",
+      "Each agent gets only its tools.",
+      "CLAUDE.md gives the rules.",
+      "The hook makes the decision in code.",
+      "The workflow fixes the order."
+    ],
+    "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction; they write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft; it writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists.\n\nCLAUDE.md is advice to the model: the model can make a mistake. The tools list and the hook are code: the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs lookup, fraud check, update, hook and draft in a fixed order."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What good looks like: core",
     "kicker": "Assignment · Expected output",
     "type": "concept",
     "visual": {
@@ -1598,36 +1533,6 @@ window.SLIDES = [
       "hook:demo large: Decision ask. The reason shows amount and limit."
     ],
     "notes": "Show this screen after the participants run npm run check:assignment and npm run hook:demo -- small and -- large. These checks run offline and need no key. If check:assignment fails, read the hints: each hint names a file. The fixtures do not call the tool and do not change data."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "What good looks like (2/2): live runs",
-    "kicker": "Assignment · Expected output",
-    "type": "concept",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/11-good-live.png",
-      "imageLink": "Terminal: MSG-07 denied write, MSG-08 fraud hold, MSG-09 AskUserQuestion"
-    },
-    "subtitle": "Stretch: three tickets, three safe stops.",
-    "cards": [
-      {
-        "title": "MSG-07 · answer N",
-        "body": "The hook denies. The agent stops."
-      },
-      {
-        "title": "MSG-08 · fraud",
-        "body": "Hold. ESCALATE. No write."
-      },
-      {
-        "title": "MSG-09 · mismatch",
-        "body": "The agent asks a person."
-      }
-    ],
-    "keyPoints": [
-      "Stretch: three tickets, three safe stops."
-    ],
-    "notes": "These are real runs on the solution branch. The model words can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again."
   },
   {
     "lessonId": "workshop-4",
@@ -1661,6 +1566,36 @@ window.SLIDES = [
       "A denied write is final."
     ],
     "notes": "Give participants 45 minutes. They work on step-4. npm run check:assignment runs without a model and shows what is missing. The solution branch has the reference answer. A live run needs a Claude Code login or --backend sdk with a key. Run npm run reset:mcp after each test."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "What good looks like: stretch",
+    "kicker": "Assignment · Expected output",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-4/11-good-live.png",
+      "imageLink": "Terminal: MSG-07 denied write, MSG-08 fraud hold, MSG-09 AskUserQuestion"
+    },
+    "subtitle": "Stretch: three tickets, three safe stops.",
+    "cards": [
+      {
+        "title": "MSG-07 · answer N",
+        "body": "The hook denies. The agent stops."
+      },
+      {
+        "title": "MSG-08 · fraud",
+        "body": "Hold. ESCALATE. No write."
+      },
+      {
+        "title": "MSG-09 · mismatch",
+        "body": "The agent asks a person."
+      }
+    ],
+    "keyPoints": [
+      "Stretch: three tickets, three safe stops."
+    ],
+    "notes": "These are real runs on the solution branch. The model words can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again."
   },
   {
     "lessonId": "workshop-4",
@@ -1731,29 +1666,6 @@ window.SLIDES = [
       "Where do you put the rule?"
     ],
     "notes": "Ask each squad for one answer per card. A rule in CLAUDE.md is advice to the model. A tools list and a hook are code: the model cannot go around them. In n8n, the Wait node and the IF node do this work."
-  },
-  {
-    "lessonId": "workshop-4",
-    "title": "Skills",
-    "kicker": "Concept · optional",
-    "type": "concept",
-    "visual": {
-      "tree": 0,
-      "stepThrough": true,
-      "bot": "head",
-      "place": "beside"
-    },
-    "subtitle": "Optional. A skill is a recipe. Claude loads it when it fits.",
-    "cards": [
-      {
-        "title": "Where it lives",
-        "body": ".claude/skills/<name>/SKILL.md"
-      }
-    ],
-    "keyPoints": [
-      "Optional. A skill is a recipe that Claude loads when it fits. No step uses it."
-    ],
-    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png)."
   },
   {
     "lessonId": "workshop-4",
@@ -1856,6 +1768,29 @@ window.SLIDES = [
       "Explain the tool-use and result messages."
     ],
     "notes": "Give participants 15–20 minutes. Keep the API key optional: without a model call they can use the dry run; participants with a Claude Code login can use the equivalent CLI command."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Skills",
+    "kicker": "Concept · optional",
+    "type": "concept",
+    "visual": {
+      "tree": 0,
+      "stepThrough": true,
+      "bot": "head",
+      "place": "beside"
+    },
+    "subtitle": "Optional. A skill is a recipe. Claude loads it when it fits.",
+    "cards": [
+      {
+        "title": "Where it lives",
+        "body": ".claude/skills/<name>/SKILL.md"
+      }
+    ],
+    "keyPoints": [
+      "Optional. A skill is a recipe that Claude loads when it fits. No step uses it."
+    ],
+    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png)."
   },
   {
     "lessonId": "workshop-4",
