@@ -1,224 +1,233 @@
 'use strict';
 /* Workshop 5 diagrams: flat, inline SVG figures for `visual.diagram` (see app.js renderDiagram).
-   Each entry gets the slide object and returns { viewBox, svg }. Labels come from the slide data
-   where the slide has them (items, columns, cards), so the slide text stays the single source.
+   Each entry gets the slide object and returns { viewBox, svg, steps }. Labels come from the slide data
+   where the slide has them (items, columns, cards, tagline), so the slide text stays the single source.
    Groups with class "dg-step" and data-step="n" take part in the → step-through (app.js).
+   Design rules (after the MIT "Diagram Design" skill, applied by hand to the AetherLink skin):
+   - one accent: orange marks the human / decide step only; cyan is the main flow
+   - solid line = flow, dashed line = return, async or not allowed (red)
+   - right-angle connectors (loop rings excepted), 8px corners, no shadows or glow
+   - arrow labels in caps on an opaque mask, legend as a bottom strip
    No external assets except local deck images. Offline-capable. */
 (function () {
   const esc = t => String(t ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  // greedy wrap by an approximate character budget (Nunito ≈ 0.52em per char)
   function wrap(text, max) {
     const words = String(text).split(/\s+/); const lines = []; let cur = '';
     words.forEach(w => { if ((cur + ' ' + w).trim().length > max && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); });
     if (cur) lines.push(cur); return lines;
   }
-  // text block: lines centred (or start-anchored) on x, first baseline at y
   function T(x, y, text, cls, opt = {}) {
-    const lh = opt.lh || 1.25, size = opt.size || 22, anchor = opt.anchor || 'middle';
+    const lh = opt.lh || 1.22, size = opt.size || 22, anchor = opt.anchor || 'middle';
     const lines = Array.isArray(text) ? text : (opt.wrap ? wrap(text, opt.wrap) : [text]);
     return '<text class="' + cls + '" x="' + x + '" y="' + y + '" text-anchor="' + anchor + '" style="font-size:' + size + 'px">' +
       lines.map((l, i) => '<tspan x="' + x + '" dy="' + (i ? size * lh : 0) + '">' + esc(l) + '</tspan>').join('') + '</text>';
   }
-  const box = (x, y, w, h, cls, r = 18) => '<rect class="' + cls + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + r + '"/>';
+  const rect = (x, y, w, h, cls, r = 8) => '<rect class="' + cls + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + r + '"/>';
+  // node: opaque mask, styled box, optional eyebrow / name / sublabel (left-aligned unless center)
+  function node(o) {
+    const { x, y, w, h, kind = '', eyebrow, name, sub, center } = o; const ns = o.nameSize || 28, ss = o.subSize || 19;
+    const tx = center ? x + w / 2 : x + 22, an = center ? 'middle' : 'start'; let ty = y + (o.top || 34); let s = rect(x, y, w, h, 'dg-mask') + rect(x, y, w, h, 'dg-n ' + kind);
+    if (eyebrow) { s += T(tx, ty, eyebrow, 'dg-eye' + (kind.includes('focal') ? ' dg-eye-o' : ''), { anchor: an, size: 16 }); ty += ns + 8; } else ty += ns / 2;
+    if (name) { s += T(tx, ty, name, 'dg-name' + (o.mono ? ' dg-mono' : '') + (kind.includes('focal') ? ' dg-o' : ''), { anchor: an, size: ns }); ty += ss + 12; }
+    if (sub) s += T(tx, ty, Array.isArray(sub) ? sub : wrap(sub, o.subWrap || 30), 'dg-sub', { anchor: an, size: ss });
+    return s;
+  }
+  // arrow label: caps, opaque mask with a gap to its line
+  function lab(x, y, text, cls = '', size = 15) { const t = String(text).toUpperCase(), w = Math.ceil(t.length * 0.66 * size + 18);
+    return '<rect class="dg-mask" x="' + (x - w / 2) + '" y="' + (y - 17) + '" width="' + w + '" height="24" rx="2"/>' + T(x, y, t, 'dg-lab ' + cls, { size }); }
+  const KIND = { flow: 'f', plain: 'p', human: 'o', ret: 'p', deny: 'r' };
+  const line = (d, kind = 'plain') => '<path class="dg-l dg-l-' + kind + '" d="' + d + '" marker-end="url(#dg-m-' + KIND[kind] + ')"/>';
   const step = (n, inner, extra = '') => '<g class="dg-step' + (extra ? ' ' + extra : '') + '" data-step="' + n + '">' + inner + '</g>';
-  const arrow = (d, cls = 'dg-arrow') => '<path class="' + cls + '" d="' + d + '" marker-end="url(#dg-head)"/>';
-  const defs = '<defs>' +
-    '<marker id="dg-head" viewBox="0 0 12 12" refX="9" refY="6" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" orient="auto-start-reverse"><path d="M1 1 11 6 1 11z" class="dg-head"/></marker>' +
-    '<marker id="dg-head-o" viewBox="0 0 12 12" refX="9" refY="6" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" orient="auto-start-reverse"><path d="M1 1 11 6 1 11z" class="dg-head-o"/></marker>' +
-    '<marker id="dg-head-r" viewBox="0 0 12 12" refX="9" refY="6" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="20" orient="auto-start-reverse"><path d="M1 1 11 6 1 11z" class="dg-head-r"/></marker>' +
-    '<pattern id="dg-hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" class="dg-hatch-bg"/><path d="M0 0V12" class="dg-hatch-line"/></pattern>' +
-    '</defs>';
+  const defs = '<defs>' + ['f', 'p', 'o', 'r'].map(k => '<marker id="dg-m-' + k + '" viewBox="0 0 12 12" refX="10" refY="6" markerUnits="userSpaceOnUse" markerWidth="16" markerHeight="16" orient="auto-start-reverse"><path d="M1 1 11 6 1 11z" class="dg-mk-' + k + '"/></marker>').join('') +
+    '<pattern id="dg-hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" class="dg-hatch-bg"/><path d="M0 0V12" class="dg-hatch-line"/></pattern></defs>';
   const person = (x, y, s = 1, cls = 'dg-person') => '<g class="' + cls + '" transform="translate(' + x + ' ' + y + ') scale(' + s + ')"><circle cx="0" cy="-9" r="7"/><path d="M-12 14a12 12 0 0 1 24 0z"/></g>';
-  const cross = (x, y, cls = 'dg-x') => '<g class="' + cls + '" transform="translate(' + x + ' ' + y + ')"><circle r="15"/><path d="M-6-6 6 6M6-6-6 6"/></g>';
-  const tick = (x, y, cls = 'dg-tick') => '<g class="' + cls + '" transform="translate(' + x + ' ' + y + ')"><circle r="15"/><path d="M-7 0-2 5 7-5"/></g>';
+  const cross = (x, y) => '<g class="dg-x" transform="translate(' + x + ' ' + y + ')"><rect class="dg-mask" x="-16" y="-16" width="32" height="32" rx="16"/><circle r="14"/><path d="M-5-5 5 5M5-5-5 5"/></g>';
+  const tick = (x, y) => '<g class="dg-tick" transform="translate(' + x + ' ' + y + ')"><circle r="14"/><path d="M-6 0-2 4 6-4"/></g>';
   const bot = (x, y, w) => '<image class="dg-bot" href="assets/aetherbot/aetherbot-head.webp" x="' + (x - w / 2) + '" y="' + (y - w / 2) + '" width="' + w + '" height="' + w + '"/>';
-  // sample an ellipse from angle a0 to a1 (degrees, screen space, clockwise) and cut out the parts inside boxes
-  function arc(cx, cy, rx, ry, a0, a1, boxes, pad = 12) {
+  // legend strip at the bottom: [kind, label] pairs; kind = line kind or 'focal'
+  function legend(y, items, x0 = 20) { let x = x0, s = '<path class="dg-rule" d="M20 ' + (y - 22) + ' H1260"/>';
+    items.forEach(([k, t]) => { s += k === 'focal' ? rect(x, y - 13, 26, 18, 'dg-n focal', 4) : '<path class="dg-l dg-l-' + k + '" d="M' + x + ' ' + (y - 4) + ' h 40"/>';
+      const w = (k === 'focal' ? 26 : 40) + 12; s += T(x + w, y + 2, t, 'dg-legend', { anchor: 'start', size: 17 }); x += w + t.length * 9.4 + 40; }); return s; }
+  // ellipse ring cut out of the boxes it passes behind (Loop type: one continuous ring, clockwise)
+  function ring(cx, cy, rx, ry, a0, a1, boxes, pad = 10) {
     const inside = (p, b) => p[0] > b[0] - pad && p[0] < b[0] + b[2] + pad && p[1] > b[1] - pad && p[1] < b[1] + b[3] + pad;
     const pts = []; for (let a = a0; a <= a1; a += 0.5) { const r = a * Math.PI / 180; pts.push([cx + rx * Math.cos(r), cy + ry * Math.sin(r)]); }
     const free = pts.filter(p => !boxes.some(b => inside(p, b)));
-    return free.length > 1 ? 'M' + free.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L') : '';
+    if (free.length < 2) return ''; const [p0, p1] = [free[0], free[free.length - 1]];
+    return 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A ' + rx + ' ' + ry + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1);  // one true elliptical arc per gap
+  }
+  function loopRing(cx, cy, rx, ry, angles, boxes, kinds) {
+    return angles.map((a, i) => { const b = angles[(i + 1) % angles.length] + (i === angles.length - 1 ? 360 : 0);
+      const d = ring(cx, cy, rx, ry, a, b, boxes); return d ? line(d, kinds?.[i] || 'flow') : ''; }).join('');
   }
 
   const D = {};
 
-  /* ---- slide 9: code is not the bottleneck ---- */
+  /* ---- slide 9: code is not the bottleneck (Gantt rows; the wait blocks are the focus) ---- */
   D.bottleneck = () => {
-    const X = 230, rowY = [70, 250], H = 84;
-    const before = [['Plan', 130], ['Design', 130], ['Build', 420], ['Test', 140], ['Deploy', 120], ['Maintain', 110]];
-    const after = [['Plan', 130, 'dec'], ['Design', 130], ['Build', 120, 'fast'], ['wait', 105, 'wait', 'review'], ['Test', 140, 'dec'], ['wait', 105, 'wait', 'approval'], ['Deploy', 120, 'dec'], ['Maintain', 110]];
-    const row = (segs, y) => { let x = X; return segs.map(([label, w, kind, sub]) => { const g = '<g class="dg-seg ' + (kind ? 'dg-seg-' + kind : '') + '">' +
-      box(x + 3, y, w - 6, H, kind === 'wait' ? 'dg-wait' : 'dg-segbox', 12) +
-      (kind === 'wait' ? T(x + w / 2, y + 38, 'WAIT', 'dg-wait-t', { size: 18 }) + T(x + w / 2, y + 64, sub, 'dg-wait-s', { size: 17 }) : T(x + w / 2, y + 52, label, 'dg-seg-t', { size: label === 'Maintain' ? 20 : 22 })) + '</g>'; x += w; return g; }).join(''); };
+    const X = 236, rowY = [40, 196], H = 84;
+    const before = [['Plan', 132], ['Design', 132], ['Build', 420], ['Test', 140], ['Deploy', 124], ['Maintain', 116]];
+    const after = [['Plan', 132], ['Design', 132], ['Build', 120, 'fast'], ['review', 108, 'wait'], ['Test', 140], ['approval', 108, 'wait'], ['Deploy', 124], ['Maintain', 116]];
+    const row = (segs, y) => { let x = X; return segs.map(([label, w, kind]) => { const g = kind === 'wait'
+      ? rect(x + 4, y, w - 8, H, 'dg-wait') + T(x + w / 2, y + 36, 'WAIT', 'dg-wait-t', { size: 17 }) + T(x + w / 2, y + 62, label, 'dg-wait-s', { size: 17 })
+      : rect(x + 4, y, w - 8, H, 'dg-n' + (kind === 'fast' ? ' key' : '')) + T(x + w / 2, y + 52, label, 'dg-name', { size: label === 'Maintain' ? 20 : 22 }); x += w; return g; }).join(''); };
     const svg = defs +
-      step(1, T(X - 24, rowY[0] + 40, 'BEFORE', 'dg-rowlabel', { anchor: 'end', size: 24 }) + T(X - 24, rowY[0] + 68, 'AGENTS', 'dg-rowlabel', { anchor: 'end', size: 24 }) + row(before, rowY[0]) +
-        T(X + 260 + 210, rowY[0] - 16, 'Build takes a large part of the cycle', 'dg-note', { size: 19 })) +
-      step(2, T(X - 24, rowY[1] + 40, 'WITH', 'dg-rowlabel dg-cyan', { anchor: 'end', size: 24 }) + T(X - 24, rowY[1] + 68, 'AGENTS', 'dg-rowlabel dg-cyan', { anchor: 'end', size: 24 }) + row(after, rowY[1]) +
-        arrow('M' + (X + 260 + 210) + ' ' + (rowY[0] + H + 14) + ' C ' + (X + 470) + ' ' + (rowY[0] + H + 60) + ', ' + (X + 320) + ' ' + (rowY[1] - 60) + ', ' + (X + 320) + ' ' + (rowY[1] - 14), 'dg-arrow dg-arrow-cyan') +
-        T(X + 520, rowY[0] + H + 66, 'Build gets faster', 'dg-note dg-cyan', { size: 21, anchor: 'start' }) +
-        T(X + 130 + 65 + 280, rowY[1] + H + 36, 'Decisions and checks still take time', 'dg-note dg-orange', { size: 21 })) +
-      step(3, [['Waiting time shifts to Plan, Test, and Deploy.', 0], ['Manual line-by-line review does not scale with more code.', 1], ['Review and approval must keep pace.', 2]].map(([t, i]) => {
-        const x = 20 + i * 420; return box(x, 432, 400, 104, 'dg-callout', 16) + T(x + 200, 474, t, 'dg-callout-t', { wrap: 30, size: 22 }); }).join('') +
-        T(1260, 572, 'Illustrative, not a time guarantee.', 'dg-foot', { anchor: 'end', size: 17 }));
-    return { viewBox: '0 0 1280 580', svg, steps: 'reveal' };
+      step(1, T(X - 24, rowY[0] + 38, 'BEFORE', 'dg-eye', { anchor: 'end', size: 20 }) + T(X - 24, rowY[0] + 64, 'AGENTS', 'dg-eye', { anchor: 'end', size: 20 }) + row(before, rowY[0])) +
+      step(2, T(X - 24, rowY[1] + 38, 'WITH', 'dg-eye dg-c', { anchor: 'end', size: 20 }) + T(X - 24, rowY[1] + 64, 'AGENTS', 'dg-eye dg-c', { anchor: 'end', size: 20 }) + row(after, rowY[1]) +
+        T(X + 300, rowY[1] + H + 30, 'Build gets faster', 'dg-name dg-c', { size: 20 }) +
+        '<path class="dg-bracket" d="M' + (X + 4) + ' ' + (rowY[1] + H + 50) + ' v 10 H ' + (X + 1092) + ' v -10"/>' +
+        T(X + 548, rowY[1] + H + 92, 'Decisions and checks still take time', 'dg-name', { size: 24 })) +
+      step(3, [['Waiting time shifts to Plan, Test, and Deploy.', 20, 440], ['Manual line-by-line review does not scale with more code.', 480, 420], ['Review and approval must keep pace.', 920, 340]].map(([t, x, w]) =>
+        rect(x, 412, w, 100, 'dg-n') + T(x + 24, 452, wrap(t, Math.floor(w / 13)), 'dg-sub dg-ink', { anchor: 'start', size: 22 })).join('') +
+        T(1260, 548, 'Illustrative, not a time guarantee.', 'dg-foot', { anchor: 'end', size: 17 }));
+    return { viewBox: '0 0 1280 556', svg, steps: 'reveal' };
   };
 
-  /* ---- slide 11: the AI-native loop ---- */
+  /* ---- slide 11: the AI-native loop (Loop type: six stations clockwise, the agent as the hub) ---- */
   D.loop = () => {
-    const cx = 640, cy = 360, R = 200, r = 64; const names = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
-    const pos = names.map((_, i) => { const a = (-90 + i * 60) * Math.PI / 180; return [cx + R * Math.cos(a), cy + R * Math.sin(a)]; });
-    const arcs = names.map((_, i) => { const a0 = -90 + i * 60 + 21, a1 = -90 + (i + 1) * 60 - 21; const p = a => [cx + R * Math.cos(a * Math.PI / 180), cy + R * Math.sin(a * Math.PI / 180)];
-      const [x0, y0] = p(a0), [x1, y1] = p(a1); return arrow('M' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' A ' + R + ' ' + R + ' 0 0 1 ' + x1.toFixed(1) + ' ' + y1.toFixed(1), i === 5 ? 'dg-arrow dg-arrow-cyan' : 'dg-arrow'); }).join('');
-    const nodes = names.map((n, i) => step(i + 1, '<circle class="dg-node' + (n === 'Deploy' ? ' dg-node-human' : '') + '" cx="' + pos[i][0] + '" cy="' + pos[i][1] + '" r="' + r + '"/>' +
-      T(pos[i][0], pos[i][1] + 8, n, 'dg-node-t', { size: n === 'Maintain' ? 21 : 24 }) +
-      '<g class="dg-ai" transform="translate(' + (pos[i][0] + (i < 3 ? 46 : -46) * (i === 0 ? 0 : 1)) + ' ' + (pos[i][1] - 50) + ')"><circle r="16"/><text y="6" text-anchor="middle">AI</text></g>')).join('');
-    const svg = defs +
-      box(250, 10, 780, 70, 'dg-human-bar', 35) + person(300, 47, 1.15, 'dg-person dg-person-o') +
-      T(670, 55, 'Humans set goals, direct, and approve', 'dg-human-t', { size: 26 }) +
-      '<path class="dg-dash-o" d="M640 80 V 116"/>' +
-      arcs + nodes + bot(cx, cy - 26, 112) + T(cx, cy + 58, 'The agent supports', 'dg-center-t', { size: 22 }) + T(cx, cy + 86, 'every stage', 'dg-center-t', { size: 22 }) +
-      T(372, 200, 'Maintain returns to Plan', 'dg-note dg-cyan', { size: 21, anchor: 'end' }) +
-      T(372, 468, 'Deploy: a named human approves', 'dg-note dg-orange', { size: 21, anchor: 'end' });
-    return { viewBox: '0 0 1280 620', svg, steps: 'highlight' };
+    const cx = 640, cy = 320, rx = 400, ry = 206, W = 220, H = 76; const names = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
+    const ang = names.map((_, i) => -90 + i * 60);
+    const pos = ang.map(a => [cx + rx * Math.cos(a * Math.PI / 180), cy + ry * Math.sin(a * Math.PI / 180)]);
+    const boxes = pos.map(([x, y]) => [x - W / 2, y - H / 2, W, H]); const hub = [500, 256, 280, 128];
+    const nodes = names.map((n, i) => { const [x, y] = boxes[i]; const focal = n === 'Deploy';
+      return step(i + 1, node({ x, y, w: W, h: H, kind: focal ? 'focal' : '', center: true, name: n, nameSize: 26, top: focal ? 26 : 40, eyebrow: focal ? 'A HUMAN APPROVES' : null })); }).join('');
+    const svg = defs + loopRing(cx, cy, rx, ry, ang, [...boxes, hub]) +
+      rect(260, 8, 760, 52, 'dg-n focal-soft', 8) + person(296, 38, 1, 'dg-person dg-person-o') + T(660, 43, 'Humans set goals, direct, and approve', 'dg-name', { size: 24 }) +
+      nodes + rect(hub[0], hub[1], hub[2], hub[3], 'dg-n hub') + bot(cx, 300, 76) + T(cx, 364, 'The agent supports every stage', 'dg-sub dg-ink', { size: 20 });
+    return { viewBox: '0 0 1280 572', svg, steps: 'highlight' };
   };
 
   /* ---- slide 12: the line and the loop (uses the compare columns) ---- */
   D['line-loop'] = s => {
     const [L, Rc] = s.columns || [{}, {}]; const stages = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
-    const left = stages.map((n, i) => { const x = 20 + i * 86, y = 96 + i * 62; return box(x, y, 150, 50, 'dg-chip', 12) + T(x + 75, y + 33, n, 'dg-chip-t', { size: 20 }) +
-      (i < 5 ? '<path class="dg-arrow" d="M' + (x + 150) + ' ' + (y + 25) + ' h 22 v 30" marker-end="url(#dg-head)"/>' + '<circle class="dg-handover" cx="' + (x + 172) + '" cy="' + (y + 26) + '" r="7"/>' : ''); }).join('');
-    const cx = 960, cy = 318, R = 146;
-    const ring = stages.map((n, i) => { const a = (-90 + i * 60) * Math.PI / 180, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
-      return box(x - 66, y - 24, 132, 48, 'dg-chip dg-chip-loop', 24) + T(x, y + 7, n, 'dg-chip-t', { size: 19 }) +
-        '<g class="dg-ai" transform="translate(' + (x + 60) + ' ' + (y - 24) + ')"><circle r="14"/><text y="5" text-anchor="middle">AI</text></g>'; }).join('');
+    const left = stages.map((n, i) => { const x = 20 + i * 84, y = 92 + i * 64;
+      return (i < 5 ? line('M' + (x + 152) + ' ' + (y + 24) + ' H ' + (x + 168) + ' q 8 0 8 8 V ' + (y + 62), 'plain') : '') + node({ x, y, w: 152, h: 48, center: true, name: n, nameSize: 20, top: 18 }); }).join('');
+    const cx = 960, cy = 324, rx = 208, ry = 150, W = 136, H = 48;
+    const ang = stages.map((_, i) => -90 + i * 60);
+    const boxes = ang.map(a => [cx + rx * Math.cos(a * Math.PI / 180) - W / 2, cy + ry * Math.sin(a * Math.PI / 180) - H / 2, W, H]);
+    const ringNodes = stages.map((n, i) => node({ x: boxes[i][0], y: boxes[i][1], w: W, h: H, center: true, name: n, nameSize: 19, top: 17 }) +
+      '<g class="dg-ai" transform="translate(' + (boxes[i][0] + W - 6) + ' ' + (boxes[i][1] + 4) + ')"><circle r="13"/><text y="5" text-anchor="middle">AI</text></g>').join('');
     const svg = defs +
-      step(1, T(20, 40, (L.title || '').toUpperCase(), 'dg-col-h', { anchor: 'start', size: 24 }) + '<path class="dg-col-rule" d="M20 58 H600"/>' + left +
-        T(560, 120, L.items?.[1] || '', 'dg-note', { size: 20, anchor: 'end', wrap: 16 }) + '<circle class="dg-handover" cx="380" cy="104" r="7"/>' +
-        '<g transform="translate(20 520)">' + box(0, 0, 580, 64, 'dg-callout', 16) + T(290, 42, L.items?.[2] || '', 'dg-big', { size: 28 }) + '</g>') +
-      '<path class="dg-divider" d="M640 20 V 600"/>' +
-      step(2, T(680, 40, (Rc.title || '').toUpperCase(), 'dg-col-h dg-orange', { anchor: 'start', size: 24 }) + '<path class="dg-col-rule dg-col-rule-o" d="M680 58 H1260"/>' +
-        box(760, 70, 400, 44, 'dg-human-bar', 22) + person(790, 93, .9, 'dg-person dg-person-o') + T(975, 100, 'Humans above the loop', 'dg-human-t', { size: 21 }) +
-        '<circle class="dg-ring" cx="' + cx + '" cy="' + cy + '" r="' + R + '"/>' + '<path class="dg-arrow" d="M' + (cx + 74) + ' ' + (cy - R + 20) + ' A ' + R + ' ' + R + ' 0 0 1 ' + (cx + R - 22) + ' ' + (cy - 72) + '" marker-end="url(#dg-head)"/>' + ring +
-        T(cx, cy - 6, L.items?.[0] ? (Rc.items?.[0] || '') : '', 'dg-center-t', { size: 19, wrap: 14 }) +
-        '<g transform="translate(680 520)">' + box(0, 0, 580, 64, 'dg-callout dg-callout-o', 16) + T(290, 42, (Rc.items?.[2] || '').split('.')[0], 'dg-big', { size: 28 }) + '</g>' +
-        T(1260, 500, Rc.items?.[1] || '', 'dg-note dg-cyan', { size: 20, anchor: 'end' }));
-    return { viewBox: '0 0 1280 600', svg, steps: 'reveal' };
+      step(1, T(20, 36, (L.title || '').toUpperCase(), 'dg-eye dg-ink', { anchor: 'start', size: 22 }) + '<path class="dg-rule-c" d="M20 54 H600"/>' + left +
+        T(600, 150, L.items?.[1] || '', 'dg-sub', { anchor: 'end', size: 19, wrap: 18 }) +
+        rect(20, 500, 580, 64, 'dg-n') + T(310, 542, L.items?.[2] || '', 'dg-name', { size: 28 })) +
+      '<path class="dg-divider" d="M640 16 V 564"/>' +
+      step(2, T(680, 36, (Rc.title || '').toUpperCase(), 'dg-eye dg-ink', { anchor: 'start', size: 22 }) + '<path class="dg-rule-o" d="M680 54 H1260"/>' +
+        rect(780, 76, 360, 44, 'dg-n focal-soft', 8) + person(808, 99, .85, 'dg-person dg-person-o') + T(974, 106, 'Humans above the loop', 'dg-name', { size: 21 }) +
+        loopRing(cx, cy, rx, ry, ang, boxes) + ringNodes +
+        T(cx, cy - 4, wrap(Rc.items?.[0] || '', 16), 'dg-sub', { size: 19 }) +
+        rect(680, 500, 580, 64, 'dg-n key') + T(970, 542, (Rc.items?.[2] || '').split('.')[0], 'dg-name', { size: 28 }) +
+        T(1260, 476, Rc.items?.[1] || '', 'dg-sub dg-c', { anchor: 'end', size: 19 }));
+    return { viewBox: '0 0 1280 572', svg, steps: 'reveal' };
   };
 
-  /* ---- slide 31: the control loop, with the five steps of /design-control-loop on it ---- */
+  /* ---- slide 31: the control loop (Loop type: five steps clockwise, intent.md as the hub, the human gate on top) ---- */
   D['control-loop'] = s => {
-    const it = s.items || []; const W = 330, H = 150;
-    // a rounded loop, clockwise: 1 sensor (bottom) → 2 compare (left) → 3 human gate (left, up) → 4 set point (top) → 5 actuator (right) → 1
-    const N = [
-      { k: 'sensor', c: [640, 494], step: 0, role: 'SENSOR', map: 'MCP, tests, review' },
-      { k: 'compare', c: [190, 395], step: 1, role: 'COMPARE', map: 'evidence vs intent' },
-      { k: 'setpoint', c: [640, 80], step: 3, role: 'SET POINT', map: 'intent.md' },
-      { k: 'actuator', c: [1090, 287], step: 4, role: 'ACTUATOR', map: 'a human with a PR' }];
-    const node = n => { const x = n.c[0] - W / 2, y = n.c[1] - H / 2, st = it[n.step] || {};
-      return step(n.step + 1, box(x, y, W, H, 'dg-box', 20) +
-        '<text class="dg-role" x="' + (x + 22) + '" y="' + (y + 32) + '" style="font-size:17px">' + n.role + '<tspan class="dg-map" dx="10">' + esc(n.map) + '</tspan></text>' +
-        '<circle class="dg-num" cx="' + (x + 44) + '" cy="' + (y + 72) + '" r="22"/>' + T(x + 44, y + 80, String(n.step + 1), 'dg-num-t', { size: 23 }) +
-        T(x + 80, y + 83, st.label || '', 'dg-step-t', { anchor: 'start', size: 32 }) +
-        T(x + 22, y + 114, wrap(st.caption || '', 30).slice(0, 2), 'dg-cap', { anchor: 'start', size: 19, lh: 1.2 }), 'dg-node-' + n.k); };
-    const g = { x: 40, y: 130, w: 300, h: 116 }, d = it[2] || {};
-    const gate = step(3, box(g.x, g.y, g.w, g.h, 'dg-gate', 20) + T(g.x + 22, g.y + 32, 'HUMAN GATE', 'dg-role dg-orange', { anchor: 'start', size: 17 }) +
-      person(g.x + 44, g.y + 76, 1.35, 'dg-person dg-person-o') + T(g.x + 80, g.y + 86, d.label || 'Decide', 'dg-step-t dg-orange', { anchor: 'start', size: 32 }) +
-      T(g.x + 196, g.y + 86, '· ' + (d.caption || ''), 'dg-cap', { anchor: 'start', size: 20 }) +
-      '<circle class="dg-num dg-num-o" cx="' + (g.x + g.w - 26) + '" cy="' + (g.y + 26) + '" r="16"/>' + T(g.x + g.w - 26, g.y + 32, '3', 'dg-num-t', { size: 18 }), 'dg-human');
-    const svg = defs +
-      arrow('M465 494 H 230 Q 190 494 190 480') +                                    // sensor → compare
-      arrow('M190 314 V 256', 'dg-arrow dg-arrow-o') +                                 // compare → gate
-      arrow('M190 124 V 110 Q 190 80 220 80 H 465', 'dg-arrow dg-arrow-o') +           // gate → set point
-      arrow('M813 80 H 1050 Q 1090 80 1090 120 V 202') +                               // set point → actuator
-      arrow('M1090 370 V 454 Q 1090 494 1050 494 H 813') +                             // actuator → sensor
-      N.map(node).join('') + gate +
-      bot(640, 250, 120) + T(640, 352, 'One round. Then stop.', 'dg-big', { size: 32 }) +
-      T(640, 390, 'Start at 1 and go clockwise', 'dg-note', { size: 20 });
-    return { viewBox: '0 0 1280 570', svg, steps: 'highlight' };
+    const it = s.items || []; const cx = 640, cy = 300, rx = 400, ry = 212, W = 300, H = 136;
+    // clockwise from the top: 3 Decide (human gate) → 4 Map → 5 Edit → 1 Read → 2 Ask → 3
+    const order = [2, 3, 4, 0, 1]; const roles = ['SENSOR', 'COMPARE', 'HUMAN GATE', 'WRITE SET POINT', 'ACTUATOR'];
+    const maps = ['MCP, tests, review', 'evidence vs intent', '', '', 'a human with a PR'];
+    const ang = order.map((_, k) => -90 + k * 72);
+    const boxes = ang.map(a => [Math.round(cx + rx * Math.cos(a * Math.PI / 180) - W / 2), Math.round(cy + ry * Math.sin(a * Math.PI / 180) - H / 2), W, H]);
+    const hub = [544, 252, 192, 96];
+    const station = (si, k) => { const [x, y] = boxes[k]; const st = it[si] || {}; const focal = si === 2;
+      return step(si + 1, rect(x, y, W, H, 'dg-mask') + rect(x, y, W, H, 'dg-n' + (focal ? ' focal' : '')) +
+        '<text class="dg-eye' + (focal ? ' dg-eye-o' : '') + '" x="' + (x + 22) + '" y="' + (y + 32) + '" style="font-size:16px">' + roles[si] + (maps[si] ? '<tspan class="dg-eye-map" dx="10">' + esc(maps[si]) + '</tspan>' : '') + '</text>' +
+        (focal ? person(x + 42, y + 72, 1.3, 'dg-person dg-person-o') : '<circle class="dg-num" cx="' + (x + 42) + '" cy="' + (y + 68) + '" r="20"/>' + T(x + 42, y + 76, String(si + 1), 'dg-num-t', { size: 22 })) +
+        T(x + 76, y + 79, (focal ? '3 · ' : '') + (st.label || ''), 'dg-name' + (focal ? ' dg-o' : ''), { anchor: 'start', size: 30 }) +
+        T(x + 22, y + 108, wrap(st.caption || '', 30).slice(0, 2), 'dg-sub', { anchor: 'start', size: 18, lh: 1.15 }), focal ? 'dg-human' : ''); };
+    // the dashed write-back spoke: Map (k = 1, upper right) writes the set point into intent.md
+    const mapBox = boxes[1]; const spoke = '<path class="dg-l dg-l-ret" d="M' + mapBox[0] + ' ' + (mapBox[1] + H / 2 + 20) + ' H 780 q -8 0 -8 8 V ' + (hub[1] + 30) + ' H ' + (hub[0] + hub[2] + 6) + '" marker-end="url(#dg-m-p)"/>';
+    const svg = defs + loopRing(cx, cy, rx, ry, ang, [...boxes, hub], ['human', 'flow', 'flow', 'flow', 'flow']) + spoke +
+      order.map((si, k) => station(si, k)).join('') +
+      rect(hub[0], hub[1], hub[2], hub[3], 'dg-mask') + rect(hub[0], hub[1], hub[2], hub[3], 'dg-n hub') + T(cx, hub[1] + 34, 'SET POINT', 'dg-eye', { size: 16 }) + T(cx, hub[1] + 70, 'intent.md', 'dg-name dg-mono', { size: 26 }) +
+      bot(112, 404, 96) + T(112, 486, 'One round.', 'dg-name', { size: 24 }) + T(112, 516, 'Then stop.', 'dg-name', { size: 24 }) +
+      legend(570, [['flow', 'flow, clockwise from 1'], ['ret', 'writes intent.md'], ['focal', 'a human decides']], 300);
+    return { viewBox: '0 0 1280 580', svg, steps: 'highlight' };
   };
 
-  /* ---- slide 39: MCP ---- */
+  /* ---- slide 39: MCP (architecture: one call path, one dashed return, dashed red for what is not allowed) ---- */
   D.mcp = s => {
     const tools = String(s.cards?.[1]?.body || '').split('\n').filter(Boolean);
     const svg = defs +
-      box(10, 150, 290, 180, 'dg-box', 20) + T(155, 206, 'CLAUDE CODE', 'dg-role', { size: 20 }) + bot(155, 262, 76) + T(155, 318, 'the agent', 'dg-cap', { size: 18 }) +
-      arrow('M306 210 H 404') + T(355, 196, 'tool call', 'dg-note', { size: 18 }) +
-      arrow('M404 282 H 306') + T(355, 312, 'result', 'dg-note dg-cyan', { size: 18 }) +
-      box(414, 40, 452, 400, 'dg-box dg-box-hi', 22) + T(640, 86, 'MCP SERVER · telemetry', 'dg-role dg-cyan', { size: 22 }) +
-      T(640, 120, (s.cards?.[0]?.body || '').split('.')[0], 'dg-cap', { size: 19 }) +
-      T(640, 146, 'src/tools.ts', 'dg-mono', { size: 18 }) +
-      tools.map((t, i) => step(i + 1, box(454, 170 + i * 64, 372, 50, 'dg-chip', 12) + T(640, 203 + i * 64, t, 'dg-mono dg-mono-big', { size: 22 }))).join('') +
-      arrow('M872 240 H 966') + T(919, 226, 'read', 'dg-note', { size: 18 }) +
-      box(976, 150, 294, 180, 'dg-box', 20) + T(1123, 204, 'incidents/', 'dg-mono dg-mono-big', { size: 26 }) + T(1123, 244, 'local incident data', 'dg-cap', { size: 18 }) +
-      T(1123, 290, 'max 200 lines per call', 'dg-cap', { size: 18 }) +
-      [['No writes', 150], ['No network', 470], ['Path outside incidents/ → tool error', 860]].map(([t, x]) => cross(x - 110, 500, 'dg-x') + T(x - 84, 507, t, 'dg-deny-t', { anchor: 'start', size: 21 })).join('') +
-      T(640, 572, s.tagline || '', 'dg-big', { size: 24 });
-    return { viewBox: '0 0 1280 590', svg, steps: 'highlight' };
+      line('M292 168 H 418', 'flow') + lab(355, 154, 'tool call', 'dg-c') +
+      line('M418 228 H 292', 'ret') + lab(355, 258, 'result') +
+      line('M862 196 H 988', 'flow') + lab(925, 182, 'read', 'dg-c') +
+      [[540, 300], [640, 640], [740, 980]].map(([px, tx]) => line('M' + px + ' 372 V 400' + (tx === px ? ' V 436' : ' q 0 8 ' + (tx > px ? 8 : -8) + ' 8 H ' + (tx > px ? tx - 8 : tx + 8) + ' q ' + (tx > px ? 8 : -8) + ' 0 ' + (tx > px ? 8 : -8) + ' 8 V 436'), 'deny')).join('') +
+      node({ x: 12, y: 112, w: 280, h: 172, center: true, eyebrow: 'CLAUDE CODE', name: '', top: 30 }) + bot(152, 196, 72) + T(152, 262, 'the agent', 'dg-sub', { size: 18 }) +
+      node({ x: 420, y: 20, w: 440, h: 352, kind: 'key', center: true, eyebrow: 'MCP SERVER', name: 'telemetry', nameSize: 28, sub: (s.cards?.[0]?.body || '').split('.')[0], subSize: 18, top: 32 }) +
+      T(640, 140, 'src/tools.ts', 'dg-sub dg-mono', { size: 17 }) +
+      tools.map((t, i) => step(i + 1, rect(460, 160 + i * 52, 360, 42, 'dg-n chip', 6) + T(640, 188 + i * 52, t, 'dg-name dg-mono', { size: 21 }))).join('') +
+      node({ x: 990, y: 112, w: 278, h: 172, kind: 'store', center: true, eyebrow: 'LOCAL FILES', name: 'incidents/', mono: true, nameSize: 26, sub: ['max 200 lines', 'per call'], subSize: 18, top: 32 }) +
+      [['Writes', 300], ['Network', 640], ['Path outside incidents/', 980]].map(([t, x]) => rect(x - 150, 440, 300, 64, 'dg-n ghost') + cross(x - 116, 472) + T(x - 92, 479, t, 'dg-deny-t', { anchor: 'start', size: 20 })).join('') +
+      T(640, 548, s.tagline || '', 'dg-name', { size: 24 }) +
+      legend(586, [['flow', 'call'], ['ret', 'return'], ['deny', 'not allowed']], 400);
+    return { viewBox: '0 0 1280 596', svg, steps: 'highlight' };
   };
 
-  /* ---- slide 44: allow · ask · deny (uses the compare columns) ---- */
+  /* ---- slide 44: allow · ask · deny (flowchart: one check, three exits; uses the compare columns) ---- */
   D.hooks = s => {
     const cols = s.columns || []; const kinds = ['allow', 'ask', 'deny']; const subs = ['runs', 'a human confirms', 'blocked'];
+    const lk = ['plain', 'human', 'deny']; const ports = [580, 640, 700], mids = [200, 640, 1080];
     const svg = defs +
-      box(470, 6, 340, 62, 'dg-box', 16) + T(640, 46, 'Agent tool call', 'dg-step-t', { size: 26 }) + arrow('M640 70 V 104') +
-      box(400, 108, 480, 72, 'dg-box dg-box-hi', 18) + T(640, 140, 'Hook + permissions', 'dg-step-t', { size: 26 }) + T(640, 168, 'check each supported call', 'dg-cap', { size: 18 }) +
-      arrow('M500 182 C 420 220, 220 210, 210 250', 'dg-arrow') + arrow('M640 182 V 250', 'dg-arrow dg-arrow-o') + arrow('M780 182 C 860 220, 1060 210, 1070 250', 'dg-arrow dg-arrow-r') +
-      cols.map((c, i) => { const x = i * 427, w = 400; let y = 316;
-        const items = (c.items || []).map(t => { const lines = wrap(t, 29); const g = '<circle class="dg-dot dg-dot-' + kinds[i] + '" cx="' + (x + 28) + '" cy="' + (y - 8) + '" r="7"/>' + T(x + 48, y, lines, 'dg-item', { anchor: 'start', size: 24, lh: 1.18 }); y += lines.length * 28 + 18; return g; }).join('');
-        return step(i + 1, box(x, 256, w, 268, 'dg-lane dg-lane-' + kinds[i], 20) + T(x + 24, 294, c.title.toUpperCase(), 'dg-lane-h dg-lane-h-' + kinds[i], { anchor: 'start', size: 30 }) +
-          T(x + w - 22, 292, subs[i], 'dg-cap', { anchor: 'end', size: 19 }) + '<g transform="translate(0 22)">' + items + '</g>'); }).join('') +
-      T(1270, 548, 'Regex rules are best effort.', 'dg-foot', { anchor: 'end', size: 17 });
-    return { viewBox: '0 0 1280 552', svg, steps: 'highlight' };
+      line('M640 72 V 104', 'plain') +
+      ports.map((p, i) => line(p === mids[i] ? 'M' + p + ' 184 V 252' : 'M' + p + ' 184 V 210 q 0 8 ' + (mids[i] > p ? 8 : -8) + ' 8 H ' + (mids[i] > p ? mids[i] - 8 : mids[i] + 8) + ' q ' + (mids[i] > p ? 8 : -8) + ' 0 ' + (mids[i] > p ? 8 : -8) + ' 8 V 252', lk[i])).join('') +
+      node({ x: 480, y: 8, w: 320, h: 64, center: true, name: 'Agent tool call', nameSize: 24, top: 18 }) +
+      node({ x: 420, y: 106, w: 440, h: 78, kind: 'key', center: true, name: 'Hook + permissions', nameSize: 26, sub: ['check each supported call'], subSize: 18, top: 20 }) +
+      cols.map((c, i) => { const x = i * 427, w = 400; let y = 334;
+        const items = (c.items || []).map(t => { const lines = wrap(t, 29); const g = '<circle class="dg-dot-' + kinds[i] + '" cx="' + (x + 28) + '" cy="' + (y - 8) + '" r="6"/>' + T(x + 46, y, lines, 'dg-item', { anchor: 'start', size: 23, lh: 1.16 }); y += lines.length * 27 + 16; return g; }).join('');
+        return step(i + 1, rect(x, 256, w, 268, 'dg-mask') + rect(x, 256, w, 268, 'dg-n lane-' + kinds[i]) + T(x + 24, 292, c.title.toUpperCase(), 'dg-lane-h dg-lane-h-' + kinds[i], { anchor: 'start', size: 28 }) +
+          T(x + w - 22, 290, subs[i], 'dg-sub', { anchor: 'end', size: 18 }) + items, i === 1 ? 'dg-human' : ''); }).join('') +
+      T(1268, 552, 'Regex rules are best effort.', 'dg-foot', { anchor: 'end', size: 17 });
+    return { viewBox: '0 0 1280 560', svg, steps: 'highlight' };
   };
 
-  /* ---- slide 49: subagents ---- */
+  /* ---- slide 49: subagents (process: delegate → investigate → verify → a human accepts) ---- */
   D.subagents = s => {
     const inv = s.cards?.[0] || {}, never = s.cards?.[1] || {};
     const svg = defs +
-      step(1, box(10, 110, 250, 200, 'dg-box', 20) + T(135, 160, 'MAIN SESSION', 'dg-role', { size: 19 }) + person(135, 216, 1.6, 'dg-person') + T(135, 278, 'you + Claude', 'dg-cap', { size: 18 })) +
-      arrow('M266 210 H 334') + T(300, 196, 'delegate', 'dg-note', { size: 17 }) +
-      step(2, box(344, 70, 296, 280, 'dg-context', 24) + T(492, 102, 'OWN CONTEXT', 'dg-ctx-t', { size: 16 }) +
-        box(364, 118, 256, 214, 'dg-box', 18) + T(492, 158, inv.title || 'Investigator', 'dg-step-t', { size: 28 }) + bot(492, 210, 64) +
-        T(492, 268, '.claude/agents/', 'dg-mono', { size: 15 }) + T(492, 288, 'oncall-investigator.md', 'dg-mono', { size: 15 }) + T(492, 316, 'It only reports.', 'dg-cap', { size: 18 })) +
-      arrow('M646 210 H 714') + T(680, 196, 'diagnosis', 'dg-note', { size: 17 }) +
-      step(3, box(724, 70, 296, 280, 'dg-context', 24) + T(872, 102, 'NEW CONTEXT', 'dg-ctx-t', { size: 16 }) +
-        box(744, 118, 256, 214, 'dg-box', 18) + T(872, 158, 'Verifier', 'dg-step-t', { size: 28 }) + bot(872, 210, 64) +
-        T(872, 270, 'Checks the diagnosis.', 'dg-cap', { size: 18 }) + T(872, 296, 'It does not see how.', 'dg-cap', { size: 18 }) + T(872, 322, 'It only reports.', 'dg-cap', { size: 18 })) +
-      arrow('M1026 210 H 1074', 'dg-arrow dg-arrow-o') + T(1050, 196, 'report', 'dg-note', { size: 17 }) +
-      step(4, box(1080, 110, 190, 200, 'dg-gate', 20) + T(1175, 150, 'HUMAN', 'dg-role dg-orange', { size: 19 }) + person(1175, 206, 1.6, 'dg-person dg-person-o') +
-        T(1175, 262, 'accepts', 'dg-step-t dg-orange', { size: 28 }) + T(1175, 292, 'the result', 'dg-cap', { size: 18 })) +
-      '<path class="dg-arrow-r dg-dash-r" d="M500 352 C 560 430, 1110 430, 1160 318" marker-end="url(#dg-head-r)"/>' + cross(830, 412, 'dg-x') +
-      T(830, 452, never.body || '', 'dg-deny-t', { size: 21 }) +
-      box(140, 486, 1000, 80, 'dg-callout dg-callout-o', 18) + T(640, 538, s.tagline || '', 'dg-big', { size: 32 });
-    return { viewBox: '0 0 1280 576', svg, steps: 'highlight' };
+      line('M248 196 H 340', 'flow') + lab(294, 180, 'work') +
+      line('M640 196 H 740', 'flow') + lab(690, 180, 'diagnosis', '', 14) +
+      line('M1040 196 H 1088', 'human') +
+      line('M492 344 V 400 q 0 8 8 8 H 1172 q 8 0 8 -8 V 292', 'deny') + cross(836, 408) +
+      step(1, node({ x: 12, y: 112, w: 236, h: 168, center: true, eyebrow: 'MAIN SESSION', name: '', top: 30 }) + person(130, 190, 1.6, 'dg-person') + T(130, 252, 'you + Claude', 'dg-sub', { size: 18 })) +
+      step(2, rect(344, 56, 296, 288, 'dg-ctx') + T(492, 86, 'OWN CONTEXT', 'dg-ctx-t', { size: 15 }) +
+        node({ x: 360, y: 104, w: 264, h: 224, center: true, name: inv.title || 'Investigator', nameSize: 28, top: 24 }) + bot(492, 196, 60) +
+        T(492, 254, '.claude/agents/', 'dg-sub dg-mono', { size: 15 }) + T(492, 274, 'oncall-investigator.md', 'dg-sub dg-mono', { size: 15 }) + T(492, 306, 'It only reports.', 'dg-sub dg-ink', { size: 18 })) +
+      step(3, rect(744, 56, 296, 288, 'dg-ctx') + T(892, 86, 'NEW CONTEXT', 'dg-ctx-t', { size: 15 }) +
+        node({ x: 760, y: 104, w: 264, h: 224, center: true, name: 'Verifier', nameSize: 28, top: 24 }) + bot(892, 196, 60) +
+        T(892, 256, 'Checks the diagnosis.', 'dg-sub', { size: 18 }) + T(892, 280, 'It does not see how.', 'dg-sub', { size: 18 }) + T(892, 306, 'It only reports.', 'dg-sub dg-ink', { size: 18 })) +
+      step(4, node({ x: 1092, y: 104, w: 176, h: 184, kind: 'focal', center: true, eyebrow: 'HUMAN', name: '', top: 30 }) + person(1180, 166, 1.6, 'dg-person dg-person-o') +
+        T(1180, 230, 'accepts', 'dg-name dg-o', { size: 28 }) + T(1180, 262, 'the result', 'dg-sub', { size: 18 }), 'dg-human') +
+      T(836, 452, never.body || '', 'dg-deny-t', { size: 20 }) +
+      rect(140, 484, 1000, 76, 'dg-n') + T(640, 534, s.tagline || '', 'dg-name', { size: 32 });
+    return { viewBox: '0 0 1280 568', svg, steps: 'highlight' };
   };
 
-  /* ---- slide 53: eval, the bench ---- */
+  /* ---- slide 53: eval, the bench (data flow: case → run → checks → gate; the floor is the focus) ---- */
   D.eval = s => {
     const checks = ['proposal', 'severity', 'harmful?'];
     const svg = defs +
-      step(1, box(10, 40, 270, 250, 'dg-box', 20) + T(145, 80, 'CASE', 'dg-role', { size: 19 }) + T(145, 108, 'bench/cases.json', 'dg-mono', { size: 17 }) +
-        ['scenario', 'expected proposal', 'expected severity'].map((t, i) => box(34, 130 + i * 50, 222, 40, 'dg-chip', 10) + T(145, 157 + i * 50, t, 'dg-chip-t', { size: 18 })).join('')) +
-      arrow('M286 165 H 340') +
-      step(2, box(346, 40, 260, 250, 'dg-box', 20) + T(476, 80, 'INVESTIGATOR', 'dg-role', { size: 19 }) + bot(476, 140, 76) +
-        T(476, 210, 'No model needed', 'dg-cap', { size: 18 }) + T(476, 238, 'Runs offline in CI', 'dg-cap', { size: 18 }) + T(476, 266, 'diagnosis + evidence', 'dg-cap dg-cyan', { size: 17 })) +
-      arrow('M612 165 H 666') +
-      step(3, box(672, 40, 250, 250, 'dg-box', 20) + T(797, 80, 'CHECKS', 'dg-role', { size: 19 }) +
-        checks.map((t, i) => tick(712, 130 + i * 56) + T(742, 137 + i * 56, t, 'dg-item', { anchor: 'start', size: 22 })).join('')) +
-      arrow('M928 165 H 982') +
-      step(4, box(988, 40, 282, 250, 'dg-box dg-box-hi', 20) + T(1129, 80, 'BENCH GATE', 'dg-role dg-cyan', { size: 19 }) +
-        T(1129, 124, 'rate ≥ floor', 'dg-mono dg-mono-big', { size: 22 }) + T(1129, 158, 'harmful ≤ 0', 'dg-mono dg-mono-big', { size: 22 }) +
-        box(1008, 186, 112, 84, 'dg-pass', 14) + T(1064, 224, 'PASS', 'dg-pass-t', { size: 22 }) + T(1064, 252, 'CI green', 'dg-cap', { size: 15 }) +
-        box(1138, 186, 112, 84, 'dg-fail', 14) + T(1194, 224, 'FAIL', 'dg-fail-t', { size: 22 }) + T(1194, 252, 'CI red', 'dg-cap', { size: 15 })) +
-      step(5, '<path class="dg-arrow dg-arrow-cyan" d="M145 380 V 302" marker-end="url(#dg-head)"/>' + T(172, 352, 'Each incident becomes a case.', 'dg-note dg-cyan', { size: 22, anchor: 'start' }) +
-        (() => { const x0 = 40, y0 = 560, bw = 58; const lv = [1, 1, 2, 2, 3, 4];
-        const bars = lv.map((l, i) => '<rect class="dg-bar" x="' + (x0 + i * (bw + 16)) + '" y="' + (y0 - 30 - l * 28) + '" width="' + bw + '" height="' + (30 + l * 28) + '" rx="6"/>').join('');
-        let d = 'M' + x0 + ' ' + (y0 - 24 - lv[0] * 28); lv.forEach((l, i) => { const y = y0 - 24 - l * 28; d += ' V ' + y + ' H ' + (x0 + (i + 1) * (bw + 16) - 8); });
-        return T(x0, 416, 'THE RATCHET', 'dg-role', { anchor: 'start', size: 19 }) + bars + '<path class="dg-floor" d="' + d + '"/>' +
-          T(x0 + 452, y0 - 130, 'floor', 'dg-note dg-orange', { anchor: 'start', size: 22 }) + T(x0 + 452, y0 - 100, 'only goes up', 'dg-cap', { anchor: 'start', size: 18 }); })() +
-        '<path class="dg-arrow dg-arrow-r" d="M1194 296 V 398" marker-end="url(#dg-head-r)"/>' +
-        box(620, 404, 650, 120, 'dg-callout dg-callout-o', 18) + T(945, 454, s.tagline || '', 'dg-big', { size: 27, wrap: 38 }));
-    return { viewBox: '0 0 1280 570', svg, steps: 'highlight' };
+      line('M284 152 H 340', 'flow') + line('M612 152 H 668', 'flow') + line('M924 152 H 980', 'flow') +
+      line('M1196 280 V 400', 'plain') +
+      step(1, node({ x: 12, y: 24, w: 272, h: 256, center: true, eyebrow: 'CASE', name: '', top: 30 }) + T(148, 70, 'bench/cases.json', 'dg-sub dg-mono', { size: 17 }) +
+        ['scenario', 'expected proposal', 'expected severity'].map((t, i) => rect(36, 96 + i * 54, 224, 42, 'dg-n chip', 6) + T(148, 124 + i * 54, t, 'dg-name', { size: 18 })).join('')) +
+      step(2, node({ x: 344, y: 24, w: 268, h: 256, center: true, eyebrow: 'INVESTIGATOR', name: '', top: 30 }) + bot(478, 100, 72) +
+        T(478, 182, 'No model needed', 'dg-sub dg-ink', { size: 19 }) + T(478, 212, 'Runs offline in CI', 'dg-sub dg-ink', { size: 19 }) + T(478, 252, 'diagnosis + evidence', 'dg-sub', { size: 17 })) +
+      step(3, node({ x: 672, y: 24, w: 252, h: 256, center: true, eyebrow: 'CHECKS', name: '', top: 30 }) +
+        checks.map((t, i) => tick(714, 100 + i * 60) + T(742, 108 + i * 60, t, 'dg-name', { anchor: 'start', size: 22 })).join('')) +
+      step(4, node({ x: 984, y: 24, w: 284, h: 256, kind: 'key', center: true, eyebrow: 'BENCH GATE', name: '', top: 30 }) +
+        T(1126, 92, 'rate ≥ floor', 'dg-name dg-mono', { size: 22 }) + T(1126, 128, 'harmful ≤ 0', 'dg-name dg-mono', { size: 22 }) +
+        rect(1004, 160, 116, 92, 'dg-pass') + T(1062, 200, 'PASS', 'dg-pass-t', { size: 22 }) + T(1062, 230, 'CI green', 'dg-sub', { size: 16 }) +
+        rect(1136, 160, 116, 92, 'dg-fail') + T(1194, 200, 'FAIL', 'dg-fail-t', { size: 22 }) + T(1194, 230, 'CI red', 'dg-sub', { size: 16 })) +
+      step(5, line('M148 380 V 284', 'ret') + T(172, 352, 'Each incident becomes a case.', 'dg-name dg-c', { anchor: 'start', size: 21 }) +
+        (() => { const x0 = 40, y0 = 548, bw = 56; const lv = [1, 1, 2, 2, 3, 4];
+          const bars = lv.map((l, i) => '<rect class="dg-bar" x="' + (x0 + i * (bw + 16)) + '" y="' + (y0 - 28 - l * 26) + '" width="' + bw + '" height="' + (28 + l * 26) + '" rx="4"/>').join('');
+          let d = 'M' + x0 + ' ' + (y0 - 22 - lv[0] * 26); lv.forEach((l, i) => { const y = y0 - 22 - l * 26; d += ' V ' + y + ' H ' + (x0 + (i + 1) * (bw + 16) - 8); });
+          return T(x0, 412, 'THE RATCHET', 'dg-eye', { anchor: 'start', size: 16 }) + bars + '<path class="dg-floor" d="' + d + '"/>' +
+            T(x0 + 444, y0 - 124, 'floor', 'dg-name dg-o', { anchor: 'start', size: 22 }) + T(x0 + 444, y0 - 96, 'only goes up', 'dg-sub', { anchor: 'start', size: 18 }); })() +
+        rect(620, 404, 648, 120, 'dg-n') + T(944, 454, wrap(s.tagline || '', 38), 'dg-name', { size: 27 }));
+    return { viewBox: '0 0 1280 560', svg, steps: 'highlight' };
   };
 
   window.ALS_DIAGRAMS = D;

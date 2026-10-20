@@ -1331,7 +1331,7 @@ window.SLIDES = [
       "diagram": {
         "id": "mcp",
         "title": "Read-only MCP",
-        "caption": "Five local tools read incident data. They do not write or use the network."
+        "caption": "Four local tools read incident data. They do not write or use the network."
       }
     },
     "keyPoints": [
