@@ -8,16 +8,20 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
-test('Workshop keeps 60 slides and seven usable Anatomy figures',()=>{
- assert.equal(context.window.SLIDES.length,60);
- const mapping=[[8,'bottleneck',''],[10,'loop',''],[30,'mcp',''],[35,'hooks',''],[39,'subagents',''],[43,'eval',''],[44,'eval','?preset=rejected']];
- for(const[number,id,query]of mapping){
-  const slide=context.window.SLIDES[number-1],a=slide.visual.anatomy;
-  assert.equal(a.src,`assets/anatomy/${id}.html${query}`);
-  assert.equal(a.poster,`assets/anatomy/${id}${number===44?'-rejected':''}.svg`);
-  for(const target of [a.src.split('?')[0],a.poster])assert.ok(existsSync(path.join(root,target)),target);
-  assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`Slide ${number} retains teaching content`);
+test('Workshop 5 keeps 70 slides and draws its concept figures as built diagrams',()=>{
+ assert.equal(context.window.SLIDES.length,70);
+ const dctx={window:{}};vm.runInNewContext(read('workshop5-diagrams.js'),dctx);const D=dctx.window.ALS_DIAGRAMS;
+ const mapping=[[9,'bottleneck'],[11,'loop'],[12,'line-loop'],[31,'control-loop'],[39,'mcp'],[44,'hooks'],[49,'subagents'],[53,'eval']];
+ for(const[number,id]of mapping){
+  const slide=context.window.SLIDES[number-1],d=slide.visual.diagram;
+  assert.equal(slide.visual.anatomy,undefined,`Slide ${number} has no Anatomy figure`);
+  assert.equal(d.id,id);assert.equal(typeof D[id],'function',id);
+  const out=D[id](slide);assert.match(out.viewBox,/^0 0 1280 \d+$/);assert.ok(out.svg.includes('dg-step'),id);
+  assert.ok(d.title&&slide.notes&&slide.keyPoints.length,`Slide ${number} retains teaching content`);
  }
+ const m=context.window.SLIDES[30].visual.media;
+ assert.equal(m.type,'video');for(const f of[m.src,m.poster])assert.ok(existsSync(path.join(root,f)),f);
+ assert.ok(read('workshop5.html').includes('workshop5-diagrams.js'));
 });
 test('Workshop 4 wires its two Anatomy figures',()=>{
  const ctx={window:{}};vm.runInNewContext(read('workshop4-slides.js'),ctx);

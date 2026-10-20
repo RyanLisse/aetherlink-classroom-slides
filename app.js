@@ -51,7 +51,7 @@ function renderCard(c, i) { const card = node('article', 'card'); card.style.set
 
 /* ---- slide layouts ---- */
 let slideController = null;
-function renderTagline(stage, s) { if (!s.visual?.anatomy && s.tagline) stage.append(node('p', 'tagline', s.tagline)); }
+function renderTagline(stage, s) { if (!s.visual?.anatomy && !s.visual?.diagram && s.tagline) stage.append(node('p', 'tagline', s.tagline)); }
 function renderPillars(stage, s) { const row = node('div', 'pillars'); (s.items || []).forEach((it, i) => { const p = node('div', 'pillar'); p.style.setProperty('--i', i); p.append(node('span', 'pillar-label', it.label)); if (it.caption) p.append(node('span', 'pillar-caption', it.caption)); row.append(p); }); stage.append(row); }
 function renderSteps(stage, s) {
   const wrap = node('div', 'steps-wrap'); const row = node('ol', 'steps-chain'); let active = -1; const els = []; const co = s.callout;
@@ -86,7 +86,7 @@ function renderTimer(stage, s) {
     onDone: () => notify('Time is up — this assignment ends now'), onEmpty: () => notify('Set the minutes first, then press Start.'), signal: slideController.signal }));
 }
 function renderLayout(stage, s) {
-  if (s.visual?.anatomy) return;
+  if (s.visual?.anatomy || s.visual?.diagram) return;
   const L = s.layout;
   if (L === 'pillars') renderPillars(stage, s);
   else if (L === 'steps') renderSteps(stage, s);
@@ -564,6 +564,66 @@ function buildOpener(stage, main, s, v) {
     c.prepend(node('span', 'team-avatar', ini));
   });
 }
+/* ---- diagrams + media (slides.js: visual.diagram, visual.media) ----
+   visual.diagram = 'id' | { id, title, caption, steps: 'highlight' | 'reveal' | false }
+     draws window.ALS_DIAGRAMS[id](slide) (a deck-local script, e.g. workshop5-diagrams.js) as inline SVG.
+     Groups with class dg-step and data-step="n" step through on → or a click; 'reveal' hides them first.
+   visual.media = { type: 'video' | 'image', src, poster, alt }
+     a looping, muted, silent clip (autoplay, playsinline) or a still; the presenter preview shows the poster.
+     With a diagram on the same slide, a Diagram / Video switch (or V) changes between the two;
+     visual.mediaDefault: 'media' starts on the video. Decks without these fields render as before. */
+function renderMedia(m) {
+  const fig = node('div', 'media-el-wrap');
+  const still = () => { const img = document.createElement('img'); img.className = 'media-el'; img.src = m.type === 'image' ? m.src : (m.poster || m.src); img.alt = m.alt || ''; img.decoding = 'async'; return img; };
+  if (m.type !== 'video' || EMBED) { fig.append(still()); return fig; }
+  const vid = document.createElement('video'); vid.className = 'media-el';
+  vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.autoplay = true; vid.playsInline = true; vid.preload = 'auto';
+  ['muted', 'loop', 'autoplay', 'playsinline'].forEach(a => vid.setAttribute(a, ''));
+  if (m.poster) vid.poster = m.poster; if (m.alt) vid.setAttribute('aria-label', m.alt);
+  vid.addEventListener('error', () => vid.replaceWith(still()), { once: true });
+  vid.src = m.src; fig.append(vid);
+  const play = () => vid.play?.()?.catch(() => {}); requestAnimationFrame(play);
+  slideController.signal.addEventListener('abort', () => { try { vid.pause(); vid.removeAttribute('src'); vid.load(); } catch {} });
+  return fig;
+}
+function diagramStepper(svgEl, mode, isActive) {
+  const groups = [...svgEl.querySelectorAll('.dg-step')]; if (!groups.length || !mode) return;
+  const keys = [...new Set(groups.map(g => Number(g.dataset.step)))].sort((a, b) => a - b);
+  let k = -1; const reveal = mode === 'reveal' && !EMBED;
+  if (reveal) groups.forEach(g => g.classList.add('dg-pending'));
+  svgEl.classList.add('dg-mode-' + mode);
+  const paint = () => groups.forEach(g => { const n = Number(g.dataset.step), at = keys[k];
+    if (reveal) { g.classList.toggle('dg-pending', !(k >= 0 && n <= at)); g.classList.toggle('dg-on', n === at); }
+    else { g.classList.toggle('dg-on', n === at); g.classList.toggle('dg-dim', k >= 0 && n !== at); } });
+  const next = () => { if (!isActive() || k >= keys.length - 1) return false; k++; paint(); announce(groups.filter(g => Number(g.dataset.step) === keys[k]).map(g => g.textContent).join(' ')); return true; };
+  svgEl.addEventListener('click', () => next(), { signal: slideController.signal });
+  window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+}
+function renderDiagram(main, s, v) {
+  const d = typeof v.diagram === 'string' ? { id: v.diagram } : v.diagram;
+  const figure = node('figure', 'diagram-figure'); const holder = node('div', 'diagram-holder');
+  const make = window.ALS_DIAGRAMS?.[d.id]; let svgEl = null;
+  if (make) {
+    const out = make(s); svgEl = svg(out.viewBox, out.svg, 'diagram diagram-' + d.id);
+    svgEl.removeAttribute('aria-hidden'); svgEl.setAttribute('role', 'img'); svgEl.setAttribute('aria-label', [d.title, d.caption].filter(Boolean).join('. ') || s.title);
+    holder.append(svgEl);
+    diagramStepper(svgEl, d.steps === undefined ? out.steps : d.steps, () => !figure.classList.contains('show-media'));
+  } else holder.append(node('p', 'diagram-missing', d.title || d.id));
+  figure.append(holder);
+  if (v.media) {
+    const media = renderMedia(v.media); media.classList.add('diagram-media'); holder.append(media);
+    const sw = node('div', 'media-switch'); sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'Visual');
+    const bD = node('button', null, 'Diagram'), bM = node('button', null, v.media.type === 'video' ? 'Video' : 'Image'); sw.append(bD, bM);
+    const set = on => { figure.classList.toggle('show-media', on); bD.setAttribute('aria-pressed', String(!on)); bM.setAttribute('aria-pressed', String(on)); saveState({ ...loadState(), media: on });
+      if (on) media.querySelector('video')?.play?.()?.catch(() => {}); };
+    const st = loadState(); set(st.media != null ? !!st.media : v.mediaDefault === 'media');
+    bD.addEventListener('click', e => { e.stopPropagation(); set(false); }); bM.addEventListener('click', e => { e.stopPropagation(); set(true); });
+    document.addEventListener('keydown', e => { if ((e.key === 'v' || e.key === 'V') && !e.ctrlKey && !e.metaKey && !e.altKey && !/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) { e.preventDefault(); set(!figure.classList.contains('show-media')); } }, { signal: slideController.signal });
+    figure.append(sw);
+  }
+  if (d.caption) figure.append(node('figcaption', null, d.caption));
+  main.append(figure);
+}
 function rel(el, stage) { const a = el.getBoundingClientRect(), b = stage.getBoundingClientRect(); return { x: a.left - b.left + stage.scrollLeft, y: a.top - b.top, w: a.width, h: a.height }; }
 function renderVisual(stage, body, main, s) {
   const v = s.visual; if (!v) return;
@@ -576,6 +636,8 @@ function renderVisual(stage, body, main, s) {
     }
     figure.append(node('figcaption', null, a.caption)); main.append(figure); return;
   }
+  if (v.diagram) { renderDiagram(main, s, v); return; }
+  if (v.media) main.append(renderMedia(v.media));
   if (v.art === 'timeline') main.prepend(ART.timeline());
   if (v.cardArt) { const cards = main.querySelectorAll('.card'); Object.entries(v.cardArt).forEach(([i, kind]) => { if (cards[i] && ART[kind]) cards[i].append(ART[kind]()); }); }
   if (v.pillarIcons) main.querySelectorAll('.pillar').forEach((p, i) => p.prepend(svg('0 0 24 24', PILLAR_ICONS[i % PILLAR_ICONS.length], 'pillar-icon')));
@@ -851,7 +913,7 @@ function render() {
   document.body.classList.toggle('dark', !!s.dark);
   document.body.classList.toggle('is-assignment', type === 'practice');
   document.body.dataset.type = type;
-  document.body.dataset.opener = s.visual?.anatomy ? 'anatomy' : s.visual?.opener || '';
+  document.body.dataset.opener = s.visual?.anatomy ? 'anatomy' : s.visual?.diagram ? 'diagram' : s.visual?.opener || '';
   document.title = s.title + ' · Aetherlink classroom';
   const stage = $('stage'); stage.replaceChildren();
   if (type === 'practice' && s.layout === 'exercise') { renderAssignment(stage, s); finishRender(s); return; }
@@ -875,8 +937,8 @@ function render() {
   renderLayout(main, s);
   renderTagline(main, s);
   renderVisual(stage, body, main, s);
-  if (!s.visual?.anatomy) applyStepThrough(main, s);
-  const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
+  if (!s.visual?.anatomy && !s.visual?.diagram) applyStepThrough(main, s);
+  const instructions = (s.visual?.anatomy || s.visual?.diagram || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
     body.classList.toggle('with-side', side);

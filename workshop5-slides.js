@@ -246,9 +246,8 @@ window.SLIDES = [
     "kicker": "W5 · WHY AI-NATIVE · FIG. 1",
     "type": "concept",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/bottleneck.html",
-        "poster": "assets/anatomy/bottleneck.svg",
+      "diagram": {
+        "id": "bottleneck",
         "title": "Delivery bottleneck",
         "caption": "Build gets faster. Decisions and checks still take time."
       }
@@ -309,9 +308,8 @@ window.SLIDES = [
     "type": "concept",
     "cards": [],
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/loop.html",
-        "poster": "assets/anatomy/loop.svg",
+      "diagram": {
+        "id": "loop",
         "title": "The AI-native loop",
         "caption": "The agent supports six stages. Humans set goals, direct, and approve."
       }
@@ -347,7 +345,10 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "pairs": true
+      "diagram": {
+        "id": "line-loop",
+        "title": "The line and the loop"
+      }
     },
     "keyPoints": [
       "Hours, not weeks.",
@@ -1054,9 +1055,17 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "stepKeys": true,
-      "humanStep": 2,
-      "reach": true
+      "diagram": {
+        "id": "control-loop",
+        "title": "The agent as a control loop: set point, actuator, sensor, compare, human gate"
+      },
+      "media": {
+        "type": "video",
+        "src": "assets/workshop-5/media/control-loop.mp4",
+        "poster": "assets/workshop-5/media/control-loop.jpg",
+        "alt": "Animated control loop: set point, act, sense, compare, and a human decide gate."
+      },
+      "mediaDefault": "diagram"
     },
     "prompt": "/design-control-loop for the SRE agent on checkout-api — one round, then map to intent.md",
     "keyPoints": [
@@ -1319,9 +1328,8 @@ window.SLIDES = [
     ],
     "tagline": "No writes. Every result is saved as evidence.",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/mcp.html",
-        "poster": "assets/anatomy/mcp.svg",
+      "diagram": {
+        "id": "mcp",
         "title": "Read-only MCP",
         "caption": "Five local tools read incident data. They do not write or use the network."
       }
@@ -1499,9 +1507,8 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/hooks.html",
-        "poster": "assets/anatomy/hooks.svg",
+      "diagram": {
+        "id": "hooks",
         "title": "Allow, ask, deny",
         "caption": "The lab hook checks supported tool calls. Named approval requests confirmation; merge stays blocked."
       }
@@ -1678,9 +1685,8 @@ window.SLIDES = [
     ],
     "tagline": "Delegate the work. Never the acceptance.",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/subagents.html",
-        "poster": "assets/anatomy/subagents.svg",
+      "diagram": {
+        "id": "subagents",
         "title": "Separate verifier context",
         "caption": "A verifier checks the diagnosis in a separate context. A human accepts the result."
       }
@@ -1793,9 +1799,8 @@ window.SLIDES = [
     ],
     "tagline": "Fix the investigator or the case. Never lower the floor.",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/eval.html",
-        "poster": "assets/anatomy/eval.svg",
+      "diagram": {
+        "id": "eval",
         "title": "Diagnosis test bench",
         "caption": "Check evidence and reasoning against the case. Fix the diagnosis, not the eval."
       }

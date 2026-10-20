@@ -1219,3 +1219,108 @@ body[data-opener="anatomy"] .slide-main{display:grid;place-items:center}
   .dr-stop{min-width:0}
   .dr-label{max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:center}
 }
+
+/* ---- diagrams (visual.diagram, e.g. workshop5-diagrams.js) + media (visual.media) ---- */
+body[data-opener="diagram"] .slide-body{justify-content:flex-start}
+body[data-opener="diagram"] .heading{margin-bottom:.6rem}
+body[data-opener="diagram"] .slide-main{display:grid;place-items:center}
+.diagram-figure{width:100%;margin:0;display:grid;gap:.5rem;position:relative;animation:enter .45s both .1s}
+.diagram-holder{display:grid;place-items:center;min-height:0}
+.diagram-holder>*{grid-area:1/1}
+svg.diagram{display:block;width:100%;height:auto;max-height:calc(100vh - 400px);overflow:visible;font-family:inherit}
+.diagram-figure figcaption{color:var(--muted);font-size:clamp(.9rem,1.4vw,1.2rem);text-align:center}
+.diagram-figure .diagram-media{display:none}
+.diagram-figure.show-media .diagram-media{display:grid}
+.diagram-figure.show-media svg.diagram{visibility:hidden}
+.media-el-wrap{display:grid;place-items:center;width:100%}
+.media-el{display:block;max-width:100%;max-height:calc(100vh - 380px);aspect-ratio:16/9;width:auto;height:auto;border-radius:16px;background:var(--bg);object-fit:contain;border:1px solid var(--border)}
+.diagram-media .media-el{width:auto;height:calc(100vh - 380px);max-width:100%}
+.slide-main>.media-el-wrap .media-el{max-height:min(52vh,560px)}
+.media-switch{position:absolute;top:-.2rem;right:0;display:flex;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:3px;z-index:2}
+.media-switch button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.8rem;font-weight:700;padding:.3rem .8rem;border-radius:999px;cursor:pointer;min-height:0}
+.media-switch button[aria-pressed="true"]{background:var(--selected);color:var(--cyan)}
+html.embed .media-switch{display:none}
+/* svg parts */
+.diagram text{fill:var(--text);font-weight:700}
+.diagram .dg-role{fill:var(--cyan);font-weight:800;letter-spacing:.06em}
+.diagram .dg-cap,.diagram .dg-note{fill:var(--muted);font-weight:600}
+.diagram .dg-step-t,.diagram .dg-node-t,.diagram .dg-chip-t,.diagram .dg-seg-t,.diagram .dg-human-t,.diagram .dg-lane-h,.diagram .dg-big{font-weight:800}
+.diagram .dg-big{fill:var(--text)}
+.diagram .dg-center-t{fill:var(--muted);font-weight:700}
+.diagram .dg-cyan{fill:var(--cyan)}
+.diagram .dg-map{fill:var(--muted);font-weight:700;letter-spacing:0}
+.diagram .dg-orange{fill:var(--aether-orange)}
+.diagram .dg-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:var(--muted);font-weight:600}
+.diagram .dg-mono-big{fill:var(--text)}
+.diagram .dg-foot{fill:#7d93b2;font-weight:600;font-style:italic}
+.diagram .dg-box{fill:var(--surface);stroke:var(--border);stroke-width:2}
+.diagram .dg-box-hi{fill:var(--surface2);stroke:var(--cyan);stroke-width:2.5}
+.diagram .dg-chip{fill:var(--surface2);stroke:color-mix(in srgb,var(--cyan) 55%,var(--border));stroke-width:2}
+.diagram .dg-segbox{fill:var(--surface2);stroke:var(--border);stroke-width:2}
+.diagram .dg-seg-fast .dg-segbox{fill:color-mix(in srgb,var(--cyan) 22%,var(--surface2));stroke:var(--cyan)}
+.diagram .dg-seg-dec .dg-segbox{stroke:var(--aether-orange);stroke-width:2.5}
+.diagram .dg-wait{fill:url(#dg-hatch);stroke:var(--aether-orange);stroke-width:2;stroke-dasharray:6 5}
+.diagram .dg-hatch-bg{fill:color-mix(in srgb,var(--aether-orange) 10%,var(--bg))}
+.diagram .dg-hatch-line{stroke:color-mix(in srgb,var(--aether-orange) 35%,transparent);stroke-width:4}
+.diagram .dg-wait-t{fill:var(--aether-orange);font-weight:900;letter-spacing:.08em}
+.diagram .dg-wait-s{fill:var(--text);font-weight:700}
+.diagram .dg-rowlabel{fill:var(--muted);font-weight:900;letter-spacing:.06em}
+.diagram .dg-rowlabel.dg-cyan{fill:var(--cyan)}
+.diagram .dg-callout{fill:var(--surface);stroke:var(--border);stroke-width:2}
+.diagram .dg-callout-o{stroke:var(--aether-orange)}
+.diagram .dg-callout-t{fill:var(--text);font-weight:700}
+.diagram .dg-arrow{fill:none;stroke:color-mix(in srgb,var(--cyan) 70%,var(--border));stroke-width:4;stroke-linecap:round}
+.diagram .dg-arrow-cyan{stroke:var(--cyan)}
+.diagram .dg-arrow-o{stroke:var(--aether-orange)}
+.diagram .dg-arrow-r,.diagram .dg-dash-r{fill:none;stroke:#ff5a5a;stroke-width:3.5}
+.diagram .dg-dash-r{stroke-dasharray:10 8}
+.diagram .dg-head{fill:color-mix(in srgb,var(--cyan) 70%,var(--border))}
+.diagram .dg-head-o{fill:var(--aether-orange)}
+.diagram .dg-head-r{fill:#ff5a5a}
+.diagram .dg-arrow-o[marker-end]{marker-end:url(#dg-head-o)}
+.diagram .dg-arrow-r[marker-end]{marker-end:url(#dg-head-r)}
+.diagram .dg-dash-o{stroke:var(--aether-orange);stroke-width:3;stroke-dasharray:6 6}
+.diagram .dg-node{fill:var(--surface2);stroke:var(--cyan);stroke-width:3}
+.diagram .dg-node-human{stroke:var(--aether-orange);stroke-width:4}
+.diagram .dg-ai circle{fill:var(--aether-purple);stroke:var(--bg);stroke-width:3}
+.diagram .dg-ai text{fill:#fff;font-size:14px;font-weight:900}
+.diagram .dg-human-bar{fill:color-mix(in srgb,var(--aether-orange) 14%,var(--bg));stroke:var(--aether-orange);stroke-width:2.5}
+.diagram .dg-human-t{fill:var(--text)}
+.diagram .dg-person path,.diagram .dg-person circle{fill:var(--muted)}
+.diagram .dg-person-o path,.diagram .dg-person-o circle{fill:var(--aether-orange)}
+.diagram .dg-gate{fill:color-mix(in srgb,var(--aether-orange) 14%,var(--surface));stroke:var(--aether-orange);stroke-width:3}
+.diagram .dg-num{fill:var(--bg);stroke:var(--cyan);stroke-width:3}
+.diagram .dg-num-o{stroke:var(--aether-orange)}
+.diagram .dg-num-t{fill:var(--text);font-weight:900}
+.diagram .dg-handover{fill:var(--aether-orange)}
+.diagram .dg-col-h{fill:var(--text);font-weight:900;letter-spacing:.04em}
+.diagram .dg-col-h.dg-orange{fill:var(--text)}
+.diagram .dg-col-rule{stroke:var(--cyan);stroke-width:3}
+.diagram .dg-col-rule-o{stroke:var(--aether-orange)}
+.diagram .dg-divider{stroke:var(--border);stroke-width:2;stroke-dasharray:4 8}
+.diagram .dg-ring{fill:none;stroke:color-mix(in srgb,var(--cyan) 45%,var(--border));stroke-width:4}
+.diagram .dg-chip-loop{fill:var(--surface2);stroke:var(--cyan)}
+.diagram .dg-x circle{fill:color-mix(in srgb,#ff5a5a 18%,var(--bg));stroke:#ff5a5a;stroke-width:2.5}
+.diagram .dg-x path{stroke:#ff5a5a;stroke-width:3.5;stroke-linecap:round}
+.diagram .dg-deny-t{fill:#ffb3b3;font-weight:700}
+.diagram .dg-tick circle{fill:color-mix(in srgb,var(--ok) 16%,var(--bg));stroke:var(--ok);stroke-width:2.5}
+.diagram .dg-tick path{fill:none;stroke:var(--ok);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.diagram .dg-item{fill:var(--text);font-weight:600}
+.diagram .dg-lane{fill:var(--surface);stroke-width:2.5}
+.diagram .dg-lane-allow{stroke:var(--ok)}.diagram .dg-lane-ask{stroke:var(--aether-orange)}.diagram .dg-lane-deny{stroke:#ff5a5a}
+.diagram .dg-lane-h-allow{fill:var(--ok)}.diagram .dg-lane-h-ask{fill:var(--aether-orange)}.diagram .dg-lane-h-deny{fill:#ff5a5a}
+.diagram .dg-dot-allow{fill:var(--ok)}.diagram .dg-dot-ask{fill:var(--aether-orange)}.diagram .dg-dot-deny{fill:#ff5a5a}
+.diagram .dg-context{fill:none;stroke:var(--violet);stroke-width:2.5;stroke-dasharray:9 7}
+.diagram .dg-ctx-t{fill:var(--violet);font-weight:900;letter-spacing:.1em}
+.diagram .dg-pass{fill:color-mix(in srgb,var(--ok) 16%,var(--bg));stroke:var(--ok);stroke-width:2.5}
+.diagram .dg-fail{fill:color-mix(in srgb,#ff5a5a 14%,var(--bg));stroke:#ff5a5a;stroke-width:2.5}
+.diagram .dg-pass-t{fill:var(--ok);font-weight:900}.diagram .dg-fail-t{fill:#ff5a5a;font-weight:900}
+.diagram .dg-bar{fill:color-mix(in srgb,var(--cyan) 30%,var(--surface2));stroke:var(--cyan);stroke-width:1.5}
+.diagram .dg-floor{fill:none;stroke:var(--aether-orange);stroke-width:4;stroke-linejoin:round}
+.diagram .dg-step{transition:opacity .35s,transform .35s,filter .35s}
+.diagram .dg-step.dg-pending{opacity:0}
+.diagram .dg-step.dg-dim{opacity:.38}
+.diagram.dg-mode-highlight .dg-step.dg-on{filter:drop-shadow(0 0 14px color-mix(in srgb,var(--cyan) 65%,transparent))}
+.diagram.dg-mode-highlight .dg-human.dg-on{filter:drop-shadow(0 0 16px color-mix(in srgb,var(--aether-orange) 75%,transparent))}
+@media(prefers-reduced-motion:reduce){.diagram .dg-step,.diagram-figure{transition:none;animation:none}}
+.diagram-figure:has(figcaption) svg.diagram{max-height:calc(100vh - 435px)}
