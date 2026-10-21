@@ -551,7 +551,9 @@ function buildOpener(stage, main, s, v) {
   }
   if (v.opener === 'showcase' && v.image) {                      // Day 2 show & tell: screenshot in a browser frame
     const shot = node('figure', 'showcase'); const bar = node('div', 'showcase-bar'); bar.append(node('span', 'dots'), node('span', 'showcase-url', v.imageLink || ''));
-    const img = document.createElement('img'); img.src = v.image; img.alt = ''; shot.append(bar, img);
+    const img = document.createElement('img'); img.src = v.image; img.alt = v.imageAlt || '';
+    const link = document.createElement('a'); link.href = v.image; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', 'Open screenshot at full size'); link.append(img); shot.append(bar, link);
+    if (v.wideImage) main.classList.add('showcase-wide');
     main.classList.add('with-showcase'); main.prepend(shot);
   }
   if (v.opener === 'sdlc-loop' && v.image) {

@@ -1062,6 +1062,13 @@ body[data-opener="team"] .card-head{justify-content:center}
 .showcase-bar .dots{width:44px;height:10px;background:radial-gradient(circle at 5px 5px,#ff5f57 4px,transparent 5px),radial-gradient(circle at 22px 5px,#febc2e 4px,transparent 5px),radial-gradient(circle at 39px 5px,#28c840 4px,transparent 5px)}
 .showcase-url{flex:1;font-size:.85rem;color:#cfc9ff;background:#0f0c22;border-radius:6px;padding:.15rem .6rem}
 .showcase img{display:block;width:100%;height:auto}
+.slide-main.with-showcase.showcase-wide{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.showcase-wide .showcase img{max-height:49vh;object-fit:contain;background:#fff}
+.showcase-wide .bot{height:clamp(80px,12vh,120px);margin:0}
+.showcase-wide .card{min-height:0;padding:1rem 1.2rem}
+.showcase-wide .card p{font-size:1.05rem;line-height:1.45}
+.showcase a:focus-visible{display:block;outline:3px solid var(--cyan);outline-offset:-3px}
+@media(max-width:900px){.slide-main.with-showcase.showcase-wide{grid-template-columns:minmax(0,1fr)}.slide-main.with-showcase.showcase-wide>:not(.showcase){grid-column:1}.slide-main.with-showcase.showcase-wide>.showcase{grid-row:auto}}
 
 body[data-opener="sdlc-loop"] .slide-body{justify-content:flex-start}
 body[data-opener="sdlc-loop"] .slide-main{display:grid;place-items:center}
