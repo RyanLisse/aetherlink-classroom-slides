@@ -35,7 +35,7 @@ test('Workshop 4 wires its two Anatomy figures',()=>{
   assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`${id} retains teaching content`);
  }
 });
-test('Workshop 5 includes real console screenshots and all nine assignments',()=>{
+test('Workshop 5 includes real console screenshots and three core tasks',()=>{
  const slides=context.window.SLIDES;
  for(const name of ['start','diagnosis','refusal','approval','landed','resolved']){
   const src=`assets/workshop-5/console-${name}.png`;
@@ -45,7 +45,12 @@ test('Workshop 5 includes real console screenshots and all nine assignments',()=
   assert.ok(slide.visual.imageAlt&&slide.notes,`${name} has context`);
   assert.ok(existsSync(path.join(root,src)),src);
  }
- for(let n=1;n<=9;n++) assert.equal(slides.filter(s=>s.title.startsWith(`Assignment ${n}:`)).length,1,`Assignment ${n}`);
+ for(let n=1;n<=3;n++) assert.equal(slides.filter(s=>s.title.startsWith(`Core task ${n}:`)).length,1,`Core task ${n}`);
+ assert.equal(slides.filter(s=>s.title.startsWith('Assignment ')).length,0);
+ const map=slides.find(s=>s.title==='One ticket, three core tasks');
+ assert.equal(map.items.length,3);
+ assert.ok(slides.find(s=>s.title==='Start here: one command').steps.some(s=>s.includes('npm start')));
+ assert.ok(slides.some(s=>s.title==='Optional: Wire and prove the controls'));
  assert.ok(slides.every(s=>s.notes?.trim()),'Every slide has facilitator notes');
 });
 test('Presenter uses posters before the legacy bot renderer',()=>{

@@ -392,10 +392,17 @@ yourself before teaching:
    who hasn't taught this content before; flag anything that doesn't match
    how you actually plan to run a slide.
 
-## Workshop 5 deck (proposal, branch `workshop-5-sre-agent`)
+## Workshop 5: three core tasks
 
-`workshop5.html` loads `workshop5-slides.js` (60 slides: AI-native SDLC with an SRE agent, English) with the same
+`workshop5.html` loads `workshop5-slides.js` (76 slides: AI-native SDLC with an SRE agent, English) with the same
 `app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
+
+The default route has three tasks: read evidence, build and test a read-only tool,
+and judge live recovery. Contract, hook, extra eval and Git-gate implementation
+are optional depth. Use the [lab participant card](https://github.com/RyanLisse/sre-oncall-agent/blob/main/PARTICIPANT.md)
+beside the console. Facilitators build the labeled starter and checkpoint packages
+from the matching lab revision; coding agents start at AGENTS.md in that package.
+`npm start` runs the services. Fault injection and human decisions remain separate.
