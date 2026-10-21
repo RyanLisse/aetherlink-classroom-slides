@@ -1219,3 +1219,100 @@ body[data-opener="anatomy"] .slide-main{display:grid;place-items:center}
   .dr-stop{min-width:0}
   .dr-label{max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:center}
 }
+
+/* ---- diagrams (visual.diagram, e.g. workshop5-diagrams.js) + media (visual.media) ---- */
+body[data-opener="diagram"] .slide-body{justify-content:flex-start}
+body[data-opener="diagram"] .heading{margin-bottom:.6rem}
+body[data-opener="diagram"] .slide-main{display:grid;place-items:center}
+.diagram-figure{width:100%;margin:0;display:grid;gap:.5rem;position:relative;animation:enter .45s both .1s}
+.diagram-holder{display:grid;place-items:center;min-height:0}
+.diagram-holder>*{grid-area:1/1}
+svg.diagram{display:block;width:100%;height:auto;max-height:calc(100vh - 400px);overflow:visible;font-family:inherit}
+.diagram-figure figcaption{color:var(--muted);font-size:clamp(.9rem,1.4vw,1.2rem);text-align:center}
+.diagram-figure .diagram-media{display:none}
+.diagram-figure.show-media .diagram-media{display:grid}
+.diagram-figure.show-media svg.diagram{visibility:hidden}
+.media-el-wrap{display:grid;place-items:center;width:100%}
+.media-el{display:block;max-width:100%;max-height:calc(100vh - 380px);aspect-ratio:16/9;width:auto;height:auto;border-radius:16px;background:var(--bg);object-fit:contain;border:1px solid var(--border)}
+.diagram-media .media-el{width:auto;height:calc(100vh - 380px);max-width:100%}
+.slide-main>.media-el-wrap .media-el{max-height:min(52vh,560px)}
+.media-switch{position:absolute;top:-.2rem;right:0;display:flex;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:3px;z-index:2}
+.media-switch button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.8rem;font-weight:700;padding:.3rem .8rem;border-radius:999px;cursor:pointer;min-height:0}
+.media-switch button[aria-pressed="true"]{background:var(--selected);color:var(--cyan)}
+html.embed .media-switch{display:none}
+/* svg parts: AetherLink skin (paper = --bg, ink = --text, accent = orange for the human step only, cyan = flow) */
+.diagram{--dg-red:#ff5a5a;--dg-line:#7f93ad}
+.diagram text{fill:var(--text);font-weight:700}
+.diagram .dg-mask{fill:var(--bg);stroke:none}
+.diagram .dg-n{fill:var(--surface);stroke:var(--border);stroke-width:2}
+.diagram .dg-n.key{stroke:var(--cyan);fill:var(--surface2)}
+.diagram .dg-n.hub{fill:var(--surface2);stroke:var(--muted);stroke-width:2}
+.diagram .dg-n.store{fill:color-mix(in srgb,var(--text) 5%,var(--surface))}
+.diagram .dg-n.chip{fill:var(--surface2);stroke:var(--border)}
+.diagram .dg-n.focal{fill:color-mix(in srgb,var(--aether-orange) 12%,var(--bg));stroke:var(--aether-orange);stroke-width:3}
+.diagram .dg-n.focal-soft{fill:color-mix(in srgb,var(--aether-orange) 8%,var(--bg));stroke:var(--aether-orange);stroke-width:2}
+.diagram .dg-n.ghost{fill:none;stroke:var(--dg-red);stroke-width:2;stroke-dasharray:8 6}
+.diagram .dg-n.lane-allow{stroke:var(--border)}
+.diagram .dg-n.lane-ask{fill:color-mix(in srgb,var(--aether-orange) 8%,var(--bg));stroke:var(--aether-orange);stroke-width:3}
+.diagram .dg-n.lane-deny{fill:color-mix(in srgb,var(--dg-red) 5%,var(--bg));stroke:var(--dg-red);stroke-dasharray:10 7}
+.diagram .dg-eye{fill:var(--muted);font-weight:800;letter-spacing:.12em}
+.diagram .dg-eye.dg-c{fill:var(--cyan)}.diagram .dg-eye.dg-ink{fill:var(--text);letter-spacing:.06em}
+.diagram .dg-eye-o{fill:var(--aether-orange)}
+.diagram .dg-eye-map{fill:var(--muted);font-weight:700;letter-spacing:0}
+.diagram .dg-name{fill:var(--text);font-weight:800}
+.diagram .dg-sub{fill:var(--muted);font-weight:600}
+.diagram .dg-sub.dg-ink{fill:var(--text);font-weight:700}
+.diagram .dg-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:600}
+.diagram .dg-o{fill:var(--aether-orange)}
+.diagram .dg-c,.diagram .dg-sub.dg-c{fill:var(--cyan)}
+.diagram .dg-lab{fill:var(--muted);font-weight:800;letter-spacing:.08em}
+.diagram .dg-lab.dg-c{fill:var(--cyan)}
+.diagram .dg-legend{fill:var(--muted);font-weight:700}
+.diagram .dg-rule{stroke:var(--border);stroke-width:1.5}
+.diagram .dg-foot{fill:#8ea3c0;font-weight:600;font-style:italic}
+.diagram .dg-item{fill:var(--text);font-weight:600}
+.diagram .dg-l{fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.diagram .dg-l-flow{stroke:var(--cyan)}
+.diagram .dg-l-plain{stroke:var(--dg-line)}
+.diagram .dg-l-human{stroke:var(--aether-orange)}
+.diagram .dg-l-ret{stroke:var(--dg-line);stroke-dasharray:9 7}
+.diagram .dg-l-deny{stroke:var(--dg-red);stroke-dasharray:9 7;stroke-width:3}
+.diagram .dg-mk-f{fill:var(--cyan)}.diagram .dg-mk-p{fill:var(--dg-line)}.diagram .dg-mk-o{fill:var(--aether-orange)}.diagram .dg-mk-r{fill:var(--dg-red)}
+.diagram .dg-wait{fill:url(#dg-hatch);stroke:var(--aether-orange);stroke-width:2.5}
+.diagram .dg-hatch-bg{fill:color-mix(in srgb,var(--aether-orange) 10%,var(--bg))}
+.diagram .dg-hatch-line{stroke:color-mix(in srgb,var(--aether-orange) 30%,transparent);stroke-width:4}
+.diagram .dg-wait-t{fill:var(--aether-orange);font-weight:900;letter-spacing:.08em}
+.diagram .dg-wait-s{fill:var(--text);font-weight:700}
+.diagram .dg-bracket{fill:none;stroke:var(--muted);stroke-width:2}
+.diagram .dg-person path,.diagram .dg-person circle{fill:var(--muted)}
+.diagram .dg-person-o path,.diagram .dg-person-o circle{fill:var(--aether-orange)}
+.diagram .dg-num{fill:var(--bg);stroke:var(--cyan);stroke-width:2.5}
+.diagram .dg-num-t{fill:var(--text);font-weight:900}
+.diagram .dg-ai circle{fill:var(--bg);stroke:var(--cyan);stroke-width:2}
+.diagram .dg-ai text{fill:var(--cyan);font-size:12px;font-weight:900}
+.diagram .dg-rule-c{stroke:var(--cyan);stroke-width:3}.diagram .dg-rule-o{stroke:var(--aether-orange);stroke-width:3}
+.diagram .dg-divider{stroke:var(--border);stroke-width:2}
+.diagram .dg-x circle{fill:var(--bg);stroke:var(--dg-red);stroke-width:2.5}
+.diagram .dg-x path{stroke:var(--dg-red);stroke-width:3;stroke-linecap:round}
+.diagram .dg-deny-t{fill:#ffb3b3;font-weight:700}
+.diagram .dg-tick circle{fill:none;stroke:var(--ok);stroke-width:2.5}
+.diagram .dg-tick path{fill:none;stroke:var(--ok);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.diagram .dg-dot-allow{fill:var(--ok)}.diagram .dg-dot-ask{fill:var(--aether-orange)}.diagram .dg-dot-deny{fill:var(--dg-red)}
+.diagram .dg-lane-h{font-weight:900;letter-spacing:.06em}
+.diagram .dg-lane-h-allow{fill:var(--ok)}.diagram .dg-lane-h-ask{fill:var(--aether-orange)}.diagram .dg-lane-h-deny{fill:var(--dg-red)}
+.diagram .dg-ctx{fill:color-mix(in srgb,var(--violet) 6%,var(--bg));stroke:color-mix(in srgb,var(--violet) 70%,var(--border));stroke-width:2}
+.diagram .dg-ctx-t{fill:var(--violet);font-weight:900;letter-spacing:.12em}
+.diagram .dg-pass{fill:color-mix(in srgb,var(--ok) 10%,var(--bg));stroke:var(--ok);stroke-width:2}
+.diagram .dg-fail{fill:color-mix(in srgb,var(--dg-red) 8%,var(--bg));stroke:var(--dg-red);stroke-width:2}
+.diagram .dg-pass-t{fill:var(--ok);font-weight:900}.diagram .dg-fail-t{fill:var(--dg-red);font-weight:900}
+.diagram .dg-bar{fill:var(--surface2);stroke:var(--border);stroke-width:1.5}
+.diagram .dg-floor{fill:none;stroke:var(--aether-orange);stroke-width:4;stroke-linejoin:round}
+/* step-through: no glow; the active step gets a stronger border, the others step back */
+.diagram .dg-step{transition:opacity .35s}
+.diagram .dg-step.dg-pending{opacity:0}
+.diagram .dg-step.dg-dim{opacity:.32}
+.diagram.dg-mode-highlight .dg-step.dg-on .dg-n:not(.focal):not(.chip):not(.lane-ask):not(.lane-deny){stroke:var(--cyan);stroke-width:3.5}
+.diagram.dg-mode-highlight .dg-step.dg-on .dg-n.focal,.diagram.dg-mode-highlight .dg-step.dg-on .dg-n.lane-ask{stroke-width:4.5}
+.diagram.dg-mode-highlight .dg-step.dg-on .dg-n.chip{stroke:var(--cyan)}
+@media(prefers-reduced-motion:reduce){.diagram .dg-step,.diagram-figure{transition:none;animation:none}}
+.diagram-figure:has(figcaption) svg.diagram{max-height:calc(100vh - 435px)}
