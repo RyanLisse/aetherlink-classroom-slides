@@ -2165,7 +2165,7 @@ window.SLIDES = [
       "Keep traffic running for the three recovery checks.",
       "After LANDED, mark mitigated. Resolve with notes in A9."
     ],
-    "notes": "Within A8. The live demo used default recovery timing, about two minutes. An early failed check can coexist with later recovery. Do not close on NOT LANDED. The screenshot shows LANDED before a human changes incident state."
+    "notes": "Within A8. The live demo used default recovery timing, about two minutes. Only the half check may fail; full and double must both pass. The healthy shop still has occasional transient errors, so a successful rollback can end in NOT LANDED. Keep that incident active. Inspect the failed metric window and logs, then investigate or escalate. Do not repeat rollback or lower the limit to get green. This screenshot is a separate successful run and shows LANDED before a human changes incident state."
   },
   {
     "title": "Maintain: each incident becomes an eval",
