@@ -6,6 +6,7 @@ window.CLASSROOM_SESSIONS = [
   {id:'day-3-n8n',label:'Day 3 · n8n (Jessy)',href:'day3-n8n.html#1',deck:'day3-n8n.html',start:1},
   {id:'day-3-maarten-n8n',label:'Day 3 · n8n agents (Maarten)',href:'day3-maarten-n8n.html#1',deck:'day3-maarten-n8n.html',start:1},
   {id:'workshop-4',label:'Day 4 · Claude Agent SDK (Ryan)',href:'workshop4.html#1',deck:'workshop4.html',start:1},
+  {id:'day-4-maarten-n8n-to-claude',label:'Day 4 · n8n to Claude (Maarten)',href:'day4-maarten-n8n-to-claude.html#1',deck:'day4-maarten-n8n-to-claude.html',start:1},
   {id:'workshop-5',label:'Day 5 · AI-native SDLC (Ryan)',href:'workshop5.html#1',deck:'workshop5.html',start:1},
   {id:'hackathon-1',label:'Day 6 · Hackathon: thin slice (Ryan)',href:'workshop6.html#1',deck:'workshop6.html',start:1},
   {id:'day-6-team-project',label:'Day 6 · Team project (Jessy)',href:'day6-team-project.html#1',deck:'day6-team-project.html',start:1},
