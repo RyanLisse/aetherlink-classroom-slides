@@ -8,19 +8,23 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
-test('Workshop 5 retains its six usable Anatomy figures',()=>{
- const mapping=['bottleneck','loop','mcp','hooks','subagents','eval'];
- const figures=context.window.SLIDES.filter(s=>s.visual?.anatomy);
+test('Workshop 5 retains all eight built diagrams and the control-loop video',()=>{
+ const mapping=['bottleneck','loop','line-loop','control-loop','mcp','hooks','subagents','eval'];
+ const dctx={window:{}};vm.runInNewContext(read('workshop5-diagrams.js'),dctx);
+ const figures=context.window.SLIDES.filter(s=>s.visual?.diagram);
  assert.equal(figures.length,mapping.length);
  for(const id of mapping){
-  const slide=figures.find(s=>s.visual.anatomy.src===`assets/anatomy/${id}.html`);
+  const slide=figures.find(s=>s.visual.diagram.id===id);
   assert.ok(slide,`Missing ${id} figure`);
-  const a=slide.visual.anatomy,query='';
-  assert.equal(a.src,`assets/anatomy/${id}.html${query}`);
-  assert.equal(a.poster,`assets/anatomy/${id}.svg`);
-  for(const target of [a.src.split('?')[0],a.poster])assert.ok(existsSync(path.join(root,target)),target);
-  assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`${id} retains teaching content`);
+  const output=dctx.window.ALS_DIAGRAMS[id](slide);
+  assert.match(output.viewBox,/^0 0 1280 \d+$/);
+  assert.match(output.svg,/dg-step/);
+  assert.ok(slide.visual.diagram.title&&slide.notes&&slide.keyPoints.length,`${id} retains teaching content`);
  }
+ const media=figures.find(s=>s.visual.diagram.id==='control-loop').visual.media;
+ assert.equal(media.type,'video');
+ for(const target of [media.src,media.poster])assert.ok(existsSync(path.join(root,target)),target);
+ assert.ok(read('workshop5.html').includes('workshop5-diagrams.js'));
 });
 test('Workshop 4 wires its two Anatomy figures',()=>{
  const ctx={window:{}};vm.runInNewContext(read('workshop4-slides.js'),ctx);
@@ -35,22 +39,26 @@ test('Workshop 4 wires its two Anatomy figures',()=>{
   assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`${id} retains teaching content`);
  }
 });
-test('Workshop 5 includes real console screenshots and three core tasks',()=>{
+test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{
  const slides=context.window.SLIDES;
- for(const name of ['start','diagnosis','refusal','approval','landed','resolved']){
-  const src=`assets/workshop-5/console-${name}.png`;
+ for(const name of ['console-start','console-diagnosis','console-refusal','console-approval','console-landed','console-resolved','shop-healthy','shop-broken']){
+  const src=`assets/workshop-5/${name}.png`;
   const slide=slides.find(s=>s.visual?.image===src);
   assert.ok(slide,src);
   assert.equal(slide.visual.opener,'showcase');
   assert.ok(slide.visual.imageAlt&&slide.notes,`${name} has context`);
   assert.ok(existsSync(path.join(root,src)),src);
  }
- for(let n=1;n<=3;n++) assert.equal(slides.filter(s=>s.title.startsWith(`Core task ${n}:`)).length,1,`Core task ${n}`);
+ for(const title of ['Core 1: Investigate the evidence','Core 2: Build a change safely','Core 3: Judge the recovery']) assert.equal(slides.filter(s=>s.title===title).length,1,title);
  assert.equal(slides.filter(s=>s.title.startsWith('Assignment ')).length,0);
  const map=slides.find(s=>s.title==='One ticket, three core tasks');
- assert.equal(map.items.length,3);
- assert.ok(slides.find(s=>s.title==='Start here: one command').steps.some(s=>s.includes('npm start')));
- assert.ok(slides.some(s=>s.title==='Optional: Wire and prove the controls'));
+ assert.equal(map.items.filter(item=>item.label.startsWith('Core ')).length,3);
+ assert.equal(map.items.filter(item=>item.label==='Optional depth').length,1);
+ const setup=slides.find(s=>s.title==='Start the lab');
+ assert.ok(setup.steps.some(s=>s.includes('npm start')));
+ assert.match(setup.cards[0].body,/npm run checkpoint -- start\ncd \.lab\/checkpoints\/start\nnpm start -- --fast/);
+ assert.ok(slides.some(s=>s.title==='Go deeper: your own guard rule (optional)'));
+ assert.doesNotMatch(JSON.stringify(slides),/starter\.zip|checkpoint\.zip|git switch -c my\/workshop-5 w5-core-start/);
  assert.ok(slides.every(s=>s.notes?.trim()),'Every slide has facilitator notes');
 });
 test('Presenter uses posters before the legacy bot renderer',()=>{
@@ -88,7 +96,7 @@ function renderShowcase(visual){
 }
 test('Showcase links describe their image and preserve full-size navigation',()=>{
  const screenshots=context.window.SLIDES.filter(s=>s.visual?.opener==='showcase'&&s.visual.image);
- assert.equal(screenshots.length,6);
+ assert.equal(screenshots.length,8);
  const labels=screenshots.map(({visual})=>{
   const rendered=renderShowcase(visual);
   assert.equal(rendered.label,`${visual.imageAlt}: Open screenshot at full size`);

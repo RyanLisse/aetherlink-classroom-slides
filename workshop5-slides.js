@@ -1,5 +1,6 @@
 'use strict';
-/* Workshop 5 · AI-native SDLC. Open workshop5.html or workshop5-presenter.html. */
+/* Workshop 5 · AI-native SDLC with a local SRE agent.
+   Slides explain; CARD.md and the live hub are the execution guide. */
 window.SLIDES = [
   {
     "title": "Welcome to Workshop 5",
@@ -17,7 +18,7 @@ window.SLIDES = [
       "Welcome the room.",
       "Check the setup."
     ],
-    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node 22+ and Claude Code before today?\n3. If a person has no setup: do not fix it now. Help them at Assignment 1 and in the 11:00 break."
+    "notes": "Time: 10:00 · 1 min. Welcome the room. Ask who has Node 22+ and Git. Claude Code is optional for the offline lab. Help missing installations during Start the lab and the morning break."
   },
   {
     "title": "Goal of the day",
@@ -60,41 +61,46 @@ window.SLIDES = [
       "Three things to take home.",
       "The agent proposes. It never executes."
     ],
-    "notes": "Time: 10:01 · 2 min.\n1. Say: “Goal: your team can run a 2-day hackathon with Claude in W6–W7.”\n2. Show: the three badges. Say each one in one sentence.\n3. Say: “The agent reads alerts, logs, and metrics. It writes a diagnosis. It proposes a rollback in the console. Code changes use a PR or MR. It never executes.”\n4. Say: “The human gate: a named human approves. Not the agent.”\n5. Say: “At 15:40 you write your hackathon intent.md. You take the skills pack home.”"
+    "notes": "Time: 10:01 · 2 min. The SRE agent gathers evidence and proposes a next step; it does not create or merge a repair PR. A named human approves. A separate executor can roll back. Humans judge recovery and close the incident. Use this controlled loop as the model for the W6–W7 hackathon. The hackathon intent and skills pack are optional takeaways."
   },
   {
     "title": "What we do today",
     "kicker": "W5 · OPENING · 10:00–16:00",
-    "subtitle": "Three core tasks. One route for people and agents.",
+    "subtitle": "Concept. Demo. Your turn.",
     "type": "context",
     "visual": {
       "bot": "point",
       "place": "left",
       "dayRoute": [
-        "Start",
-        "Read evidence",
-        "Build safely",
-        "Judge recovery",
-        "Handoff"
+        "Recap",
+        "Why",
+        "Setup",
+        "Plan",
+        "Design",
+        "Build",
+        "Test",
+        "Deploy",
+        "Maintain",
+        "Hackathon"
       ]
     },
     "cards": [
       {
         "title": "Morning",
-        "body": "10:00 Use case and SDLC\n10:45 Start the lab\n11:15 Core 1: read evidence"
+        "body": "10:00 Welcome + W4 recap\n10:30 Why AI-native · use case\n10:50 Start the lab\n11:28 Core 1 · Investigate the evidence"
       },
       {
         "title": "Afternoon",
-        "body": "13:00 Core 2: build safely\n14:10 Core 3: live incident and recovery\n15:35 Review and handoff"
+        "body": "13:00 Build concepts\n14:00 Core 2 · Build a change safely\n15:18 Core 3 · Judge the recovery\n15:50 Close + hackathon bridge"
       }
     ],
     "tagline": "Breaks: 11:00, 12:00 (lunch), 14:40. Close at 15:50.",
     "keyPoints": [
-      "Breaks: 11:00, 12:00 lunch, 14:40.",
-      "Contract, hooks and extra eval cases are optional depth.",
-      "Participant card, facilitator run sheet, agent entry point."
+      "Three core tasks. The rest is optional depth.",
+      "The slides explain. The card is for doing.",
+      "Breaks: 11:00, 12:00, 14:40."
     ],
-    "notes": "Use FACILITATOR.md for the current schedule. Default route: three core tasks. Optional implementation slides are marked OPTIONAL; skip them until everyone finishes the core. Demonstrate each core task, let teams try it, then compare evidence. Keep PARTICIPANT.md beside the console. Coding agents read AGENTS.md and CLAUDE.md. No Git branches or model key are required in the core package."
+    "notes": "Time: 10:05 · 5 min.\n1. Say: “Today has three core tasks: investigate the evidence, build a change safely, judge the recovery. Everything else is optional depth.”\n2. Say: “The slides explain why. The participant card tells you what to do: CARD.md in the repo, or the hub at localhost:4320/hub.”\n3. Show: the breaks at 11:00, 12:00 and 14:40.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (13:52), /verify-this (15:00), /review-and-ship + /visual-pr (15:18), /handoff (15:45)."
   },
   {
     "title": "Last session’s recap · Workshop 4",
@@ -238,9 +244,8 @@ window.SLIDES = [
     "kicker": "W5 · WHY AI-NATIVE · FIG. 1",
     "type": "concept",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/bottleneck.html",
-        "poster": "assets/anatomy/bottleneck.svg",
+      "diagram": {
+        "id": "bottleneck",
         "title": "Delivery bottleneck",
         "caption": "Build gets faster. Decisions and checks still take time."
       }
@@ -301,9 +306,8 @@ window.SLIDES = [
     "type": "concept",
     "cards": [],
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/loop.html",
-        "poster": "assets/anatomy/loop.svg",
+      "diagram": {
+        "id": "loop",
         "title": "The AI-native loop",
         "caption": "The agent supports six stages. Humans set goals, direct, and approve."
       }
@@ -339,7 +343,10 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "pairs": true
+      "diagram": {
+        "id": "line-loop",
+        "title": "The line and the loop"
+      }
     },
     "keyPoints": [
       "Hours, not weeks.",
@@ -390,8 +397,8 @@ window.SLIDES = [
     "notes": "Time: 10:38 · 3 min.\n1. Show the right column. Say: “We do Test, Deploy, and Maintain this afternoon.”\n2. Say: “Today each box becomes a file in the repo.”\n3. Connect to the board: At the Deploy gate, a human checks the evidence and approves the release."
   },
   {
-    "title": "Each stage leaves evidence",
-    "subtitle": "Keep your intent, test results and human decisions.",
+    "title": "Each stage commits a file",
+    "subtitle": "The git history is your audit trail.",
     "cards": [
       {
         "title": "Plan → Design",
@@ -423,7 +430,7 @@ window.SLIDES = [
       "Review in a PR (GitHub) or MR (GitLab).",
       "No external tool."
     ],
-    "notes": "In the core route, save evidence locally. Git commits and PRs are optional depth, not prerequisites. Record actual results with npm run progress:note. Never edit PROGRESS.md directly. The progress checklist does not execute tests."
+    "notes": "Time: 10:41 · 2 min.\n1. Say: “Each arrow has a file. You can show each file.”\n2. Say: “Together the files are the audit trail: who decided what, from which evidence.”\n3. Say: “All files are in the repo. Review is a PR on GitHub or an MR on GitLab.”"
   },
   {
     "title": "Why build an on-call agent?",
@@ -586,7 +593,7 @@ window.SLIDES = [
   {
     "title": "The use case on one page",
     "kicker": "W5 · THE USE CASE · 5 / 5 · THE INTENT",
-    "subtitle": "Use this shape for your intent in Core task 1.",
+    "subtitle": "The intent.md shape. Write your own in optional depth A2.",
     "type": "context",
     "cards": [
       {
@@ -629,31 +636,36 @@ window.SLIDES = [
     "layout": "steps",
     "items": [
       {
-        "label": "1 Read evidence",
-        "caption": "Intent and references",
-        "detail": "Read fixture INC-1001, cite its records and set the human boundary."
+        "label": "Core 1 · Investigate",
+        "caption": "check the evidence",
+        "detail": "Break the shop. The console opens the incident. Check every reference against the data. Find what the agent cannot see."
       },
       {
-        "label": "2 Build safely",
-        "caption": "One read-only tool",
-        "detail": "Restore list_deploys, prove red-to-green tests and verify the pipeline."
+        "label": "Core 2 · Build + test",
+        "caption": "give the agent its eyes",
+        "detail": "Rebuild the read-only list_deploys tool test-first. Tests, bench and trace prove it. The diagnosis changes from investigate-more to rollback."
       },
       {
-        "label": "3 Judge recovery",
-        "caption": "Humans decide",
-        "detail": "Investigate a live incident. Approve and execute once. Close only after recovery, or record a safe stop."
+        "label": "Core 3 · Judge the recovery",
+        "caption": "a human signs and closes",
+        "detail": "Rebuild the approval gate. Approve with your name. Execute. Read the recovery checks. Close, or stop on NOT LANDED."
+      },
+      {
+        "label": "Optional depth",
+        "caption": "intent · spec · hooks · bench · git gate",
+        "detail": "intent.md, spec.md, your own guard rule, a bench case, the git gate, your hackathon intent.md."
       }
     ],
-    "detail": "Use PARTICIPANT.md beside the console. A1–A9 remain optional depth.",
+    "detail": "Click a task to see what you do for the incident.",
     "visual": {
       "stepKeys": true
     },
     "keyPoints": [
-      "The SRE agent is the example; the SDLC is the lesson.",
-      "Controls stay intact in the core starter.",
-      "A documented safe stop is a valid result."
+      "Three core tasks on one incident.",
+      "Each core passes through the SDLC loop.",
+      "Lost? Open the card: CARD.md or localhost:4320/hub."
     ],
-    "notes": "Show the three outcomes, not nine mandatory assignments. The core starter cuts only A5 list_deploys. Spec, chat, hooks and executor controls are already implemented. The full historical workshop/start route is separate optional depth. Each outcome still exercises the SDLC: evidence and intent, safe build and tests, human gate and maintenance. Catch-up uses a new checkpoint folder, never a restore over participant edits."
+    "notes": "Time: 10:48 · 1 min.\n1. Say: “This is the map for today. Three core tasks, one incident.”\n2. Click: Core 1 and Core 3. Say: “At 11:28 you check the evidence. At 15:18 you sign the rollback and judge if it landed.”\n3. Say: “The slides explain. The card tells you what to do, what you should see, how to check it, and what to do when you are stuck.”\n4. Say: “When you are lost, open the hub. It shows the next allowed step of your incident.”"
   },
   {
     "title": "Our project: a local AI SRE agent",
@@ -695,6 +707,36 @@ window.SLIDES = [
     "notes": "Time: 10:49 · 1 min.\n1. Say: “Today you build an on-call agent for a small checkout shop. It runs on your laptop. No cloud, no API key.”\n2. Say: “It reads logs, metrics, deploys and the diff. It cannot change anything.”\n3. Say: “The console shows the diagnosis. Every claim has a reference. You can challenge it in chat.”\n4. Say: “Approve, execute and resolve are buttons with your name. Never chat commands.”\n5. Show: https://github.com/RyanLisse/sre-oncall-agent."
   },
   {
+    "title": "The shop: what customers see",
+    "kicker": "W5 · THE SHOP · REAL LOCAL UI",
+    "subtitle": "Buy sends a real local checkout request. No payment is taken.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-5/shop-healthy.png",
+      "imageAlt": "Healthy demo shop with three products, Buy buttons, browser traffic counters and separate operator fault controls.",
+      "imageLink": "localhost:4310 · local demo shop",
+      "wideImage": true,
+      "bot": "point",
+      "place": "under"
+    },
+    "cards": [
+      {
+        "title": "Try one checkout",
+        "body": "Open localhost:4310. Click Buy. Read the result and revision."
+      },
+      {
+        "title": "Read the right window",
+        "body": "Shop counters: this browser, last 30 s. Console: server telemetry."
+      }
+    ],
+    "keyPoints": [
+      "Try one checkout: Open localhost:4310. Click Buy. Read the result and revision.",
+      "Read the right window: Shop counters: this browser, last 30 s. Console: server telemetry."
+    ],
+    "notes": "Project preview. Show the real shop UI, separate from the SRE console. Headphones, Watch and Backpack all call the same demo checkout endpoint; these are not real payments or an inventory system. The shop UI samples its own checkout requests, not all traffic. Its error-rate and latency counters use the last 30 seconds; the chart uses 60 seconds. npm start also runs terminal traffic. The Simulate customers checkbox controls only this browser. A healthy mode still has occasional transient errors."
+  },
+  {
     "title": "What you build: the on-call console",
     "kicker": "W5 · OUR PROJECT · THE CONSOLE",
     "subtitle": "Evidence first. Buttons for decisions. Chat for questions.",
@@ -702,7 +744,7 @@ window.SLIDES = [
     "visual": {
       "opener": "showcase",
       "image": "assets/workshop-5/console-diagnosis.png",
-      "imageLink": "localhost:4320 · npm run console",
+      "imageLink": "localhost:4320 · solved reference",
       "stagger": "pop",
       "compact": true,
       "imageAlt": "Live checkout diagnosis with evidence references, pending approval and a disabled Execute rollback button.",
@@ -723,7 +765,7 @@ window.SLIDES = [
       "Mutations are buttons, not chat.",
       "A human resolves. The agent only proposes a lesson."
     ],
-    "notes": "Within the project introduction. Show the real local console screenshot. The shop is an HTTP API, not a storefront. The console is the UI. This solved example uses live traffic and the offline scripted runtime. The live incident ID differs from fixture INC-1001. Point at the diagnosis, evidence and pending approval. Click the screenshot to inspect it at full size. A fresh core starter opens with no incidents. Inject the documented bad deploy only when the live exercise begins."
+    "notes": "Project preview: a real local console capture from the solved reference. The separate shop UI runs on port 4310; this console runs on port 4320. The offline runtime uses live telemetry, not a model. The starter cannot yet see deploys, so its first diagnosis has a data gap instead of this solved rollback proposal. Evidence references are text. Click the image to enlarge. Approval and execution are separate human actions."
   },
   {
     "title": "In production: the same rules",
@@ -754,7 +796,7 @@ window.SLIDES = [
     "tagline": "Same rules: read-only tools, evidence per claim, humans deploy fixes and close incidents.",
     "keyPoints": [
       "Same loop, different signals.",
-      "Read-only tools. No mutation tools.",
+      "Four read tools. No mutation tools.",
       "Humans close incidents."
     ],
     "visual": {
@@ -802,21 +844,21 @@ window.SLIDES = [
       "All work is in the repo.",
       "Maximum human in the loop."
     ],
-    "notes": "Time: 10:52 · 1 min.\n1. Say the four rules.\n2. Say: “The lab runs native on your laptop with Node and Claude Code. It runs the same on Windows, macOS, and Linux.”\n3. Say: “No API key needed. The agent runs offline on a scripted runtime. A model is optional.”\n4. Say: “Your own Claude account works. If your company requires Vertex AI, use Vertex. Follow your company setup instructions. This lab itself needs Node 22+; Docker and WSL are not required.”"
+    "notes": "Time: 10:52 · 1 min.\n1. Say the four rules.\n2. Say: “The lab runs native on your laptop with Node and Claude Code. It runs the same on Windows, macOS, and Linux.”\n3. Say: “No API key needed. The agent runs offline on a scripted runtime. A model is optional.”\n4. Say: “Your own Claude account works. If your company requires Vertex AI, use Vertex. INSTALL.md has the steps.”"
   },
   {
-    "title": "Your data, your policy",
+    "title": "Use only approved data",
     "kicker": "W5 · DISCLAIMER · READ ALONG",
-    "subtitle": "AetherLink does not receive, collect, or keep your data.",
+    "subtitle": "The offline lab uses local demo data. Your company policy still applies.",
     "type": "context",
     "cards": [
       {
-        "title": "External sources",
-        "body": "We are not responsible for external sources or tools."
+        "title": "Local exercise",
+        "body": "Use the supplied fixtures and local shop. Do not paste secrets or customer data."
       },
       {
-        "title": "External data",
-        "body": "You may get external data. Your company policy applies. You are responsible."
+        "title": "External tools",
+        "body": "A coding assistant or real model can send data externally. Check your policy and provider settings first."
       }
     ],
     "visual": {
@@ -837,49 +879,44 @@ window.SLIDES = [
       "The README and handout have the same text.",
       "archify gets external code."
     ],
-    "notes": "Time: 10:53 · 1 min.\n1. Read the subtitle and the two cards aloud.\n2. Explain: the lab uses fictional local data. Before external integrations, check your company policy.\n3. Say: “archify in the full skills pack gets external code.”\n4. Say: “If you are not sure, ask your security or IT team first.”"
+    "notes": "Use synthetic lab data. The offline runtime makes no model call. A coding assistant, an external skill or an explicitly selected model is a separate integration; do not promise that those services retain no data. Follow company policy and provider terms."
   },
   {
-    "title": "Start here: one command",
+    "title": "Start the lab",
     "kicker": "W5 · SETUP · YOUR TURN",
-    "subtitle": "Extract the starter. Start the local lab. No Git required.",
+    "subtitle": "One start command after setup. Offline. No API key.",
     "repo": {
-      "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/PARTICIPANT.md",
-      "label": "Participant card · use the package supplied by your facilitator"
+      "url": "https://github.com/RyanLisse/sre-oncall-agent",
+      "label": "sre-oncall-agent · current revision + isolated starter"
     },
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Extract starter.zip into a new folder.",
-      "Open a terminal beside package.json. Run npm start.",
-      "Open localhost:4320. Keep the launcher running.",
-      "Read WORKSHOP-PACKAGE.md. Only the A5 tool exercise is cut."
+      "Clone the lab. Create the isolated start checkpoint.",
+      "Enter .lab/checkpoints/start. Run npm start -- --fast.",
+      "Open localhost:4320/hub. Keep the lab terminal open.",
+      "Use a second terminal in the starter directory for tasks."
     ],
-    "expected": "Shop and traffic running. Console open. No incident yet.",
+    "expected": "✓ Lab running. The hub opens. Shop healthy.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Terminal 1",
-        "body": "npm start"
-      },
-      {
-        "title": "Keep beside the console",
-        "body": "PARTICIPANT.md\nWORKSHOP.md\nAgents: AGENTS.md"
+        "title": "In the lab repo",
+        "body": "git clone https://github.com/RyanLisse/sre-oncall-agent.git\ncd sre-oncall-agent\nnpm run checkpoint -- start\ncd .lab/checkpoints/start\nnpm start -- --fast"
       }
     ],
     "visual": {
-      "bot": "point",
-      "place": "under",
+      "shotLabel": "sre-oncall-agent · npm start",
       "cmdCards": [
         0
       ]
     },
     "keyPoints": [
-      "Node 22+ and npm. First start needs npm access.",
-      "No API key required. Offline output is scripted.",
-      "Ctrl+C stops your launcher. Restart after edits."
+      "One command starts shop, traffic and console.",
+      "Ctrl+C stops all three.",
+      "Breaking the shop is a separate, deliberate step."
     ],
-    "notes": "10:45–11:00. Distribute the generated starter.zip, not a GitHub source archive or the historical workshop/start branch. Ask participants to extract into a new folder and run npm start. The launcher checks Node/dependencies and starts shop, traffic and console. It does not inject chaos. Installation needs npm access once. If a port is busy, stop only your own previous launcher. Do not kill unknown processes. Claude Code is optional; participants can implement TypeScript by hand. npm run progress is a checklist, not a test runner."
+    "notes": "Time: 10:50 · 10 min, with setup support during the break. Use Node 22+ and Git. Follow CARD.md from the current revision, not an old w5-core tag. npm run checkpoint -- start creates an isolated worktree with two deliberate exercises. It never overwrites an existing copy. Enter that directory before npm start -- --fast. The launcher installs dependencies, generates fixtures, and starts shop, traffic and console. Open the hub, then both UIs. The console reloads on source edits; shop state stays unchanged. Ctrl+C stops owned processes. A busy port means another copy is running: find and stop that terminal. Optional coding assistant: run claude then /status in a second terminal in this same starter directory. No Claude account is needed for the offline lab; the two code exercises can be completed in an editor."
   },
   {
     "title": "Start result: an empty console",
@@ -901,8 +938,8 @@ window.SLIDES = [
         "body": "Shop health in the header.\nNo active incidents before the fault."
       },
       {
-        "title": "Check",
-        "body": "localhost:4310/health\nAn empty list is not proof of uptime."
+        "title": "Open both",
+        "body": "Shop: localhost:4310\nConsole: localhost:4320\nCard: localhost:4320/hub"
       }
     ],
     "keyPoints": [
@@ -926,7 +963,7 @@ window.SLIDES = [
       "bot": "wave",
       "place": "beside"
     },
-    "notes": "Time: 11:00 · 15 min.\n1. Start the countdown.\n2. Help each person with a red setup check. Use the A1 failures in FACILITATOR.md.\n3. At 11:15, start Plan. Pair each person without setup with a neighbor."
+    "notes": "Time: 11:00 · 15 min.\n1. Start the countdown.\n2. Help each person with a red setup check. Use the Start failures in FACILITATOR.md.\n3. At 11:15, continue with the use case. Pair each person without setup with a neighbor."
   },
   {
     "title": "Before code: one file",
@@ -1048,9 +1085,17 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "stepKeys": true,
-      "humanStep": 2,
-      "reach": true
+      "diagram": {
+        "id": "control-loop",
+        "title": "The agent as a control loop: set point, actuator, sensor, compare, human gate"
+      },
+      "media": {
+        "type": "video",
+        "src": "assets/workshop-5/media/control-loop.mp4",
+        "poster": "assets/workshop-5/media/control-loop.jpg",
+        "alt": "Animated control loop: set point, act, sense, compare, and a human decide gate."
+      },
+      "mediaDefault": "diagram"
     },
     "prompt": "/design-control-loop for the SRE agent on checkout-api — one round, then map to intent.md",
     "keyPoints": [
@@ -1061,35 +1106,64 @@ window.SLIDES = [
     "notes": "Time: 11:25 · 3 min. Showcase 1.\n1. Show: paste the prompt.\n2. Say: “Claude reads the repo, incidents/, and REVIEW.md first.”\n3. Answer the questions (3 or fewer). Reject one recommended answer on purpose.\n4. Show: the table that maps each part to an intent.md field. The hook asks before the edit.\n5. Say: “The agent is a control loop. The sensor is the MCP. The actuator is a human with a PR. Today we build each part.”\n6. Stop after one round.\n7. If it takes too long: say “one round”, or use /grilling intent.md.\n8. Note: the lab version is phase A–B of the HumanLayer skill (MIT). It has no CI, key, or bypass parts."
   },
   {
-    "title": "Core task 1: Read the evidence",
+    "title": "Core 1: Investigate the evidence",
     "kicker": "W5 · PLAN · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Open the bad-deploy fixture and its telemetry file.",
-      "Record deploy, metric and log references in docs/diagnosis-live.md.",
-      "Write your boundary and three verifiable checks in intent.md.",
-      "Ask a neighbour to find each cited record."
+      "Shop: click Bad deploy v2.15.0 once. OR run the card’s chaos command.",
+      "Wait about one minute. Open the new incident.",
+      "Read the banner, then the diagnosis. Note the data gap.",
+      "Card steps 1.1–1.2."
     ],
-    "expected": "Fixture evidence and a clear human boundary. No invented live result.",
+    "expected": "An incident opened by the listener. A diagnosis with references and a list_deploys data gap.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Your notes",
-        "body": "Fixture analysis\nObservation versus hypothesis\nThree verifiable checks"
+        "title": "Card · core 1",
+        "body": "1.1 Break the shop\n1.2 Read banner + diagnosis\n1.3 Challenge in chat\n1.4 Save + progress note"
       }
     ],
     "visual": {
-      "bot": "point",
-      "place": "under"
+      "shotLabel": "Console · incident banner + diagnosis"
     },
     "keyPoints": [
-      "Cite records, not guesses.",
-      "The agent proposes. Humans decide.",
-      "No PR or Git branch required."
+      "You break the shop. The listener detects it.",
+      "The agent is never the detector.",
+      "A missing signal is unknown, not healthy."
     ],
-    "notes": "11:15–12:00. Demonstrate one deploy reference, then let teams inspect the fixture. Label these observations as fixture analysis. Live incidents get another ID. Help teams distinguish facts from hypotheses. Ask each team to read its boundary and checks. If an agent requests approval to edit intent.md, the human confirms. Catch-up does not mean copying someone else's observations.",
-    "subtitle": "INC-1001: find the records, then write your intent."
+    "notes": "Time: 11:28 · 15 min.\n1. Let them do: card steps 1.1 and 1.2.\n2. Say: “You chose when to break the shop. The deterministic listener opened the incident. The agent did not.”\n3. Point at the diagnosis: investigate-more, low confidence, and the data gap “list_deploys: no deploys in the window”.\n4. Say: “The agent cannot see the deploy. It says so instead of guessing. That gap is the reason for core 2.”\n5. If no incident after three minutes: the lab terminal must show traffic lines. Without --fast it takes five minutes.\n6. Optional depth for fast teams: intent.md (card, go deeper A2). Use either the shop button or npm run chaos -- deploy v2.15.0 --mode bad-deploy, not both. The shop chart and console use different windows; their percentages need not match.",
+    "subtitle": "Break the shop. Let the console raise the incident. Check every claim."
+  },
+  {
+    "title": "Break the shop, then inspect the incident",
+    "kicker": "W5 · THE SHOP · REAL LOCAL UI",
+    "subtitle": "The fault button is your operator lever. It is not an agent tool.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-5/shop-broken.png",
+      "imageAlt": "Demo shop after Bad deploy v2.15.0, with a bad-deploy revision badge and observed checkout errors.",
+      "imageLink": "localhost:4310 · local demo shop",
+      "wideImage": true,
+      "bot": "think",
+      "place": "under"
+    },
+    "cards": [
+      {
+        "title": "Make one change",
+        "body": "Click Bad deploy v2.15.0 once, OR use the chaos command."
+      },
+      {
+        "title": "Do not reset to pass",
+        "body": "Keep traffic running. Recovery goes through the console approval gate."
+      }
+    ],
+    "keyPoints": [
+      "Make one change: Click Bad deploy v2.15.0 once, OR use the chaos command.",
+      "Do not reset to pass: Keep traffic running. Recovery goes through the console approval gate."
+    ],
+    "notes": "Within core 1. The screenshot shows a real bad-deploy state; sampled errors vary. Do not click the button as well as running the command: that creates another deploy record and confuses the evidence. Wait for the console listener, about one minute with --fast, five minutes by default. A single Buy can still pass because this fault affects about 12% of requests. Other fault buttons are optional experiments, not the core route. Reset to healthy changes the fault mode without rolling back the revision; it is not evidence of approved recovery. Do not use reset to force a green recovery. Fresh repeats use a new disposable lab copy."
   },
   {
     "title": "spec.md",
@@ -1127,11 +1201,11 @@ window.SLIDES = [
       "The contract limits the agent output.",
       "Test first. Then the contract."
     ],
-    "notes": "Time: 11:40 · 3 min.\n1. Progress check (30 s).\n2. Say: “spec.md describes a verdict. The agent cannot return a field that the contract does not have.”\n3. Show: draft_only: true and human_approval_required: true. Say: “The contract marks the verdict as a proposal. Read-only tools and the separate executor enforce the action boundary.”\n4. Show the paths: docs/spec.md and src/contract.ts."
+    "notes": "Time: 11:40 · 3 min.\n1. Progress check (30 s).\n2. Say: “spec.md describes a verdict. The agent cannot return a field that the contract does not have.”\n3. Show: draft_only: true and human_approval_required: true. Say: “The type makes execution impossible. A prompt only makes a promise.”\n4. Show the paths: docs/spec.md and src/contract.ts."
   },
   {
-    "title": "Optional: red contract → green",
-    "kicker": "W5 · OPTIONAL DEPTH",
+    "title": "Watch: red contract → green",
+    "kicker": "W5 · DESIGN · DEMO",
     "subtitle": "First a failing test. Then the contract.",
     "type": "concept",
     "cards": [
@@ -1141,7 +1215,7 @@ window.SLIDES = [
       },
       {
         "title": "Green",
-        "body": "Edit the contract and offline verdicts. Run the focused A3 test, then npm test."
+        "body": "Edit src/contract.ts. npm test is green."
       }
     ],
     "visual": {
@@ -1168,38 +1242,70 @@ window.SLIDES = [
       "Show the red output.",
       "The console still renders."
     ],
-    "notes": "Optional advanced route only. Skip this implementation block in the core package: controls are already complete. Use WORKSHOP-ADVANCED.md in a separate historical starter copy, never overwrite core participant work.\n\nTime: 11:43 · 4 min. Use a disposable starter copy. Open test/workshop/contract.test.ts. Run npx tsx --test test/workshop/contract.test.ts and inspect the missing evidence rules. Add customer_impact to the contract, runtime verdicts and test fixtures. Run the focused test again, then npm test and npm run typecheck. Other assignment tests stay red. Show separate test and implementation commits. Restart the console after source edits."
+    "notes": "Time: 11:43 · 4 min.\n1. Show: open the contract test in test/. Add one rule from docs/spec.md.\n2. Show: run the test. It is red. Show the error line.\n3. Show: edit src/contract.ts. Confirm the edit.\n4. Show: run the test. It is green.\n5. Show: git log. The test commit is before the contract commit."
   },
   {
-    "title": "Optional: Spec + contract green",
-    "kicker": "W5 · OPTIONAL DEPTH",
-    "subtitle": "INC-1001: decide what a diagnosis must contain. Test first.",
+    "title": "Core 1: Check the claims",
+    "kicker": "W5 · DESIGN · YOUR TURN",
+    "subtitle": "Every claim has a reference. Find each one in the data.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Write docs/spec.md. One example per field.",
-      "npm run test:workshop: the A3 contract tests are red.",
-      "Rebuild the evidence rules in src/contract.ts (TODO A3).",
-      "Add customer_impact in src/contract.ts, src/runtime.ts and test fixtures. Green. PR/MR."
+      "Find each reference in demo/data/telemetry.json.",
+      "Search the file for v2.15.0: there was a deploy.",
+      "Chat: “Could this be something other than the deployment?”",
+      "Save docs/diagnosis-live.md. npm run progress:note."
     ],
-    "expected": "A3 tests green. npm test still fail 0. The test commit is first.",
-    "stepsHeading": "Optional advanced route:",
+    "expected": "Every reference found in the data. docs/diagnosis-live.md. A progress note that names what you checked.",
+    "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "You write",
-        "body": "docs/spec.md\nsrc/contract.ts\ntest/workshop/contract.test.ts"
+        "title": "Commands",
+        "body": "npm run progress:note -- \"Core 1: <what you verified>\""
       }
     ],
     "visual": {
-      "shotLabel": "Then: src/contract.ts",
-      "tree": 0
+      "shotLabel": "demo/data/telemetry.json",
+      "cmdCards": [
+        0
+      ]
     },
     "keyPoints": [
-      "Red first.",
-      "A claim needs a reference.",
-      "A missing signal is unknown, not healthy."
+      "References are text, not links.",
+      "Offline chat is a scripted summary.",
+      "Do not approve yet: nothing is safe to execute."
     ],
-    "notes": "Optional advanced route only. Skip this implementation block in the core package: controls are already complete. Use WORKSHOP-ADVANCED.md in a separate historical starter copy, never overwrite core participant work.\n\nTime: 11:47 · 12 min. Finish after lunch if needed.\n1. Let them do: each team writes docs/spec.md from intent.md.\n2. Then: npm run test:workshop. Run npx tsx --test test/workshop/contract.test.ts. The missing-rule tests are red; the complete-verdict example already passes.\n3. They rebuild the rules in src/contract.ts (TODO(A3)): a rollback needs a deploys evidence line, a strong proposal needs two sources, low confidence cannot carry a strong proposal, evidence needs at least one line, high confidence is refused while data_gaps exist, and customer_impact is required and non-empty.\n3a. customer_impact is required, so the offline verdicts in src/runtime.ts and the fixtures in test/contract.test.ts need it too. Changing only src/contract.ts leaves the runtime and test fixtures incomplete.\n4. Check: the A3 tests go green; npm test stays fail 0; npm run typecheck is clean.\n5. Check: npm run investigate -- fixtures/incidents/bad-deploy.json --dry-run still prints a diagnosis.\n6. Another team reads the spec against intent.md.\n7. Catch-up: git checkout w5-step-2-spec-contract -- src/contract.ts src/runtime.ts src/prompts.ts src/cli.ts console/index.html test/contract.test.ts docs/spec.md."
+    "notes": "Time: 11:47 · 13 min.\n1. Let them do: card steps 1.3 and 1.4.\n2. Walk to each team. Ask: “Show me where metrics:<time> is in the data.”\n3. Say: “ruled_out does not claim the deploy is innocent. It cannot: the agent never saw it.”\n4. Gate: a progress note that only says “done” is a wish. It must name the references that were checked.\n5. Optional depth: docs/spec.md and the contract tests (card, go deeper A3)."
+  },
+  {
+    "title": "Core check: chat refuses a rollback",
+    "kicker": "W5 · EXPECTED RESULT",
+    "subtitle": "Questions go in chat. Actions require named controls.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-5/console-refusal.png",
+      "imageAlt": "Questions go in chat. Actions require named controls.",
+      "imageLink": "Local SRE console · click the image to enlarge",
+      "wideImage": true,
+      "bot": "think",
+      "place": "under"
+    },
+    "cards": [
+      {
+        "title": "Try",
+        "body": "Type \"roll back now\" in chat."
+      },
+      {
+        "title": "Expect",
+        "body": "A refusal. No deployment change."
+      }
+    ],
+    "keyPoints": [
+      "Chat refuses mutations before any model call.",
+      "A refusal does not change the deployment."
+    ],
+    "notes": "The core starter already includes chat refusal. Type the exact request roll back now. The response refuses and points to human controls. This is not an A4 implementation exercise: optional A4 concerns the coding-agent guard hook. Check the deployment is unchanged."
   },
   {
     "title": "Lunch",
@@ -1219,31 +1325,42 @@ window.SLIDES = [
     "notes": "Time: 12:00 · 60 min.\n1. Start the countdown.\n2. Visit each person who was behind at the progress check.\n3. At 13:00, start Build 1."
   },
   {
-    "title": "AGENTS.md + CLAUDE.md",
+    "title": "CLAUDE.md",
     "kicker": "W5 · DEFINITION · BUILD 1",
-    "subtitle": "One starting point. Exact commands. Fixed human boundaries.",
+    "subtitle": "The briefing that each session reads first.",
     "type": "concept",
     "cards": [
       {
-        "title": "AGENTS.md",
-        "body": "Identify starter or checkpoint.\nFollow one core task at a time."
+        "title": "Definition",
+        "body": "People write it. Agents follow it. Commands: npm start · npm run verify · npm run bench."
       },
       {
-        "title": "CLAUDE.md",
-        "body": "Read the safety rules.\nNever approve or close for a human."
+        "title": "Sections",
+        "body": "Commands\nRules\nVerifying"
       }
     ],
     "tagline": "The same mistake two times? Add a rule.",
     "visual": {
-      "bot": "think",
-      "place": "under"
+      "mdfile": 1,
+      "guides": [
+        [
+          "🧭",
+          "CLAUDE.md",
+          "guides"
+        ],
+        [
+          "🔒",
+          "hooks",
+          "enforce"
+        ]
+      ]
     },
     "keyPoints": [
       "Always loaded.",
       "Keep it short.",
       "People maintain it."
     ],
-    "notes": "The coding agent starts at AGENTS.md, then reads CLAUDE.md. It gets the same task route and verification commands as the participant. It must identify the package before editing, preserve work, report blockers and stop at human decisions. The human runs approval, execution and closure in the console."
+    "notes": "Time: 13:00 · 3 min.\n1. Progress check (30 s): run npm run progress for the current checks. Open PROGRESS.md for the latest dated evidence. Ask which current check supports it. Do not call it verified from an agent claim.\n2. Show: the lab CLAUDE.md. Show the commands, the rules (“propose, never execute”), and how to verify.\n3. Say: “If the agent makes the same mistake two times, add the rule here.”\n4. Say: “AGENTS.md, PROGRESS.md, and SOLO.md are next to CLAUDE.md.”"
   },
   {
     "title": "PROGRESS.md",
@@ -1282,7 +1399,7 @@ window.SLIDES = [
       "Dated log entries preserve history. Never rewrite them.",
       "A correction gets its own timestamp and evidence."
     ],
-    "notes": "Time: 13:03 · 3 min.\n1. Show: run npm run progress. It reads current evidence and writes nothing.\n2. Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made.\n3. Read the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and add the new evidence.”\n6. Say: “A historical entry is not current status. Run the status command for file-pattern hints, then run the tests. Append your own checked result with npm run progress:note -- \"A3: contract tests passed\".”"
+    "notes": "Time: 13:03 · 3 min.\n1. Show: run npm run progress. It reads current evidence and writes nothing.\n2. Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made.\n3. Read the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and add the new evidence.”\n6. Say: “A historical entry is not current status. Run the status command for current evidence.”"
   },
   {
     "title": "MCP",
@@ -1301,11 +1418,10 @@ window.SLIDES = [
     ],
     "tagline": "No writes. Every result is saved as evidence.",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/mcp.html",
-        "poster": "assets/anatomy/mcp.svg",
+      "diagram": {
+        "id": "mcp",
         "title": "Read-only MCP",
-        "caption": "Five local tools read incident data. They do not write or use the network."
+        "caption": "Four local tools read incident data. They do not write or use the network."
       }
     },
     "keyPoints": [
@@ -1318,16 +1434,20 @@ window.SLIDES = [
   {
     "title": "Watch: the tools in the trace",
     "kicker": "W5 · BUILD 1 · DEMO",
-    "subtitle": "Start the console. Start an investigation. Read the calls.",
+    "subtitle": "Use the running console. Start an investigation. Read the calls.",
     "type": "concept",
     "cards": [
       {
-        "title": "Prepare",
-        "body": "Solved facilitator copy. Shop and traffic running."
+        "title": "1 · Open",
+        "body": "Keep npm start running.\nOpen localhost:4320."
       },
       {
-        "title": "Read the trace",
-        "body": "metrics → deploys → diff → logs"
+        "title": "2 · Ask",
+        "body": "New investigation\n“Investigate checkout errors”"
+      },
+      {
+        "title": "3 · Read",
+        "body": "Trace: deploys → metrics\n→ diff → logs"
       }
     ],
     "visual": {
@@ -1343,7 +1463,7 @@ window.SLIDES = [
       "Data before theory: deploys and metrics first.",
       "No tool can write."
     ],
-    "notes": "Time: 13:09 · 3 min. Use the separate solved facilitator copy with shop and traffic already running. Do not use the incomplete participant copy for this demo. Open a live incident and read the trace: summarize_metrics, list_deploys, get_diff, search_logs. Tool names and inputs are shown, not returned IDs. Match the diagnosis references to demo/data/telemetry.json. Show src/tools.ts: no tool mutates the shop. Participants build list_deploys in A5."
+    "notes": "Time: 13:09 · 3 min. Keep npm start running; use the existing console at http://localhost:4320. Do not start a second server. Click New investigation and type Investigate checkout errors. Read the trace: list_deploys and summarize_metrics come before search_logs. Show src/tools.ts: none of these tools writes. On the starter, missing deploy data is intentional. The complete trace and rollback proposal are the solved reference, not the expected core 1 result."
   },
   {
     "title": "skills",
@@ -1477,9 +1597,8 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/hooks.html",
-        "poster": "assets/anatomy/hooks.svg",
+      "diagram": {
+        "id": "hooks",
         "title": "Allow, ask, deny",
         "caption": "The lab hook checks supported tool calls. Named approval requests confirmation; merge stays blocked."
       }
@@ -1533,23 +1652,22 @@ window.SLIDES = [
     "notes": "Time: 13:25 · 5 min.\n1. Show: paste the prompt.\n2. Show: three denies. Read each reason aloud.\n3. Show: approvals/audit.jsonl has three new lines.\n4. If the hook does not run: the project is not trusted. Start claude in the repo and accept trust.\n5. If Node is missing on the laptop: install Node 22 LTS or newer."
   },
   {
-    "title": "Optional: Wire and prove the controls",
-    "kicker": "W5 · OPTIONAL DEPTH",
+    "title": "Go deeper: your own guard rule (optional)",
+    "kicker": "W5 · BUILD 1 · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Rebuild the mutation refusal in src/chat.ts (TODO A4).",
-      "Ask chat “roll back now”. It refuses.",
-      "By hand: guard.mjs denies edits to bench/ratchet.json.",
-      "test:workshop A4 green. test:hooks green.",
-      "Write docs/decisions/D01-*.md. Open a PR/MR."
+      "Behind on core 1? Finish it first.",
+      "Add one deny rule of your own to .claude/hooks/guard.mjs. By hand.",
+      "Make the agent hit it. Find the deny in approvals/audit.jsonl.",
+      "Write docs/decisions/D01-*.md."
     ],
-    "expected": "Chat refuses mutations. A deny in approvals/audit.jsonl.",
-    "stepsHeading": "Optional advanced route:",
+    "expected": "Core 1 done for everyone. Optional: a deny line from your own rule.",
+    "stepsHeading": "Do this now:",
     "cards": [
       {
         "title": "npm run test:hooks",
-        "body": "curl to a URL → deny\nread .env → deny\nself-approval → deny\nyour rule: edit bench/ratchet.json → deny"
+        "body": "curl to a URL → deny\nread .env → deny\nself-approval → deny\nedit bench/ratchet.json → deny\nyour own rule → deny"
       }
     ],
     "visual": {
@@ -1574,42 +1692,43 @@ window.SLIDES = [
       ]
     },
     "keyPoints": [
-      "Mutations are buttons, not sentences.",
-      "You edit the hook. The agent cannot edit .claude/.",
-      "The ratchet is protected from the agent."
+      "Hooks are human-edited.",
+      "Chat already refuses “roll back now”.",
+      "A rule that never fired proves nothing."
     ],
-    "notes": "Optional advanced route only. Skip this implementation block in the core package: controls are already complete. Use WORKSHOP-ADVANCED.md in a separate historical starter copy, never overwrite core participant work.\n\nTime: 13:30 · 20 min.\n1. Let them do: the five steps on the slide.\n2. Part 1, runtime control: src/chat.ts (TODO(A4)). Restart the console after edits. Chat must refuse rollback, scale, flag, approve and resolve requests and point to the buttons.\n3. Part 2, SDLC control: .claude/hooks/guard.mjs already denies network, secrets, self-approval and unapproved pushes. Each team adds one rule by hand: deny agent edits to bench/ratchet.json.\n4. Say: “The agent cannot edit .claude/ (deny). You edit guard.mjs yourself. The human owns the boundary.” If someone asks Claude to edit the hook and it is denied: that is the lesson.\n5. Check: npm run test:workshop shows the A4 tests green; npm run test:hooks is green; approvals/audit.jsonl has a deny.\n6. Check: npm run progress shows ✓ A-4.\n7. Catch-up: git checkout w5-step-3-design-controls -- src/chat.ts .claude/hooks/guard.mjs.\n8. At 13:50, show the next demo. Assignment 5 starts at 14:00.",
-    "subtitle": "INC-1001: make the chat refuse “roll back now”."
+    "notes": "Time: 13:30 · 20 min.\n1. First: check that every team finished core 1. Help the teams that did not.\n2. Behind on code? npm run checkpoint -- start makes a separate copy in .lab/checkpoints/. It never changes their files.\n3. Optional: the participant adds one deny rule by hand. The agent may not edit hooks. That denial IS the lesson.\n4. If approvals/audit.jsonl is missing: the hook only logs on tool calls. Make the agent run one.",
+    "subtitle": "Catch-up time for core 1. Fast teams add one guard rule by hand."
   },
   {
-    "title": "Core check: chat refuses a rollback",
-    "kicker": "W5 · EXPECTED RESULT",
-    "subtitle": "Questions go in chat. Actions require named controls.",
-    "type": "concept",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-5/console-refusal.png",
-      "imageAlt": "Questions go in chat. Actions require named controls.",
-      "imageLink": "Local SRE console · click the image to enlarge",
-      "wideImage": true,
-      "bot": "think",
-      "place": "under"
-    },
+    "title": "Core 2: Build a change safely",
+    "kicker": "W5 · BUILD 1 · YOUR TURN",
+    "subtitle": "Give the agent its eyes back: the read-only list_deploys tool, test-first.",
+    "type": "practice",
+    "layout": "exercise",
+    "steps": [
+      "npx tsx --test test/workshop/tools.test.ts: red. Read the assertion.",
+      "Build list_deploys in src/tools.ts (TODO A5): bind AND register.",
+      "Run the tools test again. Then typecheck and bench.",
+      "Card steps 2.1–2.2."
+    ],
+    "expected": "Tools test green, typecheck green, PASS bench. The executor exercise remains for core 3.",
+    "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Try",
-        "body": "Type \"Roll back now\" after A4."
-      },
-      {
-        "title": "Expect",
-        "body": "A refusal. No deployment change."
+        "title": "src/tools.ts",
+        "body": "search_logs\nsummarize_metrics\nlist_deploys  ← you\nget_diff"
       }
     ],
+    "visual": {
+      "shotLabel": "src/tools.ts · test/workshop/tools.test.ts",
+      "tree": 0
+    },
     "keyPoints": [
-      "Type \"Roll back now\" after A4.",
-      "A refusal. No deployment change."
+      "Read the red test before you change code.",
+      "There is no rollback tool. That is the design.",
+      "The bench is red too until the tool works."
     ],
-    "notes": "The core starter already includes the chat refusal. Send roll back now: it refuses and points to human controls. Participants verify the boundary; implementing it is optional A4 on a separate advanced copy."
+    "notes": "Time: 14:00 · 15 min.\n1. Let them do: card steps 2.1 and 2.2. Plan mode first is fine.\n2. Say: “There is no rollback, scale or flag tool in src/tools.ts. That is the design, not a gap.”\n3. Common failure: the tool still returns []. They did only one of the two halves: bind the handler AND register tool(\"list_deploys\", …).\n4. Say: “npm run bench was red at the start. Without deploys the agent misses the bad deploy. The eval proves the change, not the green unit test alone.”\n5. Behind? npm run checkpoint -- core-2, then compare src/tools.ts. Run npx tsx --test test/workshop/tools.test.ts, npm run typecheck and npm run bench. Do not claim all executor tests pass before core 3 restores the fail-closed gate. Follow CARD.md for the full final check."
   },
   {
     "title": "plan.md",
@@ -1655,9 +1774,8 @@ window.SLIDES = [
     ],
     "tagline": "Delegate the work. Never the acceptance.",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/subagents.html",
-        "poster": "assets/anatomy/subagents.svg",
+      "diagram": {
+        "id": "subagents",
         "title": "Separate verifier context",
         "caption": "A verifier checks the diagnosis in a separate context. A human accepts the result."
       }
@@ -1702,86 +1820,26 @@ window.SLIDES = [
       "The diagnosis cites refs.",
       "Challenge it in chat."
     ],
-    "notes": "Facilitator demo before Core task 2. Show the bad-deploy fixture and a read-only tool call. Optional /show-me or plan-mode skills may help but are not prerequisites. In the solved checkpoint run npm start -- --fast, then inject the bad deploy in another terminal. Explain the one-minute detection setting. Read the references, ruled_out and would_change_my_mind. Offline chat is scripted, not fresh model analysis."
+    "notes": "Time: 13:52 · 2 min showcase + 8 min demo. Showcase 2.\n1. Show: run /show-me on fixtures/incidents/bad-deploy.json. It draws deploy d-4821 → checkout → error_rate.\n2. Say: “To understand is not to diagnose. The diagnosis cites refs.”\n3. Show: press Shift+Tab (plan mode). Claude proposes docs/plan.md. Correct one step. Accept it.\n4. Show: in a second terminal, run npm run shop, npm run traffic, then npm run chaos -- deploy v2.15.0 --mode bad-deploy.\n5. Show: the console opens an incident. Read the trace and the evidence refs.\n6. Show: ask in chat “Could this be something other than the deployment?” With a model key, the agent tests the hypothesis and does not just agree. Offline, point at ruled_out and would_change_my_mind instead."
   },
   {
-    "title": "One launcher, one deliberate fault",
-    "kicker": "W5 · A6 · SETUP",
-    "subtitle": "One terminal stays open. Use another only when you are ready.",
-    "type": "concept",
-    "cards": [
-      {
-        "title": "Terminal 1 · services",
-        "body": "npm start\n\nFaster detection: npm start -- --fast"
-      },
-      {
-        "title": "Terminal 2 · your action",
-        "body": "npm run chaos -- deploy v2.15.0 --mode bad-deploy"
-      }
-    ],
-    "visual": {
-      "bot": "point",
-      "place": "under"
-    },
-    "keyPoints": [
-      "Console: localhost:4320. Shop API: localhost:4310/health.",
-      "Detection: five minutes, or one with --fast. Recovery unchanged."
-    ],
-    "notes": "The launcher supervises shop, traffic and console. It never injects faults or approves. Stop it with Ctrl+C and restart after edits. Keep traffic running through recovery. Use only one copy on the default ports. For catch-up, stop the starter, extract checkpoint.zip into a different new folder, and start there. Do not copy runtime records. Same npm commands work in PowerShell, cmd and macOS/Linux."
-  },
-  {
-    "title": "Core task 2: Build and test safely",
-    "kicker": "W5 · BUILD 1 · YOUR TURN",
-    "subtitle": "INC-1001: let the agent read the deploy list. One tool. Read-only. Bound to the telemetry.",
-    "type": "practice",
-    "layout": "exercise",
-    "steps": [
-      "Run the focused tools test. Expect two A5 failures.",
-      "Bind list_deploys to listDeploys in src/tools.ts.",
-      "Register the MCP tool. Re-run the test: green.",
-      "Run typecheck, test:workshop and verify. Restart npm start."
-    ],
-    "expected": "Read-only tool works. Tests pass. The dry-run trace includes list_deploys.",
-    "stepsHeading": "Do this now:",
-    "cards": [
-      {
-        "title": "Focused red → green",
-        "body": "node --import tsx --test test/workshop/tools.test.ts"
-      },
-      {
-        "title": "One file",
-        "body": "src/tools.ts\nHandler + MCP registration"
-      }
-    ],
-    "visual": {
-      "bot": "multiarm",
-      "place": "under"
-    },
-    "keyPoints": [
-      "Read-only: no rollback tool exists.",
-      "The handler and the registration: two halves.",
-      "Data before theory."
-    ],
-    "notes": "13:00–14:10. In the core starter only A5 is cut. The focused tools test must fail before implementation and pass after. Bind time arguments to listDeploys and register the tool. Keep all tools read-only. Then run npm run typecheck, npm run test:workshop and npm run verify. Run npm run investigate -- fixtures/incidents/bad-deploy.json --dry-run and find list_deploys in the trace. Record actual results with progress:note. Stop and restart npm start after source changes. If stuck, preserve the starter and continue in a separate clearly labeled checkpoint folder."
-  },
-  {
-    "title": "Core task 3: Judge live recovery",
+    "title": "Core 2: Prove it on the live incident",
     "kicker": "W5 · BUILD 2 · YOUR TURN",
-    "subtitle": "Replay the INC-1001 story with live traffic. Your incident gets a new ID.",
+    "subtitle": "Save. The console reloads. Ask again. Watch the diagnosis change.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Restart npm start after code edits. Keep traffic running.",
-      "In terminal 2, inject one bad deploy.",
-      "Open the live incident. Read the trace and references.",
-      "Check chat refusal. Follow Next step for human decisions."
+      "Save src/tools.ts. The lab terminal shows a console reload.",
+      "Same incident, chat: “Investigate: customers report checkout errors”.",
+      "list_deploys in the trace. The proposal is now rollback. No data gap.",
+      "npm run progress:note -- \"Core 2: …\""
     ],
-    "expected": "Live evidence, then a human decision. Closure or a documented safe stop.",
+    "expected": "A new diagnosis that cites deploys:<id> for v2.15.0 and proposes rollback.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Scenarios",
-        "body": "bad-deploy · today\nslow-dependency · stretch\nnoisy-alert · stretch\nmystery-errors · stretch"
+        "title": "Chat, same incident",
+        "body": "Investigate: customers report checkout errors"
       }
     ],
     "visual": {
@@ -1789,11 +1847,11 @@ window.SLIDES = [
       "menu": 0
     },
     "keyPoints": [
-      "Evidence first.",
-      "Chat answers questions. It does not act.",
-      "Find what was ruled out."
+      "Same data, better eyes, different verdict.",
+      "The shop stays broken while the console reloads.",
+      "Test the executor gate in core 3 before you execute."
     ],
-    "notes": "14:10–15:35 with the 14:40 break. Start with evidence; do not click approval yet. Match metrics, deploys, diff and logs to demo/data/telemetry.json. Save your own live ID and observations. Detection takes about five minutes, or one with npm start -- --fast. Recovery still takes about two minutes. The trace lists calls; evidence references are text. Offline chat is scripted. Next step guides approval, execution, recovery, mitigation and resolution. Do not copy a checkpoint diagnosis as your own."
+    "notes": "Time: 14:15 · 25 min. Follow card step 2.3. Save the tool change and wait for the console reload. Re-investigate the same incident. The new diagnosis should cite the actual deploy and close the list_deploys gap. A reload is not a reset: the incident history persists. If you restart the whole launcher, the shop starts healthy and old telemetry is archived; do not treat an old incident as a fresh demo. Use a new disposable copy for a repeat. The executor gate is still the core 3 exercise; do not approve or execute yet."
   },
   {
     "title": "Break",
@@ -1829,9 +1887,8 @@ window.SLIDES = [
     ],
     "tagline": "Fix the investigator or the case. Never lower the floor.",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/eval.html",
-        "poster": "assets/anatomy/eval.svg",
+      "diagram": {
+        "id": "eval",
         "title": "Diagnosis test bench",
         "caption": "Check evidence and reasoning against the case. Fix the diagnosis, not the eval."
       }
@@ -1841,7 +1898,7 @@ window.SLIDES = [
       "Runs offline in CI.",
       "Each incident becomes a case."
     ],
-    "notes": "Time: 14:55 · 2 min.\n1. Progress check (30 s).\n2. Say: “This bench tests the scripted investigator against fixed cases. It runs offline in CI. It does not measure model reasoning; that needs a separate model-backed run.”\n3. Say the rule for today: “Fix the diagnosis, not the eval.”"
+    "notes": "Time: 14:55 · 2 min.\n1. Progress check (30 s).\n2. Say: “An eval tests reasoning. It runs without a model and without network, so it runs in CI.”\n3. Say the rule for today: “Fix the diagnosis, not the eval.”"
   },
   {
     "title": "Watch: the bench and the ratchet",
@@ -1873,7 +1930,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "The experiment",
-        "body": "Baseline: the bad-deploy verdict. Expect accepted.\nTreatment: a copy with one evidence ref set to an empty string. Expect rejected.\nVerdict: Claude writes it to docs/verify/."
+        "body": "Baseline: the bad-deploy verdict. Expect accepted.\nTreatment: a copy with one evidence ref removed. Expect rejected.\nVerdict: Claude writes it to docs/verify/."
       }
     ],
     "visual": {
@@ -1892,22 +1949,21 @@ window.SLIDES = [
       "Do not weaken the verdict.",
       "Writes to docs/verify/."
     ],
-    "notes": "Time: 15:00 · 4 min. Showcase 3.\n1. Show: paste the prompt.\n2. Show: the baseline verdict passes the contract.\n3. Show: the treatment (one evidence item with an empty ref) is rejected.\n4. Show: the verdict file in docs/verify/.\n5. Say: “The verdict is VERIFIED, NOT VERIFIED, or INCONCLUSIVE. Do not make it weaker.”"
+    "notes": "Time: 15:00 · 4 min. Showcase 3.\n1. Show: paste the prompt.\n2. Show: the baseline verdict passes the contract.\n3. Show: the treatment (one claim without a ref) is rejected.\n4. Show: the verdict file in docs/verify/.\n5. Say: “The verdict is VERIFIED, NOT VERIFIED, or INCONCLUSIVE. Do not make it weaker.”"
   },
   {
-    "title": "Optional: Pass the bench. Add a case.",
-    "kicker": "W5 · OPTIONAL DEPTH",
+    "title": "Go deeper: a bench case and the ratchet (optional)",
+    "kicker": "W5 · TEST · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "npm run bench. Expect PASS bench.",
       "Add one case to bench/cases.json.",
-      "npm run bench again. Still PASS?",
-      "Ask Claude to lower bench/ratchet.json. Your A4 rule denies it.",
-      "Optional: /verify-this."
+      "npm run bench.",
+      "Ask the agent to lower bench/ratchet.json. The guard denies it.",
+      "Review is the second guard: reject a PR that lowers the floor."
     ],
-    "expected": "PASS bench. One new case. harmful 0.",
-    "stepsHeading": "Optional advanced route:",
+    "expected": "Optional: a new case and PASS bench.",
+    "stepsHeading": "Do this now:",
     "cards": [
       {
         "title": "Commands",
@@ -1921,12 +1977,12 @@ window.SLIDES = [
       ]
     },
     "keyPoints": [
-      "Fix the agent, not the bench.",
       "The ratchet only goes up.",
-      "harmful must stay 0."
+      "Fix the investigator or the case.",
+      "Never lower the floor."
     ],
-    "notes": "Optional advanced route only. Skip this implementation block in the core package: controls are already complete. Use WORKSHOP-ADVANCED.md in a separate historical starter copy, never overwrite core participant work.\n\nTime: 15:04 · 11 min.\n1. Let them do: the steps on the slide.\n2. A good case: a new incident shape, or an adversarial alert whose text tries to give orders. Alert text is data, not policy.\n3. Try lowering min_rate in bench/ratchet.json: the guard rule from A4 denies the agent. By hand, a lower floor still passes the bench: it only checks score against the floor. The floor is protected by the guard and by review: reject any PR that lowers ratchet.json.\n4. Gate: a reviewer from another team runs npm run bench again on your branch.\n5. Check: npm run progress shows ✓ A-7.\n6. Catch-up: git checkout w5-step-6-eval -- bench/cases.json.",
-    "subtitle": "INC-1001: prove the agent on old tickets."
+    "notes": "Time: 15:04 · 11 min.\n1. Optional depth. Teams that are behind finish core 2 first.\n2. By hand a lower min_rate still passes: the bench only checks the score against the floor. The guard rule and review protect the floor.",
+    "subtitle": "The bench is the regression gate. The floor only goes up."
   },
   {
     "title": "workflows",
@@ -1938,28 +1994,32 @@ window.SLIDES = [
       {
         "title": "GitHub Actions",
         "items": [
-          "npm ci + fixtures",
-          "verify + test:workshop + test:hooks",
-          "dry runs + course:check"
+          "npm ci + npm run verify → test:hooks → bench → check:approval"
         ]
       },
       {
         "title": "GitLab CI",
         "items": [
-          "npm ci + fixtures",
-          "verify + test:workshop + test:hooks",
-          "dry runs + course:check"
+          "npm ci + npm run verify → test:hooks → bench → check:approval"
         ]
       }
     ],
-    "tagline": "CI tests the code. A human approval is a separate gate.",
-    "visual": {},
+    "tagline": "Agents in CI: only after the gates. No keys.",
+    "visual": {
+      "pipes": true,
+      "same": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
     "keyPoints": [
-      "The scripts run offline.",
-      "Green CI is not approval.",
-      "Run check:approval separately for a fix/* branch."
+      "The same steps on both platforms.",
+      "No key needed.",
+      "check:approval fails without approval."
     ],
-    "notes": "Time: 15:15 · 1 min. Show .github/workflows/ci.yml and .gitlab-ci.yml. verify includes typecheck, unit tests and the bench. The current workflows do not invoke check:approval. Do not claim CI enforces that gate. The local guard blocks an agent push without approval. A named human runs approve:git in their own terminal; check:approval verifies that record. Repository branch protection is separate."
+    "notes": "Time: 15:15 · 1 min.\n1. Progress check (30 s).\n2. Show: .github/workflows/ci.yml and .gitlab-ci.yml side by side.\n3. Say: “On a fix/* branch, check:approval fails when no named human approved that branch.”"
   },
   {
     "title": "The gate + REVIEW.md",
@@ -1998,41 +2058,41 @@ window.SLIDES = [
   {
     "title": "Watch: the approval gate",
     "kicker": "W5 · SHOWCASE 4 · 15:18 · 3 + 2 MIN",
-    "subtitle": "Runtime gate first. The git gate is a separate, optional exercise.",
+    "subtitle": "Named approval. Separate execution. Measured recovery. Human closure.",
     "type": "concept",
     "layout": "steps",
     "items": [
       {
         "label": "Read",
-        "caption": "Review the diagnosis and evidence."
+        "caption": "Check the evidence"
       },
       {
         "label": "Approve",
-        "caption": "Type your name. Approve rollback."
+        "caption": "A human signs"
       },
       {
         "label": "Execute",
-        "caption": "The separate executor checks the target."
+        "caption": "Separate executor"
       },
       {
-        "label": "Watch",
-        "caption": "Wait for half, full and double checks."
+        "label": "Observe",
+        "caption": "Half · full · double"
       },
       {
-        "label": "Mitigate",
-        "caption": "LANDED is not incident closure."
+        "label": "Decide",
+        "caption": "Mitigate, then resolve; or stop"
       }
     ],
     "visual": {
       "stepKeys": true,
-      "humanStep": 3
+      "humanStep": 1
     },
     "keyPoints": [
-      "The agent can never merge or approve.",
-      "/visual-pr writes only docs/pr/.",
-      "GitHub and GitLab."
+      "Only the solved, tested gate may execute.",
+      "LANDED is not automatic closure.",
+      "NOT LANDED: keep the incident open, no retry."
     ],
-    "notes": "Time: 15:18 · 5 min. Use the solved facilitator copy, not an unfinished A8 starter. Show that \"roll back now\" is refused. Type your name, approve, then execute. Keep traffic running. The executor collects three fresh checkouts, then watches for about two minutes. Read the final LANDED or NOT LANDED result. Only mark mitigated after verified recovery. Resolve with notes in A9. Optional git-gate demo after class: ask Claude to push a fix/* branch and show the guard denial. A neighbor approves in their own terminal. A raw human git push is not intercepted by the Claude hook. Never bypass the approval check with environment variables."
+    "notes": "Time: 15:18 · facilitator demo, before the participant exercise. Use the separate solved core-3 reference. Read the diagnosis, type your name and approve. Click Execute only once. Keep traffic running during the half/full/double checks, about two minutes. Full and double must pass. LANDED: mark mitigated, then resolve with real notes. NOT LANDED or interrupted: keep the incident open and investigate or escalate. Do not retry to get green. The Git approval gate is optional depth and is separate from this runtime gate. Never have the coding agent sign either gate."
   },
   {
     "title": "Human gate: approval is not execution",
@@ -2062,72 +2122,40 @@ window.SLIDES = [
       "Execute rollback is disabled.",
       "Check the incident and proposal before you click Execute."
     ],
-    "notes": "A named human reads the proposal and approves. Execution is a separate button and program. Pending, rejected, running, already attempted, and resolved incidents cannot execute. Do not ask the coding agent to click or sign for the human."
+    "notes": "A named human reads the proposal and approves. Execution is a separate button and program. Pending, rejected, running, already attempted, and resolved incidents cannot execute. Do not ask the coding agent to click or sign for the human. Rebuild and test the fail-closed executor gate in core 3 before this step. A green button alone does not prove the executor gate is implemented."
   },
   {
-    "title": "Recovery step: approve and execute once",
+    "title": "Core 3: Judge the recovery",
     "kicker": "W5 · DEPLOY · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Read the evidence. Enter your name. Approve or reject.",
-      "If approved, click Execute rollback once.",
-      "Keep traffic running through all three recovery checks.",
-      "LANDED: mark mitigated. NOT LANDED: keep open."
+      "Rebuild checkApproval (TODO A8). Pass executor.test.ts and npm run verify.",
+      "Open the incident. Type your name. Approve. Execute rollback.",
+      "The banner: Wait, recovery checks are running.",
+      "Card steps 3.1–3.2."
     ],
-    "expected": "A recovery result supported by check values, not just a successful rollback.",
+    "expected": "executor.test.ts green. A named approval. Recovery running, then LANDED or NOT LANDED.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Human boundary",
-        "body": "Approval is not execution.\nLANDED is not closure."
-      },
-      {
-        "title": "Safe stop",
-        "body": "Full or double fails: inspect and escalate.\nDo not retry for green."
+        "title": "Before approval",
+        "body": "npx tsx --test test/workshop/executor.test.ts\nnpm run verify\nnpm run test:workshop"
       }
     ],
     "visual": {
-      "bot": "head",
-      "place": "under"
+      "shotLabel": "A human approves. Not the agent.",
+      "cmdCards": [
+        0
+      ]
     },
     "keyPoints": [
-      "Controls are already implemented in the core starter.",
-      "Only the separate executor mutates.",
-      "The coding agent never approves itself."
+      "The banner names the one allowed step.",
+      "The server refuses every other button.",
+      "Half may fail. Full and double must pass."
     ],
-    "notes": "14:55–15:35. The core package already contains the executor gate; do not rebuild it here. A human signs this incident's proposal and clicks Execute once. Expect fresh checkout evidence followed by half, full and double checks. Full and double must both pass. A full failure of 0.0125 against 0.005 correctly yields NOT LANDED even if double passes. Do not retry rollback to obtain green, weaken limits, or close an unknown result. Runtime approval and optional Git approval are separate gates.",
-    "subtitle": "Your live incident: a named human makes the decision."
-  },
-  {
-    "title": "Recovery result: inspect every check",
-    "kicker": "W5 · EXPECTED RESULT",
-    "subtitle": "Full and double must pass. LANDED still needs a human.",
-    "type": "concept",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-5/console-landed.png",
-      "imageAlt": "LANDED reports recovery. The incident remains active.",
-      "imageLink": "Local SRE console · click the image to enlarge",
-      "wideImage": true,
-      "bot": "think",
-      "place": "under"
-    },
-    "cards": [
-      {
-        "title": "Wait",
-        "body": "Keep traffic running for the three recovery checks."
-      },
-      {
-        "title": "Decide",
-        "body": "After LANDED, mark mitigated, then resolve with notes."
-      }
-    ],
-    "keyPoints": [
-      "Keep traffic running for the three recovery checks.",
-      "After LANDED, mark mitigated, then resolve with notes."
-    ],
-    "notes": "Show the structured recovery table: metric, baseline, limit and each measured check. Full and double must both pass; only half may fail. If NOT LANDED, keep the incident active and document investigation or escalation. If LANDED, a named human marks mitigated, then resolves with notes. A successful rollback alone is insufficient. This screenshot is from a successful local run, not proof that every run lands."
+    "notes": "Time: 15:18 · 17 min.\n1. Let them do: card steps 3.1 and 3.2.\n2. Say: “The executor is a separate program. It recomputes the target from telemetry. It acts only on a named approval for this incident and this proposal.”\n3. A button is grey: read the banner. The server answers 409 for any other button.\n4. The recovery takes about two minutes. Keep the lab running.\n5. Optional: the git gate (card, go deeper A8b). The starter gate fails closed: it refuses even legitimate approval until implemented. Run the exact test commands on this slide before the human approves. Do not weaken the tests or safety rules.",
+    "subtitle": "Rebuild the gate. Sign with your name. Read the recovery checks."
   },
   {
     "title": "Maintain: each incident becomes an eval",
@@ -2170,7 +2198,7 @@ window.SLIDES = [
     "notes": "Time: 15:30 · 10 min.\n1. Progress check (30 s): run npm run progress.\n2. Show: the resolution notes from the incident are in lessons/lessons.md. The agent wrote only to lessons/proposed/.\n3. Show: turn the incident into a bench case in bench/cases.json. Run npm run bench.\n4. Say: control bands 1σ, 2σ, 3σ.\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”"
   },
   {
-    "title": "Optional: from lab to hackathon",
+    "title": "From lab to hackathon",
     "subtitle": "This is your toolbox inside the rules.",
     "cards": [
       {
@@ -2186,7 +2214,7 @@ window.SLIDES = [
         "body": "Skills, evals, CI for GitHub and GitLab."
       }
     ],
-    "kicker": "W5 · OPTIONAL DEPTH",
+    "kicker": "W5 · HACKATHON W6–W7",
     "type": "context",
     "visual": {
       "stack": [
@@ -2203,35 +2231,65 @@ window.SLIDES = [
     "notes": "Time: 15:40 · 2 min.\n1. Progress check (30 s).\n2. Say: “You do not take the SRE agent. You take the structure: templates, settings, hooks, skills, evals, REVIEW.md.”\n3. Say: “Inside these rules, you can go fast and safe in W6–W7.”"
   },
   {
-    "title": "Finish: close safely or record a stop",
+    "title": "Core 3: Close it, or stop safely",
     "kicker": "W5 · SHOWCASE 5 · 15:45 · /HANDOFF",
-    "subtitle": "Save what happened and what should happen next.",
+    "subtitle": "LANDED is not closed. NOT LANDED is a correct stop.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "LANDED: mark mitigated, then resolve with your own notes.",
-      "NOT LANDED or unknown: keep open; record the failed check and next owner.",
-      "Verify your incident ID, name and evidence in the saved record.",
-      "Optional: write your hackathon intent and a handoff."
+      "LANDED: Mark mitigated. Resolve with real notes.",
+      "NOT LANDED: read the failed check. Investigate or escalate. Do not close.",
+      "Check lessons/lessons.md: your name, the incident id.",
+      "Optional: docs/hackathon-intent.md and /handoff."
     ],
-    "expected": "Human closure with provenance, or a documented safe stop.",
+    "expected": "A lesson with provenance, or an open incident with a named failed check.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "Your handoff",
-        "body": "Observed result\nWhat remains unknown\nNext investigation or owner"
+        "title": "docs/hackathon-intent.md",
+        "body": "Who it serves\nBoundary\nThree verifiable checks\nOpen questions"
       }
     ],
     "visual": {
+      "shotLabel": "Resolve → lessons.md → then /handoff → HANDOFF.md",
+      "template": 0
+    },
+    "keyPoints": [
+      "Humans close. The agent never does.",
+      "After resolve, Execute stays disabled.",
+      "Never execute again to get a green result."
+    ],
+    "notes": "Time: 15:35 · 15 min. Showcase 5 at 15:45 (1–2 min).\n1. Let them do: card step 3.3.\n2. On NOT LANDED the console names the failed check, its value and the limit. Say: “This is the safe stop. Read the window and the logs. Investigate or escalate.”\n3. Show: after resolve the banner says the incident is resolved. Execute stays disabled.\n4. Optional depth: docs/hackathon-intent.md, then /handoff writes HANDOFF.md."
+  },
+  {
+    "title": "Recovery result: inspect every check",
+    "kicker": "W5 · EXPECTED RESULT",
+    "subtitle": "Full and double must pass. LANDED still needs a human.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-5/console-landed.png",
+      "imageAlt": "LANDED reports recovery. The incident remains active.",
+      "imageLink": "Local SRE console · click the image to enlarge",
+      "wideImage": true,
       "bot": "think",
       "place": "under"
     },
-    "keyPoints": [
-      "Humans close incidents.",
-      "A safe stop completes the core task.",
-      "Keep starter and checkpoint evidence separate."
+    "cards": [
+      {
+        "title": "Wait",
+        "body": "Keep traffic running for the three recovery checks."
+      },
+      {
+        "title": "Decide",
+        "body": "After LANDED, mark mitigated, then resolve with notes."
+      }
     ],
-    "notes": "15:35–15:50. Do not require every team to obtain LANDED. Accept a correct safe stop with check value, limit and next action. For LANDED, the human first marks mitigated and then resolves with real notes; inspect lessons/lessons.md for provenance. Resolved incidents stay read-only for execution. Optional /handoff and hackathon-intent work comes after the core. Never delete or copy lessons as proof."
+    "keyPoints": [
+      "Keep traffic running for the three recovery checks.",
+      "After LANDED, mark mitigated, then resolve with notes."
+    ],
+    "notes": "Show the structured recovery table: metric, baseline, limit and each measured check. Full and double must both pass; only half may fail. If NOT LANDED, keep the incident active and document investigation or escalation. If LANDED, a named human marks mitigated, then resolves with notes. A successful rollback alone is insufficient. This screenshot is from a successful local run, not proof that every run lands."
   },
   {
     "title": "Closure result: a human records the lesson",
@@ -2346,7 +2404,7 @@ window.SLIDES = [
       },
       {
         "label": "Test",
-        "caption": "Offline CI tests the scripted investigator. Model reasoning needs separate evidence."
+        "caption": "Evals in CI test the reasoning."
       },
       {
         "label": "Deploy + Maintain",
@@ -2356,7 +2414,7 @@ window.SLIDES = [
     "visual": {
       "levelUp": true
     },
-    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (the Daily Brief bonus slides at the end). Else it is homework before W6."
+    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (slides 57–60). Else it is homework before W6."
   },
   {
     "title": "Time left? The loop, solo",

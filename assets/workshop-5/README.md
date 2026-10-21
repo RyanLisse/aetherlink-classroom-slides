@@ -1,7 +1,45 @@
-# Workshop 5 console screenshots
+# Workshop 5 shop and console screenshots
 
-These are real local browser captures, not UI mockups. The checkout shop is
-an HTTP API. The visible application is the SRE console.
+These are real local browser captures, not UI mockups. The checkout shop has
+a storefront and fault controls; the SRE console is the separate on-call desk.
+
+## Current shop captures
+
+Captured on 2026-10-21 from `RyanLisse/sre-oncall-agent` commit
+`a7f985518a2ef3ee91d5cafff2a22869c105c329`, in a disposable clone using
+`npm run checkpoint -- core-3`, then `npm start -- --fast`.
+The generated checkpoint records this source revision. No historical tag or
+ZIP was substituted. Offline scripted runtime, live local traffic, no model call.
+
+| Image | UTC capture time | Observed state |
+| --- | --- | --- |
+| `shop-healthy.png` | 19:48:59.994 | Healthy `v2.14.0`; Buy returned paid/order `ord-9897`; browser traffic 10/s, 0.0% errors |
+| `shop-broken.png` | 19:49:28.209 | One **Bad deploy v2.15.0** button click; `bad-deploy`, browser errors 7.4% |
+
+Both images are unmodified 1440 × 900 browser captures. The Buy result below
+the products is the last manual checkout, not a continually refreshed health
+indicator. The status pill shows the current revision and mode. Counters use
+this browser's last 30 seconds of requests; the chart spans 60 seconds. Terminal
+traffic is separate. A healthy counter may therefore coexist with an earlier
+red chart bar. There are no real payments.
+
+The run used shop port 4350 and console port 4360 to leave existing services
+untouched. The shop's static note still names the default console port 4320.
+Default classroom ports remain shop 4310 and console 4320. `--fast` changes
+detection to one minute, not the normal five minutes. Recovery timing was not
+shortened: approximately 30/60/120 seconds. Some emoji glyphs were unavailable
+on the capture host; product SVGs and functional labels are visible.
+
+The same live run's incident `INC-08920` had one separately approved execution.
+Rollback restored `v2.14.0`; observed half/full/double values were
+0 / 0.0071 / 0.0142 against frozen limit 0.005. It correctly stopped **NOT LANDED**.
+Failed observations survived reload and retry/closure remained disabled. No
+Reset, retry, threshold change or synthetic successful state was used. Closure
+was not exercised in this run. The accompanying participant walkthrough used
+a separate current starter (`INC-08726`, low confidence, `list_deploys` gap),
+then a clearly labeled read-only catch-up to that same solved incident.
+
+## Retained console captures (earlier safety-tested revision)
 
 Captured on 2026-10-21 from `RyanLisse/sre-oncall-agent`:
 
@@ -33,3 +71,8 @@ resolved it with notes. Approval, execution and closure controls stayed
 disabled after resolution and reload. Evidence references are plain text.
 
 Click a screenshot in the classroom deck to open the original image.
+
+The retained LANDED/resolved images illustrate a different, earlier valid run;
+they are not evidence that the current run closed. The latest live check
+validated the NOT LANDED path instead. Factual chat questions containing
+“rollback” may also trigger the conservative mutation-refusal grammar.

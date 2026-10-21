@@ -108,8 +108,11 @@ jobs:
               await presenter.screenshot({path:`anatomy-evidence/session-${session.id}-presenter.png`,fullPage:true});
               await presenter.close();
             }
-            for(const slide of [8,10,30,35,39,43,44]){
-              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
+            await page.goto('http://127.0.0.1:8765/workshop4.html#1');
+            const anatomySlides=await page.evaluate(()=>window.SLIDES.flatMap((s,i)=>s.visual?.anatomy?[i+1]:[]));
+            assert.equal(anatomySlides.length,2);
+            for(const slide of anatomySlides){
+              await page.goto(`http://127.0.0.1:8765/workshop4.html#${slide}`);
               const iframe=page.locator('.anatomy-figure iframe');
               await iframe.waitFor(); assert.ok(await iframe.getAttribute('title'));
               const frame=await iframe.elementHandle().then(el=>el.contentFrame());
@@ -138,7 +141,7 @@ jobs:
                 else assert.notEqual(await frame.locator('[data-readout]').first().textContent(),before);
               }
               await page.screenshot({path:`anatomy-evidence/slide-${slide}-desktop.png`,fullPage:true});
-              await page.goto(`http://127.0.0.1:8765/workshop5.html?embed=1#${slide}`);
+              await page.goto(`http://127.0.0.1:8765/workshop4.html?embed=1#${slide}`);
               assert.equal(await page.locator('.anatomy-figure iframe').count(),0);
               const img=page.locator('.anatomy-figure>img'); await img.waitFor();
               assert.ok(await img.evaluate(el=>el.complete&&el.naturalWidth>0));
@@ -146,8 +149,8 @@ jobs:
             }
             await page.setViewportSize({width:390,height:844});
             await page.emulateMedia({reducedMotion:'reduce'});
-            for(const slide of [8,10,30,35,39,43,44]){
-              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
+            for(const slide of anatomySlides){
+              await page.goto(`http://127.0.0.1:8765/workshop4.html#${slide}`);
               const iframe=page.locator('.anatomy-figure iframe'); await iframe.waitFor();
               const frame=await iframe.elementHandle().then(el=>el.contentFrame());
               await frame.locator('svg').first().waitFor();
@@ -159,6 +162,40 @@ jobs:
               await page.waitForTimeout(1000);
               const still=await frame.evaluate(motionState); await page.waitForTimeout(2500);
               assert.deepEqual(await frame.evaluate(motionState),still,`Slide ${slide} reduced motion must remain still`);
+            }
+            await page.goto('http://127.0.0.1:8765/workshop5.html#1');
+            const diagrams=await page.evaluate(()=>window.SLIDES.flatMap((s,i)=>s.visual?.diagram?[{slide:i+1,id:s.visual.diagram.id,media:s.visual.media}]:[]));
+            assert.equal(diagrams.length,8);
+            for(const {slide,id,media} of diagrams){
+              await page.setViewportSize({width:1440,height:900});
+              await page.emulateMedia({reducedMotion:'no-preference'});
+              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
+              const svg=page.locator('svg.diagram'); await svg.waitFor();
+              assert.ok(await svg.getAttribute('aria-label'),id);
+              assert.equal(await page.locator('.diagram-missing').count(),0,id);
+              if(media) await page.getByRole('button',{name:'Diagram',exact:true}).click();
+              const before=await svg.locator('.dg-on').count();
+              await svg.click();
+              assert.ok(await svg.locator('.dg-on').count()>before,`${id} reveals the first step`);
+              if(media){
+                await page.getByRole('button',{name:'Video',exact:true}).click();
+                const video=page.locator('.diagram-media video');
+                await video.waitFor({state:'visible'});
+                await page.waitForFunction(()=>document.querySelector('.diagram-media video')?.currentTime>0);
+              }
+              await page.screenshot({path:`anatomy-evidence/w5-${id}-desktop.png`,fullPage:true});
+              await page.goto(`http://127.0.0.1:8765/workshop5.html?embed=1#${slide}`);
+              assert.equal(await page.locator('video').count(),0);
+              if(media) assert.ok(await page.locator('.diagram-media img').evaluate(el=>el.complete&&el.naturalWidth>0));
+              await page.screenshot({path:`anatomy-evidence/w5-${id}-presenter.png`,fullPage:true});
+              await page.setViewportSize({width:390,height:844});
+              await page.emulateMedia({reducedMotion:'reduce'});
+              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
+              await page.locator('svg.diagram').waitFor({state:'attached'});
+              assert.equal(await page.locator('video').count(),0,`${id}: reduced motion uses a still`);
+              const overflow=await page.evaluate(overflowState);
+              assert.ok(overflow.scrollWidth<=overflow.width+1,`${id} mobile overflow: ${JSON.stringify(overflow)}`);
+              await page.screenshot({path:`anatomy-evidence/w5-${id}-mobile-reduced.png`,fullPage:true});
             }
             const closeup=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:4});
             closeup.on('pageerror',error=>errors.push(error.message));
