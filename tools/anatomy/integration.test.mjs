@@ -64,3 +64,47 @@ test('Classroom and presenter reference the same cached slide and style versions
   assert.ok(extract(main),asset);assert.equal(extract(main),extract(presenter),asset);
  }
 });
+function renderShowcase(visual){
+ const app=read('app.js'),nodeSource=app.match(/function node\(tag, cls, text\) \{[^\n]*\}/)?.[0];
+ const start=app.indexOf('function buildOpener('),end=app.indexOf('\nfunction rel(',start);
+ assert.ok(nodeSource&&start>=0&&end>start);
+ const document={createElement(tag){return{
+  tag,children:[],attributes:{},classList:{add(){}},
+  append(...children){this.children.push(...children)},
+  prepend(...children){this.children.unshift(...children)},
+  setAttribute(name,value){this.attributes[name]=value}
+ }}};
+ const vmContext={document};
+ vm.runInNewContext(`${nodeSource}\n${app.slice(start,end)}\nthis.renderShowcase=buildOpener;`,vmContext);
+ const main=document.createElement('main');
+ vmContext.renderShowcase({querySelector:()=>document.createElement('header')},main,{},visual);
+ const link=main.children[0].children[1],img=link.children[0];
+ return{label:link.attributes['aria-label'],href:link.href,target:link.target,rel:link.rel,imageAlt:img.alt};
+}
+test('Showcase links describe their image and preserve full-size navigation',()=>{
+ const screenshots=context.window.SLIDES.filter(s=>s.visual?.opener==='showcase'&&s.visual.image);
+ assert.equal(screenshots.length,6);
+ const labels=screenshots.map(({visual})=>{
+  const rendered=renderShowcase(visual);
+  assert.equal(rendered.label,`${visual.imageAlt}: Open screenshot at full size`);
+  assert.equal(rendered.href,visual.image);
+  assert.equal(rendered.target,'_blank');
+  assert.equal(rendered.rel,'noopener');
+  assert.equal(rendered.imageAlt,visual.imageAlt);
+  return rendered.label;
+ });
+ assert.equal(new Set(labels).size,screenshots.length);
+ const legacyContext={window:{}};
+ vm.runInNewContext(read('workshop3-slides.js'),legacyContext);
+ const legacy=legacyContext.window.SLIDES.find(s=>s.visual?.opener==='showcase'&&s.visual.image).visual;
+ assert.ok(legacy);
+ assert.equal(Object.hasOwn(legacy,'imageAlt'),false);
+ for(const visual of [{...legacy,imageAlt:''},legacy]){
+  const rendered=renderShowcase(visual);
+  assert.equal(rendered.label,'Open screenshot at full size');
+  assert.equal(rendered.href,visual.image);
+  assert.equal(rendered.target,'_blank');
+  assert.equal(rendered.rel,'noopener');
+  assert.equal(rendered.imageAlt,visual.imageAlt||'');
+ }
+});
