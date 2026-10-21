@@ -5,25 +5,31 @@ an HTTP API. The visible application is the SRE console.
 
 Captured on 2026-10-21 from `RyanLisse/sre-oncall-agent`:
 
-- Starter: `workshop/start`, commit `c4b5851cdf5fae07163bf28051135c6f55172f8b`.
-- Solved: `w5-step-8-maintain`, commit `a8509b3da829a6379df53f07d7de0d8f187f4ea9`.
+- Fresh core starter and separate checkpoint packages from commit
+  `64e477a7b889c74f728652937788b21abedb13e9`.
+- Resolved capture: the same persisted incident, reloaded with the renderer
+  from `bc0094895934f5c4b9fe2d7d45c8e6d0de5d917d`. No new execution.
 - Offline scripted runtime, live local shop and traffic, no model call.
-- Detection window: `AGENT_LISTEN_WINDOW_MIN=1`, not the five-minute default.
-- Recovery watch: default timing, about two minutes.
+- Launcher: `npm start -- --fast`. One-minute detection, not the five-minute default.
+- Recovery watch: default half/full/double timing, about two minutes.
+- Viewport: 1440 × 900. No horizontal document or sidebar overflow.
 
 | Image | State |
 | --- | --- |
-| `console-start.png` | Starter console before the shop starts |
-| `console-diagnosis.png` | Live diagnosis; approval pending |
-| `console-refusal.png` | Chat refuses a rollback request |
-| `console-approval.png` | Named approval; execution is a separate action |
-| `console-landed.png` | Recovery verified; incident still active |
-| `console-resolved.png` | Human resolution notes and lesson provenance |
+| `console-start.png` | Fresh core starter; healthy shop, Active 0 and History 0 |
+| `console-diagnosis.png` | Live diagnosis with customer impact and evidence; approval pending |
+| `console-refusal.png` | Chat refuses the exact request `roll back now` |
+| `console-approval.png` | Named approval; execution remains a separate action |
+| `console-landed.png` | Observed recovery checks pass; incident still active |
+| `console-resolved.png` | Human notes and provenance persist; recovery guidance says resolved |
 
-The live incident is `INC-23996`. It is not the fixture incident `INC-1001`.
-The demo rolls back `v2.15.0` to `v2.14.0`. Evidence references are plain text.
-The solved console has no separate `customer_impact` row. It also leaves the
-Execute rollback button enabled after resolution. Do not repeat execution
-on a resolved incident; that path was not tested in this walkthrough.
+The live incident is `INC-06729`, not fixture `INC-1001`. Bad deploy
+`d-4806` changed `v2.14.0` to `v2.15.0`. One approved rollback restored
+`v2.14.0`. The observed half/full/double values were 0/0/0 against a frozen
+limit of 0.005. No retry, lowered limit or synthetic recovery state was used.
+
+The incident did not close itself. A named human marked it mitigated, then
+resolved it with notes. Approval, execution and closure controls stayed
+disabled after resolution and reload. Evidence references are plain text.
 
 Click a screenshot in the classroom deck to open the original image.

@@ -723,7 +723,7 @@ window.SLIDES = [
       "Mutations are buttons, not chat.",
       "A human resolves. The agent only proposes a lesson."
     ],
-    "notes": "Within the project introduction. Show the real local console screenshot. The shop is an HTTP API, not a storefront. The console is the UI. This solved example uses live traffic and the offline scripted runtime. The live incident ID differs from fixture INC-1001. Point at the diagnosis, evidence and pending approval. Click the screenshot to inspect it at full size. The participant starter is empty until you start the shop and build the missing parts."
+    "notes": "Within the project introduction. Show the real local console screenshot. The shop is an HTTP API, not a storefront. The console is the UI. This solved example uses live traffic and the offline scripted runtime. The live incident ID differs from fixture INC-1001. Point at the diagnosis, evidence and pending approval. Click the screenshot to inspect it at full size. A fresh core starter opens with no incidents. Inject the documented bad deploy only when the live exercise begins."
   },
   {
     "title": "In production: the same rules",
@@ -906,10 +906,10 @@ window.SLIDES = [
       }
     ],
     "keyPoints": [
-      "The console opens. No telemetry is expected yet.",
-      "Build the missing rules and tools before live recovery."
+      "The health header shows live shop telemetry.",
+      "Complete list_deploys before live recovery."
     ],
-    "notes": "This is a real local console capture. A fresh starter has no incidents or approvals. npm start now starts the shop and traffic too. Check the health header rather than inferring health from an empty incident list. Refresh screenshots from the guided-console run before shipping this deck."
+    "notes": "This is a real local console capture. A fresh starter has no incidents or approvals. npm start now starts the shop and traffic too. Check the health header rather than inferring health from an empty incident list. This capture uses the core starter and the disclosed one-minute fast demo window."
   },
   {
     "title": "Break",
@@ -2120,12 +2120,12 @@ window.SLIDES = [
       },
       {
         "title": "Decide",
-        "body": "After LANDED, mark mitigated. Resolve with notes in A9."
+        "body": "After LANDED, mark mitigated, then resolve with notes."
       }
     ],
     "keyPoints": [
       "Keep traffic running for the three recovery checks.",
-      "After LANDED, mark mitigated. Resolve with notes in A9."
+      "After LANDED, mark mitigated, then resolve with notes."
     ],
     "notes": "Show the structured recovery table: metric, baseline, limit and each measured check. Full and double must both pass; only half may fail. If NOT LANDED, keep the incident active and document investigation or escalation. If LANDED, a named human marks mitigated, then resolves with notes. A successful rollback alone is insufficient. This screenshot is from a successful local run, not proof that every run lands."
   },
