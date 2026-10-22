@@ -1639,17 +1639,29 @@ window.SLIDES = [
   {
     "title": "Design a control loop",
     "kicker": "W5 · OPTIONAL DEPTH · AFTER THE CORE WORKSHOP",
-    "subtitle": "Start with intent.md. Make the outcome and each check observable.",
+    "subtitle": "The agent is a control loop: set point, sensor, actuator.",
     "type": "concept",
-    "dark": true,
-    "cards": [
+    "layout": "steps",
+    "items": [
       {
-        "title": "Interview",
-        "body": "Claude writes intent.md one question at a time."
+        "label": "Read",
+        "caption": "repo, incidents/, REVIEW.md"
       },
       {
-        "title": "Push back",
-        "body": "I reject a check that is a wish."
+        "label": "Ask",
+        "caption": "≤ 3 questions, each with a recommended answer"
+      },
+      {
+        "label": "Decide",
+        "caption": "I choose"
+      },
+      {
+        "label": "Map",
+        "caption": "each part → an intent.md field"
+      },
+      {
+        "label": "Edit",
+        "caption": "the edit asks first"
       }
     ],
     "visual": {
@@ -1665,13 +1677,13 @@ window.SLIDES = [
       },
       "mediaDefault": "diagram"
     },
-    "prompt": "Interview me one question at a time to fill intent.md for the SRE agent on checkout-api. Push back when a check is a wish, not a test. Boundary: the agent never executes anything.",
+    "prompt": "/design-control-loop for the SRE agent on checkout-api — one round, then map to intent.md",
     "keyPoints": [
-      "One question at a time.",
-      "Accept one weak check on purpose.",
-      "Then catch it."
+      "One round. Then stop.",
+      "Sensor = MCP. Actuator = a human with a PR.",
+      "Fallback: /grilling intent.md."
     ],
-    "notes": "Optional depth. Choose this only for its matching follow-up task. Explain the concept, show the example, then let participants use it. No fixed slot in the core day.\n1. Show: paste the prompt (button “Example prompt”).\n2. Answer 3–4 questions.\n3. Accept one weak check on purpose, for example “the agent is reliable”.\n4. Then ask: “How does a stranger verify this?” Rewrite the check.\n5. Show: the hook asks before Claude edits intent.md (ask).",
+    "notes": "Optional depth after the core workshop. Use this only when writing intent.md. Read the repository, ask questions, let the human decide, then map the answer and propose the edit. One round, then stop.",
     "teachingPhase": "optional"
   },
   {

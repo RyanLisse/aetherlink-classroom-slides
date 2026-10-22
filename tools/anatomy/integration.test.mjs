@@ -85,6 +85,9 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
   for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
  }
  for(const title of ['skills','hooks','subagents','The gate + REVIEW.md'])assert.ok(at(title)>close,title);
+ const control=slides.find(s=>s.visual?.diagram?.id==='control-loop');
+ assert.equal(control.items.length,5);
+ assert.ok(control.items.every(item=>item.label&&item.caption));
  const main=JSON.stringify(slides.slice(0,close+1));
  assert.doesNotMatch(main,/w5-step-|npm run shop, npm run traffic/);
  assert.match(main,/What proves it/);
