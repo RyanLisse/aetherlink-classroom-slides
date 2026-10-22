@@ -392,17 +392,32 @@ yourself before teaching:
    who hasn't taught this content before; flag anything that doesn't match
    how you actually plan to run a slide.
 
-## Workshop 5: three core tasks
+## Workshop 5: the AI-native SDLC
 
-`workshop5.html` loads `workshop5-slides.js` (76 slides: AI-native SDLC with an SRE agent, English) with the same
+`workshop5.html` loads `workshop5-slides.js` (86 slides, with 46 in the required route) with the same
 `app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
 
-The default route has three tasks: read evidence, build and test a read-only tool,
-and judge live recovery. Contract, hook, extra eval and Git-gate implementation
-are optional depth. Use the [lab participant card](https://github.com/RyanLisse/sre-oncall-agent/blob/main/PARTICIPANT.md)
-beside the console. Facilitators build the labeled starter and checkpoint packages
-from the matching lab revision; coding agents start at AGENTS.md in that package.
-`npm start` runs the services. Fault injection and human decisions remain separate.
+The required route teaches a complete AI-assisted software change:
+
+1. Specify the change from evidence. Review an intent and acceptance checks.
+2. Review a plan, build a bounded change, and verify its tests and runtime evidence.
+3. Review the diff, prepare a PR, record a human release decision, and use the
+   observed result to propose the next improvement.
+
+Claude Code helps develop the SRE agent. The local shop supplies observations;
+operating that shop is not the learning goal. A console rollback is not a code release.
+
+Use the generated [participant card](https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md)
+and hub for exact steps, [SOLO.md](https://github.com/RyanLisse/sre-oncall-agent/blob/main/SOLO.md)
+for individual work, and [FACILITATOR.md](https://github.com/RyanLisse/sre-oncall-agent/blob/main/FACILITATOR.md)
+for timing. Create isolated checkpoints from the matching lab revision. A solved
+checkpoint is a catch-up aid, not evidence of a participant-authored change.
+
+Claude Code starts before theory. The console uses the real Agent SDK by default;
+offline replay is an explicit fallback. Human plan review, diff review, Git approval
+and the PR decision are required. Missing access or a required reviewer means
+`RELEASE BLOCKED`, not a simulated merge. Contract exploration, hooks, subagents
+and additional bench cases remain optional after the core close.
