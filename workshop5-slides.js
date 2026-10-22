@@ -1203,7 +1203,7 @@ window.SLIDES = [
     "kicker": "W5 · AI-NATIVE SDLC · YOUR TURN",
     "steps": [
       "Run the gate tests, verify, workshop tests and hook tests. Save actual results.",
-      "Inspect git diff workshop-base with Claude Code against intent.md and REVIEW.md.",
+      "Check git status; include intended new files. Review git diff workshop-base against intent, plan and REVIEW.md.",
       "Ask for a concrete defect, missing check or unsupported claim. Verify each finding.",
       "The human accepts the change or requests a fix. Record that decision."
     ],
