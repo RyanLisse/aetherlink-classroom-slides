@@ -8,6 +8,18 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
+test('Workshop 5 opens with the AI SDLC before its tools and practice system',()=>{
+ const slides=context.window.SLIDES;
+ assert.deepEqual(Array.from(slides.slice(0,5),s=>s.title),[
+  'Workshop 5: AI-native SDLC','Code is not the bottleneck','The AI-native loop','Goal of the day','What we do today'
+ ]);
+ const at=title=>slides.findIndex(s=>s.title===title);
+ assert.ok(at('What we do today')<at('Open Claude Code'));
+ assert.ok(at('Open Claude Code')<at('The shop is our practice system'));
+ assert.ok(at('The shop is our practice system')<at('The shop: what customers see'));
+ assert.ok(slides.slice(0,5).every(s=>s.teachingPhase==='core'));
+ assert.match(slides[at('The shop is our practice system')].subtitle,/Learn the AI SDLC/);
+});
 test('Workshop 5 retains all eight built diagrams and the control-loop video',()=>{
  const mapping=['bottleneck','loop','line-loop','control-loop','mcp','hooks','subagents','eval'];
  const dctx={window:{}};vm.runInNewContext(read('workshop5-diagrams.js'),dctx);
@@ -49,9 +61,9 @@ test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{
   assert.ok(slide.visual.imageAlt&&slide.notes,`${name} has context`);
   assert.ok(existsSync(path.join(root,src)),src);
  }
- for(const title of ['Core 1: Investigate the evidence','Core 2: Build a change safely','Core 3: Judge the recovery']) assert.equal(slides.filter(s=>s.title===title).length,1,title);
+ for(const title of ['Core 1: Specify from evidence','Core 2: Build a change safely','Core 3: Review, release and observe']) assert.equal(slides.filter(s=>s.title===title).length,1,title);
  assert.equal(slides.filter(s=>s.title.startsWith('Assignment ')).length,0);
- const map=slides.find(s=>s.title==='One ticket, three core tasks');
+ const map=slides.find(s=>s.title==='The shop is our practice system');
  assert.equal(map.items.length,3);
  assert.ok(map.items.every(item=>item.label&&item.caption));
  const setup=slides.find(s=>s.title==='Start the lab');
@@ -80,10 +92,10 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
  assert.ok(slides.slice(close+1).every(s=>s.teachingPhase==='optional'&&s.kicker.includes('OPTIONAL DEPTH')));
  for(const sequence of [
   ['Goal of the day','Why build an on-call agent?','The shop: what customers see','Start the lab'],
-  ['Core 1: Investigate the evidence','Before the fault: how detection works','Break the shop, then inspect the incident','Before the diagnosis: evidence and data gaps','Before you record: evidence, not a done marker','Core 1: Check the claims'],
+  ['Core 1: Specify from evidence','Before the fault: how detection works','Break the shop, then inspect the incident','Before the diagnosis: evidence and data gaps','Before you record: evidence, not a done marker','Core 1: Check the claims'],
   ['Core 2: Why this change','CLAUDE.md','Before code: a small plan','MCP','Watch: the tools in the trace','eval: the bench','Core 2: Build a change safely','Core 2: Prove it on the live incident'],
-  ['First task: read before editing','The AI-native loop','Core 1: Investigate the evidence','Core 1: Specify the change','Core 2: Why this change'],
-  ['Human gate: approval is not execution','Core 3: Judge the recovery','Review the diff, not the explanation','Prepare the PR and release decision','Recovery result: inspect every check','Core 3: Close it, or stop safely','Closure result: a human records the lesson','Observe, then plan the next change','Close: show what you can now prove'],
+  ['The AI-native loop','First task: read before editing','Core 1: Specify from evidence','Core 1: Specify the change','Core 2: Why this change'],
+  ['Human gate: approval is not execution','Core 3: Review, release and observe','Review the diff, not the explanation','Prepare the PR and release decision','Recovery result: inspect every check','Core 3: Close it, or stop safely','Closure result: a human records the lesson','Observe, then plan the next change','Close: show what you can now prove'],
  ]){
   for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
  }

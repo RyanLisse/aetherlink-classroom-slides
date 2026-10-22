@@ -85,11 +85,11 @@
 
   /* ---- slide 11: the AI-native loop (Loop type: six stations clockwise, the agent as the hub) ---- */
   D.loop = () => {
-    const cx = 640, cy = 320, rx = 400, ry = 206, W = 220, H = 76; const names = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
+    const cx = 640, cy = 320, rx = 400, ry = 206, W = 220, H = 76; const names = ['Plan', 'Design', 'Build', 'Test', 'Release', 'Observe'];
     const ang = names.map((_, i) => -90 + i * 60);
     const pos = ang.map(a => [cx + rx * Math.cos(a * Math.PI / 180), cy + ry * Math.sin(a * Math.PI / 180)]);
     const boxes = pos.map(([x, y]) => [x - W / 2, y - H / 2, W, H]); const hub = [500, 256, 280, 128];
-    const nodes = names.map((n, i) => { const [x, y] = boxes[i]; const focal = n === 'Deploy';
+    const nodes = names.map((n, i) => { const [x, y] = boxes[i]; const focal = n === 'Release';
       return step(i + 1, node({ x, y, w: W, h: H, kind: focal ? 'focal' : '', center: true, name: n, nameSize: 26, top: focal ? 26 : 40, eyebrow: focal ? 'A HUMAN APPROVES' : null })); }).join('');
     const svg = defs + loopRing(cx, cy, rx, ry, ang, [...boxes, hub]) +
       rect(260, 8, 760, 52, 'dg-n focal-soft', 8) + person(296, 38, 1, 'dg-person dg-person-o') + T(660, 43, 'Humans set goals, direct, and approve', 'dg-name', { size: 24 }) +

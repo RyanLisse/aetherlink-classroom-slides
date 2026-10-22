@@ -2,9 +2,9 @@
 /* Workshop 5. Teach the AI SDLC through a reviewed SRE-agent change. */
 window.SLIDES = [
   {
-    "title": "Welcome to Workshop 5",
+    "title": "Workshop 5: AI-native SDLC",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
-    "subtitle": "Use Claude Code to specify, build, verify and review a change. The shop is our test system.",
+    "subtitle": "Practise the AI-native software development lifecycle. Specify, plan, build, verify, release and learn.",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -17,7 +17,49 @@ window.SLIDES = [
       "Welcome the room.",
       "Check the setup."
     ],
-    "notes": "Check Git, Node 22+ and Claude Code. Participants open Claude Code within the first five minutes. Follow docs/claude-code.md for installation and login. A CLI login and Agent SDK model access are separate checks. Help with missing access without silently switching to offline.",
+    "notes": "Start with the AI SDLC, not the shop or installation. Explain why faster code still needs clear intent, evidence and human decisions. Use the opening lifecycle map and outputs, then open Claude Code early. Introduce the shop only as the practice system. Keep detailed concepts beside their first use. Check Git, Node 22+ and Claude Code during setup. CLI login and Agent SDK access are separate checks.",
+    "teachingPhase": "core"
+  },
+  {
+    "title": "Code is not the bottleneck",
+    "subtitle": "Build gets faster. Decisions and checks still take time.",
+    "cards": [],
+    "kicker": "W5 · AI-NATIVE SDLC · WHY",
+    "type": "concept",
+    "visual": {
+      "diagram": {
+        "id": "bottleneck",
+        "title": "Delivery bottleneck",
+        "caption": "Build gets faster. Decisions and checks still take time."
+      }
+    },
+    "keyPoints": [
+      "Waiting time shifts to Plan, Test, and Deploy.",
+      "Manual line-by-line review does not scale with more code.",
+      "Exceptions and approvals still create waiting time. Review and approval must keep pace."
+    ],
+    "notes": "Explain why this workshop covers the whole lifecycle. Faster code does not prove the requirement, the tests or the release decision. Keep this introduction short. Do not promise a measured speed improvement. We will practise a complete change rather than only prompting for code.",
+    "teachingPhase": "core"
+  },
+  {
+    "title": "The AI-native loop",
+    "kicker": "W5 · THE ROUTE WE WILL PRACTISE",
+    "subtitle": "Plan → Design → Build → Test → Release → Observe → Plan again.",
+    "type": "concept",
+    "cards": [],
+    "visual": {
+      "diagram": {
+        "id": "loop",
+        "title": "The AI-native loop",
+        "caption": "The agent supports six stages. Humans set goals, direct, and approve."
+      }
+    },
+    "keyPoints": [
+      "AI assists each stage, not only coding.",
+      "Each stage leaves evidence for a human decision.",
+      "Repeat the loop when observations reveal a new requirement."
+    ],
+    "notes": "Introduce this map now, not only in the closing reflection. Point to the current stage throughout the day. Claude Code helps with drafts, code, tests and reviews. Humans accept the intent, constrain the plan, judge the evidence and authorize release. Teach each detailed concept just before its task; do not add a glossary block.",
     "teachingPhase": "core"
   },
   {
@@ -28,7 +70,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Build the software",
-        "body": "Specify the missing behaviour. Plan, repair and test the SRE agent with Claude Code."
+        "body": "Specify an outcome. Review a plan. Build and test a small change with AI assistance."
       },
       {
         "title": "Control the delivery",
@@ -39,22 +81,61 @@ window.SLIDES = [
         "body": "Observe the running lab. Turn one finding into the next test or change."
       }
     ],
-    "tagline": "One local shop. Three tasks. Human decisions.",
+    "tagline": "A reviewed change, with evidence from each stage.",
     "visual": {
       "bot": "happy",
       "place": "aside"
     },
     "keyPoints": [
       "Working code and checked evidence are the outcomes.",
-      "Claude Code helps you build. The console runs the real Agent SDK by default.",
+      "AI supports the work. Humans accept scope, review evidence and decide on release.",
       "Hackathon templates and skills are optional depth."
     ],
     "notes": "The learning goal is the AI-native software development lifecycle, not operating an incident console. Participants produce intent, a reviewed plan, code and test evidence, and a review/release decision. The local shop supplies observable behaviour. Do not count a solved checkpoint or a green screenshot as a completed development cycle.",
     "teachingPhase": "core"
   },
   {
+    "title": "What we do today",
+    "kicker": "W5 · OPENING",
+    "subtitle": "One software change moves through the lifecycle. Each stage has an output.",
+    "type": "context",
+    "visual": {
+      "bot": "point",
+      "place": "left",
+      "dayRoute": [
+        "Specify",
+        "Design",
+        "Build + test",
+        "Review + release",
+        "Observe + iterate"
+      ]
+    },
+    "cards": [
+      {
+        "title": "Core 1 · Specify",
+        "body": "Define the problem, acceptance checks and boundaries in intent.md."
+      },
+      {
+        "title": "Core 2 · Build and verify",
+        "body": "Review a plan. Make a small change. Collect test and runtime evidence."
+      },
+      {
+        "title": "Core 3 · Review and release",
+        "body": "Review the diff and PR. Decide on release. Observe the result and review one next task."
+      }
+    ],
+    "tagline": "Lunch 12:00–13:00. Optional depth follows the closing slide.",
+    "keyPoints": [
+      "Use CARD.md or the hub for the steps.",
+      "Explain each concept when its task needs it.",
+      "Optional slides are not a second required route."
+    ],
+    "notes": "Read the route, not a glossary. At each task ask: what will we do, why now, and what will prove it? Open the card or hub. Definitions sit beside the action that uses them. The optional appendix starts after the closing recap; do not present it as another required block.",
+    "teachingPhase": "core"
+  },
+  {
     "title": "Open Claude Code",
-    "kicker": "W5 · FIRST FIVE MINUTES · YOUR TURN",
+    "kicker": "W5 · DEVELOPMENT ASSISTANT · YOUR TURN",
     "subtitle": "Start in your isolated starter. Let Claude read before it edits.",
     "type": "practice",
     "layout": "exercise",
@@ -121,24 +202,35 @@ window.SLIDES = [
     "notes": "Let every participant send this prompt before the remaining introduction. Read the response together. If Claude requests an action outside this read-only task, refuse it and restate the scope. Authentication or network errors are setup problems, not a reason to claim the model worked. Then show the shop story."
   },
   {
-    "title": "The AI-native loop",
-    "kicker": "W5 · THE ROUTE WE WILL PRACTISE",
-    "subtitle": "Plan → Design → Build → Test → Release → Observe → Plan again.",
+    "title": "The shop is our practice system",
+    "kicker": "W5 · THE USE CASE · THE MAP",
+    "subtitle": "Learn the AI SDLC by changing the SRE agent. Use the shop to observe the result.",
     "type": "concept",
-    "cards": [],
-    "visual": {
-      "diagram": {
-        "id": "loop",
-        "title": "The AI-native loop",
-        "caption": "The agent supports six stages. Humans set goals, direct, and approve."
+    "layout": "steps",
+    "items": [
+      {
+        "label": "Software we change",
+        "caption": "A read-only tool and a human approval gate."
+      },
+      {
+        "label": "System we observe",
+        "caption": "A local shop with synthetic checkout failures."
+      },
+      {
+        "label": "Learning goal",
+        "caption": "Intent, plan, tests, review, release and a next task."
       }
+    ],
+    "detail": "A working shop alone does not prove a completed development cycle.",
+    "visual": {
+      "stepKeys": true
     },
     "keyPoints": [
-      "AI assists each stage, not only coding.",
-      "Each stage leaves evidence for a human decision.",
-      "The SRE agent is the software we improve."
+      "The AI SDLC is the learning goal.",
+      "The shop supplies evidence for a software change.",
+      "Use the participant card for the required artifacts and decisions."
     ],
-    "notes": "Introduce this map now, not only in the closing reflection. Point to the current stage throughout the day. Claude Code helps with drafts, code, tests and reviews. Humans accept the intent, constrain the plan, judge the evidence and authorize release. Teach each detailed concept just before its task; do not add a glossary block.",
+    "notes": "Introduce the exercise only after the lifecycle, outputs and Claude Code. The SRE agent is the software participants change. The shop supplies observable behaviour. Name the lifecycle stage at each task. Do not teach this as a console operation course.",
     "teachingPhase": "core"
   },
   {
@@ -166,45 +258,6 @@ window.SLIDES = [
       "Runtime loop"
     ],
     "notes": "Ask learners to name which agent is acting and what it may change. A console rollback is not a software release. A successful model call is not acceptance of a code change.",
-    "teachingPhase": "core"
-  },
-  {
-    "title": "What we do today",
-    "kicker": "W5 · OPENING",
-    "subtitle": "One software change moves through the lifecycle. Each stage has an output.",
-    "type": "context",
-    "visual": {
-      "bot": "point",
-      "place": "left",
-      "dayRoute": [
-        "Specify",
-        "Design",
-        "Build + test",
-        "Review + release",
-        "Observe + iterate"
-      ]
-    },
-    "cards": [
-      {
-        "title": "Core 1 · Specify",
-        "body": "Use the broken shop to define the problem, acceptance checks and boundaries in intent.md."
-      },
-      {
-        "title": "Core 2 · Build and verify",
-        "body": "Review a plan. Ask Claude Code for a small repair. Compare tests and live evidence."
-      },
-      {
-        "title": "Core 3 · Review and release",
-        "body": "Test the human gate. Review the diff and PR. Observe the result and plan one next change."
-      }
-    ],
-    "tagline": "Lunch 12:00–13:00. Optional depth follows the closing slide.",
-    "keyPoints": [
-      "Use CARD.md or the hub for the steps.",
-      "Explain each concept when its task needs it.",
-      "Optional slides are not a second required route."
-    ],
-    "notes": "Read the route, not a glossary. At each task ask: what will we do, why now, and what will prove it? Open the card or hub. Definitions sit beside the action that uses them. The optional appendix starts after the closing recap; do not present it as another required block.",
     "teachingPhase": "core"
   },
   {
@@ -348,38 +401,6 @@ window.SLIDES = [
       "The human signs the fix."
     ],
     "notes": "1. Show the left column. Say: “The agent does the slow part: the search. It shows its evidence. It proposes one fix.”\n2. Show the right column. Say: “You keep every decision. Approve, execute, close. With your name.”\n3. Ask: “Why not let the agent roll back by itself?” Collect answers: a wrong rollback is a second incident; alert text can contain instructions (prompt injection); nobody owns the decision.\n4. Say: “That is why the agent has no write tools. It is the design, not a missing feature.”",
-    "teachingPhase": "core"
-  },
-  {
-    "title": "One ticket, three core tasks",
-    "kicker": "W5 · THE USE CASE · THE MAP",
-    "subtitle": "We develop the SRE agent through the AI SDLC. We do not just operate the shop.",
-    "type": "concept",
-    "layout": "steps",
-    "items": [
-      {
-        "label": "1 · Specify",
-        "caption": "intent + acceptance checks"
-      },
-      {
-        "label": "2 · Build and verify",
-        "caption": "reviewed plan + tests + diff"
-      },
-      {
-        "label": "3 · Review and learn",
-        "caption": "PR decision + observed result"
-      }
-    ],
-    "detail": "Each task produces evidence for the next human decision.",
-    "visual": {
-      "stepKeys": true
-    },
-    "keyPoints": [
-      "Three core tasks on one incident.",
-      "Each core passes through the SDLC loop.",
-      "Lost? Open the card: CARD.md or localhost:4320/hub."
-    ],
-    "notes": "Keep three work blocks, but require the complete software delivery cycle inside them. Core 1 creates intent.md. Core 2 creates docs/plan.md, a tested tool change and evidence. Core 3 adds the safety-gate change, reviews the complete diff and prepares the human-controlled release. Observations create the next change request.",
     "teachingPhase": "core"
   },
   {
@@ -543,7 +564,7 @@ window.SLIDES = [
     "teachingPhase": "core"
   },
   {
-    "title": "Core 1: Investigate the evidence",
+    "title": "Core 1: Specify from evidence",
     "kicker": "W5 · PLAN · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
@@ -570,7 +591,7 @@ window.SLIDES = [
       "A missing signal is unknown, not healthy."
     ],
     "notes": "Introduce the task before explaining telemetry. Ask participants to predict what evidence they would accept. Do not inject the fault yet; first show how detection works. Return to the card for the actual steps. Core 1 ends with evidence and a data gap, not an approval.",
-    "subtitle": "Find what the diagnosis can prove, and what it cannot see.",
+    "subtitle": "Start the specification with checked observations. Then define the required software change.",
     "teachingPhase": "core"
   },
   {
@@ -1162,7 +1183,7 @@ window.SLIDES = [
     "teachingPhase": "core"
   },
   {
-    "title": "Core 3: Judge the recovery",
+    "title": "Core 3: Review, release and observe",
     "kicker": "W5 · DEPLOY · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
@@ -1583,27 +1604,6 @@ window.SLIDES = [
       "Playbook p.3."
     ],
     "notes": "Optional depth. Choose this only for its matching follow-up task. Explain the concept, show the example, then let participants use it. No fixed slot in the core day.\n1. Read the quote from playbook p.3 aloud.\n2. Ask: “Where did your last feature wait longest: on code, or on review, test, and approval?”\n3. Say: “The answer is almost never code. That is the gap.”",
-    "teachingPhase": "optional"
-  },
-  {
-    "title": "Code is not the bottleneck",
-    "subtitle": "Build gets faster. Decisions and checks still take time.",
-    "cards": [],
-    "kicker": "W5 · OPTIONAL DEPTH · AFTER THE CORE WORKSHOP",
-    "type": "concept",
-    "visual": {
-      "diagram": {
-        "id": "bottleneck",
-        "title": "Delivery bottleneck",
-        "caption": "Build gets faster. Decisions and checks still take time."
-      }
-    },
-    "keyPoints": [
-      "Waiting time shifts to Plan, Test, and Deploy.",
-      "Manual line-by-line review does not scale with more code.",
-      "Exceptions and approvals still create waiting time. Review and approval must keep pace."
-    ],
-    "notes": "Optional depth. Choose this only for its matching follow-up task. Explain the concept, show the example, then let participants use it. No fixed slot in the core day.\n1. Show the top row. Say: “Before agents, Build takes a large part of the cycle.”\n2. Show the bottom row. Say: “Agents make Build faster. Plan, Test, and Deploy still need decisions and checks.”\n3. Say: “Manual line-by-line review does not scale when agents produce more code.”\n4. Say: “Exceptions and approvals still cause waiting time. Review and approval must keep pace.”\n5. Point to the note. Say: “This is illustrative, not a time guarantee.”",
     "teachingPhase": "optional"
   },
   {
