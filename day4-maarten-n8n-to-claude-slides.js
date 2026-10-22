@@ -1,6 +1,6 @@
 /* ==========================================================================
    Aetherlink x Worldline — Day 4 classroom deck: n8n to Claude (Maarten)
-   19 slides. One slide = one object in order. See README.md "How to edit
+   18 slides. One slide = one object in order. See README.md "How to edit
    a slide" and the field reference at the top of day3-n8n-slides.js
    before changing anything here.
 
@@ -26,29 +26,11 @@ window.SLIDES = [
 },
 
 { // Slide 2
-  title: "What do you remember from yesterday?",
-  kicker: "DAY 4 · RECAP",
-  subtitle: "Without looking back, explain:",
-  type: "recap",
-  tagline: "Answer from memory first, no peeking.",
-  visual: { reveal: 'click', bot: 'peek', place: 'slot', noReact: true },
-  cards: [
-    { title: "What does the Switch do, and why is it not enough?", body: "" },
-    { title: "What changes when you add Simple Memory?", body: "" },
-    { title: "Why do we use an Output Parser?", body: "" },
-    { title: "What is the difference between a sub-agent's description and its system message?", body: "" },
-    { title: "Where did the customer data come from?", body: "" }
-  ],
-  keyPoints: ["Cold retrieval, no looking back","Open one question per click","Let the room answer first","Last question leads into MCP"],
-  notes: "Cold retrieval: let people answer without looking at yesterday's workflow. Open one question per click and let the room answer before you add anything. Expected answers: the Switch only works on rules, so the priority had to be in the input already; memory sends earlier messages along; the output parser gives fixed fields the next node can use; the description tells the main agent when to call a sub-agent, the system message tells the sub-agent how to work; the customer data came from a data table. Keep the last two in mind: they come back today as subagent files and MCP."
-},
-
-{ // Slide 3
   title: "Today",
   kicker: "DAY 4 · OVERVIEW",
   subtitle: "Yesterday's support-ticket workflow, rebuilt in Claude Code.",
   type: "context",
-  visual: { stepThrough: true, bot: 'point', place: 'left', dayRoute: ['Welcome', 'Recap', 'n8n → Claude', 'Lesson 1', 'Lesson 2', 'Lesson 3', 'Review', 'What you learned'] },
+  visual: { stepThrough: true, bot: 'point', place: 'left', dayRoute: ['Welcome', 'n8n → Claude', 'Lesson 1', 'Lesson 2', 'Lesson 3', 'Review', 'What you learned'] },
   cards: [
     { title: "What we do", body: "Build the same ticket triage in three lessons: one agent, then subagents, then external data through MCP." },
     { title: "What you learn", body: "CLAUDE.md, subagents in .claude/agents, and connecting an MCP server." },
@@ -58,7 +40,7 @@ window.SLIDES = [
   notes: "Tell how the day goes. We take the same support tickets as yesterday and build the triage in Claude Code, in three lessons that each add one thing: one agent with CLAUDE.md, then an orchestrator with subagents, then external transaction data through MCP. Each lesson follows the same rhythm: short explanation, demo, participants try it, discussion."
 },
 
-{ // Slide 4
+{ // Slide 3
   title: "From n8n to Claude Code",
   kicker: "DAY 4 · N8N → CLAUDE",
   subtitle: "The building blocks you know from yesterday each have a place in Claude Code.",
@@ -86,7 +68,7 @@ window.SLIDES = [
   notes: "Go through one pair per click and let the room guess the right-hand side first. The key difference: in n8n you draw the workflow and every step is fixed; in Claude Code you describe the workflow in text and the main agent follows it, deciding itself when to call which specialist. Keep this slide in mind: every lesson today fills in one of these rows."
 },
 
-{ // Slide 5
+{ // Slide 4
   title: "Today's customer messages",
   kicker: "DAY 4 · N8N → CLAUDE",
   subtitle: "Ten messages in customer-messages.md, the same file in every lesson.",
@@ -107,7 +89,7 @@ window.SLIDES = [
 /* DAY 4 — Lesson 1: one agent + CLAUDE.md                                  */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 6
+{ // Slide 5
   title: "Lesson 1: one agent + CLAUDE.md",
   kicker: "DAY 4 · LESSON 1",
   subtitle: "The main Claude Code session does the classification itself.",
@@ -122,7 +104,7 @@ window.SLIDES = [
   notes: "Open 01-lesson-one-single-agent/claude-project in VS Code and start Claude Code there. Walk through CLAUDE.md: it is the system message of yesterday's AI Agent, but now as a file Claude reads at the start of every session. Point out the rules (only project information, no web search, don't invent facts, say what is missing) and the required output. The priority definitions are still empty on purpose: that is the exercise."
 },
 
-{ // Slide 7
+{ // Slide 6
   title: "Lesson 1: try it",
   kicker: "DAY 4 · LESSON 1 · YOUR TURN",
   subtitle: "Test the messages without definitions first, then write the definitions yourself.",
@@ -144,7 +126,7 @@ window.SLIDES = [
   notes: "Type the minutes on the timer and press start. The point is to feel the difference: without definitions Claude tends to follow the tone, so message 6 (URGENT logo) can come out HIGH and message 2 (calm, unknown transactions) too low. After writing the definitions, start a new session (or /clear) so CLAUDE.md is read again. Early finishers: compare definitions with a neighbour. Whose definitions handle message 6 best?"
 },
 
-{ // Slide 8
+{ // Slide 7
   title: "Quiz: message 6",
   kicker: "DAY 4 · QUIZ",
   subtitle: "\"URGENT!!! My logo is wrong!!! Fix it NOW please.\" Which priority?",
@@ -164,7 +146,7 @@ window.SLIDES = [
 /* DAY 4 — Lesson 2: orchestrator + subagents                               */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 9
+{ // Slide 8
   title: "Lesson 2: orchestrator + subagents",
   kicker: "DAY 4 · LESSON 2",
   subtitle: "Claude Code becomes the orchestrator. Each specialist owns one job.",
@@ -181,7 +163,7 @@ window.SLIDES = [
   notes: "Open 02-lesson-two-subagents/claude-project. CLAUDE.md no longer classifies anything: it describes the workflow and tells the main session to use specialists instead of doing the work itself. This is yesterday's main AI Agent with the Customer Reply Agent and Risk Agent as tools. Step through the four steps; the last one is new compared to n8n: the result is a file in output/ you can open and review."
 },
 
-{ // Slide 10
+{ // Slide 9
   title: "What is in a subagent file?",
   kicker: "DAY 4 · LESSON 2",
   subtitle: "One Markdown file per specialist, in .claude/agents/.",
@@ -217,7 +199,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "Open .claude/agents/ticket-analyst.md. The header between the --- lines has a name and a description: the orchestrator reads the description to decide when to use this agent, exactly like the Description field of yesterday's Risk Agent. The rest of the file is the agent's own instructions, like the System Message. Note that the priority definitions now live here, not in CLAUDE.md: the specialist owns its own logic. Use the Example prompt button to show the full file. Then open email-responder.md: style rules and a fixed email format."
 },
 
-{ // Slide 11
+{ // Slide 10
   title: "Lesson 2: try it",
   kicker: "DAY 4 · LESSON 2 · YOUR TURN",
   subtitle: "Let the orchestrator run the whole flow, and check who did what.",
@@ -243,7 +225,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
 /* DAY 4 — Lesson 3: MCP + external transaction data                        */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 12
+{ // Slide 11
   title: "Lesson 3: MCP + external data",
   kicker: "DAY 4 · LESSON 3",
   subtitle: "The analyst looks up transactions through a tool, without access to the Excel file itself.",
@@ -258,7 +240,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "Open only 03-lesson-three-mcp/claude-project. The MCP server (transaction-mcp) and the Excel file (external-data/transactions.xlsx) deliberately sit outside that folder: Claude Code cannot just open the spreadsheet. server.js gives controlled access to it as one tool, get_transaction. Read the tagline as the chain. Compare with yesterday: the Customer Context Agent had a 'Get row(s) in Data table' tool; the ticket-analyst now has get_transaction. Open ticket-analyst.md: it now says to use the tool when a message contains a transaction ID."
 },
 
-{ // Slide 13
+{ // Slide 12
   title: "Connect the MCP server",
   kicker: "DAY 4 · LESSON 3",
   subtitle: "Install once, then tell Claude Code how to start it.",
@@ -274,7 +256,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "Do this live. In the transaction-mcp folder, run npm install: it reads package.json and creates node_modules. Without it, the server fails to start. npm install installs the dependencies; it does not start anything. Then, from claude-project, register the server under the name transactions with claude mcp add (check claude mcp --help if your version differs). The server uses stdio: it is not a background service; Claude Code starts it as a local Node.js process when the connection is used, and it stops with the session. Check with /mcp."
 },
 
-{ // Slide 14
+{ // Slide 13
   title: "What is behind the IDs?",
   kicker: "DAY 4 · LESSON 3",
   subtitle: "The facts get_transaction returns from transactions.xlsx.",
@@ -289,7 +271,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "Before you open each card, read the customer message and ask the room which priority they expect; then open the card and see if the facts change their mind. TX-1007: the payment failed but the amount is reserved, a real problem for one customer. TX-1014: the fraud flag is set and the customer doesn't recognise it, so HIGH. TX-1018: completed on our side but the merchant says nothing arrived. The point: the message alone is not enough; the external facts make the priority defensible."
 },
 
-{ // Slide 15
+{ // Slide 14
   title: "Lesson 3: try it",
   kicker: "DAY 4 · LESSON 3 · YOUR TURN",
   subtitle: "Connect the server and let the analyst look up the transactions.",
@@ -315,7 +297,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
 /* DAY 4 — Review and closing                                               */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 16
+{ // Slide 15
   title: "Look back at the three lessons",
   kicker: "DAY 4 · REVIEW",
   subtitle: "The four questions behind every agent design.",
@@ -331,7 +313,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "Open one question per click and let the room answer with today's examples. The main agent knows the workflow in CLAUDE.md, not the priority rules. The priority logic and the email style belong to subagents. A tool is needed when the answer depends on data outside the project. The transaction facts came from the Excel file, but only through get_transaction. Ask one or two people to share an output file on screen."
 },
 
-{ // Slide 17
+{ // Slide 16
   title: "n8n or Claude Code?",
   kicker: "DAY 4 · REVIEW",
   subtitle: "Both can run this workflow. They are good at different things.",
@@ -357,7 +339,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "There is no winner here. n8n is strong when a flow must run on its own, on a trigger, the same way every time, and the team should see it on a canvas. Claude Code is strong when the work happens in a project, the steps vary, and you want to change the behaviour by editing a file. Ask two or three people for a workflow from their own work, and which tool they would choose."
 },
 
-{ // Slide 18
+{ // Slide 17
   title: "What did you learn?",
   kicker: "DAY 4 · CLOSING",
   subtitle: "Complete these statements.",
@@ -374,7 +356,7 @@ description: Analyse incoming customer-support messages, determine LOW, MEDIUM, 
   notes: "Give three quiet minutes to complete the statements, then collect a few out loud. Write the open questions on the flipchart."
 },
 
-{ // Slide 19
+{ // Slide 18
   title: "Thank you!",
   kicker: "DAY 4 · CLOSING",
   subtitle: "From a canvas in n8n to agents in Claude Code.",
