@@ -551,7 +551,9 @@ function buildOpener(stage, main, s, v) {
   }
   if (v.opener === 'showcase' && v.image) {                      // Day 2 show & tell: screenshot in a browser frame
     const shot = node('figure', 'showcase'); const bar = node('div', 'showcase-bar'); bar.append(node('span', 'dots'), node('span', 'showcase-url', v.imageLink || ''));
-    const img = document.createElement('img'); img.src = v.image; img.alt = ''; shot.append(bar, img);
+    const img = document.createElement('img'); img.src = v.image; img.alt = v.imageAlt || '';
+    const link = document.createElement('a'); link.href = v.image; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', v.imageAlt ? `${v.imageAlt}: Open screenshot at full size` : 'Open screenshot at full size'); link.append(img); shot.append(bar, link);
+    if (v.wideImage) main.classList.add('showcase-wide');
     main.classList.add('with-showcase'); main.prepend(shot);
   }
   if (v.opener === 'sdlc-loop' && v.image) {
@@ -575,7 +577,7 @@ function buildOpener(stage, main, s, v) {
 function renderMedia(m) {
   const fig = node('div', 'media-el-wrap');
   const still = () => { const img = document.createElement('img'); img.className = 'media-el'; img.src = m.type === 'image' ? m.src : (m.poster || m.src); img.alt = m.alt || ''; img.decoding = 'async'; return img; };
-  if (m.type !== 'video' || EMBED) { fig.append(still()); return fig; }
+  if (m.type !== 'video' || EMBED || matchMedia('(prefers-reduced-motion: reduce)').matches) { fig.append(still()); return fig; }
   const vid = document.createElement('video'); vid.className = 'media-el';
   vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.autoplay = true; vid.playsInline = true; vid.preload = 'auto';
   ['muted', 'loop', 'autoplay', 'playsinline'].forEach(a => vid.setAttribute(a, ''));
