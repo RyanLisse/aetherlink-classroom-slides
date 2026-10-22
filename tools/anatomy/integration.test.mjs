@@ -52,11 +52,13 @@ test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{
  for(const title of ['Core 1: Investigate the evidence','Core 2: Build a change safely','Core 3: Judge the recovery']) assert.equal(slides.filter(s=>s.title===title).length,1,title);
  assert.equal(slides.filter(s=>s.title.startsWith('Assignment ')).length,0);
  const map=slides.find(s=>s.title==='One ticket, three core tasks');
- assert.equal(map.items.filter(item=>item.label.startsWith('Core ')).length,3);
- assert.equal(map.items.filter(item=>item.label==='Optional depth').length,1);
+ assert.equal(map.items.length,3);
+ assert.ok(map.items.every(item=>item.label&&item.caption));
  const setup=slides.find(s=>s.title==='Start the lab');
  assert.ok(setup.steps.some(s=>s.includes('npm start')));
- assert.match(setup.cards[0].body,/npm run checkpoint -- start\ncd \.lab\/checkpoints\/start\nnpm start -- --fast/);
+ const assistant=slides.find(s=>s.title==='Open Claude Code');
+ assert.match(assistant.cards[0].body,/npm run checkpoint -- start\ncd \.lab\/checkpoints\/start\nclaude/);
+ assert.match(setup.cards[0].body,/npm run model:check\nnpm start -- --fast/);
  assert.ok(slides.some(s=>s.title==='Go deeper: your own guard rule (optional)'));
  assert.doesNotMatch(JSON.stringify(slides),/starter\.zip|checkpoint\.zip|git switch -c my\/workshop-5 w5-core-start/);
  assert.ok(slides.every(s=>s.notes?.trim()),'Every slide has facilitator notes');
@@ -80,7 +82,8 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
   ['Goal of the day','Why build an on-call agent?','The shop: what customers see','Start the lab'],
   ['Core 1: Investigate the evidence','Before the fault: how detection works','Break the shop, then inspect the incident','Before the diagnosis: evidence and data gaps','Before you record: evidence, not a done marker','Core 1: Check the claims'],
   ['Core 2: Why this change','CLAUDE.md','Before code: a small plan','MCP','Watch: the tools in the trace','eval: the bench','Core 2: Build a change safely','Core 2: Prove it on the live incident'],
-  ['Human gate: approval is not execution','Core 3: Judge the recovery','Recovery result: inspect every check','Core 3: Close it, or stop safely','Closure result: a human records the lesson','The AI-native loop','Close: show what you can now prove'],
+  ['First task: read before editing','The AI-native loop','Core 1: Investigate the evidence','Core 1: Specify the change','Core 2: Why this change'],
+  ['Human gate: approval is not execution','Core 3: Judge the recovery','Review the diff, not the explanation','Prepare the PR and release decision','Recovery result: inspect every check','Core 3: Close it, or stop safely','Closure result: a human records the lesson','Observe, then plan the next change','Close: show what you can now prove'],
  ]){
   for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
  }
@@ -90,8 +93,37 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
  assert.ok(control.items.every(item=>item.label&&item.caption));
  const main=JSON.stringify(slides.slice(0,close+1));
  assert.doesNotMatch(main,/w5-step-|npm run shop, npm run traffic/);
- assert.match(main,/What proves it/);
+ assert.match(main,/Each stage leaves evidence for a human decision/);
  assert.match(main,/not model quality/);
+});
+test('Workshop 5 requires AI-SDLC artifacts before the closing reflection',()=>{
+ const slides=context.window.SLIDES;
+ const core=slides.filter(s=>s.teachingPhase==='core');
+ const text=JSON.stringify(core);
+ for(const artifact of ['intent.md','docs/plan.md','REVIEW.md','docs/verify/sdlc.md','workshop-base','RELEASE BLOCKED'])assert.ok(text.includes(artifact),artifact);
+ for(const title of ['Core 1: Specify the change','Keep a reviewable baseline','Review the diff, not the explanation','Prepare the PR and release decision','Observe, then plan the next change']){
+  const slide=core.find(s=>s.title===title);
+  assert.equal(slide?.type,'practice',title);
+  assert.ok(slide.steps.length>=3,title);
+ }
+ assert.match(core.find(s=>s.title==='Two loops, different decisions').notes,/rollback is not a software release/);
+ assert.doesNotMatch(text,/plan\.md is optional|Git approval gate is optional depth/);
+ assert.doesNotMatch(JSON.stringify(slides),/Scripted runtime \(a model is optional\)/);
+});
+test('Workshop 5 starts Claude Code early and provides the SRE solo route',()=>{
+ const slides=context.window.SLIDES;
+ const at=title=>slides.findIndex(s=>s.title===title);
+ assert.ok(at('Open Claude Code')>at('Goal of the day'));
+ assert.ok(at('First task: read before editing')<at('Why build an on-call agent?'));
+ assert.ok(at('Continue alone: the same three tasks')<at('Close: show what you can now prove'));
+ const solo=slides[at('Continue alone: the same three tasks')];
+ assert.equal(solo.repo.url,'https://github.com/RyanLisse/sre-oncall-agent/blob/main/SOLO.md');
+ const setup=slides[at('Start the lab')];
+ assert.match(setup.notes,/no automatic offline fallback/i);
+ assert.doesNotMatch(setup.subtitle,/Offline|No API key/);
+ for(const slide of slides.filter(s=>s.visual?.image?.includes('/console-'))){
+  assert.match(slide.visual.imageLink,/earlier offline capture/);
+ }
 });
 test('Classroom and presenter reference the same cached slide and style versions',()=>{
  const main=read('workshop5.html'),presenter=read('workshop5-presenter.html');
