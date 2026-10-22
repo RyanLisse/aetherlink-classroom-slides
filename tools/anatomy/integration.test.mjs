@@ -56,7 +56,9 @@ test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{
  assert.equal(map.items.filter(item=>item.label==='Optional depth').length,1);
  const setup=slides.find(s=>s.title==='Start the lab');
  assert.ok(setup.steps.some(s=>s.includes('npm start')));
- assert.match(setup.cards[0].body,/npm run checkpoint -- start\ncd \.lab\/checkpoints\/start\nnpm start -- --fast/);
+ const assistant=slides.find(s=>s.title==='Open Claude Code');
+ assert.match(assistant.cards[0].body,/npm run checkpoint -- start\ncd \.lab\/checkpoints\/start\nclaude/);
+ assert.match(setup.cards[0].body,/npm run model:check\nnpm start -- --fast/);
  assert.ok(slides.some(s=>s.title==='Go deeper: your own guard rule (optional)'));
  assert.doesNotMatch(JSON.stringify(slides),/starter\.zip|checkpoint\.zip|git switch -c my\/workshop-5 w5-core-start/);
  assert.ok(slides.every(s=>s.notes?.trim()),'Every slide has facilitator notes');
@@ -92,6 +94,21 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
  assert.doesNotMatch(main,/w5-step-|npm run shop, npm run traffic/);
  assert.match(main,/What proves it/);
  assert.match(main,/not model quality/);
+});
+test('Workshop 5 starts Claude Code early and provides the SRE solo route',()=>{
+ const slides=context.window.SLIDES;
+ const at=title=>slides.findIndex(s=>s.title===title);
+ assert.ok(at('Open Claude Code')>at('Goal of the day'));
+ assert.ok(at('First task: read before editing')<at('Why build an on-call agent?'));
+ assert.ok(at('Continue alone: the same three tasks')<at('Close: show what you can now prove'));
+ const solo=slides[at('Continue alone: the same three tasks')];
+ assert.equal(solo.repo.url,'https://github.com/RyanLisse/sre-oncall-agent/blob/main/SOLO.md');
+ const setup=slides[at('Start the lab')];
+ assert.match(setup.notes,/no automatic offline fallback/i);
+ assert.doesNotMatch(setup.subtitle,/Offline|No API key/);
+ for(const slide of slides.filter(s=>s.visual?.image?.includes('/console-'))){
+  assert.match(slide.visual.imageLink,/earlier offline capture/);
+ }
 });
 test('Classroom and presenter reference the same cached slide and style versions',()=>{
  const main=read('workshop5.html'),presenter=read('workshop5-presenter.html');

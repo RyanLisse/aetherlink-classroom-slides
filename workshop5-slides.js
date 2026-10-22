@@ -18,7 +18,7 @@ window.SLIDES = [
       "Welcome the room.",
       "Check the setup."
     ],
-    "notes": "Time: 10:00. Welcome the room. Ask who has Node 22+ and Git. Claude Code is optional for the offline lab. Help missing installations during Start the lab and the morning break.",
+    "notes": "Time: 10:00. Check Git, Node 22+ and Claude Code. Participants open Claude Code within the first five minutes. Follow docs/claude-code.md for installation and login. A CLI login and Agent SDK model access are separate checks. Help with missing access without silently switching to offline.",
     "teachingPhase": "core"
   },
   {
@@ -47,11 +47,79 @@ window.SLIDES = [
     },
     "keyPoints": [
       "Working code and checked evidence are the outcomes.",
-      "The offline agent is scripted, not model evidence.",
+      "Claude Code helps you build. The console runs the real Agent SDK by default.",
       "Hackathon templates and skills are optional depth."
     ],
     "notes": "Time: 10:02. Explain the practical outcome before any terminology. Ask participants what evidence they would need before changing a failing service. The agent proposes; a human approves and executes. Do not promise a LANDED result.",
     "teachingPhase": "core"
+  },
+  {
+    "title": "Open Claude Code",
+    "kicker": "W5 · FIRST FIVE MINUTES · YOUR TURN",
+    "subtitle": "Start in your isolated starter. Let Claude read before it edits.",
+    "type": "practice",
+    "layout": "exercise",
+    "teachingPhase": "core",
+    "repo": {
+      "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/docs/claude-code.md",
+      "label": "Claude Code setup and model access"
+    },
+    "steps": [
+      "Clone once. Create the start checkpoint.",
+      "Enter the starter and run claude.",
+      "Sign in if asked. Run /status.",
+      "Keep this terminal for Claude Code."
+    ],
+    "cards": [
+      {
+        "title": "First terminal",
+        "body": "git clone https://github.com/RyanLisse/sre-oncall-agent.git\ncd sre-oncall-agent\nnpm run checkpoint -- start\ncd .lab/checkpoints/start\nclaude"
+      }
+    ],
+    "visual": {
+      "cmdCards": [
+        0
+      ],
+      "shotLabel": "Claude Code · your starter"
+    },
+    "expected": "Claude Code opens in .lab/checkpoints/start. Your account is shown in /status.",
+    "keyPoints": [
+      "Claude Code is the default coding assistant.",
+      "Read repo rules before editing.",
+      "Local CLI does not mean an offline model."
+    ],
+    "notes": "Time: 10:04. Follow docs/claude-code.md. Install Claude Code with the official installer if missing; check claude --version in a new terminal. Participants use their approved accounts. /status reports the session; inspect .claude/settings.json for hooks and permissions. Do not disable guards. Never run a second checkpoint creation over an existing destination. Native Windows is supported by the instructions, not verified by our Linux run."
+  },
+  {
+    "title": "First task: read before editing",
+    "kicker": "W5 · CLAUDE CODE · YOUR TURN",
+    "subtitle": "Use Claude Code now to explain the task and its boundaries.",
+    "type": "practice",
+    "layout": "exercise",
+    "teachingPhase": "core",
+    "steps": [
+      "Paste this prompt in Claude Code.",
+      "Check its answer against CARD.md.",
+      "Name the tool exercise and the approval-gate exercise.",
+      "No code change yet. You review the answer."
+    ],
+    "prompt": "Read CLAUDE.md, AGENTS.md and CARD.md. Explain what we will build, why it helps the on-call team, and what evidence we need. Name the two starter exercises. Do not edit files or run approval, execution, mitigation, resolution, commit or push commands. Wait for my review.",
+    "cards": [
+      {
+        "title": "Your first prompt",
+        "body": "Read CLAUDE.md, AGENTS.md and CARD.md. Explain what we will build, why it helps the on-call team, and what evidence we need. Name the two starter exercises. Do not edit files or run approval, execution, mitigation, resolution, commit or push commands. Wait for my review."
+      }
+    ],
+    "visual": {
+      "shotLabel": "Claude Code · read-only orientation"
+    },
+    "expected": "You can explain what you will build, why it matters and what will prove it.",
+    "keyPoints": [
+      "Use the actual repository, not a generic plan.",
+      "A5 repairs the evidence tool. A8 rebuilds the approval gate.",
+      "The human keeps operational decisions."
+    ],
+    "notes": "Time: 10:07. Let every participant send this prompt before the remaining introduction. Read the response together. If Claude requests an action outside this read-only task, refuse it and restate the scope. Authentication or network errors are setup problems, not a reason to claim the model worked. Then show the shop story."
   },
   {
     "title": "What we do today",
@@ -246,7 +314,7 @@ window.SLIDES = [
       {
         "label": "Core 2 · Build + test",
         "caption": "give the agent its eyes",
-        "detail": "Rebuild the read-only list_deploys tool test-first. Tests, bench and trace prove it. The diagnosis changes from investigate-more to rollback."
+        "detail": "Rebuild the read-only list_deploys tool test-first. Tests and bench prove the tool repair. Check the real-model trace and references before judging its proposal."
       },
       {
         "label": "Core 3 · Judge the recovery",
@@ -301,17 +369,17 @@ window.SLIDES = [
       "pillarIcons": true
     },
     "keyPoints": [
-      "Native on Windows, macOS, Linux. Offline. No API key.",
+      "Local shop and tools. Real model calls use your approved provider.",
       "All work is in the repo.",
       "Maximum human in the loop."
     ],
-    "notes": "Time: 10:23. 1. Say the four rules.\n2. Say: “The lab runs native on your laptop with Node and Claude Code. It runs the same on Windows, macOS, and Linux.”\n3. Say: “No API key needed. The agent runs offline on a scripted runtime. A model is optional.”\n4. Say: “Your own Claude account works. If your company requires Vertex AI, use Vertex. INSTALL.md has the steps.”",
+    "notes": "Time: 10:23. Read the safety rules. Claude Code is the coding assistant; the console uses the Agent SDK with read-only tools. Model requests leave the laptop and can cost money. SDK access requires supported API or company-cloud authentication; do not promise that a Claude Code subscription authenticates the SDK. Offline replay is an explicit fallback, not the default.",
     "teachingPhase": "core"
   },
   {
     "title": "Use only approved data",
     "kicker": "W5 · DISCLAIMER · READ ALONG",
-    "subtitle": "The offline lab uses local demo data. Your company policy still applies.",
+    "subtitle": "Use synthetic shop data. Model requests go to your configured provider.",
     "type": "context",
     "cards": [
       {
@@ -341,13 +409,13 @@ window.SLIDES = [
       "The README and handout have the same text.",
       "archify gets external code."
     ],
-    "notes": "Time: 10:26. Use synthetic lab data. The offline runtime makes no model call. A coding assistant, an external skill or an explicitly selected model is a separate integration; do not promise that those services retain no data. Follow company policy and provider terms.",
+    "notes": "Time: 10:26. Read docs/claude-code.md before model use. Local refers to the CLI, shop and console, not model inference. Use only approved synthetic data. Keep API keys in the launcher shell, never files or prompts. Check company policy and provider terms. npm start -- --fast --offline is the explicit scripted fallback and is not model evidence.",
     "teachingPhase": "core"
   },
   {
     "title": "Start the lab",
     "kicker": "W5 · SETUP · YOUR TURN",
-    "subtitle": "One start command after setup. Offline. No API key.",
+    "subtitle": "Keep Claude Code open. Check model access, then start the local shop.",
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent",
       "label": "sre-oncall-agent · current revision + isolated starter"
@@ -355,17 +423,17 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Clone the lab. Create the isolated start checkpoint.",
-      "Enter .lab/checkpoints/start. Run npm start -- --fast.",
-      "Open localhost:4320/hub. Keep the lab terminal open.",
-      "Use a second terminal in the starter directory for tasks."
+      "Second terminal: use the SAME starter directory.",
+      "Configure SDK access using docs/claude-code.md.",
+      "Run the preflight below. Continue only on PASS.",
+      "Run npm start -- --fast. Open localhost:4320/hub."
     ],
-    "expected": "✓ Lab running. The hub opens. Shop healthy.",
+    "expected": "PASS model preflight, then Lab running with the selected model.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "In the lab repo",
-        "body": "git clone https://github.com/RyanLisse/sre-oncall-agent.git\ncd sre-oncall-agent\nnpm run checkpoint -- start\ncd .lab/checkpoints/start\nnpm start -- --fast"
+        "title": "Second terminal · inside your starter",
+        "body": "npm ci\nnpm run fixtures\nnpm run model:check\nnpm start -- --fast"
       }
     ],
     "visual": {
@@ -379,7 +447,7 @@ window.SLIDES = [
       "Ctrl+C stops all three.",
       "Breaking the shop is a separate, deliberate step."
     ],
-    "notes": "Time: 10:30. Use Node 22+ and Git. Follow CARD.md from the current revision, not an old w5-core tag. npm run checkpoint -- start creates an isolated worktree with two deliberate exercises. It never overwrites an existing copy. Enter that directory before npm start -- --fast. The launcher installs dependencies, generates fixtures, and starts shop, traffic and console. Open the hub, then both UIs. The console reloads on source edits; shop state stays unchanged. Ctrl+C stops owned processes. A busy port means another copy is running: find and stop that terminal. Optional coding assistant: run claude then /status in a second terminal in this same starter directory. No Claude account is needed for the offline lab; the two code exercises can be completed in an editor.",
+    "notes": "Time: 10:30. Reuse the starter created on Open Claude Code. Do not clone or create it twice. In the second terminal configure SDK API or cloud access per docs/claude-code.md, install dependencies, generate fixtures and run npm run model:check. It sends a small paid request with no tools and must return PASS. A successful CLI /status is not this check. On failure stop and fix access; no automatic offline fallback. An explicitly agreed offline demo uses npm start -- --fast --offline and must be labeled scripted. Keep the launcher open; Ctrl+C stops only its children. The console reloads on source edits. Stop only your own launcher if ports are busy.",
     "teachingPhase": "core"
   },
   {
@@ -391,7 +459,7 @@ window.SLIDES = [
       "opener": "showcase",
       "image": "assets/workshop-5/console-start.png",
       "imageAlt": "Fresh core starter console, with shop health visible and no active incidents.",
-      "imageLink": "Local SRE console · click the image to enlarge",
+      "imageLink": "Console layout reference · earlier offline capture",
       "wideImage": true,
       "bot": "head",
       "place": "under"
@@ -410,7 +478,7 @@ window.SLIDES = [
       "The health header shows live shop telemetry.",
       "Complete list_deploys before live recovery."
     ],
-    "notes": "Time: 10:55. This is a real local console capture. A fresh starter has no incidents or approvals. npm start now starts the shop and traffic too. Check the health header rather than inferring health from an empty incident list. This capture uses the core starter and the disclosed one-minute fast demo window.",
+    "notes": "Time: 10:55. This is a real local console capture. A fresh starter has no incidents or approvals. npm start now starts the shop and traffic too. Check the health header rather than inferring health from an empty incident list. This capture uses the core starter and the disclosed one-minute fast demo window. Capture provenance: this screenshot is from an earlier explicitly offline run. It shows the UI layout and safety gates, not a real model result. Current model wording and traces can differ.",
     "teachingPhase": "core"
   },
   {
@@ -625,10 +693,10 @@ window.SLIDES = [
     },
     "keyPoints": [
       "References are text, not links.",
-      "Offline chat is a scripted summary.",
+      "Real model wording varies. Check its tools and references.",
       "Do not approve yet: nothing is safe to execute."
     ],
-    "notes": "Time: 11:37. Complete card steps 1.2–1.4. Ask each team to locate a reference and the deployment the agent cannot see. Offline chat returns a scripted summary, not a fresh model investigation. Keep the incident open for Core 2. Collect docs/diagnosis-live.md and a progress note with specific checks.",
+    "notes": "Time: 11:37. Complete card steps 1.2–1.4. Ask each team to locate a reference and the deployment the starter cannot read. The console uses a real model by default; do not require identical prose or a guaranteed proposal. A missing tool must remain a data gap, not invented evidence. If the contract rejects the answer or a reference is false, keep the output and stop to investigate. Keep the incident open for Core 2. Only explicit offline mode returns a scripted summary.",
     "teachingPhase": "core"
   },
   {
@@ -640,7 +708,7 @@ window.SLIDES = [
       "opener": "showcase",
       "image": "assets/workshop-5/console-refusal.png",
       "imageAlt": "Questions go in chat. Actions require named controls.",
-      "imageLink": "Local SRE console · click the image to enlarge",
+      "imageLink": "Console layout reference · earlier offline capture",
       "wideImage": true,
       "bot": "think",
       "place": "under"
@@ -659,7 +727,7 @@ window.SLIDES = [
       "Chat refuses mutations before any model call.",
       "A refusal does not change the deployment."
     ],
-    "notes": "Time: 11:57. The core starter already includes chat refusal. Type the exact request roll back now. The response refuses and points to human controls. This is not an A4 implementation exercise: optional A4 concerns the coding-agent guard hook. Check the deployment is unchanged.",
+    "notes": "Time: 11:57. The core starter already includes chat refusal. Type the exact request roll back now. The response refuses and points to human controls. This is not an A4 implementation exercise: optional A4 concerns the coding-agent guard hook. Check the deployment is unchanged. Capture provenance: this screenshot is from an earlier explicitly offline run. It shows the UI layout and safety gates, not a real model result. Current model wording and traces can differ.",
     "teachingPhase": "core"
   },
   {
@@ -727,7 +795,7 @@ window.SLIDES = [
         "body": "Tool test, typecheck, bench. Keep A8 closed for the next task."
       }
     ],
-    "tagline": "Claude Code is optional. The same scope applies when you code by hand.",
+    "tagline": "Return to your Claude Code session. Review the plan before any edit.",
     "visual": {
       "mdfile": 1,
       "guides": [
@@ -807,7 +875,7 @@ window.SLIDES = [
       "Registration exposes that handler as a tool.",
       "No rollback tool belongs in src/tools.ts."
     ],
-    "notes": "Time: 13:10. Open src/tools.ts beside the MCP diagram. Point at the handler, its binding and its registration. These are the parts participants will repair. The offline runtime calls the same local handlers directly; it is not evidence of a model using MCP. Production allowlists and remote systems are optional follow-up topics.",
+    "notes": "Time: 13:10. Open src/tools.ts beside the MCP diagram. Point at the handler, its binding and its registration. These are the parts participants will repair. In the default real-model run, the SDK exposes these read-only MCP tools. The explicit offline fallback calls the local handlers directly and is not model evidence. Production allowlists and remote systems are optional follow-up topics.",
     "teachingPhase": "core"
   },
   {
@@ -916,10 +984,10 @@ window.SLIDES = [
     "steps": [
       "Save src/tools.ts. The lab terminal shows a console reload.",
       "Same incident, chat: “Investigate: customers report checkout errors”.",
-      "list_deploys in the trace. The proposal is now rollback. No data gap.",
+      "Find list_deploys in the trace. Check every deploy reference.",
       "npm run progress:note -- \"Core 2: …\""
     ],
-    "expected": "A new diagnosis that cites deploys:<id> for v2.15.0 and proposes rollback.",
+    "expected": "The diagnosis cites the actual deployment. Review the proposal; never assume it is safe.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
@@ -932,11 +1000,11 @@ window.SLIDES = [
       "menu": 0
     },
     "keyPoints": [
-      "Same data, better eyes, different verdict.",
+      "Same incident and data, restored tool access. Compare the evidence.",
       "The shop stays broken while the console reloads.",
       "Test the executor gate in core 3 before you execute."
     ],
-    "notes": "Time: 14:10. Follow card step 2.3. Save the tool change and wait for the console reload. Re-investigate the same incident. The new diagnosis should cite the actual deploy and close the list_deploys gap. A reload is not a reset: the incident history persists. If you restart the whole launcher, the shop starts healthy and old telemetry is archived; do not treat an old incident as a fresh demo. Use a new disposable copy for a repeat. The executor gate is still the core 3 exercise; do not approve or execute yet.",
+    "notes": "Time: 14:10. Follow card step 2.3. Save the tool change and wait for the console reload. Re-investigate the same incident. The new diagnosis should cite the actual deploy and close the list_deploys gap. A reload is not a reset: the incident history persists. If you restart the whole launcher, the shop starts healthy and old telemetry is archived; do not treat an old incident as a fresh demo. Use a new disposable copy for a repeat. The executor gate is still the core 3 exercise; do not approve or execute yet. Model output can vary. If it omits the deployment or fails the contract, record that result and inspect the trace. Do not force a rollback proposal or approve a claim you cannot verify.",
     "teachingPhase": "core"
   },
   {
@@ -966,7 +1034,7 @@ window.SLIDES = [
       "opener": "showcase",
       "image": "assets/workshop-5/console-approval.png",
       "imageAlt": "A named approval enables the separate executor.",
-      "imageLink": "Local SRE console · click the image to enlarge",
+      "imageLink": "Console layout reference · earlier offline capture",
       "wideImage": true,
       "bot": "head",
       "place": "under"
@@ -985,7 +1053,7 @@ window.SLIDES = [
       "Execute rollback is disabled.",
       "Check the incident and proposal before you click Execute."
     ],
-    "notes": "Time: 14:55. Start Core 3 by asking why a convincing diagnosis is not permission. Explain the approval record immediately before participants rebuild checkApproval. The screenshot is a solved reference, not proof that the starter is ready. The starter deliberately refuses even valid approval until the gate is implemented and tested. The Git push gate is a different, optional exercise.",
+    "notes": "Time: 14:55. Start Core 3 by asking why a convincing diagnosis is not permission. Explain the approval record immediately before participants rebuild checkApproval. The screenshot is a solved reference, not proof that the starter is ready. The starter deliberately refuses even valid approval until the gate is implemented and tested. The Git push gate is a different, optional exercise. Capture provenance: this screenshot is from an earlier explicitly offline run. It shows the UI layout and safety gates, not a real model result. Current model wording and traces can differ.",
     "teachingPhase": "core"
   },
   {
@@ -1031,7 +1099,7 @@ window.SLIDES = [
       "opener": "showcase",
       "image": "assets/workshop-5/console-landed.png",
       "imageAlt": "LANDED reports recovery. The incident remains active.",
-      "imageLink": "Local SRE console · click the image to enlarge",
+      "imageLink": "Console layout reference · earlier offline capture",
       "wideImage": true,
       "bot": "think",
       "place": "under"
@@ -1050,7 +1118,7 @@ window.SLIDES = [
       "Keep traffic running for the three recovery checks.",
       "After LANDED, mark mitigated, then resolve with notes."
     ],
-    "notes": "Time: 15:25. Show the structured recovery table: metric, baseline, limit and each measured check. Full and double must both pass; only half may fail. If NOT LANDED, keep the incident active and document investigation or escalation. If LANDED, a named human marks mitigated, then resolves with notes. A successful rollback alone is insufficient. This screenshot is from a successful local run, not proof that every run lands.",
+    "notes": "Time: 15:25. Show the structured recovery table: metric, baseline, limit and each measured check. Full and double must both pass; only half may fail. If NOT LANDED, keep the incident active and document investigation or escalation. If LANDED, a named human marks mitigated, then resolves with notes. A successful rollback alone is insufficient. This screenshot is from a successful local run, not proof that every run lands. Capture provenance: this screenshot is from an earlier explicitly offline run. It shows the UI layout and safety gates, not a real model result. Current model wording and traces can differ.",
     "teachingPhase": "core"
   },
   {
@@ -1098,7 +1166,7 @@ window.SLIDES = [
       "opener": "showcase",
       "image": "assets/workshop-5/console-resolved.png",
       "imageAlt": "Resolved in History. Your notes become a dated lesson.",
-      "imageLink": "Local SRE console · click the image to enlarge",
+      "imageLink": "Console layout reference · earlier offline capture",
       "wideImage": true,
       "bot": "happy",
       "place": "under"
@@ -1117,7 +1185,7 @@ window.SLIDES = [
       "Record what changed and how you checked recovery.",
       "Incident ID, date and your name stay with the lesson."
     ],
-    "notes": "Time: 15:45. The resolved incident is in History with human notes and provenance. All execution/decision buttons remain disabled. Reload to confirm persistence. This is a real successful run, not a promise that the recovery check always passes.",
+    "notes": "Time: 15:45. The resolved incident is in History with human notes and provenance. All execution/decision buttons remain disabled. Reload to confirm persistence. This is a real successful run, not a promise that the recovery check always passes. Capture provenance: this screenshot is from an earlier explicitly offline run. It shows the UI layout and safety gates, not a real model result. Current model wording and traces can differ.",
     "teachingPhase": "core"
   },
   {
@@ -1140,6 +1208,45 @@ window.SLIDES = [
     ],
     "notes": "Time: 15:50. Introduce the full SDLC map only after participants have used it. Ask them to point to their evidence for investigation, planning, building, testing and recovery. The lab exercised a local rollback, not a production release pipeline. Use this map to explain transfer to the hackathon, not to add more required work.",
     "teachingPhase": "core"
+  },
+  {
+    "title": "Continue alone: the same three tasks",
+    "kicker": "W5 · SOLO ROUTE",
+    "subtitle": "Open SOLO.md. Use Claude Code, one reviewed change at a time.",
+    "type": "practice",
+    "layout": "exercise",
+    "teachingPhase": "core",
+    "repo": {
+      "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/SOLO.md",
+      "label": "SRE lab · recommended solo route"
+    },
+    "steps": [
+      "Start: Claude Code login and SDK model preflight.",
+      "Core 1: check evidence and record the missing signal.",
+      "Core 2: repair the tool. Check tests and the live trace.",
+      "Core 3: repair the gate. You judge recovery."
+    ],
+    "cards": [
+      {
+        "title": "If you get stuck",
+        "body": "Use the separate core-2 or core-3 checkpoint. Keep your own work. Record which copy you used."
+      },
+      {
+        "title": "Done means evidence",
+        "body": "Save the runtime label, checked references, test results and your recovery decision. NOT LANDED is a valid safe stop."
+      }
+    ],
+    "visual": {
+      "bot": "think",
+      "place": "under"
+    },
+    "expected": "Three checked results. You—not the agent—approve and close.",
+    "keyPoints": [
+      "SOLO.md starts with this recommended route.",
+      "Legacy fixture steps are optional offline replay.",
+      "The Daily Brief is a different optional lab."
+    ],
+    "notes": "Time: 15:54. Open the SRE repo SOLO.md, not the Daily Brief SOLO.md. Show the scoped prompts, checks and catch-up path. The participant reviews each plan and performs human-only operational decisions. Use a separate checkpoint when stuck, never overwrite work or copy runtime or approval data. Completion can be a documented safe stop. The old numbered fixture steps remain optional reference, not the default learning path."
   },
   {
     "title": "Close: show what you can now prove",
@@ -1694,7 +1801,7 @@ window.SLIDES = [
     "visual": {
       "opener": "showcase",
       "image": "assets/workshop-5/console-diagnosis.png",
-      "imageLink": "localhost:4320 · solved reference",
+      "imageLink": "Console layout reference · earlier offline capture",
       "stagger": "pop",
       "compact": true,
       "imageAlt": "Live checkout diagnosis with evidence references, pending approval and a disabled Execute rollback button.",
@@ -1715,13 +1822,13 @@ window.SLIDES = [
       "Mutations are buttons, not chat.",
       "A human resolves. The agent only proposes a lesson."
     ],
-    "notes": "Optional depth. Choose this only for its matching follow-up task. Explain the concept, show the example, then let participants use it. No fixed slot in the core day.\nProject preview: a real local console capture from the solved reference. The separate shop UI runs on port 4310; this console runs on port 4320. The offline runtime uses live telemetry, not a model. The starter cannot yet see deploys, so its first diagnosis has a data gap instead of this solved rollback proposal. Evidence references are text. Click the image to enlarge. Approval and execution are separate human actions.",
+    "notes": "Optional depth. Choose this only for its matching follow-up task. Explain the concept, show the example, then let participants use it. No fixed slot in the core day.\nProject preview: a real local console capture from the solved reference. The separate shop UI runs on port 4310; this console runs on port 4320. The offline runtime uses live telemetry, not a model. The starter cannot yet see deploys, so its first diagnosis has a data gap instead of this solved rollback proposal. Evidence references are text. Click the image to enlarge. Approval and execution are separate human actions. Capture provenance: this screenshot is from an earlier explicitly offline run. It shows the UI layout and safety gates, not a real model result. Current model wording and traces can differ.",
     "teachingPhase": "optional"
   },
   {
     "title": "In production: the same rules",
     "kicker": "W5 · OPTIONAL DEPTH · AFTER THE CORE WORKSHOP",
-    "subtitle": "Today offline. In production: real cloud signals. Same division of labour.",
+    "subtitle": "Today: real model, synthetic local signals. Humans still decide.",
     "type": "concept",
     "layout": "compare",
     "columns": [
