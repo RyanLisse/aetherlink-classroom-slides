@@ -70,6 +70,26 @@ test('Presenter uses posters before the legacy bot renderer',()=>{
  assert.ok(app.slice(anatomy,bot).includes('img.src = a.poster'));
  assert.ok(app.slice(anatomy,bot).includes('frame.src = a.src'));
 });
+test('Workshop 5 teaches concepts at use and keeps optional depth after the close',()=>{
+ const slides=context.window.SLIDES;
+ const at=title=>{const index=slides.findIndex(s=>s.title===title);assert.ok(index>=0,title);return index;};
+ const close=at('Close: show what you can now prove');
+ assert.ok(slides.slice(0,close+1).every(s=>s.teachingPhase==='core'));
+ assert.ok(slides.slice(close+1).every(s=>s.teachingPhase==='optional'&&s.kicker.includes('OPTIONAL DEPTH')));
+ for(const sequence of [
+  ['Goal of the day','Why build an on-call agent?','The shop: what customers see','Start the lab'],
+  ['Core 1: Investigate the evidence','Before the fault: how detection works','Break the shop, then inspect the incident','Before the diagnosis: evidence and data gaps','Before you record: evidence, not a done marker','Core 1: Check the claims'],
+  ['Core 2: Why this change','CLAUDE.md','Before code: a small plan','MCP','Watch: the tools in the trace','eval: the bench','Core 2: Build a change safely','Core 2: Prove it on the live incident'],
+  ['Human gate: approval is not execution','Core 3: Judge the recovery','Recovery result: inspect every check','Core 3: Close it, or stop safely','Closure result: a human records the lesson','The AI-native loop','Close: show what you can now prove'],
+ ]){
+  for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
+ }
+ for(const title of ['skills','hooks','subagents','The gate + REVIEW.md'])assert.ok(at(title)>close,title);
+ const main=JSON.stringify(slides.slice(0,close+1));
+ assert.doesNotMatch(main,/w5-step-|npm run shop, npm run traffic/);
+ assert.match(main,/What proves it/);
+ assert.match(main,/not model quality/);
+});
 test('Classroom and presenter reference the same cached slide and style versions',()=>{
  const main=read('workshop5.html'),presenter=read('workshop5-presenter.html');
  for(const asset of ['styles.css','workshop5-slides.js']){
