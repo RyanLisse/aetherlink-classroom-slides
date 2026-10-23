@@ -11,17 +11,16 @@ vm.runInNewContext(read('workshop5-slides.js'),context);
 test('Workshop 5 opens with the AI SDLC before its tools and practice system',()=>{
  const slides=context.window.SLIDES;
  assert.deepEqual(Array.from(slides.slice(0,5),s=>s.title),[
-  'Workshop 5: AI-native SDLC','Code is not the bottleneck','The AI-native loop','Goal of the day','What we do today'
+  'AI-native SDLC: more than generating code','The lifecycle: AI assists, humans decide','Your assignment and definition of done','The practice system: two agents, one shop','Working boundaries'
  ]);
  const at=title=>slides.findIndex(s=>s.title===title);
- assert.ok(at('What we do today')<at('Open Claude Code'));
- assert.ok(at('Open Claude Code')<at('The shop is our practice system'));
- assert.ok(at('The shop is our practice system')<at('The shop: what customers see'));
+ assert.ok(at('Your assignment and definition of done')<at('Open Claude Code'));
+ assert.ok(at('Working boundaries')<at('Open Claude Code'));
  assert.ok(slides.slice(0,5).every(s=>s.teachingPhase==='core'));
- assert.match(slides[at('The shop is our practice system')].subtitle,/Learn the AI SDLC/);
+ assert.match(slides[at('The practice system: two agents, one shop')].subtitle,/We change the SRE agent/);
 });
-test('Workshop 5 retains all eight built diagrams and the control-loop video',()=>{
- const mapping=['bottleneck','loop','line-loop','control-loop','mcp','hooks','subagents','eval'];
+test('Workshop 5 retains the diagrams used by the assignment and selected reference',()=>{
+ const mapping=['loop','mcp','hooks','subagents','eval'];
  const dctx={window:{}};vm.runInNewContext(read('workshop5-diagrams.js'),dctx);
  const figures=context.window.SLIDES.filter(s=>s.visual?.diagram);
  assert.equal(figures.length,mapping.length);
@@ -33,9 +32,6 @@ test('Workshop 5 retains all eight built diagrams and the control-loop video',()
   assert.match(output.svg,/dg-step/);
   assert.ok(slide.visual.diagram.title&&slide.notes&&slide.keyPoints.length,`${id} retains teaching content`);
  }
- const media=figures.find(s=>s.visual.diagram.id==='control-loop').visual.media;
- assert.equal(media.type,'video');
- for(const target of [media.src,media.poster])assert.ok(existsSync(path.join(root,target)),target);
  assert.ok(read('workshop5.html').includes('workshop5-diagrams.js'));
 });
 test('Workshop 4 wires its two Anatomy figures',()=>{
@@ -53,7 +49,7 @@ test('Workshop 4 wires its two Anatomy figures',()=>{
 });
 test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{
  const slides=context.window.SLIDES;
- for(const name of ['console-start','console-diagnosis','console-refusal','console-approval','console-landed','console-resolved','shop-healthy','shop-broken']){
+ for(const name of ['console-start','console-diagnosis','console-refusal','console-approval','console-not-landed','shop-healthy','shop-broken']){
   const src=`assets/workshop-5/${name}.png`;
   const slide=slides.find(s=>s.visual?.image===src);
   assert.ok(slide,src);
@@ -61,17 +57,15 @@ test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{
   assert.ok(slide.visual.imageAlt&&slide.notes,`${name} has context`);
   assert.ok(existsSync(path.join(root,src)),src);
  }
- for(const title of ['Core 1: Specify from evidence','Core 2: Build a change safely','Core 3: Review, release and observe']) assert.equal(slides.filter(s=>s.title===title).length,1,title);
+ for(const title of ['Specify: start with an observed problem','Repair the tool: red → green','Repair the gate: refuse unsafe actions','Review the actual diff']) assert.equal(slides.filter(s=>s.title===title).length,1,title);
  assert.equal(slides.filter(s=>s.title.startsWith('Assignment ')).length,0);
- const map=slides.find(s=>s.title==='The shop is our practice system');
- assert.equal(map.items.length,3);
- assert.ok(map.items.every(item=>item.label&&item.caption));
- const setup=slides.find(s=>s.title==='Start the lab');
- assert.ok(setup.steps.some(s=>s.includes('npm start')));
+ const setup=slides.find(s=>s.title==='Start the lab and check your starting point');
+ assert.match(setup.notes,/npm run model:check/);
+ assert.match(setup.notes,/npm start -- --fast/);
  const assistant=slides.find(s=>s.title==='Open Claude Code');
- assert.match(assistant.cards[0].body,/npm run checkpoint -- start\ncd \.lab\/checkpoints\/start\nclaude/);
- assert.match(setup.cards[0].body,/npm run model:check\nnpm start -- --fast/);
- assert.ok(slides.some(s=>s.title==='Go deeper: your own guard rule (optional)'));
+ assert.ok(assistant.steps.some(s=>s.includes('.lab/checkpoints/start')&&s.includes('claude')));
+ assert.ok(assistant.repo.url.endsWith('/CARD.md'));
+ assert.ok(slides.some(s=>s.title==='Hooks: allow, ask, deny'));
  assert.doesNotMatch(JSON.stringify(slides),/starter\.zip|checkpoint\.zip|git switch -c my\/workshop-5 w5-core-start/);
  assert.ok(slides.every(s=>s.notes?.trim()),'Every slide has facilitator notes');
 });
@@ -87,22 +81,33 @@ test('Presenter uses posters before the legacy bot renderer',()=>{
 test('Workshop 5 teaches concepts at use and keeps optional depth after the close',()=>{
  const slides=context.window.SLIDES;
  const at=title=>{const index=slides.findIndex(s=>s.title===title);assert.ok(index>=0,title);return index;};
- const close=at('Close: show what you can now prove');
+ const close=at('Show the completed lifecycle');
+ assert.equal(close,30);
+ assert.equal(slides.length,38);
  assert.ok(slides.slice(0,close+1).every(s=>s.teachingPhase==='core'));
- assert.ok(slides.slice(close+1).every(s=>s.teachingPhase==='optional'&&s.kicker.includes('OPTIONAL DEPTH')));
+ assert.ok(slides.slice(close+1).every(s=>s.teachingPhase==='optional'&&s.kicker.includes('REFERENCE ONLY')));
  for(const sequence of [
-  ['Goal of the day','Why build an on-call agent?','The shop: what customers see','Start the lab'],
-  ['Core 1: Specify from evidence','Before the fault: how detection works','Break the shop, then inspect the incident','Before the diagnosis: evidence and data gaps','Before you record: evidence, not a done marker','Core 1: Check the claims'],
-  ['Core 2: Why this change','CLAUDE.md','Before code: a small plan','MCP','Watch: the tools in the trace','eval: the bench','Core 2: Build a change safely','Core 2: Prove it on the live incident'],
-  ['The AI-native loop','First task: read before editing','Core 1: Specify from evidence','Core 1: Specify the change','Core 2: Why this change'],
-  ['Human gate: approval is not execution','Core 3: Review, release and observe','Review the diff, not the explanation','Prepare the PR and release decision','Recovery result: inspect every check','Core 3: Close it, or stop safely','Closure result: a human records the lesson','Observe, then plan the next change','Close: show what you can now prove'],
+  ['Your assignment and definition of done','The practice system: two agents, one shop','Working boundaries','Open Claude Code','First assignment: understand before editing','Start the lab and check your starting point'],
+  ['Specify: start with an observed problem','Create one fault and observe detection','Check the diagnosis against the evidence','Turn the finding into an intent','Accept the assignment before building'],
+  ['Establish a reviewable starting point','Ask for a small plan, then review it','Understand the tool before repair','Repair the tool: red → green','Check the change on the same incident','Understand the human approval gate','Repair the gate: refuse unsafe actions','Verify the complete change'],
+  ['Verify the complete change','Review the actual diff','Prepare the PR and make a release decision','Observe runtime with separate permission','Recovery: confirmed or not confirmed?','Turn the observation into the next task','Continue independently','Show the completed lifecycle'],
  ]){
   for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
  }
- for(const title of ['skills','hooks','subagents','The gate + REVIEW.md'])assert.ok(at(title)>close,title);
- const control=slides.find(s=>s.visual?.diagram?.id==='control-loop');
- assert.equal(control.items.length,5);
- assert.ok(control.items.every(item=>item.label&&item.caption));
+ for(const title of ['skills','Hooks: allow, ask, deny','subagents','CI: repeat the checks'])assert.ok(at(title)>close,title);
+ const core3=slides.slice(at('Review the actual diff'),close+1);
+ assert.ok(core3.every(s=>!s.title.startsWith('Repair')));
+ assert.match(slides[at('Check the change on the same incident')].steps.join(' '),/same incident/);
+ assert.match(slides[at('Repair the gate: refuse unsafe actions')].steps.join(' '),/Review the gate plan before/);
+ const verify=slides[at('Verify the complete change')];
+ assert.equal(verify.type,'practice');
+ assert.match(verify.steps.join(' '),/npm run verify/);
+ assert.match(verify.steps.join(' '),/npm run test:workshop/);
+ assert.match(verify.steps.join(' '),/npm run test:hooks/);
+ const recovery=slides[at('Recovery: confirmed or not confirmed?')];
+ assert.match(JSON.stringify(recovery.cards),/LANDED/);
+ assert.match(JSON.stringify(recovery.cards),/Keep the incident open/);
+ assert.match(JSON.stringify(recovery.cards),/never retry for green/);
  const main=JSON.stringify(slides.slice(0,close+1));
  assert.doesNotMatch(main,/w5-step-|npm run shop, npm run traffic/);
  assert.match(main,/Each stage leaves evidence for a human decision/);
@@ -113,24 +118,24 @@ test('Workshop 5 requires AI-SDLC artifacts before the closing reflection',()=>{
  const core=slides.filter(s=>s.teachingPhase==='core');
  const text=JSON.stringify(core);
  for(const artifact of ['intent.md','docs/plan.md','REVIEW.md','docs/verify/sdlc.md','workshop-base','RELEASE BLOCKED'])assert.ok(text.includes(artifact),artifact);
- for(const title of ['Core 1: Specify the change','Keep a reviewable baseline','Review the diff, not the explanation','Prepare the PR and release decision','Observe, then plan the next change']){
+ for(const title of ['Turn the finding into an intent','Establish a reviewable starting point','Review the actual diff','Prepare the PR and make a release decision','Turn the observation into the next task']){
   const slide=core.find(s=>s.title===title);
   assert.equal(slide?.type,'practice',title);
   assert.ok(slide.steps.length>=3,title);
  }
- assert.match(core.find(s=>s.title==='Two loops, different decisions').notes,/rollback is not a software release/);
+ assert.match(core.find(s=>s.title==='The practice system: two agents, one shop').notes,/rollback is not a software release/);
  assert.doesNotMatch(text,/plan\.md is optional|Git approval gate is optional depth/);
  assert.doesNotMatch(JSON.stringify(slides),/Scripted runtime \(a model is optional\)/);
 });
 test('Workshop 5 starts Claude Code early and provides the SRE solo route',()=>{
  const slides=context.window.SLIDES;
  const at=title=>slides.findIndex(s=>s.title===title);
- assert.ok(at('Open Claude Code')>at('Goal of the day'));
- assert.ok(at('First task: read before editing')<at('Why build an on-call agent?'));
- assert.ok(at('Continue alone: the same three tasks')<at('Close: show what you can now prove'));
- const solo=slides[at('Continue alone: the same three tasks')];
+ assert.ok(at('Open Claude Code')>at('Your assignment and definition of done'));
+ assert.ok(at('First assignment: understand before editing')<at('Start the lab and check your starting point'));
+ assert.ok(at('Continue independently')<at('Show the completed lifecycle'));
+ const solo=slides[at('Continue independently')];
  assert.equal(solo.repo.url,'https://github.com/RyanLisse/sre-oncall-agent/blob/main/SOLO.md');
- const setup=slides[at('Start the lab')];
+ const setup=slides[at('Start the lab and check your starting point')];
  assert.match(setup.notes,/no automatic offline fallback/i);
  assert.doesNotMatch(setup.subtitle,/Offline|No API key/);
  for(const slide of slides.filter(s=>s.visual?.image?.includes('/console-'))){
@@ -163,7 +168,7 @@ function renderShowcase(visual){
 }
 test('Showcase links describe their image and preserve full-size navigation',()=>{
  const screenshots=context.window.SLIDES.filter(s=>s.visual?.opener==='showcase'&&s.visual.image);
- assert.equal(screenshots.length,8);
+ assert.equal(screenshots.length,7);
  const labels=screenshots.map(({visual})=>{
   const rendered=renderShowcase(visual);
   assert.equal(rendered.label,`${visual.imageAlt}: Open screenshot at full size`);

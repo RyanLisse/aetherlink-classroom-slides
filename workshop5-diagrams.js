@@ -154,12 +154,12 @@
       line('M418 228 H 292', 'ret') + lab(355, 258, 'result') +
       line('M862 196 H 988', 'flow') + lab(925, 182, 'read', 'dg-c') +
       [[540, 300], [640, 640], [740, 980]].map(([px, tx]) => line('M' + px + ' 372 V 400' + (tx === px ? ' V 436' : ' q 0 8 ' + (tx > px ? 8 : -8) + ' 8 H ' + (tx > px ? tx - 8 : tx + 8) + ' q ' + (tx > px ? 8 : -8) + ' 0 ' + (tx > px ? 8 : -8) + ' 8 V 436'), 'deny')).join('') +
-      node({ x: 12, y: 112, w: 280, h: 172, center: true, eyebrow: 'CLAUDE CODE', name: '', top: 30 }) + bot(152, 196, 72) + T(152, 262, 'the agent', 'dg-sub', { size: 18 }) +
+      node({ x: 12, y: 112, w: 280, h: 172, center: true, eyebrow: 'RUNTIME SRE AGENT', name: '', top: 30 }) + bot(152, 196, 72) + T(152, 262, 'Agent SDK', 'dg-sub', { size: 18 }) +
       node({ x: 420, y: 20, w: 440, h: 352, kind: 'key', center: true, eyebrow: 'MCP SERVER', name: 'telemetry', nameSize: 28, sub: (s.cards?.[0]?.body || '').split('.')[0], subSize: 18, top: 32 }) +
       T(640, 140, 'src/tools.ts', 'dg-sub dg-mono', { size: 17 }) +
       tools.map((t, i) => step(i + 1, rect(460, 160 + i * 52, 360, 42, 'dg-n chip', 6) + T(640, 188 + i * 52, t, 'dg-name dg-mono', { size: 21 }))).join('') +
-      node({ x: 990, y: 112, w: 278, h: 172, kind: 'store', center: true, eyebrow: 'LOCAL FILES', name: 'incidents/', mono: true, nameSize: 26, sub: ['max 200 lines', 'per call'], subSize: 18, top: 32 }) +
-      [['Writes', 300], ['Network', 640], ['Path outside incidents/', 980]].map(([t, x]) => rect(x - 150, 440, 300, 64, 'dg-n ghost') + cross(x - 116, 472) + T(x - 92, 479, t, 'dg-deny-t', { anchor: 'start', size: 20 })).join('') +
+      node({ x: 990, y: 112, w: 278, h: 172, kind: 'store', center: true, eyebrow: 'LOADED TELEMETRY', name: 'telemetry.json', mono: true, nameSize: 24, sub: ['logs, metrics', 'deploys, diffs'], subSize: 18, top: 32 }) +
+      [['Shop mutations', 300], ['External tool calls', 640], ['Arbitrary file reads', 980]].map(([t, x]) => rect(x - 150, 440, 300, 64, 'dg-n ghost') + cross(x - 116, 472) + T(x - 92, 479, t, 'dg-deny-t', { anchor: 'start', size: 20 })).join('') +
       T(640, 548, s.tagline || '', 'dg-name', { size: 24 }) +
       legend(586, [['flow', 'call'], ['ret', 'return'], ['deny', 'not allowed']], 400);
     return { viewBox: '0 0 1280 596', svg, steps: 'highlight' };
