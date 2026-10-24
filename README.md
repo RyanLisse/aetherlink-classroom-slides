@@ -418,6 +418,11 @@ checkpoint is a catch-up aid, not evidence of a participant-authored change.
 The `core-2` checkpoint is an intermediate tool-only repair inside Core 2;
 the approval gate is still unfinished. Core 3 starts after both repairs pass.
 
+Participants can complete the same assignment without a facilitator or slides.
+The solo guide covers setup, self-review, pauses, troubleshooting and release
+blockers. The card supplies explanations just before each action. Independent
+human review remains required wherever the learner repository's policy demands it.
+
 The opening explains the AI-SDLC and assignment before Claude Code and setup.
 Detailed concepts appear beside the task that uses them. The console uses the real Agent SDK by default;
 offline replay is an explicit fallback. Human plan review, diff review, Git approval

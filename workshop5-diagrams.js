@@ -99,7 +99,7 @@
 
   /* ---- slide 12: the line and the loop (uses the compare columns) ---- */
   D['line-loop'] = s => {
-    const [L, Rc] = s.columns || [{}, {}]; const stages = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
+    const [L, Rc] = s.columns || [{}, {}]; const stages = ['Plan', 'Design', 'Build', 'Test', 'Release', 'Observe'];
     const left = stages.map((n, i) => { const x = 20 + i * 84, y = 92 + i * 64;
       return (i < 5 ? line('M' + (x + 152) + ' ' + (y + 24) + ' H ' + (x + 168) + ' q 8 0 8 8 V ' + (y + 62), 'plain') : '') + node({ x, y, w: 152, h: 48, center: true, name: n, nameSize: 20, top: 18 }); }).join('');
     const cx = 960, cy = 324, rx = 208, ry = 150, W = 136, H = 48;
