@@ -394,7 +394,7 @@ yourself before teaching:
 
 ## Workshop 5: the AI-native SDLC
 
-`workshop5.html` loads `workshop5-slides.js` (86 slides, with 46 in the required route) with the same
+`workshop5.html` loads `workshop5-slides.js` (31 core slides including breaks, then 7 reference slides) with the same
 `app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
@@ -403,7 +403,7 @@ Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only
 The required route teaches a complete AI-assisted software change:
 
 1. Specify the change from evidence. Review an intent and acceptance checks.
-2. Review a plan, build a bounded change, and verify its tests and runtime evidence.
+2. Review a plan, repair `list_deploys` and `checkApproval`, and verify the complete change.
 3. Review the diff, prepare a PR, record a human release decision, and use the
    observed result to propose the next improvement.
 
@@ -415,8 +415,16 @@ and hub for exact steps, [SOLO.md](https://github.com/RyanLisse/sre-oncall-agent
 for individual work, and [FACILITATOR.md](https://github.com/RyanLisse/sre-oncall-agent/blob/main/FACILITATOR.md)
 for timing. Create isolated checkpoints from the matching lab revision. A solved
 checkpoint is a catch-up aid, not evidence of a participant-authored change.
+The `core-2` checkpoint is an intermediate tool-only repair inside Core 2;
+the approval gate is still unfinished. Core 3 starts after both repairs pass.
 
-Claude Code starts before theory. The console uses the real Agent SDK by default;
+Participants can complete the same assignment without a facilitator or slides.
+The solo guide covers setup, self-review, pauses, troubleshooting and release
+blockers. The card supplies explanations just before each action. Independent
+human review remains required wherever the learner repository's policy demands it.
+
+The opening explains the AI-SDLC and assignment before Claude Code and setup.
+Detailed concepts appear beside the task that uses them. The console uses the real Agent SDK by default;
 offline replay is an explicit fallback. Human plan review, diff review, Git approval
 and the PR decision are required. Missing access or a required reviewer means
 `RELEASE BLOCKED`, not a simulated merge. Contract exploration, hooks, subagents

@@ -85,11 +85,11 @@
 
   /* ---- slide 11: the AI-native loop (Loop type: six stations clockwise, the agent as the hub) ---- */
   D.loop = () => {
-    const cx = 640, cy = 320, rx = 400, ry = 206, W = 220, H = 76; const names = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
+    const cx = 640, cy = 320, rx = 400, ry = 206, W = 220, H = 76; const names = ['Plan', 'Design', 'Build', 'Test', 'Release', 'Observe'];
     const ang = names.map((_, i) => -90 + i * 60);
     const pos = ang.map(a => [cx + rx * Math.cos(a * Math.PI / 180), cy + ry * Math.sin(a * Math.PI / 180)]);
     const boxes = pos.map(([x, y]) => [x - W / 2, y - H / 2, W, H]); const hub = [500, 256, 280, 128];
-    const nodes = names.map((n, i) => { const [x, y] = boxes[i]; const focal = n === 'Deploy';
+    const nodes = names.map((n, i) => { const [x, y] = boxes[i]; const focal = n === 'Release';
       return step(i + 1, node({ x, y, w: W, h: H, kind: focal ? 'focal' : '', center: true, name: n, nameSize: 26, top: focal ? 26 : 40, eyebrow: focal ? 'A HUMAN APPROVES' : null })); }).join('');
     const svg = defs + loopRing(cx, cy, rx, ry, ang, [...boxes, hub]) +
       rect(260, 8, 760, 52, 'dg-n focal-soft', 8) + person(296, 38, 1, 'dg-person dg-person-o') + T(660, 43, 'Humans set goals, direct, and approve', 'dg-name', { size: 24 }) +
@@ -99,7 +99,7 @@
 
   /* ---- slide 12: the line and the loop (uses the compare columns) ---- */
   D['line-loop'] = s => {
-    const [L, Rc] = s.columns || [{}, {}]; const stages = ['Plan', 'Design', 'Build', 'Test', 'Deploy', 'Maintain'];
+    const [L, Rc] = s.columns || [{}, {}]; const stages = ['Plan', 'Design', 'Build', 'Test', 'Release', 'Observe'];
     const left = stages.map((n, i) => { const x = 20 + i * 84, y = 92 + i * 64;
       return (i < 5 ? line('M' + (x + 152) + ' ' + (y + 24) + ' H ' + (x + 168) + ' q 8 0 8 8 V ' + (y + 62), 'plain') : '') + node({ x, y, w: 152, h: 48, center: true, name: n, nameSize: 20, top: 18 }); }).join('');
     const cx = 960, cy = 324, rx = 208, ry = 150, W = 136, H = 48;
@@ -154,12 +154,12 @@
       line('M418 228 H 292', 'ret') + lab(355, 258, 'result') +
       line('M862 196 H 988', 'flow') + lab(925, 182, 'read', 'dg-c') +
       [[540, 300], [640, 640], [740, 980]].map(([px, tx]) => line('M' + px + ' 372 V 400' + (tx === px ? ' V 436' : ' q 0 8 ' + (tx > px ? 8 : -8) + ' 8 H ' + (tx > px ? tx - 8 : tx + 8) + ' q ' + (tx > px ? 8 : -8) + ' 0 ' + (tx > px ? 8 : -8) + ' 8 V 436'), 'deny')).join('') +
-      node({ x: 12, y: 112, w: 280, h: 172, center: true, eyebrow: 'CLAUDE CODE', name: '', top: 30 }) + bot(152, 196, 72) + T(152, 262, 'the agent', 'dg-sub', { size: 18 }) +
+      node({ x: 12, y: 112, w: 280, h: 172, center: true, eyebrow: 'RUNTIME SRE AGENT', name: '', top: 30 }) + bot(152, 196, 72) + T(152, 262, 'Agent SDK', 'dg-sub', { size: 18 }) +
       node({ x: 420, y: 20, w: 440, h: 352, kind: 'key', center: true, eyebrow: 'MCP SERVER', name: 'telemetry', nameSize: 28, sub: (s.cards?.[0]?.body || '').split('.')[0], subSize: 18, top: 32 }) +
       T(640, 140, 'src/tools.ts', 'dg-sub dg-mono', { size: 17 }) +
       tools.map((t, i) => step(i + 1, rect(460, 160 + i * 52, 360, 42, 'dg-n chip', 6) + T(640, 188 + i * 52, t, 'dg-name dg-mono', { size: 21 }))).join('') +
-      node({ x: 990, y: 112, w: 278, h: 172, kind: 'store', center: true, eyebrow: 'LOCAL FILES', name: 'incidents/', mono: true, nameSize: 26, sub: ['max 200 lines', 'per call'], subSize: 18, top: 32 }) +
-      [['Writes', 300], ['Network', 640], ['Path outside incidents/', 980]].map(([t, x]) => rect(x - 150, 440, 300, 64, 'dg-n ghost') + cross(x - 116, 472) + T(x - 92, 479, t, 'dg-deny-t', { anchor: 'start', size: 20 })).join('') +
+      node({ x: 990, y: 112, w: 278, h: 172, kind: 'store', center: true, eyebrow: 'LOADED TELEMETRY', name: 'telemetry.json', mono: true, nameSize: 24, sub: ['logs, metrics', 'deploys, diffs'], subSize: 18, top: 32 }) +
+      [['Shop mutations', 300], ['External tool calls', 640], ['Arbitrary file reads', 980]].map(([t, x]) => rect(x - 150, 440, 300, 64, 'dg-n ghost') + cross(x - 116, 472) + T(x - 92, 479, t, 'dg-deny-t', { anchor: 'start', size: 20 })).join('') +
       T(640, 548, s.tagline || '', 'dg-name', { size: 24 }) +
       legend(586, [['flow', 'call'], ['ret', 'return'], ['deny', 'not allowed']], 400);
     return { viewBox: '0 0 1280 596', svg, steps: 'highlight' };
