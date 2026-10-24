@@ -2,9 +2,10 @@
 /* Workshop 5. One AI-SDLC assignment, then optional reference. */
 window.SLIDES = [
   {
-    "title": "AI-native SDLC: more than generating code",
+    "title": "Welcome to Workshop 5 · AI-native SDLC",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
     "subtitle": "Build a useful change with AI. Prove it meets the need before a human releases it.",
+    "tagline": "10:00–16:00 · Explain → demonstrate → practise → review",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -17,7 +18,26 @@ window.SLIDES = [
       "Faster code alone is not a successful delivery.",
       "The lifecycle is the lesson. The shop is the practice system."
     ],
-    "notes": "Open with the learning goal, not installation or an incident. Faster code still needs a clear requirement, checked evidence and a human decision. Participants complete a small development cycle. Do not promise a measured speed improvement. Keep the introduction short so Claude Code starts early.",
+    "notes": "Welcome the group at 10:00. Name the learning goal before installation or an incident: AI-native software delivery, not just code generation. Faster code still needs a clear requirement, checked evidence and a human decision. Explain the rhythm: I explain, show one example, then you practise and review your own result. Keep welcome and recap together within five minutes so Claude Code starts early. Do not promise a measured speed improvement.",
+    "teachingPhase": "core"
+  },
+  {
+    "title": "Recap: from W4 agents to the AI SDLC",
+    "kicker": "W5 · RECAP · FROM N8N TO CLAUDE AGENTS SDK",
+    "subtitle": "W4 moved the ticket flow into code. W5 adds the full delivery cycle around a change.",
+    "type": "context",
+    "layout": "cards",
+    "visual": { "bot": "think", "place": "beside" },
+    "cards": [
+      { "title": "Keep from W4", "body": "Structured output, tool evidence and a human decision. Specialists have bounded roles." },
+      { "title": "Add in W5", "body": "Accepted intent, reviewed plans, tested code, a release decision and observations for the next task." }
+    ],
+    "tagline": "Share one useful lesson or surprise from W4. Which check would catch it next time?",
+    "keyPoints": [
+      "Carry the method forward, not yesterday's application.",
+      "A model response is not proof that software is ready to release."
+    ],
+    "notes": "Take two or three short answers, not a new round of W4 demonstrations. Use one observed surprise to connect the recap to today's verification work. If nobody has a case, ask what would reveal an unsupported claim in an agent reply. W4 used structured output, specialists, MCP and human control; W5 practises how to specify, change, test and release software around those ideas. W4 attendance is not a prerequisite for the solo route: read the two cards, then continue. Do not copy W4 mutation permissions into the W5 runtime's read-only tools.",
     "teachingPhase": "core"
   },
   {
@@ -59,25 +79,25 @@ window.SLIDES = [
     },
     "cards": [
       {
-        "title": "1 · Specify",
+        "title": "11:15 · Specify",
         "body": "Check the missing evidence. Accept an intent with observable checks and boundaries."
       },
       {
-        "title": "2 · Build and verify",
+        "title": "13:00 · Build and verify",
         "body": "Review a plan. Repair the tool and approval gate. Record tests, trace and diff."
       },
       {
-        "title": "3 · Review and learn",
+        "title": "14:55 · Review and learn",
         "body": "Review the change. Decide on release. Observe the result and review one next task."
       }
     ],
-    "tagline": "Lunch 12:00–13:00. Optional depth follows the closing slide.",
+    "tagline": "10:00 opening and setup · Lunch 12:00–13:00 · Close at 16:00",
     "keyPoints": [
       "Use CARD.md or the hub for the steps.",
       "Explain each concept when its task needs it.",
       "Optional slides are not a second required route."
     ],
-    "notes": "Name the two cuts: list_deploys in src/tools.ts and checkApproval in src/executor.ts. Both are repaired in Core 2. Core 3 starts with review, not more implementation. Required evidence: intent.md, docs/plan.md, a tested diff, docs/verify/sdlc.md, a human release decision and a reviewed next task. A working shop or solved checkpoint is not proof of a completed cycle.",
+    "notes": "Use the three cards as the day agenda and outputs, not a second overview. Breaks are 11:00–11:15 and 14:40–14:55. Ask learners to choose one delivery skill they want to improve today; revisit it at the close. Name the two cuts: list_deploys in src/tools.ts and checkApproval in src/executor.ts. Both are repaired in Core 2. Core 3 starts with review, not more implementation. Required evidence: intent.md, docs/plan.md, a tested diff, docs/verify/sdlc.md, a human release decision and a reviewed next task. A working shop or solved checkpoint is not proof of a completed cycle. Optional depth follows the closing slide, not another required block.",
     "teachingPhase": "core"
   },
   {
@@ -915,7 +935,8 @@ window.SLIDES = [
     "visual": {
       "levelUp": true
     },
-    "notes": "Ask each learner to point to evidence from Plan, Design, Build, Test, Release and Observe. A blocker stays a blocker. A solved checkpoint cannot replace a participant-authored change. End the taught route here. Slides after this close are reference only: select one for a specific follow-up question; do not continue presenting by default.",
+    "tagline": "Next: W6 builds one small part of your own use case. W7 reviews, finishes and presents it.",
+    "notes": "Ask each learner to point to evidence from Plan, Design, Build, Test, Release and Observe. Revisit the delivery skill they chose at the start: what can they now prove, and what still needs work? A blocker stays a blocker. A solved checkpoint cannot replace a participant-authored change. Bridge to W6: take the same lifecycle to one small part of the existing personal or team use case, with n8n or the Agent SDK. W7 finishes and presents that same scope; the shop is not a mandatory project. End the taught route here. Slides after this close are reference only: select one for a specific follow-up question; do not continue presenting by default.",
     "teachingPhase": "core",
     "subtitle": "Show your work: intent, plan, tested diff, human decision and next task."
   },
