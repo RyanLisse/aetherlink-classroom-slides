@@ -400,6 +400,10 @@ Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
 
+The optional `stateId` slide field is a permanent storage identity, independent
+of title and order. Existing W5 slides deliberately reuse their exact pre-recap
+`index:title` keys; give every new slide a unique, explicit ID.
+
 The required route teaches a complete AI-assisted software change:
 
 1. Specify the change from evidence. Review an intent and acceptance checks.

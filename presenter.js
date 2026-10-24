@@ -44,7 +44,7 @@ const ro = new ResizeObserver(entries => entries.forEach(e => fitShot(e.target))
 [$('p-shot'), $('p-next-shot')].forEach(el => ro.observe(el));
 
 function isHidden(i) {
-  const id = i + ':' + slides[i].title; const list = k => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } };
+  const id = slides[i].stateId || i + ':' + slides[i].title; const list = k => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch { return []; } };
   return slides[i].hidden ? !list(SHOWN_KEY).includes(id) : list(HIDDEN_KEY).includes(id);
 }
 
@@ -52,7 +52,7 @@ function isHidden(i) {
 function setupTimer(s) {
   timerController?.abort(); timerController = new AbortController();
   const slot = $('p-timer-slot'); slot.replaceChildren();
-  const v = s.visual || {}; const key = ALSTimer.key(current, s.title); let box = null, label = '';
+  const v = s.visual || {}; const key = ALSTimer.key(current, s.title, s.stateId); let box = null, label = '';
   if (s.layout === 'exercise') { label = 'This assignment'; box = ALSTimer.mount({ key, defaultSec: 0, minutes: true, bar: true, doneText: 'TIME', signal: timerController.signal }); }
   else if (v.countdown) { label = 'Break'; box = ALSTimer.mount({ key, defaultSec: v.countdown * 60, back: true, boxCls: 'pause-box', faceCls: 'pause-clock', lateCls: 'late', signal: timerController.signal }); }
   else if (v.quietTimer) { label = 'Quiet time'; box = ALSTimer.mount({ key, defaultSec: v.quietTimer * 60, boxCls: 'pause-box quiet', faceCls: 'pause-clock', lateCls: 'late', lateAt: 30, signal: timerController.signal }); }

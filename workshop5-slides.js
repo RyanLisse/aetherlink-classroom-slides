@@ -3,6 +3,7 @@
 window.SLIDES = [
   {
     "title": "Welcome to Workshop 5 · AI-native SDLC",
+    "stateId": "0:AI-native SDLC: more than generating code",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
     "subtitle": "Build a useful change with AI. Prove it meets the need before a human releases it.",
     "tagline": "10:00–16:00 · Explain → demonstrate → practise → review",
@@ -23,6 +24,7 @@ window.SLIDES = [
   },
   {
     "title": "Recap: from W4 agents to the AI SDLC",
+    "stateId": "w5:recap-w4",
     "kicker": "W5 · RECAP · FROM N8N TO CLAUDE AGENTS SDK",
     "subtitle": "W4 moved the ticket flow into code. W5 adds the full delivery cycle around a change.",
     "type": "context",
@@ -42,6 +44,7 @@ window.SLIDES = [
   },
   {
     "title": "The lifecycle: AI assists, humans decide",
+    "stateId": "1:The lifecycle: AI assists, humans decide",
     "kicker": "W5 · THE ROUTE WE WILL PRACTISE",
     "subtitle": "Plan → Design → Build → Test → Release → Observe → Plan again.",
     "type": "concept",
@@ -63,6 +66,7 @@ window.SLIDES = [
   },
   {
     "title": "Your assignment and definition of done",
+    "stateId": "2:Your assignment and definition of done",
     "kicker": "W5 · OPENING",
     "subtitle": "Improve the SRE agent: restore deployment evidence and check human approval.",
     "type": "context",
@@ -102,6 +106,7 @@ window.SLIDES = [
   },
   {
     "title": "The practice system: two agents, one shop",
+    "stateId": "3:The practice system: two agents, one shop",
     "kicker": "W5 · PRACTICE SYSTEM",
     "subtitle": "We change the SRE agent. The local shop supplies observations, not the learning goal.",
     "type": "concept",
@@ -133,6 +138,7 @@ window.SLIDES = [
   },
   {
     "title": "Working boundaries",
+    "stateId": "4:Working boundaries",
     "kicker": "W5 · RULES OF THE ROAD",
     "type": "concept",
     "layout": "cards",
@@ -162,6 +168,7 @@ window.SLIDES = [
   },
   {
     "title": "Open Claude Code",
+    "stateId": "5:Open Claude Code",
     "kicker": "W5 · SETUP · YOUR TURN",
     "subtitle": "Start in your own isolated starter. Keep the exact commands on the card.",
     "type": "practice",
@@ -194,6 +201,7 @@ window.SLIDES = [
   },
   {
     "title": "First assignment: understand before editing",
+    "stateId": "6:First assignment: understand before editing",
     "kicker": "W5 · ORIENT · YOUR TURN",
     "subtitle": "An assistant needs the task and boundaries before it changes code.",
     "type": "practice",
@@ -227,6 +235,7 @@ window.SLIDES = [
   },
   {
     "title": "Start the lab and check your starting point",
+    "stateId": "7:Start the lab and check your starting point",
     "kicker": "W5 · SETUP · YOUR TURN",
     "subtitle": "Check SDK access separately, then start the shop, traffic and console from the same starter.",
     "type": "concept",
@@ -258,6 +267,7 @@ window.SLIDES = [
   },
   {
     "title": "Break",
+    "stateId": "8:Break",
     "kicker": "W5 · 11:00 · 15 MINUTES",
     "type": "pause",
     "cards": [
@@ -276,6 +286,7 @@ window.SLIDES = [
   },
   {
     "title": "Specify: start with an observed problem",
+    "stateId": "9:Specify: start with an observed problem",
     "kicker": "W5 · CORE 1 · SPECIFY · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
@@ -308,6 +319,7 @@ window.SLIDES = [
   },
   {
     "title": "Create one fault and observe detection",
+    "stateId": "10:Create one fault and observe detection",
     "kicker": "W5 · CORE 1 · OBSERVE",
     "subtitle": "Traffic creates telemetry. A fixed metric limit opens the incident; the model does not.",
     "type": "concept",
@@ -339,6 +351,7 @@ window.SLIDES = [
   },
   {
     "title": "Check the diagnosis against the evidence",
+    "stateId": "11:Check the diagnosis against the evidence",
     "kicker": "W5 · CORE 1 · VERIFY OBSERVATIONS",
     "subtitle": "A reference must match recorded data. An empty tool result does not prove no deployment occurred.",
     "type": "concept",
@@ -368,6 +381,7 @@ window.SLIDES = [
   },
   {
     "title": "Turn the finding into an intent",
+    "stateId": "12:Turn the finding into an intent",
     "subtitle": "Define the wanted behaviour before asking Claude to implement it.",
     "type": "practice",
     "layout": "exercise",
@@ -400,6 +414,7 @@ window.SLIDES = [
   },
   {
     "title": "Accept the assignment before building",
+    "stateId": "13:Accept the assignment before building",
     "subtitle": "A clear acceptance check makes the later review possible.",
     "type": "practice",
     "layout": "exercise",
@@ -432,6 +447,7 @@ window.SLIDES = [
   },
   {
     "title": "Lunch",
+    "stateId": "14:Lunch",
     "kicker": "W5 · 12:00 · 60 MINUTES",
     "type": "pause",
     "cards": [
@@ -450,6 +466,7 @@ window.SLIDES = [
   },
   {
     "title": "Establish a reviewable starting point",
+    "stateId": "15:Establish a reviewable starting point",
     "subtitle": "The final review needs a real before-and-after diff, not a return to the solved HEAD.",
     "type": "practice",
     "layout": "exercise",
@@ -482,6 +499,7 @@ window.SLIDES = [
   },
   {
     "title": "Ask for a small plan, then review it",
+    "stateId": "16:Ask for a small plan, then review it",
     "kicker": "W5 · CORE 2 · DESIGN · YOUR TURN",
     "subtitle": "A reviewed plan limits accidental changes and makes verification deliberate.",
     "type": "practice",
@@ -515,6 +533,7 @@ window.SLIDES = [
   },
   {
     "title": "Understand the tool before repair",
+    "stateId": "17:Understand the tool before repair",
     "kicker": "W5 · CORE 2 · MCP AT FIRST USE",
     "subtitle": "MCP exposes named tools. Repair the read-only handler, not the contract.",
     "type": "concept",
@@ -546,6 +565,7 @@ window.SLIDES = [
   },
   {
     "title": "Repair the tool: red → green",
+    "stateId": "18:Repair the tool: red → green",
     "kicker": "W5 · CORE 2 · BUILD · YOUR TURN",
     "subtitle": "Use the failing test to guide the smallest implementation.",
     "type": "practice",
@@ -578,6 +598,7 @@ window.SLIDES = [
   },
   {
     "title": "Check the change on the same incident",
+    "stateId": "19:Check the change on the same incident",
     "kicker": "W5 · CORE 2 · VERIFY LIVE · YOUR TURN",
     "subtitle": "Compare the actual trace before and after the repair, not just the wording.",
     "type": "practice",
@@ -610,6 +631,7 @@ window.SLIDES = [
   },
   {
     "title": "Understand the human approval gate",
+    "stateId": "20:Understand the human approval gate",
     "kicker": "W5 · CORE 2 · SAFETY AT FIRST USE",
     "subtitle": "A diagnosis cannot authorize itself. Approval is separate from execution.",
     "type": "concept",
@@ -641,6 +663,7 @@ window.SLIDES = [
   },
   {
     "title": "Repair the gate: refuse unsafe actions",
+    "stateId": "21:Repair the gate: refuse unsafe actions",
     "kicker": "W5 · CORE 2 · BUILD · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
@@ -673,6 +696,7 @@ window.SLIDES = [
   },
   {
     "title": "Verify the complete change",
+    "stateId": "22:Verify the complete change",
     "kicker": "W5 · CORE 2 · TEST",
     "subtitle": "Finish both repairs and record the required checks before the diff review.",
     "type": "practice",
@@ -707,6 +731,7 @@ window.SLIDES = [
   },
   {
     "title": "Break",
+    "stateId": "23:Break",
     "kicker": "W5 · 14:40 · 15 MINUTES",
     "type": "pause",
     "cards": [
@@ -725,6 +750,7 @@ window.SLIDES = [
   },
   {
     "title": "Review the actual diff",
+    "stateId": "24:Review the actual diff",
     "subtitle": "A passing test does not prove that the change meets the accepted intent.",
     "type": "practice",
     "layout": "exercise",
@@ -757,6 +783,7 @@ window.SLIDES = [
   },
   {
     "title": "Prepare the PR and make a release decision",
+    "stateId": "25:Prepare the PR and make a release decision",
     "subtitle": "Publishing code needs a human decision, not the authoring agent’s approval.",
     "type": "practice",
     "layout": "exercise",
@@ -789,6 +816,7 @@ window.SLIDES = [
   },
   {
     "title": "Observe runtime with separate permission",
+    "stateId": "26:Observe runtime with separate permission",
     "kicker": "W5 · CORE 3 · OBSERVE",
     "subtitle": "Code review does not approve a shop action. Judge the current proposal and its evidence.",
     "type": "concept",
@@ -820,6 +848,7 @@ window.SLIDES = [
   },
   {
     "title": "Recovery: confirmed or not confirmed?",
+    "stateId": "27:Recovery: confirmed or not confirmed?",
     "kicker": "W5 · CORE 3 · HUMAN DECISION",
     "subtitle": "Execution success is not proof of recovery. Inspect the frozen measurements.",
     "type": "concept",
@@ -851,6 +880,7 @@ window.SLIDES = [
   },
   {
     "title": "Turn the observation into the next task",
+    "stateId": "28:Turn the observation into the next task",
     "subtitle": "Use what actually happened to improve the next development cycle.",
     "type": "practice",
     "layout": "exercise",
@@ -883,6 +913,7 @@ window.SLIDES = [
   },
   {
     "title": "Continue independently",
+    "stateId": "29:Continue independently",
     "kicker": "W5 · SOLO · YOUR TURN",
     "subtitle": "Use the same assignment and human decisions when you work alone.",
     "type": "practice",
@@ -915,6 +946,7 @@ window.SLIDES = [
   },
   {
     "title": "Show the completed lifecycle",
+    "stateId": "30:Show the completed lifecycle",
     "kicker": "W5 · RECAP · BRIDGE TO W6–W7",
     "type": "recap",
     "layout": "recap",
@@ -942,6 +974,7 @@ window.SLIDES = [
   },
   {
     "title": "skills",
+    "stateId": "31:skills",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "A method that Claude loads when a step needs it.",
     "type": "concept",
@@ -969,6 +1002,7 @@ window.SLIDES = [
   },
   {
     "title": "External skills: read first",
+    "stateId": "32:External skills: read first",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "Six checks first.",
     "type": "concept",
@@ -994,6 +1028,7 @@ window.SLIDES = [
   },
   {
     "title": "Hooks: allow, ask, deny",
+    "stateId": "33:Hooks: allow, ask, deny",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "type": "concept",
     "layout": "compare",
@@ -1043,6 +1078,7 @@ window.SLIDES = [
   },
   {
     "title": "subagents",
+    "stateId": "34:subagents",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "A helper session with its own context. Delegate the work, never the acceptance.",
     "type": "concept",
@@ -1074,6 +1110,7 @@ window.SLIDES = [
   },
   {
     "title": "Extend the bench without weakening it",
+    "stateId": "35:Extend the bench without weakening it",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "type": "concept",
     "cards": [
@@ -1101,6 +1138,7 @@ window.SLIDES = [
   },
   {
     "title": "CI: repeat the checks",
+    "stateId": "36:CI: repeat the checks",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "A repeatable path of steps. Here: CI. Both run offline.",
     "type": "concept",
@@ -1139,6 +1177,7 @@ window.SLIDES = [
   },
   {
     "title": "Production: different signals, same boundaries",
+    "stateId": "37:Production: different signals, same boundaries",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "Today: real model, synthetic local signals. Humans still decide.",
     "type": "concept",
