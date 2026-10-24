@@ -898,7 +898,7 @@ function renderAssignment(stage, s) {
   if (s.expected) { const p = node('p', 'asg-done'); p.append(node('span', 'asg-done-k', 'Done when'), node('span', null, s.expected)); main.append(p); }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));
-  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = ''; f.append(img); side.append(f); }
+  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotAlt || ''; f.append(img); side.append(f); }
   else if (v.cardImages) { const row = node('div', 'asg-thumbs'); v.cardImages.forEach((src, i) => { const f = node('figure', 'thumb'); const img = document.createElement('img'); img.src = src; img.alt = ''; f.append(img, node('figcaption', null, s.cards?.[i]?.title || '')); row.append(f); }); side.append(row); }
   else if (s.cards?.length) {
     const mini = node('div', 'slide-main asg-mini'); const grid = node('div', 'cards one-col'); s.cards.forEach((c, i) => grid.append(renderCard(c, i))); mini.append(grid); side.append(mini);
@@ -906,6 +906,7 @@ function renderAssignment(stage, s) {
     renderVisual(stage, body, mini, { ...s, visual: { ...v, bot: undefined, compact: undefined, cardImages: undefined } });
     return;
   }
+  if (v.reference) { const a = node('a', 'asg-repo', 'Scenario, start state and stop condition'); a.href = v.reference; a.target = '_blank'; a.rel = 'noopener noreferrer'; side.append(a); }
   body.append(side); stage.append(body);
 }
 

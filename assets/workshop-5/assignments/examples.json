@@ -1,0 +1,137 @@
+[
+  {
+    "id": "claude-start", "slide": "Open Claude Code", "phase": "Start", "title": "Open the assistant in the starter",
+    "scenario": "You are the developer of the checkout SRE agent. Open your own unfinished copy before you ask Claude to change it.",
+    "start": "The original clone exists. No checkpoint is being reused or overwritten.",
+    "see": "Claude Code is open in .lab/checkpoints/start. /status shows the approved account, not proof of runtime SDK access.",
+    "stop": "Stop if login fails or the folder is wrong. Do not share account details or credentials in screenshots.",
+    "file": "Terminal 1 · orientation checklist", "kind": "Example checklist, not a captured Claude session",
+    "lines": ["Working folder", "  sre-oncall-agent/.lab/checkpoints/start", "", "Run: claude", "Then: /status", "", "Check your approved account privately.", "Read .claude/settings.json for the guards.", "", "SDK access is a separate check in terminal 2."]
+  },
+  {
+    "id": "orientation", "slide": "First assignment: understand before editing", "phase": "Start", "title": "Check the assistant's understanding",
+    "scenario": "The on-call engineer needs trustworthy evidence, not a confident guess. Check that Claude understands the two repairs before it writes code.",
+    "start": "Claude Code is open in the unfinished starter. No code edits are permitted yet.",
+    "see": "An explanation of the two repairs, required evidence and human decisions. Compare the answer with CARD.md.",
+    "stop": "Stop if Claude proposes shop changes, approves its own work or starts editing.",
+    "file": "Orientation · answer checklist", "kind": "Example checklist, not a model transcript",
+    "lines": ["Change the SRE agent, not the shop.", "", "Repair 1: return deployment evidence.", "Repair 2: validate named human approval.", "", "Produce intent, plans, code and checks.", "Review the actual diff.", "A human makes the release decision.", "Observe the runtime and review one next task."]
+  },
+  {
+    "id": "evidence", "slide": "Specify: start with an observed problem", "phase": "Core 1 · Specify", "title": "Find the missing evidence",
+    "scenario": "Customers report checkout failures after a bad deployment. The on-call engineer can see errors, but the starter returns no deployment records.",
+    "start": "Start with a healthy shop and an empty console. Inject one bad deploy at the next step, then inspect that incident.",
+    "see": "The trace shows an empty list_deploys result. Missing evidence is a gap, not proof that no deployment occurred.",
+    "stop": "Stop on fabricated citations or a failed contract. Preserve the output instead of forcing a rollback proposal.",
+    "file": "docs/diagnosis-live.md", "kind": "Example evidence record; fill in your own observations",
+    "lines": ["Incident: <your actual incident id>", "Model: <actual runtime label>", "", "Trace result: list_deploys returned []", "Cross-check: <deploys in your telemetry>", "", "Unknown: deployment timing from this tool.", "Do not infer: no deploy happened.", "", "Save the trace and the remaining uncertainty."]
+  },
+  {
+    "id": "intent", "slide": "Turn the finding into an intent", "phase": "Core 1 · Specify", "title": "Describe the change before the solution",
+    "scenario": "The empty deployment result blocks a reliable diagnosis. You need a small, testable change that also keeps runtime actions behind human approval.",
+    "start": "You have compared the trace with telemetry and recorded the missing signal.",
+    "see": "A draft intent names the on-call engineer, both repairs, observable checks and the read-only boundary.",
+    "stop": "Do not build from a vague goal such as make the agent better. Reject invented evidence.",
+    "file": "intent.md · draft excerpt", "kind": "Example document, not participant evidence",
+    "lines": ["User: checkout on-call engineer", "Outcome: inspect real deployment evidence", "", "Checks", "- Available deploys are returned newest first.", "- Missing data stays an explicit gap.", "- Invalid approval cannot authorize an action.", "", "Boundary: no mutation tools in the agent.", "Human acceptance: <not yet recorded>"]
+  },
+  {
+    "id": "accept-intent", "slide": "Accept the assignment before building", "phase": "Core 1 · Human decision", "title": "Accept observable requirements",
+    "scenario": "Claude has drafted an intent. You decide whether another person could prove each check, before any implementation begins.",
+    "start": "The draft intent covers both repairs and cites your checked observation.",
+    "see": "Your name, decision, reason and remaining question are recorded in the intent.",
+    "stop": "If scope or evidence is unclear, request a revision. A model cannot accept its own draft.",
+    "file": "intent.md · human acceptance", "kind": "Example form; placeholders are not acceptance",
+    "lines": ["Check each criterion against a test or trace.", "", "Reviewer: <your name>", "Decision: <accepted / changes required>", "Reason: <why the scope is testable>", "", "Open question: <what is still unknown?>", "Evidence still needed: <specific check>", "", "No code edits until you accept the intent."]
+  },
+  {
+    "id": "baseline", "slide": "Establish a reviewable starting point", "phase": "Core 2 · Design", "title": "Keep the unfinished code for comparison",
+    "scenario": "The checkpoint was cut from solved code. Without a baseline, restoring the solution can leave no useful repair diff.",
+    "start": "Your intent is accepted. The two starter cuts are still present.",
+    "see": "Your branch is fix/w5-core. The workshop-base commit contains only src/tools.ts and src/executor.ts.",
+    "stop": "Do not overwrite a branch or include secrets, intent edits or unrelated files in the baseline.",
+    "file": "Terminal · expected baseline shape", "kind": "Illustrative output; commit ids and counts vary",
+    "lines": ["$ git branch --show-current", "fix/w5-core", "", "$ git show --stat workshop-base", "<your starter baseline commit>", " src/tools.ts", " src/executor.ts", "", "The human runs Git. Claude does not commit."]
+  },
+  {
+    "id": "plan", "slide": "Ask for a small plan, then review it", "phase": "Core 2 · Design", "title": "Review the tool plan before implementation",
+    "scenario": "The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture.",
+    "start": "The intent and baseline exist. You can explain the failing tool assertion.",
+    "see": "A plan names the handler, checks, risk, rejected alternative and human review decision.",
+    "stop": "Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later.",
+    "file": "docs/plan.md · tool plan", "kind": "Example document, not an approved plan",
+    "lines": ["Scope: src/tools.ts · list_deploys handler", "Keep: MCP registration and read-only boundary", "", "Check: focused tool test, typecheck, bench", "Risk: wrong binding still returns no records", "Reject: adding a second tool registration", "", "Human decision: <name and accepted scope>", "Stop: after checks, before runtime action"]
+  },
+  {
+    "id": "tool-test", "slide": "Repair the tool: red → green", "phase": "Core 2 · Build and test", "title": "Prove the deployment tool repair",
+    "scenario": "The on-call engineer needs the deployment records that the starter hides. Repair the handler without changing its registration.",
+    "start": "You have accepted the tool plan. The focused tools test is red.",
+    "see": "Both tool assertions pass after repair. The gate exercise is still unfinished, so this is not release-ready.",
+    "stop": "If the handler still returns [], inspect the binding. Do not weaken the test or count a solved checkpoint as your work.",
+    "file": "Terminal · tool-test result", "kind": "Expected result shape, not a recorded test run",
+    "lines": ["npx tsx --test test/workshop/tools.test.ts", "", "Before repair", "  FAIL: fixture has at least one deploy", "", "After repair", "  PASS: list_deploys returns deploys", "  PASS: list_deploys remains registered", "", "Next: typecheck and bench. A8 is still red."]
+  },
+  {
+    "id": "same-incident", "slide": "Check the change on the same incident", "phase": "Core 2 · Observe the change", "title": "Compare the same incident before and after",
+    "scenario": "A green tool test does not show what the real model used. Investigate the same incident again and inspect the new trace.",
+    "start": "The tool repair is saved. Keep the shop and traffic running; let the console reload itself.",
+    "see": "The trace contains deployment records. Check cited ids and timestamps against your telemetry; model wording and proposals may differ.",
+    "stop": "Preserve fabricated references or contract failures. Do not restart the shop or require a rollback proposal to get a pass.",
+    "file": "docs/verify/sdlc.md · comparison", "kind": "Example evidence record; your trace supplies the values",
+    "lines": ["Incident before / after: <same id>", "", "Before: list_deploys returned []", "After: <actual returned records>", "Citation: <id found in demo/data/telemetry.json>", "", "Model and trace: <actual runtime evidence>", "Remaining gaps: <what is still missing>", "Result: <verified / precise blocker>"]
+  },
+  {
+    "id": "gate-test", "slide": "Repair the gate: refuse unsafe actions", "phase": "Core 2 · Build and test", "title": "Keep human permission specific",
+    "scenario": "A valid human approval must work, but an approval for another incident or proposal must not. The starter refuses everything.",
+    "start": "Review the separate gate plan. The valid-approval assertion is red before repair.",
+    "see": "The gate accepts the valid named approval in tests and still refuses missing, pending or mismatched approval.",
+    "stop": "A green gate test is not runtime approval. Do not click Approve or Execute during this repair.",
+    "file": "Terminal · executor-test result", "kind": "Expected result shape, not a recorded test run",
+    "lines": ["npx tsx --test test/workshop/executor.test.ts", "", "Before: valid named approval is refused", "After:  valid named approval test passes", "", "Still refused", "- Pending or empty-name approval", "- Wrong proposal or incident", "", "No real incident has been approved here."]
+  },
+  {
+    "id": "verification", "slide": "Verify the complete change", "phase": "Core 2 · Test", "title": "Record checks, not a done label",
+    "scenario": "Both repairs are now present. Check the combined change before a human reviews or publishes it.",
+    "start": "The focused tool and gate tests pass. No runtime action is authorized by these results.",
+    "see": "The required commands exit successfully. The evidence record separates code checks from real-model observations.",
+    "stop": "Keep failing output. Do not mark the change ready or replace model evidence with the scripted bench.",
+    "file": "docs/verify/sdlc.md · checks actually run", "kind": "Example form; replace each field with actual output",
+    "lines": ["Focused executor test: <actual result>", "npm run verify: <actual result>", "npm run test:workshop: <actual result>", "npm run test:hooks: <actual result>", "", "Bench: scripted fixed-scenario checks", "Live trace: <real model result or blocker>", "Untested paths: <what was not checked>"]
+  },
+  {
+    "id": "diff-review", "slide": "Review the actual diff", "phase": "Core 3 · Review", "title": "Judge the code against the intent",
+    "scenario": "Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude's findings yourself.",
+    "start": "Both repairs and required checks are complete. Inspect untracked files before reviewing the diff.",
+    "see": "A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths.",
+    "stop": "An empty repair diff is not proof. Resolve findings and rerun affected checks before release.",
+    "file": "docs/verify/sdlc.md · diff review", "kind": "Example review record, not an actual approval",
+    "lines": ["Review: git diff workshop-base", "Include: intended new files, staged by you", "", "Finding: <file, line and observed defect>", "Response: <fix and rerun, or reason to reject>", "Decision: <human name and reason>", "", "Solo: self-review; no independent reviewer", "Risks and untested paths: <record explicitly>"]
+  },
+  {
+    "id": "release", "slide": "Prepare the PR and make a release decision", "phase": "Core 3 · Release decision", "title": "Publish only with the required checks",
+    "scenario": "You have a reviewed change. A missing reviewer or repository permission is a release blocker, not permission to bypass the gate.",
+    "start": "The human has reviewed the diff and current evidence. Claude may prepare PR text, not publish it.",
+    "see": "A learner-repo PR from fix/w5-core into workshop-base, or an explicit RELEASE BLOCKED record with a next action.",
+    "stop": "Do not push to the upstream training repo or bypass required review. A local reload is not a production release.",
+    "file": "docs/verify/sdlc.md · release decision", "kind": "Example blocked outcome, not a real PR or merge",
+    "lines": ["Decision: RELEASE BLOCKED", "Reason: required independent reviewer missing", "", "PR: <learner-repo URL, if one exists>", "Current-head CI: <actual status>", "Next action: request a human reviewer", "Merge commit: none", "", "Local observation may continue as a test."]
+  },
+  {
+    "id": "next-task", "slide": "Turn the observation into the next task", "phase": "Core 3 · Observe and plan", "title": "Use the actual result for the next task",
+    "scenario": "Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change.",
+    "start": "The runtime outcome or blocker is recorded. Keep an unresolved incident open.",
+    "see": "One proposed task has evidence, an observable acceptance check and a human review decision.",
+    "stop": "Do not invent successful recovery or implement the next task without a new accepted scope.",
+    "file": "docs/verify/sdlc.md · next iteration", "kind": "Conditional example; use only if you observed this gap",
+    "lines": ["Observation: <failed check and measured value>", "Hypothesis: <possible cause, not established>", "", "Next task: expose the missing signal", "Acceptance: <test proving the signal is shown>", "Human review: <name, decision and reason>", "", "No observation? Record the blocker instead.", "Keep the incident open if recovery is unknown."]
+  },
+  {
+    "id": "solo", "slide": "Continue independently", "phase": "Continue solo", "title": "Resume without inventing completion",
+    "scenario": "You continue without a facilitator. Preserve your own code and evidence, and name the limits of self-review.",
+    "start": "Read SOLO.md and locate the last step you actually verified.",
+    "see": "A resume note names the last verified step, next check and any borrowed checkpoint code.",
+    "stop": "Do not overwrite your work or copy another run's approvals. A required independent reviewer still blocks release.",
+    "file": "Resume note · record through progress:note", "kind": "Example note, not participant progress",
+    "lines": ["Last verified step: <card step and evidence>", "Next check: <exact command or observation>", "Review mode: self-review; no independent reviewer", "", "core-2: tool solved, gate unfinished", "core-3: solved reference", "", "Borrowed code: <what, why and what you checked>", "A solved checkpoint is not your completion."]
+  }
+]

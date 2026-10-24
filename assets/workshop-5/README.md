@@ -3,6 +3,25 @@
 These are real local browser captures, not UI mockups. The checkout shop has
 a storefront and fault controls; the SRE console is the separate on-call desk.
 
+## Assignment document and terminal examples
+
+`assignments/*.png` are browser screenshots of **illustrative teaching
+examples**, not real Claude responses, executed test output, participant
+acceptance, or PRs. Each image carries its provenance label. Use them to
+recognise the shape of intent, plans, evidence, tests, review and release
+decisions. Participants must fill in their own observations.
+
+`assignments/examples.json` supplies the scenario, starting state, expected
+result and stop condition for all 15 practice slides. Regenerate the reference
+page with `node tools/build-w5-examples.mjs`. Open its `index.html` through the
+slide server. For screenshots, use `?capture=1#<example-id>` at 1000 × 680.
+The participant repository contains copies of the images so the hub works
+without access to the slides site. Update those copies when an example changes.
+
+The earlier videos under `media/` remain optional shop/console control
+walkthroughs. They do not demonstrate the current Claude Code setup or the
+complete AI-SDLC assignment. The card remains the canonical route.
+
 ## Current shop captures
 
 Captured on 2026-10-21 from `RyanLisse/sre-oncall-agent` commit
