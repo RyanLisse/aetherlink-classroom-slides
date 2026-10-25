@@ -20,3 +20,10 @@ No Academy code or deployment was changed.
 
 `node --test tools/sessions.test.mjs` checks targets, images, presenter bindings,
 selector behavior, and session-scoped presenter channels.
+
+Workshop 4 has since been edited in this repository and now has 66 slides.
+Its manifest entry pins the local source at
+[`fc2c75a`](https://github.com/RyanLisse/aetherlink-classroom-slides/commit/fc2c75a47256dce553786301f68c374d7ff53bf5),
+with the earlier Academy provenance retained in `importedFrom`.
+Per-deck `repo` and `revision` fields override the manifest defaults.
+The normalized digest still checks the entire deck, not just its slide count.
