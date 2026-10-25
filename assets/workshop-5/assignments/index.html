@@ -63,15 +63,12 @@ $ git show --stat workshop-base
  src/executor.ts
 
 The human runs Git. Claude does not commit.</pre><footer>Illustrative output; commit ids and counts vary</footer></div></article>
-<article id="plan"><div class="intro"><p class="phase">Core 2 · Design</p><h2>Review the tool plan before implementation</h2><p class="scenario">The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture.</p></div><div class="details"><section><h3>Start here</h3><p>The intent and baseline exist. You can explain the failing tool assertion.</p></section><section><h3>Look for this result</h3><p>A plan names the handler, checks, risk, rejected alternative and human review decision.</p></section><section class="stop"><h3>Stop when</h3><p>Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later.</p></section></div><div class="sample"><div class="sample-head">docs/plan.md · tool plan</div><pre>Scope: src/tools.ts · list_deploys handler
-Keep: MCP registration and read-only boundary
-
-Check: focused tool test, typecheck, bench
-Risk: wrong binding still returns no records
-Reject: adding a second tool registration
-
-Human decision: &lt;name and accepted scope&gt;
-Stop: after checks, before runtime action</pre><footer>Example document, not an approved plan</footer></div></article>
+<article id="plan"><div class="intro"><p class="phase">Core 2 · Design</p><h2>Review the tool plan before implementation</h2><p class="scenario">The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture.</p></div><div class="details"><section><h3>Start here</h3><p>The intent and baseline exist. You can explain the failing tool assertion.</p></section><section><h3>Look for this result</h3><p>A plan names the handler, checks, risk, rejected alternative and human review decision.</p></section><section class="stop"><h3>Stop when</h3><p>Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later.</p></section></div><div class="sample"><div class="sample-head">docs/plan.md · tool plan</div><pre>Input: accepted intent + failing tools test
+Change: restore the existing read-only handler
+Risk: inventing data or expanding tool access
+Refusal check: missing data stays explicit
+Loop: implement, run focused test, fix in scope
+Stop: changed scope needs human plan review</pre><footer>Example document, not an approved plan</footer></div></article>
 <article id="tool-test"><div class="intro"><p class="phase">Core 2 · Build and test</p><h2>Prove the deployment tool repair</h2><p class="scenario">The on-call engineer needs the deployment records that the starter hides. Repair the handler without changing its registration.</p></div><div class="details"><section><h3>Start here</h3><p>You have accepted the tool plan. The focused tools test is red.</p></section><section><h3>Look for this result</h3><p>Both tool assertions pass after repair. The gate exercise is still unfinished, so this is not release-ready.</p></section><section class="stop"><h3>Stop when</h3><p>If the handler still returns [], inspect the binding. Do not weaken the test or count a solved checkpoint as your work.</p></section></div><div class="sample"><div class="sample-head">Terminal · tool-test result</div><pre>npx tsx --test test/workshop/tools.test.ts
 
 Before repair
@@ -109,15 +106,12 @@ npm run test:hooks: &lt;actual result&gt;
 Bench: scripted fixed-scenario checks
 Live trace: &lt;real model result or blocker&gt;
 Untested paths: &lt;what was not checked&gt;</pre><footer>Example form; replace each field with actual output</footer></div></article>
-<article id="diff-review"><div class="intro"><p class="phase">Core 3 · Review</p><h2>Judge the code against the intent</h2><p class="scenario">Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude&#39;s findings yourself.</p></div><div class="details"><section><h3>Start here</h3><p>Both repairs and required checks are complete. Inspect untracked files before reviewing the diff.</p></section><section><h3>Look for this result</h3><p>A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths.</p></section><section class="stop"><h3>Stop when</h3><p>An empty repair diff is not proof. Resolve findings and rerun affected checks before release.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · diff review</div><pre>Review: git diff workshop-base
-Include: intended new files, staged by you
-
-Finding: &lt;file, line and observed defect&gt;
-Response: &lt;fix and rerun, or reason to reject&gt;
-Decision: &lt;human name and reason&gt;
-
-Solo: self-review; no independent reviewer
-Risks and untested paths: &lt;record explicitly&gt;</pre><footer>Example review record, not an actual approval</footer></div></article>
+<article id="diff-review"><div class="intro"><p class="phase">Core 3 · Review</p><h2>Judge the code against the intent</h2><p class="scenario">Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude&#39;s findings yourself.</p></div><div class="details"><section><h3>Start here</h3><p>Both repairs and required checks are complete. Inspect untracked files before reviewing the diff.</p></section><section><h3>Look for this result</h3><p>A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths.</p></section><section class="stop"><h3>Stop when</h3><p>An empty repair diff is not proof. Resolve findings and rerun affected checks before release.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · diff review</div><pre>Review: behaviour, security, intent and plan
+Finding: file + line + trigger + impact
+Proof: reproduction or exact reachable code path
+Unverified suspicion: label it; do not assert it
+Human: confirm finding, request fix or accept
+After a fix: rerun the affected check</pre><footer>Example review record, not an actual approval</footer></div></article>
 <article id="release"><div class="intro"><p class="phase">Core 3 · Release decision</p><h2>Publish only with the required checks</h2><p class="scenario">You have a reviewed change. A missing reviewer or repository permission is a release blocker, not permission to bypass the gate.</p></div><div class="details"><section><h3>Start here</h3><p>The human has reviewed the diff and current evidence. Claude may prepare PR text, not publish it.</p></section><section><h3>Look for this result</h3><p>A learner-repo PR from fix/w5-core into workshop-base, or an explicit RELEASE BLOCKED record with a next action.</p></section><section class="stop"><h3>Stop when</h3><p>Do not push to the upstream training repo or bypass required review. A local reload is not a production release.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · release decision</div><pre>Decision: RELEASE BLOCKED
 Reason: required independent reviewer missing
 
@@ -127,15 +121,12 @@ Next action: request a human reviewer
 Merge commit: none
 
 Local observation may continue as a test.</pre><footer>Example blocked outcome, not a real PR or merge</footer></div></article>
-<article id="next-task"><div class="intro"><p class="phase">Core 3 · Observe and plan</p><h2>Use the actual result for the next task</h2><p class="scenario">Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change.</p></div><div class="details"><section><h3>Start here</h3><p>The runtime outcome or blocker is recorded. Keep an unresolved incident open.</p></section><section><h3>Look for this result</h3><p>One proposed task has evidence, an observable acceptance check and a human review decision.</p></section><section class="stop"><h3>Stop when</h3><p>Do not invent successful recovery or implement the next task without a new accepted scope.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · next iteration</div><pre>Observation: &lt;failed check and measured value&gt;
-Hypothesis: &lt;possible cause, not established&gt;
-
-Next task: expose the missing signal
-Acceptance: &lt;test proving the signal is shown&gt;
-Human review: &lt;name, decision and reason&gt;
-
-No observation? Record the blocker instead.
-Keep the incident open if recovery is unknown.</pre><footer>Conditional example; use only if you observed this gap</footer></div></article>
+<article id="next-task"><div class="intro"><p class="phase">Core 3 · Observe and plan</p><h2>Use the actual result for the next task</h2><p class="scenario">Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change.</p></div><div class="details"><section><h3>Start here</h3><p>The runtime outcome or blocker is recorded. Keep an unresolved incident open.</p></section><section><h3>Look for this result</h3><p>One proposed task has evidence, an observable acceptance check and a human review decision.</p></section><section class="stop"><h3>Stop when</h3><p>Do not invent successful recovery or implement the next task without a new accepted scope.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · next iteration</div><pre>If you observed a missing evidence reference:
+- Preserve the actual trace and failed check.
+- Propose one next intent and acceptance check.
+- Name the regression test that detects it.
+- Propose a reviewed instruction update if useful.
+Human reviews; no new implementation yet.</pre><footer>Conditional example; use only if you observed this gap</footer></div></article>
 <article id="solo"><div class="intro"><p class="phase">Continue solo</p><h2>Resume without inventing completion</h2><p class="scenario">You continue without a facilitator. Preserve your own code and evidence, and name the limits of self-review.</p></div><div class="details"><section><h3>Start here</h3><p>Read SOLO.md and locate the last step you actually verified.</p></section><section><h3>Look for this result</h3><p>A resume note names the last verified step, next check and any borrowed checkpoint code.</p></section><section class="stop"><h3>Stop when</h3><p>Do not overwrite your work or copy another run&#39;s approvals. A required independent reviewer still blocks release.</p></section></div><div class="sample"><div class="sample-head">Resume note · record through progress:note</div><pre>Last verified step: &lt;card step and evidence&gt;
 Next check: &lt;exact command or observation&gt;
 Review mode: self-review; no independent reviewer

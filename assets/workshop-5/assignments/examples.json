@@ -60,7 +60,7 @@
     "see": "A plan names the handler, checks, risk, rejected alternative and human review decision.",
     "stop": "Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later.",
     "file": "docs/plan.md · tool plan", "kind": "Example document, not an approved plan",
-    "lines": ["Scope: src/tools.ts · list_deploys handler", "Keep: MCP registration and read-only boundary", "", "Check: focused tool test, typecheck, bench", "Risk: wrong binding still returns no records", "Reject: adding a second tool registration", "", "Human decision: <name and accepted scope>", "Stop: after checks, before runtime action"]
+    "lines": ["Input: accepted intent + failing tools test", "Change: restore the existing read-only handler", "Risk: inventing data or expanding tool access", "Refusal check: missing data stays explicit", "Loop: implement, run focused test, fix in scope", "Stop: changed scope needs human plan review"]
   },
   {
     "id": "tool-test", "slide": "Repair the tool: red → green", "phase": "Core 2 · Build and test", "title": "Prove the deployment tool repair",
@@ -105,7 +105,7 @@
     "see": "A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths.",
     "stop": "An empty repair diff is not proof. Resolve findings and rerun affected checks before release.",
     "file": "docs/verify/sdlc.md · diff review", "kind": "Example review record, not an actual approval",
-    "lines": ["Review: git diff workshop-base", "Include: intended new files, staged by you", "", "Finding: <file, line and observed defect>", "Response: <fix and rerun, or reason to reject>", "Decision: <human name and reason>", "", "Solo: self-review; no independent reviewer", "Risks and untested paths: <record explicitly>"]
+    "lines": ["Review: behaviour, security, intent and plan", "Finding: file + line + trigger + impact", "Proof: reproduction or exact reachable code path", "Unverified suspicion: label it; do not assert it", "Human: confirm finding, request fix or accept", "After a fix: rerun the affected check"]
   },
   {
     "id": "release", "slide": "Prepare the PR and make a release decision", "phase": "Core 3 · Release decision", "title": "Publish only with the required checks",
@@ -123,7 +123,7 @@
     "see": "One proposed task has evidence, an observable acceptance check and a human review decision.",
     "stop": "Do not invent successful recovery or implement the next task without a new accepted scope.",
     "file": "docs/verify/sdlc.md · next iteration", "kind": "Conditional example; use only if you observed this gap",
-    "lines": ["Observation: <failed check and measured value>", "Hypothesis: <possible cause, not established>", "", "Next task: expose the missing signal", "Acceptance: <test proving the signal is shown>", "Human review: <name, decision and reason>", "", "No observation? Record the blocker instead.", "Keep the incident open if recovery is unknown."]
+    "lines": ["If you observed a missing evidence reference:", "- Preserve the actual trace and failed check.", "- Propose one next intent and acceptance check.", "- Name the regression test that detects it.", "- Propose a reviewed instruction update if useful.", "Human reviews; no new implementation yet."]
   },
   {
     "id": "solo", "slide": "Continue independently", "phase": "Continue solo", "title": "Resume without inventing completion",

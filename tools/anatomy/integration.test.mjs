@@ -35,7 +35,7 @@ test('Workshop 5 welcomes learners, recalls W4 and bridges to the next workshops
  assert.match(close.notes,/Revisit the delivery skill/);
 });
 test('Workshop 5 retains the diagrams used by the assignment and selected reference',()=>{
- const mapping=['loop','mcp','hooks','subagents','eval'];
+ const mapping=['loop','mcp','hooks','eval'];
  const dctx={window:{}};vm.runInNewContext(read('workshop5-diagrams.js'),dctx);
  const figures=context.window.SLIDES.filter(s=>s.visual?.diagram);
  assert.equal(figures.length,mapping.length);
@@ -109,7 +109,7 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
  ]){
   for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
  }
- for(const title of ['skills','Hooks: allow, ask, deny','subagents','CI: repeat the checks'])assert.ok(at(title)>close,title);
+ for(const title of ['skills','Hooks: allow, ask, deny','One loop first; subagents for a reason','CI: repeat the checks'])assert.ok(at(title)>close,title);
  const core3=slides.slice(at('Review the actual diff'),close+1);
  assert.ok(core3.every(s=>!s.title.startsWith('Repair')));
  assert.match(slides[at('Check the change on the same incident')].steps.join(' '),/same incident/);

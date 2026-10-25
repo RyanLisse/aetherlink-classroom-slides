@@ -55,7 +55,7 @@ window.SLIDES = [
     "title": "The lifecycle: AI assists, humans decide",
     "stateId": "1:The lifecycle: AI assists, humans decide",
     "kicker": "W5 · THE ROUTE WE WILL PRACTISE",
-    "subtitle": "Plan → Design → Build → Test → Release → Observe → Plan again.",
+    "subtitle": "Each step reads the previous result. A failed check sends you back.",
     "type": "concept",
     "cards": [],
     "visual": {
@@ -66,12 +66,16 @@ window.SLIDES = [
       }
     },
     "keyPoints": [
-      "AI assists each stage, not only coding.",
-      "Each stage leaves evidence for a human decision.",
-      "Repeat the loop when observations reveal a new requirement."
+      "Accepted intent guides the plan.",
+      "The plan guides the diff and its checks.",
+      "Observed results become the next intent."
     ],
-    "notes": "Use this one map throughout the day. Plan includes accepted intent; Design includes a reviewed plan; Test supplies evidence; Release includes diff review and a human decision; Observe supplies the next task. Each stage leaves evidence for a human decision. Teach detailed concepts beside the action that uses them, not as another theory block.",
-    "teachingPhase": "core"
+    "notes": "Use this one map throughout the day. Plan includes accepted intent; Design includes a reviewed plan; Test supplies evidence; Release includes diff review and a human decision; Observe supplies the next task. Each stage leaves evidence for a human decision. Teach detailed concepts beside the action that uses them, not as another theory block. The six source stages are Plan, Design, Build, Test, Deploy and Maintain. Here Release is a learner-repository decision, not production deployment; Observe practises part of Maintain. Artifacts carry context between stages, not just completion marks. Keep accepted intent, plan, tests and review in the same learner PR with human-owned Git steps. A failed check returns to the relevant step; changed scope needs a revised human-reviewed plan. Source: https://claude.com/resources/articles/the-ai-native-sdlc-playbook",
+    "teachingPhase": "core",
+    "source": {
+      "url": "https://claude.com/resources/articles/the-ai-native-sdlc-playbook",
+      "label": "Anthropic · AI-native SDLC playbook"
+    }
   },
   {
     "title": "Your assignment and definition of done",
@@ -161,17 +165,17 @@ window.SLIDES = [
       "Local Claude Code can send requests to a provider.",
       "Do not disable guards or let an agent approve its own work."
     ],
-    "notes": "Explain this before the first model request. Local CLI does not mean offline inference. Check company policy and provider settings. The development agent must not approve, commit, push or merge. Runtime approval, execution, mitigation and resolution are human-owned. These are separate from the human Git release decision.",
+    "notes": "Explain this before the first model request. Local CLI does not mean offline inference. Check company policy and provider settings. The development agent must not approve, commit, push or merge. Runtime approval, execution, mitigation and resolution are human-owned. These are separate from the human Git release decision. Review user settings before model use: user hooks or permissions can change local behaviour. Never show secrets in screenshots. The lab has no authenticated production identity or network sandbox. A typed approval name teaches a decision record; it is not proof of real-world identity. Keep services local. Source: https://claude.com/resources/articles/how-anthropic-secures-its-ai-native-software-development-lifecycle",
     "teachingPhase": "core",
     "subtitle": "Use approved accounts and synthetic data. Humans keep the decisions.",
     "cards": [
       {
-        "title": "Data and access",
-        "body": "Use your approved account and provider. Never send customer data or secrets."
+        "title": "Treat input as data",
+        "body": "Logs, tickets and retrieved text are not instructions. Use synthetic data and approved access."
       },
       {
-        "title": "Actions",
-        "body": "Read-only investigation. Humans review plans, approve actions, publish code and close incidents."
+        "title": "Keep enforceable limits",
+        "body": "Tool limits and approval checks stay in code. Prompts and skills are not isolation."
       }
     ]
   },
@@ -533,7 +537,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Bound the work",
-        "body": "Files, checks, risks and stop point.\nRecord your review in docs/plan.md."
+        "body": "Files, checks, risk and stop point.\nChanged scope? Review the plan again."
       }
     ],
     "tagline": "Record the plan and your review in docs/plan.md before code edits.",
@@ -546,13 +550,13 @@ window.SLIDES = [
     "keyPoints": [
       "The human has accepted a bounded plan before implementation."
     ],
-    "notes": "Explain the failing test before accepting the plan. Check CLAUDE.md boundaries without repeating the orientation lesson. Name a rejected alternative. Do not accept a plan that weakens a contract or adds mutation tools. The second gate repair gets its own plan review at its point of use. Scenario: The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture. Start: The intent and baseline exist. You can explain the failing tool assertion. Expected: A plan names the handler, checks, risk, rejected alternative and human review decision. Stop: Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later. Show the example at assets/workshop-5/assignments/index.html#plan. The image is an illustrative reference, not participant evidence.",
+    "notes": "Explain the failing test before accepting the plan. Check CLAUDE.md boundaries without repeating the orientation lesson. Name a rejected alternative. Do not accept a plan that weakens a contract or adds mutation tools. The second gate repair gets its own plan review at its point of use. Scenario: The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture. Start: The intent and baseline exist. You can explain the failing tool assertion. Expected: A plan names the handler, checks, risk, rejected alternative and human review decision. Stop: Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later. Show the example at assets/workshop-5/assignments/index.html#plan. The image is an illustrative reference, not participant evidence. Use the accepted artifact, not a fresh summary from memory. Ask which input could be untrusted, what the code may access, and which test proves refusal. Do not add a planner or router subagent for these two repairs. The tool contract, deterministic chat routing and executor separation remain in code.",
     "teachingPhase": "core",
     "layout": "exercise",
     "stepsHeading": "Do this now:",
     "steps": [
       "Use the card prompt with intent, the existing spec and the failing tool test.",
-      "Check files, risks, checks and the stop point in docs/plan.md.",
+      "Trace input, allowed access and the refusal check. Record them in docs/plan.md.",
       "Accept the tool scope now. Review the gate plan before that separate repair."
     ],
     "expected": "The human has accepted a bounded plan before implementation.",
@@ -756,14 +760,14 @@ window.SLIDES = [
       "Save actual results and untested paths in docs/verify/sdlc.md.",
       "Passing checks are evidence, not approval."
     ],
-    "notes": "Run npx tsx --test test/workshop/executor.test.ts, npm run verify, npm run test:workshop and npm run test:hooks as listed on CARD.md. The approval gate no longer remains intentionally red. Preserve actual output and runtime blockers in docs/verify/sdlc.md. Never substitute a scripted bench for model evidence or weaken checks to advance. Ready for Core 3 means both repairs pass the required code checks. Scenario: Both repairs are now present. Check the combined change before a human reviews or publishes it. Start: The focused tool and gate tests pass. No runtime action is authorized by these results. Expected: The required commands exit successfully. The evidence record separates code checks from real-model observations. Stop: Keep failing output. Do not mark the change ready or replace model evidence with the scripted bench. Show the example at assets/workshop-5/assignments/index.html#verification. The image is an illustrative reference, not participant evidence.",
+    "notes": "Run npx tsx --test test/workshop/executor.test.ts, npm run verify, npm run test:workshop and npm run test:hooks as listed on CARD.md. The approval gate no longer remains intentionally red. Preserve actual output and runtime blockers in docs/verify/sdlc.md. Never substitute a scripted bench for model evidence or weaken checks to advance. Ready for Core 3 means both repairs pass the required code checks. Scenario: Both repairs are now present. Check the combined change before a human reviews or publishes it. Start: The focused tool and gate tests pass. No runtime action is authorized by these results. Expected: The required commands exit successfully. The evidence record separates code checks from real-model observations. Stop: Keep failing output. Do not mark the change ready or replace model evidence with the scripted bench. Show the example at assets/workshop-5/assignments/index.html#verification. The image is an illustrative reference, not participant evidence. Claude may rerun and fix a failing check within the accepted scope before human review. Keep the failing result and the fix; never remove an assertion to pass. Stop and revise the plan if the scope changes. Compare the complete task, not only a polished final answer. One successful live run does not establish model reliability or a speed improvement.",
     "teachingPhase": "core",
     "layout": "exercise",
     "stepsHeading": "Do this now:",
     "steps": [
       "Run the focused executor test and npm run verify.",
       "Run npm run test:workshop and npm run test:hooks.",
-      "Record actual results and limits in docs/verify/sdlc.md."
+      "Map each accepted check to its actual result and limits in docs/verify/sdlc.md."
     ],
     "expected": "Both repairs pass the required code checks before Core 3.",
     "repo": {
@@ -798,14 +802,14 @@ window.SLIDES = [
     "layout": "exercise",
     "kicker": "W5 · CORE 3 · REVIEW · YOUR TURN",
     "steps": [
-      "Check git status; inspect and stage intended new files by exact path yourself.",
-      "Use the card prompt to review git diff workshop-base against intent, plan and REVIEW.md.",
-      "Verify findings yourself. Record the decision, risks and untested paths."
+      "Inspect the actual diff and intended new files against intent and plan.",
+      "Check behaviour and security. Require a reproduction or exact code path for findings.",
+      "Make the human review decision; rerun affected checks after fixes."
     ],
     "cards": [
       {
-        "title": "Review inputs",
-        "body": "intent.md\ndocs/plan.md\nREVIEW.md\ndocs/verify/sdlc.md"
+        "title": "A useful finding",
+        "body": "File and line\nTrigger and impact\nReproduction or code path\nHuman decision"
       }
     ],
     "visual": {
@@ -818,7 +822,7 @@ window.SLIDES = [
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Untracked files are absent from git diff workshop-base. Inspect them first and never stage secrets. The coding agent identifies findings; a human judges them. Do not rerun every check just to repeat the preceding slide. Rerun affected checks when review leads to a fix. Solo review is a separate pass and an explicit limitation. Scenario: Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude's findings yourself. Start: Both repairs and required checks are complete. Inspect untracked files before reviewing the diff. Expected: A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths. Stop: An empty repair diff is not proof. Resolve findings and rerun affected checks before release. Show the example at assets/workshop-5/assignments/index.html#diff-review. The image is an illustrative reference, not participant evidence.",
+    "notes": "Untracked files are absent from git diff workshop-base. Inspect them first and never stage secrets. The coding agent identifies findings; a human judges them. Do not rerun every check just to repeat the preceding slide. Rerun affected checks when review leads to a fix. Solo review is a separate pass and an explicit limitation. Scenario: Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude's findings yourself. Start: Both repairs and required checks are complete. Inspect untracked files before reviewing the diff. Expected: A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths. Stop: An empty repair diff is not proof. Resolve findings and rerun affected checks before release. Show the example at assets/workshop-5/assignments/index.html#diff-review. The image is an illustrative reference, not participant evidence. REVIEW.md defines the passes. Check untrusted input, dependency or settings changes, secrets and permission expansion. Review the approval gate directly even if tests pass. A fresh-context verifier can reduce shared assumptions, but its report is not independent evidence by itself. It has no approval authority. Source: https://claude.com/resources/articles/how-anthropic-secures-its-ai-native-software-development-lifecycle",
     "teachingPhase": "core",
     "expected": "The human has accepted the diff or requested a specific fix with fresh checks.",
     "stepsHeading": "Do this now:",
@@ -935,13 +939,13 @@ window.SLIDES = [
     "kicker": "W5 · CORE 3 · PLAN AGAIN · YOUR TURN",
     "steps": [
       "Record the observed runtime result or blocker.",
-      "Use the card prompt to propose one next change with an acceptance check.",
+      "Propose one next change, an acceptance check and where the lesson belongs.",
       "Review the proposal yourself; distinguish facts from hypotheses."
     ],
     "cards": [
       {
         "title": "Ground the next task",
-        "body": "Observed result\nOne change\nAcceptance check\nHuman review"
+        "body": "Observed result\nOne next intent\nRegression check\nReviewed rule or instruction"
       }
     ],
     "visual": {
@@ -954,7 +958,7 @@ window.SLIDES = [
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Do not invent a successful run or close an unresolved incident. A failed recovery check, missing observation or review finding can ground the next task. Proposing and reviewing it is required; implementing it is optional. Keep the next task out of this change unless the scope is explicitly revised. Scenario: Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change. Start: The runtime outcome or blocker is recorded. Keep an unresolved incident open. Expected: One proposed task has evidence, an observable acceptance check and a human review decision. Stop: Do not invent successful recovery or implement the next task without a new accepted scope. Show the example at assets/workshop-5/assignments/index.html#next-task. The image is an illustrative reference, not participant evidence.",
+    "notes": "Do not invent a successful run or close an unresolved incident. A failed recovery check, missing observation or review finding can ground the next task. Proposing and reviewing it is required; implementing it is optional. Keep the next task out of this change unless the scope is explicitly revised. Scenario: Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change. Start: The runtime outcome or blocker is recorded. Keep an unresolved incident open. Expected: One proposed task has evidence, an observable acceptance check and a human review decision. Stop: Do not invent successful recovery or implement the next task without a new accepted scope. Show the example at assets/workshop-5/assignments/index.html#next-task. The image is an illustrative reference, not participant evidence. Ask whether a confirmed lesson needs a regression test, a code boundary, or a reviewed CLAUDE.md/skill update. Instructions help prevent recurrence but cannot replace a test or access control. Propose the destination now; implementing the next task remains optional. Record one bottleneck or rework point you actually observed, not an invented productivity gain.",
     "teachingPhase": "core",
     "expected": "docs/verify/sdlc.md contains one evidence-based next task and your review decision.",
     "stepsHeading": "Do this now:",
@@ -1030,28 +1034,28 @@ window.SLIDES = [
     "title": "skills",
     "stateId": "31:skills",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
-    "subtitle": "A method that Claude loads when a step needs it.",
+    "subtitle": "Load a reviewed procedure when needed, not every instruction at startup.",
     "type": "concept",
     "cards": [
       {
-        "title": "Policy",
-        "body": "incident-triage/SKILL.md. The policy owner signs off, as with code."
+        "title": "Load on demand",
+        "body": "A short description selects a relevant skill. Its detailed procedure then enters context."
       },
       {
-        "title": "It says",
-        "body": "How to triage\nWhat to cite\nWhat never to do"
+        "title": "Keep hard limits in code",
+        "body": "Skills guide work. Tool permissions, validation and approval gates enforce boundaries."
       }
     ],
     "visual": {
-      "mdfile": 1,
-      "mdName": "incident-triage/SKILL.md"
+      "bot": "think",
+      "place": "beside"
     },
     "keyPoints": [
       "A skill is a versioned file.",
       "A skill advises. It does not enforce.",
       "Review it before you install it."
     ],
-    "notes": "Reference only. Open .claude/skills/incident-triage/SKILL.md when participants want a reusable method. A skill advises; it does not enforce. Review the file and policy before installation. No extra skill is required to finish the assignment.",
+    "notes": "Reference only. Open .claude/skills/incident-triage/SKILL.md when participants want a reusable method. A skill advises; it does not enforce. Review the file and policy before installation. No extra skill is required to finish the assignment. Progressive disclosure keeps the main loop focused. It is not permission to trust a downloaded skill. Existing SDK calls load user settings only; do not imply they automatically load this repository's project skills. Sources: https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
     "teachingPhase": "optional"
   },
   {
@@ -1131,36 +1135,37 @@ window.SLIDES = [
     "subtitle": "A hook runs on an agent event. It can block an action; it cannot approve one."
   },
   {
-    "title": "subagents",
+    "title": "One loop first; subagents for a reason",
     "stateId": "34:subagents",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
-    "subtitle": "A helper session with its own context. Delegate the work, never the acceptance.",
+    "subtitle": "Separate work by context or permissions, not by job title.",
     "type": "concept",
     "cards": [
       {
-        "title": "Investigator",
-        "body": ".claude/agents/oncall-investigator.md. Own context. It only reports."
+        "title": "Stay in one loop",
+        "body": "The repair needs the same evidence and plan. Add a reviewed skill only when needed."
       },
       {
-        "title": "Never",
-        "body": "A subagent does not accept a plan. It approves nothing."
+        "title": "Use a separate context",
+        "body": "Independent checks, parallel research, or measured context overload. Return evidence, not confidence."
       }
     ],
-    "tagline": "Delegate the work. Never the acceptance.",
+    "tagline": "Compare task success, missed evidence, time and cost. Never collapse a safety boundary.",
     "visual": {
-      "diagram": {
-        "id": "subagents",
-        "title": "Separate verifier context",
-        "caption": "A verifier checks the diagnosis in a separate context. A human accepts the result."
-      }
+      "bot": "point",
+      "place": "beside"
     },
     "keyPoints": [
-      "Own context.",
-      "The verifier only reports.",
-      "A human accepts."
+      "Start with the simplest design that works.",
+      "A verifier reports; humans accept.",
+      "The executor keeps its separate permission boundary."
     ],
-    "notes": "Reference only. Explain separate context and a reporting-only result. A verifier is not automatically independent evidence: inspect its inputs and checks. A subagent never accepts a plan or approves a release.",
-    "teachingPhase": "optional"
+    "notes": "Reference only, not a third repair. The article argues against unnecessary planner, router and domain subagents, not against every subagent. Fresh-context verification, independent parallel tasks, conflicting instructions, permission separation or measured context degradation can justify one. Keep raw evidence links in its compact result and compare end-to-end task completion, safety failures, latency and cost on the same cases before adopting an architecture. No migration or speed claim is proved by this workshop. Claude Code and the runtime SRE agent are two different applications, not redundant subagents. Do not fold the executor, deterministic chat grammar or approval checks into a model prompt. The security article uses scoped reviewers for a different purpose; this is compatible with a simple runtime loop. A new context is not a new authenticated identity or a guarantee of unbiased evidence. Sources: https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop and https://claude.com/resources/articles/how-anthropic-secures-its-ai-native-software-development-lifecycle",
+    "teachingPhase": "optional",
+    "source": {
+      "url": "https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+      "label": "Anthropic · When to fold subagents into one loop"
+    }
   },
   {
     "title": "Extend the bench without weakening it",
