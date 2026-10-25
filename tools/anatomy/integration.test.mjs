@@ -10,17 +10,32 @@ const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
 test('Workshop 5 opens with the AI SDLC before its tools and practice system',()=>{
  const slides=context.window.SLIDES;
- assert.deepEqual(Array.from(slides.slice(0,5),s=>s.title),[
-  'AI-native SDLC: more than generating code','The lifecycle: AI assists, humans decide','Your assignment and definition of done','The practice system: two agents, one shop','Working boundaries'
+ assert.deepEqual(Array.from(slides.slice(0,6),s=>s.title),[
+  'Welcome to Workshop 5 · AI-native SDLC','Recap: from W4 agents to the AI SDLC','The lifecycle: AI assists, humans decide','Your assignment and definition of done','The practice system: two agents, one shop','Working boundaries'
  ]);
  const at=title=>slides.findIndex(s=>s.title===title);
  assert.ok(at('Your assignment and definition of done')<at('Open Claude Code'));
  assert.ok(at('Working boundaries')<at('Open Claude Code'));
- assert.ok(slides.slice(0,5).every(s=>s.teachingPhase==='core'));
+ assert.ok(slides.slice(0,6).every(s=>s.teachingPhase==='core'));
  assert.match(slides[at('The practice system: two agents, one shop')].subtitle,/We change the SRE agent/);
 });
+test('Workshop 5 welcomes learners, recalls W4 and bridges to the next workshops without extra theory blocks',()=>{
+ const slides=context.window.SLIDES;
+ assert.equal(slides[0].visual.opener,'welcome');
+ assert.match(slides[0].tagline,/10:00–16:00/);
+ const recap=slides[1];
+ assert.equal(recap.cards.length,2);
+ assert.match(recap.tagline,/lesson or surprise from W4/);
+ assert.match(recap.notes,/not a prerequisite for the solo route/);
+ const agenda=slides.find(s=>s.title==='Your assignment and definition of done');
+ assert.deepEqual(Array.from(agenda.cards,c=>c.title),['11:15 · Specify','13:00 · Build and verify','14:55 · Review and learn']);
+ assert.match(agenda.tagline,/Lunch 12:00–13:00/);
+ const close=slides.find(s=>s.title==='Show the completed lifecycle');
+ assert.match(close.tagline,/W6.*W7/);
+ assert.match(close.notes,/Revisit the delivery skill/);
+});
 test('Workshop 5 retains the diagrams used by the assignment and selected reference',()=>{
- const mapping=['loop','mcp','hooks','subagents','eval'];
+ const mapping=['loop','mcp','hooks','eval'];
  const dctx={window:{}};vm.runInNewContext(read('workshop5-diagrams.js'),dctx);
  const figures=context.window.SLIDES.filter(s=>s.visual?.diagram);
  assert.equal(figures.length,mapping.length);
@@ -82,8 +97,8 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
  const slides=context.window.SLIDES;
  const at=title=>{const index=slides.findIndex(s=>s.title===title);assert.ok(index>=0,title);return index;};
  const close=at('Show the completed lifecycle');
- assert.equal(close,30);
- assert.equal(slides.length,38);
+ assert.equal(close,31);
+ assert.equal(slides.length,39);
  assert.ok(slides.slice(0,close+1).every(s=>s.teachingPhase==='core'));
  assert.ok(slides.slice(close+1).every(s=>s.teachingPhase==='optional'&&s.kicker.includes('REFERENCE ONLY')));
  for(const sequence of [
@@ -94,7 +109,7 @@ test('Workshop 5 teaches concepts at use and keeps optional depth after the clos
  ]){
   for(let i=1;i<sequence.length;i++)assert.ok(at(sequence[i-1])<at(sequence[i]),`${sequence[i-1]} before ${sequence[i]}`);
  }
- for(const title of ['skills','Hooks: allow, ask, deny','subagents','CI: repeat the checks'])assert.ok(at(title)>close,title);
+ for(const title of ['skills','Hooks: allow, ask, deny','One loop first; subagents for a reason','CI: repeat the checks'])assert.ok(at(title)>close,title);
  const core3=slides.slice(at('Review the actual diff'),close+1);
  assert.ok(core3.every(s=>!s.title.startsWith('Repair')));
  assert.match(slides[at('Check the change on the same incident')].steps.join(' '),/same incident/);

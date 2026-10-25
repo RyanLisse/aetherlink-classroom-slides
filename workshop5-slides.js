@@ -2,9 +2,11 @@
 /* Workshop 5. One AI-SDLC assignment, then optional reference. */
 window.SLIDES = [
   {
-    "title": "AI-native SDLC: more than generating code",
+    "title": "Welcome to Workshop 5 · AI-native SDLC",
+    "stateId": "0:AI-native SDLC: more than generating code",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
     "subtitle": "Build a useful change with AI. Prove it meets the need before a human releases it.",
+    "tagline": "10:00–16:00 · Explain → demonstrate → practise → review",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -17,13 +19,43 @@ window.SLIDES = [
       "Faster code alone is not a successful delivery.",
       "The lifecycle is the lesson. The shop is the practice system."
     ],
-    "notes": "Open with the learning goal, not installation or an incident. Faster code still needs a clear requirement, checked evidence and a human decision. Participants complete a small development cycle. Do not promise a measured speed improvement. Keep the introduction short so Claude Code starts early.",
+    "notes": "Welcome the group at 10:00. Name the learning goal before installation or an incident: AI-native software delivery, not just code generation. Faster code still needs a clear requirement, checked evidence and a human decision. Explain the rhythm: I explain, show one example, then you practise and review your own result. Keep welcome and recap together within five minutes so Claude Code starts early. Do not promise a measured speed improvement.",
+    "teachingPhase": "core"
+  },
+  {
+    "title": "Recap: from W4 agents to the AI SDLC",
+    "stateId": "w5:recap-w4",
+    "kicker": "W5 · RECAP · FROM N8N TO CLAUDE AGENTS SDK",
+    "subtitle": "W4 moved the ticket flow into code. W5 adds the full delivery cycle around a change.",
+    "type": "context",
+    "layout": "cards",
+    "visual": {
+      "bot": "think",
+      "place": "beside"
+    },
+    "cards": [
+      {
+        "title": "Keep from W4",
+        "body": "Structured output, tool evidence and a human decision. Specialists have bounded roles."
+      },
+      {
+        "title": "Add in W5",
+        "body": "Accepted intent, reviewed plans, tested code, a release decision and observations for the next task."
+      }
+    ],
+    "tagline": "Share one useful lesson or surprise from W4. Which check would catch it next time?",
+    "keyPoints": [
+      "Carry the method forward, not yesterday's application.",
+      "A model response is not proof that software is ready to release."
+    ],
+    "notes": "Take two or three short answers, not a new round of W4 demonstrations. Use one observed surprise to connect the recap to today's verification work. If nobody has a case, ask what would reveal an unsupported claim in an agent reply. W4 used structured output, specialists, MCP and human control; W5 practises how to specify, change, test and release software around those ideas. W4 attendance is not a prerequisite for the solo route: read the two cards, then continue. Do not copy W4 mutation permissions into the W5 runtime's read-only tools.",
     "teachingPhase": "core"
   },
   {
     "title": "The lifecycle: AI assists, humans decide",
+    "stateId": "1:The lifecycle: AI assists, humans decide",
     "kicker": "W5 · THE ROUTE WE WILL PRACTISE",
-    "subtitle": "Plan → Design → Build → Test → Release → Observe → Plan again.",
+    "subtitle": "Each step reads the previous result. A failed check sends you back.",
     "type": "concept",
     "cards": [],
     "visual": {
@@ -34,15 +66,20 @@ window.SLIDES = [
       }
     },
     "keyPoints": [
-      "AI assists each stage, not only coding.",
-      "Each stage leaves evidence for a human decision.",
-      "Repeat the loop when observations reveal a new requirement."
+      "Accepted intent guides the plan.",
+      "The plan guides the diff and its checks.",
+      "Observed results become the next intent."
     ],
-    "notes": "Use this one map throughout the day. Plan includes accepted intent; Design includes a reviewed plan; Test supplies evidence; Release includes diff review and a human decision; Observe supplies the next task. Each stage leaves evidence for a human decision. Teach detailed concepts beside the action that uses them, not as another theory block.",
-    "teachingPhase": "core"
+    "notes": "Use this one map throughout the day. Plan includes accepted intent; Design includes a reviewed plan; Test supplies evidence; Release includes diff review and a human decision; Observe supplies the next task. Each stage leaves evidence for a human decision. Teach detailed concepts beside the action that uses them, not as another theory block. The six source stages are Plan, Design, Build, Test, Deploy and Maintain. Here Release is a learner-repository decision, not production deployment; Observe practises part of Maintain. Artifacts carry context between stages, not just completion marks. Keep accepted intent, plan, tests and review in the same learner PR with human-owned Git steps. A failed check returns to the relevant step; changed scope needs a revised human-reviewed plan. Source: https://claude.com/resources/articles/the-ai-native-sdlc-playbook",
+    "teachingPhase": "core",
+    "source": {
+      "url": "https://claude.com/resources/articles/the-ai-native-sdlc-playbook",
+      "label": "Anthropic · AI-native SDLC playbook"
+    }
   },
   {
     "title": "Your assignment and definition of done",
+    "stateId": "2:Your assignment and definition of done",
     "kicker": "W5 · OPENING",
     "subtitle": "Improve the SRE agent: restore deployment evidence and check human approval.",
     "type": "context",
@@ -59,29 +96,30 @@ window.SLIDES = [
     },
     "cards": [
       {
-        "title": "1 · Specify",
+        "title": "11:15 · Specify",
         "body": "Check the missing evidence. Accept an intent with observable checks and boundaries."
       },
       {
-        "title": "2 · Build and verify",
+        "title": "13:00 · Build and verify",
         "body": "Review a plan. Repair the tool and approval gate. Record tests, trace and diff."
       },
       {
-        "title": "3 · Review and learn",
+        "title": "14:55 · Review and learn",
         "body": "Review the change. Decide on release. Observe the result and review one next task."
       }
     ],
-    "tagline": "Lunch 12:00–13:00. Optional depth follows the closing slide.",
+    "tagline": "10:00 opening and setup · Lunch 12:00–13:00 · Close at 16:00",
     "keyPoints": [
       "Use CARD.md or the hub for the steps.",
       "Explain each concept when its task needs it.",
       "Optional slides are not a second required route."
     ],
-    "notes": "Name the two cuts: list_deploys in src/tools.ts and checkApproval in src/executor.ts. Both are repaired in Core 2. Core 3 starts with review, not more implementation. Required evidence: intent.md, docs/plan.md, a tested diff, docs/verify/sdlc.md, a human release decision and a reviewed next task. A working shop or solved checkpoint is not proof of a completed cycle.",
+    "notes": "Use the three cards as the day agenda and outputs, not a second overview. Breaks are 11:00–11:15 and 14:40–14:55. Ask learners to choose one delivery skill they want to improve today; revisit it at the close. Name the two cuts: list_deploys in src/tools.ts and checkApproval in src/executor.ts. Both are repaired in Core 2. Core 3 starts with review, not more implementation. Required evidence: intent.md, docs/plan.md, a tested diff, docs/verify/sdlc.md, a human release decision and a reviewed next task. A working shop or solved checkpoint is not proof of a completed cycle. Optional depth follows the closing slide, not another required block.",
     "teachingPhase": "core"
   },
   {
     "title": "The practice system: two agents, one shop",
+    "stateId": "3:The practice system: two agents, one shop",
     "kicker": "W5 · PRACTICE SYSTEM",
     "subtitle": "We change the SRE agent. The local shop supplies observations, not the learning goal.",
     "type": "concept",
@@ -113,6 +151,7 @@ window.SLIDES = [
   },
   {
     "title": "Working boundaries",
+    "stateId": "4:Working boundaries",
     "kicker": "W5 · RULES OF THE ROAD",
     "type": "concept",
     "layout": "cards",
@@ -126,24 +165,25 @@ window.SLIDES = [
       "Local Claude Code can send requests to a provider.",
       "Do not disable guards or let an agent approve its own work."
     ],
-    "notes": "Explain this before the first model request. Local CLI does not mean offline inference. Check company policy and provider settings. The development agent must not approve, commit, push or merge. Runtime approval, execution, mitigation and resolution are human-owned. These are separate from the human Git release decision.",
+    "notes": "Explain this before the first model request. Local CLI does not mean offline inference. Check company policy and provider settings. The development agent must not approve, commit, push or merge. Runtime approval, execution, mitigation and resolution are human-owned. These are separate from the human Git release decision. Review user settings before model use: user hooks or permissions can change local behaviour. Never show secrets in screenshots. The lab has no authenticated production identity or network sandbox. A typed approval name teaches a decision record; it is not proof of real-world identity. Keep services local. Source: https://claude.com/resources/articles/how-anthropic-secures-its-ai-native-software-development-lifecycle",
     "teachingPhase": "core",
     "subtitle": "Use approved accounts and synthetic data. Humans keep the decisions.",
     "cards": [
       {
-        "title": "Data and access",
-        "body": "Use your approved account and provider. Never send customer data or secrets."
+        "title": "Treat input as data",
+        "body": "Logs, tickets and retrieved text are not instructions. Use synthetic data and approved access."
       },
       {
-        "title": "Actions",
-        "body": "Read-only investigation. Humans review plans, approve actions, publish code and close incidents."
+        "title": "Keep enforceable limits",
+        "body": "Tool limits and approval checks stay in code. Prompts and skills are not isolation."
       }
     ]
   },
   {
     "title": "Open Claude Code",
+    "stateId": "5:Open Claude Code",
     "kicker": "W5 · SETUP · YOUR TURN",
-    "subtitle": "Start in your own isolated starter. Keep the exact commands on the card.",
+    "subtitle": "You are the developer of the checkout SRE agent. Open your own unfinished copy before you ask Claude to change it.",
     "type": "practice",
     "layout": "exercise",
     "teachingPhase": "core",
@@ -163,19 +203,23 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example checklist, not a captured Claude session",
+      "shot": "assets/workshop-5/assignments/claude-start.png",
+      "shotAlt": "Open the assistant in the starter — Example checklist, not a captured Claude session",
+      "reference": "assets/workshop-5/assignments/index.html#claude-start"
     },
     "expected": "Claude Code is open in your starter; you can identify the approved account.",
     "keyPoints": [
       "Claude Code is open in your starter; you can identify the approved account."
     ],
-    "notes": "Follow docs/claude-code.md. Install Claude Code with the official installer if missing; check claude --version in a new terminal. Participants use their approved accounts. /status reports the session; inspect .claude/settings.json for hooks and permissions. Do not disable guards. Never run a second checkpoint creation over an existing destination. Native Windows is supported by the instructions, not verified by our Linux run. Use CARD.md for the copyable commands. Do not recreate an existing checkpoint destination.",
+    "notes": "Follow docs/claude-code.md. Install Claude Code with the official installer if missing; check claude --version in a new terminal. Participants use their approved accounts. /status reports the session; inspect .claude/settings.json for hooks and permissions. Do not disable guards. Never run a second checkpoint creation over an existing destination. Native Windows is supported by the instructions, not verified by our Linux run. Use CARD.md for the copyable commands. Do not recreate an existing checkpoint destination. Scenario: You are the developer of the checkout SRE agent. Open your own unfinished copy before you ask Claude to change it. Start: The original clone exists. No checkpoint is being reused or overwritten. Expected: Claude Code is open in .lab/checkpoints/start. /status shows the approved account, not proof of runtime SDK access. Stop: Stop if login fails or the folder is wrong. Do not share account details or credentials in screenshots. Show the example at assets/workshop-5/assignments/index.html#claude-start. The image is an illustrative reference, not participant evidence.",
     "stepsHeading": "Do this now:"
   },
   {
     "title": "First assignment: understand before editing",
+    "stateId": "6:First assignment: understand before editing",
     "kicker": "W5 · ORIENT · YOUR TURN",
-    "subtitle": "An assistant needs the task and boundaries before it changes code.",
+    "subtitle": "The on-call engineer needs trustworthy evidence, not a confident guess. Check that Claude understands the two repairs before it writes code.",
     "type": "practice",
     "layout": "exercise",
     "teachingPhase": "core",
@@ -192,13 +236,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example checklist, not a model transcript",
+      "shot": "assets/workshop-5/assignments/orientation.png",
+      "shotAlt": "Check the assistant's understanding — Example checklist, not a model transcript",
+      "reference": "assets/workshop-5/assignments/index.html#orientation"
     },
     "expected": "You can state the assignment, required evidence and human decisions.",
     "keyPoints": [
       "You can state the assignment, required evidence and human decisions."
     ],
-    "notes": "Let every participant use Claude Code now. Check its answer against CARD.md. Refuse action outside the read-only task. A setup failure is a blocker, not proof of a model run.",
+    "notes": "Let every participant use Claude Code now. Check its answer against CARD.md. Refuse action outside the read-only task. A setup failure is a blocker, not proof of a model run. Scenario: The on-call engineer needs trustworthy evidence, not a confident guess. Check that Claude understands the two repairs before it writes code. Start: Claude Code is open in the unfinished starter. No code edits are permitted yet. Expected: An explanation of the two repairs, required evidence and human decisions. Compare the answer with CARD.md. Stop: Stop if Claude proposes shop changes, approves its own work or starts editing. Show the example at assets/workshop-5/assignments/index.html#orientation. The image is an illustrative reference, not participant evidence.",
     "stepsHeading": "Do this now:",
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
@@ -207,6 +254,7 @@ window.SLIDES = [
   },
   {
     "title": "Start the lab and check your starting point",
+    "stateId": "7:Start the lab and check your starting point",
     "kicker": "W5 · SETUP · YOUR TURN",
     "subtitle": "Check SDK access separately, then start the shop, traffic and console from the same starter.",
     "type": "concept",
@@ -238,6 +286,7 @@ window.SLIDES = [
   },
   {
     "title": "Break",
+    "stateId": "8:Break",
     "kicker": "W5 · 11:00 · 15 MINUTES",
     "type": "pause",
     "cards": [
@@ -256,6 +305,7 @@ window.SLIDES = [
   },
   {
     "title": "Specify: start with an observed problem",
+    "stateId": "9:Specify: start with an observed problem",
     "kicker": "W5 · CORE 1 · SPECIFY · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
@@ -273,13 +323,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example evidence record; fill in your own observations",
+      "shot": "assets/workshop-5/assignments/evidence.png",
+      "shotAlt": "Find the missing evidence — Example evidence record; fill in your own observations",
+      "reference": "assets/workshop-5/assignments/index.html#evidence"
     },
     "keyPoints": [
       "Core 1 delivers checked observations and an accepted intent."
     ],
-    "notes": "Frame the task in one minute, then continue to fault injection. The proof is docs/diagnosis-live.md plus intent.md. Do not repeat the whole workshop route.",
-    "subtitle": "A diagnosis is input to a requirement, not permission to change software.",
+    "notes": "Frame the task in one minute, then continue to fault injection. The proof is docs/diagnosis-live.md plus intent.md. Do not repeat the whole workshop route. Scenario: Customers report checkout failures after a bad deployment. The on-call engineer can see errors, but the starter returns no deployment records. Start: Start with a healthy shop and an empty console. Inject one bad deploy at the next step, then inspect that incident. Expected: The trace shows an empty list_deploys result. Missing evidence is a gap, not proof that no deployment occurred. Stop: Stop on fabricated citations or a failed contract. Preserve the output instead of forcing a rollback proposal. Show the example at assets/workshop-5/assignments/index.html#evidence. The image is an illustrative reference, not participant evidence.",
+    "subtitle": "Customers report checkout failures after a bad deployment. The on-call engineer can see errors, but the starter returns no deployment records.",
     "teachingPhase": "core",
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
@@ -288,6 +341,7 @@ window.SLIDES = [
   },
   {
     "title": "Create one fault and observe detection",
+    "stateId": "10:Create one fault and observe detection",
     "kicker": "W5 · CORE 1 · OBSERVE",
     "subtitle": "Traffic creates telemetry. A fixed metric limit opens the incident; the model does not.",
     "type": "concept",
@@ -319,6 +373,7 @@ window.SLIDES = [
   },
   {
     "title": "Check the diagnosis against the evidence",
+    "stateId": "11:Check the diagnosis against the evidence",
     "kicker": "W5 · CORE 1 · VERIFY OBSERVATIONS",
     "subtitle": "A reference must match recorded data. An empty tool result does not prove no deployment occurred.",
     "type": "concept",
@@ -348,7 +403,8 @@ window.SLIDES = [
   },
   {
     "title": "Turn the finding into an intent",
-    "subtitle": "Define the wanted behaviour before asking Claude to implement it.",
+    "stateId": "12:Turn the finding into an intent",
+    "subtitle": "The empty deployment result blocks a reliable diagnosis. You need a small, testable change that also keeps runtime actions behind human approval.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "W5 · CORE 1 · SPECIFY · YOUR TURN",
@@ -364,13 +420,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example document, not participant evidence",
+      "shot": "assets/workshop-5/assignments/intent.png",
+      "shotAlt": "Describe the change before the solution — Example document, not participant evidence",
+      "reference": "assets/workshop-5/assignments/index.html#intent"
     },
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Use the existing card prompt. Keep unknowns explicit; an empty deployment result is unknown, not healthy. The approval check must stay fail-closed until repaired. This slide produces a draft; the next slide is the human acceptance checkpoint.",
+    "notes": "Use the existing card prompt. Keep unknowns explicit; an empty deployment result is unknown, not healthy. The approval check must stay fail-closed until repaired. This slide produces a draft; the next slide is the human acceptance checkpoint. Scenario: The empty deployment result blocks a reliable diagnosis. You need a small, testable change that also keeps runtime actions behind human approval. Start: You have compared the trace with telemetry and recorded the missing signal. Expected: A draft intent names the on-call engineer, both repairs, observable checks and the read-only boundary. Stop: Do not build from a vague goal such as make the agent better. Reject invented evidence. Show the example at assets/workshop-5/assignments/index.html#intent. The image is an illustrative reference, not participant evidence.",
     "teachingPhase": "core",
     "expected": "intent.md contains a bounded change and observable acceptance criteria.",
     "stepsHeading": "Do this now:",
@@ -380,7 +439,8 @@ window.SLIDES = [
   },
   {
     "title": "Accept the assignment before building",
-    "subtitle": "A clear acceptance check makes the later review possible.",
+    "stateId": "13:Accept the assignment before building",
+    "subtitle": "Claude has drafted an intent. You decide whether another person could prove each check, before any implementation begins.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "W5 · CORE 1 · HUMAN DECISION · YOUR TURN",
@@ -396,13 +456,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example form; placeholders are not acceptance",
+      "shot": "assets/workshop-5/assignments/accept-intent.png",
+      "shotAlt": "Accept observable requirements — Example form; placeholders are not acceptance",
+      "reference": "assets/workshop-5/assignments/index.html#accept-intent"
     },
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Have participants show one criterion another person could verify. The human accepts intent.md; Claude does not accept its own draft. If the scope remains unclear, stop here instead of starting implementation.",
+    "notes": "Have participants show one criterion another person could verify. The human accepts intent.md; Claude does not accept its own draft. If the scope remains unclear, stop here instead of starting implementation. Scenario: Claude has drafted an intent. You decide whether another person could prove each check, before any implementation begins. Start: The draft intent covers both repairs and cites your checked observation. Expected: Your name, decision, reason and remaining question are recorded in the intent. Stop: If scope or evidence is unclear, request a revision. A model cannot accept its own draft. Show the example at assets/workshop-5/assignments/index.html#accept-intent. The image is an illustrative reference, not participant evidence.",
     "teachingPhase": "core",
     "expected": "A human-accepted intent is ready before planning or code edits.",
     "stepsHeading": "Do this now:",
@@ -412,6 +475,7 @@ window.SLIDES = [
   },
   {
     "title": "Lunch",
+    "stateId": "14:Lunch",
     "kicker": "W5 · 12:00 · 60 MINUTES",
     "type": "pause",
     "cards": [
@@ -430,7 +494,8 @@ window.SLIDES = [
   },
   {
     "title": "Establish a reviewable starting point",
-    "subtitle": "The final review needs a real before-and-after diff, not a return to the solved HEAD.",
+    "stateId": "15:Establish a reviewable starting point",
+    "subtitle": "The checkpoint was cut from solved code. Without a baseline, restoring the solution can leave no useful repair diff.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "W5 · CORE 2 · BASELINE · YOUR TURN",
@@ -446,13 +511,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Illustrative output; commit ids and counts vary",
+      "shot": "assets/workshop-5/assignments/baseline.png",
+      "shotAlt": "Keep the unfinished code for comparison — Illustrative output; commit ids and counts vary",
+      "reference": "assets/workshop-5/assignments/index.html#baseline"
     },
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Use docs/sdlc-git.md. The checkpoint starts from solved HEAD with two unfinished cuts; without a baseline, restoring them can produce an empty diff. A human runs these Git commands. Check git show --stat workshop-base. Never overwrite an existing branch or publish the baseline to upstream.",
+    "notes": "Use docs/sdlc-git.md. The checkpoint starts from solved HEAD with two unfinished cuts; without a baseline, restoring them can produce an empty diff. A human runs these Git commands. Check git show --stat workshop-base. Never overwrite an existing branch or publish the baseline to upstream. Scenario: The checkpoint was cut from solved code. Without a baseline, restoring the solution can leave no useful repair diff. Start: Your intent is accepted. The two starter cuts are still present. Expected: Your branch is fix/w5-core. The workshop-base commit contains only src/tools.ts and src/executor.ts. Stop: Do not overwrite a branch or include secrets, intent edits or unrelated files in the baseline. Show the example at assets/workshop-5/assignments/index.html#baseline. The image is an illustrative reference, not participant evidence.",
     "teachingPhase": "core",
     "expected": "workshop-base contains only the starter cuts; fix/w5-core is your working branch.",
     "stepsHeading": "Do this now:",
@@ -462,29 +530,33 @@ window.SLIDES = [
   },
   {
     "title": "Ask for a small plan, then review it",
+    "stateId": "16:Ask for a small plan, then review it",
     "kicker": "W5 · CORE 2 · DESIGN · YOUR TURN",
-    "subtitle": "A reviewed plan limits accidental changes and makes verification deliberate.",
+    "subtitle": "The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture.",
     "type": "practice",
     "cards": [
       {
         "title": "Bound the work",
-        "body": "Files, checks, risks and stop point.\nRecord your review in docs/plan.md."
+        "body": "Files, checks, risk and stop point.\nChanged scope? Review the plan again."
       }
     ],
     "tagline": "Record the plan and your review in docs/plan.md before code edits.",
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example document, not an approved plan",
+      "shot": "assets/workshop-5/assignments/plan.png",
+      "shotAlt": "Review the tool plan before implementation — Example document, not an approved plan",
+      "reference": "assets/workshop-5/assignments/index.html#plan"
     },
     "keyPoints": [
       "The human has accepted a bounded plan before implementation."
     ],
-    "notes": "Explain the failing test before accepting the plan. Check CLAUDE.md boundaries without repeating the orientation lesson. Name a rejected alternative. Do not accept a plan that weakens a contract or adds mutation tools. The second gate repair gets its own plan review at its point of use.",
+    "notes": "Explain the failing test before accepting the plan. Check CLAUDE.md boundaries without repeating the orientation lesson. Name a rejected alternative. Do not accept a plan that weakens a contract or adds mutation tools. The second gate repair gets its own plan review at its point of use. Scenario: The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture. Start: The intent and baseline exist. You can explain the failing tool assertion. Expected: A plan names the handler, checks, risk, rejected alternative and human review decision. Stop: Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later. Show the example at assets/workshop-5/assignments/index.html#plan. The image is an illustrative reference, not participant evidence. Use the accepted artifact, not a fresh summary from memory. Ask which input could be untrusted, what the code may access, and which test proves refusal. Do not add a planner or router subagent for these two repairs. The tool contract, deterministic chat routing and executor separation remain in code.",
     "teachingPhase": "core",
     "layout": "exercise",
     "stepsHeading": "Do this now:",
     "steps": [
       "Use the card prompt with intent, the existing spec and the failing tool test.",
-      "Check files, risks, checks and the stop point in docs/plan.md.",
+      "Trace input, allowed access and the refusal check. Record them in docs/plan.md.",
       "Accept the tool scope now. Review the gate plan before that separate repair."
     ],
     "expected": "The human has accepted a bounded plan before implementation.",
@@ -495,6 +567,7 @@ window.SLIDES = [
   },
   {
     "title": "Understand the tool before repair",
+    "stateId": "17:Understand the tool before repair",
     "kicker": "W5 · CORE 2 · MCP AT FIRST USE",
     "subtitle": "MCP exposes named tools. Repair the read-only handler, not the contract.",
     "type": "concept",
@@ -526,8 +599,9 @@ window.SLIDES = [
   },
   {
     "title": "Repair the tool: red → green",
+    "stateId": "18:Repair the tool: red → green",
     "kicker": "W5 · CORE 2 · BUILD · YOUR TURN",
-    "subtitle": "Use the failing test to guide the smallest implementation.",
+    "subtitle": "The on-call engineer needs the deployment records that the starter hides. Repair the handler without changing its registration.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
@@ -544,12 +618,15 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Expected result shape, not a recorded test run",
+      "shot": "assets/workshop-5/assignments/tool-test.png",
+      "shotAlt": "Prove the deployment tool repair — Expected result shape, not a recorded test run",
+      "reference": "assets/workshop-5/assignments/index.html#tool-test"
     },
     "keyPoints": [
       "The tool checks pass. The gate exercise is still unfinished; this is not release-ready."
     ],
-    "notes": "Use the exact focused command on CARD.md. The tool test checks returned records; the offline bench checks fixed scripted outcomes, not model quality. Explain this before running it. Do not lower acceptance thresholds. The intermediate core-2 checkpoint solves only this tool; it does not complete all of Core 2.",
+    "notes": "Use the exact focused command on CARD.md. The tool test checks returned records; the offline bench checks fixed scripted outcomes, not model quality. Explain this before running it. Do not lower acceptance thresholds. The intermediate core-2 checkpoint solves only this tool; it does not complete all of Core 2. Scenario: The on-call engineer needs the deployment records that the starter hides. Repair the handler without changing its registration. Start: You have accepted the tool plan. The focused tools test is red. Expected: Both tool assertions pass after repair. The gate exercise is still unfinished, so this is not release-ready. Stop: If the handler still returns [], inspect the binding. Do not weaken the test or count a solved checkpoint as your work. Show the example at assets/workshop-5/assignments/index.html#tool-test. The image is an illustrative reference, not participant evidence.",
     "teachingPhase": "core",
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
@@ -558,8 +635,9 @@ window.SLIDES = [
   },
   {
     "title": "Check the change on the same incident",
+    "stateId": "19:Check the change on the same incident",
     "kicker": "W5 · CORE 2 · VERIFY LIVE · YOUR TURN",
-    "subtitle": "Compare the actual trace before and after the repair, not just the wording.",
+    "subtitle": "A green tool test does not show what the real model used. Investigate the same incident again and inspect the new trace.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
@@ -576,12 +654,15 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example evidence record; your trace supplies the values",
+      "shot": "assets/workshop-5/assignments/same-incident.png",
+      "shotAlt": "Compare the same incident before and after — Example evidence record; your trace supplies the values",
+      "reference": "assets/workshop-5/assignments/index.html#same-incident"
     },
     "keyPoints": [
       "You have checked live deployment evidence, or recorded the precise runtime blocker."
     ],
-    "notes": "The model may propose different actions. Never require a rollback as proof of a successful tool repair. Preserve fabricated citations or contract failures and stop. Record results in docs/verify/sdlc.md. A fresh exercise requires a new disposable copy, not rebreaking a stale incident.",
+    "notes": "The model may propose different actions. Never require a rollback as proof of a successful tool repair. Preserve fabricated citations or contract failures and stop. Record results in docs/verify/sdlc.md. A fresh exercise requires a new disposable copy, not rebreaking a stale incident. Scenario: A green tool test does not show what the real model used. Investigate the same incident again and inspect the new trace. Start: The tool repair is saved. Keep the shop and traffic running; let the console reload itself. Expected: The trace contains deployment records. Check cited ids and timestamps against your telemetry; model wording and proposals may differ. Stop: Preserve fabricated references or contract failures. Do not restart the shop or require a rollback proposal to get a pass. Show the example at assets/workshop-5/assignments/index.html#same-incident. The image is an illustrative reference, not participant evidence.",
     "teachingPhase": "core",
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
@@ -590,6 +671,7 @@ window.SLIDES = [
   },
   {
     "title": "Understand the human approval gate",
+    "stateId": "20:Understand the human approval gate",
     "kicker": "W5 · CORE 2 · SAFETY AT FIRST USE",
     "subtitle": "A diagnosis cannot authorize itself. Approval is separate from execution.",
     "type": "concept",
@@ -621,6 +703,7 @@ window.SLIDES = [
   },
   {
     "title": "Repair the gate: refuse unsafe actions",
+    "stateId": "21:Repair the gate: refuse unsafe actions",
     "kicker": "W5 · CORE 2 · BUILD · YOUR TURN",
     "type": "practice",
     "layout": "exercise",
@@ -638,13 +721,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Expected result shape, not a recorded test run",
+      "shot": "assets/workshop-5/assignments/gate-test.png",
+      "shotAlt": "Keep human permission specific — Expected result shape, not a recorded test run",
+      "reference": "assets/workshop-5/assignments/index.html#gate-test"
     },
     "keyPoints": [
       "The approval-gate tests pass; no runtime action has been approved or executed."
     ],
-    "notes": "The human reviews the second plan before the code change. Use test/workshop/executor.test.ts and the existing card prompt. The implementation must reject absent, invalid and mismatched approval. Do not confuse a passing test with permission to click Execute.",
-    "subtitle": "Restore valid approval handling without letting unsafe actions through.",
+    "notes": "The human reviews the second plan before the code change. Use test/workshop/executor.test.ts and the existing card prompt. The implementation must reject absent, invalid and mismatched approval. Do not confuse a passing test with permission to click Execute. Scenario: A valid human approval must work, but an approval for another incident or proposal must not. The starter refuses everything. Start: Review the separate gate plan. The valid-approval assertion is red before repair. Expected: The gate accepts the valid named approval in tests and still refuses missing, pending or mismatched approval. Stop: A green gate test is not runtime approval. Do not click Approve or Execute during this repair. Show the example at assets/workshop-5/assignments/index.html#gate-test. The image is an illustrative reference, not participant evidence.",
+    "subtitle": "A valid human approval must work, but an approval for another incident or proposal must not. The starter refuses everything.",
     "teachingPhase": "core",
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
@@ -653,8 +739,9 @@ window.SLIDES = [
   },
   {
     "title": "Verify the complete change",
+    "stateId": "22:Verify the complete change",
     "kicker": "W5 · CORE 2 · TEST",
-    "subtitle": "Finish both repairs and record the required checks before the diff review.",
+    "subtitle": "Both repairs are now present. Check the combined change before a human reviews or publishes it.",
     "type": "practice",
     "cards": [
       {
@@ -663,21 +750,24 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Three kinds of evidence"
+      "shotLabel": "Example form; replace each field with actual output",
+      "shot": "assets/workshop-5/assignments/verification.png",
+      "shotAlt": "Record checks, not a done label — Example form; replace each field with actual output",
+      "reference": "assets/workshop-5/assignments/index.html#verification"
     },
     "keyPoints": [
       "Both repairs must pass before Core 3.",
       "Save actual results and untested paths in docs/verify/sdlc.md.",
       "Passing checks are evidence, not approval."
     ],
-    "notes": "Run npx tsx --test test/workshop/executor.test.ts, npm run verify, npm run test:workshop and npm run test:hooks as listed on CARD.md. The approval gate no longer remains intentionally red. Preserve actual output and runtime blockers in docs/verify/sdlc.md. Never substitute a scripted bench for model evidence or weaken checks to advance. Ready for Core 3 means both repairs pass the required code checks.",
+    "notes": "Run npx tsx --test test/workshop/executor.test.ts, npm run verify, npm run test:workshop and npm run test:hooks as listed on CARD.md. The approval gate no longer remains intentionally red. Preserve actual output and runtime blockers in docs/verify/sdlc.md. Never substitute a scripted bench for model evidence or weaken checks to advance. Ready for Core 3 means both repairs pass the required code checks. Scenario: Both repairs are now present. Check the combined change before a human reviews or publishes it. Start: The focused tool and gate tests pass. No runtime action is authorized by these results. Expected: The required commands exit successfully. The evidence record separates code checks from real-model observations. Stop: Keep failing output. Do not mark the change ready or replace model evidence with the scripted bench. Show the example at assets/workshop-5/assignments/index.html#verification. The image is an illustrative reference, not participant evidence. Claude may rerun and fix a failing check within the accepted scope before human review. Keep the failing result and the fix; never remove an assertion to pass. Stop and revise the plan if the scope changes. Compare the complete task, not only a polished final answer. One successful live run does not establish model reliability or a speed improvement.",
     "teachingPhase": "core",
     "layout": "exercise",
     "stepsHeading": "Do this now:",
     "steps": [
       "Run the focused executor test and npm run verify.",
       "Run npm run test:workshop and npm run test:hooks.",
-      "Record actual results and limits in docs/verify/sdlc.md."
+      "Map each accepted check to its actual result and limits in docs/verify/sdlc.md."
     ],
     "expected": "Both repairs pass the required code checks before Core 3.",
     "repo": {
@@ -687,6 +777,7 @@ window.SLIDES = [
   },
   {
     "title": "Break",
+    "stateId": "23:Break",
     "kicker": "W5 · 14:40 · 15 MINUTES",
     "type": "pause",
     "cards": [
@@ -705,29 +796,33 @@ window.SLIDES = [
   },
   {
     "title": "Review the actual diff",
-    "subtitle": "A passing test does not prove that the change meets the accepted intent.",
+    "stateId": "24:Review the actual diff",
+    "subtitle": "Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude's findings yourself.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "W5 · CORE 3 · REVIEW · YOUR TURN",
     "steps": [
-      "Check git status; inspect and stage intended new files by exact path yourself.",
-      "Use the card prompt to review git diff workshop-base against intent, plan and REVIEW.md.",
-      "Verify findings yourself. Record the decision, risks and untested paths."
+      "Inspect the actual diff and intended new files against intent and plan.",
+      "Check behaviour and security. Require a reproduction or exact code path for findings.",
+      "Make the human review decision; rerun affected checks after fixes."
     ],
     "cards": [
       {
-        "title": "Review inputs",
-        "body": "intent.md\ndocs/plan.md\nREVIEW.md\ndocs/verify/sdlc.md"
+        "title": "A useful finding",
+        "body": "File and line\nTrigger and impact\nReproduction or code path\nHuman decision"
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example review record, not an actual approval",
+      "shot": "assets/workshop-5/assignments/diff-review.png",
+      "shotAlt": "Judge the code against the intent — Example review record, not an actual approval",
+      "reference": "assets/workshop-5/assignments/index.html#diff-review"
     },
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Untracked files are absent from git diff workshop-base. Inspect them first and never stage secrets. The coding agent identifies findings; a human judges them. Do not rerun every check just to repeat the preceding slide. Rerun affected checks when review leads to a fix. Solo review is a separate pass and an explicit limitation.",
+    "notes": "Untracked files are absent from git diff workshop-base. Inspect them first and never stage secrets. The coding agent identifies findings; a human judges them. Do not rerun every check just to repeat the preceding slide. Rerun affected checks when review leads to a fix. Solo review is a separate pass and an explicit limitation. Scenario: Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude's findings yourself. Start: Both repairs and required checks are complete. Inspect untracked files before reviewing the diff. Expected: A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths. Stop: An empty repair diff is not proof. Resolve findings and rerun affected checks before release. Show the example at assets/workshop-5/assignments/index.html#diff-review. The image is an illustrative reference, not participant evidence. REVIEW.md defines the passes. Check untrusted input, dependency or settings changes, secrets and permission expansion. Review the approval gate directly even if tests pass. A fresh-context verifier can reduce shared assumptions, but its report is not independent evidence by itself. It has no approval authority. Source: https://claude.com/resources/articles/how-anthropic-secures-its-ai-native-software-development-lifecycle",
     "teachingPhase": "core",
     "expected": "The human has accepted the diff or requested a specific fix with fresh checks.",
     "stepsHeading": "Do this now:",
@@ -737,7 +832,8 @@ window.SLIDES = [
   },
   {
     "title": "Prepare the PR and make a release decision",
-    "subtitle": "Publishing code needs a human decision, not the authoring agent’s approval.",
+    "stateId": "25:Prepare the PR and make a release decision",
+    "subtitle": "You have a reviewed change. A missing reviewer or repository permission is a release blocker, not permission to bypass the gate.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "W5 · CORE 3 · RELEASE · YOUR TURN",
@@ -753,13 +849,16 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example blocked outcome, not a real PR or merge",
+      "shot": "assets/workshop-5/assignments/release.png",
+      "shotAlt": "Publish only with the required checks — Example blocked outcome, not a real PR or merge",
+      "reference": "assets/workshop-5/assignments/index.html#release"
     },
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Use docs/sdlc-git.md and the card. Human commit, Git approval, push and PR; target workshop-base from fix/w5-core in the learner repo, never upstream. Repository provisioning is facilitator preparation. Do not bypass protection or invent a merge. A local reload is not a production deployment. With release blocked, local observation may continue only as a development test.",
+    "notes": "Use docs/sdlc-git.md and the card. Human commit, Git approval, push and PR; target workshop-base from fix/w5-core in the learner repo, never upstream. Repository provisioning is facilitator preparation. Do not bypass protection or invent a merge. A local reload is not a production deployment. With release blocked, local observation may continue only as a development test. Scenario: You have a reviewed change. A missing reviewer or repository permission is a release blocker, not permission to bypass the gate. Start: The human has reviewed the diff and current evidence. Claude may prepare PR text, not publish it. Expected: A learner-repo PR from fix/w5-core into workshop-base, or an explicit RELEASE BLOCKED record with a next action. Stop: Do not push to the upstream training repo or bypass required review. A local reload is not a production release. Show the example at assets/workshop-5/assignments/index.html#release. The image is an illustrative reference, not participant evidence.",
     "teachingPhase": "core",
     "expected": "The evidence records the PR and merge commit, or the exact release blocker.",
     "stepsHeading": "Do this now:",
@@ -769,6 +868,7 @@ window.SLIDES = [
   },
   {
     "title": "Observe runtime with separate permission",
+    "stateId": "26:Observe runtime with separate permission",
     "kicker": "W5 · CORE 3 · OBSERVE",
     "subtitle": "Code review does not approve a shop action. Judge the current proposal and its evidence.",
     "type": "concept",
@@ -800,6 +900,7 @@ window.SLIDES = [
   },
   {
     "title": "Recovery: confirmed or not confirmed?",
+    "stateId": "27:Recovery: confirmed or not confirmed?",
     "kicker": "W5 · CORE 3 · HUMAN DECISION",
     "subtitle": "Execution success is not proof of recovery. Inspect the frozen measurements.",
     "type": "concept",
@@ -831,29 +932,33 @@ window.SLIDES = [
   },
   {
     "title": "Turn the observation into the next task",
-    "subtitle": "Use what actually happened to improve the next development cycle.",
+    "stateId": "28:Turn the observation into the next task",
+    "subtitle": "Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "W5 · CORE 3 · PLAN AGAIN · YOUR TURN",
     "steps": [
       "Record the observed runtime result or blocker.",
-      "Use the card prompt to propose one next change with an acceptance check.",
+      "Propose one next change, an acceptance check and where the lesson belongs.",
       "Review the proposal yourself; distinguish facts from hypotheses."
     ],
     "cards": [
       {
         "title": "Ground the next task",
-        "body": "Observed result\nOne change\nAcceptance check\nHuman review"
+        "body": "Observed result\nOne next intent\nRegression check\nReviewed rule or instruction"
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Conditional example; use only if you observed this gap",
+      "shot": "assets/workshop-5/assignments/next-task.png",
+      "shotAlt": "Use the actual result for the next task — Conditional example; use only if you observed this gap",
+      "reference": "assets/workshop-5/assignments/index.html#next-task"
     },
     "repo": {
       "url": "https://github.com/RyanLisse/sre-oncall-agent/blob/main/CARD.md",
       "label": "Participant card · exact steps and checks"
     },
-    "notes": "Do not invent a successful run or close an unresolved incident. A failed recovery check, missing observation or review finding can ground the next task. Proposing and reviewing it is required; implementing it is optional. Keep the next task out of this change unless the scope is explicitly revised.",
+    "notes": "Do not invent a successful run or close an unresolved incident. A failed recovery check, missing observation or review finding can ground the next task. Proposing and reviewing it is required; implementing it is optional. Keep the next task out of this change unless the scope is explicitly revised. Scenario: Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change. Start: The runtime outcome or blocker is recorded. Keep an unresolved incident open. Expected: One proposed task has evidence, an observable acceptance check and a human review decision. Stop: Do not invent successful recovery or implement the next task without a new accepted scope. Show the example at assets/workshop-5/assignments/index.html#next-task. The image is an illustrative reference, not participant evidence. Ask whether a confirmed lesson needs a regression test, a code boundary, or a reviewed CLAUDE.md/skill update. Instructions help prevent recurrence but cannot replace a test or access control. Propose the destination now; implementing the next task remains optional. Record one bottleneck or rework point you actually observed, not an invented productivity gain.",
     "teachingPhase": "core",
     "expected": "docs/verify/sdlc.md contains one evidence-based next task and your review decision.",
     "stepsHeading": "Do this now:",
@@ -863,8 +968,9 @@ window.SLIDES = [
   },
   {
     "title": "Continue independently",
+    "stateId": "29:Continue independently",
     "kicker": "W5 · SOLO · YOUR TURN",
-    "subtitle": "Use the same assignment and human decisions when you work alone.",
+    "subtitle": "You continue without a facilitator. Preserve your own code and evidence, and name the limits of self-review.",
     "type": "practice",
     "layout": "exercise",
     "teachingPhase": "core",
@@ -884,17 +990,21 @@ window.SLIDES = [
       }
     ],
     "visual": {
-      "shotLabel": "Assignment reference"
+      "shotLabel": "Example note, not participant progress",
+      "shot": "assets/workshop-5/assignments/solo.png",
+      "shotAlt": "Resume without inventing completion — Example note, not participant progress",
+      "reference": "assets/workshop-5/assignments/index.html#solo"
     },
     "expected": "You know where to resume without skipping required evidence or review.",
     "keyPoints": [
       "You know where to resume without skipping required evidence or review."
     ],
-    "notes": "SOLO.md starts with the recommended route. The legacy offline reference is not the default. Require another reviewer where repository policy says so. core-2 is tool-solved but gate-unfinished, an intermediate aid inside Core 2; core-3 is a solved reference. Neither proves learner-authored work. Daily Brief is a separate follow-up exercise outside this deck.",
+    "notes": "SOLO.md starts with the recommended route. The legacy offline reference is not the default. Require another reviewer where repository policy says so. core-2 is tool-solved but gate-unfinished, an intermediate aid inside Core 2; core-3 is a solved reference. Neither proves learner-authored work. Daily Brief is a separate follow-up exercise outside this deck. Scenario: You continue without a facilitator. Preserve your own code and evidence, and name the limits of self-review. Start: Read SOLO.md and locate the last step you actually verified. Expected: A resume note names the last verified step, next check and any borrowed checkpoint code. Stop: Do not overwrite your work or copy another run's approvals. A required independent reviewer still blocks release. Show the example at assets/workshop-5/assignments/index.html#solo. The image is an illustrative reference, not participant evidence.",
     "stepsHeading": "Do this now:"
   },
   {
     "title": "Show the completed lifecycle",
+    "stateId": "30:Show the completed lifecycle",
     "kicker": "W5 · RECAP · BRIDGE TO W6–W7",
     "type": "recap",
     "layout": "recap",
@@ -915,39 +1025,42 @@ window.SLIDES = [
     "visual": {
       "levelUp": true
     },
-    "notes": "Ask each learner to point to evidence from Plan, Design, Build, Test, Release and Observe. A blocker stays a blocker. A solved checkpoint cannot replace a participant-authored change. End the taught route here. Slides after this close are reference only: select one for a specific follow-up question; do not continue presenting by default.",
+    "tagline": "Next: W6 builds one small part of your own use case. W7 reviews, finishes and presents it.",
+    "notes": "Ask each learner to point to evidence from Plan, Design, Build, Test, Release and Observe. Revisit the delivery skill they chose at the start: what can they now prove, and what still needs work? A blocker stays a blocker. A solved checkpoint cannot replace a participant-authored change. Bridge to W6: take the same lifecycle to one small part of the existing personal or team use case, with n8n or the Agent SDK. W7 finishes and presents that same scope; the shop is not a mandatory project. End the taught route here. Slides after this close are reference only: select one for a specific follow-up question; do not continue presenting by default.",
     "teachingPhase": "core",
     "subtitle": "Show your work: intent, plan, tested diff, human decision and next task."
   },
   {
     "title": "skills",
+    "stateId": "31:skills",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
-    "subtitle": "A method that Claude loads when a step needs it.",
+    "subtitle": "Load a reviewed procedure when needed, not every instruction at startup.",
     "type": "concept",
     "cards": [
       {
-        "title": "Policy",
-        "body": "incident-triage/SKILL.md. The policy owner signs off, as with code."
+        "title": "Load on demand",
+        "body": "A short description selects a relevant skill. Its detailed procedure then enters context."
       },
       {
-        "title": "It says",
-        "body": "How to triage\nWhat to cite\nWhat never to do"
+        "title": "Keep hard limits in code",
+        "body": "Skills guide work. Tool permissions, validation and approval gates enforce boundaries."
       }
     ],
     "visual": {
-      "mdfile": 1,
-      "mdName": "incident-triage/SKILL.md"
+      "bot": "think",
+      "place": "beside"
     },
     "keyPoints": [
       "A skill is a versioned file.",
       "A skill advises. It does not enforce.",
       "Review it before you install it."
     ],
-    "notes": "Reference only. Open .claude/skills/incident-triage/SKILL.md when participants want a reusable method. A skill advises; it does not enforce. Review the file and policy before installation. No extra skill is required to finish the assignment.",
+    "notes": "Reference only. Open .claude/skills/incident-triage/SKILL.md when participants want a reusable method. A skill advises; it does not enforce. Review the file and policy before installation. No extra skill is required to finish the assignment. Progressive disclosure keeps the main loop focused. It is not permission to trust a downloaded skill. Existing SDK calls load user settings only; do not imply they automatically load this repository's project skills. Sources: https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
     "teachingPhase": "optional"
   },
   {
     "title": "External skills: read first",
+    "stateId": "32:External skills: read first",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "Six checks first.",
     "type": "concept",
@@ -973,6 +1086,7 @@ window.SLIDES = [
   },
   {
     "title": "Hooks: allow, ask, deny",
+    "stateId": "33:Hooks: allow, ask, deny",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "type": "concept",
     "layout": "compare",
@@ -1021,38 +1135,41 @@ window.SLIDES = [
     "subtitle": "A hook runs on an agent event. It can block an action; it cannot approve one."
   },
   {
-    "title": "subagents",
+    "title": "One loop first; subagents for a reason",
+    "stateId": "34:subagents",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
-    "subtitle": "A helper session with its own context. Delegate the work, never the acceptance.",
+    "subtitle": "Separate work by context or permissions, not by job title.",
     "type": "concept",
     "cards": [
       {
-        "title": "Investigator",
-        "body": ".claude/agents/oncall-investigator.md. Own context. It only reports."
+        "title": "Stay in one loop",
+        "body": "The repair needs the same evidence and plan. Add a reviewed skill only when needed."
       },
       {
-        "title": "Never",
-        "body": "A subagent does not accept a plan. It approves nothing."
+        "title": "Use a separate context",
+        "body": "Independent checks, parallel research, or measured context overload. Return evidence, not confidence."
       }
     ],
-    "tagline": "Delegate the work. Never the acceptance.",
+    "tagline": "Compare task success, missed evidence, time and cost. Never collapse a safety boundary.",
     "visual": {
-      "diagram": {
-        "id": "subagents",
-        "title": "Separate verifier context",
-        "caption": "A verifier checks the diagnosis in a separate context. A human accepts the result."
-      }
+      "bot": "point",
+      "place": "beside"
     },
     "keyPoints": [
-      "Own context.",
-      "The verifier only reports.",
-      "A human accepts."
+      "Start with the simplest design that works.",
+      "A verifier reports; humans accept.",
+      "The executor keeps its separate permission boundary."
     ],
-    "notes": "Reference only. Explain separate context and a reporting-only result. A verifier is not automatically independent evidence: inspect its inputs and checks. A subagent never accepts a plan or approves a release.",
-    "teachingPhase": "optional"
+    "notes": "Reference only, not a third repair. The article argues against unnecessary planner, router and domain subagents, not against every subagent. Fresh-context verification, independent parallel tasks, conflicting instructions, permission separation or measured context degradation can justify one. Keep raw evidence links in its compact result and compare end-to-end task completion, safety failures, latency and cost on the same cases before adopting an architecture. No migration or speed claim is proved by this workshop. Claude Code and the runtime SRE agent are two different applications, not redundant subagents. Do not fold the executor, deterministic chat grammar or approval checks into a model prompt. The security article uses scoped reviewers for a different purpose; this is compatible with a simple runtime loop. A new context is not a new authenticated identity or a guarantee of unbiased evidence. Sources: https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop and https://claude.com/resources/articles/how-anthropic-secures-its-ai-native-software-development-lifecycle",
+    "teachingPhase": "optional",
+    "source": {
+      "url": "https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop",
+      "label": "Anthropic · When to fold subagents into one loop"
+    }
   },
   {
     "title": "Extend the bench without weakening it",
+    "stateId": "35:Extend the bench without weakening it",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "type": "concept",
     "cards": [
@@ -1080,6 +1197,7 @@ window.SLIDES = [
   },
   {
     "title": "CI: repeat the checks",
+    "stateId": "36:CI: repeat the checks",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "A repeatable path of steps. Here: CI. Both run offline.",
     "type": "concept",
@@ -1118,6 +1236,7 @@ window.SLIDES = [
   },
   {
     "title": "Production: different signals, same boundaries",
+    "stateId": "37:Production: different signals, same boundaries",
     "kicker": "W5 · REFERENCE ONLY · NOT PART OF THE ASSIGNMENT",
     "subtitle": "Today: real model, synthetic local signals. Humans still decide.",
     "type": "concept",

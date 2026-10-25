@@ -82,7 +82,7 @@ function renderRecap(stage, s) {
 }
 function renderTimer(stage, s) {
   // starts at 00:00; minutes can be typed or nudged any time, and the timer keeps running when you change slides
-  stage.append(ALSTimer.mount({ key: ALSTimer.key(current, s.title), defaultSec: 0, minutes: true, bar: true, doneText: 'TIME',
+  stage.append(ALSTimer.mount({ key: ALSTimer.key(current, s.title, s.stateId), defaultSec: 0, minutes: true, bar: true, doneText: 'TIME',
     onDone: () => notify('Time is up — this assignment ends now'), onEmpty: () => notify('Set the minutes first, then press Start.'), signal: slideController.signal }));
 }
 function renderLayout(stage, s) {
@@ -220,7 +220,7 @@ function renderExtras(stage, main, s, v) {
     slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
   }
   if (v.countdown) {                                             // pauses: countdown waits for ▶, keeps time across slides, shows the real return time
-    const box = ALSTimer.mount({ key: ALSTimer.key(current, s.title), defaultSec: v.countdown * 60, back: true, boxCls: 'pause-box', faceCls: 'pause-clock', lateCls: 'late', signal: slideController.signal });
+    const box = ALSTimer.mount({ key: ALSTimer.key(current, s.title, s.stateId), defaultSec: v.countdown * 60, back: true, boxCls: 'pause-box', faceCls: 'pause-clock', lateCls: 'late', signal: slideController.signal });
     if (s.cards?.[0]?.body) box.append(node('p', 'pause-next', s.cards[0].body));
     grid.replaceWith(box);
   }
@@ -351,7 +351,7 @@ function renderExtras(stage, main, s, v) {
   }
   if (v.quietTimer) {                                            // 39: a quiet countdown without "Back at", waits for ▶
     main.classList.add('has-quiet');
-    const box = ALSTimer.mount({ key: ALSTimer.key(current, s.title), defaultSec: v.quietTimer * 60, boxCls: 'pause-box quiet', faceCls: 'pause-clock', lateCls: 'late', lateAt: 30, prefix: node('span', 'quiet-ico', '✍'), signal: slideController.signal });
+    const box = ALSTimer.mount({ key: ALSTimer.key(current, s.title, s.stateId), defaultSec: v.quietTimer * 60, boxCls: 'pause-box quiet', faceCls: 'pause-clock', lateCls: 'late', lateAt: 30, prefix: node('span', 'quiet-ico', '✍'), signal: slideController.signal });
     grid.after(box);
   }
   if (v.badges) {                                               // 40: achievements unlocking one by one
@@ -758,7 +758,7 @@ function renderVisual(stage, body, main, s) {
 const TYPE_LABEL = { practice: 'Assignment', concept: 'Concept', review: 'Review', quiz: 'Quiz', recap: 'Recap', pause: 'Break', context: 'Context' };
 function slideType(s) { return TYPE_LABEL[s.type] ? s.type : (s.layout === 'exercise' ? 'practice' : s.layout === 'recap' ? 'recap' : 'context'); }
 
-const stateKey = () => 'als:' + current + ':' + slides[current].title;
+const stateKey = () => 'als:' + (slides[current].stateId || current + ':' + slides[current].title);
 function loadState() { try { return JSON.parse(sessionStorage.getItem(stateKey()) || '{}') || {}; } catch { return {}; } }
 function saveState(st) { try { sessionStorage.setItem(stateKey(), JSON.stringify(st)); } catch {} }
 
@@ -820,7 +820,7 @@ if (EMBED) document.documentElement.classList.add('embed');
 
 /* ---- hide a slide for now: H toggles; arrows, Home and End skip hidden slides ---- */
 const HIDDEN_KEY = 'als:hidden:' + DECK_ID;
-const hideId = i => i + ':' + slides[i].title;
+const hideId = i => slides[i].stateId || i + ':' + slides[i].title;
 // A slide with `hidden: true` in slides.js starts hidden on every laptop; H (or Chapters) can still show it.
 const SHOWN_KEY = 'als:shown:' + DECK_ID;
 const readSet = k => { try { return new Set(JSON.parse(localStorage.getItem(k) || '[]')); } catch { return new Set(); } };
@@ -854,7 +854,7 @@ function assignmentLabel(s) {
   return { label: (m ? 'Assignment ' + m[1] : 'Hands-on') + (day ? ' · ' + day : ''), title: m ? m[2] : s.title };
 }
 function timerPill(s) {
-  const key = ALSTimer.key(current, s.title); const wrap = node('div', 'tpill-wrap');
+  const key = ALSTimer.key(current, s.title, s.stateId); const wrap = node('div', 'tpill-wrap');
   const pill = node('button', 'tpill'); pill.type = 'button'; pill.setAttribute('aria-expanded', 'false'); pill.setAttribute('aria-label', 'Assignment timer: open the controls');
   const face = node('span', 'tpill-face', '00:00'); pill.append(node('span', 'tpill-ico', '⏱'), face);
   // the controls slide out to the left of the pill, in the same row, so they never cover the slide
@@ -898,7 +898,7 @@ function renderAssignment(stage, s) {
   if (s.expected) { const p = node('p', 'asg-done'); p.append(node('span', 'asg-done-k', 'Done when'), node('span', null, s.expected)); main.append(p); }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));
-  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = ''; f.append(img); side.append(f); }
+  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotAlt || ''; f.append(img); side.append(f); }
   else if (v.cardImages) { const row = node('div', 'asg-thumbs'); v.cardImages.forEach((src, i) => { const f = node('figure', 'thumb'); const img = document.createElement('img'); img.src = src; img.alt = ''; f.append(img, node('figcaption', null, s.cards?.[i]?.title || '')); row.append(f); }); side.append(row); }
   else if (s.cards?.length) {
     const mini = node('div', 'slide-main asg-mini'); const grid = node('div', 'cards one-col'); s.cards.forEach((c, i) => grid.append(renderCard(c, i))); mini.append(grid); side.append(mini);
@@ -906,6 +906,7 @@ function renderAssignment(stage, s) {
     renderVisual(stage, body, mini, { ...s, visual: { ...v, bot: undefined, compact: undefined, cardImages: undefined } });
     return;
   }
+  if (v.reference) { const a = node('a', 'asg-repo', 'Scenario, start state and stop condition'); a.href = v.reference; a.target = '_blank'; a.rel = 'noopener noreferrer'; side.append(a); }
   body.append(side); stage.append(body);
 }
 

@@ -394,11 +394,15 @@ yourself before teaching:
 
 ## Workshop 5: the AI-native SDLC
 
-`workshop5.html` loads `workshop5-slides.js` (31 core slides including breaks, then 7 reference slides) with the same
+`workshop5.html` loads `workshop5-slides.js` (32 core slides including breaks, then 7 reference slides) with the same
 `app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
+
+The optional `stateId` slide field is a permanent storage identity, independent
+of title and order. Existing W5 slides deliberately reuse their exact pre-recap
+`index:title` keys; give every new slide a unique, explicit ID.
 
 The required route teaches a complete AI-assisted software change:
 
@@ -423,6 +427,10 @@ The solo guide covers setup, self-review, pauses, troubleshooting and release
 blockers. The card supplies explanations just before each action. Independent
 human review remains required wherever the learner repository's policy demands it.
 
+The welcome names the AI-SDLC learning goal. One short W4 recap connects
+structured output, tool evidence and human decisions to the full delivery
+cycle. Welcome and recap take at most five minutes. The assignment slide
+also shows the day agenda; the closing reflection bridges to W6–W7.
 The opening explains the AI-SDLC and assignment before Claude Code and setup.
 Detailed concepts appear beside the task that uses them. The console uses the real Agent SDK by default;
 offline replay is an explicit fallback. Human plan review, diff review, Git approval
