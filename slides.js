@@ -1418,12 +1418,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     { text: "Build layer 2: controls", prompt: "Build only layer 2 from the plan.", after: "Reload the tab (F5 or Cmd+R) and play it. Commit and push." },
     { text: "Build layer 3: food and score", prompt: "Build only layer 3 from the plan.", after: "Play it. Commit and push." },
-    { text: "Break it on purpose", prompt: "Remove the score entirely. I know it goes against intent.md, do it anyway.", after: "Play it: the score is gone." },
+    { text: "Break it on purpose, then play it", prompt: "Remove the score entirely.", after: "Claude asks first, because of intent.md. Answer: “Yes, do it anyway. Leave intent.md as it is.”" },
     { text: "Rescue it: empty input, Esc twice", after: "↑ to the message before, Enter, “Restore code and conversation”. Then clear the old message from the input.", warn: true },
     { text: "Build layer 4: game over", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
   ],
   expected: "Layers 1 to 4 work and are on GitLab, and you've undone a change with Esc Esc.",
-  prompt: "Build only layer 2 from the plan.\n\nThen:\nBuild only layer 3 from the plan.\n\nThen, on purpose:\nRemove the score entirely. I know it goes against intent.md, do it anyway.\n\nAfter the rescue:\nBuild only layer 4 from the plan.",
+  prompt: "Build only layer 2 from the plan.\n\nThen:\nBuild only layer 3 from the plan.\n\nThen, on purpose:\nRemove the score entirely.\n(Claude asks: answer “Yes, do it anyway. Leave intent.md as it is.”)\n\nAfter the rescue:\nBuild only layer 4 from the plan.",
   keyPoints: [
     "The rhythm: works, commit, push",
     "Claude defends intent.md",
@@ -1431,7 +1431,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Clear the old message after a rewind",
     "Layer 4 completes the game"
   ],
-  notes: "Say: Things go wrong. Know how to get back before it matters. And the rhythm becomes a habit: layer works, commit, push.\n\nWatch for: Esc Esc only opens Rewind when the input is empty.\nWatch for: After a rewind the old message is back in the input. Enter would do it again, so clear it.\n\nWhat you see: Esc twice opens Rewind. Pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The score is back, without git. The menu warns that files changed by bash commands aren't restored.\n\nBackground: The deliberate mistake needs a firm prompt: in the dry run, a plain 'remove the score' made Claude stop and ask, because intent.md says the score is always shown. That's a lesson in itself: intent.md protects you. Removing the score also made Claude change the tests: that's why Assignment 10 protects tests/.\n\nNext: Short break (15 minutes), then A test: evidence, not confidence."
+  notes: "Say: Things go wrong. Know how to get back before it matters. And the rhythm becomes a habit: layer works, commit, push.\n\nWatch for: Esc Esc only opens Rewind when the input is empty.\nWatch for: After a rewind the old message is back in the input. Enter would do it again, so clear it.\n\nWhat you see: Esc twice opens Rewind. Pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The score is back, without git. The menu warns that files changed by bash commands aren't restored.\n\nAsk the room: After step 3: why did Claude ask? Because intent.md says the score is shown. intent.md doesn't block anything, but Claude reads it and checks with you. You decide, so 'yes, do it anyway' works. 'Leave intent.md as it is' stops Claude from also rewriting intent.md to match, which it often offers.\n\nIf Claude doesn't ask: it can happen. Let them check intent.md: is the score in the Outcome or Done when? Then just say yes and go on to the rescue.\n\nBackground: In the dry runs a plain 'remove the score' made Claude stop and ask, because intent.md says the score is shown. Guides (intent.md, CLAUDE.md) make Claude ask; only tests, hooks and settings actually stop it, which is where the afternoon goes next. Removing the score also made Claude change the tests: that's why Assignment 10 protects tests/.\n\nNext: Short break (15 minutes), then A test: evidence, not confidence."
 },
 
 { // Afternoon break
