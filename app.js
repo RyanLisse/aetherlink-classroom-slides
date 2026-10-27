@@ -575,11 +575,22 @@ function buildOpener(stage, main, s, v) {
     figure.append(img); main.prepend(figure);
   }
   if (v.opener === 'team') main.querySelectorAll('.card').forEach((c, i) => {
+    const d = s.cards?.[i] || {};                                    // optional: photo = 'assets/team/<name>.jpg', role, back (shown when the card flips)
     const name = c.querySelector('h2,h3,strong,.card-title')?.textContent || c.textContent;
-    const photo = s.cards?.[i]?.photo;                               // optional: cards[i].photo = 'assets/team/<name>.jpg'
-    if (photo) { const av = node('span', 'team-avatar team-photo'); const img = document.createElement('img'); img.src = photo; img.alt = ''; av.append(img); c.prepend(av); return; }
-    const ini = name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).slice(0, 2).join('');
-    c.prepend(node('span', 'team-avatar', ini));
+    let av;
+    if (d.photo) { av = node('span', 'team-avatar team-photo'); const img = document.createElement('img'); img.src = d.photo; img.alt = ''; av.append(img); }
+    else av = node('span', 'team-avatar', name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).slice(0, 2).join(''));
+    c.prepend(av);
+    if (d.role) c.append(node('p', 'team-role', d.role));
+    if (!d.back) return;
+    // flip card: click (or Enter) turns it half-way, swaps to the details, turns back
+    const front = node('div', 'flip-front'); front.append(...c.childNodes);
+    const back = node('div', 'flip-back'); back.append(node('h2', null, name), cardBody(d.back));
+    c.append(front, back); c.classList.add('flip-card'); c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', name + ': show details');
+    const flip = e => { e.stopPropagation(); if (c.classList.contains('flipping')) return; c.classList.add('flipping');
+      setTimeout(() => { c.classList.toggle('show-back'); c.classList.remove('flipping'); }, 220); };
+    c.addEventListener('click', flip, { signal: slideController.signal });
+    c.addEventListener('keydown', e => { if (e.key === 'Enter') flip(e); }, { signal: slideController.signal });
   });
   if (v.opener === 'teams') main.querySelectorAll('.card').forEach(c => {   // empty robot per team: names get written on it
     const img = document.createElement('img'); img.src = BOTS.head.src; img.alt = ''; img.className = 'teams-bot';
