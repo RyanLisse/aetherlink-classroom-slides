@@ -180,21 +180,46 @@ window.SLIDES = [
 },
 
 { // Slide 5
-  title: "Working safely with AI",
-  kicker: "WELCOME · AGREEMENTS",
+  title: "Be careful with data",
+  kicker: "WORKING SAFELY WITH AI · 1 OF 3",
   subtitle: "Required for everyone, before we build anything.",
   type: "context",
-  visual: { stepThrough: true,
-    highlight: [{ in: 'card:1', text: 'Never commit or push', tone: 'orange' }],
-    pending: ["Worldline's own AI rules", "To be added: what Worldline allows and restricts internally (tools, data, repositories)."] },
+  visual: { stepThrough: true, bot: 'think', place: 'beside' },
   cards: [
-    { title: "Be careful with data", body: "Everything you put into an AI tool leaves your hands. Only share what you are allowed to share." },
-    { title: "Never commit or push", body: "Course material or Worldline data never goes into a public repository. Check before every commit and push." },
-    { title: "EU AI Act", body: "Organisations that use AI must make sure their people know how to use it responsibly. This course is part of that." }
+    { title: "Why it matters", body: "Everything you put into an AI tool leaves your hands. Only share what you are allowed to share." }
   ],
   tagline: "When in doubt: don't share it, ask first.",
-  keyPoints: ["Required block, never skip","Data you put in AI leaves your hands","Never push course material or Worldline data","EU AI Act: AI literacy is an obligation","Worldline's own rules: see the box"],
-  notes: "This block is required, also when time is short. Three things. One: be careful with what you put into an AI tool — once it's in, it has left your hands. Two: never commit or push course material or Worldline data to a public repository; a single push can make it public without you noticing. Check before every commit and push. Three: the EU AI Act requires organisations that use AI to make sure their people have enough AI literacy (Article 4) — this course is part of how Worldline meets that. Then go through Worldline's own internal rules (the box at the bottom) — confirm these with Worldline before the class day."
+  keyPoints: ["Required block, never skip", "Data you put in AI leaves your hands", "Only share what you're allowed to share"],
+  notes: "This block of three slides is required, also when time is short. One: be careful with what you put into an AI tool. Once it's in, it has left your hands. When in doubt, don't share it and ask first. If Worldline has its own internal AI rules (which tools, which data), mention them here; confirm them with Worldline before the class day."
+},
+
+{ // Slide 5b
+  title: "Never commit or push course material",
+  kicker: "WORKING SAFELY WITH AI · 2 OF 3",
+  subtitle: "One push can make it public without you noticing.",
+  type: "context",
+  visual: { stepThrough: true, bot: 'point', place: 'beside',
+    highlight: [{ in: 'card:0', text: 'public repository', tone: 'orange' }] },
+  cards: [
+    { title: "The rule", body: "Course material or Worldline data never goes into a public repository. Check before every commit and push." }
+  ],
+  tagline: "Check before every commit and push.",
+  keyPoints: ["Never push course material or Worldline data", "A public repository is public for everyone", "Check before every commit and push"],
+  notes: "Two: never commit or push course material or Worldline data to a public repository. A single push can make it public without you noticing. In this course every repository is private, and Claude asks before every commit and push: that's the moment to check."
+},
+
+{ // Slide 5c
+  title: "The EU AI Act",
+  kicker: "WORKING SAFELY WITH AI · 3 OF 3",
+  subtitle: "Why this course exists.",
+  type: "context",
+  visual: { stepThrough: true, bot: 'head', place: 'beside' },
+  cards: [
+    { title: "What it means", body: "Organisations that use AI must make sure their people know how to use it responsibly. This course is part of that." }
+  ],
+  tagline: "Using AI well is a skill you learn.",
+  keyPoints: ["EU AI Act: AI literacy is an obligation", "Article 4", "This course is part of it"],
+  notes: "Three: the EU AI Act requires organisations that use AI to make sure their people have enough AI literacy (Article 4). This course is part of how Worldline meets that."
 },
 
 { // Slide 6
