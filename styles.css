@@ -1298,3 +1298,5 @@ body[data-opener="team"] .flip-front .team-role{margin-top:.55rem}
 .flip-back h2{margin-bottom:.7rem}
 .flip-line{margin-bottom:1.1rem}
 .flip-tags{gap:.55rem .5rem}
+body.big-word #stage>:not(.heading){display:none}
+body.big-word .heading{margin:0;padding-bottom:4vh}
