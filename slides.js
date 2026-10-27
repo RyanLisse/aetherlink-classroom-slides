@@ -267,15 +267,6 @@ window.SLIDES = [
   notes: "Ask a few \u201cHow many of you\u2026\u201d questions on the spot and let people raise their hands (online: a reaction or a yes in the chat). For example: \u2026 have used ChatGPT or Copilot this week? \u2026 write code in your job? \u2026 have used a terminal? \u2026 have built something with AI? It warms up the room and shows you who is a developer and who already builds with AI, which helps later when people get stuck."
 },
 
-{ // Slide 8b
-  title: "Team",
-  kicker: "WELCOME · TEAM",
-  type: "context",
-  visual: { bigWord: true },
-  keyPoints: ["Split the room into teams", "Use what you heard in How many of you…", "Mix developers and non-developers"],
-  notes: "Split the room into teams. Use what you just heard in the How many of you… round: mix people who write code with people who don't, and spread those who already build with AI. Everyone builds on their own laptop; the team is where you ask for help, in the room or in the team chat."
-},
-
 { // Slide 9
   title: "What do you hope to learn?",
   kicker: "WELCOME · EXPECTATIONS",
