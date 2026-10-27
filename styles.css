@@ -1265,3 +1265,9 @@ body[data-opener="teams"] .card h3,body[data-opener="teams"] .card h2{font-size:
 @media(max-width:900px){.cloud-row{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.fly-logo,.card.cloud{animation:none}}
 .step-through .pop-chip.st-shown .pop-chip-in{animation-delay:.05s}   /* stepping: each chip flies out right away, not after its auto-play delay */
+
+/* big-word slides: one short line, huge, in the centre (e.g. "How many of you…", "Team") */
+body.big-word #stage{display:flex;flex-direction:column;justify-content:center;min-height:100%}
+body.big-word .heading{text-align:center}
+body.big-word .heading h1{font-size:clamp(3rem,8vw,8rem);line-height:1.05;margin:.2em auto;max-width:none}
+body.big-word .heading .eyebrow{justify-content:center}

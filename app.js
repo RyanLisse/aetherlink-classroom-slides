@@ -882,6 +882,7 @@ function render() {
   const s = slides[current]; const type = slideType(s);
   document.body.classList.toggle('dark', !!s.dark);
   document.body.classList.toggle('is-assignment', type === 'practice');
+  document.body.classList.toggle('big-word', !!s.visual?.bigWord);
   document.body.dataset.type = type;
   document.body.dataset.opener = s.visual?.anatomy ? 'anatomy' : s.visual?.opener || '';
   document.title = s.title + ' · Aetherlink classroom';
