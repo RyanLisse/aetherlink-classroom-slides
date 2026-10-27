@@ -157,6 +157,8 @@ p.subtitle{font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.5;color:var(--muted)
 .mx-name,.mx-cell{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;line-height:1.35}
 .mx-name{display:flex;flex-direction:column;justify-content:center;border-left:4px solid var(--cyan)}
 .mx-row:nth-child(3) .mx-name{border-left-color:var(--violet)}.mx-row:nth-child(4) .mx-name{border-left-color:var(--amber)}.mx-row:nth-child(5) .mx-name{border-left-color:var(--aether-orange)}
+.mx-row:nth-child(6) .mx-name{border-left-color:var(--ok)}.mx-row:nth-child(7) .mx-name{border-left-color:#ff7eb6}
+.mx-accent{border-color:color-mix(in srgb,var(--aether-orange) 55%,var(--border));background:color-mix(in srgb,var(--aether-orange) 9%,var(--surface));font-weight:700}
 .mx-name strong{font-size:1.08rem}.mx-sub{font-size:.8rem;color:var(--muted);margin-top:.15rem}
 .mx-cell{display:flex;align-items:center;gap:.55rem;font-weight:600}
 .mx-mark{flex:none;display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;font-size:.9rem;font-weight:800;color:#06111e}

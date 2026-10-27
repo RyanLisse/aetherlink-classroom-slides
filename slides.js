@@ -710,14 +710,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "A two-minute check, together, before the demo.",
   type: "context",
-  visual: { cmdCards: [0, 1, 2],
-    highlight: [{ in: 'tagline', text: 'before the assignments', tone: 'orange' }] },
+  visual: { cmdCards: [0, 1, 2] },
   cards: [
     { title: "1 · Is it installed?", body: "claude --version\nYou should see a version number." },
     { title: "2 · Start it", body: "claude\nLog in if it asks." },
     { title: "3 · Look around, then leave", body: "Inside Claude Code, type:\n/help\n/exit\nThumbs up when this works." }
   ],
-  tagline: "Stuck? Say it now, or put it in the chat. We fix it before the assignments.",
   keyPoints: ["Everyone opens a terminal now", "claude --version, then claude", "Log in if asked, /help, /exit", "Count the thumbs up", "Stuck: note who, fix at the break"],
   notes: "Everyone installed Claude Code before the course; this slide only checks that it works, early, so there is time to fix problems at the break. Ask everyone to open a terminal and do the three steps with you: claude --version should print a version number; claude starts it (log in if it asks); /help shows what's available and /exit leaves again. Ask for a thumbs up (online: in the chat). Note who is stuck and fix their setup at the break, or at lunch at the latest: the first assignment is right after lunch and everyone works on their own laptop. Don't troubleshoot for the whole room here."
 },
@@ -754,7 +752,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   tagline: "Claude Code is an agent because it loops, within a task you bound.",
   keyPoints: ["Five steps, keep Decide","Focus on the loop itself","Link to the method comes next"],
-  notes: "Five steps, all of them stay including 'Decide' — this is the confirmed final wording. Keep this slide focused on the loop itself; after this comes the general definition of an agent, and then how this loop relates to the human and AI working method."
+  notes: "Five steps, all of them stay including 'Decide' — this is the confirmed final wording. Keep this slide focused on the loop itself; after this comes the general definition of an agent, and then the working method: where you stand around this loop."
 },
 
 { // Slide 36
@@ -771,51 +769,38 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   keyPoints: ["Keep it abstract and short","Agents act toward a goal","Next: Claude Code is one"],
   notes: "Keep this abstract and short. They've just seen one agent up close (Claude Code and its loop); now zoom out to the general definition. The next slide puts the human next to the agent."
 },
-{ // Slide 39
-  title: "Human and AI working method",
+{ // The working method: one loop, with you in it
+  title: "The working method: you stay in the loop",
   kicker: "DAY 1 · PART 2 · WORKING METHOD",
-  subtitle: "One method, six steps — the red thread for both days.",
+  subtitle: "Six phases. Every assignment today is one of them. Claude does the work; you decide.",
   type: "concept",
-  layout: "steps",
-  visual: { stepKeys: true, humanStep: 4, reach: true },
-  items: [
-    { label: "Explore", caption: "Understand before acting." },
-    { label: "Plan", caption: "Agree the intended change." },
-    { label: "Create", caption: "Make the smallest useful change." },
-    { label: "Test", caption: "Evidence, not confidence." },
-    { label: "Human review", caption: "The human decides." },
-    { label: "Handoff", caption: "Someone else can pick this up." }
+  layout: "matrix",
+  visual: { stepThrough: true, highlight: [{ in: "tagline", text: "you own the goal, the approvals and the final decision", tone: "orange" }] },
+  matrix: {
+    columns: ["Claude does", "You decide", "Leaves behind"],
+    template: "minmax(8.5rem,.9fr) minmax(0,1.3fr) minmax(0,1.5fr) minmax(0,.9fr)",
+    accent: 1,
+    rows: [
+      { title: "Plan", sub: "What do we want?", cells: ["Asks you questions", "Set the goal, and what done means", "intent.md"] },
+      { title: "Design", sub: "How do we build it?", cells: ["Proposes a plan in layers", "Approve the plan, or ask for smaller", "the plan"] },
+      { title: "Build", sub: "Small steps", cells: ["Writes the code, layer by layer", "Approve each change, commit what works", "commits"] },
+      { title: "Test", sub: "Evidence, not confidence", cells: ["Writes and runs the tests", "Check the evidence: fail once, then pass", "tests/"] },
+      { title: "Deploy", sub: "Share it", cells: ["Pushes to GitLab", "Approve the push. Merging is yours.", "GitLab project"] },
+      { title: "Maintain", sub: "Hand it over", cells: ["Writes the handover", "Could someone else carry on?", "PROGRESS.md"] }
+    ]
+  },
+  tagline: "Claude does the work, but you own the goal, the approvals and the final decision.",
+  keyPoints: [
+    "One loop, six phases: every assignment is one",
+    "Read across: Claude does, you decide, it leaves a file",
+    "Human in the loop = the orange column",
+    "The agent loop runs inside each phase",
+    "Tomorrow: the same loop, as a team"
   ],
-  tagline: "The human owns the goal, boundaries and final decision.",
-  keyPoints: ["Name it once, precisely","Explore, Plan, Create, Test, Human review, Handoff","Every later reference points back here","Avoid older 'human in the loop' wording"],
-  notes: "Name it once, precisely: this is the human and AI working method — Explore, Plan, Create, Test, Human review, Handoff. Every later reference to 'the method' or 'human review' points back to this exact slide, so get the wording right here. It's this doc's own label — do not revert to any older 'human in the loop' wording unless asked."
+  notes: "Say: This is how every assignment today works: six phases, from 'what do we want?' to 'hand it over'. Software teams call it the software development life cycle. Claude does most of the work in each phase, but you decide: the goal, every approval, the final word. That is what being the human in the loop means.\n\nWhat you see: Click: one phase per row. Read each row across: what Claude does, what you decide (the orange column), and the file it leaves behind, so the next person, or tomorrow's session, can carry on.\n\nLink back: The agent loop from two slides ago (observe, decide, act, check) is what Claude does inside each phase. This slide puts you around it.\n\nBackground: Every assignment's kicker names its phase (PLAN, DESIGN, BUILD, TEST, DEPLOY, MAINTAIN), so people always know where they are. Day 5 (AI-native SDLC) uses exactly this loop and these file names, so the team project on Days 6 and 7 starts from something familiar. Tomorrow afternoon the same loop runs as a team.\n\nNext: Ground rules: what you share."
 },
 
-{ // Slide 40
-  title: "The loop you'll walk",
-  kicker: "DAY 1 · PART 2 · THE SDLC",
-  subtitle: "All software goes through the same six phases. Today you walk them alone, with Snake. Tomorrow as a team.",
-  type: "concept",
-  layout: "steps",
-  visual: { stepKeys: true },
-  items: [
-    { label: "Plan", caption: "What do we want? intent.md" },
-    { label: "Design", caption: "How do we build it? A plan in layers" },
-    { label: "Build", caption: "Small steps. Commit what works" },
-    { label: "Test", caption: "Evidence that it works" },
-    { label: "Deploy", caption: "On GitLab, for others" },
-    { label: "Maintain", caption: "Hand it over: PROGRESS.md" }
-  ],
-  tagline: "Every phase leaves a file behind, so the next person, or the next session, can carry on.",
-  keyPoints: [
-    "The software development life cycle",
-    "Six phases, one loop",
-    "Each phase leaves a file",
-    "Today solo with Snake, tomorrow as a team",
-    "Day 5 uses the same loop"
-  ],
-  notes: "This is the spine of both days. Every assignment from now on is labelled with its phase. Plan: what do we want (intent.md). Design: how do we build it (a plan in layers, tomorrow a spec). Build: small steps, commit what works. Test: evidence, not confidence. Deploy: on GitLab, where others can see it. Maintain: hand it over in PROGRESS.md, and every bug becomes a test. Day 5 (AI-native SDLC) uses exactly this loop and these file names, so the team project on Days 6 and 7 starts from something familiar. Link back to the working method on the previous slide: the working method is what you do inside one step; the SDLC is the whole journey."
-},
+
 
 { // Slide 41
   title: "Ground rules: what you share",
@@ -2435,15 +2420,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "This afternoon you move from your own task to the team's lifecycle.",
   type: "concept",
   layout: "compare",
-  visual: { art: 'boxes', link: { 0: ['Build', 'Test'], 1: ['Create', 'Test'] } },
+  visual: { art: 'boxes', link: { 0: ['Build', 'Test'], 1: ['Approve each change', 'Check the evidence'] } },
   columns: [
-    { title: "SDLC — the team", items: ["Plan", "Design", "Build", "Test", "Deploy", "Maintain"], foot: "Contains the working method ↓" },
-    { title: "Working method — you", items: ["Explore", "Plan", "Create", "Test", "Human review", "Handoff"], foot: "Contains the agent loop ↓" },
+    { title: "The working method — the team", items: ["Plan", "Design", "Build", "Test", "Deploy", "Maintain"], foot: "Contains your decisions ↓" },
+    { title: "You — in the loop", items: ["Set the goal", "Approve the plan", "Approve each change", "Check the evidence", "Approve the push", "Hand it over"], foot: "Contains the agent loop ↓" },
     { title: "Agent loop — Claude", items: ["Observe", "Decide", "Act", "Check", "Repeat or stop"] }
   ],
-  tagline: "So far you worked in the middle box. This afternoon the whole team works in the outer one.",
-  keyPoints: ["Say the nesting left to right","SDLC = the team","Working method = you (yesterday's six steps)","Agent loop = Claude","This afternoon: the outer box"],
-  notes: "Opens the afternoon. Say the nesting out loud, left to right: the outer box is the team's software lifecycle, the middle box is your own working method from yesterday, the inner box is Claude's agent loop from yesterday. Build+Test of the lifecycle contains Create+Test of the method, which contains the whole agent loop. Only the outer box is new. So far everyone worked alone, in the middle box. This afternoon, in the arcade, the whole team works in the outer box: agreeing, planning and building in layers together."
+  tagline: "Yesterday you walked the loop alone. This afternoon the whole team walks it together.",
+  keyPoints: ["Say the nesting left to right","Outer: the six phases, now as a team","Middle: your decisions, same as yesterday","Inner: Claude's agent loop","This afternoon: the team walks the loop"],
+  notes: "Say: Opens the afternoon. Say the nesting out loud, from the outside in. The outer box is yesterday's working method, the six phases, now walked by the whole team. The middle box is you: the decisions you made in every phase yesterday (set the goal, approve the plan, each change, check the evidence, approve the push, hand it over). The inner box is Claude's agent loop.\n\nWhat you see: Click: the boxes zoom in one at a time, then Build and Test light up together with 'approve each change' and 'check the evidence': that's where Claude's loop runs.\n\nBackground: Nothing here is new: it's the working-method slide from Day 1, seen from three sides. What changes this afternoon is that the team walks the outer loop together in the arcade: agreeing, planning and building in layers."
 },
 
 { // Slide 113

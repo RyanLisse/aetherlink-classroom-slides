@@ -74,10 +74,11 @@ function renderSteps(stage, s) {
 }
 // matrix: one row per option, the same columns for each; a cell ['yes'|'ask'|'no', text] gets a coloured mark
 function renderMatrix(stage, s) { const m = s.matrix || {}; const grid = node('div', 'matrix'); const n = (m.columns || []).length;
-  grid.style.setProperty('--mx-tpl', 'minmax(9rem,1.1fr) ' + 'minmax(0,1fr) '.repeat(Math.max(n - 1, 0)) + 'minmax(0,2.2fr)');  // last column holds the longer text
+  grid.style.setProperty('--mx-tpl', m.template || 'minmax(9rem,1.1fr) ' + 'minmax(0,1fr) '.repeat(Math.max(n - 1, 0)) + 'minmax(0,2.2fr)');  // last column holds the longer text, unless the slide sets its own
   const head = node('div', 'mx-row mx-head'); head.append(node('span')); (m.columns || []).forEach(c => head.append(node('span', 'mx-col', c))); grid.append(head);
   (m.rows || []).forEach((r, i) => { const row = node('div', 'mx-row'); row.style.setProperty('--i', i); const name = node('div', 'mx-name'); name.append(node('strong', null, r.title)); if (r.sub) name.append(node('span', 'mx-sub', r.sub)); row.append(name);
-    (r.cells || []).forEach(c => { if (Array.isArray(c)) { const cell = node('div', 'mx-cell mx-' + c[0]); cell.append(node('span', 'mx-mark', { yes: '✓', ask: '?', no: '✕' }[c[0]] || ''), node('span', null, c[1])); row.append(cell); } else row.append(node('div', 'mx-cell mx-text', c)); });
+    (r.cells || []).forEach((c, j) => { let cell; if (Array.isArray(c)) { cell = node('div', 'mx-cell mx-' + c[0]); cell.append(node('span', 'mx-mark', { yes: '✓', ask: '?', no: '✕' }[c[0]] || ''), node('span', null, c[1])); } else cell = node('div', 'mx-cell mx-text', c);
+      if (m.accent === j) cell.classList.add('mx-accent'); row.append(cell); });   // accent: the column that matters most stands out
     grid.append(row); });
   stage.append(grid); }
 function renderCompare(stage, s) { const grid = node('div', 'compare'); (s.columns || []).forEach((c, i) => { const col = node('section', 'compare-col'); col.style.setProperty('--i', i); col.append(node('h2', null, c.title)); const ul = node('ul'); (c.items || []).forEach(x => ul.append(node('li', null, x))); col.append(ul); if (c.foot) col.append(node('p', 'compare-foot', c.foot)); grid.append(col); }); stage.append(grid); }
