@@ -255,18 +255,23 @@ window.SLIDES = [
 },
 
 { // Slide 8
-  title: "Introduce yourself",
-  kicker: "WELCOME · INTRODUCTIONS",
-  subtitle: "One round, about 30 seconds each.",
+  title: "How many of you…",
+  kicker: "WELCOME · GETTING TO KNOW YOU",
   type: "context",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'wave', place: 'beside' },
-  cards: [
-    { title: "Who are you?", body: "Your name and your team." },
-    { title: "What do you do?", body: "Your role, day to day." },
-    { title: "What have you built with AI?", body: "Nothing yet is a fine answer too." }
-  ],
-  keyPoints: ["One round: who, what, built with AI","About 30 seconds each","Start with yourself as example","Flipchart: roles, teams, who builds","Reuse later for features and teams"],
-  notes: "Go round the room once: who you are, what you do, and what you have already built with AI, about 30 seconds each. Start with yourself to show the length you mean. Write the roles and teams on the flipchart and note who is a developer and who already builds with AI; you will use this later, when the teams pick what to build."
+  dark: true,
+  visual: { bot: 'wave', place: 'beside' },
+  keyPoints: ["Ask questions on the spot", "Hands up", "Start easy, end with AI"],
+  notes: "Ask a few \u201cHow many of you\u2026\u201d questions on the spot and let people raise their hands (online: a reaction or a yes in the chat). For example: \u2026 have used ChatGPT or Copilot this week? \u2026 write code in your job? \u2026 have used a terminal? \u2026 have built something with AI? It warms up the room and shows you who is a developer and who already builds with AI, which helps later when people get stuck."
+},
+
+{ // Slide 8b
+  title: "Team",
+  kicker: "WELCOME · TEAM",
+  type: "context",
+  dark: true,
+  visual: { bot: 'happy', place: 'beside' },
+  keyPoints: ["Introduce the team"],
+  notes: "Team slide."
 },
 
 { // Slide 9
