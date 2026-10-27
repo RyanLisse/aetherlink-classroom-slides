@@ -1293,6 +1293,10 @@ html.embed body{min-height:100vh}
 .asg-step-prompt{display:flex;align-items:center;gap:.7rem;margin-top:.45rem;padding:.45rem .7rem;border-radius:10px;background:#0b0f19;border:1px solid #2a3350;font-weight:400}
 .asg-step-prompt .asg-prompt-text{margin:0;flex:1}
 .asg-step-after{display:block;margin-top:.45rem}
+.asg-parts{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin-top:.45rem}
+.asg-part{display:inline-flex;align-items:baseline;gap:.45rem;padding:.25rem .6rem;border:1px solid var(--line, #233c55);border-radius:8px;background:rgba(255,181,69,.06);font-size:.85em}
+.asg-part-k{font-weight:800;color:var(--amber)}
+.asg-part code{font-weight:700;color:var(--text, #e9f0fc)}
 /* calm: the "what you see" line reads as feedback, not as another instruction; warn marks the one trap */
 .asg-steps.calm .asg-step-after{font-weight:500;font-size:.85em;color:var(--muted)}
 .asg-steps.calm .asg-step-after::before{content:'→ ';color:var(--muted)}

@@ -1522,23 +1522,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 71
   title: "Hooks: a check that runs by itself",
   kicker: "DAY 1 · PART 3 · HOOKS",
-  subtitle: "Permissions decide what Claude may do. A hook decides what always happens.",
+  subtitle: "Your agent loops by itself. A hook is a fixed check at a fixed moment in that loop.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "never", tone: "orange" }] },
-  cards: [
-    { title: "When", body: "At a fixed moment: before a tool runs (PreToolUse), after it ran (PostToolUse), or when Claude stops (Stop)." },
-    { title: "What", body: "A command, for example npm test. It runs outside Claude's head, so it costs almost no tokens." },
-    { title: "Exit code 2", body: "A hook that fails with exit code 2 sends its message back to Claude, and Claude has to deal with it." }
-  ],
+  visual: { figure: "assets/examples/hooks-loop.svg?v=3", figureAlt: "The agent loop circle from slide 39: Observe, Decide, Act, Check, repeat or stop. Three hook moments are pinned on it. Before an action (PreToolUse): can stop the action. After an action (PostToolUse): runs npm test by itself; if it fails, Claude must deal with it. When Claude is done (Stop): one last check. Permissions decide what Claude may do in Act; hooks decide what always happens at a moment.", highlight: [{ in: "tagline", text: "never", tone: "orange" }] },
   tagline: "You forget to run the test. A hook never does.",
   keyPoints: [
-    "Hooks live in settings.json too",
-    "PreToolUse can block, PostToolUse checks after",
-    "Runs outside the context: almost free",
-    "Exit 2: the message goes back to Claude",
-    "/hooks shows them"
+    "The loop makes it an agent, not the hooks",
+    "A hook = a moment + your command",
+    "The moments are built into Claude Code",
+    "Before an action it can block, after it reports back",
+    "Permissions: may it? Hooks: what always happens"
   ],
-  notes: "A hook is a command Claude Code itself runs at a fixed moment; Claude doesn't have to remember it and can't skip it. PreToolUse runs before a tool and can block it (for example: refuse any command that mentions tests/). PostToolUse runs after, which is where 'run the tests after every edit' goes. Stop runs when Claude thinks it's done. Exit code 2 means: this failed, tell Claude. Hooks run outside the context window, so only their output costs tokens. Day 5 builds a guard hook with allow, ask and deny on every tool call: this is the first step."
+  notes: "Say: Remember the agent loop from this morning: observe, decide, act, check, and again, by itself. That loop is what makes Claude Code an agent. A hook is a check you pin onto that loop: at a fixed moment, a command of yours runs. Claude doesn't have to remember it and can't skip it.\n\nWhat you see: The same loop circle as slide 39, with three moments pinned on it. Plain words big, the official name small: you'll see those names in settings.json. Before an action (PreToolUse) the hook can still stop it. After an action (PostToolUse) it already happened, so the hook can only report back: that's where 'run the tests' goes. When Claude says it's done (Stop): one last check.\n\nWatch for: 'Did we make up PreToolUse?' No. The moments and their names are built into Claude Code; you pick one. What runs (npm test) and for which action (Edit, Write, Bash) is yours. A 'tool' is one action of Claude: Read, Edit, Write, Bash.\n\nWatch for: hooks don't make Claude an agent; the loop does. Hooks make it safer to let the loop run longer, because the checks happen every time.\n\nBackground: Exit code 2 means: this failed, tell Claude. The message goes back into the loop, and Claude sees it in its Check step. Hooks run outside the context window, so only their output costs tokens. Other moments exist too, such as SessionStart and UserPromptSubmit. Day 5 builds a guard hook with allow, ask and deny on every tool call: this is the first step.\n\nLook inside: /hooks shows them.\n\nNext: Assignment 11: a hook that runs your test after every change."
 },
 
 { // Slide 72
@@ -1551,7 +1546,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   calm: true,
   steps: [
     { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
-    { text: "Is your hook there? Esc to leave.", prompt: "/hooks" },
+    { text: "Find your hook: moment, which tool, command. Esc to leave.", prompt: "/hooks", parts: [["Moment", "PostToolUse"], ["Which tool", "Edit|Write"], ["Command", "npm test"]] },
     { text: "Break the game on purpose", prompt: "In game.js, let the snake turn straight back into itself. Just do it.", after: "Say yes. The hook runs the test by itself: it fails, and Claude asks what to do." },
     { text: "Undo the break", prompt: "Throw that change away.", after: "game.js is back. The test passes again." },
     "Commit and push. The hook now tests every change."
@@ -1565,7 +1560,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "The hook catches what you'd miss",
     "Throw away or rewind"
   ],
-  notes: "Say: You keep forgetting to run the test after a change. A hook runs it by itself, after every edit.\n\nWatch for: On long commands Claude Code shows a tip to switch to auto mode: don't.\nWatch for: In the dry run Claude picked the built-in update-config skill by itself (a preview of tomorrow's skills) and tested the hook command before saving. Approve those steps: they only run the tests.\n\nWhat you see: A change that breaks a rule: the hook reports the failing tests at once ('The hook caught the conflict straight away'). Claude leaves the tests alone and asks whether to keep or undo the change.\n\nA good result: \"hooks\": { \"PostToolUse\": [ { \"matcher\": \"Edit|Write\", \"hooks\": [ { \"type\": \"command\", \"command\": \"npm test 1>&2 || exit 2\" } ] } ] }. Claude's own version is usually longer (it cds to the project folder and only prints on failure).\n\nBackground: Why not 'make the snake faster' as the break: in the dry run that change kept all tests green, so the hook stayed silent and nothing was learned. Letting the snake turn straight back breaks three tests. The broken change stays until someone undoes it: 'throw that change away' (git checkout of the file). /hooks is read-only: it shows the hook, changes go through settings.json. The game file may be snake.js instead of game.js: Claude finds it either way.\n\nLook inside: /hooks: which event, which matcher?\n\nNext: Example: a complete settings.json."
+  notes: "Say: You keep forgetting to run the test after a change. A hook runs it by itself, after every edit.\n\nWatch for: On long commands Claude Code shows a tip to switch to auto mode: don't.\nWatch for: In the dry run Claude picked the built-in update-config skill by itself (a preview of tomorrow's skills) and tested the hook command before saving. Approve those steps: they only run the tests.\n\nWhat you see: A change that breaks a rule: the hook reports the failing tests at once ('The hook caught the conflict straight away'). Claude leaves the tests alone and asks whether to keep or undo the change.\n\nA good result: \"hooks\": { \"PostToolUse\": [ { \"matcher\": \"Edit|Write\", \"hooks\": [ { \"type\": \"command\", \"command\": \"npm test 1>&2 || exit 2\" } ] } ] }. Claude's own version is usually longer (it cds to the project folder and only prints on failure).\n\nBackground: Why not 'make the snake faster' as the break: in the dry run that change kept all tests green, so the hook stayed silent and nothing was learned. Letting the snake turn straight back makes the reverse tests from Assignment 9 fail. The broken change stays until someone undoes it: 'throw that change away' (git checkout of the file). /hooks is read-only: it shows the hook, changes go through settings.json. The game file may be snake.js instead of game.js: Claude finds it either way.\n\nLook inside: /hooks: which event, which matcher?\n\nThe three parts (step 2): the moment is a built-in name from Claude Code (PostToolUse: after Claude used a tool); which tool narrows it down (matcher Edit|Write: only after a file change); the command is yours (npm test). Students never write this by hand: they say it in plain words and Claude picks the moment.\n\nNext: Example: a complete settings.json."
 },
 
 { // Slide 73

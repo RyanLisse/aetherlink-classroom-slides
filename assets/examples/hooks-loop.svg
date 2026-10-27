@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" font-family="Nunito, Inter, -apple-system, 'Segoe UI', sans-serif">
+  <!-- The agent loop circle from slide 39, with the three hook moments pinned on it. Plain words big, the official event name small. -->
+
+  <!-- the loop, as on slide 39 -->
+  <circle cx="500" cy="220" r="170" fill="none" stroke="#4cc3d6" stroke-width="4" stroke-dasharray="14 11"/>
+  <g font-size="17" font-weight="900" text-anchor="middle" letter-spacing="1" fill="#e9f0fc">
+    <rect x="440" y="28" width="120" height="40" rx="20" fill="#0a1128" stroke="#69e2f2" stroke-width="2.5"/><text x="500" y="54">OBSERVE</text>
+    <rect x="618" y="200" width="104" height="40" rx="20" fill="#0a1128" stroke="#7b5cff" stroke-width="2.5"/><text x="670" y="226">DECIDE</text>
+    <rect x="462" y="370" width="76" height="40" rx="20" fill="#0a1128" stroke="#69e2f2" stroke-width="2.5"/><text x="500" y="396">ACT</text>
+    <rect x="282" y="200" width="96" height="40" rx="20" fill="#0a1128" stroke="#7b5cff" stroke-width="2.5"/><text x="330" y="226">CHECK</text>
+  </g>
+  <rect x="425" y="182" width="150" height="76" rx="10" fill="none" stroke="#233c55" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M482 205a9 9 0 1 1-4 9" fill="none" stroke="#FF7A1A" stroke-width="3" stroke-linecap="round"/><path d="M476 200l2 6 6-2" fill="none" stroke="#FF7A1A" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="506" y="198" width="16" height="16" rx="2" fill="#FF7A1A"/>
+  <text x="500" y="242" text-anchor="middle" font-size="14" font-weight="900" fill="#e9f0fc" letter-spacing="1">REPEAT OR STOP</text>
+
+  <!-- pins: before Act, after Act, at stop -->
+  <g stroke="#ffb545" stroke-width="2.5" stroke-dasharray="5 5">
+    <path d="M728 330H622"/><path d="M272 330H378"/><path d="M728 110L578 196"/>
+  </g>
+  <g fill="#ffb545"><circle cx="620" cy="340" r="9"/><circle cx="380" cy="340" r="9"/><circle cx="575" cy="198" r="7"/></g>
+
+  <!-- the three hook moments -->
+  <g>
+    <rect x="730" y="262" width="250" height="140" rx="12" fill="#1d1608" stroke="#ffb545" stroke-width="2"/>
+    <text x="746" y="292" font-size="19" font-weight="900" fill="#ffb545">Before an action</text>
+    <text x="746" y="314" font-size="14" font-weight="700" fill="#a6b8d2" font-family="ui-monospace, Menlo, monospace">PreToolUse</text>
+    <text x="746" y="342" font-size="15" font-weight="800" fill="#e9f0fc">Can stop the action.</text>
+    <text x="746" y="364" font-size="14" font-weight="700" fill="#a6b8d2">For example: no command</text>
+    <text x="746" y="384" font-size="14" font-weight="700" fill="#a6b8d2">may touch tests/.</text>
+
+    <rect x="20" y="262" width="250" height="140" rx="12" fill="#1d1608" stroke="#ffb545" stroke-width="2"/>
+    <text x="36" y="292" font-size="19" font-weight="900" fill="#ffb545">After an action</text>
+    <text x="36" y="314" font-size="14" font-weight="700" fill="#a6b8d2" font-family="ui-monospace, Menlo, monospace">PostToolUse</text>
+    <text x="36" y="342" font-size="15" font-weight="800" fill="#e9f0fc">Runs npm test by itself.</text>
+    <text x="36" y="364" font-size="14" font-weight="700" fill="#a6b8d2">Fails? Claude must deal</text>
+    <text x="36" y="384" font-size="14" font-weight="700" fill="#a6b8d2">with it (exit code 2).</text>
+
+    <rect x="730" y="40" width="250" height="140" rx="12" fill="#1d1608" stroke="#ffb545" stroke-width="2"/>
+    <text x="746" y="70" font-size="19" font-weight="900" fill="#ffb545">When Claude is done</text>
+    <text x="746" y="92" font-size="14" font-weight="700" fill="#a6b8d2" font-family="ui-monospace, Menlo, monospace">Stop</text>
+    <text x="746" y="120" font-size="15" font-weight="800" fill="#e9f0fc">One last check.</text>
+    <text x="746" y="142" font-size="14" font-weight="700" fill="#a6b8d2">For example: all tests</text>
+    <text x="746" y="162" font-size="14" font-weight="700" fill="#a6b8d2">once more.</text>
+  </g>
+
+  <!-- the split: permissions vs hooks -->
+  <g>
+    <rect x="20" y="40" width="250" height="64" rx="10" fill="#102238"/>
+    <text x="36" y="66" font-size="16" font-weight="900" fill="#69e2f2">Permissions</text>
+    <text x="36" y="89" font-size="14" font-weight="700" fill="#e9f0fc">what Claude may do in Act</text>
+    <rect x="20" y="116" width="250" height="64" rx="10" fill="#102238"/>
+    <text x="36" y="142" font-size="16" font-weight="900" fill="#ffb545">Hooks</text>
+    <text x="36" y="165" font-size="14" font-weight="700" fill="#e9f0fc">what always happens, every time</text>
+  </g>
+</svg>
