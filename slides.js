@@ -929,20 +929,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 1 · PART 2 · YOUR GAME",
   subtitle: "One small game that you build all day, step by step, with Claude Code.",
   type: "context",
-  visual: { stagger: "pop", stepThrough: true, bot: "happy", place: "aside", highlight: [{ in: "tagline", text: "Aether Arcade", tone: "orange" }] },
+  visual: { stagger: "pop", stepThrough: true, bot: "happy", place: "aside" },
   cards: [
     { title: "The game", body: "Snake in your browser. Eat, grow, and don't hit yourself." },
     { title: "Why Snake", body: "Everyone knows the rules. So you can judge Claude's work, not learn a new game." },
     { title: "Yours", body: "Your nickname and your avatar on the start screen. Your own colours and ideas." },
     { title: "Step by step", body: "Plan, build, test, put it online. Every step teaches one Claude Code skill." }
   ],
-  tagline: "Tomorrow your Snake joins everyone else's in the Aether Arcade.",
   keyPoints: [
     "Snake: one game for the whole day",
     "Everyone knows the rules",
     "Make it yours: nickname, avatar",
-    "Each step teaches one skill",
-    "Tomorrow: the Aether Arcade"
+    "Each step teaches one skill"
   ],
   notes: "Before anyone starts Claude Code, tell them what they'll build. Snake is small, everyone knows how it should behave, and it runs in the browser without installing anything. That matters: when Claude gets something wrong, people see it straight away, because they know the rules. The game is only the vehicle; what they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill. Make it personal: a nickname and an avatar on the start screen, their own colours. Tomorrow all games come together in the Aether Arcade, one website with everyone's games, so keep it working. Next slide: before Claude writes any code, we first write down what we want."
 },
