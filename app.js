@@ -749,7 +749,7 @@ function renderInstructions(s) {
     const list = node('ol', 'do-list'); const done = Array.isArray(st.done) ? st.done.slice(0, steps.length) : [];
     steps.forEach((step, i) => {
       const li = node('li', 'do-item'); const label = node('label'); const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!done[i];
-      label.append(cb, node('span', 'do-text', step)); li.classList.toggle('done', cb.checked);
+      label.append(cb, node('span', 'do-text', step.text ?? step)); li.classList.toggle('done', cb.checked);
       cb.addEventListener('change', () => { done[i] = cb.checked; li.classList.toggle('done', cb.checked); saveState({ ...loadState(), done }); paint(); if (done.filter(Boolean).length === steps.length) notify('All steps done · check the checkpoint'); });
       li.append(label); list.append(li);
     });
@@ -866,21 +866,26 @@ function renderAssignment(stage, s) {
   stage.append(head);
   const body = node('div', 'asg-body'); const main = node('div', 'asg-main');
   const st = loadState(); const done = Array.isArray(st.done) ? st.done.slice() : [];
-  const ol = node('ol', 'asg-steps' + ((s.steps || []).length > 4 ? ' many' : ''));
+  const ol = node('ol', 'asg-steps' + ((s.steps || []).length > 4 ? ' many' : '') + ((s.steps || []).some(t => t.prompt) ? ' with-prompts' : ''));
+  const copyBtn = text => { const b = node('button', 'asg-prompt-copy', 'Copy'); b.type = 'button';
+    b.addEventListener('click', async e => { e.stopPropagation(); try { await navigator.clipboard.writeText(text); notify('Prompt copied'); b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = 'Copy'; }, 1800); } catch { notify('Select and copy the prompt manually.'); } });
+    return b; };
+  const inline = (s.steps || []).some(t => t.prompt);              // steps with their own prompt: no prompt box at the bottom
   (s.steps || []).forEach((t, i) => {
     const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
-    li.append(node('span', 'asg-num', String(i + 1)), node('span', 'asg-text', t));
+    const text = node('span', 'asg-text', t.text ?? t);
+    if (t.prompt) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
+    if (t.after) text.append(node('span', 'asg-step-after', t.after));  // what you see once Claude is done
+    li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };
     li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
     ol.append(li);
   });
   main.append(ol);
   if (s.expected) { const p = node('p', 'asg-done'); p.append(node('span', 'asg-done-k', 'Done when'), node('span', null, s.expected)); main.append(p); }
-  if (s.prompt && window.ASG_PROMPT) {
-    const box = node('div', 'asg-prompt'), top = node('div', 'asg-prompt-top'), copy = node('button', 'asg-prompt-copy', 'Copy');
-    copy.type = 'button';
-    copy.addEventListener('click', async e => { e.stopPropagation(); try { await navigator.clipboard.writeText(s.prompt); notify('Prompt copied'); copy.textContent = 'Copied ✓'; setTimeout(() => { copy.textContent = 'Copy'; }, 1800); } catch { notify('Select and copy the prompt manually.'); } });
-    top.append(node('span', 'asg-done-k', 'Prompt'), copy); box.append(top, node('pre', 'asg-prompt-text', s.prompt)); main.append(box);
+  if (s.prompt && window.ASG_PROMPT && !inline) {
+    const box = node('div', 'asg-prompt'), top = node('div', 'asg-prompt-top');
+    top.append(node('span', 'asg-done-k', 'Prompt'), copyBtn(s.prompt)); box.append(top, node('pre', 'asg-prompt-text', s.prompt)); main.append(box);
   }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));

@@ -1361,9 +1361,8 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 1 · ASSIGNMENT 7 · DEPLOY",
   subtitle: "Your save points are only on your laptop. Put them somewhere safe.",
   steps: [
-    "Add the GitLab MCP server: your trainer gives you the command.",
-    "Start claude, type /mcp and log in to GitLab.",
-    "Paste the prompt. Approve the push.",
+    "Connect to the GitLab MCP server.",
+    "Paste the prompt: Claude creates your private project and pushes. Approve the push.",
     "Open the project on GitLab in your browser."
   ],
   expected: "Your game and its commits are in a private project on GitLab.",
@@ -1371,7 +1370,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   keyPoints: [
     "Deploy phase: put it where others can see it",
     "MCP: Claude talks to GitLab",
-    "/mcp: connect and log in",
+    "Connect the GitLab MCP server",
     "The push asks: your rule",
     "No GitLab access: stay local"
   ],
@@ -1406,11 +1405,11 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 1 · ASSIGNMENT 8 · BUILD",
   subtitle: "Same rhythm for every layer. One thing goes wrong on purpose.",
   steps: [
-    "Layer 2 (controls), then layer 3 (food and score). Play each. Commit and push each.",
-    "On purpose: “Remove the score entirely. I know it goes against intent.md.”",
-    "Empty input, Esc twice. ↑ to the message before, Enter, “Restore code and conversation”.",
-    "Clear the old message from the input. Score back? Good.",
-    "Layer 4 (game over). Play it. Commit and push."
+    { text: "Layer 2 (controls). Paste, press Enter:", prompt: "Build only layer 2 from the plan.", after: "Play it. Commit and push." },
+    { text: "Layer 3 (food and score). Paste, press Enter:", prompt: "Build only layer 3 from the plan.", after: "Play it. Commit and push." },
+    { text: "Break it on purpose. Paste, press Enter:", after: "Play it: the score is gone.", prompt: "Remove the score entirely. I know it goes against intent.md, do it anyway." },
+    "Empty input, Esc twice. ↑ to the message before, Enter, “Restore code and conversation”. Clear the old message from the input. Score back? Good.",
+    { text: "Layer 4 (game over). Paste, press Enter:", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
   ],
   expected: "All four layers work and are on GitLab, and you've undone a change with Esc Esc.",
   prompt: "Build only layer 2 from the plan.\n\nThen:\nBuild only layer 3 from the plan.\n\nThen, on purpose:\nRemove the score entirely. I know it goes against intent.md, do it anyway.\n\nAfter the rescue:\nBuild only layer 4 from the plan.",
@@ -1451,24 +1450,25 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   layout: "exercise",
   title: "Assignment 9: A test that finds a bug",
   kicker: "DAY 1 · ASSIGNMENT 9 · TEST",
-  subtitle: "The classic Snake bug: turning back into yourself.",
+  subtitle: "A test plays your game for you and checks one rule: the snake can't turn back into itself.",
   steps: [
-    "Paste the prompt. Claude shows a plan first: “Go ahead.”",
-    "Run it yourself: !npm test. Red or green?",
-    "Red? Ask Claude to fix the game, not the test.",
-    "Green? “Remove the reverse check on purpose, then run npm test.” Red? Esc Esc, “Restore code”.",
-    "Green again? Commit and push."
+    { text: "Ask Claude for a test. Paste, press Enter:", after: "Claude shows a plan. It doesn't touch the game yet. Say “Go ahead.”", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes." },
+    "Run it yourself: !npm test. Passed or failed?",
+    { text: "Failed? The test found a bug. Paste, press Enter:", after: "Claude fixes the game, never the test.", prompt: "The test fails. Fix the game so the snake can't turn back into itself. Don't change the test." },
+    { text: "Passed? Prove the test works by breaking the game. Paste, press Enter:", after: "The test fails now. Good: it catches the bug.", prompt: "Remove the code that stops the snake from turning back into itself. Then run npm test." },
+    "Undo the break: empty input, Esc twice. ↑ to the message before, Enter, “Restore code”. !npm test passes again.",
+    "Commit and push. From now on, this test guards the rule."
   ],
-  expected: "A test that checks the reversing rule, and it passes.",
+  expected: "A test you've seen fail, and that passes now.",
   prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.",
   keyPoints: [
     "Test phase",
     "Test a hidden rule, not the obvious",
     "Reversing: the classic Snake bug",
-    "Red: a bug found. Green: break it on purpose",
+    "Fails: a bug found. Passes: break it on purpose",
     "Fix the game, not the test"
   ],
-  notes: "Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose (remove the reverse check) and see the test turn red, which proves the test works. A test you've never seen fail is not evidence. Let Claude fix the game, never the test. npm test needs Node and a package.json; Claude makes the package.json. No Node on someone's laptop: a tests/test.html page that shows green or red in the browser works too (the hook in Assignment 11 does need Node; they watch that one on the projector).\n\nWhy now: You can't play every key combination after every change.\nWhat you see: Red: the bug was there, and Claude fixes the game. Green: Claude already guarded it, so break it on purpose and watch the test catch it.\nNo Node?: Ask for tests/test.html instead, and open it in your browser: green or red."
+  notes: "The line for the room: a test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.'\n\nWhy this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose (remove the reverse check) and see the test turn red, which proves the test works. A test you've never seen fail is not evidence. Let Claude fix the game, never the test. npm test needs Node and a package.json; Claude makes the package.json. No Node on someone's laptop: a tests/test.html page that shows green or red in the browser works too (the hook in Assignment 11 does need Node; they watch that one on the projector).\n\nWhy now: You can't play every key combination after every change.\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\nNo Node?: Ask for tests/test.html instead, and open it in your browser: green or red."
 },
 
 { // Slide 70
@@ -1476,15 +1476,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   layout: "exercise",
   title: "Assignment 10: The rules grow",
   kicker: "DAY 1 · ASSIGNMENT 10 · TEST",
-  subtitle: "Now there's a test. Protect it.",
+  subtitle: "Two house rules: running the tests is always fine. Changing a test needs your yes.",
   steps: [
-    "Paste the prompt. Read it before you approve.",
-    "Test it: “Run the tests.” No question asked?",
-    "Shift+Tab to “accept edits on”.",
-    "“Change the test so it expects the snake to turn straight back.” It asks: choose 3, No.",
-    "Shift+Tab back to manual. Commit the settings."
+    { text: "Give Claude the two rules. Paste, press Enter:", after: "Claude shows its settings file. Read it, then say yes.", prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the rules that are already there. Show me the file before you save it." },
+    { text: "Try the first rule: tests may run. Paste, press Enter:", after: "Claude runs the tests without asking you.", prompt: "Run the tests." },
+    "Press Shift+Tab until you see “accept edits on”. From now on, Claude changes files without asking.",
+    { text: "Try the second rule: a test needs your yes. Paste, press Enter:", after: "Claude asks before it changes the test. Choose No.", prompt: "Change the test so it expects the snake to turn straight back." },
+    "Shift+Tab to “manual mode on”. Commit and push."
   ],
-  expected: "npm test runs without asking, and a change to tests/ always needs your yes.",
+  expected: "Claude runs the tests without asking, and a change to a test always needs your yes.",
   prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the rules that are already there. Show me the file before you save it.",
   keyPoints: [
     "Rules grow with the project",
@@ -1523,13 +1523,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   layout: "exercise",
   title: "Assignment 11: Let a hook guard your game",
   kicker: "DAY 1 · ASSIGNMENT 11 · TEST",
-  subtitle: "After every change, the test runs by itself.",
+  subtitle: "A hook runs the test by itself after every change. You can't forget it any more.",
   steps: [
-    "Paste the prompt. Claude may use a built-in skill and test the hook first: Yes.",
-    "Type /hooks. Leave with Esc.",
-    "Break it on purpose: “In game.js, let the snake turn straight back into itself. Just do it.”",
-    "Watch the hook catch it. What does Claude suggest?",
-    "“Throw that change away.” Then commit the hook."
+    { text: "Give Claude the hook. Paste, press Enter:", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
+    "Check that it's there: type /hooks and find your hook. Leave with Esc.",
+    { text: "Break the game on purpose. Paste, press Enter:", prompt: "In game.js, let the snake turn straight back into itself. Just do it.", after: "Say yes to the change. The hook runs the test by itself: it fails, and Claude asks what to do." },
+    { text: "Undo the break. Paste, press Enter:", prompt: "Throw that change away.", after: "game.js is back. The test passes again." },
+    "Commit and push. From now on, the hook tests every change."
   ],
   expected: "After every file change the test runs by itself, and a break gets caught.",
   prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.",
@@ -1570,12 +1570,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   layout: "exercise",
   title: "Assignment 12: Look at your context window",
   kicker: "DAY 1 · ASSIGNMENT 12 · BUILD",
-  subtitle: "The session is getting long. What's in Claude's head right now?",
+  subtitle: "With every message, Claude rereads the whole conversation. Look inside, and make room.",
   steps: [
-    "Type /context. What takes the most room?",
-    "Type /compact keep the test rules and the plan",
-    "/context again: what changed?",
-    "Starting a new task? That's when you use /clear."
+    { text: "See what's in Claude's head. Type, press Enter:", prompt: "/context", after: "What fills the window, in tokens. What takes the most room?" },
+    { text: "Shrink the conversation, keep what matters. Paste, press Enter:", prompt: "/compact keep the test rules and the plan", after: "Claude sums up the conversation and carries on from the summary." },
+    { text: "Look again. Type, press Enter:", prompt: "/context", after: "The conversation takes much less room now. CLAUDE.md is still there." },
+    "Not now, but for a new task: /clear. It empties the conversation. CLAUDE.md and your files stay."
   ],
   expected: "You know what fills the window, and when to use /compact or /clear.",
   prompt: "/context\n/compact keep the test rules and the plan\n/context",
