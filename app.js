@@ -876,7 +876,12 @@ function renderAssignment(stage, s) {
   });
   main.append(ol);
   if (s.expected) { const p = node('p', 'asg-done'); p.append(node('span', 'asg-done-k', 'Done when'), node('span', null, s.expected)); main.append(p); }
-  if (s.prompt && window.ASG_PROMPT) { const box = node('div', 'asg-prompt'); box.append(node('span', 'asg-done-k', 'Prompt'), node('pre', 'asg-prompt-text', s.prompt)); main.append(box); }
+  if (s.prompt && window.ASG_PROMPT) {
+    const box = node('div', 'asg-prompt'), top = node('div', 'asg-prompt-top'), copy = node('button', 'asg-prompt-copy', 'Copy');
+    copy.type = 'button';
+    copy.addEventListener('click', async e => { e.stopPropagation(); try { await navigator.clipboard.writeText(s.prompt); notify('Prompt copied'); copy.textContent = 'Copied ✓'; setTimeout(() => { copy.textContent = 'Copy'; }, 1800); } catch { notify('Select and copy the prompt manually.'); } });
+    top.append(node('span', 'asg-done-k', 'Prompt'), copy); box.append(top, node('pre', 'asg-prompt-text', s.prompt)); main.append(box);
+  }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));
   if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = ''; f.append(img); side.append(f); }

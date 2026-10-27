@@ -1165,6 +1165,9 @@ html.embed body{min-height:100vh}
 .asg-done{margin:1.1rem 0 0;display:flex;gap:.8rem;align-items:baseline;flex-wrap:wrap;font-size:clamp(1rem,1.55vw,1.3rem);font-weight:700;color:var(--text)}
 .asg-done-k{font-size:.72em;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--aether-orange)}
 .asg-prompt{margin:1rem 0 0;padding:.75rem 1rem .85rem;border-radius:14px;background:#0b0f19;border:1px solid #2a3350}
+.asg-prompt-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.asg-prompt-copy{padding:.3rem .8rem;border-radius:8px;border:1px solid #2a3350;background:var(--surface);color:var(--text);font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}
+.asg-prompt-copy:hover{border-color:var(--aether-orange)}
 .asg-prompt-text{margin:.45rem 0 0;max-height:min(36vh,340px);overflow:auto;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.82rem,1.15vw,1rem);line-height:1.5;color:#d7dcef}
 .asg-side{background:var(--surface2);border:1px dashed var(--border);border-radius:16px;padding:1rem 1rem 1.1rem}
 .asg-side-k{margin:0 0 .7rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900}
