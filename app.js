@@ -918,7 +918,7 @@ function renderAssignment(stage, s) {
     const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
     const text = node('span', 'asg-text', t.text ?? t);
     const cmds = t.cmds || (t.prompt && isCmd(t.prompt) ? [t.prompt] : null);  // short commands: chips on the same line, 'then' between two
-    (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd'); c.append(node('code', null, p), copyBtn(p)); text.append(c); });
+    (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd' + (p[0] !== '!' ? ' no-copy' : '')); c.append(node('code', null, p)); if (p[0] === '!') c.append(copyBtn(p)); text.append(c); });  // only !commands get Copy; /exit, claude: just type them
     if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
     if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
