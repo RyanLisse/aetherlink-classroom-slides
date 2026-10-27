@@ -10,6 +10,16 @@
    with a localStorage fallback) — see presenter.js for the receiving end.
    ========================================================================== */
 const slides = window.SLIDES || [];
+// Count per day, not over the whole file: "61 / 82" on Day 1, "5 / 50" on Day 2. Parked slides count apart.
+function dayCount(i, deck) {
+  const starts = (window.CLASSROOM_SESSIONS || []).filter(s => s.deck === deck).map(s => s.start - 1);
+  const parked = slides.findIndex(s => /^Parked ·/.test(s.title)); const end = parked < 0 ? slides.length : parked;
+  if (i >= end) return [i - end + 1, slides.length - end + ' parked'];
+  const from = starts.filter(s => s <= i).at(-1) ?? 0; const to = starts.find(s => s > i) ?? end;
+  return [i - from + 1, to - from];
+}
+const DECK = location.pathname.split('/').pop() || 'index.html';
+const countText = (i, pad) => { const [n, of] = dayCount(i, DECK); return (pad ? String(n).padStart(2, '0') : String(n)) + ' / ' + of; };
 const $ = id => document.getElementById(id);
 let current = 0, lastFocus = null, toastTimer;
 const panel = $('panel');
@@ -907,7 +917,7 @@ function renderAssignment(stage, s) {
   eyebrow.append(node('span', 'type-chip', label));
   if (s.mode) eyebrow.append(node('span', 'mode-chip mode-' + s.mode, ({ manual: '⏵ Start in manual mode', plan: '⏸ Start in plan mode', librechat: 'In LibreChat, not Claude Code' })[s.mode] || s.mode));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
-  const right = node('div', 'asg-top-right'); right.append(timerPill(s), node('p', 'slide-count', String(current + 1) + ' / ' + slides.length));
+  const right = node('div', 'asg-top-right'); right.append(timerPill(s), node('p', 'slide-count', countText(current)));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
   if (s.subtitle) head.append(node('p', 'subtitle', s.subtitle));
   if (s.repo?.url) {
@@ -975,7 +985,7 @@ function render() {
   const head = node('section', 'heading'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
   const parts = (s.kicker || '').split('·').map(x => x.trim());
   eyebrow.append(node('span', 'type-chip', TYPE_LABEL[type]), node('span', 'kicker-text', parts.join(' · ')));
-  top.append(eyebrow, node('p', 'slide-count', String(current + 1) + ' / ' + slides.length));
+  top.append(eyebrow, node('p', 'slide-count', countText(current)));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
   head.append(top, node('h1', null, s.title), node('p', 'subtitle', s.subtitle));
   if (s.source?.url) {
@@ -1001,7 +1011,7 @@ function render() {
   finishRender(s);
 }
 function finishRender(s) {
-  $('count').textContent = String(current + 1).padStart(2, '0') + ' / ' + slides.length;
+  $('count').textContent = countText(current, true);
   renderProgress();
   $('prev').disabled = current === 0; $('next').disabled = current === slides.length - 1;
   announce('Slide ' + (current + 1) + ' of ' + slides.length + ': ' + s.title);

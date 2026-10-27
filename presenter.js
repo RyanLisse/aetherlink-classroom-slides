@@ -9,6 +9,14 @@
    same timer as the deck (timers.js, shared through localStorage).
    ========================================================================== */
 const slides = window.SLIDES || [];
+// Count per day, not over the whole file: "61 / 82" on Day 1, "5 / 50" on Day 2. Parked slides count apart.
+function dayCount(i, deck) {
+  const starts = (window.CLASSROOM_SESSIONS || []).filter(s => s.deck === deck).map(s => s.start - 1);
+  const parked = slides.findIndex(s => /^Parked ·/.test(s.title)); const end = parked < 0 ? slides.length : parked;
+  if (i >= end) return [i - end + 1, slides.length - end + ' parked'];
+  const from = starts.filter(s => s <= i).at(-1) ?? 0; const to = starts.find(s => s > i) ?? end;
+  return [i - from + 1, to - from];
+}
 const DECK_ID = window.DECK_PAGE || 'index.html';
 const PRESENTER_CHANNEL = 'aetherlink-classroom-slides:' + DECK_ID;
 const PRESENTER_KEY = 'als:presenter:index:' + DECK_ID;
@@ -81,7 +89,7 @@ function renderSlide(index) {
   $('ptype-wrap').dataset.ptype = type;
   $('p-type-label').textContent = TYPE_LABEL[type] || 'Context';
   $('p-kicker-text').textContent = s.kicker || '';
-  $('p-progress').textContent = (current + 1) + ' / ' + slides.length;
+  $('p-progress').textContent = dayCount(current, 'index.html').join(' / ');
   $('p-hidden').hidden = !isHidden(current);
   $('p-title').textContent = s.title;
   const keys = s.keyPoints || [];
