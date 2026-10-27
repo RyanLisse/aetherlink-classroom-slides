@@ -512,6 +512,7 @@ p.subtitle{font-weight:700}
 @keyframes jolt{0%{transform:none}25%{transform:translateY(-14px) rotate(-6deg)}55%{transform:translateY(0) rotate(4deg)}100%{transform:none}}
 /* ---- slide 13: self-ticking checklist ---- */
 .cards.one-col{grid-template-columns:minmax(0,640px)}
+.cards.one-col:has(.checklist li.labelled){grid-template-columns:minmax(0,820px)}
 .checklist{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.55rem}
 .checklist li{display:flex;align-items:center;gap:.8rem;font-weight:700;font-size:clamp(1.05rem,1.5vw,1.3rem);color:color-mix(in srgb,var(--text) 55%,transparent);animation:check-text .3s both;animation-delay:calc(1.2s + var(--i)*.5s)}
 .check-box{flex:none;width:26px;height:26px;border-radius:8px;border:2.5px solid var(--border);position:relative;animation:check-box .35s both;animation-delay:calc(1.2s + var(--i)*.5s)}
@@ -659,6 +660,15 @@ p.subtitle{font-weight:700}
 /* ---- slide 28: editable extra line ---- */
 .check-add{color:var(--text)!important;animation:none!important;opacity:1}
 .check-plus{flex:none;width:26px;height:26px;border-radius:8px;border:2.5px dashed var(--aether-orange);display:grid;place-items:center;color:var(--aether-orange);font-weight:900}
+/* checkLabels: one colour per prompt line, the same on the template and both examples */
+.checklist li.labelled{display:grid;grid-template-columns:26px 6.6em minmax(0,1fr);gap:.7rem}
+.check-label{justify-self:start;padding:.15rem .6rem;border-radius:8px;font-size:.78em;font-weight:900;letter-spacing:.02em;--lab:var(--cyan);color:var(--lab);background:color-mix(in srgb,var(--lab) 15%,transparent);border:1px solid color-mix(in srgb,var(--lab) 45%,transparent)}
+.check-label[data-label="context"]{--lab:var(--violet)}
+.check-label[data-label="constraints"]{--lab:var(--aether-orange)}
+.check-label[data-label="done-when"]{--lab:var(--ok)}
+.check-label[data-label="output"]{--lab:var(--amber)}
+.check-label[data-label="check"]{--lab:#ff7eb6}
+.checklist li.labelled .check-text{font-weight:600}
 .check-add .check-text{min-width:12ch;outline:none;border-bottom:2px dashed var(--border);padding:0 .2rem}
 .check-add .check-text:empty::before{content:attr(data-placeholder);color:var(--muted,#6b7597)}
 /* ---- slide 29: stacking library ---- */

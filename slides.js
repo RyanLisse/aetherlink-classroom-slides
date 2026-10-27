@@ -334,11 +334,11 @@ window.SLIDES = [
   type: "context",
   visual: { bot: 'wave', place: 'clouds' },
   cards: [
-    { title: "AI fundamentals", body: "What AI is, how a model reads your input, and how to write a prompt that works." },
-    { title: "Get acquainted with Claude Code", body: "A tour, your own profile, and your first game: play around and try things." }
+    { title: "AI fundamentals", body: "What AI is, how a model reads your input and what that costs, and how you steer it with a good prompt." },
+    { title: "Get to know Claude Code", body: "A tour this morning. After lunch you build your own Snake game with it, step by step." }
   ],
-  keyPoints: ["Two things today","Fundamentals first","Then Claude Code: tour, profile, first game","Just to play around"],
-  notes: "Keep it simple: today is about two things. First the AI fundamentals. Then getting to know Claude Code: a tour, your own profile, and your first game — just to play around and try things."
+  keyPoints: ["Two things today", "Morning: AI fundamentals, then a tour of Claude Code", "After lunch: your own Snake, step by step", "Each step teaches one Claude Code skill"],
+  notes: "Say: Today is about two things. This morning the AI fundamentals, and then a tour of Claude Code. After lunch everyone builds their own Snake game with Claude Code, step by step: plan, build, test, put it online. Every step teaches one Claude Code skill.\n\nNext: AI in three questions, the map of the fundamentals."
 },
 
 
@@ -346,9 +346,30 @@ window.SLIDES = [
 /* DAY 1 — Part 1: AI foundations                                         */
 /* ---------------------------------------------------------------------- */
 
+{ // Overview of the AI fundamentals
+  title: "AI in three questions",
+  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  subtitle: "This morning's map: each answer builds on the one before.",
+  type: "concept",
+  visual: { stagger: "pop", stepThrough: true, bot: "point", place: "left" },
+  cards: [
+    { title: "1 · What is AI?", body: "From the first idea to the language model you use today." },
+    { title: "2 · How does a model read?", body: "Tokens, the context window, which model, and what it costs." },
+    { title: "3 · How do you steer it?", body: "Where it goes wrong, and a prompt that prevents it." }
+  ],
+  keyPoints: [
+    "Show the map before the details",
+    "1 What is AI: history, rings, the language model",
+    "2 How it reads: tokens, window, model, cost, then a quiz",
+    "3 How you steer it: failure modes, then the prompt",
+    "Ends with a knowledge check"
+  ],
+  notes: "Say: Before the details, the map. The next hour answers three questions, in this order, and each answer needs the one before it.\n\nWhat you see: Click: one question at a time. 1 What is AI? From the history to the language model you use today. 2 How does a model read? It reads in tokens; the context window, the model you pick and the cost are all counted in them. That chapter ends with a quiz. 3 How do you steer it? First where AI goes wrong, then the prompt that prevents it. That ends with a knowledge check.\n\nTip: Come back to this slide in your words at each new chapter: 'question 2: how does it read?'. The kicker on every slide shows which question you're in."
+},
+
 { // Slide 14
   title: "Where AI comes from",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Seventy years in six moments.",
   type: "concept",
   layout: "steps",
@@ -367,7 +388,7 @@ window.SLIDES = [
 
 { // Slide 15
   title: "The AI landscape",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Each one sits inside the one before it, like animal → dog → Rottweiler.",
   type: "concept",
   layout: "steps",
@@ -385,7 +406,7 @@ window.SLIDES = [
 
 { // Slide 16
   title: "You have been training AI for years",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Machine learning: learning from examples instead of rules.",
   type: "concept",
   visual: { hero: 0, popOut: 1, bot: 'head', place: 'popout', stepThrough: true,
@@ -400,7 +421,7 @@ window.SLIDES = [
 
 { // Slide 17
   title: "From layers to creating something new",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Deep learning and generative AI.",
   type: "concept",
   visual: { hero: 0, popOut: 1, bot: 'head', place: 'popout', stepThrough: true,
@@ -415,7 +436,7 @@ window.SLIDES = [
 
 { // Slide 18
   title: "Large language models",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Sounding right is not the same as being right.",
   type: "concept",
   visual: { keyLine: 1, stamp: 'VERIFY', bot: 'head', place: 'key',
@@ -425,12 +446,20 @@ window.SLIDES = [
     { title: "Key line", body: "A plausible response still requires verification." }
   ],
   keyPoints: ["Trained on huge amounts of text","It predicts the next piece of text","Likely is not the same as true","'My cat' vs 'my Maine Coon'","Training stops at a cutoff date","Same question, different answer","Say the key line slowly"],
-  notes: "This closes the circle: the large language model you use today was trained on huge amounts of text and learned the patterns in it. It writes by predicting the most likely next piece of text, one piece at a time. It doesn't look facts up: it produces what sounds likely, and likely is not the same as true. Use the cat: if you say 'my cat', it has to guess — a farm cat, a lynx, a Maine Coon? Say 'my Maine Coon' and it knows. That's why what you give it matters. Two consequences to name: training stops at a cutoff date, so it doesn't know what happened after that; and it picks from likely options, so the same question can give a different answer each time. Tomorrow nobody's Snake looks the same, and that's normal. Then say the key line slowly and let it land: it's the single most important sentence of Part 1, and everything about verification and human review later depends on it. Those 'pieces of text' have a name: tokens, the next slide."
+  notes: "This closes the circle: the large language model you use today was trained on huge amounts of text and learned the patterns in it. It writes by predicting the most likely next piece of text, one piece at a time. It doesn't look facts up: it produces what sounds likely, and likely is not the same as true. Use the cat: if you say 'my cat', it has to guess — a farm cat, a lynx, a Maine Coon? Say 'my Maine Coon' and it knows. That's why what you give it matters. Two consequences to name: training stops at a cutoff date, so it doesn't know what happened after that; and it picks from likely options, so the same question can give a different answer each time. This afternoon nobody's Snake will look the same, and that's normal. Then say the key line slowly and let it land: it's the single most important sentence of Part 1, and everything about verification and human review later depends on it. Those 'pieces of text' have a name: tokens. That opens question 2, how a model reads."
 },
+
+
+
+
+
+
+
+
 
 { // Slide 19
   title: "Tokens",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
+  kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "The currency of your AI.",
   type: "concept",
   visual: { stepThrough: true, flowText: ["your text", "tokens", "numbers", "the model"],
@@ -440,48 +469,12 @@ window.SLIDES = [
     { title: "Why it matters", body: "Context limits, usage limits and costs are all counted in tokens. The clearer your prompt, the fewer you waste." }
   ],
   tagline: "A token is not the same as a word.",
-  keyPoints: ["Tokens = the currency","Flipchart: split one sentence into tokens","Everything is counted in tokens","Efficient = right model + clear prompt","About 3.5 characters per token"],
-  notes: "Tokens are the currency of the model: everything it reads and writes is counted in tokens. Flipchart: split one sentence into tokens — common words stay whole, rare words get split. The model sees tokens as numbers. Context limits, usage limits and costs are all counted in tokens; on average a token is about 3.5 characters of English text. Using tokens efficiently comes down to two things you'll see next: the right model, and a clear prompt that keeps the context window clean. Expect the room to get very focused here — that's fine, but don't let tokens take over: they are one lever, not the whole story."
+  keyPoints: ["Question 2 starts here: how a model reads", "Tokens = the currency", "Flipchart: split one sentence into tokens", "Window, model and cost: all counted in tokens", "About 3.5 characters per token"],
+  notes: "Tokens are the currency of the model: everything it reads and writes is counted in tokens. Flipchart: split one sentence into tokens — common words stay whole, rare words get split. The model sees tokens as numbers. Context limits, usage limits and costs are all counted in tokens; on average a token is about 3.5 characters of English text. The rest of this chapter follows the tokens: the context window is measured in them, a bigger model costs more per token, and through the API every token has a price. Question 3 then shows how a clear prompt keeps them in check. Expect the room to get very focused here — that's fine, but don't let tokens take over: they are one lever, not the whole story."
 },
-
-{ // Slide 20
-  title: "AI failure modes",
-  kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
-  subtitle: "How does AI get it wrong?",
-  type: "concept",
-  visual: { reveal: 'click', bot: 'head', place: 'slot', faces: ['verward', 'dubbel', 'eigenwijs', 'slaperig', 'betrapt'] },
-  cards: [
-    { title: "Missing context", body: "The model did not have what it needed to answer well." },
-    { title: "Ambiguous instructions", body: "The request could reasonably mean more than one thing." },
-    { title: "Unsupported assumptions", body: "The model filled a gap with a guess instead of asking." },
-    { title: "Outdated information", body: "The model only knows what was in its training data, up to a cutoff date." },
-    { title: "Fabricated details", body: "A confident-sounding answer that isn't actually true." }
-  ],
-  tagline: "Treat AI output as a proposal until you verify it.",
-  keyPoints: ["Ask for a personal example first","AI being confidently wrong","Then reveal the list","Link back: it predicts what sounds likely"],
-  notes: "Ask the room for a personal example of AI being confidently wrong before you reveal the list — recognition lands harder than the definition alone. Then link each one back to how the model works: it predicts what sounds likely from what it was given and what it was trained on. Missing context, an ambiguous request or a cutoff date all lead to a likely-sounding answer that isn't right."
-},
-
-{ // Slide 21
-  title: "Input, context and output",
-  kicker: "DAY 1 · PART 1 · STEERING AI",
-  subtitle: "Now you know what AI is. How do you steer it?",
-  type: "concept",
-  visual: { art: 'flow', bot: 'head', place: 'slot',
-    highlight: [{ in: 'tagline', text: 'you check what comes out', tone: 'orange' }] },
-  cards: [
-    { title: "Input", body: "Your instruction, question or goal. Specific, clear and short." },
-    { title: "Context", body: "Relevant information available to the model." },
-    { title: "Output", body: "The response or proposed action." }
-  ],
-  tagline: "Garbage in, garbage out. Good in, good out — and you check what comes out.",
-  keyPoints: ["Garbage in, garbage out","You sit in the middle: human in the loop","Developer, manager, analyst: same flow","Input: specific, clear, short"],
-  notes: "Draw the arrow on the whiteboard: input + context → model → output. Garbage in, garbage out — but good in is also good out. And you sit in the middle: you give the input and you check the output. That is human in the loop, from the very first prompt. It works the same for a developer, a manager or a technical analyst. Keep your input specific, clear and short."
-},
-
 { // Slide 22
   title: "Context windows",
-  kicker: "DAY 1 · PART 1 · STEERING AI",
+  kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "The model can only consider so much at once.",
   type: "concept",
   visual: { art: 'window',
@@ -493,13 +486,12 @@ window.SLIDES = [
   ],
   tagline: "Relevant, current and permitted context works best.",
   keyPoints: ["Context = small Lego blocks","Each block helps build the next","Irrelevant blocks pull attention away","Repeat: relevant, current, permitted"],
-  notes: "Think of context as small Lego blocks: each block helps the model get to the next one. Flipchart: draw one box as the window and keep adding blocks as the conversation grows: prompt, answer, a pasted file, more answers, until it is full. Irrelevant blocks take space and pull attention away from what matters. A one-and-a-half page love letter is fine if the model gets it at once; if it starts to wander, cut it into smaller blocks. The tagline is the takeaway to repeat: relevant, current, permitted."
+  notes: "Still counting in tokens: the window is measured in them. Think of context as small Lego blocks: each block helps the model get to the next one. Flipchart: draw one box as the window and keep adding blocks as the conversation grows: prompt, answer, a pasted file, more answers, until it is full. Irrelevant blocks take space and pull attention away from what matters. A one-and-a-half page love letter is fine if the model gets it at once; if it starts to wander, cut it into smaller blocks. The tagline is the takeaway to repeat: relevant, current, permitted."
 },
-
 { // Slide 23
   title: "Model choice",
-  kicker: "DAY 1 · PART 1 · STEERING AI",
-  subtitle: "What comes out also depends on the model. Pick the one that fits the task.",
+  kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
+  subtitle: "Bigger models do more, and cost more per token. Pick the one that fits the task.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true,
     highlight: [{ in: 'card:3', text: 'not allowed', tone: 'orange' }] },
@@ -511,12 +503,11 @@ window.SLIDES = [
   ],
   tagline: "A simple question doesn't need the biggest model.",
   keyPoints: ["Haiku: fast, cheap, simple","Sonnet: everyday all-rounder","Opus 5.5: complex, highest quality","Fable 5.1: not allowed here","Bigger is not always better"],
-  notes: "Different models offer different balances of capability, speed and cost. Haiku is fast and cheap: perfect for a simple question. Sonnet is the all-rounder for most work. Opus 5.5 is the most capable, for complex work. Fable 5.1 exists, but is not allowed at Worldline. A simple question doesn't need the biggest model: that's the bridge to tokens and cost."
+  notes: "Different models offer different balances of capability, speed and cost. Haiku is fast and cheap: perfect for a simple question. Sonnet is the all-rounder for most work. Opus 5.5 is the most capable, for complex work. Fable 5.1 exists, but is not allowed at Worldline. A simple question doesn't need the biggest model: that's the bridge to the next slide: what it costs."
 },
-
 { // Slide 24
-  title: "How you reach the model",
-  kicker: "DAY 1 · PART 1 · STEERING AI",
+  title: "How you access a model",
+  kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "Desktop or API: same models, different costs.",
   type: "concept",
   visual: { stepThrough: true,
@@ -528,11 +519,10 @@ window.SLIDES = [
   ],
   tagline: "Through the API, every token has a price.",
   keyPoints: ["Same models, different ways in","Desktop: subscription","API: pay per token","Here: a secure route, through the API","So tokens matter"],
-  notes: "Same models, different ways in, and different costs. On your desktop you have a subscription: a fixed price per month with usage limits. Through the API you pay for what you use, counted in tokens. In your setup Claude Code runs through your company's own secure route, because you work with sensitive systems, and it is used through the API. So every token you just learned about has a price: the right model and a clear prompt save money."
+  notes: "Same models, different ways in, and different costs. On your desktop you have a subscription: a fixed price per month with usage limits. Through the API you pay for what you use, counted in tokens. In your setup Claude Code runs through your company's own secure route, because you work with sensitive systems, and it is used through the API. So every token you just learned about has a price: the right model and a clear prompt save money.\n\nNext: a quiz on questions 1 and 2, then question 3: how you steer it."
 },
-
 { // Slide 25
-  title: "Quiz: steering AI",
+  title: "Quiz: what is AI, and how does it read?",
   kicker: "DAY 1 · QUIZ",
   subtitle: "Which statement is true?",
   type: "quiz",
@@ -544,14 +534,46 @@ window.SLIDES = [
     { title: "D", body: "Through the API, tokens are free." }
   ],
   check: "Answer: C",
-  keyPoints: ["Vote first","Answer: C","A: the rings","B: distraction","D: every token has a price"],
-  notes: "Vote first, then press → to strike the wrong answers. The answer is C: pick the model that fits the task. A goes back to the rings: the language model sits inside machine learning. B goes back to the distraction card: irrelevant context takes space and attention. D goes back to the slide before tokens: through the API, every token has a price."
+  keyPoints: ["Closes questions 1 and 2", "Vote first", "Answer: C", "A: the rings", "B: distraction", "D: every token has a price"],
+  notes: "Vote first, then press → to strike the wrong answers. The answer is C: pick the model that fits the task. A goes back to the rings: the language model sits inside machine learning. B goes back to the distraction card: irrelevant context takes space and attention. D goes back to the previous slide: through the API, every token has a price."
 },
-
+{ // Slide 20
+  title: "AI failure modes",
+  kicker: "DAY 1 · PART 1 · 3 STEERING AI",
+  subtitle: "How does AI get it wrong?",
+  type: "concept",
+  visual: { reveal: 'click', bot: 'head', place: 'slot', faces: ['verward', 'dubbel', 'eigenwijs', 'slaperig', 'betrapt'] },
+  cards: [
+    { title: "Missing context", body: "The model did not have what it needed to answer well." },
+    { title: "Ambiguous instructions", body: "The request could reasonably mean more than one thing." },
+    { title: "Unsupported assumptions", body: "The model filled a gap with a guess instead of asking." },
+    { title: "Outdated information", body: "The model only knows what was in its training data, up to a cutoff date." },
+    { title: "Fabricated details", body: "A confident-sounding answer that isn't actually true." }
+  ],
+  tagline: "Treat AI output as a proposal until you verify it.",
+  keyPoints: ["Question 3 starts here: how you steer it", "Ask for a personal example first", "Then reveal the list", "Link back: it predicts what sounds likely", "Each failure has a fix in the prompt"],
+  notes: "Ask the room for a personal example of AI being confidently wrong before you reveal the list — recognition lands harder than the definition alone. Then link each one back to how the model works: it predicts what sounds likely from what it was given and what it was trained on. Missing context, an ambiguous request or a cutoff date all lead to a likely-sounding answer that isn't right.\n\nNext: Each failure has its own line in a good prompt, which the next slides build up. Missing or outdated context: the Context line. An ambiguous request: the Goal. Unsupported assumptions: Constraints and Done when. Fabricated details: the Check."
+},
+{ // Slide 21
+  title: "Input, context and output",
+  kicker: "DAY 1 · PART 1 · 3 STEERING AI",
+  subtitle: "Steering starts with what you give it.",
+  type: "concept",
+  visual: { art: 'flow', bot: 'head', place: 'slot',
+    highlight: [{ in: 'tagline', text: 'you check what comes out', tone: 'orange' }] },
+  cards: [
+    { title: "Input", body: "Your instruction, question or goal. Specific, clear and short." },
+    { title: "Context", body: "Relevant information available to the model." },
+    { title: "Output", body: "The response or proposed action." }
+  ],
+  tagline: "Garbage in, garbage out. Good in, good out — and you check what comes out.",
+  keyPoints: ["Garbage in, garbage out","You sit in the middle: human in the loop","Developer, manager, analyst: same flow","Input: specific, clear, short"],
+  notes: "Bridge from the failure modes: most of them start with what goes in. Draw the arrow on the whiteboard: input + context → model → output. Garbage in, garbage out — but good in is also good out. And you sit in the middle: you give the input and you check the output. That is human in the loop, from the very first prompt. It works the same for a developer, a manager or a technical analyst. Keep your input specific, clear and short."
+},
 { // Slide 26
   title: "Prompt",
-  kicker: "DAY 1 · PART 1 · PROMPTING",
-  subtitle: "What you give the model to work with.",
+  kicker: "DAY 1 · PART 1 · 3 STEERING AI",
+  subtitle: "Your input plus the context you send along: together, that's your prompt.",
   type: "concept",
   visual: { keyLine: 1, stamp: 'CLEAR', bot: 'head', place: 'key',
     highlight: [{ in: 'card:1', text: 'what your prompt tells it', tone: 'mark' }] },
@@ -559,18 +581,17 @@ window.SLIDES = [
     { title: "Definition", body: "A prompt is everything you send the model: your instruction or question, plus any background, examples or documents you add." },
     { title: "Key line", body: "At the start, the model knows only what your prompt tells it." }
   ],
-  keyPoints: ["Prompt = everything you send","At the start: only what you tell it","Later: conversation and memory add to it","Bridge to the prompt ingredients"],
-  notes: "Keep it short: a prompt is more than the question you type, it is everything you send along with it. The key line says 'at the start' on purpose: in a fresh session the model knows only what your prompt tells it; later the conversation and memory add to that, which you'll see in Claude Code. Because it starts from your prompt, a good prompt has a fixed set of ingredients."
+  keyPoints: ["Input + context = your prompt", "Prompt = everything you send", "At the start: only what you tell it", "Later: conversation and memory add to it", "Bridge to the prompt ingredients"],
+  notes: "Connect the words from the previous slide: your input and the context you send along are, together, your prompt. Keep it short: a prompt is more than the question you type, it is everything you send along with it. The key line says 'at the start' on purpose: in a fresh session the model knows only what your prompt tells it; later the conversation and memory add to that, which you'll see in Claude Code. Because it starts from your prompt, a good prompt has a fixed set of ingredients."
 },
-
 { // Slide 27
   title: "A reliable prompt",
-  kicker: "DAY 1 · PART 1 · PROMPTING",
+  kicker: "DAY 1 · PART 1 · 3 STEERING AI",
   subtitle: "A template you can copy into Claude Code or ChatGPT today.",
   type: "concept",
-  visual: { checklist: 0, bot: 'point', place: 'left' },
+  visual: { checklist: 0, checkLabels: true, bot: 'point', place: 'left' },
   cards: [
-    { title: "Template", body: "Goal: the result you want\nContext: what the model needs to know\nConstraints: what it must not do or change\nDone when: how you recognise a good result\nOutput: the format you want back\nCheck: how you will verify it (you stay in the loop)" }
+    { title: "Template", body: "Goal: the result you want\nContext: what the model needs to know\nConstraints: what it must not do\nDone when: what good looks like\nOutput: the format you want back\nCheck: how you verify it" }
   ],
   tagline: "Press “Example prompt” to copy the template.",
   prompt: `Goal: [the result I want]
@@ -579,37 +600,19 @@ Constraints: [what you must not do or change]
 Done when: [how I will recognise a good result]
 Output: [the format I want back, e.g. a short plan, a table or 5 bullets]
 Check: [how I will verify your answer; mark anything you cannot confirm as OPEN]`,
-  keyPoints: ["Walk through the six lines once","Constraints + Check = human in the loop","Open Example prompt, show it copies","Two examples follow"],
-  notes: "This is the pattern behind every assignment prompt in the deck. Walk through the six lines once. Constraints and Check are where you stay in the loop: you say what it may not touch, and you decide how you verify the result. Then open “Example prompt” (top right) and show that it copies. The next two slides show it filled in: one from daily life, one from developer work."
+  keyPoints: ["Walk through the six lines once", "Each line fixes a failure mode", "Constraints + Check = human in the loop", "Open Example prompt, show it copies", "One example follows: a bug fix"],
+  notes: "This is the pattern behind every assignment prompt in the deck. Walk through the six lines once, and point back at the failure modes: Context prevents missing context, Goal prevents an ambiguous request, Constraints and Done when stop assumptions, and Check catches what's made up. Constraints and Check are where you stay in the loop: you say what it may not touch, and you decide how you verify the result. Then open “Example prompt” (top right) and show that it copies. The next slide shows it filled in, for a bug fix. Each line keeps its colour there, so you can point: 'the orange line, Constraints: read only'."
 },
 
-{ // Slide 28
-  title: "Example: a birthday cake",
-  kicker: "DAY 1 · PART 1 · PROMPTING",
-  subtitle: "The same six lines, outside work.",
-  type: "concept",
-  visual: { checklist: 0, bot: 'think', place: 'left' },
-  cards: [
-    { title: "Prompt", body: "Goal: a recipe for a birthday cake for a 5-year-old\nContext: six people, one of them allergic to hazelnut\nConstraints: no nuts at all, nothing that needs special equipment\nDone when: grandma can bake it on her own\nOutput: ingredients and steps in simple language\nCheck: list every ingredient so I can check it for nuts" }
-  ],
-  prompt: `Goal: a recipe for a birthday cake for a 5-year-old.
-Context: six people, one of them is allergic to hazelnut.
-Constraints: no nuts at all, and nothing that needs special equipment.
-Done when: grandma can bake it on her own.
-Output: a list of ingredients and numbered steps, in simple language.
-Check: list every ingredient separately so I can check it for nuts.`,
-  keyPoints: ["Everyone gets this one","Constraint: no hazelnut","Done when: grandma can do it","Check: you verify the ingredients"],
-  notes: "Everyone gets this one. Read it line by line. The constraint is the allergy; the 'done when' is grandma baking it on her own, so the language has to be simple. The check is you: the model lists every ingredient, and you verify there are no nuts. Without that line, you'd have to trust it."
-},
 
 { // Slide 29
   title: "Example: a bug fix",
-  kicker: "DAY 1 · PART 1 · PROMPTING",
-  subtitle: "The same six lines, at work.",
+  kicker: "DAY 1 · PART 1 · 3 STEERING AI",
+  subtitle: "The same six lines, filled in.",
   type: "concept",
-  visual: { checklist: 0, bot: 'point', place: 'left' },
+  visual: { checklist: 0, checkLabels: true, bot: 'point', place: 'left' },
   cards: [
-    { title: "Prompt", body: "Goal: find the cause of the failing login test\nContext: the error appears since yesterday's merge\nConstraints: read only, change nothing\nDone when: you can point to the line that causes it\nOutput: the cause, the file and line, and a proposed fix\nCheck: show the evidence; mark anything unsure as OPEN" }
+    { title: "Prompt", body: "Goal: find why the login test fails\nContext: it fails since yesterday's merge\nConstraints: read only, change nothing\nDone when: you can point to the line\nOutput: cause, file, line and a fix\nCheck: show proof, mark doubts as OPEN" }
   ],
   prompt: `Goal: find the cause of the failing login test.
 Context: the error appears since yesterday's merge. Scan the repository.
@@ -618,7 +621,7 @@ Done when: you can point to the line that causes the error.
 Output: the cause, the file and line number, and a proposed fix (not applied).
 Check: show the evidence for your answer; mark anything you are not sure of as OPEN.`,
   keyPoints: ["Same lines, developer task","Constraint: read only","You decide on the fix","Evidence + OPEN = human in the loop"],
-  notes: "Same six lines, now a developer task. The constraint is the important one: read only, change nothing — Claude scans the repo and shows the error, you decide what to do with it. The check asks for evidence and marks what it isn't sure of as OPEN. That's human in the loop in one line."
+  notes: "Same six lines, now filled in for a developer task. Read it line by line, using the colours. The slide shows short versions; Example prompt (top right) has the full prompt to copy. The constraint is the important one: read only, change nothing — Claude scans the repo and shows the error, you decide what to do with it. The check asks for evidence and marks what it isn't sure of as OPEN. That's human in the loop in one line."
 },
 
 { // Slide 30

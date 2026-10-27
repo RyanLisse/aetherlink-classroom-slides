@@ -544,7 +544,11 @@ function renderExtras(stage, main, s, v) {
   }
   if (v.checklist != null && cards[v.checklist]) {             // 13: the checklist ticks itself off
     grid.classList.add('one-col'); const c = cards[v.checklist]; const ul = node('ul', 'checklist');
-    String(s.cards[v.checklist].body).split('\n').forEach((t, i) => { const li = node('li'); li.style.setProperty('--i', i); li.append(node('span', 'check-box'), node('span', 'check-text', t)); ul.append(li); });
+    String(s.cards[v.checklist].body).split('\n').forEach((t, i) => { const li = node('li'); li.style.setProperty('--i', i);
+      const m = v.checkLabels && /^([^:]{2,14}):\s*(.*)$/.exec(t);   // checkLabels: "Goal: …" becomes a coloured label next to its text, the same colour on every slide
+      if (m) { const lab = node('span', 'check-label', m[1]); lab.dataset.label = m[1].toLowerCase().replace(/\s+/g, '-'); li.classList.add('labelled'); li.append(node('span', 'check-box'), lab, node('span', 'check-text', m[2])); }
+      else li.append(node('span', 'check-box'), node('span', 'check-text', t));
+      ul.append(li); });
     if (v.addLine) { const li = node('li', 'check-add'); li.style.setProperty('--i', ul.children.length); const t = node('span', 'check-text', ''); t.contentEditable = 'true'; t.dataset.placeholder = v.addLine; t.addEventListener('keydown', e => e.stopPropagation()); li.append(node('span', 'check-plus', '+'), t); ul.append(li); }
     c.querySelector('p')?.replaceWith(ul);
   }
