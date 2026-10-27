@@ -947,7 +947,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   steps: [
     "Shift+Tab to plan mode.",
-    "Paste the Example prompt. Answer Claude's questions.",
+    "Paste the prompt. Answer Claude's questions.",
     "Approve with option 2: “Yes, manually approve edits”. Then Yes to create intent.md.",
     "Open intent.md in VS Code and read it."
   ],
@@ -1067,7 +1067,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   steps: [
     "Type /clear, then ask: “Which rules must you follow in this project?”",
-    "Paste the Example prompt. Read the file, then say yes to create it.",
+    "Paste the prompt. Read the file, then say yes to create it.",
     "/clear again, and ask the same question.",
     "Type /memory: which files are loaded? Leave with Esc."
   ],
@@ -1119,7 +1119,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "Open .claude/settings.json. Which line blocked the force push?" }
   ],
   steps: [
-    "Paste the Example prompt. Read the file, then say yes to create it.",
+    "Paste the prompt. Read the file, then say yes to create it.",
     "Restart: /exit, then claude. Bottom line not manual? Shift+Tab.",
     "Type /permissions. Use ←→ to see the Ask and Deny tabs. Esc.",
     "Test it: “Run exactly this command: git push --force origin main”.",
@@ -1215,7 +1215,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   steps: [
     "Plan mode (Shift+Tab).",
-    "Paste the Example prompt.",
+    "Paste the prompt.",
     "Read the plan. Too big? Choose 3 and ask for smaller layers.",
     "Happy? Press Esc. Then Shift+Tab back to manual mode."
   ],
@@ -1359,7 +1359,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     "Add the GitLab MCP server: your trainer gives you the command.",
     "Start claude, type /mcp and log in to GitLab.",
-    "Paste the Example prompt. Approve the push.",
+    "Paste the prompt. Approve the push.",
     "Open the project on GitLab in your browser."
   ],
   expected: "Your game and its commits are in a private project on GitLab.",
@@ -1461,7 +1461,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "No Node?", body: "Ask for tests/test.html instead, and open it in your browser: green or red." }
   ],
   steps: [
-    "Paste the Example prompt. Claude shows a plan first: “Go ahead.”",
+    "Paste the prompt. Claude shows a plan first: “Go ahead.”",
     "Run it yourself: !npm test. Red or green?",
     "Red? Ask Claude to fix the game, not the test.",
     "Green? “Remove the reverse check on purpose, then run npm test.” Red? Esc Esc, “Restore code”.",
@@ -1492,7 +1492,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "/permissions: where do your new rules show up?" }
   ],
   steps: [
-    "Paste the Example prompt. Read it before you approve.",
+    "Paste the prompt. Read it before you approve.",
     "Test it: “Run the tests.” No question asked?",
     "Shift+Tab to “accept edits on”.",
     "“Change the test so it expects the snake to turn straight back.” It asks: choose 3, No.",
@@ -1545,7 +1545,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "/hooks: is your hook there? Which event, which matcher?" }
   ],
   steps: [
-    "Paste the Example prompt. Claude may use a built-in skill and test the hook first: Yes.",
+    "Paste the prompt. Claude may use a built-in skill and test the hook first: Yes.",
     "Type /hooks. Leave with Esc.",
     "Break it on purpose: “In game.js, let the snake turn straight back into itself. Just do it.”",
     "Watch the hook catch it. What does Claude suggest?",
@@ -1657,7 +1657,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   stepsHeading: "Do this:",
   steps: [
     "Put the picture in your game repo, in assets/.",
-    "Plan mode. Paste the Example prompt with your file name and nickname.",
+    "Plan mode. Paste the prompt with your file name and nickname.",
     "Play and check: avatar, nickname, and the fallback without a picture.",
     "Commit and push."
   ],
@@ -1684,7 +1684,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "What you see", body: "PROGRESS.md: what's built, how it was tested, what's still open." },
     { title: "Extra", body: "Tomorrow: claude --continue takes you back into today's last conversation." }
   ],
-  steps: ["Paste the Example prompt.", "Read PROGRESS.md: could a colleague carry on from this?", "Commit and push."],
+  steps: ["Paste the prompt.", "Read PROGRESS.md: could a colleague carry on from this?", "Commit and push."],
   expected: "PROGRESS.md is on GitLab, and someone else could carry on.",
   prompt: "Write PROGRESS.md: what we built today, how we tested it, which rules and hooks are active, and what is still open. No personal data.",
   keyPoints: [
@@ -1867,7 +1867,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     "!git pull: get the latest from GitLab.",
     "claude --continue",
-    "Plan mode. Paste the Example prompt.",
+    "Plan mode. Paste the prompt.",
     "Read the new intent.md before you approve."
   ],
   expected: "intent.md has a new outcome: levels that get harder.",
@@ -1938,7 +1938,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "Read spec.md. Could someone else make a level from it?" }
   ],
   steps: [
-    "Paste the Example prompt.",
+    "Paste the prompt.",
     "Read spec.md before you approve. Say yes to the new tests.",
     "!npm test: the new tests are red. Good.",
     "Commit and push."
@@ -1993,7 +1993,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "!git branch: which branch are you on? Is main untouched?" }
   ],
   steps: [
-    "Paste the Example prompt.",
+    "Paste the prompt.",
     "Build until !npm test is green.",
     "Play level 2.",
     "Commit and push the branch."
@@ -2017,7 +2017,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "Read it as if a colleague wrote it. Would you approve it?" }
   ],
   steps: [
-    "Paste the Example prompt.",
+    "Paste the prompt.",
     "Open the merge request on GitLab.",
     "Read the changes. Happy? Merge it yourself.",
     "Back in the terminal: !git checkout main && git pull"
@@ -2157,7 +2157,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "Open SKILL.md. Which line makes Claude choose this skill?" }
   ],
   steps: [
-    "Paste the Example prompt.",
+    "Paste the prompt.",
     "Open the skill folder in VS Code.",
     "/clear, then: “Make level 3: a maze.”",
     "Did Claude use the skill? Did it run the script?",
@@ -2232,7 +2232,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   steps: [
     "/context: note the size of your memory files.",
-    "Paste the Example prompt. Read both files before you approve.",
+    "Paste the prompt. Read both files before you approve.",
     "/clear, then /context again.",
     "Ask about a level: does Claude still know the level rules?"
   ],
@@ -2283,7 +2283,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "/context: did the verifier's reading end up in your context?" }
   ],
   steps: [
-    "Paste the Example prompt. Read the file, then Yes.",
+    "Paste the prompt. Read the file, then Yes.",
     "Restart so the agent loads: /exit, then claude --continue. Check the mode.",
     "“Let the verifier check level 3.”",
     "Read the report. Do you agree?",
@@ -2337,7 +2337,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Look inside", body: "Open ship-level's SKILL.md. Which skills and agents does it call?" }
   ],
   steps: [
-    "Paste the Example prompt. Read SKILL.md before you approve.",
+    "Paste the prompt. Read SKILL.md before you approve.",
     "Commit the new skill first (branch, merge request, merge): the workflow wants a clean start.",
     "Type /ship-level 4",
     "Approve the push when Claude asks.",
@@ -2386,7 +2386,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   steps: [
     "Shift+Tab to “accept edits on”: file edits go through, commit and push still ask.",
-    "Paste the Example prompt.",
+    "Paste the prompt.",
     "Watch. Approve the commit and the push. /goal on its own shows the status.",
     "Goal met? Play level 5 yourself.",
     "Happy? Merge the merge request."
@@ -2437,7 +2437,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   steps: [
     "Play for three minutes. Write down one thing that goes wrong, and how to make it happen again.",
-    "Paste the Example prompt with your bug and the steps.",
+    "Paste the prompt with your bug and the steps.",
     "Red first? Then let Claude fix the game.",
     "Branch, merge request, merge."
   ],

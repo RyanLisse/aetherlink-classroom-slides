@@ -876,6 +876,7 @@ function renderAssignment(stage, s) {
   });
   main.append(ol);
   if (s.expected) { const p = node('p', 'asg-done'); p.append(node('span', 'asg-done-k', 'Done when'), node('span', null, s.expected)); main.append(p); }
+  if (s.prompt && window.ASG_PROMPT) { const box = node('div', 'asg-prompt'); box.append(node('span', 'asg-done-k', 'Prompt'), node('pre', 'asg-prompt-text', s.prompt)); main.append(box); }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));
   if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = ''; f.append(img); side.append(f); }
