@@ -660,8 +660,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "Four ways to work with Claude, and when to use which.",
   type: "concept",
-  visual: { spotlight: 1, bot: 'stretchLeft', place: 'pointer', pointAt: 1,
-    pending: ["Screenshots", "To be added: a real screenshot of each interface."] },
+  visual: { spotlight: 1, bot: 'stretchLeft', place: 'pointer', pointAt: 1 },
   cards: [
     { title: "Claude chat", body: "Ask, think and write. For questions, ideas and texts." },
     { title: "Claude Code", body: "Works inside your code project: reads, plans, changes and tests." },
