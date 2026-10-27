@@ -1450,23 +1450,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 68
   title: "A test: evidence, not confidence",
   kicker: "DAY 1 · PART 3 · TESTS",
-  subtitle: "Claude says it works. A test shows it, every time.",
+  subtitle: "In Snake, pressing the opposite direction should do nothing. Not end the game.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, bot: "head", place: "beside", highlight: [{ in: "tagline", text: "without you noticing", tone: "orange" }] },
-  cards: [
-    { title: "What it is", body: "A small piece of code that checks one rule your game must keep." },
-    { title: "A good test", body: "Protects a rule you don't see by playing for a moment: moving right and pressing left must not kill you." },
-    { title: "Pass or fail", body: "npm test. Red: something broke, and the test says what." }
-  ],
+  visual: { figure: "assets/examples/snake-reverse.svg", figureAlt: "Two Snake boards. Moving right, the player presses up and then left very fast. Correct: the snake turns up and the game goes on. The bug: the snake turns back into itself and it's game over.", highlight: [{ in: "tagline", text: "without you noticing", tone: "orange" }] },
   tagline: "Test what can break without you noticing, not what you see straight away.",
   keyPoints: [
-    "Back to the working method: Test",
-    "One test = one thing the game must do",
-    "npm test: pass or fail",
-    "Claude saying 'done' is not evidence",
-    "Rules and hook today, goals tomorrow"
+    "Correct: the opposite key does nothing",
+    "The bug: two fast keys, game over",
+    "You'd almost never find it by playing",
+    "A test presses the keys for you, every time",
+    "Next: your test. Red or green?"
   ],
-  notes: "Link back to the working method: Test, 'evidence, not confidence'. Ask the room: what would you test in Snake? Someone will say 'the snake grows when it eats'. Fair, but that's the game itself: you'd see it break straight away. A good test protects a rule that breaks without anyone noticing, like turning back into yourself: it only shows up when you press the wrong keys fast, and it comes back when the speed or controls change. Tomorrow the tests grow with the levels: food never on a wall."
+  notes: "Say: Claude says it works. A test shows it, every time. Here's the classic Snake bug. You're moving right and press left: in a good game nothing happens, the key is ignored. Now press up and then left very fast, both before the snake moves. A careless game accepts up, then accepts left (that's not the opposite of up), but the snake never went up: it turns back into itself. Game over, from two quick keys.\n\nWhat you see: The same two keys in the middle, two games. Left: correct, the snake turns up. Right: the bug, the snake turns back into itself and it's game over.\n\nAsk the room: Which one is correct? People mix this up: the correct game is the one that does NOT end. Then: would you find the bug by playing? Almost never: you'd need two keys within 120 milliseconds.\n\nBackground: That's why it's a good test: it hides until someone presses fast, and it comes back when you change the speed or the controls. A test like 'the snake grows' is less useful: you'd see that break straight away. Tomorrow the tests grow with the levels: food never on a wall.\n\nNext: Assignment 9: your own test. Does your game have the bug?"
 },
 
 { // Slide 69
@@ -1475,7 +1470,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 9: A test that finds a bug",
   mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 9 · TEST",
-  subtitle: "A test plays your game for you and checks one rule: the snake can't turn back into itself.",
+  subtitle: "Your test presses ↑ ← for you, very fast, and checks: no game over. Red means your game has the bug.",
   calm: true,
   steps: [
     { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
@@ -1494,7 +1489,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Fails: a bug found. Passes: break it on purpose",
     "Fix the game, not the test"
   ],
-  notes: "Say: A test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.' You can't play every key combination after every change.\n\nWatch for: Claude fixes the game, never the test.\n\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\n\nBackground: Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose and see the test turn red. A test you've never seen fail is not evidence. npm test needs Node and a package.json; Claude makes the package.json.\n\nIf stuck: No Node on someone's laptop: ask for tests/test.html instead, and open it in the browser: green or red. The hook in Assignment 11 does need Node; they watch that one on the projector.\n\nNext: Assignment 10: The rules grow."
+  notes: "Say: A test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.' You can't play every key combination after every change.\n\nWatch for: Claude fixes the game, never the test.\n\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\n\nWhy not plant the bug: Claude writes every game itself, and usually guards this rule. You can't hand out a buggy game without telling Claude to write a bug. So there are two paths: some games are red the first time (a real bug found), most are green (break it on purpose, then see red). Both end with a test you've seen fail.\n\nBackground: Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose and see the test turn red. A test you've never seen fail is not evidence. npm test needs Node and a package.json; Claude makes the package.json.\n\nIf stuck: No Node on someone's laptop: ask for tests/test.html instead, and open it in the browser: green or red. The hook in Assignment 11 does need Node; they watch that one on the projector.\n\nNext: Assignment 10: The rules grow."
 },
 
 { // Slide 70
