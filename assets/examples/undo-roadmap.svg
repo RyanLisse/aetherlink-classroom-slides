@@ -32,7 +32,7 @@
 
     <rect x="635" y="135" width="150" height="70" rx="14" fill="#1d1608" stroke="#ffb545" stroke-width="2.5"/>
     <text x="710" y="164" font-size="19" fill="#ffb545">Esc Esc ↩</text>
-    <text x="710" y="188" font-size="13" font-weight="700" fill="#a6b8d2">restore code</text>
+    <text x="710" y="188" font-size="13" font-weight="700" fill="#a6b8d2">or type /rewind</text>
 
     <rect x="815" y="135" width="150" height="70" rx="14" fill="#0c1928" stroke="#3ddc84" stroke-width="2.5"/>
     <text x="890" y="164" font-size="19" fill="#e9f0fc">Layer 4 ✓</text>
@@ -60,7 +60,7 @@
 
   <!-- rule of thumb -->
   <rect x="40" y="368" width="440" height="40" rx="10" fill="#102238"/>
-  <text x="260" y="394" text-anchor="middle" font-size="16" font-weight="800" fill="#e9f0fc">Last few minutes? <tspan fill="#ffb545">Esc Esc</tspan></text>
+  <text x="260" y="394" text-anchor="middle" font-size="16" font-weight="800" fill="#e9f0fc">Last few minutes? <tspan fill="#ffb545">Esc Esc</tspan> or <tspan fill="#ffb545">/rewind</tspan></text>
   <rect x="520" y="368" width="440" height="40" rx="10" fill="#102238"/>
   <text x="740" y="394" text-anchor="middle" font-size="16" font-weight="800" fill="#e9f0fc">Older than that? <tspan fill="#FF7A1A">git</tspan></text>
 </svg>
