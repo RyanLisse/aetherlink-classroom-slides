@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" font-family="Nunito, Inter, -apple-system, 'Segoe UI', sans-serif">
+  <!-- .claude/settings.json after Assignment 11, with a short label on each part. The labels match the chips on Assignment 11. -->
+
+  <!-- the file -->
+  <rect x="20" y="20" width="620" height="420" rx="12" fill="#070d1f" stroke="#233c55" stroke-width="2"/>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#c9d6ea" xml:space="preserve" style="white-space:pre">
+    <text x="40" y="50">{</text>
+    <text x="40" y="72">&#160;&#160;"permissions":&#160;{</text>
+    <text x="40" y="94">&#160;&#160;&#160;&#160;"<tspan fill="#69e2f2" font-weight="800">allow</tspan>":&#160;["Bash(npm&#160;test)"],</text>
+    <text x="40" y="116">&#160;&#160;&#160;&#160;"<tspan fill="#69e2f2" font-weight="800">ask</tspan>":&#160;&#160;&#160;["Bash(git&#160;commit&#160;*)",&#160;"Bash(git&#160;push&#160;*)",</text>
+    <text x="40" y="138">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"Edit(tests/**)"],</text>
+    <text x="40" y="160">&#160;&#160;&#160;&#160;"<tspan fill="#69e2f2" font-weight="800">deny</tspan>":&#160;&#160;["Bash(git&#160;push&#160;--force&#160;*)",&#160;"Bash(git&#160;push&#160;-f&#160;*)",</text>
+    <text x="40" y="182">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"Bash(rm&#160;-rf&#160;*)",&#160;"Bash(glab&#160;mr&#160;merge&#160;*)",</text>
+    <text x="40" y="204">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"Bash(gh&#160;pr&#160;merge&#160;*)"]</text>
+    <text x="40" y="226">&#160;&#160;},</text>
+    <text x="40" y="248">&#160;&#160;"hooks":&#160;{</text>
+    <text x="40" y="270">&#160;&#160;&#160;&#160;"<tspan fill="#ffb545" font-weight="800">PostToolUse</tspan>":&#160;[{</text>
+    <text x="40" y="292">&#160;&#160;&#160;&#160;&#160;&#160;"matcher":&#160;"<tspan fill="#ffb545" font-weight="800">Edit|Write</tspan>",</text>
+    <text x="40" y="314">&#160;&#160;&#160;&#160;&#160;&#160;"hooks":&#160;[{&#160;"type":&#160;"command",</text>
+    <text x="40" y="336">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"command":&#160;"<tspan fill="#ffb545" font-weight="800">npm&#160;test</tspan>&#160;1&gt;&amp;2&#160;||&#160;exit&#160;2"&#160;}]</text>
+    <text x="40" y="358">&#160;&#160;&#160;&#160;}]</text>
+    <text x="40" y="380">&#160;&#160;}</text>
+    <text x="40" y="402">}</text>
+  </g>
+  <text x="40" y="428" font-size="13" font-weight="800" fill="#6f84a3" letter-spacing="1">.CLAUDE/SETTINGS.JSON</text>
+
+  <!-- leader lines -->
+  <g stroke-width="2" stroke-dasharray="4 4" fill="none">
+    <path d="M642 89L690 75" stroke="#69e2f2"/><path d="M642 111L690 125" stroke="#69e2f2"/><path d="M642 155L690 175" stroke="#69e2f2"/>
+    <path d="M642 265L690 280" stroke="#ffb545"/><path d="M642 287L690 330" stroke="#ffb545"/><path d="M642 331L690 380" stroke="#ffb545"/>
+  </g>
+
+  <!-- permissions -->
+  <text x="690" y="40" font-size="14" font-weight="900" fill="#69e2f2" letter-spacing="1.2">PERMISSIONS · MAY CLAUDE DO IT?</text>
+  <g font-size="16" font-weight="800">
+    <rect x="690" y="57" width="290" height="36" rx="9" fill="#0c1928" stroke="#69e2f2" stroke-width="1.5"/>
+    <text x="706" y="81" fill="#e9f0fc"><tspan fill="#69e2f2" font-weight="900">allow</tspan>  no question, it just runs</text>
+    <rect x="690" y="107" width="290" height="36" rx="9" fill="#0c1928" stroke="#69e2f2" stroke-width="1.5"/>
+    <text x="706" y="131" fill="#e9f0fc"><tspan fill="#69e2f2" font-weight="900">ask</tspan>  asks you every time</text>
+    <rect x="690" y="157" width="290" height="36" rx="9" fill="#0c1928" stroke="#69e2f2" stroke-width="1.5"/>
+    <text x="706" y="181" fill="#e9f0fc"><tspan fill="#69e2f2" font-weight="900">deny</tspan>  never, even if you ask</text>
+  </g>
+
+  <!-- the hook -->
+  <text x="690" y="246" font-size="14" font-weight="900" fill="#ffb545" letter-spacing="1.2">HOOK · WHAT ALWAYS HAPPENS</text>
+  <g font-size="16" font-weight="800">
+    <rect x="690" y="262" width="290" height="36" rx="9" fill="#1d1608" stroke="#ffb545" stroke-width="1.5"/>
+    <text x="706" y="286" fill="#e9f0fc"><tspan fill="#ffb545" font-weight="900">Moment</tspan>  after Claude used a tool</text>
+    <rect x="690" y="312" width="290" height="36" rx="9" fill="#1d1608" stroke="#ffb545" stroke-width="1.5"/>
+    <text x="706" y="336" fill="#e9f0fc"><tspan fill="#ffb545" font-weight="900">Which tool</tspan>  only file changes</text>
+    <rect x="690" y="362" width="290" height="36" rx="9" fill="#1d1608" stroke="#ffb545" stroke-width="1.5"/>
+    <text x="706" y="386" fill="#e9f0fc"><tspan fill="#ffb545" font-weight="900">Command</tspan>  run the tests</text>
+  </g>
+  <text x="690" y="424" font-size="14" font-weight="700" fill="#a6b8d2">Fails? exit 2 sends it back to Claude.</text>
+</svg>
