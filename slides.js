@@ -1240,7 +1240,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { img: "assets/examples/snake-layer-2.svg", label: "Controls", caption: "The arrow keys steer the snake." },
     { img: "assets/examples/snake-layer-3.svg", label: "Food and score", caption: "Eat, grow, count your points." },
     { img: "assets/examples/snake-layer-4.svg", label: "Game over", caption: "Hit a wall or yourself: game over, play again." },
-    { img: "assets/examples/snake-layer-5.svg", label: "Your style", caption: "Your nickname, avatar and best score." }
+    { img: "assets/examples/snake-layer-5.svg?v=2", label: "Your style", caption: "Your nickname and avatar." }
   ] },
   tagline: "One prompt can build Snake. Layers let you steer it.",
   keyPoints: [
@@ -1250,7 +1250,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Layer 5 comes with your avatar this afternoon",
     "Next: Claude plans these five layers with you"
   ],
-  notes: "Say: One prompt can build Snake: the dry run did it in under a minute. But then you can't steer it, you can't tell what broke, and you learn nothing about what's in the files. So we build it in five layers. After every layer you play it, check it and save it.\n\nWhat you see: Click: one board at a time. 1 Skeleton: a grid and a snake that moves by itself. 2 Controls: the arrow keys steer it. 3 Food and score: it eats, grows and counts. 4 Game over: a wall or your own tail ends the game, Space starts again. 5 Your style: your nickname, avatar and best score on screen.\n\nTip: After every layer: reload the browser tab (F5 or Cmd+R) and play it. The first time, Claude opens index.html for you.\n\nLink back: Every layer is one small turn of the working-method loop: plan it, build it, check it, commit it.\n\nBackground: Layers 1 to 4 get built in Assignments 6 and 8. Layer 5 comes later this afternoon, when everyone has made an avatar in LibreChat. Real software gets built the same way: small slices that each work on their own.\n\nNext: Assignment 5: Claude plans these five layers with you."
+  notes: "Say: One prompt can build Snake: the dry run did it in under a minute. But then you can't steer it, you can't tell what broke, and you learn nothing about what's in the files. So we build it in five layers. After every layer you play it, check it and save it.\n\nWhat you see: Click: one board at a time. 1 Skeleton: a grid and a snake that moves by itself. 2 Controls: the arrow keys steer it. 3 Food and score: it eats, grows and counts. 4 Game over: a wall or your own tail ends the game, Space starts again. 5 Your style: your nickname and avatar on screen (Assignment 14). No best score: tomorrow the arcade leaderboard does that.\n\nTip: After every layer: reload the browser tab (F5 or Cmd+R) and play it. The first time, Claude opens index.html for you.\n\nLink back: Every layer is one small turn of the working-method loop: plan it, build it, check it, commit it.\n\nBackground: Layers 1 to 4 get built in Assignments 6 and 8. Layer 5 comes later this afternoon, when everyone has made an avatar in LibreChat. Real software gets built the same way: small slices that each work on their own.\n\nNext: Assignment 5: Claude plans these five layers with you."
 },
 
 { // Slide 59
@@ -1263,13 +1263,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   calm: true,
   steps: [
     "Shift+Tab until the bottom says “plan mode on”",
-    { text: "Ask for a plan in layers", prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname, avatar, best score). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.", after: "Five layers, each with a 10-second check." },
+    { text: "Ask for a plan in layers", prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname and avatar). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.", after: "Five layers, each with a 10-second check." },
     "Too big? Choose 3 and ask for smaller layers.",
     { text: "Happy? Press Esc. Don't approve.", after: "Approving starts building. Esc keeps the plan, and nothing is built.", warn: true },
     "Shift+Tab back to “manual mode on”"
   ],
   expected: "A plan of five layers, each with its own check, and nothing built yet.",
-  prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname, avatar, best score). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.",
+  prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname and avatar). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.",
   keyPoints: [
     "Design phase",
     "Layers you can steer",
@@ -1393,7 +1393,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 66
   title: "Undo: checkpoints and commits",
   kicker: "DAY 1 · PART 3 · UNDO",
-  subtitle: "Two ways back. This is how you'll use them in the next assignment.",
+  subtitle: "Two ways back. Commits are your save points. Checkpoints are Claude's own, made automatically.",
   type: "concept",
   visual: { figure: "assets/examples/undo-roadmap.svg?v=3", figureAlt: "Assignment 8 as a road: layer 2 and layer 3 work and get a commit, then the score is removed on purpose, Esc Esc goes back to the checkpoint before that, then layer 4 works and gets a commit.", highlight: [{ in: "tagline", text: "always", tone: "orange" }] },
   tagline: "Checkpoints are for the last few minutes. Commits are for always.",
@@ -1475,7 +1475,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press the left arrow key, the game must not end. The same when I press the up arrow key and then the left arrow key very fast. Make it run with npm test. If it fails, say in plain words what went wrong. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
     { text: "Run it yourself: passed or failed?", prompt: "!npm test" },
-    { text: "Failed? Let Claude fix the game", prompt: "The test fails. Fix the game so the snake can't turn back into itself. Don't change the test.", after: "The game, never the test.", warn: true },
+    { text: "Failed? Let Claude fix the game", prompt: "The test fails. Fix the game so the snake can't turn straight back. Don't change the test.", after: "The game, never the test.", warn: true },
     { text: "Passed? Break the game on purpose", prompt: "Delete the check that ignores the opposite direction. Then run npm test.", after: "The test fails now: it catches the bug." },
     { text: "Undo: empty input, Esc twice, “Restore code”. Passes again?", prompt: "!npm test" },
     "Commit and push. This test now guards the rule."
@@ -1639,7 +1639,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 76
-  title: "Assignment 14: Put your avatar in your game",
+  title: "Assignment 14: Layer 5, your avatar in your game",
   mode: "plan",
   kicker: "DAY 1 · ASSIGNMENT 14 · BUILD",
   subtitle: "Give the picture to Claude Code: it shows your character on the start screen.",
