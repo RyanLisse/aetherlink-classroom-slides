@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" font-family="Nunito, Inter, -apple-system, 'Segoe UI', sans-serif">
+  <!-- An example Snake game, as it could look after Day 1: nickname, avatar, score, board -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1430"/><stop offset="1" stop-color="#070b1c"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3ddc84"/><stop offset="1" stop-color="#1fa862"/></linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#1a2547" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="640" height="440" fill="url(#bg)"/>
+
+  <!-- header: avatar, nickname, score -->
+  <circle cx="62" cy="40" r="20" fill="#FF7A1A"/>
+  <text x="62" y="47" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">P</text>
+  <text x="92" y="48" font-size="22" font-weight="900" fill="#e9f0fc">Pixel</text>
+  <text x="320" y="47" text-anchor="middle" font-size="22" font-weight="900" fill="#69e2f2" letter-spacing="4">SNAKE</text>
+  <text x="600" y="36" text-anchor="end" font-size="18" font-weight="900" fill="#ffb545">Score 12</text>
+  <text x="600" y="55" text-anchor="end" font-size="12" font-weight="700" fill="#8b93b0">Best 30</text>
+
+  <!-- board -->
+  <rect x="40" y="76" width="560" height="308" rx="10" fill="#0a1128" stroke="#2a3a6b" stroke-width="2"/>
+  <rect x="40" y="76" width="560" height="308" fill="url(#grid)" opacity=".9"/>
+
+  <!-- food -->
+  <circle cx="474" cy="230" r="11" fill="#ff5a5a"/>
+  <path d="M474 219c2-6 7-8 11-7-2 5-6 7-11 7z" fill="#3ddc84"/>
+
+  <!-- snake: tail at the left, head on the right, moving right -->
+  <g fill="url(#body)">
+    <rect x="182" y="262" width="24" height="24" rx="7" opacity=".55"/>
+    <rect x="210" y="262" width="24" height="24" rx="7" opacity=".65"/>
+    <rect x="238" y="262" width="24" height="24" rx="7" opacity=".75"/>
+    <rect x="266" y="262" width="24" height="24" rx="7" opacity=".85"/>
+    <rect x="266" y="234" width="24" height="24" rx="7"/>
+    <rect x="266" y="206" width="24" height="24" rx="7"/>
+    <rect x="266" y="178" width="24" height="24" rx="7"/>
+    <rect x="294" y="178" width="24" height="24" rx="7"/>
+    <rect x="322" y="178" width="24" height="24" rx="7"/>
+    <rect x="350" y="178" width="24" height="24" rx="7"/>
+  </g>
+  <rect x="377" y="176" width="28" height="28" rx="9" fill="#3ddc84"/>
+  <circle cx="396" cy="185" r="3.5" fill="#06111e"/>
+  <circle cx="396" cy="196" r="3.5" fill="#06111e"/>
+
+  <!-- footer -->
+  <text x="320" y="414" text-anchor="middle" font-size="13" font-weight="700" fill="#8b93b0">Arrow keys to move · Space to pause · Eat, grow, and don't hit yourself</text>
+</svg>

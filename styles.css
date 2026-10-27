@@ -829,6 +829,45 @@ body.is-assignment #stage{border-color:var(--cyan);box-shadow:0 0 0 8px color-mi
 .intake-arrow::after{content:'';position:absolute;right:-6px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:11px solid var(--cyan);border-right:0}
 .intake .place-aside{margin-left:70px}
 .intake-cards .card:last-child{border-color:var(--aether-orange)}
+/* ---- where everything lives: two folders -> Claude Code -> MCP ---- */
+.cmap{display:grid;grid-template-columns:minmax(0,1.6fr) auto minmax(0,.8fr);gap:clamp(.6rem,1.4vw,1.2rem);align-items:center;width:100%}
+.cmap-col{display:grid;gap:.75rem}
+.cmap-tree{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:1.4rem;row-gap:.2rem;padding:.9rem 1.2rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.88rem,1.2vw,1.08rem)}
+.ctree-group,.ctree-row{display:contents}
+.ctree-name{white-space:pre;font-weight:800;color:var(--text);line-height:1.75}
+.ctree-pre{color:color-mix(in srgb,var(--muted) 60%,transparent);font-weight:400}
+.ctree-note{align-self:center;white-space:nowrap;font-family:Nunito,Inter,-apple-system,'Segoe UI',sans-serif;font-size:.92em;color:var(--muted)}
+.ctree-dir .ctree-name{color:var(--cyan);font-weight:900}.ctree-dir .ctree-note{color:var(--cyan);font-weight:800}
+.ctree-dim .ctree-name,.ctree-dim .ctree-note{opacity:.38}
+.ctree-root .ctree-name{color:var(--amber);font-weight:900}.ctree-root .ctree-note{color:var(--amber);font-weight:800}
+.cmap-home{position:relative;padding:1.1rem .7rem .7rem;border:2px dashed color-mix(in srgb,var(--muted) 45%,transparent);border-radius:20px}
+.cmap-home-label{position:absolute;top:-.75rem;left:1rem;padding:.1rem .6rem;background:var(--bg);font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cmap-box{border:2px solid var(--border);border-radius:14px;background:var(--surface);padding:.6rem 1rem .7rem;animation:enter .45s both}
+.cmap-head{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin-bottom:.35rem}
+.cmap-name{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:900;font-size:clamp(1rem,1.4vw,1.25rem);color:var(--cyan)}
+.cmap-where{font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.cmap-row{display:grid;grid-template-columns:12.6rem minmax(0,1fr) auto;gap:.8rem;align-items:center;padding:.32rem 0;border-top:1px solid var(--border)}
+.cmap-file{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:800;font-size:clamp(.88rem,1.15vw,1.02rem);color:var(--text)}
+.cmap-what{font-size:clamp(.88rem,1.15vw,1.02rem);color:var(--muted)}
+.cmap-tag{padding:.12rem .55rem;border-radius:999px;font-size:.7rem;font-weight:900;white-space:nowrap;color:var(--amber);background:var(--selected)}
+.cmap-two{grid-template-columns:max-content auto;justify-content:center;column-gap:clamp(1rem,3vw,3rem)}
+.cmap-mid{display:grid;grid-auto-flow:column;align-items:center;gap:.4rem}
+.cmap-core{display:grid;justify-items:center;gap:.15rem;text-align:center}
+.cmap-core img{width:clamp(78px,8vw,120px);height:auto}
+.cmap-core strong{font-weight:900;font-size:clamp(1rem,1.4vw,1.2rem)}
+.cmap-core .cmap-where{max-width:9rem;line-height:1.3}
+.cmap-arrow{display:grid;justify-items:center;gap:.45rem;width:clamp(56px,5.5vw,84px);transition:opacity .3s}
+.cmap-line{position:relative;width:calc(100% - 10px);justify-self:start;height:5px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--cyan) 0 12px,transparent 12px 20px);background-size:20px 5px;animation:flow-dash .6s linear infinite}
+.cmap-line::after{content:'';position:absolute;right:-10px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:11px solid var(--cyan);border-right:0}
+.cmap-label{font-size:.68rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--cyan);text-align:center}
+.cmap-mid:has(.cmap-core.st-pending) .cmap-arrow{opacity:0}
+.cmap-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.2rem}
+.cmap-chip{display:grid;padding:.3rem .75rem;border-radius:12px;border:1.5px solid var(--cyan);font-weight:900;font-size:clamp(.9rem,1.2vw,1.05rem);line-height:1.2}
+.cmap-chip small{font-size:.7rem;font-weight:700;color:var(--muted)}
+.cmap-note{margin:.35rem 0 0;font-size:clamp(.88rem,1.15vw,1.02rem);color:var(--muted)}
+.cmap-apart{grid-column:1/-1;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;border-style:dashed;background:transparent;padding:.5rem 1rem}
+.cmap-apart .cmap-head{margin:0}.cmap-apart .cmap-note{margin:0}
+@media (max-width:760px){.cmap{grid-template-columns:minmax(0,1fr)}.cmap-mid{justify-content:center}.cmap-row{grid-template-columns:minmax(0,1fr) auto}.cmap-what{grid-column:1/-1;grid-row:2}}
 .stairs ~ .steps-detail{display:none}
 .reveal-grid .place-slot.bot-peek{height:clamp(170px,24vh,220px)}
 /* ---- 45/46: CLAUDE.md file ---- */
@@ -1109,6 +1148,8 @@ body[data-opener="sdlc-loop"] .sdlc-loop img{display:block;width:100%;height:aut
 .slide-main.compact-cards .card p{font-size:clamp(.92rem,1.1vw,1.05rem);line-height:1.4;margin-top:.35rem}
 .slide-main.compact-cards .cards{gap:clamp(.5rem,1.2vh,.9rem)}
 .slide-main.with-showcase>.tagline{margin-top:.2rem}
+/* a showcase with nothing next to it: one picture, centred */
+.slide-main.with-showcase:not(:has(>:not(.showcase))){grid-template-columns:minmax(0,min(820px,100%));justify-content:center}
 
 /* example avatar gallery beside the steps (slide 48) */
 .thumb-gallery{margin:clamp(.4rem,1.2vh,.9rem) 0}
@@ -1176,6 +1217,8 @@ html.embed body{min-height:100vh}
    ========================================================================== */
 .asg-head .heading-top{align-items:center}
 .asg-head h1{margin-top:.1rem}
+.mode-chip{padding:.2rem .7rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;white-space:nowrap;color:var(--text);border:1.5px solid var(--muted);background:var(--surface)}
+.mode-chip.mode-plan{border-color:var(--cyan);color:var(--cyan)}.mode-chip.mode-manual{border-color:var(--amber);color:var(--amber)}
 .asg-repo{display:inline-block;margin-top:.45rem;color:var(--cyan);font-size:clamp(.9rem,1.25vw,1.05rem);font-weight:800;text-decoration-thickness:2px;text-underline-offset:.22em;overflow-wrap:anywhere}
 .asg-repo:hover{color:var(--text)}
 .asg-top-right{display:flex;align-items:center;gap:1rem}
@@ -1230,6 +1273,10 @@ html.embed body{min-height:100vh}
 .tpill-controls .timer-play{min-width:6.2rem}
 .asg-head .heading-top{flex-wrap:nowrap}
 .asg-text:has(.asg-step-prompt){flex:1;min-width:0}
+.asg-cmd{display:inline-flex;align-items:center;gap:.8rem;margin-left:.8rem;padding:0 .2rem 0 .85rem;line-height:1.2;border-radius:9px;background:#0b0f19;border:1px solid #2a3350;vertical-align:middle;font-weight:400}
+.asg-cmd .asg-prompt-copy{font-size:max(.78rem,.62em);padding:.25rem .8rem;margin:.15rem 0;min-height:0}
+.asg-cmd-then{margin-left:.8rem;font-size:.8em;font-weight:700;color:var(--muted)}
+.asg-cmd code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;font-weight:700;color:var(--cyan);white-space:pre}
 .asg-step-prompt{display:flex;align-items:center;gap:.7rem;margin-top:.45rem;padding:.45rem .7rem;border-radius:10px;background:#0b0f19;border:1px solid #2a3350;font-weight:400}
 .asg-step-prompt .asg-prompt-text{margin:0;flex:1}
 .asg-step-after{display:block;margin-top:.45rem}

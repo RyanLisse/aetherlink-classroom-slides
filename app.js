@@ -398,6 +398,22 @@ function renderExtras(stage, main, s, v) {
     main.classList.add('intake'); grid.classList.add('intake-cards'); cards.forEach((c, i) => { c.style.setProperty('--i', i); c.append(node('span', 'intake-arrow')); if (v.tags?.[i]) c.querySelector('.card-head').append(node('span', 'stack-tag', v.tags[i])); });
     x.aside = main;
   }
+  if (v.map) {                                                   // where everything lives: folders it reads -> Claude Code -> MCP out
+    const M = v.map; const m = node('div', 'cmap');
+    const box = (b, cls) => { const d = node('div', 'cmap-box cmap-step' + (cls ? ' ' + cls : '')); const h = node('div', 'cmap-head'); h.append(node('span', 'cmap-name', b.name), node('span', 'cmap-where', b.where)); d.append(h);
+      (b.rows || []).forEach(r => { const row = node('div', 'cmap-row'); row.append(node('span', 'cmap-file', r[0]), node('span', 'cmap-what', r[1]), node('span', r[2] ? 'cmap-tag' : '', r[2] || '')); d.append(row); });
+      if (b.chips) { const c = node('div', 'cmap-chips'); b.chips.forEach(t => { const k = node('span', 'cmap-chip', t[0]); if (t[1]) k.append(node('small', null, t[1])); c.append(k); }); d.append(c); }
+      if (b.note) d.append(node('p', 'cmap-note', b.note)); return d; };
+    const arrow = t => { const a = node('div', 'cmap-arrow'); a.append(node('span', 'cmap-line'), node('span', 'cmap-label', t)); return a; };
+    const left = node('div', 'cmap-col'); (M.left || []).forEach(b => left.append(box(b)));
+    if (M.tree) { const t = node('div', 'cmap-box cmap-tree'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', M.tree.root), node('span', 'ctree-note', M.tree.rootNote)); t.append(r0);
+      M.tree.groups.forEach(g => { const grp = node('div', 'ctree-group cmap-step'); g.forEach(([pre, name, note, dir, dim]) => { const r = node('div', 'ctree-row' + (dir ? ' ctree-dir' : '') + (dim ? ' ctree-dim' : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', '← ' + note)); grp.append(r); }); t.append(grp); });
+      left.append(t); }
+    const core = node('div', 'cmap-core cmap-step'); const im = document.createElement('img'); im.src = BOTS.head.src; im.alt = ''; core.append(im, node('strong', null, M.center), node('span', 'cmap-where', M.centerSub || ''));
+    const mid = node('div', 'cmap-mid'); mid.append(arrow(M.inLabel || ''), core); if (M.right) mid.append(arrow(M.outLabel || ''));
+    m.append(left, mid); if (M.right) { const right = node('div', 'cmap-col'); M.right.forEach(b => right.append(box(b))); m.append(right); } else m.classList.add('cmap-two'); if (M.apart) { const ap = box(M.apart, 'cmap-apart'); m.append(ap); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(m); else if (tg) tg.before(m); else main.append(m);
+  }
   if (v.mdfile != null && cards[v.mdfile]) {                    // 45/46: the card's lines as a CLAUDE.md file
     const c = cards[v.mdfile]; const f = node('div', 'mdfile'); const bar = node('div', 'md-bar'); bar.append(node('i'), node('i'), node('i'), node('span', 'md-name', v.mdName || 'CLAUDE.md')); f.append(bar);
     const body = node('div', 'md-body'); String(s.cards[v.mdfile].body).split('\n').forEach((l, i) => { const r = node('div', 'md-sec'); r.style.setProperty('--i', i); r.append(node('span', 'md-h', '## ' + l), node('span', 'md-l'), node('span', 'md-l short')); body.append(r); });
@@ -880,6 +896,7 @@ function renderAssignment(stage, s) {
   const { label, title } = assignmentLabel(s);
   const head = node('section', 'heading asg-head'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
   eyebrow.append(node('span', 'type-chip', label));
+  if (s.mode) eyebrow.append(node('span', 'mode-chip mode-' + s.mode, ({ manual: '⏵ Start in manual mode', plan: '⏸ Start in plan mode', librechat: 'In LibreChat, not Claude Code' })[s.mode] || s.mode));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
   const right = node('div', 'asg-top-right'); right.append(timerPill(s), node('p', 'slide-count', String(current + 1) + ' / ' + slides.length));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
@@ -891,15 +908,18 @@ function renderAssignment(stage, s) {
   stage.append(head);
   const body = node('div', 'asg-body'); const main = node('div', 'asg-main');
   const st = loadState(); const done = Array.isArray(st.done) ? st.done.slice() : [];
-  const ol = node('ol', 'asg-steps' + ((s.steps || []).length > 4 ? ' many' : '') + ((s.steps || []).some(t => t.prompt) ? ' with-prompts' : '') + (s.calm ? ' calm' : ''));
+  const isCmd = p => /^[\/!][^\n]{0,40}$/.test(p);              // a short command (/memory, !npm test) shows as a chip, not a prompt box
+  const ol = node('ol', 'asg-steps' + ((s.steps || []).length > 4 ? ' many' : '') + ((s.steps || []).some(t => t.prompt && !isCmd(t.prompt)) ? ' with-prompts' : '') + (s.calm ? ' calm' : ''));
   const copyBtn = text => { const b = node('button', 'asg-prompt-copy', 'Copy'); b.type = 'button';
     b.addEventListener('click', async e => { e.stopPropagation(); try { await navigator.clipboard.writeText(text); notify('Prompt copied'); b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = 'Copy'; }, 1800); } catch { notify('Select and copy the prompt manually.'); } });
     return b; };
-  const inline = (s.steps || []).some(t => t.prompt);              // steps with their own prompt: no prompt box at the bottom
+  const inline = (s.steps || []).some(t => t.prompt && !isCmd(t.prompt));              // steps with their own prompt: no prompt box at the bottom
   (s.steps || []).forEach((t, i) => {
     const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
     const text = node('span', 'asg-text', t.text ?? t);
-    if (t.prompt) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
+    const cmds = t.cmds || (t.prompt && isCmd(t.prompt) ? [t.prompt] : null);  // short commands: chips on the same line, 'then' between two
+    (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd'); c.append(node('code', null, p), copyBtn(p)); text.append(c); });
+    if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
     if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };

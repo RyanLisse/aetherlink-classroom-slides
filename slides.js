@@ -932,22 +932,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 46b
   title: "Today you build Snake",
   kicker: "DAY 1 · PART 2 · YOUR GAME",
-  subtitle: "One small game that you build all day, step by step, with Claude Code.",
+  subtitle: "Snake is just the practice project. What you take home is how to work with Claude Code.",
   type: "context",
-  visual: { stagger: "pop", stepThrough: true, bot: "happy", place: "aside" },
-  cards: [
-    { title: "The game", body: "Snake in your browser. Eat, grow, and don't hit yourself." },
-    { title: "Why Snake", body: "Everyone knows the rules. So you can judge Claude's work, not learn a new game." },
-    { title: "Yours", body: "Your nickname and your avatar on the start screen. Your own colours and ideas." },
-    { title: "Step by step", body: "Plan, build, test, put it online. Every step teaches one Claude Code skill." }
-  ],
+  visual: { opener: "showcase", image: "assets/examples/snake-game.svg", imageLink: "aether-snake/index.html" },
   keyPoints: [
     "Snake: one game for the whole day",
+    "Eat, grow, don't hit yourself",
     "Everyone knows the rules",
     "Make it yours: nickname, avatar",
-    "Each step teaches one skill"
+    "Each step teaches one skill",
+    "The picture is an example: theirs will differ"
   ],
-  notes: "Before anyone starts Claude Code, tell them what they'll build. Snake is small, everyone knows how it should behave, and it runs in the browser without installing anything. That matters: when Claude gets something wrong, people see it straight away, because they know the rules. The game is only the vehicle; what they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill. Make it personal: a nickname and an avatar on the start screen, their own colours. Tomorrow all games come together in the Aether Arcade, one website with everyone's games, so keep it working. Next slide: before Claude writes any code, we first write down what we want."
+  notes: "Say: Before anyone starts Claude Code, tell them what they'll build: Snake, in the browser. Eat, grow, and don't hit yourself. Not everyone likes games, so say it plainly: Snake is only the practice project. What they take home is how to work with Claude Code.\n\nWhy Snake: Everyone knows how it should behave, so when Claude gets something wrong, people see it straight away: they judge Claude's work instead of learning a new game. It runs in the browser without installing anything.\n\nMake it yours: A nickname and an avatar on the start screen, their own colours and ideas.\n\nStep by step: The game is only the vehicle. What they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill.\n\nWhat you see: An example of a finished game. Theirs will look different: Claude never builds the same game twice, and that's fine.\n\nNext: Assignment 1: start Claude Code in your own folder."
 },
 
 { // Slide 46
@@ -960,7 +956,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     { text: "Make your folder", prompt: "mkdir aether-snake\ncd aether-snake\ngit init", after: "“Initialized empty Git repository”" },
     { text: "Start Claude Code", prompt: "claude", after: "Trust this folder? Press ↓ to Yes, then Enter. Enter alone quits.", warn: true },
-    "Look around: /help, then /model. Esc to leave.",
+    { text: "Look around. Esc to leave.", cmds: ["/help", "/model"] },
     "Shift+Tab until the bottom says “manual mode on”",
     { text: "Ask your first question", prompt: "What is in this folder?", after: "Empty. It didn't ask: reading needs no yes." }
   ],
@@ -1004,6 +1000,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 2: Let Claude interview you",
+  mode: "plan",
   kicker: "DAY 1 · ASSIGNMENT 2 · PLAN",
   subtitle: "Before Claude builds anything, decide what you want.",
   calm: true,
@@ -1028,18 +1025,29 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 48
   title: "Your AI in Claude Code",
   kicker: "DAY 1 · PART 2 · TOUR",
-  subtitle: "What your Claude Code already brings, and what it will get from you.",
+  subtitle: "Where everything lives: two folders it reads, and the connections it reaches out through.",
   type: "concept",
-  visual: { art: 'intake', bot: 'head', place: 'aside', tags: { 3: 'images' } },
-  cards: [
-    { title: "Memory", body: "CLAUDE.md: who you are, what you do, how it should work with you." },
-    { title: "Hands and feet", body: "MCP connections: GitLab this afternoon. Jira and Confluence in the support days." },
-    { title: "Defaults", body: "Settings, rules and the model it starts with." },
-    { title: "LibreChat", body: "For your basic questions, and for images: this afternoon you make your avatar there." }
-  ],
+  visual: { stepThrough: ".cmap-step, .slide-main > .tagline", map: {
+    tree: { root: "~", rootNote: "your home folder", groups: [
+      [ ["├── ", ".claude/", "about you, every project", 1],
+        ["│   ├── ", "CLAUDE.md", "memory: about you"],
+        ["│   ├── ", "settings.json", "your own rules"],
+        ["│   └── ", "projects/…/memory/", "Claude's notes"] ],
+      [ ["└── ", "aether-snake/", "your project, in git", 1],
+        ["    ├── ", "intent.md", "what you want ✓"],
+        ["    ├── ", "CLAUDE.md", "memory: this project"],
+        ["    ├── ", ".claude/settings.json", "house rules"],
+        ["    └── ", ".mcp.json", "its connections"] ]
+    ] },
+    inLabel: "loads", center: "Claude Code", centerSub: "reads both folders at the start", outLabel: "MCP",
+    right: [
+      { name: "Hands and feet", where: "Outside, through MCP", chips: [["GitLab", "this afternoon"], ["Jira", "support days"], ["Confluence", "support days"]] }
+    ],
+    apart: { name: "LibreChat", where: "In the browser · not part of Claude Code", note: "Quick questions, and images: your avatar, this afternoon." }
+  } },
   tagline: "We set this up with you, step by step.",
-  keyPoints: ["Opens the tour: the map first","Memory: CLAUDE.md, today","Hands and feet: GitLab this afternoon","Defaults: settings and model","LibreChat: questions and your avatar","We set it up together"],
-  notes: "This opens the tour: draw the landscape once, so they see it before they need it. Your Claude Code is your personal assistant. It gets a memory (CLAUDE.md: who you are and how it should work with you, which you write this afternoon), hands and feet through MCP connections (GitLab this afternoon; Jira and Confluence come in the support days), and defaults: settings, rules and the model it starts with. LibreChat is for basic questions and for images: this afternoon everyone makes their avatar there. Don't explain each piece in depth: all of them come back today, and we set them up together."
+  keyPoints: ["Opens the tour: the map first","Left: two folders, you and this project","Middle: Claude Code loads them at the start","Right: MCP, its hands and feet","Bottom: LibreChat, separate","Every file comes back today"],
+  notes: "Say: Before we fill anything in, the map. Claude Code itself remembers nothing between sessions. What it knows and what it may do lives in files, in two folders, and it loads them every time it starts. Through MCP it reaches outside your laptop.\n\nWhat you see: Click: one part at a time. 1 ~/.claude/, a hidden folder in your home folder, next to your project, not around it: your personal CLAUDE.md (about you), your own settings.json and the notes Claude keeps for itself (auto memory). It stays on your laptop and counts for every project. 2 Your project folder: intent.md (done), CLAUDE.md for this project, .claude/settings.json with the house rules and .mcp.json with its connections. This folder goes into git, so the team gets the same rules. 3 Claude Code in the middle: it loads both folders at the start of every session. 4 Hands and feet: through MCP it works in GitLab this afternoon, Jira and Confluence in the support days. 5 LibreChat: separate, in the browser, for quick questions and images.\n\nLink back: Every file here comes back today. Point back at this slide every time one of them comes up.\n\nWatch for: People think the project lives inside ~/.claude/ because of the projects/ folder there. It only holds Claude's notes and chat history per project; the code stays in the project folder.\n\nBackground: Project settings beat your own, and company settings beat both. /memory shows the loaded CLAUDE.md files and auto memory; /mcp shows the connections. Day 2 adds skills, agents and hooks to the same project folder.\n\nNext: Your context window in Claude Code."
 },
 
 { // Slide 49
@@ -1095,23 +1103,31 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 52
   title: "CLAUDE.md and memory",
   kicker: "DAY 1 · PART 2 · CLAUDE.MD",
-  subtitle: "How Claude Code gets to know you, and your project.",
+  subtitle: "The model doesn't learn from you. Only what's written down carries over.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "card:2", text: "written down", tone: "orange" }] },
-  cards: [
-    { title: "~/.claude/CLAUDE.md", body: "About you. Loaded in every project. Stays on your laptop." },
-    { title: "CLAUDE.md in the project", body: "About this project. Shared with the team through git." },
-    { title: "CLAUDE.local.md", body: "Your own notes for this project. Not in git." },
-    { title: "Memory", body: "The model doesn't learn from you. What carries over is what's written down. /memory shows it." }
-  ],
+  visual: { stepThrough: ".cmap-step, .slide-main > .tagline", highlight: [{ in: "subtitle", text: "written down", tone: "orange" }], map: {
+    tree: { root: "~", rootNote: "your home folder", groups: [
+      [ ["├── ", ".claude/", "about you", 1],
+        ["│   ├── ", "CLAUDE.md", "you, in every project"],
+        ["│   ├── ", "settings.json", "rules: next slide", 0, 1],
+        ["│   └── ", "projects/…/memory/", "Claude's own notes"] ],
+      [ ["└── ", "aether-snake/", "your project", 1],
+        ["    ├── ", "CLAUDE.md", "this project, in git"],
+        ["    ├── ", "CLAUDE.local.md", "you here, not in git"],
+        ["    ├── ", "intent.md", "pulled in with @intent.md", 0, 1],
+        ["    ├── ", ".claude/settings.json", "rules: next slide", 0, 1],
+        ["    └── ", ".mcp.json", "connections", 0, 1] ]
+    ] },
+    inLabel: "loads", center: "Every new session", centerSub: "/memory shows what's loaded"
+  } },
   keyPoints: [
-    "Root CLAUDE.md = you, everywhere",
-    "Project CLAUDE.md = this project, the team",
-    "Read at the start of every session",
-    "The model itself doesn't learn",
-    "Only what's written down carries over"
+    "The model doesn't learn: files carry over",
+    "Same tree as the map, memory lit up",
+    "You, the project, you-here, Claude's notes",
+    "All loaded at the start of every session",
+    "/memory shows them; keep them short"
   ],
-  notes: "Three CLAUDE.md files, three scopes: you (~/.claude/CLAUDE.md, every project, stays on your laptop), the project (CLAUDE.md, shared through git), and you in this project (CLAUDE.local.md, not in git). A line like @intent.md pulls another file in at the start. Claude Code can also keep its own memory notes (auto memory) when you tell it to remember something; /memory shows and opens all of them. The model itself never learns from you: only what's written down carries over. Everything here is loaded in every session, which is why it should stay short: tomorrow we'll move detail out of it.",
+  notes: "Say: Claude Code doesn't remember you, and the model never learns from you. What carries over from one session to the next is what's written down. These are the files it reads at the start, every time.\n\nWhat you see: The same folder tree as the map, with only the memory files lit up. Click: first ~/.claude/: CLAUDE.md is about you, in every project, only on your laptop; projects/…/memory/ holds the notes Claude writes itself when you say 'remember this' (auto memory). Then the project: CLAUDE.md is about this project and goes into git, so the team shares it; CLAUDE.local.md is your own notes for this project, not in git. Then the bot: all four land in every new session. The dimmed files are not memory: settings.json is the next slide, intent.md is only pulled in when CLAUDE.md says @intent.md.\n\nLink back: This is the left side of the map from a few slides ago. Two folders side by side in your home folder; the project is never inside ~/.claude/.\n\nWatch for: 'Isn't the project CLAUDE.md the master one?' No: ~/.claude/CLAUDE.md is about you, the project CLAUDE.md is about the project. Both are loaded; when they disagree, the project one usually wins because it's more specific. And ~/.claude/projects/ only holds Claude's notes and chat history per project, not your code.\n\nBackground: A line like @intent.md in CLAUDE.md pulls another file in at the start. /memory shows and opens all of them. Everything is loaded in every session, which is why it should stay short: tomorrow we'll move detail out of it.\n\nNext: Assignment 3, a CLAUDE.md for your game.",
   tagline: "Loaded at the start of every session, so keep it short."
 },
 
@@ -1119,6 +1135,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 3: A CLAUDE.md for your game",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 3 · PLAN",
   subtitle: "Tell Claude once how to work in this project.",
   calm: true,
@@ -1126,7 +1143,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Type /clear, then ask", prompt: "Which rules must you follow in this project?", after: "Claude guesses the rules from your files." },
     { text: "Write CLAUDE.md", prompt: "Write a short CLAUDE.md for this project:\n- A Snake game in plain HTML, CSS and JavaScript. No frameworks, no outside links.\n- Tests live in tests/ and run with npm test.\n- Always show me a plan before you change files.\n- The player name is a nickname. No real names, emails or other personal data in this repo.\n- Read @intent.md for what we're building.\nKeep it under 15 lines. Show it to me before you save it.", after: "Claude shows the file. Read it, then say yes." },
     { text: "Type /clear, and ask again", prompt: "Which rules must you follow in this project?", after: "Now it names exactly your rules, without searching." },
-    "Type /memory: which files are loaded? Esc to leave."
+    { text: "See which memory files are loaded. Esc closes the list.", prompt: "/memory" }
   ],
   expected: "After /clear, Claude names your project's rules without searching for them.",
   prompt: "Write a short CLAUDE.md for this project:\n- A Snake game in plain HTML, CSS and JavaScript. No frameworks, no outside links.\n- Tests live in tests/ and run with npm test.\n- Always show me a plan before you change files.\n- The player name is a nickname. No real names, emails or other personal data in this repo.\n- Read @intent.md for what we're building.\nKeep it under 15 lines. Show it to me before you save it.",
@@ -1137,7 +1154,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Keep it short: it costs tokens every session",
     "/memory shows what's loaded"
   ],
-  notes: "Say: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your rules. CLAUDE.md is the file it loads at the start of every session.\n\nAsk the room: Steps 1 and 3 are the same question on purpose. Let a few people read Claude's answer out loud, before and after.\n\nWatch for: A personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'. Ask which rule wins, and why.\n\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory.\n\nBackground: Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command.\n\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop.\n\nNext: Decide first what Claude may do."
+  notes: "Say: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your rules. CLAUDE.md is the file it loads at the start of every session.\n\nAsk the room: Steps 1 and 3 are the same question on purpose. Let a few people read Claude's answer out loud, before and after.\n\nWatch for: A personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'. Ask which rule wins, and why.\n\nWatch for: /memory takes no question after it: people type '/memory which files are loaded?'. It opens a list of memory files; Esc closes it with 'Cancelled memory editing', which is fine.\n\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory.\n\nBackground: Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command.\n\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop.\n\nNext: Decide first what Claude may do."
 },
 
 { // Slide 54
@@ -1167,13 +1184,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 4: House rules before you build",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 4 · PLAN",
   subtitle: "Ask before saving. Never anything you can't undo.",
   calm: true,
   steps: [
     { text: "Write your house rules", prompt: "Write .claude/settings.json for this project:\n- Ask me before every git commit and every git push.\n- Never allow git push --force or rm -rf.\n- Never let Claude merge a merge request (glab mr merge, gh pr merge): I do that myself.\nShow me the file before you save it.", after: "Claude always asks before it writes settings.json. Read it, then say yes." },
-    { text: "Restart: /exit, then claude", after: "Check the bottom line. Not manual? Shift+Tab.", warn: true },
-    "Type /permissions. ←→ shows the Ask and Deny tabs. Esc to leave.",
+    { text: "Restart Claude Code", cmds: ["/exit", "claude"], after: "Not manual at the bottom? Shift+Tab.", warn: true },
+    { text: "See your rules", prompt: "/permissions", after: "←→ shows the Ask and Deny tabs. Esc closes it." },
     { text: "Test it", prompt: "Run exactly this command: git push --force origin main", after: "Blocked by your permission settings. Which rule did that?" }
   ],
   expected: "Commit and push ask you first. Force push, rm -rf and merging your own merge request are blocked.",
@@ -1239,6 +1257,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 5: Plan it in layers",
+  mode: "plan",
   kicker: "DAY 1 · ASSIGNMENT 5 · DESIGN",
   subtitle: "One big prompt gives you a game you can't steer.",
   calm: true,
@@ -1312,6 +1331,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 6: Build layer 1, look inside, commit",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 6 · BUILD",
   subtitle: "A small step. Understand it. Save it.",
   calm: true,
@@ -1319,7 +1339,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Build layer 1", prompt: "Build only layer 1 from the plan.", after: "Say yes to each file." },
     "Open index.html in your browser: do you see the board?",
     { text: "Look inside", prompt: "Explain @game.js in plain words.", after: "Your file may be called snake.js: type @ and pick it." },
-    "Type !git status: which files are new?",
+    { text: "Which files are new?", prompt: "!git status", after: "The ! runs the command yourself, without Claude." },
     { text: "Save it", prompt: "Commit this layer with a clear message.", after: "Claude asks first: that's your rule. Say yes." }
   ],
   expected: "Layer 1 works, you can explain it, and it's committed.",
@@ -1373,6 +1393,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 7: Put your game on GitLab",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 7 · DEPLOY",
   subtitle: "Your save points are only on your laptop. Put them somewhere safe.",
   calm: true,
@@ -1418,6 +1439,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 8: Layers 2 to 4, and one rescue",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 8 · BUILD",
   subtitle: "Same rhythm for every layer. One thing goes wrong on purpose.",
   calm: true,
@@ -1479,15 +1501,16 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 9: A test that finds a bug",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 9 · TEST",
   subtitle: "A test plays your game for you and checks one rule: the snake can't turn back into itself.",
   calm: true,
   steps: [
     { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
-    "Run it yourself: !npm test. Passed or failed?",
+    { text: "Run it yourself: passed or failed?", prompt: "!npm test" },
     { text: "Failed? Let Claude fix the game", prompt: "The test fails. Fix the game so the snake can't turn back into itself. Don't change the test.", after: "The game, never the test.", warn: true },
     { text: "Passed? Break the game on purpose", prompt: "Remove the code that stops the snake from turning back into itself. Then run npm test.", after: "The test fails now: it catches the bug." },
-    "Undo: empty input, Esc twice, “Restore code”. !npm test passes again.",
+    { text: "Undo: empty input, Esc twice, “Restore code”. Passes again?", prompt: "!npm test" },
     "Commit and push. This test now guards the rule."
   ],
   expected: "A test you've seen fail, and that passes now.",
@@ -1506,6 +1529,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 10: The rules grow",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 10 · TEST",
   subtitle: "Two house rules: running the tests is always fine. Changing a test needs your yes.",
   calm: true,
@@ -1554,12 +1578,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 11: Let a hook guard your game",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 11 · TEST",
   subtitle: "A hook runs the test by itself after every change. You can't forget it any more.",
   calm: true,
   steps: [
     { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
-    "Type /hooks: is your hook there? Esc to leave.",
+    { text: "Is your hook there? Esc to leave.", prompt: "/hooks" },
     { text: "Break the game on purpose", prompt: "In game.js, let the snake turn straight back into itself. Just do it.", after: "Say yes. The hook runs the test by itself: it fails, and Claude asks what to do." },
     { text: "Undo the break", prompt: "Throw that change away.", after: "game.js is back. The test passes again." },
     "Commit and push. The hook now tests every change."
@@ -1602,6 +1627,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 12: Look at your context window",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 12 · BUILD",
   subtitle: "With every message, Claude rereads the whole conversation. Look inside, and make room.",
   calm: true,
@@ -1625,6 +1651,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 
 { // Slide 75
   title: "Assignment 13: Make your avatar in LibreChat",
+  mode: "librechat",
   kicker: "DAY 1 · ASSIGNMENT 13 · BUILD",
   subtitle: "Your character for tomorrow's leaderboard. No real name, no email, no photo.",
   calm: true,
@@ -1655,6 +1682,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 
 { // Slide 76
   title: "Assignment 14: Put your avatar in your game",
+  mode: "plan",
   kicker: "DAY 1 · ASSIGNMENT 14 · BUILD",
   subtitle: "Give the picture to Claude Code: it shows your character on the start screen.",
   calm: true,
@@ -1686,6 +1714,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   title: "Assignment 15: Hand it over",
+  mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 15 · MAINTAIN",
   subtitle: "Tomorrow you continue. Maybe someone else does.",
   calm: true,
@@ -1868,7 +1897,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 2 · ASSIGNMENT 16 · PLAN",
   subtitle: "Yesterday's conversation is gone from Claude's head. Your files aren't.",
   steps: [
-    "!git pull: get the latest from GitLab.",
+    { text: "Get the latest from GitLab", prompt: "!git pull" },
     "claude --continue",
     "Plan mode. Paste the prompt.",
     "Read the new intent.md before you approve."
@@ -1937,7 +1966,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     "Paste the prompt.",
     "Read spec.md before you approve. Say yes to the new tests.",
-    "!npm test: the new tests are red. Good.",
+    { text: "The new tests should be red. Good.", prompt: "!npm test" },
     "Commit and push."
   ],
   expected: "spec.md and red tests, committed.",
@@ -1985,7 +2014,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A new feature, next to main.",
   steps: [
     "Paste the prompt.",
-    "Build until !npm test is green.",
+    { text: "Build until the tests are green", prompt: "!npm test" },
     "Play level 2.",
     "Commit and push the branch."
   ],
@@ -2005,7 +2034,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Paste the prompt.",
     "Open the merge request on GitLab.",
     "Read the changes. Happy? Merge it yourself.",
-    "Back in the terminal: !git checkout main && git pull"
+    { text: "Back in the terminal: get the merged work on main", prompt: "!git checkout main && git pull" }
   ],
   expected: "Level 2 is in main, through a merge request you reviewed.",
   prompt: "Open a merge request on GitLab for the branch level-2 into main. Description: what changed, why, and how it was tested. Don't merge it: I review and merge it myself.",
@@ -2138,7 +2167,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     "Paste the prompt.",
     "Open the skill folder in VS Code.",
-    "/clear, then: “Make level 3: a maze.”",
+    "Type /clear, then ask: “Make level 3: a maze.”",
     "Did Claude use the skill? Did it run the script?",
     "Commit, push, merge request."
   ],
@@ -2204,9 +2233,9 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 2 · ASSIGNMENT 21 · MAINTAIN",
   subtitle: "Your CLAUDE.md keeps growing, and it's loaded in every session.",
   steps: [
-    "/context: note the size of your memory files.",
+    { text: "Note the size of your memory files", prompt: "/context" },
     "Paste the prompt. Read both files before you approve.",
-    "/clear, then /context again.",
+    { text: "Type /clear, then look again", prompt: "/context" },
     "Ask about a level: does Claude still know the level rules?"
   ],
   expected: "A short root CLAUDE.md, and a levels/CLAUDE.md that only loads when it's needed.",
@@ -2251,7 +2280,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A second opinion, in its own context.",
   steps: [
     "Paste the prompt. Read the file, then Yes.",
-    "Restart so the agent loads: /exit, then claude --continue. Check the mode.",
+    { text: "Restart so the agent loads, then check the mode", cmds: ["/exit", "claude --continue"] },
     "“Let the verifier check level 3.”",
     "Read the report. Do you agree?",
     "Commit it on a branch, merge request, merge."
@@ -2300,7 +2329,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     "Paste the prompt. Read SKILL.md before you approve.",
     "Commit the new skill first (branch, merge request, merge): the workflow wants a clean start.",
-    "Type /ship-level 4",
+    { text: "Run your skill", prompt: "/ship-level 4" },
     "Approve the push when Claude asks.",
     "Review and merge the merge request on GitLab."
   ],
@@ -2342,7 +2371,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     "Shift+Tab to “accept edits on”: file edits go through, commit and push still ask.",
     "Paste the prompt.",
-    "Watch. Approve the commit and the push. /goal on its own shows the status.",
+    { text: "Watch. Approve the commit and the push. Want the status?", prompt: "/goal", after: "On its own, it shows the status." },
     "Goal met? Play level 5 yourself.",
     "Happy? Merge the merge request."
   ],
