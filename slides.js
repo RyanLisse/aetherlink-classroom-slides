@@ -245,13 +245,17 @@ window.SLIDES = [
   type: "context",
   visual: { opener: 'team', stagger: 'pop' },
   cards: [
-    { title: "Jessy The", body: "" },
-    { title: "Constance van der Vlist", body: "" },
-    { title: "Maarten Nauw", body: "" },
-    { title: "Ryan Lisse", body: "" }
+    { title: "Jessy The", body: "", role: "Frontend & AI Developer · Speaker & Host",
+      back: "Builds AI-powered apps with React, Next.js and TypeScript.\nSpeaks and hosts at tech conferences like JSWorld and Frontmania.\nTeaches workshops and masterclasses for developers and teams." },
+    { title: "Constance van der Vlist", body: "", role: "CEO & Co-founder AetherLink",
+      back: "AI strategy, implementation and training, in the Netherlands and Finland.\nStarted in veterinary clinics, fixing the X-ray machines and computers.\nFrom there: clinic software, robotics, AI and Web3." },
+    { title: "Maarten Nauw", body: "", role: "Co-founder CFX · Game Developer · Robotics",
+      back: "Co-founder of CFX, a video and visual effects studio.\nMakes branded content for game developers and brands: film, 2D/3D animation, visual effects.\nBuilds games and robots." },
+    { title: "Ryan Lisse", body: "", role: "AI Engineer · Agentic systems",
+      back: "AI Engineer at Blinqx: multi-agent systems, from proof of concept to production.\nEval-first, test-driven, building for scale, not for demos.\nWorks with TypeScript, Python, MCP and Claude Code." }
   ],
-  keyPoints: ["We are one team: AetherLink","Each trainer: one or two sentences","Who you are, what you do in this programme","Something personal"],
-  notes: "We present ourselves as one team: team AetherLink, not as separate freelancers. Each trainer introduces themselves in one or two sentences: who you are, what you do in this programme, and something personal. Keep it short: the room gets to know you over the next two days."
+  keyPoints: ["We are one team: AetherLink","Click a card: it flips to the details","Each trainer: one or two sentences","Something personal"],
+  notes: "We present ourselves as one team: team AetherLink, not as separate freelancers. Each trainer clicks their own card, so it flips to the details, and says one or two sentences: who you are, what you do in this programme, and something personal. Click again to flip it back. Keep it short: the room gets to know you over the next two days."
 },
 
 { // Slide 8
