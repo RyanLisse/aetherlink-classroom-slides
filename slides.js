@@ -961,7 +961,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Ask your first question", prompt: "What is in this folder?", after: "Empty. It didn't ask: reading needs no yes." }
   ],
   expected: "Claude Code runs in your folder, in manual mode.",
-  prompt: "mkdir aether-snake\ncd aether-snake\ngit init\nclaude",
   keyPoints: [
     "git init: a repo on your own laptop, offline",
     "Trust the folder: ↓ first, the default is No",
@@ -1011,7 +1010,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Say yes to intent.md, then open it in VS Code", after: "Outcome, done-when checks, boundaries, open questions." }
   ],
   expected: "An intent.md with your outcome, three checks, boundaries and open questions.",
-  prompt: "Ask me questions, one at a time, about the Snake game I want to build. It's a browser game in plain HTML, CSS and JavaScript, and the start screen shows my nickname and avatar. Then write intent.md with:\n- Outcome: what the game does\n- Done when: three checks anyone can verify\n- Boundaries: what you must not do (for example: no outside links, no personal data except a nickname)\n- Open questions\nDon't write any code yet.",
   keyPoints: [
     "Plan phase: what do we want?",
     "Claude interviews, you answer",
@@ -1146,7 +1144,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "See which memory files are loaded. Esc closes the list.", prompt: "/memory" }
   ],
   expected: "After /clear, Claude names your project's rules without searching for them.",
-  prompt: "Write a short CLAUDE.md for this project:\n- A Snake game in plain HTML, CSS and JavaScript. No frameworks, no outside links.\n- Tests live in tests/ and run with npm test.\n- Always show me a plan before you change files.\n- The player name is a nickname. No real names, emails or other personal data in this repo.\n- Read @intent.md for what we're building.\nKeep it under 15 lines. Show it to me before you save it.",
   keyPoints: [
     "/clear empties the conversation",
     "CLAUDE.md is loaded every session",
@@ -1195,7 +1192,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Test it", prompt: "Run exactly this command: git push --force origin main", after: "Blocked by your permission settings. Which rule did that?" }
   ],
   expected: "Commit and push ask you first. Force push, rm -rf and merging your own merge request are blocked.",
-  prompt: "Write .claude/settings.json for this project:\n- Ask me before every git commit and every git push.\n- Never allow git push --force or rm -rf.\n- Never let Claude merge a merge request (glab mr merge, gh pr merge): I do that myself.\nShow me the file before you save it.",
   keyPoints: [
     "Permissions before building",
     "ask: commit and push",
@@ -1269,7 +1265,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Shift+Tab back to “manual mode on”"
   ],
   expected: "A plan of five layers, each with its own check, and nothing built yet.",
-  prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname and avatar). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.",
   keyPoints: [
     "Design phase",
     "Layers you can steer",
@@ -1319,7 +1314,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Save it. Claude asks first (your rule): say yes.", prompt: "Commit this layer with a clear message." }
   ],
   expected: "Layer 1 works, you can explain it, and it's committed.",
-  prompt: "Build only layer 1 from the plan.\n\nThen:\nExplain @game.js in plain words.\n\nThen:\nCommit this layer with a clear message.",
   keyPoints: [
     "Build phase: one layer",
     "@file points Claude at a file",
@@ -1379,7 +1373,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Open the project on GitLab in your browser. Is your commit there?"
   ],
   expected: "Your game and its commits are in a private project on GitLab.",
-  prompt: "Create a private project called aether-snake-[nickname] in my personal GitLab space. Add it as the remote and push main. Ask me before you push.",
   keyPoints: [
     "Deploy phase: put it where others can see it",
     "MCP: Claude talks to GitLab",
@@ -1423,7 +1416,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Build layer 4: game over", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
   ],
   expected: "Layers 1 to 4 work and are on GitLab, and you've undone a change with Esc Esc.",
-  prompt: "Build only layer 2 from the plan.\n\nThen:\nBuild only layer 3 from the plan.\n\nThen, on purpose:\nRemove the score entirely.\n(Claude asks: answer “Yes, do it anyway. Leave intent.md as it is.”)\n\nAfter the rescue:\nBuild only layer 4 from the plan.",
   keyPoints: [
     "The rhythm: works, commit, push",
     "Claude defends intent.md",
@@ -1481,7 +1473,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit and push. This test now guards the rule."
   ],
   expected: "A test you've seen fail, and that passes now.",
-  prompt: "Write a test in tests/ for this rule: when the snake moves right and I press the left arrow key, the game must not end. The same when I press the up arrow key and then the left arrow key very fast. Make it run with npm test. If it fails, say in plain words what went wrong. Don't change the game yet: first show me whether the test passes.",
   keyPoints: [
     "Test phase",
     "Test a hidden rule, not the obvious",
@@ -1508,7 +1499,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Shift+Tab to “manual mode on”. Commit and push."
   ],
   expected: "Claude runs the tests without asking, and a change to a test always needs your yes.",
-  prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the rules that are already there. Show me the file before you save it.",
   keyPoints: [
     "Rules grow with the project",
     "allow: npm test",
@@ -1570,7 +1560,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit and push. The hook now tests every change."
   ],
   expected: "After every file change the test runs by itself, and a break gets caught.",
-  prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.",
   keyPoints: [
     "PostToolUse, matcher Edit|Write",
     "npm test, failures back to Claude",
@@ -1596,7 +1585,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "For a new task, later: /clear empties the conversation. CLAUDE.md and your files stay."
   ],
   expected: "You know what fills the window, and when to use /compact or /clear.",
-  prompt: "/context\n/compact keep the test rules and the plan\n/context",
   keyPoints: [
     "Every message rereads the conversation",
     "/context: what costs what",
@@ -1658,7 +1646,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit and push"
   ],
   expected: "Your game shows your avatar and nickname. Without a picture it shows the first letter of your nickname.",
-  prompt: "I put my avatar in @assets/[file name]. Show it with my nickname [nickname] on the start screen of my game. Without a picture, show the first letter of my nickname. Plan first and show me the plan before you change anything.",
   keyPoints: [
     "LibreChat made it, Claude Code places it",
     "Picture into assets/ first",
@@ -1682,7 +1669,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit and push"
   ],
   expected: "PROGRESS.md is on GitLab, and someone else could carry on.",
-  prompt: "Write PROGRESS.md: what we built today, how we tested it, which rules and hooks are active, and what is still open. No personal data.",
   keyPoints: [
     "Maintain phase",
     "The handover file",

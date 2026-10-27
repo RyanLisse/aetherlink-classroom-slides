@@ -1011,6 +1011,7 @@ function render() {
   finishRender(s);
 }
 function finishRender(s) {
+  $('prompt').hidden = !s.prompt;   // only where the prompt isn't already on the slide
   $('count').textContent = countText(current, true);
   renderProgress();
   $('prev').disabled = current === 0; $('next').disabled = current === slides.length - 1;
