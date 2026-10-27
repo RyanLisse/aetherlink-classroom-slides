@@ -59,6 +59,19 @@ function setupTimer(s) {
   $('p-timer').hidden = !box; $('p-timer-label').textContent = label; if (box) slot.append(box);
 }
 
+// notes: a blank line starts a new paragraph; a line that starts with "Label:" (Why now, Watch for, If stuck…) gets the label in bold
+function renderNotes(el, text) {
+  el.replaceChildren(...text.split(/\n{2,}/).map(par => {
+    const p = document.createElement('span'); p.className = 'p-note-par';
+    par.split('\n').forEach((line, i) => {
+      if (i) p.append(document.createElement('br'));
+      const m = /^([A-Z][A-Za-z ?/]{1,24}):\s+/.exec(line);
+      if (m) { const b = document.createElement('strong'); b.textContent = m[1] + ': '; p.append(b, line.slice(m[0].length)); } else p.append(line);
+    });
+    return p;
+  }));
+}
+
 function renderSlide(index) {
   if (!Number.isInteger(index) || index < 0 || index >= slides.length) return;
   current = index;
@@ -74,7 +87,7 @@ function renderSlide(index) {
   const keys = s.keyPoints || [];
   $('p-keys-block').hidden = !keys.length;
   $('p-keys').replaceChildren(...keys.map(k => { const li = document.createElement('li'); li.textContent = k; return li; }));
-  $('p-notes').textContent = s.notes || 'No facilitator notes on this slide.';
+  if (s.notes) renderNotes($('p-notes'), s.notes); else $('p-notes').textContent = 'No facilitator notes on this slide.';
   $('p-notes').classList.toggle('p-empty', !s.notes);
   const promptBlock = $('p-prompt-block');
   if (s.prompt) { promptBlock.hidden = false; $('p-prompt').textContent = s.prompt; } else { promptBlock.hidden = true; }

@@ -845,48 +845,70 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 43
-  title: "Watch: where you'll be tonight",
-  kicker: "DAY 1 · PART 2 · LIVE DEMO",
-  subtitle: "The trainer opens a finished game in VS Code. Every file you see is one lesson today.",
+  title: "A tour of Claude Code",
+  kicker: "DAY 1 · PART 2 · TOUR",
+  subtitle: "One screen, six parts. Each one gets its own moment today.",
   type: "concept",
-  visual: { code: 0 },
+  visual: { tour: {
+    title: "claude · ~/my-project",
+    screen: [
+      { k: "dim", t: "✻ Welcome to Claude Code" },
+      { k: "dim", t: "  cwd: ~/my-project", n: [1] },
+      { k: "user", t: "> make the page title bigger" },
+      { k: "tool", t: "● Read(CLAUDE.md)", n: [2, 6] },
+      { k: "tool", t: "● Update(index.html)", n: [2] },
+      { k: "out", t: "  ⎿  1 line changed", n: [2] },
+      { k: "tool", t: "● Bash(npm test)", n: [2] },
+      { k: "ask", t: "  Run this command?\n  ❯ 1. Yes   2. Yes, don't ask again   3. No", n: [3] },
+      { k: "user", t: "> /", n: [5] },
+      { k: "menu", t: "  /help  /model  /context  /mcp  …", n: [5] },
+      { k: "mode", t: "⏵⏵ accept edits on (shift+tab to cycle)", n: [4] }
+    ] } },
   cards: [
-    { title: "aether-snake/", body: "intent.md              what you want\nCLAUDE.md              how Claude works here\nindex.html  style.css  snake.js\ntests/                 the test\nassets/                your avatar\nPROGRESS.md            the handover\n.mcp.json              the GitLab connection\n.claude/settings.json  rules + hook" },
-    { title: "Watch for", body: "Who wrote each file: you or Claude?\nWhat Claude reads at the start of every session.\nWhich file holds the rules Claude can't ignore.\nThe git history: one commit per step." }
+    { title: "Your folder", body: "You start claude in a folder. That folder is where it works." },
+    { title: "Tools", body: "Claude reads files, edits them and runs commands. Every step shows up on screen." },
+    { title: "The question", body: "Before a change or a command, it asks. You answer 1, 2 or 3." },
+    { title: "Modes", body: "How much may it do before it asks? Shift+Tab switches. Next slide." },
+    { title: "The / menu", body: "Type / for everything else: help, model, context, connections." },
+    { title: "Files that steer it", body: "CLAUDE.md: what it knows.\nsettings.json: what it may do.\n.mcp.json: what it connects to." }
   ],
-  tagline: "You start from an empty folder. Tonight yours looks like this.",
   keyPoints: [
-    "Finished game in VS Code, terminal next to it",
-    "Click through each file: one lesson each",
-    "Show the git log: one commit per step",
-    "Start claude in it: it already knows the project",
-    "Participants start empty"
+    "Click: one part at a time, the screen lights up",
+    "Folder, tools, the question",
+    "Modes and / menu: the next two slides",
+    "Files that steer it: you make them today",
+    "Then show it live in an empty folder"
   ],
-  notes: "This replaces a tour of loose tips: show the destination first. Before class, build this repo yourself by doing today's assignments once (about 45 minutes); keep it on your laptop. Open it in VS Code with the terminal next to it. Click through the files top to bottom and say one sentence each: intent.md is what we wanted, CLAUDE.md is what Claude reads every session, the game files are what Claude built, tests/ is the evidence, .claude/settings.json holds the rules Claude can't ignore and the hook, .mcp.json is the GitLab connection, PROGRESS.md is the handover. Then type git log --oneline: one commit per step. Start claude and ask 'What is this project?': it answers from CLAUDE.md. End with: you start from an empty folder, and tonight yours looks like this. Participants never get this repo; they build their own."
+  notes: "A map before the details: everything they will see on the screen today, in one picture. Click through the six parts; each click lights up the matching line on the screen. 1 Your folder: claude works in the folder you start it in, so you always start it in your own project folder. 2 Tools: reading, editing and running commands; every step is a line with a dot, so you can follow what it does. 3 The question: before a change or a command it asks; 1 is yes once, 2 is yes and don't ask again for this kind of thing, 3 is no. Read before you answer. 4 Modes: how much it may do before it asks; the bottom line says which mode you are in. Next slide. 5 The / menu: everything else lives behind /. The slide after next. 6 Files that steer it: CLAUDE.md, .claude/settings.json and .mcp.json; they don't exist yet, they make them today. Notice on the screen: in accept edits mode the file edit went through without a question, but the command still asks.\n\nThen show it live: make an empty folder, start claude in it, type one small request and let them see the same parts on a real screen. Their screen will look a little different (version, colours, wording): that is fine, the parts are the same."
 },
 
 { // Slide 44
   title: "Modes: how much Claude may do by itself",
   kicker: "DAY 1 · PART 2 · MODES",
-  subtitle: "Shift+Tab switches the mode. You see it at the bottom of the screen.",
+  subtitle: "Shift+Tab switches the mode. You see it at the bottom of the screen. Reading your files never needs a yes.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "plan mode", tone: "orange" }] },
-  cards: [
-    { title: "Manual", body: "“manual mode on”. Asks before every file edit and every command. Use this while you learn." },
-    { title: "Accept edits", body: "Edits files without asking. Commands still ask." },
-    { title: "Plan", body: "Reads and plans. Changes nothing until you approve the plan." },
-    { title: "Auto", body: "Keeps going without asking. Risky actions are still checked and can be blocked." }
-  ],
+  layout: "matrix",
+  visual: { stepThrough: true, highlight: [{ in: "tagline", text: "manually approve edits", tone: "orange" }] },
+  matrix: {
+    columns: ["Edits files", "Runs commands", "Pick it when"],
+    rows: [
+      { title: "Manual", sub: "manual mode on", cells: [["ask", "Asks you"], ["ask", "Asks you"], "You're learning, or the code is new to you. Today's default."] },
+      { title: "Accept edits", sub: "accept edits on", cells: [["yes", "Just does it"], ["ask", "Asks you"], "You agreed on what to change and read the result after. Pushing or installing still stops for you."] },
+      { title: "Plan", sub: "plan mode on", cells: [["no", "Not yet"], ["no", "Only to look around"], "The change is big, or you're not sure how. See the plan before anything changes."] },
+      { title: "Auto", sub: "auto mode on", cells: [["yes", "Just does it"], ["yes", "Risky ones are checked"], "A clear task, tests and git as a safety net, and you review after. Not today."] }
+    ]
+  },
   tagline: "Check the bottom line after every restart. Approving a plan? Pick “manually approve edits”, not the auto mode default.",
   keyPoints: [
     "Shift+Tab cycles the modes",
-    "Manual: asks for everything",
-    "Accept edits: files yes, commands ask",
-    "Plan: read-only until you approve",
+    "The question: what may Claude do before it asks?",
+    "Manual vs accept edits: only file edits differ",
+    "Plan: look and plan, change nothing",
+    "Auto: not today",
     "A restart can bring back auto mode",
     "Plan approval: choose option 2"
   ],
-  notes: "The mode is the first thing the user controls: how much may Claude do before it asks? Show it live: press Shift+Tab a few times and read the label at the bottom. In Claude Code 2.1.309 the order is manual, accept edits, plan, auto. Manual asks before every edit and command. Accept edits lets file edits through, commands still ask. Plan mode is read-only until you approve. Auto mode keeps going, while risky actions are still checked. Two traps from the dry run, say them out loud: 1) Claude Code starts in your default mode, and on some laptops that's auto mode; every restart goes back to it, so check the bottom line after every restart and Shift+Tab to manual. 2) When you approve a plan, the first and highlighted option is 'Yes, and use auto mode'. Pressing Enter switches Claude to auto mode and it stops asking. Always choose option 2, 'Yes, manually approve edits'. There is also an option to skip all permission checks for automated setups: it exists, we don't use it."
+  notes: "Manual vs accept edits, the question people ask: the only difference is file edits. In manual Claude stops before every file it writes and before every command. In accept edits it writes files straight away, and still stops before every command (git push, npm install, npm test). So accept edits is for when you already agreed on what to change and would only be pressing yes ten times; you read the result afterwards (or Esc Esc to undo). Commands are where the real risk is, and they still ask. Reading files never asks, in any mode. Your own allow and ask rules in .claude/settings.json (Assignment 4) apply on top of every mode.\n\nWhen do you use which, today: manual for everything; plan mode in Assignment 5; accept edits briefly in Assignment 10 to see that your ask rule still stops it. Auto is for later: long, clear tasks with tests and git behind them.\n\nThe mode is the first thing the user controls: how much may Claude do before it asks? Show it live: press Shift+Tab a few times and read the label at the bottom. In Claude Code 2.1.309 the order is manual, accept edits, plan, auto. Manual asks before every edit and command. Accept edits lets file edits through, commands still ask. Plan mode is read-only until you approve. Auto mode keeps going, while risky actions are still checked. Two traps from the dry run, say them out loud: 1) Claude Code starts in your default mode, and on some laptops that's auto mode; every restart goes back to it, so check the bottom line after every restart and Shift+Tab to manual. 2) When you approve a plan, the first and highlighted option is 'Yes, and use auto mode'. Pressing Enter switches Claude to auto mode and it stops asking. Always choose option 2, 'Yes, manually approve edits'. There is also an option to skip all permission checks for automated setups: it exists, we don't use it."
 },
 
 { // Slide 45
@@ -900,31 +922,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   keyPoints: ["Type / live","/help, /model","/permissions: link to the gate","/statusline: show a nice one","/memory opens CLAUDE.md","Skills appear here too (Day 2)"],
   notes: "Type / live and scroll through the menu. /help shows everything Claude Code can do. /model lets you choose Haiku, Sonnet or Opus: remember the model-choice slide. /permissions shows what Claude may do without asking: the gate from a few slides ago. /statusline sets what you see at the bottom of the screen; show a good example. /memory opens your CLAUDE.md, which is coming up. And the skills you install or make show up in this menu too: that's tomorrow."
-},
-
-{ // Slide 46
-  type: "practice",
-  layout: "exercise",
-  title: "Assignment 1: Start Claude Code in your own folder",
-  kicker: "DAY 1 · ASSIGNMENT 1 · SETUP",
-  subtitle: "An empty folder is all you need. No GitLab yet.",
-  steps: [
-    "Open a terminal.",
-    "mkdir aether-snake && cd aether-snake && git init",
-    "Type claude. Press ↓ to “Yes, I trust this folder”, then Enter.",
-    "Type / and scroll. Try /help, then /model, and leave with Esc.",
-    "Press Shift+Tab until the bottom says “manual mode on”."
-  ],
-  expected: "Claude Code runs in your own folder, in manual mode.",
-  prompt: "mkdir aether-snake\ncd aether-snake\ngit init\nclaude",
-  keyPoints: [
-    "git init: a repo on your own laptop, offline",
-    "Trust the folder: say yes",
-    "/ menu, /help, /model",
-    "Shift+Tab: find plan mode",
-    "Stuck? Say it now"
-  ],
-  notes: "git init turns the folder into a git repository on your own laptop: no GitLab, no internet needed. GitLab comes later, when there is something to share. The trust question is the first trap: the highlighted answer is 'No, exit', so pressing Enter quits Claude Code. Say: arrow down first. Trusting matters later too: Claude Code only applies a project's own allow rules once the folder is trusted. In /model, Enter sets a new default model; Esc just leaves. Finish in manual mode: some laptops start in auto mode (it depends on personal and company settings), and we want Claude to ask for everything today. Walk around: whoever can't start claude gets fixed now.\n\nWhy now: You need a place to work, and a feel for the tool before it builds anything.\nWhat you see: “Do you trust this folder?” The highlighted answer is No, exit: press ↓ first. The mode at the bottom. The / menu with every built-in command.\nCareful: In /model, Enter changes your default model. Just looking? Press Esc."
 },
 
 { // Slide 46b
@@ -947,7 +944,34 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Each step teaches one skill",
     "Tomorrow: the Aether Arcade"
   ],
-  notes: "Now that Claude Code runs, tell them what they'll build. Snake is small, everyone knows how it should behave, and it runs in the browser without installing anything. That matters: when Claude gets something wrong, people see it straight away, because they know the rules. The game is only the vehicle; what they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill. Make it personal: a nickname and an avatar on the start screen, their own colours. Tomorrow all games come together in the Aether Arcade, one website with everyone's games, so keep it working. Next slide: before Claude writes any code, we first write down what we want."
+  notes: "Before anyone starts Claude Code, tell them what they'll build. Snake is small, everyone knows how it should behave, and it runs in the browser without installing anything. That matters: when Claude gets something wrong, people see it straight away, because they know the rules. The game is only the vehicle; what they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill. Make it personal: a nickname and an avatar on the start screen, their own colours. Tomorrow all games come together in the Aether Arcade, one website with everyone's games, so keep it working. Next slide: before Claude writes any code, we first write down what we want."
+},
+
+{ // Slide 46
+  type: "practice",
+  layout: "exercise",
+  title: "Assignment 1: Start Claude Code in your own folder",
+  kicker: "DAY 1 · ASSIGNMENT 1 · SETUP",
+  subtitle: "Copy each box into your terminal and press Enter.",
+  calm: true,
+  steps: [
+    { text: "Make your folder", prompt: "mkdir aether-snake\ncd aether-snake\ngit init", after: "“Initialized empty Git repository”" },
+    { text: "Start Claude Code", prompt: "claude", after: "Trust this folder? Press ↓ to Yes, then Enter. Enter alone quits.", warn: true },
+    "Look around: /help, then /model. Esc to leave.",
+    "Shift+Tab until the bottom says “manual mode on”",
+    { text: "Ask your first question", prompt: "What is in this folder?", after: "Empty. It didn't ask: reading needs no yes." }
+  ],
+  expected: "Claude Code runs in your folder, in manual mode.",
+  prompt: "mkdir aether-snake\ncd aether-snake\ngit init\nclaude",
+  keyPoints: [
+    "git init: a repo on your own laptop, offline",
+    "Trust the folder: ↓ first, the default is No",
+    "/help, /model: Esc to leave",
+    "Shift+Tab to manual mode on",
+    "First question: reading needs no yes",
+    "Stuck? Say it now"
+  ],
+  notes: "Say: You need a place to work, and a feel for the tool before it builds anything. An empty folder is all you need; no GitLab yet.\n\nDo together: Steps 1 and 2 on the projector, everyone at the same time. Wait at the trust question until every hand (or chat) says they're in. Then let them do 3 to 5 on their own.\n\nWatch for: The trust question. The highlighted answer is 'No, exit', so Enter quits Claude Code: arrow down first. Trusting matters later too: Claude Code only applies a project's own allow rules once the folder is trusted.\nWatch for: The mode at the start. Some laptops start in auto mode (personal or company settings). Everyone ends in manual mode: today Claude asks for everything.\nWatch for: /model. Enter sets a new default model; Esc only leaves.\n\nWhat you see: git init says 'Initialized empty Git repository': a repo on your own laptop, no internet needed. GitLab comes later, when there is something to share. The first answer comes without a question: Claude may read, it asks before it changes or runs something (the Modes slide).\n\nIf stuck: 'claude: command not found' or a login that fails: note the name, fix it at the break, and let them follow on the shared screen until then. Windows: the three lines work in PowerShell too; paste them one by one if the terminal only runs the first.\n\nNext: Why intent.md first? Their folder is empty and Claude is waiting: before it builds anything, they agree what they want."
 },
 
 { // Slide 46c
@@ -978,14 +1002,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   layout: "exercise",
   title: "Assignment 2: Let Claude interview you",
   kicker: "DAY 1 · ASSIGNMENT 2 · PLAN",
-  subtitle: "Before Claude builds anything, decide what you want. In plan mode.",
+  subtitle: "Before Claude builds anything, decide what you want.",
+  calm: true,
   steps: [
-    "Shift+Tab to plan mode.",
-    "Paste the prompt. Answer Claude's questions.",
-    "Approve with option 2: “Yes, manually approve edits”. Then Yes to create intent.md.",
-    "Open intent.md in VS Code and read it."
+    "Shift+Tab until the bottom says “plan mode on”",
+    { text: "Let Claude interview you", prompt: "Ask me questions, one at a time, about the Snake game I want to build. It's a browser game in plain HTML, CSS and JavaScript, and the start screen shows my nickname and avatar. Then write intent.md with:\n- Outcome: what the game does\n- Done when: three checks anyone can verify\n- Boundaries: what you must not do (for example: no outside links, no personal data except a nickname)\n- Open questions\nDon't write any code yet.", after: "Questions one at a time: pick with ↑↓ and Enter." },
+    { text: "Approve the plan with 2: “Yes, manually approve edits”", after: "Not 1: that switches Claude to auto mode.", warn: true },
+    { text: "Say yes to intent.md, then open it in VS Code", after: "Outcome, done-when checks, boundaries, open questions." }
   ],
-  expected: "An intent.md for a browser game, with your outcome, done-when checks, boundaries and open questions.",
+  expected: "An intent.md with your outcome, three checks, boundaries and open questions.",
   prompt: "Ask me questions, one at a time, about the Snake game I want to build. It's a browser game in plain HTML, CSS and JavaScript, and the start screen shows my nickname and avatar. Then write intent.md with:\n- Outcome: what the game does\n- Done when: three checks anyone can verify\n- Boundaries: what you must not do (for example: no outside links, no personal data except a nickname)\n- Open questions\nDon't write any code yet.",
   keyPoints: [
     "Plan phase: what do we want?",
@@ -994,7 +1019,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Nothing else changes in plan mode",
     "Same file as Day 5"
   ],
-  notes: "The Plan phase. In plan mode Claude can't change anything except through the plan you approve. Claude interviews with clickable multiple-choice questions (audience, platform, walls, controls, high score, speed, pause). The prompt fixes 'browser game' and 'nickname and avatar' on purpose: in the dry run Claude also offered a terminal or Python version, which the rest of the course doesn't support, and without the nickname intent.md said 'no names', which clashed with the arcade later. Two traps: approving the plan defaults to 'Yes, and use auto mode' (choose option 2), and after Claude answers, a grey suggested next prompt sits in the input; Enter sends it. intent.md is the same file Day 5 starts with. In the dry run Claude listed 'what happens when you press the opposite direction' as an open question: point at it, it's this afternoon's test. Extra: push back on a check that is a wish ('the game is fun') until anyone can verify it.\n\nWhy now: One vague prompt gives you a game you didn't ask for. Agree first what you want.\nWhat you see: Multiple-choice questions, one at a time: pick with ↑↓ and Enter. Then the plan, and intent.md.\nCareful: Approving the plan: choose 2, “Yes, manually approve edits”. Grey text in the input is only a suggestion: don't press Enter on it."
+  notes: "Say: One vague prompt gives you a game you didn't ask for. First agree what you want: this is the Plan phase. In plan mode Claude can't change anything except through the plan you approve.\n\nWatch for: Approving the plan. The first, highlighted option is 'Yes, and use auto mode': everyone chooses 2, 'Yes, manually approve edits'.\nWatch for: After Claude answers, a grey suggested next prompt sits in the input. It's only a suggestion: Enter sends it.\n\nWhat you see: Clickable multiple-choice questions, one at a time (audience, platform, walls, controls, high score, speed, pause). Then the plan, and intent.md.\n\nBackground: The prompt fixes 'browser game' and 'nickname and avatar' on purpose. In the dry run Claude also offered a terminal or Python version, which the rest of the course doesn't support, and without the nickname intent.md said 'no names', which clashed with the arcade later. intent.md is the same file Day 5 starts with. In the dry run Claude listed 'what happens when you press the opposite direction' as an open question: point at it, it's this afternoon's test.\n\nExtra: Push back on a check that is a wish ('the game is fun') until anyone can verify it.\n\nNext: Your AI in Claude Code."
 },
 
 { // Slide 48
@@ -1093,11 +1118,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 3: A CLAUDE.md for your game",
   kicker: "DAY 1 · ASSIGNMENT 3 · PLAN",
   subtitle: "Tell Claude once how to work in this project.",
+  calm: true,
   steps: [
-    "Type /clear, then ask: “Which rules must you follow in this project?”",
-    "Paste the prompt. Read the file, then say yes to create it.",
-    "/clear again, and ask the same question.",
-    "Type /memory: which files are loaded? Leave with Esc."
+    { text: "Type /clear, then ask", prompt: "Which rules must you follow in this project?", after: "Claude guesses the rules from your files." },
+    { text: "Write CLAUDE.md", prompt: "Write a short CLAUDE.md for this project:\n- A Snake game in plain HTML, CSS and JavaScript. No frameworks, no outside links.\n- Tests live in tests/ and run with npm test.\n- Always show me a plan before you change files.\n- The player name is a nickname. No real names, emails or other personal data in this repo.\n- Read @intent.md for what we're building.\nKeep it under 15 lines. Show it to me before you save it.", after: "Claude shows the file. Read it, then say yes." },
+    { text: "Type /clear, and ask again", prompt: "Which rules must you follow in this project?", after: "Now it names exactly your rules, without searching." },
+    "Type /memory: which files are loaded? Esc to leave."
   ],
   expected: "After /clear, Claude names your project's rules without searching for them.",
   prompt: "Write a short CLAUDE.md for this project:\n- A Snake game in plain HTML, CSS and JavaScript. No frameworks, no outside links.\n- Tests live in tests/ and run with npm test.\n- Always show me a plan before you change files.\n- The player name is a nickname. No real names, emails or other personal data in this repo.\n- Read @intent.md for what we're building.\nKeep it under 15 lines. Show it to me before you save it.",
@@ -1108,7 +1134,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Keep it short: it costs tokens every session",
     "/memory shows what's loaded"
   ],
-  notes: "Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory. Watch for: a personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'; ask which rule wins, and why.\n\nWhy now: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your rules.\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session.\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop."
+  notes: "Say: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your rules. CLAUDE.md is the file it loads at the start of every session.\n\nAsk the room: Steps 1 and 3 are the same question on purpose. Let a few people read Claude's answer out loud, before and after.\n\nWatch for: A personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'. Ask which rule wins, and why.\n\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory.\n\nBackground: Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command.\n\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop.\n\nNext: Decide first what Claude may do."
 },
 
 { // Slide 54
@@ -1140,12 +1166,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 4: House rules before you build",
   kicker: "DAY 1 · ASSIGNMENT 4 · PLAN",
   subtitle: "Ask before saving. Never anything you can't undo.",
+  calm: true,
   steps: [
-    "Paste the prompt. Read the file, then say yes to create it.",
-    "Restart: /exit, then claude. Bottom line not manual? Shift+Tab.",
-    "Type /permissions. Use ←→ to see the Ask and Deny tabs. Esc.",
-    "Test it: “Run exactly this command: git push --force origin main”.",
-    "Claude Code blocks it. Which rule did that?"
+    { text: "Write your house rules", prompt: "Write .claude/settings.json for this project:\n- Ask me before every git commit and every git push.\n- Never allow git push --force or rm -rf.\n- Never let Claude merge a merge request (glab mr merge, gh pr merge): I do that myself.\nShow me the file before you save it.", after: "Claude always asks before it writes settings.json. Read it, then say yes." },
+    { text: "Restart: /exit, then claude", after: "Check the bottom line. Not manual? Shift+Tab.", warn: true },
+    "Type /permissions. ←→ shows the Ask and Deny tabs. Esc to leave.",
+    { text: "Test it", prompt: "Run exactly this command: git push --force origin main", after: "Blocked by your permission settings. Which rule did that?" }
   ],
   expected: "Commit and push ask you first. Force push, rm -rf and merging your own merge request are blocked.",
   prompt: "Write .claude/settings.json for this project:\n- Ask me before every git commit and every git push.\n- Never allow git push --force or rm -rf.\n- Never let Claude merge a merge request (glab mr merge, gh pr merge): I do that myself.\nShow me the file before you save it.",
@@ -1156,7 +1182,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Test with the exact command",
     "Writing settings.json always asks you"
   ],
-  notes: "A good result: { \"permissions\": { \"ask\": [\"Bash(git commit*)\", \"Bash(git push*)\"], \"deny\": [\"Bash(git push --force*)\", \"Bash(git push -f*)\", \"Bash(rm -rf *)\", \"Bash(glab mr merge*)\", \"Bash(gh pr merge*)\"] } }. Claude usually writes stricter rules (more variants) and explains honestly that text patterns can be worked around: worth a word. Test with the exact command: in the dry run, 'force push my work' did nothing visible, because with no commits and no remote Claude didn't even try. 'Run exactly this command: git push --force origin main' gets 'blocked by your permission settings' every time. The merge deny keeps the human gate tomorrow: Claude Code later suggests 'merge the pull request' as a next prompt, and without this rule Claude would merge its own work. Claude Code always asks before writing settings.json, even in accept-edits mode. After the restart, check the mode again: it starts in the default mode.\n\nWhy now: Claude is about to touch your files and run git. Decide now, not after something goes wrong.\nWhat you see: Claude asks before it writes .claude/settings.json. Then “force push” is blocked.\nLook inside: Open .claude/settings.json. Which line blocked the force push?"
+  notes: "Say: Claude is about to touch your files and run git. Decide now what it may do, not after something goes wrong.\n\nWatch for: After the restart Claude Code starts in your default mode, and on some laptops that's auto. Everyone checks the bottom line.\nWatch for: Test with the exact command. In the dry run 'force push my work' did nothing visible: with no commits and no remote, Claude didn't even try. 'Run exactly this command: git push --force origin main' gets 'blocked by your permission settings' every time.\n\nWhat you see: Claude asks before it writes .claude/settings.json (always, even in accept-edits mode). Then the force push is blocked.\n\nA good result: { \"permissions\": { \"ask\": [\"Bash(git commit*)\", \"Bash(git push*)\"], \"deny\": [\"Bash(git push --force*)\", \"Bash(git push -f*)\", \"Bash(rm -rf *)\", \"Bash(glab mr merge*)\", \"Bash(gh pr merge*)\"] } }. Claude usually writes stricter rules (more variants) and explains honestly that text patterns can be worked around: worth a word.\n\nBackground: The merge deny keeps the human gate tomorrow: Claude Code later suggests 'merge the pull request' as a next prompt, and without this rule Claude would merge its own work.\n\nLook inside: Open .claude/settings.json. Which line blocked the force push?\n\nNext: Quiz: the working method."
 },
 
 { // Slide 56
@@ -1229,11 +1255,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 5: Plan it in layers",
   kicker: "DAY 1 · ASSIGNMENT 5 · DESIGN",
   subtitle: "One big prompt gives you a game you can't steer.",
+  calm: true,
   steps: [
-    "Plan mode (Shift+Tab).",
-    "Paste the prompt.",
-    "Read the plan. Too big? Choose 3 and ask for smaller layers.",
-    "Happy? Press Esc. Then Shift+Tab back to manual mode."
+    "Shift+Tab until the bottom says “plan mode on”",
+    { text: "Ask for a plan in layers", prompt: "Read intent.md. Make a plan to build it in layers: skeleton, controls, food and score, game over. For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.", after: "Four layers, each with a 10-second check." },
+    "Too big? Choose 3 and ask for smaller layers.",
+    { text: "Happy? Press Esc. Don't approve.", after: "Approving starts building. Esc keeps the plan, and nothing is built.", warn: true },
+    "Shift+Tab back to “manual mode on”"
   ],
   expected: "A plan of four layers, each with its own check, and nothing built yet.",
   prompt: "Read intent.md. Make a plan to build it in layers: skeleton, controls, food and score, game over. For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.",
@@ -1244,7 +1272,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Reject a plan that's too big",
     "Nothing built yet"
   ],
-  notes: "The Design phase. Say it out loud: one prompt can build Snake (the dry run did it in under a minute), but then you can't steer it and you learn nothing about what's in the files. The trap: in plan mode, approving the plan means 'go and build it', possibly all four layers at once. So here they press Esc: the plan stays in the conversation, and the next assignment builds one layer from it. Claude names the main file itself (game.js in the dry run, snake.js in another run), and often adds tests in layer 3 on its own. Extra: reject the first plan and steer it ('smaller', 'one file per layer').\n\nWhy now: If Claude builds it all at once, you can't tell what broke, or why.\nWhat you see: A plan with layers: skeleton, controls, food and score, game over. Each with a check. Claude may add tests by itself: fine.\nCareful: Don't approve this plan: approving starts building. Press Esc: the plan stays, nothing is built."
+  notes: "Say: One prompt can build Snake (the dry run did it in under a minute), but then you can't steer it and you learn nothing about what's in the files. If Claude builds it all at once, you can't tell what broke, or why. This is the Design phase.\n\nWatch for: Approving the plan. In plan mode, approving means 'go and build it', possibly all four layers at once. Here they press Esc: the plan stays in the conversation, and the next assignment builds one layer from it.\n\nWhat you see: A plan with layers: skeleton, controls, food and score, game over, each with a check. Claude names the main file itself (game.js in the dry run, snake.js in another run), and often adds tests in layer 3 on its own: fine.\n\nExtra: Reject the first plan and steer it ('smaller', 'one file per layer').\n\nNext: Watch: Snake in layers."
 },
 
 { // Slide 60
@@ -1300,12 +1328,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 6: Build layer 1, look inside, commit",
   kicker: "DAY 1 · ASSIGNMENT 6 · BUILD",
   subtitle: "A small step. Understand it. Save it.",
+  calm: true,
   steps: [
-    "“Build only layer 1 from the plan.” Say Yes to each file.",
+    { text: "Build layer 1", prompt: "Build only layer 1 from the plan.", after: "Say yes to each file." },
     "Open index.html in your browser: do you see the board?",
-    "Ask: “Explain @game.js in plain words.” (Type @ and pick your file.)",
+    { text: "Look inside", prompt: "Explain @game.js in plain words.", after: "Your file may be called snake.js: type @ and pick it." },
     "Type !git status: which files are new?",
-    "“Commit this layer with a clear message.” Claude asks: Yes."
+    { text: "Save it", prompt: "Commit this layer with a clear message.", after: "Claude asks first: that's your rule. Say yes." }
   ],
   expected: "Layer 1 works, you can explain it, and it's committed.",
   prompt: "Build only layer 1 from the plan.\n\nThen:\nExplain @game.js in plain words.\n\nThen:\nCommit this layer with a clear message.",
@@ -1316,7 +1345,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit = save point",
     "Claude asks: your rule from Assignment 4"
   ],
-  notes: "Three new controls: @file points Claude straight at a file, so it doesn't have to search (cheaper and faster); type @ and a list of files appears. The file name is whatever Claude chose (game.js in the dry run). !git status runs a command yourself, and the output lands in the conversation; Claude even comments on it. The commit asks first, and the screen names the rule: 'Permission rule Bash(git commit *) requires confirmation'. The first commit includes CLAUDE.md, intent.md and .claude/settings.json: that's fine, they belong to the project. If Claude proposes a branch, say 'commit straight to main'; branches come tomorrow. Look inside is the real lesson: if nobody can say which part draws the snake, slow down.\n\nWhy now: It works. Make a save point before you change anything else.\nWhat you see: index.html, style.css and snake.js appear. Claude asks before it commits.\nLook inside: Ask Claude to explain your game's .js file (@game.js or @snake.js). Which part draws the snake?"
+  notes: "Say: It works. Make a save point before you change anything else. A small step, understood, saved.\n\nWatch for: The file name is whatever Claude chose (game.js in the dry run, sometimes snake.js). Type @ and a list of files appears: pick the right one.\nWatch for: If Claude proposes a branch, say 'commit straight to main'. Branches come tomorrow.\n\nWhat you see: index.html, style.css and the game's .js file appear. The commit asks first, and the screen names the rule: 'Permission rule Bash(git commit *) requires confirmation'. The first commit includes CLAUDE.md, intent.md and .claude/settings.json: that's fine, they belong to the project.\n\nThree new controls: @file points Claude straight at a file, so it doesn't have to search (cheaper and faster). !git status runs a command yourself, and the output lands in the conversation; Claude even comments on it. A commit is a save point.\n\nLook inside: This is the real lesson. Which part draws the snake? If nobody can say, slow down.\n\nNext: Model Context Protocol."
 },
 
 { // Slide 63
@@ -1360,10 +1389,11 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 7: Put your game on GitLab",
   kicker: "DAY 1 · ASSIGNMENT 7 · DEPLOY",
   subtitle: "Your save points are only on your laptop. Put them somewhere safe.",
+  calm: true,
   steps: [
-    "Connect to the GitLab MCP server.",
-    "Paste the prompt: Claude creates your private project and pushes. Approve the push.",
-    "Open the project on GitLab in your browser."
+    { text: "Connect the GitLab MCP server", after: "/mcp shows GitLab connected." },
+    { text: "Put your game on GitLab", prompt: "Create a private project called aether-snake-[nickname] in my personal GitLab space. Add it as the remote and push main. Ask me before you push.", after: "Claude creates the project, then asks before it pushes. Say yes." },
+    "Open the project on GitLab in your browser. Is your commit there?"
   ],
   expected: "Your game and its commits are in a private project on GitLab.",
   prompt: "Create a private project called aether-snake-[nickname] in my personal GitLab space. Add it as the remote and push main. Ask me before you push.",
@@ -1374,7 +1404,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "The push asks: your rule",
     "No GitLab access: stay local"
   ],
-  notes: "Now MCP becomes real. git is on your laptop; GitLab is the online copy; the GitLab MCP is what lets Claude itself create the project. The push asks first, because of the house rule ('Permission rule Bash(git push *) requires confirmation'). In the dry run Claude also pointed out that the commits carry the author's email from git config; on Worldline's own GitLab that's normal, but it's a nice privacy moment. Check before the course that every participant has GitLab access; most managers do, not all. Anyone without it keeps working locally all afternoon (git pull tomorrow will then say there's no remote: ignore it). From now on the rhythm is: it works, commit, push.\n\nWhy now: Laptop gone, game gone. On GitLab it's safe, and tomorrow the arcade needs it.\nWhat you see: /mcp shows GitLab connected. Claude creates the project, then asks before it pushes.\nLook inside: Open the project on GitLab. Is your commit there?"
+  notes: "Say: Laptop gone, game gone. On GitLab it's safe, and tomorrow the arcade needs it. git is on your laptop; GitLab is the online copy; the GitLab MCP is what lets Claude itself create the project.\n\nBefore class: Check that every participant has GitLab access. Most managers do, not all.\n\nWhat you see: /mcp shows GitLab connected. Claude creates the project, then asks before it pushes, because of the house rule ('Permission rule Bash(git push *) requires confirmation').\n\nBackground: In the dry run Claude also pointed out that the commits carry the author's email from git config. On Worldline's own GitLab that's normal, but it's a nice privacy moment.\n\nIf stuck: No GitLab access: keep working locally all afternoon. git pull tomorrow will then say there's no remote: ignore it.\n\nNext: Undo: checkpoints and commits. From now on the rhythm is: it works, commit, push."
 },
 
 { // Slide 66
@@ -1404,12 +1434,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 8: Layers 2 to 4, and one rescue",
   kicker: "DAY 1 · ASSIGNMENT 8 · BUILD",
   subtitle: "Same rhythm for every layer. One thing goes wrong on purpose.",
+  calm: true,
   steps: [
-    { text: "Layer 2 (controls). Paste, press Enter:", prompt: "Build only layer 2 from the plan.", after: "Play it. Commit and push." },
-    { text: "Layer 3 (food and score). Paste, press Enter:", prompt: "Build only layer 3 from the plan.", after: "Play it. Commit and push." },
-    { text: "Break it on purpose. Paste, press Enter:", after: "Play it: the score is gone.", prompt: "Remove the score entirely. I know it goes against intent.md, do it anyway." },
-    "Empty input, Esc twice. ↑ to the message before, Enter, “Restore code and conversation”. Clear the old message from the input. Score back? Good.",
-    { text: "Layer 4 (game over). Paste, press Enter:", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
+    { text: "Build layer 2: controls", prompt: "Build only layer 2 from the plan.", after: "Play it. Commit and push." },
+    { text: "Build layer 3: food and score", prompt: "Build only layer 3 from the plan.", after: "Play it. Commit and push." },
+    { text: "Break it on purpose", prompt: "Remove the score entirely. I know it goes against intent.md, do it anyway.", after: "Play it: the score is gone." },
+    { text: "Rescue it: empty input, Esc twice", after: "↑ to the message before, Enter, “Restore code and conversation”. Then clear the old message from the input.", warn: true },
+    { text: "Build layer 4: game over", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
   ],
   expected: "All four layers work and are on GitLab, and you've undone a change with Esc Esc.",
   prompt: "Build only layer 2 from the plan.\n\nThen:\nBuild only layer 3 from the plan.\n\nThen, on purpose:\nRemove the score entirely. I know it goes against intent.md, do it anyway.\n\nAfter the rescue:\nBuild only layer 4 from the plan.",
@@ -1420,7 +1451,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Clear the old message after a rewind",
     "Layer 4 completes the game"
   ],
-  notes: "The rhythm becomes a habit: layer works, commit, push. The deliberate mistake needs a firm prompt: in the dry run, a plain 'remove the score' made Claude stop and ask, because intent.md says the score is always shown. That's a lesson in itself: intent.md protects you. Notice too that removing the score made Claude change the tests as well: that's why Assignment 10 protects tests/. The rescue: with an empty input, Esc twice opens Rewind; pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The menu warns that files changed by bash commands aren't restored. Afterwards the old message is back in the input; Enter would do it again, so clear it. Then layer 4 (game over) finishes the game.\n\nWhy now: Things go wrong. Know how to get back before it matters.\nWhat you see: Esc twice opens Rewind. Pick the point before, then “Restore code and conversation”: the score is back, without git.\nCareful: Esc Esc only opens Rewind when the input is empty. After a rewind your old message is back in the input: clear it, don't press Enter."
+  notes: "Say: Things go wrong. Know how to get back before it matters. And the rhythm becomes a habit: layer works, commit, push.\n\nWatch for: Esc Esc only opens Rewind when the input is empty.\nWatch for: After a rewind the old message is back in the input. Enter would do it again, so clear it.\n\nWhat you see: Esc twice opens Rewind. Pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The score is back, without git. The menu warns that files changed by bash commands aren't restored.\n\nBackground: The deliberate mistake needs a firm prompt: in the dry run, a plain 'remove the score' made Claude stop and ask, because intent.md says the score is always shown. That's a lesson in itself: intent.md protects you. Removing the score also made Claude change the tests: that's why Assignment 10 protects tests/.\n\nNext: A test: evidence, not confidence."
 },
 
 { // Slide 68
@@ -1451,13 +1482,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 9: A test that finds a bug",
   kicker: "DAY 1 · ASSIGNMENT 9 · TEST",
   subtitle: "A test plays your game for you and checks one rule: the snake can't turn back into itself.",
+  calm: true,
   steps: [
-    { text: "Ask Claude for a test. Paste, press Enter:", after: "Claude shows a plan. It doesn't touch the game yet. Say “Go ahead.”", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes." },
+    { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
     "Run it yourself: !npm test. Passed or failed?",
-    { text: "Failed? The test found a bug. Paste, press Enter:", after: "Claude fixes the game, never the test.", prompt: "The test fails. Fix the game so the snake can't turn back into itself. Don't change the test." },
-    { text: "Passed? Prove the test works by breaking the game. Paste, press Enter:", after: "The test fails now. Good: it catches the bug.", prompt: "Remove the code that stops the snake from turning back into itself. Then run npm test." },
-    "Undo the break: empty input, Esc twice. ↑ to the message before, Enter, “Restore code”. !npm test passes again.",
-    "Commit and push. From now on, this test guards the rule."
+    { text: "Failed? Let Claude fix the game", prompt: "The test fails. Fix the game so the snake can't turn back into itself. Don't change the test.", after: "The game, never the test.", warn: true },
+    { text: "Passed? Break the game on purpose", prompt: "Remove the code that stops the snake from turning back into itself. Then run npm test.", after: "The test fails now: it catches the bug." },
+    "Undo: empty input, Esc twice, “Restore code”. !npm test passes again.",
+    "Commit and push. This test now guards the rule."
   ],
   expected: "A test you've seen fail, and that passes now.",
   prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.",
@@ -1468,7 +1500,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Fails: a bug found. Passes: break it on purpose",
     "Fix the game, not the test"
   ],
-  notes: "The line for the room: a test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.'\n\nWhy this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose (remove the reverse check) and see the test turn red, which proves the test works. A test you've never seen fail is not evidence. Let Claude fix the game, never the test. npm test needs Node and a package.json; Claude makes the package.json. No Node on someone's laptop: a tests/test.html page that shows green or red in the browser works too (the hook in Assignment 11 does need Node; they watch that one on the projector).\n\nWhy now: You can't play every key combination after every change.\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\nNo Node?: Ask for tests/test.html instead, and open it in your browser: green or red."
+  notes: "Say: A test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.' You can't play every key combination after every change.\n\nWatch for: Claude fixes the game, never the test.\n\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\n\nBackground: Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose and see the test turn red. A test you've never seen fail is not evidence. npm test needs Node and a package.json; Claude makes the package.json.\n\nIf stuck: No Node on someone's laptop: ask for tests/test.html instead, and open it in the browser: green or red. The hook in Assignment 11 does need Node; they watch that one on the projector.\n\nNext: Assignment 10: The rules grow."
 },
 
 { // Slide 70
@@ -1477,11 +1509,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 10: The rules grow",
   kicker: "DAY 1 · ASSIGNMENT 10 · TEST",
   subtitle: "Two house rules: running the tests is always fine. Changing a test needs your yes.",
+  calm: true,
   steps: [
-    { text: "Give Claude the two rules. Paste, press Enter:", after: "Claude shows its settings file. Read it, then say yes.", prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the rules that are already there. Show me the file before you save it." },
-    { text: "Try the first rule: tests may run. Paste, press Enter:", after: "Claude runs the tests without asking you.", prompt: "Run the tests." },
-    "Press Shift+Tab until you see “accept edits on”. From now on, Claude changes files without asking.",
-    { text: "Try the second rule: a test needs your yes. Paste, press Enter:", after: "Claude asks before it changes the test. Choose No.", prompt: "Change the test so it expects the snake to turn straight back." },
+    { text: "Add two rules", prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the rules that are already there. Show me the file before you save it.", after: "Claude shows the settings file. Read it, then say yes." },
+    { text: "Try rule 1: tests may run", prompt: "Run the tests.", after: "No question: Claude just runs them." },
+    "Shift+Tab to “accept edits on”: file edits now go through without asking",
+    { text: "Try rule 2: a test needs your yes", prompt: "Change the test so it expects the snake to turn straight back.", after: "Claude asks before it changes the test. Choose No.", warn: true },
     "Shift+Tab to “manual mode on”. Commit and push."
   ],
   expected: "Claude runs the tests without asking, and a change to a test always needs your yes.",
@@ -1493,7 +1526,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Why ask, not deny",
     "Approving safe things over and over trains clicking yes"
   ],
-  notes: "allow for npm test: approving a safe command over and over only teaches people to click yes without reading. ask for tests/, not deny: tomorrow they'll add new tests, so the rule is 'a test only changes with my yes'. Why the test in accept-edits mode: in manual mode every edit asks anyway, so you can't see the rule working. In accept-edits mode other files go through without a question, but tests/ still asks: that's the rule. In the dry run the allow rule worked straight away, without a restart. Claude also noted that npm test runs tests/run.js, so protecting tests/ protects what runs without asking. Edit(tests/**) covers new files too; a Write(tests/**) rule does nothing. Deny beats ask beats allow when several rules match.\n\nWhy now: Asked to “make the tests pass”, Claude could change the test instead of the game. And it keeps asking to run npm test.\nWhat you see: “Run the tests”: no question. In accept-edits mode, every other file goes through, but a test file still asks. You say No.\nLook inside: /permissions: where do your new rules show up?"
+  notes: "Say: Asked to 'make the tests pass', Claude could change the test instead of the game. And it keeps asking to run npm test. Two rules fix both.\n\nWatch for: In step 4 the answer is No. And everyone goes back to manual mode at the end.\n\nWhat you see: 'Run the tests': no question. In accept-edits mode every other file goes through, but a test file still asks.\n\nBackground: allow for npm test: approving a safe command over and over only teaches people to click yes without reading. ask for tests/, not deny: tomorrow they'll add new tests, so the rule is 'a test only changes with my yes'. Why accept-edits mode: in manual mode every edit asks anyway, so you can't see the rule working. In the dry run the allow rule worked straight away, without a restart. Claude also noted that npm test runs tests/run.js, so protecting tests/ protects what runs without asking. Edit(tests/**) covers new files too; a Write(tests/**) rule does nothing. Deny beats ask beats allow when several rules match.\n\nLook inside: /permissions: where do your new rules show up?\n\nNext: Hooks: a check that runs by itself."
 },
 
 { // Slide 71
@@ -1524,12 +1557,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 11: Let a hook guard your game",
   kicker: "DAY 1 · ASSIGNMENT 11 · TEST",
   subtitle: "A hook runs the test by itself after every change. You can't forget it any more.",
+  calm: true,
   steps: [
-    { text: "Give Claude the hook. Paste, press Enter:", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
-    "Check that it's there: type /hooks and find your hook. Leave with Esc.",
-    { text: "Break the game on purpose. Paste, press Enter:", prompt: "In game.js, let the snake turn straight back into itself. Just do it.", after: "Say yes to the change. The hook runs the test by itself: it fails, and Claude asks what to do." },
-    { text: "Undo the break. Paste, press Enter:", prompt: "Throw that change away.", after: "game.js is back. The test passes again." },
-    "Commit and push. From now on, the hook tests every change."
+    { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
+    "Type /hooks: is your hook there? Esc to leave.",
+    { text: "Break the game on purpose", prompt: "In game.js, let the snake turn straight back into itself. Just do it.", after: "Say yes. The hook runs the test by itself: it fails, and Claude asks what to do." },
+    { text: "Undo the break", prompt: "Throw that change away.", after: "game.js is back. The test passes again." },
+    "Commit and push. The hook now tests every change."
   ],
   expected: "After every file change the test runs by itself, and a break gets caught.",
   prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.",
@@ -1540,7 +1574,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "The hook catches what you'd miss",
     "Throw away or rewind"
   ],
-  notes: "A good result: \"hooks\": { \"PostToolUse\": [ { \"matcher\": \"Edit|Write\", \"hooks\": [ { \"type\": \"command\", \"command\": \"npm test 1>&2 || exit 2\" } ] } ] }. Claude's own version is usually longer (it cds to the project folder and only prints on failure). In the dry run Claude picked the built-in update-config skill by itself (a preview of tomorrow's skills) and tested the hook command before saving: approve those steps, they only run the tests. Claude Code shows a tip to switch to auto mode on long commands: don't. Why not 'make the snake faster' as the test: in the dry run that change kept all tests green, so the hook stayed silent and nothing was learned. Letting the snake turn straight back breaks three tests: the hook reported them at once ('The hook caught the conflict straight away'), Claude left the tests alone and asked whether to keep or undo the change. The broken change stays until someone undoes it: 'throw that change away' (git checkout of the file). /hooks is read-only: it shows the hook, changes go through settings.json.\n\nWhy now: You keep forgetting to run the test after a change.\nWhat you see: A change that breaks a rule: the hook reports the failing tests at once, and Claude asks you what to do.\nLook inside: /hooks: is your hook there? Which event, which matcher?"
+  notes: "Say: You keep forgetting to run the test after a change. A hook runs it by itself, after every edit.\n\nWatch for: On long commands Claude Code shows a tip to switch to auto mode: don't.\nWatch for: In the dry run Claude picked the built-in update-config skill by itself (a preview of tomorrow's skills) and tested the hook command before saving. Approve those steps: they only run the tests.\n\nWhat you see: A change that breaks a rule: the hook reports the failing tests at once ('The hook caught the conflict straight away'). Claude leaves the tests alone and asks whether to keep or undo the change.\n\nA good result: \"hooks\": { \"PostToolUse\": [ { \"matcher\": \"Edit|Write\", \"hooks\": [ { \"type\": \"command\", \"command\": \"npm test 1>&2 || exit 2\" } ] } ] }. Claude's own version is usually longer (it cds to the project folder and only prints on failure).\n\nBackground: Why not 'make the snake faster' as the break: in the dry run that change kept all tests green, so the hook stayed silent and nothing was learned. Letting the snake turn straight back breaks three tests. The broken change stays until someone undoes it: 'throw that change away' (git checkout of the file). /hooks is read-only: it shows the hook, changes go through settings.json. The game file may be snake.js instead of game.js: Claude finds it either way.\n\nLook inside: /hooks: which event, which matcher?\n\nNext: Example: a complete settings.json."
 },
 
 { // Slide 73
@@ -1571,11 +1605,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 12: Look at your context window",
   kicker: "DAY 1 · ASSIGNMENT 12 · BUILD",
   subtitle: "With every message, Claude rereads the whole conversation. Look inside, and make room.",
+  calm: true,
   steps: [
-    { text: "See what's in Claude's head. Type, press Enter:", prompt: "/context", after: "What fills the window, in tokens. What takes the most room?" },
-    { text: "Shrink the conversation, keep what matters. Paste, press Enter:", prompt: "/compact keep the test rules and the plan", after: "Claude sums up the conversation and carries on from the summary." },
-    { text: "Look again. Type, press Enter:", prompt: "/context", after: "The conversation takes much less room now. CLAUDE.md is still there." },
-    "Not now, but for a new task: /clear. It empties the conversation. CLAUDE.md and your files stay."
+    { text: "See what fills the window", prompt: "/context", after: "In tokens. What takes the most room?" },
+    { text: "Shrink it, keep what matters", prompt: "/compact keep the test rules and the plan", after: "Claude sums up the conversation and carries on from the summary." },
+    { text: "Look again", prompt: "/context", after: "The conversation is much smaller. CLAUDE.md is still there." },
+    "For a new task, later: /clear empties the conversation. CLAUDE.md and your files stay."
   ],
   expected: "You know what fills the window, and when to use /compact or /clear.",
   prompt: "/context\n/compact keep the test rules and the plan\n/context",
@@ -1586,13 +1621,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "/clear: new task, empty conversation",
     "CLAUDE.md survives both"
   ],
-  notes: "Link back to the context-window slide this morning. Every new message makes Claude read the whole conversation again, so a long session costs more per question, gets slower, and gets distracted by old material. /context shows what fills the window right now: the system prompt and tools, MCP tools, CLAUDE.md, and the conversation. /compact summarises the conversation and keeps going; you can say what to keep. /clear empties it, for a new task. CLAUDE.md and the files on disk survive both.\n\nWhy now: With every message Claude rereads the whole conversation. A long session gets slower, more expensive and more distracted.\nWhat you see: /context: CLAUDE.md, tools, MCP and the whole conversation, in tokens.\nLook inside: What takes the most room? Do you still need it?"
+  notes: "Say: With every message Claude rereads the whole conversation. A long session gets slower, more expensive and more distracted. Link back to the context-window slide this morning.\n\nWhat you see: /context shows what fills the window right now: the system prompt and tools, MCP tools, CLAUDE.md, and the conversation, in tokens.\n\nBackground: /compact summarises the conversation and keeps going; you can say what to keep. /clear empties it, for a new task. CLAUDE.md and the files on disk survive both.\n\nLook inside: What takes the most room? Do you still need it?\n\nNext: Assignment 13: Make your avatar in LibreChat."
 },
 
 { // Slide 75
   title: "Assignment 13: Make your avatar in LibreChat",
   kicker: "DAY 1 · ASSIGNMENT 13 · BUILD",
   subtitle: "Your character for tomorrow's leaderboard. No real name, no email, no photo.",
+  calm: true,
   type: "practice",
   layout: "exercise",
   visual: { cardImages: ["assets/avatars/avatar-cartoon.webp", "assets/avatars/avatar-superhero.webp", "assets/avatars/avatar-jipjanneke.webp"] },
@@ -1602,10 +1638,9 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Jip and Janneke", body: "" }
   ],
   steps: [
-    "Open LibreChat and pick the image generator from the library.",
-    "Describe only how your avatar looks: style, colours, accessories.",
-    "Ask for a square image: plain background, no text.",
-    "Download it, and pick a nickname."
+    "Open LibreChat and pick the image generator from the library",
+    { text: "Describe only how your avatar looks. Fill in the look, then send", prompt: "Create a square cartoon avatar of a character: [describe the look — hair, glasses, outfit], holding a laptop and a coffee. Bright colours, plain background, no text.", after: "Rather a superhero or Jip and Janneke? See the Example prompt button." },
+    { text: "Download it, and pick a nickname", after: "Nothing that says who you are: no real name, email or photo.", warn: true }
   ],
   expected: "A square avatar and a nickname, with nothing that says who you are.",
   prompt: "Cartoon:\nCreate a square cartoon avatar of a character: [describe the look — hair, glasses, outfit], holding a laptop and a coffee. Bright colours, plain background, no text.\n\nSuperhero:\nCreate a square comic-book superhero portrait of a character: [describe the look]. Cape, city skyline at night, no text.\n\nJip and Janneke:\nCreate a square avatar of a character as a Dutch Jip and Janneke silhouette: black on a plain coloured background. [describe the look]. No text.",
@@ -1616,13 +1651,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Pick a nickname",
     "Check everyone downloaded the file"
   ],
-  notes: "Keep the energy high: this is meant to be fun. LibreChat itself doesn't make images: in the library you pick the image generator. Privacy rule for the whole arcade: the avatar only describes how the character looks, and the game only shows a nickname. No real name, email, employee number or photo, because tomorrow every game is on a shared website. Don't paste anything from your personal CLAUDE.md. The Example prompt button has three starting prompts: cartoon, superhero and Jip and Janneke (a well-known Dutch children's-book style by Fiep Westendorp, black silhouettes; explain it in one sentence for non-Dutch participants). The three thumbnails are AetherBOT, made with these prompts. Make sure everyone has downloaded the file before moving on."
+  notes: "Say: Keep the energy high: this is meant to be fun. This is your character for tomorrow's leaderboard.\n\nWatch for: The privacy rule for the whole arcade. The avatar only describes how the character looks, and the game only shows a nickname. No real name, email, employee number or photo, because tomorrow every game is on a shared website. Don't paste anything from your personal CLAUDE.md.\n\nWhat you see: LibreChat itself doesn't make images: in the library you pick the image generator. The three thumbnails are AetherBOT, made with the three starting prompts.\n\nBackground: The Example prompt button has three starting prompts: cartoon, superhero and Jip and Janneke (a well-known Dutch children's-book style by Fiep Westendorp, black silhouettes; explain it in one sentence for non-Dutch participants).\n\nBefore you move on: Make sure everyone has downloaded the file.\n\nNext: Assignment 14: Put your avatar in your game."
 },
 
 { // Slide 76
   title: "Assignment 14: Put your avatar in your game",
   kicker: "DAY 1 · ASSIGNMENT 14 · BUILD",
   subtitle: "Give the picture to Claude Code: it shows your character on the start screen.",
+  calm: true,
   type: "practice",
   layout: "exercise",
   cards: [
@@ -1630,10 +1666,11 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   stepsHeading: "Do this:",
   steps: [
-    "Put the picture in your game repo, in assets/.",
-    "Plan mode. Paste the prompt with your file name and nickname.",
-    "Play and check: avatar, nickname, and the fallback without a picture.",
-    "Commit and push."
+    "Put the picture in your game folder, in assets/",
+    "Shift+Tab until the bottom says “plan mode on”",
+    { text: "Fill in your file name and nickname, then send", prompt: "I put my avatar in @assets/[file name]. Show it with my nickname [nickname] on the start screen of my game. Without a picture, show the first letter of my nickname. Plan first and show me the plan before you change anything.", after: "Read the plan. Approve with 2: “Yes, manually approve edits”.", warn: true },
+    "Play and check: avatar, nickname, and the first letter without a picture",
+    "Commit and push"
   ],
   expected: "Your game shows your avatar and nickname. Without a picture it shows the first letter of your nickname.",
   prompt: "I put my avatar in @assets/[file name]. Show it with my nickname [nickname] on the start screen of my game. Without a picture, show the first letter of my nickname. Plan first and show me the plan before you change anything.",
@@ -1643,7 +1680,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Plan first, initials as fallback",
     "Tomorrow: name + picture go to the scoreboard"
   ],
-  notes: "The hand-off: LibreChat made the picture, Claude Code puts it in the game. @assets/… points Claude at the image; Claude can read images, so it can also describe it. The fallback is the part people forget. Is the hook from Assignment 11 still running the test after this change? It should be. Tomorrow the avatar and nickname go to the arcade leaderboard."
+  notes: "Say: The hand-off: LibreChat made the picture, Claude Code puts it in the game. Tomorrow the avatar and nickname go to the arcade leaderboard.\n\nWatch for: Approving the plan: option 2 again, not auto mode.\nWatch for: The fallback is the part people forget. Check the game without a picture too.\n\nWhat you see: @assets/… points Claude at the image; Claude can read images, so it can also describe it. The hook from Assignment 11 runs the test after this change too: it should.\n\nNext: Assignment 15: Hand it over."
 },
 
 { // Slide 77
@@ -1652,7 +1689,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 15: Hand it over",
   kicker: "DAY 1 · ASSIGNMENT 15 · MAINTAIN",
   subtitle: "Tomorrow you continue. Maybe someone else does.",
-  steps: ["Paste the prompt.", "Read PROGRESS.md: could a colleague carry on from this?", "Commit and push."],
+  calm: true,
+  steps: [
+    { text: "Write the handover", prompt: "Write PROGRESS.md: what we built today, how we tested it, which rules and hooks are active, and what is still open. No personal data.", after: "Say yes to PROGRESS.md." },
+    "Read it: could a colleague carry on from this?",
+    "Commit and push"
+  ],
   expected: "PROGRESS.md is on GitLab, and someone else could carry on.",
   prompt: "Write PROGRESS.md: what we built today, how we tested it, which rules and hooks are active, and what is still open. No personal data.",
   keyPoints: [
@@ -1662,7 +1704,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit and push",
     "Tomorrow: claude --continue"
   ],
-  notes: "The Maintain phase closes the loop: the next person, or tomorrow's session, starts from PROGRESS.md. Day 5 uses the same file. Tomorrow starts with git pull and claude --continue.\n\nWhy now: Tomorrow's session starts empty. Only what's written down carries over.\nWhat you see: PROGRESS.md: what's built, how it was tested, what's still open.\nExtra: Tomorrow: claude --continue takes you back into today's last conversation."
+  notes: "Say: Tomorrow's session starts empty. Only what's written down carries over. The Maintain phase closes the loop: the next person, or tomorrow's session, starts from PROGRESS.md.\n\nWhat you see: PROGRESS.md: what's built, how it was tested, which rules and hooks are active, and what's still open.\n\nBackground: Day 5 uses the same file.\n\nNext: Day 1 learning note. Tomorrow starts with git pull and claude --continue, which takes you back into today's last conversation."
 },
 
 { // Slide 78

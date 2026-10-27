@@ -151,6 +151,18 @@ p.subtitle{font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.5;color:var(--muted)
 .compare-col:nth-child(2) h2{color:var(--violet)}
 .compare-col:nth-child(3) h2{color:var(--amber)}
 .compare-col ul{margin:0;padding-left:1.1rem;line-height:1.7;color:var(--text)}
+.matrix{display:grid;gap:.5rem;margin:.75rem 0;cursor:pointer}
+.mx-row{display:grid;grid-template-columns:var(--mx-tpl);gap:.5rem;align-items:stretch;animation:enter .45s both;animation-delay:calc(var(--i,0)*120ms)}
+.mx-head{animation:none}.mx-col{font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 .9rem}
+.mx-name,.mx-cell{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;line-height:1.35}
+.mx-name{display:flex;flex-direction:column;justify-content:center;border-left:4px solid var(--cyan)}
+.mx-row:nth-child(3) .mx-name{border-left-color:var(--violet)}.mx-row:nth-child(4) .mx-name{border-left-color:var(--amber)}.mx-row:nth-child(5) .mx-name{border-left-color:var(--aether-orange)}
+.mx-name strong{font-size:1.08rem}.mx-sub{font-size:.8rem;color:var(--muted);margin-top:.15rem}
+.mx-cell{display:flex;align-items:center;gap:.55rem;font-weight:600}
+.mx-mark{flex:none;display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;font-size:.9rem;font-weight:800;color:#06111e}
+.mx-yes .mx-mark{background:var(--ok)}.mx-ask .mx-mark{background:var(--amber)}.mx-no .mx-mark{background:var(--border);color:var(--muted)}
+.mx-text{font-weight:400;font-size:.95rem;color:var(--text)}
+@media(max-width:760px){.mx-head{display:none}.mx-row{grid-template-columns:1fr 1fr}.mx-name,.mx-text{grid-column:1/-1}}
 .compare-foot{margin:.9rem 0 0;font-weight:700;letter-spacing:.05em;font-size:.76rem;text-transform:uppercase;text-align:center;color:var(--muted)}
 .with-side .compare{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.with-side .compare-col{padding:.9rem 1rem}.with-side .compare-col ul{font-size:.92rem;line-height:1.5;padding-left:1rem}
 
@@ -571,6 +583,18 @@ p.subtitle{font-weight:700}
 .term-prompt{white-space:pre-wrap;font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.6}
 .term-prompt .tp-text{opacity:0;animation:fade-in .6s both .6s}
 .term-prompt .prompt-sign{color:var(--aether-orange)}
+/* tour: a Claude Code screen next to numbered cards; the lit line belongs to the last card shown */
+.tour{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:1.2rem;align-items:start;margin:.75rem 0}
+.tour-screen{min-width:0;cursor:pointer}.tour-screen .term-body{font-size:clamp(.82rem,1.05vw,.98rem);line-height:1.55}
+.tl{white-space:pre-wrap;padding:.12rem .5rem;margin:0 -.5rem;border-radius:6px;border:1px solid transparent;transition:background .3s,border-color .3s}
+.tl-dim{color:#8b93b0}.tl-user{color:#fff;font-weight:700}.tl-tool{color:#69e2f2}.tl-out{color:#8b93b0}.tl-ask{color:#ffb545}.tl-mode{color:#b99aff;margin-top:.5rem}.tl-menu{color:#d7dcef}
+.tl.on{background:rgba(255,122,26,.16);border-color:#FF7A1A}
+.tour .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:0}
+.tour .card{position:relative;padding:.85rem 1rem;animation-delay:0s}.tour .card.pending{animation:none;visibility:hidden;pointer-events:none}
+.tour .card h2{font-size:1rem}.tour .card p,.tour .card li{font-size:.9rem;line-height:1.4}
+.tour-n{position:absolute;top:.6rem;right:.7rem;display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--aether-orange);color:#fff;font-size:.8rem;font-weight:800}
+@media(max-width:900px){.tour{grid-template-columns:1fr}}
+@media(max-width:560px){.tour .cards{grid-template-columns:1fr}}
 /* plan B overlay */
 .planb{position:fixed;inset:6vh 5vw;z-index:40;display:none;flex-direction:column;background:#0b0f19;border:2px solid var(--aether-orange);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
 .planb.show{display:flex}
@@ -1197,6 +1221,11 @@ html.embed body{min-height:100vh}
 .asg-step-prompt{display:flex;align-items:center;gap:.7rem;margin-top:.45rem;padding:.45rem .7rem;border-radius:10px;background:#0b0f19;border:1px solid #2a3350;font-weight:400}
 .asg-step-prompt .asg-prompt-text{margin:0;flex:1}
 .asg-step-after{display:block;margin-top:.45rem}
+/* calm: the "what you see" line reads as feedback, not as another instruction; warn marks the one trap */
+.asg-steps.calm .asg-step-after{font-weight:500;font-size:.85em;color:var(--muted)}
+.asg-steps.calm .asg-step-after::before{content:'→ ';color:var(--muted)}
+.asg-steps.calm .asg-step-after.warn{font-weight:700;color:var(--aether-orange)}
+.asg-steps.calm .asg-step-after.warn::before{content:'⚠ ';color:var(--aether-orange)}
 .asg-steps.with-prompts{gap:clamp(.3rem,.6vh,.55rem)}
 .asg-steps.with-prompts .asg-step{padding:clamp(.4rem,.9vh,.65rem) 1.1rem;font-size:clamp(.98rem,1.5vw,1.2rem)}
 .asg-steps.with-prompts .asg-step-prompt{margin-top:.3rem;padding:.3rem .6rem}

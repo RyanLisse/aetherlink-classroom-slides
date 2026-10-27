@@ -72,6 +72,14 @@ function renderSteps(stage, s) {
   if (co && co.at) els[co.at - 1].classList.add('highlight');
   wrap.append(row, cap, ctrl); stage.append(wrap);
 }
+// matrix: one row per option, the same columns for each; a cell ['yes'|'ask'|'no', text] gets a coloured mark
+function renderMatrix(stage, s) { const m = s.matrix || {}; const grid = node('div', 'matrix'); const n = (m.columns || []).length;
+  grid.style.setProperty('--mx-tpl', 'minmax(9rem,1.1fr) ' + 'minmax(0,1fr) '.repeat(Math.max(n - 1, 0)) + 'minmax(0,2.2fr)');  // last column holds the longer text
+  const head = node('div', 'mx-row mx-head'); head.append(node('span')); (m.columns || []).forEach(c => head.append(node('span', 'mx-col', c))); grid.append(head);
+  (m.rows || []).forEach((r, i) => { const row = node('div', 'mx-row'); row.style.setProperty('--i', i); const name = node('div', 'mx-name'); name.append(node('strong', null, r.title)); if (r.sub) name.append(node('span', 'mx-sub', r.sub)); row.append(name);
+    (r.cells || []).forEach(c => { if (Array.isArray(c)) { const cell = node('div', 'mx-cell mx-' + c[0]); cell.append(node('span', 'mx-mark', { yes: '✓', ask: '?', no: '✕' }[c[0]] || ''), node('span', null, c[1])); row.append(cell); } else row.append(node('div', 'mx-cell mx-text', c)); });
+    grid.append(row); });
+  stage.append(grid); }
 function renderCompare(stage, s) { const grid = node('div', 'compare'); (s.columns || []).forEach((c, i) => { const col = node('section', 'compare-col'); col.style.setProperty('--i', i); col.append(node('h2', null, c.title)); const ul = node('ul'); (c.items || []).forEach(x => ul.append(node('li', null, x))); col.append(ul); if (c.foot) col.append(node('p', 'compare-foot', c.foot)); grid.append(col); }); stage.append(grid); }
 function renderRecap(stage, s) {
   const list = node('ul', 'recap-list'); const items = s.items || [];
@@ -91,6 +99,7 @@ function renderLayout(stage, s) {
   if (L === 'pillars') renderPillars(stage, s);
   else if (L === 'steps') renderSteps(stage, s);
   else if (L === 'compare') renderCompare(stage, s);
+  else if (L === 'matrix') renderMatrix(stage, s);
   else if (L === 'recap') renderRecap(stage, s);
   if (s.cards?.length && (!L || L === 'exercise' || L === 'cards')) {
     const grid = node('div', 'cards' + (s.cards.length === 3 ? ' three' : ''));
@@ -230,6 +239,17 @@ function renderExtras(stage, main, s, v) {
     const body = node('div', 'term-body'); v.term.forEach((ln, i) => { const row = node('div', 'term-line ' + (ln.c ? 'cmd' : ln.ask ? 'ask' : 'out')); row.style.setProperty('--i', i);
       if (ln.c) { row.append(node('span', 'prompt-sign', '$ ')); const ty = node('span', 'typed', ln.c); ty.style.setProperty('--n', ln.c.length); row.append(ty); } else row.textContent = ln.o || ln.ask; body.append(row); });
     t.append(body); grid.after(t);
+  }
+  if (v.tour) {                                                  // tour: a Claude Code screen; each click shows one card and lights up its part
+    const wrap = node('div', 'tour'); const t = node('div', 'term tour-screen'); t.setAttribute('aria-hidden', 'true');
+    const bar = node('div', 'term-bar'); bar.append(node('i'), node('i'), node('i'), node('span', 'term-title', v.tour.title || 'claude')); t.append(bar);
+    const body = node('div', 'term-body'); const lines = v.tour.screen.map(ln => { const row = node('div', 'tl tl-' + (ln.k || 'out'), ln.t); body.append(row); return [row, ln.n || []]; });
+    t.append(body); grid.before(wrap); wrap.append(t, grid);
+    const light = i => lines.forEach(([row, ns]) => row.classList.toggle('on', ns.includes(i + 1)));
+    cards.forEach((c, i) => { c.prepend(node('span', 'tour-n', String(i + 1))); c.classList.add('pending'); c.addEventListener('click', e => { if (!c.classList.contains('pending')) { e.stopPropagation(); light(i); } }); });
+    let k = 0; const next = () => { if (k >= cards.length) return false; cards[k].classList.remove('pending'); light(k); announce(cards[k].textContent); k++; return true; };
+    t.addEventListener('click', next); window.__reveal = next;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
   }
   if (v.art === 'gate') {                                        // 21: explore -> plan -> (gate) -> change
     const route = node('div', 'route'); const st = (ico, label, cls) => { const d = node('div', 'station ' + (cls || '')); d.append(node('span', 'st-ico', ico), node('span', 'st-label', label)); return d; };
@@ -815,7 +835,7 @@ function visibleFrom(i, dir) { for (let n = i; n >= 0 && n < slides.length; n +=
 function step(dir) { const n = visibleFrom(current + dir, dir); if (n !== null) go(n); }
 
 /* ---- stepThrough: every main item starts hidden, click / → shows the next one ---- */
-const STEP_ITEMS = '.cards > .card, .pillars > .pillar, .compare > .compare-col, .pop-chips > .pop-chip, .rules-box, .tok-flow, .slide-main > .tagline';
+const STEP_ITEMS = '.cards > .card, .pillars > .pillar, .compare > .compare-col, .matrix > .mx-row:not(.mx-head), .pop-chips > .pop-chip, .rules-box, .tok-flow, .slide-main > .tagline';
 function applyStepThrough(main, s) {
   const v = s.visual || {}; if (!v.stepThrough || window.__reveal) return;
   const items = [...main.querySelectorAll(typeof v.stepThrough === 'string' ? v.stepThrough : STEP_ITEMS)];
@@ -866,7 +886,7 @@ function renderAssignment(stage, s) {
   stage.append(head);
   const body = node('div', 'asg-body'); const main = node('div', 'asg-main');
   const st = loadState(); const done = Array.isArray(st.done) ? st.done.slice() : [];
-  const ol = node('ol', 'asg-steps' + ((s.steps || []).length > 4 ? ' many' : '') + ((s.steps || []).some(t => t.prompt) ? ' with-prompts' : ''));
+  const ol = node('ol', 'asg-steps' + ((s.steps || []).length > 4 ? ' many' : '') + ((s.steps || []).some(t => t.prompt) ? ' with-prompts' : '') + (s.calm ? ' calm' : ''));
   const copyBtn = text => { const b = node('button', 'asg-prompt-copy', 'Copy'); b.type = 'button';
     b.addEventListener('click', async e => { e.stopPropagation(); try { await navigator.clipboard.writeText(text); notify('Prompt copied'); b.textContent = 'Copied ✓'; setTimeout(() => { b.textContent = 'Copy'; }, 1800); } catch { notify('Select and copy the prompt manually.'); } });
     return b; };
@@ -875,7 +895,7 @@ function renderAssignment(stage, s) {
     const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
     const text = node('span', 'asg-text', t.text ?? t);
     if (t.prompt) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
-    if (t.after) text.append(node('span', 'asg-step-after', t.after));  // what you see once Claude is done
+    if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };
     li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
