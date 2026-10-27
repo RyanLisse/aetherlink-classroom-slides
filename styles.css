@@ -1290,3 +1290,11 @@ body.big-word .heading .eyebrow{justify-content:center}
 .flip-tag{padding:.3rem .75rem;border-radius:999px;font-size:clamp(.85rem,1.05vw,1rem);font-weight:700;background:color-mix(in srgb,var(--cyan) 16%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);color:#e8f6ff}
 .flip-hint{position:absolute;top:.6rem;right:.8rem;font-size:1.1rem;opacity:.45}
 .flip-card:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+/* team cards: more air, names in orange so they stand out from the role text */
+.flip-face{padding:clamp(1.6rem,2.8vw,2.6rem) clamp(1.4rem,2.4vw,2.4rem);gap:.25rem}
+body[data-opener="team"] .flip-card .flip-face h2{color:#FF9A4D}
+body[data-opener="team"] .flip-front .team-avatar{margin-bottom:1rem}
+body[data-opener="team"] .flip-front .team-role{margin-top:.55rem}
+.flip-back h2{margin-bottom:.7rem}
+.flip-line{margin-bottom:1.1rem}
+.flip-tags{gap:.55rem .5rem}
