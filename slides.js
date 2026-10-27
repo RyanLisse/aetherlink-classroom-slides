@@ -927,6 +927,52 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "git init turns the folder into a git repository on your own laptop: no GitLab, no internet needed. GitLab comes later, when there is something to share. The trust question is the first trap: the highlighted answer is 'No, exit', so pressing Enter quits Claude Code. Say: arrow down first. Trusting matters later too: Claude Code only applies a project's own allow rules once the folder is trusted. In /model, Enter sets a new default model; Esc just leaves. Finish in manual mode: some laptops start in auto mode (it depends on personal and company settings), and we want Claude to ask for everything today. Walk around: whoever can't start claude gets fixed now.\n\nWhy now: You need a place to work, and a feel for the tool before it builds anything.\nWhat you see: “Do you trust this folder?” The highlighted answer is No, exit: press ↓ first. The mode at the bottom. The / menu with every built-in command.\nCareful: In /model, Enter changes your default model. Just looking? Press Esc."
 },
 
+{ // Slide 46b
+  title: "Today you build Snake",
+  kicker: "DAY 1 · PART 2 · YOUR GAME",
+  subtitle: "One small game that you build all day, step by step, with Claude Code.",
+  type: "context",
+  visual: { stagger: "pop", stepThrough: true, bot: "happy", place: "aside", highlight: [{ in: "tagline", text: "Aether Arcade", tone: "orange" }] },
+  cards: [
+    { title: "The game", body: "Snake in your browser. Eat, grow, and don't hit yourself." },
+    { title: "Why Snake", body: "Everyone knows the rules. So you can judge Claude's work, not learn a new game." },
+    { title: "Yours", body: "Your nickname and your avatar on the start screen. Your own colours and ideas." },
+    { title: "Step by step", body: "Plan, build, test, put it online. Every step teaches one Claude Code skill." }
+  ],
+  tagline: "Tomorrow your Snake joins everyone else's in the Aether Arcade.",
+  keyPoints: [
+    "Snake: one game for the whole day",
+    "Everyone knows the rules",
+    "Make it yours: nickname, avatar",
+    "Each step teaches one skill",
+    "Tomorrow: the Aether Arcade"
+  ],
+  notes: "Now that Claude Code runs, tell them what they'll build. Snake is small, everyone knows how it should behave, and it runs in the browser without installing anything. That matters: when Claude gets something wrong, people see it straight away, because they know the rules. The game is only the vehicle; what they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill. Make it personal: a nickname and an avatar on the start screen, their own colours. Tomorrow all games come together in the Aether Arcade, one website with everyone's games, so keep it working. Next slide: before Claude writes any code, we first write down what we want."
+},
+
+{ // Slide 46c
+  title: "Why intent.md first?",
+  kicker: "DAY 1 · PART 2 · PLAN",
+  subtitle: "Say only “build me Snake”, and Claude fills in the rest itself.",
+  type: "concept",
+  visual: { stagger: "pop", stepThrough: true, bot: "think", place: "aside", highlight: [{ in: "tagline", text: "what done means", tone: "orange" }] },
+  cards: [
+    { title: "Without it", body: "Claude guesses: terminal or browser? Walls? How fast? You get a game, but not the one you had in mind." },
+    { title: "intent.md", body: "A short file with what you want: the outcome, how you check it's done, and what Claude must not do." },
+    { title: "Why a file", body: "Claude forgets between sessions, a file doesn't. Every next step, test and review checks against it." },
+    { title: "Claude helps", body: "You don't write it alone: Claude asks you questions and writes the file. You read it and decide." }
+  ],
+  tagline: "No code yet. First agree what done means.",
+  keyPoints: [
+    "Vague prompt: Claude guesses",
+    "intent.md: outcome, done when, boundaries, open questions",
+    "A file outlives the chat",
+    "Claude interviews, you decide",
+    "Plan phase of the loop"
+  ],
+  notes: "This is the why behind the next assignment. Ask the room: what happens if you just type 'build me a Snake game'? Claude makes a lot of choices for you: in the dry run it offered a terminal or Python version, and picked walls, speed and controls on its own. You get something that works, but not what you had in mind, and you can't say whether it is done. intent.md is the Plan phase from the loop: what do we want, before how. Four parts: Outcome (what the game does), Done when (checks anyone can verify, not 'it's fun'), Boundaries (what Claude must not do, such as no personal data except a nickname) and Open questions. Why a file and not just the chat: a chat is gone after a restart, a file stays in the project, and from now on every plan, test and review points back to it. The nice part: you don't write it yourself. Claude interviews you with multiple-choice questions and writes the file; you read it and decide. Developers know this as requirements or a ticket; it's the same file Day 5 starts with."
+},
+
 { // Slide 47
   type: "practice",
   layout: "exercise",
