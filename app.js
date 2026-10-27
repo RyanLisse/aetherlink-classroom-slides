@@ -887,7 +887,8 @@ function renderAssignment(stage, s) {
     renderVisual(stage, body, mini, { ...s, visual: { ...v, bot: undefined, compact: undefined, cardImages: undefined } });
     return;
   }
-  body.append(side); stage.append(body);
+  if (v.shot || v.cardImages) body.append(side); else body.classList.add('solo');
+  stage.append(body);
 }
 
 function render() {
