@@ -246,13 +246,13 @@ window.SLIDES = [
   visual: { opener: 'team', stagger: 'pop' },
   cards: [
     { title: "Jessy The", body: "", role: "Full-Stack Software Engineer · AI Applications",
-      back: "Builds full-stack AI applications in TypeScript, React, Next.js, Node.js and Python.\nIntegrates LLMs into products: agents, AI workflows and scalable front-end architecture.\nSpeaker on AI engineering at JSWorld, Frontmania and DevWorld." },
+      back: "Builds full-stack AI apps, from the model to the UI.", tags: ["TypeScript", "React · Next.js", "Node.js", "Python", "LLMs & agents", "Speaker"] },
     { title: "Constance van der Vlist", body: "", role: "CEO & Co-founder AetherLink",
-      back: "AI strategy, implementation and training, in the Netherlands and Finland.\nStarted in veterinary clinics, fixing the X-ray machines and computers.\nFrom there: clinic software, robotics, AI and Web3." },
+      back: "Makes AI work in real teams.", tags: ["AI strategy", "Implementation", "Training", "Robotics", "NL · FI"] },
     { title: "Maarten Nauw", body: "", role: "Co-founder CFX · Game Developer · Robotics",
-      back: "Co-founder of CFX, a video and visual effects studio.\nMakes branded content for game developers and brands: film, 2D/3D animation, visual effects.\nBuilds games and robots." },
+      back: "Video, visual effects and games.", tags: ["CFX co-founder", "VFX & 3D", "Game dev", "Robotics"] },
     { title: "Ryan Lisse", body: "", role: "AI Engineer · Agentic systems",
-      back: "AI Engineer at Blinqx: multi-agent systems, from proof of concept to production.\nEval-first, test-driven, building for scale, not for demos.\nWorks with TypeScript, Python, MCP and Claude Code." }
+      back: "Multi-agent systems, from proof of concept to production.", tags: ["Agentic AI", "Evals", "TypeScript", "Python", "MCP", "Claude Code"] }
   ],
   keyPoints: ["We are one team: AetherLink","Click a card: it flips to the details","Each trainer: one or two sentences","Something personal"],
   notes: "We present ourselves as one team: team AetherLink, not as separate freelancers. Each trainer clicks their own card, so it flips to the details, and says one or two sentences: who you are, what you do in this programme, and something personal. Click again to flip it back. Keep it short: the room gets to know you over the next two days."

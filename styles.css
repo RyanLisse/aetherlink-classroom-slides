@@ -1276,11 +1276,17 @@ body.big-word .heading .eyebrow{justify-content:center}
 .team-photo{overflow:hidden;padding:0}
 .team-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 .team-role{margin:.3rem 0 0;color:var(--muted,#9fb0c8);font-size:clamp(.95rem,1.2vw,1.15rem)}
-.flip-card{cursor:pointer;transition:transform .22s ease-in;transform-style:preserve-3d}
-.flip-card.flipping{transform:perspective(900px) rotateY(90deg)}
-.flip-card .flip-back{display:none}
-.flip-card.show-back .flip-front{display:none}
-.flip-card.show-back .flip-back{display:block}
-.flip-card .flip-back h2{font-size:clamp(1.1rem,1.6vw,1.4rem);margin:0 0 .5rem}
-.flip-card .flip-back p{text-align:left;line-height:1.45}
+.flip-card{cursor:pointer;background:none;border:0;box-shadow:none;padding:0;perspective:1400px;display:grid}
+.flip-inner{display:grid;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.45,.05,.25,1)}
+.flip-card.show-back .flip-inner{transform:rotateY(180deg)}
+.flip-card:hover .flip-inner{transform:rotateY(8deg)}
+.flip-card.show-back:hover .flip-inner{transform:rotateY(172deg)}
+.flip-face{grid-area:1/1;position:relative;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--cyan);border-radius:0 0 14px 14px;padding:clamp(1.1rem,1.8vw,1.7rem);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.flip-card:nth-child(odd) .flip-face{border-top-color:var(--violet)}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(145deg,color-mix(in srgb,var(--violet) 22%,var(--surface)),color-mix(in srgb,#FF7A1A 14%,var(--surface)))}
+.flip-back h2{font-size:clamp(1.05rem,1.5vw,1.3rem);margin:0 0 .35rem;text-transform:none;letter-spacing:0}
+.flip-line{margin:0 0 .8rem;font-size:clamp(1rem,1.3vw,1.2rem);font-weight:700;text-align:center;line-height:1.35}
+.flip-tags{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.flip-tag{padding:.3rem .75rem;border-radius:999px;font-size:clamp(.85rem,1.05vw,1rem);font-weight:700;background:color-mix(in srgb,var(--cyan) 16%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);color:#e8f6ff}
+.flip-hint{position:absolute;top:.6rem;right:.8rem;font-size:1.1rem;opacity:.45}
 .flip-card:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}

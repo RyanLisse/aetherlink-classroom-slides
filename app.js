@@ -583,12 +583,13 @@ function buildOpener(stage, main, s, v) {
     c.prepend(av);
     if (d.role) c.append(node('p', 'team-role', d.role));
     if (!d.back) return;
-    // flip card: click (or Enter) turns it half-way, swaps to the details, turns back
-    const front = node('div', 'flip-front'); front.append(...c.childNodes);
-    const back = node('div', 'flip-back'); back.append(node('h2', null, name), cardBody(d.back));
-    c.append(front, back); c.classList.add('flip-card'); c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', name + ': show details');
-    const flip = e => { e.stopPropagation(); if (c.classList.contains('flipping')) return; c.classList.add('flipping');
-      setTimeout(() => { c.classList.toggle('show-back'); c.classList.remove('flipping'); }, 220); };
+    // flip card, like a memory card: front and back are two faces of one card that turns in 3D
+    const front = node('div', 'flip-face flip-front'); front.append(...c.childNodes, node('span', 'flip-hint', '↻'));
+    const back = node('div', 'flip-face flip-back'); back.append(node('h2', null, name), node('p', 'flip-line', d.back));
+    if (d.tags) { const chips = node('div', 'flip-tags'); d.tags.forEach(t => chips.append(node('span', 'flip-tag', t))); back.append(chips); }
+    const inner = node('div', 'flip-inner'); inner.append(front, back);
+    c.append(inner); c.classList.add('flip-card'); c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', name + ': show details');
+    const flip = e => { e.stopPropagation(); c.classList.toggle('show-back'); };
     c.addEventListener('click', flip, { signal: slideController.signal });
     c.addEventListener('keydown', e => { if (e.key === 'Enter') flip(e); }, { signal: slideController.signal });
   });
