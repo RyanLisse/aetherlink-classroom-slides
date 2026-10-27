@@ -2620,19 +2620,21 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   visual: { shotLabel: "Why, what you see, look inside" },
   cards: [
     { title: "Why now", body: "The agreement changed. Your game, the skill and the arcade all have to follow." },
-    { title: "What you see", body: "arcade-spec.md v2, an updated skill, your game tagged v2.0, and the arcade still accepting v1 scores." },
+    { title: "What you see", body: "arcade-spec.md v2, an updated skill, your game sending level, the arcade tagged v2.0, and v1 scores still accepted." },
     { title: "Look inside", body: "Which games are still on v1? Does the leaderboard still work for them?" }
   ],
   steps: [
     "Host: update arcade-spec.md to v2, and keep v1 accepted for now.",
     "Host: update the arcade-connect skill.",
-    "Everyone: update your game with the skill, and tag it v2.0.",
-    "Merge request, pipeline, review, merge."
+    "Everyone: pull main of the arcade repo first, so you use the new skill.",
+    "Everyone: update your game with the skill.",
+    "Merge request, pipeline, review, merge.",
+    "Host: once every game is merged, tag the arcade v2.0."
   ],
   expected: "Every game sends v2 scores, and nothing broke on the way.",
-  prompt: "arcade-spec.md is now v2: a score also has level. Update my game with the arcade-connect skill so it sends v2 scores. Tag it v2.0 and push. Then open a merge request to the arcade repo.",
-  keyPoints: ["Update spec, skill, games", "Tag = a version", "v1 still works: deprecated", "Same MR flow"],
-  notes: "A tag (v2.0) marks which version of a game speaks which contract. If two people change the arcade's start screen at the same time in this sprint, a merge conflict appears by itself: let Claude explain both versions, and the humans choose."
+  prompt: "arcade-spec.md is now v2: a score also has level. Pull main of the arcade repo, then update my game in games/[nickname]/ with the arcade-connect skill so it sends v2 scores. Push a new branch and open a merge request.",
+  keyPoints: ["Update spec, skill, games", "Pull first: the skill changed too", "v1 still works: deprecated", "Same MR flow", "Host tags the release v2.0"],
+  notes: "Only the host tags: v2.0 on the arcade repo marks the release that speaks contract v2. Players don't tag the shared repo. In the dry run, Claude flagged that a player's copied skill was still v1: pulling main of the arcade first fixes that. Expect Claude to keep v1 working with a warning instead of a date check, and to suggest a message for the team chat. If two people change the arcade's start screen at the same time in this sprint, a merge conflict appears by itself: let Claude explain both versions, and the humans choose."
 },
 
 { // Slide 120
@@ -2657,7 +2659,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   visual: { reveal: "click", buttons: true },
   cards: [
     { title: "Broken deploy", body: "One game takes the whole start screen down. Revert, or hotfix?" },
-    { title: "Cheater", body: "999999 points on the leaderboard. The anti-cheat check missed it. Now what?" },
+    { title: "Cheater", body: "480 points on level 1, where the most you can score is 4. The anti-cheat check let it through. Now what?" },
     { title: "Privacy leak", body: "A game shows a real name and an email. How did that get past review?" },
     { title: "Merge conflict", body: "Two people changed the start screen at the same time." }
   ],
@@ -2669,7 +2671,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Resolve a conflict with Claude",
     "Incident → test (Day 5)"
   ],
-  notes: "Turn one card, or two if there's time. Broken deploy: the fastest safe move is git revert of the merge, then a hotfix branch for the real fix; add a test so it can't happen again. Cheater: tighten the anti-cheat check (maximum possible score per level and time) and add the cheating score as a test case. Privacy leak: add a check to the pipeline (or a hook) that fails on anything that looks like an email or a full name, and remove the data. Merge conflict: ask Claude to explain both versions, decide as humans, commit the result. Whatever the card: it ends with a new test or rule, exactly Day 5's 'each incident becomes an eval'. Prepare the cards in advance: a deliberately broken game, a cheating score file, and a game with a fake name and email, all in a branch you can merge on cue."
+  notes: "Turn one card, or two if there's time. Broken deploy: the fastest safe move is git revert of the merge, then a hotfix branch for the real fix; add a test so it can't happen again. Cheater: the template caps records at 500, so a record of 480 on level 1 passes, but level 1 ends after 5 food, so it is impossible. In the dry run Claude worked that out, added a maximum per game and level, and saved the cheating record as a test case that must stay rejected. Privacy leak: add a check to the pipeline (or a hook) that fails on anything that looks like an email or a full name, and remove the data. Merge conflict: ask Claude to explain both versions, decide as humans, commit the result. Whatever the card: it ends with a new test or rule, exactly Day 5's 'each incident becomes an eval'. Prepare the cards in advance: a deliberately broken game, a cheating score file, and a game with a fake name and email, all in a branch you can merge on cue."
 },
 
 { // Slide 122
