@@ -716,23 +716,9 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   tagline: "Stuck? Say it now, or put it in the chat. We fix it before the assignments.",
   keyPoints: ["Everyone opens a terminal now", "claude --version, then claude", "Log in if asked, /help, /exit", "Count the thumbs up", "Stuck: note who, fix at the break"],
-  notes: "Everyone installed Claude Code before the course; this slide only checks that it works, early, so there is time to fix problems at the break. Ask everyone to open a terminal and do the three steps with you: claude --version should print a version number; claude starts it (log in if it asks); /help shows what's available and /exit leaves again. Ask for a thumbs up (online: in the chat). Note who is stuck and fix their setup at the break, or at lunch at the latest: the first assignment is before lunch and everyone works on their own laptop. Don't troubleshoot for the whole room here."
+  notes: "Everyone installed Claude Code before the course; this slide only checks that it works, early, so there is time to fix problems at the break. Ask everyone to open a terminal and do the three steps with you: claude --version should print a version number; claude starts it (log in if it asks); /help shows what's available and /exit leaves again. Ask for a thumbs up (online: in the chat). Note who is stuck and fix their setup at the break, or at lunch at the latest: the first assignment is right after lunch and everyone works on their own laptop. Don't troubleshoot for the whole room here."
 },
 
-{ // Slide 36
-  title: "AI agents",
-  kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
-  subtitle: "Not just answering — acting toward a goal.",
-  type: "concept",
-  visual: { hero: 0, popOut: 1, stepThrough: true, chipIcons: ['▶', '↻', '■', '✋'],
-    highlight: [{ in: 'card:0', text: 'works toward a goal', tone: 'orange' }] },
-  cards: [
-    { title: "Definition", body: "An AI agent works toward a goal by gathering context, choosing actions, using tools and checking results." },
-    { title: "It can", body: "continue\nadjust\nstop\nask for human input" }
-  ],
-  keyPoints: ["Keep it abstract and short","Agents act toward a goal","Next: Claude Code is one"],
-  notes: "Keep this abstract and short — it sets up the next slide's concrete claim that Claude Code already is one of these."
-},
 
 { // Slide 37
   title: "Claude Code as an agentic tool",
@@ -745,8 +731,8 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Claude Code can", body: "inspect a repository\nform a plan\nread and edit files\nrun commands and tests\ninspect results\nadjust its approach" }
   ],
   tagline: "Using Claude Code means using an existing agentic tool.",
-  keyPoints: ["Say it explicitly","It fits the definition you just saw","Using an agent, not building one","Building one: support day 4"],
-  notes: "Important clarification, say it explicitly: Claude Code fits the definition from the previous slide, so it is an agent. But using Claude Code does not mean the room has built a standalone agent. Building your own agent comes in the support days (Day 4, the Claude Agent SDK) — plant it now."
+  keyPoints: ["Say it explicitly","It reads, plans, acts and checks by itself","Using an agent, not building one","Building one: support day 4"],
+  notes: "Important clarification, say it explicitly: Claude Code reads, plans, acts and checks by itself, so it is an agent; the general definition follows after the loop. But using Claude Code does not mean the room has built a standalone agent. Building your own agent comes in the support days (Day 4, the Claude Agent SDK) — plant it now."
 },
 
 { // Slide 38
@@ -765,9 +751,23 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   tagline: "Claude Code is an agent because it loops, within a task you bound.",
   keyPoints: ["Five steps, keep Decide","Focus on the loop itself","Link to the method comes next"],
-  notes: "Five steps, all of them stay including 'Decide' — this is the confirmed final wording. Keep this slide focused on the loop itself; the relationship between this loop and the working method just taught is the very next slide."
+  notes: "Five steps, all of them stay including 'Decide' — this is the confirmed final wording. Keep this slide focused on the loop itself; after this comes the general definition of an agent, and then how this loop relates to the human and AI working method."
 },
 
+{ // Slide 36
+  title: "AI agents",
+  kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
+  subtitle: "Not just answering — acting toward a goal.",
+  type: "concept",
+  visual: { hero: 0, popOut: 1, stepThrough: true, chipIcons: ['▶', '↻', '■', '✋'],
+    highlight: [{ in: 'card:0', text: 'works toward a goal', tone: 'orange' }] },
+  cards: [
+    { title: "Definition", body: "An AI agent works toward a goal by gathering context, choosing actions, using tools and checking results." },
+    { title: "It can", body: "continue\nadjust\nstop\nask for human input" }
+  ],
+  keyPoints: ["Keep it abstract and short","Agents act toward a goal","Next: Claude Code is one"],
+  notes: "Keep this abstract and short. They've just seen one agent up close (Claude Code and its loop); now zoom out to the general definition. The next slide puts the human next to the agent."
+},
 { // Slide 39
   title: "Human and AI working method",
   kicker: "DAY 1 · PART 2 · WORKING METHOD",
@@ -924,6 +924,23 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Type / live and scroll through the menu. /help shows everything Claude Code can do. /model lets you choose Haiku, Sonnet or Opus: remember the model-choice slide. /permissions shows what Claude may do without asking: the gate from a few slides ago. /statusline sets what you see at the bottom of the screen; show a good example. /memory opens your CLAUDE.md, which is coming up. And the skills you install or make show up in this menu too: that's tomorrow."
 },
 
+{ // Slide 57
+  title: "Lunch",
+  kicker: "DAY 1 · LUNCH",
+  subtitle: "Enjoy your lunch.",
+  type: "pause",
+  visual: { countdown: 60, bot: "wave", place: "beside" },
+  cards: [
+    { title: "Back at 13:00", body: "We continue with your own Snake." }
+  ],
+  keyPoints: [
+    "Lunch: resume at 13:00",
+    "Fix anyone still stuck on setup",
+    "Check the GitLab MCP command works",
+    "Assignments start right after lunch"
+  ],
+  notes: "Exact resume time: 13:00. Use the break to fix anyone whose Claude Code still doesn't work, and check on your own laptop that the GitLab MCP command you hand out works (Assignment 7 this afternoon)."
+},
 { // Slide 46b
   title: "Today you build Snake",
   kicker: "DAY 1 · PART 2 · YOUR GAME",
@@ -1033,8 +1050,8 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "LibreChat", body: "For your basic questions, and for images: this afternoon you make your avatar there." }
   ],
   tagline: "We set this up with you, step by step.",
-  keyPoints: ["Opens the tour: the map first","Memory: CLAUDE.md, before lunch","Hands and feet: GitLab this afternoon","Defaults: settings and model","LibreChat: questions and your avatar","We set it up together"],
-  notes: "This opens the tour: draw the landscape once, so they see it before they need it. Your Claude Code is your personal assistant. It gets a memory (CLAUDE.md: who you are and how it should work with you, which you write before lunch), hands and feet through MCP connections (GitLab this afternoon; Jira and Confluence come in the support days), and defaults: settings, rules and the model it starts with. LibreChat is for basic questions and for images: this afternoon everyone makes their avatar there. Don't explain each piece in depth: all of them come back today, and we set them up together."
+  keyPoints: ["Opens the tour: the map first","Memory: CLAUDE.md, today","Hands and feet: GitLab this afternoon","Defaults: settings and model","LibreChat: questions and your avatar","We set it up together"],
+  notes: "This opens the tour: draw the landscape once, so they see it before they need it. Your Claude Code is your personal assistant. It gets a memory (CLAUDE.md: who you are and how it should work with you, which you write this afternoon), hands and feet through MCP connections (GitLab this afternoon; Jira and Confluence come in the support days), and defaults: settings, rules and the model it starts with. LibreChat is for basic questions and for images: this afternoon everyone makes their avatar there. Don't explain each piece in depth: all of them come back today, and we set them up together."
 },
 
 { // Slide 49
@@ -1200,23 +1217,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Let the room vote before you reveal (hands up per letter). Press → to strike the wrong answers one by one. The answer is B: the human owns the goal, the boundaries and the final decision. Passing tests are evidence for that decision, not a replacement for it."
 },
 
-{ // Slide 57
-  title: "Lunch",
-  kicker: "DAY 1 · LUNCH",
-  subtitle: "Enjoy your lunch.",
-  type: "pause",
-  visual: { countdown: 60, bot: "wave", place: "beside" },
-  cards: [
-    { title: "Back at 13:00", body: "We continue with your own Snake." }
-  ],
-  keyPoints: [
-    "Lunch: resume at 13:00",
-    "Fix anyone still stuck on setup",
-    "Check the GitLab MCP command works",
-    "Assignments start right after lunch"
-  ],
-  notes: "Exact resume time: 13:00. Use the break to fix anyone whose Claude Code still doesn't work, and check on your own laptop that the GitLab MCP command you hand out works (Assignment 7 this afternoon)."
-},
 
 
 /* ---------------------------------------------------------------------- */
@@ -1226,7 +1226,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 58
   title: "Aether Game",
   kicker: "DAY 1 · PART 3 · AETHER GAME",
-  subtitle: "This afternoon you build Snake step by step, and every step leaves something behind.",
+  subtitle: "Now you build Snake step by step, and every step leaves something behind.",
   type: "context",
   visual: { stagger: "pop", stepThrough: true, bot: "happy", place: "aside", highlight: [{ in: "tagline", text: "Aether Arcade", tone: "orange" }] },
   cards: [
@@ -1244,7 +1244,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "House rules and a test hook",
     "Tomorrow: the arcade"
   ],
-  notes: "The afternoon walks the rest of the loop with Snake: design in layers, build one layer at a time with the git rhythm (works, commit, push), a test that finds a real bug, rules that grow and a hook, your avatar, and a handover at the end. Tomorrow every game joins the Aether Arcade, so keep it working and on GitLab."
+  notes: "From here the afternoon walks the rest of the loop with Snake: design in layers, build one layer at a time with the git rhythm (works, commit, push), a test that finds a real bug, rules that grow and a hook, your avatar, and a handover at the end. Tomorrow every game joins the Aether Arcade, so keep it working and on GitLab."
 },
 
 { // Slide 59
@@ -1449,7 +1449,20 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Clear the old message after a rewind",
     "Layer 4 completes the game"
   ],
-  notes: "Say: Things go wrong. Know how to get back before it matters. And the rhythm becomes a habit: layer works, commit, push.\n\nWatch for: Esc Esc only opens Rewind when the input is empty.\nWatch for: After a rewind the old message is back in the input. Enter would do it again, so clear it.\n\nWhat you see: Esc twice opens Rewind. Pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The score is back, without git. The menu warns that files changed by bash commands aren't restored.\n\nBackground: The deliberate mistake needs a firm prompt: in the dry run, a plain 'remove the score' made Claude stop and ask, because intent.md says the score is always shown. That's a lesson in itself: intent.md protects you. Removing the score also made Claude change the tests: that's why Assignment 10 protects tests/.\n\nNext: A test: evidence, not confidence."
+  notes: "Say: Things go wrong. Know how to get back before it matters. And the rhythm becomes a habit: layer works, commit, push.\n\nWatch for: Esc Esc only opens Rewind when the input is empty.\nWatch for: After a rewind the old message is back in the input. Enter would do it again, so clear it.\n\nWhat you see: Esc twice opens Rewind. Pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The score is back, without git. The menu warns that files changed by bash commands aren't restored.\n\nBackground: The deliberate mistake needs a firm prompt: in the dry run, a plain 'remove the score' made Claude stop and ask, because intent.md says the score is always shown. That's a lesson in itself: intent.md protects you. Removing the score also made Claude change the tests: that's why Assignment 10 protects tests/.\n\nNext: Short break (15 minutes), then A test: evidence, not confidence."
+},
+
+{ // Afternoon break
+  title: "Short break",
+  kicker: "DAY 1 · BREAK",
+  subtitle: "Return in 15 minutes.",
+  type: "pause",
+  visual: { countdown: 15, bot: 'wave', place: 'beside' },
+  cards: [
+    { title: "Return in 15 minutes", body: "Continuing with: a test that finds a bug." }
+  ],
+  keyPoints: ["Break: say the return time","Show the clock time on screen","Press ▶ Start on the timer","Everyone's game on GitLab?"],
+  notes: "State the actual clock time you'll resume, out loud and (if possible) on screen. Everyone has now built all four layers. Use the break to help anyone whose game isn't on GitLab yet, or who is still stuck in a layer: after the break the topic changes from building to testing, and everyone needs a working game for that."
 },
 
 { // Slide 68
