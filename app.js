@@ -414,6 +414,11 @@ function renderExtras(stage, main, s, v) {
     m.append(left, mid); if (M.right) { const right = node('div', 'cmap-col'); M.right.forEach(b => right.append(box(b))); m.append(right); } else m.classList.add('cmap-two'); if (M.apart) { const ap = box(M.apart, 'cmap-apart'); m.append(ap); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(m); else if (tg) tg.before(m); else main.append(m);
   }
+  if (v.layers) {                                                // Snake in layers: one small board per layer, numbered
+    const w = node('div', 'layers'); v.layers.forEach((L, i) => { const c = node('figure', 'layer-card'); const im = document.createElement('img'); im.src = L.img; im.alt = L.label;
+      c.append(node('span', 'layer-n', String(i + 1)), im, node('strong', null, L.label), node('span', 'layer-cap', L.caption)); w.append(c); });
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.mdfile != null && cards[v.mdfile]) {                    // 45/46: the card's lines as a CLAUDE.md file
     const c = cards[v.mdfile]; const f = node('div', 'mdfile'); const bar = node('div', 'md-bar'); bar.append(node('i'), node('i'), node('i'), node('span', 'md-name', v.mdName || 'CLAUDE.md')); f.append(bar);
     const body = node('div', 'md-body'); String(s.cards[v.mdfile].body).split('\n').forEach((l, i) => { const r = node('div', 'md-sec'); r.style.setProperty('--i', i); r.append(node('span', 'md-h', '## ' + l), node('span', 'md-l'), node('span', 'md-l short')); body.append(r); });

@@ -1220,7 +1220,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   check: "Answer: B",
   keyPoints: ["Vote first: hands up per letter", "→ strikes the wrong answers", "Answer: B, the human decides"],
-  notes: "Let the room vote before you reveal (hands up per letter). Press → to strike the wrong answers one by one. The answer is B: the human owns the goal, the boundaries and the final decision. Passing tests are evidence for that decision, not a replacement for it."
+  notes: "Let the room vote before you reveal (hands up per letter). Press → to strike the wrong answers one by one. The answer is B: the human owns the goal, the boundaries and the final decision. Passing tests are evidence for that decision, not a replacement for it.\n\nNext: Snake in 5 layers."
 },
 
 
@@ -1229,47 +1229,47 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 1 — Part 3: Snake through the SDLC (afternoon)                     */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 58
-  title: "Aether Game",
-  kicker: "DAY 1 · PART 3 · AETHER GAME",
-  subtitle: "Now you build Snake step by step, and every step leaves something behind.",
-  type: "context",
-  visual: { stagger: "pop", stepThrough: true, bot: "happy", place: "aside", highlight: [{ in: "tagline", text: "Aether Arcade", tone: "orange" }] },
-  cards: [
-    { title: "Design", body: "A plan in layers." },
-    { title: "Build", body: "One layer at a time. Commit and push what works." },
-    { title: "Test", body: "A test that finds a bug you didn't see." },
-    { title: "Rules and a hook", body: "Rules that grow, and a check that runs by itself." },
-    { title: "Your avatar", body: "A nickname and an avatar, for tomorrow's leaderboard." }
-  ],
-  tagline: "Tomorrow your game joins the Aether Arcade.",
+
+{ // Snake in 5 layers: the map before Assignment 5
+  title: "Snake in 5 layers",
+  kicker: "DAY 1 · PART 3 · DESIGN",
+  subtitle: "Not one big prompt, but five small steps. Each one you can play, check and save.",
+  type: "concept",
+  visual: { stepThrough: ".layer-card, .slide-main > .tagline", layers: [
+    { img: "assets/examples/snake-layer-1.svg", label: "Skeleton", caption: "A grid, and a snake that moves on its own." },
+    { img: "assets/examples/snake-layer-2.svg", label: "Controls", caption: "The arrow keys steer the snake." },
+    { img: "assets/examples/snake-layer-3.svg", label: "Food and score", caption: "Eat, grow, count your points." },
+    { img: "assets/examples/snake-layer-4.svg", label: "Game over", caption: "Hit a wall or yourself: game over, play again." },
+    { img: "assets/examples/snake-layer-5.svg", label: "Your style", caption: "Your nickname, avatar and best score." }
+  ] },
+  tagline: "One prompt can build Snake. Layers let you steer it.",
   keyPoints: [
-    "Own repo on GitLab",
-    "Snake in layers, no skills yet",
-    "Avatar from LibreChat",
-    "House rules and a test hook",
-    "Tomorrow: the arcade"
+    "The map before the plan",
+    "Five layers, each one playable",
+    "Play, check, commit after every layer",
+    "Layer 5 comes with your avatar this afternoon",
+    "Next: Claude plans these five layers with you"
   ],
-  notes: "From here the afternoon walks the rest of the loop with Snake: design in layers, build one layer at a time with the git rhythm (works, commit, push), a test that finds a real bug, rules that grow and a hook, your avatar, and a handover at the end. Tomorrow every game joins the Aether Arcade, so keep it working and on GitLab."
+  notes: "Say: One prompt can build Snake: the dry run did it in under a minute. But then you can't steer it, you can't tell what broke, and you learn nothing about what's in the files. So we build it in five layers. After every layer you play it, check it and save it.\n\nWhat you see: Click: one board at a time. 1 Skeleton: a grid and a snake that moves by itself. 2 Controls: the arrow keys steer it. 3 Food and score: it eats, grows and counts. 4 Game over: a wall or your own tail ends the game, Space starts again. 5 Your style: your nickname, avatar and best score on screen.\n\nTip: After every layer: reload the browser tab (F5 or Cmd+R) and play it. The first time, Claude opens index.html for you.\n\nLink back: Every layer is one small turn of the working-method loop: plan it, build it, check it, commit it.\n\nBackground: Layers 1 to 4 get built in Assignments 6 and 8. Layer 5 comes later this afternoon, when everyone has made an avatar in LibreChat. Real software gets built the same way: small slices that each work on their own.\n\nNext: Assignment 5: Claude plans these five layers with you."
 },
 
 { // Slide 59
   type: "practice",
   layout: "exercise",
-  title: "Assignment 5: Plan it in layers",
+  title: "Assignment 5: Plan the 5 layers of your Snake",
   mode: "plan",
   kicker: "DAY 1 · ASSIGNMENT 5 · DESIGN",
   subtitle: "One big prompt gives you a game you can't steer.",
   calm: true,
   steps: [
     "Shift+Tab until the bottom says “plan mode on”",
-    { text: "Ask for a plan in layers", prompt: "Read intent.md. Make a plan to build it in layers: skeleton, controls, food and score, game over. For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.", after: "Four layers, each with a 10-second check." },
+    { text: "Ask for a plan in layers", prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname, avatar, best score). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.", after: "Five layers, each with a 10-second check." },
     "Too big? Choose 3 and ask for smaller layers.",
     { text: "Happy? Press Esc. Don't approve.", after: "Approving starts building. Esc keeps the plan, and nothing is built.", warn: true },
     "Shift+Tab back to “manual mode on”"
   ],
-  expected: "A plan of four layers, each with its own check, and nothing built yet.",
-  prompt: "Read intent.md. Make a plan to build it in layers: skeleton, controls, food and score, game over. For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.",
+  expected: "A plan of five layers, each with its own check, and nothing built yet.",
+  prompt: "Read intent.md. Make a plan to build it in 5 layers: skeleton, controls, food and score, game over, your style (nickname, avatar, best score). For each layer: which files change, and how I can check in 10 seconds that it works. Don't build yet.",
   keyPoints: [
     "Design phase",
     "Layers you can steer",
@@ -1277,54 +1277,30 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Reject a plan that's too big",
     "Nothing built yet"
   ],
-  notes: "Say: One prompt can build Snake (the dry run did it in under a minute), but then you can't steer it and you learn nothing about what's in the files. If Claude builds it all at once, you can't tell what broke, or why. This is the Design phase.\n\nWatch for: Approving the plan. In plan mode, approving means 'go and build it', possibly all four layers at once. Here they press Esc: the plan stays in the conversation, and the next assignment builds one layer from it.\n\nWhat you see: A plan with layers: skeleton, controls, food and score, game over, each with a check. Claude names the main file itself (game.js in the dry run, snake.js in another run), and often adds tests in layer 3 on its own: fine.\n\nExtra: Reject the first plan and steer it ('smaller', 'one file per layer').\n\nNext: Watch: Snake in layers."
+  notes: "Say: One prompt can build Snake (the dry run did it in under a minute), but then you can't steer it and you learn nothing about what's in the files. If Claude builds it all at once, you can't tell what broke, or why. This is the Design phase.\n\nWatch for: Approving the plan. In plan mode, approving means 'go and build it', possibly all five layers at once. Here they press Esc: the plan stays in the conversation, and the next assignment builds one layer from it.\n\nIf someone approved by accident: Claude Code is now in auto mode and starts building everything. Esc stops it. Then empty input, Esc twice, pick the message before and 'Restore code and conversation' to remove what it wrote. Then Shift+Tab back to manual mode. In the dry run approving switched straight to auto mode.\n\nWhat you see: A plan with five layers: skeleton, controls, food and score, game over, your style, each with a check. Claude names the main file itself (game.js in the dry run, snake.js in another run), and often adds tests in layer 3 on its own: fine.\n\nExtra: Reject the first plan and steer it ('smaller', 'one file per layer').\n\nNext: Before you build: save points."
 },
 
-{ // Slide 60
-  title: "Watch: Snake in layers",
-  kicker: "DAY 1 · PART 3 · LIVE DEMO",
-  subtitle: "One layer per prompt. Play it, then the next layer.",
-  type: "concept",
-  layout: "steps",
-  visual: { stepKeys: true },
-  items: [
-    { label: "Skeleton", caption: "A grid and a snake that moves on its own." },
-    { label: "Controls", caption: "The arrow keys steer the snake." },
-    { label: "Food and score", caption: "Eat, grow, count your points." },
-    { label: "Game over", caption: "Hit a wall or yourself: game over, play again." },
-    { label: "Your style", caption: "Colours, sounds, your own touch." }
-  ],
-  tagline: "One prompt can build Snake. Layers let you steer it.",
-  keyPoints: [
-    "Build it live, layer by layer",
-    "Plan mode, read the plan, approve",
-    "Play after every layer",
-    "Show what goes wrong, and fix it",
-    "One prompt works, but you learn nothing"
-  ],
-  notes: "Build layer 1 live on the projector, with VS Code next to the terminal, from the plan you made in Assignment 5. Plan mode, read the plan, approve, then point at VS Code: these three files appeared, this is what's in them. Play it. Then layer 2, and show that only snake.js changed. Say it out loud: one prompt can build Snake, but then you can't steer it and you learn nothing. Layers are how real software gets built too."
-},
 
 { // Slide 61
-  title: "Git in three words",
+  title: "Before you build: save points",
   kicker: "DAY 1 · PART 3 · GIT",
-  subtitle: "Your game lives in a repository. Today you need one rhythm.",
+  subtitle: "git has been watching your folder since git init, but nothing is saved yet. Layer 1 is the first code worth saving.",
   type: "concept",
   visual: { stagger: "pop", stepThrough: true, bot: "point", place: "beside", highlight: [{ in: "tagline", text: "it works → commit → push", tone: "orange" }] },
   cards: [
-    { title: "Repository", body: "A project folder that remembers every version of every file. git init made yours." },
-    { title: "Commit", body: "A save point you can always go back to. Make one for every layer that works." },
-    { title: "Push", body: "Sends your commits to GitLab: safe, and visible to others." }
+    { title: "Repository", body: "Your folder since git init. It can remember every version, but so far it holds none." },
+    { title: "Commit", body: "A save point you can always go back to. Your first one: when layer 1 works." },
+    { title: "Push", body: "Copies your commits to GitLab: safe, and visible to others. Your first push comes right after." }
   ],
-  tagline: "The rhythm: it works → commit → push. Claude runs git, you decide.",
+  tagline: "From now on, after every layer: it works → commit → push. Claude runs git, you decide.",
   keyPoints: [
-    "For everyone who doesn't use git daily",
-    "Repository: a folder with history",
-    "Commit: a save point, every working layer",
-    "Push / pull: to and from GitLab",
+    "Why now: the first code is coming",
+    "git init made a repository, still empty",
+    "Commit: the first one after layer 1",
+    "Push: right after, to GitLab",
     "Claude runs git, you decide"
   ],
-  notes: "For everyone who doesn't use git every day; developers can nod along. Today is only the rhythm: a layer works, commit, push. Claude runs the git commands and asks first (the rule from Assignment 4). Branches, merge requests and the rest come tomorrow, when there's a reason for them."
+  notes: "Say: You typed git init at the very start, and your house rules already mention commit and push. But nothing has been saved yet: the folder only had intent.md and CLAUDE.md. Next you build layer 1, the first real code. When it works, you save it: that's your first commit. Then you push it to GitLab.\n\nWhat you see: Click: three words. Repository: your folder, with a memory that's still empty. Commit: a save point, the first one when layer 1 works. Push: a copy on GitLab.\n\nBackground: For everyone who doesn't use git every day; developers can nod along. Today is only the rhythm: a layer works, commit, push. Claude runs the git commands and asks first (the house rule). Branches, merge requests and the rest come tomorrow, when there's a reason for them.\n\nNext: Assignment 6: build layer 1, look inside, commit."
 },
 
 { // Slide 62
@@ -1336,11 +1312,11 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A small step. Understand it. Save it.",
   calm: true,
   steps: [
-    { text: "Build layer 1", prompt: "Build only layer 1 from the plan.", after: "Say yes to each file." },
-    "Open index.html in your browser: do you see the board?",
+    { text: "Build layer 1, and say yes to each file", prompt: "Build only layer 1 from the plan." },
+    { text: "See it in your browser", prompt: "Open index.html in my browser.", after: "Claude asks to run a command: say yes. Do you see the board?" },
     { text: "Look inside", prompt: "Explain @game.js in plain words.", after: "Your file may be called snake.js: type @ and pick it." },
-    { text: "Which files are new?", prompt: "!git status", after: "The ! runs the command yourself, without Claude." },
-    { text: "Save it", prompt: "Commit this layer with a clear message.", after: "Claude asks first: that's your rule. Say yes." }
+    { text: "Which files are new?", prompt: "!git status" },
+    { text: "Save it. Claude asks first (your rule): say yes.", prompt: "Commit this layer with a clear message." }
   ],
   expected: "Layer 1 works, you can explain it, and it's committed.",
   prompt: "Build only layer 1 from the plan.\n\nThen:\nExplain @game.js in plain words.\n\nThen:\nCommit this layer with a clear message.",
@@ -1351,7 +1327,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit = save point",
     "Claude asks: your rule from Assignment 4"
   ],
-  notes: "Say: It works. Make a save point before you change anything else. A small step, understood, saved.\n\nWatch for: The file name is whatever Claude chose (game.js in the dry run, sometimes snake.js). Type @ and a list of files appears: pick the right one.\nWatch for: If Claude proposes a branch, say 'commit straight to main'. Branches come tomorrow.\n\nWhat you see: index.html, style.css and the game's .js file appear. The commit asks first, and the screen names the rule: 'Permission rule Bash(git commit *) requires confirmation'. The first commit includes CLAUDE.md, intent.md and .claude/settings.json: that's fine, they belong to the project.\n\nThree new controls: @file points Claude straight at a file, so it doesn't have to search (cheaper and faster). !git status runs a command yourself, and the output lands in the conversation; Claude even comments on it. A commit is a save point.\n\nLook inside: This is the real lesson. Which part draws the snake? If nobody can say, slow down.\n\nNext: Model Context Protocol."
+  notes: "Tip: The ! in !git status runs the command yourself, without Claude.\n\nSay: It works. Make a save point before you change anything else. A small step, understood, saved.\n\nWatch for: The file name is whatever Claude chose (game.js in the dry run, sometimes snake.js). Type @ and a list of files appears: pick the right one.\nWatch for: If Claude proposes a branch, say 'commit straight to main'. Branches come tomorrow.\n\nWhat you see: index.html, style.css and the game's .js file appear. The commit asks first, and the screen names the rule: 'Permission rule Bash(git commit *) requires confirmation'. The first commit includes CLAUDE.md, intent.md and .claude/settings.json: that's fine, they belong to the project.\n\nThree new controls: @file points Claude straight at a file, so it doesn't have to search (cheaper and faster). !git status runs a command yourself, and the output lands in the conversation; Claude even comments on it. A commit is a save point.\n\nLook inside: This is the real lesson. Which part draws the snake? If nobody can say, slow down.\n\nNext: Model Context Protocol."
 },
 
 { // Slide 63
@@ -1444,13 +1420,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Same rhythm for every layer. One thing goes wrong on purpose.",
   calm: true,
   steps: [
-    { text: "Build layer 2: controls", prompt: "Build only layer 2 from the plan.", after: "Play it. Commit and push." },
+    { text: "Build layer 2: controls", prompt: "Build only layer 2 from the plan.", after: "Reload the tab (F5 or Cmd+R) and play it. Commit and push." },
     { text: "Build layer 3: food and score", prompt: "Build only layer 3 from the plan.", after: "Play it. Commit and push." },
     { text: "Break it on purpose", prompt: "Remove the score entirely. I know it goes against intent.md, do it anyway.", after: "Play it: the score is gone." },
     { text: "Rescue it: empty input, Esc twice", after: "↑ to the message before, Enter, “Restore code and conversation”. Then clear the old message from the input.", warn: true },
     { text: "Build layer 4: game over", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
   ],
-  expected: "All four layers work and are on GitLab, and you've undone a change with Esc Esc.",
+  expected: "Layers 1 to 4 work and are on GitLab, and you've undone a change with Esc Esc.",
   prompt: "Build only layer 2 from the plan.\n\nThen:\nBuild only layer 3 from the plan.\n\nThen, on purpose:\nRemove the score entirely. I know it goes against intent.md, do it anyway.\n\nAfter the rescue:\nBuild only layer 4 from the plan.",
   keyPoints: [
     "The rhythm: works, commit, push",
@@ -1472,7 +1448,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Return in 15 minutes", body: "Continuing with: a test that finds a bug." }
   ],
   keyPoints: ["Break: say the return time","Show the clock time on screen","Press ▶ Start on the timer","Everyone's game on GitLab?"],
-  notes: "State the actual clock time you'll resume, out loud and (if possible) on screen. Everyone has now built all four layers. Use the break to help anyone whose game isn't on GitLab yet, or who is still stuck in a layer: after the break the topic changes from building to testing, and everyone needs a working game for that."
+  notes: "State the actual clock time you'll resume, out loud and (if possible) on screen. Everyone has now built layers 1 to 4. Use the break to help anyone whose game isn't on GitLab yet, or who is still stuck in a layer: after the break the topic changes from building to testing, and everyone needs a working game for that."
 },
 
 { // Slide 68

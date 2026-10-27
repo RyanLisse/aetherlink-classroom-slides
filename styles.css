@@ -829,6 +829,16 @@ body.is-assignment #stage{border-color:var(--cyan);box-shadow:0 0 0 8px color-mi
 .intake-arrow::after{content:'';position:absolute;right:-6px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:11px solid var(--cyan);border-right:0}
 .intake .place-aside{margin-left:70px}
 .intake-cards .card:last-child{border-color:var(--aether-orange)}
+/* ---- Snake in layers: one small board per layer ---- */
+.layers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.6rem,1.4vw,1.2rem);width:100%;margin:.6rem 0 0}
+.layer-card{position:relative;margin:0;display:grid;gap:.35rem;align-content:start;padding:.55rem .55rem .75rem;border-radius:14px;border:1.5px solid var(--border);background:var(--surface)}
+.layer-card img{display:block;width:100%;height:auto;border-radius:9px}
+.layer-card strong{margin-top:.2rem;font-size:clamp(.95rem,1.35vw,1.2rem);font-weight:900;line-height:1.2}
+.layer-cap{font-size:clamp(.8rem,1.05vw,.95rem);color:var(--muted);line-height:1.35}
+.layer-n{position:absolute;top:-.75rem;left:-.55rem;z-index:1;width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--aether-purple),var(--aether-orange));box-shadow:0 0 0 3px var(--bg)}
+.layer-card:last-child{border-color:var(--aether-orange)}
+@media (max-width:900px){.layers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.layers{grid-template-columns:minmax(0,1fr)}}
 /* ---- where everything lives: two folders -> Claude Code -> MCP ---- */
 .cmap{display:grid;grid-template-columns:minmax(0,1.6fr) auto minmax(0,.8fr);gap:clamp(.6rem,1.4vw,1.2rem);align-items:center;width:100%}
 .cmap-col{display:grid;gap:.75rem}
