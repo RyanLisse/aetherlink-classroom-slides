@@ -1027,14 +1027,23 @@ $('prompt').addEventListener('click', () => showPrompt());
 $('presenter').addEventListener('click', openPresenterView);
 $('chapters').addEventListener('click', () => {
   const list = node('nav', 'chapter-list'); list.setAttribute('aria-label', 'All ' + slides.length + ' slides');
+  const days = (window.CLASSROOM_SESSIONS || []).filter(d => d.deck === DECK);
+  const parked = slides.findIndex(s => /^Parked ·/.test(s.title));
   slides.forEach((s, i) => {
+    const day = days.find(d => d.start - 1 === i);                // a heading per day, and one for the parked slides
+    if (day) list.append(node('h3', 'chapter-day', day.label));
+    if (i === parked) list.append(node('h3', 'chapter-day parked', 'Parked · not presented'));
+    const type = slideType(s);
     const row = node('div', 'chapter-row' + (isHidden(i) ? ' is-hidden' : ''));
-    const b = node('button', 'chapter-link'); b.append(node('span', null, String(i + 1).padStart(2, '0')), node('strong', null, s.title)); b.setAttribute('aria-current', String(i === current)); b.addEventListener('click', () => { closePanel(); go(i); });
+    const b = node('button', 'chapter-link'); b.dataset.type = type;
+    b.append(node('span', 'chapter-num', String(dayCount(i, DECK)[0]).padStart(2, '0')), node('span', 'chapter-type', TYPE_LABEL[type]), node('strong', null, s.title.replace(/^Parked · /, '')));
+    b.setAttribute('aria-current', String(i === current)); b.addEventListener('click', () => { closePanel(); go(i); });
     const t = node('button', 'chapter-hide', isHidden(i) ? 'Show' : 'Hide'); t.setAttribute('aria-label', (isHidden(i) ? 'Show' : 'Hide') + ' slide ' + (i + 1));
     t.addEventListener('click', () => { const h = toggleHidden(i); row.classList.toggle('is-hidden', h); t.textContent = h ? 'Show' : 'Hide'; renderProgress(); if (i === current) render(); });
     row.append(b, t); list.append(row);
   });
   openPanel('Chapters', list);
+  list.querySelector('[aria-current=true]')?.scrollIntoView({ block: 'center' });   // open where you are, not at slide 1
 });
 // generic timer in the toolbar (any slide): same look as the pause slides, one shared timer
 let timerCtl = null;
