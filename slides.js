@@ -825,9 +825,8 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   cards: [
     { title: "What you share", body: "Practice data only: no Worldline or customer data\nNo passwords, API keys or internal documents\nNo real photos or personal details in your game\nPush only to your own repo on Worldline's GitLab" }
   ],
-  tagline: "Not even to try.",
   keyPoints: ["Say each line out loud","Practice data only","No passwords, keys or internal documents","No real photos or personal details","Push only to your own GitLab repo"],
-  notes: "From now on everyone works on their own laptop, so say these out loud, once. Practice data only: no Worldline data and no customer data. No passwords, API keys or internal documents. No real photos, contact details or confidential text in what you build: your avatar this afternoon is a generated picture. Push only to your own repo on Worldline's GitLab: that is where your game lives this afternoon. Not even to try anywhere else."
+  notes: "From now on everyone works on their own laptop, so say these out loud, once. Practice data only: no Worldline data and no customer data. No passwords, API keys or internal documents. No real photos, contact details or confidential text in what you build: your avatar this afternoon is a generated picture. Push only to your own repo on Worldline's GitLab: that is where your game lives this afternoon."
 },
 
 { // Slide 42
