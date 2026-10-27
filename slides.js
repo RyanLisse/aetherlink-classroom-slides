@@ -245,8 +245,8 @@ window.SLIDES = [
   type: "context",
   visual: { opener: 'team', stagger: 'pop' },
   cards: [
-    { title: "Jessy The", body: "", role: "Frontend & AI Developer · Speaker & Host",
-      back: "Builds AI-powered apps with React, Next.js and TypeScript.\nSpeaks and hosts at tech conferences like JSWorld and Frontmania.\nTeaches workshops and masterclasses for developers and teams." },
+    { title: "Jessy The", body: "", role: "Full-Stack Software Engineer · AI Applications",
+      back: "Builds full-stack AI applications in TypeScript, React, Next.js, Node.js and Python.\nIntegrates LLMs into products: agents, AI workflows and scalable front-end architecture.\nSpeaker on AI engineering at JSWorld, Frontmania and DevWorld." },
     { title: "Constance van der Vlist", body: "", role: "CEO & Co-founder AetherLink",
       back: "AI strategy, implementation and training, in the Netherlands and Finland.\nStarted in veterinary clinics, fixing the X-ray machines and computers.\nFrom there: clinic software, robotics, AI and Web3." },
     { title: "Maarten Nauw", body: "", role: "Co-founder CFX · Game Developer · Robotics",
