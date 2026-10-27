@@ -1393,22 +1393,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 66
   title: "Undo: checkpoints and commits",
   kicker: "DAY 1 · PART 3 · UNDO",
-  subtitle: "Two ways back, with a different reach.",
+  subtitle: "Two ways back. This is how you'll use them in the next assignment.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "always", tone: "orange" }] },
-  cards: [
-    { title: "Esc Esc", body: "Rewinds Claude's last steps in this session: the conversation, the code, or both. Also: /rewind." },
-    { title: "Commit", body: "A save point in git. It stays, and after a push it's on GitLab too." },
-    { title: "When which?", body: "Claude just made a mess? Esc Esc.\nYesterday's version? git." }
-  ],
+  visual: { figure: "assets/examples/undo-roadmap.svg?v=2", figureAlt: "Assignment 8 as a road: layer 2 and layer 3 work and get a commit, then the score is removed on purpose, Esc Esc goes back to the checkpoint before that, then layer 4 works and gets a commit.", highlight: [{ in: "tagline", text: "always", tone: "orange" }] },
   tagline: "Checkpoints are for the last few minutes. Commits are for always.",
   keyPoints: [
-    "Esc Esc or /rewind: Claude's recent edits",
-    "Code, conversation or both",
-    "Commit: permanent, shared after push",
-    "Checkpoints don't replace git"
+    "The road = Assignment 8",
+    "Top: a checkpoint before every prompt",
+    "Bottom: a commit after every working layer",
+    "The break: Esc Esc back to before it",
+    "Last few minutes: Esc Esc. Older: git"
   ],
-  notes: "Claude Code keeps a checkpoint before each of its edits. Esc twice (or /rewind) shows a list of earlier points; you choose to restore the code, the conversation, or both. It only covers Claude's own file edits in this session, not what a command did elsewhere, and it is not shared. A commit is permanent and, after a push, on GitLab. Rule of thumb on the slide: last few minutes, Esc Esc; anything older, git. Before class, try Esc Esc on your teaching laptop so you know what the menu looks like in this version."
+  notes: "Say: You'll break your game on purpose in the next assignment, and get it back. There are two ways back, and this road shows both.\n\nWhat you see: The road is Assignment 8, left to right. Layer 2 works: commit and push. Layer 3 works: commit and push. Then you remove the score on purpose: broken. Esc Esc takes you back to the checkpoint just before that prompt (the orange arrow), and the score is back. Then layer 4: commit and push. Top lane: Claude makes a checkpoint before every prompt, but only in this session. Bottom lane: you make a commit after every layer that works; it stays forever, and after a push it's on GitLab.\n\nBackground: Esc twice (or /rewind) shows a list of earlier points; you choose to restore the code, the conversation, or both. It only covers Claude's own file edits in this session, not what a command did elsewhere, and it isn't shared. The broken step gets no commit, because it didn't work. Rule of thumb: last few minutes, Esc Esc; anything older, git.\n\nBefore class: Try Esc Esc on your teaching laptop so you know what the menu looks like in this version.\n\nNext: Assignment 8: layers 2 to 4, and one rescue."
 },
 
 { // Slide 67

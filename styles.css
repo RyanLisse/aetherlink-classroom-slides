@@ -829,6 +829,8 @@ body.is-assignment #stage{border-color:var(--cyan);box-shadow:0 0 0 8px color-mi
 .intake-arrow::after{content:'';position:absolute;right:-6px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:11px solid var(--cyan);border-right:0}
 .intake .place-aside{margin-left:70px}
 .intake-cards .card:last-child{border-color:var(--aether-orange)}
+.slide-figure{margin:.4rem auto 0;width:100%;max-width:1080px;animation:enter .5s both}
+.slide-figure img{display:block;width:100%;height:auto}
 /* ---- Snake in layers: one small board per layer ---- */
 .layers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.6rem,1.4vw,1.2rem);width:100%;margin:.6rem 0 0}
 .layer-card{position:relative;margin:0;display:grid;gap:.35rem;align-content:start;padding:.55rem .55rem .75rem;border-radius:14px;border:1.5px solid var(--border);background:var(--surface)}

@@ -414,6 +414,10 @@ function renderExtras(stage, main, s, v) {
     m.append(left, mid); if (M.right) { const right = node('div', 'cmap-col'); M.right.forEach(b => right.append(box(b))); m.append(right); } else m.classList.add('cmap-two'); if (M.apart) { const ap = box(M.apart, 'cmap-apart'); m.append(ap); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(m); else if (tg) tg.before(m); else main.append(m);
   }
+  if (v.figure) {                                                // one drawing that explains the slide on its own
+    const f = node('figure', 'slide-figure'); const im = document.createElement('img'); im.src = v.figure; im.alt = v.figureAlt || ''; f.append(im);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(f); else if (tg) tg.before(f); else main.append(f);
+  }
   if (v.layers) {                                                // Snake in layers: one small board per layer, numbered
     const w = node('div', 'layers'); v.layers.forEach((L, i) => { const c = node('figure', 'layer-card'); const im = document.createElement('img'); im.src = L.img; im.alt = L.label;
       c.append(node('span', 'layer-n', String(i + 1)), im, node('strong', null, L.label), node('span', 'layer-cap', L.caption)); w.append(c); });

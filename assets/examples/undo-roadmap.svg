@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" font-family="Nunito, Inter, -apple-system, 'Segoe UI', sans-serif">
+  <!-- Assignment 8 as a roadmap: checkpoints above (Claude, this session), commits below (git, forever) -->
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ffb545"/></marker>
+  </defs>
+
+  <!-- lane: checkpoints -->
+  <text x="40" y="38" font-size="15" font-weight="900" fill="#69e2f2" letter-spacing="1.5">CHECKPOINTS</text>
+  <text x="178" y="38" font-size="14" font-weight="700" fill="#a6b8d2">Claude makes one before every prompt · only this session</text>
+  <path d="M60 78H960" stroke="#69e2f2" stroke-width="2" stroke-dasharray="3 7" opacity=".55"/>
+  <g fill="#69e2f2">
+    <path d="M100 70l8 8-8 8-8-8z"/><path d="M280 70l8 8-8 8-8-8z"/><path d="M460 70l8 8-8 8-8-8z"/><path d="M820 70l8 8-8 8-8-8z"/>
+  </g>
+  <path d="M460 66l12 12-12 12-12-12z" fill="none" stroke="#ffb545" stroke-width="3"/>
+
+  <!-- the road -->
+  <path d="M60 170H960" stroke="#233c55" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- stations -->
+  <g font-weight="900" text-anchor="middle">
+    <rect x="95" y="135" width="150" height="70" rx="14" fill="#0c1928" stroke="#3ddc84" stroke-width="2.5"/>
+    <text x="170" y="164" font-size="19" fill="#e9f0fc">Layer 2 ✓</text>
+    <text x="170" y="188" font-size="13" font-weight="700" fill="#a6b8d2">controls</text>
+
+    <rect x="275" y="135" width="150" height="70" rx="14" fill="#0c1928" stroke="#3ddc84" stroke-width="2.5"/>
+    <text x="350" y="164" font-size="19" fill="#e9f0fc">Layer 3 ✓</text>
+    <text x="350" y="188" font-size="13" font-weight="700" fill="#a6b8d2">food and score</text>
+
+    <rect x="455" y="135" width="150" height="70" rx="14" fill="#1d0f17" stroke="#ff5a5a" stroke-width="2.5"/>
+    <text x="530" y="164" font-size="19" fill="#ff8a8a">Score gone ✗</text>
+    <text x="530" y="188" font-size="13" font-weight="700" fill="#a6b8d2">broken on purpose</text>
+
+    <rect x="635" y="135" width="150" height="70" rx="14" fill="#1d1608" stroke="#ffb545" stroke-width="2.5"/>
+    <text x="710" y="164" font-size="19" fill="#ffb545">Esc Esc ↩</text>
+    <text x="710" y="188" font-size="13" font-weight="700" fill="#a6b8d2">restore code</text>
+
+    <rect x="815" y="135" width="150" height="70" rx="14" fill="#0c1928" stroke="#3ddc84" stroke-width="2.5"/>
+    <text x="890" y="164" font-size="19" fill="#e9f0fc">Layer 4 ✓</text>
+    <text x="890" y="188" font-size="13" font-weight="700" fill="#a6b8d2">game over</text>
+  </g>
+
+  <!-- the rescue: back to the checkpoint before the break -->
+  <path d="M710 133C710 100 600 78 476 78" fill="none" stroke="#ffb545" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#ah)"/>
+  <text x="604" y="64" font-size="13" font-weight="800" fill="#ffb545">back to before the break</text>
+
+  <!-- lane: commits -->
+  <path d="M60 268H960" stroke="#FF7A1A" stroke-width="2" stroke-dasharray="3 7" opacity=".45"/>
+  <g>
+    <line x1="170" y1="207" x2="170" y2="256" stroke="#FF7A1A" stroke-width="2"/>
+    <line x1="350" y1="207" x2="350" y2="256" stroke="#FF7A1A" stroke-width="2"/>
+    <line x1="890" y1="207" x2="890" y2="256" stroke="#FF7A1A" stroke-width="2"/>
+    <circle cx="170" cy="268" r="12" fill="#FF7A1A"/><circle cx="350" cy="268" r="12" fill="#FF7A1A"/><circle cx="890" cy="268" r="12" fill="#FF7A1A"/>
+    <text x="170" y="300" text-anchor="middle" font-size="13" font-weight="800" fill="#e9f0fc">commit + push</text>
+    <text x="350" y="300" text-anchor="middle" font-size="13" font-weight="800" fill="#e9f0fc">commit + push</text>
+    <text x="890" y="300" text-anchor="middle" font-size="13" font-weight="800" fill="#e9f0fc">commit + push</text>
+    <text x="620" y="300" text-anchor="middle" font-size="13" font-weight="700" fill="#a6b8d2" opacity=".8">no commit: it didn't work</text>
+  </g>
+  <text x="40" y="340" font-size="15" font-weight="900" fill="#FF7A1A" letter-spacing="1.5">COMMITS</text>
+  <text x="140" y="340" font-size="14" font-weight="700" fill="#a6b8d2">you make one after every layer that works · stays forever, also on GitLab</text>
+
+  <!-- rule of thumb -->
+  <rect x="40" y="368" width="440" height="40" rx="10" fill="#102238"/>
+  <text x="260" y="394" text-anchor="middle" font-size="16" font-weight="800" fill="#e9f0fc">Last few minutes? <tspan fill="#ffb545">Esc Esc</tspan></text>
+  <rect x="520" y="368" width="440" height="40" rx="10" fill="#102238"/>
+  <text x="740" y="394" text-anchor="middle" font-size="16" font-weight="800" fill="#e9f0fc">Older than that? <tspan fill="#FF7A1A">git</tspan></text>
+</svg>
