@@ -2544,7 +2544,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Host: create the arcade repo from the AetherLink template.",
     "Team: agree what every game needs: game.json, the score format, nickname, avatar.",
     "Host: let Claude write arcade-spec.md and the skill arcade-connect.",
-    "Everyone: get the skill from the arcade repo."
+    "Everyone: clone the arcade repo next to your game folder. The skill comes with it."
   ],
   expected: "One arcade-spec.md everyone agreed on, and the team skill on every laptop.",
   prompt: "Write arcade-spec.md from what we agreed: every game lives in games/<nickname>/ with index.html and game.json (title, nickname, avatar), and reports its score once at game over as { player, avatar, points, game }. Then make a skill arcade-connect that makes a game meet this spec and runs the contract test.",
@@ -2555,7 +2555,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "A team skill everyone shares",
     "Compare with the starter afterwards"
   ],
-  notes: "One volunteer is the arcade host (fallback: a trainer). The team agrees in the chat; the host types it into Claude. The skill is shared through the arcade repo: if plugins are allowed in your Worldline setup, the host can package it as a plugin so everyone installs it in one step; otherwise everyone copies .claude/skills/arcade-connect into their own game repo. Check the plugin commands in the current Claude Code docs before class. Afterwards, show the contract in the arcade starter (arcade.js) and ask what the team forgot: usually the nickname length or what happens with a missing avatar."
+  notes: "One volunteer is the arcade host (fallback: a trainer). The team agrees in the chat; the host types it into Claude. The skill is shared through the arcade repo: everyone clones it and starts Claude there, so the skill is always the latest version. Don't copy it into your game repo: in the dry run the copy stayed on v1 after the contract changed. Fallback when Sprint 0 runs out of time: copy arcade-reference/ (spec, skill and contract test) into the arcade repo. Afterwards, show the contract in the arcade starter (arcade.js) and ask what the team forgot: usually the nickname length or what happens with a missing avatar."
 },
 
 { // Slide 117
@@ -2571,14 +2571,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Review", body: "Review someone else's merge request: run your verifier, and write one comment of your own." }
   ],
   steps: [
-    "Use the arcade-connect skill on your game.",
-    "Open a merge request to the arcade repo with games/<nickname>/.",
+    "Start Claude in your clone of the arcade repo, not in your game folder.",
+    "Use the arcade-connect skill: it brings your game into games/<nickname>/.",
+    "Open a merge request to the arcade repo.",
     "Pipeline red? Fix it and push again.",
     "Review the merge request of the person after you on the list.",
     "Merged? Play the arcade website."
   ],
   expected: "Your game is live in the arcade, and you reviewed someone else's.",
-  prompt: "Use the arcade-connect skill to make my game meet arcade-spec.md. Then put it in games/[nickname]/ in the arcade repo on a new branch, push, and open a merge request.",
+  prompt: "My game is in ../aether-snake. Use the arcade-connect skill to bring it into games/[nickname]/ and make it meet arcade-spec.md. Then commit on a new branch, push, and open a merge request.",
   keyPoints: [
     "Build + Test + Deploy in one sprint",
     "The pipeline is the first reviewer",

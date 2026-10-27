@@ -1,22 +1,24 @@
 # Arcade starter
 
-The starting point for the Day 2 arcade. One repo for the whole team, run on one laptop (the arcade laptop).
+The starting point for the Day 2 arcade (Assignments 26–28). One repo for the whole team: everyone's game on one start screen, with one scoreboard.
 
-## Set up (the manager, once)
-1. Create a repo called `arcade` in your personal space on Worldline's GitLab, and give your team access.
-2. Copy everything in this folder into it (including the hidden `.claude` folder), commit and push.
-3. On the arcade laptop: clone it, then run `node serve.js` and open http://localhost:8080
+## Set up (the host, once)
+1. Create a project called `arcade` on Worldline's GitLab and give your team access. Protect `main`: merge requests only, one approval.
+2. Copy everything in this folder into it (including the hidden `.gitlab-ci.yml`), commit and push.
+3. Clone it and run `npm test`, then `node serve.js`, and open http://localhost:8080
 
 ## What's in it
 | File | What |
 |---|---|
-| `arcade.js` | The contract: `Arcade.submitScore()`, `Arcade.topScores()`, `Arcade.games()`. Don't change it. |
-| `.claude/skills/arcade-score/` | The skill that connects a game to the arcade. |
-| `serve.js` | The arcade server. No install needed. |
-| `index.html` | The start screen. Empty: Assignment 15. |
-| `scoreboard.html` | The scoreboard. Empty: Assignment 13. |
-| `games/example/` | A tiny example of a connected game. |
-| `tests/` | Tests for the contract: `npm test`. |
+| `arcade.js` | The contract in code: `Arcade.submitScore()`, `Arcade.topScores()`, `Arcade.games()`. Don't change it. |
+| `serve.js` | The arcade server. No install needed. Lists games at `/games.json` and shared records at `/scores.json`. |
+| `index.html` | The start screen: every game with its avatar and nickname. |
+| `scoreboard.html` | Shared records from `scores/`, and personal records from this browser. |
+| `scores/` | Shared records, one `<nickname>.json` per player, added through a merge request. |
+| `tests/anti-cheat.test.js` | Every shared record must be possible. |
+| `tests/arcade.test.js` | Tests for the contract. |
+| `.gitlab-ci.yml` | Runs `npm test` on every merge request. |
+| `games/AetherBOT/` | A tiny example of a connected game. |
 
-## Every player
-Copy your game into `games/<game>-<your name>/`, then ask Claude Code: *"Use the arcade-score skill to connect my game in games/<folder>."*
+## What the team adds in Sprint 0
+`arcade-spec.md` (the agreement), the skill `.claude/skills/arcade-connect/`, and a contract test for every game. The trainer has a tested version in `../arcade-reference/`, to compare afterwards or to fall back on.

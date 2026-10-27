@@ -1,9 +1,37 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Scoreboard</title><link rel="stylesheet" href="arcade.css"></head>
+<html lang="en"><head><meta charset="utf-8"><title>Scoreboard</title><link rel="stylesheet" href="arcade.css">
+<style>
+  table{margin:0 auto 2rem;border-collapse:collapse;min-width:min(32rem,calc(100% - 2rem))}
+  th,td{padding:.4rem .8rem;text-align:left}
+  td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+  tbody tr:nth-child(odd){background:#0e1c30}
+  img{width:32px;height:32px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.5rem}
+</style></head>
 <body>
   <h1>TOP 10</h1>
-  <!-- Assignment 13 builds this scoreboard. Use Arcade.topScores(10): each score has player, avatar, points, game. -->
-  <ol id="scores"><!-- TODO: one row per score, with picture, player name, game and points --></ol>
+  <h2>Shared records</h2>
+  <table><thead><tr><th>#</th><th>Player</th><th>Game</th><th>Points</th></tr></thead><tbody id="shared"></tbody></table>
+  <h2>Personal records <small>(this computer)</small></h2>
+  <table><thead><tr><th>#</th><th>Player</th><th>Game</th><th>Points</th></tr></thead><tbody id="personal"></tbody></table>
   <p><a href="index.html">Back to the arcade</a></p>
   <script src="arcade.js"></script>
+  <script>
+    function render(id, rows) {
+      const body = document.getElementById(id);
+      if (!rows.length) { body.innerHTML = '<tr><td colspan="4">No scores yet.</td></tr>'; return; }
+      rows.forEach((s, i) => {
+        const tr = document.createElement('tr');
+        const player = document.createElement('td');
+        if (s.avatar) { const img = document.createElement('img'); img.src = s.avatar; img.alt = ''; player.append(img); }
+        player.append(s.player);
+        for (const v of [i + 1, player, s.game || '', s.points]) { const td = v instanceof Node ? v : document.createElement('td'); if (!(v instanceof Node)) td.textContent = v; tr.append(td); }
+        body.append(tr);
+      });
+    }
+    render('personal', Arcade.topScores(10));
+    fetch('/scores.json', { cache: 'no-store' }).then(r => r.json())
+      .then(all => render('shared', all.sort((a, b) => b.points - a.points).slice(0, 10)
+        .map(s => ({ player: s.nickname, avatar: s.avatarUrl, game: s.title, points: s.points }))))
+      .catch(() => render('shared', []));
+  </script>
 </body></html>

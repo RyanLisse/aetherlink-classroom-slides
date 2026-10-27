@@ -10,7 +10,7 @@
     // This is all a game needs to do at game over:
     document.getElementById('end').onclick = () => {
       const points = Math.floor(Math.random() * 100);
-      Arcade.submitScore({ player: 'AetherBOT', avatar: '/games/example/avatar.svg', points, game: 'Example' });
+      Arcade.submitScore({ player: 'AetherBOT', avatar: '/games/AetherBOT/avatar.svg', points, game: 'Example' });
       document.getElementById('msg').textContent = 'Score sent: ' + points;
     };
   </script>

@@ -1,11 +1,31 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Arcade</title><link rel="stylesheet" href="arcade.css"></head>
+<html lang="en"><head><meta charset="utf-8"><title>Arcade</title><link rel="stylesheet" href="arcade.css">
+<style>
+  #games{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;padding:0 1rem;list-style:none}
+  #games a{display:block;width:10rem;padding:1rem;border:2px solid #3b2a8f;border-radius:12px;text-decoration:none;color:#eef}
+  #games a:hover,#games a:focus{border-color:#ff7a1a}
+  #games img{width:72px;height:72px;border-radius:50%;object-fit:cover}
+  #games strong{display:block;margin-top:.5rem;color:#22d3ee}
+</style></head>
 <body>
   <h1>ARCADE</h1>
-  <!-- Assignment 15 builds this start screen. Use Arcade.games() and Arcade.topScores(). -->
-  <section id="players"><h2>Pick your player</h2><!-- TODO: every player's avatar --></section>
-  <section id="games"><h2>Pick a game</h2><!-- TODO: every game, as a button that opens it --></section>
-  <section id="top10"><h2>Top 10</h2><!-- TODO: the top 10 --></section>
+  <h2>Pick a game</h2>
+  <ul id="games"></ul>
+  <p id="msg"></p>
   <p><a href="scoreboard.html">Scoreboard</a></p>
   <script src="arcade.js"></script>
+  <script>
+    Arcade.games().then(games => {
+      if (!games.length) document.getElementById('msg').textContent = 'No games yet.';
+      for (const g of games) {
+        const a = document.createElement('a'); a.href = g.url;
+        const img = document.createElement('img'); img.src = g.avatarUrl; img.alt = '';
+        const nick = document.createElement('strong'); nick.textContent = g.nickname;
+        const title = document.createElement('span'); title.textContent = g.title;
+        a.append(img, nick, title);
+        const li = document.createElement('li'); li.append(a);
+        document.getElementById('games').append(li);
+      }
+    }).catch(() => { document.getElementById('msg').textContent = 'Start the arcade with node serve.js to see the games.'; });
+  </script>
 </body></html>
