@@ -693,13 +693,11 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "Where Claude Code does its work.",
   type: "concept",
-  visual: { term: [{ c: 'ls' }, { o: 'README.md  data  public  server.js' }, { c: 'git status' }, { o: 'On branch main · nothing to commit' }, { ask: 'Allow Claude to run npm test? (y/n)' }],
-    highlight: [{ in: 'tagline', text: 'understand what you approve', tone: 'orange' }] },
+  visual: { term: [{ c: 'ls' }, { o: 'README.md  data  public  server.js' }, { c: 'git status' }, { o: 'On branch main · nothing to commit' }, { ask: 'Allow Claude to run npm test? (y/n)' }] },
   cards: [
     { title: "What the terminal gives you", body: "The terminal lets you interact with your computer and project through commands." },
     { title: "Same tools developers use", body: "Claude Code uses the same project tools developers already use for files, Git, applications and tests." }
   ],
-  tagline: "You do not need to memorise every command. You must understand what you approve.",
   keyPoints: ["Name terminal anxiety directly","No need to memorise commands","Understand what you approve","That is the whole bar"],
   notes: "If anyone in the room is terminal-anxious, name it directly: they don't need to memorise commands, they need to understand what they're approving. That's the whole bar."
 },
