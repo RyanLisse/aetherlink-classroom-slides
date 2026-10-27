@@ -1450,18 +1450,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 68
   title: "A test: evidence, not confidence",
   kicker: "DAY 1 · PART 3 · TESTS",
-  subtitle: "In Snake, pressing the opposite direction should do nothing. Not end the game.",
+  subtitle: "The rule: the snake never turns straight back. Moving right, the ← key does nothing.",
   type: "concept",
-  visual: { figure: "assets/examples/snake-reverse.svg", figureAlt: "Two Snake boards. Moving right, the player presses up and then left very fast. Correct: the snake turns up and the game goes on. The bug: the snake turns back into itself and it's game over.", highlight: [{ in: "tagline", text: "without you noticing", tone: "orange" }] },
-  tagline: "Test what can break without you noticing, not what you see straight away.",
+  visual: { figure: "assets/examples/snake-reverse.svg?v=3", figureAlt: "Three Snake boards in slow motion. The snake is moving right. 1: you press the up key; the game notes go up next, the snake hasn't moved yet. 2: you quickly press the left key; a careless game compares left with up, the key you just pressed, and says OK. 3: the snake moves left, into its own neck: game over. A good game compares left with where the snake really moves, right, and ignores it. The test presses both keys for you and checks: no game over.", highlight: [{ in: "tagline", text: "after every change", tone: "orange" }] },
+  tagline: "Your game probably gets this right already. The test proves it, after every change.",
   keyPoints: [
-    "Correct: the opposite key does nothing",
-    "The bug: two fast keys, game over",
-    "You'd almost never find it by playing",
-    "A test presses the keys for you, every time",
-    "Next: your test. Red or green?"
+    "The rule: never straight back",
+    "Tricky case: the ↑ key, then quickly the ← key",
+    "A careless game compares with the last key, not the real direction",
+    "The test presses the keys and checks: no game over",
+    "Why: you'd never press that fast, and changes can break it"
   ],
-  notes: "Say: Claude says it works. A test shows it, every time. Here's the classic Snake bug. You're moving right and press left: in a good game nothing happens, the key is ignored. Now press up and then left very fast, both before the snake moves. A careless game accepts up, then accepts left (that's not the opposite of up), but the snake never went up: it turns back into itself. Game over, from two quick keys.\n\nWhat you see: The same two keys in the middle, two games. Left: correct, the snake turns up. Right: the bug, the snake turns back into itself and it's game over.\n\nAsk the room: Which one is correct? People mix this up: the correct game is the one that does NOT end. Then: would you find the bug by playing? Almost never: you'd need two keys within 120 milliseconds.\n\nBackground: That's why it's a good test: it hides until someone presses fast, and it comes back when you change the speed or the controls. A test like 'the snake grows' is less useful: you'd see that break straight away. Tomorrow the tests grow with the levels: food never on a wall.\n\nNext: Assignment 9: your own test. Does your game have the bug?"
+  notes: "Say: Claude says it works. A test shows it, every time. Here's the classic Snake bug. You're moving right and press left: in a good game nothing happens, the key is ignored. Now press up and then left very fast, both before the snake moves. A careless game accepts up, then accepts left (that's not the opposite of up), but the snake never went up: it turns back into itself. Game over, from two quick keys.\n\nWhat you see: The subtitle gives the rule. The three boards show the tricky case in slow motion. 1: the up key; the game notes 'go up next', but the snake only moves every 0.12 seconds, so it hasn't moved yet. 2: quickly the left key; a careless game compares left with up (the key just pressed), and left isn't straight back from up, so it says OK. 3: the snake moves left, but it was still moving right: straight back into its neck. Green bar: a good game compares with where the snake really moves. Orange box: what the test does, and why.\n\nWatch for: keep keys and directions apart when you talk. 'The left key' is what you press; 'left' is where the snake goes.\n\nSay: Your game probably gets this right already, so your test will likely be green first. That's fine: in the assignment you break it on purpose and see it turn red.\n\nAsk the room: Would you find the bug by playing? Almost never: you'd need two keys within 120 milliseconds.\n\nBackground: That's why it's a good test: it hides until someone presses fast, and it comes back when you change the speed or the controls. A test like 'the snake grows' is less useful: you'd see that break straight away. Tomorrow the tests grow with the levels: food never on a wall.\n\nNext: Assignment 9: your own test. Does your game have the bug?"
 },
 
 { // Slide 69
@@ -1470,18 +1470,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 9: A test that finds a bug",
   mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 9 · TEST",
-  subtitle: "Your test presses ↑ ← for you, very fast, and checks: no game over. Red means your game has the bug.",
+  subtitle: "Your test presses the ↑ and ← keys very fast and checks: no game over. Red: your game has the bug.",
   calm: true,
   steps: [
-    { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
+    { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press the left arrow key, the game must not end. The same when I press the up arrow key and then the left arrow key very fast. Make it run with npm test. If it fails, say in plain words what went wrong. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
     { text: "Run it yourself: passed or failed?", prompt: "!npm test" },
     { text: "Failed? Let Claude fix the game", prompt: "The test fails. Fix the game so the snake can't turn back into itself. Don't change the test.", after: "The game, never the test.", warn: true },
-    { text: "Passed? Break the game on purpose", prompt: "Remove the code that stops the snake from turning back into itself. Then run npm test.", after: "The test fails now: it catches the bug." },
+    { text: "Passed? Break the game on purpose", prompt: "Delete the check that ignores the opposite direction. Then run npm test.", after: "The test fails now: it catches the bug." },
     { text: "Undo: empty input, Esc twice, “Restore code”. Passes again?", prompt: "!npm test" },
     "Commit and push. This test now guards the rule."
   ],
   expected: "A test you've seen fail, and that passes now.",
-  prompt: "Write a test in tests/ for this rule: when the snake moves right and I press left, the game must not end. The same when I press up and then left very fast. Make it run with npm test. Don't change the game yet: first show me whether the test passes.",
+  prompt: "Write a test in tests/ for this rule: when the snake moves right and I press the left arrow key, the game must not end. The same when I press the up arrow key and then the left arrow key very fast. Make it run with npm test. If it fails, say in plain words what went wrong. Don't change the game yet: first show me whether the test passes.",
   keyPoints: [
     "Test phase",
     "Test a hidden rule, not the obvious",
