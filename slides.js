@@ -1734,7 +1734,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 2 · WARM-UP",
   subtitle: "Show, tell, ask: one minute each. This is where your Snake is going today.",
   type: "context",
-  visual: { anatomy: { src: "assets/examples/snake-advanced.html", poster: "assets/examples/snake-level-4.svg", title: "Snake, level 4: obstacles, more food, a longer and faster snake, a stopwatch", caption: "Level 4 by tonight: more food, a longer and faster snake, obstacles. Click the board to play." } },
+  visual: { anatomy: { src: "assets/examples/snake-advanced.html", poster: "assets/examples/snake-level-4.svg", title: "Snake, level 4: obstacles, more food, a longer and faster snake, a stopwatch", caption: "Level 4 by tonight: a longer and faster snake, obstacles, a stopwatch. Click the board to play." } },
   keyPoints: ["The game on screen plays itself: let it run", "Then everyone: show, tell, ask", "One minute each", "Questions on the flipchart", "This is today's goal"],
   notes: "The board on the slide plays itself (autopilot). Click it and use the arrow keys to play yourself; click outside the game to get the slide keys back. Say: This is level 4. By tonight your Snake has levels like this, and you'll have built them three ways: with prompts, with skills, and with one command.\n\nThen everyone shows their Snake from yesterday, one minute each. Show: play it for a few seconds. Tell: one thing that went well, one thing that went wrong. Ask: what do you want to know after seeing the others? Online participants share their screen. Collect the questions on the flipchart: the recap answers them."
 },
@@ -1832,14 +1832,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "concept",
   visual: { stepThrough: ".layer-card, .slide-main > .tagline", layers: [
     { img: "assets/examples/snake-level-1.svg", label: "Level 1", caption: "Your game from yesterday." },
-    { img: "assets/examples/snake-level-2.svg", label: "Level 2", caption: "More food, a longer snake, one obstacle." },
+    { img: "assets/examples/snake-level-2.svg", label: "Level 2", caption: "More food to finish, a longer snake, one obstacle." },
     { img: "assets/examples/snake-level-3.svg", label: "Level 3", caption: "More obstacles, a bit faster." },
     { img: "assets/examples/snake-level-4.svg", label: "Level 4", caption: "Faster, more in the way." },
     { img: "assets/examples/snake-level-5.svg", label: "Level 5", caption: "Almost a maze. Still playable." }
   ] },
   tagline: "Level 2 with prompts. Level 3 with skills. A test and Bobby check them. Levels 4 and 5 with one command.",
   keyPoints: ["Ask first: how would you make Snake harder?", "Click: one level at a time", "Harder, but still playable", "The tagline is today's route"],
-  notes: "Ask the room first: what would make the next level of Snake harder? Collect a few answers, then click through the five boards. Every level turns the same knobs a little further: more food on the board, a longer snake at the start, more obstacles, a bit faster. Harder, but always playable: that rule comes back in the spec, the test and Bobby.\n\nThe tagline is the route of the day, read it out: level 2 with plain prompts, level 3 with three skills you make, then a test and a checker agent called Bobby, then one command that builds levels 4 and 5. Each time the same result, built a smarter way."
+  notes: "Ask the room first: what would make the next level of Snake harder? Collect a few answers, then click through the five boards. Every level turns the same knobs a little further: more food to finish, a longer snake at the start, more obstacles, a bit faster. Harder, but always playable: that rule comes back in the spec, the test and Bobby.\n\nThe tagline is the route of the day, read it out: level 2 with plain prompts, level 3 with three skills you make, then a test and a checker agent called Bobby, then one command that builds levels 4 and 5. Each time the same result, built a smarter way."
 },
 
 { // Slide 89
@@ -1912,12 +1912,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Like yesterday's layers: one small step, play it, then the next. Only a little harder than level 1.",
   calm: true,
   steps: [
-    { text: "Layer 1: more food", prompt: "Create a branch level-2. Make levels/level-1.js from today's game and levels/level-2.js from spec.md, and load the levels in the game: after level 1's food goal you go to level 2. In this step level 2 only has more food on the board than level 1.", after: "Reload the tab and play. Tip: ask for a test link like index.html?level=2." },
+    { text: "Layer 1: more food to finish", prompt: "Create a branch level-2. Make levels/level-1.js from today's game and levels/level-2.js from spec.md, and load the levels in the game: after level 1's food goal you go to level 2. In this step level 2 only needs more food to finish than level 1.", after: "Reload the tab and play. Tip: ask for a test link like index.html?level=2." },
     { text: "Layer 2: a longer snake", prompt: "Next layer: in level 2 the snake starts longer than in level 1. Stay within spec.md.", after: "Reload and play." },
     { text: "Layer 3: obstacles", prompt: "Last layer: level 2 has a few obstacles. The snake never starts in one, and food never lands on one. Stay within spec.md.", after: "Reload and play. Still fair?" },
     { text: "Save it on the branch", prompt: "Commit and push the branch level-2.", after: "main stays untouched. Check: !git branch" }
   ],
-  expected: "Level 2 has more food, a longer snake and a few obstacles, on the branch level-2.",
+  expected: "Level 2 needs more food, has a longer snake and a few obstacles, on the branch level-2.",
   keyPoints: ["A branch per feature", "Three small prompts, three layers", "Play after every layer", "Push the branch, not main"],
   notes: "Same rhythm as yesterday's five layers: one small change, play it, then the next. The hook from yesterday runs npm test after every edit. Claude also makes level-1.js: today's game as a level. Level 2 is only a little harder: that's what spec.md's limits are for.\n\nWhy now: level 2 is a new feature, and main must keep working while you build it.\nWhat you see: a branch level-2, levels/level-1.js and level-2.js, and the game going up a level.\nLook inside: !git branch: which branch are you on? Is main untouched?\n\nNotice for later: the three prompts are three jobs (food, snake, obstacles). Level 3 needs the same three again: that's the next part."
 },
@@ -1992,7 +1992,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "concept",
   visual: { code: 0, highlight: [{ in: "tagline", text: "always", tone: "orange" }] },
   cards: [
-    { title: ".claude/skills/create-food/SKILL.md", body: "---\nname: create-food\ndescription: Adds the food to a level of the\n  Snake game. Use when a level needs food.\nallowed-tools: Read, Edit, Bash(npm test)\n---\n\n# Create food\n1. Read the Food section of spec.md.\n2. A little more food than the level before.\n3. Never on an obstacle or the snake.\n4. Run npm test: green before you stop." },
+    { title: ".claude/skills/create-food/SKILL.md", body: "---\nname: create-food\ndescription: Adds the food to a level of the\n  Snake game. Use when a level needs food.\nallowed-tools: Read, Edit(levels/**)\n---\n\n# Create food\n1. Read the Food section of spec.md.\n2. A bit more food to finish than the level before.\n3. Never on an obstacle or the snake.\n4. Run npm test: green before you stop." },
     { title: "The frontmatter", body: "Between the two --- lines.\nname: the /name you type.\ndescription: when to use it.\nallowed-tools: what it may do without asking." },
     { title: "The body", body: "The recipe, in plain words. Read only when the skill is used." },
     { title: "Extra files", body: "A template or a script next to SKILL.md. Read or run only when the recipe points to them." }
@@ -2076,7 +2076,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "You made the food for level 2 by hand. Now write down the recipe.",
   calm: true,
   steps: [
-    { text: "Make the skill on a new branch", prompt: "Create a branch level-3. Turn how we made the food for level 2 into a skill in .claude/skills/create-food/. Frontmatter: name, and a description that says when to use it. Recipe: read the food rules in spec.md, give level N a little more food than the level before and stay within the limits, food never on an obstacle or the snake, then npm test must be green. Show me SKILL.md before you save it.", after: "Read it, then say yes." },
+    { text: "Make the skill on a new branch", prompt: "Create a branch level-3. Turn how we made the food for level 2 into a skill in .claude/skills/create-food/. Frontmatter: name, and a description that says when to use it. Recipe: read the food rules in spec.md, make level N need a little more food to finish than the level before and stay within the limits, food never on an obstacle or the snake, then npm test must be green. Show me SKILL.md before you save it.", after: "Read it, then say yes." },
     "Open .claude/skills/create-food/SKILL.md in VS Code. Find the two --- lines. Which line tells Claude when to use it?",
     { text: "Is it there?", prompt: "/", after: "Type create and you'll see /create-food. No restart needed." },
     { text: "Save point", prompt: "Commit the skill on the branch level-3 and push it." }
@@ -2092,17 +2092,17 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "manual",
   title: "Assignment 21: Skill 2, /create-snake, and its permissions",
   kicker: "DAY 2 · ASSIGNMENT 21 · BUILD",
-  subtitle: "The second recipe. And this one may run the tests without asking you.",
+  subtitle: "The second recipe. And this one may change level files without asking you.",
   calm: true,
   steps: [
-    { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-snake/ for the snake in level N: its start length and its speed, a little more than the level before, within the limits in spec.md, and the snake never starts in an obstacle. In the frontmatter, add allowed-tools so this skill may run npm test without asking me. Show me SKILL.md before you save it.", after: "Find allowed-tools between the --- lines." },
+    { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-snake/ for the snake in level N: its start length and its speed, a little more than the level before, within the limits in spec.md, and the snake never starts in an obstacle. In the frontmatter, add allowed-tools so this skill may edit the files in levels/ without asking me. Show me SKILL.md before you save it.", after: "Find allowed-tools between the --- lines." },
     { text: "A rule for the whole project: secrets stay closed", prompt: "Add a deny rule to .claude/settings.json so Claude may never read .env files. Show me the change first.", after: "deny beats allow: no prompt can open it." },
     { text: "Try it", prompt: "Read the .env file.", after: "Claude can't: the deny rule stops it." },
     { text: "Save point", prompt: "Commit the skill and settings.json on level-3 and push." }
   ],
   expected: "A /create-snake skill with its own allowed-tools, and a deny rule for .env.",
   keyPoints: ["allowed-tools: per skill, while it runs", "settings.json: for the whole project", "deny beats allow and ask", "Secrets: deny, always"],
-  notes: "Two kinds of permission side by side. allowed-tools in a skill's frontmatter: the tools that skill may use without asking, only while it runs. settings.json: rules for the whole project, for every session. deny beats everything: no prompt, no mode and no skill gets past it. Every real repo has secrets in .env files (API keys, passwords): a deny rule on them is standard practice.\n\nWhy now: a skill that runs tests a hundred times shouldn't ask a hundred times. A secret should never be read, whatever the prompt.\nWhat you see: allowed-tools in SKILL.md; a deny list in settings.json.\nLook inside: .claude/settings.json: allow, ask and deny. Which one wins?\n\nNo .env in the folder? The deny still holds; Claude says it isn't allowed, or that the file doesn't exist and it wouldn't read it anyway."
+  notes: "Two kinds of permission side by side. allowed-tools in a skill's frontmatter: the tools that skill may use without asking, only while it runs. settings.json: rules for the whole project, for every session. deny beats everything: no prompt, no mode and no skill gets past it. Every real repo has secrets in .env files (API keys, passwords): a deny rule on them is standard practice.\n\nWhy now: in manual mode every level-file edit asks. A skill that only touches levels/ can be trusted with that, only while it runs. A secret should never be read, whatever the prompt.\nWhat you see: allowed-tools in SKILL.md; a deny list in settings.json.\nLook inside: .claude/settings.json: allow, ask and deny. Which one wins?\n\nNo .env in the folder? The deny still holds; Claude says it isn't allowed, or that the file doesn't exist and it wouldn't read it anyway."
 },
 
 { // Slide 103
@@ -2121,7 +2121,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   expected: "A /create-obstacles skill, and a hook that blocks edits on main.",
   keyPoints: ["Third skill: same shape", "Hook = always, at a fixed moment", "Protect main, like at work", "Test it on main"],
-  notes: "Yesterday's hook ran the test after every edit. This one runs before every edit and can say no: a PreToolUse hook on Edit and Write that checks git branch and blocks on main. At work main is protected in GitLab; this does the same on your laptop, for Claude.\n\nWhy now: from here on every level is built on a branch. A rule like that shouldn't depend on Claude remembering it.\nWhat you see: a hooks block in settings.json and a small check script. On main, the edit is blocked with your message.\nLook inside: settings.json: when does the hook run (the event), and on which tools (the matcher)?\n\nWatch for: the hook only blocks Claude's file edits, not git itself, so checkout, pull and merge on main still work."
+  notes: "Yesterday's hook ran the test after every edit. This one runs before every edit and can say no: a PreToolUse hook on Edit and Write that checks git branch and blocks on main. At work main is protected in GitLab; this does the same on your laptop, for Claude.\n\nWhy now: from here on every level is built on a branch. A rule like that shouldn't depend on Claude remembering it.\nWhat you see: a hooks block in settings.json and a small check script. On main, the edit is blocked with your message.\nLook inside: settings.json: when does the hook run (the event), and on which tools (the matcher)?\n\nWatch for: the hook only blocks Claude's file edits, not git itself, so checkout, pull and merge on main still work. Step 3 works because the new hook isn't committed yet: uncommitted changes come along to main.\n\nDry run (28 Oct): on main the edit was blocked with 'Make a branch first.', and Claude made a branch by itself and did the edit there. Undo that branch afterwards (!git checkout level-3). The deny rule in Assignment 21 held too: Claude refused .env and didn't try cat instead."
 },
 
 { // Slide 104
@@ -2133,14 +2133,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Same result as level 2. This time the recipes do the explaining.",
   calm: true,
   steps: [
-    { text: "Start clean, then ask for level 3 without naming a skill", cmds: ["/clear"], prompt: "Make level 3: a bit harder than level 2.", after: "Watch for Skill(create-food), Skill(create-snake), Skill(create-obstacles)." },
+    { text: "Start clean, then ask for level 3 with your skills", cmds: ["/clear"], prompt: "Make level 3 with my create-food, create-snake and create-obstacles skills: a bit harder than level 2.", after: "Watch for Skill(create-food), Skill(create-snake), Skill(create-obstacles)." },
     { text: "Play it: reload the tab", after: "Harder than level 2? Still fair?" },
     { text: "Merge request", prompt: "Push level-3 and open a merge request into main: what changed, why, how it was tested. Don't merge it.", after: "Review it on GitLab and merge it yourself." },
     { text: "Back on main", prompt: "!git checkout main && git pull" }
   ],
   expected: "Level 3 was made with your three skills, and it's in main.",
-  keyPoints: ["/clear first", "Claude picks the skills by description", "No skill picked? Sharpen the description", "Review and merge"],
-  notes: "Why now: three recipes are ready. This is the moment they pay off.\nWhat you see: Claude names each skill as it uses it. The level appears without you explaining food, snake or obstacles.\nLook inside: did Claude use all three skills? If not, read that skill's description: that's the line to sharpen.\n\nThe hook from Assignment 22 is on: everything happens on level-3, so nothing is blocked. If someone is still on main, the hook will tell them."
+  keyPoints: ["/clear first", "Name the skills: Claude calls them", "Extra: try it without naming them", "Review and merge"],
+  notes: "Why now: three recipes are ready. This is the moment they pay off.\nWhat you see: Claude names each skill as it uses it. The level appears without you explaining food, snake or obstacles.\nLook inside: did Claude use all three skills? Which values did each one choose?\n\nDry run (28 Oct, Claude Code 2.1.312): with 'Make level 3: a bit harder than level 2.' Claude read the three SKILL.md files with cat and followed them, without a Skill() call. Naming the skills in the prompt gave three real Skill() calls. Extra for the fast ones: /clear and ask without naming them, then compare.\n\nThe hook from Assignment 22 is on: everything happens on level-3, so nothing is blocked. If someone is still on main, the hook will tell them."
 },
 
 { // Slide 105
@@ -2243,12 +2243,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   steps: [
     { text: "Write the test on a new branch", prompt: "Create a branch level-test. Write tests/levels.test.js. For every level file that exists: it follows spec.md, every value stays between its minimum and maximum, each level is harder than the one before and never easier, the snake never starts in an obstacle and food never lands on one. Show me the tests before you save them.", after: "Tests change: yesterday's ask rule asks you. Say yes." },
     { text: "All green?", prompt: "!npm test" },
-    { text: "Break it on purpose", prompt: "Make level 3 as fast as possible.", after: "The hook runs the test: red, too fast. Then Esc Esc to undo." },
+    { text: "Break it on purpose", prompt: "On purpose, to see the test catch it: make level 3 faster than spec.md allows.", after: "The hook runs the test: red, with the file and the allowed range. Then Esc Esc to undo." },
     { text: "Save it", prompt: "Commit, push and open a merge request. Don't merge it.", after: "Merge it yourself, then !git checkout main && git pull" }
   ],
   expected: "A green level test that turns red when a level is too fast.",
   keyPoints: ["Test phase", "Harder, never easier", "Limits keep it playable", "Break it on purpose: red", "Esc Esc to undo"],
-  notes: "Why now: three levels exist, two more are coming by command. You need a check that doesn't depend on someone playing every level.\nWhat you see: tests/levels.test.js, green for levels 1 to 3. A too-fast level 3 turns it red.\nLook inside: open the test. Which line checks 'harder than the one before'?\n\nThe break-on-purpose step is the point: a test is only worth something if you've seen it fail. In the next assignment this test becomes Bobby's main tool."
+  notes: "Why now: three levels exist, two more are coming by command. You need a check that doesn't depend on someone playing every level.\nWhat you see: tests/levels.test.js, green for levels 1 to 3. A too-fast level 3 turns it red.\nLook inside: open the test. Which line checks 'harder than the one before'?\n\nThe break-on-purpose step is the point: a test is only worth something if you've seen it fail. Dry run (28 Oct): 'Make level 3 as fast as possible' did not break anything: Claude (with the create-snake skill, which it picked by itself after a 'Use skill?' question) offered the fastest values spec.md allows. Asking for faster than spec.md allows gave 2 red tests naming the file, the value and the range. The level test Claude wrote: 19 checks, 40 of 40 green, trial-run on copies with planted mistakes first. In the next assignment this test becomes Bobby's main tool."
 },
 
 { // Slide 110
@@ -2279,12 +2279,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Ask Claude to make Bobby", prompt: "Create a branch bobby. Create a subagent called bobby in .claude/agents/bobby.md, the level-checker. Job: run tests/levels.test.js, read the level files and spec.md, and check that every level is harder than the one before and still playable. Tools: read files and npm test, no edits. Model: Haiku. Bobby ends with GO or NO-GO and the reasons, and approves nothing. Show me the file first.", after: "Say yes to the file." },
     "Open .claude/agents/bobby.md in VS Code. Same --- frontmatter as a skill: which tools may Bobby use?",
     { text: "Restart so Bobby loads: /exit, then", prompt: "claude --continue", after: "Back in auto mode? Shift+Tab to “manual mode on”.", warn: true },
-    { text: "Ask Bobby", prompt: "Ask bobby to check all levels.", after: "GO or NO-GO, with reasons. Bobby can be wrong: you decide." },
+    { text: "Ask Bobby", prompt: "Ask bobby to check the levels that exist.", after: "Probably NO-GO: levels 4 and 5 don't exist yet. Read the reasons." },
     { text: "Save it", prompt: "Commit, push and open a merge request. Don't merge it.", after: "Merge it yourself, then !git checkout main && git pull" }
   ],
   expected: "Bobby checks your levels and answers GO or NO-GO, without changing anything.",
   keyPoints: ["Made by asking Claude", "Same frontmatter as a skill", "Read-only + npm test", "Restart to load", "GO / NO-GO, you decide"],
-  notes: "Why now: you have a test and three levels. Checking them all is reading work that fills your session; let a helper do it.\nWhat you see: .claude/agents/bobby.md, and a report ending in GO or NO-GO.\nLook inside: /context after Bobby's check: did Bobby's reading land in your context, or only the report?\n\nWatch for: 'Agent type bobby not found' means no restart yet. Bobby gets Bash to run npm test, so 'no edits' is partly an instruction, not a hard wall: say it out loud. Haiku is enough for checking against a spec, and cheaper."
+  notes: "Why now: you have a test and three levels. Checking them all is reading work that fills your session; let a helper do it.\nWhat you see: .claude/agents/bobby.md, and a report ending in GO or NO-GO.\nLook inside: /context after Bobby's check: did Bobby's reading land in your context, or only the report?\n\nDry run (28 Oct, 2.1.312): Bobby ran as a background agent (about 30 s) and said NO-GO because spec.md wants five levels and only three exist; levels 1 to 3 each passed. He also spotted that the level test doesn't require all five levels: Bobby reads more than the test does. Claude itself mentioned /agents as a way to load him without a restart.\n\nWatch for: 'Agent type bobby not found' means no restart yet. Bobby gets Bash to run npm test, so 'no edits' is partly an instruction, not a hard wall: say it out loud. Haiku is enough for checking against a spec, and cheaper."
 },
 
 { // Slide 112
@@ -2346,7 +2346,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   expected: "Levels 4 and 5 built by one command, checked by Bobby, merged by you.",
   keyPoints: ["Stacked: skills, test, Bobby, MR", "Only by /build-game-levels", "The push still asks", "You still merge"],
-  notes: "Why now: every level is the same steps. Typing them every time is where mistakes creep in.\nWhat you see: one command; Claude names each skill and Bobby as it goes; a merge request link at the end.\nLook inside: SKILL.md of build-game-levels. Which skills and which agent does it call, in what order?\n\nWatch for: if the workflow's own SKILL.md is uncommitted, its clean-start check stops it at step 1: that's why step 2 exists. Skills load without a restart. Expect a few minutes per level."
+  notes: "Why now: every level is the same steps. Typing them every time is where mistakes creep in.\nWhat you see: one command; Claude names each skill and Bobby as it goes; a merge request link at the end.\nLook inside: SKILL.md of build-game-levels. Which skills and which agent does it call, in what order?\n\nDry run (28 Oct, 2.1.312, manual mode): /build-game-levels 5 found levels 1 to 3, showed a plan (values per level, obstacles as a pinwheel), made branch levels-4-to-5, wrote both level files and the script tags, ran npm test (52 of 52) and a reachability check, ran Bobby in the background (GO, with what he could not check), then asked before the commit and before the push. About 3 minutes plus the yes-clicks. With a GitLab origin it opens the merge request through git push options or MCP. It read the three skills as files instead of calling them: same result.\n\nWatch for: if the workflow's own SKILL.md is uncommitted, its clean-start check stops it at step 1: that's why step 2 exists. Skills load without a restart. Expect a few minutes per level."
 },
 
 { // Slide 115
@@ -2358,13 +2358,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A gate is only worth something if you've seen it close.",
   calm: true,
   steps: [
-    { text: "Ask for a level that breaks the rules", prompt: "/build-game-levels 6, and make level 6 faster than spec.md allows.", after: "npm test turns red, Bobby says NO-GO." },
-    "Check: was anything pushed? Look on GitLab",
-    { text: "Clean up", prompt: "Throw away level 6 and the branch you made for it, and go back to main.", after: "Your five levels stay." }
+    { text: "Ask for a level that breaks the rules", prompt: "/build-game-levels 5, but on purpose, to test the gate: first throw away level 5, then make the new level 5 faster than spec.md allows. Run bobby as well.", after: "npm test turns red, Bobby says NO-GO. No commit, no push." },
+    "Check: was anything pushed? Look on GitLab: no new branch, no merge request",
+    { text: "Clean up", prompt: "Restore the original level 5, go back to main and delete the branch you made.", after: "Your five levels are back." }
   ],
   expected: "Bobby said NO-GO, and nothing reached GitLab.",
   keyPoints: ["Break the rule on purpose", "Test red, Bobby NO-GO", "Nothing pushed", "Like Day 1's rescue"],
-  notes: "Same idea as yesterday's rescue: make it go wrong on purpose, in a safe place. The limits in spec.md, the level test and Bobby together stop the bad level before it leaves the laptop.\n\nWhy now: you've seen the workflow say GO. Trust comes from seeing it say NO.\nWhat you see: a red test, a NO-GO with the reason, and no push.\nLook inside: which line in spec.md did level 6 break?"
+  notes: "Same idea as yesterday's rescue: make it go wrong on purpose, in a safe place. The limits in spec.md, the level test and Bobby together stop the bad level before it leaves the laptop.\n\nWhy now: you've seen the workflow say GO. Trust comes from seeing it say NO.\nWhat you see: a red test, a NO-GO with the reason, and no push.\nLook inside: which line in spec.md did the new level 5 break?\n\nDry run (28 Oct, 2.1.312): /build-game-levels 6 doesn't work for this: the workflow and spec.md only allow levels up to 5, so it stops before Bobby. Throwing away level 5 and rebuilding it too fast did reach all gates: the hook flagged the write, npm test failed 1 of 52 ('startDelay is 30, must be 40 to 150'), Bobby said NO-GO, nothing was committed or pushed. Bonus moment: Bobby miscounted the obstacles (30 instead of 26) and the main Claude corrected him. Bobby can be wrong: that's why he approves nothing."
 },
 
 /* ---------------------------------------------------------------------- */
