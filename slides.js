@@ -2051,36 +2051,19 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 99
-  title: "Skills in your role",
-  kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
-  subtitle: "In the game it's food, snake and obstacles. At work it looks like this.",
-  type: "concept",
-  visual: { stepThrough: true },
+  title: "Which skills would you build for your daily work?",
+  kicker: "DAY 2 · PART 2 · YOUR WORK",
+  subtitle: "Think of something you explain again and again, to Claude or to a colleague.",
+  type: "context",
+  visual: { stagger: "pop", stepThrough: true, bot: "think", place: "beside" },
   cards: [
-    { title: "Frontender", body: "A skill for a new component: your design system, your naming, a test for every state." },
-    { title: "Backender", body: "A skill for a new endpoint: the contract first, tests, error handling, the same every time." },
-    { title: "Manager", body: "A skill for the weekly status: read the Jira board, the same headings, the risks on top." }
+    { title: "Something you explain every time", body: "How we name things here, how a ticket should look." },
+    { title: "A check you always do", body: "Before a merge request, before a release." },
+    { title: "Something with the same shape every week", body: "A status update, a report, release notes." }
   ],
   tagline: "Anything you explain to Claude twice can become a skill.",
-  keyPoints: ["First the game, then your role","Frontend: component skill","Backend: endpoint skill","Manager: weekly status skill","Ask: which one would you build?"],
-  notes: "Every concept first in the game, then in your role. A frontender could have a skill for a new component: their design system, their naming, a test for every state. A backender a skill for a new endpoint: the contract first, then tests and error handling, the same way every time. A manager a skill for the weekly status: read the Jira board, the same headings, risks on top. Ask the room: which skill would you build first for your own work?"
-},
-
-{ // Slide 100
-  title: "Quiz: where does it go?",
-  kicker: "DAY 2 · QUIZ",
-  subtitle: "Claude must follow an instruction in every session of this project. Where do you put it?",
-  type: "quiz",
-  visual: { quiz: { answer: 1 }, bot: 'stretchLeft', place: 'pointer', pointAt: 1 },
-  cards: [
-    { title: "A", body: "In your prompt, every time." },
-    { title: "B", body: "In CLAUDE.md." },
-    { title: "C", body: "In a skill." },
-    { title: "D", body: "In a comment in your code." }
-  ],
-  check: "Answer: B",
-  keyPoints: ["Vote first", "Answer: B, CLAUDE.md", "Skill = a recurring method, not a standing instruction"],
-  notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing instructions live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not an instruction that always applies."
+  keyPoints: ["Ask first, then click", "Something you explain every time", "A check you always do", "The same shape every week", "Collect 3 or 4 answers"],
+  notes: "Ask the question before you click. Give the room a minute to think of their own work, then collect three or four answers. Only then click through the three cards as starting points for anyone who's stuck.\n\nExamples if it stays quiet: a frontender with a skill for a new component (design system, naming, a test for every state); a backender with a skill for a new endpoint (the contract first, tests, error handling); a manager with a skill for the weekly status (read the board, the same headings, risks on top).\n\nKeep the answers: at the end of the day the final reflection asks for one workflow to investigate."
 },
 
 { // Slide 100b
@@ -2188,6 +2171,23 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   expected: "A /create-obstacles skill, and a hook that blocks edits on main.",
   keyPoints: ["Third skill: same shape", "Hook = always, at a fixed moment", "Protect main, like at work", "Test it on main"],
   notes: "Yesterday's hook ran the test after every edit. This one runs before every edit and can say no: a PreToolUse hook on Edit and Write that checks git branch and blocks on main. At work main is protected in GitLab; this does the same on your laptop, for Claude.\n\nWhy now: from here on every level is built on a branch. A rule like that shouldn't depend on Claude remembering it.\nWhat you see: a hooks block in settings.json and a small check script. On main, the edit is blocked with your message.\nLook inside: settings.json: when does the hook run (the event), and on which tools (the matcher)?\n\nWatch for: the hook only blocks Claude's file edits, not git itself, so checkout, pull and merge on main still work. Step 3 works because the new hook isn't committed yet: uncommitted changes come along to main.\n\nDry run (28 Oct): on main the edit was blocked with 'Make a branch first.', and Claude made a branch by itself and did the edit there. Undo that branch afterwards (!git checkout level-3). The deny rule in Assignment 22 held too: Claude refused .env and didn't try cat instead."
+},
+
+{ // Slide 103b
+  title: "Quiz: how does Claude pick a skill?",
+  kicker: "DAY 2 · QUIZ",
+  subtitle: "You type “Level 4 needs obstacles.” You don't type /create-obstacles. How does Claude know to use that skill?",
+  type: "quiz",
+  visual: { quiz: { answer: 1 }, bot: 'stretchLeft', place: 'pointer', pointAt: 1 },
+  cards: [
+    { title: "A", body: "It reads the body of all three skills first." },
+    { title: "B", body: "Your question matches the description in the frontmatter." },
+    { title: "C", body: "spec.md says which skill to use." },
+    { title: "D", body: "CLAUDE.md lists your skills." }
+  ],
+  check: "Answer: B",
+  keyPoints: ["Vote first", "Answer: B, the description", "Frontmatter: always loaded", "Body: only after Claude picks the skill"],
+  notes: "Vote first, then press → to strike the wrong answers. B: at the start of every session Claude has the frontmatter of every skill. 'Level 4 needs obstacles' matches the description of create-obstacles, so Claude picks that skill, and only then Claude Code loads its body. A is the opposite: the bodies are only loaded after the choice, that's why skills are cheap. C: spec.md has the numbers, not the skills; the skill's body points to spec.md. D: CLAUDE.md doesn't need to list skills, Claude Code finds them in .claude/skills/ by itself.\n\nNext: Assignment 24, level 3 with your three skills. That's where they see the choice happen."
 },
 
 { // Slide 104
@@ -2637,6 +2637,24 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   tagline: "A skill is one thing you call, and it runs. It doesn't start Claude Code or run in the background.",
   keyPoints: ["Project skills: shared through git", "Personal: ~/.claude/skills", "Type / to see them", "Claude picks by description, or /name", "One thing you call, and it runs"],
   notes: "Same two places as CLAUDE.md and settings.json: the project (shared with the team through git) and your home folder (only you). Built-in skills come with Claude Code; plugins bundle skills, agents and hooks from others. Type / to show the list live.\n\nWho starts a skill: Claude, when your request matches the description; or you, by typing /name. For a skill that does something you don't want to happen by surprise (push, deploy), switch off Claude's automatic use with disable-model-invocation: true in the frontmatter.\n\nThe tagline is the guardrail worth repeating: a skill is a method Claude applies inside your conversation. It's not a background process, and it's not a separate agent: that comes after lunch (Bobby)."
+},
+
+{ // Slide 100
+  hidden: true,
+  title: "Parked · Quiz: where does it go?",
+  kicker: "DAY 2 · QUIZ",
+  subtitle: "Claude must follow an instruction in every session of this project. Where do you put it?",
+  type: "quiz",
+  visual: { quiz: { answer: 1 }, bot: 'stretchLeft', place: 'pointer', pointAt: 1 },
+  cards: [
+    { title: "A", body: "In your prompt, every time." },
+    { title: "B", body: "In CLAUDE.md." },
+    { title: "C", body: "In a skill." },
+    { title: "D", body: "In a comment in your code." }
+  ],
+  check: "Answer: B",
+  keyPoints: ["Vote first", "Answer: B, CLAUDE.md", "Skill = a recurring method, not a standing instruction"],
+  notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing instructions live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not an instruction that always applies."
 },
 
 { // Slide 125
