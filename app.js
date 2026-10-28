@@ -210,7 +210,13 @@ function renderExtras(stage, main, s, v) {
   if (v.reveal === 'click') {                                  // 12: cards open one by one, so the room answers first
     grid.classList.add('reveal-grid'); let reacted = null;
     const open = i => { const c = cards[i]; if (!c || !c.classList.contains('closed')) return false; c.classList.remove('closed'); c.setAttribute('aria-hidden', 'false'); x.react?.(i); return true; };
-    cards.forEach((c, i) => { c.classList.add('closed'); c.setAttribute('aria-hidden', 'true'); const cover = node('span', 'card-cover', String(i + 1)); c.append(cover); c.addEventListener('click', () => open(i)); });
+    if (v.answers) grid.classList.add('qa');                    // quiz: the question shows, only the answer is covered
+    cards.forEach((c, i) => {
+      c.classList.add('closed'); if (!v.answers) c.setAttribute('aria-hidden', 'true');
+      const cover = node('span', 'card-cover', v.answers ? '?' : String(i + 1));
+      if (v.answers) { const ans = node('div', 'qa-answer'); ans.append(c.lastElementChild, cover); c.append(ans); } else c.append(cover);
+      c.addEventListener('click', () => open(i));
+    });
     const next = () => open(cards.findIndex(c => c.classList.contains('closed')));
     const ctrl = node('div', 'widget-controls reveal-controls'); const b1 = node('button', null, 'Reveal next →'); b1.addEventListener('click', next);
     const b2 = node('button', 'secondary', 'Show all'); b2.addEventListener('click', () => cards.forEach((c, i) => open(i)));

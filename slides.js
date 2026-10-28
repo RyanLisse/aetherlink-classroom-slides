@@ -1029,12 +1029,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     tree: { root: "~", rootNote: "your home folder", groups: [
       [ ["├── ", ".claude/", "about you, every project", 1],
         ["│   ├── ", "CLAUDE.md", "memory: about you"],
-        ["│   ├── ", "settings.json", "your own rules"],
+        ["│   ├── ", "settings.json", "your own permissions"],
         ["│   └── ", "projects/…/memory/", "Claude's notes"] ],
       [ ["└── ", "aether-snake/", "your project, in git", 1],
         ["    ├── ", "intent.md", "what you want ✓"],
         ["    ├── ", "CLAUDE.md", "memory: this project"],
-        ["    ├── ", ".claude/settings.json", "house rules"],
+        ["    ├── ", ".claude/settings.json", "permissions"],
         ["    └── ", ".mcp.json", "its connections"] ]
     ] },
     inLabel: "loads", center: "Claude Code", centerSub: "reads both folders at the start", outLabel: "MCP",
@@ -1045,7 +1045,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   } },
   tagline: "We set this up with you, step by step.",
   keyPoints: ["Opens the tour: the map first","Left: two folders, you and this project","Middle: Claude Code loads them at the start","Right: MCP, its hands and feet","Bottom: LibreChat, separate","Every file comes back today"],
-  notes: "Say: Before we fill anything in, the map. Claude Code itself remembers nothing between sessions. What it knows and what it may do lives in files, in two folders, and it loads them every time it starts. Through MCP it reaches outside your laptop.\n\nWhat you see: Click: one part at a time. 1 ~/.claude/, a hidden folder in your home folder, next to your project, not around it: your personal CLAUDE.md (about you), your own settings.json and the notes Claude keeps for itself (auto memory). It stays on your laptop and counts for every project. 2 Your project folder: intent.md (done), CLAUDE.md for this project, .claude/settings.json with the house rules and .mcp.json with its connections. This folder goes into git, so the team gets the same rules. 3 Claude Code in the middle: it loads both folders at the start of every session. 4 Hands and feet: through MCP it works in GitLab this afternoon, Jira and Confluence in the support days. 5 LibreChat: separate, in the browser, for quick questions and images.\n\nLink back: Every file here comes back today. Point back at this slide every time one of them comes up.\n\nWatch for: People think the project lives inside ~/.claude/ because of the projects/ folder there. It only holds Claude's notes and chat history per project; the code stays in the project folder.\n\nBackground: Project settings beat your own, and company settings beat both. /memory shows the loaded CLAUDE.md files and auto memory; /mcp shows the connections. Day 2 adds skills, agents and hooks to the same project folder.\n\nNext: Your context window in Claude Code."
+  notes: "Say: Before we fill anything in, the map. Claude Code itself remembers nothing between sessions. What it knows and what it may do lives in files, in two folders, and it loads them every time it starts. Through MCP it reaches outside your laptop.\n\nWhat you see: Click: one part at a time. 1 ~/.claude/, a hidden folder in your home folder, next to your project, not around it: your personal CLAUDE.md (about you), your own settings.json and the notes Claude keeps for itself (auto memory). It stays on your laptop and counts for every project. 2 Your project folder: intent.md (done), CLAUDE.md for this project, .claude/settings.json with the permissions and .mcp.json with its connections. This folder goes into git, so the team gets the same instructions and permissions. 3 Claude Code in the middle: it loads both folders at the start of every session. 4 Hands and feet: through MCP it works in GitLab this afternoon, Jira and Confluence in the support days. 5 LibreChat: separate, in the browser, for quick questions and images.\n\nLink back: Every file here comes back today. Point back at this slide every time one of them comes up.\n\nWatch for: People think the project lives inside ~/.claude/ because of the projects/ folder there. It only holds Claude's notes and chat history per project; the code stays in the project folder.\n\nBackground: Project settings beat your own, and company settings beat both. /memory shows the loaded CLAUDE.md files and auto memory; /mcp shows the connections. Day 2 adds skills, agents and hooks to the same project folder.\n\nNext: Your context window in Claude Code."
 },
 
 { // Slide 49
@@ -1107,13 +1107,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     tree: { root: "~", rootNote: "your home folder", groups: [
       [ ["├── ", ".claude/", "about you", 1],
         ["│   ├── ", "CLAUDE.md", "you, in every project"],
-        ["│   ├── ", "settings.json", "rules: next slide", 0, 1],
+        ["│   ├── ", "settings.json", "permissions: next slide", 0, 1],
         ["│   └── ", "projects/…/memory/", "Claude's own notes"] ],
       [ ["└── ", "aether-snake/", "your project", 1],
         ["    ├── ", "CLAUDE.md", "this project, in git"],
         ["    ├── ", "CLAUDE.local.md", "you here, not in git"],
         ["    ├── ", "intent.md", "pulled in with @intent.md", 0, 1],
-        ["    ├── ", ".claude/settings.json", "rules: next slide", 0, 1],
+        ["    ├── ", ".claude/settings.json", "permissions: next slide", 0, 1],
         ["    └── ", ".mcp.json", "connections", 0, 1] ]
     ] },
     inLabel: "loads", center: "Every new session", centerSub: "/memory shows what's loaded"
@@ -1138,12 +1138,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Tell Claude once how to work in this project.",
   calm: true,
   steps: [
-    { text: "Type /clear, then ask", prompt: "Which rules must you follow in this project?", after: "Claude guesses the rules from your files." },
+    { text: "Type /clear, then ask", prompt: "Which instructions do you follow in this project?", after: "Claude guesses them from your files." },
     { text: "Write CLAUDE.md", prompt: "Write a short CLAUDE.md for this project:\n- A Snake game in plain HTML, CSS and JavaScript. No frameworks, no outside links.\n- Tests live in tests/ and run with npm test.\n- Always show me a plan before you change files.\n- The player name is a nickname. No real names, emails or other personal data in this repo.\n- Read @intent.md for what we're building.\nKeep it under 15 lines. Show it to me before you save it.", after: "Claude shows the file. Read it, then say yes." },
-    { text: "Type /clear, and ask again", prompt: "Which rules must you follow in this project?", after: "Now it names exactly your rules, without searching." },
+    { text: "Type /clear, and ask again", prompt: "Which instructions do you follow in this project?", after: "Now it names your instructions at once." },
     { text: "See which memory files are loaded. Esc closes the list.", prompt: "/memory" }
   ],
-  expected: "After /clear, Claude names your project's rules without searching for them.",
+  expected: "After /clear, Claude names your project's instructions without searching for them.",
   keyPoints: [
     "/clear empties the conversation",
     "CLAUDE.md is loaded every session",
@@ -1151,13 +1151,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Keep it short: it costs tokens every session",
     "/memory shows what's loaded"
   ],
-  notes: "Say: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your rules. CLAUDE.md is the file it loads at the start of every session.\n\nAsk the room: Steps 1 and 3 are the same question on purpose. Let a few people read Claude's answer out loud, before and after.\n\nWatch for: A personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'. Ask which rule wins, and why.\n\nWatch for: /memory takes no question after it: people type '/memory which files are loaded?'. It opens a list of memory files; Esc closes it with 'Cancelled memory editing', which is fine.\n\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory.\n\nBackground: Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command.\n\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop.\n\nNext: Decide first what Claude may do."
+  notes: "Say: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your instructions. CLAUDE.md is the file it loads at the start of every session.\n\nAsk the room: Steps 1 and 3 are the same question on purpose. Let a few people read Claude's answer out loud, before and after.\n\nWatch for: A personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'. Ask which rule wins, and why.\n\nWatch for: /memory takes no question after it: people type '/memory which files are loaded?'. It opens a list of memory files; Esc closes it with 'Cancelled memory editing', which is fine.\n\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory.\n\nBackground: Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command.\n\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop.\n\nNext: Decide first what Claude may do."
 },
 
 { // Slide 54
   title: "Decide first what Claude may do",
   kicker: "DAY 1 · PART 2 · PERMISSIONS",
-  subtitle: "Claude is about to edit your files and run commands. You set the rules before it starts.",
+  subtitle: "Claude is about to edit your files and run commands. You set its permissions before it starts.",
   type: "concept",
   visual: { stepThrough: true, guides: [["🧭", "CLAUDE.md", "asks Claude"], ["🔒", "settings.json", "enforces"]] },
   cards: [
@@ -1166,7 +1166,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Deny", body: "Never, even if you ask. For example: git push --force, rm -rf." },
     { title: "Where", body: "~/.claude/settings.json: you, everywhere\n.claude/settings.json: this project, shared\n.claude/settings.local.json: this project, only you\nCompany settings: always win" }
   ],
-  tagline: "A rule in CLAUDE.md can be forgotten. A rule in settings.json can't.",
+  tagline: "An instruction in CLAUDE.md can be forgotten. A permission in settings.json can't.",
   keyPoints: [
     "CLAUDE.md = a request, settings = enforced",
     "Permissions: always allow / never allow",
@@ -1174,22 +1174,22 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Shared file vs local file",
     "Two assignments follow: 5 and 6"
   ],
-  notes: "Comes right after the CLAUDE.md assignment: CLAUDE.md asks Claude, settings.json enforces. Three kinds of rules: allow (no question), ask (a question every time), deny (never, even when asked; deny wins when rules overlap). Four levels: your own settings everywhere, the project's settings shared through git, the project's local settings only for you, and company-managed settings that always win (Worldline may have some). /permissions shows what's active. Claude Code always asks before it writes a settings file, and the project's allow rules only apply once you've trusted the folder. Hooks live in the same file; they come this afternoon."
+  notes: "Comes right after the CLAUDE.md assignment: CLAUDE.md asks Claude, settings.json enforces. Three kinds of permission: allow (no question), ask (a question every time), deny (never, even when asked; deny wins when rules overlap). Four levels: your own settings everywhere, the project's settings shared through git, the project's local settings only for you, and company-managed settings that always win (Worldline may have some). /permissions shows what's active. Claude Code always asks before it writes a settings file, and the project's allow rules only apply once you've trusted the folder. Hooks live in the same file; they come this afternoon."
 },
 
 { // Slide 55
   type: "practice",
   layout: "exercise",
-  title: "Assignment 4: House rules before you build",
+  title: "Assignment 4: Permissions before you build",
   mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 4 · PLAN",
   subtitle: "Ask before saving. Never anything you can't undo.",
   calm: true,
   steps: [
-    { text: "Write your house rules", prompt: "Write .claude/settings.json for this project:\n- Ask me before every git commit and every git push.\n- Never allow git push --force or rm -rf.\n- Never let Claude merge a merge request (glab mr merge, gh pr merge): I do that myself.\nShow me the file before you save it.", after: "Claude always asks before it writes settings.json. Read it, then say yes." },
+    { text: "Write your permissions", prompt: "Write .claude/settings.json for this project:\n- Ask me before every git commit and every git push.\n- Never allow git push --force or rm -rf.\n- Never let Claude merge a merge request (glab mr merge, gh pr merge): I do that myself.\nShow me the file before you save it.", after: "Claude always asks before it writes settings.json. Read it, then say yes." },
     { text: "Restart Claude Code", cmds: ["/exit", "claude"], after: "Not manual at the bottom? Shift+Tab.", warn: true },
-    { text: "See your rules", prompt: "/permissions", after: "←→ shows the Ask and Deny tabs. Esc closes it." },
-    { text: "Test it", prompt: "Run exactly this command: git push --force origin main", after: "Blocked by your permission settings. Which rule did that?" }
+    { text: "See your permissions", prompt: "/permissions", after: "←→ shows the Ask and Deny tabs. Esc closes it." },
+    { text: "Test it", prompt: "Run exactly this command: git push --force origin main", after: "Blocked by your permission settings. Which line in settings.json did that?" }
   ],
   expected: "Commit and push ask you first. Force push, rm -rf and merging your own merge request are blocked.",
   keyPoints: [
@@ -1295,7 +1295,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Push: right after, to GitLab",
     "Claude runs git, you decide"
   ],
-  notes: "Say: You typed git init at the very start, and your house rules already mention commit and push. But nothing has been saved yet: the folder only had intent.md and CLAUDE.md. Next you build layer 1, the first real code. When it works, you save it: that's your first commit. Then you push it to GitLab.\n\nWhat you see: Click: three words. Repository: your folder, with a memory that's still empty. Commit: a save point, the first one when layer 1 works. Push: a copy on GitLab.\n\nBackground: For everyone who doesn't use git every day; developers can nod along. Today is only the rhythm: a layer works, commit, push. Claude runs the git commands and asks first (the house rule). Branches, merge requests and the rest come tomorrow, when there's a reason for them.\n\nNext: Assignment 6: build layer 1, look inside, commit."
+  notes: "Say: You typed git init at the very start, and your permissions already mention commit and push. But nothing has been saved yet: the folder only had intent.md and CLAUDE.md. Next you build layer 1, the first real code. When it works, you save it: that's your first commit. Then you push it to GitLab.\n\nWhat you see: Click: three words. Repository: your folder, with a memory that's still empty. Commit: a save point, the first one when layer 1 works. Push: a copy on GitLab.\n\nBackground: For everyone who doesn't use git every day; developers can nod along. Today is only the rhythm: a layer works, commit, push. Claude runs the git commands and asks first (the house rule). Branches, merge requests and the rest come tomorrow, when there's a reason for them.\n\nNext: Assignment 6: build layer 1, look inside, commit."
 },
 
 { // Slide 62
@@ -1311,7 +1311,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "See it in your browser", prompt: "Open index.html in my browser.", after: "Claude asks to run a command: say yes. Do you see the board?" },
     { text: "Look inside", prompt: "Explain @game.js in plain words.", after: "Your file may be called snake.js: type @ and pick it." },
     { text: "Which files are new?", prompt: "!git status" },
-    { text: "Save it. Claude asks first (your rule): say yes.", prompt: "Commit this layer with a clear message." }
+    { text: "Save it. Claude asks first (your permission): say yes.", prompt: "Commit this layer with a clear message." }
   ],
   expected: "Layer 1 works, you can explain it, and it's committed.",
   keyPoints: [
@@ -1319,7 +1319,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "@file points Claude at a file",
     "!command runs it yourself",
     "Commit = save point",
-    "Claude asks: your rule from Assignment 4"
+    "Claude asks: your permission from Assignment 4"
   ],
   notes: "Tip: The ! in !git status runs the command yourself, without Claude.\n\nSay: It works. Make a save point before you change anything else. A small step, understood, saved.\n\nWatch for: The file name is whatever Claude chose (game.js in the dry run, sometimes snake.js). Type @ and a list of files appears: pick the right one.\nWatch for: If Claude proposes a branch, say 'commit straight to main'. Branches come tomorrow.\n\nWhat you see: index.html, style.css and the game's .js file appear. The commit asks first, and the screen names the rule: 'Permission rule Bash(git commit *) requires confirmation'. The first commit includes CLAUDE.md, intent.md and .claude/settings.json: that's fine, they belong to the project.\n\nThree new controls: @file points Claude straight at a file, so it doesn't have to search (cheaper and faster). !git status runs a command yourself, and the output lands in the conversation; Claude even comments on it. A commit is a save point.\n\nLook inside: This is the real lesson. Which part draws the snake? If nobody can say, slow down.\n\nNext: Model Context Protocol."
 },
@@ -1377,10 +1377,10 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Deploy phase: put it where others can see it",
     "MCP: Claude talks to GitLab",
     "Connect the GitLab MCP server",
-    "The push asks: your rule",
+    "The push asks: your permission",
     "No GitLab access: stay local"
   ],
-  notes: "Say: Laptop gone, game gone. On GitLab it's safe, and tomorrow the arcade needs it. git is on your laptop; GitLab is the online copy; the GitLab MCP is what lets Claude itself create the project.\n\nBefore class: Check that every participant has GitLab access. Most managers do, not all.\n\nWhat you see: /mcp shows GitLab connected. Claude creates the project, then asks before it pushes, because of the house rule ('Permission rule Bash(git push *) requires confirmation').\n\nBackground: In the dry run Claude also pointed out that the commits carry the author's email from git config. On Worldline's own GitLab that's normal, but it's a nice privacy moment.\n\nIf stuck: No GitLab access: keep working locally all afternoon. git pull tomorrow will then say there's no remote: ignore it.\n\nNext: Undo: checkpoints and commits. From now on the rhythm is: it works, commit, push."
+  notes: "Say: Laptop gone, game gone. On GitLab it's safe, and tomorrow the arcade needs it. git is on your laptop; GitLab is the online copy; the GitLab MCP is what lets Claude itself create the project.\n\nBefore class: Check that every participant has GitLab access. Most managers do, not all.\n\nWhat you see: /mcp shows GitLab connected. Claude creates the project, then asks before it pushes, because of the ask permission ('Permission rule Bash(git push *) requires confirmation').\n\nBackground: In the dry run Claude also pointed out that the commits carry the author's email from git config. On Worldline's own GitLab that's normal, but it's a nice privacy moment.\n\nIf stuck: No GitLab access: keep working locally all afternoon. git pull tomorrow will then say there's no remote: ignore it.\n\nNext: Undo: checkpoints and commits. From now on the rhythm is: it works, commit, push."
 },
 
 { // Slide 66
@@ -1410,7 +1410,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   calm: true,
   steps: [
     { text: "Build layer 2: controls", prompt: "Build only layer 2 from the plan.", after: "Reload the tab (F5 or Cmd+R) and play it. Commit and push." },
-    { text: "Build layer 3: food and score", prompt: "Build only layer 3 from the plan.", after: "Play it. Commit and push." },
+    { text: "Same for layer 3: food and score", after: "“Build only layer 3 from the plan.” Play it. Commit and push." },
     { text: "Break it on purpose, then play it", prompt: "Remove the score entirely.", after: "Claude asks first, because of intent.md. Answer: “Yes, do it anyway. Leave intent.md as it is.”" },
     { text: "Rescue it: empty input, Esc twice", after: "↑ to the message before, Enter, “Restore code and conversation”. Then clear the old message from the input.", warn: true },
     { text: "Build layer 4: game over", prompt: "Build only layer 4 from the plan.", after: "Play it. Commit and push." }
@@ -1462,10 +1462,10 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 9: A test that finds a bug",
   mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 9 · TEST",
-  subtitle: "Your test presses the ↑ and ← keys very fast and checks: no game over. Red: your game has the bug.",
+  subtitle: "Your test presses the ↑ and ← keys very fast. Red means your game has the bug.",
   calm: true,
   steps: [
-    { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press the left arrow key, the game must not end. The same when I press the up arrow key and then the left arrow key very fast. Make it run with npm test. If it fails, say in plain words what went wrong. Don't change the game yet: first show me whether the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
+    { text: "Ask for a test", prompt: "Write a test in tests/ for this rule: when the snake moves right and I press the left arrow key, the game must not end. The same for the up arrow key and then the left arrow key, very fast. Run it with npm test and say in plain words what fails. Don't change the game yet: first show me if the test passes.", after: "Claude shows a plan, and the game stays untouched. Say “Go ahead.”" },
     { text: "Run it yourself: passed or failed?", prompt: "!npm test" },
     { text: "Failed? Let Claude fix the game", prompt: "The test fails. Fix the game so the snake can't turn straight back. Don't change the test.", after: "The game, never the test.", warn: true },
     { text: "Passed? Break the game on purpose", prompt: "Delete the check that ignores the opposite direction. Then run npm test.", after: "The test fails now: it catches the bug." },
@@ -1480,33 +1480,33 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Fails: a bug found. Passes: break it on purpose",
     "Fix the game, not the test"
   ],
-  notes: "Say: A test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.' You can't play every key combination after every change.\n\nWatch for: Claude fixes the game, never the test.\n\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\n\nWhy not plant the bug: Claude writes every game itself, and usually guards this rule. You can't hand out a buggy game without telling Claude to write a bug. So there are two paths: some games are red the first time (a real bug found), most are green (break it on purpose, then see red). Both end with a test you've seen fail.\n\nBackground: Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose and see the test turn red. A test you've never seen fail is not evidence. npm test needs Node and a package.json; Claude makes the package.json.\n\nIf stuck: No Node on someone's laptop: ask for tests/test.html instead, and open it in the browser: green or red. The hook in Assignment 11 does need Node; they watch that one on the projector.\n\nNext: Assignment 10: The rules grow."
+  notes: "Say: A test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.' You can't play every key combination after every change.\n\nWatch for: Claude fixes the game, never the test.\n\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\n\nWhy not plant the bug: Claude writes every game itself, and usually guards this rule. You can't hand out a buggy game without telling Claude to write a bug. So there are two paths: some games are red the first time (a real bug found), most are green (break it on purpose, then see red). Both end with a test you've seen fail.\n\nBackground: Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose and see the test turn red. A test you've never seen fail is not evidence. npm test needs Node and a package.json; Claude makes the package.json.\n\nIf stuck: No Node on someone's laptop: ask for tests/test.html instead, and open it in the browser: green or red. The hook in Assignment 11 does need Node; they watch that one on the projector.\n\nNext: Assignment 10: The permissions grow."
 },
 
 { // Slide 70
   type: "practice",
   layout: "exercise",
-  title: "Assignment 10: The rules grow",
+  title: "Assignment 10: The permissions grow",
   mode: "manual",
   kicker: "DAY 1 · ASSIGNMENT 10 · TEST",
-  subtitle: "Two house rules: running the tests is always fine. Changing a test needs your yes.",
+  subtitle: "Two new permissions: running the tests is always fine. Changing a test needs your yes.",
   calm: true,
   steps: [
-    { text: "Add two rules", prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the rules that are already there. Show me the file before you save it.", after: "Claude shows the settings file. Read it, then say yes." },
-    { text: "Try rule 1: tests may run", prompt: "Run the tests.", after: "No question: Claude just runs them." },
+    { text: "Add two permissions", prompt: "Add to .claude/settings.json:\n- allow: npm test, without asking\n- ask: any edit in tests/\nKeep the permissions that are already there. Show me the file before you save it.", after: "Claude shows the settings file. Read it, then say yes." },
+    { text: "Try the first: tests may run", prompt: "Run the tests.", after: "No question: Claude just runs them." },
     "Shift+Tab to “accept edits on”: file edits now go through without asking",
-    { text: "Try rule 2: a test needs your yes", prompt: "Change the test so it expects the snake to turn straight back.", after: "Claude asks before it changes the test. Choose No.", warn: true },
+    { text: "Try the second: a test needs your yes", prompt: "Change the test so it expects the snake to turn straight back.", after: "Claude asks before it changes the test. Choose No.", warn: true },
     "Shift+Tab to “manual mode on”. Commit and push."
   ],
   expected: "Claude runs the tests without asking, and a change to a test always needs your yes.",
   keyPoints: [
-    "Rules grow with the project",
+    "Permissions grow with the project",
     "allow: npm test",
     "ask: edits in tests/",
     "Why ask, not deny",
     "Approving safe things over and over trains clicking yes"
   ],
-  notes: "Say: Asked to 'make the tests pass', Claude could change the test instead of the game. And it keeps asking to run npm test. Two rules fix both.\n\nWatch for: In step 4 the answer is No. And everyone goes back to manual mode at the end.\n\nWhat you see: 'Run the tests': no question. In accept-edits mode every other file goes through, but a test file still asks.\n\nBackground: allow for npm test: approving a safe command over and over only teaches people to click yes without reading. ask for tests/, not deny: tomorrow they'll add new tests, so the rule is 'a test only changes with my yes'. Why accept-edits mode: in manual mode every edit asks anyway, so you can't see the rule working. In the dry run the allow rule worked straight away, without a restart. Claude also noted that npm test runs tests/run.js, so protecting tests/ protects what runs without asking. Edit(tests/**) covers new files too; a Write(tests/**) rule does nothing. Deny beats ask beats allow when several rules match.\n\nLook inside: /permissions: where do your new rules show up?\n\nNext: Hooks: a check that runs by itself."
+  notes: "Say: Asked to 'make the tests pass', Claude could change the test instead of the game. And it keeps asking to run npm test. Two permissions fix both.\n\nWatch for: In step 4 the answer is No. And everyone goes back to manual mode at the end.\n\nWhat you see: 'Run the tests': no question. In accept-edits mode every other file goes through, but a test file still asks.\n\nBackground: allow for npm test: approving a safe command over and over only teaches people to click yes without reading. ask for tests/, not deny: tomorrow they'll add new tests, so the rule is 'a test only changes with my yes'. Why accept-edits mode: in manual mode every edit asks anyway, so you can't see the rule working. In the dry run the allow rule worked straight away, without a restart. Claude also noted that npm test runs tests/run.js, so protecting tests/ protects what runs without asking. Edit(tests/**) covers new files too; a Write(tests/**) rule does nothing. Deny beats ask beats allow when several rules match.\n\nLook inside: /permissions: where do your new rules show up?\n\nNext: Hooks: a check that runs by itself."
 },
 
 { // Slide 71
@@ -1529,10 +1529,10 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 73
   title: "Example: a complete settings.json",
   kicker: "DAY 1 · PART 3 · SETTINGS",
-  subtitle: "Your house rules and your hook together in one file: .claude/settings.json",
+  subtitle: "Your permissions and your hook together in one file: .claude/settings.json",
   type: "concept",
   visual: { figure: "assets/examples/settings-example.svg?v=3", figureAlt: ".claude/settings.json after Assignment 11, with labels. Permissions: allow, no question, it just runs (npm test); ask, asks you every time (git commit, git push, edits in tests/); deny, never, even if you ask (force push, rm -rf, merging). Hook: moment PostToolUse, after Claude used a tool; which tool Edit|Write, only file changes; command npm test, run the tests. Fails? exit 2 sends it back to Claude." },
-  tagline: "One file, shared with your team. Rules are enforced, not requested.",
+  tagline: "One file, shared with your team. Permissions are enforced, not requested.",
   prompt: "{\n  \"permissions\": {\n    \"allow\": [\"Bash(npm test)\"],\n    \"ask\": [\n      \"Bash(git commit*)\",\n      \"Bash(git push*)\",\n      \"Edit(tests/**)\"\n    ],\n    \"deny\": [\n      \"Bash(git push --force*)\",\n      \"Bash(git push -f*)\",\n      \"Bash(rm -rf *)\",\n      \"Bash(glab mr merge*)\",\n      \"Bash(gh pr merge*)\"\n    ]\n  },\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"Edit|Write\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"npm test 1>&2 || exit 2\"\n          }\n        ]\n      }\n    ]\n  }\n}",
   keyPoints: [
     "Where you end up after Assignment 11",
@@ -1541,7 +1541,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "exit 2 sends the failure to Claude",
     "settings.local.json = only you"
   ],
-  notes: "Say: This is where you end up after the next assignment: your house rules from Assignments 4 and 10, plus the hook. When Claude shows you the file in step 1, compare it with this one (the Example prompt button copies it). What you see: the file on the left, a label for each part on the right. The hook labels (moment, which tool, command) are the same as the chips in Assignment 11, step 2.\n\nWalk through it top to bottom: allow lets npm test run without a question; ask makes commit, push and any change in tests/ need a yes; deny blocks force push, rm -rf and merging your own merge request, even when asked; the PostToolUse hook runs the test after every Edit or Write, and exit 2 sends a failing test back to Claude. Claude's own version is often stricter; that's fine. After changing it, check with /permissions and /hooks.\n\nNext: Assignment 11: add the hook yourself."
+  notes: "Say: This is where you end up after the next assignment: your permissions from Assignments 4 and 10, plus the hook. When Claude shows you the file in step 1, compare it with this one (the Example prompt button copies it). What you see: the file on the left, a label for each part on the right. The hook labels (moment, which tool, command) are the same as the chips in Assignment 11, step 2.\n\nWalk through it top to bottom: allow lets npm test run without a question; ask makes commit, push and any change in tests/ need a yes; deny blocks force push, rm -rf and merging your own merge request, even when asked; the PostToolUse hook runs the test after every Edit or Write, and exit 2 sends a failing test back to Claude. Claude's own version is often stricter; that's fine. After changing it, check with /permissions and /hooks.\n\nNext: Assignment 11: add the hook yourself."
 },
 
 { // Slide 72
@@ -1553,7 +1553,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A hook runs the test by itself after every change. You can't forget it any more.",
   calm: true,
   steps: [
-    { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing rules. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
+    { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: after every file edit, run npm test. If the test fails, send the output back to you (exit code 2). Keep the existing permissions. Show me the file before you save it.", after: "Claude shows the file, and may test the hook first. Say yes." },
     { text: "Find your hook: moment, which tool, command. Esc to leave.", prompt: "/hooks", parts: [["Moment", "PostToolUse"], ["Which tool", "Edit|Write"], ["Command", "npm test"]] },
     { text: "Break the game on purpose", prompt: "In game.js, let the snake turn straight back into itself. Just do it.", after: "Say yes. The hook runs the test by itself: it fails, and Claude asks what to do." },
     { text: "Undo the break", prompt: "Throw that change away.", after: "game.js is back. The test passes again." },
@@ -1664,7 +1664,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Tomorrow you continue. Maybe someone else does.",
   calm: true,
   steps: [
-    { text: "Write the handover", prompt: "Write PROGRESS.md: what we built today, how we tested it, which rules and hooks are active, and what is still open. No personal data.", after: "Say yes to PROGRESS.md." },
+    { text: "Write the handover", prompt: "Write PROGRESS.md: what we built today, how we tested it, which permissions and hooks are active, and what is still open. No personal data.", after: "Say yes to PROGRESS.md." },
     "Read it: could a colleague carry on from this?",
     "Commit and push"
   ],
@@ -1676,7 +1676,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Commit and push",
     "Tomorrow: claude --continue"
   ],
-  notes: "Say: Tomorrow's session starts empty. Only what's written down carries over. The Maintain phase closes the loop: the next person, or tomorrow's session, starts from PROGRESS.md.\n\nWhat you see: PROGRESS.md: what's built, how it was tested, which rules and hooks are active, and what's still open.\n\nBackground: Day 5 uses the same file.\n\nNext: Day 1 learning note. Tomorrow starts with git pull and claude --continue, which takes you back into today's last conversation."
+  notes: "Say: Tomorrow's session starts empty. Only what's written down carries over. The Maintain phase closes the loop: the next person, or tomorrow's session, starts from PROGRESS.md.\n\nWhat you see: PROGRESS.md: what's built, how it was tested, which permissions and hooks are active, and what's still open.\n\nBackground: Day 5 uses the same file.\n\nNext: Day 1 learning note. Tomorrow starts with git pull and claude --continue, which takes you back into today's last conversation."
 },
 
 { // Slide 78
@@ -1702,15 +1702,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   cards: [
     { title: "Planned with intent.md", body: "" },
     { title: "Gave Claude a CLAUDE.md", body: "" },
-    { title: "Set house rules first", body: "" },
+    { title: "Set permissions first", body: "" },
     { title: "Built Snake in layers: commit, push", body: "" },
     { title: "Wrote a test that finds bugs", body: "" },
     { title: "Let a hook guard it", body: "" },
     { title: "Put it on GitLab and handed it over", body: "" }
   ],
-  tagline: "Next: levels that get harder, your own skill, agent and workflow, and the Aether Arcade.",
+  tagline: "Next: harder levels, your own skill and agent, and the Aether Arcade.",
   keyPoints: ["Preview only", "Don't explain skills yet", "Day 2 covers those", "End on the tagline"],
-  notes: "Walk the loop once more: Plan (intent.md, CLAUDE.md, house rules), Design (layers), Build (commit and push), Test (a test and a hook), Deploy (GitLab), Maintain (PROGRESS.md). Preview only: don't explain skills or agents tonight."
+  notes: "Walk the loop once more: Plan (intent.md, CLAUDE.md, permissions), Design (layers), Build (commit and push), Test (a test and a hook), Deploy (GitLab), Maintain (PROGRESS.md). Preview only: don't explain skills or agents tonight."
 },
 
 
@@ -1777,21 +1777,20 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 83
-  title: "Retrieval check",
-  kicker: "DAY 2 · RECAP",
-  subtitle: "Without looking at yesterday's slides, explain:",
-  type: "recap",
-  tagline: "Answer from memory first — no peeking.",
-  visual: { reveal: "click", bot: "peek", place: "slot", noReact: true },
+  title: "Quiz: what do you remember?",
+  kicker: "DAY 2 · QUIZ",
+  subtitle: "Yesterday in five questions. Answer out loud first, then click to see the answer.",
+  type: "quiz",
+  visual: { reveal: "click", answers: true, bot: "peek", place: "slot", noReact: true },
   cards: [
-    { title: "Why start a task in plan mode?", body: "" },
-    { title: "What does CLAUDE.md do, and what does settings.json do?", body: "" },
-    { title: "What does a hook do that a rule can't?", body: "" },
-    { title: "Esc Esc or a commit: when do you use which?", body: "" },
-    { title: "What are the six SDLC phases?", body: "" }
+    { title: "Why start a task in plan mode?", body: "Claude can only read and ask. You see the plan and approve it before anything changes." },
+    { title: "What does CLAUDE.md do, and what does settings.json do?", body: "CLAUDE.md: instructions Claude tries to follow. settings.json: permissions it can't ignore (allow, ask, deny)." },
+    { title: "What does a hook do that an instruction or a permission can't?", body: "It always runs, at a fixed moment. Like npm test after every edit." },
+    { title: "Esc Esc or a commit: when do you use which?", body: "Esc Esc undoes the last few minutes. A commit is a save point that lasts." },
+    { title: "What are the six phases of the working method?", body: "Plan → Design → Build → Test → Deploy → Maintain" }
   ],
-  keyPoints: ["Cold retrieval, no looking back", "Make them actually answer", "Struggling with six steps? Slow down"],
-  notes: "Make them answer without looking back at Day 1's deck: cold retrieval, not open-book. CLAUDE.md asks, settings.json enforces. A hook makes something always happen, a permission only decides what's allowed. Esc Esc for the last few minutes, a commit for always. If the six phases are shaky, put the SDLC slide back up for a moment: today's assignments are labelled with them."
+  keyPoints: ["From memory, no looking back", "Let the room answer before you click", "Six phases shaky? Show slide 41 again"],
+  notes: "Ask each question and let the room answer before you click: from memory, not open-book. Click a card (or →) to show its answer. Plan mode: Claude can't change files, so you see the plan first. CLAUDE.md asks, settings.json enforces. A hook makes something always happen; a permission only decides what's allowed. Esc Esc for the last few minutes, a commit for always. If the six phases are shaky, put the working method slide (Day 1, slide 41) back up for a moment: today's assignments are labelled with them."
 },
 
 { // Slide 84
@@ -1802,14 +1801,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   visual: { art: "intake", bot: "head", place: "aside" },
   cards: [
     { title: "Memory", body: "CLAUDE.md, intent.md and PROGRESS.md." },
-    { title: "Rules", body: "settings.json: allow, ask and deny." },
+    { title: "Permissions", body: "settings.json: allow, ask and deny." },
     { title: "Checks", body: "Your test and your hook." },
     { title: "Online", body: "Your repo on GitLab, through MCP." }
   ],
   tagline: "Today we make it bigger: levels, skills, agents and a team.",
   keyPoints: [
     "Answer the flipchart questions here",
-    "Memory, MCP, rules, your game",
+    "Memory, MCP, permissions, your game",
     "All of it they set up themselves",
     "Today: goals and skills"
   ],
@@ -1823,7 +1822,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "pause",
   visual: { countdown: 15, bot: 'wave', place: 'beside' },
   cards: [
-    { title: "Return in 15 minutes", body: "We continue with goals: let Claude work until it's done." }
+    { title: "Return in 15 minutes", body: "We continue with levels: your game gets harder." }
   ],
   keyPoints: ["Break: say the return time","Press ▶ Start on the timer","Pivot: from recap to new work"],
   notes: "State the actual clock time you'll resume. This is the pivot point of the morning — from looking back to new work: goals first, then skills."
@@ -1833,29 +1832,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* ---------------------------------------------------------------------- */
 /* DAY 2 — Part 1: Levels — spec, branch, merge request                   */
 /* ---------------------------------------------------------------------- */
-
-{ // Slide 86
-  type: "practice",
-  layout: "exercise",
-  title: "Assignment 16: Pick up where you left off",
-  kicker: "DAY 2 · ASSIGNMENT 16 · PLAN",
-  subtitle: "Yesterday's conversation is gone from Claude's head. Your files aren't.",
-  steps: [
-    { text: "Get the latest from GitLab", prompt: "!git pull" },
-    "claude --continue",
-    "Plan mode. Paste the prompt.",
-    "Read the new intent.md before you approve."
-  ],
-  expected: "intent.md has a new outcome: levels that get harder.",
-  prompt: "Read PROGRESS.md and intent.md. New wish: levels, each one harder than the last. Update intent.md with this outcome and new done-when checks. Don't build yet.",
-  keyPoints: [
-    "Maintain feeds Plan: the loop goes round",
-    "git pull every morning",
-    "claude --continue or /resume",
-    "PROGRESS.md carries over"
-  ],
-  notes: "The loop goes round: yesterday's Maintain is today's Plan. git pull is the first thing developers do every morning: get what colleagues pushed. claude --continue goes back into the last conversation; /resume lets you pick one. Either way, PROGRESS.md and intent.md are what really carry over.\n\nWhy now: A new day, a new wish: levels that get harder. Start from what's written down.\nWhat you see: Claude reads PROGRESS.md and knows where you stopped. intent.md gets a new outcome.\nExtra: /resume: pick any earlier conversation from a list."
-},
 
 { // Slide 87
   title: "What makes a level harder?",
@@ -1877,6 +1853,31 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "That rule becomes a skill later"
   ],
   notes: "Ask the room first: how would you make Snake harder? Collect answers, then show the four knobs. 'Harder but fair' is the rule that will later live in the new-level skill: one or two knobs go up, the snake doesn't start in a wall, food never lands on a wall, and the level stays playable."
+},
+
+{ // Slide 86
+  type: "practice",
+  layout: "exercise",
+  mode: "plan",
+  title: "Assignment 16: Pick up where you left off",
+  kicker: "DAY 2 · ASSIGNMENT 16 · PLAN",
+  subtitle: "Yesterday's conversation is gone from Claude's head. Your files aren't.",
+  calm: true,
+  steps: [
+    { text: "A new day: open a terminal, go to your game and get the latest", prompt: "cd aether-snake\ngit pull" },
+    { text: "Start Claude Code in yesterday's conversation", prompt: "claude --continue", after: "Not “manual mode on” at the bottom? Shift+Tab." },
+    { text: "Shift+Tab to “plan mode on”, then tell Claude the new wish", prompt: "Read PROGRESS.md and intent.md. New wish: levels that get harder. Add it to intent.md with done-when checks. Don't build yet.", after: "Claude asks a few questions. Pick with ↑↓ and Enter." },
+    "Approve the plan with 2 (“Yes, manually approve edits”, not 1), then say yes to intent.md",
+    { text: "Save it", prompt: "Commit and push intent.md." }
+  ],
+  expected: "intent.md has a new outcome: levels that get harder, with checks. Committed.",
+  keyPoints: [
+    "Maintain feeds Plan: the loop goes round",
+    "git pull every morning",
+    "claude --continue or /resume",
+    "PROGRESS.md carries over"
+  ],
+  notes: "In the dry run (28 Oct): Claude asked four questions before writing anything: what makes a level harder (faster, walls or both), when you go up a level (every 5 food), how many levels (5), and what the player sees (Level N next to the score). That's why the four-knobs slide now comes just before this one. Steps 1 and 2 happen in the terminal, before Claude runs: a new day means a new terminal.\n\nThe loop goes round: yesterday's Maintain is today's Plan. git pull is the first thing developers do every morning: get what colleagues pushed. claude --continue goes back into the last conversation; /resume lets you pick one. Either way, PROGRESS.md and intent.md are what really carry over.\n\nWhy now: A new day, a new wish: levels that get harder. Start from what's written down.\nWhat you see: Claude reads PROGRESS.md and knows where you stopped. intent.md gets a new outcome.\nExtra: /resume: pick any earlier conversation from a list."
 },
 
 { // Slide 88
@@ -1904,17 +1905,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 89
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 17: Spec first, failing test first",
   kicker: "DAY 2 · ASSIGNMENT 17 · DESIGN",
   subtitle: "Describe a level before you build one.",
+  calm: true,
   steps: [
-    "Paste the prompt.",
-    "Read spec.md before you approve. Say yes to the new tests.",
-    { text: "The new tests should be red. Good.", prompt: "!npm test" },
-    "Commit and push."
+    { text: "Ask for a spec and tests that fail first", prompt: "Write spec.md for a level file levels/level-N.js (a .js file, so the browser can load it straight from the folder): speed, startLength, walls and foodToWin, with one example. Then write failing tests first: food never lands on a wall or on the snake, and the snake never starts in a wall, in every level file that exists. Don't build any levels yet.", after: "Claude shows a plan first. Read it, then say “Go ahead.”" },
+    { text: "Say yes to spec.md, and to each change in tests/", after: "Yesterday's permission asks you before a test changes. This time you asked for them." },
+    { text: "Run the tests: the new ones should be red. Good.", prompt: "!npm test", after: "For example: 3 passed, 2 failed. Nothing is built yet." },
+    { text: "Save it", prompt: "Commit and push." }
   ],
   expected: "spec.md and red tests, committed.",
-  prompt: "Write spec.md for a level file levels/level-N.js (a .js file, so the browser can load it straight from the folder): speed, startLength, walls and foodToWin, with one example. Then write failing tests first: food never lands on a wall or on the snake, and the snake never starts in a wall. Don't build any levels yet.",
   keyPoints: [
     "Design phase",
     "spec.md with an example",
@@ -1922,7 +1924,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "tests/ asks: you say yes",
     "Commit the red tests"
   ],
-  notes: "Why .js and not .json: a page opened straight from the folder (file://) can't load a .json file, the browser blocks it. In the dry run Claude raised this itself and chose levels/level-N.js. Claude may put spec.md in levels/ instead of the root: fine. The ask rule on tests/ from yesterday now does its job: Claude asks before adding tests, and this time the human says yes because they asked for them. Red is the expected result here (6 of 27 in the dry run). If someone's hook complains on every edit because the new tests are red, that's correct behaviour; tell them the hook will be happy once level 2 is built.\n\nWhy now: A level is a file that other code depends on. Describe it before you build it.\nWhat you see: spec.md, and new tests that are red: nothing is built yet. Claude asks before it adds them to tests/.\nLook inside: Read spec.md. Could someone else make a level from it?"
+  notes: "In the dry run (28 Oct) the prompt without 'in every level file that exists' made Claude test level-1 to level-5.js, so Assignment 18 (only level 2) could never turn green and Claude had to stop and ask. The added words fix that.\n\nWhy .js and not .json: a page opened straight from the folder (file://) can't load a .json file, the browser blocks it. In the dry run Claude raised this itself and chose levels/level-N.js. Claude may put spec.md in levels/ instead of the root: fine. The ask rule on tests/ from yesterday now does its job: Claude asks before adding tests, and this time the human says yes because they asked for them. Red is the expected result here (6 of 27 in the dry run). If someone's hook complains on every edit because the new tests are red, that's correct behaviour; tell them the hook will be happy once level 2 is built.\n\nWhy now: A level is a file that other code depends on. Describe it before you build it.\nWhat you see: spec.md, and new tests that are red: nothing is built yet. Claude asks before it adds them to tests/.\nLook inside: Read spec.md. Could someone else make a level from it?"
 },
 
 { // Slide 90
@@ -1953,35 +1955,37 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 91
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 18: Level 2 on its own branch",
   kicker: "DAY 2 · ASSIGNMENT 18 · BUILD",
   subtitle: "A new feature, next to main.",
+  calm: true,
   steps: [
-    "Paste the prompt.",
-    { text: "Build until the tests are green", prompt: "!npm test" },
-    "Play level 2.",
-    "Commit and push the branch."
+    { text: "Build level 2 on its own branch", prompt: "Create a branch level-2. Make levels/level-2.js from spec.md: walls around the edge, a little faster than level 1. Load the level in the game. Build until npm test is green. Then commit and push the branch.", after: "Claude also makes level-1.js: today's game as a level. While it builds, the hook shows red tests. Normal until everything is in." },
+    { text: "All green?", prompt: "!npm test" },
+    { text: "Play it: reload the tab and eat 5 food", after: "Level 2: walls around the edge, a little faster." },
+    { text: "Claude asks to commit and push the branch: say yes", after: "main stays untouched. Check: !git branch" }
   ],
   expected: "Level 2 works on its own branch, and the tests are green.",
-  prompt: "Create a branch level-2. Make levels/level-2.js from spec.md: walls around the edge, a little faster than level 1. Load the level in the game. Build until npm test is green. Then commit and push the branch.",
   keyPoints: ["A branch per feature", "Build until green", "Play it", "Push the branch, not main"],
-  notes: "The red tests from Assignment 17 now turn green: that's the spec being met. While Claude builds, the hook reports red tests between edits: that's expected until everything is in. Main is untouched until the merge request is merged. Playing up to level 2 takes a while: an Extra is to ask Claude for a test link like index.html?level=2.\n\nWhy now: Level 2 is a new feature. Main must keep working while you build it.\nWhat you see: A branch level-2 with levels/level-2.js. The red tests turn green.\nLook inside: !git branch: which branch are you on? Is main untouched?"
+  notes: "In the dry run (28 Oct) Claude made level-1.js too (the plain board as a level), loaded both in index.html, went up a level after 5 food, and pushed the branch level-2: 5 passed.\n\nThe red tests from Assignment 17 now turn green: that's the spec being met. While Claude builds, the hook reports red tests between edits: that's expected until everything is in. Main is untouched until the merge request is merged. Playing up to level 2 takes a while: an Extra is to ask Claude for a test link like index.html?level=2.\n\nWhy now: Level 2 is a new feature. Main must keep working while you build it.\nWhat you see: A branch level-2 with levels/level-2.js. The red tests turn green.\nLook inside: !git branch: which branch are you on? Is main untouched?"
 },
 
 { // Slide 92
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 19: Your first merge request",
   kicker: "DAY 2 · ASSIGNMENT 19 · DEPLOY",
   subtitle: "Before it goes into main, someone looks at it. Today that's you.",
+  calm: true,
   steps: [
-    "Paste the prompt.",
-    "Open the merge request on GitLab.",
-    "Read the changes. Happy? Merge it yourself.",
+    { text: "Ask for a merge request", prompt: "Open a merge request on GitLab for the branch level-2 into main. Description: what changed, why, and how it was tested. Don't merge it: I review and merge it myself.", after: "Claude gives you the link. It doesn't merge." },
+    "Open the link. Read the changes as if a colleague wrote them",
+    "Happy? Merge it yourself on GitLab",
     { text: "Back in the terminal: get the merged work on main", prompt: "!git checkout main && git pull" }
   ],
   expected: "Level 2 is in main, through a merge request you reviewed.",
-  prompt: "Open a merge request on GitLab for the branch level-2 into main. Description: what changed, why, and how it was tested. Don't merge it: I review and merge it myself.",
   keyPoints: [
     "Deploy phase: the human gate",
     "Claude opens the MR via MCP",
@@ -2039,7 +2043,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   visual: { mdfile: 1, mdName: "SKILL.md", highlight: [{ in: "tagline", text: "does not start Claude Code or run continuously", tone: "orange" }] },
   cards: [
     { title: "Definition", body: "A skill packages a reusable method for a recurring task." },
-    { title: "A skill is a folder", body: "SKILL.md: name, description and the recipe\ntemplate.json: read only when needed\nscripts/: run, not read" },
+    { title: "A skill is a folder", body: "SKILL.md: name, description and the recipe\ntemplate/: an empty level, read only when needed\nscripts/: run, not read" },
     { title: "How Claude finds it", body: "Only the name and description are always loaded. The full recipe is read when a task matches it, or when you type /name.\nProject: .claude/skills/\nYou, everywhere: ~/.claude/skills/" }
   ],
   tagline: "A skill does not start Claude Code or run continuously.",
@@ -2066,7 +2070,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Skill", body: "A reusable method for one type of task." }
   ],
   keyPoints: ["Three mechanisms, three jobs","The guide column of the map, zoomed in","Assignment 9 builds this distinction","Point back here during work"],
-  notes: "All three are text Claude reads; they differ in when they apply. A prompt is this task, CLAUDE.md is every session, a skill is loaded when a task matches its description. None of them enforces anything: that stays in settings.json, as you saw yesterday with the house rules and the hook (guide vs enforce). This is the exact distinction Assignment 9 asks participants to build — point back to it once the room starts working."
+  notes: "All three are text Claude reads; they differ in when they apply. A prompt is this task, CLAUDE.md is every session, a skill is loaded when a task matches its description. None of them enforces anything: that stays in settings.json, as you saw yesterday with the permissions and the hook (guide vs enforce). Assignment 21 (a shorter CLAUDE.md) builds on exactly this difference."
 },
 
 { // Slide 97
@@ -2088,7 +2092,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 98
   title: "Quiz: where does it go?",
   kicker: "DAY 2 · QUIZ",
-  subtitle: "Claude must follow a rule in every session of this project. Where do you put it?",
+  subtitle: "Claude must follow an instruction in every session of this project. Where do you put it?",
   type: "quiz",
   visual: { quiz: { answer: 1 }, bot: 'stretchLeft', place: 'pointer', pointAt: 1 },
   cards: [
@@ -2098,25 +2102,26 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "D", body: "In a comment in your code." }
   ],
   check: "Answer: B",
-  keyPoints: ["Vote first", "Answer: B, CLAUDE.md", "Skill = a recurring method, not a standing rule"],
-  notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing rules live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not a rule that always applies."
+  keyPoints: ["Vote first", "Answer: B, CLAUDE.md", "Skill = a recurring method, not a standing instruction"],
+  notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing instructions live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not an instruction that always applies."
 },
 
 { // Slide 99
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 20: Turn levels into a skill",
   kicker: "DAY 2 · ASSIGNMENT 20 · BUILD",
   subtitle: "You did it once by hand. Now write down the recipe.",
+  calm: true,
   steps: [
-    "Paste the prompt.",
-    "Open the skill folder in VS Code.",
-    "Type /clear, then ask: “Make level 3: a maze.”",
-    "Did Claude use the skill? Did it run the script?",
-    "Commit, push, merge request."
+    { text: "Turn level 2 into a skill", prompt: "Turn how we made level 2 into a skill in .claude/skills/new-level/: a SKILL.md with a clear description of when to use it, the recipe (a branch, harder but fair, npm test green), a template with an empty level file, and scripts/validate-level.js that checks a level file against spec.md. Show me the folder before you save it.", after: "Claude tries the checker on good and broken levels first, then shows the folder. Say “Go ahead.”" },
+    "Open .claude/skills/new-level/SKILL.md in VS Code. Which line tells Claude when to use it?",
+    { text: "Type /clear, then ask for level 3 without naming the skill", prompt: "Make level 3: a maze.", after: "“Skill(new-level)” on screen: Claude found it by itself. It asks about speed and the maze." },
+    { text: "Say “Go ahead”. Claude runs the checker and npm test", after: "“levels/level-3.js is OK”, and all tests pass." },
+    { text: "Save the skill and level 3 together", prompt: "Commit the skill folder and level 3 on the branch, push it and open a merge request.", after: "Merge it yourself, then !git checkout main && git pull" }
   ],
-  expected: "Level 3 was made with your skill, and the script checked it.",
-  prompt: "Turn how we made level 2 into a skill in .claude/skills/new-level/:\n- SKILL.md with a clear description of when to use it\n- the recipe: a branch, harder but fair (one or two knobs up), npm test green\n- template.json: an empty level\n- scripts/validate-level.js: checks a level file against spec.md\nShow me the folder before you save it.",
+  expected: "Level 3 was made with your skill, the checker passed it, and both are in main.",
   keyPoints: [
     "A skill is a folder",
     "The description decides when it's used",
@@ -2124,7 +2129,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Script: run, not read",
     "Level 3 with the skill"
   ],
-  notes: "The obvious moment: you just did the same steps for level 2, and level 3 needs them again. The skill is a folder. SKILL.md has a name and a description (always visible to Claude) and the recipe (only read when the description matches). The template is only read when the recipe points to it. The script is run, not read: its code never enters the context, only its output, which is the token-efficient way to check something. After /clear, ask for level 3 without mentioning the skill: Claude should find it from the description. If it doesn't, the description isn't clear enough: that's the lesson.\n\nWhy now: Spec, test, branch, build: level 3 needs exactly the same steps as level 2.\nWhat you see: .claude/skills/new-level/ with SKILL.md, a template and a script. After /clear, Claude picks the skill by itself.\nLook inside: Open SKILL.md. Which line makes Claude choose this skill?"
+  notes: "In the dry run (28 Oct): Claude drafted the skill, ran the checker on the real levels and on deliberately broken ones, then showed it. After /clear, 'Make level 3: a maze.' loaded the skill by itself. Watch for: Claude leaves the new skill out of the level 3 commit unless you ask (it was untracked before), hence step 5. The permission question while it tests the checker can show a scary 'Dangerous rm operation' warning on its own scratch folder: that's fine to approve.\n\nThe obvious moment: you just did the same steps for level 2, and level 3 needs them again. The skill is a folder. SKILL.md has a name and a description (always visible to Claude) and the recipe (only read when the description matches). The template is only read when the recipe points to it. The script is run, not read: its code never enters the context, only its output, which is the token-efficient way to check something. After /clear, ask for level 3 without mentioning the skill: Claude should find it from the description. If it doesn't, the description isn't clear enough: that's the lesson.\n\nWhy now: Spec, test, branch, build: level 3 needs exactly the same steps as level 2.\nWhat you see: .claude/skills/new-level/ with SKILL.md, a template and a script. After /clear, Claude picks the skill by itself.\nLook inside: Open SKILL.md. Which line makes Claude choose this skill?"
 },
 
 { // Slide 100
@@ -2156,7 +2161,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "concept",
   visual: { code: 0 },
   cards: [
-    { title: "aether-snake/", body: "CLAUDE.md               every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md             only when working in levels/\n  level-2.js …\ntests/\n.mcp.json               GitLab connection\n.claude/\n  settings.json         rules + hooks, shared\n  skills/\n    new-level/          SKILL.md, template.json, scripts/\n    ship-level/         SKILL.md: the workflow\n  agents/\n    verifier.md         a subagent" },
+    { title: "aether-snake/", body: "CLAUDE.md               every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md             only when working in levels/\n  level-2.js …\ntests/\n.mcp.json               GitLab connection\n.claude/\n  settings.json         permissions + hooks\n  skills/\n    new-level/          SKILL.md, template/, scripts/\n    ship-level/         SKILL.md: the workflow\n  agents/\n    verifier.md         a subagent" },
     { title: "Yours, not shared", body: "Not in git:\nCLAUDE.local.md\n.claude/settings.local.json\n\nYou, in every project:\n~/.claude/CLAUDE.md\n~/.claude/settings.json\n~/.claude/skills/\n~/.claude/agents/" }
   ],
   tagline: "Project files are shared through git. Your home folder is only yours.",
@@ -2173,24 +2178,26 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 102
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 21: A shorter CLAUDE.md",
   kicker: "DAY 2 · ASSIGNMENT 21 · MAINTAIN",
   subtitle: "Your CLAUDE.md keeps growing, and it's loaded in every session.",
+  calm: true,
   steps: [
-    { text: "Note the size of your memory files", prompt: "/context" },
-    "Paste the prompt. Read both files before you approve.",
-    { text: "Type /clear, then look again", prompt: "/context" },
-    "Ask about a level: does Claude still know the level rules?"
+    { text: "Note the size of your memory files", prompt: "/context", after: "“Memory files”: about 1k tokens." },
+    { text: "Make CLAUDE.md cheaper", prompt: "Make the root CLAUDE.md as cheap as possible: move everything about levels into levels/CLAUDE.md, and replace the @intent.md line with a plain pointer (\"What we're building is in intent.md\"), so intent.md isn't loaded into every session. Show me both files before you save them.", after: "Claude shows both files. Read them, then say yes." },
+    { text: "Start fresh and look again", cmds: ["/clear", "/context"], after: "Memory files: about 200 tokens." },
+    { text: "Does Claude still know the level rules?", prompt: "What are the rules for a new level?", after: "Yes: it reads them when it needs them." },
+    { text: "Save it", prompt: "Commit and push both CLAUDE.md files." }
   ],
   expected: "A short root CLAUDE.md, and a levels/CLAUDE.md that only loads when it's needed.",
-  prompt: "Make the root CLAUDE.md as cheap as possible: move everything about levels into levels/CLAUDE.md, and replace the @intent.md line with a plain pointer (\"What we're building is in intent.md\"), so intent.md isn't loaded into every session. Show me both files before you save them.",
   keyPoints: [
     "Measure first with /context",
     "Nested CLAUDE.md per folder",
     "Root: only what every session needs",
     "Measure again"
   ],
-  notes: "In the dry run the real cost was the @intent.md line: it pulled the whole intent.md (about 1k tokens) into every session. Replacing it with a plain pointer took memory files from 1.2k to 188 tokens. Before and after with /context makes the saving visible. A CLAUDE.md in a subfolder is read when Claude works with files in that folder, not at the start. If the room's CLAUDE.md is still tiny, the saving is small; the habit is the point. Note: files pulled in with @ in the root CLAUDE.md load at the start, so moving them into a nested CLAUDE.md is what actually defers them.\n\nWhy now: /context shows it: your CLAUDE.md costs tokens in every session, even when you're not working on levels.\nWhat you see: Fewer tokens at the start. The level rules still apply in levels/.\nLook inside: Which lines did Claude move, and where to?"
+  notes: "In the dry run (28 Oct): memory files went from 1k to 176 tokens. Claude also copied 'Don't commit or push without asking' into the root CLAUDE.md, because that rule only lived in intent.md. After /clear it still answered the level rules correctly.\n\nIn the dry run the real cost was the @intent.md line: it pulled the whole intent.md (about 1k tokens) into every session. Replacing it with a plain pointer took memory files from 1.2k to 188 tokens. Before and after with /context makes the saving visible. A CLAUDE.md in a subfolder is read when Claude works with files in that folder, not at the start. If the room's CLAUDE.md is still tiny, the saving is small; the habit is the point. Note: files pulled in with @ in the root CLAUDE.md load at the start, so moving them into a nested CLAUDE.md is what actually defers them.\n\nWhy now: /context shows it: your CLAUDE.md costs tokens in every session, even when you're not working on levels.\nWhat you see: Fewer tokens at the start. The level rules still apply in levels/.\nLook inside: Which lines did Claude move, and where to?"
 },
 
 { // Slide 103
@@ -2219,18 +2226,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 104
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 22: A verifier that checks your work",
   kicker: "DAY 2 · ASSIGNMENT 22 · TEST",
   subtitle: "A second opinion, in its own context.",
+  calm: true,
   steps: [
-    "Paste the prompt. Read the file, then Yes.",
-    { text: "Restart so the agent loads, then check the mode", cmds: ["/exit", "claude --continue"] },
-    "“Let the verifier check level 3.”",
-    "Read the report. Do you agree?",
-    "Commit it on a branch, merge request, merge."
+    { text: "Make the verifier", prompt: "Create a subagent in .claude/agents/verifier.md. Job: check a level and its branch against spec.md. Tools: read files, npm test, the level validator and read-only git, no edits. Model: Haiku. It reports what matches, what doesn't and what it couldn't check, and approves nothing. Show me the file first.", after: "Claude shows the file. Say “Save it as it is.”" },
+    { text: "Restart so the verifier loads: /exit, then", prompt: "claude --continue", after: "It comes back in auto mode: Shift+Tab to “manual mode on”.", warn: true },
+    { text: "Ask for a check", prompt: "Let the verifier check level 3.", after: "A report in three parts. It can be wrong: you decide." },
+    { text: "Save it", prompt: "Commit verifier.md on a branch, push it and open a merge request.", after: "Merge it yourself, then !git checkout main && git pull" }
   ],
   expected: "A verifier that reports on a level, without changing anything.",
-  prompt: "Create a subagent in .claude/agents/verifier.md:\n- Job: check a level and its branch against spec.md, and run npm test and the level validator.\n- Tools: read files, npm test, the validate-level script and read-only git. No edits.\n- Model: Haiku.\n- It reports what matches, what doesn't, and what it couldn't check. It approves nothing.\nShow me the file before you save it.",
   keyPoints: [
     "Test phase: an independent check",
     "Read-only tools",
@@ -2238,7 +2245,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Report, don't approve",
     "Your context stays small"
   ],
-  notes: "In the dry run the first prompt asked the verifier to check the branch but only allowed npm test, so Claude pointed out it couldn't run git; this prompt includes read-only git and the validator. The verifier gets Bash to run those, so 'no edits' is partly an instruction, not a hard wall: say it out loud. First use fails with 'Agent type verifier not found' until you restart, which is why the restart is a step. Its report has three parts: matches, doesn't match, not checked. Haiku is enough for checking against a spec, and cheaper. Read-only tools mean it can't 'fix' things quietly. The Look inside question shows why subagents matter for tokens: the verifier read the level, the spec and the test output, but only its summary landed in your session.\n\nWhy now: Three levels are more than you can review properly, and your own session is filling up.\nWhat you see: .claude/agents/verifier.md. A report: what matches spec.md, and what doesn't.\nLook inside: /context: did the verifier's reading end up in your context?"
+  notes: "In the dry run (28 Oct): Claude warned that 'no edits' only holds for files: Bash is all or nothing, so the command limits are an instruction (it offered deny rules). After the restart Claude Code was in auto mode: everyone back to manual. The verifier ran as a background agent and also flagged the author email in the git history: a good privacy moment. Later it wrongly flagged the avatar picture as breaking 'no images', and the main Claude overruled it: the verifier reports, the human judges.\n\nIn the dry run the first prompt asked the verifier to check the branch but only allowed npm test, so Claude pointed out it couldn't run git; this prompt includes read-only git and the validator. The verifier gets Bash to run those, so 'no edits' is partly an instruction, not a hard wall: say it out loud. First use fails with 'Agent type verifier not found' until you restart, which is why the restart is a step. Its report has three parts: matches, doesn't match, not checked. Haiku is enough for checking against a spec, and cheaper. Read-only tools mean it can't 'fix' things quietly. The Look inside question shows why subagents matter for tokens: the verifier read the level, the spec and the test output, but only its summary landed in your session.\n\nWhy now: Three levels are more than you can review properly, and your own session is filling up.\nWhat you see: .claude/agents/verifier.md. A report: what matches spec.md, and what doesn't.\nLook inside: /context: did the verifier's reading end up in your context?"
 },
 
 { // Slide 105
@@ -2261,26 +2268,27 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Workflow skill: only when you type /name",
     "Side effects (push) = only by hand"
   ],
-  notes: "Two kinds of skills, as on Day 5. A policy skill, like new-level, is something Claude may pick up by itself when the task matches. A workflow skill, like ship-level, runs a sequence with side effects (it pushes and opens a merge request), so it should only run when the user types /ship-level. In SKILL.md that's a frontmatter setting that switches off automatic use (disable-model-invocation: true); check the exact field in the current Claude Code docs before class. The workflow stacks what they built this morning: the skill, the test, the verifier, the merge request."
+  notes: "Two kinds of skills, as on Day 5. A policy skill, like new-level, is something Claude may pick up by itself when the task matches. A workflow skill, like ship-level, runs a sequence with side effects (it pushes and opens a merge request), so it should only run when the user types /ship-level. In SKILL.md that's a frontmatter setting that switches off automatic use (disable-model-invocation: true). Confirmed in the dry run of 28 Oct: Claude sets it by itself when you say 'only when I type it'. The workflow stacks what they built this morning: the skill, the test, the verifier, the merge request."
 },
 
 { // Slide 106
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 23: One command for a whole level",
   kicker: "DAY 2 · ASSIGNMENT 23 · BUILD",
   subtitle: "Your skill, your test and your verifier, in one workflow.",
+  calm: true,
   steps: [
-    "Paste the prompt. Read SKILL.md before you approve.",
-    "Commit the new skill first (branch, merge request, merge): the workflow wants a clean start.",
-    { text: "Run your skill", prompt: "/ship-level 4" },
-    "Approve the push when Claude asks.",
-    "Review and merge the merge request on GitLab."
+    { text: "Make the workflow", prompt: "Create a workflow skill in .claude/skills/ship-level/: for level N, use the new-level skill on a new branch, run npm test, let the verifier agent check it, then push and open a merge request. It only runs when I type /ship-level, never by itself. Show me SKILL.md before you save it.", after: "Claude shows SKILL.md. Say “Save it as it is.”" },
+    { text: "Save the workflow first: it wants a clean start", prompt: "Commit it on a branch, push and open a merge request.", after: "Merge it, then !git checkout main && git pull" },
+    { text: "Run your workflow", prompt: "/ship-level 4", after: "Claude asks about speed and walls, then shows a plan. Say “Go ahead.”" },
+    { text: "Watch: level file, checker, tests, verifier. Then it asks before the push: yes", after: "About five minutes. You get a merge request link." },
+    "Review and merge it on GitLab"
   ],
   expected: "Level 4 shipped through your workflow, and you merged it.",
-  prompt: "Create a workflow skill in .claude/skills/ship-level/: for level N, use the new-level skill on a new branch, run npm test, let the verifier agent check it, then push and open a merge request. It only runs when I type /ship-level, never by itself. Show me SKILL.md before you save it.",
   keyPoints: ["Stacked: skill, test, agent, MR", "Only by /ship-level", "The push still asks", "You still merge"],
-  notes: "In the dry run the first /ship-level stopped at step 1, because the new skill itself was still uncommitted: its own clean-tree check worked. So commit and merge the skill first. Skills load without a restart (unlike agents). Then /ship-level 4 ran the whole flow: plan, level file, validator, npm test, verifier, push (which asked) and a pull request. Everything stacks here: the skill from Assignment 20, the test, the verifier from Assignment 22, the merge request from Assignment 19, and yesterday's ask rule on push. The human gate stays: Claude asks before pushing, and the human merges.\n\nWhy now: Every level is now the same four steps. Typing them every time is where mistakes creep in.\nWhat you see: /ship-level 4: a new level, tests, a verifier report and a merge request. Claude asks before the push.\nLook inside: Open ship-level's SKILL.md. Which skills and agents does it call?"
+  notes: "In the dry run (28 Oct): Claude used disable-model-invocation: true, so /ship-level only runs when typed. It kept an 'ask before commit and push' step because of CLAUDE.md. Once the skill was merged and pulled, /ship-level 4 worked without a restart: questions with previews of the walls, plan, branch, level file, checker, npm test, verifier, diff, then the push question and a merge request.\n\nIn the dry run the first /ship-level stopped at step 1, because the new skill itself was still uncommitted: its own clean-tree check worked. So commit and merge the skill first. Skills load without a restart (unlike agents). Then /ship-level 4 ran the whole flow: plan, level file, validator, npm test, verifier, push (which asked) and a pull request. Everything stacks here: the skill from Assignment 20, the test, the verifier from Assignment 22, the merge request from Assignment 19, and yesterday's ask rule on push. The human gate stays: Claude asks before pushing, and the human merges.\n\nWhy now: Every level is now the same four steps. Typing them every time is where mistakes creep in.\nWhat you see: /ship-level 4: a new level, tests, a verifier report and a merge request. Claude asks before the push.\nLook inside: Open ship-level's SKILL.md. Which skills and agents does it call?"
 },
 
 { // Slide 107
@@ -2303,31 +2311,32 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Vague goal = endless or wrong work",
     "Still play the result yourself"
   ],
-  notes: "Connect this to “Done when” from yesterday: a goal is exactly that, as a command. Claude keeps going on its own until it's met, inside the same rules and hooks. After each turn a small, fast model decides whether the condition holds; when it does, the goal clears itself. The lesson is the bad example: “make level 5 fun” can never be checked. A met goal is still not your approval: they play the level afterwards. Before class, check that /goal exists in the version on the participants' laptops."
+  notes: "Connect this to “Done when” from yesterday: a goal is exactly that, as a command. Claude keeps going on its own until it's met, inside the same permissions and hooks. After each turn a small, fast model decides whether the condition holds; when it does, the goal clears itself. The lesson is the bad example: “make level 5 fun” can never be checked. A met goal is still not your approval: they play the level afterwards. Before class, check that /goal exists in the version on the participants' laptops."
 },
 
 { // Slide 108
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 24: Level 5 without watching",
   kicker: "DAY 2 · ASSIGNMENT 24 · BUILD",
   subtitle: "You know the steps work. Let Claude keep going until the check passes.",
+  calm: true,
   steps: [
-    "Shift+Tab to “accept edits on”: file edits go through, commit and push still ask.",
-    "Paste the prompt.",
-    { text: "Watch. Approve the commit and the push. Want the status?", prompt: "/goal", after: "On its own, it shows the status." },
-    "Goal met? Play level 5 yourself.",
-    "Happy? Merge the merge request."
+    "Shift+Tab to “accept edits on”: file edits go through, commit and push still ask",
+    { text: "Give Claude the goal", prompt: "/goal level 5 is harder than level 4, npm test passes, the verifier finds nothing, and a merge request is open. For this goal you don't need to wait for my approval of plans; commit and push still ask.", after: "Claude works by itself: level, checker, tests, verifier. It still asks before the commit and push." },
+    { text: "Want the status?", prompt: "/goal", after: "“Goal achieved” once everything is true." },
+    "Shift+Tab back to “manual mode on”. Play level 5 yourself",
+    "Happy? Merge the merge request"
   ],
   expected: "Level 5 is harder than level 4, the checks pass, and you merged it after playing it.",
-  prompt: "/goal level 5 is harder than level 4, npm test passes, the verifier finds nothing, and a merge request is open. For this goal you don't need to wait for my approval of plans; commit and push still ask.",
   keyPoints: [
     "A goal = a checkable done-when",
     "Claude runs until it's met",
-    "Your rules still apply",
+    "Your permissions and hooks still apply",
     "Play it before you merge"
   ],
-  notes: "Why the extra sentence in the goal: our CLAUDE.md says 'always show a plan and wait for approval'. In the dry run that rule made Claude stop for approval, the goal check kept finding the goal unmet, and the goal paused. Giving plan approval inside the goal fixed it: 'Goal achieved (3m, 13 turns)'. Accept-edits mode keeps it from stopping at every file; the ask rules still stop it at commit and push, so the human stays in the loop. The goal names checks, not feelings: npm test, the verifier, an open merge request. Claude keeps going, inside the same rules and hooks; the push still asks. /goal exists in Claude Code 2.1.309; on an older version, the same prompt without /goal plus 'keep going until all of this is true' works almost the same way.\n\nWhy now: The workflow works. Now let Claude run on its own, inside your rules.\nWhat you see: Claude keeps working by itself until the goal is met, then stops.\nLook inside: Play level 5. A met goal is not your approval."
+  notes: "In the dry run (28 Oct, Claude Code 2.1.312): 'Goal achieved (2m · 2 turns · 15k tokens)'. Claude picked level 5's speed and walls itself, ran the checker, npm test and the verifier, showed 'Goal not yet met… continuing' until the merge request existed, and asked before the commit and push.\n\nWhy the extra sentence in the goal: our CLAUDE.md says 'always show a plan and wait for approval'. In the dry run that rule made Claude stop for approval, the goal check kept finding the goal unmet, and the goal paused. Giving plan approval inside the goal fixed it: 'Goal achieved (3m, 13 turns)'. Accept-edits mode keeps it from stopping at every file; the ask rules still stop it at commit and push, so the human stays in the loop. The goal names checks, not feelings: npm test, the verifier, an open merge request. Claude keeps going, inside the same permissions and hooks; the push still asks. /goal exists in Claude Code 2.1.309; on an older version, the same prompt without /goal plus 'keep going until all of this is true' works almost the same way.\n\nWhy now: The workflow works. Now let Claude run on its own, inside your permissions.\nWhat you see: Claude keeps working by itself until the goal is met, then stops.\nLook inside: Play level 5. A met goal is not your approval."
 },
 
 { // Slide 109
@@ -2339,9 +2348,9 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   cards: [
     { title: "Headless", body: "claude -p \"run the tests and review this change\" --output-format json" },
     { title: "In GitLab CI", body: "A job on every merge request: the tests, then a Claude review as a comment." },
-    { title: "Its rules", body: "--allowedTools decides what it may do. There's no human to ask, so keep it read-only." }
+    { title: "Its permissions", body: "--allowedTools decides what it may do. There's no human to ask, so keep it read-only." }
   ],
-  tagline: "The arcade gets a pipeline like this this afternoon.",
+  tagline: "This afternoon the arcade's pipeline checks every merge request.",
   keyPoints: [
     "claude -p: one prompt, no conversation",
     "JSON output for scripts",
@@ -2354,17 +2363,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 110
   type: "practice",
   layout: "exercise",
+  mode: "manual",
   title: "Assignment 25: A bug becomes a test",
   kicker: "DAY 2 · ASSIGNMENT 25 · MAINTAIN",
   subtitle: "Fix it so it never comes back.",
+  calm: true,
   steps: [
-    "Play for three minutes. Write down one thing that goes wrong, and how to make it happen again.",
-    "Paste the prompt with your bug and the steps.",
-    "Red first? Then let Claude fix the game.",
-    "Branch, merge request, merge."
+    "Play for three minutes. Write down one thing that goes wrong, and how to make it happen again",
+    { text: "Report the bug", prompt: "Bug: [what goes wrong]. How to make it happen: [the steps]. First write a test that shows this bug and fails. Then fix the game until the test passes. Work on a branch and open a merge request. If you can't reproduce it, tell me, and add a regression test that guards the rule instead.", after: "No real bug? Claude says so, and adds a test that guards the rule instead." },
+    "Red first? Then let Claude fix the game",
+    "Merge request, review, merge"
   ],
   expected: "A test that catches the bug, and the fix in main.",
-  prompt: "Bug: [what goes wrong]. How to make it happen: [the steps]. First write a test that shows this bug and fails. Then fix the game until the test passes. Work on a branch and open a merge request. If you can't reproduce it, tell me, and add a regression test that guards the rule instead.",
   keyPoints: ["Maintain phase", "Every bug becomes a test", "Red, fix, green", "git revert for a bad merge"],
   notes: "In the dry run the example bug ('food inside a wall') didn't exist, and Claude refused to invent a fix: it asked for the steps to reproduce it, then offered a regression test instead. That's the lesson behind the steps in the prompt: a bug report without steps is a guess. Day 5's rule in small: each incident becomes an eval. A bug that has a test can't quietly come back. git revert makes a new commit that undoes an old one, so nothing is lost and the history stays honest; that's how teams undo a bad merge on a protected main.\n\nWhy now: You found a bug while playing. Fixing it isn't enough: it has to stay fixed.\nWhat you see: First a red test that shows the bug. Then the fix. Then green.\nExtra: A bad merge? “Revert that commit”: undone safely, and the history stays."
 },
@@ -2475,14 +2485,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 26: Sprint 0, the agreement",
   kicker: "DAY 2 · ASSIGNMENT 26 · PLAN",
   subtitle: "15 minutes, as a team, in the team chat.",
+  calm: true,
   steps: [
-    "Host: create the arcade repo from the AetherLink template.",
-    "Team: agree what every game needs: game.json, the score format, nickname, avatar.",
-    "Host: let Claude write arcade-spec.md and the skill arcade-connect.",
-    "Everyone: clone the arcade repo next to your game folder. The skill comes with it."
+    "Host: create the arcade repo from the AetherLink template",
+    "Team: agree in the chat what every game needs: game.json, the score format, nickname, avatar",
+    { text: "Host: let Claude write the agreement and the team skill", prompt: "Write arcade-spec.md from what we agreed: every game lives in games/<nickname>/ with index.html and game.json (title, nickname, avatar), and reports its score once at game over as { player, avatar, points, game }. Then make a skill arcade-connect that makes a game meet this spec and runs the contract test." },
+    "Everyone: clone the arcade repo next to your game folder. The skill comes with it"
   ],
   expected: "One arcade-spec.md everyone agreed on, and the team skill on every laptop.",
-  prompt: "Write arcade-spec.md from what we agreed: every game lives in games/<nickname>/ with index.html and game.json (title, nickname, avatar), and reports its score once at game over as { player, avatar, points, game }. Then make a skill arcade-connect that makes a game meet this spec and runs the contract test.",
   keyPoints: [
     "Plan phase, as a team",
     "Agree before anyone builds",
@@ -2499,16 +2509,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 27: Sprint 1, connect your game",
   kicker: "DAY 2 · ASSIGNMENT 27 · BUILD",
   subtitle: "35 minutes. Your game into the arcade, through a merge request.",
+  calm: true,
   steps: [
-    "Start Claude in your clone of the arcade repo, not in your game folder.",
-    "Use the arcade-connect skill: it brings your game into games/<nickname>/.",
-    "Open a merge request to the arcade repo.",
-    "Pipeline red? Fix it and push again.",
-    "Review the merge request of the person after you on the list.",
-    "Merged? Play the arcade website."
+    "Start Claude in your clone of the arcade repo, not in your game folder",
+    { text: "Bring your game in with the team skill", prompt: "My game is in ../aether-snake. Use the arcade-connect skill to bring it into games/[nickname]/ and make it meet arcade-spec.md. Then commit on a new branch, push, and open a merge request.", after: "Claude asks before the push. Then the merge request opens." },
+    "Pipeline red? Fix it and push again",
+    "Review the merge request of the person after you on the list",
+    "Merged? Play the arcade website"
   ],
   expected: "Your game is live in the arcade, and you reviewed someone else's.",
-  prompt: "My game is in ../aether-snake. Use the arcade-connect skill to bring it into games/[nickname]/ and make it meet arcade-spec.md. Then commit on a new branch, push, and open a merge request.",
   keyPoints: [
     "Build + Test + Deploy in one sprint",
     "The pipeline is the first reviewer",
@@ -2547,16 +2556,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   title: "Assignment 28: Sprint 2, contract v2",
   kicker: "DAY 2 · ASSIGNMENT 28 · BUILD",
   subtitle: "25 minutes. Change without breaking the others.",
+  calm: true,
   steps: [
-    "Host: update arcade-spec.md to v2, and keep v1 accepted for now.",
-    "Host: update the arcade-connect skill.",
-    "Everyone: pull main of the arcade repo first, so you use the new skill.",
-    "Everyone: update your game with the skill.",
-    "Merge request, pipeline, review, merge.",
-    "Host: once every game is merged, tag the arcade v2.0."
+    "Host: update arcade-spec.md to v2, and keep v1 accepted for now",
+    "Host: update the arcade-connect skill",
+    { text: "Everyone: update your game with the new skill", prompt: "arcade-spec.md is now v2: a score also has level. Pull main of the arcade repo, then update my game in games/[nickname]/ with the arcade-connect skill so it sends v2 scores. Push a new branch and open a merge request.", after: "The prompt pulls main of the arcade first, so you use the new skill." },
+    "Merge request, pipeline, review, merge",
+    "Host: once every game is merged, tag the arcade v2.0"
   ],
   expected: "Every game sends v2 scores, and nothing broke on the way.",
-  prompt: "arcade-spec.md is now v2: a score also has level. Pull main of the arcade repo, then update my game in games/[nickname]/ with the arcade-connect skill so it sends v2 scores. Push a new branch and open a merge request.",
   keyPoints: ["Update spec, skill, games", "Pull first: the skill changed too", "v1 still works: deprecated", "Same MR flow", "Host tags the release v2.0"],
   notes: "Only the host tags: v2.0 on the arcade repo marks the release that speaks contract v2. Players don't tag the shared repo. In the dry run, Claude flagged that a player's copied skill was still v1: pulling main of the arcade first fixes that. Expect Claude to keep v1 working with a warning instead of a date check, and to suggest a message for the team chat. If two people change the arcade's start screen at the same time in this sprint, a merge conflict appears by itself: let Claude explain both versions, and the humans choose.\n\nWhy now: The agreement changed. Your game, the skill and the arcade all have to follow.\nWhat you see: arcade-spec.md v2, an updated skill, your game sending level, the arcade tagged v2.0, and v1 scores still accepted.\nLook inside: Which games are still on v1? Does the leaderboard still work for them?"
 },
@@ -2568,10 +2576,10 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "pause",
   visual: { countdown: 15, bot: 'wave', place: 'beside' },
   cards: [
-    { title: "Return in 15 minutes", body: "We continue with connecting your game to the arcade." }
+    { title: "Return in 15 minutes", body: "We continue with a chaos card: an incident." }
   ],
   keyPoints: ["Break: say the return time","Press ▶ Start on the timer","Two big assignments follow","Reset your own energy"],
-  notes: "State the actual clock time you'll resume. The two assignments after the break (14 and 15: connecting every game and the start screen) are where the arcade comes together — use this break to reset your own energy too."
+  notes: "State the actual clock time you'll resume. After the break the trainer turns a chaos card: an incident."
 },
 
 { // Slide 121
@@ -2587,7 +2595,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "Privacy leak", body: "A game shows a real name and an email. How did that get past review?" },
     { title: "Merge conflict", body: "Two people changed the start screen at the same time." }
   ],
-  tagline: "Every incident becomes a new test or a new rule.",
+  tagline: "Every incident becomes a new test, instruction or permission.",
   keyPoints: [
     "Revert vs hotfix",
     "Tighten the anti-cheat check",
@@ -2595,7 +2603,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Resolve a conflict with Claude",
     "Incident → test (Day 5)"
   ],
-  notes: "Turn one card, or two if there's time. Broken deploy: the fastest safe move is git revert of the merge, then a hotfix branch for the real fix; add a test so it can't happen again. Cheater: the template caps records at 500, so a record of 480 on level 1 passes, but level 1 ends after 5 food, so it is impossible. In the dry run Claude worked that out, added a maximum per game and level, and saved the cheating record as a test case that must stay rejected. Privacy leak: add a check to the pipeline (or a hook) that fails on anything that looks like an email or a full name, and remove the data. Merge conflict: ask Claude to explain both versions, decide as humans, commit the result. Whatever the card: it ends with a new test or rule, exactly Day 5's 'each incident becomes an eval'. Prepare the cards in advance: a deliberately broken game, a cheating score file, and a game with a fake name and email, all in a branch you can merge on cue."
+  notes: "Turn one card, or two if there's time. Broken deploy: the fastest safe move is git revert of the merge, then a hotfix branch for the real fix; add a test so it can't happen again. Cheater: the template caps records at 500, so a record of 480 on level 1 passes, but level 1 ends after 5 food, so it is impossible. In the dry run Claude worked that out, added a maximum per game and level, and saved the cheating record as a test case that must stay rejected. Privacy leak: add a check to the pipeline (or a hook) that fails on anything that looks like an email or a full name, and remove the data. Merge conflict: ask Claude to explain both versions, decide as humans, commit the result. Whatever the card: it ends with a new test, instruction or permission, exactly Day 5's 'each incident becomes an eval'. Prepare the cards in advance: a deliberately broken game, a cheating score file, and a game with a fake name and email, all in a branch you can merge on cue."
 },
 
 { // Slide 122
@@ -2658,7 +2666,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   items: [
     { label: "Your own Snake repo on GitLab, built in layers" },
     { label: "intent.md, spec.md, CLAUDE.md and PROGRESS.md" },
-    { label: "House rules, a test and a hook" },
+    { label: "Permissions, a test and a hook" },
     { label: "Levels from files, each one harder" },
     { label: "A new-level skill, a verifier agent and a /ship-level workflow" },
     { label: "Branches and merge requests, like at work" },
