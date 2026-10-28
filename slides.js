@@ -2056,7 +2056,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 2 · PART 2 · DESIGN",
   subtitle: "Before you build the skills: write down the numbers they must stay within.",
   type: "concept",
-  visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
+  visual: { stepThrough: ".sp-step, .slide-main > .tagline", specDoc: {
     tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
       ["├── ", "CLAUDE.md", "how to work here"],
       ["├── ", "intent.md", "why + what: the levels wish"],
@@ -2066,19 +2066,17 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
       ["├── ", "tests/", "your test"],
       ["└── ", "PROGRESS.md", "the handover"]
     ] },
-    docs: [
-      { name: "spec.md", tone: "what", badge: "Exactly what", ask: "What does a level look like, exactly?",
-        lines: ["## levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"],
-        facts: ["Written from your levels 1 and 2", "intent.md says “always playable”, spec.md says how far: the numbers"],
-        when: ["only when something points to it", "your 3 skills: “read spec.md”", "after lunch: the level test and a subagent check every level against it"],
-        example: "Make level 3 with my skills." }
-    ],
-    whenTitle: "When does Claude read it?",
-    work: ["spec.md ≈ the API contract or the design spec: what everyone builds to and tests against"]
+    what: { head: "What is it?", lines: ["## levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"],
+      text: "A file with the numbers a level may have: a minimum and a maximum for each, and one example. Claude writes it from your levels 1 and 2. You check the numbers." },
+    why: { head: "What is it for?", intent: "each level a little harder, always playable", spec: ["speed: 40 to 150 ms", "obstacles: at most 40", "food to finish: 5 to 50"],
+      text: "intent.md says what you want, in words. spec.md turns that into numbers you can check." },
+    skills: { head: "What does it mean for the skills?", names: ["create-food", "create-snake", "create-obstacles"], verb: "each reads →",
+      text: "Each skill's instructions say “read spec.md”. So all three stay within the same numbers: every level gets harder, but never unplayable." },
+    work: ["spec.md ≈ the API contract or the design spec: what everyone builds to"]
   } },
   tagline: "intent.md says what you want. spec.md says exactly how far you may go.",
-  keyPoints: ["Why now: soon five things build or check levels", "Written from what you already have", "A min and max for every value", "Read only when something points to it"],
-  notes: "Say: Level 2 you built alone, with prompts. That didn't need a rulebook. From now on three skills each build part of a level, and after lunch a test and a subagent check them. If each of them guesses its own numbers, the skills make a level the test fails. spec.md is the one agreement they all follow.\n\nClick through it. 1 The folder: levels/ is there now, from this morning, and spec.md is the one new file. 2 What goes in it: which numbers a level file contains, a minimum and a maximum for each, and one example. You don't invent it: Claude writes it from your levels 1 and 2, and you check the numbers. intent.md says 'always playable' in words; spec.md says how far you may go. 3 When Claude reads it: only when something points to it. Your skills will say 'read spec.md'. After lunch the level test and the subagent check every level against it. 4 At work: the API contract or the design spec.\n\nThe numbers on the slide are an example. Claude may choose other names (startDelay instead of speed): fine, as long as every value has a minimum and a maximum.\n\nNext: Assignment 20, your own spec.md."
+  keyPoints: ["Click: folder, what, what for, the skills", "A min and max for every value", "Words in intent.md, numbers in spec.md", "Every skill reads it"],
+  notes: "Say: Level 2 you built alone, with prompts. That didn't need a rulebook. Now three skills each build part of a level. If each of them guesses its own numbers, level 4 might suddenly be twice as fast, or blocked. spec.md is the one set of numbers they all follow.\n\nClick through it. 1 The folder: levels/ is there now, from this morning, and spec.md is the one new file, in the root next to intent.md. 2 What is it? A file with the numbers a level may have: a minimum and a maximum for each, and one example. You don't invent it: Claude writes it from your levels 1 and 2, and you check the numbers. 3 What is it for? intent.md says 'each level a little harder, always playable', in words. spec.md says how far: speed at least 40 ms, at most 40 obstacles. Words become numbers you can check. 4 What does it mean for the skills? Every skill's instructions start with 'read spec.md', so all three skills stay within the same numbers. 5 At work: the API contract or the design spec.\n\nThe numbers on the slide are an example. Claude may choose other names (startDelay instead of speed): fine, as long as every value has a minimum and a maximum.\n\nLater today the level test and the subagent check against the same file; you don't need to say that yet.\n\nNext: Assignment 20, your own spec.md."
 },
 
 { // Slide 100c

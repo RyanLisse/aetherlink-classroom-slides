@@ -449,6 +449,23 @@ function renderExtras(stage, main, s, v) {
     if (D.work) { const wk = node('div', 'dp-work dp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
+  if (v.specDoc) {                                               // spec.md: where it lives, what it is, what it's for, what it means for the skills
+    const D = v.specDoc; const w = node('div', 'spdoc');
+    const tree = node('div', 'cmap-box cmap-tree dp-tree sp-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, hl]) => { const r = node('div', 'ctree-row' + (hl ? ' dp-hl dp-hl-' + hl : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', '← ' + note)); tree.append(r); });
+    const right = node('div', 'sp-right');
+    const sec = (n, head, cls) => { const b = node('section', 'sp-sec sp-step ' + cls); const h = node('div', 'sp-head'); h.append(node('span', 'sp-n', String(n)), node('strong', null, head)); b.append(h); right.append(b); return b; };
+    const a = sec(1, D.what.head, 'sp-what'); const row1 = node('div', 'sp-row'); const f = node('div', 'dp-file sp-file'); f.append(node('span', 'sp-fname', 'spec.md'));
+    D.what.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); row1.append(f, node('p', 'sp-text', D.what.text)); a.append(row1);
+    const b = sec(2, D.why.head, 'sp-why'); const row2 = node('div', 'sp-pair'); const iq = node('div', 'sp-box sp-intent'); iq.append(node('span', 'sp-bname', 'intent.md'), node('span', 'sp-quote', D.why.intent));
+    const sq = node('div', 'sp-box sp-spec'); sq.append(node('span', 'sp-bname', 'spec.md')); D.why.spec.forEach(t => sq.append(node('span', 'sp-num', t)));
+    row2.append(iq, node('span', 'sp-arrow', '→'), sq); b.append(row2, node('p', 'sp-cap', D.why.text));
+    const c = sec(3, D.skills.head, 'sp-skills'); const row3 = node('div', 'sp-flow'); const sk = node('div', 'sp-chips'); D.skills.names.forEach(t => sk.append(node('span', 'sp-chip', t)));
+    const tgt = node('span', 'sp-target', 'spec.md'); row3.append(sk, node('span', 'sp-arrow sp-small', D.skills.verb), tgt); c.append(row3, node('p', 'sp-cap', D.skills.text));
+    w.append(tree, right);
+    if (D.work) { const wk = node('div', 'dp-work sp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.skillDef) {                                              // what a skill is: the definition as a flow, file → who starts it → same result
     const D = v.skillDef; const w = node('div', 'sdef');
     const q = node('blockquote', 'sf-quote sf-step'); q.append(node('span', 'sf-qtext', D.quote), node('cite', null, D.source)); w.append(q);
