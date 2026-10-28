@@ -1968,6 +1968,56 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ask the room first: what did you tell Claude for level 2 that you'll have to say again for level 3? Collect it, then show the card. Typing it again is boring and you forget a line. That's what a skill is for."
 },
 
+{ // Slide 100b
+  title: "spec.md: one rulebook for every level",
+  kicker: "DAY 2 · PART 2 · DESIGN",
+  subtitle: "Level 3 needs the same three steps again. Soon skills build the levels, and a test and a subagent check them: they all need the same numbers.",
+  type: "concept",
+  visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
+    tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
+      ["├── ", "CLAUDE.md", "how to work here"],
+      ["├── ", "intent.md", "why + what: the levels wish"],
+      ["├── ", "spec.md", "exactly what: new now", "what"],
+      ["├── ", "levels/", "level-1.js, level-2.js: from this morning"],
+      ["├── ", "game.js …", "your Snake"],
+      ["├── ", "tests/", "your test"],
+      ["└── ", "PROGRESS.md", "the handover"]
+    ] },
+    docs: [
+      { name: "spec.md", tone: "what", badge: "Exactly what", ask: "What does a level look like, exactly?",
+        lines: ["## levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"],
+        facts: ["Written from your levels 1 and 2", "intent.md says “always playable”, spec.md says how far: the numbers"],
+        when: ["only when something points to it", "your 3 skills: “read spec.md”", "after lunch: the level test and a subagent check every level against it"],
+        example: "Make level 3 with my skills." }
+    ],
+    whenTitle: "When does Claude read it?",
+    work: ["spec.md ≈ the API contract or the design spec: what everyone builds to and tests against"]
+  } },
+  tagline: "intent.md says what you want. spec.md says exactly how far you may go.",
+  keyPoints: ["Why now: soon five things build or check levels", "Written from what you already have", "A min and max for every value", "Read only when something points to it"],
+  notes: "Say: Level 2 you built alone, with prompts. That didn't need a rulebook. From now on three skills each build part of a level, and after lunch a test and a subagent check them. If each of them guesses its own numbers, the skills make a level the test fails. spec.md is the one agreement they all follow.\n\nClick through it. 1 The folder: levels/ is there now, from this morning, and spec.md is the one new file. 2 What goes in it: which numbers a level file contains, a minimum and a maximum for each, and one example. You don't invent it: Claude writes it from your levels 1 and 2, and you check the numbers. intent.md says 'always playable' in words; spec.md says how far you may go. 3 When Claude reads it: only when something points to it. Your skills will say 'read spec.md'. After lunch the level test and the subagent check every level against it. 4 At work: the API contract or the design spec.\n\nThe numbers on the slide are an example. Claude may choose other names (startDelay instead of speed): fine, as long as every value has a minimum and a maximum.\n\nNext: Assignment 20, your own spec.md."
+},
+
+{ // Slide 100c
+  type: "practice",
+  layout: "exercise",
+  mode: "plan",
+  title: "Assignment 20: Your spec.md",
+  kicker: "DAY 2 · ASSIGNMENT 20 · DESIGN",
+  subtitle: "Write down the rules your levels already follow, before the skills need them.",
+  calm: true,
+  steps: [
+    { text: "A new branch for level 3", prompt: "!git checkout -b level-3" },
+    "Shift+Tab to “plan mode on”",
+    { text: "Write spec.md from what you have", prompt: "Write spec.md from levels/level-1.js, levels/level-2.js and the levels wish in intent.md: which values a level file contains, a minimum and a maximum for every value so the game stays playable, and level-2.js as the example. Don't change any level.", after: "Approve the plan with 2. Claude may ask a few questions: pick with ↑↓ and Enter." },
+    "Put intent.md and spec.md side by side in VS Code. Which line in spec.md makes “always playable” exact?",
+    { text: "Save point", prompt: "Commit spec.md on the branch level-3 and push it." }
+  ],
+  expected: "spec.md says what a level file contains, with a minimum and maximum for every value, on the branch level-3.",
+  keyPoints: ["Why now: the skills need one rulebook", "Written from your real levels", "Plan mode", "Find the line that makes it exact", "On the branch level-3"],
+  notes: "Why now: level 3 needs the same three steps again, with the same limits. Write the limits down once, before you make skills that build levels.\nWhat you see: a new spec.md with the values from your level files, a min and max for each, and level-2.js as the example.\nLook inside: step 4. intent.md says 'always playable' in words; spec.md turns it into numbers (a maximum speed, a maximum number of obstacles).\n\nWhy from levels 1 and 2: everyone's game is different, so everyone's spec is too. It records what the levels already look like, plus the limits.\n\nThe branch level-3 holds spec.md, the three skills and level 3 itself: one merge request at the end.\n\nWatch for: Claude may put spec.md in levels/: fine. Field names differ per person: fine. Someone whose level 2 has no own file in levels/? Ask Claude to move the numbers there first."
+},
+
 { // Slide 95
   title: "What is a skill?",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
@@ -2032,7 +2082,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   } },
   tagline: "The frontmatter is always loaded. The body only when the skill is used.",
   keyPoints: ["Click: folder, frontmatter, body, loading", "One folder per skill in .claude/skills/", "Frontmatter = the top, between the --- lines", "description decides when Claude picks it", "Frontmatter always loaded, body only when used"],
-  notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the instructions themselves, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The instructions are only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they write that rulebook in Assignment 20, just before this skill."
+  notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the instructions themselves, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The instructions are only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they wrote it in Assignment 20, a few slides ago."
 },
 
 { // Slide 97
@@ -2098,56 +2148,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   check: "Answer: B",
   keyPoints: ["Vote first", "Answer: B, CLAUDE.md", "Skill = a recurring method, not a standing instruction"],
   notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing instructions live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not an instruction that always applies."
-},
-
-{ // Slide 100b
-  title: "spec.md: one rulebook for every level",
-  kicker: "DAY 2 · PART 2 · DESIGN",
-  subtitle: "Soon three skills build levels, and a test and a subagent check them. They must agree on the numbers.",
-  type: "concept",
-  visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
-    tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
-      ["├── ", "CLAUDE.md", "how to work here"],
-      ["├── ", "intent.md", "why + what: the levels wish"],
-      ["├── ", "spec.md", "exactly what: new now", "what"],
-      ["├── ", "levels/", "level-1.js, level-2.js: from this morning"],
-      ["├── ", "game.js …", "your Snake"],
-      ["├── ", "tests/", "your test"],
-      ["└── ", "PROGRESS.md", "the handover"]
-    ] },
-    docs: [
-      { name: "spec.md", tone: "what", badge: "Exactly what", ask: "What does a level look like, exactly?",
-        lines: ["## levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"],
-        facts: ["Written from your levels 1 and 2", "intent.md says “always playable”, spec.md says how far: the numbers"],
-        when: ["only when something points to it", "your 3 skills: “read spec.md”", "after lunch: the level test and a subagent check every level against it"],
-        example: "Make level 3 with my skills." }
-    ],
-    whenTitle: "When does Claude read it?",
-    work: ["spec.md ≈ the API contract or the design spec: what everyone builds to and tests against"]
-  } },
-  tagline: "intent.md says what you want. spec.md says exactly how far you may go.",
-  keyPoints: ["Why now: soon five things build or check levels", "Written from what you already have", "A min and max for every value", "Read only when something points to it"],
-  notes: "Say: Level 2 you built alone, with prompts. That didn't need a rulebook. From now on three skills each build part of a level, and after lunch a test and a subagent check them. If each of them guesses its own numbers, the skills make a level the test fails. spec.md is the one agreement they all follow.\n\nClick through it. 1 The folder: levels/ is there now, from this morning, and spec.md is the one new file. 2 What goes in it: which numbers a level file contains, a minimum and a maximum for each, and one example. You don't invent it: Claude writes it from your levels 1 and 2, and you check the numbers. intent.md says 'always playable' in words; spec.md says how far you may go. 3 When Claude reads it: only when something points to it. Your skills will say 'read spec.md'. After lunch the level test and the subagent check every level against it. 4 At work: the API contract or the design spec.\n\nThe numbers on the slide are an example. Claude may choose other names (startDelay instead of speed): fine, as long as every value has a minimum and a maximum.\n\nNext: Assignment 20, your own spec.md."
-},
-
-{ // Slide 100c
-  type: "practice",
-  layout: "exercise",
-  mode: "plan",
-  title: "Assignment 20: Your spec.md",
-  kicker: "DAY 2 · ASSIGNMENT 20 · DESIGN",
-  subtitle: "Write down the rules your levels already follow, before the skills need them.",
-  calm: true,
-  steps: [
-    { text: "A new branch for level 3", prompt: "!git checkout -b level-3" },
-    "Shift+Tab to “plan mode on”",
-    { text: "Write spec.md from what you have", prompt: "Write spec.md from levels/level-1.js, levels/level-2.js and the levels wish in intent.md: which values a level file contains, a minimum and a maximum for every value so the game stays playable, and level-2.js as the example. Don't change any level.", after: "Approve the plan with 2. Claude may ask a few questions: pick with ↑↓ and Enter." },
-    "Put intent.md and spec.md side by side in VS Code. Which line in spec.md makes “always playable” exact?",
-    { text: "Save point", prompt: "Commit spec.md on the branch level-3 and push it." }
-  ],
-  expected: "spec.md says what a level file contains, with a minimum and maximum for every value, on the branch level-3.",
-  keyPoints: ["Why now: the skills need one rulebook", "Written from your real levels", "Plan mode", "Find the line that makes it exact", "On the branch level-3"],
-  notes: "Why now: the next three assignments make skills that build levels. They need one place that says how far each number may go.\nWhat you see: a new spec.md with the values from your level files, a min and max for each, and level-2.js as the example.\nLook inside: step 4. intent.md says 'always playable' in words; spec.md turns it into numbers (a maximum speed, a maximum number of obstacles).\n\nWhy from levels 1 and 2: everyone's game is different, so everyone's spec is too. It records what the levels already look like, plus the limits.\n\nThe branch level-3 holds spec.md, the three skills and level 3 itself: one merge request at the end.\n\nWatch for: Claude may put spec.md in levels/: fine. Field names differ per person: fine. Someone whose level 2 has no own file in levels/? Ask Claude to move the numbers there first."
 },
 
 { // Slide 101
