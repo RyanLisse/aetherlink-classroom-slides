@@ -1829,14 +1829,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 89
-  title: "intent.md: what you want, and why",
+  title: "Update intent.md: the levels wish",
   kicker: "DAY 2 · PART 1 · DESIGN",
-  subtitle: "Before you build: write down the goal of the day. You know the file from yesterday. Today it gets the levels wish.",
+  subtitle: "Your intent.md from yesterday says what your game is. Before you build levels, add what you want next.",
   type: "concept",
   visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
     tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
       ["├── ", "CLAUDE.md", "how to work here: says @intent.md"],
-      ["├── ", "intent.md", "why + what: gets the levels wish", "why"],
+      ["├── ", "intent.md", "from Day 1: add the levels wish", "why"],
       ["├── ", ".claude/settings.json", "permissions + hook"],
       ["├── ", "game.js …", "your Snake"],
       ["├── ", "tests/", "your test"],
@@ -1844,36 +1844,36 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     ] },
     docs: [
       { name: "intent.md", badge: "Why + what", ask: "What do we want, and why?",
-        lines: ["## Outcome", "Levels 2 to 5, each a little harder.", "## Done when", "- you can play all five", "- no level is easier than the one before", "## Boundaries", "- always playable"],
-        facts: ["In words, for people and for Claude", "Changes when the goal changes"],
+        lines: ["## Outcome", "…your game from Day 1…", "+ Levels 2 to 5, each a little harder.", "## Done when", "+ you can play all five", "+ no level is easier than the one before", "## Boundaries", "+ always playable"],
+        facts: ["The same file as yesterday, a few lines more (+)", "In words, for people and for Claude"],
         when: ["at the start of every session: CLAUDE.md says @intent.md", "when it makes a plan", "to check: is it done? Later today a test and a subagent check the Done when lines"],
         example: "Make the game harder, level by level." }
     ],
     whenTitle: "When does Claude read it?",
     work: ["intent.md ≈ the why in a ticket or user story: the outcome and the acceptance criteria"]
   } },
-  tagline: "First what you want. Then you build. Claude keeps the goal in mind, every session.",
+  tagline: "New goal? Update intent.md first. Then build.",
   keyPoints: ["Click: folder, intent.md, when, at work", "You know it from Day 1", "Outcome, done when, boundaries", "Read every session through @intent.md", "Done when comes back with the test and the subagent"],
-  notes: "Say: You just saw five levels. Before anyone builds one, we write down what we want. You know intent.md from yesterday; today it gets the wish for the levels.\n\nClick through it. 1 The folder as it is now, at the end of Day 1: intent.md is already there, in the root next to CLAUDE.md, in git. 2 What goes in it, in words: the outcome (levels 2 to 5, each a little harder), when it's done (you can play all five, no level is easier than the one before) and the boundaries (always playable). 3 When Claude reads it: at the start of every session, because CLAUDE.md pulls it in with @intent.md, so you don't have to repeat the goal in every prompt. Also when it makes a plan, and when it checks whether something is done. The Done when lines come back this afternoon: the level test and a subagent check against them. 4 At work: the why in a ticket or user story, with its acceptance criteria.\n\nWhy now and not later: it's the goal of the whole day, and it costs one prompt.\n\nNot yet: the exact numbers (how fast, how many obstacles at most). Those come in spec.md, just before the skills, when three skills, a test and a subagent have to agree on them. Don't name Bobby yet: the subagent gets its name after lunch. After Assignment 25, intent.md is no longer loaded by itself: then it's read when needed.\n\nNext: Assignment 17, the wish in your own intent.md."
+  notes: "Say: You just saw five levels. Before anyone builds one, we update what we want. This is the intent.md you made on Day 1: nothing new, it just gets a few lines for the levels (the + lines on the slide).\n\nClick through it. 1 The folder as it is now, at the end of Day 1: intent.md is already there, in the root next to CLAUDE.md, in git. 2 What goes in it, in words: the outcome (levels 2 to 5, each a little harder), when it's done (you can play all five, no level is easier than the one before) and the boundaries (always playable). 3 When Claude reads it: at the start of every session, because CLAUDE.md pulls it in with @intent.md, so you don't have to repeat the goal in every prompt. Also when it makes a plan, and when it checks whether something is done. The Done when lines come back this afternoon: the level test and a subagent check against them. 4 At work: the why in a ticket or user story, with its acceptance criteria.\n\nWhy now and not later: it's the goal of the whole day, and it costs one prompt.\n\nNot yet: the exact numbers (how fast, how many obstacles at most). Those come in spec.md, just before the skills, when three skills, a test and a subagent have to agree on them. Don't name Bobby yet: the subagent gets its name after lunch. After Assignment 25, intent.md is no longer loaded by itself: then it's read when needed.\n\nNext: Assignment 17, the wish in your own intent.md."
 },
 
 { // Slide 90
   type: "practice",
   layout: "exercise",
   mode: "plan",
-  title: "Assignment 17: The wish for the levels",
+  title: "Assignment 17: Update intent.md",
   kicker: "DAY 2 · ASSIGNMENT 17 · DESIGN",
-  subtitle: "Write down what you want before you build. Nothing gets built yet.",
+  subtitle: "Add the levels wish to yesterday's intent.md. Nothing gets built yet.",
   calm: true,
   steps: [
     "Shift+Tab to “plan mode on”",
-    { text: "Add the wish to intent.md", prompt: "New wish: levels 2 to 5, each a little harder than the one before, and always playable. Add it to intent.md: the outcome, done-when checks and boundaries. Don't build anything yet.", after: "Approve the plan with 2 (not 1)." },
+    { text: "Add the wish to intent.md", prompt: "New wish: levels 2 to 5, each a little harder than the one before: more food to finish, a longer snake at the start, more obstacles, a bit faster. Always playable. Add it to intent.md: the outcome, done-when checks and boundaries. Don't build anything yet.", after: "Approve the plan with 2 (not 1)." },
     "Open intent.md in VS Code. Find Done when. How would you check each line?",
     { text: "Save it", prompt: "Commit and push intent.md." }
   ],
   expected: "intent.md has the levels wish: the outcome, done-when checks and boundaries.",
   keyPoints: ["Design phase", "One prompt, in plan mode", "Done when: how do you check it?", "Commit it"],
-  notes: "Why now: you're about to build levels. Write down what you want first, so every session after this knows the goal.\nWhat you see: intent.md gets a levels outcome with done-when checks and boundaries.\nLook inside: the Done when lines. 'No level is easier than the one before': how would you check that? Keep the answer: the level test and the subagent do exactly that this afternoon.\n\nWatch for: dry run (28 Oct): Claude listed its assumptions first (level 1 is today's game, game over goes back to level 1, 'You win' after level 5). If someone asks for 'more food on the board', Claude rightly reads that as easier: harder is more food to finish."
+  notes: "Why now: you're about to build levels. Write down what you want first, so every session after this knows the goal.\nWhat you see: intent.md gets a levels outcome with done-when checks and boundaries.\nLook inside: the Done when lines. 'No level is easier than the one before': how would you check that? Keep the answer: the level test and the subagent do exactly that this afternoon.\n\nThe prompt names the four ways to make a level harder, the same as the boards on the slide before. Dry run (28 Oct): without them, Claude asked 'harder how?' and offered only speed and obstacles.\n\nWatch for: Claude may say it won't push straight to main and offer a branch. On Day 1 you pushed to main too: say push to main. Claude also listed its assumptions first (level 1 is today's game, game over goes back to level 1, 'You win' after level 5). If someone asks for 'more food on the board', Claude rightly reads that as easier: harder is more food to finish."
 },
 
 { // Slide 91
