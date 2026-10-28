@@ -1722,9 +1722,10 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 
 { // Slide 83
   title: "Welcome to Day 2",
-  kicker: "TEACHING DAY 2",
+  kicker: "AETHERLINK × WORLDLINE · DAY 2",
+  subtitle: "",
   type: "context",
-  visual: { bot: "wave", place: "left" },
+  visual: { opener: "welcome", bot: "wave", place: "beside" },
   keyPoints: ["Short re-welcome", "No agenda yet: the game shows it in a moment", "Straight on to Show your game"],
   notes: "Short re-welcome. Don't explain the day yet: the next slide shows a level 4 Snake, and the levels slide after the recap shows the whole route."
 },
