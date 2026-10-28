@@ -1911,8 +1911,8 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   calm: true,
   steps: [
     { text: "Layer 1: more food to finish", prompt: "Create a branch level-2. Level 1 is the game as it is now: move its numbers into levels/level-1.js, without changing how it plays. Then make levels/level-2.js: the same, but it needs more food to finish. After level 1's food goal you go to level 2. Also make index.html?level=2 start straight at level 2, so I can test it.", after: "Reload the tab and play. Level 2 straight away: type ?level=2 after index.html in the address bar." },
-    { text: "Layer 2: a longer snake", prompt: "Next layer: in level 2 the snake starts longer than in level 1. Keep it playable.", after: "Reload and play." },
-    { text: "Layer 3: obstacles", prompt: "Last layer: level 2 has a few obstacles. The snake never starts in one, and food never lands on one.", after: "Reload and play. Still fair?" },
+    { text: "Layer 2: a longer snake", prompt: "Next layer, only in levels/level-2.js: the snake starts a bit longer than in level 1. Keep it playable.", after: "Reload and play." },
+    { text: "Layer 3: obstacles", prompt: "Last layer: level 2 gets a few obstacles, blocks on the board that end the game when you hit them. Put them in levels/level-2.js. The snake never starts in one, and food never lands on one.", after: "Reload and play. Still fair?" },
     { text: "Save it on the branch", prompt: "Commit and push the branch level-2.", after: "main stays untouched. Check: !git branch" }
   ],
   expected: "Level 2 needs more food, has a longer snake and a few obstacles, in levels/level-2.js on the branch level-2.",
