@@ -1823,9 +1823,9 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { img: "assets/examples/snake-level-4.svg", label: "Level 4", caption: "Faster, more in the way." },
     { img: "assets/examples/snake-level-5.svg", label: "Level 5", caption: "Almost a maze. Still playable." }
   ] },
-  tagline: "Level 2 with prompts. Level 3 with skills. A test and Bobby check them. Levels 4 and 5 with one command.",
+  tagline: "Level 2 with prompts. Level 3 with skills. A test and a subagent check them. Levels 4 and 5 with one command.",
   keyPoints: ["Ask first: how would you make Snake harder?", "Click: one level at a time", "Harder, but still playable", "The tagline is today's route"],
-  notes: "Ask the room first: what would make the next level of Snake harder? Collect a few answers, then click through the five boards. Every level turns the same knobs a little further: more food to finish, a longer snake at the start, more obstacles, a bit faster. Harder, but always playable: that rule comes back in the spec, the test and Bobby.\n\nThe tagline is the route of the day, read it out: level 2 with plain prompts, level 3 with three skills you make, then a test and a checker agent called Bobby, then one command that builds levels 4 and 5. Each time the same result, built a smarter way."
+  notes: "Ask the room first: what would make the next level of Snake harder? Collect a few answers, then click through the five boards. Every level turns the same knobs a little further: more food to finish, a longer snake at the start, more obstacles, a bit faster. Harder, but always playable: that rule comes back in the spec, the test and Bobby.\n\nThe tagline is the route of the day, read it out: level 2 with plain prompts, level 3 with three skills you make, then a test and a checker subagent, then one command that builds levels 4 and 5. Each time the same result, built a smarter way."
 },
 
 { // Slide 89
@@ -1834,36 +1834,34 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Two files next to your code: why you build it, and exactly what you build. The example: the levels from the last slide.",
   type: "concept",
   visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
-    treeTitle: "Where they live",
-    tree: [
-      ["aether-snake/", "your project, in git"],
-      ["├── CLAUDE.md", "how to work here"],
-      ["├── intent.md", "why + what", "why"],
-      ["├── spec.md", "exactly what", "what"],
-      ["├── levels/", "built from spec.md"],
-      ["└── tests/", "checks spec.md"]
-    ],
-    treeNote: "In the root, in git: the whole team reads the same two files.",
+    tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
+      ["├── ", "CLAUDE.md", "how to work here"],
+      ["├── ", "intent.md", "why + what: gets the levels wish", "why"],
+      ["├── ", "spec.md", "exactly what: new today", "what"],
+      ["├── ", ".claude/settings.json", "permissions + hook"],
+      ["├── ", "game.js …", "your Snake"],
+      ["├── ", "tests/", "your test"],
+      ["└── ", "PROGRESS.md", "the handover"]
+    ] },
     link: "makes it exact",
     docs: [
       { name: "intent.md", badge: "Why + what", ask: "What do we want, and why?",
-        lines: ["## Outcome", "Levels 2 to 5, each a bit harder.", "## Done when", "- you can play all five", "- no level is easier", "## Boundaries", "- always playable"],
+        lines: ["## Outcome", "Levels 2 to 5, each harder.", "## Done when", "- you can play all five", "- no level is easier", "## Boundaries", "- always playable"],
         facts: ["In words, for people", "Changes when the goal changes"],
-        when: { label: "Claude reads it", items: ["at the start of every session (@intent.md)", "when it makes a plan", "to check: is it done?"] },
-        example: { prompt: "Make levels that get harder." },
-        usersLabel: "Read by", users: ["you", "your team", "Claude"] },
+        when: ["at the start of every session (CLAUDE.md says @intent.md)", "when it makes a plan", "to check: is it done?"],
+        example: "Make the game harder, level by level." },
       { name: "spec.md", badge: "Exactly what", ask: "What does it look like, exactly?",
-        lines: ["## A level: levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"], 
+        lines: ["## levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"],
         facts: ["Fields, limits, an example", "Changes when the design changes"],
-        when: { label: "Claude reads it", items: ["only when something points to it:", "your prompt, a skill or Bobby", "to build or check a level"] },
-        example: { prompt: "Make level 3." },
-        usersLabel: "Followed by", users: ["your 3 skills", "the level test", "Bobby"] }
+        when: ["only when something points to it", "today: your level 2 prompts, then the skills, the test and a subagent", "whenever a level is built or checked"],
+        example: "Make level 2 from spec.md." }
     ],
+    whenTitle: "When does Claude read it?",
     work: ["intent.md ≈ the why in a ticket or user story", "spec.md ≈ the API contract or the design spec"]
   } },
   tagline: "intent.md says why. spec.md says exactly what. Everything you build today follows spec.md.",
-  keyPoints: ["Click: folder, intent.md, spec.md, at work", "Both in the project root, in git", "intent = why + what, in words", "spec = exact shape: fields, limits, example", "intent → spec → build → test"],
-  notes: "Say: You just saw five levels. Before anyone builds one, we write two files. The content on the slide is today's wish, so you see what goes in each file with something real.\n\nClick through it. 1 Where they live: in the root of your project, next to CLAUDE.md, in git, so everyone and every Claude session reads the same files. 2 intent.md, the why and the what, in words: what we want (levels 2 to 5, each a bit harder), when it's done (you can play all five, no level is easier) and the boundaries (always playable). People read it; Claude reads it to plan. 3 spec.md, exactly what: what a level file contains, a minimum and a maximum for every value, and one example. The arrow says it: spec.md makes intent.md exact. 'A bit harder' and 'always playable' become numbers you can check. Each card also says when Claude reads it. intent.md: at the start of every session (CLAUDE.md pulls it in with @intent.md), when it makes a plan, and when it checks whether something is done. spec.md: only when something points to it (a prompt that says 'from spec.md', a skill's recipe, Bobby), so when it builds or checks a level. The two speech bubbles are the short version: 'Make levels that get harder' is an intent.md question, 'Make level 3' is a spec.md question. After Assignment 24, intent.md is no longer loaded by itself either: then it's read when needed, like spec.md. 4 At work: intent.md is the why in a ticket, spec.md is the API contract or the design spec.\n\nWhy this order: intent first, because you can't make something exact before you know what you want. Spec before building, because the next part builds from it: your three skills follow spec.md, the level test checks it, and Bobby uses it to say GO or NO-GO.\n\nWatch for: the field names on the slide are an example. Claude may choose others in Assignment 17 (startDelay instead of speed, for instance): fine, as long as every value has a minimum and a maximum.\n\nNext: Assignment 17, the same two files for your own game: first intent.md, then spec.md."
+  keyPoints: ["Click: folder, intent.md, spec.md, at work", "Both in the project root, in git", "intent = why + what, in words", "spec = exact shape: fields, limits, example", "spec.md: read from level 2 on, because the prompts point to it"],
+  notes: "Say: You just saw five levels. Before anyone builds one, we write two files. The content on the slide is today's wish, so you see what goes in each file with something real.\n\nClick through it. 1 Where they live: the folder as it is now, at the end of Day 1, with spec.md as the one new file, in the root next to CLAUDE.md, in git, so everyone and every Claude session reads the same files. 2 intent.md, the why and the what, in words: what we want (levels 2 to 5, each a bit harder), when it's done (you can play all five, no level is easier) and the boundaries (always playable). People read it; Claude reads it to plan. 3 spec.md, exactly what: what a level file contains, a minimum and a maximum for every value, and one example. The arrow says it: spec.md makes intent.md exact. 'A bit harder' and 'always playable' become numbers you can check. Each card also says when Claude reads it. intent.md: at the start of every session (CLAUDE.md pulls it in with @intent.md), when it makes a plan, and when it checks whether something is done. spec.md: only when something points to it: your level 2 prompts ('from spec.md'), later a skill's recipe, the test and the subagent. The two speech bubbles are the short version: 'Make the game harder, level by level' is an intent.md question, 'Make level 2 from spec.md' is a spec.md question. After Assignment 24, intent.md is no longer loaded by itself either: then it's read when needed, like spec.md. 4 At work: intent.md is the why in a ticket, spec.md is the API contract or the design spec.\n\nWhy this order: intent first, because you can't make something exact before you know what you want. Spec before building: level 2 is built with plain prompts, but those prompts say 'from spec.md' and 'stay within spec.md', so Claude reads it from the very first level. Later your three skills follow it, the level test checks it, and a subagent uses it to say GO or NO-GO. Don't name Bobby yet: the subagent gets its name after lunch.\n\nWatch for: the field names on the slide are an example. Claude may choose others in Assignment 17 (startDelay instead of speed, for instance): fine, as long as every value has a minimum and a maximum.\n\nNext: Assignment 17, the same two files for your own game: first intent.md, then spec.md."
 },
 
 { // Slide 90

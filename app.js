@@ -430,20 +430,21 @@ function renderExtras(stage, main, s, v) {
     m.append(left, mid); if (M.right) { const right = node('div', 'cmap-col'); M.right.forEach(b => right.append(box(b))); m.append(right); } else m.classList.add('cmap-two'); if (M.apart) { const ap = box(M.apart, 'cmap-apart'); m.append(ap); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(m); else if (tg) tg.before(m); else main.append(m);
   }
-  if (v.docPair) {                                               // two project files: where they live, what each says, who uses them
+  if (v.docPair) {                                               // two project files: where they live, what each says, when Claude reads them
     const D = v.docPair; const w = node('div', 'dpair');
-    const tree = node('div', 'dp-tree dp-step'); tree.append(node('span', 'dp-label', D.treeTitle || 'Your project'));
-    D.tree.forEach(([name, note, hl]) => { const r = node('div', 'dp-trow' + (hl ? ' dp-hl dp-hl-' + hl : '')); r.append(node('span', 'dp-tname', name), node('span', 'dp-tnote', note || '')); tree.append(r); });
-    if (D.treeNote) tree.append(node('p', 'dp-tfoot', D.treeNote));
+    const tree = node('div', 'cmap-box cmap-tree dp-tree dp-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, hl]) => { const r = node('div', 'ctree-row' + (hl ? ' dp-hl dp-hl-' + hl : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', '← ' + note)); tree.append(r); });
     const doc = (d, i) => { const c = node('div', 'dp-doc dp-step dp-doc-' + i); const h = node('div', 'dp-dhead'); h.append(node('span', 'dp-dname', d.name), node('span', 'dp-badge', d.badge)); c.append(h, node('p', 'dp-ask', d.ask));
       const f = node('div', 'dp-file'); d.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); c.append(f);
-      const facts = node('ul', 'dp-facts'); d.facts.forEach(t => facts.append(node('li', null, t))); c.append(facts);
-      if (d.when) { const wb = node('div', 'dp-when'); wb.append(node('span', 'dp-ulabel', d.when.label)); const ol = node('ol', 'dp-wlist'); d.when.items.forEach(t => ol.append(node('li', null, t))); wb.append(ol); c.append(wb); }
-      if (d.example) { const ex = node('div', 'dp-ex'); ex.append(node('span', 'dp-bubble', d.example.prompt), node('span', 'dp-exarrow', '→'), node('span', 'dp-exfile', d.name)); c.append(ex); }
-      const u = node('div', 'dp-users'); u.append(node('span', 'dp-ulabel', d.usersLabel)); d.users.forEach(t => u.append(node('span', 'dp-chip', t))); c.append(u); return c; };
+      const facts = node('ul', 'dp-facts'); d.facts.forEach(t => facts.append(node('li', null, t))); c.append(facts); return c; };
     const link = node('div', 'dp-link dp-step'); link.append(node('span', 'cmap-line'), node('span', 'cmap-label', D.link));
     const pair = node('div', 'dp-docs'); pair.append(doc(D.docs[0], 0), link, doc(D.docs[1], 1));
-    w.append(tree, pair);
+    const when = node('div', 'dp-whenbox dp-step'); when.append(node('span', 'dp-label', D.whenTitle));
+    const cols = node('div', 'dp-wcols'); D.docs.forEach((d, i) => { const col = node('div', 'dp-wcol dp-doc-' + i); const hd = node('div', 'dp-whead'); hd.append(node('span', 'dp-exfile', d.name)); col.append(hd);
+      const ul = node('ul', 'dp-wlist'); d.when.forEach(t => ul.append(node('li', null, t))); col.append(ul);
+      const ex = node('div', 'dp-ex'); ex.append(node('span', 'dp-bubble', d.example)); col.append(ex); cols.append(col); }); when.append(cols);
+    const right = node('div', 'dp-right'); right.append(pair, when);
+    w.append(tree, right);
     if (D.work) { const wk = node('div', 'dp-work dp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
