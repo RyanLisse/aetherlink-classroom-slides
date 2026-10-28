@@ -434,13 +434,14 @@ function renderExtras(stage, main, s, v) {
     const D = v.docPair; const w = node('div', 'dpair');
     const tree = node('div', 'cmap-box cmap-tree dp-tree dp-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
     D.tree.rows.forEach(([pre, name, note, hl]) => { const r = node('div', 'ctree-row' + (hl ? ' dp-hl dp-hl-' + hl : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', '← ' + note)); tree.append(r); });
-    const doc = (d, i) => { const c = node('div', 'dp-doc dp-step dp-doc-' + i); const h = node('div', 'dp-dhead'); h.append(node('span', 'dp-dname', d.name), node('span', 'dp-badge', d.badge)); c.append(h, node('p', 'dp-ask', d.ask));
+    const tone = (d, i) => d.tone === 'what' ? 1 : d.tone === 'why' ? 0 : i;
+    const doc = (d, i) => { const c = node('div', 'dp-doc dp-step dp-doc-' + tone(d, i)); const h = node('div', 'dp-dhead'); h.append(node('span', 'dp-dname', d.name), node('span', 'dp-badge', d.badge)); c.append(h, node('p', 'dp-ask', d.ask));
       const f = node('div', 'dp-file'); d.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); c.append(f);
       const facts = node('ul', 'dp-facts'); d.facts.forEach(t => facts.append(node('li', null, t))); c.append(facts); return c; };
     const link = node('div', 'dp-link dp-step'); link.append(node('span', 'cmap-line'), node('span', 'cmap-label', D.link));
-    const pair = node('div', 'dp-docs'); pair.append(doc(D.docs[0], 0), link, doc(D.docs[1], 1));
+    const pair = node('div', 'dp-docs' + (D.docs.length === 1 ? ' dp-docs-one' : '')); if (D.docs.length === 1) pair.append(doc(D.docs[0], 0)); else pair.append(doc(D.docs[0], 0), link, doc(D.docs[1], 1));
     const when = node('div', 'dp-whenbox dp-step'); when.append(node('span', 'dp-label', D.whenTitle));
-    const cols = node('div', 'dp-wcols'); D.docs.forEach((d, i) => { const col = node('div', 'dp-wcol dp-doc-' + i); const hd = node('div', 'dp-whead'); hd.append(node('span', 'dp-exfile', d.name)); col.append(hd);
+    const cols = node('div', 'dp-wcols' + (D.docs.length === 1 ? ' dp-wcols-one' : '')); D.docs.forEach((d, i) => { const col = node('div', 'dp-wcol dp-doc-' + tone(d, i)); const hd = node('div', 'dp-whead'); hd.append(node('span', 'dp-exfile', d.name)); col.append(hd);
       const ul = node('ul', 'dp-wlist'); d.when.forEach(t => ul.append(node('li', null, t))); col.append(ul);
       const ex = node('div', 'dp-ex'); ex.append(node('span', 'dp-bubble', d.example)); col.append(ex); cols.append(col); }); when.append(cols);
     const right = node('div', 'dp-right'); right.append(pair, when);

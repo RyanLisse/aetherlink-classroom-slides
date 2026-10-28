@@ -1471,6 +1471,7 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .dp-file{display:grid;gap:.1rem;padding:.55rem .75rem;border-radius:10px;background:var(--bg);border:1px solid var(--border);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.74rem,.95vw,.9rem);white-space:pre;overflow:hidden}
 .dp-line{color:var(--muted)}.dp-h{color:var(--text);font-weight:800}
 .dp-facts{margin:0;padding-left:1.1rem;display:grid;gap:.15rem;font-size:clamp(.84rem,1.05vw,.98rem)}
+.dp-docs-one,.dp-wcols-one{grid-template-columns:minmax(0,1fr)}
 .dp-link{display:grid;justify-items:center;gap:.4rem;width:clamp(60px,6vw,92px)}
 .dp-link .cmap-label{max-width:6rem;line-height:1.25}
 .dp-whenbox{display:grid;gap:.45rem;padding:.6rem 1rem .7rem;border:2px solid var(--border);border-radius:14px;background:var(--surface)}
