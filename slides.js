@@ -1758,48 +1758,33 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 86
-  title: "Recap: your AI in Claude Code",
+  title: "Your AI in Claude Code",
   kicker: "DAY 2 · RECAP",
-  subtitle: "Yesterday's map, now filled in: everything you made is a file in your game.",
+  subtitle: "Yesterday's map, now with everything you made in it.",
   type: "recap",
-  visual: {
-    map: {
-      tree: {
-        root: "aether-snake/",
-        rootNote: "your game",
-        groups: [
-          [
-            ["├── ", "intent.md", "what you want"],
-            ["├── ", "CLAUDE.md", "your instructions"],
-            ["├── ", ".claude/settings.json", "permissions + your hook"]
-          ],
-          [
-            ["├── ", "game.js  index.html …", "Snake, in 5 layers"],
-            ["├── ", "assets/", "your avatar"],
-            ["├── ", "tests/", "your test"]
-          ],
-          [
-            ["└── ", "PROGRESS.md", "the handover"]
-          ]
-        ]
-      },
-      inLabel: "loads",
-      center: "Claude Code",
-      centerSub: "reads CLAUDE.md and settings.json at every start",
-      outLabel: "MCP",
-      right: [
-        { name: "GitLab", where: "Through MCP", chips: [["your project", "yesterday"], ["merge requests", "today"]] }
-      ]
-    }
-  },
-  keyPoints: [
-    "Same map as Day 1, now filled in",
-    "Instructions and permissions: Claude Code loads them",
-    "Game, tests, avatar: what you built",
-    "PROGRESS.md: where today starts",
-    "Answer the flipchart questions here"
-  ],
-  notes: "Say: This is the map from yesterday morning (Day 1, slide 52), now with everything you made in it. Walk it top to bottom. What Claude Code reads: intent.md, CLAUDE.md with your instructions, and .claude/settings.json with your permissions and the hook that runs npm test after every edit. What you built: the game in 5 layers, your avatar in assets/, and the test in tests/ that caught the straight-back bug. PROGRESS.md: the handover, and the first thing Claude reads this morning. Claude Code loads CLAUDE.md (which pulls in @intent.md) and settings.json at every start; PROGRESS.md it reads when you ask. GitLab: Claude created your project through MCP; git pushed your code.\n\nUse this to answer the questions from Show your game. Today the same folder gets spec.md, levels/, three skills, a workflow and an agent called Bobby in .claude/."
+  visual: { stepThrough: ".cmap-step, .slide-main > .tagline", map: {
+    tree: { root: "~", rootNote: "your home folder", groups: [
+      [ ["├── ", ".claude/", "about you, every project", 1],
+        ["│   ├── ", "CLAUDE.md", "memory: about you"],
+        ["│   ├── ", "settings.json", "your own permissions"],
+        ["│   └── ", "projects/…/memory/", "Claude's notes"] ],
+      [ ["└── ", "aether-snake/", "your project, in git", 1],
+        ["    ├── ", "intent.md", "what you want ✓"],
+        ["    ├── ", "CLAUDE.md", "memory: this project"],
+        ["    ├── ", ".claude/settings.json", "permissions + hook"],
+        ["    ├── ", "game.js …", "your Snake ✓"],
+        ["    ├── ", "assets/", "your avatar"],
+        ["    ├── ", "tests/", "your test"],
+        ["    └── ", "PROGRESS.md", "the handover"] ]
+    ] },
+    inLabel: "loads", center: "Claude Code", centerSub: "reads both folders at the start", outLabel: "MCP",
+    right: [
+      { name: "Hands and feet", where: "Outside, through MCP", chips: [["GitLab", "your project ✓"], ["Jira", "support days"], ["Confluence", "support days"]] }
+    ]
+  } },
+  tagline: "Everything Claude knows about your game is a file. Today the same folder grows.",
+  keyPoints: ["Same map as Day 1 slide 52", "Click: one part at a time", "Ticks: what you made yesterday", "PROGRESS.md: where today starts", "Answer the flipchart questions here"],
+  notes: "Say: This is the map from yesterday (Day 1, slide 52), now with everything you made in it. Click through it one part at a time. 1 ~/.claude/: your personal CLAUDE.md, your own settings and Claude's notes, the same as yesterday. 2 Your project folder, with a tick on everything you made: intent.md, the project CLAUDE.md, .claude/settings.json with your permissions and the hook that runs npm test after every edit, the game in 5 layers, your avatar in assets/, the test in tests/ that caught the straight-back bug, and PROGRESS.md, the handover. 3 Claude Code loads both folders at the start of every session; PROGRESS.md it reads when you ask. 4 Through MCP it made your GitLab project; Jira and Confluence come in the support days.\n\nUse this to answer the questions from Show your game. Today the same folder gets spec.md, levels/, three skills, a workflow and an agent called Bobby in .claude/."
 },
 
 { // Slide 87
