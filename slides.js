@@ -858,7 +858,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "The question", body: "Before a change or a command, it asks. You answer 1, 2 or 3." },
     { title: "Modes", body: "How much may it do before it asks? Shift+Tab switches. Next slide." },
     { title: "The / menu", body: "Type / for everything else: help, model, context, connections." },
-    { title: "Files that steer it", body: "CLAUDE.md: what it knows.\nsettings.json: what it may do.\n.mcp.json: what it connects to." }
+    { title: "Files that steer it", body: "CLAUDE.md: what it knows.\nsettings.json: what it may do." }
   ],
   keyPoints: [
     "Click: one part at a time, the screen lights up",
@@ -867,7 +867,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     "Files that steer it: you make them today",
     "Then show it live in an empty folder"
   ],
-  notes: "A map before the details: everything they will see on the screen today, in one picture. Click through the six parts; each click lights up the matching line on the screen. 1 Your folder: claude works in the folder you start it in, so you always start it in your own project folder. 2 Tools: reading, editing and running commands; every step is a line with a dot, so you can follow what it does. 3 The question: before a change or a command it asks; 1 is yes once, 2 is yes and don't ask again for this kind of thing, 3 is no. Read before you answer. 4 Modes: how much it may do before it asks; the bottom line says which mode you are in. Next slide. 5 The / menu: everything else lives behind /. The slide after next. 6 Files that steer it: CLAUDE.md, .claude/settings.json and .mcp.json; they don't exist yet, they make them today. Notice on the screen: in accept edits mode the file edit went through without a question, but the command still asks.\n\nThen show it live: make an empty folder, start claude in it, type one small request and let them see the same parts on a real screen. Their screen will look a little different (version, colours, wording): that is fine, the parts are the same."
+  notes: "A map before the details: everything they will see on the screen today, in one picture. Click through the six parts; each click lights up the matching line on the screen. 1 Your folder: claude works in the folder you start it in, so you always start it in your own project folder. 2 Tools: reading, editing and running commands; every step is a line with a dot, so you can follow what it does. 3 The question: before a change or a command it asks; 1 is yes once, 2 is yes and don't ask again for this kind of thing, 3 is no. Read before you answer. 4 Modes: how much it may do before it asks; the bottom line says which mode you are in. Next slide. 5 The / menu: everything else lives behind /. The slide after next. 6 Files that steer it: CLAUDE.md and .claude/settings.json; they don't exist yet, they make them today. Notice on the screen: in accept edits mode the file edit went through without a question, but the command still asks.\n\nThen show it live: make an empty folder, start claude in it, type one small request and let them see the same parts on a real screen. Their screen will look a little different (version, colours, wording): that is fine, the parts are the same."
 },
 
 { // Slide 44
@@ -1034,8 +1034,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
       [ ["└── ", "aether-snake/", "your project, in git", 1],
         ["    ├── ", "intent.md", "what you want ✓"],
         ["    ├── ", "CLAUDE.md", "memory: this project"],
-        ["    ├── ", ".claude/settings.json", "permissions"],
-        ["    └── ", ".mcp.json", "its connections"] ]
+        ["    └── ", ".claude/settings.json", "permissions"] ]
     ] },
     inLabel: "loads", center: "Claude Code", centerSub: "reads both folders at the start", outLabel: "MCP",
     right: [
@@ -1045,7 +1044,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   } },
   tagline: "We set this up with you, step by step.",
   keyPoints: ["Opens the tour: the map first","Left: two folders, you and this project","Middle: Claude Code loads them at the start","Right: MCP, its hands and feet","Bottom: LibreChat, separate","Every file comes back today"],
-  notes: "Say: Before we fill anything in, the map. Claude Code itself remembers nothing between sessions. What it knows and what it may do lives in files, in two folders, and it loads them every time it starts. Through MCP it reaches outside your laptop.\n\nWhat you see: Click: one part at a time. 1 ~/.claude/, a hidden folder in your home folder, next to your project, not around it: your personal CLAUDE.md (about you), your own settings.json and the notes Claude keeps for itself (auto memory). It stays on your laptop and counts for every project. 2 Your project folder: intent.md (done), CLAUDE.md for this project, .claude/settings.json with the permissions and .mcp.json with its connections. This folder goes into git, so the team gets the same instructions and permissions. 3 Claude Code in the middle: it loads both folders at the start of every session. 4 Hands and feet: through MCP it works in GitLab this afternoon, Jira and Confluence in the support days. 5 LibreChat: separate, in the browser, for quick questions and images.\n\nLink back: Every file here comes back today. Point back at this slide every time one of them comes up.\n\nWatch for: People think the project lives inside ~/.claude/ because of the projects/ folder there. It only holds Claude's notes and chat history per project; the code stays in the project folder.\n\nBackground: Project settings beat your own, and company settings beat both. /memory shows the loaded CLAUDE.md files and auto memory; /mcp shows the connections. Day 2 adds skills, agents and hooks to the same project folder.\n\nNext: Your context window in Claude Code."
+  notes: "Say: Before we fill anything in, the map. Claude Code itself remembers nothing between sessions. What it knows and what it may do lives in files, in two folders, and it loads them every time it starts. Through MCP it reaches outside your laptop.\n\nWhat you see: Click: one part at a time. 1 ~/.claude/, a hidden folder in your home folder, next to your project, not around it: your personal CLAUDE.md (about you), your own settings.json and the notes Claude keeps for itself (auto memory). It stays on your laptop and counts for every project. 2 Your project folder: intent.md (done), CLAUDE.md for this project, and .claude/settings.json with the permissions. This folder goes into git, so the team gets the same instructions and permissions. 3 Claude Code in the middle: it loads both folders at the start of every session. 4 Hands and feet: through MCP it works in GitLab this afternoon, Jira and Confluence in the support days. 5 LibreChat: separate, in the browser, for quick questions and images.\n\nLink back: Every file here comes back today. Point back at this slide every time one of them comes up.\n\nWatch for: People think the project lives inside ~/.claude/ because of the projects/ folder there. It only holds Claude's notes and chat history per project; the code stays in the project folder.\n\nBackground: Project settings beat your own, and company settings beat both. /memory shows the loaded CLAUDE.md files and auto memory; /mcp shows the connections. Day 2 adds skills, agents and hooks to the same project folder.\n\nNext: Your context window in Claude Code."
 },
 
 { // Slide 49
@@ -1113,8 +1112,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
         ["    ├── ", "CLAUDE.md", "this project, in git"],
         ["    ├── ", "CLAUDE.local.md", "you here, not in git"],
         ["    ├── ", "intent.md", "pulled in with @intent.md", 0, 1],
-        ["    ├── ", ".claude/settings.json", "permissions: next slide", 0, 1],
-        ["    └── ", ".mcp.json", "connections", 0, 1] ]
+        ["    └── ", ".claude/settings.json", "permissions: next slide", 0, 1] ]
     ] },
     inLabel: "loads", center: "Every new session", centerSub: "/memory shows what's loaded"
   } },
@@ -1796,23 +1794,48 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 84
   title: "Recap: your AI in Claude Code",
   kicker: "DAY 2 · RECAP",
-  subtitle: "What you gave your Snake yesterday.",
+  subtitle: "Yesterday's map, now filled in: everything you made is a file in your game.",
   type: "recap",
-  visual: { art: "intake", bot: "head", place: "aside" },
-  cards: [
-    { title: "Memory", body: "CLAUDE.md, intent.md and PROGRESS.md." },
-    { title: "Permissions", body: "settings.json: allow, ask and deny." },
-    { title: "Checks", body: "Your test and your hook." },
-    { title: "Online", body: "Your repo on GitLab, through MCP." }
-  ],
-  tagline: "Today we make it bigger: levels, skills, agents and a team.",
+  visual: {
+    map: {
+      tree: {
+        root: "aether-snake/",
+        rootNote: "your game, in git and on GitLab",
+        groups: [
+          [
+            ["├── ", "intent.md", "what you want"],
+            ["├── ", "CLAUDE.md", "instructions, every session"],
+            ["├── ", ".claude/settings.json", "permissions + your hook"]
+          ],
+          [
+            ["├── ", "index.html  game.js  style.css", "Snake, in 5 layers"],
+            ["├── ", "assets/", "your avatar"],
+            ["├── ", "tests/", "the test that caught the bug"]
+          ],
+          [
+            ["└── ", "PROGRESS.md", "the handover for today"]
+          ]
+        ]
+      },
+      inLabel: "loads",
+      center: "Claude Code",
+      centerSub: "reads CLAUDE.md and settings.json at every start",
+      outLabel: "MCP",
+      right: [
+        { name: "GitLab", where: "Through MCP", chips: [["your project", "yesterday"], ["merge requests", "today"]] }
+      ],
+      apart: { name: "LibreChat", where: "In the browser · not part of Claude Code", note: "Made your avatar." }
+    }
+  },
+  tagline: "Today the same folder grows: levels, a skill, an agent, and then a team.",
   keyPoints: [
-    "Answer the flipchart questions here",
-    "Memory, MCP, permissions, your game",
-    "All of it they set up themselves",
-    "Today: goals and skills"
+    "Same map as Day 1, now filled in",
+    "Instructions and permissions: Claude Code loads them",
+    "Game, tests, avatar: what you built",
+    "PROGRESS.md: where today starts",
+    "Answer the flipchart questions here"
   ],
-  notes: "Use this to answer the questions from Show your game. Everything here they set up themselves yesterday. Today adds levels with a spec, skills, a subagent, a workflow, and a whole team in the arcade."
+  notes: "Say: This is the map from yesterday morning (Day 1, slide 52), now with everything you made in it. Walk it top to bottom. What Claude Code reads: intent.md, CLAUDE.md with your instructions, and .claude/settings.json with your permissions and the hook that runs npm test after every edit. What you built: the game in 5 layers, your avatar in assets/, and the test in tests/ that caught the straight-back bug. PROGRESS.md: the handover, and the first thing Claude reads this morning. Claude Code loads CLAUDE.md (which pulls in @intent.md) and settings.json at every start; PROGRESS.md it reads when you ask. GitLab: Claude created your project through MCP; git pushed your code. LibreChat made the avatar, outside Claude Code.\n\nUse this to answer the questions from Show your game. Today the same folder gets levels/, spec.md, a skill and an agent in .claude/, and then the arcade with a whole team."
 },
 
 { // Slide 85
@@ -2161,7 +2184,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "concept",
   visual: { code: 0 },
   cards: [
-    { title: "aether-snake/", body: "CLAUDE.md               every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md             only when working in levels/\n  level-2.js …\ntests/\n.mcp.json               GitLab connection\n.claude/\n  settings.json         permissions + hooks\n  skills/\n    new-level/          SKILL.md, template/, scripts/\n    ship-level/         SKILL.md: the workflow\n  agents/\n    verifier.md         a subagent" },
+    { title: "aether-snake/", body: "CLAUDE.md               every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md             only when working in levels/\n  level-2.js …\ntests/\n.claude/\n  settings.json         permissions + hooks\n  skills/\n    new-level/          SKILL.md, template/, scripts/\n    ship-level/         SKILL.md: the workflow\n  agents/\n    verifier.md         a subagent" },
     { title: "Yours, not shared", body: "Not in git:\nCLAUDE.local.md\n.claude/settings.local.json\n\nYou, in every project:\n~/.claude/CLAUDE.md\n~/.claude/settings.json\n~/.claude/skills/\n~/.claude/agents/" }
   ],
   tagline: "Project files are shared through git. Your home folder is only yours.",
