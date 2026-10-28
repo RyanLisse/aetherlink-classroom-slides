@@ -465,14 +465,15 @@ function renderExtras(stage, main, s, v) {
   }
   if (v.skillDoc) {                                              // a skill: where its folder lives, what SKILL.md holds, what Claude loads when
     const D = v.skillDoc; const w = node('div', 'sdoc');
-    const tree = node('div', 'cmap-box cmap-tree sd-tree sd-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    const tree = node('div', 'cmap-box cmap-tree sd-tree sd-step'); tree.append(node('span', 'dp-label sd-tlabel', D.tree.label)); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
     D.tree.rows.forEach(([pre, name, note, cls]) => { const r = node('div', 'ctree-row' + (cls ? ' ' + cls.split(' ').map(c => 'ctree-' + c).join(' ') : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', note ? '← ' + note : '')); tree.append(r); });
-    const file = node('div', 'sd-file'); const fh = node('div', 'sd-fhead'); fh.append(node('span', 'sd-fname', D.file.name)); file.append(fh);
-    D.file.parts.forEach(P => { const part = node('div', 'sd-part sd-step sd-' + P.kind); const lab = node('div', 'sd-plabel'); lab.append(node('strong', null, P.label), node('span', null, P.sub)); part.append(lab);
+    const file = node('div', 'sd-file sd-step'); const fh = node('div', 'sd-fhead'); fh.append(node('span', 'dp-label', D.file.label), node('span', 'sd-fname', D.file.name)); file.append(fh);
+    D.file.parts.forEach((P, k) => { const part = node('div', 'sd-part sd-' + P.kind + (k ? ' sd-step' : '')); const lab = node('div', 'sd-plabel'); lab.append(node('strong', null, P.label), node('span', null, P.sub)); part.append(lab);
       const body = node('div', 'sd-lines'); P.lines.forEach(([code, note]) => { const row = node('div', 'sd-row'); row.append(node('span', 'sd-code' + (/^(---|#)/.test(code) ? ' sd-mark' : ''), code), node('span', 'sd-note', note ? '← ' + note : '')); body.append(row); }); part.append(body); file.append(part); });
-    const load = node('div', 'sd-load sd-step'); load.append(node('span', 'dp-label', D.load.title)); const cols = node('div', 'sd-lcols');
-    D.load.cols.forEach(C => { const c = node('div', 'sd-lcol sd-' + C.kind); c.append(node('strong', 'sd-lhead', C.head)); const ul = node('ul', 'dp-wlist'); C.items.forEach(t => ul.append(node('li', null, t))); c.append(ul); cols.append(c); });
-    load.append(cols); if (D.load.why) load.append(node('p', 'sd-why', D.load.why));
+    const load = node('div', 'sd-load sd-step'); load.append(node('span', 'dp-label', D.load.title));
+    D.load.moments.forEach(M => { const m = node('div', 'sd-moment'); m.append(node('strong', 'sd-when', M.when)); const box = node('div', 'sd-ctx'); box.append(node('span', 'sd-ctxlabel', M.label));
+      const chips = node('div', 'sd-chips'); M.chips.forEach(([t, k]) => chips.append(node('span', 'sd-chip sd-chip-' + k, t))); (M.closed || []).forEach(t => chips.append(node('span', 'sd-chip sd-chip-closed', t))); box.append(chips); m.append(box, node('span', 'sd-mnote', M.note)); load.append(m); });
+    if (D.load.why) load.append(node('p', 'sd-why', D.load.why));
     const right = node('div', 'sd-right'); right.append(file, load); w.append(tree, right);
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }

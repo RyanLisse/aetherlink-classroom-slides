@@ -1990,26 +1990,26 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 96
   title: "Inside a skill: SKILL.md",
   kicker: "DAY 2 · PART 2 · SKILLS",
-  subtitle: "A skill is a folder with one file, SKILL.md. The top of that file is the label, the rest is the instructions.",
+  subtitle: "A skill is a folder with one file in it, SKILL.md. The file has two parts: the frontmatter on top, the body under it.",
   type: "concept",
   visual: { stepThrough: ".sd-step, .slide-main > .tagline", skillDoc: {
-    tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
+    tree: { label: "Where skills live", root: "aether-snake/", rootNote: "your project, in git", rows: [
       ["├── ", "CLAUDE.md", "", "dim"],
       ["├── ", "intent.md", "", "dim"],
-      ["├── ", "spec.md", "the numbers the skills follow", "dim"],
-      ["├── ", "levels/", "the level files the skills change", "dim"],
+      ["├── ", "spec.md", "the numbers", "dim"],
+      ["├── ", "levels/", "skills add level 3 here", "dim"],
       ["└── ", ".claude/", "", "dir"],
       ["    ├── ", "settings.json", "", "dim"],
-      ["    └── ", "skills/", "one folder per skill", "dir"],
+      ["    └── ", "skills/", "a folder per skill", "dir"],
       ["        ├── ", "create-food/", "", "skill"],
-      ["        │   └── ", "SKILL.md", "today, first", "file"],
+      ["        │   └── ", "SKILL.md", "on the right →", "file"],
       ["        ├── ", "create-snake/", "", "skill"],
       ["        │   └── ", "SKILL.md", "", "file"],
       ["        └── ", "create-obstacles/", "", "skill"],
       ["            └── ", "SKILL.md", "", "file"]
     ] },
-    file: { name: "create-food/SKILL.md", parts: [
-      { kind: "front", label: "Frontmatter", sub: "the label: between the two --- lines", lines: [
+    file: { label: "Inside the file", name: "create-food/SKILL.md", parts: [
+      { kind: "front", label: "Frontmatter", sub: "the top of the file, between the two --- lines", lines: [
         ["---", ""],
         ["name: create-food", "the /name you type"],
         ["description: Adds the food to a level.", "what it does, and when:"],
@@ -2017,7 +2017,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
         ["allowed-tools: Read, Edit(levels/**)", "may do this without asking you"],
         ["---", ""]
       ] },
-      { kind: "body", label: "Body", sub: "the instructions, in plain words", lines: [
+      { kind: "body", label: "Body", sub: "everything under the second ---, no heading needed", lines: [
         ["# Create food", ""],
         ["1. Read the food rules in spec.md.", ""],
         ["2. A bit more food to finish than the level before.", ""],
@@ -2025,13 +2025,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
         ["4. Run npm test: green before you stop.", ""]
       ] }
     ] },
-    load: { title: "What does Claude load, and when?", cols: [
-      { kind: "front", head: "Every session: every skill's label", items: ["only the frontmatter, a few lines per skill", "so Claude knows: /create-food exists, use it when a level needs food"] },
-      { kind: "body", head: "Only when the skill is used: the instructions", items: ["you type /create-food, or your task matches the description", "then Claude reads the body, and spec.md when the instructions says so"] }
-    ], why: "Why it matters: 3 skills or 30, your context stays small. And a vague description means Claude never picks the skill." }
+    load: { title: "What does Claude load, and when?", moments: [
+      { when: "1 · The session starts", label: "in Claude's context", chips: [["create-food: frontmatter", "front"], ["create-snake: frontmatter", "front"], ["create-obstacles: frontmatter", "front"]], note: "Only the frontmatter of each skill: a few lines. Now Claude knows which skills exist." },
+      { when: "2 · You: “Level 3 needs food.”", label: "added to Claude's context", chips: [["create-food: body", "body"], ["spec.md", "file"]], closed: ["create-snake: body", "create-obstacles: body"], note: "Only this skill's body. Step 1 says: read spec.md, so that comes too. The other two stay closed." }
+    ], why: "Why it matters: a skill costs almost nothing until it's used, so you can have many. But Claude only sees the frontmatter, so the description must be clear." }
   } },
-  tagline: "The label is always loaded. The instructions only when the skill is used.",
-  keyPoints: ["Click: folder, label, instructions, loading", "One folder per skill in .claude/skills/", "Frontmatter = the label between ---", "description decides when Claude picks it", "Label always loaded, instructions only when used"],
+  tagline: "The frontmatter is always loaded. The body only when the skill is used.",
+  keyPoints: ["Click: folder, frontmatter, body, loading", "One folder per skill in .claude/skills/", "Frontmatter = the top, between the --- lines", "description decides when Claude picks it", "Frontmatter always loaded, body only when used"],
   notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the instructions themselves, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The instructions are only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they write that rulebook in Assignment 20, just before this skill."
 },
 
