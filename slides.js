@@ -1987,18 +1987,49 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 96
   title: "Inside a skill: SKILL.md",
   kicker: "DAY 2 · PART 2 · SKILLS",
-  subtitle: "A skill is a folder with one file. The top of the file is the part Claude always sees.",
+  subtitle: "A skill is a folder with one file, SKILL.md. The top of that file is the label, the rest is the recipe.",
   type: "concept",
-  visual: { code: 0, highlight: [{ in: "tagline", text: "always", tone: "orange" }] },
-  cards: [
-    { title: ".claude/skills/create-food/SKILL.md", body: "---\nname: create-food\ndescription: Adds the food to a level of the\n  Snake game. Use when a level needs food.\nallowed-tools: Read, Edit(levels/**)\n---\n\n# Create food\n1. Read the Food section of spec.md.\n2. A bit more food to finish than the level before.\n3. Never on an obstacle or the snake.\n4. Run npm test: green before you stop." },
-    { title: "The frontmatter", body: "Between the two --- lines.\nname: the /name you type.\ndescription: when to use it.\nallowed-tools: what it may do without asking." },
-    { title: "The body", body: "The recipe, in plain words. Read only when the skill is used." },
-    { title: "Extra files", body: "A template or a script next to SKILL.md. Read or run only when the recipe points to them." }
-  ],
-  tagline: "Only the frontmatter is always loaded. The rest only when the skill is used.",
-  keyPoints: ["Folder + SKILL.md", "Frontmatter between the --- lines", "description decides when Claude picks it", "allowed-tools: no question while it runs", "Body read only when used"],
-  notes: "This is the anatomy. The three dashes above and below the top block are the frontmatter (Ryan's 'three stripes'): name, description and optional settings. Claude Code reads the frontmatter of every skill at the start of every session, so it knows which skills exist; that's why the description matters so much and why it must say when to use it. The body, the recipe, is only read when the skill is used. Extra files (a template, a script) cost nothing until the recipe points to them; a script is run, so only its output enters the context.\n\nallowed-tools: the tools this skill may use without asking you while it runs. Other frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: a skill is just a folder under .claude/skills/. When Claude makes one you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they write that rulebook in Assignment 20, just before this skill."
+  visual: { stepThrough: ".sd-step, .slide-main > .tagline", skillDoc: {
+    tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
+      ["├── ", "CLAUDE.md", "", "dim"],
+      ["├── ", "intent.md", "", "dim"],
+      ["├── ", "spec.md", "the numbers the skills follow", "dim"],
+      ["├── ", "levels/", "the level files the skills change", "dim"],
+      ["└── ", ".claude/", "", "dir"],
+      ["    ├── ", "settings.json", "", "dim"],
+      ["    └── ", "skills/", "one folder per skill", "dir"],
+      ["        ├── ", "create-food/", "", "skill"],
+      ["        │   └── ", "SKILL.md", "today, first", "file"],
+      ["        ├── ", "create-snake/", "", "skill"],
+      ["        │   └── ", "SKILL.md", "", "file"],
+      ["        └── ", "create-obstacles/", "", "skill"],
+      ["            └── ", "SKILL.md", "", "file"]
+    ] },
+    file: { name: "create-food/SKILL.md", parts: [
+      { kind: "front", label: "Frontmatter", sub: "the label: between the two --- lines", lines: [
+        ["---", ""],
+        ["name: create-food", "the /name you type"],
+        ["description: Adds the food to a level.", "what it does, and when:"],
+        ["  Use when a level needs food.", "Claude picks the skill by this"],
+        ["allowed-tools: Read, Edit(levels/**)", "may do this without asking you"],
+        ["---", ""]
+      ] },
+      { kind: "body", label: "Body", sub: "the recipe, in plain words", lines: [
+        ["# Create food", ""],
+        ["1. Read the food rules in spec.md.", ""],
+        ["2. A bit more food to finish than the level before.", ""],
+        ["3. Never on an obstacle or the snake.", ""],
+        ["4. Run npm test: green before you stop.", ""]
+      ] }
+    ] },
+    load: { title: "What does Claude load, and when?", cols: [
+      { kind: "front", head: "Every session: every skill's label", items: ["only the frontmatter, a few lines per skill", "so Claude knows: /create-food exists, use it when a level needs food"] },
+      { kind: "body", head: "Only when the skill is used: the recipe", items: ["you type /create-food, or your task matches the description", "then Claude reads the body, and spec.md when the recipe says so"] }
+    ], why: "Why it matters: 3 skills or 30, your context stays small. And a vague description means Claude never picks the skill." }
+  } },
+  tagline: "The label is always loaded. The recipe only when the skill is used.",
+  keyPoints: ["Click: folder, label, recipe, loading", "One folder per skill in .claude/skills/", "Frontmatter = the label between ---", "description decides when Claude picks it", "Label always loaded, recipe only when used"],
+  notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the recipe itself, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The recipe is only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they write that rulebook in Assignment 20, just before this skill."
 },
 
 { // Slide 97

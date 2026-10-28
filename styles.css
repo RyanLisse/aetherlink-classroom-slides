@@ -1486,3 +1486,29 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .dp-work{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.2rem;padding:.5rem 1rem;border:2px dashed var(--border);border-radius:14px}
 .dp-wk{font-size:clamp(.86rem,1.1vw,1rem)}
 @media (max-width:760px){.dpair{grid-template-columns:minmax(0,1fr)}.dp-docs,.dp-wcols{grid-template-columns:minmax(0,1fr)}.dp-link{justify-self:center;transform:rotate(90deg)}}
+
+/* ---- skillDoc: a skill's folder, its SKILL.md, and what Claude loads when ---- */
+.sdoc{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:clamp(.7rem,1.6vw,1.3rem);width:100%;align-items:start}
+.ctree-skill .ctree-name{color:var(--amber)}.ctree-skill .ctree-note{color:var(--amber);font-weight:800}
+.ctree-file .ctree-name{color:var(--text)}
+.sd-right{display:grid;gap:.7rem;min-width:0}
+.sd-file{display:grid;gap:.45rem;padding:.7rem .9rem;border:2px solid var(--border);border-radius:14px;background:var(--surface)}
+.sd-fname{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:900;color:var(--amber)}
+.sd-part{display:grid;grid-template-columns:minmax(0,1fr);gap:.3rem;padding:.5rem .7rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg)}
+.sd-front{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 9%,var(--bg))}
+.sd-plabel{display:flex;flex-wrap:wrap;align-items:baseline;gap:.1rem .6rem;font-size:clamp(.8rem,1vw,.94rem);color:var(--muted)}
+.sd-plabel strong{font-size:clamp(.92rem,1.15vw,1.06rem);color:var(--text)}
+.sd-front .sd-plabel strong{color:var(--amber)}
+.sd-lines{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:1rem;row-gap:.05rem;min-width:0;align-items:baseline}
+.sd-row{display:contents}
+.sd-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.74rem,.95vw,.9rem);white-space:pre;color:var(--text)}
+.sd-mark{color:var(--muted);font-weight:800}
+.sd-note{font-size:clamp(.76rem,.95vw,.9rem);color:var(--muted)}
+.sd-front .sd-note{color:var(--amber);font-weight:700}
+.sd-load{display:grid;gap:.45rem;padding:.6rem 1rem .7rem;border:2px solid var(--border);border-radius:14px;background:var(--surface)}
+.sd-lcols{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.sd-lcol{display:grid;gap:.25rem;align-content:start;padding-left:.7rem;border-left:3px solid var(--border)}
+.sd-lcol.sd-front{border-left-color:var(--amber);background:none;border-top:0;border-right:0;border-bottom:0;border-radius:0}
+.sd-lhead{font-size:clamp(.9rem,1.15vw,1.04rem)}.sd-lcol.sd-front .sd-lhead{color:var(--amber)}
+.sd-why{margin:0;padding-top:.35rem;border-top:1px dashed var(--border);font-weight:800;font-size:clamp(.86rem,1.1vw,1rem)}
+@media (max-width:760px){.sdoc{grid-template-columns:minmax(0,1fr)}.sd-part,.sd-lcols{grid-template-columns:minmax(0,1fr)}}
