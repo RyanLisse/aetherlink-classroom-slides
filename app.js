@@ -430,6 +430,21 @@ function renderExtras(stage, main, s, v) {
     m.append(left, mid); if (M.right) { const right = node('div', 'cmap-col'); M.right.forEach(b => right.append(box(b))); m.append(right); } else m.classList.add('cmap-two'); if (M.apart) { const ap = box(M.apart, 'cmap-apart'); m.append(ap); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(m); else if (tg) tg.before(m); else main.append(m);
   }
+  if (v.docPair) {                                               // two project files: where they live, what each says, who uses them
+    const D = v.docPair; const w = node('div', 'dpair');
+    const tree = node('div', 'dp-tree dp-step'); tree.append(node('span', 'dp-label', D.treeTitle || 'Your project'));
+    D.tree.forEach(([name, note, hl]) => { const r = node('div', 'dp-trow' + (hl ? ' dp-hl dp-hl-' + hl : '')); r.append(node('span', 'dp-tname', name), node('span', 'dp-tnote', note || '')); tree.append(r); });
+    if (D.treeNote) tree.append(node('p', 'dp-tfoot', D.treeNote));
+    const doc = (d, i) => { const c = node('div', 'dp-doc dp-step dp-doc-' + i); const h = node('div', 'dp-dhead'); h.append(node('span', 'dp-dname', d.name), node('span', 'dp-badge', d.badge)); c.append(h, node('p', 'dp-ask', d.ask));
+      const f = node('div', 'dp-file'); d.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); c.append(f);
+      const facts = node('ul', 'dp-facts'); d.facts.forEach(t => facts.append(node('li', null, t))); c.append(facts);
+      const u = node('div', 'dp-users'); u.append(node('span', 'dp-ulabel', d.usersLabel)); d.users.forEach(t => u.append(node('span', 'dp-chip', t))); c.append(u); return c; };
+    const link = node('div', 'dp-link dp-step'); link.append(node('span', 'cmap-line'), node('span', 'cmap-label', D.link));
+    const pair = node('div', 'dp-docs'); pair.append(doc(D.docs[0], 0), link, doc(D.docs[1], 1));
+    w.append(tree, pair);
+    if (D.work) { const wk = node('div', 'dp-work dp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.figure) {                                                // one drawing that explains the slide on its own
     const f = node('figure', 'slide-figure'); const im = document.createElement('img'); im.src = v.figure; im.alt = v.figureAlt || ''; f.append(im);
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(f); else if (tg) tg.before(f); else main.append(f);

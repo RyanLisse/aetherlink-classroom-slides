@@ -1831,17 +1831,35 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 89
   title: "intent.md and spec.md",
   kicker: "DAY 2 · PART 1 · DESIGN",
-  subtitle: "What you want, and exactly what it looks like.",
+  subtitle: "Two files next to your code: why you build it, and exactly what you build. The example: the levels from the last slide.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "spec.md", tone: "orange" }] },
-  cards: [
-    { title: "intent.md", body: "What and why: levels 2 to 5, each harder than the one before. Done when: you can play all five." },
-    { title: "spec.md", body: "Exactly what a level looks like: a file levels/level-N.js with food, startLength, obstacles and speed. Every value has a minimum and a maximum." },
-    { title: "Why limits?", body: "A snake that's too fast or a board full of obstacles can't be played. The limits keep every level fair." }
-  ],
-  tagline: "From now on the skills, the test and Bobby all follow spec.md.",
-  keyPoints: ["intent = what and why, in words", "spec = the technical shape, with an example", "Minimum and maximum per value", "One rulebook for everything that comes later"],
-  notes: "intent.md you know from yesterday: what we want and why, with done-when checks. spec.md is new: it says exactly what a level file looks like, so every Claude session, every skill and every test builds and checks the same thing. For a level: the fields, a minimum and a maximum for each, and one example. The limits are the 'still playable' rule written down: later the test checks them and Bobby uses them to say GO or NO-GO.\n\nIn your work: intent.md is the ticket's why, spec.md is the API contract or the design spec. The rest of the day only works because this file exists."
+  visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
+    treeTitle: "Where they live",
+    tree: [
+      ["aether-snake/", "your project, in git"],
+      ["├── CLAUDE.md", "how to work here"],
+      ["├── intent.md", "why + what", "why"],
+      ["├── spec.md", "exactly what", "what"],
+      ["├── levels/", "built from spec.md"],
+      ["└── tests/", "checks spec.md"]
+    ],
+    treeNote: "In the root, in git: the whole team reads the same two files.",
+    link: "makes it exact",
+    docs: [
+      { name: "intent.md", badge: "Why + what", ask: "What do we want, and why?",
+        lines: ["## Outcome", "Levels 2 to 5, each a bit harder.", "## Done when", "- you can play all five", "- no level is easier", "## Boundaries", "- always playable"],
+        facts: ["In words, for people", "You write it first", "Changes when the goal changes"],
+        usersLabel: "Read by", users: ["you", "your team", "Claude, to plan"] },
+      { name: "spec.md", badge: "Exactly what", ask: "What does it look like, exactly?",
+        lines: ["## A level: levels/level-N.js", "value         min   max", "startLength     3     8", "speed (ms)     40   150", "obstacles       0    40", "foodToFinish    5    50", "## Example: level-2.js"], 
+        facts: ["Fields, numbers, limits, an example", "Before you build", "Changes when the design changes"],
+        usersLabel: "Followed by", users: ["your 3 skills", "the level test", "Bobby"] }
+    ],
+    work: ["intent.md ≈ the why in a ticket or user story", "spec.md ≈ the API contract or the design spec"]
+  } },
+  tagline: "intent.md says why. spec.md says exactly what. Everything you build today follows spec.md.",
+  keyPoints: ["Click: folder, intent.md, spec.md, at work", "Both in the project root, in git", "intent = why + what, in words", "spec = exact shape: fields, limits, example", "intent → spec → build → test"],
+  notes: "Say: You just saw five levels. Before anyone builds one, we write two files. The content on the slide is today's wish, so you see what goes in each file with something real.\n\nClick through it. 1 Where they live: in the root of your project, next to CLAUDE.md, in git, so everyone and every Claude session reads the same files. 2 intent.md, the why and the what, in words: what we want (levels 2 to 5, each a bit harder), when it's done (you can play all five, no level is easier) and the boundaries (always playable). People read it; Claude reads it to plan. 3 spec.md, exactly what: what a level file contains, a minimum and a maximum for every value, and one example. The arrow says it: spec.md makes intent.md exact. 'A bit harder' and 'always playable' become numbers you can check. 4 At work: intent.md is the why in a ticket, spec.md is the API contract or the design spec.\n\nWhy this order: intent first, because you can't make something exact before you know what you want. Spec before building, because the next part builds from it: your three skills follow spec.md, the level test checks it, and Bobby uses it to say GO or NO-GO.\n\nWatch for: the field names on the slide are an example. Claude may choose others in Assignment 17 (startDelay instead of speed, for instance): fine, as long as every value has a minimum and a maximum.\n\nNext: Assignment 17, the same two files for your own game: first intent.md, then spec.md."
 },
 
 { // Slide 90
@@ -1850,18 +1868,18 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "plan",
   title: "Assignment 17: The wish and the spec",
   kicker: "DAY 2 · ASSIGNMENT 17 · DESIGN",
-  subtitle: "Write down what you want, and what a level looks like, before you build one.",
+  subtitle: "First the why in intent.md, then the exactly what in spec.md. Nothing gets built yet.",
   calm: true,
   steps: [
     "Shift+Tab to “plan mode on”",
-    { text: "Add the wish to intent.md, and write the spec", prompt: "New wish: levels 2 to 5, each a little harder than the one before. Add it to intent.md with done-when checks. Then write spec.md for a level file levels/level-N.js (a .js file, so the browser can load it straight from the folder): how much food is on the board, the snake's start length, the obstacles, the speed, and how much food finishes the level. Give every value a minimum and a maximum so the game stays playable, and one example. Don't build anything yet.", after: "Claude asks a few questions. Pick with ↑↓ and Enter." },
-    "Approve the plan with 2 (“Yes, manually approve edits”, not 1), then say yes to both files",
-    "Open spec.md in VS Code. Can you find a minimum and a maximum for the speed?",
+    { text: "First the why: add the wish to intent.md", prompt: "New wish: levels 2 to 5, each a little harder than the one before, and always playable. Add it to intent.md: the outcome, done-when checks and boundaries. Don't build anything yet.", after: "Approve the plan with 2 (not 1). Open intent.md in VS Code: find Done when." },
+    { text: "Shift+Tab to “plan mode on” again. Then the exactly what: spec.md", prompt: "Now write spec.md from the levels wish in intent.md: what a level file levels/level-N.js contains (food to finish, the snake's start length, the obstacles, the speed), a minimum and a maximum for every value so the game stays playable, and one example. A .js file, so the browser can load it straight from the folder. Don't build anything yet.", after: "Claude may ask a few questions. Pick with ↑↓ and Enter, approve with 2." },
+    "Put them side by side in VS Code. Which line in spec.md makes “always playable” from intent.md exact?",
     { text: "Save it", prompt: "Commit and push intent.md and spec.md." }
   ],
-  expected: "intent.md has the levels wish with checks, and spec.md describes a level file with limits.",
-  keyPoints: ["Design phase", "Plan mode first", "intent.md: the wish", "spec.md: fields, limits, one example", "Commit both"],
-  notes: "Why now: you're about to build a level, and level 3, 4 and 5 must look the same. Describe it once.\nWhat you see: intent.md gets a new outcome; spec.md is a new file with fields, limits and an example.\nLook inside: Read spec.md. Could a colleague make level 2 from it without asking you?\n\nWatch for: Claude may put spec.md in levels/: fine. If it asks what 'harder' means, point at the five boards on the previous slide."
+  expected: "intent.md says why and when it's done; spec.md says what a level file looks like, with limits and an example.",
+  keyPoints: ["Design phase", "Two prompts: why, then exactly what", "Plan mode for both", "Find the line that makes it exact", "Commit both"],
+  notes: "Why now: you're about to build levels, and levels 3, 4 and 5 must look the same as 2. Describe it once, before building.\nWhat you see: intent.md gets a levels outcome with done-when checks; spec.md is a new file with fields, limits and an example.\nLook inside: step 4 is the point of the slide before: intent.md says 'always playable' in words, spec.md turns it into numbers (a minimum speed, a maximum number of obstacles).\n\nTwo prompts on purpose: the same order as the slide, why first, then exactly what. The second prompt says 'from the levels wish in intent.md', so Claude builds the spec on the intent.\n\nWatch for: Claude may put spec.md in levels/: fine. Field names may differ from the slide (startDelay, foodOnBoard): fine. Dry run (28 Oct): Claude listed its assumptions first (level 1 is today's game, game over goes back to level 1, 'You win' after level 5) and chose 5 food to finish level 1. If someone asks for 'more food on the board', Claude rightly reads that as easier: harder is more food to finish."
 },
 
 { // Slide 91
