@@ -2035,23 +2035,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the instructions themselves, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The instructions are only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: say 'you'll write that in a few minutes, just before you build this skill'."
 },
 
-{ // Slide 97
-  title: "Where skills live, and who starts them",
-  kicker: "DAY 2 · PART 2 · SKILLS",
-  subtitle: "Teach Claude a method once, reuse it every time.",
-  type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "one thing you call", tone: "orange" }] },
-  cards: [
-    { title: "Project", body: ".claude/skills/ in your repo. Goes into git: the whole team gets it." },
-    { title: "Personal", body: "~/.claude/skills/ in your home folder. Only you, in every project." },
-    { title: "Built in and plugins", body: "Claude Code comes with a few. Plugins add more. Type / to see them all." },
-    { title: "Who starts it", body: "Claude, when your task matches the description. Or you, by typing /name. With disable-model-invocation: true, only you." }
-  ],
-  tagline: "A skill is one thing you call, and it runs. It doesn't start Claude Code or run in the background.",
-  keyPoints: ["Project skills: shared through git", "Personal: ~/.claude/skills", "Type / to see them", "Claude picks by description, or /name", "One thing you call, and it runs"],
-  notes: "Same two places as CLAUDE.md and settings.json: the project (shared with the team through git) and your home folder (only you). Built-in skills come with Claude Code; plugins bundle skills, agents and hooks from others. Type / to show the list live.\n\nWho starts a skill: Claude, when your request matches the description; or you, by typing /name. For a skill that does something you don't want to happen by surprise (push, deploy), switch off Claude's automatic use with disable-model-invocation: true in the frontmatter.\n\nThe tagline is the guardrail worth repeating: a skill is a method Claude applies inside your conversation. It's not a background process, and it's not a separate agent: that comes after lunch (Bobby)."
-},
-
 { // Slide 98
   title: "Prompt, CLAUDE.md and skill",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
@@ -2637,6 +2620,24 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* ---------------------------------------------------------------------- */
 /* PARKED — replaced or not used (hidden)                                 */
 /* ---------------------------------------------------------------------- */
+
+{ // Slide 97
+  hidden: true,
+  title: "Parked · Where skills live, and who starts them",
+  kicker: "DAY 2 · PART 2 · SKILLS",
+  subtitle: "Teach Claude a method once, reuse it every time.",
+  type: "concept",
+  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "one thing you call", tone: "orange" }] },
+  cards: [
+    { title: "Project", body: ".claude/skills/ in your repo. Goes into git: the whole team gets it." },
+    { title: "Personal", body: "~/.claude/skills/ in your home folder. Only you, in every project." },
+    { title: "Built in and plugins", body: "Claude Code comes with a few. Plugins add more. Type / to see them all." },
+    { title: "Who starts it", body: "Claude, when your task matches the description. Or you, by typing /name. With disable-model-invocation: true, only you." }
+  ],
+  tagline: "A skill is one thing you call, and it runs. It doesn't start Claude Code or run in the background.",
+  keyPoints: ["Project skills: shared through git", "Personal: ~/.claude/skills", "Type / to see them", "Claude picks by description, or /name", "One thing you call, and it runs"],
+  notes: "Same two places as CLAUDE.md and settings.json: the project (shared with the team through git) and your home folder (only you). Built-in skills come with Claude Code; plugins bundle skills, agents and hooks from others. Type / to show the list live.\n\nWho starts a skill: Claude, when your request matches the description; or you, by typing /name. For a skill that does something you don't want to happen by surprise (push, deploy), switch off Claude's automatic use with disable-model-invocation: true in the frontmatter.\n\nThe tagline is the guardrail worth repeating: a skill is a method Claude applies inside your conversation. It's not a background process, and it's not a separate agent: that comes after lunch (Bobby)."
+},
 
 { // Slide 125
   hidden: true,
