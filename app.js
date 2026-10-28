@@ -472,7 +472,7 @@ function renderExtras(stage, main, s, v) {
       const body = node('div', 'sd-lines'); P.lines.forEach(([code, note]) => { const row = node('div', 'sd-row'); row.append(node('span', 'sd-code' + (/^(---|#)/.test(code) ? ' sd-mark' : ''), code), node('span', 'sd-note', note ? '← ' + note : '')); body.append(row); }); part.append(body); file.append(part); });
     const load = node('div', 'sd-load sd-step'); load.append(node('span', 'dp-label', D.load.title));
     D.load.moments.forEach(M => { const m = node('div', 'sd-moment'); m.append(node('strong', 'sd-when', M.when)); const box = node('div', 'sd-ctx'); box.append(node('span', 'sd-ctxlabel', M.label));
-      const chips = node('div', 'sd-chips'); M.chips.forEach(([t, k]) => chips.append(node('span', 'sd-chip sd-chip-' + k, t))); (M.closed || []).forEach(t => chips.append(node('span', 'sd-chip sd-chip-closed', t))); box.append(chips); m.append(box, node('span', 'sd-mnote', M.note)); load.append(m); });
+      const chips = node('div', 'sd-chips'); M.chips.forEach(([t, k]) => chips.append(node('span', 'sd-chip sd-chip-' + k, t))); (M.closed || []).forEach(t => chips.append(node('span', 'sd-chip sd-chip-closed', t))); box.append(chips); m.append(box, node('span', 'sd-mnote', M.note)); if (M.link) { const l = node('div', 'sd-link'); l.append(node('span', 'sd-larrow', '↓'), node('span', null, M.link)); load.append(l); } load.append(m); });
     if (D.load.why) load.append(node('p', 'sd-why', D.load.why));
     const right = node('div', 'sd-right'); right.append(file, load); w.append(tree, right);
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);

@@ -2027,7 +2027,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     ] },
     load: { title: "What does Claude load, and when?", moments: [
       { when: "1 · The session starts", label: "in Claude's context", chips: [["create-food: frontmatter", "front"], ["create-snake: frontmatter", "front"], ["create-obstacles: frontmatter", "front"]], note: "Only the frontmatter of each skill: a few lines. Now Claude knows which skills exist." },
-      { when: "2 · You: “Level 3 needs food.”", label: "added to Claude's context", chips: [["create-food: body", "body"], ["spec.md", "file"]], closed: ["create-snake: body", "create-obstacles: body"], note: "Only this skill's body. Step 1 says: read spec.md, so that comes too. The other two stay closed." }
+      { when: "2 · You: “Level 3 needs food.”", link: "It matches the description of create-food, so Claude Code loads that skill's body", label: "added to Claude's context", chips: [["create-food: body", "body"], ["spec.md", "file"]], closed: ["create-snake: body, not loaded", "create-obstacles: body, not loaded"], note: "Only this skill's body. Step 1 says: read spec.md, so Claude reads that too. The other two are not loaded." }
     ], why: "Why it matters: a skill costs almost nothing until it's used, so you can have many. But Claude only sees the frontmatter, so the description must be clear." }
   } },
   tagline: "The frontmatter is always loaded. The body only when the skill is used.",

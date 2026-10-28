@@ -1521,7 +1521,9 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .sd-chip-body{border-color:var(--violet);color:var(--violet)}
 .sd-chip-file{border-color:var(--text);color:var(--text)}
 .sd-chip-closed{border-color:var(--border);color:var(--muted);border-style:dashed;opacity:.7}
-.sd-chip-closed::before{content:'🔒 '}
+.sd-link{display:flex;align-items:center;gap:.5rem;margin-left:11.3rem;font-size:clamp(.8rem,1vw,.94rem);font-weight:800;color:var(--violet)}
+.sd-larrow{font-size:1.2rem;line-height:1}
+@media (max-width:760px){.sd-link{margin-left:0}}
 .sd-mnote{grid-column:2;font-size:clamp(.8rem,1vw,.94rem);color:var(--muted)}
 .sd-why{margin:0;padding-top:.4rem;border-top:1px dashed var(--border);font-weight:800;font-size:clamp(.86rem,1.1vw,1rem)}
 @media (max-width:760px){.sdoc{grid-template-columns:minmax(0,1fr)}.sd-moment{grid-template-columns:minmax(0,1fr)}.sd-mnote{grid-column:1}}
