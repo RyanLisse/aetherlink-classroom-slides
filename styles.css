@@ -1512,3 +1512,31 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .sd-lhead{font-size:clamp(.9rem,1.15vw,1.04rem)}.sd-lcol.sd-front .sd-lhead{color:var(--amber)}
 .sd-why{margin:0;padding-top:.35rem;border-top:1px dashed var(--border);font-weight:800;font-size:clamp(.86rem,1.1vw,1rem)}
 @media (max-width:760px){.sdoc{grid-template-columns:minmax(0,1fr)}.sd-part,.sd-lcols{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- skillDef: Anthropic's definition of a skill as a small flow ---- */
+.sdef{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);width:100%}
+.sf-quote{margin:0;padding:.8rem 1.2rem;border-left:5px solid var(--amber);border-radius:0 14px 14px 0;background:var(--surface);display:grid;gap:.3rem}
+.sf-qtext{font-size:clamp(1.3rem,2.4vw,2.1rem);font-weight:900;line-height:1.2}
+.sf-qtext::before{content:'“'}.sf-qtext::after{content:'”'}
+.sf-quote cite{font-style:normal;font-size:clamp(.8rem,1vw,.95rem);color:var(--muted);font-weight:700}
+.sf-flow{display:grid;grid-template-columns:minmax(0,1.15fr) auto minmax(0,1fr) auto minmax(0,.9fr);align-items:center;gap:.6rem}
+.sf-card{position:relative;display:grid;gap:.45rem;align-content:start;padding:.8rem 1rem .9rem;border:2px solid var(--border);border-radius:16px;background:var(--surface)}
+.sf-n{position:absolute;top:-.7rem;left:.8rem;width:1.5rem;height:1.5rem;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:900;color:var(--ink);background:var(--amber)}
+.sf-title{font-size:clamp(.98rem,1.3vw,1.18rem);font-weight:900}
+.sf-file{border-color:var(--amber)}
+.sf-code{display:grid;padding:.5rem .7rem;border-radius:10px;background:var(--bg);border:1px solid var(--border);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.72rem,.9vw,.86rem);white-space:pre;overflow:hidden}
+.sf-line{color:var(--text)}.sf-dash{color:var(--muted)}.sf-front{color:var(--amber);font-weight:800}
+.sf-cap{font-size:clamp(.82rem,1vw,.95rem);color:var(--muted);font-weight:700}
+.sf-arrow{font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:900;color:var(--amber);line-height:1}
+.sf-who{display:grid;gap:.5rem}
+.sf-start-0{border-color:var(--violet)}.sf-start-0 .sf-n{background:var(--violet)}
+.sf-start-1{border-color:var(--cyan)}.sf-start-1 .sf-n{background:var(--cyan)}
+.sf-or{justify-self:center;font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sf-bubble{justify-self:start;padding:.3rem .75rem;border-radius:14px 14px 14px 4px;background:var(--surface2);border:1.5px solid var(--border);font-weight:800;font-size:clamp(.84rem,1.05vw,.98rem)}
+.sf-bubble::before{content:'💬 '}
+.sf-chip{justify-self:start;padding:.25rem .7rem;border-radius:8px;background:var(--bg);border:1.5px solid var(--cyan);color:var(--cyan);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:900;font-size:clamp(.86rem,1.1vw,1rem)}
+.sf-result{border-color:var(--ok,#3ddc84);text-align:center;justify-items:center}
+.sf-tiles{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.sf-tile{display:grid;place-items:center;width:3.2rem;height:3.2rem;border-radius:12px;background:var(--bg);border:2px solid var(--ok,#3ddc84);font-weight:900}
+.sf-tile b{font-size:1rem}.sf-tile i{font-style:normal;color:var(--ok,#3ddc84);font-size:.9rem;line-height:1}
+@media (max-width:760px){.sf-flow{grid-template-columns:minmax(0,1fr)}.sf-arrow{justify-self:center;transform:rotate(90deg)}}

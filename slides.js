@@ -1971,16 +1971,19 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 95
   title: "What is a skill?",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
-  subtitle: "“Skills extend what Claude can do.” (Anthropic, Claude Code docs)",
+  subtitle: "Anthropic's definition, in three parts. The example: the first skill you'll make.",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
-  cards: [
-    { title: "A SKILL.md file", body: "With instructions: how a task is done. You write it once." },
-    { title: "Claude uses it when relevant", body: "Your task matches the skill's description, so Claude uses the skill by itself." },
-    { title: "Or you start it", body: "Type /skill-name. Type / to see all skills." }
-  ],
+  visual: { stepThrough: ".sf-step, .slide-main > .tagline", skillDef: {
+    quote: "Skills extend what Claude can do.", source: "Anthropic, Claude Code docs",
+    file: { title: "A SKILL.md file", lines: ["---", "name: create-food", "description: Adds food to a level.", "  Use when a level needs food.", "---", "1. Read the food rules in spec.md.", "2. A bit more food than last level.", "3. Never on an obstacle or the snake."], caption: "With instructions: how the task is done. Written once." },
+    starters: [
+      { title: "Claude uses it when relevant", say: "Level 3 needs food.", caption: "your task matches the description" },
+      { title: "Or you start it", say: "/create-food", chip: true, caption: "type / to see all skills" }
+    ],
+    result: { title: "The same way, every time", tiles: ["L3", "L4", "L5"], caption: "every level gets its food by the same instructions" }
+  } },
   tagline: "Write it down once. Claude does it the same way every time.",
-  keyPoints: ["Anthropic's definition first", "A file with instructions", "Claude picks it when relevant", "Or you type /name"],
+  keyPoints: ["Click: definition, file, who starts it, result", "Anthropic's definition first", "A file with instructions", "Claude picks it when relevant", "Or you type /name"],
   notes: "Read the definition from Anthropic's Claude Code docs out loud: 'Skills extend what Claude can do. Create a SKILL.md file with instructions, and Claude adds it to its toolkit. Claude uses skills when relevant, or you can invoke one directly with /skill-name.' The three cards are those three sentences.\n\nLink it to what they just did: for level 2 you told Claude three times how to make a level harder. A skill writes that down once, so Claude does it the same way for level 3, 4 and 5.\n\nClaude Code also comes with a few built-in skills (type / to see them), and you can ask Claude to turn what you just did into a skill: that's what you'll do next."
 },
 

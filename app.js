@@ -449,6 +449,20 @@ function renderExtras(stage, main, s, v) {
     if (D.work) { const wk = node('div', 'dp-work dp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
+  if (v.skillDef) {                                              // what a skill is: the definition as a flow, file → who starts it → same result
+    const D = v.skillDef; const w = node('div', 'sdef');
+    const q = node('blockquote', 'sf-quote sf-step'); q.append(node('span', 'sf-qtext', D.quote), node('cite', null, D.source)); w.append(q);
+    const flow = node('div', 'sf-flow');
+    const file = node('div', 'sf-card sf-file sf-step'); file.append(node('span', 'sf-n', '1'), node('strong', 'sf-title', D.file.title));
+    const code = node('div', 'sf-code'); let dashes = 0; D.file.lines.forEach(l => { const d = /^---/.test(l); if (d) dashes++; code.append(node('span', 'sf-line' + (d ? ' sf-dash' : dashes === 1 ? ' sf-front' : ''), l)); }); file.append(code, node('span', 'sf-cap', D.file.caption));
+    const arrow = () => node('span', 'sf-arrow', '→');
+    const who = node('div', 'sf-who sf-step'); D.starters.forEach((st, i) => { const c = node('div', 'sf-card sf-start sf-start-' + i); c.append(node('span', 'sf-n', String(i + 2)), node('strong', 'sf-title', st.title));
+      c.append(node('span', st.chip ? 'sf-chip' : 'sf-bubble', st.say)); c.append(node('span', 'sf-cap', st.caption)); who.append(c); if (i === 0) who.append(node('span', 'sf-or', 'or')); });
+    const res = node('div', 'sf-card sf-result sf-step'); res.append(node('strong', 'sf-title', D.result.title)); const tiles = node('div', 'sf-tiles');
+    D.result.tiles.forEach(t => { const tl = node('span', 'sf-tile'); tl.append(node('b', null, t), node('i', null, '✓')); tiles.append(tl); }); res.append(tiles, node('span', 'sf-cap', D.result.caption));
+    flow.append(file, arrow(), who, arrow(), res); w.append(flow);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.skillDoc) {                                              // a skill: where its folder lives, what SKILL.md holds, what Claude loads when
     const D = v.skillDoc; const w = node('div', 'sdoc');
     const tree = node('div', 'cmap-box cmap-tree sd-tree sd-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
