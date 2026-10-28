@@ -1735,7 +1735,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   kicker: "DAY 2 · WARM-UP",
   subtitle: "Show, tell, ask: one minute each. This is where your Snake is going today.",
   type: "context",
-  visual: { anatomy: { src: "assets/examples/snake-advanced.html", poster: "assets/examples/snake-level-4.svg", title: "Snake, level 4: obstacles, more food, a longer and faster snake, a stopwatch", caption: "Level 4 by tonight: a longer and faster snake, obstacles, a stopwatch. Click the board to play." } },
+  visual: { anatomy: { src: "assets/examples/snake-advanced.html", poster: "assets/examples/snake-level-4.svg", title: "Snake, level 4: obstacles, more food, a longer and faster snake, a stopwatch", caption: "" } },
   keyPoints: ["The game on screen plays itself: let it run", "Then everyone: show, tell, ask", "One minute each", "Questions on the flipchart", "This is today's goal"],
   notes: "The board on the slide plays itself (autopilot). Click it and use the arrow keys to play yourself; click outside the game to get the slide keys back. Say: This is level 4. By tonight your Snake has levels like this, and you'll have built them three ways: with prompts, with skills, and with one command.\n\nThen everyone shows their Snake from yesterday, one minute each. Show: play it for a few seconds. Tell: one thing that went well, one thing that went wrong. Ask: what do you want to know after seeing the others? Online participants share their screen. Collect the questions on the flipchart: the recap answers them."
 },
