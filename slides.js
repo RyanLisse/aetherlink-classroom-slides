@@ -1907,13 +1907,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "manual",
   title: "Assignment 18: Level 2 in three layers",
   kicker: "DAY 2 · ASSIGNMENT 18 · BUILD",
-  subtitle: "Like yesterday: one layer, play it, commit. Claude reads intent.md for the goal, and level 2 gets its own file.",
+  subtitle: "Like yesterday: one layer, check it, commit. Each layer has a 10-second check.",
   calm: true,
   steps: [
-    { text: "Layer 1: more food to finish. Say yes to each file.", prompt: "Create a branch level-2. Level 1 is the game as it is now: move its numbers into levels/level-1.js, without changing how it plays. Then make levels/level-2.js: the same, but it needs more food to finish. After level 1's food goal you go to level 2. Also make index.html?level=2 start straight at level 2, so I can test it.", after: "Claude reads intent.md and game.js, makes the two level files and changes game.js. The hook runs npm test after every edit. Reload the tab and play. Level 2 straight away: type ?level=2 after index.html in the address bar." },
-    { text: "Look inside", prompt: "Explain @levels/level-2.js in plain words.", after: "Only level 2's numbers: food to finish, start length, speed, obstacles. Works? Commit and push." },
-    { text: "Layer 2: a longer snake", prompt: "Next layer, only in levels/level-2.js: the snake starts a bit longer than in level 1. Keep it playable.", after: "Claude changes one number in levels/level-2.js. Play it. Commit and push." },
-    { text: "Layer 3: obstacles", prompt: "Last layer: level 2 gets a few obstacles, blocks on the board that end the game when you hit them. Put them in levels/level-2.js. The snake never starts in one, and food never lands on one.", after: "Claude adds the blocks to levels/level-2.js, and changes game.js so they're drawn and end the game. Play it: still fair? Commit and push." },
+    { text: "Layer 1: more food to finish. Say yes to each file.", prompt: "Create a branch level-2. Level 1 is the game as it is now: move its numbers into levels/level-1.js, without changing how it plays. Then make levels/level-2.js: the same, but it needs more food to finish. After level 1's food goal you go to level 2. Also make index.html?level=2 start straight at level 2, so I can test it.", after: "Check: reload the tab and eat 5 food. The screen says Level 2. Or start there: type ?level=2 after index.html in the address bar." },
+    { text: "Look inside", prompt: "Explain @levels/level-2.js in plain words.", after: "Check: level 2 needs more food than level-1.js. Works? Commit and push." },
+    { text: "Layer 2: a longer snake", prompt: "Next layer, only in levels/level-2.js: the snake starts a bit longer than in level 1. Keep it playable.", after: "Check: open index.html?level=2. Count the snake: longer than in level 1? Commit and push." },
+    { text: "Layer 3: obstacles", prompt: "Last layer: level 2 gets a few obstacles, blocks on the board that end the game when you hit them. Put them in levels/level-2.js. The snake never starts in one, and food never lands on one.", after: "Check: open index.html?level=2. You see blocks. Steer into one: game over. Commit and push." },
     { text: "Which branch are you on?", prompt: "!git branch", after: "* level-2. main is untouched." }
   ],
   expected: "Level 2 needs more food, has a longer snake and a few obstacles, in levels/level-2.js on the branch level-2.",
