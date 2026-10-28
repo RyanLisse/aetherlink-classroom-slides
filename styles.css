@@ -1447,3 +1447,4 @@ body[data-opener="ask"] .bot img{height:clamp(200px,34vh,340px)}
 body[data-opener="team"] .team-avatar{width:clamp(64px,6vw,92px)}
 body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .slide-main.with-showcase:not(:has(>:not(.showcase))){grid-template-columns:minmax(0,min(760px,100%))}
+.cmap-tree{min-width:0}.cmap-tree .ctree-note{white-space:normal}

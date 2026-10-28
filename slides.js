@@ -193,7 +193,7 @@ window.SLIDES = [
   notes: "This block of three slides is required, also when time is short. One: be careful with what you put into an AI tool. Once it's in, it has left your hands. When in doubt, don't share it and ask first. If Worldline has its own internal AI rules (which tools, which data), mention them here; confirm them with Worldline before the class day."
 },
 
-{ // Slide 5b
+{ // Slide 6b
   title: "Never commit or push course material",
   kicker: "WORKING SAFELY WITH AI · 2 OF 3",
   subtitle: "One push can make it public without you noticing.",
@@ -208,7 +208,7 @@ window.SLIDES = [
   notes: "Two: never commit or push course material or Worldline data to a public repository. A single push can make it public without you noticing. In this course every repository is private, and Claude asks before every commit and push: that's the moment to check."
 },
 
-{ // Slide 5c
+{ // Slide 7c
   title: "The EU AI Act",
   kicker: "WORKING SAFELY WITH AI · 3 OF 3",
   subtitle: "Why this course exists.",
@@ -222,7 +222,7 @@ window.SLIDES = [
   notes: "Three: the EU AI Act requires organisations that use AI to make sure their people have enough AI literacy (Article 4). This course is part of how Worldline meets that."
 },
 
-{ // Slide 6
+{ // Slide 8
   title: "AetherLink × Worldline",
   kicker: "WELCOME · WHO WE ARE",
   subtitle: "Who AetherLink is, and what we are doing together.",
@@ -238,7 +238,7 @@ window.SLIDES = [
   notes: "AetherBOT waves first, then our logo flies in. Constance tells who AetherLink is: a passion for the newest technology, curious about the future, and good at building brains. Then Worldline: you get seven days of AI time, room to explore, research and learn to work with AI. Keep it short and personal: the shape of the programme comes back a few slides later."
 },
 
-{ // Slide 7
+{ // Slide 9
   title: "We are team AetherLink",
   kicker: "WELCOME · TEAM",
   subtitle: "One team, here for your team.",
@@ -258,7 +258,7 @@ window.SLIDES = [
   notes: "We present ourselves as one team: team AetherLink, not as separate freelancers. Each trainer clicks their own card, so it flips to the details, and says one or two sentences: who you are, what you do in this programme, and something personal. Click again to flip it back. Keep it short: the room gets to know you over the next two days."
 },
 
-{ // Slide 8
+{ // Slide 10
   title: "How many of you…",
   kicker: "WELCOME · GETTING TO KNOW YOU",
   type: "context",
@@ -267,7 +267,7 @@ window.SLIDES = [
   notes: "Ask a few \u201cHow many of you\u2026\u201d questions on the spot and let people raise their hands (online: a reaction or a yes in the chat). For example: \u2026 have used ChatGPT or Copilot this week? \u2026 write code in your job? \u2026 have used a terminal? \u2026 have built something with AI? It warms up the room and shows you who is a developer and who already builds with AI, which helps later when people get stuck."
 },
 
-{ // Slide 9
+{ // Slide 11
   title: "What do you hope to learn?",
   kicker: "WELCOME · EXPECTATIONS",
   subtitle: "Before we start: your curiosity and your questions.",
@@ -282,7 +282,7 @@ window.SLIDES = [
   notes: "Give people a minute to think, then collect answers on the flipchart: one column for what they hope to learn, one for questions. You're looking for curiosity: who is excited about Claude Code, who doesn't see the point yet. Don't answer now; say when in the programme it comes up (for example 'that is end of Day 2'), or park it. Keep the sheet on the wall and come back to it in the final reflection at the end of Day 2."
 },
 
-{ // Slide 10
+{ // Slide 12
   title: "Your team",
   kicker: "WELCOME · TEAMS",
   subtitle: "Who builds with whom?",
@@ -297,7 +297,7 @@ window.SLIDES = [
   notes: "Split the room into the teams and write the names on each team's robot (on the whiteboard or live in the deck). Ryan and Maarten join a team too, so everyone knows who they work with. Small assignment: each team picks a team name in two minutes. Make clear what the team is for during these two days: everyone builds on their own laptop, and the team is where you ask for help (in the room or in the team chat). The teams stay together for the rest of the programme."
 },
 
-{ // Slide 11
+{ // Slide 13
   title: "The seven-day programme",
   kicker: "DAY 1 · WELCOME",
   subtitle: "Two days to practise and play. Five days to deepen and apply.",
@@ -312,7 +312,7 @@ window.SLIDES = [
   notes: "This one matters: set the tone. The first two days are for practising and playing: just have fun, together. Nothing has to be perfect yet. The other five days are for deepening and applying: each team builds its own pipeline or workflow. Don't explain all seven days in detail now; one sentence per phase is enough."
 },
 
-{ // Slide 12
+{ // Slide 14
   title: "Programme outcome",
   kicker: "DAY 1 · WELCOME",
   subtitle: "By the end of the programme, your team has built something with AI that works in your team.",
@@ -327,7 +327,7 @@ window.SLIDES = [
   notes: "Give inspiration, not a definition. Press → and the ideas come out of AetherBOT's head one by one. What a team ends up with can be an agent, a set of skills, a pipeline or an automation: anything that elevates your team and saves time, money or effort. Make it explicit that this is a team assignment: you build it together with your team, not as a personal trick."
 },
 
-{ // Slide 13
+{ // Slide 15
   title: "Today",
   kicker: "DAY 1 · WELCOME",
   subtitle: "AI fundamentals, and getting to know Claude Code.",
@@ -346,7 +346,7 @@ window.SLIDES = [
 /* DAY 1 — Part 1: AI foundations                                         */
 /* ---------------------------------------------------------------------- */
 
-{ // Overview of the AI fundamentals
+{ // Slide 16: Overview of the AI fundamentals
   title: "AI in three questions",
   kicker: "DAY 1 · PART 1 · AI FOUNDATIONS",
   subtitle: "This morning's map: each answer builds on the one before.",
@@ -367,7 +367,7 @@ window.SLIDES = [
   notes: "Say: Before the details, the map. The next hour answers three questions, in this order, and each answer needs the one before it.\n\nWhat you see: Click: one question at a time. 1 What is AI? From the history to the language model you use today. 2 How does a model read? It reads in tokens; the context window, the model you pick and the cost are all counted in them. That chapter ends with a quiz. 3 How do you steer it? First where AI goes wrong, then the prompt that prevents it. That ends with a knowledge check.\n\nTip: Come back to this slide in your words at each new chapter: 'question 2: how does it read?'. The kicker on every slide shows which question you're in."
 },
 
-{ // Slide 14
+{ // Slide 17
   title: "Where AI comes from",
   kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Seventy years in six moments.",
@@ -386,7 +386,7 @@ window.SLIDES = [
   notes: "Tell this as a story. Press → to move one year further. 1950: Alan Turing asks 'Can machines think?'. 1997: Deep Blue beats Kasparov at chess, by brute computing power rather than thinking. 2012: deep learning breaks through when a neural network wins the ImageNet contest. 2017: Google's transformer paper, 'Attention Is All You Need', the engine under every modern language model. 2022: ChatGPT reaches a million users in five days. And now, 2025–2026: agentic AI, which no longer only answers but carries out tasks. That is where you are today. The next slides zoom in on the steps."
 },
 
-{ // Slide 15
+{ // Slide 18
   title: "The AI landscape",
   kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Each one sits inside the one before it, like animal → dog → Rottweiler.",
@@ -404,7 +404,7 @@ window.SLIDES = [
   notes: "Click through the five rings live so the nesting is visible. Use the metaphor: you start with 'an animal', then 'a dog', then 'a Rottweiler', then a male Rottweiler, then this one Rottweiler with his own character. Every ring is more specific than the one around it. Artificial intelligence is the whole field, and the large language model in the middle is the one you work with today."
 },
 
-{ // Slide 16
+{ // Slide 19
   title: "You have been training AI for years",
   kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Machine learning: learning from examples instead of rules.",
@@ -419,7 +419,7 @@ window.SLIDES = [
   notes: "Ask the room: who had to click all the traffic lights to log in somewhere this week? Notice that the puzzles keep changing. Every time you do it, you help train a machine to recognise traffic lights, buses and animals. That is machine learning: nobody writes a rule for every picture; the system learns from millions of examples. Netflix recommendations, YouTube's next video and your spam filter work the same way."
 },
 
-{ // Slide 17
+{ // Slide 20
   title: "From layers to creating something new",
   kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Deep learning and generative AI.",
@@ -434,7 +434,7 @@ window.SLIDES = [
   notes: "Keep it light: no maths. 'Deep' just means many layers, each picking up a slightly more complex pattern: from lines, to shapes, to faces. Once a model knows the patterns well enough, it can create something new from them: that's generative AI. Plant the caution that the next slide makes explicit: new is not the same as correct."
 },
 
-{ // Slide 18
+{ // Slide 21
   title: "Large language models",
   kicker: "DAY 1 · PART 1 · 1 WHAT IS AI?",
   subtitle: "Sounding right is not the same as being right.",
@@ -457,7 +457,7 @@ window.SLIDES = [
 
 
 
-{ // Slide 19
+{ // Slide 22
   title: "Tokens",
   kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "The currency of your AI.",
@@ -472,7 +472,7 @@ window.SLIDES = [
   keyPoints: ["Question 2 starts here: how a model reads", "Tokens = the currency", "Flipchart: split one sentence into tokens", "Window, model and cost: all counted in tokens", "About 3.5 characters per token"],
   notes: "Tokens are the currency of the model: everything it reads and writes is counted in tokens. Flipchart: split one sentence into tokens — common words stay whole, rare words get split. The model sees tokens as numbers. Context limits, usage limits and costs are all counted in tokens; on average a token is about 3.5 characters of English text. The rest of this chapter follows the tokens: the context window is measured in them, a bigger model costs more per token, and through the API every token has a price. Question 3 then shows how a clear prompt keeps them in check. Expect the room to get very focused here — that's fine, but don't let tokens take over: they are one lever, not the whole story."
 },
-{ // Slide 22
+{ // Slide 23
   title: "Context windows",
   kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "The model can only consider so much at once.",
@@ -488,7 +488,7 @@ window.SLIDES = [
   keyPoints: ["Context = small Lego blocks","Each block helps build the next","Irrelevant blocks pull attention away","Repeat: relevant, current, permitted"],
   notes: "Still counting in tokens: the window is measured in them. Think of context as small Lego blocks: each block helps the model get to the next one. Flipchart: draw one box as the window and keep adding blocks as the conversation grows: prompt, answer, a pasted file, more answers, until it is full. Irrelevant blocks take space and pull attention away from what matters. A one-and-a-half page love letter is fine if the model gets it at once; if it starts to wander, cut it into smaller blocks. The tagline is the takeaway to repeat: relevant, current, permitted."
 },
-{ // Slide 23
+{ // Slide 24
   title: "Model choice",
   kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "Bigger models do more, and cost more per token. Pick the one that fits the task.",
@@ -505,7 +505,7 @@ window.SLIDES = [
   keyPoints: ["Haiku: fast, cheap, simple","Sonnet: everyday all-rounder","Opus 5.5: complex, highest quality","Fable 5.1: not allowed here","Bigger is not always better"],
   notes: "Different models offer different balances of capability, speed and cost. Haiku is fast and cheap: perfect for a simple question. Sonnet is the all-rounder for most work. Opus 5.5 is the most capable, for complex work. Fable 5.1 exists, but is not allowed at Worldline. A simple question doesn't need the biggest model: that's the bridge to the next slide: what it costs."
 },
-{ // Slide 24
+{ // Slide 25
   title: "How you access a model",
   kicker: "DAY 1 · PART 1 · 2 HOW A MODEL READS",
   subtitle: "Desktop or API: same models, different costs.",
@@ -521,7 +521,7 @@ window.SLIDES = [
   keyPoints: ["Same models, different ways in","Desktop: subscription","API: pay per token","Here: a secure route, through the API","So tokens matter"],
   notes: "Same models, different ways in, and different costs. On your desktop you have a subscription: a fixed price per month with usage limits. Through the API you pay for what you use, counted in tokens. In your setup Claude Code runs through your company's own secure route, because you work with sensitive systems, and it is used through the API. So every token you just learned about has a price: the right model and a clear prompt save money.\n\nNext: a quiz on questions 1 and 2, then question 3: how you steer it."
 },
-{ // Slide 25
+{ // Slide 26
   title: "Quiz: what is AI, and how does it read?",
   kicker: "DAY 1 · QUIZ",
   subtitle: "Which statement is true?",
@@ -537,7 +537,7 @@ window.SLIDES = [
   keyPoints: ["Closes questions 1 and 2", "Vote first", "Answer: C", "A: the rings", "B: distraction", "D: every token has a price"],
   notes: "Vote first, then press → to strike the wrong answers. The answer is C: pick the model that fits the task. A goes back to the rings: the language model sits inside machine learning. B goes back to the distraction card: irrelevant context takes space and attention. D goes back to the previous slide: through the API, every token has a price."
 },
-{ // Slide 20
+{ // Slide 27
   title: "AI failure modes",
   kicker: "DAY 1 · PART 1 · 3 STEERING AI",
   subtitle: "How does AI get it wrong?",
@@ -554,7 +554,7 @@ window.SLIDES = [
   keyPoints: ["Question 3 starts here: how you steer it", "Ask for a personal example first", "Then reveal the list", "Link back: it predicts what sounds likely", "Each failure has a fix in the prompt"],
   notes: "Ask the room for a personal example of AI being confidently wrong before you reveal the list — recognition lands harder than the definition alone. Then link each one back to how the model works: it predicts what sounds likely from what it was given and what it was trained on. Missing context, an ambiguous request or a cutoff date all lead to a likely-sounding answer that isn't right.\n\nNext: Each failure has its own line in a good prompt, which the next slides build up. Missing or outdated context: the Context line. An ambiguous request: the Goal. Unsupported assumptions: Constraints and Done when. Fabricated details: the Check."
 },
-{ // Slide 21
+{ // Slide 28
   title: "Input, context and output",
   kicker: "DAY 1 · PART 1 · 3 STEERING AI",
   subtitle: "Steering starts with what you give it.",
@@ -570,7 +570,7 @@ window.SLIDES = [
   keyPoints: ["Garbage in, garbage out","You sit in the middle: human in the loop","Developer, manager, analyst: same flow","Input: specific, clear, short"],
   notes: "Bridge from the failure modes: most of them start with what goes in. Draw the arrow on the whiteboard: input + context → model → output. Garbage in, garbage out — but good in is also good out. And you sit in the middle: you give the input and you check the output. That is human in the loop, from the very first prompt. It works the same for a developer, a manager or a technical analyst. Keep your input specific, clear and short."
 },
-{ // Slide 26
+{ // Slide 29
   title: "Prompt",
   kicker: "DAY 1 · PART 1 · 3 STEERING AI",
   subtitle: "Your input plus the context you send along: together, that's your prompt.",
@@ -584,7 +584,7 @@ window.SLIDES = [
   keyPoints: ["Input + context = your prompt", "Prompt = everything you send", "At the start: only what you tell it", "Later: conversation and memory add to it", "Bridge to the prompt ingredients"],
   notes: "Connect the words from the previous slide: your input and the context you send along are, together, your prompt. Keep it short: a prompt is more than the question you type, it is everything you send along with it. The key line says 'at the start' on purpose: in a fresh session the model knows only what your prompt tells it; later the conversation and memory add to that, which you'll see in Claude Code. Because it starts from your prompt, a good prompt has a fixed set of ingredients."
 },
-{ // Slide 27
+{ // Slide 30
   title: "A reliable prompt",
   kicker: "DAY 1 · PART 1 · 3 STEERING AI",
   subtitle: "A template you can copy into Claude Code or ChatGPT today.",
@@ -605,7 +605,7 @@ Check: [how I will verify your answer; mark anything you cannot confirm as OPEN]
 },
 
 
-{ // Slide 29
+{ // Slide 31
   title: "Example: a bug fix",
   kicker: "DAY 1 · PART 1 · 3 STEERING AI",
   subtitle: "The same six lines, filled in.",
@@ -624,7 +624,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Same six lines, now filled in for a developer task. Read it line by line, using the colours. The slide shows short versions; Example prompt (top right) has the full prompt to copy. The constraint is the important one: read only, change nothing — Claude scans the repo and shows the error, you decide what to do with it. The check asks for evidence and marks what it isn't sure of as OPEN. That's human in the loop in one line."
 },
 
-{ // Slide 30
+{ // Slide 32
   title: "Knowledge check",
   kicker: "DAY 1 · QUIZ",
   subtitle: "Four quick questions. Answer first, then click to see.",
@@ -640,7 +640,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ask each question out loud and let the room answer before you click. The four questions cover what you just did: tokens, model choice, what the model knows at the start, and how you stay in the loop. Use 'Reveal next' or click a card."
 },
 
-{ // Slide 31
+{ // Slide 33
   title: "Short break",
   kicker: "DAY 1 · BREAK",
   subtitle: "Return in 15 minutes.",
@@ -658,7 +658,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 1 — Part 2: Claude Code — modes, plan, memory, permissions         */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 32
+{ // Slide 34
   title: "Claude interfaces",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "Four ways to work with Claude, and when to use which.",
@@ -674,7 +674,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Same Claude, four ways in. Claude chat is for asking, thinking and writing. Cowork hands over a task on your own documents and files: knowledge work, not code. Claude Code works inside your code project: it reads the files, makes a plan, changes code and runs tests. With the API and the SDK you build Claude into your own application or agent. Then land on Claude Code: that is where the room lives today. The difference with chat: chat only knows what you paste in, Claude Code works inside the project itself."
 },
 
-{ // Slide 33
+{ // Slide 35
   title: "Where Claude Code runs",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "The same Claude Code, in different windows.",
@@ -691,7 +691,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Claude Code runs in the terminal, as an extension inside VS Code, and in the Claude desktop app and the browser: it is the same Claude Code. In these lessons we work in the terminal, so everyone sees the same screen and every step Claude takes. Someone who prefers VS Code can use the extension: everything we teach works there too. Tip for later: open VS Code next to your terminal, so you see the files Claude touches."
 },
 
-{ // Slide 34
+{ // Slide 36
   title: "The terminal",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "Where Claude Code does its work.",
@@ -705,7 +705,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "If anyone in the room is terminal-anxious, name it directly: they don't need to memorise commands, they need to understand what they're approving. That's the whole bar."
 },
 
-{ // Slide 35
+{ // Slide 37
   title: "Is Claude Code ready on your laptop?",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "A two-minute check, together, before the demo.",
@@ -721,7 +721,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 
-{ // Slide 37
+{ // Slide 38
   title: "Claude Code as an agentic tool",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "You are using an agent — not building one (yet).",
@@ -736,7 +736,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Important clarification, say it explicitly: Claude Code reads, plans, acts and checks by itself, so it is an agent; the general definition follows after the loop. But using Claude Code does not mean the room has built a standalone agent. Building your own agent comes in the support days (Day 4, the Claude Agent SDK) — plant it now."
 },
 
-{ // Slide 38
+{ // Slide 39
   title: "Agent loop",
   kicker: "DAY 1 · PART 2 · WORKING METHOD",
   subtitle: "A loop, not a line.",
@@ -755,7 +755,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Five steps, all of them stay including 'Decide' — this is the confirmed final wording. Keep this slide focused on the loop itself; after this comes the general definition of an agent, and then the working method: where you stand around this loop."
 },
 
-{ // Slide 36
+{ // Slide 40
   title: "AI agents",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "Not just answering — acting toward a goal.",
@@ -769,7 +769,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   keyPoints: ["Keep it abstract and short","Agents act toward a goal","Next: Claude Code is one"],
   notes: "Keep this abstract and short. They've just seen one agent up close (Claude Code and its loop); now zoom out to the general definition. The next slide puts the human next to the agent."
 },
-{ // The working method: one loop, with you in it
+{ // Slide 41: The working method: one loop, with you in it
   title: "The working method: you stay in the loop",
   kicker: "DAY 1 · PART 2 · WORKING METHOD",
   subtitle: "Six phases. Every assignment today is one of them. Claude does the work; you decide.",
@@ -802,7 +802,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 
 
 
-{ // Slide 41
+{ // Slide 42
   title: "Ground rules: what you share",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "From now on you work on your own laptop. These rules apply both days.",
@@ -815,7 +815,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "From now on everyone works on their own laptop, so say these out loud, once. Practice data only: no Worldline data and no customer data. No passwords, API keys or internal documents. No real photos, contact details or confidential text in what you build: your avatar this afternoon is a generated picture. Push only to your own repo on Worldline's GitLab: that is where your game lives this afternoon."
 },
 
-{ // Slide 42
+{ // Slide 43
   title: "Ground rules: what you approve",
   kicker: "DAY 1 · PART 2 · CLAUDE & CLAUDE CODE",
   subtitle: "Claude Code asks before it acts. You decide.",
@@ -832,7 +832,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Three rules about what you approve. Read before you approve: if you don't understand a command, say no and ask Claude what it does. Never skip permissions: don't use the option that turns all approvals off, whoever suggests it. Respect IT policy: if something is blocked, that is the answer. No workarounds, no personal accounts, no borrowed logins or keys. The next slide shows how approving works in Claude Code."
 },
 
-{ // Slide 43
+{ // Slide 44
   title: "A tour of Claude Code",
   kicker: "DAY 1 · PART 2 · TOUR",
   subtitle: "One screen, six parts. Each one gets its own moment today.",
@@ -870,7 +870,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "A map before the details: everything they will see on the screen today, in one picture. Click through the six parts; each click lights up the matching line on the screen. 1 Your folder: claude works in the folder you start it in, so you always start it in your own project folder. 2 Tools: reading, editing and running commands; every step is a line with a dot, so you can follow what it does. 3 The question: before a change or a command it asks; 1 is yes once, 2 is yes and don't ask again for this kind of thing, 3 is no. Read before you answer. 4 Modes: how much it may do before it asks; the bottom line says which mode you are in. Next slide. 5 The / menu: everything else lives behind /. The slide after next. 6 Files that steer it: CLAUDE.md and .claude/settings.json; they don't exist yet, they make them today. Notice on the screen: in accept edits mode the file edit went through without a question, but the command still asks.\n\nThen show it live: make an empty folder, start claude in it, type one small request and let them see the same parts on a real screen. Their screen will look a little different (version, colours, wording): that is fine, the parts are the same."
 },
 
-{ // Slide 44
+{ // Slide 45
   title: "Modes: how much Claude may do by itself",
   kicker: "DAY 1 · PART 2 · MODES",
   subtitle: "Shift+Tab switches the mode. You see it at the bottom of the screen. Reading your files never needs a yes.",
@@ -899,7 +899,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Manual vs accept edits, the question people ask: the only difference is file edits. In manual Claude stops before every file it writes and before every command. In accept edits it writes files straight away, and still stops before every command (git push, npm install, npm test). So accept edits is for when you already agreed on what to change and would only be pressing yes ten times; you read the result afterwards (or Esc Esc to undo). Commands are where the real risk is, and they still ask. Reading files never asks, in any mode. Your own allow and ask rules in .claude/settings.json (Assignment 4) apply on top of every mode.\n\nWhen do you use which, today: manual for everything; plan mode in Assignment 5; accept edits briefly in Assignment 10 to see that your ask rule still stops it. Auto is for later: long, clear tasks with tests and git behind them.\n\nThe mode is the first thing the user controls: how much may Claude do before it asks? Show it live: press Shift+Tab a few times and read the label at the bottom. In Claude Code 2.1.309 the order is manual, accept edits, plan, auto. Manual asks before every edit and command. Accept edits lets file edits through, commands still ask. Plan mode is read-only until you approve. Auto mode keeps going, while risky actions are still checked. Two traps from the dry run, say them out loud: 1) Claude Code starts in your default mode, and on some laptops that's auto mode; every restart goes back to it, so check the bottom line after every restart and Shift+Tab to manual. 2) When you approve a plan, the first and highlighted option is 'Yes, and use auto mode'. Pressing Enter switches Claude to auto mode and it stops asking. Always choose option 2, 'Yes, manually approve edits'. There is also an option to skip all permission checks for automated setups: it exists, we don't use it."
 },
 
-{ // Slide 45
+{ // Slide 46
   title: "The / menu",
   kicker: "DAY 1 · PART 2 · TOUR",
   subtitle: "Type / and Claude Code shows everything it can do.",
@@ -912,7 +912,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Type / live and scroll through the menu. /help shows everything Claude Code can do. /model lets you choose Haiku, Sonnet or Opus: remember the model-choice slide. /permissions shows what Claude may do without asking: the gate from a few slides ago. /statusline sets what you see at the bottom of the screen; show a good example. /memory opens your CLAUDE.md, which is coming up. And the skills you install or make show up in this menu too: that's tomorrow."
 },
 
-{ // Slide 57
+{ // Slide 47
   title: "Lunch",
   kicker: "DAY 1 · LUNCH",
   subtitle: "Enjoy your lunch.",
@@ -929,7 +929,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   notes: "Exact resume time: 13:00. Use the break to fix anyone whose Claude Code still doesn't work, and check on your own laptop that the GitLab MCP command you hand out works (Assignment 7 this afternoon)."
 },
-{ // Slide 46b
+{ // Slide 48b
   title: "Today you build Snake",
   kicker: "DAY 1 · PART 2 · YOUR GAME",
   subtitle: "Snake is just the practice project. What you take home is how to work with Claude Code.",
@@ -946,7 +946,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Before anyone starts Claude Code, tell them what they'll build: Snake, in the browser. Eat, grow, and don't hit yourself. Not everyone likes games, so say it plainly: Snake is only the practice project. What they take home is how to work with Claude Code.\n\nWhy Snake: Everyone knows how it should behave, so when Claude gets something wrong, people see it straight away: they judge Claude's work instead of learning a new game. It runs in the browser without installing anything.\n\nMake it yours: A nickname and an avatar on the start screen, their own colours and ideas.\n\nStep by step: The game is only the vehicle. What they learn is the way of working (plan, build, test, put it online), and every step adds one Claude Code skill.\n\nWhat you see: An example of a finished game. Theirs will look different: Claude never builds the same game twice, and that's fine.\n\nNext: Assignment 1: start Claude Code in your own folder."
 },
 
-{ // Slide 46
+{ // Slide 49
   type: "practice",
   layout: "exercise",
   title: "Assignment 1: Start Claude Code in your own folder",
@@ -972,7 +972,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: You need a place to work, and a feel for the tool before it builds anything. An empty folder is all you need; no GitLab yet.\n\nDo together: Steps 1 and 2 on the projector, everyone at the same time. Wait at the trust question until every hand (or chat) says they're in. Then let them do 3 to 5 on their own.\n\nWatch for: The trust question. The highlighted answer is 'No, exit', so Enter quits Claude Code: arrow down first. Trusting matters later too: Claude Code only applies a project's own allow rules once the folder is trusted.\nWatch for: The mode at the start. Some laptops start in auto mode (personal or company settings). Everyone ends in manual mode: today Claude asks for everything.\nWatch for: /model. Enter sets a new default model; Esc only leaves.\n\nWhat you see: git init says 'Initialized empty Git repository': a repo on your own laptop, no internet needed. GitLab comes later, when there is something to share. The first answer comes without a question: Claude may read, it asks before it changes or runs something (the Modes slide).\n\nIf stuck: 'claude: command not found' or a login that fails: note the name, fix it at the break, and let them follow on the shared screen until then. Windows: the three lines work in PowerShell too; paste them one by one if the terminal only runs the first.\n\nNext: Why intent.md first? Their folder is empty and Claude is waiting: before it builds anything, they agree what they want."
 },
 
-{ // Slide 46c
+{ // Slide 50c
   title: "Why intent.md first?",
   kicker: "DAY 1 · PART 2 · PLAN",
   subtitle: "Say only “build me Snake”, and Claude fills in the rest itself.",
@@ -995,7 +995,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the why behind the next assignment. Ask the room: what happens if you just type 'build me a Snake game'? Claude makes a lot of choices for you: in the dry run it offered a terminal or Python version, and picked walls, speed and controls on its own. You get something that works, but not what you had in mind, and you can't say whether it is done. intent.md is the Plan phase from the loop: what do we want, before how. Four parts: Outcome (what the game does), Done when (checks anyone can verify, not 'it's fun'), Boundaries (what Claude must not do, such as no personal data except a nickname) and Open questions. Why a file and not just the chat: a chat is gone after a restart, a file stays in the project, and from now on every plan, test and review points back to it. The nice part: you don't write it yourself. Claude interviews you with multiple-choice questions and writes the file; you read it and decide. Developers know this as requirements or a ticket; it's the same file Day 5 starts with."
 },
 
-{ // Slide 47
+{ // Slide 51
   type: "practice",
   layout: "exercise",
   title: "Assignment 2: Let Claude interview you",
@@ -1020,7 +1020,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: One vague prompt gives you a game you didn't ask for. First agree what you want: this is the Plan phase. In plan mode Claude can't change anything except through the plan you approve.\n\nWatch for: Approving the plan. The first, highlighted option is 'Yes, and use auto mode': everyone chooses 2, 'Yes, manually approve edits'.\nWatch for: After Claude answers, a grey suggested next prompt sits in the input. It's only a suggestion: Enter sends it.\n\nWhat you see: Clickable multiple-choice questions, one at a time (audience, platform, walls, controls, high score, speed, pause). Then the plan, and intent.md.\n\nBackground: The prompt fixes 'browser game' and 'nickname and avatar' on purpose. In the dry run Claude also offered a terminal or Python version, which the rest of the course doesn't support, and without the nickname intent.md said 'no names', which clashed with the arcade later. intent.md is the same file Day 5 starts with. In the dry run Claude listed 'what happens when you press the opposite direction' as an open question: point at it, it's this afternoon's test.\n\nExtra: Push back on a check that is a wish ('the game is fun') until anyone can verify it.\n\nNext: Your AI in Claude Code."
 },
 
-{ // Slide 48
+{ // Slide 52
   title: "Your AI in Claude Code",
   kicker: "DAY 1 · PART 2 · TOUR",
   subtitle: "Where everything lives: two folders it reads, and the connections it reaches out through.",
@@ -1047,7 +1047,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Before we fill anything in, the map. Claude Code itself remembers nothing between sessions. What it knows and what it may do lives in files, in two folders, and it loads them every time it starts. Through MCP it reaches outside your laptop.\n\nWhat you see: Click: one part at a time. 1 ~/.claude/, a hidden folder in your home folder, next to your project, not around it: your personal CLAUDE.md (about you), your own settings.json and the notes Claude keeps for itself (auto memory). It stays on your laptop and counts for every project. 2 Your project folder: intent.md (done), CLAUDE.md for this project, and .claude/settings.json with the permissions. This folder goes into git, so the team gets the same instructions and permissions. 3 Claude Code in the middle: it loads both folders at the start of every session. 4 Hands and feet: through MCP it works in GitLab this afternoon, Jira and Confluence in the support days. 5 LibreChat: separate, in the browser, for quick questions and images.\n\nLink back: Every file here comes back today. Point back at this slide every time one of them comes up.\n\nWatch for: People think the project lives inside ~/.claude/ because of the projects/ folder there. It only holds Claude's notes and chat history per project; the code stays in the project folder.\n\nBackground: Project settings beat your own, and company settings beat both. /memory shows the loaded CLAUDE.md files and auto memory; /mcp shows the connections. Day 2 adds skills, agents and hooks to the same project folder.\n\nNext: Your context window in Claude Code."
 },
 
-{ // Slide 49
+{ // Slide 53
   title: "Your context window in Claude Code",
   kicker: "DAY 1 · PART 2 · TOUR",
   subtitle: "The window from this morning, now on your own screen.",
@@ -1064,7 +1064,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This makes the context window from Part 1 concrete. Type /context live: it shows what fills the window right now, counted in tokens, including the system prompt, tools and CLAUDE.md. A long conversation fills it up and, just like on the Lego slide, irrelevant blocks pull attention away. /clear starts a fresh conversation: do that when you switch to a new task. /compact lets Claude summarise the conversation so far, so you can go on with more room. The tagline sets up the next slides: a new session starts empty, apart from what is written down in CLAUDE.md and memory."
 },
 
-{ // Slide 50
+{ // Slide 54
   title: "Context grows",
   kicker: "DAY 1 · PART 2 · TOUR",
   subtitle: "The more you work with it, the more it knows.",
@@ -1080,7 +1080,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Working with AI is a rising line. Your very first prompt starts from zero: it knows nothing about you. Within one conversation every prompt and answer adds context. A new session starts empty again: the model itself does not learn from you. Only what is written down, in CLAUDE.md and memory files, is read again next time. End on the question: what does Claude Code know about you today? For most people: nothing yet. That's what you fix in a few minutes, with your own CLAUDE.md."
 },
 
-{ // Slide 51
+{ // Slide 55
   title: "What does AI need to know first?",
   kicker: "DAY 1 · PART 2 · CLAUDE.MD",
   subtitle: "What would you tell a new colleague before they touch your project?",
@@ -1097,7 +1097,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Don't show the answers yet. Ask the room: before a new colleague touches your project, what do you tell them first? Collect answers on the flipchart for a minute or two. Then reveal the cards one by one (click or →) and match them to what the room said. The last card is the working agreement for every exercise: investigate before changing, show the plan first, make small changes, run relevant checks, show evidence, mark uncertainty as OPEN and wait for human approval before committing. Frame it as the room's own agreement with Claude Code, not a rule imposed from outside. Then the bridge: Claude Code is that new colleague, every session again. You don't want to tell it all this every time, so you write it down once: that's CLAUDE.md, next."
 },
 
-{ // Slide 52
+{ // Slide 56
   title: "CLAUDE.md and memory",
   kicker: "DAY 1 · PART 2 · CLAUDE.MD",
   subtitle: "The model doesn't learn from you. Only what's written down carries over.",
@@ -1127,7 +1127,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   tagline: "Loaded at the start of every session, so keep it short."
 },
 
-{ // Slide 53
+{ // Slide 57
   type: "practice",
   layout: "exercise",
   title: "Assignment 3: A CLAUDE.md for your game",
@@ -1152,7 +1152,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: After /clear the conversation is gone. Claude can read your files again, but it doesn't know your instructions. CLAUDE.md is the file it loads at the start of every session.\n\nAsk the room: Steps 1 and 3 are the same question on purpose. Let a few people read Claude's answer out loud, before and after.\n\nWatch for: A personal CLAUDE.md rule like 'use Tailwind' clashes with 'no frameworks'. Ask which rule wins, and why.\n\nWatch for: /memory takes no question after it: people type '/memory which files are loaded?'. It opens a list of memory files; Esc closes it with 'Cancelled memory editing', which is fine.\n\nWhat you see: Before: Claude guesses the rules from your files. After: it names exactly your rules, every session. /memory shows the project CLAUDE.md, the @-imported intent.md, your personal file and auto-memory.\n\nBackground: Ask about the rules, not 'what is this project': in the dry run Claude simply read intent.md and knew what the project was, even without CLAUDE.md. What it can't know without CLAUDE.md is your rules (no frameworks, npm test, plan first, nickname only). That is the difference between context (the conversation, gone after /clear), files Claude can search, and memory (CLAUDE.md, loaded every session without searching). @intent.md pulls that file in at the start of every session; tomorrow we'll measure what that costs. 'Tests run with npm test' is in the prompt on purpose: otherwise Claude may build browser-only tests, and the hook this afternoon needs a command.\n\nExtra: A personal ~/.claude/CLAUDE.md with your role and one preference. It stays on your laptop.\n\nNext: Decide first what Claude may do."
 },
 
-{ // Slide 54
+{ // Slide 58
   title: "Decide first what Claude may do",
   kicker: "DAY 1 · PART 2 · PERMISSIONS",
   subtitle: "Claude is about to edit your files and run commands. You set its permissions before it starts.",
@@ -1175,7 +1175,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Comes right after the CLAUDE.md assignment: CLAUDE.md asks Claude, settings.json enforces. Three kinds of permission: allow (no question), ask (a question every time), deny (never, even when asked; deny wins when rules overlap). Four levels: your own settings everywhere, the project's settings shared through git, the project's local settings only for you, and company-managed settings that always win (Worldline may have some). /permissions shows what's active. Claude Code always asks before it writes a settings file, and the project's allow rules only apply once you've trusted the folder. Hooks live in the same file; they come this afternoon."
 },
 
-{ // Slide 55
+{ // Slide 59
   type: "practice",
   layout: "exercise",
   title: "Assignment 4: Permissions before you build",
@@ -1200,7 +1200,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Claude is about to touch your files and run git. Decide now what it may do, not after something goes wrong.\n\nWatch for: After the restart Claude Code starts in your default mode, and on some laptops that's auto. Everyone checks the bottom line.\nWatch for: Test with the exact command. In the dry run 'force push my work' did nothing visible: with no commits and no remote, Claude didn't even try. 'Run exactly this command: git push --force origin main' gets 'blocked by your permission settings' every time.\n\nWhat you see: Claude asks before it writes .claude/settings.json (always, even in accept-edits mode). Then the force push is blocked.\n\nA good result: { \"permissions\": { \"ask\": [\"Bash(git commit*)\", \"Bash(git push*)\"], \"deny\": [\"Bash(git push --force*)\", \"Bash(git push -f*)\", \"Bash(rm -rf *)\", \"Bash(glab mr merge*)\", \"Bash(gh pr merge*)\"] } }. Claude usually writes stricter rules (more variants) and explains honestly that text patterns can be worked around: worth a word.\n\nBackground: A rule matches how a command starts. 'git push --force origin main' is blocked, but 'git push origin main --force' puts the flag at the end, so it slips past the deny rule and only hits the ask rule: Claude still asks, but it isn't blocked. Someone will try it; that's the honest limit of text rules. Hooks (Assignment 11) can check the whole command.\n\nBackground: The merge deny keeps the human gate tomorrow: Claude Code later suggests 'merge the pull request' as a next prompt, and without this rule Claude would merge its own work.\n\nLook inside: Open .claude/settings.json. Which line blocked the force push?\n\nNext: Quiz: the working method."
 },
 
-{ // Slide 56
+{ // Slide 60
   title: "Quiz: the working method",
   kicker: "DAY 1 · QUIZ",
   subtitle: "In our working method, who makes the final decision?",
@@ -1224,7 +1224,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* ---------------------------------------------------------------------- */
 
 
-{ // Snake in 5 layers: the map before Assignment 5
+{ // Slide 61: Snake in 5 layers: the map before Assignment 5
   title: "Snake in 5 layers",
   kicker: "DAY 1 · PART 3 · DESIGN",
   subtitle: "Not one big prompt, but five small steps. Each one you can play, check and save.",
@@ -1247,7 +1247,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: One prompt can build Snake: the dry run did it in under a minute. But then you can't steer it, you can't tell what broke, and you learn nothing about what's in the files. So we build it in five layers. After every layer you play it, check it and save it.\n\nWhat you see: Click: one board at a time. 1 Skeleton: a grid and a snake that moves by itself. 2 Controls: the arrow keys steer it. 3 Food and score: it eats, grows and counts. 4 Game over: a wall or your own tail ends the game, Space starts again. 5 Your style: your nickname and avatar on screen (Assignment 14). No best score: tomorrow the arcade leaderboard does that.\n\nTip: After every layer: reload the browser tab (F5 or Cmd+R) and play it. The first time, Claude opens index.html for you.\n\nLink back: Every layer is one small turn of the working-method loop: plan it, build it, check it, commit it.\n\nBackground: Layers 1 to 4 get built in Assignments 6 and 8. Layer 5 comes later this afternoon, when everyone has made an avatar in LibreChat. Real software gets built the same way: small slices that each work on their own.\n\nNext: Assignment 5: Claude plans these five layers with you."
 },
 
-{ // Slide 59
+{ // Slide 62
   type: "practice",
   layout: "exercise",
   title: "Assignment 5: Plan the 5 layers of your Snake",
@@ -1274,7 +1274,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 
-{ // Slide 61
+{ // Slide 63
   title: "Before you build: save points",
   kicker: "DAY 1 · PART 3 · GIT",
   subtitle: "git has been watching your folder since git init, but nothing is saved yet. Layer 1 is the first code worth saving.",
@@ -1296,7 +1296,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: You typed git init at the very start, and your permissions already mention commit and push. But nothing has been saved yet: the folder only had intent.md and CLAUDE.md. Next you build layer 1, the first real code. When it works, you save it: that's your first commit. Then you push it to GitLab.\n\nWhat you see: Click: three words. Repository: your folder, with a memory that's still empty. Commit: a save point, the first one when layer 1 works. Push: a copy on GitLab.\n\nBackground: For everyone who doesn't use git every day; developers can nod along. Today is only the rhythm: a layer works, commit, push. Claude runs the git commands and asks first (the house rule). Branches, merge requests and the rest come tomorrow, when there's a reason for them.\n\nNext: Assignment 6: build layer 1, look inside, commit."
 },
 
-{ // Slide 62
+{ // Slide 64
   type: "practice",
   layout: "exercise",
   title: "Assignment 6: Build layer 1, look inside, commit",
@@ -1322,7 +1322,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Tip: The ! in !git status runs the command yourself, without Claude.\n\nSay: It works. Make a save point before you change anything else. A small step, understood, saved.\n\nWatch for: The file name is whatever Claude chose (game.js in the dry run, sometimes snake.js). Type @ and a list of files appears: pick the right one.\nWatch for: If Claude proposes a branch, say 'commit straight to main'. Branches come tomorrow.\n\nWhat you see: index.html, style.css and the game's .js file appear. The commit asks first, and the screen names the rule: 'Permission rule Bash(git commit *) requires confirmation'. The first commit includes CLAUDE.md, intent.md and .claude/settings.json: that's fine, they belong to the project.\n\nThree new controls: @file points Claude straight at a file, so it doesn't have to search (cheaper and faster). !git status runs a command yourself, and the output lands in the conversation; Claude even comments on it. A commit is a save point.\n\nLook inside: This is the real lesson. Which part draws the snake? If nobody can say, slow down.\n\nNext: Model Context Protocol."
 },
 
-{ // Slide 63
+{ // Slide 65
   title: "Model Context Protocol",
   kicker: "DAY 1 · PART 3 · MCP & GITLAB",
   subtitle: "One standard plug for approved connections.",
@@ -1337,7 +1337,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say the tagline explicitly and connect it back to the working agreement (What does AI need to know first?): being connected to something is not the same as being allowed to change it. An MCP tool goes through the same allow, ask and deny rules as a file edit or a command, so a read-only tool can be allowed and anything that writes can be ask or deny. Next: you connect GitLab yourself."
 },
 
-{ // Slide 64
+{ // Slide 66
   title: "git, GitLab and MCP",
   kicker: "DAY 1 · PART 3 · MCP & GITLAB",
   subtitle: "Three different things, often mixed up.",
@@ -1357,7 +1357,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Keep this crisp, it's the most common confusion. git is local: your folder and its history, no internet needed. GitLab is where the history is stored and shared; git push sends it there. The GitLab MCP is only so that Claude itself can act on GitLab: create the project, later open merge requests. Claude reads your files with its own built-in tools, no MCP needed."
 },
 
-{ // Slide 65
+{ // Slide 67
   type: "practice",
   layout: "exercise",
   title: "Assignment 7: Put your game on GitLab",
@@ -1381,7 +1381,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Laptop gone, game gone. On GitLab it's safe, and tomorrow the arcade needs it. git is on your laptop; GitLab is the online copy; the GitLab MCP is what lets Claude itself create the project.\n\nBefore class: Check that every participant has GitLab access. Most managers do, not all.\n\nWhat you see: /mcp shows GitLab connected. Claude creates the project, then asks before it pushes, because of the ask permission ('Permission rule Bash(git push *) requires confirmation').\n\nBackground: In the dry run Claude also pointed out that the commits carry the author's email from git config. On Worldline's own GitLab that's normal, but it's a nice privacy moment.\n\nIf stuck: No GitLab access: keep working locally all afternoon. git pull tomorrow will then say there's no remote: ignore it.\n\nNext: Undo: checkpoints and commits. From now on the rhythm is: it works, commit, push."
 },
 
-{ // Slide 66
+{ // Slide 68
   title: "Undo: checkpoints and commits",
   kicker: "DAY 1 · PART 3 · UNDO",
   subtitle: "Two ways back. Commits are your save points. Checkpoints are Claude's own, made automatically.",
@@ -1398,7 +1398,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: You'll break your game on purpose in the next assignment, and get it back. There are two ways back, and this road shows both.\n\nWhat you see: The road is Assignment 8, left to right. Layer 2 works: commit and push. Layer 3 works: commit and push. Then you remove the score on purpose: broken. Esc Esc, or typing /rewind, takes you back to the checkpoint just before that prompt (the orange arrow), and the score is back. Then layer 4: commit and push. Top lane: Claude makes a checkpoint before every prompt, but only in this session. Bottom lane: you make a commit after every layer that works; it stays forever, and after a push it's on GitLab.\n\nBackground: Esc twice (or /rewind) shows a list of earlier points; you choose to restore the code, the conversation, or both. It only covers Claude's own file edits in this session, not what a command did elsewhere, and it isn't shared. The broken step gets no commit, because it didn't work. Rule of thumb: last few minutes, Esc Esc; anything older, git.\n\nBefore class: Try Esc Esc on your teaching laptop so you know what the menu looks like in this version.\n\nNext: Assignment 8: layers 2 to 4, and one rescue."
 },
 
-{ // Slide 67
+{ // Slide 69
   type: "practice",
   layout: "exercise",
   title: "Assignment 8: Layers 2 to 4, and one rescue",
@@ -1424,7 +1424,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Things go wrong. Know how to get back before it matters. And the rhythm becomes a habit: layer works, commit, push.\n\nWatch for: Esc Esc only opens Rewind when the input is empty.\nWatch for: After a rewind the old message is back in the input. Enter would do it again, so clear it.\n\nWhat you see: Esc twice opens Rewind. Pick the message before the mistake, then 'Restore code and conversation' (also possible: code only, or conversation only). The score is back, without git. The menu warns that files changed by bash commands aren't restored.\n\nAsk the room: After step 3: why did Claude ask? Because intent.md says the score is shown. intent.md doesn't block anything, but Claude reads it and checks with you. You decide, so 'yes, do it anyway' works. 'Leave intent.md as it is' stops Claude from also rewriting intent.md to match, which it often offers.\n\nIf Claude doesn't ask: it can happen. Let them check intent.md: is the score in the Outcome or Done when? Then just say yes and go on to the rescue.\n\nBackground: In the dry runs a plain 'remove the score' made Claude stop and ask, because intent.md says the score is shown. Guides (intent.md, CLAUDE.md) make Claude ask; only tests, hooks and settings actually stop it, which is where the afternoon goes next. Removing the score also made Claude change the tests: that's why Assignment 10 protects tests/.\n\nNext: Short break (15 minutes), then A test: evidence, not confidence."
 },
 
-{ // Afternoon break
+{ // Slide 70: Afternoon break
   title: "Short break",
   kicker: "DAY 1 · BREAK",
   subtitle: "Return in 15 minutes.",
@@ -1437,7 +1437,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "State the actual clock time you'll resume, out loud and (if possible) on screen. Everyone has now built layers 1 to 4. Use the break to help anyone whose game isn't on GitLab yet, or who is still stuck in a layer: after the break the topic changes from building to testing, and everyone needs a working game for that."
 },
 
-{ // Slide 68
+{ // Slide 71
   title: "A test: evidence, not confidence",
   kicker: "DAY 1 · PART 3 · TESTS",
   subtitle: "The rule: the snake never turns straight back. Moving right, the ← key does nothing.",
@@ -1454,7 +1454,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Claude says it works. A test shows it, every time. Here's the classic Snake bug. You're moving right and press left: in a good game nothing happens, the key is ignored. Now press up and then left very fast, both before the snake moves. A careless game accepts up, then accepts left (that's not the opposite of up), but the snake never went up: it turns back into itself. Game over, from two quick keys.\n\nWhat you see: The subtitle gives the rule. The three boards show the tricky case in slow motion. 1: the up key; the game notes 'go up next', but the snake only moves every 0.12 seconds, so it hasn't moved yet. 2: quickly the left key; a careless game compares left with up (the key just pressed), and left isn't straight back from up, so it says OK. 3: the snake moves left, but it was still moving right: straight back into its neck. Green bar: a good game compares with where the snake really moves. Orange box: what the test does, and why.\n\nWatch for: keep keys and directions apart when you talk. 'The left key' is what you press; 'left' is where the snake goes.\n\nSay: Your game probably gets this right already, so your test will likely be green first. That's fine: in the assignment you break it on purpose and see it turn red.\n\nAsk the room: Would you find the bug by playing? Almost never: you'd need two keys within 120 milliseconds.\n\nBackground: That's why it's a good test: it hides until someone presses fast, and it comes back when you change the speed or the controls. A test like 'the snake grows' is less useful: you'd see that break straight away. Tomorrow the tests grow with the levels: food never on a wall.\n\nNext: Assignment 9: your own test. Does your game have the bug?"
 },
 
-{ // Slide 69
+{ // Slide 72
   type: "practice",
   layout: "exercise",
   title: "Assignment 9: A test that finds a bug",
@@ -1481,7 +1481,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: A test turns 'I think it works' into 'I've seen it work, and I've seen it catch the bug.' You can't play every key combination after every change.\n\nWatch for: Claude fixes the game, never the test.\n\nWhat you see: Failed: the bug was there, and Claude fixes the game. Passed: Claude already guarded it, so break it on purpose and watch the test catch it. The ! in !npm test runs the command yourself, without Claude.\n\nWhy not plant the bug: Claude writes every game itself, and usually guards this rule. You can't hand out a buggy game without telling Claude to write a bug. So there are two paths: some games are red the first time (a real bug found), most are green (break it on purpose, then see red). Both end with a test you've seen fail.\n\nBackground: Why this test and not 'the snake grows'? Growing is the game itself; you'd see it break immediately. Reversing into yourself is the classic Snake bug: it hides until you press the wrong keys fast, and it comes back when you change the speed or the controls. Some games will be red the first time: the test found a bug nobody saw. In the dry run Claude had already guarded this rule in layer 2, so the test was green; then the point is to break it on purpose and see the test turn red. A test you've never seen fail is not evidence. npm test needs Node and a package.json; Claude makes the package.json.\n\nIf stuck: No Node on someone's laptop: ask for tests/test.html instead, and open it in the browser: green or red. The hook in Assignment 11 does need Node; they watch that one on the projector.\n\nNext: Assignment 10: The permissions grow."
 },
 
-{ // Slide 70
+{ // Slide 73
   type: "practice",
   layout: "exercise",
   title: "Assignment 10: The permissions grow",
@@ -1507,7 +1507,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Asked to 'make the tests pass', Claude could change the test instead of the game. And it keeps asking to run npm test. Two permissions fix both.\n\nWatch for: In step 4 the answer is No. And everyone goes back to manual mode at the end.\n\nWhat you see: 'Run the tests': no question. In accept-edits mode every other file goes through, but a test file still asks.\n\nBackground: allow for npm test: approving a safe command over and over only teaches people to click yes without reading. ask for tests/, not deny: tomorrow they'll add new tests, so the rule is 'a test only changes with my yes'. Why accept-edits mode: in manual mode every edit asks anyway, so you can't see the rule working. In the dry run the allow rule worked straight away, without a restart. Claude also noted that npm test runs tests/run.js, so protecting tests/ protects what runs without asking. Edit(tests/**) covers new files too; a Write(tests/**) rule does nothing. Deny beats ask beats allow when several rules match.\n\nLook inside: /permissions: where do your new rules show up?\n\nNext: Hooks: a check that runs by itself."
 },
 
-{ // Slide 71
+{ // Slide 74
   title: "Hooks: a check that runs by itself",
   kicker: "DAY 1 · PART 3 · HOOKS",
   subtitle: "Your agent loops by itself. A hook is a fixed check at a fixed moment in that loop.",
@@ -1524,7 +1524,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Remember the agent loop from this morning: observe, decide, act, check, and again, by itself. That loop is what makes Claude Code an agent. A hook is a check you pin onto that loop: at a fixed moment, a command of yours runs. Claude doesn't have to remember it and can't skip it.\n\nWhat you see: The same loop circle as slide 39, with three moments pinned on it. Plain words big, the official name small: you'll see those names in settings.json. Before an action (PreToolUse) the hook can still stop it. After an action (PostToolUse) it already happened, so the hook can only report back: that's where 'run the tests' goes. When Claude says it's done (Stop): one last check.\n\nWatch for: 'Did we make up PreToolUse?' No. The moments and their names are built into Claude Code; you pick one. What runs (npm test) and for which action (Edit, Write, Bash) is yours. A 'tool' is one action of Claude: Read, Edit, Write, Bash.\n\nWatch for: hooks don't make Claude an agent; the loop does. Hooks make it safer to let the loop run longer, because the checks happen every time.\n\nBackground: Exit code 2 means: this failed, tell Claude. The message goes back into the loop, and Claude sees it in its Check step. Hooks run outside the context window, so only their output costs tokens. Other moments exist too, such as SessionStart and UserPromptSubmit. Day 5 builds a guard hook with allow, ask and deny on every tool call: this is the first step.\n\nLook inside: /hooks shows them.\n\nNext: what your settings.json looks like once the hook is in, then Assignment 11."
 },
 
-{ // Slide 73
+{ // Slide 75
   title: "Example: a complete settings.json",
   kicker: "DAY 1 · PART 3 · SETTINGS",
   subtitle: "Your permissions and your hook together in one file: .claude/settings.json",
@@ -1542,7 +1542,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: This is where you end up after the next assignment: your permissions from Assignments 4 and 10, plus the hook. When Claude shows you the file in step 1, compare it with this one (the Example prompt button copies it). What you see: the file on the left, a label for each part on the right. The hook labels (moment, which tool, command) are the same as the chips in Assignment 11, step 2.\n\nWalk through it top to bottom: allow lets npm test run without a question; ask makes commit, push and any change in tests/ need a yes; deny blocks force push, rm -rf and merging your own merge request, even when asked; the PostToolUse hook runs the test after every Edit or Write, and exit 2 sends a failing test back to Claude. Claude's own version is often stricter; that's fine. After changing it, check with /permissions and /hooks.\n\nNext: Assignment 11: add the hook yourself."
 },
 
-{ // Slide 72
+{ // Slide 76
   type: "practice",
   layout: "exercise",
   title: "Assignment 11: Let a hook guard your game",
@@ -1568,7 +1568,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: You keep forgetting to run the test after a change. A hook runs it by itself, after every edit.\n\nWatch for: On long commands Claude Code shows a tip to switch to auto mode: don't.\nWatch for: In the dry run Claude picked the built-in update-config skill by itself (a preview of tomorrow's skills) and tested the hook command before saving. Approve those steps: they only run the tests.\n\nWhat you see: A change that breaks a rule: the hook reports the failing tests at once ('The hook caught the conflict straight away'). Claude leaves the tests alone and asks whether to keep or undo the change.\n\nA good result: \"hooks\": { \"PostToolUse\": [ { \"matcher\": \"Edit|Write\", \"hooks\": [ { \"type\": \"command\", \"command\": \"npm test 1>&2 || exit 2\" } ] } ] }. Claude's own version is usually longer (it cds to the project folder and only prints on failure).\n\nBackground: Why not 'make the snake faster' as the break: in the dry run that change kept all tests green, so the hook stayed silent and nothing was learned. Letting the snake turn straight back makes the reverse tests from Assignment 9 fail. The broken change stays until someone undoes it: 'throw that change away' (git checkout of the file). /hooks is read-only: it shows the hook, changes go through settings.json. The game file may be snake.js instead of game.js: Claude finds it either way.\n\nLook inside: /hooks: which event, which matcher?\n\nThe three parts (step 2): the moment is a built-in name from Claude Code (PostToolUse: after Claude used a tool); which tool narrows it down (matcher Edit|Write: only after a file change); the command is yours (npm test). Students never write this by hand: they say it in plain words and Claude picks the moment.\n\nNext: Assignment 12."
 },
 
-{ // Slide 74
+{ // Slide 77
   type: "practice",
   layout: "exercise",
   title: "Assignment 12: Look at your context window",
@@ -1593,7 +1593,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: With every message Claude rereads the whole conversation. A long session gets slower, more expensive and more distracted. Link back to the context-window slide this morning.\n\nWhat you see: /context shows what fills the window right now: the system prompt and tools, MCP tools, CLAUDE.md, and the conversation, in tokens.\n\nBackground: /compact summarises the conversation and keeps going; you can say what to keep. /clear empties it, for a new task. CLAUDE.md and the files on disk survive both.\n\nLook inside: What takes the most room? Do you still need it?\n\nNext: Assignment 13: Make your avatar in LibreChat."
 },
 
-{ // Slide 75
+{ // Slide 78
   title: "Assignment 13: Make your avatar in LibreChat",
   mode: "librechat",
   kicker: "DAY 1 · ASSIGNMENT 13 · BUILD",
@@ -1624,7 +1624,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Keep the energy high: this is meant to be fun. This is your character for tomorrow's leaderboard.\n\nWatch for: The privacy rule for the whole arcade. The avatar only describes how the character looks, and the game only shows a nickname. No real name, email, employee number or photo, because tomorrow every game is on a shared website. Don't paste anything from your personal CLAUDE.md.\n\nWhat you see: LibreChat itself doesn't make images: in the library you pick the image generator. The three thumbnails are AetherBOT, made with the three starting prompts.\n\nBackground: The Example prompt button has three starting prompts: cartoon, superhero and Jip and Janneke (a well-known Dutch children's-book style by Fiep Westendorp, black silhouettes; explain it in one sentence for non-Dutch participants).\n\nBefore you move on: Make sure everyone has downloaded the file.\n\nNext: Assignment 14: Put your avatar in your game."
 },
 
-{ // Slide 76
+{ // Slide 79
   title: "Assignment 14: Layer 5, your avatar in your game",
   mode: "plan",
   kicker: "DAY 1 · ASSIGNMENT 14 · BUILD",
@@ -1653,7 +1653,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: The hand-off: LibreChat made the picture, Claude Code puts it in the game. Tomorrow the avatar and nickname go to the arcade leaderboard.\n\nWatch for: Approving the plan: option 2 again, not auto mode.\nWatch for: The fallback is the part people forget. Check the game without a picture too.\n\nWhat you see: @assets/… points Claude at the image; Claude can read images, so it can also describe it. The hook from Assignment 11 runs the test after this change too: it should.\n\nNext: Assignment 15: Hand it over."
 },
 
-{ // Slide 77
+{ // Slide 80
   type: "practice",
   layout: "exercise",
   title: "Assignment 15: Hand it over",
@@ -1677,7 +1677,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: Tomorrow's session starts empty. Only what's written down carries over. The Maintain phase closes the loop: the next person, or tomorrow's session, starts from PROGRESS.md.\n\nWhat you see: PROGRESS.md: what's built, how it was tested, which permissions and hooks are active, and what's still open.\n\nBackground: Day 5 uses the same file.\n\nNext: Day 1 learning note. Tomorrow starts with git pull and claude --continue, which takes you back into today's last conversation."
 },
 
-{ // Slide 78
+{ // Slide 81
   title: "Day 1 learning note",
   kicker: "DAY 1 · CLOSING",
   subtitle: "Five quiet minutes — in your own words.",
@@ -1691,7 +1691,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Give people genuinely quiet time to write it, five minutes is enough. The habit of writing a raw, honest note, not one polished by Claude, is worth protecting. Tomorrow starts with showing your game: this note helps them remember what they want to show and ask."
 },
 
-{ // Slide 79
+{ // Slide 82
   title: "Day 1 recap",
   kicker: "DAY 1 · CLOSING",
   subtitle: "Today you:",
@@ -1720,7 +1720,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 2 — Warm-up and recap                                              */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 80
+{ // Slide 83
   title: "Reusable and connected AI workflows",
   kicker: "TEACHING DAY 2",
   subtitle: "From your own Snake to a team arcade.",
@@ -1740,24 +1740,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Short re-welcome. Point at the day's shape: the morning walks the loop again with levels (spec, branch, merge request), then the method becomes a skill, a verifier agent and a workflow. The afternoon is the Aether Arcade: one website, everyone's game, three sprints and chaos cards. The warm-up comes first: everyone shows their game."
 },
 
-{ // Slide 81
-  title: "Built with AI: Stekkie",
-  hidden: true, // hidden for now (press H on it, or use Chapters, to show it again)
-  kicker: "DAY 2 · SHOW & TELL",
-  subtitle: "Constance's own AI garden coach — vibe coded, live at app.stekkie.ai.",
-  type: "context",
-  visual: { opener: 'showcase', image: 'assets/stekkie.webp', imageLink: 'app.stekkie.ai', stagger: 'pop', compact: true, stepThrough: true },
-  cards: [
-    { title: "Constance's idea", body: "Constance loves gardening, so she built Stekkie: her own AI garden coach." },
-    { title: "What Stekkie helps with", body: "Sowing, harvesting, the weather, and spotting what's wrong with a plant from a photo. Plus a map of her garden, her planter beds and a garden logbook." },
-    { title: "Built with AI", body: "Made by describing what she wanted, without a traditional development team. Live, with real users and real bugs to fix." }
-  ],
-  tagline: "Vibe coding gets you a working app. Today is about making it reliable.",
-  keyPoints: ["Constance's project: she loves gardening", "Let Constance show it, 3 to 5 minutes", "One flow end to end", "Land it: trust needs today's material", "Site fails: tell the story with the image"],
-  notes: "Stekkie is Constance's project: she loves gardening and built Stekkie, her own AI garden coach, by describing what she wanted to AI. If Constance is in the room, let her show it herself (app.stekkie.ai), 3 to 5 minutes, one flow end to end. The app's own start screen says it helps with sowing, harvesting, the weather and plant diagnosis from a photo. What you can see in its menu: a dashboard, Mijn Tuin (draw a map of your garden: grass, soil, tiles, paths, water, decking), Bakken (planter beds), Logboek (a garden logbook), Seizoen (the seasons) and a community page, plus the local weather and a chat helper. If you present it without her, stick to what the screen shows and ask the room what they would build for their own hobby. Then land the tagline: vibe coding got this app live, but what makes it trustworthy is exactly today's material: context, repeatable methods, bounded work and checks. If the site or wifi fails, stay on this slide and tell the story with the image."
-},
-
-{ // Slide 82
+{ // Slide 84
   title: "Show your game",
   kicker: "DAY 2 · WARM-UP",
   subtitle: "Everyone shows what they built yesterday. One minute each.",
@@ -1774,7 +1757,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Everyone shows their Snake from yesterday, one minute each: play it for a few seconds, show the avatar and their own touch. Online participants share their screen. In a big group, pick a handful of volunteers instead of everyone, and keep an eye on the clock. One thing that went well, one thing that went wrong. Collect the questions that come up on the flipchart: the recap that follows answers them. Optional opener: how many tokens did your game cost? (/cost or the status line)."
 },
 
-{ // Slide 83
+{ // Slide 85
   title: "Quiz: what do you remember?",
   kicker: "DAY 2 · QUIZ",
   subtitle: "Yesterday in five questions. Answer out loud first, then click to see the answer.",
@@ -1791,7 +1774,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ask each question and let the room answer before you click: from memory, not open-book. Click a card (or →) to show its answer. Plan mode: Claude can't change files, so you see the plan first. CLAUDE.md asks, settings.json enforces. A hook makes something always happen; a permission only decides what's allowed. Esc Esc for the last few minutes, a commit for always. If the six phases are shaky, put the working method slide (Day 1, slide 41) back up for a moment: today's assignments are labelled with them."
 },
 
-{ // Slide 84
+{ // Slide 86
   title: "Recap: your AI in Claude Code",
   kicker: "DAY 2 · RECAP",
   subtitle: "Yesterday's map, now filled in: everything you made is a file in your game.",
@@ -1800,20 +1783,20 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     map: {
       tree: {
         root: "aether-snake/",
-        rootNote: "your game, in git and on GitLab",
+        rootNote: "your game",
         groups: [
           [
             ["├── ", "intent.md", "what you want"],
-            ["├── ", "CLAUDE.md", "instructions, every session"],
+            ["├── ", "CLAUDE.md", "your instructions"],
             ["├── ", ".claude/settings.json", "permissions + your hook"]
           ],
           [
-            ["├── ", "index.html  game.js  style.css", "Snake, in 5 layers"],
+            ["├── ", "game.js  index.html …", "Snake, in 5 layers"],
             ["├── ", "assets/", "your avatar"],
-            ["├── ", "tests/", "the test that caught the bug"]
+            ["├── ", "tests/", "your test"]
           ],
           [
-            ["└── ", "PROGRESS.md", "the handover for today"]
+            ["└── ", "PROGRESS.md", "the handover"]
           ]
         ]
       },
@@ -1827,7 +1810,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
       apart: { name: "LibreChat", where: "In the browser · not part of Claude Code", note: "Made your avatar." }
     }
   },
-  tagline: "Today the same folder grows: levels, a skill, an agent, and then a team.",
   keyPoints: [
     "Same map as Day 1, now filled in",
     "Instructions and permissions: Claude Code loads them",
@@ -1838,7 +1820,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Say: This is the map from yesterday morning (Day 1, slide 52), now with everything you made in it. Walk it top to bottom. What Claude Code reads: intent.md, CLAUDE.md with your instructions, and .claude/settings.json with your permissions and the hook that runs npm test after every edit. What you built: the game in 5 layers, your avatar in assets/, and the test in tests/ that caught the straight-back bug. PROGRESS.md: the handover, and the first thing Claude reads this morning. Claude Code loads CLAUDE.md (which pulls in @intent.md) and settings.json at every start; PROGRESS.md it reads when you ask. GitLab: Claude created your project through MCP; git pushed your code. LibreChat made the avatar, outside Claude Code.\n\nUse this to answer the questions from Show your game. Today the same folder gets levels/, spec.md, a skill and an agent in .claude/, and then the arcade with a whole team."
 },
 
-{ // Slide 85
+{ // Slide 87
   title: "Short break",
   kicker: "DAY 2 · BREAK",
   subtitle: "Return in 15 minutes.",
@@ -1856,7 +1838,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 2 — Part 1: Levels — spec, branch, merge request                   */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 87
+{ // Slide 88
   title: "What makes a level harder?",
   kicker: "DAY 2 · PART 1 · LEVELS",
   subtitle: "Each level is a small file with knobs.",
@@ -1878,7 +1860,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ask the room first: how would you make Snake harder? Collect answers, then show the four knobs. 'Harder but fair' is the rule that will later live in the new-level skill: one or two knobs go up, the snake doesn't start in a wall, food never lands on a wall, and the level stays playable."
 },
 
-{ // Slide 86
+{ // Slide 89
   type: "practice",
   layout: "exercise",
   mode: "plan",
@@ -1903,7 +1885,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct): Claude asked four questions before writing anything: what makes a level harder (faster, walls or both), when you go up a level (every 5 food), how many levels (5), and what the player sees (Level N next to the score). That's why the four-knobs slide now comes just before this one. Steps 1 and 2 happen in the terminal, before Claude runs: a new day means a new terminal.\n\nThe loop goes round: yesterday's Maintain is today's Plan. git pull is the first thing developers do every morning: get what colleagues pushed. claude --continue goes back into the last conversation; /resume lets you pick one. Either way, PROGRESS.md and intent.md are what really carry over.\n\nWhy now: A new day, a new wish: levels that get harder. Start from what's written down.\nWhat you see: Claude reads PROGRESS.md and knows where you stopped. intent.md gets a new outcome.\nExtra: /resume: pick any earlier conversation from a list."
 },
 
-{ // Slide 88
+{ // Slide 90
   title: "intent.md, spec.md and a test",
   kicker: "DAY 2 · PART 1 · DESIGN",
   subtitle: "What you want, exactly what it looks like, and the proof.",
@@ -1925,7 +1907,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "intent.md says what you want and why. spec.md says exactly what something looks like, so anyone (or any Claude session) builds the same thing; for a level file: the four fields, their types, one example. The tests check the spec. Writing the test first means it's red before anything is built, and green proves the build matches the spec. Day 5 does exactly this with spec.md and a schema test: red, then green."
 },
 
-{ // Slide 89
+{ // Slide 91
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -1950,7 +1932,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct) the prompt without 'in every level file that exists' made Claude test level-1 to level-5.js, so Assignment 18 (only level 2) could never turn green and Claude had to stop and ask. The added words fix that.\n\nWhy .js and not .json: a page opened straight from the folder (file://) can't load a .json file, the browser blocks it. In the dry run Claude raised this itself and chose levels/level-N.js. Claude may put spec.md in levels/ instead of the root: fine. The ask rule on tests/ from yesterday now does its job: Claude asks before adding tests, and this time the human says yes because they asked for them. Red is the expected result here (6 of 27 in the dry run). If someone's hook complains on every edit because the new tests are red, that's correct behaviour; tell them the hook will be happy once level 2 is built.\n\nWhy now: A level is a file that other code depends on. Describe it before you build it.\nWhat you see: spec.md, and new tests that are red: nothing is built yet. Claude asks before it adds them to tests/.\nLook inside: Read spec.md. Could someone else make a level from it?"
 },
 
-{ // Slide 90
+{ // Slide 92
   title: "How developers work with git",
   kicker: "DAY 2 · PART 1 · GIT",
   subtitle: "Main always works. New work happens next to it.",
@@ -1975,7 +1957,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "For the trainers, in plain words: a developer's day at a company like Worldline starts with git pull. Each ticket gets its own branch, so main keeps working. Small commits with a clear message, pushed often. When it's done: a merge request (GitLab's name for a pull request), where a colleague reviews it and the pipeline runs the tests; then it's merged. Main is protected: no direct pushes, no force push. When two people change the same line, that's a merge conflict and someone decides which version stays. Something broke after a merge? git revert undoes a commit safely. A tag such as v1.0 marks a release. Today they meet branch, merge request, revert, and in the arcade conflicts and tags."
 },
 
-{ // Slide 91
+{ // Slide 93
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -1994,7 +1976,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct) Claude made level-1.js too (the plain board as a level), loaded both in index.html, went up a level after 5 food, and pushed the branch level-2: 5 passed.\n\nThe red tests from Assignment 17 now turn green: that's the spec being met. While Claude builds, the hook reports red tests between edits: that's expected until everything is in. Main is untouched until the merge request is merged. Playing up to level 2 takes a while: an Extra is to ask Claude for a test link like index.html?level=2.\n\nWhy now: Level 2 is a new feature. Main must keep working while you build it.\nWhat you see: A branch level-2 with levels/level-2.js. The red tests turn green.\nLook inside: !git branch: which branch are you on? Is main untouched?"
 },
 
-{ // Slide 92
+{ // Slide 94
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2023,7 +2005,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 2 — Part 2: Skills, architecture, agents, workflow                 */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 93
+{ // Slide 95
   title: "A repeated method",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
   subtitle: "You just made level 2. Level 3 needs exactly the same steps.",
@@ -2042,7 +2024,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ask the room first: what did you tell Claude for level 2 that you'll have to say again for level 3? Collect it, then show the card. Typing it again is boring and you forget a line. That's what a skill is for."
 },
 
-{ // Slide 94
+{ // Slide 96
   title: "A skill is a recipe",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
   subtitle: "Write down how you make the apple pie once. Bake it whenever you want.",
@@ -2058,7 +2040,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "A skill is a recipe. You write down once how you make the apple pie: ingredients, steps, when it's done. After that you bake it whenever you want, the same way every time. There are three kinds: built in (Claude Code comes with a few; type / and they're in the menu), your own (you write the SKILL.md yourself), and made by Claude (you ask Claude to turn what you just did into a skill). That last one is what you'll do with your Snake. Before class, type / on your teaching laptop and pick one built-in skill to point at."
 },
 
-{ // Slide 95
+{ // Slide 97
   title: "Claude Code skills",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
   subtitle: "Teach Claude a method once — reuse it every time.",
@@ -2081,7 +2063,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The tagline is a real guardrail worth repeating: a skill is a packaged method Claude Code applies when relevant, not a background process or its own agent. A skill is a folder: SKILL.md holds the name, the description and the recipe; other files (a template, reference notes) are only read when the recipe points to them; scripts are run, so their code never enters the context, only their output. Only the name and description of each skill are always in the context window: that's why you can have many skills, and why a good description matters. Skills live in the project (.claude/skills/, shared) or in your home folder (~/.claude/skills/, you, everywhere)."
 },
 
-{ // Slide 96
+{ // Slide 98
   title: "Prompt, CLAUDE.md and skill",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
   subtitle: "Three different mechanisms, three different jobs.",
@@ -2096,7 +2078,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "All three are text Claude reads; they differ in when they apply. A prompt is this task, CLAUDE.md is every session, a skill is loaded when a task matches its description. None of them enforces anything: that stays in settings.json, as you saw yesterday with the permissions and the hook (guide vs enforce). Assignment 21 (a shorter CLAUDE.md) builds on exactly this difference."
 },
 
-{ // Slide 97
+{ // Slide 99
   title: "Skills in your role",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
   subtitle: "In the game it's Snake → Pac-Man. At work it looks like this.",
@@ -2112,7 +2094,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Every concept first in the game, then in your role. A frontender could have a skill for a new component: their design system, their naming, a test for every state. A backender a skill for a new endpoint: the contract first, then tests and error handling, the same way every time. A manager a skill for the weekly status: read the Jira board, the same headings, risks on top. Ask the room: which skill would you build first for your own work?"
 },
 
-{ // Slide 98
+{ // Slide 100
   title: "Quiz: where does it go?",
   kicker: "DAY 2 · QUIZ",
   subtitle: "Claude must follow an instruction in every session of this project. Where do you put it?",
@@ -2129,7 +2111,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing instructions live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not an instruction that always applies."
 },
 
-{ // Slide 99
+{ // Slide 101
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2155,7 +2137,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct): Claude drafted the skill, ran the checker on the real levels and on deliberately broken ones, then showed it. After /clear, 'Make level 3: a maze.' loaded the skill by itself. Watch for: Claude leaves the new skill out of the level 3 commit unless you ask (it was untracked before), hence step 5. The permission question while it tests the checker can show a scary 'Dangerous rm operation' warning on its own scratch folder: that's fine to approve.\n\nThe obvious moment: you just did the same steps for level 2, and level 3 needs them again. The skill is a folder. SKILL.md has a name and a description (always visible to Claude) and the recipe (only read when the description matches). The template is only read when the recipe points to it. The script is run, not read: its code never enters the context, only its output, which is the token-efficient way to check something. After /clear, ask for level 3 without mentioning the skill: Claude should find it from the description. If it doesn't, the description isn't clear enough: that's the lesson.\n\nWhy now: Spec, test, branch, build: level 3 needs exactly the same steps as level 2.\nWhat you see: .claude/skills/new-level/ with SKILL.md, a template and a script. After /clear, Claude picks the skill by itself.\nLook inside: Open SKILL.md. Which line makes Claude choose this skill?"
 },
 
-{ // Slide 100
+{ // Slide 102
   title: "What costs tokens, and what doesn't",
   kicker: "DAY 2 · PART 2 · ARCHITECTURE",
   subtitle: "Where you put something decides when Claude reads it.",
@@ -2177,7 +2159,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the question students ask most: why does where I put things matter? Real numbers from the dry run (/context, Claude Code 2.1.309): the conversation was 175k tokens before /compact and 44k after; CLAUDE.md plus @intent.md about 1.2k; 30 skills 5.1k (only their descriptions); 155 MCP tools 0 tokens, because they load on demand, while the MCP server instructions cost 2.5k. So the conversation is by far the biggest cost: /clear between tasks matters most. Everything in the first column is in the context window from the very first message, every session. The second column is only read when it's relevant. The third column barely touches the context: a hook or script runs outside it, and a subagent does its reading in its own window and only returns a summary. Practical habits: keep CLAUDE.md short and let it say where things live, switch off MCP servers you don't use, put detail in skills and nested CLAUDE.md files, use /clear between tasks."
 },
 
-{ // Slide 101
+{ // Slide 103
   title: "The map of your project",
   kicker: "DAY 2 · PART 2 · ARCHITECTURE",
   subtitle: "Every file has its place. By tonight your folder looks like this.",
@@ -2198,7 +2180,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Come back to this map whenever someone asks 'where does this go?'. The rule: anything in the project's .claude/ folder and the project CLAUDE.md is shared with the team through git. The .local files are only for you and stay out of git. ~/.claude/ is the same structure for you personally, in every project. Point at the files that don't exist yet (ship-level, verifier.md): they're coming in the next hour."
 },
 
-{ // Slide 102
+{ // Slide 104
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2223,7 +2205,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct): memory files went from 1k to 176 tokens. Claude also copied 'Don't commit or push without asking' into the root CLAUDE.md, because that rule only lived in intent.md. After /clear it still answered the level rules correctly.\n\nIn the dry run the real cost was the @intent.md line: it pulled the whole intent.md (about 1k tokens) into every session. Replacing it with a plain pointer took memory files from 1.2k to 188 tokens. Before and after with /context makes the saving visible. A CLAUDE.md in a subfolder is read when Claude works with files in that folder, not at the start. If the room's CLAUDE.md is still tiny, the saving is small; the habit is the point. Note: files pulled in with @ in the root CLAUDE.md load at the start, so moving them into a nested CLAUDE.md is what actually defers them.\n\nWhy now: /context shows it: your CLAUDE.md costs tokens in every session, even when you're not working on levels.\nWhat you see: Fewer tokens at the start. The level rules still apply in levels/.\nLook inside: Which lines did Claude move, and where to?"
 },
 
-{ // Slide 103
+{ // Slide 105
   title: "Subagents: a helper with its own head",
   kicker: "DAY 2 · PART 2 · AGENTS",
   subtitle: "Delegate the work, never the approval.",
@@ -2246,7 +2228,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "A subagent is a separate Claude with its own context window, its own instructions, a limited set of tools and optionally a cheaper model. Claude hands it one job; it reads whatever it needs and returns a short report, so your main session stays clean. In Claude Code 2.1.309 the /agents wizard is gone: you ask Claude to create one, or write the file in .claude/agents/. A new agent is only loaded when Claude Code starts, so restart (claude --continue) before using it; skills, by contrast, load straight away. The Day 5 lab has a verifier exactly like this: it reports, it never accepts a plan or approves a change."
 },
 
-{ // Slide 104
+{ // Slide 106
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2271,7 +2253,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct): Claude warned that 'no edits' only holds for files: Bash is all or nothing, so the command limits are an instruction (it offered deny rules). After the restart Claude Code was in auto mode: everyone back to manual. The verifier ran as a background agent and also flagged the author email in the git history: a good privacy moment. Later it wrongly flagged the avatar picture as breaking 'no images', and the main Claude overruled it: the verifier reports, the human judges.\n\nIn the dry run the first prompt asked the verifier to check the branch but only allowed npm test, so Claude pointed out it couldn't run git; this prompt includes read-only git and the validator. The verifier gets Bash to run those, so 'no edits' is partly an instruction, not a hard wall: say it out loud. First use fails with 'Agent type verifier not found' until you restart, which is why the restart is a step. Its report has three parts: matches, doesn't match, not checked. Haiku is enough for checking against a spec, and cheaper. Read-only tools mean it can't 'fix' things quietly. The Look inside question shows why subagents matter for tokens: the verifier read the level, the spec and the test output, but only its summary landed in your session.\n\nWhy now: Three levels are more than you can review properly, and your own session is filling up.\nWhat you see: .claude/agents/verifier.md. A report: what matches spec.md, and what doesn't.\nLook inside: /context: did the verifier's reading end up in your context?"
 },
 
-{ // Slide 105
+{ // Slide 107
   title: "A workflow: skills and agents stacked",
   kicker: "DAY 2 · PART 2 · WORKFLOW",
   subtitle: "The same four steps for every level. One command.",
@@ -2294,7 +2276,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Two kinds of skills, as on Day 5. A policy skill, like new-level, is something Claude may pick up by itself when the task matches. A workflow skill, like ship-level, runs a sequence with side effects (it pushes and opens a merge request), so it should only run when the user types /ship-level. In SKILL.md that's a frontmatter setting that switches off automatic use (disable-model-invocation: true). Confirmed in the dry run of 28 Oct: Claude sets it by itself when you say 'only when I type it'. The workflow stacks what they built this morning: the skill, the test, the verifier, the merge request."
 },
 
-{ // Slide 106
+{ // Slide 108
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2314,7 +2296,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct): Claude used disable-model-invocation: true, so /ship-level only runs when typed. It kept an 'ask before commit and push' step because of CLAUDE.md. Once the skill was merged and pulled, /ship-level 4 worked without a restart: questions with previews of the walls, plan, branch, level file, checker, npm test, verifier, diff, then the push question and a merge request.\n\nIn the dry run the first /ship-level stopped at step 1, because the new skill itself was still uncommitted: its own clean-tree check worked. So commit and merge the skill first. Skills load without a restart (unlike agents). Then /ship-level 4 ran the whole flow: plan, level file, validator, npm test, verifier, push (which asked) and a pull request. Everything stacks here: the skill from Assignment 20, the test, the verifier from Assignment 22, the merge request from Assignment 19, and yesterday's ask rule on push. The human gate stays: Claude asks before pushing, and the human merges.\n\nWhy now: Every level is now the same four steps. Typing them every time is where mistakes creep in.\nWhat you see: /ship-level 4: a new level, tests, a verifier report and a merge request. Claude asks before the push.\nLook inside: Open ship-level's SKILL.md. Which skills and agents does it call?"
 },
 
-{ // Slide 107
+{ // Slide 109
   title: "Goals: tell Claude when it's done",
   kicker: "DAY 2 · PART 2 · GOALS",
   subtitle: "Your “done when”, turned into a command Claude keeps working towards.",
@@ -2337,7 +2319,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Connect this to “Done when” from yesterday: a goal is exactly that, as a command. Claude keeps going on its own until it's met, inside the same permissions and hooks. After each turn a small, fast model decides whether the condition holds; when it does, the goal clears itself. The lesson is the bad example: “make level 5 fun” can never be checked. A met goal is still not your approval: they play the level afterwards. Before class, check that /goal exists in the version on the participants' laptops."
 },
 
-{ // Slide 108
+{ // Slide 110
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2362,7 +2344,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run (28 Oct, Claude Code 2.1.312): 'Goal achieved (2m · 2 turns · 15k tokens)'. Claude picked level 5's speed and walls itself, ran the checker, npm test and the verifier, showed 'Goal not yet met… continuing' until the merge request existed, and asked before the commit and push.\n\nWhy the extra sentence in the goal: our CLAUDE.md says 'always show a plan and wait for approval'. In the dry run that rule made Claude stop for approval, the goal check kept finding the goal unmet, and the goal paused. Giving plan approval inside the goal fixed it: 'Goal achieved (3m, 13 turns)'. Accept-edits mode keeps it from stopping at every file; the ask rules still stop it at commit and push, so the human stays in the loop. The goal names checks, not feelings: npm test, the verifier, an open merge request. Claude keeps going, inside the same permissions and hooks; the push still asks. /goal exists in Claude Code 2.1.309; on an older version, the same prompt without /goal plus 'keep going until all of this is true' works almost the same way.\n\nWhy now: The workflow works. Now let Claude run on its own, inside your permissions.\nWhat you see: Claude keeps working by itself until the goal is met, then stops.\nLook inside: Play level 5. A met goal is not your approval."
 },
 
-{ // Slide 109
+{ // Slide 111
   title: "Watch: Claude in the pipeline",
   kicker: "DAY 2 · PART 2 · DEPLOY",
   subtitle: "The same checks, without anyone at the keyboard.",
@@ -2383,7 +2365,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Demo it live: run the claude -p command in a game folder and show the JSON. It takes a few minutes, so start it and talk meanwhile. In the dry run, a tool that wasn't in --allowedTools (the level validator) was simply skipped and reported as 'needed approval': in a pipeline, nobody is there to approve. -p means print mode: one prompt, one answer, no conversation, ideal for scripts and pipelines. In GitLab CI, a job can run the tests and a Claude review on every merge request. Because nobody is there to approve anything, limit it with --allowedTools to read-only tools. This afternoon the arcade's pipeline runs the contract test on every merge request."
 },
 
-{ // Slide 110
+{ // Slide 112
   type: "practice",
   layout: "exercise",
   mode: "manual",
@@ -2402,7 +2384,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "In the dry run the example bug ('food inside a wall') didn't exist, and Claude refused to invent a fix: it asked for the steps to reproduce it, then offered a regression test instead. That's the lesson behind the steps in the prompt: a bug report without steps is a guess. Day 5's rule in small: each incident becomes an eval. A bug that has a test can't quietly come back. git revert makes a new commit that undoes an old one, so nothing is lost and the history stays honest; that's how teams undo a bad merge on a protected main.\n\nWhy now: You found a bug while playing. Fixing it isn't enough: it has to stay fixed.\nWhat you see: First a red test that shows the bug. Then the fix. Then green.\nExtra: A bad merge? “Revert that commit”: undone safely, and the history stays."
 },
 
-{ // Slide 111
+{ // Slide 113
   title: "Lunch",
   kicker: "DAY 2 · LUNCH",
   subtitle: "Enjoy your lunch.",
@@ -2420,10 +2402,10 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 2 — Part 3: The Aether Arcade                                      */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 112
+{ // Slide 114
   title: "Three views of the same work",
   kicker: "DAY 2 · PART 3 · THE ARCADE",
-  subtitle: "This afternoon you move from your own task to the team's lifecycle.",
+  subtitle: "The working method from Day 1, seen from three sides.",
   type: "concept",
   layout: "compare",
   visual: { art: 'boxes', link: { 0: ['Build', 'Test'], 1: ['Approve each change', 'Check the evidence'] } },
@@ -2432,12 +2414,11 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { title: "You — in the loop", items: ["Set the goal", "Approve the plan", "Approve each change", "Check the evidence", "Approve the push", "Hand it over"], foot: "Contains the agent loop ↓" },
     { title: "Agent loop — Claude", items: ["Observe", "Decide", "Act", "Check", "Repeat or stop"] }
   ],
-  tagline: "Yesterday you walked the loop alone. This afternoon the whole team walks it together.",
-  keyPoints: ["Say the nesting left to right","Outer: the six phases, now as a team","Middle: your decisions, same as yesterday","Inner: Claude's agent loop","This afternoon: the team walks the loop"],
-  notes: "Say: Opens the afternoon. Say the nesting out loud, from the outside in. The outer box is yesterday's working method, the six phases, now walked by the whole team. The middle box is you: the decisions you made in every phase yesterday (set the goal, approve the plan, each change, check the evidence, approve the push, hand it over). The inner box is Claude's agent loop.\n\nWhat you see: Click: the boxes zoom in one at a time, then Build and Test light up together with 'approve each change' and 'check the evidence': that's where Claude's loop runs.\n\nBackground: Nothing here is new: it's the working-method slide from Day 1, seen from three sides. What changes this afternoon is that the team walks the outer loop together in the arcade: agreeing, planning and building in layers."
+  keyPoints: ["Say the nesting left to right","Outer: the six phases","Middle: your decisions","Inner: Claude's agent loop"],
+  notes: "Say: Say the nesting out loud, from the outside in. The outer box is the working method, the six phases. The middle box is you: the decisions you made in every phase yesterday (set the goal, approve the plan, each change, check the evidence, approve the push, hand it over). The inner box is Claude's agent loop.\n\nWhat you see: Click: the boxes zoom in one at a time, then Build and Test light up together with 'approve each change' and 'check the evidence': that's where Claude's loop runs.\n\nBackground: Nothing here is new: it's the working-method slide from Day 1, seen from three sides."
 },
 
-{ // Slide 113
+{ // Slide 115
   title: "The Aether Arcade",
   kicker: "DAY 2 · PART 3 · THE ARCADE",
   subtitle: "Everyone's game on one website. Built and run like a real team product.",
@@ -2460,7 +2441,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Why the arcade: Claude can build one game in one prompt, but ten games on one website only work with an agreement everyone keeps, reviews, versions and a pipeline. That's what teams at Worldline do every day when they connect each other's work. The arcade repo comes from AetherLink (the arcade starter as a template) with a .gitlab-ci.yml: every merge runs the contract test and, if green, publishes the arcade on GitLab Pages. Records go in as scores/<nickname>.json through a merge request; an anti-cheat check in the pipeline tests whether the score is possible, a fraud check in miniature. The AetherLink template must already contain the start screen, the leaderboard, the anti-cheat test and a .gitlab-ci.yml (a .github/workflows file does nothing on GitLab), and only one connect skill: in the dry run an old overlapping skill confused the choice. Fallback if GitLab Pages or CI runners aren't available: the host laptop runs the arcade (node serve.js) on the projector, and online participants play through screen sharing. Check Pages and runners with Worldline before the course."
 },
 
-{ // Slide 114
+{ // Slide 116
   title: "How the afternoon runs",
   kicker: "DAY 2 · PART 3 · THE ARCADE",
   subtitle: "Three sprints, two chaos cards, one tournament.",
@@ -2481,7 +2462,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Show the shape of the afternoon before anyone starts. Each sprint is the SDLC loop in small. The chaos cards are announced, but not what's on them."
 },
 
-{ // Slide 115
+{ // Slide 117
   title: "Roles in the arcade",
   kicker: "DAY 2 · PART 3 · THE ARCADE",
   subtitle: "Everyone owns a game. Nobody merges their own work.",
@@ -2502,7 +2483,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Everyone works solo on their own game, and everyone also reviews one other person's merge request: that's the teamwork, and it works online too. One volunteer is the arcade host (fallback: a trainer): they own the arcade repo and merge after a review. In your role at work this is the same: the developer owns the change, a colleague reviews, someone owns main."
 },
 
-{ // Slide 116
+{ // Slide 118
   type: "practice",
   layout: "exercise",
   title: "Assignment 26: Sprint 0, the agreement",
@@ -2526,7 +2507,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "One volunteer is the arcade host (fallback: a trainer). The team agrees in the chat; the host types it into Claude. The skill is shared through the arcade repo: everyone clones it and starts Claude there, so the skill is always the latest version. Don't copy it into your game repo: in the dry run the copy stayed on v1 after the contract changed. Fallback when Sprint 0 runs out of time: copy arcade-reference/ (spec, skill and contract test) into the arcade repo. Afterwards, show the contract in the arcade starter (arcade.js) and ask what the team forgot: usually the nickname length or what happens with a missing avatar.\n\nWhy now: Ten games, one leaderboard. That only works if every game speaks the same language.\nWhat you see: arcade-spec.md in the arcade repo, and a team skill arcade-connect that everyone uses.\nLook inside: Compare your spec with the arcade starter's contract. What did the team forget?"
 },
 
-{ // Slide 117
+{ // Slide 119
   type: "practice",
   layout: "exercise",
   title: "Assignment 27: Sprint 1, connect your game",
@@ -2551,7 +2532,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Main of the arcade repo is protected: only the host merges, and only after one review from someone else. The pipeline runs the contract test on every merge request. Keep a list of nicknames in the chat for the review rotation: you review the person after you. 'First time green' (the merge request passes the pipeline on the first push) counts for an award, which rewards reading the spec carefully.\n\nWhy now: Your game has to work inside someone else's product now.\nWhat you see: The pipeline runs the contract test on your merge request. Green, reviewed, merged: your game is live on the arcade website.\nReview: Review someone else's merge request: run your verifier, and write one comment of your own."
 },
 
-{ // Slide 118
+{ // Slide 120
   title: "🃏 Chaos card: the contract changes",
   kicker: "DAY 2 · PART 3 · CHAOS CARD",
   subtitle: "The product owner, five minutes ago: “Every score now also needs the level it was played on.”",
@@ -2573,7 +2554,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Play the product owner and say it as if it's urgent. Then let the team talk for two minutes before anyone types: who updates the spec, the skill and the arcade; what happens to games still on v1; how long v1 stays accepted. That's versioning and deprecation, and it's mostly communication."
 },
 
-{ // Slide 119
+{ // Slide 121
   type: "practice",
   layout: "exercise",
   title: "Assignment 28: Sprint 2, contract v2",
@@ -2592,7 +2573,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Only the host tags: v2.0 on the arcade repo marks the release that speaks contract v2. Players don't tag the shared repo. In the dry run, Claude flagged that a player's copied skill was still v1: pulling main of the arcade first fixes that. Expect Claude to keep v1 working with a warning instead of a date check, and to suggest a message for the team chat. If two people change the arcade's start screen at the same time in this sprint, a merge conflict appears by itself: let Claude explain both versions, and the humans choose.\n\nWhy now: The agreement changed. Your game, the skill and the arcade all have to follow.\nWhat you see: arcade-spec.md v2, an updated skill, your game sending level, the arcade tagged v2.0, and v1 scores still accepted.\nLook inside: Which games are still on v1? Does the leaderboard still work for them?"
 },
 
-{ // Slide 120
+{ // Slide 122
   title: "Short break",
   kicker: "DAY 2 · BREAK",
   subtitle: "Return in 15 minutes.",
@@ -2605,7 +2586,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "State the actual clock time you'll resume. After the break the trainer turns a chaos card: an incident."
 },
 
-{ // Slide 121
+{ // Slide 123
   title: "🃏 Chaos card: an incident",
   kicker: "DAY 2 · PART 3 · CHAOS CARD",
   subtitle: "The trainer turns one card. Fix it as a team, then make sure it can't happen again.",
@@ -2629,7 +2610,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Turn one card, or two if there's time. Broken deploy: the fastest safe move is git revert of the merge, then a hotfix branch for the real fix; add a test so it can't happen again. Cheater: the template caps records at 500, so a record of 480 on level 1 passes, but level 1 ends after 5 food, so it is impossible. In the dry run Claude worked that out, added a maximum per game and level, and saved the cheating record as a test case that must stay rejected. Privacy leak: add a check to the pipeline (or a hook) that fails on anything that looks like an email or a full name, and remove the data. Merge conflict: ask Claude to explain both versions, decide as humans, commit the result. Whatever the card: it ends with a new test, instruction or permission, exactly Day 5's 'each incident becomes an eval'. Prepare the cards in advance: a deliberately broken game, a cheating score file, and a game with a fake name and email, all in a branch you can merge on cue."
 },
 
-{ // Slide 122
+{ // Slide 124
   title: "The tournament",
   kicker: "DAY 2 · CLOSING",
   subtitle: "Play each other's games on the arcade website.",
@@ -2651,7 +2632,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The arcade website (or the host laptop) on the big screen. Everyone plays as many games as they can; records go in as scores/<nickname>.json through a merge request, checked by the anti-cheat test. Close with the point: this worked because the team agreed on the format first, reviewed each other and kept main green."
 },
 
-{ // Slide 123
+{ // Slide 125
   title: "Awards and debrief",
   kicker: "DAY 2 · CLOSING",
   subtitle: "First the awards. Then three honest questions.",
@@ -2679,7 +2660,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* DAY 2 — Closing                                                        */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 124
+{ // Slide 126
   title: "What you built",
   kicker: "DAY 2 · CLOSING",
   subtitle: "Together, we created:",
@@ -2699,7 +2680,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The items appear on their own, one by one — no clicking needed. Let them come in without talking over them, and let the room recognise their own two days of work in the list."
 },
 
-{ // Slide 125
+{ // Slide 127
   title: "What you can now do",
   kicker: "DAY 2 · CLOSING",
   subtitle: "How Claude Code works, and why the boundaries matter.",
@@ -2724,7 +2705,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the understanding checklist, not the artefact checklist (that was the previous slide) — the distinction is worth naming out loud. If there's time, ask someone which line they will use first in their own work."
 },
 
-{ // Slide 126
+{ // Slide 128
   title: "The five support days",
   kicker: "PREVIEW · SUPPORT DAYS",
   subtitle: "The support programme builds on this foundation.",
@@ -2742,7 +2723,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Preview only, matching the Day 1 recap's pattern — this is a different facilitator's territory starting next time, don't get pulled into detail questions here."
 },
 
-{ // Slide 127
+{ // Slide 129
   title: "Where could your team be helped first?",
   kicker: "DAY 2 · CLOSING",
   subtitle: "Now that you know what's possible: which recurring task costs your team time or creates unnecessary uncertainty?",
@@ -2757,7 +2738,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The bridge from the two teaching days to the support days. The programme outcome (Day 1) is that every team builds something with AI that works in their team; this is where they pick the problem. Now that they've seen what Claude Code can do, each team takes five minutes: which recurring task costs time or creates uncertainty? Describe the current problem, leave the solution open: do not let it become a design session. Write the answers down: they're the input for the support days."
 },
 
-{ // Slide 128
+{ // Slide 130
   title: "Human responsibility",
   kicker: "DAY 2 · CLOSING",
   subtitle: "AI can inspect, propose, create, transform and check.",
@@ -2784,7 +2765,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the single sentence to leave the room with above all others — slow down here, don't rush it because it's near the end of a long two days."
 },
 
-{ // Slide 129
+{ // Slide 131
   title: "Final reflection",
   kicker: "DAY 2 · CLOSING",
   subtitle: "Complete these statements.",
@@ -2807,7 +2788,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* PARKED — replaced or not used (hidden)                                 */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 130
+{ // Slide 132
   hidden: true,
   title: "Parked · Permissions and Plan Mode",
   kicker: "DAY 1 · PART 2 · PERMISSIONS",
@@ -2823,7 +2804,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This comes before anyone runs Claude Code on a task: from the demo on, they will see approval questions. Open with the question: Claude Code works on your real files and your real terminal, so who decides what it may do? You do. Permissions: reading and looking around is low risk, but before it edits a file or runs a command it stops and asks. You answer yes (just this once), yes and don't ask again for this kind of action, or no (and tell it what to do instead). Link back to the terminal slide: you don't need to know every command, but you must understand what you approve. Standing rules (always allow the tests, never touch this folder) live in the settings; /permissions shows them. Modes: the current mode shows at the bottom of Claude Code and Shift+Tab switches between them. Normal asks before each edit or command, which is best while learning. Accept edits lets file edits through without asking, while other actions still ask. Plan mode is read-only: Claude explores and comes back with a plan, and nothing changes until you approve it. Auto mode, if your setup has it, runs without asking each time, but risky actions are still checked and can be blocked. There is also a skip-all-permissions option for automated setups; mention that it exists and that we don't use it. Click to open the gate: this gate is you. Close on the tagline as the rule for both days: every assignment starts in plan mode, and changes only happen after you have read the plan. Optional story: when a hard-to-undo action such as deleting a repository is requested, Claude Code's safety check can block it even after a yes in chat, and the human has to run it themselves; that is permissions working as designed. Before class, open Claude Code on your teaching laptop and press Shift+Tab a few times, so the modes you name match what the room will see (they depend on the version and company settings)."
 },
 
-{ // Slide 131
+{ // Slide 133
   hidden: true,
   title: "Parked · Watch: Claude Code explores a project",
   kicker: "DAY 1 · PART 2 · LIVE DEMO",
@@ -2842,7 +2823,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is a trainer demo: you run it live on the projector, the room watches. Use the practice repo on your own laptop (git clone https://github.com/jyse/aetherlink-classroom-starter.git); participants don't need it. While it runs, narrate what you see: it reads files, asks before it runs a command (that's the permission you just explained), builds up context, ties claims to evidence, marks OPEN, and changes nothing. Before class, run this exact prompt once on your own machine. If your live run fails (no network, no auth, a crash), say so plainly and press B for the captured run, then walk through it as if it were live; the teaching point survives either way. Point out that it's the reliable prompt from Part 1: goal, context, constraints, check. Later today they use the same pattern on their own game."
 },
 
-{ // Slide 132
+{ // Slide 134
   hidden: true,
   title: "Parked · A tour of Claude Code",
   kicker: "DAY 1 · PART 2 · TOUR",
@@ -2859,7 +2840,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Do this live on the projector. Open VS Code next to the terminal so the room sees the files Claude touches. The input: type a normal sentence and press Enter; Esc stops Claude halfway. When something goes wrong: read the error, paste it back to Claude and ask what it means. At the bottom of the screen: which mode you are in and your status line; Shift+Tab switches the mode."
 },
 
-{ // Slide 133
+{ // Slide 135
   hidden: true,
   title: "Parked · Assignment: Your first CLAUDE.md",
   kicker: "DAY 1 · ASSIGNMENT",
@@ -2877,7 +2858,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Show it once on the projector, then let everyone write their own. Who you are and what you do at Worldline, plus one rule, for example: when I build frontend, use Tailwind. Keep it to your role: no customer data, passwords or internal documents. Claude shows the file before saving; read it, approve it, and open it in VS Code. Then start a new session and ask 'What do you know about me?' to see that it works."
 },
 
-{ // Slide 134
+{ // Slide 136
   hidden: true,
   title: "Parked · Look around for yourself",
   kicker: "DAY 1 · BEFORE LUNCH",
@@ -2894,7 +2875,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ten to fifteen minutes to look around on their own. Walk around and help. Ask a few people what surprised them and keep those for after lunch. Then lunch."
 },
 
-{ // Slide 135
+{ // Slide 137
   hidden: true,
   title: "Parked · Assignment 1: Your own game repo",
   kicker: "DAY 1 · ASSIGNMENT 1",
@@ -2912,7 +2893,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Now the MCP from the previous slides becomes real. Everyone adds the GitLab MCP server (the trainer gives the command), starts claude, types /mcp and logs in. A first check: ask Claude which GitLab projects it can see. Then each person makes a new repo for the game in their personal space; if Claude can't create projects through the MCP, they use the GitLab page. Clone it and start claude inside it. Check before the course that every participant, managers included, has GitLab access. Anyone without it today starts with an empty local folder (git init) and connects GitLab later; the rest of the afternoon works the same."
 },
 
-{ // Slide 136
+{ // Slide 138
   hidden: true,
   title: "Parked · Assignment 2: Build your Snake",
   kicker: "DAY 1 · ASSIGNMENT 2",
@@ -2930,7 +2911,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Now everyone builds their own. The Example prompt is layer 1 in the reliable-prompt form; the next layers they write themselves. One prompt per layer, play after each. The test matters for later: ask for one small test in tests/ that checks the snake grows when it eats, runnable with npm test. The hook and the goals this afternoon use it. Then make it theirs: a different character, a sound, walls or a maze. Commit every layer that works, so they can always go back."
 },
 
-{ // Slide 137
+{ // Slide 139
   hidden: true,
   title: "Parked · Assignment 5: House rules for your game",
   kicker: "DAY 1 · ASSIGNMENT 5",
@@ -2950,7 +2931,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Each rule stops a mistake that can really happen. No force push: it overwrites the history in their GitLab repo. No rm -rf: Claude never deletes folders on its own. No edits to tests/: the test is the referee; asked to 'make the tests pass', Claude might otherwise change the test instead of the game. Always allow npm test: approving a safe command over and over only teaches people to click yes without reading. Each participant decides first, then Claude writes the file; the Example prompt shows a good result (don't hand it out before they've decided). The test is the point: 'force push my work' must be refused by Claude Code itself, not by Claude being polite. If /permissions doesn't show the rules, restart Claude in the project folder."
 },
 
-{ // Slide 138
+{ // Slide 140
   hidden: true,
   title: "Parked · Assignment 6: Let the test check Claude's work",
   kicker: "DAY 1 · ASSIGNMENT 6",
@@ -2970,7 +2951,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The hook goes into the same .claude/settings.json as the house rules, next to permissions. After every file edit (PostToolUse, matcher Edit|Write), Claude Code runs npm test. The '|| exit 2' part matters: if the test fails, the error goes back to Claude, so Claude sees it. The test makes it visible: asking the snake to stop growing breaks the test on purpose. Claude can't change the test (tests/ is denied), so the right outcome is that Claude tells you the request conflicts with the test. That is rules and hooks working together. If the hook doesn't fire, check /hooks and restart Claude in the project folder."
 },
 
-{ // Slide 139
+{ // Slide 141
   hidden: true,
   title: "Parked · Assignment 7: Let Claude run to a goal",
   kicker: "DAY 2 · ASSIGNMENT 7",
@@ -2988,7 +2969,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The first time Claude really works on its own for a while, but inside the fences they built in assignments 5 and 6. Name it out loud: autonomy is safe because the rules and the check are already in place. The goal is given word for word (Example prompt). While it runs, point at the test output after each edit: that's their hook. Typing /goal mid-run shows the status. When the goal clears, they still play it themselves; the goal being met is not their approval. The bonus shows the deny rule holds even while Claude runs on its own."
 },
 
-{ // Slide 140
+{ // Slide 142
   hidden: true,
   title: "Parked · Assignment 8: Write your own goal",
   kicker: "DAY 2 · ASSIGNMENT 8",
@@ -3005,7 +2986,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Last step down the ladder for this block: they write the goal themselves. The self-check against the box is the learning moment: “add a high score” is too vague; “the game shows a high score that stays after reload, resets only with a button, and npm test passes” is a goal a model can check. When the goal clears, they still play it. Everyone posts their goal in the team chat. Close by picking one good and one weak goal from the chat and saying why the good one worked."
 },
 
-{ // Slide 141
+{ // Slide 143
   hidden: true,
   title: "Parked · Assignment 9: Turn your Snake into a skill",
   kicker: "DAY 2 · ASSIGNMENT 9",
@@ -3023,7 +3004,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Claude writes the recipe from their own work: it reads the Snake repo and turns the method into a SKILL.md. The important part is the reading: is the step they always did in there? If not, they add it. Then type / and check the skill shows up. This skill builds Pac-Man in the next assignment."
 },
 
-{ // Slide 142
+{ // Slide 144
   hidden: true,
   title: "Parked · Assignment 10: Build Pac-Man with your skill",
   kicker: "DAY 2 · ASSIGNMENT 10",
@@ -3041,7 +3022,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Same method, next game. The skill does the explaining, so the prompt is one line. Point out that the plan follows their own layers, and that the rules and hook from yesterday still run. The real learning is the last step: whatever they had to explain again goes into the skill. Ask afterwards: how many prompts did you need compared to Snake?"
 },
 
-{ // Slide 143
+{ // Slide 145
   hidden: true,
   title: "Parked · Assignment 11: Levels from MD files",
   kicker: "DAY 2 · ASSIGNMENT 11",
@@ -3060,7 +3041,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The rules of a level live in a file, not in the prompt: speed, obstacles, goal, what happens when you win. Claude builds the level from the file and must say when a rule is unclear instead of guessing. That's the same idea as a spec or a ticket at work. Bonus: turn 'build a level from a file' into its own skill."
 },
 
-{ // Slide 144
+{ // Slide 146
   hidden: true,
   title: "Parked · The arcade",
   kicker: "DAY 2 · PART 3 · THE ARCADE",
@@ -3078,7 +3059,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Why the arcade: Claude can build one game in one prompt. Five games from five people talking to one scoreboard can't: it needs one agreement that everyone keeps, and building in layers. That is the software lifecycle and the team work we want them to feel. The agreement is already made for them: the arcade starter has one fixed contract (arcade.js) and a skill that connects a game to it. Three layers: the scoreboard, the connection every game uses at game over, and the start screen. Everything runs on one laptop, the arcade, shared on the big screen.",
 },
 
-{ // Slide 145
+{ // Slide 147
   hidden: true,
   title: "Parked · Assignment 12: Set up the arcade",
   kicker: "DAY 2 · ASSIGNMENT 12",
@@ -3096,7 +3077,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The agreement is already made: one contract (arcade.js) and one skill (arcade-score) that every game uses. The manager creates the arcade repo on GitLab, copies the starter in and pushes; the trainer has the starter (https://github.com/jyse/aetherlink-classroom-slides/tree/main/arcade-starter). Everyone clones it and reads the skill: the Example prompt lets Claude summarise it in five lines. On the arcade laptop: npm test (it tests the contract), then node serve.js and open localhost:8080. Play the example game once so there is a first score. No install is needed: serve.js uses Node only."
 },
 
-{ // Slide 146
+{ // Slide 148
   hidden: true,
   title: "Parked · Assignment 13: Build the scoreboard",
   kicker: "DAY 2 · ASSIGNMENT 13",
@@ -3114,7 +3095,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The scoreboard is half there: scoreboard.html is an empty page with the contract loaded. Claude fills it in with Arcade.topScores(10). Test with the example game before any real game is connected. arcade.js is the contract and stays untouched; if Claude wants to change it, say no. Mostly backender and manager, with the rest preparing their game.",
 },
 
-{ // Slide 147
+{ // Slide 149
   hidden: true,
   title: "Parked · Assignment 14: Connect your game",
   kicker: "DAY 2 · ASSIGNMENT 14",
@@ -3132,7 +3113,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Every player copies their game into the arcade repo, in games/<game>-<name>/, with their picture. The skill does the connecting: game.json, the contract script, one Arcade.submitScore at game over. One game first: connect, check /games.json, play one round on the arcade laptop, check the scoreboard. Only when that works does the next game join. When something breaks, it is almost always the score: the contract rejects it with a clear message.",
 },
 
-{ // Slide 148
+{ // Slide 150
   hidden: true,
   title: "Parked · Assignment 15: The start screen",
   kicker: "DAY 2 · ASSIGNMENT 15",
@@ -3150,7 +3131,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Mostly the frontender, on the arcade laptop. index.html is an empty start screen with three sections: players, games and the top 10. Arcade.games() gives every connected game with its player and picture. Pick your avatar, pick a game, play, and after game over you're back with the new top 10. When this works, the arcade is ready for the tournament.",
 },
 
-{ // Slide 149
+{ // Slide 151
   hidden: true,
   title: "Parked · Bonus: the game coaches you",
   kicker: "DAY 2 · BONUS",
@@ -3168,7 +3149,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Optional, for teams that are done early. The game comments on itself after every round: skills, memory and creativity together. The comments are fixed texts chosen by rules: there is no AI connection inside the game itself."
 },
 
-{ // Slide 150
+{ // Slide 152
   hidden: true,
   title: "Parked · Three views of the same work",
   kicker: "DAY 1 · PART 2 · WORKING METHOD",
@@ -3192,7 +3173,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the reconciled three-tier diagram — say the nesting out loud, left to right: Build+Test of the SDLC (outer) contains Create+Test of the working method (middle), which contains the whole agent loop (inner). The middle tier is this course's own working method from slide 40, unchanged; the inner tier is slide 39's agent loop, unchanged. Only the outer SDLC ring is new context — it places one bounded assignment inside the team's whole software lifecycle. Close on the tagline exactly as written; it's the sentence to leave the room with before moving to slide 42."
 },
 
-{ // Slide 151
+{ // Slide 153
   hidden: true,
   title: "Parked · Get the Aether Library on your laptop",
   kicker: "DAY 1 · PART 2 · HANDS-ON",
@@ -3210,7 +3191,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Walk the room through it together, not self-paced. Everyone clones the starter repo and starts Claude Code inside that folder; the commands are in the Example prompt panel to copy. The repo is aetherlink-classroom-starter; its on-screen name is Aether Library, which we properly introduce after lunch. No npm install yet: for exploring, the files are enough; running the app comes later. Anyone stuck (git missing, no access) follows along on a neighbour's screen and gets fixed at lunch."
 },
 
-{ // Slide 152
+{ // Slide 154
   hidden: true,
   title: "Parked · settings.json",
   kicker: "DAY 1 · PART 2 · TOUR",
@@ -3226,7 +3207,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Open the file in VS Code. Settings are plain JSON. In this example: the model Claude Code starts with, and one thing it is never allowed to do: push. There are three places: in your home folder for you in every project, in the project for the whole team, and settings.local.json for this project but only you. Don't go deeper now: this afternoon everyone writes their own rules in here."
 },
 
-{ // Slide 153
+{ // Slide 155
   hidden: true,
   title: "Parked · Complete progression",
   kicker: "DAY 2 · CLOSING",
@@ -3247,7 +3228,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The first six steps are exactly what the room just did across the two teaching days — say that explicitly before pointing at the last one, which belongs to the support days."
 },
 
-{ // Slide 154
+{ // Slide 156
   hidden: true,
   title: "Parked · Assignment 5: Design and build a feature",
   hidden: true, // folded into AetherBOT: the bot is the feature this group designs and builds (press H or use Chapters to show it again)
@@ -3270,7 +3251,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Four rounds. (1) Everyone switches to plan mode (Shift+Tab until it shows Plan) and asks Claude for five feature ideas for their Aether Library; Claude explores the project and proposes, but changes nothing. (2) Each person shares their best idea in one sentence. (3) The room picks three to five and you write them on the board. (4) Everyone builds one of the picked features with the working method: plan, approve, build, check in the browser. Good fits if the room needs a nudge: a theme switcher with 3+ palettes that survives a reload, search on the Glossary page, a “term of the day”. The skill practised is describing what you want to SEE, not what code to write; encourage small rounds (change, look, adjust). Watch for changes that touch the data files (only app code should change) and for features that break another page.",
 },
 
-{ // Slide 155
+{ // Slide 157
   hidden: true,
   title: "Parked · Sources of context",
   kicker: "DAY 2 · PART 1 · CONTEXT & CLAUDE.MD",
@@ -3288,7 +3269,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The last row is the one to underline — it's the seed for Part 5's MCP content later today."
 },
 
-{ // Slide 156
+{ // Slide 158
   hidden: true,
   title: "Parked · Meet AetherBOT",
   kicker: "DAY 2 · PART 1 · CONTEXT AND CLAUDE.MD",
@@ -3306,7 +3287,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Introduce the chatbot before anyone designs or builds it: the Aether Library gets a chatbot called AetherBOT that answers questions about AI terms. Its answers come only from the glossary and concept cards the participant has built so far, so it grows with their Library. Make the third point explicit: it is plain code in the app, no AI model inside, no API keys, nothing leaves the laptop (the same rule as the rest of the app); Claude Code builds it, the bot itself doesn't call an AI. That's also the trap to name: CLAUDE.md, the permissions and the goal are rules for Claude Code while it builds the bot, not settings inside the bot. The bot only behaves well if Claude Code turns those rules into code. The fourth card is the whole of yesterday in one build: the guide and enforce columns from the last slide, plus a goal. Then the plan for the next hour: Assignment 6 designs it (CLAUDE.md plus one permission rule), a fresh session tests that design, Assignment 7 builds it towards a goal, and partners try to break each other's bot."
 },
 
-{ // Slide 157
+{ // Slide 159
   hidden: true,
   title: "Parked · Assignment 6: Design AetherBOT",
   kicker: "DAY 2 · ASSIGNMENT 6",
@@ -3330,7 +3311,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is where the room applies the Sources of context slide and the How the pieces fit map to something of their own: they decide what goes in, Claude writes it, they check it and own it. Step 1 is the real exercise: rough notes in their own words (in the prompt or on paper) on what AetherBOT is for, its data (the glossary and concept cards, nothing else), its tone of voice (friendly teacher, short and to the point, playful…) and 3 rules. Good rules to steer towards: answer only from the glossary and cards, say OPEN when unsure, name the source card, refuse off-topic questions, never repeat personal profile details. Step 2 sorts three ways: what is always true for this project (purpose, data, tone, rules, how to test a change to the bot) goes into CLAUDE.md; what must hold even if Claude forgets goes into settings.json (Claude must ask before it edits anything in data/); the task itself (build it now, where it appears) stays in the prompt for Assignment 7. Step 3 in plan mode, so they see the change before it's written. Step 4 matters most: Claude tends to add rules nobody decided and to make the file long, and a long CLAUDE.md is weaker. Anything they didn't decide gets deleted, and they edit one line by hand, so they know it's just a text file they own. Step 5 is yesterday's 4b again, one level up: they add an ask rule, Edit(data/**), next to their existing allow and deny rules in .claude/settings.json (an ask rule shows up as an approval prompt every time Claude wants to edit a file in data/; their deny rule on data/fixtures/ still wins, because deny beats ask). /permissions should list it; if not, restart Claude in the project folder. Why ask and not deny: Assignments 9 and 10 write concept cards into data/ on purpose, and the ask rule turns that into a human approval point instead of blocking it. CLAUDE.md says why the bot never changes data; the ask rule makes sure Claude can't do it silently. Show the difference: good, “AetherBOT answers only from data/glossary.json and data/concept-cards.json. If the answer isn't there, it says OPEN.”; too vague, “AetherBOT should be helpful and accurate.” (can't be checked); doesn't belong, “Today: build the chat window and add a quiz command.” (a task, so it goes in the prompt). Tip for later: in a new project, /init writes a first CLAUDE.md from the repo; same rule, read it, delete what isn't true, add what only you know. Nothing is built yet: that's the next assignment.",
 },
 
-{ // Slide 158
+{ // Slide 160
   hidden: true,
   title: "Parked · Fresh-session test",
   kicker: "DAY 2 · ASSIGNMENT 6 · REVIEW",
@@ -3346,7 +3327,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "No laptop swap. Everyone types /clear in their own session — the files stay, the conversation is gone. The neighbour on their right then asks the first five questions and decides PASS, REVISE or OPEN. If Claude can answer from CLAUDE.md alone, the instructions work — the single most convincing proof of the morning. Anything Claude got wrong is a rule missing from the file. Question 6 is a different kind of test: ask Claude to add a test term to data/glossary.json. Claude Code must stop and ask for approval (the ask rule from Assignment 6); they answer no. That's the difference from the map, felt in practice: questions 1–5 test what Claude remembers, the approval prompt is enforced whatever Claude remembers."
 },
 
-{ // Slide 159
+{ // Slide 161
   hidden: true,
   title: "Parked · Assignment 7: Build AetherBOT",
   kicker: "DAY 2 · ASSIGNMENT 7",
@@ -3370,7 +3351,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The payoff of Assignment 6, and all of yesterday in one build: CLAUDE.md guides, the ask rule and the validate hook enforce, and a goal says when it's done. Participants ask Claude Code to plan AetherBOT and do NOT repeat the rules in their prompt; Claude reads them from CLAUDE.md. If someone pastes the rules in anyway, ask them to delete that and try again. A good plan says where the chat appears in the app and how it finds answers (matching the question to glossary terms and concept cards), and keeps it plain code with no AI model or API. Then the goal: the Example prompt is a checkable one, built from their own rules; strong participants write their own (yesterday's 4e). Every part of it can be checked: a page, an answer, an OPEN, a refusal, untouched data, a passing command. While it runs, point at the validate output after each edit (their 4c hook). If Claude tries to write to data/, the ask rule stops it and they answer no: the bot reads data, it never writes it. The goal clearing is not approval: the last step is them trying to break it by hand, and the partner round after this does it again. Commands are things like “quiz me” or “compare X and Y”; call them commands, not skills, because Claude Code skills come after the break. When a rule fails, the question is: is the code wrong, or is the rule unclear in CLAUDE.md? Watch for a command with no test, and for rules that only exist in CLAUDE.md but never made it into the code."
 },
 
-{ // Slide 160
+{ // Slide 162
   hidden: true,
   title: "Parked · Break your partner's bot",
   kicker: "DAY 2 · ASSIGNMENT 7 · REVIEW",
@@ -3384,7 +3365,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Ten minutes, partners swap laptops for this one (it's their own bot, not a fresh Claude session). Each person writes down which rule failed, then fixes it with Claude Code. Note for later: after Assignment 10 the bot can answer from all the new cards, without changes — point that out then."
 },
 
-{ // Slide 161
+{ // Slide 163
   hidden: true,
   title: "Parked · Assignment 8: Create a second card",
   kicker: "DAY 2 · ASSIGNMENT 8",
@@ -3406,7 +3387,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Important: this must stay a normal, ad-hoc prompt, not a skill. Add the term to the glossary first if it isn't there yet, use the same requirements and validation as yesterday's approved card, and check it renders on the Library page. The inconsistency this creates between people's results, and the list of instructions they had to repeat from scratch, is exactly what motivates building a skill next. Don't let anyone jump ahead to Assignment 9 yet.",
 },
 
-{ // Slide 162
+{ // Slide 164
   hidden: true,
   title: "Parked · Compare the two runs",
   kicker: "DAY 2 · ASSIGNMENT 8 · REVIEW",
@@ -3422,7 +3403,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This discussion creates the need for a reusable method — collect two or three genuinely different outcomes from the room out loud before moving to slide 95, the contrast is the point."
 },
 
-{ // Slide 163
+{ // Slide 165
   hidden: true,
   title: "Parked · Agentic behaviour in the assignment",
   kicker: "DAY 2 · PART 3 · BOUNDED AGENTIC WORK",
@@ -3441,7 +3422,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the agent loop from slide 39, now made concrete in the exact assignment the room is running. Point at the last step: 'Repeat or stop' is where the goal comes in. After each turn a small model checks whether the goal is met; if not, Claude takes the next term. Check is the validate hook, and 'request human input' is the ask rule on data/. Use it as a live diagnostic while circulating: ask a stuck participant which of these five steps their session is stuck on."
 },
 
-{ // Slide 164
+{ // Slide 166
   hidden: true,
   title: "Parked · Explain It Back",
   kicker: "DAY 2 · PART 4 · LEARNING GAME",
@@ -3459,7 +3440,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the payoff of Parts 2–3 — every card the room built now feeds this game. Say that connection explicitly before moving to the starter state. Then name the one new idea of this part: so far their skill created things (cards); the skill they build here checks things (an explanation against a checklist). Same mechanism, different job: a skill can be the reviewer, not only the maker."
 },
 
-{ // Slide 165
+{ // Slide 167
   hidden: true,
   title: "Parked · Game starter state",
   kicker: "DAY 2 · PART 4 · LEARNING GAME",
@@ -3474,7 +3455,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Point out explicitly what's missing: the game doesn't yet do anything when Submit is clicked. That gap is exactly what Assignment 11 fills."
 },
 
-{ // Slide 166
+{ // Slide 168
   hidden: true,
   title: "Parked · checklist.md and the term-checker skill",
   kicker: "DAY 2 · PART 4 · LEARNING GAME",
@@ -3490,7 +3471,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "checklist.md lives at the repo root, separate from the skill file — it's participant- and class-authored, and people may edit or extend it. This is deliberately the same pattern as create-concept-card (Skill #1): the reusable method stays generic, the specific criteria live in their own file. The difference: Skill #1 makes something, Skill #2 judges something. For this group, link it to the map: checklist.md plays the role for the game that npm run validate plays for the code, a check outside Claude's own opinion. Say explicitly that this is required behaviour for Assignment 11, not an optional extra — there is no separate 'AI Concept Coach' assignment; this is it."
 },
 
-{ // Slide 167
+{ // Slide 169
   hidden: true,
   title: "Parked · Assignment 11: Learning game",
   kicker: "DAY 2 · ASSIGNMENT 11",
@@ -3513,7 +3494,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Longest single assignment of the two days; give it the full 60 minutes and don't rush the wrap-up. Part A: propose what a good “explain this term back” answer contains, based on the approved concept cards, including the four rating categories (Strong explanation, Partially complete, Review this concept, Unable to evaluate); write it to checklist.md once approved. Part B: create .claude/skills/term-checker/SKILL.md; it reads checklist.md (never hardcoded criteria) and the latest submission, compares against the matching concept card and writes structured feedback. Part C: say the exact phrase “Check my latest submission using the term-checker skill.” Do NOT let anyone rebuild the game itself; it already works. Protect this: no API keys, no external model calls, no database; feedback comes entirely from the participant's own Claude Code session reading and writing local files. Watch for people who skip Part C because time is short.",
 },
 
-{ // Slide 168
+{ // Slide 170
   hidden: true,
   title: "Parked · Quiz: MCP",
   kicker: "DAY 2 · QUIZ",
@@ -3531,7 +3512,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Vote first, then press → to strike the wrong answers. The answer is B: MCP is the plug, not the brain. C is the misconception to correct firmly: a connection only does what it is allowed to, and in this course it stays read-only, with human approval for anything that would change a system."
 },
 
-{ // Slide 169
+{ // Slide 171
   hidden: true,
   title: "Parked · Approved connections",
   kicker: "DAY 2 · PART 5 · MCP & WORKPLACE SYSTEMS",
@@ -3547,7 +3528,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Worldline's MCP access for Jira, GitLab and Confluence is confirmed — this is the real, primary path for Assignment 12, not a stretch goal. Insert the exact Worldline-approved setup instructions here after technical preflight; do not place credentials on this slide. Still keep the local-fixture fallback ready as a safety net in case one participant's connection fails on the day, but plan and pace the room around the real connections working."
 },
 
-{ // Slide 170
+{ // Slide 172
   hidden: true,
   title: "Parked · Assignment 12: Connected context",
   kicker: "DAY 2 · ASSIGNMENT 12",
@@ -3570,7 +3551,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Highest infra-risk moment of the two days; verify the MCP connection end-to-end yourself before class. Also ask participants to list which actions the connection could perform that they did not approve. Fallback: if a participant's connection fails, have them use the local fixture files instead and explain those; the teaching point (retrieve, explain, do not modify) survives without a live round-trip. Keep a captured example ready (press B) if several people need the fallback at once.",
 },
 
-{ // Slide 171
+{ // Slide 173
   hidden: true,
   title: "Parked · From skill to workflow",
   kicker: "DAY 2 · PART 5 · MCP & WORKPLACE SYSTEMS",
@@ -3590,7 +3571,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Three minutes, no more. The room has built two single-method skills (create-concept-card, term-checker). A workflow combines several of them, plus a tool connection (MCP), in a fixed order with a human checkpoint. Each step still keeps its own boundaries and stop conditions, and the agent loop from the working method happens inside each step. In practice the workflow can live in one top-level skill (for example day-start) that lists the steps in order, or in a short instruction file that names the skills. Say plainly: this is the same pattern as the Aether Library, pointed at real work — source, structured output, validation, human approval. Close the map: a workflow is the right column putting everything together. Skills from the guide column, permissions from the enforce column (read-only on Jira), MCP for the data, and a human checkpoint at the end. Nothing new to learn, only the order. The assignment follows immediately."
 },
 
-{ // Slide 172
+{ // Slide 174
   hidden: true,
   title: "Parked · Assignment 13: Day-start workflow",
   kicker: "DAY 2 · ASSIGNMENT 13",
@@ -3612,7 +3593,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "The payoff of the day: skills (Assignments 9 and 11) plus MCP (Assignment 12) become a workflow. Example phrases if people get stuck: “List my open tickets. Read-only.” → “Plan a day-start workflow from 2–3 skills: fetch, sort, brief. Show me the plan first.” → “Build those skills and a day-start that runs them in order. Never change a ticket.” then /clear and “Start my day.” A good split is fetch, sort (new, blocked, due soon, waiting for you) and brief (top 3 priorities, anything unclear marked OPEN). Everything stays read-only on Jira. Real tickets can contain sensitive details; tell people not to share their screen while it runs. If a connection fails, debugging it with Claude Code is part of the lesson: paste the exact error and check /mcp. Partner step: a skill is just files, so the partner copies the skill folders into their own project and runs it on their own tickets.",
 },
 
-{ // Slide 173
+{ // Slide 175
   hidden: true,
   title: "Parked · The same pattern across systems",
   kicker: "DAY 2 · PART 5 · MCP & WORKPLACE SYSTEMS",
