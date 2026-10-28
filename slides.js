@@ -1910,7 +1910,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Like yesterday: one layer, check it, commit. Each layer has a 10-second check.",
   calm: true,
   steps: [
-    { text: "Layer 1: more food to finish. Say yes to each file.", prompt: "Create a branch level-2. Level 1 is the game as it is now: move its numbers into levels/level-1.js, without changing how it plays. Then make levels/level-2.js: the same, but it needs more food to finish. After level 1's food goal you go to level 2. Also make index.html?level=2 start straight at level 2, so I can test it.", after: "Check: reload the tab and eat 5 food. The screen says Level 2. Or start there: type ?level=2 after index.html in the address bar." },
+    { text: "Layer 1: more food to finish. Say yes to each file.", prompt: "Create a branch level-2. Level 1 is the game as it is now: move its numbers into levels/level-1.js, without changing how it plays. Then make levels/level-2.js: the same, but it needs more food to finish. After level 1's food goal you go to level 2. Also make index.html?level=2 start straight at level 2, and the same for every later level, so I can test it.", after: "Check: reload the tab and eat 5 food. The screen says Level 2. Or start there: type ?level=2 after index.html in the address bar." },
     { text: "Look inside", prompt: "Explain @levels/level-2.js in plain words.", after: "Check: level 2 needs more food than level-1.js. Works? Commit and push." },
     { text: "Layer 2: a longer snake", prompt: "Next layer, only in levels/level-2.js: the snake starts a bit longer than in level 1. Keep it playable.", after: "Check: open index.html?level=2. Count the snake: longer than in level 1? Commit and push." },
     { text: "Layer 3: obstacles", prompt: "Last layer: level 2 gets a few obstacles, blocks on the board that end the game when you hit them. Put them in levels/level-2.js. The snake never starts in one, and food never lands on one.", after: "Check: open index.html?level=2. You see blocks. Steer into one: game over. Commit and push." },
@@ -2183,7 +2183,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   calm: true,
   steps: [
     { text: "Start clean, then ask for level 3 with your skills", cmds: ["/clear"], prompt: "Make level 3 with my create-food, create-snake and create-obstacles skills: a bit harder than level 2.", after: "Watch for Skill(create-food), Skill(create-snake), Skill(create-obstacles)." },
-    { text: "Play it: reload the tab", after: "Harder than level 2? Still fair?" },
+    { text: "Check: open index.html?level=3", after: "Harder than level 2? Still fair? Compare with ?level=2." },
     { text: "Merge request", prompt: "Push level-3 and open a merge request into main: what changed, why, how it was tested. Don't merge it.", after: "Review it on GitLab and merge it yourself." },
     { text: "Back on main", prompt: "!git checkout main && git pull" }
   ],
@@ -2391,7 +2391,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     { text: "Make the workflow", prompt: "Create a branch workflow. Make a workflow skill in .claude/skills/build-game-levels/: /build-game-levels N looks which levels exist, makes a new branch, and makes the missing levels up to N with the create-food, create-snake and create-obstacles skills, each a little harder than the one before. Then it runs npm test and asks bobby to check. Only on GO: commit, push and open a merge request on GitLab. On NO-GO: stop and show me why. It only runs when I type it, never by itself. Show me SKILL.md before you save it.", after: "Find disable-model-invocation and $ARGUMENTS." },
     { text: "Save the workflow first: it wants a clean start", prompt: "Commit, push and open a merge request.", after: "Merge it, then !git checkout main && git pull" },
     { text: "Run it", prompt: "/build-game-levels 5", after: "Watch: branch, three skills per level, npm test, Bobby, then the push question." },
-    "Bobby said GO? Review the merge request on GitLab, play levels 4 and 5, then merge"
+    "Bobby said GO? Review the merge request on GitLab, check index.html?level=4 and ?level=5, then merge"
   ],
   expected: "Levels 4 and 5 built by one command, checked by Bobby, merged by you.",
   keyPoints: ["Stacked: skills, test, Bobby, MR", "Only by /build-game-levels", "The push still asks", "You still merge"],
