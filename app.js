@@ -438,6 +438,8 @@ function renderExtras(stage, main, s, v) {
     const doc = (d, i) => { const c = node('div', 'dp-doc dp-step dp-doc-' + i); const h = node('div', 'dp-dhead'); h.append(node('span', 'dp-dname', d.name), node('span', 'dp-badge', d.badge)); c.append(h, node('p', 'dp-ask', d.ask));
       const f = node('div', 'dp-file'); d.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); c.append(f);
       const facts = node('ul', 'dp-facts'); d.facts.forEach(t => facts.append(node('li', null, t))); c.append(facts);
+      if (d.when) { const wb = node('div', 'dp-when'); wb.append(node('span', 'dp-ulabel', d.when.label)); const ol = node('ol', 'dp-wlist'); d.when.items.forEach(t => ol.append(node('li', null, t))); wb.append(ol); c.append(wb); }
+      if (d.example) { const ex = node('div', 'dp-ex'); ex.append(node('span', 'dp-bubble', d.example.prompt), node('span', 'dp-exarrow', '→'), node('span', 'dp-exfile', d.name)); c.append(ex); }
       const u = node('div', 'dp-users'); u.append(node('span', 'dp-ulabel', d.usersLabel)); d.users.forEach(t => u.append(node('span', 'dp-chip', t))); c.append(u); return c; };
     const link = node('div', 'dp-link dp-step'); link.append(node('span', 'cmap-line'), node('span', 'cmap-label', D.link));
     const pair = node('div', 'dp-docs'); pair.append(doc(D.docs[0], 0), link, doc(D.docs[1], 1));

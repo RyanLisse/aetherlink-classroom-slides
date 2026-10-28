@@ -1482,3 +1482,11 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .dp-work{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.2rem;padding:.5rem 1rem;border:2px dashed var(--border);border-radius:14px}
 .dp-wk{font-size:clamp(.86rem,1.1vw,1rem)}
 @media (max-width:760px){.dpair{grid-template-columns:minmax(0,1fr)}.dp-docs{grid-template-columns:minmax(0,1fr)}.dp-link{justify-self:center;transform:rotate(90deg)}}
+.dp-when{display:grid;gap:.25rem;padding:.45rem .7rem;border-radius:10px;background:var(--selected)}
+.dp-wlist{margin:0;padding-left:1.25rem;display:grid;gap:.12rem;font-size:clamp(.84rem,1.05vw,.98rem);font-weight:700}
+.dp-ex{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.dp-bubble{position:relative;padding:.3rem .75rem;border-radius:14px 14px 14px 4px;background:var(--surface2);border:1.5px solid var(--border);font-weight:800;font-size:clamp(.84rem,1.05vw,.98rem)}
+.dp-bubble::before{content:'💬 '}
+.dp-exarrow{font-weight:900;color:var(--muted)}
+.dp-exfile{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:900}
+.dp-doc-0 .dp-exfile{color:var(--violet)}.dp-doc-1 .dp-exfile{color:var(--cyan)}
