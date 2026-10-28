@@ -2035,21 +2035,6 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the instructions themselves, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The instructions are only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: say 'you'll write that in a few minutes, just before you build this skill'."
 },
 
-{ // Slide 98
-  title: "Prompt, CLAUDE.md and skill",
-  kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
-  subtitle: "Three different mechanisms, three different jobs.",
-  type: "concept",
-  visual: { lifespan: [{ kind: 'now', icon: '💬', label: 'now' }, { kind: 'always', icon: '📄', label: 'every session' }, { kind: 'recurring', icon: '🧰', label: 'whenever that task comes up' }] },
-  cards: [
-    { title: "Prompt", body: "The task Claude should perform now." },
-    { title: "CLAUDE.md", body: "Project instructions that apply across sessions." },
-    { title: "Skill", body: "A reusable method for one type of task." }
-  ],
-  keyPoints: ["Three mechanisms, three jobs","The guide column of the map, zoomed in","Point back here after lunch","Point back here during work"],
-  notes: "All three are text Claude reads; they differ in when they apply. A prompt is this task, CLAUDE.md is every session, a skill is loaded when a task matches its description. None of them enforces anything: that stays in settings.json, as you saw yesterday with the permissions and the hook (guide vs enforce). Assignment 25 (a shorter CLAUDE.md) builds on exactly this difference."
-},
-
 { // Slide 99
   title: "Which skills would you build for your daily work?",
   kicker: "DAY 2 · PART 2 · YOUR WORK",
@@ -2655,6 +2640,22 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   check: "Answer: B",
   keyPoints: ["Vote first", "Answer: B, CLAUDE.md", "Skill = a recurring method, not a standing instruction"],
   notes: "Vote first, then press → to strike the wrong answers. The answer is B: CLAUDE.md is read in every session, so standing instructions live there. A is the problem the room felt with every Snake layer: repeating yourself. C is close but different: a skill holds a recurring method that runs when needed, not an instruction that always applies."
+},
+
+{ // Slide 98
+  hidden: true,
+  title: "Parked · Prompt, CLAUDE.md and skill",
+  kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
+  subtitle: "Three different mechanisms, three different jobs.",
+  type: "concept",
+  visual: { lifespan: [{ kind: 'now', icon: '💬', label: 'now' }, { kind: 'always', icon: '📄', label: 'every session' }, { kind: 'recurring', icon: '🧰', label: 'whenever that task comes up' }] },
+  cards: [
+    { title: "Prompt", body: "The task Claude should perform now." },
+    { title: "CLAUDE.md", body: "Project instructions that apply across sessions." },
+    { title: "Skill", body: "A reusable method for one type of task." }
+  ],
+  keyPoints: ["Three mechanisms, three jobs","The guide column of the map, zoomed in","Point back here after lunch","Point back here during work"],
+  notes: "All three are text Claude reads; they differ in when they apply. A prompt is this task, CLAUDE.md is every session, a skill is loaded when a task matches its description. None of them enforces anything: that stays in settings.json, as you saw yesterday with the permissions and the hook (guide vs enforce). Assignment 25 (a shorter CLAUDE.md) builds on exactly this difference."
 },
 
 { // Slide 125
