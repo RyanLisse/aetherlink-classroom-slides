@@ -1969,25 +1969,25 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 95
-  title: "A skill is a recipe",
+  title: "What is a skill?",
   kicker: "DAY 2 · PART 2 · PROMPT TO SKILL",
-  subtitle: "Write down how you make the apple pie once. Bake it whenever you want.",
+  subtitle: "“Skills extend what Claude can do.” (Anthropic, Claude Code docs)",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside',
-    highlight: [{ in: 'subtitle', text: 'once', tone: 'orange' }] },
+  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
   cards: [
-    { title: "Built in", body: "Claude Code comes with a few. Type / to see them." },
-    { title: "Your own", body: "You write the recipe yourself, in a SKILL.md." },
-    { title: "Made by Claude", body: "You ask Claude to turn what you just did into a skill." }
+    { title: "A SKILL.md file", body: "With instructions: how a task is done. You write it once." },
+    { title: "Claude uses it when relevant", body: "Your task matches the skill's description, so Claude uses the skill by itself." },
+    { title: "Or you start it", body: "Type /skill-name. Type / to see all skills." }
   ],
-  keyPoints: ["Recipe: write it once, bake it often","Built in: in the / menu","Your own SKILL.md","Or let Claude write it from your work"],
-  notes: "A skill is a recipe. You write down once how you make the apple pie: ingredients, steps, when it's done. After that you bake it whenever you want, the same way every time. There are three kinds: built in (Claude Code comes with a few; type / and they're in the menu), your own (you write the SKILL.md yourself), and made by Claude (you ask Claude to turn what you just did into a skill). That last one is what you'll do with your Snake. Before class, type / on your teaching laptop and pick one built-in skill to point at."
+  tagline: "Write it down once. Claude does it the same way every time.",
+  keyPoints: ["Anthropic's definition first", "A file with instructions", "Claude picks it when relevant", "Or you type /name"],
+  notes: "Read the definition from Anthropic's Claude Code docs out loud: 'Skills extend what Claude can do. Create a SKILL.md file with instructions, and Claude adds it to its toolkit. Claude uses skills when relevant, or you can invoke one directly with /skill-name.' The three cards are those three sentences.\n\nLink it to what they just did: for level 2 you told Claude three times how to make a level harder. A skill writes that down once, so Claude does it the same way for level 3, 4 and 5.\n\nClaude Code also comes with a few built-in skills (type / to see them), and you can ask Claude to turn what you just did into a skill: that's what you'll do next."
 },
 
 { // Slide 96
   title: "Inside a skill: SKILL.md",
   kicker: "DAY 2 · PART 2 · SKILLS",
-  subtitle: "A skill is a folder with one file, SKILL.md. The top of that file is the label, the rest is the recipe.",
+  subtitle: "A skill is a folder with one file, SKILL.md. The top of that file is the label, the rest is the instructions.",
   type: "concept",
   visual: { stepThrough: ".sd-step, .slide-main > .tagline", skillDoc: {
     tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
@@ -2014,7 +2014,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
         ["allowed-tools: Read, Edit(levels/**)", "may do this without asking you"],
         ["---", ""]
       ] },
-      { kind: "body", label: "Body", sub: "the recipe, in plain words", lines: [
+      { kind: "body", label: "Body", sub: "the instructions, in plain words", lines: [
         ["# Create food", ""],
         ["1. Read the food rules in spec.md.", ""],
         ["2. A bit more food to finish than the level before.", ""],
@@ -2024,12 +2024,12 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
     ] },
     load: { title: "What does Claude load, and when?", cols: [
       { kind: "front", head: "Every session: every skill's label", items: ["only the frontmatter, a few lines per skill", "so Claude knows: /create-food exists, use it when a level needs food"] },
-      { kind: "body", head: "Only when the skill is used: the recipe", items: ["you type /create-food, or your task matches the description", "then Claude reads the body, and spec.md when the recipe says so"] }
+      { kind: "body", head: "Only when the skill is used: the instructions", items: ["you type /create-food, or your task matches the description", "then Claude reads the body, and spec.md when the instructions says so"] }
     ], why: "Why it matters: 3 skills or 30, your context stays small. And a vague description means Claude never picks the skill." }
   } },
-  tagline: "The label is always loaded. The recipe only when the skill is used.",
-  keyPoints: ["Click: folder, label, recipe, loading", "One folder per skill in .claude/skills/", "Frontmatter = the label between ---", "description decides when Claude picks it", "Label always loaded, recipe only when used"],
-  notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the recipe itself, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The recipe is only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they write that rulebook in Assignment 20, just before this skill."
+  tagline: "The label is always loaded. The instructions only when the skill is used.",
+  keyPoints: ["Click: folder, label, instructions, loading", "One folder per skill in .claude/skills/", "Frontmatter = the label between ---", "description decides when Claude picks it", "Label always loaded, instructions only when used"],
+  notes: "Click through it. 1 Where it lives: every skill is a folder in .claude/skills/, with one file in it, SKILL.md. Today you make three: create-food, create-snake and create-obstacles. In git, so the whole team gets them. The grey files are the ones the skills work with: spec.md for the numbers, levels/ for the level files.\n\n2 The frontmatter: the block between the two --- lines at the top (Ryan's 'three stripes'). Think of it as the label on a jar. name is the /name you type. description says what the skill does and when to use it: Claude reads it to decide whether this skill fits your task. allowed-tools: what this skill may do without asking you, only while it runs.\n\n3 The body: the instructions themselves, in plain words, step by step. It points to spec.md instead of repeating the numbers.\n\n4 What Claude loads, and when. At the start of every session Claude reads only the labels of all skills: a few lines each. That's how it knows which skills exist. The instructions are only read when the skill is used: you type /create-food, or you ask for something that matches the description. Why that matters: a skill costs almost nothing until you use it, so you can have many. And because Claude only sees the label, the description must say clearly when to use it, or Claude never picks the skill. Remember the tokens part after lunch: this is one of the cheap ones.\n\nOther frontmatter settings you'll meet today: disable-model-invocation: true (only you can start it, with /name) and argument-hint (what to type after /name).\n\nIn the code editor: when Claude makes a skill you see the folder appear in VS Code's explorer, and the skill is in the / menu straight away, no restart.\n\nThe example points to spec.md: they write that rulebook in Assignment 20, just before this skill."
 },
 
 { // Slide 97
@@ -2153,17 +2153,17 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "manual",
   title: "Assignment 21: Skill 1, /create-food",
   kicker: "DAY 2 · ASSIGNMENT 21 · BUILD",
-  subtitle: "You made the food for level 2 by hand. Now write down the recipe.",
+  subtitle: "You made the food for level 2 by hand. Now write down the instructions.",
   calm: true,
   steps: [
-    { text: "Make the skill on a new branch", prompt: "Turn how we made the food for level 2 into a skill in .claude/skills/create-food/. Frontmatter: name, and a description that says when to use it. Recipe: read the food rules in spec.md, make level N need a little more food to finish than the level before and stay within the limits, food never on an obstacle or the snake, then npm test must be green. Show me SKILL.md before you save it.", after: "Read it, then say yes." },
+    { text: "Make the skill on a new branch", prompt: "Turn how we made the food for level 2 into a skill in .claude/skills/create-food/. Frontmatter: name, and a description that says when to use it. Instructions: read the food rules in spec.md, make level N need a little more food to finish than the level before and stay within the limits, food never on an obstacle or the snake, then npm test must be green. Show me SKILL.md before you save it.", after: "Read it, then say yes." },
     "Open .claude/skills/create-food/SKILL.md in VS Code. Find the two --- lines. Which line tells Claude when to use it?",
     { text: "Is it there?", prompt: "/", after: "Type create and you'll see /create-food. No restart needed." },
     { text: "Save point", prompt: "Commit the skill on the branch level-3 and push it." }
   ],
-  expected: "A /create-food skill with frontmatter and a recipe, committed on level-3.",
-  keyPoints: ["Skill from your own work", "Frontmatter: name + description", "Recipe points to spec.md", "In the / menu straight away"],
-  notes: "Why now: level 3 needs food again, exactly like level 2.\nWhat you see: a new folder .claude/skills/create-food/ in VS Code, with SKILL.md.\nLook inside: the description. Would Claude pick this skill if you said 'level 3 needs food'?\n\nThe recipe points to spec.md instead of repeating the numbers: one rulebook. You're still on the branch level-3 from Assignment 20."
+  expected: "A /create-food skill with frontmatter and instructions, committed on level-3.",
+  keyPoints: ["Skill from your own work", "Frontmatter: name + description", "Instructions point to spec.md", "In the / menu straight away"],
+  notes: "Why now: level 3 needs food again, exactly like level 2.\nWhat you see: a new folder .claude/skills/create-food/ in VS Code, with SKILL.md.\nLook inside: the description. Would Claude pick this skill if you said 'level 3 needs food'?\n\nThe instructions point to spec.md instead of repeating the numbers: one rulebook. You're still on the branch level-3 from Assignment 20."
 },
 
 { // Slide 102
@@ -2210,7 +2210,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "manual",
   title: "Assignment 24: Level 3 with your three skills",
   kicker: "DAY 2 · ASSIGNMENT 24 · BUILD",
-  subtitle: "Same result as level 2. This time the recipes do the explaining.",
+  subtitle: "Same result as level 2. This time the instructions do the explaining.",
   calm: true,
   steps: [
     { text: "Start clean, then ask for level 3 with your skills", cmds: ["/clear"], prompt: "Make level 3 with my create-food, create-snake and create-obstacles skills: a bit harder than level 2.", after: "Watch for Skill(create-food), Skill(create-snake), Skill(create-obstacles)." },
@@ -2220,7 +2220,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   expected: "Level 3 was made with your three skills, and it's in main.",
   keyPoints: ["/clear first", "Name the skills: Claude calls them", "Extra: try it without naming them", "Review and merge"],
-  notes: "Why now: three recipes are ready. This is the moment they pay off.\nWhat you see: Claude names each skill as it uses it. The level appears without you explaining food, snake or obstacles.\nLook inside: did Claude use all three skills? Which values did each one choose?\n\nDry run (28 Oct, Claude Code 2.1.312): with 'Make level 3: a bit harder than level 2.' Claude read the three SKILL.md files with cat and followed them, without a Skill() call. Naming the skills in the prompt gave three real Skill() calls. Extra for the fast ones: /clear and ask without naming them, then compare.\n\nThe hook from Assignment 23 is on: everything happens on level-3, so nothing is blocked. If someone is still on main, the hook will tell them."
+  notes: "Why now: three skills are ready. This is the moment they pay off.\nWhat you see: Claude names each skill as it uses it. The level appears without you explaining food, snake or obstacles.\nLook inside: did Claude use all three skills? Which values did each one choose?\n\nDry run (28 Oct, Claude Code 2.1.312): with 'Make level 3: a bit harder than level 2.' Claude read the three SKILL.md files with cat and followed them, without a Skill() call. Naming the skills in the prompt gave three real Skill() calls. Extra for the fast ones: /clear and ask without naming them, then compare.\n\nThe hook from Assignment 23 is on: everything happens on level-3, so nothing is blocked. If someone is still on main, the hook will tell them."
 },
 
 { // Slide 105
@@ -2248,7 +2248,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "short", tone: "orange" }] },
   cards: [
     { title: "Always loaded", body: "CLAUDE.md, and what it pulls in with @\nthe frontmatter of every skill\nMCP server instructions (the tools themselves load on demand)" },
-    { title: "Only when needed", body: "a SKILL.md recipe\nfiles inside a skill\nlevels/CLAUDE.md: only when Claude works in levels/" },
+    { title: "Only when needed", body: "a SKILL.md's instructions\nfiles inside a skill\nlevels/CLAUDE.md: only when Claude works in levels/" },
     { title: "Almost free", body: "hooks and scripts: they run, only their output counts\na subagent: works in its own context, brings back a summary" }
   ],
   tagline: "Keep CLAUDE.md short. Put the details where they're needed.",
@@ -2269,7 +2269,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "concept",
   visual: { code: 0 },
   cards: [
-    { title: "aether-snake/", body: "CLAUDE.md              every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md            only when working in levels/\n  level-1.js … level-5.js\ntests/levels.test.js   every level, every limit\n.claude/\n  settings.json        permissions + hooks\n  skills/              top always, recipe when used\n    create-food/  create-snake/  create-obstacles/\n    build-game-levels/ the workflow\n  agents/\n    bobby.md           the level-checker" },
+    { title: "aether-snake/", body: "CLAUDE.md              every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md            only when working in levels/\n  level-1.js … level-5.js\ntests/levels.test.js   every level, every limit\n.claude/\n  settings.json        permissions + hooks\n  skills/              top always, instructions when used\n    create-food/  create-snake/  create-obstacles/\n    build-game-levels/ the workflow\n  agents/\n    bobby.md           the level-checker" },
     { title: "Yours, not shared", body: "Not in git:\nCLAUDE.local.md\n.claude/settings.local.json\n\nYou, in every project:\n~/.claude/CLAUDE.md\n~/.claude/settings.json\n~/.claude/skills/\n~/.claude/agents/" }
   ],
   tagline: "Project files are shared through git. Your home folder is only yours.",
@@ -2344,7 +2344,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   tagline: "A subagent reports. It approves nothing.",
   keyPoints: ["Own context window", "Own agent loop", "Skill = in your conversation", "Subagent = apart, returns a report", "Same frontmatter idea as a skill", "Restart before first use"],
-  notes: "A subagent is a separate Claude with its own context window, its own instructions, limited tools and optionally a cheaper model. Claude hands it one job; it runs its own loop (read, run, think, repeat) and returns a short report, so your main session stays clean. That's the difference with a skill: a skill is a recipe your own Claude follows inside your conversation; a subagent is another worker.\n\nThe file looks like a skill: frontmatter between --- lines (name, description, tools, model), then the instructions in plain words. You make one by asking Claude, or by writing the file yourself. A new agent loads when Claude Code starts, so restart (claude --continue) before using it; skills load straight away. Bobby will check your levels, but the decision to merge stays yours."
+  notes: "A subagent is a separate Claude with its own context window, its own instructions, limited tools and optionally a cheaper model. Claude hands it one job; it runs its own loop (read, run, think, repeat) and returns a short report, so your main session stays clean. That's the difference with a skill: a skill is a set of instructions your own Claude follows inside your conversation; a subagent is another worker.\n\nThe file looks like a skill: frontmatter between --- lines (name, description, tools, model), then the instructions in plain words. You make one by asking Claude, or by writing the file yourself. A new agent loads when Claude Code starts, so restart (claude --continue) before using it; skills load straight away. Bobby will check your levels, but the decision to merge stays yours."
 },
 
 { // Slide 111
@@ -2376,7 +2376,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   cards: [
     { title: "💬 Prompt", body: "Loaded: now\nStarted by: you\nOwn context: no" },
     { title: "📄 CLAUDE.md", body: "Loaded: every session\nStarted by: Claude Code\nOwn context: no" },
-    { title: "🧰 Skill", body: "Loaded: the top always, the recipe when used\nStarted by: Claude, or you with /name\nOwn context: no" },
+    { title: "🧰 Skill", body: "Loaded: the top always, the instructions when used\nStarted by: Claude, or you with /name\nOwn context: no" },
     { title: "🤖 Subagent", body: "Loaded: when called\nStarted by: Claude\nOwn context: yes" },
     { title: "🔗 Workflow", body: "Loaded: when you type /name\nStarted by: you\nOwn context: no, it calls agents" },
     { title: "🪝 Hook", body: "Runs: at a fixed moment\nStarted by: Claude Code\nOwn context: no, runs outside" },
@@ -2407,7 +2407,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   tagline: "/build-game-levels only runs when you type it: it pushes, so Claude must never start it by itself.",
   keyPoints: ["A workflow = a skill that calls skills and agents", "The number after it: $ARGUMENTS", "Bobby is the gate", "NO-GO: nothing pushed", "Only you start it"],
-  notes: "A workflow is a skill too, but its recipe calls the other skills and an agent, in a fixed order, with a gate. The number you type after the command reaches the recipe as $ARGUMENTS (argument-hint in the frontmatter shows it in the menu). Because it pushes and opens a merge request, it gets disable-model-invocation: true: Claude may never start it by itself.\n\nBobby is the gate: GO means commit, push and merge request through GitLab MCP (yesterday's connection). NO-GO means stop and explain; nothing leaves your laptop. The human gate stays at the end: you review and merge."
+  notes: "A workflow is a skill too, but its instructions call the other skills and an agent, in a fixed order, with a gate. The number you type after the command reaches the instructions as $ARGUMENTS (argument-hint in the frontmatter shows it in the menu). Because it pushes and opens a merge request, it gets disable-model-invocation: true: Claude may never start it by itself.\n\nBobby is the gate: GO means commit, push and merge request through GitLab MCP (yesterday's connection). NO-GO means stop and explain; nothing leaves your laptop. The human gate stays at the end: you review and merge."
 },
 
 { // Slide 114
