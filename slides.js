@@ -2103,7 +2103,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 100b
   title: "spec.md: one rulebook for every level",
   kicker: "DAY 2 · PART 2 · DESIGN",
-  subtitle: "Before you build the skills: write down the numbers they must stay within. Later a test and a subagent check against the same file.",
+  subtitle: "Before you build the skills: write down the numbers they must stay within.",
   type: "concept",
   visual: { stepThrough: ".dp-step, .slide-main > .tagline", docPair: {
     tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
