@@ -2099,6 +2099,29 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Why now: the next three assignments build skills that make levels. Write down the limits they must stay within first.\nWhat you see: a new spec.md with the values from your level files, a min and max for each, and level-2.js as the example.\nLook inside: step 4. intent.md says 'always playable' in words; spec.md turns it into numbers (a maximum speed, a maximum number of obstacles).\n\nWhy from levels 1 and 2: everyone's game is different, so everyone's spec is too. It records what the levels already look like, plus the limits.\n\nThe branch level-3 holds spec.md, the three skills and level 3 itself: one merge request at the end.\n\nWatch for: Claude may put spec.md in levels/: fine. Field names differ per person: fine. Someone whose level 2 has no own file in levels/? Ask Claude to move the numbers there first."
 },
 
+{ // Slide 100d
+  title: "A skill prompt: the job, and the limits",
+  kicker: "DAY 2 · PART 2 · SKILLS",
+  subtitle: "Say in words what the skill should do. Then point to spec.md for how far it may go.",
+  type: "concept",
+  visual: { stepThrough: ".pt-step, .slide-main > .tagline", promptParts: {
+    label: "The prompt for your first skill, in parts",
+    parts: [
+      { kind: "where", text: "Make a skill in .claude/skills/create-food/.", label: "Where", means: "the folder of the skill" },
+      { kind: "job", text: "Level N needs a little more food to finish than the level before. Food never lands on an obstacle or the snake.", label: "The job, in words", means: "what the skill does" },
+      { kind: "limits", text: "Stay within the limits in spec.md.", label: "The limits", means: "how far: the numbers in spec.md" },
+      { kind: "check", text: "Then npm test must be green.", label: "The check", means: "how you know it worked" }
+    ],
+    compare: { title: "Why “within spec.md”?", cols: [
+      { tone: "bad", head: "Only the words", say: "a little more food", items: ["Claude decides how much “a little” is", "level 5 might need 6 food, or 200", "nothing to check it against"] },
+      { tone: "good", head: "The words + spec.md", say: "foodToFinish: 5 to 50", items: ["a number Claude has to stay within", "the same for all three skills", "a test can check it: yes or no"] }
+    ] }
+  } },
+  tagline: "Words say what you want. spec.md makes it measurable.",
+  keyPoints: ["Click: the prompt, the parts, why", "The job: in words", "The limits: in spec.md, not in the prompt", "Measurable = testable"],
+  notes: "Say: You're about to write the prompts for your three skills. Every one of them has the same parts. Click 1: the prompt for create-food. Click 2: the four parts. Where the skill lives. The job, in words: what the skill does. The limits: how far it may go, and that's one short sentence, because the numbers are already in spec.md. The check: how you know it worked.\n\nClick 3: why the limits part matters. 'A little more food' is clear to a person, but Claude decides how much a little is, and it may decide differently for level 4 than for level 5. Nothing says when it's too much. spec.md makes it measurable: food to finish between 5 and 50. Every skill stays within the same numbers, and a test can check it with a yes or a no.\n\nWhy not put the numbers in the prompt? Then they live in three skills, and the next time you change a limit you have to change three files. In spec.md they live in one place.\n\nAt work: the same as writing 'follow the API contract' in a ticket instead of copying the contract into it.\n\nNext: Assignment 21, your first skill."
+},
+
 { // Slide 101
   type: "practice",
   layout: "exercise",

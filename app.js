@@ -466,6 +466,16 @@ function renderExtras(stage, main, s, v) {
     if (D.work) { const wk = node('div', 'dp-work sp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
+  if (v.promptParts) {                                           // one prompt taken apart: what each part does, and why the limits part matters
+    const D = v.promptParts; const w = node('div', 'pparts');
+    const pr = node('div', 'pt-prompt pt-step'); pr.append(node('span', 'dp-label', D.label)); const tx = node('p', 'pt-text');
+    D.parts.forEach(P => tx.append(node('span', 'pt-seg pt-' + P.kind, P.text), ' ')); pr.append(tx); w.append(pr);
+    const keys = node('div', 'pt-keys pt-step'); D.parts.filter(P => P.label).forEach(P => { const k = node('div', 'pt-key pt-' + P.kind); k.append(node('strong', null, P.label), node('span', null, P.means)); keys.append(k); }); w.append(keys);
+    const cmp = node('div', 'pt-cmp pt-step'); cmp.append(node('span', 'dp-label pt-cmplabel', D.compare.title));
+    D.compare.cols.forEach(C => { const c = node('div', 'pt-col pt-c-' + C.tone); c.append(node('strong', 'pt-chead', C.head), node('span', 'pt-say', C.say));
+      const ul = node('ul', 'dp-wlist'); C.items.forEach(t => ul.append(node('li', null, t))); c.append(ul); cmp.append(c); }); w.append(cmp);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.permPair) {                                              // two kinds of permission side by side: where it's written, what it lets through, for how long
     const D = v.permPair; const w = node('div', 'pperm');
     D.cols.forEach((C, i) => { const c = node('section', 'pp-col pp-step pp-' + C.tone); const h = node('div', 'pp-head'); h.append(node('span', 'pp-n', String(i + 1)), node('strong', null, C.title)); c.append(h, node('span', 'pp-where', C.where));
