@@ -2122,7 +2122,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 102a
   title: "Two kinds of permission",
   kicker: "DAY 2 · PART 2 · PERMISSIONS",
-  subtitle: "The skill may change level files without asking. The rules it follows stay yours.",
+  subtitle: "Skills let Claude do more on its own. That's the point, as long as you decide where its freedom ends: what it may just do, and what it must ask you first.",
   type: "concept",
   visual: { stepThrough: ".pp-step, .slide-main > .tagline", permPair: {
     cols: [
@@ -2139,7 +2139,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   } },
   tagline: "A skill gets what it needs for its job. The rulebook only changes when you say yes.",
   keyPoints: ["Click: skill, then project", "allowed-tools: this skill, while it runs", "settings.json: the whole project", "Level files: free. spec.md: asks"],
-  notes: "Say: In the next assignment you make the second skill, and you give it two permissions at once. Here's the difference before you build it.\n\nClick 1: allowed-tools, in the skill's frontmatter. create-snake may edit the files in levels/ without asking you. That's practical: building levels is its job. It only counts for this skill, and only while it runs.\n\nClick 2: a rule in .claude/settings.json. Claude always asks before it changes spec.md. That counts for the whole project and every session, whatever a skill says. spec.md is the rulebook every skill follows: if a skill or a prompt could quietly raise a limit, the rules would mean nothing.\n\nAsk the room: which one would you use for a file nobody should ever touch? (deny in settings.json: deny beats allow and ask.)\n\nAt work: a protected file in GitLab, like a pipeline config or an API contract.\n\nNext: Assignment 22, both permissions in your project."
+  notes: "Say: Skills are great: Claude does more by itself, faster. But you don't want an AI, or any agent, to just do whatever it likes in your project. So you decide where its freedom ends. In the next assignment you make the second skill, and you give it two permissions at once. Here's the difference before you build it.\n\nClick 1: allowed-tools, in the skill's frontmatter. create-snake may edit the files in levels/ without asking you. That's practical: building levels is its job. It only counts for this skill, and only while it runs.\n\nClick 2: a rule in .claude/settings.json. Claude always asks before it changes spec.md. That counts for the whole project and every session, whatever a skill says. spec.md is the rulebook every skill follows: if a skill or a prompt could quietly raise a limit, the rules would mean nothing.\n\nAsk the room: which one would you use for a file nobody should ever touch? (deny in settings.json: deny beats allow and ask.)\n\nAt work: a protected file in GitLab, like a pipeline config or an API contract.\n\nNext: Assignment 22, both permissions in your project."
 },
 
 { // Slide 102
