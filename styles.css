@@ -1648,3 +1648,10 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .pm-stitle{font-size:clamp(.98rem,1.25vw,1.12rem)}
 .pm-files{display:grid;gap:.1rem;margin-bottom:.3rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.78rem,.98vw,.92rem)}
 @media (max-width:760px){.pmap{grid-template-columns:minmax(0,1fr)}}
+.sdoc.sd-wide{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.sd-wide .sd-load{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:1rem;align-items:start}
+.sd-wide .sd-load > .dp-label,.sd-wide .sd-why{grid-column:1/-1}
+.sd-wide .sd-moment{grid-template-columns:minmax(0,1fr);align-content:start}
+.sd-wide .sd-mnote{grid-column:1}
+.sd-wide .sd-link{display:none}
+@media (max-width:760px){.sdoc.sd-wide,.sd-wide .sd-load{grid-template-columns:minmax(0,1fr)}}

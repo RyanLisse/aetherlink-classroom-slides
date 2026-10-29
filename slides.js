@@ -2368,17 +2368,47 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 { // Slide 110
   title: "Subagents: a helper with its own head",
   kicker: "DAY 2 · PART 4 · AGENTS",
-  subtitle: "Delegate the checking, never the approval.",
+  subtitle: "A subagent is one file. Ask for it, and Claude writes it. Delegate the checking, never the approval.",
   type: "concept",
-  visual: { stagger: "pop", stepThrough: true, highlight: [{ in: "tagline", text: "approves nothing", tone: "orange" }] },
-  cards: [
-    { title: "What", body: "A separate Claude for one job, with its own context window and its own agent loop: it reads, runs and thinks by itself." },
-    { title: "Skill or subagent?", body: "A skill runs inside your conversation, in your context. A subagent works apart and only sends back a short report." },
-    { title: "Where", body: ".claude/agents/bobby.md: frontmatter with name, description, tools and model, then its instructions. Loads after a restart." }
-  ],
+  visual: { stepThrough: ".sd-step, .slide-main > .tagline", skillDoc: {
+    tree: { label: "Where it lives", root: "aether-snake/", rootNote: "your project, in git", rows: [
+      ["├── ", "spec.md", "bobby checks against it", "dim"],
+      ["├── ", "levels/", "the levels bobby reads", "dim"],
+      ["├── ", "tests/levels.test.js", "the test bobby runs", "dim"],
+      ["└── ", ".claude/", "", "dir"],
+      ["    ├── ", "settings.json", "", "dim"],
+      ["    ├── ", "skills/", "folders, one per skill", "dim"],
+      ["    └── ", "agents/", "new: one file per subagent", "dir"],
+      ["        └── ", "bobby.md", "on the right →", "skill"]
+    ] },
+    file: { label: "Inside the file", name: ".claude/agents/bobby.md", parts: [
+      { kind: "front", label: "Frontmatter", sub: "the same idea as a skill, between the --- lines", lines: [
+        ["---", ""],
+        ["name: bobby", "you say: ask bobby"],
+        ["description: Checks the Snake levels", "when Claude hands"],
+        ["  against spec.md.", "it a job"],
+        ["tools: Read, Grep, Glob, Bash", "read and run npm test"],
+        ["model: haiku", "a smaller, cheaper Claude"],
+        ["---", ""]
+      ] },
+      { kind: "body", label: "Body", sub: "its instructions: who it is and how it works", lines: [
+        ["You are Bobby, the level-checker.", ""],
+        ["1. Run npm test.", ""],
+        ["2. Read spec.md and every levels/level-N.js.", ""],
+        ["3. Each level harder than the one before? Playable?", ""],
+        ["4. Change nothing. End with GO or NO-GO + reasons.", ""]
+      ] }
+    ] },
+    loadWide: true,
+    load: { title: "What happens when you ask bobby?", moments: [
+      { when: "1 · Claude Code starts", label: "in your context", chips: [["bobby: frontmatter", "front"]], note: "Like a skill: only the frontmatter. A new subagent loads at the start, so restart once after making it." },
+      { when: "2 · You: “Ask bobby to check the levels.”", label: "bobby's own context: a separate Claude", chips: [["bobby: body", "body"], ["spec.md", "file"], ["level-1.js … level-3.js", "file"], ["npm test output", "file"]], note: "Bobby reads, runs and thinks by itself. None of this lands in your context." },
+      { when: "3 · Bobby is done", label: "back in your context", chips: [["the report: GO or NO-GO + reasons", "front"]], note: "Only the short report comes back. You decide what happens next." }
+    ], why: "Skill or subagent? A skill runs in your conversation, so everything it reads fills your context. A subagent works apart and only sends back its report." }
+  } },
   tagline: "A subagent reports. It approves nothing.",
-  keyPoints: ["Own context window", "Own agent loop", "Skill = in your conversation", "Subagent = apart, returns a report", "Same frontmatter idea as a skill", "Restart before first use"],
-  notes: "A subagent is a separate Claude with its own context window, its own instructions, limited tools and optionally a cheaper model. Claude hands it one job; it runs its own loop (read, run, think, repeat) and returns a short report, so your main session stays clean. That's the difference with a skill: a skill is a set of instructions your own Claude follows inside your conversation; a subagent is another worker.\n\nThe file looks like a skill: frontmatter between --- lines (name, description, tools, model), then the instructions in plain words. You make one by asking Claude, or by writing the file yourself. A new agent loads when Claude Code starts, so restart (claude --continue) before using it; skills load straight away. Bobby will check your levels, but the decision to merge stays yours."
+  keyPoints: ["Click: folder, frontmatter, body, what happens", "One file in .claude/agents/", "Frontmatter: name, description, tools, model", "Own context: only the report comes back", "Restart once after making it"],
+  notes: "Say: In the next assignment you ask Claude to make Bobby, the level-checker. This is what Claude will create.\n\nClick 1, the folder: one new folder, .claude/agents/, with one file per subagent. A skill is a folder with SKILL.md in it; a subagent is just one .md file. In git, so the team gets Bobby too. The grey files are what Bobby works with: spec.md, the levels and the level test.\n\nClick 2, the frontmatter: the same idea as a skill. name is what you call it ('ask bobby'). description tells Claude when to hand it a job. tools is what it may use: here reading and Bash for npm test, no Edit or Write. model: Haiku, a smaller and cheaper Claude, enough for checking against a spec.\n\nClick 3, the body: its instructions, written as who it is and how it works. It ends with GO or NO-GO, and changes nothing.\n\nClick 4, what happens: at the start only the frontmatter is loaded, like a skill; a new subagent only loads when Claude Code starts, so restart once. When you ask, Claude hands the job over: Bobby is a separate Claude with its own context window and its own agent loop. It reads the files, runs the test and thinks, and none of that fills your context. Only the short report comes back. That's the difference with a skill: a skill is instructions your own Claude follows inside your conversation; a subagent is another worker.\n\nWatch for: Bobby gets Bash to run npm test, so 'change nothing' is partly an instruction, not a hard wall. Say it out loud. The exact frontmatter Claude writes may differ a little (tools as a list, a colour): fine.\n\nThe decision to merge stays yours."
 },
 
 { // Slide 111

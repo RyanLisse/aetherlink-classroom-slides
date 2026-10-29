@@ -520,7 +520,7 @@ function renderExtras(stage, main, s, v) {
     D.load.moments.forEach(M => { const m = node('div', 'sd-moment'); m.append(node('strong', 'sd-when', M.when)); const box = node('div', 'sd-ctx'); box.append(node('span', 'sd-ctxlabel', M.label));
       const chips = node('div', 'sd-chips'); M.chips.forEach(([t, k]) => chips.append(node('span', 'sd-chip sd-chip-' + k, t))); (M.closed || []).forEach(t => chips.append(node('span', 'sd-chip sd-chip-closed', t))); box.append(chips); m.append(box, node('span', 'sd-mnote', M.note)); if (M.link) { const l = node('div', 'sd-link'); l.append(node('span', 'sd-larrow', '↓'), node('span', null, M.link)); load.append(l); } load.append(m); });
     if (D.load.why) load.append(node('p', 'sd-why', D.load.why));
-    const right = node('div', 'sd-right'); right.append(file, load); w.append(tree, right);
+    const right = node('div', 'sd-right'); if (D.loadWide) { right.append(file); w.classList.add('sd-wide'); w.append(tree, right, load); } else { right.append(file, load); w.append(tree, right); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
   if (v.figure) {                                                // one drawing that explains the slide on its own
