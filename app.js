@@ -799,7 +799,9 @@ function renderVisual(stage, body, main, s) {
   if (bot.hatch) { hatch.style.left = bot.hatch[0] + '%'; hatch.style.top = bot.hatch[1] + '%'; live.append(img, hatch); } else live.append(img);
   fig.append(live);
   if (v.tool === 'thought') fig.append(ART.thought());
-  if (v.place === 'left') { body.prepend(fig); body.classList.add('with-bot', 'bot-left'); }
+  if (v.botTag) fig.append(node('span', 'bot-tag', v.botTag));
+  if (v.place === 'in' && v.botIn && main.querySelector(v.botIn)) { const host = main.querySelector(v.botIn); host.classList.add('bot-host'); host.append(fig); }
+  else if (v.place === 'left') { body.prepend(fig); body.classList.add('with-bot', 'bot-left'); }
   else if (v.place === 'beside') { body.append(fig); body.classList.add('with-bot', 'bot-beside'); }
   else if (v.place === 'under') { main.append(fig); }
   else if (v.place === 'popout' && popRow) { popRow.prepend(fig); }

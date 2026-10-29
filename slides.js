@@ -2305,7 +2305,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
       ["    │   ├── ", "create-food/  create-snake/  create-obstacles/", "your 3 skills", "am"],
       ["    │   └── ", "build-game-levels/", "the workflow", "pm"],
       ["    └── ", "agents/", "", "pm dir"],
-      ["        └── ", "… .md", "a subagent that checks the levels", "pm"]
+      ["        └── ", "level-checker.md", "a subagent that checks the levels", "pm"]
     ] },
     side: { title: "Yours, not shared", groups: [
       { head: "Not in git", items: ["CLAUDE.local.md", ".claude/settings.local.json"] },
@@ -2314,7 +2314,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   } },
   tagline: "Project files are shared through git. Your home folder is only yours.",
   keyPoints: ["Click: the project, then yours", "Grey: Day 1. Cyan: this morning. Orange: this afternoon", "Project .claude/: shared with the team", "Local files and ~/.claude/: only you"],
-  notes: "Come back to this map whenever someone asks 'where does this go?'.\n\nClick 1: the project. Grey is what they had at the end of Day 1. Cyan is this morning: the levels wish in intent.md, spec.md, levels 1 to 3 in their own files, the ask rule for spec.md in settings.json, and the three skills. Orange is this afternoon: a shorter CLAUDE.md with a second one in levels/ (next assignment), the level test, a subagent that checks the levels, the workflow, levels 4 and 5, and the hook that keeps Claude off main (it goes into settings.json with the workflow). Don't name the subagent yet: it gets its name two slides from now.\n\nClick 2: yours, not shared. Anything in the project's .claude/ folder and the project CLAUDE.md is shared with the team through git. The .local files are only for you and stay out of git. ~/.claude/ is the same structure for you personally, in every project.\n\nYour folder may differ a little: Claude may have chosen other file names, or put a level test in tests/ already in level 2. Fine."
+  notes: "Come back to this map whenever someone asks 'where does this go?'.\n\nClick 1: the project. Grey is what they had at the end of Day 1. Cyan is this morning: the levels wish in intent.md, spec.md, levels 1 to 3 in their own files, the ask rule for spec.md in settings.json, and the three skills. Orange is this afternoon: a shorter CLAUDE.md with a second one in levels/ (next assignment), the level test, a subagent that checks the levels, the workflow, levels 4 and 5, and the hook that keeps Claude off main (it goes into settings.json with the workflow). The file is level-checker.md; don't name its character yet: Bobby comes three slides from now.\n\nClick 2: yours, not shared. Anything in the project's .claude/ folder and the project CLAUDE.md is shared with the team through git. The .local files are only for you and stay out of git. ~/.claude/ is the same structure for you personally, in every project.\n\nYour folder may differ a little: Claude may have chosen other file names, or put a level test in tests/ already in level 2. Fine."
 },
 
 { // Slide 108
@@ -2366,27 +2366,27 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 },
 
 { // Slide 110
-  title: "Subagents: a helper with its own head",
+  title: "Meet Bobby, your level-checker",
   kicker: "DAY 2 · PART 4 · AGENTS",
-  subtitle: "A subagent is one file. Ask for it, and Claude writes it. Delegate the checking, never the approval.",
+  subtitle: "A subagent is one file. Ask for it, and Claude writes it. Bobby is its character: a helper with its own head.",
   type: "concept",
-  visual: { stepThrough: ".sd-step, .slide-main > .tagline", skillDoc: {
+  visual: { stepThrough: ".sd-step, .slide-main > .tagline", bot: "wave", place: "in", botIn: ".sd-tree", botTag: "Bobby", skillDoc: {
     tree: { label: "Where it lives", root: "aether-snake/", rootNote: "your project, in git", rows: [
-      ["├── ", "spec.md", "bobby checks against it", "dim"],
-      ["├── ", "levels/", "the levels bobby reads", "dim"],
-      ["├── ", "tests/levels.test.js", "the test bobby runs", "dim"],
+      ["├── ", "spec.md", "Bobby checks against it", "dim"],
+      ["├── ", "levels/", "the levels Bobby reads", "dim"],
+      ["├── ", "tests/levels.test.js", "the test Bobby runs", "dim"],
       ["└── ", ".claude/", "", "dir"],
       ["    ├── ", "settings.json", "", "dim"],
       ["    ├── ", "skills/", "folders, one per skill", "dim"],
-      ["    └── ", "agents/", "new: one file per subagent", "dir"],
-      ["        └── ", "bobby.md", "on the right →", "skill"]
+      ["    └── ", "agents/", "new: a file per subagent", "dir"],
+      ["        └── ", "level-checker.md", "on the right →", "skill"]
     ] },
-    file: { label: "Inside the file", name: ".claude/agents/bobby.md", parts: [
+    file: { label: "Inside the file", name: ".claude/agents/level-checker.md", parts: [
       { kind: "front", label: "Frontmatter", sub: "the same idea as a skill, between the --- lines", lines: [
         ["---", ""],
-        ["name: bobby", "you say: ask bobby"],
-        ["description: Checks the Snake levels", "when Claude hands"],
-        ["  against spec.md.", "it a job"],
+        ["name: level-checker", "the subagent's name"],
+        ["description: Bobby, the level-checker.", "when Claude hands"],
+        ["  Checks the levels against spec.md.", "it a job"],
         ["tools: Read, Grep, Glob, Bash", "read and run npm test"],
         ["model: haiku", "a smaller, cheaper Claude"],
         ["---", ""]
@@ -2400,15 +2400,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
       ] }
     ] },
     loadWide: true,
-    load: { title: "What happens when you ask bobby?", moments: [
-      { when: "1 · Claude Code starts", label: "in your context", chips: [["bobby: frontmatter", "front"]], note: "Like a skill: only the frontmatter. A new subagent loads at the start, so restart once after making it." },
-      { when: "2 · You: “Ask bobby to check the levels.”", label: "bobby's own context: a separate Claude", chips: [["bobby: body", "body"], ["spec.md", "file"], ["level-1.js … level-3.js", "file"], ["npm test output", "file"]], note: "Bobby reads, runs and thinks by itself. None of this lands in your context." },
+    load: { title: "What happens when you ask Bobby?", moments: [
+      { when: "1 · Claude Code starts", label: "in your context", chips: [["level-checker: frontmatter", "front"]], note: "Like a skill: only the frontmatter. A new subagent loads at the start, so restart once after making it." },
+      { when: "2 · You: “Ask Bobby to check the levels.”", label: "Bobby's own context: a separate Claude", chips: [["level-checker: body", "body"], ["spec.md", "file"], ["level-1.js … level-3.js", "file"], ["npm test output", "file"]], note: "Bobby reads, runs and thinks by itself. None of this lands in your context." },
       { when: "3 · Bobby is done", label: "back in your context", chips: [["the report: GO or NO-GO + reasons", "front"]], note: "Only the short report comes back. You decide what happens next." }
     ], why: "Skill or subagent? A skill runs in your conversation, so everything it reads fills your context. A subagent works apart and only sends back its report." }
   } },
   tagline: "A subagent reports. It approves nothing.",
-  keyPoints: ["Click: folder, frontmatter, body, what happens", "One file in .claude/agents/", "Frontmatter: name, description, tools, model", "Own context: only the report comes back", "Restart once after making it"],
-  notes: "Say: In the next assignment you ask Claude to make Bobby, the level-checker. This is what Claude will create.\n\nClick 1, the folder: one new folder, .claude/agents/, with one file per subagent. A skill is a folder with SKILL.md in it; a subagent is just one .md file. In git, so the team gets Bobby too. The grey files are what Bobby works with: spec.md, the levels and the level test.\n\nClick 2, the frontmatter: the same idea as a skill. name is what you call it ('ask bobby'). description tells Claude when to hand it a job. tools is what it may use: here reading and Bash for npm test, no Edit or Write. model: Haiku, a smaller and cheaper Claude, enough for checking against a spec.\n\nClick 3, the body: its instructions, written as who it is and how it works. It ends with GO or NO-GO, and changes nothing.\n\nClick 4, what happens: at the start only the frontmatter is loaded, like a skill; a new subagent only loads when Claude Code starts, so restart once. When you ask, Claude hands the job over: Bobby is a separate Claude with its own context window and its own agent loop. It reads the files, runs the test and thinks, and none of that fills your context. Only the short report comes back. That's the difference with a skill: a skill is instructions your own Claude follows inside your conversation; a subagent is another worker.\n\nWatch for: Bobby gets Bash to run npm test, so 'change nothing' is partly an instruction, not a hard wall. Say it out loud. The exact frontmatter Claude writes may differ a little (tools as a list, a colour): fine.\n\nThe decision to merge stays yours."
+  keyPoints: ["Click: folder, frontmatter, body, what happens", "One file: .claude/agents/level-checker.md", "Bobby is its character, named in the description", "Frontmatter: name, description, tools, model", "Own context: only the report comes back", "Restart once after making it"],
+  notes: "Say: In the next assignment you ask Claude to make Bobby, the level-checker. This is what Claude will create: one file, level-checker.md, and Bobby is the character inside it. The robot on the slide has his name tag.\n\nClick 1, the folder: one new folder, .claude/agents/, with one file per subagent. A skill is a folder with SKILL.md in it; a subagent is just one .md file. In git, so the team gets Bobby too. The grey files are what Bobby works with: spec.md, the levels and the level test.\n\nClick 2, the frontmatter: the same idea as a skill. name is the subagent's name: level-checker, what it does. Bobby is its character: the description and the body say 'Bobby', so 'ask Bobby' works. description tells Claude when to hand it a job. tools is what it may use: here reading and Bash for npm test, no Edit or Write. model: Haiku, a smaller and cheaper Claude, enough for checking against a spec.\n\nClick 3, the body: its instructions, written as who it is and how it works. It ends with GO or NO-GO, and changes nothing.\n\nClick 4, what happens: at the start only the frontmatter is loaded, like a skill; a new subagent only loads when Claude Code starts, so restart once. When you ask, Claude hands the job over: Bobby is a separate Claude with its own context window and its own agent loop. It reads the files, runs the test and thinks, and none of that fills your context. Only the short report comes back. That's the difference with a skill: a skill is instructions your own Claude follows inside your conversation; a subagent is another worker.\n\nWatch for: Bobby gets Bash to run npm test, so 'change nothing' is partly an instruction, not a hard wall. Say it out loud. The exact frontmatter Claude writes may differ a little (tools as a list, a colour): fine.\n\nThe decision to merge stays yours."
 },
 
 { // Slide 111
@@ -2420,15 +2420,15 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A second opinion on every level, in its own context.",
   calm: true,
   steps: [
-    { text: "Ask Claude to make Bobby", prompt: "Create a branch bobby. Create a subagent called bobby in .claude/agents/bobby.md, the level-checker. Job: run tests/levels.test.js, read the level files and spec.md, and check that every level is harder than the one before and still playable. Tools: read files and npm test, no edits. Model: Haiku. Bobby ends with GO or NO-GO and the reasons, and approves nothing. Show me the file first.", after: "Say yes to the file." },
-    "Open .claude/agents/bobby.md in VS Code. Same --- frontmatter as a skill: which tools may Bobby use?",
+    { text: "Ask Claude to make Bobby", prompt: "Create a branch level-checker. Create a subagent in .claude/agents/level-checker.md, named level-checker. Its character is Bobby: the description starts with “Bobby, the level-checker”. Job: run tests/levels.test.js, read the level files and spec.md, and check that every level is harder than the one before and still playable. Tools: read files and npm test, no edits. Model: Haiku. Bobby ends with GO or NO-GO and the reasons, and approves nothing. Show me the file first.", after: "Say yes to the file." },
+    "Open .claude/agents/level-checker.md in VS Code. Same --- frontmatter as a skill: which tools may Bobby use?",
     { text: "Restart so Bobby loads: /exit, then", prompt: "claude --continue", after: "Back in auto mode? Shift+Tab to “manual mode on”.", warn: true },
-    { text: "Ask Bobby", prompt: "Ask bobby to check the levels that exist.", after: "Probably NO-GO: levels 4 and 5 don't exist yet. Read the reasons." },
+    { text: "Ask Bobby", prompt: "Ask Bobby to check the levels that exist.", after: "Probably NO-GO: levels 4 and 5 don't exist yet. Read the reasons." },
     { text: "Save it", prompt: "Commit, push and open a merge request. Don't merge it.", after: "Merge it yourself, then !git checkout main && git pull" }
   ],
   expected: "Bobby checks your levels and answers GO or NO-GO, without changing anything.",
   keyPoints: ["Made by asking Claude", "Same frontmatter as a skill", "Read-only + npm test", "Restart to load", "GO / NO-GO, you decide"],
-  notes: "Why now: you have a test and three levels. Checking them all is reading work that fills your session; let a helper do it.\nWhat you see: .claude/agents/bobby.md, and a report ending in GO or NO-GO.\nLook inside: /context after Bobby's check: did Bobby's reading land in your context, or only the report?\n\nDry run (28 Oct, 2.1.312): Bobby ran as a background agent (about 30 s) and said NO-GO because spec.md wants five levels and only three exist; levels 1 to 3 each passed. He also spotted that the level test doesn't require all five levels: Bobby reads more than the test does. Claude itself mentioned /agents as a way to load him without a restart.\n\nWatch for: 'Agent type bobby not found' means no restart yet. Bobby gets Bash to run npm test, so 'no edits' is partly an instruction, not a hard wall: say it out loud. Haiku is enough for checking against a spec, and cheaper."
+  notes: "Why now: you have a test and three levels. Checking them all is reading work that fills your session; let a helper do it.\nWhat you see: .claude/agents/level-checker.md, and a report ending in GO or NO-GO.\nLook inside: /context after Bobby's check: did Bobby's reading land in your context, or only the report?\n\nDry run (28 Oct, 2.1.312): Bobby ran as a background agent (about 30 s) and said NO-GO because spec.md wants five levels and only three exist; levels 1 to 3 each passed. He also spotted that the level test doesn't require all five levels: Bobby reads more than the test does. Claude itself mentioned /agents as a way to load him without a restart.\n\nWatch for: 'Agent type level-checker not found' means no restart yet. Not tried in a dry run yet with the name level-checker: if 'Ask Bobby' doesn't find it, say 'Ask the level-checker'. Bobby gets Bash to run npm test, so 'no edits' is partly an instruction, not a hard wall: say it out loud. Haiku is enough for checking against a spec, and cheaper."
 },
 
 { // Slide 112
@@ -2483,7 +2483,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "Build the workflow once. Then let it build the levels.",
   calm: true,
   steps: [
-    { text: "Make the workflow", prompt: "Create a branch workflow. Make a workflow skill in .claude/skills/build-game-levels/: /build-game-levels N looks which levels exist, makes a new branch, and makes the missing levels up to N with the create-food, create-snake and create-obstacles skills, each a little harder than the one before. Then it runs npm test and asks bobby to check. Only on GO: commit, push and open a merge request on GitLab. On NO-GO: stop and show me why. It only runs when I type it, never by itself. Show me SKILL.md before you save it.", after: "Find disable-model-invocation and $ARGUMENTS." },
+    { text: "Make the workflow", prompt: "Create a branch workflow. Make a workflow skill in .claude/skills/build-game-levels/: /build-game-levels N looks which levels exist, makes a new branch, and makes the missing levels up to N with the create-food, create-snake and create-obstacles skills, each a little harder than the one before. Then it runs npm test and asks the level-checker subagent (Bobby) to check. Only on GO: commit, push and open a merge request on GitLab. On NO-GO: stop and show me why. It only runs when I type it, never by itself. Show me SKILL.md before you save it.", after: "Find disable-model-invocation and $ARGUMENTS." },
     { text: "A guard before Claude works on its own: no edits on main", prompt: "Add a hook to .claude/settings.json: before Claude edits or writes a file, check the git branch. On main, block it with the message: Make a branch first. Show me the hook before you save it.", after: "Try it: !git checkout main, ask for a small change: blocked. Then !git checkout workflow" },
     { text: "Save the workflow and the hook first: it wants a clean start", prompt: "Commit, push and open a merge request.", after: "Merge it, then !git checkout main && git pull" },
     { text: "Run it", prompt: "/build-game-levels 5", after: "Watch: first a new branch (on main the hook would stop it), three skills per level, npm test, Bobby, then the push question." },
@@ -2503,7 +2503,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "A gate is only worth something if you've seen it close.",
   calm: true,
   steps: [
-    { text: "Ask for a level that breaks the rules", prompt: "/build-game-levels 5, but on purpose, to test the gate: first throw away level 5, then make the new level 5 faster than spec.md allows. Run bobby as well.", after: "npm test turns red, Bobby says NO-GO. No commit, no push." },
+    { text: "Ask for a level that breaks the rules", prompt: "/build-game-levels 5, but on purpose, to test the gate: first throw away level 5, then make the new level 5 faster than spec.md allows. Ask Bobby to check as well.", after: "npm test turns red, Bobby says NO-GO. No commit, no push." },
     "Check: was anything pushed? Look on GitLab: no new branch, no merge request",
     { text: "Clean up", prompt: "Restore the original level 5, go back to main and delete the branch you made.", after: "Your five levels are back." }
   ],

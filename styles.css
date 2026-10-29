@@ -1648,10 +1648,18 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .pm-stitle{font-size:clamp(.98rem,1.25vw,1.12rem)}
 .pm-files{display:grid;gap:.1rem;margin-bottom:.3rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.78rem,.98vw,.92rem)}
 @media (max-width:760px){.pmap{grid-template-columns:minmax(0,1fr)}}
-.sdoc.sd-wide{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.sdoc.sd-wide{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
 .sd-wide .sd-load{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:1rem;align-items:start}
 .sd-wide .sd-load > .dp-label,.sd-wide .sd-why{grid-column:1/-1}
 .sd-wide .sd-moment{grid-template-columns:minmax(0,1fr);align-content:start}
 .sd-wide .sd-mnote{grid-column:1}
 .sd-wide .sd-link{display:none}
 @media (max-width:760px){.sdoc.sd-wide,.sd-wide .sd-load{grid-template-columns:minmax(0,1fr)}}
+
+/* AetherBOT inside a box, with a name tag (Bobby on the subagent slide) */
+.bot-host{position:relative}
+.bot.place-in{position:absolute;right:.7rem;bottom:.6rem;height:clamp(7rem,11vw,9.5rem)}
+.cmap-tree.bot-host{padding-right:clamp(6.5rem,9vw,8rem)}
+.place-in .bot-live{animation:bob 3.8s ease-in-out 1.5s infinite;transform-origin:50% 100%}
+.bot-tag{position:absolute;left:50%;bottom:34%;transform:translateX(-50%) rotate(-4deg);padding:.15rem .55rem;border-radius:6px;background:#fff;color:#1b1f3b;font-family:Nunito,Inter,-apple-system,'Segoe UI',sans-serif;font-weight:900;font-size:clamp(.72rem,.9vw,.86rem);letter-spacing:.03em;box-shadow:0 3px 8px rgba(0,0,0,.35);border:2px solid var(--amber);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.place-in .bot-live{animation:none}}
