@@ -466,6 +466,21 @@ function renderExtras(stage, main, s, v) {
     if (D.work) { const wk = node('div', 'dp-work sp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
+  if (v.orchestra) {                                             // a workflow conducts skills, a test and a subagent: the ladder on the left, the run on the right
+    const D = v.orchestra; const w = node('div', 'orch');
+    const lad = node('div', 'or-ladder or-step'); lad.append(node('span', 'dp-label', D.ladder.title));
+    D.ladder.rungs.forEach((R, i) => { const r = node('div', 'or-rung' + (R.hl ? ' or-hl' : '')); r.append(node('span', 'or-rn', String(i + 1)), node('strong', null, R.name), node('span', null, R.text)); lad.append(r); });
+    if (D.front) { const f = node('div', 'pp-code or-front'); f.append(node('span', 'or-fname', D.front.name)); D.front.lines.forEach(l => f.append(node('span', 'pp-line' + (l.hl ? ' pp-hl' : ''), l.t))); lad.append(f); }
+    const flow = node('div', 'or-flow or-step'); flow.append(node('span', 'dp-label', D.flow.title));
+    const down = () => node('span', 'or-down', '↓');
+    D.flow.steps.forEach((St, i) => { if (i) flow.append(down()); const b = node('div', 'or-box or-' + St.kind);
+      if (St.label) b.append(node('span', 'or-tag', St.label)); if (St.title) b.append(node('strong', 'or-title', St.title));
+      if (St.chips) { const row = node('div', 'or-chips'); St.chips.forEach((c, k) => { if (k) row.append(node('span', 'or-to', '→')); row.append(node('span', 'or-chip', c)); }); b.append(row); }
+      if (St.split) { const sp = node('div', 'or-split'); St.split.forEach(x => { const o = node('div', 'or-out or-' + x.kind); o.append(node('strong', null, x.title), node('span', null, x.text)); sp.append(o); }); b.append(sp); }
+      if (St.text) b.append(node('span', 'or-text', St.text)); flow.append(b); });
+    w.append(lad, flow);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.projMap) {                                               // the project folder: what came on Day 1, this morning, and what comes this afternoon
     const D = v.projMap; const w = node('div', 'pmap');
     const tree = node('div', 'cmap-box cmap-tree pm-tree pm-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);

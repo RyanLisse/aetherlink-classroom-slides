@@ -2456,22 +2456,35 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
 /* ---------------------------------------------------------------------- */
 
 { // Slide 113
-  title: "A workflow: /build-game-levels",
+  title: "A workflow: one command that runs the others",
   kicker: "DAY 2 · PART 5 · WORKFLOW",
-  subtitle: "Your skills, your test and Bobby, in one command.",
+  subtitle: "Your three skills, the test and Bobby, in a fixed order, with a gate at the end.",
   type: "concept",
-  layout: "steps",
-  visual: { stepKeys: true },
-  items: [
-    { label: "Look", caption: "Which levels exist already? /build-game-levels 5 makes the rest." },
-    { label: "Build", caption: "On a new branch: /create-food, /create-snake, /create-obstacles for each missing level." },
-    { label: "Check", caption: "npm test, then Bobby: GO or NO-GO." },
-    { label: "GO", caption: "Commit, push, and a merge request on GitLab." },
-    { label: "NO-GO", caption: "Stop, show why. Nothing is pushed." }
-  ],
-  tagline: "/build-game-levels only runs when you type it: it pushes, so Claude must never start it by itself.",
-  keyPoints: ["A workflow = a skill that calls skills and agents", "The number after it: $ARGUMENTS", "Bobby is the gate", "NO-GO: nothing pushed", "Only you start it"],
-  notes: "A workflow is a skill too, but its instructions call the other skills and an agent, in a fixed order, with a gate. The number you type after the command reaches the instructions as $ARGUMENTS (argument-hint in the frontmatter shows it in the menu). Because it pushes and opens a merge request, it gets disable-model-invocation: true: Claude may never start it by itself.\n\nBobby is the gate: GO means commit, push and merge request through GitLab MCP (yesterday's connection). NO-GO means stop and explain; nothing leaves your laptop. The human gate stays at the end: you review and merge."
+  visual: { stepThrough: ".or-step, .slide-main > .tagline", orchestra: {
+    ladder: { title: "Who does the steps?", rungs: [
+      { name: "Prompt", text: "you say every step yourself" },
+      { name: "Skill", text: "one step, written down once" },
+      { name: "Subagent", text: "a separate worker that checks and reports" },
+      { name: "Workflow", text: "one command runs them all, in order, with a gate", hl: true }
+    ] },
+    front: { name: ".claude/skills/build-game-levels/SKILL.md", lines: [
+      { t: "---" }, { t: "name: build-game-levels" }, { t: "argument-hint: [N]", hl: true }, { t: "disable-model-invocation: true", hl: true }, { t: "---" }
+    ] },
+    flow: { title: "What one command does", steps: [
+      { kind: "you", label: "You", title: "/build-game-levels 5" },
+      { kind: "wf", label: "The workflow", title: "Looks: levels 1 to 3 exist", text: "makes a new branch, then builds level 4 and level 5" },
+      { kind: "skills", label: "For each level: your 3 skills", chips: ["create-food", "create-snake", "create-obstacles"] },
+      { kind: "test", label: "The test", title: "npm test", text: "every level within spec.md" },
+      { kind: "agent", label: "The subagent, in its own context", title: "Bobby: GO or NO-GO", split: [
+        { kind: "go", title: "GO", text: "commit, push, merge request" },
+        { kind: "nogo", title: "NO-GO", text: "stop, show why, nothing pushed" }
+      ] },
+      { kind: "you", label: "You", title: "Review and merge", text: "the human gate stays yours" }
+    ] }
+  } },
+  tagline: "A workflow is a skill that conducts the others. Only you start it.",
+  keyPoints: ["Click: the ladder, then the run", "Prompt, skill, subagent, workflow", "The workflow calls skills, a test and Bobby", "Bobby is the gate: NO-GO pushes nothing", "disable-model-invocation: only you start it"],
+  notes: "Say: Today you climbed a ladder. Level 2: you said every step yourself, in prompts. Level 3: each step was a skill. Then Bobby, a separate worker that checks. Now the top: a workflow, one command that runs all of them in a fixed order, with a gate at the end. That's orchestration: Claude conducts your skills and your subagent, you only start it and approve the result.\n\nClick 1, the ladder, with the workflow's frontmatter under it. A workflow is a skill too: a folder build-game-levels/ with a SKILL.md. Two lines are new. argument-hint: [N] shows in the / menu that you type a number after it; the number reaches the instructions as $ARGUMENTS. disable-model-invocation: true means Claude may never start it by itself: it pushes, so only you start it.\n\nClick 2, the run. You type /build-game-levels 5. The workflow looks which levels exist (1 to 3), makes a new branch and builds level 4, then level 5, each with your three skills. Then npm test. Then Bobby, in his own context: GO means commit, push and a merge request on GitLab; NO-GO means stop and show why, nothing leaves your laptop. At the end you review and merge: the human gate.\n\nAt work: a release pipeline or a definition of done: the same steps, the same checks, every time, and a person signs off.\n\nNext: Assignment 28, build the workflow and let it make levels 4 and 5."
 },
 
 { // Slide 114
