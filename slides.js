@@ -2119,6 +2119,29 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "Why now: level 3 needs food again, exactly like level 2.\nWhat you see: a new folder .claude/skills/create-food/ in VS Code, with SKILL.md.\nLook inside: the description. Would Claude pick this skill if you said 'level 3 needs food'?\n\nThe instructions point to spec.md instead of repeating the numbers: one rulebook. You're still on the branch level-3 from Assignment 20."
 },
 
+{ // Slide 102a
+  title: "Two kinds of permission",
+  kicker: "DAY 2 · PART 2 · PERMISSIONS",
+  subtitle: "The skill may change level files without asking. The rules it follows stay yours.",
+  type: "concept",
+  visual: { stepThrough: ".pp-step, .slide-main > .tagline", permPair: {
+    cols: [
+      { tone: "skill", title: "allowed-tools, in the skill", where: ".claude/skills/create-snake/SKILL.md",
+        code: [{ t: "---" }, { t: "name: create-snake" }, { t: "description: …" }, { t: "allowed-tools: Edit(levels/**)", hl: true }, { t: "---" }],
+        say: "/create-snake 3", target: "levels/level-3.js", verdict: "ok", verdictText: "✓ no question",
+        scope: "This skill only, while it runs." },
+      { tone: "project", title: "A rule, in settings.json", where: ".claude/settings.json",
+        code: [{ t: "\"permissions\": {" }, { t: "  \"ask\": [" }, { t: "    \"Edit(spec.md)\"", hl: true }, { t: "  ]" }, { t: "}" }],
+        say: "Make the maximum speed faster.", target: "spec.md", verdict: "ask", verdictText: "✋ asks you first",
+        scope: "The whole project, every session, whatever a skill says." }
+    ],
+    work: ["like a protected file in GitLab: anyone can propose a change to the contract, someone has to approve it"]
+  } },
+  tagline: "A skill gets what it needs for its job. The rulebook only changes when you say yes.",
+  keyPoints: ["Click: skill, then project", "allowed-tools: this skill, while it runs", "settings.json: the whole project", "Level files: free. spec.md: asks"],
+  notes: "Say: In the next assignment you make the second skill, and you give it two permissions at once. Here's the difference before you build it.\n\nClick 1: allowed-tools, in the skill's frontmatter. create-snake may edit the files in levels/ without asking you. That's practical: building levels is its job. It only counts for this skill, and only while it runs.\n\nClick 2: a rule in .claude/settings.json. Claude always asks before it changes spec.md. That counts for the whole project and every session, whatever a skill says. spec.md is the rulebook every skill follows: if a skill or a prompt could quietly raise a limit, the rules would mean nothing.\n\nAsk the room: which one would you use for a file nobody should ever touch? (deny in settings.json: deny beats allow and ask.)\n\nAt work: a protected file in GitLab, like a pipeline config or an API contract.\n\nNext: Assignment 22, both permissions in your project."
+},
+
 { // Slide 102
   type: "practice",
   layout: "exercise",

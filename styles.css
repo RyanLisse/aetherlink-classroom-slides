@@ -1584,3 +1584,27 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .sp-chip{padding:.2rem .65rem;border-radius:999px;border:1.5px solid var(--amber);color:var(--amber);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:800;font-size:clamp(.78rem,.98vw,.92rem)}
 .sp-target{padding:.25rem .75rem;border-radius:8px;border:2px solid var(--cyan);color:var(--cyan);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:900}
 @media (max-width:760px){.spdoc,.sp-row,.sp-pair{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- permPair: allowed-tools in a skill next to a rule in settings.json ---- */
+.pperm{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.6rem);width:100%;align-items:stretch}
+.pperm .dp-work{grid-column:1/-1}
+.pp-col{display:grid;gap:.65rem;align-content:start;padding:.8rem 1.1rem 1rem;border:2px solid;border-radius:16px;background:var(--surface)}
+.pp-skill{border-color:var(--amber)}.pp-project{border-color:var(--cyan)}
+.pp-head{display:flex;align-items:center;gap:.55rem;font-size:clamp(1.05rem,1.45vw,1.3rem)}
+.pp-n{width:1.6rem;height:1.6rem;border-radius:50%;display:grid;place-items:center;font-size:.85rem;font-weight:900;color:var(--ink)}
+.pp-skill .pp-n{background:var(--amber)}.pp-project .pp-n{background:var(--cyan)}
+.pp-skill .pp-head strong{color:var(--amber)}.pp-project .pp-head strong{color:var(--cyan)}
+.pp-where{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:800;font-size:clamp(.82rem,1.02vw,.96rem);color:var(--muted)}
+.pp-code{display:grid;padding:.55rem .8rem;border-radius:10px;background:var(--bg);border:1px solid var(--border);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.78rem,1vw,.94rem);white-space:pre;overflow:hidden}
+.pp-line{color:var(--muted)}.pp-hl{color:var(--text);font-weight:900}
+.pp-skill .pp-hl{color:var(--amber)}.pp-project .pp-hl{color:var(--cyan)}
+.pp-ex{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .55rem;padding:.55rem .7rem;border-radius:10px;border:1.5px dashed var(--border)}
+.pp-say{padding:.25rem .65rem;border-radius:14px 14px 14px 4px;background:var(--surface2);border:1.5px solid var(--border);font-weight:800;font-size:clamp(.84rem,1.05vw,.98rem)}
+.pp-say::before{content:'💬 '}
+.pp-arrow{font-weight:900;color:var(--muted);font-size:1.2rem}
+.pp-target{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:900;font-size:clamp(.84rem,1.05vw,.98rem)}
+.pp-verdict{padding:.2rem .65rem;border-radius:999px;font-weight:900;font-size:clamp(.8rem,1vw,.94rem)}
+.pp-v-ok{background:color-mix(in srgb,var(--ok,#3ddc84) 18%,transparent);color:var(--ok,#3ddc84);border:1.5px solid var(--ok,#3ddc84)}
+.pp-v-ask{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber);border:1.5px solid var(--amber)}
+.pp-scope{display:grid;gap:.15rem;font-weight:800;font-size:clamp(.88rem,1.12vw,1.02rem)}
+@media (max-width:760px){.pperm{grid-template-columns:minmax(0,1fr)}}

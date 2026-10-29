@@ -466,6 +466,15 @@ function renderExtras(stage, main, s, v) {
     if (D.work) { const wk = node('div', 'dp-work sp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
+  if (v.permPair) {                                              // two kinds of permission side by side: where it's written, what it lets through, for how long
+    const D = v.permPair; const w = node('div', 'pperm');
+    D.cols.forEach((C, i) => { const c = node('section', 'pp-col pp-step pp-' + C.tone); const h = node('div', 'pp-head'); h.append(node('span', 'pp-n', String(i + 1)), node('strong', null, C.title)); c.append(h, node('span', 'pp-where', C.where));
+      const f = node('div', 'pp-code'); C.code.forEach(l => f.append(node('span', 'pp-line' + (l.hl ? ' pp-hl' : ''), l.t))); c.append(f);
+      const ex = node('div', 'pp-ex'); ex.append(node('span', 'pp-say', C.say), node('span', 'pp-arrow', '→'), node('span', 'pp-target', C.target), node('span', 'pp-verdict pp-v-' + C.verdict, C.verdictText)); c.append(ex);
+      const sc = node('div', 'pp-scope'); sc.append(node('span', 'dp-label', 'Applies to'), node('span', null, C.scope)); c.append(sc); w.append(c); });
+    if (D.work) { const wk = node('div', 'dp-work pp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.skillDef) {                                              // what a skill is: the definition as a flow, file → who starts it → same result
     const D = v.skillDef; const w = node('div', 'sdef');
     const q = node('blockquote', 'sf-quote sf-step'); q.append(node('span', 'sf-qtext', D.quote), node('cite', null, D.source)); w.append(q);
