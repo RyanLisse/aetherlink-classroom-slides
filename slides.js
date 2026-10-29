@@ -2279,25 +2279,42 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   notes: "This is the question students ask most: why does where I put things matter? Real numbers from the dry run (/context, Claude Code 2.1.309): the conversation was 175k tokens before /compact and 44k after; CLAUDE.md plus @intent.md about 1.2k; 30 skills 5.1k (only their descriptions); 155 MCP tools 0 tokens, because they load on demand, while the MCP server instructions cost 2.5k. So the conversation is by far the biggest cost: /clear between tasks matters most. Everything in the first column is in the context window from the very first message, every session. The second column is only read when it's relevant. The third column barely touches the context: a hook or script runs outside it, and a subagent does its reading in its own window and only returns a summary. Practical habits: keep CLAUDE.md short and let it say where things live, switch off MCP servers you don't use, put detail in skills and nested CLAUDE.md files, use /clear between tasks."
 },
 
-{ // Slide 107
+{ // Slide 103
   title: "The map of your project",
   kicker: "DAY 2 · PART 3 · ARCHITECTURE",
-  subtitle: "Every file has its place. By tonight your folder looks like this.",
+  subtitle: "What your folder has after this morning, and what this afternoon adds.",
   type: "concept",
-  visual: { code: 0 },
-  cards: [
-    { title: "aether-snake/", body: "CLAUDE.md              every session: keep it short\nintent.md  spec.md  PROGRESS.md\nlevels/\n  CLAUDE.md            only when working in levels/\n  level-1.js … level-5.js\ntests/levels.test.js   every level, every limit\n.claude/\n  settings.json        permissions + hooks\n  skills/              top always, instructions when used\n    create-food/  create-snake/  create-obstacles/\n    build-game-levels/ the workflow\n  agents/\n    bobby.md           the level-checker" },
-    { title: "Yours, not shared", body: "Not in git:\nCLAUDE.local.md\n.claude/settings.local.json\n\nYou, in every project:\n~/.claude/CLAUDE.md\n~/.claude/settings.json\n~/.claude/skills/\n~/.claude/agents/" }
-  ],
+  visual: { stepThrough: ".pm-step, .slide-main > .tagline", projMap: {
+    legend: [["day1", "Day 1"], ["am", "this morning"], ["pm", "this afternoon"]],
+    tree: { root: "aether-snake/", rootNote: "your project, in git", rows: [
+      ["├── ", "CLAUDE.md", "every session: gets shorter next", "day1"],
+      ["├── ", "intent.md", "Day 1 + the levels wish", "am"],
+      ["├── ", "spec.md", "the numbers every level stays within", "am"],
+      ["├── ", "PROGRESS.md", "the handover", "day1"],
+      ["├── ", "index.html  game.js …", "your Snake", "day1"],
+      ["├── ", "levels/", "one file per level", "am dir"],
+      ["│   ├── ", "CLAUDE.md", "only when Claude works in levels/", "pm"],
+      ["│   ├── ", "level-1.js  level-2.js  level-3.js", "", "am"],
+      ["│   └── ", "level-4.js  level-5.js", "the workflow builds them", "pm"],
+      ["├── ", "tests/", "", "day1 dir"],
+      ["│   ├── ", "reverse-keys.test.js", "your Day 1 test", "day1"],
+      ["│   └── ", "levels.test.js", "every level, every limit", "pm"],
+      ["└── ", ".claude/", "", "day1 dir"],
+      ["    ├── ", "settings.json", "permissions, hooks, ask before spec.md", "am"],
+      ["    ├── ", "skills/", "", "am dir"],
+      ["    │   ├── ", "create-food/  create-snake/  create-obstacles/", "your 3 skills", "am"],
+      ["    │   └── ", "build-game-levels/", "the workflow", "pm"],
+      ["    └── ", "agents/", "", "pm dir"],
+      ["        └── ", "… .md", "a subagent that checks the levels", "pm"]
+    ] },
+    side: { title: "Yours, not shared", groups: [
+      { head: "Not in git", items: ["CLAUDE.local.md", ".claude/settings.local.json"] },
+      { head: "You, in every project", items: ["~/.claude/CLAUDE.md", "~/.claude/settings.json", "~/.claude/skills/", "~/.claude/agents/"] }
+    ] }
+  } },
   tagline: "Project files are shared through git. Your home folder is only yours.",
-  keyPoints: [
-    "Project .claude/: shared with the team",
-    "Local files: only you, not in git",
-    "~/.claude/: you, in every project",
-    "Nested CLAUDE.md per folder",
-    "Skills and agents are folders and files"
-  ],
-  notes: "Come back to this map whenever someone asks 'where does this go?'. The rule: anything in the project's .claude/ folder and the project CLAUDE.md is shared with the team through git. The .local files are only for you and stay out of git. ~/.claude/ is the same structure for you personally, in every project. Point at the files that don't exist yet (levels.test.js, bobby.md, build-game-levels): they're coming this afternoon."
+  keyPoints: ["Click: the project, then yours", "Grey: Day 1. Cyan: this morning. Orange: this afternoon", "Project .claude/: shared with the team", "Local files and ~/.claude/: only you"],
+  notes: "Come back to this map whenever someone asks 'where does this go?'.\n\nClick 1: the project. Grey is what they had at the end of Day 1. Cyan is this morning: the levels wish in intent.md, spec.md, levels 1 to 3 in their own files, the ask rule for spec.md in settings.json, and the three skills. Orange is this afternoon: a shorter CLAUDE.md with a second one in levels/ (next assignment), the level test, a subagent that checks the levels, the workflow, levels 4 and 5, and the hook that keeps Claude off main (it goes into settings.json with the workflow). Don't name the subagent yet: it gets its name two slides from now.\n\nClick 2: yours, not shared. Anything in the project's .claude/ folder and the project CLAUDE.md is shared with the team through git. The .local files are only for you and stay out of git. ~/.claude/ is the same structure for you personally, in every project.\n\nYour folder may differ a little: Claude may have chosen other file names, or put a level test in tests/ already in level 2. Fine."
 },
 
 { // Slide 108

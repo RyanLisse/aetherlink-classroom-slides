@@ -1631,3 +1631,20 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .pt-chead{font-size:clamp(.94rem,1.2vw,1.1rem)}.pt-c-good .pt-chead{color:var(--cyan)}
 .pt-say{justify-self:start;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.8rem,1vw,.94rem);padding:.15rem .5rem;border-radius:6px;background:var(--bg);border:1px solid var(--border)}
 @media (max-width:760px){.pt-keys{grid-template-columns:1fr 1fr}.pt-cmp{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- projMap: the project folder after the morning, with what the afternoon adds ---- */
+.pmap{display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:clamp(1rem,2vw,1.6rem);width:100%;align-items:start}
+.pm-tree .ctree-name{line-height:1.5}
+.pm-legend{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.35rem}
+.pm-chip{padding:.12rem .6rem;border-radius:999px;font-family:Nunito,Inter,-apple-system,'Segoe UI',sans-serif;font-size:.74rem;font-weight:900;border:1.5px solid}
+.pm-chip.pm-day1{border-color:var(--border);color:var(--muted)}
+.pm-chip.pm-am{border-color:var(--cyan);color:var(--cyan)}
+.pm-chip.pm-pm{border-color:var(--amber);color:var(--amber);border-style:dashed}
+.pm-day1 .ctree-name{color:color-mix(in srgb,var(--text) 62%,transparent)}
+.pm-am .ctree-name{color:var(--cyan)}.pm-am .ctree-note{color:var(--cyan)}
+.pm-pm .ctree-name{color:var(--amber);font-style:italic}.pm-pm .ctree-note{color:var(--amber);font-weight:800}
+.pm-dir .ctree-name{font-weight:900}
+.pm-side{display:grid;gap:.4rem;padding:.8rem 1rem;border:2px solid var(--border);border-radius:14px;background:var(--surface)}
+.pm-stitle{font-size:clamp(.98rem,1.25vw,1.12rem)}
+.pm-files{display:grid;gap:.1rem;margin-bottom:.3rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(.78rem,.98vw,.92rem)}
+@media (max-width:760px){.pmap{grid-template-columns:minmax(0,1fr)}}

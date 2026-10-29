@@ -466,6 +466,16 @@ function renderExtras(stage, main, s, v) {
     if (D.work) { const wk = node('div', 'dp-work sp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
+  if (v.projMap) {                                               // the project folder: what came on Day 1, this morning, and what comes this afternoon
+    const D = v.projMap; const w = node('div', 'pmap');
+    const tree = node('div', 'cmap-box cmap-tree pm-tree pm-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, tag]) => { const r = node('div', 'ctree-row' + (tag ? ' ' + tag.split(' ').map(c => 'pm-' + c).join(' ') : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', note ? '← ' + note : '')); tree.append(r); });
+    const lg = node('div', 'pm-legend'); D.legend.forEach(([tag, t]) => lg.append(node('span', 'pm-chip pm-' + tag, t))); tree.prepend(lg);
+    const side = node('div', 'pm-side pm-step'); side.append(node('strong', 'pm-stitle', D.side.title));
+    D.side.groups.forEach(G => { side.append(node('span', 'dp-label', G.head)); const ul = node('div', 'pm-files'); G.items.forEach(t => ul.append(node('span', null, t))); side.append(ul); });
+    w.append(tree, side);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
   if (v.promptParts) {                                           // one prompt taken apart: what each part does, and why the limits part matters
     const D = v.promptParts; const w = node('div', 'pparts');
     const pr = node('div', 'pt-prompt pt-step'); pr.append(node('span', 'dp-label', D.label)); const tx = node('p', 'pt-text');
