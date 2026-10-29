@@ -2189,20 +2189,19 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   type: "practice",
   layout: "exercise",
   mode: "manual",
-  title: "Assignment 23: Skill 3, /create-obstacles, and a hook that guards main",
+  title: "Assignment 23: Skill 3, /create-obstacles",
   kicker: "DAY 2 · ASSIGNMENT 23 · BUILD",
-  subtitle: "The third skill, tried on level 3. And a hook so nobody, not even Claude, edits files on main.",
+  subtitle: "The third skill, the same shape as the first two. Try it on level 3 straight away.",
   calm: true,
   steps: [
     { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-obstacles/ for the obstacles in level N. I start it with /create-obstacles N. A few more than the level before, within the limits in spec.md, never on the snake's start and never blocking the whole board. Show me SKILL.md before you save it." },
-    { text: "Try it on level 3", prompt: "/create-obstacles 3", after: "Check: index.html?level=3. More blocks than in ?level=2. Still fair?" },
-    { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: before Claude edits or writes a file, check the git branch. On main, block it with the message: Make a branch first. Show me the hook before you save it.", after: "Not working straight away? /exit, then claude --continue." },
-    { text: "Try it: switch to main and ask for a change", prompt: "!git checkout main", after: "Then ask Claude to change something small. Blocked: Make a branch first." },
-    { text: "Back to your branch and save", prompt: "!git checkout level-3", after: "Then: Commit the skill, level 3 and settings.json on level-3 and push." }
+    { text: "Try it on level 3", prompt: "/create-obstacles 3", after: "Claude adds blocks to levels/level-3.js." },
+    { text: "Check it in the browser", after: "Open index.html?level=3. More blocks than in ?level=2? Still fair?" },
+    { text: "Save point", prompt: "Commit the skill and level 3 on the branch level-3 and push." }
   ],
-  expected: "A /create-obstacles skill, level 3 with more obstacles, and a hook that blocks edits on main.",
-  keyPoints: ["Third skill: same shape", "Hook = always, at a fixed moment", "Protect main, like at work", "Test it on main"],
-  notes: "Yesterday's hook ran the test after every edit. This one runs before every edit and can say no: a PreToolUse hook on Edit and Write that checks git branch and blocks on main. At work main is protected in GitLab; this does the same on your laptop, for Claude.\n\nWhy now: from here on every level is built on a branch. A rule like that shouldn't depend on Claude remembering it.\nWhat you see: a hooks block in settings.json and a small check script. On main, the edit is blocked with your message.\nLook inside: settings.json: when does the hook run (the event), and on which tools (the matcher)?\n\nWatch for: the hook only blocks Claude's file edits, not git itself, so checkout, pull and merge on main still work. Step 3 works because the new hook isn't committed yet: uncommitted changes come along to main.\n\nDry run (28 Oct): on main the edit was blocked with 'Make a branch first.', and Claude made a branch by itself and did the edit there. Undo that branch afterwards (!git checkout level-3)."
+  expected: "A /create-obstacles skill, and level 3 with more obstacles, on the branch level-3.",
+  keyPoints: ["Third skill: same shape", "Within the limits in spec.md", "Try it on level 3", "Level 3: three layers, three skills"],
+  notes: "Why now: level 3 has its food and its snake. The obstacles are the last layer, just like in level 2.\nWhat you see: a new folder .claude/skills/create-obstacles/, and more blocks in level 3.\nLook inside: is the board still fair? The skill says never blocking the whole board; spec.md says how many at most.\n\nAfter this, level 3 is built in three layers with three skills, the same three layers as level 2 by hand. Ask the room: what was different?",
 },
 
 { // Slide 103b
@@ -2238,7 +2237,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   expected: "Claude picked a skill from its description, and level 3 is in main.",
   keyPoints: ["/clear first", "No /: Claude picks by the description", "The quiz, live", "Review and merge level 3"],
-  notes: "Why now: the quiz just asked how Claude picks a skill. Here they see it happen.\nWhat you see: Claude names the skill it uses, Skill(create-obstacles), sometimes after asking 'Use skill?'. The body of that skill is loaded, the other two are not.\nLook inside: which skill did it use, and why? The description in its frontmatter.\n\nLevel 3 was already built in Assignments 21 to 23: each skill tried right after it was made, one layer at a time, just like level 2 by hand.\n\nWatch for: dry run (28 Oct, Claude Code 2.1.312): a broad 'Make level 3' without naming skills made Claude read the SKILL.md files with cat instead of a real Skill() call. A request that matches one description, like this one, is the better test. Not tried in a dry run yet: if Claude edits level-3.js without the skill, ask 'Which skill fits this?' and compare.\n\nThe hook from Assignment 23 is on: everything happens on level-3, so nothing is blocked."
+  notes: "Why now: the quiz just asked how Claude picks a skill. Here they see it happen.\nWhat you see: Claude names the skill it uses, Skill(create-obstacles), sometimes after asking 'Use skill?'. The body of that skill is loaded, the other two are not.\nLook inside: which skill did it use, and why? The description in its frontmatter.\n\nLevel 3 was already built in Assignments 21 to 23: each skill tried right after it was made, one layer at a time, just like level 2 by hand.\n\nWatch for: dry run (28 Oct, Claude Code 2.1.312): a broad 'Make level 3' without naming skills made Claude read the SKILL.md files with cat instead of a real Skill() call. A request that matches one description, like this one, is the better test. Not tried in a dry run yet: if Claude edits level-3.js without the skill, ask 'Which skill fits this?' and compare."
 },
 
 { // Slide 105
@@ -2438,13 +2437,14 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   calm: true,
   steps: [
     { text: "Make the workflow", prompt: "Create a branch workflow. Make a workflow skill in .claude/skills/build-game-levels/: /build-game-levels N looks which levels exist, makes a new branch, and makes the missing levels up to N with the create-food, create-snake and create-obstacles skills, each a little harder than the one before. Then it runs npm test and asks bobby to check. Only on GO: commit, push and open a merge request on GitLab. On NO-GO: stop and show me why. It only runs when I type it, never by itself. Show me SKILL.md before you save it.", after: "Find disable-model-invocation and $ARGUMENTS." },
-    { text: "Save the workflow first: it wants a clean start", prompt: "Commit, push and open a merge request.", after: "Merge it, then !git checkout main && git pull" },
-    { text: "Run it", prompt: "/build-game-levels 5", after: "Watch: branch, three skills per level, npm test, Bobby, then the push question." },
+    { text: "A guard before Claude works on its own: no edits on main", prompt: "Add a hook to .claude/settings.json: before Claude edits or writes a file, check the git branch. On main, block it with the message: Make a branch first. Show me the hook before you save it.", after: "Try it: !git checkout main, ask for a small change: blocked. Then !git checkout workflow" },
+    { text: "Save the workflow and the hook first: it wants a clean start", prompt: "Commit, push and open a merge request.", after: "Merge it, then !git checkout main && git pull" },
+    { text: "Run it", prompt: "/build-game-levels 5", after: "Watch: first a new branch (on main the hook would stop it), three skills per level, npm test, Bobby, then the push question." },
     "Bobby said GO? Review the merge request on GitLab, check index.html?level=4 and ?level=5, then merge"
   ],
-  expected: "Levels 4 and 5 built by one command, checked by Bobby, merged by you.",
-  keyPoints: ["Stacked: skills, test, Bobby, MR", "Only by /build-game-levels", "The push still asks", "You still merge"],
-  notes: "Why now: every level is the same steps. Typing them every time is where mistakes creep in.\nWhat you see: one command; Claude names each skill and Bobby as it goes; a merge request link at the end.\nLook inside: SKILL.md of build-game-levels. Which skills and which agent does it call, in what order?\n\nDry run (28 Oct, 2.1.312, manual mode): /build-game-levels 5 found levels 1 to 3, showed a plan (values per level, obstacles as a pinwheel), made branch levels-4-to-5, wrote both level files and the script tags, ran npm test (52 of 52) and a reachability check, ran Bobby in the background (GO, with what he could not check), then asked before the commit and before the push. About 3 minutes plus the yes-clicks. With a GitLab origin it opens the merge request through git push options or MCP. It read the three skills as files instead of calling them: same result.\n\nWatch for: if the workflow's own SKILL.md is uncommitted, its clean-start check stops it at step 1: that's why step 2 exists. Skills load without a restart. Expect a few minutes per level."
+  expected: "Levels 4 and 5 by one command, checked by Bobby, merged by you. Claude stays off main.",
+  keyPoints: ["Stacked: skills, test, Bobby, MR", "Only by /build-game-levels", "Hook: no edits on main, whatever happens", "The push still asks", "You still merge"],
+  notes: "Why now: every level is the same steps. Typing them every time is where mistakes creep in. And the workflow is the first time Claude works on its own for a few minutes: branch, files, commit, push. So first a guard that doesn't depend on Claude remembering a rule.\n\nThe hook: yesterday's hook ran the test after every edit. This one runs before every edit and can say no: a PreToolUse hook on Edit and Write that checks git branch and blocks on main. At work main is protected in GitLab; this does the same on your laptop, for Claude. It only blocks Claude's file edits, not git itself, so checkout, pull and merge on main still work. The try-it on main works because the new hook isn't committed yet: uncommitted changes come along to main. Dry run (28 Oct): on main the edit was blocked with 'Make a branch first.', and Claude made a branch by itself and did the edit there; delete that branch afterwards.\nWhat you see: one command; Claude names each skill and Bobby as it goes; a merge request link at the end.\nLook inside: SKILL.md of build-game-levels. Which skills and which agent does it call, in what order?\n\nDry run (28 Oct, 2.1.312, manual mode): /build-game-levels 5 found levels 1 to 3, showed a plan (values per level, obstacles as a pinwheel), made branch levels-4-to-5, wrote both level files and the script tags, ran npm test (52 of 52) and a reachability check, ran Bobby in the background (GO, with what he could not check), then asked before the commit and before the push. About 3 minutes plus the yes-clicks. With a GitLab origin it opens the merge request through git push options or MCP. It read the three skills as files instead of calling them: same result.\n\nWatch for: if the workflow's own SKILL.md is uncommitted, its clean-start check stops it at step 1: that's why step 2 exists. Skills load without a restart. Expect a few minutes per level."
 },
 
 { // Slide 115
