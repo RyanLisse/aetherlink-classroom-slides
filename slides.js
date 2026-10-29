@@ -2108,12 +2108,13 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   subtitle: "You made the food for level 2 by hand. Now write down the instructions.",
   calm: true,
   steps: [
-    { text: "Make the skill on a new branch", prompt: "Turn how we made the food for level 2 into a skill in .claude/skills/create-food/. Frontmatter: name, and a description that says when to use it. Instructions: read the food rules in spec.md, make level N need a little more food to finish than the level before and stay within the limits, food never on an obstacle or the snake, then npm test must be green. Show me SKILL.md before you save it.", after: "Read it, then say yes." },
+    { text: "Make the skill", prompt: "Turn how we made the food for level 2 into a skill in .claude/skills/create-food/. I start it with /create-food N. Frontmatter: name, and a description that says when to use it. Instructions: if levels/level-N.js doesn't exist yet, start from a copy of the level before. Read the food rules in spec.md, make level N need a little more food to finish than the level before and stay within the limits, food never on an obstacle or the snake, then npm test must be green. Show me SKILL.md before you save it.", after: "Read it, then say yes." },
     "Open .claude/skills/create-food/SKILL.md in VS Code. Find the two --- lines. Which line tells Claude when to use it?",
-    { text: "Is it there?", prompt: "/", after: "Type create and you'll see /create-food. No restart needed." },
-    { text: "Save point", prompt: "Commit the skill on the branch level-3 and push it." }
+    { text: "Try it on level 3", prompt: "/create-food 3", after: "Claude makes levels/level-3.js: a copy of level 2, with more food to finish." },
+    { text: "Check it in the browser", after: "Open index.html?level=3. Does it need more food to finish than ?level=2?" },
+    { text: "Save point", prompt: "Commit the skill and level 3 on the branch level-3 and push." }
   ],
-  expected: "A /create-food skill with frontmatter and instructions, committed on level-3.",
+  expected: "A /create-food skill, and level 3 with more food to finish, on the branch level-3.",
   keyPoints: ["Skill from your own work", "Frontmatter: name + description", "Instructions point to spec.md", "In the / menu straight away"],
   notes: "Why now: level 3 needs food again, exactly like level 2.\nWhat you see: a new folder .claude/skills/create-food/ in VS Code, with SKILL.md.\nLook inside: the description. Would Claude pick this skill if you said 'level 3 needs food'?\n\nThe instructions point to spec.md instead of repeating the numbers: one rulebook. You're still on the branch level-3 from Assignment 20."
 },
@@ -2124,15 +2125,16 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "manual",
   title: "Assignment 22: Skill 2, /create-snake, and its permissions",
   kicker: "DAY 2 · ASSIGNMENT 22 · BUILD",
-  subtitle: "The second recipe. And this one may change level files without asking you.",
+  subtitle: "The second skill. This one may change level files without asking you. Try it on level 3 straight away.",
   calm: true,
   steps: [
-    { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-snake/ for the snake in level N: its start length and its speed, a little more than the level before, within the limits in spec.md, and the snake never starts in an obstacle. In the frontmatter, add allowed-tools so this skill may edit the files in levels/ without asking me. Show me SKILL.md before you save it.", after: "Find allowed-tools between the --- lines." },
+    { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-snake/ for the snake in level N. I start it with /create-snake N. Its start length and its speed: a little more than the level before, within the limits in spec.md, and the snake never starts in an obstacle. In the frontmatter, add allowed-tools so this skill may edit the files in levels/ without asking me. Show me SKILL.md before you save it.", after: "Find allowed-tools between the --- lines." },
+    { text: "Try it on level 3", prompt: "/create-snake 3", after: "No question for the edit in levels/: that's allowed-tools. Check: index.html?level=3. The snake starts longer than in ?level=2." },
     { text: "A rule for the whole project: secrets stay closed", prompt: "Add a deny rule to .claude/settings.json so Claude may never read .env files. Show me the change first.", after: "deny beats allow: no prompt can open it." },
     { text: "Try it", prompt: "Read the .env file.", after: "Claude can't: the deny rule stops it." },
-    { text: "Save point", prompt: "Commit the skill and settings.json on level-3 and push." }
+    { text: "Save point", prompt: "Commit the skill, level 3 and settings.json on level-3 and push." }
   ],
-  expected: "A /create-snake skill with its own allowed-tools, and a deny rule for .env.",
+  expected: "A /create-snake skill with its own allowed-tools, a longer snake in level 3, and a deny rule for .env.",
   keyPoints: ["allowed-tools: per skill, while it runs", "settings.json: for the whole project", "deny beats allow and ask", "Secrets: deny, always"],
   notes: "Two kinds of permission side by side. allowed-tools in a skill's frontmatter: the tools that skill may use without asking, only while it runs. settings.json: rules for the whole project, for every session. deny beats everything: no prompt, no mode and no skill gets past it. Every real repo has secrets in .env files (API keys, passwords): a deny rule on them is standard practice.\n\nWhy now: in manual mode every level-file edit asks. A skill that only touches levels/ can be trusted with that, only while it runs. A secret should never be read, whatever the prompt.\nWhat you see: allowed-tools in SKILL.md; a deny list in settings.json.\nLook inside: .claude/settings.json: allow, ask and deny. Which one wins?\n\nNo .env in the folder? The deny still holds; Claude says it isn't allowed, or that the file doesn't exist and it wouldn't read it anyway."
 },
@@ -2143,15 +2145,16 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   mode: "manual",
   title: "Assignment 23: Skill 3, /create-obstacles, and a hook that guards main",
   kicker: "DAY 2 · ASSIGNMENT 23 · BUILD",
-  subtitle: "The third recipe. And a hook so nobody, not even Claude, edits files on main.",
+  subtitle: "The third skill, tried on level 3. And a hook so nobody, not even Claude, edits files on main.",
   calm: true,
   steps: [
-    { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-obstacles/ for the obstacles in level N: a few more than the level before, within the limits in spec.md, never on the snake's start and never blocking the whole board. Show me SKILL.md before you save it." },
+    { text: "Make the skill", prompt: "Make a skill in .claude/skills/create-obstacles/ for the obstacles in level N. I start it with /create-obstacles N. A few more than the level before, within the limits in spec.md, never on the snake's start and never blocking the whole board. Show me SKILL.md before you save it." },
+    { text: "Try it on level 3", prompt: "/create-obstacles 3", after: "Check: index.html?level=3. More blocks than in ?level=2. Still fair?" },
     { text: "Add the hook", prompt: "Add a hook to .claude/settings.json: before Claude edits or writes a file, check the git branch. On main, block it with the message: Make a branch first. Show me the hook before you save it.", after: "Not working straight away? /exit, then claude --continue." },
     { text: "Try it: switch to main and ask for a change", prompt: "!git checkout main", after: "Then ask Claude to change something small. Blocked: Make a branch first." },
-    { text: "Back to your branch and save", prompt: "!git checkout level-3", after: "Then: Commit the skill and settings.json on level-3 and push." }
+    { text: "Back to your branch and save", prompt: "!git checkout level-3", after: "Then: Commit the skill, level 3 and settings.json on level-3 and push." }
   ],
-  expected: "A /create-obstacles skill, and a hook that blocks edits on main.",
+  expected: "A /create-obstacles skill, level 3 with more obstacles, and a hook that blocks edits on main.",
   keyPoints: ["Third skill: same shape", "Hook = always, at a fixed moment", "Protect main, like at work", "Test it on main"],
   notes: "Yesterday's hook ran the test after every edit. This one runs before every edit and can say no: a PreToolUse hook on Edit and Write that checks git branch and blocks on main. At work main is protected in GitLab; this does the same on your laptop, for Claude.\n\nWhy now: from here on every level is built on a branch. A rule like that shouldn't depend on Claude remembering it.\nWhat you see: a hooks block in settings.json and a small check script. On main, the edit is blocked with your message.\nLook inside: settings.json: when does the hook run (the event), and on which tools (the matcher)?\n\nWatch for: the hook only blocks Claude's file edits, not git itself, so checkout, pull and merge on main still work. Step 3 works because the new hook isn't committed yet: uncommitted changes come along to main.\n\nDry run (28 Oct): on main the edit was blocked with 'Make a branch first.', and Claude made a branch by itself and did the edit there. Undo that branch afterwards (!git checkout level-3). The deny rule in Assignment 22 held too: Claude refused .env and didn't try cat instead."
 },
@@ -2170,26 +2173,26 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   ],
   check: "Answer: B",
   keyPoints: ["Vote first", "Answer: B, the description", "Frontmatter: always loaded", "Body: only after Claude picks the skill"],
-  notes: "Vote first, then press → to strike the wrong answers. B: at the start of every session Claude has the frontmatter of every skill. 'Level 4 needs obstacles' matches the description of create-obstacles, so Claude picks that skill, and only then Claude Code loads its body. A is the opposite: the bodies are only loaded after the choice, that's why skills are cheap. C: spec.md has the numbers, not the skills; the skill's body points to spec.md. D: CLAUDE.md doesn't need to list skills, Claude Code finds them in .claude/skills/ by itself.\n\nNext: Assignment 24, level 3 with your three skills. That's where they see the choice happen."
+  notes: "Vote first, then press → to strike the wrong answers. B: at the start of every session Claude has the frontmatter of every skill. 'Level 4 needs obstacles' matches the description of create-obstacles, so Claude picks that skill, and only then Claude Code loads its body. A is the opposite: the bodies are only loaded after the choice, that's why skills are cheap. C: spec.md has the numbers, not the skills; the skill's body points to spec.md. D: CLAUDE.md doesn't need to list skills, Claude Code finds them in .claude/skills/ by itself.\n\nNext: Assignment 24, where they ask without the / and see Claude make that choice."
 },
 
 { // Slide 104
   type: "practice",
   layout: "exercise",
   mode: "manual",
-  title: "Assignment 24: Level 3 with your three skills",
+  title: "Assignment 24: Let Claude pick the skill",
   kicker: "DAY 2 · ASSIGNMENT 24 · BUILD",
-  subtitle: "Same result as level 2. This time the instructions do the explaining.",
+  subtitle: "Level 3 is built. Now ask without the /: does Claude pick the right skill by itself?",
   calm: true,
   steps: [
-    { text: "Start clean, then ask for level 3 with your skills", cmds: ["/clear"], prompt: "Make level 3 with my create-food, create-snake and create-obstacles skills: a bit harder than level 2.", after: "Watch for Skill(create-food), Skill(create-snake), Skill(create-obstacles)." },
-    { text: "Check: open index.html?level=3", after: "Harder than level 2? Still fair? Compare with ?level=2." },
+    { text: "Start clean, then ask without the /", cmds: ["/clear"], prompt: "Level 3 needs one more obstacle.", after: "Watch: Claude picks create-obstacles by itself. It may ask “Use skill?”: say yes." },
+    { text: "Check it in the browser", after: "Open index.html?level=3. One more block? Compare with ?level=2." },
     { text: "Merge request", prompt: "Push level-3 and open a merge request into main: what changed, why, how it was tested. Don't merge it.", after: "Review it on GitLab and merge it yourself." },
     { text: "Back on main", prompt: "!git checkout main && git pull" }
   ],
-  expected: "Level 3 was made with your three skills, and it's in main.",
-  keyPoints: ["/clear first", "Name the skills: Claude calls them", "Extra: try it without naming them", "Review and merge"],
-  notes: "Why now: three skills are ready. This is the moment they pay off.\nWhat you see: Claude names each skill as it uses it. The level appears without you explaining food, snake or obstacles.\nLook inside: did Claude use all three skills? Which values did each one choose?\n\nDry run (28 Oct, Claude Code 2.1.312): with 'Make level 3: a bit harder than level 2.' Claude read the three SKILL.md files with cat and followed them, without a Skill() call. Naming the skills in the prompt gave three real Skill() calls. Extra for the fast ones: /clear and ask without naming them, then compare.\n\nThe hook from Assignment 23 is on: everything happens on level-3, so nothing is blocked. If someone is still on main, the hook will tell them."
+  expected: "Claude picked a skill from its description, and level 3 is in main.",
+  keyPoints: ["/clear first", "No /: Claude picks by the description", "The quiz, live", "Review and merge level 3"],
+  notes: "Why now: the quiz just asked how Claude picks a skill. Here they see it happen.\nWhat you see: Claude names the skill it uses, Skill(create-obstacles), sometimes after asking 'Use skill?'. The body of that skill is loaded, the other two are not.\nLook inside: which skill did it use, and why? The description in its frontmatter.\n\nLevel 3 was already built in Assignments 21 to 23: each skill tried right after it was made, one layer at a time, just like level 2 by hand.\n\nWatch for: dry run (28 Oct, Claude Code 2.1.312): a broad 'Make level 3' without naming skills made Claude read the SKILL.md files with cat instead of a real Skill() call. A request that matches one description, like this one, is the better test. Not tried in a dry run yet: if Claude edits level-3.js without the skill, ask 'Which skill fits this?' and compare.\n\nThe hook from Assignment 23 is on: everything happens on level-3, so nothing is blocked."
 },
 
 { // Slide 105
