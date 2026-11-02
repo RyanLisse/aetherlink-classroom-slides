@@ -1,7 +1,7 @@
 'use strict';
 window.CLASSROOM_SESSIONS = [
   {id:'day-1',label:'Day 1 · AI and Claude Code',href:'index.html#1',deck:'index.html',start:1},
-  {id:'day-2',label:'Day 2 · Skills, agents, arcade',href:'index.html#83',deck:'index.html',start:83},
+  {id:'day-2',label:'Day 2 · Skills, agents, workflows',href:'index.html#83',deck:'index.html',start:83},
   {id:'workshop-3',label:'Day 3 · Agents in n8n (Ryan)',href:'workshop3.html#1',deck:'workshop3.html',start:1},
   {id:'day-3-maarten-n8n',label:'Day 3 · n8n (Maarten)',href:'day3-maarten-n8n.html#1',deck:'day3-maarten-n8n.html',start:1},
   {id:'workshop-4',label:'Day 4 · Claude Agent SDK (Ryan)',href:'workshop4.html#1',deck:'workshop4.html',start:1},

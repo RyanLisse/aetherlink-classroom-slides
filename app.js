@@ -210,7 +210,13 @@ function renderExtras(stage, main, s, v) {
   if (v.reveal === 'click') {                                  // 12: cards open one by one, so the room answers first
     grid.classList.add('reveal-grid'); let reacted = null;
     const open = i => { const c = cards[i]; if (!c || !c.classList.contains('closed')) return false; c.classList.remove('closed'); c.setAttribute('aria-hidden', 'false'); x.react?.(i); return true; };
-    cards.forEach((c, i) => { c.classList.add('closed'); c.setAttribute('aria-hidden', 'true'); const cover = node('span', 'card-cover', String(i + 1)); c.append(cover); c.addEventListener('click', () => open(i)); });
+    if (v.answers) grid.classList.add('qa');                    // quiz: the question shows, only the answer is covered
+    cards.forEach((c, i) => {
+      c.classList.add('closed'); if (!v.answers) c.setAttribute('aria-hidden', 'true');
+      const cover = node('span', 'card-cover', v.answers ? '?' : String(i + 1));
+      if (v.answers) { const ans = node('div', 'qa-answer'); ans.append(c.lastElementChild, cover); c.append(ans); } else c.append(cover);
+      c.addEventListener('click', () => open(i));
+    });
     const next = () => open(cards.findIndex(c => c.classList.contains('closed')));
     const ctrl = node('div', 'widget-controls reveal-controls'); const b1 = node('button', null, 'Reveal next →'); b1.addEventListener('click', next);
     const b2 = node('button', 'secondary', 'Show all'); b2.addEventListener('click', () => cards.forEach((c, i) => open(i)));
@@ -423,6 +429,114 @@ function renderExtras(stage, main, s, v) {
     const mid = node('div', 'cmap-mid'); mid.append(arrow(M.inLabel || ''), core); if (M.right) mid.append(arrow(M.outLabel || ''));
     m.append(left, mid); if (M.right) { const right = node('div', 'cmap-col'); M.right.forEach(b => right.append(box(b))); m.append(right); } else m.classList.add('cmap-two'); if (M.apart) { const ap = box(M.apart, 'cmap-apart'); m.append(ap); }
     const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(m); else if (tg) tg.before(m); else main.append(m);
+  }
+  if (v.docPair) {                                               // two project files: where they live, what each says, when Claude reads them
+    const D = v.docPair; const w = node('div', 'dpair');
+    const tree = node('div', 'cmap-box cmap-tree dp-tree dp-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, hl]) => { const r = node('div', 'ctree-row' + (hl ? ' dp-hl dp-hl-' + hl : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', '← ' + note)); tree.append(r); });
+    const tone = (d, i) => d.tone === 'what' ? 1 : d.tone === 'why' ? 0 : i;
+    const doc = (d, i) => { const c = node('div', 'dp-doc dp-step dp-doc-' + tone(d, i)); const h = node('div', 'dp-dhead'); h.append(node('span', 'dp-dname', d.name), node('span', 'dp-badge', d.badge)); c.append(h, node('p', 'dp-ask', d.ask));
+      const f = node('div', 'dp-file'); d.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); c.append(f);
+      const facts = node('ul', 'dp-facts'); d.facts.forEach(t => facts.append(node('li', null, t))); c.append(facts); return c; };
+    const link = node('div', 'dp-link dp-step'); link.append(node('span', 'cmap-line'), node('span', 'cmap-label', D.link));
+    const pair = node('div', 'dp-docs' + (D.docs.length === 1 ? ' dp-docs-one' : '')); if (D.docs.length === 1) pair.append(doc(D.docs[0], 0)); else pair.append(doc(D.docs[0], 0), link, doc(D.docs[1], 1));
+    const when = node('div', 'dp-whenbox dp-step'); when.append(node('span', 'dp-label', D.whenTitle));
+    const cols = node('div', 'dp-wcols' + (D.docs.length === 1 ? ' dp-wcols-one' : '')); D.docs.forEach((d, i) => { const col = node('div', 'dp-wcol dp-doc-' + tone(d, i)); const hd = node('div', 'dp-whead'); hd.append(node('span', 'dp-exfile', d.name)); col.append(hd);
+      const ul = node('ul', 'dp-wlist'); d.when.forEach(t => ul.append(node('li', null, t))); col.append(ul);
+      const ex = node('div', 'dp-ex'); ex.append(node('span', 'dp-bubble', d.example)); col.append(ex); cols.append(col); }); when.append(cols);
+    const right = node('div', 'dp-right'); right.append(pair, when);
+    w.append(tree, right);
+    if (D.work) { const wk = node('div', 'dp-work dp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.specDoc) {                                               // spec.md: where it lives, what it is, what it's for, what it means for the skills
+    const D = v.specDoc; const w = node('div', 'spdoc');
+    const tree = node('div', 'cmap-box cmap-tree dp-tree sp-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, hl]) => { const r = node('div', 'ctree-row' + (hl ? ' dp-hl dp-hl-' + hl : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', '← ' + note)); tree.append(r); });
+    const right = node('div', 'sp-right');
+    const sec = (n, head, cls) => { const b = node('section', 'sp-sec sp-step ' + cls); const h = node('div', 'sp-head'); h.append(node('span', 'sp-n', String(n)), node('strong', null, head)); b.append(h); right.append(b); return b; };
+    const a = sec(1, D.what.head, 'sp-what'); const row1 = node('div', 'sp-row'); const f = node('div', 'dp-file sp-file'); f.append(node('span', 'sp-fname', 'spec.md'));
+    D.what.lines.forEach(l => f.append(node('span', 'dp-line' + (/^#/.test(l) ? ' dp-h' : ''), l))); row1.append(f, node('p', 'sp-text', D.what.text)); a.append(row1);
+    const b = sec(2, D.why.head, 'sp-why'); const row2 = node('div', 'sp-pair'); const iq = node('div', 'sp-box sp-intent'); iq.append(node('span', 'sp-bname', 'intent.md'), node('span', 'sp-quote', D.why.intent));
+    const sq = node('div', 'sp-box sp-spec'); sq.append(node('span', 'sp-bname', 'spec.md')); D.why.spec.forEach(t => sq.append(node('span', 'sp-num', t)));
+    row2.append(iq, node('span', 'sp-arrow', '→'), sq); b.append(row2, node('p', 'sp-cap', D.why.text));
+    const c = sec(3, D.skills.head, 'sp-skills'); const row3 = node('div', 'sp-flow'); const sk = node('div', 'sp-chips'); D.skills.names.forEach(t => sk.append(node('span', 'sp-chip', t)));
+    const tgt = node('span', 'sp-target', 'spec.md'); row3.append(sk, node('span', 'sp-arrow sp-small', D.skills.verb), tgt); c.append(row3, node('p', 'sp-cap', D.skills.text));
+    w.append(tree, right);
+    if (D.work) { const wk = node('div', 'dp-work sp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.orchestra) {                                             // a workflow conducts skills, a test and a subagent: the ladder on the left, the run on the right
+    const D = v.orchestra; const w = node('div', 'orch');
+    const lad = node('div', 'or-ladder or-step'); lad.append(node('span', 'dp-label', D.ladder.title));
+    D.ladder.rungs.forEach((R, i) => { const r = node('div', 'or-rung' + (R.hl ? ' or-hl' : '')); r.append(node('span', 'or-rn', String(i + 1)), node('strong', null, R.name), node('span', null, R.text)); lad.append(r); });
+    if (D.front) { const f = node('div', 'pp-code or-front'); f.append(node('span', 'or-fname', D.front.name)); D.front.lines.forEach(l => f.append(node('span', 'pp-line' + (l.hl ? ' pp-hl' : ''), l.t))); lad.append(f); }
+    const flow = node('div', 'or-flow or-step'); flow.append(node('span', 'dp-label', D.flow.title));
+    const down = () => node('span', 'or-down', '↓');
+    D.flow.steps.forEach((St, i) => { if (i) flow.append(down()); const b = node('div', 'or-box or-' + St.kind);
+      if (St.label) b.append(node('span', 'or-tag', St.label)); if (St.title) b.append(node('strong', 'or-title', St.title));
+      if (St.chips) { const row = node('div', 'or-chips'); St.chips.forEach((c, k) => { if (k) row.append(node('span', 'or-to', '→')); row.append(node('span', 'or-chip', c)); }); b.append(row); }
+      if (St.split) { const sp = node('div', 'or-split'); St.split.forEach(x => { const o = node('div', 'or-out or-' + x.kind); o.append(node('strong', null, x.title), node('span', null, x.text)); sp.append(o); }); b.append(sp); }
+      if (St.text) b.append(node('span', 'or-text', St.text)); flow.append(b); });
+    w.append(lad, flow);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.projMap) {                                               // the project folder: what came on Day 1, this morning, and what comes this afternoon
+    const D = v.projMap; const w = node('div', 'pmap');
+    const tree = node('div', 'cmap-box cmap-tree pm-tree pm-step'); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, tag]) => { const r = node('div', 'ctree-row' + (tag ? ' ' + tag.split(' ').map(c => 'pm-' + c).join(' ') : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', note ? '← ' + note : '')); tree.append(r); });
+    const lg = node('div', 'pm-legend'); D.legend.forEach(([tag, t]) => lg.append(node('span', 'pm-chip pm-' + tag, t))); tree.prepend(lg);
+    const side = node('div', 'pm-side pm-step'); side.append(node('strong', 'pm-stitle', D.side.title));
+    D.side.groups.forEach(G => { side.append(node('span', 'dp-label', G.head)); const ul = node('div', 'pm-files'); G.items.forEach(t => ul.append(node('span', null, t))); side.append(ul); });
+    w.append(tree, side);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.promptParts) {                                           // one prompt taken apart: what each part does, and why the limits part matters
+    const D = v.promptParts; const w = node('div', 'pparts');
+    const pr = node('div', 'pt-prompt pt-step'); pr.append(node('span', 'dp-label', D.label)); const tx = node('p', 'pt-text');
+    D.parts.forEach(P => tx.append(node('span', 'pt-seg pt-' + P.kind, P.text), ' ')); pr.append(tx); w.append(pr);
+    const keys = node('div', 'pt-keys pt-step'); D.parts.filter(P => P.label).forEach(P => { const k = node('div', 'pt-key pt-' + P.kind); k.append(node('strong', null, P.label), node('span', null, P.means)); keys.append(k); }); w.append(keys);
+    const cmp = node('div', 'pt-cmp pt-step'); cmp.append(node('span', 'dp-label pt-cmplabel', D.compare.title));
+    D.compare.cols.forEach(C => { const c = node('div', 'pt-col pt-c-' + C.tone); c.append(node('strong', 'pt-chead', C.head), node('span', 'pt-say', C.say));
+      const ul = node('ul', 'dp-wlist'); C.items.forEach(t => ul.append(node('li', null, t))); c.append(ul); cmp.append(c); }); w.append(cmp);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.permPair) {                                              // two kinds of permission side by side: where it's written, what it lets through, for how long
+    const D = v.permPair; const w = node('div', 'pperm');
+    D.cols.forEach((C, i) => { const c = node('section', 'pp-col pp-step pp-' + C.tone); const h = node('div', 'pp-head'); h.append(node('span', 'pp-n', String(i + 1)), node('strong', null, C.title)); c.append(h, node('span', 'pp-where', C.where));
+      const f = node('div', 'pp-code'); C.code.forEach(l => f.append(node('span', 'pp-line' + (l.hl ? ' pp-hl' : ''), l.t))); c.append(f);
+      const ex = node('div', 'pp-ex'); ex.append(node('span', 'pp-say', C.say), node('span', 'pp-arrow', '→'), node('span', 'pp-target', C.target), node('span', 'pp-verdict pp-v-' + C.verdict, C.verdictText)); c.append(ex);
+      const sc = node('div', 'pp-scope'); sc.append(node('span', 'dp-label', 'Applies to'), node('span', null, C.scope)); c.append(sc); w.append(c); });
+    if (D.work) { const wk = node('div', 'dp-work pp-step'); wk.append(node('span', 'dp-label', 'At work')); D.work.forEach(t => wk.append(node('span', 'dp-wk', t))); w.append(wk); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.skillDef) {                                              // what a skill is: the definition as a flow, file → who starts it → same result
+    const D = v.skillDef; const w = node('div', 'sdef');
+    const q = node('blockquote', 'sf-quote sf-step'); q.append(node('span', 'sf-qtext', D.quote), node('cite', null, D.source)); w.append(q);
+    const flow = node('div', 'sf-flow');
+    const file = node('div', 'sf-card sf-file sf-step'); file.append(node('span', 'sf-n', '1'), node('strong', 'sf-title', D.file.title));
+    const code = node('div', 'sf-code'); let dashes = 0; D.file.lines.forEach(l => { const d = /^---/.test(l); if (d) dashes++; code.append(node('span', 'sf-line' + (d ? ' sf-dash' : dashes === 1 ? ' sf-front' : ''), l)); }); file.append(code, node('span', 'sf-cap', D.file.caption));
+    const arrow = () => node('span', 'sf-arrow', '→');
+    const who = node('div', 'sf-who sf-step'); D.starters.forEach((st, i) => { const c = node('div', 'sf-card sf-start sf-start-' + i); c.append(node('span', 'sf-n', String(i + 2)), node('strong', 'sf-title', st.title));
+      c.append(node('span', st.chip ? 'sf-chip' : 'sf-bubble', st.say)); c.append(node('span', 'sf-cap', st.caption)); who.append(c); if (i === 0) who.append(node('span', 'sf-or', 'or')); });
+    const res = node('div', 'sf-card sf-result sf-step'); res.append(node('strong', 'sf-title', D.result.title)); const tiles = node('div', 'sf-tiles');
+    D.result.tiles.forEach(t => { const tl = node('span', 'sf-tile'); tl.append(node('b', null, t), node('i', null, '✓')); tiles.append(tl); }); res.append(tiles, node('span', 'sf-cap', D.result.caption));
+    flow.append(file, arrow(), who, arrow(), res); w.append(flow);
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
+  }
+  if (v.skillDoc) {                                              // a skill: where its folder lives, what SKILL.md holds, what Claude loads when
+    const D = v.skillDoc; const w = node('div', 'sdoc');
+    const tree = node('div', 'cmap-box cmap-tree sd-tree sd-step'); tree.append(node('span', 'dp-label sd-tlabel', D.tree.label)); const r0 = node('div', 'ctree-row ctree-root'); r0.append(node('span', 'ctree-name', D.tree.root), node('span', 'ctree-note', D.tree.rootNote)); tree.append(r0);
+    D.tree.rows.forEach(([pre, name, note, cls]) => { const r = node('div', 'ctree-row' + (cls ? ' ' + cls.split(' ').map(c => 'ctree-' + c).join(' ') : '')); const nm = node('span', 'ctree-name'); nm.append(node('span', 'ctree-pre', pre), name); r.append(nm, node('span', 'ctree-note', note ? '← ' + note : '')); tree.append(r); });
+    const file = node('div', 'sd-file sd-step'); const fh = node('div', 'sd-fhead'); fh.append(node('span', 'dp-label', D.file.label), node('span', 'sd-fname', D.file.name)); file.append(fh);
+    D.file.parts.forEach((P, k) => { const part = node('div', 'sd-part sd-' + P.kind + (k ? ' sd-step' : '')); const lab = node('div', 'sd-plabel'); lab.append(node('strong', null, P.label), node('span', null, P.sub)); part.append(lab);
+      const body = node('div', 'sd-lines'); P.lines.forEach(([code, note]) => { const row = node('div', 'sd-row'); row.append(node('span', 'sd-code' + (/^(---|#)/.test(code) ? ' sd-mark' : ''), code), node('span', 'sd-note', note ? '← ' + note : '')); body.append(row); }); part.append(body); file.append(part); });
+    const load = node('div', 'sd-load sd-step'); load.append(node('span', 'dp-label', D.load.title));
+    D.load.moments.forEach(M => { const m = node('div', 'sd-moment'); m.append(node('strong', 'sd-when', M.when)); const box = node('div', 'sd-ctx'); box.append(node('span', 'sd-ctxlabel', M.label));
+      const chips = node('div', 'sd-chips'); M.chips.forEach(([t, k]) => chips.append(node('span', 'sd-chip sd-chip-' + k, t))); (M.closed || []).forEach(t => chips.append(node('span', 'sd-chip sd-chip-closed', t))); box.append(chips); m.append(box, node('span', 'sd-mnote', M.note)); if (M.link) { const l = node('div', 'sd-link'); l.append(node('span', 'sd-larrow', '↓'), node('span', null, M.link)); load.append(l); } load.append(m); });
+    if (D.load.why) load.append(node('p', 'sd-why', D.load.why));
+    const right = node('div', 'sd-right'); if (D.loadWide) { right.append(file); w.classList.add('sd-wide'); w.append(tree, right, load); } else { right.append(file, load); w.append(tree, right); }
+    const tg = main.querySelector('.tagline'); if (grid) grid.replaceWith(w); else if (tg) tg.before(w); else main.append(w);
   }
   if (v.figure) {                                                // one drawing that explains the slide on its own
     const f = node('figure', 'slide-figure'); const im = document.createElement('img'); im.src = v.figure; im.alt = v.figureAlt || ''; f.append(im);
@@ -700,7 +814,9 @@ function renderVisual(stage, body, main, s) {
   if (bot.hatch) { hatch.style.left = bot.hatch[0] + '%'; hatch.style.top = bot.hatch[1] + '%'; live.append(img, hatch); } else live.append(img);
   fig.append(live);
   if (v.tool === 'thought') fig.append(ART.thought());
-  if (v.place === 'left') { body.prepend(fig); body.classList.add('with-bot', 'bot-left'); }
+  if (v.botTag) fig.append(node('span', 'bot-tag', v.botTag));
+  if (v.place === 'in' && v.botIn && main.querySelector(v.botIn)) { const host = main.querySelector(v.botIn); host.classList.add('bot-host'); host.append(fig); }
+  else if (v.place === 'left') { body.prepend(fig); body.classList.add('with-bot', 'bot-left'); }
   else if (v.place === 'beside') { body.append(fig); body.classList.add('with-bot', 'bot-beside'); }
   else if (v.place === 'under') { main.append(fig); }
   else if (v.place === 'popout' && popRow) { popRow.prepend(fig); }
