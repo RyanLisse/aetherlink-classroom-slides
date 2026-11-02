@@ -10,7 +10,7 @@ vm.runInNewContext(read('day3-maarten-n8n-slides.js'), context);
 const slides = context.window.SLIDES;
 
 test('Day 3 keeps Maarten technical steps inside the Jessy-led classroom route', () => {
-  assert.equal(slides.length, 22);
+  assert.equal(slides.length, 24);
   const titles = slides.map(slide => slide.title);
   for (const title of [
     'What was useful from the last session?',
@@ -18,12 +18,17 @@ test('Day 3 keeps Maarten technical steps inside the Jessy-led classroom route',
     'Who are you?',
     'A quick tour of n8n',
     'Use workshop data only',
+    'Checkpoint: prove memory',
+    'Checkpoint: route structured output',
     'Assignment: from chat to chat',
     'Save your proof',
     'What did you learn?'
   ]) assert.ok(titles.includes(title), title);
   assert.ok(titles.indexOf('A quick tour of n8n') < titles.indexOf('The basic flow'));
   assert.ok(titles.indexOf('Save your proof') < titles.indexOf('What did you learn?'));
+  const introduction = slides.find(slide => slide.title === 'Who are you?');
+  assert.equal(introduction.cards.length, 3);
+  assert.match(introduction.cards.at(-1).body, /success/i);
 });
 
 test('The eleven lesson screenshots stay paired with technical steps 1 through 11', () => {
@@ -43,8 +48,9 @@ test('The eleven lesson screenshots stay paired with technical steps 1 through 1
   for (const [title, filename] of expected) {
     const slide = slides.find(item => item.title === title);
     assert.ok(slide, title);
-    assert.ok(slide.visual.image.endsWith(filename), title);
-    assert.ok(existsSync(new URL(slide.visual.image, root)), slide.visual.image);
+    const image = slide.visual.image || slide.visual.shot;
+    assert.ok(image.endsWith(filename), title);
+    assert.ok(existsSync(new URL(image, root)), image);
   }
 });
 
@@ -60,13 +66,26 @@ test('Memory, customer data and proof are usable from the deck', () => {
   const proof = slides.find(slide => slide.title === 'Save your proof');
   assert.match(proof.expected, /workflow/i);
   assert.match(proof.expected, /human review/i);
+  const checkpoints = slides.filter(slide => slide.layout === 'exercise' && /Checkpoint|Three sub-agents/.test(slide.title));
+  assert.equal(checkpoints.length, 3);
+  for (const slide of checkpoints) {
+    assert.ok(slide.visual.shot, slide.title);
+    assert.ok(slide.steps.length >= 4, slide.title);
+    assert.ok(slide.expected, slide.title);
+  }
+  const specialists = slides.find(slide => slide.title === 'Three sub-agents');
+  assert.equal(specialists.repo.url, 'assets/day3-maarten-n8n/customer-context.csv');
+  const risk = slides.find(slide => slide.title === 'Risk Agent settings');
+  assert.ok(risk.cards.every(card => card.body.length < 70));
+  assert.match(risk.prompt, /Description:/);
+  assert.match(risk.prompt, /System Message:/);
 });
 
 test('Deck and presenter load the same current Day 3 source', () => {
   const deck = read('day3-maarten-n8n.html');
   const presenter = read('day3-maarten-n8n-presenter.html');
-  assert.ok(deck.includes('day3-maarten-n8n-slides.js?v=2'));
-  assert.ok(presenter.includes('day3-maarten-n8n-slides.js?v=2'));
+  assert.ok(deck.includes('day3-maarten-n8n-slides.js?v=3'));
+  assert.ok(presenter.includes('day3-maarten-n8n-slides.js?v=3'));
   assert.ok(deck.includes('id="timer-btn"'));
   assert.ok(deck.includes('window.ASG_PROMPT = true'));
   assert.ok(deck.includes('styles.css?v=147'));
