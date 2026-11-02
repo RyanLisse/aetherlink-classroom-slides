@@ -1,10 +1,10 @@
 /* ==========================================================================
    Aetherlink x Worldline — Day 4 classroom deck: n8n to Claude (Maarten)
-   19 slides. One slide = one object in order. See README.md "How to edit
+   21 slides. One slide = one object in order. See README.md "How to edit
    a slide" and the field reference at the top of day3-n8n-slides.js
    before changing anything here.
 
-   Follows the Claude Code agent training package (TRAINER-GUIDE.md):
+   Follows the current workshop repository and the local LESSON source:
    lesson 1 one agent + CLAUDE.md, lesson 2 orchestrator + subagents,
    lesson 3 MCP + external transaction data. Same support ticket as the
    Day 3 n8n workflow, now built in Claude Code.
@@ -41,47 +41,37 @@ window.SLIDES = [
 },
 
 { // Slide 3
-  title: "From n8n to Claude Code",
-  kicker: "DAY 4 · N8N → CLAUDE",
-  subtitle: "The building blocks you know from yesterday each have a place in Claude Code.",
+  title: "Yesterday in n8n",
+  kicker: "DAY 4 · N8N ANCHOR",
+  subtitle: "A visible workflow connected the ticket, three specialists and a customer-data lookup.",
   type: "concept",
-  layout: "compare",
-  visual: { pairs: true },
-  columns: [
-    { title: "n8n", items: [
-      "AI Agent with a system message",
-      "Customer Reply, Risk and Context agents",
-      "Each sub-agent's Description",
-      "Data table with 'Get row(s)'",
-      "The workflow you draw on the canvas"
-    ] },
-    { title: "Claude Code", items: [
-      "CLAUDE.md for the main session",
-      "risk-agent and customer-reply-agent files",
-      "Descriptions in each file's header",
-      "customer-context-agent plus MCP lookup tools",
-      "The workflow you write down in CLAUDE.md"
-    ] }
-  ],
-  tagline: "Same ideas, different place: in n8n you draw it, in Claude Code you write it down.",
-  keyPoints: ["One pair per click","System message → CLAUDE.md","Sub-agent → .claude/agents","Data table → MCP tool","Canvas → written workflow"],
-  notes: "Go through one pair per click and let the room guess the right-hand side first. Yesterday's Customer Reply, Risk and Customer Context agents become customer-reply-agent, risk-agent and customer-context-agent. In Lesson 3 the context agent gets customer facts through an MCP tool. The key difference: in n8n you draw the workflow and every step is fixed; in Claude Code you describe the workflow in text and the main agent follows it."
+  visual: { stepThrough: true, bot: 'point', place: 'beside' },
+  keyPoints: ["AI Agent with a System Message","Reply, Risk and Context specialists","Data Table with Get row(s)"],
+  notes: "Keep this slide on n8n. Recall the three specialist roles and the Data Table. The next slide introduces only the Claude Code equivalents."
 },
 
 { // Slide 4
+  title: "Today in Claude Code",
+  kicker: "DAY 4 · CLAUDE CODE",
+  subtitle: "The same responsibilities move into project instructions, agent files and MCP tools.",
+  type: "concept",
+  visual: { stepThrough: true, bot: 'point', place: 'beside' },
+  keyPoints: ["CLAUDE.md for the main session","risk, reply and context agent files","get_customer and get_transaction through MCP"],
+  notes: "Map each responsibility once. CLAUDE.md holds the main instructions. Agent descriptions tell Claude when to delegate. MCP tools supply customer and transaction facts."
+},
+
+{ // Slide 5
   title: "Today's customer messages",
   kicker: "DAY 4 · N8N → CLAUDE",
   subtitle: "Ten messages in docs/customer-messages.md, the same file in every lesson.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
   cards: [
-    { title: "Tone traps", body: "1 and 6: loud and angry, but little impact." },
-    { title: "Hidden risk", body: "2: calm and polite, but unknown transactions." },
-    { title: "Clear cases", body: "3, 4 and 5: medium, low and high." },
-    { title: "Transaction IDs", body: "7, 8 and 9: TX-1007, TX-1014, TX-1018. For lesson 3." },
-    { title: "Missing information", body: "10: \"My payment isn't working. Please fix it.\"" }
+    { title: "Tone versus risk", body: "1 and 6 sound urgent. Message 2 is calm but may involve fraud." },
+    { title: "Transaction context", body: "7, 8 and 9 contain IDs that become useful in Lesson 3." },
+    { title: "Missing information", body: "10 asks for help without enough facts." }
   ],
-  keyPoints: ["Same file in every lesson","Tone traps: 1 and 6","Hidden risk: 2","TX messages for lesson 3","10 tests missing info"],
+  keyPoints: ["Same file in every lesson","Tone is not impact","Later lessons add missing context"],
   notes: "Show docs/customer-messages.md. The messages are chosen on purpose: some sound urgent but aren't, one sounds calm but could be fraud, three have a transaction ID that only makes sense once we have the external data, and the last one has too little information. Ask people to keep the numbers in mind: we come back to them in every lesson."
 },
 
@@ -103,7 +93,7 @@ window.SLIDES = [
     "Find docs/customer-messages.md and 01-single-agent. Later lesson folders arrive with the step branches."
   ],
   expected: "The verification passes and the dry run prints the prompt, project folder and dry-run notice.",
-  keyPoints: ["Use the repository link on this slide","Install once at the repository root","Verify and run doctor before Lesson 1","Dry run does not call a model"],
+  keyPoints: ["Clone and install at the repository root","Verify and run doctor before Lesson 1","Dry run does not call a model"],
   notes: "Give everyone time to clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent. Run the commands exactly as shown. npm run verify checks the package and npm run doctor checks Node.js, Claude Code and the selected backend. The dry run shows what Lesson 1 would send without calling a model. Main is the Step 0 starter; step-1 through step-4 contain finished catch-up states."
 },
 
@@ -122,7 +112,7 @@ window.SLIDES = [
     { title: "CLAUDE.md", body: "Purpose\nRules\nPriority definitions\nRequired output" }
   ],
   tagline: "The priority depends on impact and risk, not on tone.",
-  keyPoints: ["Switch to step-1","Open 01-single-agent/claude-project","CLAUDE.md = yesterday's system message","Output: Priority + Reason"],
+  keyPoints: ["Switch to step-1","CLAUDE.md holds the project rules","Output: Priority + Reason"],
   notes: "Fetch and switch to step-1, run npm ci, then open 01-single-agent/claude-project in VS Code. Walk through CLAUDE.md: it is the system message of yesterday's AI Agent, but now as a file the agent loads for each run. Point out the rules and the required output. The finished step gives the room a runnable baseline; the exercise temporarily removes the definitions to expose the tone trap."
 },
 
@@ -144,7 +134,7 @@ window.SLIDES = [
     "Check whether the result states what information is missing."
   ],
   expected: "With your definitions, the loud messages come out LOW and the calm message about unknown transactions comes out HIGH.",
-  keyPoints: ["Type the minutes on the timer","Run the baseline first","Remove only Priority definitions","Repeat the same message IDs","Restore before MSG-10"],
+  keyPoints: ["Run the baseline first","Repeat the same IDs without definitions","Restore the file before MSG-10"],
   notes: "Type the minutes on the timer and press start. Use the npm commands so each message is a fresh case. First record the completed step-1 result. Then remove only Priority definitions and repeat the same IDs. Restore the section before MSG-10. The point is to compare evidence: without definitions the model may follow tone. Do not promise that every model run will fail in the same way."
 },
 
@@ -160,7 +150,7 @@ window.SLIDES = [
     { title: "HIGH", body: "The customer is angry and says it is urgent." }
   ],
   check: "Answer: LOW",
-  keyPoints: ["Vote first","Answer: LOW","Tone is not impact","Compare: message 2 is HIGH"],
+  keyPoints: ["Vote first","Answer: LOW","Tone is not impact"],
   notes: "Vote first, then press → to strike the wrong answers. The answer is LOW: an old logo in the portal is cosmetic, however loud the message is. Contrast it with message 2: polite, but three unknown card transactions is a possible fraud case, so HIGH. That is exactly why the definitions say impact and risk, not tone."
 },
 
@@ -176,12 +166,11 @@ window.SLIDES = [
   layout: "steps",
   visual: { stepKeys: true, bot: 'point', place: 'beside' },
   items: [
-    { label: "risk-agent", caption: "Reads the message, decides LOW, MEDIUM or HIGH, and writes the internal risk note." },
-    { label: "Wait for the result", caption: "The orchestrator waits for the analysis before anything else happens." },
+    { label: "risk-agent", caption: "Decides the priority and returns its analysis before the workflow continues." },
     { label: "customer-reply-agent", caption: "Writes the customer email from the message and the risk analysis." },
     { label: "output/", caption: "The orchestrator writes one Markdown file: message, priority, reason, email." }
   ],
-  keyPoints: ["Use step-2, then open 02-subagents","CLAUDE.md is now the orchestrator","Priority logic moved to risk-agent","Result lands in output/"],
+  keyPoints: ["CLAUDE.md defines the workflow","Each specialist owns one job","The result lands in output/"],
   notes: "Save Lesson 1 work, fetch and switch to step-2, then open 02-subagents/claude-project. CLAUDE.md now describes the workflow and tells the main session to use specialists. Yesterday's Risk Agent maps to risk-agent and Customer Reply Agent maps to customer-reply-agent. Customer Context returns in Lesson 3. Step through the four steps; the result is a file in output/ you can review."
 },
 
@@ -217,7 +206,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
 - Priority: LOW | MEDIUM | HIGH
 - Risk note: customer risk, complaint risk, urgency, escalate yes/no
 - Missing information: none, or a short list`,
-  keyPoints: ["One file per specialist","Header: name + description","Description = when to call it","Body = how it works"],
+  keyPoints: ["One file per specialist","The description says when to call it","The body says how it works"],
   notes: "Open .claude/agents/risk-agent.md. The header between the --- lines has a name and a description: the orchestrator reads the description to decide when to use this agent, exactly like yesterday's Description field. The rest is the agent's own prompt, like the System Message. The priority definitions now live here. Use the Example prompt button to show the file. Then open customer-reply-agent.md for its style and output rules."
 },
 
@@ -240,7 +229,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
     "Run message 2 and message 10. Does the email promise anything it shouldn't?"
   ],
   expected: "A Markdown file in output/ per message, with the original message, priority, reason and a proposed email.",
-  keyPoints: ["Type the minutes on the timer","/agents shows the specialists","Watch the delegation happen","Read the file in output/","Email must not overpromise"],
+  keyPoints: ["Watch both specialists run","Review the file in output/","The email must not overpromise"],
   notes: "Type the minutes on the timer and press start. Let people watch the delegation: the orchestrator calls risk-agent, then customer-reply-agent. In output/ they should find one file per message. For message 10 the email should ask for missing details; for message 2 it should not invent refunds or causes. Early finishers can change the style in customer-reply-agent.md and run the same message again."
 },
 
@@ -259,7 +248,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
     { title: "Transaction facts", body: "docs/transactions.xlsx → get_transaction → risk-agent" }
   ],
   tagline: "Data files → MCP servers → read-only tools → specialist agents",
-  keyPoints: ["Use step-3, then open 03-mcp/claude-project","Data files sit outside the agent project","get_customer and get_transaction","Agents get facts, not direct file access"],
+  keyPoints: ["Data files stay outside the agent project","Tools expose customer and transaction facts","Agents receive results, not file access"],
   notes: "Save Lesson 2 work, fetch and switch to step-3, then open 03-mcp/claude-project. docs/customer_context.csv and docs/transactions.xlsx sit outside the agent project. The MCP servers expose narrow read-only tools. customer-context-agent calls get_customer, like yesterday's Data Table lookup. risk-agent calls get_transaction for transaction IDs. Neither specialist reads the data files itself."
 },
 
@@ -275,7 +264,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
     { title: "3. Check Claude Code", body: ".mcp.json registers both servers. In Claude Code, /mcp should show customers and transactions." }
   ],
   tagline: "The servers do not run all the time: the SDK or Claude Code starts them over stdio when needed.",
-  keyPoints: ["npm ci at root and in transaction-mcp","Smoke test makes no model call",".mcp.json registers two servers","/mcp to verify","stdio runs only while used"],
+  keyPoints: ["Install both dependency sets","Smoke-test both tools without a model","Use /mcp to verify both connections"],
   notes: "Do this live from the repository root after switching to step-3. Install the root and nested dependencies. npm run smoke:mcp calls get_customer and the transaction tools without a model. .mcp.json already registers both servers for Claude Code, so no manual claude mcp add is needed. Start Claude Code at the repository root and check /mcp. Both local processes start on demand over stdio and stop with the session."
 },
 
@@ -290,7 +279,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
     { title: "TX-1014 · message 8", body: "Futura Labs · €1,290 · COMPLETED\nCustomer reports transaction as unrecognised · Fraud flag: Yes" },
     { title: "TX-1018 · message 9", body: "Juniper Hotels · €575.25 · COMPLETED\nCustomer says merchant has not received funds" }
   ],
-  keyPoints: ["Ask the priority before each card","1007: failed, money reserved","1014: fraud flag","1018: completed, not received"],
+  keyPoints: ["1007: failed, money reserved","1014: fraud flag","1018: completed, not received"],
   notes: "Before you open each card, read the customer message and ask the room which priority they expect; then open the card and see if the facts change their mind. TX-1007: the payment failed but the amount is reserved, a real problem for one customer. TX-1014: the fraud flag is set and the customer doesn't recognise it, so HIGH. TX-1018: completed on our side but the merchant says nothing arrived. The point: the message alone is not enough; the external facts make the priority defensible."
 },
 
@@ -312,7 +301,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
     "Ask about TX-9999 in Claude Code at the repository root. It must not invent a record."
   ],
   expected: "The specialists look up external facts before the reply draft, and the output identifies which facts came from each tool.",
-  keyPoints: ["Type the minutes on the timer","Run the offline smoke test first","Check both MCP connections","Facts and sources must appear in output/","TX-9999: not found, nothing invented"],
+  keyPoints: ["Run the offline smoke test first","Trace facts and sources into output/","TX-9999 must return not found"],
   notes: "Type the minutes on the timer and press start. Most problems are setup: the wrong branch, a missing nested npm ci, or Node.js missing. Start with npm run smoke:mcp, then check /mcp. The specialists never open the CSV or workbook directly. With TX-9999 risk-agent should say the transaction was not found instead of making something up."
 },
 
@@ -336,33 +325,27 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
   notes: "Open one question per click and let the room answer with today's examples. The main agent knows the workflow in CLAUDE.md, not the specialist rules. Risk, reply and customer context belong to subagents. A tool is needed when the answer depends on data outside the project. Customer and transaction facts came only through get_customer and get_transaction. Ask one or two people to share an output file on screen."
 },
 
-{ // Slide 17
-  title: "n8n or Claude Code?",
-  kicker: "DAY 4 · REVIEW",
-  subtitle: "Both can run this workflow. They are good at different things.",
+{ // Slide 18
+  title: "Choose n8n when the route is fixed",
+  kicker: "DAY 4 · REVIEW · N8N",
+  subtitle: "The team can see the triggered workflow and every branch on one canvas.",
   type: "concept",
-  layout: "compare",
-  visual: { stepThrough: true },
-  columns: [
-    { title: "n8n", items: [
-      "A fixed flow you can see on one canvas",
-      "Starts on its own: chat, form, schedule, webhook",
-      "Hundreds of ready-made integrations",
-      "Easy for a team to read and reuse"
-    ] },
-    { title: "Claude Code", items: [
-      "A flow you describe in text and files",
-      "The agent decides which specialist to call",
-      "Works inside a project with files and output",
-      "Easy to change: edit a Markdown file"
-    ] }
-  ],
-  tagline: "Ask the room: which of your own workflows fits which tool?",
-  keyPoints: ["Not a winner, a choice","n8n: fixed, triggered, visible","Claude Code: flexible, in a project","Ask for examples from their work"],
-  notes: "There is no winner here. n8n is strong when a flow must run on its own, on a trigger, the same way every time, and the team should see it on a canvas. Claude Code is strong when the work happens in a project, the steps vary, and you want to change the behaviour by editing a file. Ask two or three people for a workflow from their own work, and which tool they would choose."
+  visual: { stepThrough: true, bot: 'point', place: 'beside' },
+  keyPoints: ["Fixed and visible flow","Built-in triggers and integrations","Easy for a team to inspect"],
+  notes: "Keep this slide on n8n. Ask for one participant workflow that benefits from a fixed route, trigger, and visible canvas."
 },
 
-{ // Slide 18
+{ // Slide 19
+  title: "Choose Claude Code when the work varies",
+  kicker: "DAY 4 · REVIEW · CLAUDE CODE",
+  subtitle: "The agent can choose a specialist while files preserve instructions and output.",
+  type: "concept",
+  visual: { stepThrough: true, bot: 'point', place: 'beside' },
+  keyPoints: ["Flexible delegation","Instructions and output live in files","Change behavior by editing Markdown"],
+  notes: "Now ask for one workflow whose next step depends on the case. There is no universal winner; choose the control model that fits the work."
+},
+
+{ // Slide 20
   title: "What did you learn?",
   kicker: "DAY 4 · CLOSING",
   subtitle: "Complete these statements.",
@@ -375,11 +358,11 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
     { title: "MCP lets an agent…", body: "" },
     { title: "I still have a question about…", body: "" }
   ],
-  keyPoints: ["Three quiet minutes","Let people write first","Collect a few answers aloud","Questions on the flipchart"],
+  keyPoints: ["Three quiet minutes","Let people write first","Collect answers and open questions"],
   notes: "Give three quiet minutes to complete the statements, then collect a few out loud. Write the open questions on the flipchart."
 },
 
-{ // Slide 19
+{ // Slide 21
   title: "Thank you!",
   kicker: "DAY 4 · CLOSING",
   subtitle: "From a canvas in n8n to agents in Claude Code.",
