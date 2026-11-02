@@ -39,6 +39,7 @@ test('Imported authored data matches its pinned source digest',()=>{
   const ctx={window:{}};vm.runInNewContext(read(item.file),ctx);
   for(const slide of ctx.window.SLIDES)if(slide.visual?.image)slide.visual.image=slide.visual.image.replace(/^assets\//,'');
   assert.equal(ctx.window.SLIDES.length,item.slides);
+  if(item.adapted){assert.ok(item.sourceSlides>0);assert.ok(item.adaptedFromNormalizedSha256);assert.equal(item.normalizedDataSha256,item.adaptedDataSha256,item.file);assert.equal(createHash('sha256').update(JSON.stringify(ctx.window.SLIDES)).digest('hex'),item.normalizedDataSha256,item.file);continue;}
   assert.equal(createHash('sha256').update(JSON.stringify(ctx.window.SLIDES)).digest('hex'),item.normalizedDataSha256,item.file);
  }
 });
