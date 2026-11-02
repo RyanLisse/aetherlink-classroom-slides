@@ -98,7 +98,7 @@ function makeScene() {
   const flow = [
     k.lineOnTop([-104, 4], [-122, 4], 35.1, P),
     k.lineOnTop([-122, 4], [-122, -72], 35.1, P),
-    k.lineOnTop([-122, -72], [-24, -72], 35.1, P),
+    k.lineOnTop([-122, -72], [-27.4, -72], 35.1, P),
   ].join("");
   overlays.push(`<g class="feedback-flow">${L(flow, { tone: "lit", flow: true })}</g>`);
 
