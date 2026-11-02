@@ -18,13 +18,13 @@ test('All ten sessions open real decks with real assets and matching presenters'
   const phtml=read(presenter);assert.ok(phtml.includes(data),presenter);
   if(session.deck!=='index.html')assert.ok(phtml.includes(`window.DECK_PAGE = "${session.deck}"`),presenter);
  }
- assert.equal(sessions[0].href,'index.html#7');assert.equal(sessions[1].href,'index.html#63');
+ assert.equal(sessions[0].href,'index.html#1');assert.equal(sessions[1].href,'index.html#83');
 });
 test('Day selection tracks hash navigation and opens the chosen session',()=>{
  const listeners={};let select;
  const element=tag=>({tag,children:[],append(...children){this.children.push(...children)},prepend(){},addEventListener(event,fn){this[event]=fn}});
- const ctx={window:{},URLSearchParams,location:{search:'',pathname:'/index.html',hash:'#7'},addEventListener(event,fn){listeners[event]=fn},document:{createElement(tag){const e=element(tag);if(tag==='select')select=e;return e},querySelector(){return element('tools')}}};
- vm.runInNewContext(read('sessions.js'),ctx);assert.equal(select.value,'day-1');ctx.location.hash='#63';listeners.hashchange();assert.equal(select.value,'day-2');select.value='hackathon-2';select.change();assert.equal(ctx.location.href,'workshop7.html#1');
+ const ctx={window:{},URLSearchParams,location:{search:'',pathname:'/index.html',hash:'#1'},addEventListener(event,fn){listeners[event]=fn},document:{createElement(tag){const e=element(tag);if(tag==='select')select=e;return e},querySelector(){return element('tools')}}};
+ vm.runInNewContext(read('sessions.js'),ctx);assert.equal(select.value,'day-1');ctx.location.hash='#83';listeners.hashchange();assert.equal(select.value,'day-2');select.value='hackathon-2';select.change();assert.equal(ctx.location.href,'workshop7.html#1');
 });
 test('Deck and presenter use separate matching channels and storage keys',()=>{
  const evaluate=(file,deck)=>{const src=read(file);const start=src.indexOf('const DECK_ID =');const end=src.indexOf(';',src.indexOf('const PRESENTER_KEY =',start))+1;const ctx={location:{pathname:'/path/'+deck},window:{DECK_PAGE:deck}};return vm.runInNewContext(src.slice(start,end)+'; ({channel:PRESENTER_CHANNEL,key:PRESENTER_KEY})',ctx)};

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Aetherlink x Worldline — Day 3 classroom deck: n8n agents (Maarten)
-   18 slides. One slide = one object in order. See README.md "How to edit
+   24 slides. One slide = one object in order. See README.md "How to edit
    a slide" and the field reference at the top of day3-n8n-slides.js
    before changing anything here.
 
@@ -25,6 +25,21 @@ window.SLIDES = [
 },
 
 { // Slide 2
+  title: "What was useful from the last session?",
+  kicker: "DAY 3 · RECAP",
+  subtitle: "Choose one thing you used, remembered or want to practise again.",
+  type: "recap",
+  visual: { sentences: true, quietTimer: 2 },
+  cards: [
+    { title: "A useful idea was…", body: "" },
+    { title: "I used it when…", body: "" },
+    { title: "I want to practise…", body: "" }
+  ],
+  keyPoints: ["Two quiet minutes","One useful idea each","Connect the answers to today's workflow"],
+  notes: "Give the room two quiet minutes. Ask each participant for one useful idea from the last session and one thing they want to practise again. Connect their answers to today's work where possible."
+},
+
+{ // Slide 3
   title: "Introducing myself",
   kicker: "DAY 3 · TEAM",
   subtitle: "Who is teaching you n8n today.",
@@ -39,22 +54,22 @@ window.SLIDES = [
   notes: "Introduce yourself: who you are, what you do, and one concrete thing you have built or automated with n8n. A real example of your own makes the build slides land better."
 },
 
-{ // Slide 3
+{ // Slide 4
   title: "Who are you?",
   kicker: "DAY 3 · INTRODUCTIONS",
   subtitle: "A short round: one sentence each.",
   type: "context",
   visual: { stagger: 'pop', stepThrough: true, bot: 'multiarm', place: 'beside' },
   cards: [
-    { title: "Your name", body: "" },
-    { title: "Your role", body: "" },
-    { title: "Have you used n8n before?", body: "" }
+    { title: "Name and role", body: "Who are you and what do you do?" },
+    { title: "n8n experience", body: "Have you used n8n or another automation tool?" },
+    { title: "Success today", body: "What do you want to get out of today? What would success look like?" }
   ],
-  keyPoints: ["One sentence each","Name, role, n8n yes or no","Keep it moving","Note who already knows n8n"],
-  notes: "Go round the room: name, role, and whether they have used n8n or another automation tool before. Keep it quick. Remember who already knows n8n: they can help their neighbours during the build."
+  keyPoints: ["One sentence each","Name, role and n8n experience","Desired outcome","Keep it moving"],
+  notes: "Go round the room: name, role, whether they have used n8n or another automation tool, and what success would look like today. Keep it quick. Use the answers to adjust the pace and examples."
 },
 
-{ // Slide 4
+{ // Slide 5
   title: "Today",
   kicker: "DAY 3 · OVERVIEW",
   subtitle: "One support ticket, from a simple switch to a team of AI agents.",
@@ -69,7 +84,7 @@ window.SLIDES = [
   notes: "Tell how the day will go. We take one support ticket and build the workflow around it step by step: first a simple Switch, then a chat, memory, an AI Agent, an output parser, sub-agents and a data table. Everyone builds along on their own screen. Use the route under the cards for the planning of the day, and add the times of the breaks out loud."
 },
 
-{ // Slide 5
+{ // Slide 6
   title: "How we work today",
   kicker: "DAY 3 · OVERVIEW",
   subtitle: "We build along together and look at each other's work.",
@@ -85,11 +100,42 @@ window.SLIDES = [
   notes: "Set the working agreement for the day. After each block, ask one or two people to share their screen: what did they make, and did they run into anything? Make it normal to show something that doesn't work yet; that is where the most is learned."
 },
 
+{ // Slide 7
+  title: "A quick tour of n8n",
+  kicker: "DAY 3 · N8N BASICS",
+  subtitle: "Follow one run from its trigger to the data each node returns.",
+  type: "concept",
+  visual: { stagger: 'pop', stepThrough: true, bot: 'point', place: 'beside' },
+  cards: [
+    { title: "Trigger", body: "Starts one workflow run." },
+    { title: "Nodes and connections", body: "Each node reads data, does one job and passes data on." },
+    { title: "Input and output", body: "Open a node to see what came in and what went out." },
+    { title: "Executions", body: "Inspect earlier runs and find the step that failed." }
+  ],
+  keyPoints: ["Trigger starts the run","Connections carry data","Inspect input and output","Executions preserve the run"],
+  notes: "Tour the live n8n interface in this order: workflows, canvas, trigger, node settings, input and output, then Executions. Run one tiny example. The central skill today is following the data through each node."
+},
+
+{ // Slide 8
+  title: "Use workshop data only",
+  kicker: "DAY 3 · WORKING AGREEMENT",
+  subtitle: "Build on local n8n or the workshop instance and keep real systems out of the exercise.",
+  type: "context",
+  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
+  cards: [
+    { title: "No production writes", body: "Do not send real messages or change customer systems." },
+    { title: "Protect credentials", body: "Keep secrets and connection details off screen." },
+    { title: "Use the fixtures", body: "Test with the supplied tickets and customer table." }
+  ],
+  keyPoints: ["Workshop environment only","No real customer data","Secrets stay off screen","Use supplied fixtures"],
+  notes: "Set the boundary before the first build. Use local n8n or the workshop instance. Do not write to production systems. Do not paste real customer data or credentials into the workflow or show secrets while sharing a screen."
+},
+
 /* ---------------------------------------------------------------------- */
 /* DAY 3 — Build the ticket workflow                                        */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 6
+{ // Slide 9
   title: "The basic flow",
   kicker: "DAY 3 · BUILD · STEP 1",
   subtitle: "A ticket comes in, and a Switch sends it down the right path.",
@@ -104,7 +150,7 @@ window.SLIDES = [
   notes: "Build this live and let everyone build along. Start with a Manual trigger, add an Edit Fields node called Ticket Input with a test ticket (for example a customer who was charged twice), and add a Switch with three rules: low, medium and high. Run it and open the Switch to show which output the ticket went to. Point out that this is plain rules: it only works if the priority is already in the ticket. That is the problem the AI Agent will solve."
 },
 
-{ // Slide 7
+{ // Slide 10
   title: "Chat Message trigger",
   kicker: "DAY 3 · BUILD · STEP 2",
   subtitle: "Start a workflow by typing a message, instead of clicking a button.",
@@ -118,24 +164,43 @@ window.SLIDES = [
   notes: "Open a new workflow and add the trigger 'When chat message received'. Show the chat panel that appears at the bottom: the chat on the left, the logs on the right. On its own it does nothing yet; on the next slide we connect an AI Agent to it."
 },
 
-{ // Slide 8
+{ // Slide 11
   title: "Simple Memory",
   kicker: "DAY 3 · BUILD · STEP 3",
-  subtitle: "Without memory, the agent forgets every message straight away.",
+  subtitle: "Compare what the agent receives before and after Simple Memory is connected.",
   type: "concept",
-  visual: { opener: 'showcase', image: 'assets/day3-maarten-n8n/03-chat-memory.jpeg', imageLink: 'n8n · AI Agent + Simple Memory', stepThrough: true },
+  visual: { opener: 'showcase', image: 'assets/day3-maarten-n8n/03-chat-memory.jpeg', imageLink: 'Step 3 · Before connecting Simple Memory', stepThrough: true },
   cards: [
     { title: "Test 1, without memory", body: "Type: My favorite color is red\nThen ask: What is my favorite color?" },
     { title: "Add Simple Memory", body: "Connect a Simple Memory node to the Memory slot of the AI Agent." },
-    { title: "Test 2, with memory", body: "Ask the same two things again. Now the agent remembers." }
+    { title: "Test 2, with memory", body: "Start clean, repeat both messages in one session, and compare the output." }
   ],
   prompt: `My favorite color is red
 What is my favorite color?`,
-  keyPoints: ["AI Agent + chat model on the chat","Test without memory first","Add Simple Memory","Same test: now it remembers"],
-  notes: "Connect an AI Agent to the chat trigger and give it a chat model (OpenAI in the screenshot). First test without memory: type 'My favorite color is red', then 'What is my favorite color?'. The agent doesn't know. Then connect Simple Memory to the Memory slot and do exactly the same test: now it answers red. Let people see the difference in the Logs as well. Takeaway: every message is a new call to the model; memory is what sends the earlier messages along."
+  keyPoints: ["AI Agent + chat model on the chat","Test without memory first","Add Simple Memory","Repeat and compare in one session"],
+  notes: "Connect an AI Agent to the chat trigger and give it a chat model. First record the output without memory after the exact two messages. Then connect Simple Memory, start a clean session, repeat both messages in that same session and compare the output and Logs. Describe what you observe; do not promise that a model can never infer an answer without memory. Memory sends earlier messages with the current request."
 },
 
-{ // Slide 9
+{ // Slide 12
+  title: "Checkpoint: prove memory",
+  kicker: "DAY 3 · CHECKPOINT · STEP 3",
+  subtitle: "Run the same test before and after Simple Memory is connected.",
+  type: "practice",
+  layout: "exercise",
+  visual: { shot: 'assets/day3-maarten-n8n/03-chat-memory.jpeg', shotLabel: 'Step 3 · Before connecting Simple Memory' },
+  stepsHeading: "Show the difference:",
+  steps: [
+    "Record both outputs without memory.",
+    "Connect Simple Memory and start a clean session.",
+    "Repeat both messages in that same session.",
+    "Compare the outputs and the Logs with a neighbour."
+  ],
+  expected: "You can show the before and after outputs and explain what history Simple Memory adds.",
+  keyPoints: ["Same prompts","Clean session","Compare outputs","Explain the evidence"],
+  notes: "Pause here. Let everyone complete the same before-and-after test. Ask one pair to share both outputs and explain what changed. Treat their recorded run as evidence; do not prescribe the exact wording the model must return."
+},
+
+{ // Slide 13
   title: "AI Agent in the flow",
   kicker: "DAY 3 · BUILD · STEP 4",
   subtitle: "The agent reads the ticket and decides the priority, so the Switch no longer needs it in the input.",
@@ -150,7 +215,7 @@ What is my favorite color?`,
   notes: "Go back to the ticket workflow from step 1 and put an AI Agent between Ticket Input and the Switch, with a chat model and Simple Memory. Write a short instruction: read the ticket, decide low, medium or high, and write a reply. Run it and open the agent's output. Point out the problem: the answer is one block of text, so the Switch can't read the priority from it. That's the next step."
 },
 
-{ // Slide 10
+{ // Slide 14
   title: "Output Parser",
   kicker: "DAY 3 · BUILD · STEP 5",
   subtitle: "Make the agent answer in fixed fields that the next node can use.",
@@ -165,7 +230,7 @@ What is my favorite color?`,
   notes: "In the AI Agent, turn on 'Require Specific Output Format'; a fourth slot, Output Parser, appears. Connect a Structured Output Parser to it. From now on the agent always answers in the same JSON shape, and the Switch can route on the priority field. The settings come on the next slide."
 },
 
-{ // Slide 11
+{ // Slide 15
   title: "Output Parser settings",
   kicker: "DAY 3 · BUILD · STEP 6",
   subtitle: "Give an example of the JSON you want back, and adjust the fields.",
@@ -184,7 +249,26 @@ What is my favorite color?`,
   notes: "Open the Structured Output Parser. Choose 'Generate From JSON Example' and type an example with the fields you want: priority and message. Note the warning: all fields become required. Run the workflow and compare input and output in the parser: in goes a block of text, out come clean fields. Then point the Switch rules at the priority field. Let people add or rename a field themselves, for example a category."
 },
 
-{ // Slide 12
+{ // Slide 16
+  title: "Checkpoint: route structured output",
+  kicker: "DAY 3 · CHECKPOINT · STEP 6",
+  subtitle: "Prove that the parser fields drive the correct Switch branch.",
+  type: "practice",
+  layout: "exercise",
+  visual: { shot: 'assets/day3-maarten-n8n/06-output-parser-settings.jpeg', shotLabel: 'Step 6 · priority and message fields' },
+  stepsHeading: "Run one ticket:",
+  steps: [
+    "Inspect the parser output for priority and message.",
+    "Point the Switch rules at the priority field.",
+    "Run the workflow and note the selected branch.",
+    "Share the output and branch with a neighbour."
+  ],
+  expected: "The parser returns priority and message, and the Switch follows the matching branch.",
+  keyPoints: ["Two required fields","Switch reads priority","Branch matches output","Share the run"],
+  notes: "Pause after the parser block. Let participants show the structured output and the selected branch side by side. Fix the field reference before moving to sub-agents."
+},
+
+{ // Slide 17
   title: "Your first sub-agent",
   kicker: "DAY 3 · BUILD · STEP 7",
   subtitle: "The Customer Reply Agent: a specialist the main agent calls as a tool.",
@@ -199,7 +283,7 @@ What is my favorite color?`,
   notes: "Add an AI Agent Tool to the Tool slot of the main AI Agent and call it Customer Reply Agent. Give it its own chat model and Simple Memory. Its only job: write a friendly, clear reply to the customer. Run the workflow and show the green dotted line: the main agent called the sub-agent. Takeaway: instead of one agent that does everything, you give each job to a specialist."
 },
 
-{ // Slide 13
+{ // Slide 18
   title: "The second sub-agent: Risk Agent",
   kicker: "DAY 3 · BUILD · STEP 8",
   subtitle: "A second specialist that analyses the risk of the ticket.",
@@ -213,17 +297,21 @@ What is my favorite color?`,
   notes: "Add a second AI Agent Tool next to the Customer Reply Agent and call it Risk Agent, again with its own model and memory. Its job is to analyse the risk of the ticket. The main agent now has two specialists it can call. How it knows which one to call is on the next slide."
 },
 
-{ // Slide 14
+{ // Slide 19
   title: "Risk Agent settings",
   kicker: "DAY 3 · BUILD · STEP 9",
   subtitle: "The description tells the main agent when to call it. The system message tells the sub-agent how to work.",
   type: "concept",
   visual: { opener: 'showcase', image: 'assets/day3-maarten-n8n/09-risk-agent-settings.jpeg', imageLink: 'n8n · Risk Agent settings', stepThrough: true },
   cards: [
-    { title: "Description", body: "For the main agent: when to use this tool.\n\"Use this agent to assess ticket risk, urgency and whether escalation is required.\"" },
-    { title: "System Message", body: "For the sub-agent itself: who it is and what it returns.\n\"You are a payment risk and escalation specialist… Return a short internal risk note.\"" }
+    { title: "Description", body: "When the main agent should choose this specialist." },
+    { title: "System Message", body: "How the Risk Agent behaves and what it returns." }
   ],
-  prompt: `You are a payment risk and escalation specialist.
+  prompt: `Description:
+Use this agent to assess ticket risk, urgency and whether escalation is required.
+
+System Message:
+You are a payment risk and escalation specialist.
 
 Review the ticket context.
 
@@ -238,12 +326,13 @@ Return a short internal risk note.`,
   notes: "Open the Risk Agent. Two fields matter. The Description is read by the main agent: it decides from this text whether to call this tool, so write when to use it. The System Message is read by the sub-agent itself: its role, what to look at, and what to return. The Prompt is defined automatically by the model, meaning the main agent writes the question. Use the Example prompt button to paste the system message. Ask: what happens if the description is vague?"
 },
 
-{ // Slide 15
+{ // Slide 20
   title: "Data tables",
   kicker: "DAY 3 · BUILD · STEP 10",
   subtitle: "A table inside n8n that your workflow can read and write: here, what we know about each customer.",
   type: "concept",
   visual: { opener: 'showcase', image: 'assets/day3-maarten-n8n/10-data-table.jpeg', imageLink: 'n8n · Data tables · customer context', stepThrough: true },
+  source: { label: 'Download customer-context.csv', url: 'assets/day3-maarten-n8n/customer-context.csv' },
   cards: [
     { title: "What it is", body: "Rows and columns stored in n8n itself, no separate database needed." },
     { title: "Import the CSV", body: "Create a data table and import customer-context.csv." },
@@ -253,16 +342,23 @@ Return a short internal risk note.`,
   notes: "Explain data tables: a simple table that lives inside n8n, which workflows can read and write, without setting up a database. Share customer-context.csv with the participants (it is in this repo at assets/day3-maarten-n8n/customer-context.csv) and let them create a data table called customer context and import it. Walk through the columns: customer type, transactions per hour, previous incidents and the critical flag. This is the context the third sub-agent will use."
 },
 
-{ // Slide 16
+{ // Slide 21
   title: "Three sub-agents",
   kicker: "DAY 3 · BUILD · STEP 11",
   subtitle: "Customer Reply, Risk and Customer Context: each with its own job.",
   type: "practice",
-  visual: { opener: 'showcase', image: 'assets/day3-maarten-n8n/11-three-sub-agents.jpeg', imageLink: 'n8n · Three sub-agents', stepThrough: true },
-  cards: [
-    { title: "Customer Context Agent", body: "The third sub-agent, with 'Get row(s) in Data table' as its tool." },
-    { title: "Share your screen", body: "What does your workflow answer? Compare the results with each other." }
+  layout: "exercise",
+  repo: { label: 'Download customer-context.csv', url: 'assets/day3-maarten-n8n/customer-context.csv' },
+  visual: { shot: 'assets/day3-maarten-n8n/11-three-sub-agents.jpeg', shotLabel: 'Step 11 · Three specialist agents' },
+  stepsHeading: "Complete the specialist team:",
+  steps: [
+    "Add the Customer Context Agent as the third specialist.",
+    "Give it the 'Get row(s) in Data table' tool.",
+    "Run one ticket for a critical customer and one for a standard customer.",
+    "Compare which specialists ran and what context they returned.",
+    "Share one complete result with the room."
   ],
+  expected: "Customer Reply, Risk and Customer Context each do one job, and customer context changes between both test tickets.",
   keyPoints: ["Third agent reads the data table","Three specialists, one main agent","Share screens","Compare results"],
   notes: "Add the third sub-agent, the Customer Context Agent, and give it the 'Get row(s) in Data table' node as a tool, so it can look up the customer of the ticket. Run the workflow with a ticket for a critical customer and one for a standard customer. Then let two or three people share their screen: what did their workflow answer, and why are the results different?"
 },
@@ -271,7 +367,7 @@ Return a short internal risk note.`,
 /* DAY 3 — Assignment and closing                                           */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 17
+{ // Slide 22
   title: "Assignment: from chat to chat",
   kicker: "DAY 3 · ASSIGNMENT",
   subtitle: "The ticket comes in through the chat, goes through the whole flow, and the answer comes back in the chat.",
@@ -293,7 +389,25 @@ Return a short internal risk note.`,
   notes: "Type the minutes on the timer and press start. The core: the ticket comes in through the chat trigger, goes through the whole flow, and each path of the Switch ends with a message back in the chat. Once that works, let people explore other nodes to make the workflow more interesting or more effective. Walk around and help; save a few interesting workflows for the recap."
 },
 
-{ // Slide 18
+{ // Slide 23
+  title: "Save your proof",
+  kicker: "DAY 3 · ASSIGNMENT",
+  subtitle: "Capture enough evidence to explain what ran and where a person still decides.",
+  type: "practice",
+  layout: "exercise",
+  stepsHeading: "Before you finish:",
+  steps: [
+    "Export the workflow or capture one readable screenshot.",
+    "Save one chat input and its returned answer.",
+    "Write one sentence that explains the Low, Medium and High routing.",
+    "Name the human review step before a customer-facing reply is sent."
+  ],
+  expected: "You can show the workflow, one real run, the routing rule and the human review step.",
+  keyPoints: ["Workflow export or screenshot","One input and output","Routing explanation","Named human review"],
+  notes: "Give participants time to save proof before the recap. The proof is small: one export or readable screenshot, one input and output, a short routing explanation, and the point where a person reviews customer-facing output."
+},
+
+{ // Slide 24
   title: "What did you learn?",
   kicker: "DAY 3 · CLOSING",
   subtitle: "Complete these statements.",
