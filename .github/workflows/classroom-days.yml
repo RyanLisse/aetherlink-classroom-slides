@@ -4,6 +4,7 @@ on:
     paths:
       - 'day3-maarten*'
       - 'day4-maarten*'
+      - 'workshop4*'
       - 'assets/day3-maarten-n8n/**'
       - '.github/workflows/classroom-days.yml'
 permissions:
@@ -42,7 +43,7 @@ jobs:
             page.on('console', m=>{if(m.type()==='error')errors.push(m.text());});
             page.on('requestfailed', r=>errors.push(r.url()+': '+r.failure()?.errorText));
             page.on('response', r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url());});
-            for(const deck of ['day3-maarten-n8n','day4-maarten-n8n-to-claude']) {
+            for(const deck of ['day3-maarten-n8n','day4-maarten-n8n-to-claude','workshop4']) {
               await page.goto(`http://127.0.0.1:8765/${deck}.html`);
               await page.waitForFunction(()=>window.SLIDES?.length>0);
               const slides=await page.evaluate(()=>window.SLIDES.map(s=>({title:s.title,exercise:s.layout==='exercise',image:!!s.visual?.image})));
@@ -55,7 +56,7 @@ jobs:
                 await page.waitForFunction(()=>[...document.images].every(i=>i.complete));
                 assert.deepEqual(await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.naturalWidth).map(i=>i.src)),[]);
                 await page.evaluate(()=>{let n=0;while(typeof window.__reveal==='function'&&n++<30&&window.__reveal()){} });
-                if(slides[i].exercise||slides[i].image||i===0)await page.screenshot({path:`classroom-evidence/${deck}-${i+1}.png`,fullPage:true});
+                await page.screenshot({path:`classroom-evidence/${deck}-${i+1}.png`,fullPage:true});
               }
             }
             assert.deepEqual(errors,[]);
