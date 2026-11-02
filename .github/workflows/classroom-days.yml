@@ -46,7 +46,7 @@ jobs:
             for(const deck of ['day3-maarten-n8n','day4-maarten-n8n-to-claude','workshop4']) {
               await page.goto(`http://127.0.0.1:8765/${deck}.html`);
               await page.waitForFunction(()=>window.SLIDES?.length>0);
-              const slides=await page.evaluate(()=>window.SLIDES.map(s=>({title:s.title,exercise:s.layout==='exercise',image:!!s.visual?.image})));
+              const slides=await page.evaluate(()=>window.SLIDES.map(s=>({title:s.title,type:s.type,exercise:s.layout==='exercise',image:!!s.visual?.image})));
               for(let i=0;i<slides.length;i++) {
                 await page.goto(`http://127.0.0.1:8765/${deck}.html#${i+1}`);
                 const heading=page.locator('.heading h1, .asg-head h1').first();
@@ -56,6 +56,7 @@ jobs:
                 await page.waitForFunction(()=>[...document.images].every(i=>i.complete));
                 assert.deepEqual(await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.naturalWidth).map(i=>i.src)),[]);
                 await page.evaluate(()=>{let n=0;while(typeof window.__reveal==='function'&&n++<30&&window.__reveal()){} });
+                if(deck==='workshop4'&&slides[i].type==='concept'&&i>0)assert.ok((await page.locator('.slide-main').innerText()).trim(), `Concept slide ${i+1} needs visible content`);
                 await page.screenshot({path:`classroom-evidence/${deck}-${i+1}.png`,fullPage:true});
               }
             }
