@@ -68,6 +68,20 @@ window.SLIDES = [
       "Reply, Risk, and Context own separate jobs.",
       "Data Table supplies customer context."
     ],
+    "cards": [
+      {
+        "title": "Route",
+        "body": "A Switch sends each ticket to a fixed priority branch."
+      },
+      {
+        "title": "Specialists",
+        "body": "Reply, Risk, and Context each own one job."
+      },
+      {
+        "title": "Customer data",
+        "body": "A Data Table supplies the customer context."
+      }
+    ],
     "notes": "Use one n8n anchor instead of repeating a side-by-side comparison on every concept."
   },
   {
@@ -85,6 +99,20 @@ window.SLIDES = [
       "The event stream shows tools and observations.",
       "maxTurns limits the loop."
     ],
+    "cards": [
+      {
+        "title": "Input",
+        "body": "query() receives the prompt and options."
+      },
+      {
+        "title": "Trace",
+        "body": "The event stream shows tools and observations."
+      },
+      {
+        "title": "Limit",
+        "body": "maxTurns limits the loop."
+      }
+    ],
     "notes": "Explain the SDK loop, then move directly to project instructions."
   },
   {
@@ -101,6 +129,20 @@ window.SLIDES = [
       "settingSources loads project instructions.",
       "Purpose and Rules set the main boundaries.",
       "Step 1 adds priority and output requirements."
+    ],
+    "cards": [
+      {
+        "title": "Load",
+        "body": "settingSources loads the project instructions."
+      },
+      {
+        "title": "Boundaries",
+        "body": "Purpose and Rules define the main boundaries."
+      },
+      {
+        "title": "Lesson 1",
+        "body": "Step 1 adds priority and output requirements."
+      }
     ],
     "notes": "The supplied facilitator CLAUDE.md contains Purpose, Rules, and Always use sub-agents. It does not contain priority definitions or an output schema; those claims come from the current workshop repository."
   },
@@ -271,6 +313,20 @@ window.SLIDES = [
       "customer-reply-agent owns the draft.",
       "customer-context-agent arrives in Step 3."
     ],
+    "cards": [
+      {
+        "title": "risk-agent",
+        "body": "Owns priority and escalation."
+      },
+      {
+        "title": "customer-reply-agent",
+        "body": "Owns the reply draft."
+      },
+      {
+        "title": "customer-context-agent",
+        "body": "Adds customer facts in Step 3."
+      }
+    ],
     "notes": "The description tells the orchestrator when to delegate. The body tells the specialist how to work."
   },
   {
@@ -287,6 +343,20 @@ window.SLIDES = [
       "tools includes Agent and Write.",
       "allowedTools permits known operations.",
       "disallowedTools blocks WebSearch, WebFetch, and Bash."
+    ],
+    "cards": [
+      {
+        "title": "Available",
+        "body": "tools includes Agent and Write."
+      },
+      {
+        "title": "Allowed",
+        "body": "allowedTools permits known operations."
+      },
+      {
+        "title": "Blocked",
+        "body": "disallowedTools blocks WebSearch, WebFetch, and Bash."
+      }
     ],
     "notes": "Use the current Step 2 options. Keep this slide to tool access only."
   },
@@ -387,6 +457,20 @@ window.SLIDES = [
       "get_customer reads one customer record.",
       "get_transaction reads one transaction.",
       "Data files stay outside claude-project."
+    ],
+    "cards": [
+      {
+        "title": "get_customer",
+        "body": "Reads one customer record."
+      },
+      {
+        "title": "get_transaction",
+        "body": "Reads one transaction."
+      },
+      {
+        "title": "Boundary",
+        "body": "Data files stay outside claude-project."
+      }
     ],
     "notes": "The current repo has two read-only servers. The supplied archive confirms only the transaction-server pattern."
   },
@@ -510,6 +594,20 @@ window.SLIDES = [
       "The orchestrator chooses the next specialist.",
       "npm run check validates recorded labels.",
       "A person reviews every saved draft."
+    ],
+    "cards": [
+      {
+        "title": "Agent choice",
+        "body": "The orchestrator chooses the next specialist."
+      },
+      {
+        "title": "Fixed check",
+        "body": "npm run check validates the recorded labels."
+      },
+      {
+        "title": "Human review",
+        "body": "A person reviews every saved draft."
+      }
     ],
     "notes": "Hooks and Skills are parked because neither appears in the core exercise."
   },

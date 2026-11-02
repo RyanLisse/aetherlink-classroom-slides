@@ -51,8 +51,8 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
   assert.match(presenter,/timers\.js\?v=92/);
   assert.match(presenter,/presenter\.js\?v=96/);
  }
- assert.match(read('workshop4.html'),/workshop4-slides\.js\?v=3/);
- assert.match(read('workshop4-presenter.html'),/workshop4-slides\.js\?v=3/);
+ assert.match(read('workshop4.html'),/workshop4-slides\.js\?v=4/);
+ assert.match(read('workshop4-presenter.html'),/workshop4-slides\.js\?v=4/);
  assert.match(read('day4-maarten-n8n-to-claude.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  assert.match(read('day4-maarten-n8n-to-claude-presenter.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  const ryan=deck('workshop4-slides.js');
@@ -60,6 +60,9 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').sourceSlides,28);
  assert.ok(ryan.every(s=>s.layout!=='compare'));
  assert.ok(ryan.filter(s=>s.type==='concept').every(s=>(s.keyPoints?.length||0)<=3));
+ const visibleConcepts=ryan.filter((s,i)=>s.type==='concept'&&i!==0);
+ assert.ok(visibleConcepts.every(s=>!s.layout&&s.cards?.length>=1&&s.cards.length<=3));
+ assert.ok(visibleConcepts.every(s=>s.cards.every(card=>card.title?.trim()&&card.body?.trim())));
  assert.deepEqual(Array.from(ryan.slice(3,7),s=>s.title),['Yesterday in n8n','Agent SDK: the query loop','Agent SDK: project instructions','Get the workshop package.']);
  assert.ok(!ryan.some(s=>/Hooks|Skills/.test(s.title)));
  const active=JSON.stringify(ryan);
