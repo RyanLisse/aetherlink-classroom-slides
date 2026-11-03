@@ -45,12 +45,15 @@ test('Day 4 bridges the real fields and does not require W3 specialists', () => 
 
 test('Both days explain the same bounded loop without equating text with success', () => {
   for (const file of ['workshop3-slides.js', 'workshop4-slides.js']) {
-    const diagrams = load(file).filter(s => s.visual?.image === 'assets/workshop-3/agent-loop.svg');
-    assert.equal(diagrams.length, 1);
-    assert.match(diagrams[0].notes, /post-tool hook cannot prevent an action that already ran/);
-    assert.match(diagrams[0].notes, /not proof that acceptance checks passed/);
-    assert.ok(diagrams[0].visual.imageAlt);
-  }
+      const slides = load(file);
+      const diagrams = slides.filter(s => s.visual?.image === 'assets/workshop-3/agent-loop.svg');
+      assert.equal(diagrams.length, 1);
+      assert.match(diagrams[0].notes, /post-tool hook cannot prevent an action that already ran/);
+      assert.match(diagrams[0].notes, /not proof that acceptance checks passed/);
+      assert.ok(diagrams[0].visual.imageAlt);
+      assert.equal(slides.some(s => s.visual?.anatomy), false, `${file} still references removed Anatomy visuals`);
+      assert.doesNotMatch(JSON.stringify(slides), /assets\/anatomy\//, `${file} references removed Anatomy assets`);
+    }
   const svg = read('assets/workshop-3/agent-loop.svg');
   for (const label of ['Check permission', 'Runtime executes tool', 'Answer to review', 'human cancellation']) {
     assert.ok(svg.includes(label), label);

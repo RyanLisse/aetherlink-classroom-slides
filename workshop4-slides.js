@@ -1536,26 +1536,28 @@ window.SLIDES = [
     "title": "Not every agent has every tool",
     "kicker": "Explain · Permissions",
     "type": "concept",
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/permissions.html",
-        "poster": "assets/anatomy/permissions.svg",
-        "title": "Who may open which drawer",
-        "caption": "Four layers decide one write: the agent’s key ring, no write key for the orchestrator, the amount hook, a person’s y/N."
+    "subtitle": "Tool access does not give an agent human authority.",
+    "cards": [
+      {
+        "title": "Limit the tools",
+        "body": "Give each agent only the tools its task needs. The core customer and transaction tools read facts."
+      },
+      {
+        "title": "Check before execution",
+        "body": "A permission check can deny a requested tool call. A check after execution cannot undo that action."
+      },
+      {
+        "title": "Review the draft",
+        "body": "A person checks the facts and proposed reply. Tool access does not approve a refund or send a reply."
       }
-    },
-    "subtitle": "Four layers decide if a write can run.",
-    "cards": [],
+    ],
     "keyPoints": [
       "Each agent gets only the tools it needs.",
-      "The orchestrator delegates writes.",
-      "The hook decides; a person approves.",
-      "1 · Agent tools list: only transaction-agent has update and add.",
-      "2 · allowedTools: the orchestrator has no write tools.",
-      "3 · PreToolUse hook: allows, asks or denies each write.",
-      "4 · A person: only the orchestrator has AskUserQuestion."
+      "A requested tool call is not an executed action.",
+      "Read-only context does not authorize a customer action.",
+      "A person reviews every draft."
     ],
-    "notes": "Show the layers in order. The tools list in the agent frontmatter limits what each agent can call. The orchestrator allowedTools has no write tools, so it must delegate. The PreToolUse hook in 03-mcp/hooks/transaction-guard.mjs then allows, asks or denies each call. When the hook asks, a person answers y or N. The same hook runs in the SDK hooks option and in .claude/settings.json for Claude Code. AskUserQuestion is the built-in ask-a-person tool. Only the orchestrator has it; subagents do not get it."
+    "notes": "Inspect the configured tools before the run. The current core package reads customer and transaction context; it does not grant permission to change a payment or send a reply. Ask the participant to identify the requested tool, its permitted scope and the human review decision. Keep the removed Anatomy illustration out of this route. The bounded-loop diagram earlier in the deck distinguishes pre-execution permission checks from post-tool checks."
   },
   {
     "lessonId": "workshop-4",
