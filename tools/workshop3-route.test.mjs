@@ -10,6 +10,50 @@ const load = name => {
   return context.window.SLIDES;
 };
 
+test('Break timers render with or without a card grid', () => {
+  const source = read('app.js');
+  const extras = source.slice(source.indexOf('function renderExtras('), source.indexOf('\nconst REACT ='));
+  for (const slide of load('workshop3-slides.js').filter(s => s.type === 'pause')) {
+    for (const withCards of [false, true]) {
+      const timer = {children: [], append(...items) { this.children.push(...items); }};
+      const grid = {replaceWith(item) { children.splice(children.indexOf(grid), 1, item); }};
+      const children = withCards ? [grid] : [];
+      const main = {querySelectorAll: () => [], querySelector: () => withCards ? grid : null, append: item => children.push(item)};
+      let options;
+      const context = {
+        current: 0,
+        slideController: {signal: new AbortController().signal},
+        node: (tag, cls, text) => ({tag, cls, text}),
+        ALSTimer: {key: (index, title, stateId) => stateId, mount: value => { options = value; return timer; }}
+      };
+      vm.runInNewContext(extras, context);
+      const data = withCards ? {...slide, cards: [{body: 'Resume the lab.'}]} : slide;
+      context.renderExtras({}, main, data, data.visual);
+      assert.deepEqual(children, [timer]);
+      assert.equal(options.key, slide.stateId);
+      assert.equal(options.defaultSec, slide.visual.countdown * 60);
+      assert.equal(timer.children.length, withCards ? 1 : 0);
+    }
+  }
+});
+
+test('Cloud checkpoints show the result relevant to each assignment', () => {
+  const slides = load('workshop3-slides.js');
+  const expected = {
+    'w3-setup': 'cloud-empty.png',
+    'w3-rule-limit': 'if-rule-limitation.png',
+    'w3-invalid': 'invalid-urgent.png',
+    'w3-review': 'human-review-stop.png',
+    'w3-build-zip-42': 'model-low.png'
+  };
+  for (const [id, file] of Object.entries(expected)) {
+    const slide = slides.find(s => s.stateId === id);
+    assert.equal(slide.visual.shot, 'assets/workshop-3/cloud/' + file);
+    assert.ok(slide.visual.shotAlt);
+    assert.ok(existsSync(new URL('../' + slide.visual.shot, import.meta.url)));
+  }
+});
+
 test('W3 core can finish without specialist extensions', () => {
   const slides = load('workshop3-slides.js');
   assert.equal(new Set(slides.map(s => s.stateId)).size, slides.length);

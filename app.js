@@ -222,7 +222,7 @@ function renderExtras(stage, main, s, v) {
   if (v.countdown) {                                             // pauses: countdown waits for ▶, keeps time across slides, shows the real return time
     const box = ALSTimer.mount({ key: ALSTimer.key(current, s.title, s.stateId), defaultSec: v.countdown * 60, back: true, boxCls: 'pause-box', faceCls: 'pause-clock', lateCls: 'late', signal: slideController.signal });
     if (s.cards?.[0]?.body) box.append(node('p', 'pause-next', s.cards[0].body));
-    grid.replaceWith(box);
+    if (grid) grid.replaceWith(box); else main.append(box);
   }
   if (v.term) {                                                  // 20: a terminal that types a few commands, then asks
     main.classList.add('with-window'); const t = node('div', 'term'); const bar = node('div', 'term-bar'); bar.append(node('i'), node('i'), node('i')); t.append(bar);
@@ -559,7 +559,7 @@ function buildOpener(stage, main, s, v) {
   if (v.opener === 'sdlc-loop' && v.image) {
     const figure = node('figure', 'sdlc-loop'); const img = document.createElement('img'); img.src = v.image; img.alt = v.imageAlt || '';
     const link = document.createElement('a'); link.href = v.image; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', 'Open diagram at full size');
-    link.append(img); figure.append(link); main.prepend(figure);
+    link.append(img); figure.append(link, node('figcaption', null, 'Open diagram at full size to read each check')); main.prepend(figure);
   }
   if (v.opener === 'team') main.querySelectorAll('.card').forEach(c => {
     const name = c.querySelector('h2,h3,strong,.card-title')?.textContent || c.textContent;
@@ -899,7 +899,11 @@ function renderAssignment(stage, s) {
   if (s.expected) { const p = node('p', 'asg-done'); p.append(node('span', 'asg-done-k', 'Done when'), node('span', null, s.expected)); main.append(p); }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));
-  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = ''; f.append(img); side.append(f); }
+  if (v.shot) {
+    const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotAlt || '';
+    const link = document.createElement('a'); link.href = v.shot; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', 'Open screenshot at full size');
+    link.append(img); f.append(link, node('figcaption', null, 'Open screenshot at full size')); side.append(f);
+  }
   else if (v.cardImages) { const row = node('div', 'asg-thumbs'); v.cardImages.forEach((src, i) => { const f = node('figure', 'thumb'); const img = document.createElement('img'); img.src = src; img.alt = ''; f.append(img, node('figcaption', null, s.cards?.[i]?.title || '')); row.append(f); }); side.append(row); }
   else if (s.cards?.length) {
     const mini = node('div', 'slide-main asg-mini'); const grid = node('div', 'cards one-col'); s.cards.forEach((c, i) => grid.append(renderCard(c, i))); mini.append(grid); side.append(mini);

@@ -170,7 +170,10 @@ window.SLIDES = [
     "stateId": "w3-setup",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/cloud-empty.png",
+      "shotLabel": "Cloud reference · saved empty workflow",
+      "shotAlt": "Cloud reference · saved empty workflow"
     },
     "notes": "Every participant creates their own n8n Cloud trial account before building; do not use a shared participant login. Start at n8n.io and choose Get started. Use the approved training email, complete any email verification prompt, create your own workspace if requested, and wait for the editor. Confirm the trial is active and free model credits are available; note the expiry before class. Gateway credits pay for workflow model calls; Assistant credits do not. Older instances may show free OpenAI API credits. Self-hosted n8n is only an optional rules exercise, not the free-credit route. Stop if verification is blocked, a paid plan or payment details are required, or trial credits are unavailable; do not enter payment details, buy credits, upgrade, or substitute a provider key. Participants save their own empty workflow. Explain, demonstrate, practise, inspect the saved result, then discuss. Solo participants write the explanation."
   },
@@ -285,7 +288,10 @@ window.SLIDES = [
     "stateId": "w3-rule-limit",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/if-rule-limitation.png",
+      "shotLabel": "Cloud reference · literal rule misses the meaning",
+      "shotAlt": "Cloud reference · literal rule misses the meaning"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: You can show a rule that works as written but misses a relevant ticket. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -381,8 +387,9 @@ window.SLIDES = [
     "visual": {
       "bot": "point",
       "place": "beside",
-      "shot": "assets/day3-lesplan/step-01.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/manual-switch-medium.png",
+      "shotLabel": "Cloud reference · supplied medium → Output 1",
+      "shotAlt": "Cloud reference · supplied medium → Output 1"
     },
     "cards": [
       {
@@ -397,7 +404,7 @@ window.SLIDES = [
       "Point to each selected output and explain why it was chosen."
     ],
     "expected": "Three supplied values reach their matching outputs; urgent reaches the fallback. No model has classified anything.",
-    "subtitle": "Run or inspect the deterministic L1 flow and hold the human gate before L2.",
+    "subtitle": "Keep the IF example. Use a separate Switch for low, medium and high.",
     "keyPoints": [
       "Run the L1 flow.",
       "Match the expected label.",
@@ -517,7 +524,7 @@ window.SLIDES = [
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
-      "Save 01-rules. Create a separate workflow named 02-chat.",
+      "Search chat → Chat → On new Chat event (canvas: When chat message received). Connect AI Agent and OpenAI Chat Model.",
       "Add When chat message received → AI Agent → OpenAI Chat Model.",
       "Select Use Gateway credits, or the legacy free OpenAI credits option. Check the balance.",
       "Send a fictional ticket and inspect the Agent output. No memory yet."
@@ -530,8 +537,9 @@ window.SLIDES = [
     },
     "stateId": "w3-chat",
     "visual": {
-      "shot": "assets/day3-lesplan/step-02.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/gateway-model.png",
+      "shotLabel": "Cloud reference · Gateway credits, not a provider key",
+      "shotAlt": "Cloud reference · Gateway credits, not a provider key"
     },
     "notes": "Demonstrate OpenAI Chat Model with Use Gateway credits, or the legacy free OpenAI credits option offered by the trial. Do not create a personal API credential. Confirm the remaining balance and record the selected model. Participants build the nodes themselves and inspect a real execution. Stop if model credits are unavailable; do not pay or substitute an API key. Discuss how model access differs from Claude Code login. An Anthropic API key is used only on the later Claude SDK route. Follow the linked guide for the exact steps."
   },
@@ -542,8 +550,9 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "visual": {
-      "shot": "assets/day3-lesplan/step-03.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/memory-same-session.png",
+      "shotLabel": "Cloud reference · same-session recall; test a new session too",
+      "shotAlt": "Cloud reference · same-session recall; test a new session too"
     },
     "steps": [
       "Without memory, send the two favourite-colour prompts from the guide.",
@@ -626,12 +635,13 @@ window.SLIDES = [
   {
     "title": "Shape the parser output",
     "kicker": "STEP 6 · PARSER FIELDS",
-    "subtitle": "Start with the fields visible in the example, then extend only when the workflow needs more.",
+    "subtitle": "Define a strict JSON Schema. The parser checks fields, not whether the draft is true.",
     "type": "concept",
     "visual": {
       "opener": "showcase",
-      "image": "assets/day3-lesplan/step-06.jpg",
-      "imageLink": "Reference screenshot · compare with your own run"
+      "image": "assets/workshop-3/cloud/parser-schema.png",
+      "imageLink": "Cloud reference · strict schema, not generated from an example",
+      "imageAlt": "Actual Cloud parser schema with low, medium and high enum values"
     },
     "cards": [
       {
@@ -645,7 +655,7 @@ window.SLIDES = [
       "Test more than one ticket",
       "Treat extra fields as an explicit extension"
     ],
-    "notes": "Use the screenshot to explain the parser settings and JSON Schema structure. The visible example uses priority and message. Do not copy unrelated promises from the prompt example. If participants add fields later, make that an explicit extension and update every downstream reference.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Use the actual Cloud screenshot to explain the manually defined JSON Schema. The enum restricts priority to low, medium and high. A valid shape does not prove that the draft is factual. If participants add fields later, make that an explicit extension and update every downstream reference.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
     "stateId": "w3-build-zip-30"
   },
   {
@@ -668,8 +678,9 @@ window.SLIDES = [
     },
     "stateId": "w3-parser",
     "visual": {
-      "shot": "assets/day3-lesplan/step-06.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/model-low.png",
+      "shotLabel": "Cloud reference · model chooses low; Switch routes the draft",
+      "shotAlt": "Cloud reference · model chooses low; Switch routes the draft"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Each valid output reaches its matching branch; invalid output stops or reaches review. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -694,7 +705,10 @@ window.SLIDES = [
     "stateId": "w3-invalid",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/invalid-urgent.png",
+      "shotLabel": "Cloud reference · urgent reaches fallback, not a priority branch",
+      "shotAlt": "Cloud reference · urgent reaches fallback, not a priority branch"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Invalid and missing priorities do not enter a valid branch. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -708,8 +722,9 @@ window.SLIDES = [
     "visual": {
       "bot": "point",
       "place": "beside",
-      "shot": "assets/day3-lesplan/step-05.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/core-no-actions.png",
+      "shotLabel": "Cloud reference · draft output is not approval",
+      "shotAlt": "Cloud reference · draft output is not approval"
     },
     "cards": [
       {
@@ -786,7 +801,10 @@ window.SLIDES = [
     "stateId": "w3-review",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/human-review-stop.png",
+      "shotLabel": "Cloud reference · failed draft, human STOP/revise",
+      "shotAlt": "Cloud reference · failed draft, human STOP/revise"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: You have one reviewed draft and one stop decision, with no external action. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -847,8 +865,9 @@ window.SLIDES = [
     },
     "stateId": "w3-lookup",
     "visual": {
-      "shot": "assets/day3-lesplan/step-10.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/customer-known.png",
+      "shotLabel": "Cloud reference · synthetic customer found; test missing ID too",
+      "shotAlt": "Cloud reference · synthetic customer found; test missing ID too"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: A known ID returns its row; an unknown ID produces a recorded data gap. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -861,7 +880,10 @@ window.SLIDES = [
     "timer": 20,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/model-low.png",
+      "shotLabel": "Cloud reference · one-Agent core, draft only",
+      "shotAlt": "Cloud reference · one-Agent core, draft only"
     },
     "steps": [
       "Open 02-chat. Run the Agent, parser and Switch with the fixture tickets.",
@@ -893,7 +915,10 @@ window.SLIDES = [
     "timer": 10,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/share-import.png",
+      "shotLabel": "Cloud reference · separate unpublished sharing import",
+      "shotAlt": "Cloud reference · separate unpublished sharing import"
     },
     "cards": [
       {
