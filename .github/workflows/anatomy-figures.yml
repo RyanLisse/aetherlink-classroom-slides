@@ -109,7 +109,7 @@ jobs:
               await presenter.close();
             }
             // Day 5 no longer embeds Anatomy figures: the former figure slides show their own cards and columns.
-            for(const slide of [28,33,37,41,42]){
+            for(const slide of [31,36,40,44,45]){
               await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
               await page.locator('.heading h1').waitFor();
               assert.equal(await page.locator('.anatomy-figure').count(),0,`Slide ${slide} must not embed an Anatomy figure`);
@@ -118,7 +118,7 @@ jobs:
             }
             await page.setViewportSize({width:390,height:844});
             await page.emulateMedia({reducedMotion:'reduce'});
-            for(const slide of [28,33,37,41,42]){
+            for(const slide of [31,36,40,44,45]){
               await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
               await page.locator('.heading h1').waitFor();
               const pageOverflow=await page.evaluate(overflowState);
