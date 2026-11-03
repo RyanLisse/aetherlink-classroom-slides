@@ -126,9 +126,9 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Keep the exercise on local n8n or the workshop instance and show evidence for model runs.",
+    "subtitle": "Use n8n Cloud trial credits and show evidence for model runs.",
     "keyPoints": [
-      "Use local n8n or the workshop instance.",
+      "Use the approved Cloud trial. Do not add a provider API key.",
       "Never show secrets.",
       "An import alone is not model-run proof."
     ],
@@ -151,17 +151,17 @@ window.SLIDES = [
   },
   {
     "title": "Open your own n8n workspace",
-    "subtitle": "Use local n8n or an approved training instance.",
+    "subtitle": "Use an approved n8n Cloud trial with free model credits.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
-      "Open the setup guide. Check the n8n version and workshop account.",
+      "Open the setup guide. Check the Cloud trial and available model credits.",
       "Create a workflow named W3 support triage. Do not connect production tools.",
       "Find the canvas, node settings and Executions.",
       "Save the empty workflow. Keep credentials off screen."
     ],
-    "expected": "Your own workflow is open and saved; no production connection exists.",
+    "expected": "Your workflow is saved on an active Cloud trial with model credits; no production connection exists.",
     "timer": 10,
     "repo": {
       "label": "Participant steps, checks and stop conditions",
@@ -172,7 +172,7 @@ window.SLIDES = [
       "bot": "point",
       "place": "beside"
     },
-    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Your own workflow is open and saved; no production connection exists. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+    "notes": "Open the approved n8n Cloud trial. Check that it is active and has model credits before participants build. Gateway credits pay for workflow model calls; Assistant credits do not. Older instances may show free OpenAI API credits. Self-hosted n8n is only an optional rules exercise, not the free-credit route. Stop on unavailable trial credits; do not substitute a provider key or upgrade a plan. Participants save their own empty workflow. Explain, demonstrate, practise, inspect the saved result, then discuss. Solo participants write the explanation."
   },
   {
     "title": "A tour of n8n",
@@ -512,17 +512,17 @@ window.SLIDES = [
   },
   {
     "title": "Connect chat to one AI Agent",
-    "subtitle": "A chat model call is separate from a Claude Code login.",
+    "subtitle": "Use n8n trial credits. No personal provider API key today.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
       "Save 01-rules. Create a separate workflow named 02-chat.",
-      "Add When chat message received → AI Agent → an approved Chat Model.",
-      "Select your credential in the model node. Never paste the key into a prompt.",
+      "Add When chat message received → AI Agent → OpenAI Chat Model.",
+      "Select Use Gateway credits, or the legacy free OpenAI credits option. Check the balance.",
       "Send a fictional ticket and inspect the Agent output. No memory yet."
     ],
-    "expected": "One real model run is visible, or model access is explicitly recorded as blocked.",
+    "expected": "One model run using trial credits is visible, or trial access is recorded as blocked. Do not substitute an API key.",
     "timer": 10,
     "repo": {
       "label": "Participant steps, checks and stop conditions",
@@ -533,7 +533,7 @@ window.SLIDES = [
       "shot": "assets/day3-lesplan/step-02.jpg",
       "shotLabel": "Reference screenshot · not your execution evidence"
     },
-    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: One real model run is visible, or model access is explicitly recorded as blocked. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+    "notes": "Demonstrate OpenAI Chat Model with Use Gateway credits, or the legacy free OpenAI credits option offered by the trial. Do not create a personal API credential. Confirm the remaining balance and record the selected model. Participants build the nodes themselves and inspect a real execution. Stop if model credits are unavailable; do not pay or substitute an API key. Discuss how model access differs from Claude Code login. An Anthropic API key is used only on the later Claude SDK route. Follow the linked guide for the exact steps."
   },
   {
     "title": "Give the Agent memory",
@@ -902,19 +902,19 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Capture a screenshot or export.",
+      "Capture execution screenshots and prepare a safe export copy using the guide.",
       "Write the L/M/H rules in one paragraph.",
       "Name the human gate.",
       "Record the level reached."
     ],
-    "expected": "The Proof pack includes an export or screenshot, routing rules, a named human gate, and the level reached.",
-    "subtitle": "Capture what ran and leave the routing rules and human gate in a checkable Proof pack.",
+    "expected": "The Proof pack includes a checked sharing copy, execution screenshots, routing rules, a human decision, and the level reached.",
+    "subtitle": "Keep the raw export private. Share only the checked copy and synthetic evidence.",
     "keyPoints": [
       "Capture the flow.",
       "Explain the L/M/H rules.",
       "Name the gate and level."
     ],
-    "notes": "Your turn — Proof pack on your machine before you leave. Timer: 10 min. Checklist: (1) screenshot/export (2) L/M/H rules in one paragraph (3) human gate named (4) level reached.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Follow the guide's Prepare a sharing copy steps. Save and export the participant workflow, keep the raw file private, then remove credential references, instance metadata and personal data from a separate copy. Validate JSON locally and inspect a separate inactive import without executing it. Never remove credentials from the live workflow. Check screenshots for account details. Record the trial-credit option, selected model, routing rules, human decision and level reached. Valid JSON is not proof that sensitive data is absent. Explain, demonstrate, practise, check and discuss. Solo participants label their own review as self-review.",
     "repo": {
       "label": "Evidence checklist",
       "url": "assets/workshop-3/participant-guide.html#finish"
@@ -1264,7 +1264,7 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Open your L3 workflow, or import the download and add your own OpenAI credential to the three Chat Models.",
+      "Open your L3 workflow, or import the download. Select trial credits on each Chat Model.",
       "Drag the Risk Agent's connection from the AI Agent to the Tool input of the Customer Reply Agent.",
       "In the Reply Agent's System Message, tell it to ask the Risk Agent before it writes, and to end with a line that starts with Risk note:.",
       "Run WL-1026. Open Executions and find the Risk Agent's call inside the Customer Reply Agent's run.",
@@ -1277,7 +1277,7 @@ window.SLIDES = [
       "Find the nested call in Executions",
       "Human gate stays at the end"
     ],
-    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Stretch for fast groups. The only structural change from L3 is one connection: the Risk Agent's Tool output moves from the orchestrator to the Customer Reply Agent. The downloadable workflow already has this wiring and updated system messages; participants add their own OpenAI credential. Proof is the nested call in Executions plus the Risk note line in the reply. Never paste an API key into the workflow.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. The Risk Agent's Tool output moves from the orchestrator to Customer Reply Agent. The reference workflow already has this wiring. Select the trial-credit option on each Chat Model before use. Skip the extension if credits are low or unavailable; do not add a provider key or buy credits. Proof is the nested call in Executions plus the Risk note in the reply. A reference import does not prove that participants built it. Explain, demonstrate, practise, inspect the actual call and discuss. Solo participants write the explanation.",
     "stateId": "w3-build-zip-40",
     "optional": true,
     "hidden": true

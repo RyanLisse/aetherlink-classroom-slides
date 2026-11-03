@@ -43,6 +43,32 @@ test('Day 4 bridges the real fields and does not require W3 specialists', () => 
   assert.ok(slides.some(s => s.cards?.some(c => c.body.includes('Day 3: priority and message'))));
 });
 
+test('Day 3 uses trial model credits and reserves provider keys for the SDK route', () => {
+  const slides = load('workshop3-slides.js');
+  const setup = slides.find(s => s.stateId === 'w3-setup');
+  const chat = slides.find(s => s.stateId === 'w3-chat');
+  assert.match(setup.subtitle, /Cloud trial/);
+  assert.ok(chat.steps.some(step => step.includes('Use Gateway credits')));
+  assert.match(chat.expected, /Do not substitute an API key/);
+  assert.doesNotMatch(JSON.stringify(slides), /add your own OpenAI credential|Select your credential in the model node/);
+  const guide = read('assets/workshop-3/participant-guide.html');
+  for (const phrase of ['Assistant credits are different', 'Do not buy credits', 'Gateway credits are not available on self-hosted', 'Only the Claude SDK route uses']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const backend = load('workshop4-slides.js').find(s => s.title === 'Two ways to run the same agent');
+  assert.match(backend.subtitle, /n8n trial credits stay in n8n/);
+});
+
+test('The proof pack explains how to share a separate export without changing the live workflow', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  for (const phrase of ['id="safe-export"', 'Export JSON', '02-chat-shareable.json', 'Do not edit credentials in the live workflow', '02-chat-share-check', 'without executing', 'Valid JSON alone does not prove']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const proof = load('workshop3-slides.js').find(s => s.stateId === 'w3-build-zip-44');
+  assert.match(proof.expected, /checked sharing copy/);
+  assert.equal(proof.repo.url, 'assets/workshop-3/participant-guide.html#finish');
+});
+
 test('Both days explain the same bounded loop without equating text with success', () => {
   for (const file of ['workshop3-slides.js', 'workshop4-slides.js']) {
       const slides = load(file);
