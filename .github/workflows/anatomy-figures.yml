@@ -165,7 +165,7 @@ jobs:
             }
             await page.goto('http://127.0.0.1:8765/workshop5.html#1');
             const diagrams=await page.evaluate(()=>window.SLIDES.flatMap((s,i)=>s.visual?.diagram?[{slide:i+1,id:s.visual.diagram.id,media:s.visual.media}]:[]));
-            assert.equal(diagrams.length,8);
+            assert.deepEqual(diagrams.map(({id})=>id),['loop','mcp','hooks','subagents','eval']);
             for(const {slide,id,media} of diagrams){
               await page.setViewportSize({width:1440,height:900});
               await page.emulateMedia({reducedMotion:'no-preference'});
