@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: '24'
       - name: Test classroom decks
-        run: node --test --test-concurrency=2 tools/anatomy/bottleneck/model.test.mjs tools/anatomy/integration.test.mjs tools/sessions.test.mjs
+        run: node --test --test-concurrency=2 tools/anatomy/bottleneck/model.test.mjs tools/anatomy/integration.test.mjs tools/sessions.test.mjs tools/workshop3-route.test.mjs
       - name: Prepare static site
         run: node tools/publish-site.mjs
       - name: Check publish boundary

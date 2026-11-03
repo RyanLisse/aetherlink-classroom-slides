@@ -27,7 +27,15 @@ base document and was applied when `slides.js` was authored:
    connections as the primary, confirmed path — not a stretch goal — while
    still keeping local fixtures as a fallback.
 
-## Run it
+## Workshop teaching routes
+
+Use [the teaching structure](TEACHING-STRUCTURE.md) for new and revised lessons.
+The [Day 3 participant guide](assets/workshop-3/participant-guide.html) provides
+the build steps, test cases, safe stopping points and Day 4 handoff.
+The legacy Day 3 introduction remains a separate session; the complete revised
+route is `workshop3.html`.
+
+## Run the deck
 
 ```
 python3 serve.py 8080

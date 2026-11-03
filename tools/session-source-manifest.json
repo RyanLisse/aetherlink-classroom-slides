@@ -4,17 +4,38 @@
   "decks": [
     {
       "file": "workshop3-slides.js",
-      "source": "apps/web/src/deck/workshop3-slides.ts",
-      "slides": 18,
-      "sourceSha256": "2b5a3e59ab843c619ddd58a5f1e8711ed0ca5b63876de94e45b347a5ed3f5a9f",
-      "normalizedDataSha256": "45d43abd6a24dffd22caf7674a4762acdf0089c64883e5ffbdd784b4262c3f6b"
+      "source": "workshop3-slides.js",
+      "slides": 45,
+      "sourceSha256": "505b19d307de7d9d266cc051cf79ec706ac982e83e3c57b6e1e7673193130af8",
+      "normalizedDataSha256": "a02c06c9d5f53a98986ec19ba3c0b07e3338229d4503dfcd8206590909cbbe58",
+      "importedFrom": {
+        "source": "apps/web/src/deck/workshop3-slides.ts",
+        "slides": 18,
+        "sourceSha256": "2b5a3e59ab843c619ddd58a5f1e8711ed0ca5b63876de94e45b347a5ed3f5a9f",
+        "normalizedDataSha256": "45d43abd6a24dffd22caf7674a4762acdf0089c64883e5ffbdd784b4262c3f6b"
+      },
+      "maintenance": "local",
+      "repo": "RyanLisse/aetherlink-classroom-slides",
+      "adaptedFrom": {
+        "repo": "jyse/aetherlink-classroom-slides",
+        "revision": "3bc44efae16b82a79077eeba41286ff02e4deba5",
+        "source": "workshop3-slides.js"
+      }
     },
     {
       "file": "workshop4-slides.js",
-      "source": "apps/web/src/deck/workshop4-slides.ts",
-      "slides": 36,
-      "sourceSha256": "8a902bf0427f137c09db78199e61b066df3f30f8851a1e5e3b62665f53ea05f9",
-      "normalizedDataSha256": "4df40d4c3665c52ab4eeec172b7e02c943c5981eae0778b6f0c425a3785de6c7"
+      "source": "workshop4-slides.js",
+      "slides": 66,
+      "sourceSha256": "c703ebe85755b4452f5cd7b67a218bd1b7d54280842f57b5e81f506e4bbcdd7d",
+      "normalizedDataSha256": "34eb98b7bd0f9736e05036cda6888ac846030f647f53d2cda4453f009140a99d",
+      "importedFrom": {
+        "source": "apps/web/src/deck/workshop4-slides.ts",
+        "slides": 36,
+        "sourceSha256": "8a902bf0427f137c09db78199e61b066df3f30f8851a1e5e3b62665f53ea05f9",
+        "normalizedDataSha256": "4df40d4c3665c52ab4eeec172b7e02c943c5981eae0778b6f0c425a3785de6c7"
+      },
+      "maintenance": "local",
+      "repo": "RyanLisse/aetherlink-classroom-slides"
     },
     {
       "file": "workshop6-slides.js",

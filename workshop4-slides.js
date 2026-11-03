@@ -1,19 +1,17 @@
-/* Imported from RyanLisse/aetherlink-academy-app @ cb50647cf2c9e1fb589b5e7f6d03211d5a13e23c
- * Source: apps/web/src/deck/workshop4-slides.ts. Authored content retained; image paths adapted. */
-'use strict';
+/* Locally maintained workshop deck. Import provenance: tools/SESSION-SOURCES.md. */
 window.SLIDES = [
   {
     "lessonId": "workshop-4",
     "title": "Welcome to Workshop 4 · From n8n to Claude Agents SDK",
-    "kicker": "Workshop 4 · Thu 8 Oct",
+    "kicker": "Workshop 4 · From n8n to Claude Agents SDK",
     "type": "concept",
     "visual": {
       "opener": "welcome",
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Today we build yesterday’s n8n ticket flow again, in code.",
-    "notes": "Welcome (10:00; session 10:00–16:00). Today: the same ticket flow as yesterday in n8n, now in code with the Claude Agent SDK."
+    "subtitle": "Rebuild the behaviour you checked in n8n, now in code.",
+    "notes": "Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. No specialist extension is required to start."
   },
   {
     "lessonId": "workshop-4",
@@ -124,14 +122,14 @@ window.SLIDES = [
       },
       {
         "title": "Simple Memory",
-        "body": "Remembers your favourite colour."
+        "body": "Adds earlier messages from the same session."
       }
     ],
     "keyPoints": [
-      "Chat trigger: When chat message received.",
-      "Simple Memory: Remembers your favourite colour."
+      "Compare the observed runs.",
+      "Check session boundaries."
     ],
-    "notes": "Recap 2/4. Chat trigger + AI Agent + OpenAI Chat Model. Ask: who did the favourite-colour test? With Simple Memory the agent remembers; without it, it forgets. Today: npm run chat resumes the session."
+    "notes": "Ask for the before-memory, same-session and new-session results. Do not promise an exact model answer. Today npm run chat resumes the session; a new session must not inherit another customer’s conversation."
   },
   {
     "lessonId": "workshop-4",
@@ -147,7 +145,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Structured Output Parser",
-        "body": "Gives { priority, reason }."
+        "body": "Day 3: priority and message. Day 4: inspect the target schema."
       },
       {
         "title": "Switch",
@@ -155,14 +153,15 @@ window.SLIDES = [
       }
     ],
     "keyPoints": [
-      "Structured Output Parser: Gives { priority, reason }.",
-      "Switch: Routes on priority."
+      "Keep the priority values consistent.",
+      "Map message to the new contract deliberately.",
+      "Check parse errors and wrong decisions separately."
     ],
-    "notes": "Recap 3/4. AI Agent with Chat Model, Memory and Structured Output Parser, then Switch. Today the parser becomes outputFormat: json_schema."
+    "notes": "Day 3 used priority and message. Day 4 has its own schema and fixtures; do not claim they are identical. Open priority-schema.mjs and name each required field. Translate deliberately and keep the failed-case evidence."
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday’s flow · 4. Three specialist agents",
+    "title": "Optional yesterday, explained today: specialist agents",
     "kicker": "Recap · n8n flow 4/4",
     "type": "recap",
     "visual": {
@@ -170,7 +169,7 @@ window.SLIDES = [
       "image": "assets/workshop-4/n8n/05-three-agents.png",
       "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
     },
-    "subtitle": "Each specialist does one task. A person reads each reply.",
+    "subtitle": "You can start today after the one-Agent core. No L3 completion is required.",
     "cards": [
       {
         "title": "Customer Reply Agent",
@@ -190,7 +189,7 @@ window.SLIDES = [
       "Risk Agent: Decides the risk.",
       "Customer Context Agent: Reads the Data Table."
     ],
-    "notes": "Recap 4/4. Three sub agents, each with its own model and memory. Customer Context reads the Data Table from customer_context.csv. The assignment: chat in → chat out, with a person who reviews. Today these become subagents and MCP tools."
+    "notes": "Yesterday’s specialist route was optional. Show this as a reference, not an assumed participant result. Briefly identify Reply, Risk and Context, then explain the code equivalent before asking learners to build it."
   },
   {
     "lessonId": "workshop-4",

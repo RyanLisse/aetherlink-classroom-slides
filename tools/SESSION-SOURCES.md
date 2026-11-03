@@ -1,5 +1,21 @@
 # Classroom session sources
 
+## Locally maintained teaching routes
+
+Workshop 3 is adapted from Ryan's 47-slide deck in the supplied
+`jyse/aetherlink-classroom-slides` archive at
+`3bc44efae16b82a79077eeba41286ff02e4deba5`. Its source images and optional
+orchestration download are retained with the same paths. Reference screenshots
+are not participant-run evidence. The core has 35 slides; 10 extensions are
+hidden by default. `assets/workshop-3/participant-guide.html` contains the
+standalone instructions, test inputs, stop conditions and downloads.
+
+Workshop 4's recap now names the actual W3 fields and distinguishes the optional
+specialist route from the one-Agent core. These two decks are locally maintained:
+their manifest digests record the current authored content, not an unchanged
+upstream import. Original import metadata is retained under `importedFrom`.
+The tables below describe the original imports.
+
 Days 1 and 2 use the existing `slides.js` deck. Their opening slides are 7 and 63.
 Day 5 retains the local SRE workshop and its reviewed changes.
 
