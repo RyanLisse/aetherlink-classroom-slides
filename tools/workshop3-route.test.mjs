@@ -104,11 +104,18 @@ test('Day 4 translates the required communication without assuming identical run
 test('Subagent instructions preserve context, require call evidence and keep failures visible', () => {
   const guide = read('assets/workshop-3/participant-guide.html');
   for (const id of ['specialists', 'flat-check', 'nested', 'sdk-handoff']) assert.ok(guide.includes(`id="${id}"`));
-  for (const phrase of ['03-specialists', '04-nested', "$fromAI('task'", "$fromAI('customer_id'", 'Always Output Data', 'coordinator → Reply → Risk → Reply → coordinator', 'STOP — required consultation missing', '03-specialists-shareable.json', '04-nested-shareable.json']) {
+  for (const phrase of ['03-specialists', '04-nested', "$fromAI('task'", "$fromAI('customer_id'", 'STOP — customer record not verified', 'No customer record returned', 'coordinator → Reply → Risk → Reply → coordinator', 'STOP — required consultation missing', '03-specialists-shareable.json', '04-nested-shareable.json']) {
     assert.ok(guide.includes(phrase), phrase);
   }
+  const plainGuide = guide.replace(/<[^>]+>/g, ' ');
+  assert.ok(/tested Cloud Data Table Tool v1\.1,\s+Settings did not show the regular node's\s+Always Output Data\s+setting/.test(plainGuide), 'guide explains the tested Cloud Tool setting limitation');
+  assert.doesNotMatch(plainGuide, /(?:enable|turn on)\s+Always Output Data/i);
+  assert.doesNotMatch(JSON.stringify(load('workshop3-slides.js')), /Enable Always Output Data/);
   const core = load('workshop3-slides.js').filter(s => !s.optional);
   assert.doesNotMatch(JSON.stringify(core), /Specialists are optional|Specialist tools are optional|No prerequisite specialist build|The orchestrator never sees the risk call/);
+  const structure = read('TEACHING-STRUCTURE.md');
+  assert.match(structure, /one-Agent baseline, flat specialist team and\s+nested Reply → Risk consultation are required/);
+  assert.doesNotMatch(structure, /Specialist, nested-agent and CRUD exercises are\s+extensions|optional\s+three-specialist build/);
 });
 
 test('Day 3 uses trial model credits and reserves provider keys for the SDK route', () => {

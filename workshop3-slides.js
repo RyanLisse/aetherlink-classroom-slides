@@ -748,7 +748,7 @@ window.SLIDES = [
       "Keep auto-send off.",
       "Screen-share one working flow."
     ],
-    "notes": "Your turn — L2. Solo bar = ≥L2 required. Timer: 20 min. Checklist: (1) AI run recorded (2) parser returns priority and message (3) human reviewed priority (4) no silent auto-send (5) Proof fields started. Invite one or two participants to share their workflow before L3.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Your turn — L2. This checkpoint requires L2 before L3. Day 3 completion also requires the flat and nested communication exercises. Timer: 20 min. Checklist: (1) AI run recorded (2) parser returns priority and message (3) human reviewed priority (4) no silent auto-send (5) Proof fields started. Invite one or two participants to share their workflow before L3.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
     "repo": {
       "label": "Fixtures and model-evidence checklist",
       "url": "assets/workshop-3/participant-guide.html#fixtures"
@@ -1027,11 +1027,11 @@ window.SLIDES = [
       "Add Customer Context Agent as a third AI Agent Tool on the coordinator.",
       "Add its trial-credit Chat Model and copy the guide’s role fields.",
       "At its Tool connector, add Data Table → Get row(s). Select your checked customer table.",
-      "Filter customer_id with the model-defined customer_id parameter. Enable Always Output Data for a missing row.",
+      "Filter customer_id with the model-defined customer_id parameter. Do not rely on an empty item being returned.",
       "Use Get only. Do not connect Insert, Update, Delete, email or payment tools."
     ],
-    "expected": "Only Customer Context can read the selected table. Missing rows remain missing; no facts are invented.",
-    "notes": "This turns the earlier manual lookup into a delegated tool. Show the extra tool connection: Data Table → Customer Context Agent → coordinator. A Data Table node on the main path is not equivalent. Use one ticket per run because sub-node expressions resolve against the first input item. If Data Tables or the required model are unavailable, record the blocker; do not substitute real data. Explain the change, demonstrate it, let participants build, inspect the execution, then discuss. Solo participants write the explanation.",
+    "expected": "Only Customer Context can read the selected table. An absent or unclear lookup result is a recorded stop, not proof that no record exists.",
+    "notes": "This turns the earlier manual lookup into a delegated tool. Show the extra tool connection: Data Table → Customer Context Agent → coordinator. A Data Table node on the main path is not equivalent. Use one ticket per run because sub-node expressions resolve against the first input item. In the tested Cloud Data Table Tool v1.1, Settings did not show the regular node's Always Output Data setting. Inspect the actual CUST-999 result and stop if a no-record result cannot be verified. If Data Tables or the required model are unavailable, record the blocker; do not substitute real data. Explain the change, demonstrate it, let participants build, inspect the execution, then discuss. Solo participants write the explanation.",
     "stateId": "w3-build-zip-37",
     "timer": 8
   },
@@ -1057,10 +1057,10 @@ window.SLIDES = [
       "Set the coordinator prompt from the guide; keep priority and message as the final schema.",
       "Start a fresh chat: CUST-003 — I was charged twice. I need this fixed today.",
       "Inspect Context’s lookup, Risk’s input and Reply’s input. Capture each call and result.",
-      "In a fresh session, try CUST-999. Confirm missing context remains explicit in later calls.",
+      "Try CUST-999 in a fresh session. Continue only with a trace-backed no-record result; otherwise record STOP.",
       "Record a human decision. If any required call or fact is missing, mark STOP and repair it."
     ],
-    "expected": "Execution evidence shows all three calls and the context passed between them. A polished final reply alone fails this check.",
+    "expected": "Execution evidence shows all three calls and their inputs. CUST-999 is explicit only when the trace proves it; an absent or unclear result is a STOP.",
     "subtitle": "03-specialists: Context, then Risk, then Reply. The coordinator carries the results.",
     "notes": "Keep 02-chat as the baseline. Do not mark the exercise complete if the coordinator answers directly, omits the lookup or invents context. Record caller → callee, input, result and decision for each invocation. Discuss: which information did the coordinator have to forward? A screenshot of wiring alone is not enough. Explain the change, demonstrate it, let participants build, inspect the execution, then discuss. Solo participants write the explanation.",
     "stateId": "w3-build-zip-38",
@@ -1147,7 +1147,7 @@ window.SLIDES = [
     },
     "steps": [
       "Show valid routing and the invalid-priority stop from 02-chat.",
-      "Show the three tool calls and missing-customer result from 03-specialists.",
+      "Show the three tool calls and CUST-999 result or recorded STOP from 03-specialists.",
       "Show Reply → Risk → Reply in 04-nested, plus the disconnected-tool STOP.",
       "Review the final draft. Prepare safe exports and explain what information crossed each boundary."
     ],
