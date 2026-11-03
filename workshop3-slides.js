@@ -526,7 +526,7 @@ window.SLIDES = [
     "steps": [
       "Save 01-switch. Create a separate workflow named 02-chat.",
       "Search chat → Chat → On new Chat event (canvas: When chat message received). Connect AI Agent and OpenAI Chat Model.",
-      "Add When chat message received → AI Agent → OpenAI Chat Model.",
+      "Confirm the Agent prompt uses the chat input. Do not add memory yet.",
       "Select Use Gateway credits, or the legacy free OpenAI credits option. Check the balance.",
       "Send a fictional ticket and inspect the Agent output. No memory yet."
     ],
