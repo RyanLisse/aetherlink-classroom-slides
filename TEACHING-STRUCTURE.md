@@ -24,7 +24,7 @@ day. A handoff names the artifacts to bring and any changed schemas, fixtures,
 credentials or environment. Optional work must not become a prerequisite the
 next morning.
 
-## Current rollout
+## Current scope: days 3, 4 and 5
 
 This is the target structure, not a claim that every existing deck has passed a
 participant walkthrough.
@@ -35,14 +35,11 @@ participant walkthrough.
 - Day 4 already has explain, demo, solo, expected-output and discussion blocks.
   Its recap now maps the actual Day 3 fields and does not require the optional
   three-specialist build. Its complete SDK route still needs its own walkthrough.
-- Days 1 and 2 in this fork still use the Aether Library deck. The supplied ZIP
-  uses a newer Snake-based route. Do not mix specific Snake assignments into the
-  Library deck without reconciling the participant project and instructions.
+- Jessy owns days 1 and 2. They are the teaching-quality reference and remain
+  unchanged. This pass does not migrate their decks or participant projects.
 - Day 5 has a separate ongoing AI-SDLC revision. Reconcile that revision before
   editing this fork's older copy. Do not restore removed material inadvertently.
-- Days 6 and 7 have explain, demo and solo blocks, but need more concrete
-  starting states, checkpoints, refusal cases and facilitator guidance for
-  participants' different projects.
+- Days 6 and 7 are outside this pass.
 
 Keep each day's content revision independently reviewable, then check the
 handoffs across days. A shared structure does not mean identical assignments
