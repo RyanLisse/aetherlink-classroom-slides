@@ -3,31 +3,232 @@
 'use strict';
 window.SLIDES = [
   {
+    "title": "You used an agent. Today you open it up.",
+    "kicker": "WORKSHOP 3 · WHY TODAY",
+    "subtitle": "In Claude Code the agent loop ran inside a terminal. Today you build that loop yourself, on a canvas where every step is visible.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-intro/agent-opened-up.jpg",
+      "imageLink": "n8n · one agent, opened up: model, memory, tools and output parser",
+      "stagger": "pop",
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "every step is visible",
+          "tone": "orange"
+        }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Day 1 and 2: you used one",
+        "body": "Claude Code observed, decided, acted and checked for you. You saw the result, not each step inside the loop."
+      },
+      {
+        "title": "Day 3: you build one, visually",
+        "body": "In n8n the trigger, the AI Agent, its memory, its tools and its checks are nodes. You can open each one and read what went in and what came out."
+      },
+      {
+        "title": "Day 4: you build one in code",
+        "body": "The same agent, written with the Claude Agent SDK. Today's canvas becomes your blueprint."
+      }
+    ],
+    "tagline": "First see how an agent works. Then decide what your team should build.",
+    "keyPoints": [
+      "Day 1 quote: 'using an agent, not building one (yet)'",
+      "Today is the 'yet'",
+      "n8n makes the loop visible",
+      "Day 4 turns the same design into code"
+    ],
+    "notes": "Connect to Day 1, slide 'Claude Code as an agentic tool': we said you were using an agent, not building one yet. Today is the 'yet'. In Claude Code the loop (observe, decide, act, check) happened inside the tool; you only saw the outcome. In n8n you draw the same parts yourself and every run shows the data at every step. That makes n8n a learning tool: you can see what an agent does and why. And it is a prototyping tool: in an hour you can test whether an agent idea works for your team, before anyone writes code. Day 4 builds the same thing with the Claude Agent SDK."
+  },
+  {
+    "title": "Why n8n?",
+    "kicker": "WORKSHOP 3 · WHY N8N",
+    "subtitle": "We use n8n for two jobs: to learn how agents work, and to prototype one for your team.",
+    "type": "concept",
+    "layout": "compare",
+    "visual": {
+      "stepThrough": true
+    },
+    "columns": [
+      {
+        "title": "To learn agents",
+        "items": [
+          "Every part of an agent is a node you can open",
+          "Every run shows the data at every step",
+          "You watch agency grow: rules, one Agent, specialists",
+          "You see exactly where the human gate sits"
+        ]
+      },
+      {
+        "title": "To prototype",
+        "items": [
+          "Test an agent idea in an hour, without writing code",
+          "Start with plain rules; add AI only where rules fail",
+          "Runs on your own server, so customer data stays in-house",
+          "A working canvas is the blueprint for Day 4's code"
+        ]
+      }
+    ],
+    "tagline": "AI does the steps. People decide where the workflow stops for a human.",
+    "keyPoints": [
+      "Visual: the whole flow on one canvas",
+      "Low-code, code when needed",
+      "Self-hosting keeps data in-house",
+      "Links to last week: a workflow with a human checkpoint"
+    ],
+    "notes": "Two jobs, two columns. Left: n8n as a learning tool. An agent is hard to understand when it runs inside a terminal; on a canvas you see its parts and every run's data. Right: n8n as a prototyping tool. Before a team invests in code, they can test in an hour whether an agent idea holds up, with real-looking tickets and a human gate. Then answer the question the room is asking: why not just ask ChatGPT to sort the inbox? Because then you cannot see, check or repeat what happened. In n8n every ticket's route is visible and logged, plain rules handle the easy cases, AI is added only where rules fail, and a person approves before anything reaches a customer. Left column: general reasons. It's visual, so anyone on the team can follow a workflow; it's low-code but lets you drop into JavaScript or Python when needed; it can be self-hosted, which matters for a company like Worldline where data should stay inside; and AI is just one node among normal integrations. Right column: why here. Last week ended with a workflow that chains skills, tools and a human checkpoint. n8n is where that becomes something that runs on its own and that the team can see, reuse and change."
+  },
+  {
+    "title": "What you know from Claude Code, as nodes",
+    "kicker": "WORKSHOP 3 · DAY 1–2 → N8N",
+    "subtitle": "Every idea from the first two days has a place on today's canvas.",
+    "type": "concept",
+    "layout": "matrix",
+    "visual": {
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "tagline",
+          "text": "you can open it and read it",
+          "tone": "orange"
+        }
+      ]
+    },
+    "matrix": {
+      "columns": [
+        "In Claude Code",
+        "In n8n today",
+        "Level"
+      ],
+      "rows": [
+        {
+          "title": "Rules",
+          "sub": "no judgment",
+          "cells": [
+            "A test or a hook: a fixed check",
+            "A Switch node",
+            "L1"
+          ]
+        },
+        {
+          "title": "Agent loop",
+          "sub": "observe, decide, act, check",
+          "cells": [
+            "Claude Code itself",
+            "The AI Agent node",
+            "L2"
+          ]
+        },
+        {
+          "title": "Instructions",
+          "sub": "how to work",
+          "cells": [
+            "CLAUDE.md and skills",
+            "The Agent's prompt and System Message",
+            "L2"
+          ]
+        },
+        {
+          "title": "Memory",
+          "sub": "what carries over",
+          "cells": [
+            "The context window and memory",
+            "Simple Memory",
+            "L2"
+          ]
+        },
+        {
+          "title": "Checked output",
+          "sub": "evidence, not confidence",
+          "cells": [
+            "A test that must pass",
+            "Parse Decision: one of three labels",
+            "L2"
+          ]
+        },
+        {
+          "title": "Subagents",
+          "sub": "one job each",
+          "cells": [
+            "Bobby, the level-checker, in its own context",
+            "Customer Reply and Risk agents",
+            "L3"
+          ]
+        },
+        {
+          "title": "Workflow",
+          "sub": "steps chained",
+          "cells": [
+            "/build-game-levels: skills, test, Bobby",
+            "Agents that call each other",
+            "L3+"
+          ]
+        },
+        {
+          "title": "You decide",
+          "sub": "human in the loop",
+          "cells": [
+            "You approve and you merge",
+            "A human gate before any reply",
+            "L1–L3"
+          ]
+        }
+      ]
+    },
+    "tagline": "Same ideas, new view: in n8n every part is a node, and you can open it and read it.",
+    "keyPoints": [
+      "Nothing today is new as an idea",
+      "What is new: you see it happen",
+      "Rules first (L1), then judgment (L2), then specialists (L3)",
+      "The human decision never moves to the machine"
+    ],
+    "notes": "This is the map for the whole day. Read one row at a time and ask the room where they met it on Day 1 or 2. The point: nothing today is a new idea. A rule is like a test or a hook; the AI Agent node is the agent loop; the prompt and System Message play the role of CLAUDE.md and skills; Simple Memory is what carries over between messages; Parse Decision forces one of three labels; the L3 specialists are subagents with one job each, like Bobby; and agents that call each other are a workflow, like /build-game-levels. The difference is that in n8n you see each part and its data. Come back to this slide whenever a level adds a node."
+  },
+  {
     "lessonId": "workshop-3",
     "title": "One ticket. Three agency levels.",
     "kicker": "Workshop 3 · Day 3 · L1→L3",
     "type": "concept",
     "visual": {
-      "bot": "wave",
-      "place": "beside"
+      "art": "stairs",
+      "stepKeys": true
     },
-    "subtitle": "Workshop 4 carries the labels, specialist split, and human review gate into three Agent SDK lessons.",
+    "subtitle": "One ticket workflow, built up step by step. Each step keeps what works and adds one new idea.",
     "keyPoints": [
-      "Keep the same priority labels.",
-      "Keep analysis and reply writing separate.",
-      "Review drafts before they reach a customer."
+      "Same tickets, same labels, every step",
+      "Start without an LLM: know what rules can do",
+      "Add the agent only where rules break",
+      "Specialists, orchestration and data come last",
+      "A human approves before any reply"
     ],
-    "cards": [
+    "notes": "Open the climb. We build one ticket workflow five times. Step 1: no LLM at all, a Switch with keyword rules; it works until someone writes \"I paid two times\". Step 2: the same workflow with an AI Agent that reads meaning. Step 3: split the work into Reply and Risk specialists, like Bobby on Day 2. Step 4: let the specialists consult each other before they answer the orchestrator. Step 5: give the agents a Data Table and let them create, read, update and delete rows. The labels and the human gate never change. Rhythm all day: explain, demonstrate, participants try, discuss. Goal ≥L2; stretch L3+. Workshop 4 keeps the labels, specialist split, and human review gate while teaching one Agent SDK agent, subagents, and MCP transaction lookup.",
+    "layout": "steps",
+    "items": [
       {
-        "title": "One ticket",
-        "body": "Carry the same scenario through the day."
+        "label": "Rules, no LLM",
+        "caption": "L1. A Switch sorts on keywords. Predictable, until a customer uses other words."
       },
       {
-        "title": "L1 → L2 → L3",
-        "body": "Move from business rules to judgment to specialists."
+        "label": "The same flow, with an agent",
+        "caption": "L2. An AI Agent reads what the customer means."
+      },
+      {
+        "label": "Subagents",
+        "caption": "L3. Reply and Risk specialists, one job each."
+      },
+      {
+        "label": "Agents that consult",
+        "caption": "L3+. The Reply Agent asks the Risk Agent first."
+      },
+      {
+        "label": "Data Tables and CRUD",
+        "caption": "Agents read and write rows: create, read, update, delete."
       }
-    ],
-    "notes": "Open. One scenario, three agency levels on n8n. Rhythm all day: explain, demonstrate, participants try, discuss. Goal ≥L2; stretch L3. Workshop 4 keeps the labels, specialist split, and human review gate while teaching one Agent SDK agent, subagents, and MCP transaction lookup."
+    ]
   },
   {
     "lessonId": "workshop-3",
@@ -81,7 +282,8 @@ window.SLIDES = [
         "body": "A bounded AI Agent drafts priority."
       }
     ],
-    "notes": "Explain. L1 = business rule without LLM. L2 = judgment (one AI Agent + memory). L3 = specialists (Reply + Risk). Human gate before “done” / customer-facing."
+    "notes": "Explain. L1 = business rule without LLM. L2 = judgment (one AI Agent + memory). L3 = specialists (Reply + Risk). Human gate before “done” / customer-facing.",
+    "tagline": "Day 1 bridge: an agent observes, decides, acts and checks in a loop. A rule only follows one path."
   },
   {
     "lessonId": "workshop-3",
@@ -135,7 +337,8 @@ window.SLIDES = [
         "body": "Route to Low, Med, or High."
       }
     ],
-    "notes": "Explain — L1 Switch / rules. Ticket → Switch → L/M/H. No LLM. Cover input, branches, and error path."
+    "notes": "Explain — L1 Switch / rules. Ticket → Switch → L/M/H. No LLM. Cover input, branches, and error path.",
+    "tagline": "Day 1 bridge: like your Snake test and hook, a Switch checks the same way every time."
   },
   {
     "lessonId": "workshop-3",
@@ -182,6 +385,95 @@ window.SLIDES = [
     "notes": "Your turn — L1 on your machine. Timer: 15 min. Checklist: (1) flow runs (2) label matches fixture (3) steps noted (4) human confirms branch. Gate before L2 — required."
   },
   {
+    "title": "What is an agent?",
+    "kicker": "WORKSHOP 3 · BEFORE L2",
+    "subtitle": "L1 follows the rules you wrote. An agent chooses its next step itself.",
+    "type": "concept",
+    "visual": {
+      "hero": 0,
+      "popOut": 1,
+      "stepThrough": true,
+      "chipIcons": [
+        "▶",
+        "↻",
+        "■",
+        "✋"
+      ],
+      "highlight": [
+        {
+          "in": "card:0",
+          "text": "works toward a goal",
+          "tone": "orange"
+        }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Definition",
+        "body": "An AI agent works toward a goal by gathering context, choosing actions, using tools and checking results."
+      },
+      {
+        "title": "It can",
+        "body": "continue\nadjust\nstop\nask for human input"
+      },
+      {
+        "title": "In n8n",
+        "body": "One AI Agent node with four parts: a Chat Model to think, a System Message to guide it, Tools to act, and Memory to remember."
+      }
+    ],
+    "tagline": "Day 1 bridge: the same definition as Claude Code. Today you build the agent instead of using it.",
+    "keyPoints": [
+      "Same definition as Day 1",
+      "Goal, not a fixed path",
+      "Model, instructions, tools, memory",
+      "It may ask a human: that is a feature"
+    ],
+    "notes": "Contrast with L1 first: the Switch follows a path you drew, so it fails on 'I paid two times'. An agent gets a goal (give this ticket the right priority) and decides itself how to get there. Read the definition, then pop the four things it can do; stress that asking a human is part of the design, not a failure. Close with the third card: in n8n an agent is one node with four inputs you can see. Point back to the opening screenshot: Chat Model, Memory, Tools, Output Parser."
+  },
+  {
+    "title": "The agentic loop",
+    "kicker": "WORKSHOP 3 · BEFORE L2",
+    "subtitle": "A loop, not a line. The agent goes round until the goal is met, or it stops and asks.",
+    "type": "concept",
+    "layout": "steps",
+    "visual": {
+      "stepKeys": true,
+      "art": "loop",
+      "loopCaptions": true
+    },
+    "items": [
+      {
+        "label": "Observe",
+        "caption": "Read the ticket and what memory holds: WL-1026, “I was charged twice”."
+      },
+      {
+        "label": "Decide",
+        "caption": "Choose the next step: is the priority clear, or does it need the Risk Agent or a customer lookup?"
+      },
+      {
+        "label": "Act",
+        "caption": "Call a tool: a specialist agent, a Data Table or another app."
+      },
+      {
+        "label": "Check",
+        "caption": "Read the result. Is the answer one of the three labels: low, medium or high?"
+      },
+      {
+        "label": "Repeat or stop",
+        "caption": "Not done: go round again. Done: return the answer and stop at the human gate."
+      }
+    ],
+    "tagline": "In n8n you can watch this loop: every model and tool call appears in the AI Agent's logs in Executions.",
+    "keyPoints": [
+      "Same five steps as Day 1",
+      "One ticket, several rounds",
+      "Tools are how it acts",
+      "Check is where the parser helps",
+      "Stop means: hand over to a human"
+    ],
+    "notes": "Same loop as Day 1, same five words; now follow one ticket round it. Observe: the ticket plus memory. Decide: the model picks the next action, which is the step a Switch cannot do. Act: a tool call, such as a specialist agent or a Data Table lookup. Check: read the result; Parse Decision makes this concrete, because the answer must be one of three labels. Repeat or stop: an agent may go round several times, and when it stops it hands over to the human gate. After L2 runs, open Executions, click the AI Agent node and show its logs: each round of the loop is visible there."
+  },
+  {
     "lessonId": "workshop-3",
     "title": "L2 adds one AI Agent with memory.",
     "kicker": "Explain · L2 · judgment enters",
@@ -206,7 +498,8 @@ window.SLIDES = [
         "body": "Keep the existing ticket context."
       }
     ],
-    "notes": "Explain — L2. Same chain + one bounded AI Agent. Agent drafts priority; human reviews. Capture trace/settings. OpenAI node in screenshots OK — day 4 swaps stack."
+    "notes": "Explain — L2. Same chain + one bounded AI Agent. Agent drafts priority; human reviews. Capture trace/settings. OpenAI node in screenshots OK — day 4 swaps stack.",
+    "tagline": "Day 1 bridge: this node is the agent loop you used in Claude Code, now on the canvas."
   },
   {
     "lessonId": "workshop-3",
@@ -277,7 +570,8 @@ window.SLIDES = [
         "body": "Assess risk or priority."
       }
     ],
-    "notes": "Explain — L3. Split reply vs risk/priority; orchestrate; document who does what; human gate before done. Stretch — not required for solo bar."
+    "notes": "Explain — L3. Split reply vs risk/priority; orchestrate; document who does what; human gate before done. Stretch — not required for solo bar.",
+    "tagline": "Day 2 bridge: like Bobby the level-checker, each specialist has one job. It reports; it approves nothing."
   },
   {
     "lessonId": "workshop-3",
@@ -321,6 +615,119 @@ window.SLIDES = [
       "Keep the human gate explicit."
     ],
     "notes": "Your turn — L3 stretch (optional). Timer: 15 min. Checklist: (1) two roles named (2) joint output (3) human gate explicit."
+  },
+  {
+    "title": "Subagents talk before they report back",
+    "kicker": "L3+ · ORCHESTRATION",
+    "subtitle": "The orchestrator asks one specialist. That specialist asks another, and only then answers.",
+    "type": "concept",
+    "layout": "steps",
+    "visual": {
+      "stepKeys": true,
+      "bot": "point",
+      "place": "beside"
+    },
+    "items": [
+      {
+        "label": "Orchestrator",
+        "caption": "The main AI Agent reads WL-1026 and asks the Customer Reply Agent for a draft."
+      },
+      {
+        "label": "Customer Reply Agent",
+        "caption": "Before writing, it calls the Risk Agent, which is wired as its own tool."
+      },
+      {
+        "label": "Risk Agent",
+        "caption": "Returns a risk note to the Reply Agent: double charge, complaint risk, escalate today."
+      },
+      {
+        "label": "Customer Reply Agent",
+        "caption": "Writes a reply that matches the risk note, so it promises nothing the risk does not support."
+      },
+      {
+        "label": "Orchestrator",
+        "caption": "Gets one answer back, sets the priority, and stops at the human gate."
+      }
+    ],
+    "tagline": "Day 2 bridge: /build-game-levels chained skills, a test and Bobby. Here the agents chain each other.",
+    "keyPoints": [
+      "One question in, one answer out",
+      "The specialists talk in between",
+      "Wiring decides who may ask whom",
+      "The orchestrator never sees the risk call",
+      "The human gate stays at the end"
+    ],
+    "notes": "This is multi-agent orchestration. In flat L3 the orchestrator calls every specialist itself. Here the Customer Reply Agent has the Risk Agent as its own tool, so the specialists consult each other before anything goes back to the orchestrator. Walk the five steps with the arrow key. Then open the Executions view of the demo workflow: the Risk Agent's call appears inside the Reply Agent's run, not inside the orchestrator's. The point to land: who may talk to whom is decided by the wiring on the canvas, not by the prompt. Be precise about what n8n does: agents call each other as tools, one request and one answer at a time; there is no open chat between them.",
+    "lessonId": "workshop-3"
+  },
+  {
+    "lessonId": "workshop-3",
+    "title": "Let subagents consult each other",
+    "kicker": "L3+ · Your turn · stretch",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "subtitle": "Rewire your L3 so the Reply Agent asks the Risk Agent before it answers the orchestrator.",
+    "repo": {
+      "label": "Download the L3+ orchestration workflow",
+      "url": "assets/day3-orchestration/n8n-triage-l3-orchestration.json"
+    },
+    "cards": [
+      {
+        "title": "Wiring",
+        "body": "Risk Agent: Tool output into Customer Reply Agent\nCustomer Reply Agent: Tool output into AI Agent"
+      }
+    ],
+    "steps": [
+      "Open your L3 workflow, or import the download and add your own OpenAI credential to the three Chat Models.",
+      "Drag the Risk Agent's connection from the AI Agent to the Tool input of the Customer Reply Agent.",
+      "In the Reply Agent's System Message, tell it to ask the Risk Agent before it writes, and to end with a line that starts with Risk note:.",
+      "Run WL-1026. Open Executions and find the Risk Agent's call inside the Customer Reply Agent's run.",
+      "Compare with flat L3: what changed in the reply?"
+    ],
+    "expected": "The reply ends with a Risk note line, and the Risk Agent's call appears inside the Customer Reply Agent's run in Executions.",
+    "keyPoints": [
+      "Rewire, do not rebuild",
+      "Wiring decides who may ask whom",
+      "Find the nested call in Executions",
+      "Human gate stays at the end"
+    ],
+    "notes": "Stretch for fast groups. The only structural change from L3 is one connection: the Risk Agent's Tool output moves from the orchestrator to the Customer Reply Agent. The downloadable workflow already has this wiring and updated system messages; participants add their own OpenAI credential. Proof is the nested call in Executions plus the Risk note line in the reply. Never paste an API key into the workflow."
+  },
+  {
+    "lessonId": "workshop-3",
+    "title": "Give the agent data: Data Table CRUD",
+    "kicker": "Data · Your turn · stretch",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "subtitle": "Store each reviewed ticket in a Data Table, then read it, update it and delete it again.",
+    "cards": [
+      {
+        "title": "Table",
+        "body": "Name: tickets\nColumns: ticket_id, message, priority, status"
+      },
+      {
+        "title": "CRUD",
+        "body": "Create: Insert row\nRead: Get row(s)\nUpdate: Update row(s)\nDelete: Delete row(s)"
+      }
+    ],
+    "steps": [
+      "Open Data tables in n8n and create a table named tickets with the columns ticket_id, message, priority and status.",
+      "Create: after the human gate, add a Data table node with Insert row. Map ticket_id, message and priority, and set status to new.",
+      "Read: add a Data table node with Get row(s) and filter on ticket_id = WL-1026. Check the row in the output.",
+      "Update: add Update row(s) for the same ticket_id and set status to reviewed.",
+      "Delete: add Delete row(s) for the same ticket_id to clean up the test row.",
+      "Run once, then open the table: which step changed which row?"
+    ],
+    "expected": "WL-1026 is inserted with status new, read back, updated to reviewed, and deleted again; each step shows its row in the output.",
+    "keyPoints": [
+      "Create, read, update, delete",
+      "One table, four Data table operations",
+      "Write only after the human gate",
+      "Delete your test rows"
+    ],
+    "notes": "Stretch: the agent workflow gets its own storage. Data tables are built into n8n, so no database or credential is needed. Insert row is Create, Get row(s) is Read, Update row(s) is Update and Delete row(s) is Delete. Put the Insert after the human gate: nothing is stored before a person approved the priority. Proof is the four outputs plus the table view. In a later step a Customer Context Agent can use Get row(s) as a tool to look customers up."
   },
   {
     "lessonId": "workshop-3",

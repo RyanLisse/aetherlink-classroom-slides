@@ -5,9 +5,13 @@
     {
       "file": "workshop3-slides.js",
       "source": "apps/web/src/deck/workshop3-slides.ts",
-      "slides": 18,
+      "slides": 26,
+      "sourceSlides": 18,
+      "adapted": true,
       "sourceSha256": "2b5a3e59ab843c619ddd58a5f1e8711ed0ca5b63876de94e45b347a5ed3f5a9f",
-      "normalizedDataSha256": "45d43abd6a24dffd22caf7674a4762acdf0089c64883e5ffbdd784b4262c3f6b"
+      "adaptedFromNormalizedSha256": "45d43abd6a24dffd22caf7674a4762acdf0089c64883e5ffbdd784b4262c3f6b",
+      "normalizedDataSha256": "cd1c8fa3c55c1fa902edea3c5260d208ecae9a8caa563bcfc887c07b9fb4a939",
+      "adaptedDataSha256": "cd1c8fa3c55c1fa902edea3c5260d208ecae9a8caa563bcfc887c07b9fb4a939"
     },
     {
       "file": "workshop4-slides.js",
