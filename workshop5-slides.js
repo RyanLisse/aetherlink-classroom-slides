@@ -7,7 +7,7 @@ window.SLIDES = [
   {
     "title": "Welcome to Workshop 5",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
-    "subtitle": "Today we build an SRE agent.",
+    "subtitle": "Days 3–4 built an agent. Today we ship one safely.",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -21,6 +21,48 @@ window.SLIDES = [
       "Check the setup."
     ],
     "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n3. If a person has no setup: do not fix it now. Help them at Assignment 1: Setup check and in the 11:00 break."
+  },
+  {
+    "title": "What do you remember from Days 1–4?",
+    "kicker": "W5 · RECAP · DAYS 1–4",
+    "subtitle": "Answer from memory first. Then click.",
+    "type": "recap",
+    "visual": {
+      "reveal": "click",
+      "answers": true,
+      "bot": "peek",
+      "place": "slot",
+      "noReact": true
+    },
+    "cards": [
+      {
+        "title": "Day 1: what goes in intent.md?",
+        "body": "The outcome, how you check it is done, and what Claude must not do."
+      },
+      {
+        "title": "Day 1: what does a hook do that CLAUDE.md cannot?",
+        "body": "It always runs, at a fixed moment. CLAUDE.md guides. A hook enforces."
+      },
+      {
+        "title": "Day 2: what did Bobby do?",
+        "body": "Checked the levels in his own context. Said GO or NO-GO. Approved nothing."
+      },
+      {
+        "title": "Day 3: where did the human stay in charge?",
+        "body": "A person approved the reply to WL-1026 before it went out."
+      },
+      {
+        "title": "Day 4: how did the agent get customer facts?",
+        "body": "Through read-only MCP tools: get_customer and get_transaction."
+      }
+    ],
+    "tagline": "Today: the same pieces, in one lifecycle.",
+    "keyPoints": [
+      "Cold retrieval. No looking back.",
+      "One question per click.",
+      "Each answer returns today."
+    ],
+    "notes": "Time: 10:10 · 5 min.\n1. Open one question per click. Let the room answer first.\n2. Say after each answer where it returns today: intent.md at 11:15, hooks at 13:18, Bobby as the verifier at 13:51, the human gate at 15:16, read-only MCP at 13:06.\n3. Day refs: Day 1 “Why intent.md first?” and “Hooks: a check that runs by itself”, Day 2 “Meet Bobby, your level-checker”, Day 3 “Today in n8n”, Day 4 “Agent SDK: read-only MCP tools”."
   },
   {
     "title": "Goal of the day",
@@ -66,6 +108,45 @@ window.SLIDES = [
     "notes": "Time: 10:01 · 2 min.\n1. Say: “Goal: your team can run a 2-day hackathon with Claude in W6–W7.”\n2. Show: the three badges. Say each one in one sentence.\n3. Say: “The agent reads alerts, logs, and metrics. It writes a diagnosis. It proposes a fix as a PR or MR. It never executes.”\n4. Say: “The human gate: a named human approves. Not the agent.”\n5. Say: “At 15:40 you write your hackathon intent.md. You take the skills pack home.”"
   },
   {
+    "title": "Today's story: from a ticket to a page",
+    "kicker": "W5 · OPENING · WHY TODAY",
+    "subtitle": "03:12. checkout-api pages on-call. The agent can read. It must not act.",
+    "type": "context",
+    "cards": [
+      {
+        "title": "Day 3–4",
+        "body": "One ticket, WL-1026. An agent read it. A person approved the reply."
+      },
+      {
+        "title": "Today",
+        "body": "One alert on checkout-api. An agent reads logs and deploys. A person approves the fix."
+      },
+      {
+        "title": "New today",
+        "body": "Not the agent. The lifecycle around it: intent, spec, hooks, evals, gate."
+      }
+    ],
+    "tagline": "The agent was the easy part. Shipping it safely is today.",
+    "visual": {
+      "stagger": "pop",
+      "bot": "think",
+      "place": "aside",
+      "highlight": [
+        {
+          "in": "tagline",
+          "text": "Shipping it safely",
+          "tone": "orange"
+        }
+      ]
+    },
+    "keyPoints": [
+      "Same pattern as Day 3–4.",
+      "New domain: an SRE page.",
+      "New focus: the lifecycle."
+    ],
+    "notes": "Time: 10:15 · 2 min.\n1. Say: “On Day 3 you built a ticket agent in n8n. On Day 4 the same agent in the Agent SDK, with read-only MCP and a human review.”\n2. Say: “Today the agent reads a page instead of a ticket. The pattern is the same: read-only sensors, a proposal, a human decides.”\n3. Say: “What is new: each stage of the lifecycle leaves a file, and each boundary is a hook or a test, not a promise.”"
+  },
+  {
     "title": "What we do today",
     "kicker": "W5 · OPENING · 10:00–16:00",
     "subtitle": "Concept. Demo. Your turn.",
@@ -89,14 +170,14 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Morning",
-        "body": "10:00 Welcome + W4 recap\n10:30 Why AI-native · 10:45 Setup\n11:15 Plan · 11:40 Design"
+        "body": "10:00 Welcome + recap · 10:30 Why AI-native\n10:45 Setup · 11:15 Plan · 11:40 Design"
       },
       {
         "title": "Afternoon",
-        "body": "13:00 Build 1 · 13:50 Build 2\n14:55 Test · 15:15 Deploy\n15:30 Maintain · 15:40 Hackathon"
+        "body": "13:00 Build 1: controls · 13:50 Build 2: diagnose\n14:55 Test · 15:15 Deploy · 15:30 Maintain\n15:40 Hackathon · 15:55 Recap + reflection"
       }
     ],
-    "tagline": "Breaks: 11:00, 12:00 (lunch), 14:40. Close at 15:50.",
+    "tagline": "Breaks: 11:00, 12:00 (lunch), 14:40. Close at 16:00.",
     "keyPoints": [
       "Breaks: 11:00, 12:00, 14:40.",
       "Five skill showcases.",
@@ -119,7 +200,7 @@ window.SLIDES = [
       "One useful takeaway per table.",
       "Ask for a concrete example."
     ],
-    "notes": "Time: 10:10 · 7 min.\n1. Give each table 2 minutes to discuss.\n2. Ask each table to share one useful takeaway from the last session.\n3. Ask how they used it, or where they could use it.\n4. Write the main takeaways on the board."
+    "notes": "Time: 10:17 · 4 min.\n1. Give each table 2 minutes to discuss.\n2. Ask each table to share one useful takeaway from the last session.\n3. Ask how they used it, or where they could use it.\n4. Write the main takeaways on the board."
   },
   {
     "title": "What went wrong? What did you learn?",
@@ -163,7 +244,7 @@ window.SLIDES = [
       "One concrete outcome per person.",
       "Keep the outcomes for the closing discussion."
     ],
-    "notes": "Time: 10:23 · 7 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Let them share at their table.\n3. Collect one or two outcomes per table on the board.\n4. Connect these outcomes to the workshop goal. Explain what fits today and what falls outside the scope.\n5. Keep the outcomes visible. Return to them at the end of the workshop."
+    "notes": "Time: 10:23 · 5 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Let them share at their table.\n3. Collect one or two outcomes per table on the board.\n4. Connect these outcomes to the workshop goal. Explain what fits today and what falls outside the scope.\n5. Keep the outcomes visible. Return to them at the end of the workshop.\n5. Keep the outcomes visible. We return to them on “Did you reach your goal for today?”."
   },
   {
     "title": "“AI writes code faster than one year ago.”",
@@ -251,7 +332,6 @@ window.SLIDES = [
       {
         "title": "Traditional: a line",
         "items": [
-          "Plan → Design → Build → Test → Deploy → Maintain",
           "A handover at each stage",
           "Weeks per cycle"
         ]
@@ -259,9 +339,8 @@ window.SLIDES = [
       {
         "title": "AI-native: a loop",
         "items": [
-          "The same stages, as a circle",
-          "AI at each point",
-          "Hours per cycle. Humans above the loop."
+          "AI at each stage",
+          "Hours per cycle. Humans above it."
         ]
       }
     ],
@@ -269,11 +348,11 @@ window.SLIDES = [
       "pairs": true
     },
     "keyPoints": [
+      "Same six stages.",
       "Hours, not weeks.",
-      "Humans are above the loop.",
-      "Humans start, direct, and approve."
+      "Humans are above the loop."
     ],
-    "notes": "Time: 10:37 · 1 min.\n1. Show the left column, then the right column.\n2. Say: “Hours, not weeks. Humans stay above the loop.”\n3. Do not discuss now. We build the loop for the rest of the day."
+    "notes": "Time: 10:37 · 1 min.\n1. Say: “Both have the same six stages: Plan, Design, Build, Test, Deploy, Maintain.”\n2. Show row 1: a handover at each stage, versus AI at each stage.\n3. Show row 2. Say: “Hours, not weeks. Humans stay above the loop.”\n4. Bridge: “This is the agent loop from Day 1 “Agent loop”, one level up.”"
   },
   {
     "title": "What changes per stage",
@@ -355,7 +434,7 @@ window.SLIDES = [
   {
     "title": "Our project: an SRE agent",
     "kicker": "W5 · OUR PROJECT · CHECKOUT-API",
-    "subtitle": "The agent proposes. It never executes.",
+    "subtitle": "Like Day 4: read-only tools, a proposal, a human decides.",
     "type": "concept",
     "cards": [
       {
@@ -465,7 +544,7 @@ window.SLIDES = [
   {
     "title": "Assignment 1: Setup check",
     "kicker": "W5 · SETUP · YOUR TURN",
-    "subtitle": "Native on your laptop. Docker is optional.",
+    "subtitle": "Copy each box into your terminal. Native on your laptop. Docker is optional.",
     "repo": {
       "url": "https://github.com/RyanLisse/aetherlink-sre-agent-lab",
       "label": "github.com/RyanLisse/aetherlink-sre-agent-lab"
@@ -473,32 +552,92 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Clone the repo. Run npm ci.",
-      "Run npm test. Expect fail 0.",
-      "Run claude. Approve MCP sre.",
-      "Run /status. Check your account.",
-      "Type /. Find the 8 lab skills."
-    ],
-    "expected": "Tests green. Status: [x] STEP-0 Setup.",
-    "stepsHeading": "Do this now:",
-    "cards": [
       {
-        "title": "In the lab repo",
-        "body": "git clone https://github.com/RyanLisse/aetherlink-sre-agent-lab.git\ncd aetherlink-sre-agent-lab\nnpm ci\nnpm test\nclaude\n/status"
+        "text": "Get the lab and install",
+        "prompt": "git clone https://github.com/RyanLisse/aetherlink-sre-agent-lab.git\ncd aetherlink-sre-agent-lab\nnpm ci"
+      },
+      {
+        "text": "Run the three checks. No model needed.",
+        "prompt": "npm test\nnpm run test:hooks\nnpm run eval",
+        "after": "pass 17 · fail 0. Three times fail=0. Six lines that start with ok."
+      },
+      {
+        "text": "Start Claude Code",
+        "prompt": "claude",
+        "after": "Trust this folder? Yes. MCP server sre? Approve.",
+        "warn": true
+      },
+      {
+        "text": "Check your login and the MCP",
+        "cmds": [
+          "/status",
+          "/mcp"
+        ],
+        "after": "Your own login. sre is connected."
+      },
+      {
+        "text": "Let Claude look once, so the guard hook fires",
+        "prompt": "What is in this folder?"
+      },
+      {
+        "text": "Type / and find the lab skills",
+        "cmds": [
+          "/"
+        ],
+        "after": "design-control-loop, grilling, show-me, verify-this, review-and-ship, visual-pr, handoff, incident-triage."
+      },
+      {
+        "text": "In a second terminal: check your progress",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-0 Setup"
       }
     ],
+    "expected": "Three green checks. sre connected. [x] STEP-0 Setup.",
+    "stepsHeading": "Do this now:",
+    "cards": [],
     "visual": {
-      "shotLabel": "aetherlink-sre-agent-lab",
-      "cmdCards": [
-        0
-      ]
+      "shotLabel": "aetherlink-sre-agent-lab"
     },
     "keyPoints": [
-      "This is a check, not an install.",
-      "Red? We help in the break.",
-      "npm run progress -- --status shows current evidence."
+      "A check, not an install.",
+      "STEP-0 needs one Claude tool call.",
+      "Red? We help in the break."
     ],
-    "notes": "Time: 10:50 · 10 min. This block continues into the break.\n1. Show: in the lab folder, run npm ci and npm test (pass 13).\n2. Show: run claude. Select “Yes” at the trust question. Approve the MCP server sre.\n3. Show: run /status. Show your account.\n4. Show: type /. Show the 8 skills: design-control-loop, grilling, show-me, verify-this, review-and-ship, visual-pr, handoff, incident-triage.\n5. Show: run npm run progress -- --status. It shows “[x] STEP-0 Setup”. Open PROGRESS.md to show the dated STEP-0 history entry.\n6. Let them do: the same steps. Check one green tick per table.\n7. If “npm: command not found”: install Node LTS (INSTALL.md step 3).\n8. If /status shows no account: run /login. Use Vertex only if the company requires it (CLAUDE_CODE_USE_VERTEX=1, ANTHROPIC_VERTEX_PROJECT_ID, CLOUD_ML_REGION, gcloud auth application-default login).\n9. If MCP shows “Pending approval”: start claude in the repo folder. Approve the server.\n10. If the hook does not run: restart claude. Trust the project.\n11. If Windows shows CRLF errors: clone again. .gitattributes sets LF.\n12. If a skill behaves differently: an old copy in ~/.claude/skills wins. Rename it.\n13. If native fails: use INSTALL-DOCKER.md."
+    "notes": "Time: 10:50 · 10 min. This block runs into the break.\n1. Show the same steps first.\n2. STEP-0 needs node_modules and one line in approvals/audit.jsonl. That line comes only from a Claude tool call in the trusted folder. npm run test:hooks does not count: it writes to a temp folder.\n3. If “npm: command not found”: install Node LTS (INSTALL.md step 3).\n4. If STEP-0 stays [ ]: the trust question was not accepted. Restart claude in the lab folder and choose Yes.\n5. If /status shows no account: run /login. Use Vertex only if the company requires it (INSTALL.md, Optional: At Worldline).\n6. If MCP shows “Pending approval”: start claude in the repo folder and approve sre.\n7. If a skill behaves differently: an old copy in ~/.claude/skills wins. Rename it.\n8. If native fails: use INSTALL-DOCKER.md and prefix each npm command with docker compose run --rm lab."
+  },
+  {
+    "title": "Fell behind? Copy the worked example",
+    "kicker": "W5 · SETUP · CATCH UP",
+    "subtitle": "Each block has a worked example in a step tag. Copy one file. Do not switch to the tag.",
+    "type": "context",
+    "cards": [
+      {
+        "title": "Look",
+        "body": "git show step-1:intent.md"
+      },
+      {
+        "title": "Copy one file",
+        "body": "git show step-2:docs/spec.md > docs/spec.md"
+      },
+      {
+        "title": "Tags",
+        "body": "step-1 intent · step-2 spec · step-3 deny rule · step-4 plan + diagnosis · step-5 verdict · step-6 gate · step-7 eval case · step-8 HANDOFF.md"
+      }
+    ],
+    "tagline": "The tags are older than main. Copy files, never check out a tag.",
+    "visual": {
+      "cmdCards": [
+        0,
+        1
+      ],
+      "oneCol": true
+    },
+    "keyPoints": [
+      "One file at a time.",
+      "Never git checkout step-N.",
+      "Your own work stays."
+    ],
+    "notes": "Time: 10:59 · 1 min.\n1. Show git show step-1:intent.md.\n2. Say: “The tags are older than main. They miss new skills and have older messages. So copy one file, do not switch.”\n3. Windows PowerShell: git show step-2:docs/spec.md | Set-Content docs/spec.md."
   },
   {
     "title": "Break",
@@ -545,7 +684,7 @@ window.SLIDES = [
   {
     "title": "intent.md",
     "kicker": "W5 · DEFINITION · PLAN",
-    "subtitle": "Three checks that a stranger can verify. At least one is OPEN.",
+    "subtitle": "Day 1 you wrote one for Snake. Today: three checks a stranger can verify. One is OPEN.",
     "type": "concept",
     "cards": [
       {
@@ -553,8 +692,8 @@ window.SLIDES = [
         "body": "The outcome, the checks that prove it, and the boundary the agent never crosses."
       },
       {
-        "title": "Five fields",
-        "body": "Problem\nOutcome\nUsers/Systems\nConstraints\nOpen questions"
+        "title": "Five headings",
+        "body": "Problem\nProposed outcome\nAffected users and systems\nConstraints\nOpen questions"
       }
     ],
     "tagline": "A wish is not a rule. The merge is the acceptance.",
@@ -655,21 +794,33 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Write the five fields. Add one OPEN.",
-      "Do one interview round with a skill.",
-      "Read your boundary to a neighbor.",
-      "Open a PR or MR."
+      {
+        "text": "Start the interview: one round only",
+        "prompt": "/design-control-loop for the SRE agent on checkout-api — one round, then map to intent.md",
+        "after": "Answer at most 3 questions. Reject one recommended answer."
+      },
+      {
+        "text": "Claude edits intent.md. The hook asks. Read it, then say yes.",
+        "after": "Keep the five headings. Replace Author: <team> with your names."
+      },
+      "Read your Constraints line to a neighbor. Can a stranger test it? If not, rewrite it.",
+      "Add one line under Open questions that starts with OPEN:",
+      {
+        "text": "Check",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-1 Plan: intent.md"
+      }
     ],
-    "expected": "PR/MR open. The boundary is testable.",
+    "expected": "[x] STEP-1. The boundary is testable. One OPEN.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
         "title": "intent.md",
-        "body": "Problem\nOutcome\nUsers/Systems\nConstraints\nOpen questions"
+        "body": "Problem\nProposed outcome\nAffected users and systems\nConstraints\nOpen questions"
       }
     ],
     "visual": {
-      "shotLabel": "Skill: /design-control-loop or /grilling",
+      "shotLabel": "Skill: /design-control-loop · fallback: /grilling intent.md",
       "mdfile": 0,
       "mdName": "intent.md"
     },
@@ -683,7 +834,7 @@ window.SLIDES = [
   {
     "title": "spec.md",
     "kicker": "W5 · DEFINITION · DESIGN",
-    "subtitle": "The diagnosis contract. A schema holds it.",
+    "subtitle": "Day 2 had a rulebook for levels. Today a schema rejects a bad diagnosis.",
     "type": "concept",
     "cards": [
       {
@@ -692,7 +843,7 @@ window.SLIDES = [
       },
       {
         "title": "Fields",
-        "body": "category\ntrigger_deploy\nevidence[] + log ids\nrunbook\nproposed_step\nexecutes: false"
+        "body": "root_cause.category\nroot_cause.trigger_deploy\nevidence[]: log_id + quote\nruled_out[]\nproposed_action.runbook + step\nexecutes: false"
       }
     ],
     "tagline": "executes: false is a type, not a promise.",
@@ -721,16 +872,16 @@ window.SLIDES = [
   {
     "title": "Watch: red schema → green",
     "kicker": "W5 · DESIGN · DEMO",
-    "subtitle": "First a failing test. Then the schema.",
+    "subtitle": "First a failing test for blast_radius. Then the schema.",
     "type": "concept",
     "cards": [
       {
         "title": "Red",
-        "body": "The schema test fails. The field is missing."
+        "body": "Add a test: blast_radius is a required string. npm test: pass 17, fail 1."
       },
       {
         "title": "Green",
-        "body": "Edit evals/schema.ts. npm test is green."
+        "body": "Add blast_radius to evals/schema.ts and the 3 good fixtures. npm test: pass 18, fail 0."
       }
     ],
     "visual": {
@@ -739,16 +890,16 @@ window.SLIDES = [
           "c": "npm test "
         },
         {
-          "o": "✗ schema: field \"runbook\" is missing"
+          "o": "ℹ pass 17 · ℹ fail 1"
         },
         {
-          "o": "… edit evals/schema.ts …"
+          "o": "… add blast_radius to evals/schema.ts + good fixtures …"
         },
         {
           "c": "npm test "
         },
         {
-          "o": "✓ all tests pass · fail 0"
+          "o": "ℹ pass 18 · ℹ fail 0"
         }
       ]
     },
@@ -762,21 +913,42 @@ window.SLIDES = [
   {
     "title": "Assignment 3: Spec + schema green",
     "kicker": "W5 · DESIGN · YOUR TURN",
-    "subtitle": "Test first.",
+    "subtitle": "Test first. The test must be red before you fix it.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Write docs/spec.md. One example per field.",
-      "Make the schema test fail.",
-      "Edit evals/schema.ts until green.",
-      "Open a PR/MR. Another team reviews."
+      {
+        "text": "Ask Claude to fill the spec",
+        "prompt": "Fill docs/spec.md against evals/schema.ts: one line per Diagnosis field, what it holds and where the evidence comes from. Under Flagged concerns: executes is always false, and who approves.",
+        "after": "The hook asks. Read it, then say yes."
+      },
+      {
+        "text": "Write the test first",
+        "prompt": "Add a test in test/schema.test.ts that expects a required blast_radius string field. Do not touch evals/schema.ts yet. Then run npm test.",
+        "after": "pass 17 · fail 1. Red. Good."
+      },
+      {
+        "text": "Make it green",
+        "prompt": "Add blast_radius: z.string() to Diagnosis in evals/schema.ts, and \"blast_radius\": \"checkout-api only; sample data\" to each evals/fixtures/*.good.json. Run npm test.",
+        "after": "pass 18 · fail 0"
+      },
+      {
+        "text": "Record one design decision",
+        "prompt": "Create docs/decisions/D01-evidence-via-mcp-only.md from the template in docs/decisions/README.md.",
+        "after": "The hook asks. Say yes."
+      },
+      {
+        "text": "Check",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-2 and [x] STEP-3"
+      }
     ],
-    "expected": "npm test green. The test commit is first.",
+    "expected": "Red, then green: pass 18 · fail 0. [x] STEP-2 and STEP-3.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
         "title": "You write",
-        "body": "docs/spec.md"
+        "body": "docs/spec.md\ntest/schema.test.ts\nevals/schema.ts\ndocs/decisions/D01-….md"
       }
     ],
     "visual": {
@@ -810,7 +982,7 @@ window.SLIDES = [
   {
     "title": "CLAUDE.md",
     "kicker": "W5 · DEFINITION · BUILD 1",
-    "subtitle": "The briefing that each session reads first.",
+    "subtitle": "Day 1 you wrote one. Here it is the briefing each session reads first.",
     "type": "concept",
     "cards": [
       {
@@ -861,7 +1033,7 @@ window.SLIDES = [
       },
       {
         "title": "Change + mechanism",
-        "body": "What shipped · Why"
+        "body": "What shipped · Why it mattered · How, and what was rejected"
       },
       {
         "title": "Validation",
@@ -882,12 +1054,12 @@ window.SLIDES = [
       "Dated log entries preserve history. Never rewrite them.",
       "A correction gets its own timestamp and evidence."
     ],
-    "notes": "Time: 13:03 · 3 min.\n1. Show: run npm run progress -- --status. It reads current evidence and writes nothing.\n2. Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made.\n3. Read the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and add the new evidence.”\n6. Say: “A historical entry is not current status. Run the status command for current evidence.”"
+    "notes": "Time: 13:03 · 3 min.\n1. Show: run npm run progress -- --status. It reads current evidence and writes nothing.\n2. Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made.\n3. Read the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and add the new evidence.”\n6. Say: “A historical entry is not current status. Run the status command for current evidence.”\nBridge: Day 2 Assignment 16, “Read PROGRESS.md. Where did we stop?” Same file. Now a hook appends to it, and Claude may not edit it (settings.json denies Edit(./PROGRESS.md))."
   },
   {
     "title": "MCP",
     "kicker": "W5 · DEFINITION · BUILD 1",
-    "subtitle": "The connection between Claude and a source system.",
+    "subtitle": "Day 4: get_customer. Today: get_logs. Same idea: narrow and read-only.",
     "type": "concept",
     "cards": [
       {
@@ -965,7 +1137,7 @@ window.SLIDES = [
       "A skill advises. It does not enforce.",
       "Review it before you install it."
     ],
-    "notes": "Time: 13:12 · 3 min.\n1. Show: .claude/skills/incident-triage/SKILL.md.\n2. Say: “A skill advises. It does not enforce. The hooks enforce. You see them next.”\n3. Say: “The policy owner signs off in a PR/MR.”"
+    "notes": "Time: 13:12 · 3 min.\n1. Show: .claude/skills/incident-triage/SKILL.md.\n2. Say: “A skill advises. It does not enforce. The hooks enforce. You see them next.”\n3. Say: “The policy owner signs off in a PR/MR.”\nBridge: Day 2, “What is a skill?”. A skill is a method Claude loads when the description matches."
   },
   {
     "title": "Two types of skills",
@@ -978,10 +1150,10 @@ window.SLIDES = [
       },
       {
         "title": "Workflow (only with /name)",
-        "body": "design-control-loop · grilling · show-me · verify-this · review-and-ship · visual-pr · handoff"
+        "body": "design-control-loop · show-me · verify-this · review-and-ship · visual-pr"
       }
     ],
-    "tagline": "HumanLayer skills (MIT) keep their source.",
+    "tagline": "grilling and handoff can also start by themselves. HumanLayer skills (MIT) keep their source.",
     "visual": {
       "lifespan": [
         {
@@ -1006,7 +1178,7 @@ window.SLIDES = [
   {
     "title": "hooks",
     "kicker": "W5 · DEFINITION · BUILD 1",
-    "subtitle": "A script that runs on an agent event. It can block the event.",
+    "subtitle": "Day 1 your hook ran npm test. Today the hook decides: allow, ask or deny.",
     "type": "concept",
     "cards": [
       {
@@ -1077,7 +1249,8 @@ window.SLIDES = [
       "Merge and approve are human work.",
       "Regex rules are best effort."
     ],
-    "notes": "Time: 13:21 · 4 min.\n1. Explain the three columns, left to right.\n2. Say: “The agent can never merge or approve. This is also true after an approval.”\n3. Say: “A push without a named approval is denied. The message says: a human runs npm run approve in their own terminal.”\n4. Say: “Regex rules are best effort. Strong isolation needs an OS sandbox, the Docker route without network, or managed settings from IT.”"
+    "notes": "Time: 13:21 · 4 min.\n1. Explain the three columns, left to right.\n2. Say: “The agent can never merge or approve. This is also true after an approval.”\n3. Say: “A push without a named approval is denied. The message says: a human runs npm run approve in their own terminal.”\n4. Say: “Regex rules are best effort. Strong isolation needs an OS sandbox, the Docker route without network, or managed settings from IT.”",
+    "subtitle": "Day 1 you set permissions. Day 4 had allowedTools. Same three answers."
   },
   {
     "title": "Watch: try to break the rules",
@@ -1126,18 +1299,41 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Run npm run test:hooks. Expect green.",
-      "Choose one new deny rule.",
-      "Write the test first. See it fail.",
-      "Edit guard.mjs until green.",
-      "Open a PR/MR."
+      {
+        "text": "Let Claude try a blocked action",
+        "prompt": "Fetch https://example.com with curl.",
+        "after": "Denied. One deny line in approvals/audit.jsonl."
+      },
+      {
+        "text": "Run the hook tests",
+        "prompt": "npm run test:hooks",
+        "after": "Three times fail=0."
+      },
+      {
+        "text": "You, in VS Code: add a test to test/hooks.test.mjs, above check(\"npm test untouched\"…",
+        "prompt": "check(\"team rule: git reset --hard denied\", \"deny\", P(\"Bash\", \"command\", \"git reset --hard HEAD~1\"));"
+      },
+      {
+        "text": "See it fail",
+        "prompt": "node test/hooks.test.mjs",
+        "after": "FAIL team rule: git reset --hard denied -> none (want deny)"
+      },
+      {
+        "text": "You, in .claude/hooks/guard.mjs: add one line above the HUMAN_ONLY check",
+        "prompt": "if (/\\bgit\\s+reset\\s+--hard/i.test(cmd)) decide(\"deny\", \"Destructive git commands are a human decision.\");"
+      },
+      {
+        "text": "See it pass",
+        "prompt": "npm run test:hooks",
+        "after": "fail=0 everywhere. Then npm run progress -- --status: [x] STEP-4."
+      }
     ],
-    "expected": "test:hooks green. Status: [x] STEP-4 Build.",
+    "expected": "Red, then green. [x] STEP-4 Build.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
-        "title": "npm run test:hooks",
-        "body": "curl to a URL\nread .env\nedit runbooks/\nyour rule: kubectl delete"
+        "title": "Pick a rule that is not covered yet",
+        "body": "git reset --hard · rm -rf · terraform destroy\nNot kubectl delete: kubectl is already gated."
       }
     ],
     "visual": {
@@ -1166,7 +1362,8 @@ window.SLIDES = [
       "The agent cannot edit .claude/.",
       "STEP-4 is [x] after your first deny."
     ],
-    "notes": "Time: 13:30 · 20 min.\n1. Let them do: the five steps on the slide.\n2. Say: “The agent cannot edit .claude/ (deny). You edit guard.mjs yourself. The human owns the boundary.”\n3. Check: npm run test:hooks is green, including the new test.\n4. Check: npm run progress -- --status shows “[x] STEP-4 Build” after one deny in audit.jsonl.\n5. At 13:50, go to the next block."
+    "notes": "Time: 13:30 · 20 min.\n1. Let them do: the five steps on the slide.\n2. Say: “The agent cannot edit .claude/ (deny). You edit guard.mjs yourself. The human owns the boundary.”\n3. Check: npm run test:hooks is green, including the new test.\n4. Check: npm run progress -- --status shows “[x] STEP-4 Build” after one deny in audit.jsonl.\n5. At 13:50, go to the next block.",
+    "subtitle": "Your own deny rule. Test first. You edit the hook, not Claude."
   },
   {
     "title": "plan.md",
@@ -1198,16 +1395,16 @@ window.SLIDES = [
   {
     "title": "subagents",
     "kicker": "W5 · DEFINITION · BUILD 2",
-    "subtitle": "A helper session with its own context. Delegate the work, never the acceptance.",
+    "subtitle": "Day 2 you met Bobby. The verifier is Bobby for diagnoses.",
     "type": "concept",
     "cards": [
       {
         "title": "Verifier",
-        "body": ".claude/agents/verifier.md. New context. It only reports."
+        "body": ".claude/agents/verifier.md. New context. Checks each log id against get_logs. Only reports."
       },
       {
         "title": "Never",
-        "body": "A subagent does not accept a plan. It approves nothing."
+        "body": "Like Bobby: it says what matches. It accepts nothing. It approves nothing."
       }
     ],
     "tagline": "Delegate the work. Never the acceptance.",
@@ -1251,7 +1448,7 @@ window.SLIDES = [
       "The diagnosis cites log ids.",
       "HTML version in docs/show-me/."
     ],
-    "notes": "Time: 13:52 · 2 min showcase + 8 min demo. Showcase 2.\n1. Show: paste the prompt. /show-me draws request → DB pool → timeout with real names from the logs.\n2. Say: “To understand is not to diagnose. The diagnosis cites log ids.”\n3. Say: “The HTML version is in docs/show-me/. Open it yourself. The lab version does not run open.”\n4. Show: press Shift+Tab (plan mode). Claude proposes docs/plan.md.\n5. Show: correct one step. Accept the plan.\n6. Show: Claude calls get_logs, get_metrics, and get_deploys. It writes docs/diagnoses/inc-001.json.\n7. Show: the cited log ids and trigger d-0142.\n8. If /show-me tries to run open: the upstream version is active. Use the lab copy in .claude/skills/show-me."
+    "notes": "Time: 13:52 · 2 min showcase + 8 min demo. Showcase 2.\n1. Show: paste the prompt. /show-me draws request → DB pool → timeout with real names from the logs.\n2. Say: “To understand is not to diagnose. The diagnosis cites log ids.”\n3. Say: “The HTML version is in docs/show-me/. Open it yourself. The lab version does not run open.”\n4. Show: press Shift+Tab (plan mode). Claude proposes docs/plan.md.\n5. Show: correct one step. Accept the plan.\n6. Show: Claude calls get_logs, get_metrics, and get_deploys. It writes docs/diagnoses/inc-001.json.\n7. Show: the cited log ids and trigger d-0142.\n8. If /show-me tries to run open: the upstream version is active. Use the lab copy in .claude/skills/show-me.\n7b. Show: “Use the verifier subagent to check docs/diagnoses/inc-001.json.” It reports matches and gaps."
   },
   {
     "title": "Assignment 5: Diagnose an incident",
@@ -1260,13 +1457,33 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Optional: /show-me on the alert.",
-      "Plan mode. Accept docs/plan.md yourself.",
-      "Diagnose inc-001.",
-      "Diagnose inc-002 or inc-004.",
-      "Open a PR/MR."
+      {
+        "text": "Optional: understand the alert first",
+        "prompt": "/show-me incidents/inc-001-db-pool/alert.json — what happens between the alert and the pool?"
+      },
+      {
+        "text": "Plan mode: Shift+Tab until the bottom says plan mode. Then ask",
+        "prompt": "Plan how you will diagnose inc-001 with the sre MCP tools. Write the plan to docs/plan.md: Files, Order, Risks, Proof, Rollback.",
+        "after": "Read the plan. Change one step. Accept. The edit of docs/plan.md asks."
+      },
+      {
+        "text": "Diagnose",
+        "prompt": "Diagnose inc-001 with the incident-triage policy. Write docs/diagnoses/inc-001.json with incident \"inc-001-db-pool\". Cite log ids with literal quotes.",
+        "after": "A JSON file and a short .md next to it."
+      },
+      {
+        "text": "Second opinion",
+        "prompt": "Use the verifier subagent to check docs/diagnoses/inc-001.json.",
+        "after": "It reports what matches. It changes nothing."
+      },
+      {
+        "text": "Check",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-5 Diagnose"
+      },
+      "Time left: diagnose inc-002 or inc-004 the same way."
     ],
-    "expected": "Diagnosis JSON with log ids. Plan accepted first.",
+    "expected": "docs/plan.md accepted first. inc-001.json with real log ids. [x] STEP-5.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
@@ -1305,7 +1522,7 @@ window.SLIDES = [
   {
     "title": "eval",
     "kicker": "W5 · DEFINITION · TEST",
-    "subtitle": "It runs in CI.",
+    "subtitle": "It runs in CI. Day 2: a gate counts only once you have seen it close.",
     "type": "concept",
     "cards": [
       {
@@ -1379,12 +1596,24 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Run npm run eval on your diagnosis.",
-      "REJECTED? Fix the diagnosis, not the eval.",
-      "Add one eval case.",
-      "Optional: /verify-this."
+      {
+        "text": "Score your diagnosis",
+        "prompt": "npm run eval -- docs/diagnoses/inc-001.json",
+        "after": "PASS, or REJECTED with reasons in [ … ]"
+      },
+      "REJECTED? Fix the diagnosis, not the eval. Run it again.",
+      {
+        "text": "Prove the eval can fail",
+        "prompt": "/verify-this \"npm run eval rejects a diagnosis that cites a non-existent log id\"",
+        "after": "docs/verify/<claim>/verdict.md: VERIFIED, NOT VERIFIED or INCONCLUSIVE."
+      },
+      {
+        "text": "Check",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-6 Test"
+      }
     ],
-    "expected": "PASS. One new case. One verdict. CI green.",
+    "expected": "PASS, newer than your last edit. One verdict. [x] STEP-6.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
@@ -1408,7 +1637,7 @@ window.SLIDES = [
   {
     "title": "workflows",
     "kicker": "W5 · DEFINITION · DEPLOY",
-    "subtitle": "A repeatable path of steps. Here: CI. Both run offline.",
+    "subtitle": "Day 2: /build-game-levels ran the steps in order. Here CI runs the gates in order.",
     "type": "concept",
     "layout": "compare",
     "columns": [
@@ -1526,12 +1755,37 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "steps": [
-      "Create fix/<name>. Make the fix.",
-      "Commit (ask). The push is denied.",
-      "A neighbor runs npm run approve.",
-      "Push. Open a PR (gh) or MR (glab)."
+      {
+        "text": "Branch and fix",
+        "prompt": "git switch -c fix/<your-name>",
+        "after": "Then ask Claude: Set DB_POOL_MAX=20 in app/config/prod.env (inc-001). The edit asks."
+      },
+      {
+        "text": "Review and commit",
+        "prompt": "/review-and-ship fix: restore DB_POOL_MAX=20 (inc-001)",
+        "after": "The commit asks. The push is denied: no named approval."
+      },
+      {
+        "text": "A neighbor, in THEIR OWN terminal (not in Claude)",
+        "prompt": "npm run approve -- <their-name> fix/<your-name> \"inc-001 eval PASS\"",
+        "after": "Approved: fix/<your-name> by <their-name>"
+      },
+      {
+        "text": "You, in your own terminal: commit the approval",
+        "prompt": "git add -f approvals/approvals.jsonl approvals/audit.jsonl\ngit commit -m \"approval: fix/<your-name> by <their-name>\""
+      },
+      {
+        "text": "Optional: a PR description",
+        "prompt": "/visual-pr",
+        "after": "docs/pr/fix-<your-name>.md"
+      },
+      {
+        "text": "Push and open the PR or MR",
+        "prompt": "git push -u origin fix/<your-name>\ngh pr create --fill",
+        "after": "GitLab: glab mr create --fill. Then npm run progress -- --status: [x] STEP-7."
+      }
     ],
-    "expected": "PR/MR with the approval line. CI green.",
+    "expected": "PR/MR with the approval line. check:approval green. [x] STEP-7.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
@@ -1555,7 +1809,7 @@ window.SLIDES = [
   {
     "title": "Maintain: each incident becomes an eval",
     "kicker": "W5 · MAINTAIN · CONTROL BANDS",
-    "subtitle": "The running system teaches you. Put the lesson back in the loop.",
+    "subtitle": "The running system teaches you. Day 1's agent loop, one level up.",
     "type": "concept",
     "layout": "steps",
     "items": [
@@ -1590,7 +1844,54 @@ window.SLIDES = [
       "A human triages.",
       "Only mention /improve-claude-md."
     ],
-    "notes": "Time: 15:30 · 10 min.\n1. Progress check (30 s): run npm run progress -- --status.\n2. Show: write a new (fictional) incident as an eval case. Run npm run eval.\n3. Say: control bands 1σ, 2σ, 3σ (p.49–51).\n4. Say: “Claude Tag exists. Slack connections are probably not allowed at Worldline.”\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”\n6. Check: the status command shows “[x] STEP-8 Maintain” after one eval case more than the 3 included cases."
+    "notes": "Time: 15:30 · 3 min.\n1. Progress check (30 s): run npm run progress -- --status.\n2. Show: write a new (fictional) incident as an eval case. Run npm run eval.\n3. Say: control bands 1σ, 2σ, 3σ (p.49–51).\n4. Say: “Claude Tag exists. Slack connections are probably not allowed at Worldline.”\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”\n6. Check: the status command shows “[x] STEP-8 Maintain” after one eval case more than the 3 included cases.\nThen go to Assignment 7b."
+  },
+  {
+    "title": "Assignment 7b: One incident, one eval case",
+    "kicker": "W5 · MAINTAIN · YOUR TURN",
+    "subtitle": "A new incident becomes a test. Then it can never pass by accident again.",
+    "type": "practice",
+    "layout": "exercise",
+    "stepsHeading": "Do this now:",
+    "steps": [
+      {
+        "text": "Read the stretch design",
+        "prompt": "docs/stretch-incidents.md",
+        "after": "inc-003: memory leak after d-0170. Distractor: peak traffic."
+      },
+      {
+        "text": "Ask Claude to write the case",
+        "prompt": "Write evals/cases/inc-003.json for inc-003-memory-leak from docs/stretch-incidents.md: category resource-leak, trigger d-0170, keywords cache and TTL, runbook memory-leak, rule out peak or traffic, forbidden restart, executed, increase memory limit. No fixtures yet.",
+        "after": "The hook asks. Read it, then say yes."
+      },
+      {
+        "text": "Tests stay green",
+        "prompt": "npm test",
+        "after": "pass 17 · fail 0"
+      },
+      {
+        "text": "Check",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-8 Maintain"
+      }
+    ],
+    "expected": "evals/cases/inc-003.json. npm test green. [x] STEP-8.",
+    "cards": [
+      {
+        "title": "evals/cases/",
+        "body": "inc-001.json\ninc-002.json\ninc-004.json\ninc-003.json  ← yours"
+      }
+    ],
+    "visual": {
+      "shotLabel": "Fallback: git show step-7:evals/cases/inc-003.json",
+      "tree": 0
+    },
+    "keyPoints": [
+      "One file.",
+      "No fixtures yet is fine.",
+      "Fixtures later: one good, one bad."
+    ],
+    "notes": "Time: 15:33 · 7 min.\n1. Let them do the four steps.\n2. A case without fixtures is allowed. If a team adds fixtures, it needs a good and a bad one (test/evals.test.ts:20-28).\n3. Fallback: git show step-7:evals/cases/inc-003.json > evals/cases/inc-003.json.\n4. Verified: with this file npm test stays pass 17 and STEP-8 turns [x]."
   },
   {
     "title": "From lab to hackathon",
@@ -1628,17 +1929,33 @@ window.SLIDES = [
   {
     "title": "Assignment 8: Your hackathon intent.md",
     "kicker": "W5 · SHOWCASE 5 · 15:45 · /HANDOFF",
-    "subtitle": "Then /handoff.",
+    "subtitle": "Then /handoff, and save it as HANDOFF.md.",
     "type": "practice",
     "layout": "exercise",
     "steps": [
       "Choose your hackathon idea.",
-      "Write intent.md: five fields + one OPEN.",
-      "A loop? Use /design-control-loop.",
-      "Run /handoff.",
-      "Open a PR/MR."
+      {
+        "text": "Write intent.md for it: five headings, one OPEN",
+        "prompt": "/design-control-loop for <your idea> — one round, then map to intent.md",
+        "after": "Or edit intent.md by hand. Keep the five headings."
+      },
+      {
+        "text": "Write the handoff",
+        "prompt": "/handoff hackathon day 1: <your idea>",
+        "after": "The skill writes a prompt for the next agent."
+      },
+      {
+        "text": "Save it as a file",
+        "prompt": "Save that handoff as HANDOFF.md: what is decided, what is OPEN, the first 3 steps. Use OPEN:, never TODO.",
+        "after": "The hook asks. Say yes."
+      },
+      {
+        "text": "Check",
+        "prompt": "npm run progress -- --status",
+        "after": "[x] STEP-9 Hackathon"
+      }
     ],
-    "expected": "PR/MR with intent.md and HANDOFF.md.",
+    "expected": "intent.md and HANDOFF.md for your idea. [x] STEP-9.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
@@ -1750,7 +2067,100 @@ window.SLIDES = [
     "visual": {
       "levelUp": true
     },
-    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (slides 57–60). Else it is homework before W6."
+    "notes": "Time: 15:56 · 4 min.\n1. Say the quote (p.53): “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md. Read the flag list.\n4. If time remains: do the bonus Daily Brief solo (the hidden bonus slides at the end). Else it is homework before W6.\n4. Then the recap of what you built and the reflection. The Daily Brief solo is homework before W6 (the hidden bonus slides at the end)."
+  },
+  {
+    "title": "What you built today",
+    "kicker": "W5 · CLOSING",
+    "subtitle": "Together, we created:",
+    "type": "recap",
+    "layout": "recap",
+    "items": [
+      {
+        "label": "intent.md, spec.md and a design decision"
+      },
+      {
+        "label": "A blast_radius field: red first, then green"
+      },
+      {
+        "label": "Your own deny rule in the hook"
+      },
+      {
+        "label": "A plan you accepted, and a diagnosis with real log ids"
+      },
+      {
+        "label": "An eval PASS and a /verify-this verdict"
+      },
+      {
+        "label": "A fix behind a named human approval"
+      },
+      {
+        "label": "A new eval case and a HANDOFF.md"
+      }
+    ],
+    "visual": {
+      "recapKeys": true,
+      "bot": "happy",
+      "place": "aside"
+    },
+    "keyPoints": [
+      "STEP-0 to STEP-9.",
+      "Each line is a file.",
+      "You take the structure."
+    ],
+    "notes": "Time: 15:55 · 2 min.\n1. Say: “Run npm run progress -- --status one last time. Each [x] is a file you can show.”\n2. Same shape as Day 2 “What you built”."
+  },
+  {
+    "title": "Did you reach your goal for today?",
+    "kicker": "W5 · CLOSING · YOUR GOAL",
+    "subtitle": "Look at the goal you wrote at 10:23.",
+    "type": "context",
+    "cards": [],
+    "visual": {
+      "opener": "ask",
+      "bot": "think",
+      "place": "beside"
+    },
+    "keyPoints": [
+      "Return to the board.",
+      "One yes, one not yet."
+    ],
+    "notes": "Time: 15:57 · 1 min.\n1. Point at the outcomes from “What would success look like for you today?” on the board.\n2. Ask: who reached theirs? What is still open? Write the open ones down for W6."
+  },
+  {
+    "title": "Final reflection",
+    "kicker": "W5 · CLOSING",
+    "subtitle": "Complete these statements.",
+    "type": "recap",
+    "tagline": "Complete each statement for yourself.",
+    "visual": {
+      "sentences": true,
+      "quietTimer": 3
+    },
+    "cards": [
+      {
+        "title": "An AI-native SDLC is…",
+        "body": ""
+      },
+      {
+        "title": "The boundary I would enforce with a hook is…",
+        "body": ""
+      },
+      {
+        "title": "In the hackathon, the human decides…",
+        "body": ""
+      },
+      {
+        "title": "I still have a question about…",
+        "body": ""
+      }
+    ],
+    "keyPoints": [
+      "Three quiet minutes.",
+      "Collect a few aloud.",
+      "Questions feed W6."
+    ],
+    "notes": "Time: 15:57 · 3 min. Same format as Day 2 “Final reflection” and Day 3 “What did you learn?”. Write the open questions on the flipchart: they start W6."
   },
   {
     "title": "Time left? The loop, solo",
@@ -1795,7 +2205,8 @@ window.SLIDES = [
       "Solo and small.",
       "Repo only, sample data, no network."
     ],
-    "notes": "Time: 1 min.\n1. Say: “This is the same loop as this afternoon. It is solo and small: one source, sample/work.json, three sections.”\n2. Say the rules: all in the repo, sample data only, no external MCP or API, a human gate with approve.sh and audit.\n3. Say: “The base is aetherlink-daily-brief-lab-s1, from tag step-4-build-render.”"
+    "notes": "Time: 1 min.\n1. Say: “This is the same loop as this afternoon. It is solo and small: one source, sample/work.json, three sections.”\n2. Say the rules: all in the repo, sample data only, no external MCP or API, a human gate with approve.sh and audit.\n3. Say: “The base is aetherlink-daily-brief-lab-s1, from tag step-4-build-render.”",
+    "hidden": true
   },
   {
     "title": "Watch: one source, one gate",
@@ -1826,7 +2237,8 @@ window.SLIDES = [
       "Two terminals: Claude left, your shell right.",
       "No model at runtime."
     ],
-    "notes": "Time: 18 min.\n1. Prepare: clone the repo. Run npm ci. Run claude and /status. Have sample/work.json ready. Open two terminals. Use font size 18+.\n2. 0–1 min: git switch -c solo/ryan step-4-build-render. Run npm test (6 green).\n3. 1–4 min: Intent. Paste prompt 1.\n4. 4–6 min: Spec. Paste prompt 2 (table source → Brief field).\n5. 6–8 min: Plan. Press Shift+Tab. Paste prompt 3. Ask “What can break?” (p.19).\n6. 8–12 min: Build. test/compose.test.ts is red first. Then src/compose.ts and src/solo.ts make it green (10 tests).\n7. 12–14 min: Test. Run typecheck and npm run brief:solo. Compare out/latest.html with sample/work.json (AL-240, no AL-198, 11:00 and 14:00).\n8. 14–16 min: Gate. Claude tries git push. The hook denies it. In your own shell, run scripts/approve.sh ryan solo/ryan \"evidence ok\". Claude tries again. The hook asks.\n9. Say: “Claude goes to the gate, not through it. The hook enforces that a named human has approved.”\n10. 16–18 min: Maintain. Set AL-198 to High. Run npm test. Add a new OPEN to intent.md.\n11. If brief:sample hangs: set BRIEF_ARTWORK=off, or use brief:solo.\n12. If the hook does not run on Windows: use the Node hook or WSL.\n13. If package.json is denied: add the script yourself."
+    "notes": "Time: 18 min.\n1. Prepare: clone the repo. Run npm ci. Run claude and /status. Have sample/work.json ready. Open two terminals. Use font size 18+.\n2. 0–1 min: git switch -c solo/ryan step-4-build-render. Run npm test (6 green).\n3. 1–4 min: Intent. Paste prompt 1.\n4. 4–6 min: Spec. Paste prompt 2 (table source → Brief field).\n5. 6–8 min: Plan. Press Shift+Tab. Paste prompt 3. Ask “What can break?” (p.19).\n6. 8–12 min: Build. test/compose.test.ts is red first. Then src/compose.ts and src/solo.ts make it green (10 tests).\n7. 12–14 min: Test. Run typecheck and npm run brief:solo. Compare out/latest.html with sample/work.json (AL-240, no AL-198, 11:00 and 14:00).\n8. 14–16 min: Gate. Claude tries git push. The hook denies it. In your own shell, run scripts/approve.sh ryan solo/ryan \"evidence ok\". Claude tries again. The hook asks.\n9. Say: “Claude goes to the gate, not through it. The hook enforces that a named human has approved.”\n10. 16–18 min: Maintain. Set AL-198 to High. Run npm test. Add a new OPEN to intent.md.\n11. If brief:sample hangs: set BRIEF_ARTWORK=off, or use brief:solo.\n12. If the hook does not run on Windows: use the Node hook or WSL.\n13. If package.json is denied: add the script yourself.",
+    "hidden": true
   },
   {
     "title": "Assignment 9: Daily Brief solo",
@@ -1858,7 +2270,8 @@ window.SLIDES = [
       "A neighbor approves with approve.sh.",
       "Stretch: a New updates section."
     ],
-    "notes": "Time: 30–40 min.\n1. Let them do: steps 0–7 from DAILY-BRIEF-SOLO §3.\n2. Say: “Approve the branch of your neighbor with scripts/approve.sh <name> solo/<their-name> \"<reason>\".”\n3. Stretch: add a 4th section New updates, for example pipelines that are green again today.\n4. If a person is behind: use the reference in docs/plan.md."
+    "notes": "Time: 30–40 min.\n1. Let them do: steps 0–7 from DAILY-BRIEF-SOLO §3.\n2. Say: “Approve the branch of your neighbor with scripts/approve.sh <name> solo/<their-name> \"<reason>\".”\n3. Stretch: add a 4th section New updates, for example pipelines that are green again today.\n4. If a person is behind: use the reference in docs/plan.md.",
+    "hidden": true
   },
   {
     "title": "What changes when you work alone",
@@ -1869,8 +2282,7 @@ window.SLIDES = [
       {
         "title": "In a team",
         "items": [
-          "Reviewer",
-          "QA",
+          "Reviewer and QA",
           "Four eyes",
           "Memory"
         ]
@@ -1878,8 +2290,7 @@ window.SLIDES = [
       {
         "title": "Alone",
         "items": [
-          "Plan mode",
-          "Tests",
+          "Plan mode and tests",
           "Hook + approve.sh",
           "Evals"
         ]
@@ -1893,6 +2304,7 @@ window.SLIDES = [
       "This leads to the hackathon.",
       "The gate stays human."
     ],
-    "notes": "Time: 2 min.\n1. Say: “Solo work still has controls.”\n2. Say: “Plan mode is your reviewer. Tests are your QA. The hook plus approve.sh is your four eyes. Evals are your memory.”\n3. Say: “Use this loop between the hackathon sessions in W6–W7.”"
+    "notes": "Time: 2 min.\n1. Say: “Solo work still has controls.”\n2. Say: “Plan mode is your reviewer. Tests are your QA. The hook plus approve.sh is your four eyes. Evals are your memory.”\n3. Say: “Use this loop between the hackathon sessions in W6–W7.”",
+    "hidden": true
   }
 ];

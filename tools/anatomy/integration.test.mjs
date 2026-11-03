@@ -8,9 +8,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
-test('Day 5 keeps 58 slides without Anatomy figures, and the former figure slides keep their content',()=>{
+test('Day 5 keeps 65 slides (4 hidden bonus) without Anatomy figures, and the former figure slides keep their content',()=>{
  const slides=context.window.SLIDES;
- assert.equal(slides.length,58);
+ assert.equal(slides.length,65);
  assert.equal(slides.filter(slide=>slide.visual?.anatomy).map(slide=>slide.title).join(', '),'');
  for(const title of ['MCP','Allow · ask · deny','subagents','eval','Watch: PASS and REJECTED']){
   const slide=slides.find(item=>item.title===title);
