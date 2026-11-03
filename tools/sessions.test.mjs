@@ -33,7 +33,7 @@ test('Deck and presenter use separate matching channels and storage keys',()=>{
  assert.notEqual(evaluate('app.js','workshop3.html').key,evaluate('app.js','workshop5.html').key);
 });
 
-test('Imported authored data matches its pinned source digest',()=>{
+test('Authored data matches its pinned source digest',()=>{
  const manifest=JSON.parse(read('tools/session-source-manifest.json'));
  for(const item of manifest.decks){
   const ctx={window:{}};vm.runInNewContext(read(item.file),ctx);

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workshop 5 assignment examples</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:#102b43;font:18px/1.5 system-ui,sans-serif}header,main{max-width:1120px;margin:auto;padding:32px}header p{max-width:850px}h1{font-size:38px;line-height:1.15}h2{font-size:30px;line-height:1.2;margin:8px 0 16px}nav{display:flex;gap:8px;flex-wrap:wrap}a{color:#075e68}nav a{font-size:14px;padding:6px 12px;border:1px solid #bac9d3;border-radius:20px;text-decoration:none;background:white}article{margin-bottom:64px;scroll-margin-top:24px}.phase{color:#075e68;font-size:14px;font-weight:750;letter-spacing:.1em;text-transform:uppercase}.scenario{font-size:21px;max-width:900px}.details{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}.details section{background:white;border:1px solid #ced9e0;border-radius:12px;padding:18px}.details h3{font-size:16px;margin:0 0 8px}.details p{margin:0}.details .stop{border-left:5px solid #ac570c;grid-column:1/-1}.sample{border:1px solid #aac1cd;border-radius:14px;overflow:hidden;background:#fff}.sample-head{padding:18px 24px;background:#102b43;color:#fff;font-size:20px;font-weight:650}.sample pre{margin:0;padding:24px;font:20px/1.55 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#123c50}.sample footer{padding:14px 24px;background:#e5f4f1;color:#135950;font-size:15px;font-weight:650}.capture header,.capture .intro,.capture .details{display:none}.capture main{padding:24px;max-width:none}.capture article{display:none;margin:0}.capture article:target{display:block}.capture .sample pre{font-size:24px;line-height:1.55}.capture .sample-head{font-size:25px}.capture .sample footer{font-size:18px}.capture .sample{min-height:590px}.capture body{background:#eef2f5}@media(max-width:680px){header,main{padding:20px}.details{grid-template-columns:1fr}.sample pre{font-size:15px}}
+</style></head><body>
+<header><p class="phase">Workshop 5 · AI-native SDLC</p><h1>What each assignment produces</h1><p>Use these examples to recognise the expected result. They are teaching examples, not completed participant work or live model evidence. Fill your records with your own observations. The participant card contains the exact commands.</p><nav><a href="#claude-start">Open the assistant in the starter</a><a href="#orientation">Check the assistant&#39;s understanding</a><a href="#evidence">Find the missing evidence</a><a href="#intent">Describe the change before the solution</a><a href="#accept-intent">Accept observable requirements</a><a href="#baseline">Keep the unfinished code for comparison</a><a href="#plan">Review the tool plan before implementation</a><a href="#tool-test">Prove the deployment tool repair</a><a href="#same-incident">Compare the same incident before and after</a><a href="#gate-test">Keep human permission specific</a><a href="#verification">Record checks, not a done label</a><a href="#diff-review">Judge the code against the intent</a><a href="#release">Publish only with the required checks</a><a href="#next-task">Use the actual result for the next task</a><a href="#solo">Resume without inventing completion</a></nav></header>
+<main><article id="claude-start"><div class="intro"><p class="phase">Start</p><h2>Open the assistant in the starter</h2><p class="scenario">You are the developer of the checkout SRE agent. Open your own unfinished copy before you ask Claude to change it.</p></div><div class="details"><section><h3>Start here</h3><p>The original clone exists. No checkpoint is being reused or overwritten.</p></section><section><h3>Look for this result</h3><p>Claude Code is open in .lab/checkpoints/start. /status shows the approved account, not proof of runtime SDK access.</p></section><section class="stop"><h3>Stop when</h3><p>Stop if login fails or the folder is wrong. Do not share account details or credentials in screenshots.</p></section></div><div class="sample"><div class="sample-head">Terminal 1 · orientation checklist</div><pre>Working folder
+  sre-oncall-agent/.lab/checkpoints/start
+
+Run: claude
+Then: /status
+
+Check your approved account privately.
+Read .claude/settings.json for the guards.
+
+SDK access is a separate check in terminal 2.</pre><footer>Example checklist, not a captured Claude session</footer></div></article>
+<article id="orientation"><div class="intro"><p class="phase">Start</p><h2>Check the assistant&#39;s understanding</h2><p class="scenario">The on-call engineer needs trustworthy evidence, not a confident guess. Check that Claude understands the two repairs before it writes code.</p></div><div class="details"><section><h3>Start here</h3><p>Claude Code is open in the unfinished starter. No code edits are permitted yet.</p></section><section><h3>Look for this result</h3><p>An explanation of the two repairs, required evidence and human decisions. Compare the answer with CARD.md.</p></section><section class="stop"><h3>Stop when</h3><p>Stop if Claude proposes shop changes, approves its own work or starts editing.</p></section></div><div class="sample"><div class="sample-head">Orientation · answer checklist</div><pre>Change the SRE agent, not the shop.
+
+Repair 1: return deployment evidence.
+Repair 2: validate named human approval.
+
+Produce intent, plans, code and checks.
+Review the actual diff.
+A human makes the release decision.
+Observe the runtime and review one next task.</pre><footer>Example checklist, not a model transcript</footer></div></article>
+<article id="evidence"><div class="intro"><p class="phase">Core 1 · Specify</p><h2>Find the missing evidence</h2><p class="scenario">Customers report checkout failures after a bad deployment. The on-call engineer can see errors, but the starter returns no deployment records.</p></div><div class="details"><section><h3>Start here</h3><p>Start with a healthy shop and an empty console. Inject one bad deploy at the next step, then inspect that incident.</p></section><section><h3>Look for this result</h3><p>The trace shows an empty list_deploys result. Missing evidence is a gap, not proof that no deployment occurred.</p></section><section class="stop"><h3>Stop when</h3><p>Stop on fabricated citations or a failed contract. Preserve the output instead of forcing a rollback proposal.</p></section></div><div class="sample"><div class="sample-head">docs/diagnosis-live.md</div><pre>Incident: &lt;your actual incident id&gt;
+Model: &lt;actual runtime label&gt;
+
+Trace result: list_deploys returned []
+Cross-check: &lt;deploys in your telemetry&gt;
+
+Unknown: deployment timing from this tool.
+Do not infer: no deploy happened.
+
+Save the trace and the remaining uncertainty.</pre><footer>Example evidence record; fill in your own observations</footer></div></article>
+<article id="intent"><div class="intro"><p class="phase">Core 1 · Specify</p><h2>Describe the change before the solution</h2><p class="scenario">The empty deployment result blocks a reliable diagnosis. You need a small, testable change that also keeps runtime actions behind human approval.</p></div><div class="details"><section><h3>Start here</h3><p>You have compared the trace with telemetry and recorded the missing signal.</p></section><section><h3>Look for this result</h3><p>A draft intent names the on-call engineer, both repairs, observable checks and the read-only boundary.</p></section><section class="stop"><h3>Stop when</h3><p>Do not build from a vague goal such as make the agent better. Reject invented evidence.</p></section></div><div class="sample"><div class="sample-head">intent.md · draft excerpt</div><pre>User: checkout on-call engineer
+Outcome: inspect real deployment evidence
+
+Checks
+- Available deploys are returned newest first.
+- Missing data stays an explicit gap.
+- Invalid approval cannot authorize an action.
+
+Boundary: no mutation tools in the agent.
+Human acceptance: &lt;not yet recorded&gt;</pre><footer>Example document, not participant evidence</footer></div></article>
+<article id="accept-intent"><div class="intro"><p class="phase">Core 1 · Human decision</p><h2>Accept observable requirements</h2><p class="scenario">Claude has drafted an intent. You decide whether another person could prove each check, before any implementation begins.</p></div><div class="details"><section><h3>Start here</h3><p>The draft intent covers both repairs and cites your checked observation.</p></section><section><h3>Look for this result</h3><p>Your name, decision, reason and remaining question are recorded in the intent.</p></section><section class="stop"><h3>Stop when</h3><p>If scope or evidence is unclear, request a revision. A model cannot accept its own draft.</p></section></div><div class="sample"><div class="sample-head">intent.md · human acceptance</div><pre>Check each criterion against a test or trace.
+
+Reviewer: &lt;your name&gt;
+Decision: &lt;accepted / changes required&gt;
+Reason: &lt;why the scope is testable&gt;
+
+Open question: &lt;what is still unknown?&gt;
+Evidence still needed: &lt;specific check&gt;
+
+No code edits until you accept the intent.</pre><footer>Example form; placeholders are not acceptance</footer></div></article>
+<article id="baseline"><div class="intro"><p class="phase">Core 2 · Design</p><h2>Keep the unfinished code for comparison</h2><p class="scenario">The checkpoint was cut from solved code. Without a baseline, restoring the solution can leave no useful repair diff.</p></div><div class="details"><section><h3>Start here</h3><p>Your intent is accepted. The two starter cuts are still present.</p></section><section><h3>Look for this result</h3><p>Your branch is fix/w5-core. The workshop-base commit contains only src/tools.ts and src/executor.ts.</p></section><section class="stop"><h3>Stop when</h3><p>Do not overwrite a branch or include secrets, intent edits or unrelated files in the baseline.</p></section></div><div class="sample"><div class="sample-head">Terminal · expected baseline shape</div><pre>$ git branch --show-current
+fix/w5-core
+
+$ git show --stat workshop-base
+&lt;your starter baseline commit&gt;
+ src/tools.ts
+ src/executor.ts
+
+The human runs Git. Claude does not commit.</pre><footer>Illustrative output; commit ids and counts vary</footer></div></article>
+<article id="plan"><div class="intro"><p class="phase">Core 2 · Design</p><h2>Review the tool plan before implementation</h2><p class="scenario">The tool test fails because the handler returns no records. Ask for the smallest repair, not a new tool architecture.</p></div><div class="details"><section><h3>Start here</h3><p>The intent and baseline exist. You can explain the failing tool assertion.</p></section><section><h3>Look for this result</h3><p>A plan names the handler, checks, risk, rejected alternative and human review decision.</p></section><section class="stop"><h3>Stop when</h3><p>Reject a plan that weakens tests, changes the contract or adds mutation tools. Review the gate plan separately later.</p></section></div><div class="sample"><div class="sample-head">docs/plan.md · tool plan</div><pre>Input: accepted intent + failing tools test
+Change: restore the existing read-only handler
+Risk: inventing data or expanding tool access
+Refusal check: missing data stays explicit
+Loop: implement, run focused test, fix in scope
+Stop: changed scope needs human plan review</pre><footer>Example document, not an approved plan</footer></div></article>
+<article id="tool-test"><div class="intro"><p class="phase">Core 2 · Build and test</p><h2>Prove the deployment tool repair</h2><p class="scenario">The on-call engineer needs the deployment records that the starter hides. Repair the handler without changing its registration.</p></div><div class="details"><section><h3>Start here</h3><p>You have accepted the tool plan. The focused tools test is red.</p></section><section><h3>Look for this result</h3><p>Both tool assertions pass after repair. The gate exercise is still unfinished, so this is not release-ready.</p></section><section class="stop"><h3>Stop when</h3><p>If the handler still returns [], inspect the binding. Do not weaken the test or count a solved checkpoint as your work.</p></section></div><div class="sample"><div class="sample-head">Terminal · tool-test result</div><pre>npx tsx --test test/workshop/tools.test.ts
+
+Before repair
+  FAIL: fixture has at least one deploy
+
+After repair
+  PASS: list_deploys returns deploys
+  PASS: list_deploys remains registered
+
+Next: typecheck and bench. A8 is still red.</pre><footer>Expected result shape, not a recorded test run</footer></div></article>
+<article id="same-incident"><div class="intro"><p class="phase">Core 2 · Observe the change</p><h2>Compare the same incident before and after</h2><p class="scenario">A green tool test does not show what the real model used. Investigate the same incident again and inspect the new trace.</p></div><div class="details"><section><h3>Start here</h3><p>The tool repair is saved. Keep the shop and traffic running; let the console reload itself.</p></section><section><h3>Look for this result</h3><p>The trace contains deployment records. Check cited ids and timestamps against your telemetry; model wording and proposals may differ.</p></section><section class="stop"><h3>Stop when</h3><p>Preserve fabricated references or contract failures. Do not restart the shop or require a rollback proposal to get a pass.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · comparison</div><pre>Incident before / after: &lt;same id&gt;
+
+Before: list_deploys returned []
+After: &lt;actual returned records&gt;
+Citation: &lt;id found in demo/data/telemetry.json&gt;
+
+Model and trace: &lt;actual runtime evidence&gt;
+Remaining gaps: &lt;what is still missing&gt;
+Result: &lt;verified / precise blocker&gt;</pre><footer>Example evidence record; your trace supplies the values</footer></div></article>
+<article id="gate-test"><div class="intro"><p class="phase">Core 2 · Build and test</p><h2>Keep human permission specific</h2><p class="scenario">A valid human approval must work, but an approval for another incident or proposal must not. The starter refuses everything.</p></div><div class="details"><section><h3>Start here</h3><p>Review the separate gate plan. The valid-approval assertion is red before repair.</p></section><section><h3>Look for this result</h3><p>The gate accepts the valid named approval in tests and still refuses missing, pending or mismatched approval.</p></section><section class="stop"><h3>Stop when</h3><p>A green gate test is not runtime approval. Do not click Approve or Execute during this repair.</p></section></div><div class="sample"><div class="sample-head">Terminal · executor-test result</div><pre>npx tsx --test test/workshop/executor.test.ts
+
+Before: valid named approval is refused
+After:  valid named approval test passes
+
+Still refused
+- Pending or empty-name approval
+- Wrong proposal or incident
+
+No real incident has been approved here.</pre><footer>Expected result shape, not a recorded test run</footer></div></article>
+<article id="verification"><div class="intro"><p class="phase">Core 2 · Test</p><h2>Record checks, not a done label</h2><p class="scenario">Both repairs are now present. Check the combined change before a human reviews or publishes it.</p></div><div class="details"><section><h3>Start here</h3><p>The focused tool and gate tests pass. No runtime action is authorized by these results.</p></section><section><h3>Look for this result</h3><p>The required commands exit successfully. The evidence record separates code checks from real-model observations.</p></section><section class="stop"><h3>Stop when</h3><p>Keep failing output. Do not mark the change ready or replace model evidence with the scripted bench.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · checks actually run</div><pre>Focused executor test: &lt;actual result&gt;
+npm run verify: &lt;actual result&gt;
+npm run test:workshop: &lt;actual result&gt;
+npm run test:hooks: &lt;actual result&gt;
+
+Bench: scripted fixed-scenario checks
+Live trace: &lt;real model result or blocker&gt;
+Untested paths: &lt;what was not checked&gt;</pre><footer>Example form; replace each field with actual output</footer></div></article>
+<article id="diff-review"><div class="intro"><p class="phase">Core 3 · Review</p><h2>Judge the code against the intent</h2><p class="scenario">Tests pass, but the change might still exceed the plan. Review the actual diff and verify Claude&#39;s findings yourself.</p></div><div class="details"><section><h3>Start here</h3><p>Both repairs and required checks are complete. Inspect untracked files before reviewing the diff.</p></section><section><h3>Look for this result</h3><p>A meaningful diff against workshop-base and a human decision linked to findings, risks and unchecked paths.</p></section><section class="stop"><h3>Stop when</h3><p>An empty repair diff is not proof. Resolve findings and rerun affected checks before release.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · diff review</div><pre>Review: behaviour, security, intent and plan
+Finding: file + line + trigger + impact
+Proof: reproduction or exact reachable code path
+Unverified suspicion: label it; do not assert it
+Human: confirm finding, request fix or accept
+After a fix: rerun the affected check</pre><footer>Example review record, not an actual approval</footer></div></article>
+<article id="release"><div class="intro"><p class="phase">Core 3 · Release decision</p><h2>Publish only with the required checks</h2><p class="scenario">You have a reviewed change. A missing reviewer or repository permission is a release blocker, not permission to bypass the gate.</p></div><div class="details"><section><h3>Start here</h3><p>The human has reviewed the diff and current evidence. Claude may prepare PR text, not publish it.</p></section><section><h3>Look for this result</h3><p>A learner-repo PR from fix/w5-core into workshop-base, or an explicit RELEASE BLOCKED record with a next action.</p></section><section class="stop"><h3>Stop when</h3><p>Do not push to the upstream training repo or bypass required review. A local reload is not a production release.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · release decision</div><pre>Decision: RELEASE BLOCKED
+Reason: required independent reviewer missing
+
+PR: &lt;learner-repo URL, if one exists&gt;
+Current-head CI: &lt;actual status&gt;
+Next action: request a human reviewer
+Merge commit: none
+
+Local observation may continue as a test.</pre><footer>Example blocked outcome, not a real PR or merge</footer></div></article>
+<article id="next-task"><div class="intro"><p class="phase">Core 3 · Observe and plan</p><h2>Use the actual result for the next task</h2><p class="scenario">Recovery may fail even after a successful execution. Use the failed measurement or another observed limit to propose one next change.</p></div><div class="details"><section><h3>Start here</h3><p>The runtime outcome or blocker is recorded. Keep an unresolved incident open.</p></section><section><h3>Look for this result</h3><p>One proposed task has evidence, an observable acceptance check and a human review decision.</p></section><section class="stop"><h3>Stop when</h3><p>Do not invent successful recovery or implement the next task without a new accepted scope.</p></section></div><div class="sample"><div class="sample-head">docs/verify/sdlc.md · next iteration</div><pre>If you observed a missing evidence reference:
+- Preserve the actual trace and failed check.
+- Propose one next intent and acceptance check.
+- Name the regression test that detects it.
+- Propose a reviewed instruction update if useful.
+Human reviews; no new implementation yet.</pre><footer>Conditional example; use only if you observed this gap</footer></div></article>
+<article id="solo"><div class="intro"><p class="phase">Continue solo</p><h2>Resume without inventing completion</h2><p class="scenario">You continue without a facilitator. Preserve your own code and evidence, and name the limits of self-review.</p></div><div class="details"><section><h3>Start here</h3><p>Read SOLO.md and locate the last step you actually verified.</p></section><section><h3>Look for this result</h3><p>A resume note names the last verified step, next check and any borrowed checkpoint code.</p></section><section class="stop"><h3>Stop when</h3><p>Do not overwrite your work or copy another run&#39;s approvals. A required independent reviewer still blocks release.</p></section></div><div class="sample"><div class="sample-head">Resume note · record through progress:note</div><pre>Last verified step: &lt;card step and evidence&gt;
+Next check: &lt;exact command or observation&gt;
+Review mode: self-review; no independent reviewer
+
+core-2: tool solved, gate unfinished
+core-3: solved reference
+
+Borrowed code: &lt;what, why and what you checked&gt;
+A solved checkpoint is not your completion.</pre><footer>Example note, not participant progress</footer></div></article></main>
+<script>if(new URLSearchParams(location.search).has('capture'))document.documentElement.classList.add('capture');</script>
+</body></html>
