@@ -398,8 +398,13 @@ function renderExtras(stage, main, s, v) {
     x.aside = main;
   }
   if (v.dayRoute) {                                              // 41: the shape of the day
-    const r = node('div', 'day-route'); v.dayRoute.forEach((t, i) => { const st = node('div', 'dr-stop'); st.style.setProperty('--i', i); st.append(node('span', 'dr-dot', String(i + 1)), node('span', 'dr-label', t)); r.append(st); });
-    (main.querySelector('.tagline') || grid).after(r);
+    const stops = v.dayRoute, perRow = stops.length > 8 ? Math.ceil(stops.length / 2) : stops.length;   // >8 stops: two rows, numbering continues
+    const rows = []; for (let s = 0; s < stops.length; s += perRow) {
+      const r = node('div', 'day-route'); r.style.setProperty('--n', Math.min(perRow, stops.length - s));
+      stops.slice(s, s + perRow).forEach((t, k) => { const i = s + k, st = node('div', 'dr-stop'); st.style.setProperty('--i', i); st.append(node('span', 'dr-dot', String(i + 1)), node('span', 'dr-label', t)); r.append(st); });
+      rows.push(r);
+    }
+    (main.querySelector('.tagline') || grid).after(...rows);
   }
   if (v.art === 'stairs' && x.steps) {                           // 43: levels as a staircase
     const chain = main.querySelector('.steps-chain'); chain.classList.add('nest-hidden'); const st = node('div', 'stairs');
