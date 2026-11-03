@@ -36,7 +36,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Keep from W4",
-        "body": "Structured output, tool evidence and a human decision. Specialists have bounded roles."
+        "body": "Structured output, tool evidence and a human decision. After compaction, recheck the requirements and safety boundaries."
       },
       {
         "title": "Add in W5",
@@ -48,7 +48,7 @@ window.SLIDES = [
       "Carry the method forward, not yesterday's application.",
       "A model response is not proof that software is ready to release."
     ],
-    "notes": "Take two or three short answers, not a new round of W4 demonstrations. Use one observed surprise to connect the recap to today's verification work. If nobody has a case, ask what would reveal an unsupported claim in an agent reply. W4 used structured output, specialists, MCP and human control; W5 practises how to specify, change, test and release software around those ideas. W4 attendance is not a prerequisite for the solo route: read the two cards, then continue. Do not copy W4 mutation permissions into the W5 runtime's read-only tools.",
+    "notes": "Take two or three short answers, not a new round of W4 demonstrations. Use one observed surprise to connect the recap to today's verification work. If nobody has a case, ask what would reveal an unsupported claim in an agent reply. W4 used structured output, specialists, MCP and human control; W5 practises how to specify, change, test and release software around those ideas. Recall W4's context, caching and compaction diagrams: context is bounded, caching reuses computation without adding space, and a summary needs checking against the accepted intent and safety boundaries. Keep the intent and evidence in files, not only in chat. Refer to workshop4.html#27 for the three explanations once the W4 update is available. W4 attendance is not a prerequisite for the solo route: read the two cards, then continue. Do not copy W4 mutation permissions into the W5 runtime's read-only tools.",
     "teachingPhase": "core"
   },
   {
