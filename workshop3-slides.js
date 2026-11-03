@@ -156,7 +156,7 @@ window.SLIDES = [
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
-      "At n8n.io, choose Get started free. Create your own account with the approved training email, complete any email verification prompt, create your workspace if requested, and wait for the editor.",
+      "At n8n.io, choose Get started. Create your own account and complete any email verification.",
       "Open your own workspace. Confirm the Cloud trial is active with free model credits, and note its expiry before class.",
       "Create a workflow named W3 support triage. Do not connect production tools.",
       "Find the canvas, node settings and Executions, then save the empty workflow. Keep account details off screen."
@@ -172,7 +172,7 @@ window.SLIDES = [
       "bot": "point",
       "place": "beside"
     },
-    "notes": "Every participant creates their own n8n Cloud trial account before building; do not use a shared participant login. Start at n8n.io and choose Get started free. Use the approved training email, complete any email verification prompt, create your own workspace if requested, and wait for the editor. Confirm the trial is active and free model credits are available; note the expiry before class. Gateway credits pay for workflow model calls; Assistant credits do not. Older instances may show free OpenAI API credits. Self-hosted n8n is only an optional rules exercise, not the free-credit route. Stop if verification is blocked, a paid plan or payment details are required, or trial credits are unavailable; do not enter payment details, buy credits, upgrade, or substitute a provider key. Participants save their own empty workflow. Explain, demonstrate, practise, inspect the saved result, then discuss. Solo participants write the explanation."
+    "notes": "Every participant creates their own n8n Cloud trial account before building; do not use a shared participant login. Start at n8n.io and choose Get started. Use the approved training email, complete any email verification prompt, create your own workspace if requested, and wait for the editor. Confirm the trial is active and free model credits are available; note the expiry before class. Gateway credits pay for workflow model calls; Assistant credits do not. Older instances may show free OpenAI API credits. Self-hosted n8n is only an optional rules exercise, not the free-credit route. Stop if verification is blocked, a paid plan or payment details are required, or trial credits are unavailable; do not enter payment details, buy credits, upgrade, or substitute a provider key. Participants save their own empty workflow. Explain, demonstrate, practise, inspect the saved result, then discuss. Solo participants write the explanation."
   },
   {
     "title": "A tour of n8n",
