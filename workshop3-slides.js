@@ -524,6 +524,7 @@ window.SLIDES = [
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
+      "Save 01-switch. Create a separate workflow named 02-chat.",
       "Search chat → Chat → On new Chat event (canvas: When chat message received). Connect AI Agent and OpenAI Chat Model.",
       "Add When chat message received → AI Agent → OpenAI Chat Model.",
       "Select Use Gateway credits, or the legacy free OpenAI credits option. Check the balance.",

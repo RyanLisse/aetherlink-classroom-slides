@@ -93,6 +93,7 @@ test('Day 3 uses trial model credits and reserves provider keys for the SDK rout
   const chat = slides.find(s => s.stateId === 'w3-chat');
   assert.match(setup.subtitle, /Cloud trial/);
   assert.ok(setup.steps[0].includes('Create your own'));
+  assert.match(chat.steps[0], /Save 01-switch\. Create a separate workflow named 02-chat\./);
   assert.ok(chat.steps.some(step => step.includes('Use Gateway credits')));
   assert.match(chat.expected, /Do not substitute an API key/);
   assert.doesNotMatch(JSON.stringify(slides), /add your own OpenAI credential|Select your credential in the model node/);
