@@ -118,6 +118,16 @@ test('Subagent instructions preserve context, require call evidence and keep fai
   assert.doesNotMatch(structure, /Specialist, nested-agent and CRUD exercises are\s+extensions|optional\s+three-specialist build/);
 });
 
+test('The participant guide explains Maarten’s progression and the synthetic data fixture', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  const text = guide.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1');
+  assert.ok(text.includes('L1 uses deterministic IF/Switch rules (no model). L2 adds one Agent, memory and validated output. L3 adds specialist calls: first flat delegation, then nested Reply → Risk.'));
+  assert.ok(text.includes('Maarten\'s reference deck calls the same rows customer-context.csv; use the linked filename here.'));
+  for (const field of ['customer_id', 'customer_name', 'customer_type', 'transactions_per_hour', 'previous_incidents', 'critical']) assert.ok(text.includes(field), field);
+  assert.ok(text.includes('Description tells the coordinator when to call a specialist. System Message sets that specialist\'s behavior. Prompt (User Message) carries the actual ticket, ID and findings.'));
+  assert.ok(text.includes('prompt text alone does not create a call.'));
+});
+
 test('Day 3 uses trial model credits and reserves provider keys for the SDK route', () => {
   const slides = load('workshop3-slides.js');
   const setup = slides.find(s => s.stateId === 'w3-setup');
