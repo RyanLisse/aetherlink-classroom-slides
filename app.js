@@ -558,7 +558,8 @@ function buildOpener(stage, main, s, v) {
   }
   if (v.opener === 'sdlc-loop' && v.image) {
     const figure = node('figure', 'sdlc-loop'); const img = document.createElement('img'); img.src = v.image; img.alt = v.imageAlt || '';
-    figure.append(img); main.prepend(figure);
+    const link = document.createElement('a'); link.href = v.image; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', 'Open diagram at full size');
+    link.append(img); figure.append(link); main.prepend(figure);
   }
   if (v.opener === 'team') main.querySelectorAll('.card').forEach(c => {
     const name = c.querySelector('h2,h3,strong,.card-title')?.textContent || c.textContent;
