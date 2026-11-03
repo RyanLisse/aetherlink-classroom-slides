@@ -48,11 +48,12 @@ test('Day 3 uses trial model credits and reserves provider keys for the SDK rout
   const setup = slides.find(s => s.stateId === 'w3-setup');
   const chat = slides.find(s => s.stateId === 'w3-chat');
   assert.match(setup.subtitle, /Cloud trial/);
+  assert.ok(setup.steps[0].includes('Create your own'));
   assert.ok(chat.steps.some(step => step.includes('Use Gateway credits')));
   assert.match(chat.expected, /Do not substitute an API key/);
   assert.doesNotMatch(JSON.stringify(slides), /add your own OpenAI credential|Select your credential in the model node/);
   const guide = read('assets/workshop-3/participant-guide.html');
-  for (const phrase of ['Assistant credits are different', 'Do not buy credits', 'Gateway credits are not available on self-hosted', 'Only the Claude SDK route uses']) {
+  for (const phrase of ['complete any email verification prompt', 'Assistant credits are different', 'Do not buy credits', 'Gateway credits are not available on self-hosted', 'Only the Claude SDK route uses']) {
     assert.ok(guide.includes(phrase), phrase);
   }
   const backend = load('workshop4-slides.js').find(s => s.title === 'Two ways to run the same agent');
