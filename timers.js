@@ -9,7 +9,7 @@
 (function () {
   const PREFIX = 'als:timer:';
   const fmt = sec => String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
-  const key = (index, title) => PREFIX + index + ':' + (title || '');
+  const key = (index, title, stateId) => PREFIX + (stateId || index + ':' + (title || ''));
   function read(k, defSec) {
     let t = null; try { t = JSON.parse(localStorage.getItem(k) || 'null'); } catch {}
     return t && typeof t.total === 'number' ? t : { total: defSec, left: defSec, running: false, endAt: 0 };

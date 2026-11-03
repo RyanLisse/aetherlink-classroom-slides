@@ -14,6 +14,9 @@ Workshop 4's recap now names the actual W3 fields and distinguishes the optional
 specialist route from the one-Agent core. These two decks are locally maintained:
 their manifest digests record the current authored content, not an unchanged
 upstream import. Original import metadata is retained under `importedFrom`.
+Three added W4 concepts (slides 27–29) explain context windows, prompt caching
+and compaction, referencing Claude Code's official [context window](https://code.claude.com/docs/en/context-window)
+and [prompt caching](https://code.claude.com/docs/en/prompt-caching) documentation.
 The tables below describe the original imports.
 
 Days 1 and 2 use the existing `slides.js` deck. Their opening slides are 7 and 63.

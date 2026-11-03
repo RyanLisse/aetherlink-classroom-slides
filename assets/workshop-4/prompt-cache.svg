@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" role="img" aria-labelledby="title desc">
+<title id="title">Caching reuses a matching prefix, not context space</title><desc id="desc">Two requests share an exact unchanged prefix. A warm cache can reuse that computation while new content is processed. All tokens still count toward context. Changing the prefix or expiring the cache can require recomputation.</desc>
+<defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#eff7ff;font-size:28px}.head{font-size:34px;font-weight:700}.label{fill:#6de0dc}.muted{fill:#b8cbdc}.box{fill:#102a40;stroke:#42637f;stroke-width:2}.warm{fill:#15382e;stroke:#50b594;stroke-width:2}.new{fill:#332b25;stroke:#ffb25e;stroke-width:2}</style><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#46cfcb"/></marker></defs>
+<rect width="1400" height="640" rx="22" fill="#071827"/>
+
+<text x="48" y="55" class="label">2 · PROMPT CACHING · CONCEPTUAL REQUESTS</text>
+<text x="48" y="118" class="head">Earlier request</text>
+<rect class="box" x="48" y="143" width="1302" height="130" rx="14"/>
+<rect class="warm" x="68" y="163" width="920" height="90" rx="10"/><text x="98" y="204">Instructions + loaded context + conversation</text><text x="98" y="238" class="muted">Processed prefix, available to cache</text>
+<text x="48" y="328" class="head">Next request, while the cache matches</text>
+<rect class="box" x="48" y="353" width="1302" height="130" rx="14"/>
+<rect class="warm" x="68" y="373" width="920" height="90" rx="10"/><text x="98" y="414">Exact same prefix: reuse computation</text><text x="98" y="448" class="muted">Cached reads have their own lower input rate</text>
+<rect class="new" x="1004" y="373" width="326" height="90" rx="10"/><text x="1028" y="414">New exchange</text><text x="1028" y="448" class="muted">Process new content</text>
+<text x="48" y="537" class="head">Cached tokens still use context space.</text>
+<text x="48" y="587" class="muted">Changed or expired prefix? Recompute. Cache writes and output also have costs.</text>
+</svg>

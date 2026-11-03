@@ -15,6 +15,7 @@ on:
       - 'tools/anatomy/integration.test.mjs'
       - 'tools/workshop3-route.test.mjs'
       - 'tools/workshop3-orchestration.test.mjs'
+      - 'tools/workshop4-context.test.mjs'
       - 'assets/workshop-*/**'
       - 'assets/day3-orchestration/n8n-triage-l3-orchestration.json'
       - '.github/workflows/anatomy-figures.yml'
@@ -33,7 +34,7 @@ jobs:
         with:
           node-version: '24'
       - name: Test classroom decks and optional workflow
-        run: node --test --test-concurrency=2 tools/anatomy/integration.test.mjs tools/sessions.test.mjs tools/workshop3-route.test.mjs tools/workshop3-orchestration.test.mjs
+        run: node --test --test-concurrency=2 tools/anatomy/integration.test.mjs tools/sessions.test.mjs tools/workshop3-route.test.mjs tools/workshop3-orchestration.test.mjs tools/workshop4-context.test.mjs
       - name: Install remote browser checks
         id: browser-install
         run: |
