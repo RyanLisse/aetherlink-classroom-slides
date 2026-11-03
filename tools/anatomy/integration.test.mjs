@@ -34,17 +34,15 @@ test('Workshop 5 retains the diagrams used by the assignment and selected refere
  }
  assert.ok(read('workshop5.html').includes('workshop5-diagrams.js'));
 });
-test('Workshop 4 wires its two Anatomy figures',()=>{
- const ctx={window:{}};vm.runInNewContext(read('workshop4-slides.js'),ctx);
- const figures=ctx.window.SLIDES.filter(s=>s.visual?.anatomy);
- assert.equal(figures.length,2);
- for(const id of ['agent-loop','permissions']){
-  const slide=figures.find(s=>s.visual.anatomy.src===`assets/anatomy/${id}.html`);
-  assert.ok(slide,`Missing ${id} figure`);
-  const a=slide.visual.anatomy;
-  assert.equal(a.src,`assets/anatomy/${id}.html`);assert.equal(a.poster,`assets/anatomy/${id}.svg`);
-  for(const target of[a.src,a.poster,`assets/anatomy/${id}-light.html`])assert.ok(existsSync(path.join(root,target)),target);
-  assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`${id} retains teaching content`);
+test('Workshop 3 and 4 share the bounded-loop visual without removed anatomy assets',()=>{
+ const shared='assets/workshop-3/agent-loop.svg';
+ assert.ok(existsSync(path.join(root,shared)),shared);
+ for(const file of ['workshop3-slides.js','workshop4-slides.js']){
+  const ctx={window:{}};vm.runInNewContext(read(file),ctx);
+  const slides=ctx.window.SLIDES;
+  assert.ok(slides.some(s=>s.visual?.image===shared),`${file} missing ${shared}`);
+  assert.equal(slides.some(s=>s.visual?.anatomy),false,`${file} still uses anatomy visuals`);
+  assert.doesNotMatch(JSON.stringify(slides),/assets\/anatomy\//,`${file} references removed anatomy assets`);
  }
 });
 test('Workshop 5 includes both UIs and the current card/checkpoint route',()=>{

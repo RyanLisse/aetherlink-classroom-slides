@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" role="img" aria-labelledby="title desc">
+<title id="title">Compaction replaces history with a summary</title><desc id="desc">Before compaction, instructions and detailed history are present. Afterwards unchanged instructions and a shorter summary remain with room for new work. Verify requirements and safety boundaries against source evidence.</desc>
+<defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#eff7ff;font-size:28px}.head{font-size:34px;font-weight:700}.label{fill:#6de0dc}.muted{fill:#b8cbdc}.box{fill:#102a40;stroke:#42637f;stroke-width:2}.warm{fill:#15382e;stroke:#50b594;stroke-width:2}.new{fill:#332b25;stroke:#ffb25e;stroke-width:2}</style><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#46cfcb"/></marker></defs>
+<rect width="1400" height="640" rx="22" fill="#071827"/>
+
+<text x="48" y="55" class="label">3 · COMPACTION</text>
+<text x="48" y="112" class="head">Before</text><text x="790" y="112" class="head">After</text>
+<rect class="box" x="48" y="140" width="560" height="300" rx="15"/>
+<rect class="warm" x="70" y="162" width="516" height="65" rx="9"/><text x="94" y="204">Instructions</text>
+<rect class="box" x="70" y="243" width="516" height="175" rx="9"/><text x="94" y="287">Detailed conversation</text><text x="94" y="331" class="muted">Attempts, answers, tool results</text><text x="94" y="375" class="muted">Requirements and decisions</text>
+<path d="M628 287 H770" stroke="#46cfcb" stroke-width="3" marker-end="url(#arrow)"/><text x="635" y="265" class="label">/compact</text>
+<rect class="box" x="790" y="140" width="560" height="300" rx="15"/>
+<rect class="warm" x="812" y="162" width="516" height="65" rx="9"/><text x="836" y="204">Unchanged instructions</text>
+<rect class="new" x="812" y="243" width="516" height="94" rx="9"/><text x="836" y="282">Summary: goal + constraints</text><text x="836" y="318" class="muted">Not a lossless copy of the history</text>
+<text x="836" y="390" class="muted">Room for new work</text>
+<text x="48" y="493" class="head">Try: /context → /compact → check the summary</text>
+<text x="48" y="540">Verify one acceptance criterion and “draft only” against your notes.</text>
+<text x="48" y="587" class="label">Missing a constraint? Restore it before continuing.</text>
+</svg>

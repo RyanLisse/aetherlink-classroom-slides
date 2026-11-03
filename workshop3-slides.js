@@ -1,69 +1,305 @@
-/* Imported from RyanLisse/aetherlink-academy-app @ b491cc0187b948a9717186fa9d2cb3f79dbc59ca
- * Source: apps/web/src/deck/workshop3-slides.ts. Authored content retained; image paths adapted. */
-'use strict';
+/* Locally maintained classroom content. See tools/SESSION-SOURCES.md. */
 window.SLIDES = [
   {
-    "lessonId": "workshop-3",
-    "title": "One ticket. Three agency levels.",
-    "kicker": "Workshop 3 · Day 3 · L1→L3",
-    "type": "concept",
+    "title": "Welcome to Day 3!",
+    "kicker": "AETHERLINK × WORLDLINE · DAY 3",
+    "subtitle": "Build a support workflow you can explain, test and stop.",
+    "type": "context",
     "visual": {
+      "opener": "welcome",
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Workshop 4 carries the labels, specialist split, and human review gate into three Agent SDK lessons.",
     "keyPoints": [
-      "Keep the same priority labels.",
-      "Keep analysis and reply writing separate.",
-      "Review drafts before they reach a customer."
+      "On screen as people arrive",
+      "Warm welcome once seated",
+      "Keep it to a few sentences"
     ],
-    "cards": [
-      {
-        "title": "One ticket",
-        "body": "Carry the same scenario through the day."
-      },
-      {
-        "title": "L1 → L2 → L3",
-        "body": "Move from business rules to judgment to specialists."
-      }
-    ],
-    "notes": "Open. One scenario, three agency levels on n8n. Rhythm all day: explain, demonstrate, participants try, discuss. Goal ≥L2; stretch L3. Workshop 4 keeps the labels, specialist split, and human review gate while teaching one Agent SDK agent, subagents, and MCP transaction lookup."
+    "notes": "Have this on screen while people walk in. Once everyone is seated, give a warm welcome back: keep it to a few sentences.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-1"
   },
   {
-    "lessonId": "workshop-3",
-    "title": "Ticket in. Low / Med / High out.",
-    "kicker": "Vehicle · one ticket · three levels",
+    "title": "What did you build, check or stop?",
+    "kicker": "DAY 3 · RECAP",
+    "subtitle": "One example from day 1 or 2. No previous attendance is required.",
+    "type": "recap",
+    "tagline": "Answer from memory first, no peeking.",
+    "visual": {
+      "reveal": "click",
+      "bot": "peek",
+      "place": "slot",
+      "noReact": true
+    },
+    "cards": [
+      {
+        "title": "Built",
+        "body": "What did you make?"
+      },
+      {
+        "title": "Checked",
+        "body": "What showed that it worked?"
+      },
+      {
+        "title": "Stopped",
+        "body": "When did a person need to decide?"
+      }
+    ],
+    "keyPoints": [
+      "Cold retrieval, no looking back",
+      "Open one question per click",
+      "Let the room answer first",
+      "Last question leads into today"
+    ],
+    "notes": "Cold retrieval: make people answer without looking at last week's slides. Open one question per click and let the room answer before you add anything. The last question is the bridge to today: n8n is about workflows, and a good workflow has clear places where a person decides.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-2"
+  },
+  {
+    "title": "Today in n8n",
+    "kicker": "DAY 3 · OVERVIEW",
+    "subtitle": "Monday, 08:00. Two hundred support tickets, and one of them is urgent. Today we build the workflow that finds it.",
     "type": "context",
     "visual": {
       "bot": "wave",
+      "place": "left"
+    },
+    "cards": [
+      {
+        "title": "The problem",
+        "body": "WL-1026 reports a duplicate payment in a fictional support inbox."
+      },
+      {
+        "title": "Today’s build",
+        "body": "Rules, then one AI Agent. Review its draft. Specialists are optional."
+      }
+    ],
+    "keyPoints": [
+      "Open with the inbox: 200 tickets, one urgent",
+      "Goal: the right priority, fast, with a human gate",
+      "Jessy’s introduction leads the full route",
+      "Grow the same ticket flow from rules to specialists",
+      "End with Proof and reflection"
+    ],
+    "notes": "Tell the story first. A support team at a payment company starts the week with a full inbox; the ticket that matters most is buried. Today we build the workflow that reads every ticket and gives it a priority, and we add intelligence one step at a time: plain rules (L1), one AI Agent (L2), specialists (L3). A machine never answers a customer on its own; a person approves. Then walk the route below. Set the route for one combined Day 3 without promising clock times. Jessy leads the introduction, the n8n tour, and the first workflow. Pause for screen sharing after the first workflow, L1, L2, L3, and the final build. Use one ticket to move from deterministic rules to bounded judgment and three specialist roles. Keep human review visible throughout. Close with Proof and reflection.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-3"
+  },
+  {
+    "title": "Today: one ticket flow, small steps",
+    "subtitle": "Build along on your own screen. Explain one run before adding more.",
+    "type": "concept",
+    "kicker": "DAY 3 · BUILD AND CHECK",
+    "cards": [
+      {
+        "title": "10:00–12:00",
+        "body": "Rules, chat and memory. Break 11:00–11:15."
+      },
+      {
+        "title": "12:00–13:00",
+        "body": "Lunch. Save your checked workflow first."
+      },
+      {
+        "title": "13:00–16:00",
+        "body": "Parser, review, tests and demos. Break 14:15–14:30."
+      }
+    ],
+    "stateId": "w3-agenda",
+    "visual": {
+      "bot": "think",
       "place": "beside"
     },
-    "subtitle": "Keep one n8n ticket in view while routing it to Low, Med, or High.",
+    "notes": "Build along on your own screen. Explain one run before adding more.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "lessonId": "workshop-3",
+    "title": "Your own n8n. No prod.",
+    "kicker": "Guardrails",
+    "type": "concept",
+    "visual": {
+      "bot": "head",
+      "place": "beside",
+      "stagger": "pop",
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "card:0",
+          "text": "Do not connect real Jira or payments.",
+          "tone": "orange"
+        }
+      ]
+    },
+    "subtitle": "Keep the exercise on local n8n or the workshop instance and show evidence for model runs.",
     "keyPoints": [
-      "One ticket.",
-      "Three labels.",
-      "Optional reply at L3."
+      "Use local n8n or the workshop instance.",
+      "Never show secrets.",
+      "An import alone is not model-run proof."
     ],
     "cards": [
       {
-        "title": "Input",
-        "body": "Start with the shared ticket fixture."
+        "title": "No production writes",
+        "body": "Do not connect real Jira or payments."
       },
       {
-        "title": "Output",
-        "body": "Return a Low, Med, or High label."
+        "title": "Protect secrets",
+        "body": "Keep credentials off screen."
       }
     ],
-    "notes": "The vehicle. Ticket in → Low/Med/High out (+ optional reply at L3). Point at local n8n (run npm install once in training-lab/w3-n8n-triage; on Windows this can take 15–25 minutes, so do it before the workshop, then npm run n8n) or the optional workshop instance + screenshot pack under /workshop-3/. No vehicle = fail the through-line. Soft: AET-84 starter JSON when ready — does not block today."
+    "notes": "Guardrails. No real Jira/payments; no secrets on screen; import ≠ model-run proof without trace.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "source": {
+      "label": "Setup and participant guide",
+      "url": "assets/workshop-3/participant-guide.html#setup"
+    },
+    "stateId": "w3-build-zip-13"
+  },
+  {
+    "title": "Open your own n8n workspace",
+    "subtitle": "Use local n8n or an approved training instance.",
+    "type": "practice",
+    "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Open the setup guide. Check the n8n version and workshop account.",
+      "Create a workflow named W3 support triage. Do not connect production tools.",
+      "Find the canvas, node settings and Executions.",
+      "Save the empty workflow. Keep credentials off screen."
+    ],
+    "expected": "Your own workflow is open and saved; no production connection exists.",
+    "timer": 10,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#setup"
+    },
+    "stateId": "w3-setup",
+    "visual": {
+      "bot": "point",
+      "place": "beside"
+    },
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Your own workflow is open and saved; no production connection exists. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "title": "A tour of n8n",
+    "kicker": "DAY 3 · TOUR",
+    "subtitle": "The parts you will use today.",
+    "type": "concept",
+    "layout": "steps",
+    "visual": {
+      "stepKeys": true,
+      "bot": "point",
+      "place": "beside"
+    },
+    "items": [
+      {
+        "label": "Workflows",
+        "caption": "Your overview: every workflow you have, active or not."
+      },
+      {
+        "label": "Canvas",
+        "caption": "Where you build: add nodes with +, connect them, drag them around."
+      },
+      {
+        "label": "Trigger node",
+        "caption": "Every workflow starts with one. Today: start it by hand."
+      },
+      {
+        "label": "Node panel",
+        "caption": "Open a node: input on the left, settings in the middle, output on the right."
+      },
+      {
+        "label": "Executions",
+        "caption": "Every run, with the data each node saw. This is where you look when something fails."
+      },
+      {
+        "label": "Credentials and templates",
+        "caption": "Log-ins for apps, kept separately; templates are ready-made workflows to start from."
+      }
+    ],
+    "keyPoints": [
+      "Show it live in n8n",
+      "Click through one part at a time",
+      "Node panel: input, settings, output",
+      "Executions = where you debug",
+      "Credentials are kept apart from workflows"
+    ],
+    "notes": "Do the tour live in n8n and use this slide as the order. Workflows overview; the canvas; add a Manual trigger; open a node and point at the three parts of the panel (input, settings, output), because reading input and output is the most important skill today; run it and show the Executions list with the data per node; finish on credentials (stored once, separate from the workflow, never pasted into a node) and templates as a place to start.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-12"
+  },
+  {
+    "title": "Build your first workflow, step by step",
+    "kicker": "DAY 3 · FIRST WORKFLOW",
+    "subtitle": "Five nodes: a trigger, one ticket, one rule, two answers.",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "visual": {
+      "bot": "point",
+      "place": "beside"
+    },
+    "cards": [
+      {
+        "title": "Ticket fields",
+        "body": "ticket_id = WL-1026\nmessage = I was charged twice. I need this fixed today."
+      },
+      {
+        "title": "Rule",
+        "body": "If message contains charged twice: priority = high\nOtherwise: priority = low"
+      }
+    ],
+    "stepsHeading": "Steps:",
+    "steps": [
+      "Add Manual Trigger and Edit Fields. Enter the two ticket fields shown.",
+      "Add If: message contains charged twice. Drag message from Input.",
+      "Add Edit Fields on both outputs: priority high or low. Keep other input fields.",
+      "Run both ticket messages from the guide. Inspect the selected branch."
+    ],
+    "expected": "WL-1026 ends in Priority: high; with the invoice message it ends in Priority: low, and both runs show in Executions.",
+    "keyPoints": [
+      "Five nodes, no credentials",
+      "Drag fields from Input, do not type them",
+      "Read input and output per node",
+      "Change one word, watch the branch move",
+      "Find both runs in Executions"
+    ],
+    "notes": "Guided build before free exploration. Build it live once on screen, then let participants repeat it with the timer running. The key skill is step 3: dragging message from the Input panel writes the expression {{ $json.message }}, which shows how data moves from node to node. Turning on Include Other Input Fields keeps ticket_id and message next to priority. This is WL-1026 from the opening inbox. Step 6 previews L1: this If is a one-rule version of the Priority Switch. Plant the next question: what if a customer writes 'I paid two times' instead? The rule misses it; that is where the AI Agent comes in at L2. Early finishers move on to the next slide and build their own idea.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "repo": {
+      "label": "Exact fields and expected branches",
+      "url": "assets/workshop-3/participant-guide.html#rules"
+    },
+    "stateId": "w3-build-zip-14"
+  },
+  {
+    "title": "Make the rule miss the meaning",
+    "subtitle": "Same payment problem, different words.",
+    "type": "practice",
+    "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Save the working flow as 01-rules.",
+      "Replace charged twice with I paid two times. Predict the branch.",
+      "Run it and inspect the If input and output.",
+      "Explain why this rule misses the meaning. Keep both runs."
+    ],
+    "expected": "You can show a rule that works as written but misses a relevant ticket.",
+    "timer": 5,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#rules"
+    },
+    "stateId": "w3-rule-limit",
+    "visual": {
+      "bot": "point",
+      "place": "beside"
+    },
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: You can show a rule that works as written but misses a relevant ticket. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
   {
     "lessonId": "workshop-3",
     "title": "Automation is not an agent.",
+    "tagline": "Day 1 bridge: an agent observes, decides, acts and checks in a loop. A rule only follows one path.",
     "kicker": "Explain · why the ladder",
     "type": "concept",
     "visual": {
       "bot": "think",
-      "place": "beside"
+      "place": "beside",
+      "stagger": "pop",
+      "stepThrough": true
     },
     "subtitle": "L1 is a business rule; agent judgment starts at L2.",
     "keyPoints": [
@@ -81,43 +317,27 @@ window.SLIDES = [
         "body": "A bounded AI Agent drafts priority."
       }
     ],
-    "notes": "Explain. L1 = business rule without LLM. L2 = judgment (one AI Agent + memory). L3 = specialists (Reply + Risk). Human gate before “done” / customer-facing."
-  },
-  {
-    "lessonId": "workshop-3",
-    "title": "Same tickets all day.",
-    "kicker": "Scenario · shared fixture",
-    "type": "concept",
-    "visual": {
-      "bot": "point",
-      "place": "beside"
-    },
-    "subtitle": "A shared fixture keeps expected labels stable as agency increases.",
-    "keyPoints": [
-      "Reuse the fixture.",
-      "Keep the expected label visible.",
-      "No production writes or secrets on screen."
-    ],
-    "cards": [
-      {
-        "title": "Examples",
-        "body": "Use at least three example tickets."
-      },
-      {
-        "title": "Expected",
-        "body": "Record the expected Low / Med / High label."
-      }
-    ],
-    "notes": "Shared fixture. ≥3 example tickets with expected L/M/H. Workshop 4 uses new messages. No prod writes. Secrets off screen."
+    "notes": "Explain. L1 = business rule without LLM. L2 = judgment with one AI Agent and memory. L3 = Customer Reply, Risk, and Customer Context specialists. Human gate before “done” or customer-facing output.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-18"
   },
   {
     "lessonId": "workshop-3",
     "title": "L1 is a Switch — no LLM.",
+    "tagline": "Like a deterministic test, a Switch applies the same rules to the same input.",
     "kicker": "Explain · L1 · deterministic routing",
     "type": "concept",
     "visual": {
       "bot": "think",
-      "place": "beside"
+      "place": "beside",
+      "stagger": "pop",
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "without an LLM",
+          "tone": "orange"
+        }
+      ]
     },
     "subtitle": "Route each ticket with deterministic Switch rules, without an LLM.",
     "keyPoints": [
@@ -135,7 +355,8 @@ window.SLIDES = [
         "body": "Route to Low, Med, or High."
       }
     ],
-    "notes": "Explain — L1 Switch / rules. Ticket → Switch → L/M/H. No LLM. Cover input, branches, and error path."
+    "notes": "Explain — L1 Switch / rules. Ticket → Switch → L/M/H. No LLM. Cover input, branches, and error path.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-20"
   },
   {
     "lessonId": "workshop-3",
@@ -144,21 +365,24 @@ window.SLIDES = [
     "type": "concept",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-3/01-n8n.jpeg",
-      "imageLink": "n8n · L1 Switch"
+      "image": "assets/day3-lesplan/step-01.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
     },
-    "notes": "Demo — L1. Facilitator walks screenshot 01-n8n.jpeg or live import. Room watches; does not build yet. Script: open flow → show Switch branches → run one fixture ticket → label matches."
+    "notes": "Demo — L1. Walk through Ticket Input, the Switch, and the Low, Medium, and High branches. Run one fixture ticket and compare the branch with the expected label.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-21"
   },
   {
     "lessonId": "workshop-3",
-    "title": "Build or inspect L1 on your machine.",
+    "title": "Route three explicit values",
     "kicker": "L1 · Your turn",
     "type": "practice",
     "layout": "exercise",
     "timer": 15,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/day3-lesplan/step-01.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
     },
     "cards": [
       {
@@ -167,58 +391,312 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Run the flow.",
-      "Match the fixture label.",
-      "Note the steps.",
-      "Ask a human to confirm the branch."
+      "Duplicate the rules workflow as 01-switch. Disconnect the If.",
+      "Supply priority in Ticket Input. Add Switch rules for low, medium and high.",
+      "Select Extra Output for unmatched values. Test each value and urgent.",
+      "Point to each selected output and explain why it was chosen."
     ],
-    "expected": "The flow runs, its label matches the fixture, the steps are noted, and a human confirms the branch before L2.",
+    "expected": "Three supplied values reach their matching outputs; urgent reaches the fallback. No model has classified anything.",
     "subtitle": "Run or inspect the deterministic L1 flow and hold the human gate before L2.",
     "keyPoints": [
       "Run the L1 flow.",
       "Match the expected label.",
-      "Confirm the branch with a human."
+      "Confirm the branch with a human.",
+      "Screen-share one working flow."
     ],
-    "notes": "Your turn — L1 on your machine. Timer: 15 min. Checklist: (1) flow runs (2) label matches fixture (3) steps noted (4) human confirms branch. Gate before L2 — required."
+    "notes": "Demonstrate dragging priority from Input into the rule. Participants follow the exact steps in the guide. They supply test labels here, not the packaged hashed fixtures. Discuss why a fallback is needed.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "repo": {
+      "label": "Switch values and fixture tickets",
+      "url": "assets/workshop-3/participant-guide.html#switch"
+    },
+    "stateId": "w3-build-zip-22"
   },
   {
-    "lessonId": "workshop-3",
-    "title": "L2 adds one AI Agent with memory.",
-    "kicker": "Explain · L2 · judgment enters",
+    "title": "Short break",
+    "subtitle": "11:00–11:15",
+    "type": "pause",
+    "kicker": "DAY 3 · BREAK",
+    "visual": {
+      "countdown": 15
+    },
+    "stateId": "w3-break-am",
+    "notes": "11:00–11:15. Save the workflow before leaving. Resume from the last checked state."
+  },
+  {
+    "title": "What is an agent?",
+    "kicker": "DAY 3 · BEFORE L2",
+    "subtitle": "L1 follows the rules you wrote. An agent chooses its next step itself.",
     "type": "concept",
+    "visual": {
+      "hero": 0,
+      "popOut": 1,
+      "stepThrough": true,
+      "chipIcons": [
+        "▶",
+        "↻",
+        "■",
+        "✋"
+      ],
+      "highlight": [
+        {
+          "in": "card:0",
+          "text": "works toward a goal",
+          "tone": "orange"
+        }
+      ]
+    },
+    "cards": [
+      {
+        "title": "Definition",
+        "body": "An AI agent works toward a goal by gathering context, choosing actions, using tools and checking results."
+      },
+      {
+        "title": "It can",
+        "body": "continue\nadjust\nstop\nask for human input"
+      },
+      {
+        "title": "In n8n",
+        "body": "One AI Agent node with four parts: a Chat Model to think, a System Message to guide it, Tools to act, and Memory to remember."
+      }
+    ],
+    "tagline": "Day 1 bridge: the same definition as Claude Code. Today you build the agent instead of using it.",
+    "keyPoints": [
+      "Same definition as Day 1",
+      "Goal, not a fixed path",
+      "Model, instructions, tools, memory",
+      "It may ask a human: that is a feature"
+    ],
+    "notes": "Contrast with L1 first: the Switch follows a path you drew, so it fails on 'I paid two times'. An agent gets a goal (give this ticket the right priority) and decides itself how to get there. Read the definition, then pop the four things it can do; stress that asking a human is part of the design, not a failure. Close with the third card: in n8n an agent is one node with four inputs you can see. Point back to the screenshot on 'You used an agent': Chat Model, Memory, Tools, Output Parser.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-23"
+  },
+  {
+    "title": "One agent loop. Bounded actions.",
+    "kicker": "DAY 3 · BEFORE L2",
+    "subtitle": "The n8n AI Agent runs this loop inside one node.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/workshop-3/agent-loop.svg",
+      "imageAlt": "Context, model call, permission check, runtime tool execution, result and next turn. Answers need review; denial, errors and limits can stop the run.",
+      "imageLink": "Concept diagram · trace one real run next"
+    },
+    "keyPoints": [
+      "Model requests; runtime executes.",
+      "Check permission before a tool runs.",
+      "Hooks can inspect defined before/after events.",
+      "Text is not success; check evidence.",
+      "Errors, limits and people can stop the run."
+    ],
+    "notes": "Use WL-1026: the model may request a customer lookup; the runtime checks permission, runs the allowed tool, and adds its result to context. A second model call can use that evidence. Do not claim this lookup exists in the core chat flow: it is an optional tool example. Before any tools exist, show the short path from model to an unapproved draft. Hooks are callbacks at defined runtime events; they are not the model, do not universally intercept every operation, and do not grant human approval. A post-tool hook cannot prevent an action that already ran. A no-tool answer is one normal end path, not proof that acceptance checks passed. A denied action may be returned as an error for safe continuation or may stop the run, depending on policy. Unrecoverable failures, turn/budget limits and cancellation are separate end paths. This diagram shows one agent invocation, not the full AI-SDLC.\nDemonstrate one request and response. Participants identify them in their own trace. Discuss: who executed the code, and which evidence supports the answer?",
+    "stateId": "w3-build-zip-24",
+    "cards": []
+  },
+  {
+    "title": "Add a Chat Message Trigger",
+    "kicker": "STEP 2 · CHAT INPUT",
+    "subtitle": "Start one workflow run for every user message.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-02.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "keyPoints": [
+      "Add the Chat Message Trigger",
+      "Use Hosted Chat for the workshop",
+      "Keep public access off while building",
+      "Test one message"
+    ],
+    "notes": "Show the Chat Message Trigger. Use Hosted Chat for the workshop and keep Make Chat Publicly Available off while building. Explain that the trigger runs the workflow once for each user message. Send one test message before adding the agent.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-27"
+  },
+  {
+    "title": "Connect chat to one AI Agent",
+    "subtitle": "A chat model call is separate from a Claude Code login.",
+    "type": "practice",
+    "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Save 01-rules. Create a separate workflow named 02-chat.",
+      "Add When chat message received → AI Agent → an approved Chat Model.",
+      "Select your credential in the model node. Never paste the key into a prompt.",
+      "Send a fictional ticket and inspect the Agent output. No memory yet."
+    ],
+    "expected": "One real model run is visible, or model access is explicitly recorded as blocked.",
+    "timer": 10,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#chat"
+    },
+    "stateId": "w3-chat",
+    "visual": {
+      "shot": "assets/day3-lesplan/step-02.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
+    },
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: One real model run is visible, or model access is explicitly recorded as blocked. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "title": "Give the Agent memory",
+    "kicker": "STEP 3 · AI AGENT + SIMPLE MEMORY",
+    "subtitle": "Connect a minimal AI Agent, then prove what the same session remembers.",
+    "type": "practice",
+    "layout": "exercise",
+    "visual": {
+      "shot": "assets/day3-lesplan/step-03.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
+    },
+    "steps": [
+      "Without memory, send the two favourite-colour prompts from the guide.",
+      "Connect Simple Memory. Start clean and repeat both prompts in one session.",
+      "Repeat the question in a different session. Inspect the inputs and outputs.",
+      "Record the three results. Explain which history each request received."
+    ],
+    "expected": "You can show the recorded outputs before and after memory, plus the result from another session.",
+    "keyPoints": [
+      "The screenshot shows the Agent before memory is connected",
+      "Connect Simple Memory live",
+      "Keep the same session for the first comparison",
+      "Compare with a different session"
+    ],
+    "notes": "The screenshot shows the minimal Agent before Simple Memory is connected. Run the exact two prompts without memory and record the output. Then connect Simple Memory, start clean, repeat both prompts in the same session, and record the output. Finally use another session and compare. Simple Memory stores configurable chat history for the current session. Discuss the observed evidence instead of promising that a model can never infer the answer from the prompt text.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "timer": 10,
+    "repo": {
+      "label": "Memory prompts and session checks",
+      "url": "assets/workshop-3/participant-guide.html#memory"
+    },
+    "stateId": "w3-build-zip-28"
+  },
+  {
+    "title": "Discuss: what should a new ticket remember?",
+    "subtitle": "Use the recorded runs, not a guess about the model.",
+    "type": "review",
+    "kicker": "DAY 3 · BUILD AND CHECK",
+    "cards": [
+      {
+        "title": "Same conversation",
+        "body": "Which earlier message was included?"
+      },
+      {
+        "title": "New conversation",
+        "body": "Did another customer’s context carry over?"
+      },
+      {
+        "title": "Stop",
+        "body": "Do not continue with mixed customer sessions."
+      }
+    ],
+    "stateId": "w3-memory-review",
+    "visual": {
+      "bot": "think",
+      "place": "beside"
+    },
+    "notes": "Use the recorded runs, not a guess about the model.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "title": "Lunch",
+    "subtitle": "12:00–13:00",
+    "type": "pause",
+    "kicker": "DAY 3 · BREAK",
+    "visual": {
+      "countdown": 60
+    },
+    "stateId": "w3-lunch",
+    "notes": "12:00–13:00. Save the workflow before leaving. Resume from the last checked state."
+  },
+  {
+    "title": "Add predictable output fields",
+    "tagline": "Day 1 bridge: evidence, not confidence. Like a test, the parser makes the answer checkable.",
+    "kicker": "STEP 5 · STRUCTURED OUTPUT PARSER",
+    "subtitle": "Connect a Structured Output Parser to the Agent.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-05.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "keyPoints": [
+      "Connect the parser to the AI Agent",
+      "Define the output fields before testing",
+      "The parser returns fields that match its JSON Schema",
+      "Keep human review before sending"
+    ],
+    "notes": "Show where the Structured Output Parser connects to the AI Agent. Explain that the parser adds predictable fields that match its JSON Schema. It does not remove the need to test the result or review customer-facing output.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-29"
+  },
+  {
+    "title": "Shape the parser output",
+    "kicker": "STEP 6 · PARSER FIELDS",
+    "subtitle": "Start with the fields visible in the example, then extend only when the workflow needs more.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-06.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "cards": [
+      {
+        "title": "Compact example",
+        "body": "{\n  \"priority\": \"high\",\n  \"message\": \"Payment service unavailable\"\n}"
+      }
+    ],
+    "keyPoints": [
+      "Use priority and message first",
+      "Match field names in the schema and downstream nodes",
+      "Test more than one ticket",
+      "Treat extra fields as an explicit extension"
+    ],
+    "notes": "Use the screenshot to explain the parser settings and JSON Schema structure. The visible example uses priority and message. Do not copy unrelated promises from the prompt example. If participants add fields later, make that an explicit extension and update every downstream reference.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-30"
+  },
+  {
+    "title": "Route fields, not free text",
+    "subtitle": "Continue 02-chat. Build the parser before the Switch.",
+    "type": "practice",
+    "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Enable Require Specific Output Format. Add Structured Output Parser.",
+      "Use priority and message. Restrict priority to low, medium or high.",
+      "Add a Switch that reads output.priority with three exact matches and a fallback.",
+      "Run the three fixture tickets. Inspect the fields and selected outputs."
+    ],
+    "expected": "Each valid output reaches its matching branch; invalid output stops or reaches review.",
+    "timer": 20,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#parser"
+    },
+    "stateId": "w3-parser",
+    "visual": {
+      "shot": "assets/day3-lesplan/step-06.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
+    },
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Each valid output reaches its matching branch; invalid output stops or reaches review. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "title": "Test the path that must stop",
+    "subtitle": "A valid JSON shape is not proof that the decision is right.",
+    "type": "practice",
+    "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Duplicate the workflow as 03-test. Replace the Agent input to the Switch with test fields.",
+      "Set output.priority to urgent, then test without priority.",
+      "Inspect the fallback. It must not become low, medium or high.",
+      "Keep this test copy. Return to 02-chat for a real model run."
+    ],
+    "expected": "Invalid and missing priorities do not enter a valid branch.",
+    "timer": 10,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#parser"
+    },
+    "stateId": "w3-invalid",
     "visual": {
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "One bounded AI Agent drafts priority while a human reviews it.",
-    "keyPoints": [
-      "Same ticket chain.",
-      "Agent drafts priority.",
-      "Human review before sending."
-    ],
-    "cards": [
-      {
-        "title": "Agent",
-        "body": "Add one bounded AI Agent to the same chain."
-      },
-      {
-        "title": "Memory",
-        "body": "Keep the existing ticket context."
-      }
-    ],
-    "notes": "Explain — L2. Same chain + one bounded AI Agent. Agent drafts priority; human reviews. Capture trace/settings. OpenAI node in screenshots OK — day 4 swaps stack."
-  },
-  {
-    "lessonId": "workshop-3",
-    "title": "Watch: L2 Agent drafts priority.",
-    "kicker": "Demo · L2",
-    "type": "concept",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-3/02-n8n.jpeg",
-      "imageLink": "n8n · L2 AI Agent + memory"
-    },
-    "notes": "Demo — L2. Screenshot 02-n8n.jpeg or live. Show Agent + memory, draft priority, human review pause. Room watches."
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Invalid and missing priorities do not enter a valid branch. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
   {
     "lessonId": "workshop-3",
@@ -229,7 +707,9 @@ window.SLIDES = [
     "timer": 20,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/day3-lesplan/step-05.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
     },
     "cards": [
       {
@@ -238,116 +718,171 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Record an AI run.",
-      "Have a human review the priority.",
-      "Prevent silent auto-send.",
-      "Start the Proof fields."
+      "Run a fixture through the Agent, parser and Switch.",
+      "Compare the proposed priority with the expected label.",
+      "Record the input, output and trace. Label a blocked run honestly.",
+      "Keep the reply as a draft; the next step is human review."
     ],
-    "expected": "An AI run is recorded, a human reviews the priority, auto-send stays off, and Proof fields are started.",
+    "expected": "An AI run returns the parser fields, a human reviews the priority, auto-send stays off, and the group sees one working flow.",
     "subtitle": "Record one AI run and make the human review visible before anything is sent.",
     "keyPoints": [
       "Record the AI run.",
+      "Check priority and message.",
       "Review the priority with a human.",
-      "Keep auto-send off."
+      "Keep auto-send off.",
+      "Screen-share one working flow."
     ],
-    "notes": "Your turn — L2. Solo bar = ≥L2 required. Timer: 20 min. Checklist: (1) AI run recorded (2) human reviewed priority (3) no silent auto-send (4) Proof fields started."
+    "notes": "Your turn — L2. Solo bar = ≥L2 required. Timer: 20 min. Checklist: (1) AI run recorded (2) parser returns priority and message (3) human reviewed priority (4) no silent auto-send (5) Proof fields started. Invite one or two participants to share their workflow before L3.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "repo": {
+      "label": "Fixtures and model-evidence checklist",
+      "url": "assets/workshop-3/participant-guide.html#fixtures"
+    },
+    "stateId": "w3-build-zip-31"
   },
   {
-    "lessonId": "workshop-3",
-    "title": "L3 splits Reply and Risk.",
-    "kicker": "Explain · L3 · specialists · one gate",
+    "title": "A draft is not permission to send",
+    "subtitle": "This lab has no email, payment or customer-system action.",
     "type": "concept",
+    "kicker": "DAY 3 · BUILD AND CHECK",
+    "cards": [
+      {
+        "title": "Propose",
+        "body": "The model returns priority and a draft message."
+      },
+      {
+        "title": "Review",
+        "body": "A person checks the ticket, missing facts and proposed reply."
+      },
+      {
+        "title": "Decide",
+        "body": "Record accept, revise or stop. Nothing is sent automatically."
+      }
+    ],
+    "stateId": "w3-gate",
     "visual": {
       "bot": "think",
       "place": "beside"
     },
-    "subtitle": "L3 separates Reply and Risk specialists but keeps one human gate.",
-    "keyPoints": [
-      "Split the specialist roles.",
-      "Document who does what.",
-      "Keep the human gate before done."
-    ],
-    "cards": [
-      {
-        "title": "Reply",
-        "body": "Draft a customer-facing reply."
-      },
-      {
-        "title": "Risk",
-        "body": "Assess risk or priority."
-      }
-    ],
-    "notes": "Explain — L3. Split reply vs risk/priority; orchestrate; document who does what; human gate before done. Stretch — not required for solo bar."
+    "notes": "This lab has no email, payment or customer-system action.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
   {
-    "lessonId": "workshop-3",
-    "title": "Watch: L3 specialists, one gate.",
-    "kicker": "Demo · L3",
-    "type": "concept",
-    "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-3/03-n8n.jpeg",
-      "imageLink": "n8n · L3 Reply + Risk"
-    },
-    "notes": "Demo — L3. Screenshot 03-n8n.jpeg or live. Stretch demo — not required for solo bar. Name two roles and the human gate."
-  },
-  {
-    "lessonId": "workshop-3",
-    "title": "Stretch L3 — same tickets.",
-    "kicker": "L3 · Your turn · optional",
+    "title": "Review one draft and reject another",
+    "subtitle": "Manual review is an exercise boundary, not a production approval system.",
     "type": "practice",
     "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Inspect a draft alongside its ticket and tool evidence.",
+      "Record accept or revise with your reason. Do not send a real message.",
+      "Use the missing-information ticket. Record stop and the missing fact.",
+      "Explain what prevents a customer action: no sending node is connected."
+    ],
+    "expected": "You have one reviewed draft and one stop decision, with no external action.",
     "timer": 15,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#review"
+    },
+    "stateId": "w3-review",
     "visual": {
       "bot": "point",
       "place": "beside"
     },
-    "cards": [
-      {
-        "title": "Level",
-        "body": "L3"
-      }
-    ],
-    "steps": [
-      "Name two specialist roles.",
-      "Produce a joint output.",
-      "Make the human gate explicit."
-    ],
-    "expected": "Two specialist roles produce a joint output with an explicit human gate.",
-    "subtitle": "Stretch the same tickets into two specialist roles with one explicit human gate.",
-    "keyPoints": [
-      "Name the two roles.",
-      "Show their joint output.",
-      "Keep the human gate explicit."
-    ],
-    "notes": "Your turn — L3 stretch (optional). Timer: 15 min. Checklist: (1) two roles named (2) joint output (3) human gate explicit."
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: You have one reviewed draft and one stop decision, with no external action. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
   {
-    "lessonId": "workshop-3",
-    "title": "Proof is not vibes.",
-    "kicker": "Explain · export · rules · gate",
+    "title": "Short break",
+    "subtitle": "14:15–14:30",
+    "type": "pause",
+    "kicker": "DAY 3 · BREAK",
+    "visual": {
+      "countdown": 15
+    },
+    "stateId": "w3-break-pm",
+    "notes": "14:15–14:30. Save the workflow before leaving. Resume from the last checked state."
+  },
+  {
+    "title": "Data is not chat history",
+    "subtitle": "Customer context comes from a lookup, not from a remembered claim.",
     "type": "concept",
+    "kicker": "DAY 3 · BUILD AND CHECK",
+    "cards": [
+      {
+        "title": "Chat history",
+        "body": "Earlier messages in this session."
+      },
+      {
+        "title": "Customer record",
+        "body": "A row matched by customer_id."
+      },
+      {
+        "title": "Missing record",
+        "body": "Report the gap; do not invent customer details."
+      }
+    ],
+    "stateId": "w3-context",
+    "visual": {
+      "bot": "think",
+      "place": "beside"
+    },
+    "notes": "Customer context comes from a lookup, not from a remembered claim.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "title": "Look up a customer, then a missing customer",
+    "subtitle": "Use a separate lookup experiment before attaching more tools.",
+    "type": "practice",
+    "layout": "exercise",
+    "kicker": "DAY 3 · YOUR TURN",
+    "steps": [
+      "Download the workshop CSV and import it into a Data Table.",
+      "Create a manual test with Get row(s), filtered by customer_id = CUST-003.",
+      "Repeat with CUST-999. Record what the node returns.",
+      "Explain how the Agent should respond when no matching row exists."
+    ],
+    "expected": "A known ID returns its row; an unknown ID produces a recorded data gap.",
+    "timer": 15,
+    "repo": {
+      "label": "Participant steps, checks and stop conditions",
+      "url": "assets/workshop-3/participant-guide.html#context"
+    },
+    "stateId": "w3-lookup",
+    "visual": {
+      "shot": "assets/day3-lesplan/step-10.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
+    },
+    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: A known ID returns its row; an unknown ID produces a recorded data gap. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+  },
+  {
+    "title": "Final build: chat in, reviewed draft out",
+    "kicker": "FINAL ASSIGNMENT · YOUR TURN",
+    "subtitle": "The core needs one Agent. Specialist tools are optional.",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 20,
     "visual": {
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "A working flow, export or screenshot, and short routing explanation make the result checkable.",
+    "steps": [
+      "Open 02-chat. Run the Agent, parser and Switch with the fixture tickets.",
+      "Read the proposed reply in local chat. Label it as an unapproved draft.",
+      "Record your review and one stopped case. No customer action is connected.",
+      "Export the workflow and explain one execution to another person or in a note."
+    ],
+    "expected": "One Agent completes the core. Evidence includes valid routing, a stop case and a human review.",
     "keyPoints": [
-      "Show the working flow.",
-      "Explain the routing rules.",
-      "Keep labels for day 4 to rerun."
+      "One Agent is enough",
+      "Inspect all three branches",
+      "Reject invalid output",
+      "Record a human review",
+      "Do not send a real message"
     ],
-    "cards": [
-      {
-        "title": "Working flow",
-        "body": "Leave the flow runnable."
-      },
-      {
-        "title": "Proof pack",
-        "body": "Capture an export or screenshot."
-      }
-    ],
-    "notes": "Explain — Proof. Working flow + export/screenshot + short routing explanation. Same labels day 4 will re-run."
+    "notes": "The local chat displays an unapproved draft, not a reply released to a customer. A person records their review afterwards. No sender or payment tool exists in the core. Show the final output node and inspect the Chat Trigger response mode. Finish with the evidence checklist in the guide.",
+    "repo": {
+      "label": "Final checks and solo completion",
+      "url": "assets/workshop-3/participant-guide.html#finish"
+    },
+    "stateId": "w3-build-zip-42"
   },
   {
     "lessonId": "workshop-3",
@@ -379,7 +914,45 @@ window.SLIDES = [
       "Explain the L/M/H rules.",
       "Name the gate and level."
     ],
-    "notes": "Your turn — Proof pack on your machine before you leave. Timer: 10 min. Checklist: (1) screenshot/export (2) L/M/H rules in one paragraph (3) human gate named (4) level reached."
+    "notes": "Your turn — Proof pack on your machine before you leave. Timer: 10 min. Checklist: (1) screenshot/export (2) L/M/H rules in one paragraph (3) human gate named (4) level reached.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "repo": {
+      "label": "Evidence checklist",
+      "url": "assets/workshop-3/participant-guide.html#finish"
+    },
+    "stateId": "w3-build-zip-44"
+  },
+  {
+    "title": "What did you learn?",
+    "kicker": "DAY 3 · CLOSING",
+    "subtitle": "Complete these statements.",
+    "type": "recap",
+    "tagline": "Complete each statement for yourself.",
+    "visual": {
+      "sentences": true,
+      "quietTimer": 3
+    },
+    "cards": [
+      {
+        "title": "I built…",
+        "body": "Show one execution."
+      },
+      {
+        "title": "I stopped…",
+        "body": "Show the reason and missing evidence."
+      },
+      {
+        "title": "At work I could…",
+        "body": "Name one small, safe use case."
+      }
+    ],
+    "keyPoints": [
+      "Three quiet minutes",
+      "Let people write first",
+      "Collect a few answers aloud",
+      "Questions feed tomorrow"
+    ],
+    "notes": "Give three quiet minutes to complete the statements, then collect a few out loud. Write the workflow ideas and open questions on the flipchart: they are the starting point for tomorrow.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-47"
   },
   {
     "lessonId": "workshop-3",
@@ -388,80 +961,366 @@ window.SLIDES = [
     "type": "concept",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "stagger": "pop",
+      "stepThrough": true
     },
-    "subtitle": "Workshop 4 keeps the labels, specialist split, and human gate while teaching three Agent SDK lessons.",
+    "subtitle": "Carry your behaviour and checks into code, not your n8n export.",
     "keyPoints": [
-      "Keep the same priority labels.",
-      "Keep the specialist split and human review gate.",
-      "Learn one agent, subagents, and MCP."
+      "Bring observed behaviour",
+      "Map the schemas explicitly",
+      "No prerequisite specialist build"
     ],
     "cards": [
       {
-        "title": "Keep",
-        "body": "Carry labels, specialist roles, and human review forward."
+        "title": "Bring",
+        "body": "One ticket, a checked output, a failed case and a human decision."
       },
       {
-        "title": "Learn",
-        "body": "Start with one agent, then subagents, then MCP."
+        "title": "Translate",
+        "body": "Nodes become prompt, schema, tools and explicit control flow."
+      },
+      {
+        "title": "New environment",
+        "body": "Day 4 uses its own messages and package. No n8n JSON import."
       }
     ],
-    "notes": "Bridge. Workshop 4 carries the LOW, MEDIUM, and HIGH labels, the specialist split, and the human review gate into the Claude Agent SDK. The three lessons are one agent with CLAUDE.md, an orchestrator with subagents, and MCP transaction lookup. Workshop 4 uses new messages and a separate workbook."
+    "notes": "Carry one ticket, actual output, failed case and human decision to Day 4. Day 4 has its own messages, schema and package. Translate deliberately; there is no n8n-export import. No W3 specialist completion is required.",
+    "stateId": "w3-build-zip-45"
   },
   {
     "lessonId": "workshop-3",
-    "title": "Your own n8n. No prod.",
-    "kicker": "Guardrails",
+    "title": "L3 splits Reply, Risk and Context.",
+    "tagline": "Like a reviewer from day 2, each specialist has one job. It reports; it approves nothing.",
+    "kicker": "OPTIONAL EXTENSION · Explain · L3 · three specialists · one gate",
     "type": "concept",
     "visual": {
-      "bot": "head",
-      "place": "beside"
+      "bot": "think",
+      "place": "beside",
+      "stagger": "pop",
+      "stepThrough": true,
+      "highlight": [
+        {
+          "in": "subtitle",
+          "text": "one human gate",
+          "tone": "orange"
+        }
+      ]
     },
-    "subtitle": "Keep the exercise on local n8n or the workshop instance and show evidence for model runs.",
+    "subtitle": "L3 separates Customer Reply, Risk, and Customer Context while keeping one human gate.",
     "keyPoints": [
-      "Use local n8n or the workshop instance.",
-      "Never show secrets.",
-      "An import alone is not model-run proof."
+      "Split the three specialist roles.",
+      "Document who does what.",
+      "Keep the human gate before done."
     ],
     "cards": [
       {
-        "title": "No production writes",
-        "body": "Do not connect real Jira or payments."
+        "title": "Reply",
+        "body": "Draft a customer-facing reply."
       },
       {
-        "title": "Protect secrets",
-        "body": "Keep credentials off screen."
+        "title": "Risk",
+        "body": "Assess risk or priority."
+      },
+      {
+        "title": "Customer Context",
+        "body": "Look up customer context in a Data Table through customer_id."
       }
     ],
-    "notes": "Guardrails. No real Jira/payments; no secrets on screen; import ≠ model-run proof without trace."
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Explain — L3. Split customer reply, risk or priority, and customer context. Customer Context Agent looks up context in a Data Table through customer_id. Let the main Agent orchestrate the three tools. Document who does what and keep the human gate before done. Stretch — not required for the solo bar.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-32",
+    "optional": true,
+    "hidden": true
   },
   {
     "lessonId": "workshop-3",
-    "title": "L1 rules. L2 judgment. L3 specialists.",
-    "kicker": "Done when · ladder recap",
-    "type": "recap",
-    "layout": "recap",
+    "title": "Watch: L3 specialists, one gate.",
+    "kicker": "OPTIONAL EXTENSION · Demo · L3",
+    "type": "concept",
     "visual": {
-      "recapKeys": true
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-11.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Demo — L3. The screenshot shows Customer Reply Agent, Risk Agent, and Customer Context Agent connected to the main flow. Explain that Customer Context Agent uses a Data Table lookup through customer_id. Name all three roles and the human gate.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-33",
+    "optional": true,
+    "hidden": true
+  },
+  {
+    "title": "Add the Customer Reply Agent",
+    "kicker": "OPTIONAL EXTENSION · STEP 7 · FIRST SPECIALIST",
+    "subtitle": "Give one specialist responsibility for the customer-facing draft.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-07.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "keyPoints": [
+      "Keep the main Agent as orchestrator",
+      "Add Customer Reply Agent as a tool",
+      "Give it one clear responsibility",
+      "Review the draft before it reaches a customer"
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Add the Customer Reply Agent as a tool for the main Agent. Its responsibility is the customer-facing draft. Keep the main Agent in control of when the tool is used. Keep a human review before sending.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-34",
+    "optional": true,
+    "hidden": true
+  },
+  {
+    "title": "Add the Risk Agent",
+    "kicker": "OPTIONAL EXTENSION · STEP 8 · SECOND SPECIALIST",
+    "subtitle": "Separate risk assessment from customer reply writing.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-08.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "keyPoints": [
+      "Customer Reply drafts the response",
+      "Risk assesses risk and priority",
+      "The main Agent coordinates both tools",
+      "One human gate remains"
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Add the Risk Agent beside the Customer Reply Agent. Separate the responsibilities. The Reply specialist drafts customer-facing text. The Risk specialist assesses risk and priority. The main Agent coordinates both tools and one human gate remains.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-35",
+    "optional": true,
+    "hidden": true
+  },
+  {
+    "title": "Description chooses. System Message guides.",
+    "tagline": "Day 2 bridge: the Description works like a skill's description, the System Message like CLAUDE.md.",
+    "kicker": "OPTIONAL EXTENSION · STEP 9 · TOOL ROUTING",
+    "subtitle": "Two fields control different parts of the specialist pattern.",
+    "type": "concept",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-lesplan/step-09.jpg",
+      "imageLink": "Reference screenshot · compare with your own run"
+    },
+    "cards": [
+      {
+        "title": "Description",
+        "body": "Tells the main Agent when it should choose this tool."
+      },
+      {
+        "title": "System Message",
+        "body": "Defines how the specialist behaves after it is selected."
+      }
+    ],
+    "keyPoints": [
+      "Description supports tool selection",
+      "System Message guides specialist behavior",
+      "Write each field for its own purpose",
+      "Test when the tool is and is not called"
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Use the Risk Agent configuration to show the distinction. The Description tells the main Agent when to choose the tool. The System Message guides the specialist's behavior after selection. Test both a case that should call the specialist and one that should not.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-36",
+    "optional": true,
+    "hidden": true
+  },
+  {
+    "title": "Add customer context with Data Tables",
+    "kicker": "OPTIONAL EXTENSION · STEP 10 · THIRD SPECIALIST",
+    "subtitle": "Import the workshop CSV and look up customer context through customer_id.",
+    "type": "practice",
+    "layout": "exercise",
+    "repo": {
+      "label": "Extension instructions and source downloads",
+      "url": "assets/workshop-3/participant-guide.html#extensions"
+    },
+    "visual": {
+      "shot": "assets/day3-lesplan/step-10.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
+    },
+    "steps": [
+      "Open Data Tables and create a table.",
+      "Import customers.csv from this slide.",
+      "Add a Customer Context Agent as the third specialist.",
+      "Let it look up a row through customer_id.",
+      "Return the customer context to the main Agent."
+    ],
+    "expected": "The Customer Context Agent finds the matching customer_id and returns useful context to the main Agent.",
+    "keyPoints": [
+      "Data Tables provide built-in instance storage",
+      "Use customer_id consistently",
+      "The screenshot shows the table interface",
+      "The supplied CSV uses the same schema"
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Open the Data Tables tab, create a table, and import the linked CSV. The screenshot is the interface example and the supplied CSV uses the same schema. Add Customer Context Agent as the third specialist. It looks up context in the Data Table through customer_id and returns the matching row to the main Agent. Data Tables suit light to moderate workshop data.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-37",
+    "optional": true,
+    "hidden": true,
+    "timer": 10
+  },
+  {
+    "lessonId": "workshop-3",
+    "title": "Stretch L3 — same tickets.",
+    "kicker": "OPTIONAL EXTENSION · L3 · Your turn · optional",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "visual": {
+      "bot": "point",
+      "place": "beside",
+      "shot": "assets/day3-lesplan/step-11.jpg",
+      "shotLabel": "Reference screenshot · not your execution evidence"
+    },
+    "cards": [
+      {
+        "title": "Level",
+        "body": "L3"
+      }
+    ],
+    "steps": [
+      "Name all three specialist roles.",
+      "Use customer_id for the context lookup.",
+      "Produce a joint output.",
+      "Make the human gate explicit.",
+      "Share the complete workflow on screen."
+    ],
+    "expected": "Three specialist roles produce a joint output with customer context and an explicit human gate.",
+    "subtitle": "Stretch the same tickets into three specialist roles with one explicit human gate.",
+    "keyPoints": [
+      "Name the three roles.",
+      "Use customer_id consistently.",
+      "Show their joint output.",
+      "Keep the human gate explicit.",
+      "Screen-share one complete flow."
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Your turn — L3 stretch (optional). Timer: 15 min. Checklist: (1) Customer Reply, Risk, and Customer Context roles named (2) customer_id lookup works (3) joint output (4) human gate explicit. Invite participants to share the results of all three specialists.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-38",
+    "optional": true,
+    "hidden": true,
+    "repo": {
+      "label": "Extension instructions and source downloads",
+      "url": "assets/workshop-3/participant-guide.html#extensions"
+    }
+  },
+  {
+    "title": "Subagents talk before they report back",
+    "kicker": "OPTIONAL EXTENSION · L3+ · ORCHESTRATION",
+    "subtitle": "The orchestrator asks one specialist. That specialist asks another, and only then answers.",
+    "type": "concept",
+    "layout": "steps",
+    "visual": {
+      "stepKeys": true,
+      "bot": "point",
+      "place": "beside"
     },
     "items": [
       {
-        "label": "L1 · Rules",
-        "caption": "Deterministic routing without an LLM."
+        "label": "Orchestrator",
+        "caption": "The main AI Agent reads WL-1026 and asks the Customer Reply Agent for a draft."
       },
       {
-        "label": "L2 · Judgment",
-        "caption": "One AI Agent drafts priority; a human reviews."
+        "label": "Customer Reply Agent",
+        "caption": "Before writing, it calls the Risk Agent, which is wired as its own tool."
       },
       {
-        "label": "L3 · Specialists",
-        "caption": "Reply and Risk share one human gate."
+        "label": "Risk Agent",
+        "caption": "Returns a risk note to the Reply Agent: double charge, complaint risk, escalate today."
       },
       {
-        "label": "Proof",
-        "caption": "Export or screenshot plus routing rules on /workshop/3."
+        "label": "Customer Reply Agent",
+        "caption": "Writes a reply that matches the risk note, so it promises nothing the risk does not support."
+      },
+      {
+        "label": "Orchestrator",
+        "caption": "Gets one answer back, sets the priority, and stops at the human gate."
       }
     ],
-    "notes": "Close. Recap L1 rules · L2 judgment · L3 specialists. Outline ≠ Linear Done. Linear Done = live /workshop/3 + Proof AC (export/screenshot + routing rules). Rhythm held: uitleg → voordoen → zelf doen."
+    "tagline": "Compare this with chaining a task and a check. Inspect the actual nested call.",
+    "keyPoints": [
+      "One question in, one answer out",
+      "The specialists talk in between",
+      "Wiring decides who may ask whom",
+      "The orchestrator never sees the risk call",
+      "The human gate stays at the end"
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. This is multi-agent orchestration. In flat L3 the orchestrator calls every specialist itself. Here the Customer Reply Agent has the Risk Agent as its own tool, so the specialists consult each other before anything goes back to the orchestrator. Walk the five steps with the arrow key. Then open the Executions view of the demo workflow: the Risk Agent's call appears inside the Reply Agent's run, not inside the orchestrator's. The point to land: who may talk to whom is decided by the wiring on the canvas, not by the prompt. Be precise about what n8n does: agents call each other as tools, one request and one answer at a time; there is no open chat between them.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-39",
+    "optional": true,
+    "hidden": true
+  },
+  {
+    "lessonId": "workshop-3",
+    "title": "Let subagents consult each other",
+    "kicker": "OPTIONAL EXTENSION · L3+ · Your turn · stretch",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "subtitle": "Rewire your L3 so the Reply Agent asks the Risk Agent before it answers the orchestrator.",
+    "repo": {
+      "label": "Extension instructions and source downloads",
+      "url": "assets/workshop-3/participant-guide.html#extensions"
+    },
+    "cards": [
+      {
+        "title": "Wiring",
+        "body": "Risk Agent: Tool output into Customer Reply Agent\nCustomer Reply Agent: Tool output into AI Agent"
+      }
+    ],
+    "steps": [
+      "Open your L3 workflow, or import the download and add your own OpenAI credential to the three Chat Models.",
+      "Drag the Risk Agent's connection from the AI Agent to the Tool input of the Customer Reply Agent.",
+      "In the Reply Agent's System Message, tell it to ask the Risk Agent before it writes, and to end with a line that starts with Risk note:.",
+      "Run WL-1026. Open Executions and find the Risk Agent's call inside the Customer Reply Agent's run.",
+      "Compare with flat L3: what changed in the reply?"
+    ],
+    "expected": "The reply ends with a Risk note line, and the Risk Agent's call appears inside the Customer Reply Agent's run in Executions.",
+    "keyPoints": [
+      "Rewire, do not rebuild",
+      "Wiring decides who may ask whom",
+      "Find the nested call in Executions",
+      "Human gate stays at the end"
+    ],
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Stretch for fast groups. The only structural change from L3 is one connection: the Risk Agent's Tool output moves from the orchestrator to the Customer Reply Agent. The downloadable workflow already has this wiring and updated system messages; participants add their own OpenAI credential. Proof is the nested call in Executions plus the Risk note line in the reply. Never paste an API key into the workflow.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "stateId": "w3-build-zip-40",
+    "optional": true,
+    "hidden": true
+  },
+  {
+    "lessonId": "workshop-3",
+    "title": "Give the agent data: Data Table CRUD",
+    "kicker": "OPTIONAL EXTENSION · Data · Your turn · stretch",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "subtitle": "Store each reviewed ticket in a Data Table, then read it, update it and delete it again.",
+    "cards": [
+      {
+        "title": "Table",
+        "body": "Name: tickets\nColumns: ticket_id, message, priority, status"
+      },
+      {
+        "title": "CRUD",
+        "body": "Create: Insert row\nRead: Get row(s)\nUpdate: Update row(s)\nDelete: Delete row(s)"
+      }
+    ],
+    "steps": [
+      "Record your manual review. Create a separate test workflow and a synthetic tickets table.",
+      "Insert WL-1026 with message, priority and status new. Run the node manually.",
+      "Get the same ticket_id and inspect the returned row.",
+      "Update its status to reviewed. Inspect the row before continuing.",
+      "Delete only WL-1026. Check that the test row is gone."
+    ],
+    "expected": "WL-1026 is inserted with status new, read back, updated to reviewed, and deleted again; each step shows its row in the output.",
+    "keyPoints": [
+      "Create, read, update, delete",
+      "One table, four Data table operations",
+      "Write only after the human gate",
+      "Delete your test rows"
+    ],
+    "notes": "This extension is a separate manual CRUD experiment on synthetic data. The human starts each operation after reviewing the input; no automatic approval node is implied. Show Insert, Get, Update and Delete one at a time. Do not connect the experiment to a live chat trigger. Stop if the target table or ticket_id is uncertain.",
+    "stateId": "w3-build-zip-41",
+    "optional": true,
+    "hidden": true,
+    "repo": {
+      "label": "Extension instructions and source downloads",
+      "url": "assets/workshop-3/participant-guide.html#extensions"
+    }
   }
 ];

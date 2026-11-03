@@ -1073,6 +1073,7 @@ body[data-opener="team"] .card-head{justify-content:center}
 body[data-opener="sdlc-loop"] .slide-body{justify-content:flex-start}
 body[data-opener="sdlc-loop"] .slide-main{display:grid;place-items:center}
 body[data-opener="sdlc-loop"] .sdlc-loop{margin:0;display:grid;place-items:center;width:min(100%,1100px)}
+body[data-opener="sdlc-loop"] .sdlc-loop>a{display:block;width:100%;min-width:0}
 body[data-opener="sdlc-loop"] .sdlc-loop img{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain}
 
 /* compact cards (slides 46 + 48): tighter padding, smaller body text */
