@@ -43,8 +43,7 @@ test('Cloud checkpoints show the result relevant to each assignment', () => {
     'w3-setup': 'cloud-empty.png',
     'w3-rule-limit': 'if-rule-limitation.png',
     'w3-invalid': 'invalid-urgent.png',
-    'w3-review': 'human-review-stop.png',
-    'w3-build-zip-42': 'model-low.png'
+    'w3-review': 'human-review-stop.png'
   };
   for (const [id, file] of Object.entries(expected)) {
     const slide = slides.find(s => s.stateId === id);
@@ -54,7 +53,7 @@ test('Cloud checkpoints show the result relevant to each assignment', () => {
   }
 });
 
-test('W3 core can finish without specialist extensions', () => {
+test('W3 core requires flat and nested subagent communication before completion', () => {
   const slides = load('workshop3-slides.js');
   assert.equal(new Set(slides.map(s => s.stateId)).size, slides.length);
   const core = slides.filter(s => !s.optional);
@@ -62,7 +61,20 @@ test('W3 core can finish without specialist extensions', () => {
   assert.ok(slides.filter(s => s.optional).every(s => s.hidden));
   assert.equal(core.filter(s => s.type === 'pause').length, 3);
   const final = core.find(s => s.title.startsWith('Final build:'));
-  assert.match(final.expected, /One Agent completes the core/);
+  assert.match(final.expected, /one-Agent run alone is incomplete/);
+  assert.equal(final.visual.shot, 'assets/workshop-3/subagent-communication.svg');
+  const flat = core.find(s => s.stateId === 'w3-build-zip-38');
+  const nested = core.find(s => s.stateId === 'w3-build-zip-40');
+  assert.ok(flat && nested);
+  assert.ok(core.indexOf(flat) < core.indexOf(nested));
+  assert.ok(core.indexOf(nested) < core.indexOf(final));
+  assert.equal(flat.repo.url, 'assets/workshop-3/participant-guide.html#flat-check');
+  assert.equal(nested.repo.url, 'assets/workshop-3/participant-guide.html#nested');
+  assert.match(flat.expected, /all three calls/);
+  assert.match(nested.expected, /Missing consultation is rejected/);
+  assert.ok(nested.steps.some(step => step.includes('Disconnect Risk')));
+  assert.ok(nested.steps.some(step => step.includes('Restore the connection')));
+  assert.deepEqual(Array.from(slides.filter(s => s.optional), s => s.stateId), ['w3-build-zip-41']);
   assert.ok(core.find(s => s.stateId === 'w3-invalid'));
   assert.ok(core.find(s => s.stateId === 'w3-review'));
 });
@@ -81,10 +93,22 @@ test('Every W3 exercise has visible instructions and reachable local evidence ai
   }
 });
 
-test('Day 4 bridges the real fields and does not require W3 specialists', () => {
+test('Day 4 translates the required communication without assuming identical runtimes', () => {
   const slides = load('workshop4-slides.js');
-  assert.ok(slides.some(s => s.notes?.includes('No specialist extension is required')));
+  assert.ok(slides.some(s => s.notes?.includes('Day 3 now requires both flat delegation and nested consultation')));
+  assert.ok(slides.some(s => s.notes?.includes('does not establish a runtime connection')));
+  assert.ok(slides.some(s => s.notes?.includes("settingSources: ['user', 'project']")));
   assert.ok(slides.some(s => s.cards?.some(c => c.body.includes('Day 3: priority and message'))));
+});
+
+test('Subagent instructions preserve context, require call evidence and keep failures visible', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  for (const id of ['specialists', 'flat-check', 'nested', 'sdk-handoff']) assert.ok(guide.includes(`id="${id}"`));
+  for (const phrase of ['03-specialists', '04-nested', "$fromAI('task'", "$fromAI('customer_id'", 'Always Output Data', 'coordinator → Reply → Risk → Reply → coordinator', 'STOP — required consultation missing', '03-specialists-shareable.json', '04-nested-shareable.json']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const core = load('workshop3-slides.js').filter(s => !s.optional);
+  assert.doesNotMatch(JSON.stringify(core), /Specialists are optional|Specialist tools are optional|No prerequisite specialist build|The orchestrator never sees the risk call/);
 });
 
 test('Day 3 uses trial model credits and reserves provider keys for the SDK route', () => {
