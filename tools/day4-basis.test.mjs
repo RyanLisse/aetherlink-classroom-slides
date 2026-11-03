@@ -51,12 +51,12 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
   assert.match(presenter,/timers\.js\?v=92/);
   assert.match(presenter,/presenter\.js\?v=96/);
  }
- assert.match(read('workshop4.html'),/workshop4-slides\.js\?v=4/);
- assert.match(read('workshop4-presenter.html'),/workshop4-slides\.js\?v=4/);
+ assert.match(read('workshop4.html'),/workshop4-slides\.js\?v=5/);
+ assert.match(read('workshop4-presenter.html'),/workshop4-slides\.js\?v=5/);
  assert.match(read('day4-maarten-n8n-to-claude.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  assert.match(read('day4-maarten-n8n-to-claude-presenter.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  const ryan=deck('workshop4-slides.js');
- assert.equal(ryan.length,24);
+ assert.equal(ryan.length,28);
  assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').sourceSlides,28);
  assert.ok(ryan.every(s=>s.layout!=='compare'));
  assert.ok(ryan.filter(s=>s.type==='concept').every(s=>(s.keyPoints?.length||0)<=3));
