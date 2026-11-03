@@ -126,9 +126,9 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Keep the exercise on local n8n or the workshop instance and show evidence for model runs.",
+    "subtitle": "Use n8n Cloud trial credits and show evidence for model runs.",
     "keyPoints": [
-      "Use local n8n or the workshop instance.",
+      "Use the approved Cloud trial. Do not add a provider API key.",
       "Never show secrets.",
       "An import alone is not model-run proof."
     ],
@@ -150,18 +150,18 @@ window.SLIDES = [
     "stateId": "w3-build-zip-13"
   },
   {
-    "title": "Open your own n8n workspace",
-    "subtitle": "Use local n8n or an approved training instance.",
+    "title": "Create your n8n Cloud trial account",
+    "subtitle": "Every participant creates their own n8n Cloud trial account before building.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
-      "Open the setup guide. Check the n8n version and workshop account.",
+      "At n8n.io, choose Get started. Create your own account and complete any email verification.",
+      "Open your own workspace. Confirm the Cloud trial is active with free model credits, and note its expiry before class.",
       "Create a workflow named W3 support triage. Do not connect production tools.",
-      "Find the canvas, node settings and Executions.",
-      "Save the empty workflow. Keep credentials off screen."
+      "Find the canvas, node settings and Executions, then save the empty workflow. Keep account details off screen."
     ],
-    "expected": "Your own workflow is open and saved; no production connection exists.",
+    "expected": "Your own account and workspace are open; the active trial has free model credits and an expiry noted; W3 support triage is saved with no production connection.",
     "timer": 10,
     "repo": {
       "label": "Participant steps, checks and stop conditions",
@@ -170,9 +170,12 @@ window.SLIDES = [
     "stateId": "w3-setup",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/cloud-empty.png",
+      "shotLabel": "Cloud reference · saved empty workflow",
+      "shotAlt": "Cloud reference · saved empty workflow"
     },
-    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Your own workflow is open and saved; no production connection exists. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+    "notes": "Every participant creates their own n8n Cloud trial account before building; do not use a shared participant login. Start at n8n.io and choose Get started. Use the approved training email, complete any email verification prompt, create your own workspace if requested, and wait for the editor. Confirm the trial is active and free model credits are available; note the expiry before class. Gateway credits pay for workflow model calls; Assistant credits do not. Older instances may show free OpenAI API credits. Self-hosted n8n is only an optional rules exercise, not the free-credit route. Stop if verification is blocked, a paid plan or payment details are required, or trial credits are unavailable; do not enter payment details, buy credits, upgrade, or substitute a provider key. Participants save their own empty workflow. Explain, demonstrate, practise, inspect the saved result, then discuss. Solo participants write the explanation."
   },
   {
     "title": "A tour of n8n",
@@ -285,7 +288,10 @@ window.SLIDES = [
     "stateId": "w3-rule-limit",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/if-rule-limitation.png",
+      "shotLabel": "Cloud reference · literal rule misses the meaning",
+      "shotAlt": "Cloud reference · literal rule misses the meaning"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: You can show a rule that works as written but misses a relevant ticket. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -381,8 +387,9 @@ window.SLIDES = [
     "visual": {
       "bot": "point",
       "place": "beside",
-      "shot": "assets/day3-lesplan/step-01.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/manual-switch-medium.png",
+      "shotLabel": "Cloud reference · supplied medium → Output 1",
+      "shotAlt": "Cloud reference · supplied medium → Output 1"
     },
     "cards": [
       {
@@ -397,7 +404,7 @@ window.SLIDES = [
       "Point to each selected output and explain why it was chosen."
     ],
     "expected": "Three supplied values reach their matching outputs; urgent reaches the fallback. No model has classified anything.",
-    "subtitle": "Run or inspect the deterministic L1 flow and hold the human gate before L2.",
+    "subtitle": "Keep the IF example. Use a separate Switch for low, medium and high.",
     "keyPoints": [
       "Run the L1 flow.",
       "Match the expected label.",
@@ -512,17 +519,18 @@ window.SLIDES = [
   },
   {
     "title": "Connect chat to one AI Agent",
-    "subtitle": "A chat model call is separate from a Claude Code login.",
+    "subtitle": "Use n8n trial credits. No personal provider API key today.",
     "type": "practice",
     "layout": "exercise",
     "kicker": "DAY 3 · YOUR TURN",
     "steps": [
-      "Save 01-rules. Create a separate workflow named 02-chat.",
-      "Add When chat message received → AI Agent → an approved Chat Model.",
-      "Select your credential in the model node. Never paste the key into a prompt.",
+      "Save 01-switch. Create a separate workflow named 02-chat.",
+      "Search chat → Chat → On new Chat event (canvas: When chat message received). Connect AI Agent and OpenAI Chat Model.",
+      "Confirm the Agent prompt uses the chat input. Do not add memory yet.",
+      "Select Use Gateway credits, or the legacy free OpenAI credits option. Check the balance.",
       "Send a fictional ticket and inspect the Agent output. No memory yet."
     ],
-    "expected": "One real model run is visible, or model access is explicitly recorded as blocked.",
+    "expected": "One model run using trial credits is visible, or trial access is recorded as blocked. Do not substitute an API key.",
     "timer": 10,
     "repo": {
       "label": "Participant steps, checks and stop conditions",
@@ -530,10 +538,11 @@ window.SLIDES = [
     },
     "stateId": "w3-chat",
     "visual": {
-      "shot": "assets/day3-lesplan/step-02.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/gateway-model.png",
+      "shotLabel": "Cloud reference · Gateway credits, not a provider key",
+      "shotAlt": "Cloud reference · Gateway credits, not a provider key"
     },
-    "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: One real model run is visible, or model access is explicitly recorded as blocked. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
+    "notes": "Demonstrate OpenAI Chat Model with Use Gateway credits, or the legacy free OpenAI credits option offered by the trial. Do not create a personal API credential. Confirm the remaining balance and record the selected model. Participants build the nodes themselves and inspect a real execution. Stop if model credits are unavailable; do not pay or substitute an API key. Discuss how model access differs from Claude Code login. An Anthropic API key is used only on the later Claude SDK route. Follow the linked guide for the exact steps."
   },
   {
     "title": "Give the Agent memory",
@@ -542,8 +551,9 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "visual": {
-      "shot": "assets/day3-lesplan/step-03.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/memory-same-session.png",
+      "shotLabel": "Cloud reference · same-session recall; test a new session too",
+      "shotAlt": "Cloud reference · same-session recall; test a new session too"
     },
     "steps": [
       "Without memory, send the two favourite-colour prompts from the guide.",
@@ -626,12 +636,13 @@ window.SLIDES = [
   {
     "title": "Shape the parser output",
     "kicker": "STEP 6 · PARSER FIELDS",
-    "subtitle": "Start with the fields visible in the example, then extend only when the workflow needs more.",
+    "subtitle": "Define a strict JSON Schema. The parser checks fields, not whether the draft is true.",
     "type": "concept",
     "visual": {
       "opener": "showcase",
-      "image": "assets/day3-lesplan/step-06.jpg",
-      "imageLink": "Reference screenshot · compare with your own run"
+      "image": "assets/workshop-3/cloud/parser-schema.png",
+      "imageLink": "Cloud reference · strict schema, not generated from an example",
+      "imageAlt": "Actual Cloud parser schema with low, medium and high enum values"
     },
     "cards": [
       {
@@ -645,7 +656,7 @@ window.SLIDES = [
       "Test more than one ticket",
       "Treat extra fields as an explicit extension"
     ],
-    "notes": "Use the screenshot to explain the parser settings and JSON Schema structure. The visible example uses priority and message. Do not copy unrelated promises from the prompt example. If participants add fields later, make that an explicit extension and update every downstream reference.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Use the actual Cloud screenshot to explain the manually defined JSON Schema. The enum restricts priority to low, medium and high. A valid shape does not prove that the draft is factual. If participants add fields later, make that an explicit extension and update every downstream reference.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
     "stateId": "w3-build-zip-30"
   },
   {
@@ -668,8 +679,9 @@ window.SLIDES = [
     },
     "stateId": "w3-parser",
     "visual": {
-      "shot": "assets/day3-lesplan/step-06.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/model-low.png",
+      "shotLabel": "Cloud reference · model chooses low; Switch routes the draft",
+      "shotAlt": "Cloud reference · model chooses low; Switch routes the draft"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Each valid output reaches its matching branch; invalid output stops or reaches review. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -694,7 +706,10 @@ window.SLIDES = [
     "stateId": "w3-invalid",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/invalid-urgent.png",
+      "shotLabel": "Cloud reference · urgent reaches fallback, not a priority branch",
+      "shotAlt": "Cloud reference · urgent reaches fallback, not a priority branch"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: Invalid and missing priorities do not enter a valid branch. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -708,8 +723,9 @@ window.SLIDES = [
     "visual": {
       "bot": "point",
       "place": "beside",
-      "shot": "assets/day3-lesplan/step-05.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/core-no-actions.png",
+      "shotLabel": "Cloud reference · draft output is not approval",
+      "shotAlt": "Cloud reference · draft output is not approval"
     },
     "cards": [
       {
@@ -786,7 +802,10 @@ window.SLIDES = [
     "stateId": "w3-review",
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/human-review-stop.png",
+      "shotLabel": "Cloud reference · failed draft, human STOP/revise",
+      "shotAlt": "Cloud reference · failed draft, human STOP/revise"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: You have one reviewed draft and one stop decision, with no external action. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -847,8 +866,9 @@ window.SLIDES = [
     },
     "stateId": "w3-lookup",
     "visual": {
-      "shot": "assets/day3-lesplan/step-10.jpg",
-      "shotLabel": "Reference screenshot · not your execution evidence"
+      "shot": "assets/workshop-3/cloud/customer-known.png",
+      "shotLabel": "Cloud reference · synthetic customer found; test missing ID too",
+      "shotAlt": "Cloud reference · synthetic customer found; test missing ID too"
     },
     "notes": "Explain why this step is needed. Demonstrate one change, then let participants repeat it. Check: A known ID returns its row; an unknown ID produces a recorded data gap. Discuss one observed result. Stop if the starting state is missing. Use the linked guide for recovery and solo instructions.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing."
   },
@@ -861,7 +881,10 @@ window.SLIDES = [
     "timer": 20,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/model-low.png",
+      "shotLabel": "Cloud reference · one-Agent core, draft only",
+      "shotAlt": "Cloud reference · one-Agent core, draft only"
     },
     "steps": [
       "Open 02-chat. Run the Agent, parser and Switch with the fixture tickets.",
@@ -893,7 +916,10 @@ window.SLIDES = [
     "timer": 10,
     "visual": {
       "bot": "point",
-      "place": "beside"
+      "place": "beside",
+      "shot": "assets/workshop-3/cloud/share-import.png",
+      "shotLabel": "Cloud reference · separate unpublished sharing import",
+      "shotAlt": "Cloud reference · separate unpublished sharing import"
     },
     "cards": [
       {
@@ -902,19 +928,19 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Capture a screenshot or export.",
+      "Capture execution screenshots and prepare a safe export copy using the guide.",
       "Write the L/M/H rules in one paragraph.",
       "Name the human gate.",
       "Record the level reached."
     ],
-    "expected": "The Proof pack includes an export or screenshot, routing rules, a named human gate, and the level reached.",
-    "subtitle": "Capture what ran and leave the routing rules and human gate in a checkable Proof pack.",
+    "expected": "The Proof pack includes a checked sharing copy, execution screenshots, routing rules, a human decision, and the level reached.",
+    "subtitle": "Keep the raw export private. Share only the checked copy and synthetic evidence.",
     "keyPoints": [
       "Capture the flow.",
       "Explain the L/M/H rules.",
       "Name the gate and level."
     ],
-    "notes": "Your turn — Proof pack on your machine before you leave. Timer: 10 min. Checklist: (1) screenshot/export (2) L/M/H rules in one paragraph (3) human gate named (4) level reached.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Follow the guide's Prepare a sharing copy steps. Save and export the participant workflow, keep the raw file private, then remove credential references, instance metadata and personal data from a separate copy. Validate JSON locally and inspect a separate inactive import without executing it. Never remove credentials from the live workflow. Check screenshots for account details. Record the trial-credit option, selected model, routing rules, human decision and level reached. Valid JSON is not proof that sensitive data is absent. Explain, demonstrate, practise, check and discuss. Solo participants label their own review as self-review.",
     "repo": {
       "label": "Evidence checklist",
       "url": "assets/workshop-3/participant-guide.html#finish"
@@ -1264,7 +1290,7 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Open your L3 workflow, or import the download and add your own OpenAI credential to the three Chat Models.",
+      "Open your L3 workflow, or import the download. Select trial credits on each Chat Model.",
       "Drag the Risk Agent's connection from the AI Agent to the Tool input of the Customer Reply Agent.",
       "In the Reply Agent's System Message, tell it to ask the Risk Agent before it writes, and to end with a line that starts with Risk note:.",
       "Run WL-1026. Open Executions and find the Risk Agent's call inside the Customer Reply Agent's run.",
@@ -1277,7 +1303,7 @@ window.SLIDES = [
       "Find the nested call in Executions",
       "Human gate stays at the end"
     ],
-    "notes": "Optional after the one-Agent core passes. Not required for solo completion. Stretch for fast groups. The only structural change from L3 is one connection: the Risk Agent's Tool output moves from the orchestrator to the Customer Reply Agent. The downloadable workflow already has this wiring and updated system messages; participants add their own OpenAI credential. Proof is the nested call in Executions plus the Risk note line in the reply. Never paste an API key into the workflow.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Optional after the one-Agent core passes. Not required for solo completion. The Risk Agent's Tool output moves from the orchestrator to Customer Reply Agent. The reference workflow already has this wiring. Select the trial-credit option on each Chat Model before use. Skip the extension if credits are low or unavailable; do not add a provider key or buy credits. Proof is the nested call in Executions plus the Risk note in the reply. A reference import does not prove that participants built it. Explain, demonstrate, practise, inspect the actual call and discuss. Solo participants write the explanation.",
     "stateId": "w3-build-zip-40",
     "optional": true,
     "hidden": true

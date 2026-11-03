@@ -32,6 +32,11 @@ base document and was applied when `slides.js` was authored:
 Use [the teaching structure](TEACHING-STRUCTURE.md) for new and revised lessons.
 The [Day 3 participant guide](assets/workshop-3/participant-guide.html) provides
 the build steps, test cases, safe stopping points and Day 4 handoff.
+Day 3 uses n8n Cloud trial model credits, not personal provider API keys.
+Every participant must first create their own n8n Cloud trial account before
+building; do not use a shared participant login.
+The local n8n package is optional for deterministic rules practice only.
+The Claude SDK route introduces the Anthropic API key on Day 4.
 The legacy Day 3 introduction remains a separate session; the complete revised
 route is `workshop3.html`.
 

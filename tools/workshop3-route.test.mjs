@@ -10,6 +10,50 @@ const load = name => {
   return context.window.SLIDES;
 };
 
+test('Break timers render with or without a card grid', () => {
+  const source = read('app.js');
+  const extras = source.slice(source.indexOf('function renderExtras('), source.indexOf('\nconst REACT ='));
+  for (const slide of load('workshop3-slides.js').filter(s => s.type === 'pause')) {
+    for (const withCards of [false, true]) {
+      const timer = {children: [], append(...items) { this.children.push(...items); }};
+      const grid = {replaceWith(item) { children.splice(children.indexOf(grid), 1, item); }};
+      const children = withCards ? [grid] : [];
+      const main = {querySelectorAll: () => [], querySelector: () => withCards ? grid : null, append: item => children.push(item)};
+      let options;
+      const context = {
+        current: 0,
+        slideController: {signal: new AbortController().signal},
+        node: (tag, cls, text) => ({tag, cls, text}),
+        ALSTimer: {key: (index, title, stateId) => stateId, mount: value => { options = value; return timer; }}
+      };
+      vm.runInNewContext(extras, context);
+      const data = withCards ? {...slide, cards: [{body: 'Resume the lab.'}]} : slide;
+      context.renderExtras({}, main, data, data.visual);
+      assert.deepEqual(children, [timer]);
+      assert.equal(options.key, slide.stateId);
+      assert.equal(options.defaultSec, slide.visual.countdown * 60);
+      assert.equal(timer.children.length, withCards ? 1 : 0);
+    }
+  }
+});
+
+test('Cloud checkpoints show the result relevant to each assignment', () => {
+  const slides = load('workshop3-slides.js');
+  const expected = {
+    'w3-setup': 'cloud-empty.png',
+    'w3-rule-limit': 'if-rule-limitation.png',
+    'w3-invalid': 'invalid-urgent.png',
+    'w3-review': 'human-review-stop.png',
+    'w3-build-zip-42': 'model-low.png'
+  };
+  for (const [id, file] of Object.entries(expected)) {
+    const slide = slides.find(s => s.stateId === id);
+    assert.equal(slide.visual.shot, 'assets/workshop-3/cloud/' + file);
+    assert.ok(slide.visual.shotAlt);
+    assert.ok(existsSync(new URL('../' + slide.visual.shot, import.meta.url)));
+  }
+});
+
 test('W3 core can finish without specialist extensions', () => {
   const slides = load('workshop3-slides.js');
   assert.equal(new Set(slides.map(s => s.stateId)).size, slides.length);
@@ -41,6 +85,35 @@ test('Day 4 bridges the real fields and does not require W3 specialists', () => 
   const slides = load('workshop4-slides.js');
   assert.ok(slides.some(s => s.notes?.includes('No specialist extension is required')));
   assert.ok(slides.some(s => s.cards?.some(c => c.body.includes('Day 3: priority and message'))));
+});
+
+test('Day 3 uses trial model credits and reserves provider keys for the SDK route', () => {
+  const slides = load('workshop3-slides.js');
+  const setup = slides.find(s => s.stateId === 'w3-setup');
+  const chat = slides.find(s => s.stateId === 'w3-chat');
+  assert.match(setup.subtitle, /Cloud trial/);
+  assert.ok(setup.steps[0].includes('Create your own'));
+  assert.match(chat.steps[0], /Save 01-switch\. Create a separate workflow named 02-chat\./);
+  assert.ok(chat.steps.some(step => step.includes('Use Gateway credits')));
+  assert.match(chat.expected, /Do not substitute an API key/);
+  assert.doesNotMatch(JSON.stringify(slides), /add your own OpenAI credential|Select your credential in the model node/);
+  const guide = read('assets/workshop-3/participant-guide.html');
+  assert.match(guide, /complete any email verification prompt/i);
+  for (const phrase of ['Assistant credits are different', 'Do not buy credits', 'Gateway credits are not available on self-hosted', 'Only the Claude SDK route uses']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const backend = load('workshop4-slides.js').find(s => s.title === 'Two ways to run the same agent');
+  assert.match(backend.subtitle, /n8n trial credits stay in n8n/);
+});
+
+test('The proof pack explains how to share a separate export without changing the live workflow', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  for (const phrase of ['id="safe-export"', 'Export JSON', '02-chat-shareable.json', 'Do not edit credentials in the live workflow', '02-chat-share-check', 'without executing', 'Valid JSON alone does not prove']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const proof = load('workshop3-slides.js').find(s => s.stateId === 'w3-build-zip-44');
+  assert.match(proof.expected, /checked sharing copy/);
+  assert.equal(proof.repo.url, 'assets/workshop-3/participant-guide.html#finish');
 });
 
 test('Both days explain the same bounded loop without equating text with success', () => {

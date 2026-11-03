@@ -400,7 +400,7 @@ window.SLIDES = [
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "Claude Code is the default. The SDK is the second way.",
+    "subtitle": "n8n trial credits stay in n8n. Choose your Claude access separately.",
     "cards": [
       {
         "title": "claude-code · default",
@@ -418,7 +418,7 @@ window.SLIDES = [
     "keyPoints": [
       "Claude Code is the default. The SDK is the second way."
     ],
-    "notes": "claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. The SDK backend uses query() with ANTHROPIC_API_KEY; sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume.",
+    "notes": "Day 3 uses n8n Cloud trial model credits without a personal provider API key. Those credits do not transfer to Claude. The Anthropic API key is introduced only for the Claude SDK route. claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. The SDK backend uses query() with ANTHROPIC_API_KEY; sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume.",
     "stateId": "13:Two ways to run the same agent"
   },
   {
