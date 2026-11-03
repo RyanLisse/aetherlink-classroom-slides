@@ -1,4 +1,4 @@
-/* Adapted from Ryan’s Day 3 in the supplied jyse archive 3bc44ef. See tools/SESSION-SOURCES.md. */
+/* Locally maintained classroom content. See tools/SESSION-SOURCES.md. */
 window.SLIDES = [
   {
     "title": "Welcome to Day 3!",
@@ -470,48 +470,26 @@ window.SLIDES = [
     "stateId": "w3-build-zip-23"
   },
   {
-    "title": "The agentic loop",
+    "title": "One agent loop. Bounded actions.",
     "kicker": "DAY 3 · BEFORE L2",
-    "subtitle": "A loop, not a line. The agent goes round until the goal is met, or it stops and asks.",
+    "subtitle": "The n8n AI Agent runs this loop inside one node.",
     "type": "concept",
-    "layout": "steps",
     "visual": {
-      "stepKeys": true,
-      "art": "loop",
-      "loopCaptions": true
+      "opener": "showcase",
+      "image": "assets/workshop-3/agent-loop.svg",
+      "imageAlt": "Context, model call, permission check, runtime tool execution, result and next turn. Answers need review; denial, errors and limits can stop the run.",
+      "imageLink": "Concept diagram · trace one real run next"
     },
-    "items": [
-      {
-        "label": "Observe",
-        "caption": "Read the ticket and what memory holds: WL-1026, “I was charged twice”."
-      },
-      {
-        "label": "Decide",
-        "caption": "Choose the next step: is the priority clear, or does it need the Risk Agent or a customer lookup?"
-      },
-      {
-        "label": "Act",
-        "caption": "Call a tool: a specialist agent, a Data Table or another app."
-      },
-      {
-        "label": "Check",
-        "caption": "Read the result. Is the priority clear? Does the output fit the parser's fields?"
-      },
-      {
-        "label": "Repeat or stop",
-        "caption": "Not done: go round again. Done: return the answer and stop at the human gate."
-      }
-    ],
-    "tagline": "In n8n you can watch this loop: every model and tool call appears in the AI Agent's logs in Executions.",
     "keyPoints": [
-      "Same five steps as Day 1",
-      "One ticket, several rounds",
-      "Tools are how it acts",
-      "Check is where the parser helps",
-      "Stop means: hand over to a human"
+      "Model requests; runtime executes.",
+      "Check permission before a tool runs.",
+      "Hooks can inspect defined before/after events.",
+      "Text is not success; check evidence.",
+      "Errors, limits and people can stop the run."
     ],
-    "notes": "Same loop as Day 1, same five words; now follow one ticket round it. Observe: the ticket plus memory. Decide: the model picks the next action, which is the step a Switch cannot do. Act: a tool call, such as a specialist agent or a Data Table lookup. Check: read the result; the Structured Output Parser makes this concrete. Repeat or stop: an agent may go round several times, and when it stops it hands over to the human gate. After L2 runs, open Executions, click the AI Agent node and show its logs: each round of the loop is visible there.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
-    "stateId": "w3-build-zip-24"
+    "notes": "Use WL-1026: the model may request a customer lookup; the runtime checks permission, runs the allowed tool, and adds its result to context. A second model call can use that evidence. Do not claim this lookup exists in the core chat flow: it is an optional tool example. Before any tools exist, show the short path from model to an unapproved draft. Hooks are callbacks at defined runtime events; they are not the model, do not universally intercept every operation, and do not grant human approval. A post-tool hook cannot prevent an action that already ran. A no-tool answer is one normal end path, not proof that acceptance checks passed. A denied action may be returned as an error for safe continuation or may stop the run, depending on policy. Unrecoverable failures, turn/budget limits and cancellation are separate end paths. This diagram shows one agent invocation, not the full AI-SDLC.\nDemonstrate one request and response. Participants identify them in their own trace. Discuss: who executed the code, and which evidence supports the answer?",
+    "stateId": "w3-build-zip-24",
+    "cards": []
   },
   {
     "title": "Add a Chat Message Trigger",

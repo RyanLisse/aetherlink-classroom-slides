@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">One bounded agent loop</title>
+  <desc id="desc">Context enters a model call. A response without a tool call goes to human review, not automatic success. A requested tool passes permission checks before the runtime executes it. Results and post-tool checks update context for the next model call. Denial, failure, limits or a human stop can end the run.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#46cfcb"/></marker>
+    <marker id="stop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffb25e"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#eff7ff}.head{font-size:29px;font-weight:700}.copy{font-size:23px;fill:#b8cbdc}.label{font-size:22px;fill:#6de0dc}.small{font-size:21px;fill:#b8cbdc}.box{fill:#102a40;stroke:#42637f;stroke-width:2}.edge{fill:none;stroke:#46cfcb;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="720" rx="22" fill="#071827"/>
+  <text x="50" y="44" class="small">INSIDE AN AGENT RUNTIME · NOT THE WHOLE DEVELOPMENT LIFECYCLE</text>
+
+  <rect class="box" x="50" y="85" width="310" height="130" rx="15"/>
+  <text x="76" y="129" class="head">Context</text>
+  <text x="76" y="167" class="copy">Instructions, messages,</text>
+  <text x="76" y="198" class="copy">tool results and settings</text>
+
+  <rect class="box" x="530" y="85" width="310" height="130" rx="15"/>
+  <text x="556" y="129" class="head">Model call</text>
+  <text x="556" y="167" class="copy">Propose a tool call</text>
+  <text x="556" y="198" class="copy">or return an answer</text>
+
+  <rect x="1110" y="85" width="440" height="130" rx="15" fill="#15382e" stroke="#50b594" stroke-width="2"/>
+  <text x="1136" y="129" class="head">Answer to review</text>
+  <text x="1136" y="167" class="copy">Check evidence and acceptance.</text>
+  <text x="1136" y="198" class="copy">Text is not proof of success.</text>
+
+  <path class="edge" d="M360 150 H520"/>
+  <text x="393" y="132" class="label">request</text>
+  <path class="edge" d="M840 150 H1100"/>
+  <text x="884" y="132" class="label">no tool call</text>
+
+  <rect class="box" x="50" y="330" width="310" height="130" rx="15"/>
+  <text x="76" y="374" class="head">Update context</text>
+  <text x="76" y="412" class="copy">Append the result.</text>
+  <text x="76" y="443" class="copy">Keep the evidence.</text>
+
+  <rect x="530" y="330" width="310" height="130" rx="15" fill="#332b25" stroke="#ffb25e" stroke-width="2"/>
+  <text x="556" y="374" class="head">Check permission</text>
+  <text x="556" y="412" class="copy">Before tool execution:</text>
+  <text x="556" y="443" class="copy">allow, ask or deny</text>
+
+  <rect class="box" x="1110" y="330" width="440" height="130" rx="15"/>
+  <text x="1136" y="374" class="head">Runtime executes tool</text>
+  <text x="1136" y="412" class="copy">Only with required permission.</text>
+  <text x="1136" y="443" class="copy">The model does not run the code.</text>
+
+  <path class="edge" d="M685 215 V320"/>
+  <text x="704" y="277" class="label">tool request</text>
+  <path class="edge" d="M840 395 H1100"/>
+  <text x="873" y="377" class="label">allowed</text>
+  <path class="edge" d="M205 330 V225"/>
+  <text x="225" y="277" class="label">next turn</text>
+
+  <path class="edge" d="M1330 460 V565 H205 V470"/>
+  <rect x="451" y="531" width="600" height="58" rx="10" fill="#071827"/>
+  <text x="751" y="554" text-anchor="middle" class="label">Tool result + post-tool checks / logging</text>
+  <text x="751" y="581" text-anchor="middle" class="small">An error is evidence too, not a successful action.</text>
+
+  <path d="M685 460 V493 H408 V630" fill="none" stroke="#ffb25e" stroke-width="2" marker-end="url(#stop-arrow)"/>
+  <rect x="50" y="638" width="1500" height="57" rx="12" fill="#332b25"/>
+  <text x="76" y="674" font-size="24" fill="#ffd9b1">Stop paths: denied action · unrecoverable error · turn or budget limit · human cancellation</text>
+</svg>

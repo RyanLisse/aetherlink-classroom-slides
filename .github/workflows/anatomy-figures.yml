@@ -110,7 +110,7 @@ jobs:
             }
             await page.goto('http://127.0.0.1:8765/workshop4.html#1');
             const anatomySlides=await page.evaluate(()=>window.SLIDES.flatMap((s,i)=>s.visual?.anatomy?[i+1]:[]));
-            assert.equal(anatomySlides.length,2);
+            assert.equal(anatomySlides.length,1);
             for(const slide of anatomySlides){
               await page.goto(`http://127.0.0.1:8765/workshop4.html#${slide}`);
               const iframe=page.locator('.anatomy-figure iframe');

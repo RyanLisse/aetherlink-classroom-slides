@@ -34,11 +34,11 @@ test('Workshop 5 retains the diagrams used by the assignment and selected refere
  }
  assert.ok(read('workshop5.html').includes('workshop5-diagrams.js'));
 });
-test('Workshop 4 wires its two Anatomy figures',()=>{
+test('Workshop 4 retains its interactive permissions figure',()=>{
  const ctx={window:{}};vm.runInNewContext(read('workshop4-slides.js'),ctx);
  const figures=ctx.window.SLIDES.filter(s=>s.visual?.anatomy);
- assert.equal(figures.length,2);
- for(const id of ['agent-loop','permissions']){
+ assert.equal(figures.length,1);
+ for(const id of ['permissions']){
   const slide=figures.find(s=>s.visual.anatomy.src===`assets/anatomy/${id}.html`);
   assert.ok(slide,`Missing ${id} figure`);
   const a=slide.visual.anatomy;

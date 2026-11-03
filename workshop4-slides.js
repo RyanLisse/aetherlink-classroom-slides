@@ -1,4 +1,4 @@
-/* Locally maintained workshop deck. Import provenance: tools/SESSION-SOURCES.md. */
+/* Locally maintained classroom content. See tools/SESSION-SOURCES.md. */
 window.SLIDES = [
   {
     "lessonId": "workshop-4",
@@ -357,25 +357,25 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Agent and agent loop",
+    "title": "One agent loop. Bounded actions.",
     "kicker": "Concept · Agent",
     "type": "concept",
     "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/agent-loop.html",
-        "poster": "assets/anatomy/agent-loop.svg",
-        "title": "Agent loop",
-        "caption": "One model turn per lap. A tool call goes out and comes back. At maxTurns the loop stops."
-      }
+      "opener": "showcase",
+      "image": "assets/workshop-3/agent-loop.svg",
+      "imageAlt": "Context, model call, permission check, runtime tool execution, result and next turn. Answers need review; denial, errors and limits can stop the run.",
+      "imageLink": "Concept diagram · trace one real run next"
     },
-    "subtitle": "The AI Agent node becomes a loop: think, call a tool, read, repeat.",
+    "subtitle": "The SDK runtime runs the loop. Your code sets tools, limits and controls.",
     "cards": [],
     "keyPoints": [
-      "The AI Agent node becomes a loop in code: think, tool, observe, repeat, answer.",
-      "query({ prompt, options }) runs the loop.",
-      "maxTurns stops the loop, like Max Iterations."
+      "Model requests; runtime executes.",
+      "Check permission before a tool runs.",
+      "Hooks can inspect defined before/after events.",
+      "Text is not success; check evidence.",
+      "Errors, limits and people can stop the run."
     ],
-    "notes": "The loop is prompt → model turn → tool calls → tool results → next turn → result message. The runner prints [system:init], [assistant], [tool_use], [tool_result], and [result]. The result subtype is printed with turn count, duration, and cost; structured_output is printed before the deterministic Switch route. maxTurns limits the model turns; it maps to n8n Max Iterations. docs/sample-trace.md is illustrative, not model evidence. Detail: for await (… of query({ prompt, options })) · prompt → model turn → tool_use → tool_result → next turn → result message · Events: [system:init] · [assistant] · [tool_use] · [tool_result] · [result] · result prints its subtype, turns, time, and cost; structured output shows parsed JSON · maxTurns limits model turns; n8n Options → Max Iterations"
+    "notes": "Use WL-1026: the model may request a customer lookup; the runtime checks permission, runs the allowed tool, and adds its result to context. A second model call can use that evidence. Do not claim this lookup exists in the core chat flow: it is an optional tool example. Before any tools exist, show the short path from model to an unapproved draft. Hooks are callbacks at defined runtime events; they are not the model, do not universally intercept every operation, and do not grant human approval. A post-tool hook cannot prevent an action that already ran. A no-tool answer is one normal end path, not proof that acceptance checks passed. A denied action may be returned as an error for safe continuation or may stop the run, depending on policy. Unrecoverable failures, turn/budget limits and cancellation are separate end paths. This diagram shows one agent invocation, not the full AI-SDLC.\nDemonstrate one request and response. Participants identify them in their own trace. Discuss: who executed the code, and which evidence supports the answer? In the SDK inspect query(), tool_use/tool_result, the result subtype and maxTurns. n8n Max Iterations and SDK maxTurns are related limits, not identical counters. Not every n8n node has Claude SDK hook APIs."
   },
   {
     "lessonId": "workshop-4",
