@@ -8,16 +8,16 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
-test('Workshop keeps 60 slides and seven usable Anatomy figures',()=>{
- assert.equal(context.window.SLIDES.length,60);
- const mapping=[[8,'bottleneck',''],[10,'loop',''],[30,'mcp',''],[35,'hooks',''],[39,'subagents',''],[43,'eval',''],[44,'eval','?preset=rejected']];
- for(const[number,id,query]of mapping){
-  const slide=context.window.SLIDES[number-1],a=slide.visual.anatomy;
-  assert.equal(a.src,`assets/anatomy/${id}.html${query}`);
-  assert.equal(a.poster,`assets/anatomy/${id}${number===44?'-rejected':''}.svg`);
-  for(const target of [a.src.split('?')[0],a.poster])assert.ok(existsSync(path.join(root,target)),target);
-  assert.ok(a.title&&a.caption&&slide.notes&&slide.keyPoints.length,`Slide ${number} retains teaching content`);
+test('Day 5 keeps 58 slides without Anatomy figures, and the former figure slides keep their content',()=>{
+ const slides=context.window.SLIDES;
+ assert.equal(slides.length,58);
+ assert.equal(slides.filter(slide=>slide.visual?.anatomy).map(slide=>slide.title).join(', '),'');
+ for(const title of ['MCP','Allow · ask · deny','subagents','eval','Watch: PASS and REJECTED']){
+  const slide=slides.find(item=>item.title===title);
+  assert.ok(slide,title);
+  assert.ok((slide.cards?.length||slide.columns?.length)&&slide.notes&&slide.keyPoints.length,`${title} retains teaching content`);
  }
+ for(const id of ['bottleneck','loop','mcp','hooks','subagents','eval'])assert.ok(existsSync(path.join(root,`assets/anatomy/${id}.html`)),id);
 });
 test('Presenter uses posters before the legacy bot renderer',()=>{
  const app=read('app.js');

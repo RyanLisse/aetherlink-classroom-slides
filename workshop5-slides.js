@@ -20,7 +20,7 @@ window.SLIDES = [
       "Welcome the room.",
       "Check the setup."
     ],
-    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n3. If a person has no setup: do not fix it now. Help them at slide 17 and in the 11:00 break."
+    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node and Claude Code from INSTALL.md?\n3. If a person has no setup: do not fix it now. Help them at Assignment 1: Setup check and in the 11:00 break."
   },
   {
     "title": "Goal of the day",
@@ -201,27 +201,6 @@ window.SLIDES = [
     "notes": "Time: 10:30 · 2 min.\n1. Read the quote from playbook p.3 aloud.\n2. Ask: “Where did your last feature wait longest: on code, or on review, test, and approval?”\n3. Say: “The answer is almost never code. That is the gap.”"
   },
   {
-    "title": "Code is not the bottleneck",
-    "subtitle": "Build gets faster. Decisions and checks still take time.",
-    "cards": [],
-    "kicker": "W5 · WHY AI-NATIVE · FIG. 1",
-    "type": "concept",
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/bottleneck.html",
-        "poster": "assets/anatomy/bottleneck.svg",
-        "title": "Delivery bottleneck",
-        "caption": "Build gets faster. Decisions and checks still take time."
-      }
-    },
-    "keyPoints": [
-      "Waiting time shifts to Plan, Test, and Deploy.",
-      "Manual line-by-line review does not scale with more code.",
-      "Exceptions and approvals still create waiting time. Review and approval must keep pace."
-    ],
-    "notes": "Time: 10:32 · 2 min.\n1. Show the top row. Say: “Before agents, Build takes a large part of the cycle.”\n2. Show the bottom row. Say: “Agents make Build faster. Plan, Test, and Deploy still need decisions and checks.”\n3. Say: “Manual line-by-line review does not scale when agents produce more code.”\n4. Say: “Exceptions and approvals still cause waiting time. Review and approval must keep pace.”\n5. Point to the note. Say: “This is illustrative, not a time guarantee.”"
-  },
-  {
     "title": "AI-native SDLC",
     "kicker": "W5 · DEFINITION",
     "subtitle": "Old control objectives. New enforcement.",
@@ -262,27 +241,6 @@ window.SLIDES = [
       "Humans stay accountable."
     ],
     "notes": "Time: 10:34 · 2 min.\n1. Read the definition from playbook p.5 aloud, word for word.\n2. Say: “Four-eyes review, test evidence, and separation of duties stay.”\n3. Say: “The enforcement is new: hooks, evals, and a gate.”\n4. Say: “Humans stay accountable” (p.7)."
-  },
-  {
-    "title": "The AI-native loop",
-    "kicker": "W5 · WHY AI-NATIVE · THE LOOP",
-    "subtitle": "One loop. Six stages. Human control.",
-    "type": "concept",
-    "cards": [],
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/loop.html",
-        "poster": "assets/anatomy/loop.svg",
-        "title": "The AI-native loop",
-        "caption": "The agent supports six stages. Humans set goals, direct, and approve."
-      }
-    },
-    "keyPoints": [
-      "The six stages form one continuous loop.",
-      "The AI agent supports every stage.",
-      "Humans set goals, direct, and approve."
-    ],
-    "notes": "Time: 10:36 · 1 min.\n1. Trace the six stages clockwise, from Plan to Maintain.\n2. Say: “The agent supports every stage. The work returns to Plan.”\n3. Point to the top line. Say: “Humans set the goals, direct the work, and approve.”"
   },
   {
     "title": "The line and the loop",
@@ -942,14 +900,6 @@ window.SLIDES = [
       }
     ],
     "tagline": "No network. No writes.",
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/mcp.html",
-        "poster": "assets/anatomy/mcp.svg",
-        "title": "Read-only MCP",
-        "caption": "Five local tools read incident data. They do not write or use the network."
-      }
-    },
     "keyPoints": [
       "Read-only.",
       "A path outside incidents/ gives a tool error.",
@@ -1122,14 +1072,6 @@ window.SLIDES = [
         ]
       }
     ],
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/hooks.html",
-        "poster": "assets/anatomy/hooks.svg",
-        "title": "Allow, ask, deny",
-        "caption": "The lab hook checks supported tool calls. Named approval requests confirmation; merge stays blocked."
-      }
-    },
     "keyPoints": [
       "Permissions + hook + approvals/ + audit.jsonl.",
       "Merge and approve are human work.",
@@ -1269,14 +1211,6 @@ window.SLIDES = [
       }
     ],
     "tagline": "Delegate the work. Never the acceptance.",
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/subagents.html",
-        "poster": "assets/anatomy/subagents.svg",
-        "title": "Separate verifier context",
-        "caption": "A verifier checks the diagnosis in a separate context. A human accepts the result."
-      }
-    },
     "keyPoints": [
       "Own context.",
       "The verifier only reports.",
@@ -1384,14 +1318,6 @@ window.SLIDES = [
       }
     ],
     "tagline": "Fix the diagnosis, not the eval.",
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/eval.html",
-        "poster": "assets/anatomy/eval.svg",
-        "title": "Diagnosis test bench",
-        "caption": "Check evidence and reasoning against the case. Fix the diagnosis, not the eval."
-      }
-    },
     "keyPoints": [
       "No model needed.",
       "Runs offline in CI.",
@@ -1411,14 +1337,6 @@ window.SLIDES = [
       }
     ],
     "tagline": "The eval tests the reasoning.",
-    "visual": {
-      "anatomy": {
-        "src": "assets/anatomy/eval.html?preset=rejected",
-        "poster": "assets/anatomy/eval-rejected.svg",
-        "title": "Rejected diagnosis",
-        "caption": "Real log IDs are not enough. The diagnosis must pass every case check."
-      }
-    },
     "keyPoints": [
       "npm run eval: 6 of 6 as expected.",
       "The eval tests reasoning, not only evidence.",
