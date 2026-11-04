@@ -399,3 +399,16 @@ yourself before teaching:
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
+
+## Day 4 deck (Claude Agent SDK, revised 4 Nov 2026)
+
+`workshop4.html` loads `workshop4-slides.js` (74 slides) with the shared `app.js`, `styles.css`, `timers.js` and
+`fit-stage.js` (shrinks a tall slide to fit the screen). Presenter view with teach cards: `workshop4-presenter.html`.
+Base: Ryan's 69-slide deck, rewritten in the Day 1-2 style (title = intent, copy-button steps, "Look for" and
+"Done when", a teach card on every slide), with Jessy's teach-card renderer and real-run clips in
+`assets/day4-teach/`, and Maarten's message-6 quiz. Own diagrams: `assets/workshop-4/*.svg` (Nunito embedded).
+Participants clone the public package `https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent`; the
+assignment lives in its `SOLO.md` on branch `step-4` ("Assignment · Extend the MCP"). All data in the package is
+fictional. Checks: `node --test tools/day4-basis.test.mjs` (the manifest digest in
+`tools/session-source-manifest.json` must be updated after every slide edit). This repo
+(`AetherLink-bv/aetherlink-classroom-slides`) is the single source for the classroom decks.
