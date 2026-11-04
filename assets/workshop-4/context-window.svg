@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" role="img" aria-labelledby="title desc">
+<title id="title">Context is what this request contains</title><desc id="desc">Instructions, loaded content and conversation share a limited context window. Unread repository files and customer records remain outside until retrieved. Space is needed for the response.</desc>
+<defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#eff7ff;font-size:28px}.head{font-size:34px;font-weight:700}.label{fill:#6de0dc}.muted{fill:#b8cbdc}.box{fill:#102a40;stroke:#42637f;stroke-width:2}.warm{fill:#15382e;stroke:#50b594;stroke-width:2}.new{fill:#332b25;stroke:#ffb25e;stroke-width:2}</style><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#46cfcb"/></marker></defs>
+<rect width="1400" height="640" rx="22" fill="#071827"/>
+
+<text x="48" y="55" class="label">1 · CONTEXT WINDOW</text>
+<rect class="box" x="48" y="90" width="800" height="440" rx="18"/>
+<text x="80" y="137" class="head">Available to this model call</text>
+<rect class="warm" x="80" y="167" width="736" height="66" rx="10"/><text x="106" y="210">Instructions and available tool definitions</text>
+<rect class="box" x="80" y="249" width="736" height="66" rx="10"/><text x="106" y="292">Files and tool results already loaded</text>
+<rect class="box" x="80" y="331" width="736" height="66" rx="10"/><text x="106" y="374">Messages, answers and the current task</text>
+<rect x="80" y="413" width="736" height="83" rx="10" fill="none" stroke="#b8cbdc" stroke-dasharray="9 7"/><text x="106" y="462" class="muted">Leave room for the response</text>
+<text x="950" y="132" class="head">Not loaded yet</text>
+<rect class="box" x="950" y="167" width="400" height="115" rx="12"/><text x="978" y="213">Other repository files</text><text x="978" y="252" class="muted">Exist on disk, not in context</text>
+<rect class="box" x="950" y="315" width="400" height="115" rx="12"/><text x="978" y="361">Customer records</text><text x="978" y="400" class="muted">Stay in the data source</text>
+<path d="M950 290 H860" stroke="#46cfcb" stroke-width="3" marker-end="url(#arrow)"/><text x="960" y="482" class="label">Read or retrieve to include</text>
+<text x="48" y="588" class="head">Inspect with /context. A session is not unlimited memory.</text>
+</svg>
