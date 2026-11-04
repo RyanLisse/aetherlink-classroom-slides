@@ -516,7 +516,11 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Test it",
-        "body": "One command, npm run check, marks your answers against the answer key. Same result on every laptop."
+        "body": "You write down low, medium or high for each customer message. npm run check marks them against a hidden answer key: correct or revise."
+      },
+      {
+        "title": "Where does “npm run check” come from?",
+        "body": "npm comes with Node.js: it is the remote control of a code project.\nThe workshop package has buttons built in: check, doctor, verify.\nnpm run check presses the button called check."
       },
       {
         "title": "Limit it",
@@ -528,11 +532,12 @@ window.SLIDES = [
       }
     ],
     "keyPoints": [
-      "Test: one command marks everything",
-      "Limit: each agent its own key ring",
-      "Control: a barrier the AI cannot skip"
+      "npm = the remote control of a code project",
+      "npm run check = press the 'check' button",
+      "Check: your labels against the answer key",
+      "Limit: key ring · Control: barrier"
     ],
-    "notes": "These are the three problems from the recap on slide 2: hard to test, every agent could do everything, no stop before a change. npm run check compares the labels you wrote down (low, medium, high per message) with a hidden answer key, and says per message: correct or revise. A hook is a piece of code that runs before a change, and can say no.",
+    "notes": "These are the three problems from the recap on slide 2: hard to test, every agent could do everything, no stop before a change. npm run check compares the labels you wrote down (low, medium, high per message) with a hidden answer key, and says per message: correct or revise. A hook is a piece of code that runs before a change, and can say no. npm comes with Node.js; the buttons are listed under 'scripts' in package.json. They only work inside the package folder.",
     "stateId": "10:Why move the flow to code?",
     "teach": {
       "time": "2 min",
@@ -544,6 +549,13 @@ window.SLIDES = [
         {
           "do": "Point at Test it.",
           "say": "One: testing. In code you type one command, npm run check, and it marks all your answers against the answer key. Like a teacher with the answer sheet."
+        },
+        {
+          "do": "Point at the card 'Where does npm run check come from?'.",
+          "say": "What is npm? It comes with Node.js, and it is the remote control of a code project. Someone built buttons into this package: check, doctor, verify. npm run check means: press the button called check."
+        },
+        {
+          "say": "Careful: the buttons only work in the project they were built for. Like a remote control: it only works with its own TV. In another project, check may not exist, or do something else."
         },
         {
           "do": "Point at Limit it.",
@@ -566,9 +578,11 @@ window.SLIDES = [
         "Everyone can name test, limit and control."
       ],
       "watch": [
-        "npm = the tool that runs commands in a JavaScript project. 'npm run check' just means: run the command called check."
+        "Someone types npm run check outside the package folder? Then npm can't find the buttons: first cd into the package folder.",
+        "The answer key is encrypted: nobody can peek, everybody has to think."
       ]
-    }
+    },
+    "tagline": "npm run check = press the button called “check”. The buttons only work in the project they were built for."
   },
   {
     "lessonId": "workshop-4",
