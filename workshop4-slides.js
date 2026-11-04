@@ -49,7 +49,7 @@ window.SLIDES = [
     "kicker": "Day 4 · Recap · 3 rounds",
     "type": "context",
     "visual": {},
-    "subtitle": "Two minutes per round. One answer per table.",
+    "subtitle": "Groups of 3–4 (your table). 2 minutes per round. One person shares your table's answer; you may pass.",
     "timer": 6,
     "cards": [
       {
@@ -178,7 +178,7 @@ window.SLIDES = [
       "image": "assets/day3-maarten-n8n/03-chat-memory.jpeg",
       "imageLink": "n8n · Chat trigger → AI Agent"
     },
-    "subtitle": "Memory works like a conversation at a service desk: with the same customer, you remember what was said. With a new customer, you start afresh.",
+    "subtitle": "Memory works like a conversation at a shop counter: with the same customer, you remember what was said. With a new customer, you start afresh.",
     "cards": [
       {
         "title": "Chat trigger",
@@ -304,7 +304,7 @@ window.SLIDES = [
       "image": "assets/day3-maarten-n8n/11-three-sub-agents.jpeg",
       "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
     },
-    "subtitle": "As in an office, everyone has one job. Today, Reply and Risk become agents in code, and Customer Context becomes a lookup tool (MCP).",
+    "subtitle": "As in an office, everyone has one job. Today, Reply and Risk become agents in code. Customer Context comes back in Step 3, with a lookup desk (MCP).",
     "cards": [
       {
         "title": "Customer Reply Agent",
@@ -316,7 +316,7 @@ window.SLIDES = [
       },
       {
         "title": "Customer Context Agent",
-        "body": "The records desk: looks up the customer in the Data Table."
+        "body": "The record keeper: looks up the customer in the Data Table."
       }
     ],
     "keyPoints": [
@@ -368,7 +368,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "You will have built",
-        "body": "An agent team in code: one agent, two specialists and a lookup tool."
+        "body": "An agent team in code: one agent, a team of specialists and two lookup desks."
       },
       {
         "title": "You can explain",
@@ -384,7 +384,7 @@ window.SLIDES = [
       "Who may do what",
       "A person says yes before a change"
     ],
-    "notes": "Say the goal in one sentence: at 16:00 you will have an agent team that you built yourself, and you can explain it. Come back to this at the close, together with the goals that people wrote down on slide 2.",
+    "notes": "Say the goal in one sentence: at 16:00 you will have an agent team that you built yourself, and you can explain it. Come back to this at the close, together with the goals that people wrote down this morning.",
     "stateId": "9:Goal of today",
     "teach": {
       "time": "1 min",
@@ -424,19 +424,19 @@ window.SLIDES = [
     "cards": [
       {
         "title": "10:00 · Start",
-        "body": "Welcome and recap\nFrom n8n to code\nStep 0: get the package\n☕ Break 11:00"
+        "body": "Welcome and recap\nFrom n8n to code\nStep 0: get the package\n☕ Break 11:00–11:15"
       },
       {
         "title": "11:15 · Step 1",
-        "body": "One agent\nThe form and memory\n🍽 Lunch 12:00"
+        "body": "One agent\nThe form and memory\n🍽 Lunch 12:00–13:00"
       },
       {
         "title": "13:00 · Steps 2–4",
-        "body": "Step 2: two specialists\nStep 3: lookup tools (MCP)\nStep 4: the check\n☕ Break 14:45"
+        "body": "Step 2: two specialists\nStep 3: lookup desks (MCP)\nStep 4: check your answers\n☕ Break 14:45–15:00"
       },
       {
         "title": "15:00 · Assignment",
-        "body": "Let one agent change data, safely\nWrap-up at 15:50"
+        "body": "Let one agent change data, safely\nWrap-up 15:50–16:00"
       }
     ],
     "keyPoints": [
@@ -474,6 +474,48 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Finished early? The fast lane",
+    "kicker": "All day · Fast lane",
+    "type": "concept",
+    "subtitle": "Done before the timer ends? Pick one of these. You can come back to them at any point today.",
+    "visual": {
+      "bot": "point",
+      "place": "beside"
+    },
+    "cards": [
+      {
+        "title": "1 · How stable is the label?",
+        "body": "Run MSG-01 to MSG-06 three times each. Which labels change between runs? What does a run cost (see the result line)?"
+      },
+      {
+        "title": "2 · Try to break the barrier",
+        "body": "After the assignment: try to get €150 through as two changes of €75. Then fix the hook with a total per transaction."
+      },
+      {
+        "title": "3 · Log every decision",
+        "body": "After the assignment: write allow, ask and deny to the audit log, with the time. Who approved what?"
+      }
+    ],
+    "notes": "For fast finishers, all day. 1 shows that the AI's label can differ between runs (the Switch does not). 2 shows why a single limit is not enough. 3 is the audit-trail pattern a payment company needs.",
+    "teach": {
+      "time": "1 min",
+      "gist": "Fast lane: three challenges for whoever finishes early.",
+      "script": [
+        {
+          "say": "Some of you will finish early. That is great. Whenever you are done, pick one of these three. They are not on the test, they are for you."
+        }
+      ],
+      "do": [
+        "Show the three challenges."
+      ],
+      "done": [
+        "Fast finishers know what to do."
+      ],
+      "watch": []
+    }
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Why move the flow to code?",
     "kicker": "Context · why code",
     "type": "context",
@@ -503,7 +545,7 @@ window.SLIDES = [
       "Check: your labels against the answer key",
       "Limit: key ring · Control: barrier"
     ],
-    "notes": "These are the three problems from the recap on slide 2: hard to test, every agent could do everything, and no stop before a change. npm run check compares the labels you wrote down (low, medium or high for each message) with a hidden answer key, and says for each message: correct or revise. A hook is a piece of code that runs before a change and can say no. npm comes with Node.js. The buttons are listed under 'scripts' in package.json, and they only work inside the package folder.",
+    "notes": "These are the three problems from the recap this morning: hard to test, every agent could do everything, and no stop before a change. npm run check compares the labels you wrote down (low, medium or high for each message) with a hidden answer key, and says for each message: correct or revise. A hook is a piece of code that runs before a change and can say no. npm comes with Node.js. The buttons are listed under 'scripts' in package.json, and they only work inside the package folder.",
     "stateId": "10:Why move the flow to code?",
     "teach": {
       "time": "2 min",
@@ -538,7 +580,7 @@ window.SLIDES = [
       ],
       "do": [
         "Name the three reasons.",
-        "Link them to the problems from slide 2."
+        "Link them to the problems from this morning."
       ],
       "done": [
         "Everyone can name test, limit and control."
@@ -627,7 +669,7 @@ window.SLIDES = [
           "say": "maxTurns is the maximum number of rounds. So the agent can never keep going forever."
         },
         {
-          "ask": "Which row is the form from slide 5?",
+          "ask": "Which row is yesterday's form?",
           "say": "(Answer: Priority Parser, json_schema.)"
         },
         {
@@ -727,7 +769,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Two ways to run the same agent",
+    "title": "Which login do we use? And whose data?",
     "kicker": "Concept · choose a backend",
     "type": "concept",
     "visual": {},
@@ -740,6 +782,10 @@ window.SLIDES = [
       {
         "title": "What you don't need",
         "body": "An API key. There is nothing new to request."
+      },
+      {
+        "title": "All data is fictional",
+        "body": "Every customer, payment and message in this package is made up. Never paste real customer data into it."
       }
     ],
     "keyPoints": [
@@ -754,6 +800,9 @@ window.SLIDES = [
       "script": [
         {
           "say": "Good news: you already have everything. We use your Claude Code login from Day 1. You do not need to request anything new."
+        },
+        {
+          "say": "And one important rule: all data in this package is fictional. Every customer, payment and message is made up. Never paste real customer data into it."
         }
       ],
       "do": [
@@ -766,6 +815,68 @@ window.SLIDES = [
         "Does someone's run choose 'sdk' by itself? Then an API key is set on their laptop. Add --backend claude-code to the command.",
         "The n8n trial credits from yesterday do not work here."
       ]
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Words you need today",
+    "kicker": "Before we start · Words",
+    "type": "concept",
+    "subtitle": "Six words that come back all day. The timer on a slide always counts down.",
+    "visual": {},
+    "cards": [
+      {
+        "title": "Terminal",
+        "body": "The window where you type commands. Windows: PowerShell. Mac: Terminal."
+      },
+      {
+        "title": "Editor",
+        "body": "The program where you open and change files, for example VS Code."
+      },
+      {
+        "title": "cd",
+        "body": "“Go to this folder.” Every command works in the folder you are in."
+      },
+      {
+        "title": "Branch",
+        "body": "A saved version of the package. step-1 to step-4 are the finished versions of each step."
+      },
+      {
+        "title": "git stash -u",
+        "body": "Puts your own changes safely aside before you switch branch. They are not lost."
+      },
+      {
+        "title": "npm run …",
+        "body": "Presses a button built into the package, such as check or verify."
+      }
+    ],
+    "notes": "Go through the six words quickly. They return all day. git stash -u is needed before every git switch: without it git refuses to switch when you have changed files.",
+    "teach": {
+      "time": "3 min",
+      "gist": "Six words for the day: terminal, editor, cd, branch, git stash -u, npm run.",
+      "script": [
+        {
+          "say": "Before we start, six words that come back all day."
+        },
+        {
+          "do": "Point at the cards one by one.",
+          "say": "The terminal is where you type commands. The editor is where you change files. cd means: go to this folder. A branch is a saved version; step-1 to step-4 are the finished versions."
+        },
+        {
+          "say": "git stash -u puts your own changes safely aside before you switch to another branch. You do not lose them. And npm run presses a button in the package."
+        },
+        {
+          "ask": "Which command do you use before switching to another branch?",
+          "say": "(Answer: git stash -u.)"
+        }
+      ],
+      "do": [
+        "Explain the six words."
+      ],
+      "done": [
+        "Everyone knows the six words."
+      ],
+      "watch": []
     }
   },
   {
@@ -870,12 +981,12 @@ window.SLIDES = [
       {
         "text": "Download the package",
         "prompt": "git clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git",
-        "after": "This gives you your own copy of the package."
+        "after": "This gives you your own copy of the package. (It is called “day5” for historical reasons: it is today's package.)"
       },
       {
         "text": "Go into the folder and install the parts",
         "prompt": "cd aetherlink-day5-n8n-to-agent\nnpm ci",
-        "after": "This takes about a minute. Warnings are fine; errors are not."
+        "after": "This takes about a minute. Lines starting with “npm warn” are fine. A line starting with “npm error” means something went wrong: ask for help."
       },
       {
         "text": "Run the health check and the tests",
@@ -1051,7 +1162,7 @@ window.SLIDES = [
       "imageAlt": "CLAUDE.md in three parts: who you are, what you may not do, when is it what.",
       "imageLink": "01-single-agent/claude-project/CLAUDE.md"
     },
-    "subtitle": "Yesterday, the instructions lived inside the n8n block (System Message). Today, they are a file next to the code.",
+    "subtitle": "Yesterday, the instructions lived inside the n8n block (System Message). Today, they are a file next to the code, read on top of Claude's own system prompt.",
     "cards": [],
     "keyPoints": [
       "The system message now lives in a file next to the code."
@@ -1114,7 +1225,7 @@ window.SLIDES = [
       },
       {
         "title": "Today · json_schema",
-        "body": "The same form, now as a file: priority-schema.mjs. The AI has to fill it in."
+        "body": "The same form, now as a file: priority-schema.mjs. Today it has two fields: priority and reason. The AI has to fill it in."
       },
       {
         "title": "The trays · lib/switch.mjs",
@@ -1167,7 +1278,7 @@ window.SLIDES = [
       "bot": "think",
       "place": "beside"
     },
-    "subtitle": "Just like the service desk on slide 4: with the same customer, you remember; with a new customer, you start afresh.",
+    "subtitle": "Just like the shop counter from this morning's recap: with the same customer, you remember; with a new customer, you start afresh.",
     "cards": [
       {
         "title": "Yesterday · Simple Memory",
@@ -1358,7 +1469,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Open SOLO.md in your editor and go to Step 1",
-        "after": "Everything you need is there: Build 1, 2 and 3."
+        "after": "Your editor is the program where you open and change files (for example VS Code). Everything you need is in SOLO.md: Build 1, 2 and 3."
       },
       {
         "text": "Build 1: the settings",
@@ -1370,13 +1481,13 @@ window.SLIDES = [
       },
       {
         "text": "Build 3: the form",
-        "after": "Create 01-single-agent/priority-schema.mjs. Then add the import and the outputFormat line to options.mjs. That line is the one people forget.",
+        "after": "Create 01-single-agent/priority-schema.mjs with the code from SOLO.md. Then open options.mjs: add the import line at the very top, and the outputFormat line inside buildOptions(). People often forget this line.",
         "warn": true
       },
       {
         "text": "Test it",
         "prompt": "git checkout origin/step-1 -- test/step1.test.mjs\nnpm run verify",
-        "after": "Look for: fail 0. Stuck? git switch step-1 gives you the finished version."
+        "after": "Look for: fail 0. Stuck? git stash -u, then git switch step-1 gives you the finished version."
       }
     ],
     "expected": "npm run verify shows fail 0.",
@@ -1521,21 +1632,21 @@ window.SLIDES = [
       {
         "text": "Label six messages, one by one",
         "prompt": "npm run lesson1 -- MSG-01",
-        "after": "Then MSG-02 to MSG-06. Write down each label (low, medium or high): you will need them in Step 4."
+        "after": "Then MSG-02 to MSG-06. Write each label down (low, medium or high) on paper or in a notes file: you will enter them in Step 4."
       },
       {
         "text": "Remove the rules for high, medium and low",
-        "after": "Cut the entire ## Priority definitions section from 01-single-agent/claude-project/CLAUDE.md and save.",
+        "after": "In 01-single-agent/claude-project/CLAUDE.md, select everything from the line “## Priority definitions” up to the next line that starts with “##”. Cut it (Ctrl+X) and save (Ctrl+S).",
         "warn": true
       },
       {
         "text": "Run two messages again",
         "prompt": "npm run lesson1 -- MSG-01\nnpm run lesson1 -- MSG-06",
-        "after": "Compare them with your first labels. Did anything change?"
+        "after": "For MSG-01 and MSG-06, write down: the same label as before, or a different one?"
       },
       {
         "text": "Put the rules back",
-        "after": "Paste the section back and save. Lost it? Run: git checkout origin/step-1 -- 01-single-agent/claude-project/CLAUDE.md"
+        "after": "Paste the section back in the same place (Ctrl+V) and save. Lost it? Run: git checkout origin/step-1 -- 01-single-agent/claude-project/CLAUDE.md"
       },
       {
         "text": "Check it still works",
@@ -1663,7 +1774,7 @@ window.SLIDES = [
         "eigenwijs"
       ]
     },
-    "subtitle": "Discuss at your table first, then click to reveal the answer.",
+    "subtitle": "At your table (3–4 people), 2 minutes. One person shares your table's answer; you may pass. Then click to reveal.",
     "cards": [
       {
         "title": "The form",
@@ -1866,7 +1977,7 @@ window.SLIDES = [
       "bot": "sleepy",
       "place": "beside"
     },
-    "subtitle": "Back at 13:00. Fallen behind? After lunch, run: git switch step-1.",
+    "subtitle": "Back at 13:00. Fallen behind? After lunch, run: git stash -u, then git switch step-1.",
     "cards": [
       {
         "title": "Back at 13:00",
@@ -1885,7 +1996,7 @@ window.SLIDES = [
       "gist": "Lunch. Be back at 13:00.",
       "script": [
         {
-          "say": "Enjoy your lunch. Be back at 13:00. Have you fallen behind? After lunch, use git switch step-1."
+          "say": "Enjoy your lunch. Be back at 13:00. Have you fallen behind? After lunch, use git stash -u, then git switch step-1."
         },
         {
           "do": "Start the countdown."
@@ -2263,7 +2374,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Get the Step 2 files",
-        "after": "Build 1 to 3 from SOLO.md, Step 2. Short on time? Use the shortcut below.",
+        "after": "Option A: build them yourself from SOLO.md, Step 2 (Build 1 to 3). Option B, if you are short on time: copy this command instead.",
         "prompt": "git checkout origin/step-2 -- .claude lib/agents.mjs 02-subagents package.json test/step2.test.mjs\nnpm run verify"
       },
       {
@@ -2277,13 +2388,13 @@ window.SLIDES = [
       },
       {
         "text": "The description test",
-        "after": "In .claude/agents/risk-agent.md, change the description to “Helps with things.” and run MSG-05 again. Is the risk expert still called?",
+        "after": "In .claude/agents/risk-agent.md, change the description to “Helps with things.” and run MSG-05 again. Does the risk expert still run?",
         "warn": true
       },
       {
         "text": "Put it back",
         "prompt": "git checkout origin/step-2 -- .claude/agents/risk-agent.md",
-        "after": "Stuck? git switch step-2 gives you the finished version."
+        "after": "Stuck? git stash -u, then git switch step-2 gives you the finished version."
       }
     ],
     "expected": "The trace shows risk first, then the reply; you have read the draft and tested a vague description.",
@@ -2394,7 +2505,7 @@ window.SLIDES = [
         "betrapt"
       ]
     },
-    "subtitle": "Discuss at your table first, then click to reveal the answer.",
+    "subtitle": "At your table (3–4 people), 2 minutes. One person shares your table's answer; you may pass. Then click to reveal.",
     "cards": [
       {
         "title": "Order",
@@ -2449,7 +2560,7 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "The agent asks the desk for facts. The desk holds the data and hands over only what was asked for. It cannot change anything.",
+    "subtitle": "The agent asks the desk for facts. The desk holds the data and hands over only what was asked for. In Step 3 it can only look things up.",
     "cards": [
       {
         "title": "customers · get_customer",
@@ -2457,7 +2568,7 @@ window.SLIDES = [
       },
       {
         "title": "transactions · get_transaction",
-        "body": "Looks up a payment in the transactions list."
+        "body": "get_transaction and list_transactions: look up one payment, or list them."
       }
     ],
     "keyPoints": [
@@ -2624,8 +2735,8 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Get the Step 3 files",
-        "prompt": "git checkout origin/step-3 -- 03-mcp .mcp.json .claude lib package.json test/step3.test.mjs\nnpm ci\n(cd 03-mcp/transaction-mcp && npm ci)",
-        "after": "The last line installs the payment desk. You don't need to start the desks yourself."
+        "prompt": "git checkout origin/step-3 -- 03-mcp .mcp.json .claude lib package.json test/step3.test.mjs\nnpm ci\ncd 03-mcp/transaction-mcp\nnpm ci\ncd ../..",
+        "after": "The last three lines install the payment desk and take you back to the package folder. You don't need to start the desks yourself."
       },
       {
         "text": "Test the desks",
@@ -2635,7 +2746,7 @@ window.SLIDES = [
       {
         "text": "Run three messages",
         "prompt": "npm run lesson3 -- MSG-08\nnpm run lesson3 -- MSG-07\nnpm run lesson3 -- MSG-09",
-        "after": "Write down each label: you will need them in Step 4."
+        "after": "Write each label down (on paper or in a notes file): you will enter them in labels.json in Step 4."
       },
       {
         "text": "Find the lookups",
@@ -2643,7 +2754,7 @@ window.SLIDES = [
       },
       {
         "text": "Stuck?",
-        "prompt": "git switch step-3",
+        "prompt": "git stash -u\ngit switch step-3",
         "after": "This gives you the finished version."
       }
     ],
@@ -2706,7 +2817,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "1 · Only lookup tools",
-        "body": "list_transactions and get_transaction. No tools that change anything."
+        "body": "get_customer, get_transaction and list_transactions: only lookups. No tools that change anything."
       },
       {
         "title": "2 · Last line",
@@ -2750,7 +2861,7 @@ window.SLIDES = [
         "blij"
       ]
     },
-    "subtitle": "Discuss at your table first, then click to reveal the answer.",
+    "subtitle": "At your table (3–4 people), 2 minutes. One person shares your table's answer; you may pass. Then click to reveal.",
     "cards": [
       {
         "title": "Facts",
@@ -2805,13 +2916,13 @@ window.SLIDES = [
           "The Switch picks the tray",
           "npm run check marks the labels",
           "The barrier checks every change",
-          "Same input, same answer"
+          "Same input, always the same route"
         ]
       },
       {
         "title": "Thinking · the agent",
         "items": [
-          "Reads what the customer means",
+          "Reads what the customer means: its label can differ between runs",
           "The team lead picks a specialist",
           "The writer writes the draft",
           "A person checks the result"
@@ -2855,7 +2966,7 @@ window.SLIDES = [
     "layout": "exercise",
     "timer": 15,
     "visual": {},
-    "subtitle": "Remember npm run check from slide 9? Now you use it to compare your labels with the answer key.",
+    "subtitle": "Remember npm run check from “Why move the flow to code?”? Now you use it to compare your labels with the answer key.",
     "cards": [],
     "steps": [
       {
@@ -2871,7 +2982,7 @@ window.SLIDES = [
       {
         "text": "Check them",
         "prompt": "npm run check",
-        "after": "For each message: correct or revise. Lesson 1 passes at 6/6, Lesson 3 at 9/9."
+        "after": "For each message: correct or revise. Lesson 1 passes at 6/6, Lesson 3 at 9/9. Do not change a label just to pass: reread the rules instead."
       },
       {
         "text": "Fill in the acceptance table",
@@ -2879,7 +2990,7 @@ window.SLIDES = [
       },
       {
         "text": "Save it",
-        "after": "Save the table in participant-output/. Stuck? git switch step-4."
+        "after": "Save the table in participant-output/. Stuck? git stash -u, then git switch step-4."
       }
     ],
     "expected": "npm run check shows your result, and the acceptance table is saved.",
@@ -2893,7 +3004,7 @@ window.SLIDES = [
       "gist": "Step 4: get the checker, fill in labels.json, run npm run check, and save the acceptance table.",
       "script": [
         {
-          "say": "Do you remember the button from slide 9? Now you press it. It compares your labels with the answer key."
+          "say": "Do you remember the button from “Why move the flow to code?”? Now you press it. It compares your labels with the answer key."
         },
         {
           "do": "Point at step 1.",
@@ -2978,7 +3089,7 @@ window.SLIDES = [
       "bot": "coffee",
       "place": "beside"
     },
-    "subtitle": "Back at 15:00. Fallen behind? Switch now: git switch step-4.",
+    "subtitle": "Back at 15:00. Fallen behind? Switch now: git stash -u, then git switch step-4.",
     "cards": [
       {
         "title": "Back at 15:00",
@@ -2997,7 +3108,7 @@ window.SLIDES = [
       "gist": "Break. Have you fallen behind? Switch to step-4 now.",
       "script": [
         {
-          "say": "Coffee break. Be back at 15:00. Have you fallen behind? Switch now with git switch step-4. Then you start the assignment together with everyone else."
+          "say": "Coffee break. Be back at 15:00. Have you fallen behind? Switch now with git stash -u, then git switch step-4. Then you start the assignment together with everyone else."
         },
         {
           "do": "Start the countdown."
@@ -3026,11 +3137,11 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Core · 35 min",
-        "body": "Tools that change a test copy of the data, and a barrier (hook) before every change."
+        "body": "Tools that change a test copy of the data, one agent that may use them (transaction-agent), and a barrier (hook) before every change. SOLO.md, Part 1 and 2."
       },
       {
         "title": "Stretch · optional",
-        "body": "A draft tool, a fraud check and a question for a person."
+        "body": "A draft tool, a fraud check and a question for a person. SOLO.md, Part 3 and 4."
       }
     ],
     "keyPoints": [
@@ -3063,7 +3174,8 @@ window.SLIDES = [
         "Everyone knows that the target is the core."
       ],
       "watch": []
-    }
+    },
+    "tagline": "All instructions: SOLO.md, section “Assignment · Extend the MCP”. You get this section once you switch to step-4."
   },
   {
     "lessonId": "workshop-4",
@@ -3099,7 +3211,7 @@ window.SLIDES = [
       "gist": "The hook is the barrier: a small change goes through, and a big change asks a person.",
       "script": [
         {
-          "say": "Do you remember the barrier from slide 9? This is it. Before a tool changes data, the hook checks."
+          "say": "Do you remember the barrier from “Why move the flow to code?”? This is it. Before a tool changes data, the hook checks."
         },
         {
           "say": "A small change goes through. For a big change, a person must say yes first. And afterwards everything is written down in a log."
@@ -3181,7 +3293,7 @@ window.SLIDES = [
       "place": "pointer",
       "pointAt": 1
     },
-    "subtitle": "Which agent is allowed to use update_transaction? Vote first.",
+    "subtitle": "Which agent is allowed to use update_transaction? Vote by raising your hand for A, B, C or D.",
     "cards": [
       {
         "title": "A",
@@ -3247,15 +3359,15 @@ window.SLIDES = [
     "cards": [
       {
         "title": "ALLOW",
-        "body": "A lookup, a draft, or a change below 100."
+        "body": "A lookup, a draft, or a change below €100."
       },
       {
         "title": "ASK",
-        "body": "A change of 100 or more, an addition or a deletion: a person has to approve it."
+        "body": "A change of €100 or more, an addition or a deletion: a person has to approve it."
       },
       {
         "title": "DENY",
-        "body": "A fraud hold, or the person says no. The agent stops."
+        "body": "A fraud hold, or the person says no. The change is blocked, and the agent is told to stop."
       }
     ],
     "keyPoints": [
@@ -3263,7 +3375,7 @@ window.SLIDES = [
       "Large updates, adds and deletes ask a person.",
       "No person to ask means deny."
     ],
-    "notes": "Read the cards one by one. The threshold is one constant: AUTO_APPROVE_TRANSACTION_AMOUNT = 100 in 03-mcp/hooks/transaction-guard.mjs. In interactive claude, the hook returns ask and Claude Code shows the prompt. When fraud-check-agent says medium, or a fact is missing, the orchestrator asks the person with AskUserQuestion. Under claude -p, or in the SDK without a terminal, no person can answer, so the write is denied. A denied write is final: the agent reports it and stops.",
+    "notes": "Read the cards one by one. The threshold is one constant: AUTO_APPROVE_TRANSACTION_AMOUNT = 100 in 03-mcp/hooks/transaction-guard.mjs. In interactive claude, the hook returns ask and Claude Code shows the prompt. When fraud-check-agent says medium, or a fact is missing, the orchestrator asks the person with AskUserQuestion. Under claude -p, or in the SDK without a terminal, no person can answer, so the write is denied. A denied write is final: the agent reports it and stops. Precise: the hook blocks that one tool call. The agent stops because its instructions tell it to stop after a denial, and because it has no other tool that can make the change.",
     "stateId": "50:When does the hook ask?",
     "teach": {
       "time": "2 min",
@@ -3348,22 +3460,22 @@ window.SLIDES = [
       "bot": "point",
       "place": "left"
     },
-    "subtitle": "Each file has one job.",
+    "subtitle": "Each file has one job. The exact instructions are in SOLO.md, section “Assignment · Extend the MCP”, Part 1 and 2.",
     "cards": [
       {
-        "title": "transaction-mcp/server.js",
+        "title": "03-mcp/transaction-mcp/server.js",
         "body": "Add the tools that change data. They change a test copy, not the real list."
       },
       {
-        "title": ".claude/agents/transaction-agent.md",
+        "title": "03-mcp/claude-project/.claude/agents/transaction-agent.md",
         "body": "The only agent allowed to change data. Give it get, update and add."
       },
       {
-        "title": "CLAUDE.md",
+        "title": "03-mcp/claude-project/CLAUDE.md",
         "body": "Who changes data, and when to stop. The team lead must hand the work over."
       },
       {
-        "title": "hooks/transaction-guard.mjs",
+        "title": "03-mcp/hooks/transaction-guard.mjs",
         "body": "The barrier: the code decides on every change."
       }
     ],
@@ -3491,30 +3603,30 @@ window.SLIDES = [
   {
     "lessonId": "workshop-4",
     "title": "Your turn · the assignment: core",
-    "kicker": "SOLO 6 · Core",
+    "kicker": "Assignment · Core",
     "type": "practice",
     "layout": "exercise",
     "timer": 35,
     "visual": {},
-    "subtitle": "Work on step-4. Fix one line of the to-do list at a time.",
+    "subtitle": "Work on step-4. Follow SOLO.md, “Assignment · Extend the MCP”, Part 1 and 2. Fix one line of the to-do list at a time.",
     "cards": [],
     "steps": [
       {
         "text": "Switch to step-4 and look at the to-do list",
-        "prompt": "git switch step-4\nnpm run check:assignment",
-        "after": "Each red line names one file and one change."
+        "prompt": "git stash -u\ngit switch step-4\nnpm run check:assignment",
+        "after": "Then open SOLO.md and go to “Assignment · Extend the MCP”. Each red line of the to-do list names one file and one change."
       },
       {
         "text": "The tools that change data",
-        "after": "In 03-mcp/transaction-mcp/server.js. They change a test copy, not the real list."
+        "after": "SOLO.md, Part 1: in 03-mcp/transaction-mcp/server.js. They change a test copy, not the real list."
       },
       {
         "text": "The one agent that may change data",
-        "after": "Create .claude/agents/transaction-agent.md and give it get, update and add. Add the rules for changing data to CLAUDE.md."
+        "after": "SOLO.md, Part 1: create 03-mcp/claude-project/.claude/agents/transaction-agent.md with get, update and add. Add the rules for changing data to 03-mcp/claude-project/CLAUDE.md."
       },
       {
         "text": "The barrier",
-        "after": "Write 03-mcp/hooks/transaction-guard.mjs: small changes go through, big changes ask a person.",
+        "after": "SOLO.md, Part 2: write 03-mcp/hooks/transaction-guard.mjs. Below €100 goes through; €100 or more asks a person; every change gets one line in the audit log.",
         "warn": true
       },
       {
@@ -3573,7 +3685,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "MSG-07 · answer N",
-        "body": "The hook says no. The agent stops."
+        "body": "The hook says no. The change is blocked, and the agent stops."
       },
       {
         "title": "MSG-08 · fraud",
@@ -3616,7 +3728,7 @@ window.SLIDES = [
       "bot": "think",
       "place": "left"
     },
-    "subtitle": "Only once the core passes.",
+    "subtitle": "Only once the core passes. Instructions: SOLO.md, Part 3 and 4.",
     "cards": [
       {
         "title": "transaction-mcp/drafts-server.js",
@@ -3658,11 +3770,11 @@ window.SLIDES = [
   {
     "lessonId": "workshop-4",
     "title": "Your turn · the assignment: stretch",
-    "kicker": "SOLO 6 · Stretch",
+    "kicker": "Assignment · Stretch",
     "type": "practice",
     "layout": "exercise",
     "timer": 10,
-    "subtitle": "Only once the core passes. Otherwise, at home.",
+    "subtitle": "Only once the core passes. Follow SOLO.md, “Assignment · Extend the MCP”, Part 3 and 4. Otherwise, at home.",
     "cards": [],
     "steps": [
       {
@@ -3730,7 +3842,7 @@ window.SLIDES = [
         "blij"
       ]
     },
-    "subtitle": "Discuss at your table first, then click to reveal the answer.",
+    "subtitle": "At your table (3–4 people), 2 minutes. One person shares your table's answer; you may pass. Then click to reveal.",
     "cards": [
       {
         "title": "Tools",
@@ -3776,6 +3888,59 @@ window.SLIDES = [
         "All three questions are answered."
       ],
       "watch": []
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Discuss: who is accountable?",
+    "kicker": "Discuss · Accountability",
+    "type": "review",
+    "subtitle": "At your table (3–4 people), 2 minutes. One person shares your table's answer; you may pass. Then click to reveal.",
+    "visual": {
+      "reveal": "click",
+      "bot": "peek",
+      "place": "slot",
+      "faces": [
+        "verward",
+        "eigenwijs"
+      ]
+    },
+    "cards": [
+      {
+        "title": "Who is accountable?",
+        "body": "The agent labels a fraud ticket as low. A customer loses money. Who is accountable?"
+      },
+      {
+        "title": "How do you prove it?",
+        "body": "How do you show afterwards that a named person reviewed the decision?"
+      }
+    ],
+    "notes": "Answers: never the agent. The organisation, and the people who designed the rules and approved the result. Proof: an audit log with what happened, when, and who approved it. In the assignment every change gets one line in participant-output/audit.jsonl; in production you add the name of the reviewer. Also: nine messages in this course prove nothing about accuracy; in production you measure on many more.",
+    "teach": {
+      "time": "5 min",
+      "gist": "Accountability: never the agent; prove review with an audit log that names the reviewer.",
+      "script": [
+        {
+          "say": "A hard question, and a fair one. Two minutes at your table."
+        },
+        {
+          "ask": "Who is accountable if the agent labels fraud as low?",
+          "say": "(Answer: never the agent. The organisation, and the people who designed the rules and approved the result.)"
+        },
+        {
+          "ask": "How do you prove a named person reviewed it?",
+          "say": "(Answer: an audit log: what happened, when, and who approved it. Our assignment writes one line per change; in production you add the reviewer's name.)"
+        }
+      ],
+      "do": [
+        "Let tables talk, then reveal."
+      ],
+      "done": [
+        "Both questions answered."
+      ],
+      "watch": [
+        "Expect this question from sceptics. Welcome it: it is exactly the point of the barrier."
+      ]
     }
   },
   {
@@ -3877,7 +4042,6 @@ window.SLIDES = [
     "kicker": "SOLO 5 · Homework",
     "type": "practice",
     "layout": "exercise",
-    "timer": 20,
     "visual": {
       "bot": "wave",
       "place": "beside"
@@ -3887,7 +4051,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Go to the starter",
-        "prompt": "git switch step-4\ncd 05-build-your-own",
+        "prompt": "git stash -u\ngit switch step-4\ncd 05-build-your-own",
         "after": "Read README.md in this folder."
       },
       {
@@ -4015,6 +4179,61 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "On Monday: take this to your squad",
+    "kicker": "Close · Monday",
+    "type": "concept",
+    "subtitle": "Three things to do next week, and what today's version is not.",
+    "visual": {},
+    "cards": [
+      {
+        "title": "1 · Pick one flow",
+        "body": "Choose one real flow where a person already reads the result, for example a ticket draft."
+      },
+      {
+        "title": "2 · Write the rules first",
+        "body": "Which agent may do what, and which changes need a person. That is your barrier."
+      },
+      {
+        "title": "3 · Check with security",
+        "body": "Approved accounts, where data may go, and test data only. No real customer data in experiments."
+      },
+      {
+        "title": "What today is not",
+        "body": "Not production: fictional data, nine test messages, a laptop demo. A real version needs an audit log with names and a data-handling decision."
+      }
+    ],
+    "notes": "Make it concrete for each squad: ask one person per table to name the flow they would pick.",
+    "teach": {
+      "time": "4 min",
+      "gist": "Monday: one flow, rules first, check with security. Today is a demo, not production.",
+      "script": [
+        {
+          "say": "What do you do with this on Monday? Three things."
+        },
+        {
+          "do": "Point at cards 1 to 3.",
+          "say": "Pick one flow where a person already reads the result. Write the rules first: who may do what, and what needs a person. And check with security before you use any real data."
+        },
+        {
+          "do": "Point at the last card.",
+          "say": "And be honest about what today was: a demo with fictional data and nine messages. Not production."
+        },
+        {
+          "ask": "Which flow would your squad pick?",
+          "say": "(One answer per table.)"
+        }
+      ],
+      "do": [
+        "Three Monday actions."
+      ],
+      "done": [
+        "Each table named one flow."
+      ],
+      "watch": []
+    }
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Close: a person stays in charge",
     "kicker": "Close · Day 4",
     "type": "recap",
@@ -4035,14 +4254,14 @@ window.SLIDES = [
       },
       {
         "label": "The barrier + a person",
-        "caption": "Big changes ask first. A 'no' is final."
+        "caption": "Big changes ask first. A 'no' blocks the change."
       },
       {
-        "label": "Next: Workshop 5",
+        "label": "Next: Day 5",
         "caption": "We build on this agent team."
       }
     ],
-    "notes": "Recap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Go back to the goals on the board from slide 2. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.",
+    "notes": "Recap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Go back to the goals on the board from this morning. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.",
     "stateId": "65:Close: keep a human in the loop.",
     "subtitle": "One agent, a team, lookup desks and a barrier. And at the end, always a person.",
     "teach": {
@@ -4053,7 +4272,7 @@ window.SLIDES = [
           "say": "This morning we started with a sorting machine in n8n blocks. Now you have a team of agents in code. And at the end there is always a person."
         },
         {
-          "do": "Point at the goals on the board from slide 2.",
+          "do": "Point at the goals on the board from this morning.",
           "say": "Look at the goal you wrote down this morning. Who got there?"
         },
         {
