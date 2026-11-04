@@ -11,8 +11,8 @@ production in their own work. Each step gets its own pull request in each repo i
 | Step | Slides | Status | Package PR | Slides PR |
 | --- | --- | --- | --- | --- |
 | 0 · Setup | 13-17 | walked, fixed | [#7](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/7) | this branch |
-| 1 · One agent | 19-29 | next | | |
-| 2 · Subagents | 34-42 | not yet | | |
+| 1 · One agent | 19-29 | walked, fixed | [#22](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/22) (main), #23 to #28 (step branches) | none needed |
+| 2 · Subagents | 34-42 | next | | |
 | 3 · MCP | 43-48 | not yet | | |
 | 4 · Check | 49-51 | not yet | | |
 | Assignment | 53-67 | not yet | | |
@@ -44,6 +44,23 @@ Walked on macOS, Node.js 24.18.0, Claude Code 2.1.318, on package `main` at `9b9
   `assets/day4-teach/a07-*.mp4` clips. That needs its own decision.
 - **Slide 16 depends on package #7.** The "Step 1 is not built yet" wording on slide 16 matches the package
   only once #7 is merged.
+
+## Step 1 · One agent (slides 19-29)
+
+Walked on package `main` at `a18b464`, following SOLO.md literally. The slides lead: SOLO.md now follows
+slides 22 to 29 in order (1a build, 1b look inside and test memory, 1c six messages and the tone trap).
+
+| # | What the participant sees | Why it confuses | Fix | Where |
+| --- | --- | --- | --- | --- |
+| 1 | After Build 1 to 3 and the copied test, `npm run verify` fails: `Cannot find module lib/chat-options.mjs`. | Slide 24 says "Look for: fail 0". The copied step-1 test needs a chat refactor that only `step-1` had. Everyone on the hand-built path hits this. | `main` gets the step-1 chat refactor, so `main` plus the three Builds equals `step-1`. | Package #22 |
+| 2 | Build 3 says "import it from ./priority-schema.mjs". | Neither SOLO.md nor slide 24 gives the import line itself. | SOLO.md gives the line, and says where the `outputFormat` line goes. | Package #22 to #28 |
+| 3 | Before the test is copied, `verify` already passes without the parser hooked up. | It looks done while `outputFormat` is missing. | Slide 24 already has the test-copy step. SOLO now says what a schema failure means. | Package #22 to #28 |
+| 4 | SOLO.md order and wording differ from the slides (memory as Build 4, extra chat dry run, "favorite color"). | Trainer and participant read two different scripts. | SOLO Step 0 and 1 rewritten against slides 15 to 29. | Package #22 to #28 |
+| 5 | SOLO and the finished branch can drift apart unnoticed. | That is how finding 1 happened. | `test/solo-step1.test.mjs` on every step branch builds Step 1 from SOLO.md and compares it with the branch. It is mutation-checked. | Package #23 to #28 |
+
+Live runs on the claude-code backend, about $0.02 each: MSG-01 low, 02 high, 03 medium, 04 low, 05 high,
+06 low. All match the trainer key on slide 27. Tone trap without definitions: MSG-01 and MSG-06 stayed low
+twice each. That is what slide 27's watch line expects ("the model got lucky").
 
 ## Company login (Vertex AI, Bedrock)
 
