@@ -1157,28 +1157,26 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Memory is the session",
+    "title": "Memory: the chat remembers the conversation",
     "kicker": "Concept · memory",
     "type": "concept",
     "visual": {
-      "art": "window",
-      "highlight": [
-        {
-          "in": "subtitle",
-          "text": "continues the session",
-          "tone": "orange"
-        }
-      ]
+      "bot": "think",
+      "place": "beside"
     },
-    "subtitle": "npm run chat continues the session. --no-memory starts a new one.",
+    "subtitle": "Like the desk from slide 4: same customer, you remember. New customer, start fresh.",
     "cards": [
       {
-        "title": "n8n",
-        "body": "Simple Memory keeps your favourite colour."
+        "title": "Yesterday · Simple Memory",
+        "body": "The n8n block that remembered your favourite colour."
       },
       {
-        "title": "Agent SDK",
-        "body": "The chat resumes the last sessionId."
+        "title": "Today · npm run chat",
+        "body": "Carries on the same conversation. It remembers."
+      },
+      {
+        "title": "Today · --no-memory",
+        "body": "Every message is a new conversation. It forgets."
       }
     ],
     "keyPoints": [
@@ -1186,93 +1184,163 @@ window.SLIDES = [
       "npm run chat resumes with the previous sessionId.",
       "--no-memory starts each turn without resume."
     ],
-    "notes": "The session is the memory in chat: lib/chat.mjs passes resume: sessionId to the next turn unless --no-memory is set. In n8n, the Chat trigger uses Simple Memory; Maarten's favourite-colour test makes the cross-turn behavior visible.",
-    "stateId": "20:Memory is the session"
+    "notes": "The conversation is the memory: npm run chat passes the previous session on to the next message (resume: sessionId in lib/chat.mjs). With --no-memory every message starts fresh. Every npm run lesson1 is a new session on purpose: one ticket is one case.",
+    "stateId": "20:Memory is the session",
+    "teach": {
+      "time": "2 min",
+      "gist": "Memory = the conversation. npm run chat remembers, --no-memory forgets.",
+      "script": [
+        {
+          "say": "Remember the desk? Same customer, you remember what he said. That is memory."
+        },
+        {
+          "do": "Point at the first card.",
+          "say": "Yesterday that was the Simple Memory block. You tested it with your favourite colour."
+        },
+        {
+          "do": "Point at the other two cards.",
+          "say": "Today: npm run chat carries on the conversation, so it remembers. With --no-memory every message is a new conversation, so it forgets."
+        },
+        {
+          "ask": "Why do we want every customer ticket to start fresh?",
+          "say": "(Answer: customer B may never see anything of customer A.)"
+        }
+      ],
+      "do": [
+        "Memory = the conversation.",
+        "With and without --no-memory."
+      ],
+      "done": [
+        "Everyone can say what --no-memory does."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
-    "title": "Step 1 · Structured priority output and chat memory",
-    "kicker": "Explain · one agent",
+    "title": "Step 1: one agent that fills in the form",
+    "kicker": "Step 1 · what you build",
     "type": "concept",
     "visual": {
-      "stagger": "pop",
-      "stepThrough": true,
       "bot": "point",
-      "place": "left"
+      "place": "beside"
     },
-    "subtitle": "One agent gives a fixed priority. Code routes it.",
+    "subtitle": "You give one agent its work instructions and the form. Then the code sorts the answer into a tray.",
     "cards": [
       {
         "title": "What you build",
-        "body": "One agent that returns { priority, reason } as JSON."
+        "body": "One agent with CLAUDE.md and the form: priority and reason."
       },
       {
         "title": "Why",
-        "body": "A schema makes the output predictable. Then code can route it."
+        "body": "A fixed form makes the answer predictable. Then the code can sort it."
       },
       {
         "title": "Done when",
-        "body": "The trace shows the JSON and a Switch → line."
+        "body": "You have six labels written down, and you tested the tone trap."
       }
     ],
     "keyPoints": [
       "One agent returns a fixed priority. Code routes it."
     ],
-    "notes": "Explain Step 1 using the final chain. The n8n Structured Output Parser / Priority Parser maps to outputFormat json_schema, and Switch maps to lib/switch.mjs. Simple Memory maps to session resume in npm run chat; --no-memory starts without resume. The main agent reads the project instructions and supplied message.",
-    "stateId": "21:Step 1 · Structured priority output and chat memory"
+    "notes": "Step 1 in the package (SOLO.md, Step 1): Build 1 options.mjs, Build 2 CLAUDE.md, Build 3 priority-schema.mjs, Build 4 the memory test; then six live runs (MSG-01 to MSG-06) and the tone trap. Participants copy the code from SOLO.md: they don't type it. The six labels are needed in Step 4 (npm run check).",
+    "stateId": "21:Step 1 · Structured priority output and chat memory",
+    "teach": {
+      "time": "2 min",
+      "gist": "Step 1: one agent + work instructions + form. Done = six labels and the tone trap tested.",
+      "script": [
+        {
+          "say": "Step 1. You build one agent. You give it its work instructions, CLAUDE.md, and the form."
+        },
+        {
+          "do": "Point at Why.",
+          "say": "Why the form? Then the answer is always the same shape, and the code can sort it."
+        },
+        {
+          "do": "Point at Done when.",
+          "say": "You are done when you have six labels written down, and you tested the tone trap. Keep the labels: you need them in Step 4."
+        }
+      ],
+      "do": [
+        "Name what they build.",
+        "Name when they are done."
+      ],
+      "done": [
+        "Everyone knows the goal of Step 1."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
-    "title": "Demo · Step 1: schema, route, and memory",
-    "kicker": "Demo · Step 1",
+    "title": "Demo · Step 1: I show it",
+    "kicker": "Demo · Step 1 · I show it",
     "type": "concept",
-    "visual": {
-      "term": [
-        {
-          "c": "npm run lesson1 -- MSG-01 --dry-run"
-        },
-        {
-          "o": "dry run — no model call"
-        },
-        {
-          "c": "npm run lesson1 -- MSG-01"
-        },
-        {
-          "o": "Switch → low → AUTO_REPLY"
-        },
-        {
-          "c": "npm run chat"
-        },
-        {
-          "o": "resumes the session"
-        }
-      ]
-    },
-    "subtitle": "Show the dry run first. Then a live run or the sample trace.",
+    "visual": {},
+    "subtitle": "Watch first. On the next slides you do the same.",
     "cards": [
       {
-        "title": "Offline",
-        "body": "npm run lesson1 -- MSG-01 --dry-run"
+        "title": "1 · Dress rehearsal",
+        "body": "npm run lesson1 -- MSG-01 --dry-run\nLook for: outputFormat, that is the form."
       },
       {
-        "title": "Result",
-        "body": "Structured output + Switch → low"
+        "title": "2 · A real run",
+        "body": "npm run lesson1 -- MSG-01\nLook for: Structured output, and Switch → low."
       },
       {
-        "title": "Memory",
-        "body": "npm run chat"
+        "title": "3 · Memory",
+        "body": "npm run chat\nGive a colour, ask it back. Then with --no-memory."
       }
     ],
     "keyPoints": [
       "Show the dry run first. Then show a live run or the sample trace."
     ],
-    "notes": "Run npm run lesson1 -- MSG-01 --dry-run and point out the prompt, options, and Claude Code equivalent. The dry run does not produce model JSON or a Switch → result. Inspect 01-single-agent/priority-schema.mjs, outputFormat in the dry-run options, and lib/switch.mjs offline. Then show a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md explicitly labelled as an illustrative sample; point out Structured output: and Switch → low. Start npm run chat, ask for a favourite colour, then ask for it again to show resumed session memory. Compare with npm run chat -- --no-memory.",
-    "stateId": "22:Demo · Step 1: schema, route, and memory"
+    "notes": "Show it on the finished version (git switch step-1), so the build is already done. 1: the dry run shows the options, including outputFormat. 2: a live run (Claude Code login) prints Structured output with priority and reason, then the Switch line. No live run possible? Show docs/sample-trace.md and say it is a sample. 3: the colour test with and without --no-memory.",
+    "stateId": "22:Demo · Step 1: schema, route, and memory",
+    "tagline": "The AI gives the label. The code picks the tray.",
+    "teach": {
+      "time": "5 min",
+      "gist": "Demo on step-1: dry run, a real run with the Switch line, the memory test.",
+      "script": [
+        {
+          "do": "Before class: git switch step-1 in your own copy."
+        },
+        {
+          "say": "I show it first, on the finished version. Just watch."
+        },
+        {
+          "do": "Run the dry run. Point at outputFormat.",
+          "say": "The dress rehearsal. See outputFormat? That is the form."
+        },
+        {
+          "do": "Run npm run lesson1 -- MSG-01. Point at Structured output and the Switch line.",
+          "say": "Now a real run. The AI fills in the form: priority low, plus the reason. And then the code: Switch, low, auto reply."
+        },
+        {
+          "do": "Run npm run chat, then npm run chat -- --no-memory.",
+          "say": "And the memory test. Same conversation: it remembers red. A new conversation: it forgets."
+        },
+        {
+          "ask": "Who picked the tray: the AI or the code?",
+          "say": "(Answer: the code. The AI only gave the label.)"
+        }
+      ],
+      "do": [
+        "Dry run, real run, memory test."
+      ],
+      "done": [
+        "Everyone saw the form and the Switch line."
+      ],
+      "watch": [
+        "A real run needs your Claude Code login and takes a moment.",
+        "No internet or login? Show docs/sample-trace.md and say clearly it is a sample."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
-    "title": "Run Step 1 and test chat memory.",
-    "kicker": "SOLO 1 · Your turn",
+    "title": "Your turn · Step 1a: build the agent",
+    "kicker": "SOLO 1a · Your turn",
     "type": "practice",
     "layout": "exercise",
     "timer": 15,
@@ -1280,21 +1348,93 @@ window.SLIDES = [
       "bot": "multiarm",
       "place": "beside"
     },
-    "subtitle": "Do the dry run. Then test the chat with and without memory.",
-    "cards": [
-      {
-        "title": "Level",
-        "body": "SOLO 1"
-      }
-    ],
+    "subtitle": "All the code is in SOLO.md, Step 1. You copy it: you don't type it yourself.",
+    "cards": [],
     "steps": [
       {
-        "text": "Look at the plan, without the model",
+        "text": "Open SOLO.md in your editor and go to Step 1",
+        "after": "Everything you need is there, as Build 1, 2 and 3."
+      },
+      {
+        "text": "Build 1: the settings",
+        "after": "Replace the whole file 01-single-agent/options.mjs with Build 1."
+      },
+      {
+        "text": "Build 2: the work instructions",
+        "after": "Replace 01-single-agent/claude-project/CLAUDE.md with Build 2."
+      },
+      {
+        "text": "Build 3: the form",
+        "after": "Create 01-single-agent/priority-schema.mjs. Then add the import and the outputFormat line to options.mjs: that is the line people forget.",
+        "warn": true
+      },
+      {
+        "text": "Test it",
+        "prompt": "git checkout origin/step-1 -- test/step1.test.mjs\nnpm run verify",
+        "after": "Look for: fail 0. Stuck? git switch step-1 gives you the finished version."
+      }
+    ],
+    "expected": "npm run verify shows fail 0.",
+    "keyPoints": [
+      "Do the dry run. Then compare chat with and without memory."
+    ],
+    "teach": {
+      "time": "15 min",
+      "gist": "Build 1-3 from SOLO.md (settings, work instructions, form), then verify.",
+      "script": [
+        {
+          "say": "Now you build it. Open SOLO.md and go to Step 1. Everything you need is in there, as Build 1, 2 and 3. You copy it, you don't type it."
+        },
+        {
+          "do": "Point at steps 2 and 3.",
+          "say": "Build 1: the settings. Build 2: the work instructions, CLAUDE.md."
+        },
+        {
+          "do": "Point at step 4.",
+          "say": "Build 3: the form. Careful: you also add one line to options.mjs, the outputFormat line, and an import at the top. That's the one people forget."
+        },
+        {
+          "do": "Point at step 5.",
+          "say": "Then copy in the test, and run verify. Look for fail 0.",
+          "clip": "assets/day4-teach/a10-1-verify-outputformat.mp4"
+        },
+        {
+          "do": "Start the 15-minute timer."
+        }
+      ],
+      "do": [
+        "Paste Build 1-3 from SOLO.md.",
+        "Copy the test, run npm run verify."
+      ],
+      "done": [
+        "verify shows fail 0."
+      ],
+      "watch": [
+        "Verify fails on the schema → the outputFormat line or the import is missing in options.mjs.",
+        "Someone retyping code → remind them: copy from SOLO.md.",
+        "Stuck: git stash -u, then git switch step-1."
+      ]
+    },
+    "notes": "Participants copy Build 1 to 3 from SOLO.md, Step 1. The first test file is copied from the finished branch, then npm run verify. Fell behind or stuck? git switch step-1 (first git stash -u if they changed files)."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Your turn · Step 1b: look inside and test memory",
+    "kicker": "SOLO 1b · Your turn",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 10,
+    "visual": {},
+    "subtitle": "Now your agent is built. Look at the form and the trays, then test the memory.",
+    "cards": [],
+    "steps": [
+      {
+        "text": "Dress rehearsal",
         "prompt": "npm run lesson1 -- MSG-01 --dry-run",
         "after": "You see the options the agent gets. Find outputFormat: that is the priority schema."
       },
       {
-        "text": "Open 01-single-agent/priority-schema.mjs and lib/switch.mjs in your editor",
+        "text": "Open 01-single-agent/priority-schema.mjs and lib/switch.mjs",
         "after": "The schema says what the answer looks like. The Switch picks the route. Code decides the route, not the model."
       },
       {
@@ -1314,7 +1454,7 @@ window.SLIDES = [
       "Do the dry run. Then compare chat with and without memory."
     ],
     "teach": {
-      "time": "15 min",
+      "time": "10 min",
       "gist": "SOLO 1: dry run to see the schema, open schema + Switch, then the favourite-colour test with and without memory.",
       "script": [
         {
@@ -1360,31 +1500,145 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "What you see · Step 1",
-    "kicker": "What you see · Expected output",
+    "title": "Your turn · Step 1c: six messages and the tone trap",
+    "kicker": "SOLO 1c · Your turn",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 15,
+    "visual": {
+      "bot": "think",
+      "place": "beside"
+    },
+    "subtitle": "Your agent labels six real customer messages. Then you remove one rule and see what happens.",
+    "cards": [],
+    "steps": [
+      {
+        "text": "Label six messages, one by one",
+        "prompt": "npm run lesson1 -- MSG-01",
+        "after": "Then MSG-02 up to MSG-06. Write down each label: low, medium or high. You need them in Step 4."
+      },
+      {
+        "text": "Remove the rules for high, medium and low",
+        "after": "Cut the whole ## Priority definitions section from 01-single-agent/claude-project/CLAUDE.md. Save.",
+        "warn": true
+      },
+      {
+        "text": "Run two messages again",
+        "prompt": "npm run lesson1 -- MSG-01\nnpm run lesson1 -- MSG-06",
+        "after": "Compare with your first labels. Did anything change?"
+      },
+      {
+        "text": "Put the rules back",
+        "after": "Paste the section back and save. Lost it? git checkout origin/step-1 -- 01-single-agent/claude-project/CLAUDE.md"
+      },
+      {
+        "text": "Check it still works",
+        "prompt": "npm run verify",
+        "after": "Look for: fail 0."
+      }
+    ],
+    "expected": "Six labels written down, the tone-trap comparison noted, CLAUDE.md restored and fail 0.",
+    "keyPoints": [
+      "Do the dry run. Then compare chat with and without memory."
+    ],
+    "teach": {
+      "time": "15 min",
+      "gist": "Six live runs, labels written down; then the tone trap: remove the definitions, rerun 01 and 06, restore.",
+      "script": [
+        {
+          "say": "Now your agent does real work: six customer messages. Write down every label, you need them in Step 4."
+        },
+        {
+          "do": "Point at steps 2 and 3.",
+          "say": "Then the tone trap. You remove the rules for high, medium and low from CLAUDE.md, and run two messages again."
+        },
+        {
+          "ask": "What do you expect will happen without those rules?",
+          "say": "(Answer: the AI may judge by tone. An angry message looks urgent, a calm one harmless.)"
+        },
+        {
+          "do": "Point at steps 4 and 5.",
+          "say": "Then put the rules back, and check fail 0 again."
+        },
+        {
+          "do": "Start the 15-minute timer."
+        }
+      ],
+      "do": [
+        "Six runs, labels written down.",
+        "Tone trap: cut, rerun 01 and 06, restore.",
+        "npm run verify."
+      ],
+      "done": [
+        "Six labels written down.",
+        "Tone-trap comparison noted.",
+        "CLAUDE.md restored, fail 0."
+      ],
+      "watch": [
+        "For you only: MSG-01 low, 02 high, 03 medium, 04 low, 05 high, 06 low.",
+        "The label often does NOT change without the definitions (strong model). Say: 'the model got lucky, but now nothing in the file guarantees it. Would you bet the escalation queue on luck?'",
+        "Each live run takes a moment and uses their Claude Code quota."
+      ]
+    },
+    "notes": "Expected labels, for you only, don't say them aloud: MSG-01 low, 02 high, 03 medium, 04 low, 05 high, 06 low (checked against the package answer key). The tone trap: without the priority definitions the model may judge by tone, so a loud message looks urgent. A strong model often keeps the same label: that's fine, the point is that nothing in the file guarantees it any more. Each live run uses the participant's Claude Code quota; six runs is fine."
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Check: does your screen look like this?",
+    "kicker": "What you see · Step 1",
     "type": "concept",
     "visual": {
       "opener": "showcase",
       "image": "assets/workshop-4/see-step1.png",
       "imageLink": "Sample trace: the agent returns JSON, then the Switch picks a route"
     },
-    "subtitle": "Compare your terminal with this screen.",
+    "subtitle": "After a real run. Two things to look for.",
     "keyPoints": [
       "Structured output: JSON with priority and reason.",
       "Switch line: Switch → low → AUTO_REPLY. Code picks the route, not the model."
     ],
     "cards": [
       {
-        "title": "Structured output",
-        "body": "JSON with priority and reason."
+        "title": "1 · Structured output",
+        "body": "The filled-in form: priority and reason."
       },
       {
-        "title": "Switch line",
-        "body": "Switch → low → AUTO_REPLY. Code picks the route, not the model."
+        "title": "2 · The Switch line",
+        "body": "Switch → low → AUTO_REPLY. The code picked the tray, not the AI."
       }
     ],
     "notes": "This is the labelled sample in docs/sample-trace.md. A live run shows the same labels with other text. The [result] line shows turns, time and cost.",
-    "stateId": "24:What you see · Step 1"
+    "stateId": "24:What you see · Step 1",
+    "teach": {
+      "time": "2 min",
+      "gist": "Compare: the filled-in form, then the Switch line.",
+      "script": [
+        {
+          "say": "Compare your screen with this one. Two things."
+        },
+        {
+          "do": "Point at card 1.",
+          "say": "The filled-in form: priority and reason."
+        },
+        {
+          "do": "Point at card 2.",
+          "say": "And the Switch line: the code picked the tray."
+        },
+        {
+          "ask": "Your reason text is different from mine. Is that a problem?",
+          "say": "(Answer: no. The words differ per run. The priority and the route are what matter.)"
+        }
+      ],
+      "do": [
+        "Compare with the screenshot."
+      ],
+      "done": [
+        "Everyone found both lines."
+      ],
+      "watch": [
+        "This screenshot is a sample: the reason text is different on every run."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
