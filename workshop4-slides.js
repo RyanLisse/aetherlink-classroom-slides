@@ -839,11 +839,11 @@ window.SLIDES = [
       },
       {
         "title": "Branch",
-        "body": "A saved version of the package. step-1 to step-4 are the finished versions of each step."
+        "body": "A saved version of the package. step-1 to step-4 are the finished versions of each step. You only need them if you fall behind."
       },
       {
         "title": "git stash -u",
-        "body": "Puts your own changes safely aside before you switch branch. They are not lost."
+        "body": "Puts your own changes safely aside before you switch to a finished version. They are not lost. Only needed if you fall behind."
       },
       {
         "title": "npm run …",
@@ -863,7 +863,7 @@ window.SLIDES = [
           "say": "The terminal is where you type commands. The editor is where you change files. cd means: go to this folder. A branch is a saved version; step-1 to step-4 are the finished versions."
         },
         {
-          "say": "git stash -u puts your own changes safely aside before you switch to another branch. You do not lose them. And npm run presses a button in the package."
+          "say": "git stash -u puts your own changes safely aside before you switch to another branch. You do not lose them. Branch and git stash are your safety net: you only need them if you fall behind and want to catch up. And npm run presses a button in the package."
         },
         {
           "ask": "Which command do you use before switching to another branch?",
@@ -901,7 +901,7 @@ window.SLIDES = [
       },
       {
         "title": "4 · npm run lesson1 -- MSG-01 --dry-run",
-        "body": "A dress rehearsal: shows what the agent would receive, without calling the AI. Look for: backend: claude-code."
+        "body": "A dress rehearsal: shows what the agent would receive, without calling the AI. Look for: backend: claude-code. The {} is the agent's settings, still empty: you fill them in Step 1."
       }
     ],
     "keyPoints": [
@@ -937,7 +937,7 @@ window.SLIDES = [
         },
         {
           "do": "Type npm run lesson1 -- MSG-01 --dry-run. Point at 'backend: claude-code'.",
-          "say": "And this is the dress rehearsal. Do you see this line? It uses your Claude Code login. And it says: dry run, no model call.",
+          "say": "And this is the dress rehearsal. Do you see this line? It uses your Claude Code login. And it says: dry run, no model call. Two more things. The {} in the middle is the agent's settings: still empty, because you fill them in Step 1. And the line Claude Code equivalent shows what happens under the hood. You never type it.",
           "clip": "assets/day4-teach/a07-3-dry-runs.mp4"
         },
         {
@@ -954,7 +954,8 @@ window.SLIDES = [
       ],
       "watch": [
         "Windows laptops: check docs/SETUP.md beforehand.",
-        "A dry run says nothing about the quality of the agent. It only checks the setup."
+        "A dry run says nothing about the quality of the agent. It only checks the setup.",
+        "Every npm line shows aetherlink-day5-n8n-to-agent. That is the package's internal name: it is the right package for Day 4."
       ]
     },
     "tagline": "Why first? If something is missing, you find out now, not halfway through an exercise."
@@ -996,7 +997,7 @@ window.SLIDES = [
       {
         "text": "Do a dress rehearsal",
         "prompt": "npm run lesson1 -- MSG-01 --dry-run",
-        "after": "The last line reads: dry run — no model call. That is correct: the AI does nothing yet."
+        "after": "The last line reads: dry run — no model call. That is correct: the AI does nothing yet. Keep --dry-run until you have built Step 1: without it, the package stops and says Step 1 is not built yet."
       }
     ],
     "expected": "verify shows fail 0, and the dry run ends with “dry run — no model call”.",
@@ -1044,7 +1045,8 @@ window.SLIDES = [
         "'Missing script' or 'could not find package.json': they are in the wrong folder. They should cd aetherlink-day4-n8n-to-agent first.",
         "'git' not found: Git is not installed. See docs/SETUP.md.",
         "Error at npm ci: check the Node version. node --version must be 22 or higher.",
-        "The backend says sdk: add --backend claude-code."
+        "The backend says sdk: add --backend claude-code.",
+        "Someone ran it without --dry-run and sees Step 1 is not built yet: that is correct before Step 1. Add --dry-run."
       ]
     }
   },
@@ -1070,7 +1072,7 @@ window.SLIDES = [
       },
       {
         "title": "2 · After the dry run",
-        "body": "The last line reads: dry run — no model call. That is correct: the AI has not done anything yet."
+        "body": "The last line reads: dry run — no model call. That is correct: the AI has not done anything yet. The {} above it is the empty settings list."
       }
     ],
     "notes": "Show this after Step 0. The first line of the dry run says how the agent runs (backend: claude-code means your login). A dry run does not call the AI, so it says nothing about how good the agent is.",
