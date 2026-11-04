@@ -503,32 +503,24 @@ window.SLIDES = [
     "title": "Why move the flow to code?",
     "kicker": "Context · why code",
     "type": "context",
-    "visual": {
-      "stack": [
-        "test",
-        "limit",
-        "control"
-      ],
-      "bot": "think",
-      "place": "beside"
-    },
-    "subtitle": "n8n is great for drawing the flow. Code lets you test it, limit it and control it.",
+    "visual": {},
+    "subtitle": "n8n is great for drawing. Code lets you test, limit and control.",
     "cards": [
       {
         "title": "Test it",
-        "body": "You write down low, medium or high for each customer message. npm run check marks them against a hidden answer key: correct or revise."
+        "body": "You label each message low, medium or high. npm run check marks it: correct or revise."
       },
       {
-        "title": "Where does “npm run check” come from?",
-        "body": "npm comes with Node.js: it is the remote control of a code project.\nThe workshop package has buttons built in: check, doctor, verify.\nnpm run check presses the button called check."
+        "title": "What is npm run check?",
+        "body": "npm = the remote control of a code project. check = a button built into the package."
       },
       {
         "title": "Limit it",
-        "body": "Each agent gets its own key ring: a list of the tools it may use."
+        "body": "Each agent gets its own key ring: only the tools it needs."
       },
       {
         "title": "Control it",
-        "body": "A hook is a barrier: before any change, the code checks first. The AI cannot skip it."
+        "body": "A hook is a barrier: before any change, the code checks first."
       }
     ],
     "keyPoints": [
@@ -582,7 +574,7 @@ window.SLIDES = [
         "The answer key is encrypted: nobody can peek, everybody has to think."
       ]
     },
-    "tagline": "npm run check = press the button called “check”. The buttons only work in the project they were built for."
+    "tagline": "The buttons only work inside the workshop package folder."
   },
   {
     "lessonId": "workshop-4",
