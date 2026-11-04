@@ -11,11 +11,11 @@ window.SLIDES = [
       "place": "beside"
     },
     "subtitle": "Yesterday you built the flow in n8n. Today you build the same flow in code.",
-    "notes": "On screen while people arrive. Today we build yesterday's n8n support flow again, now in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages: we do not import the n8n flow. Did someone's Day 3 flow not work? No problem: they use the example results in the package.",
+    "notes": "Keep this slide on screen while people arrive. Today we build yesterday's n8n support flow again, this time in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages. We do not import the n8n flow. If someone's Day 3 flow did not work, that is no problem: they can use the example results in the package.",
     "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK",
     "teach": {
       "time": "2 min",
-      "gist": "Welcome: yesterday the sorting machine in n8n blocks, today the same machine in code.",
+      "gist": "Welcome. Yesterday you built the sorting machine from n8n blocks. Today we build the same machine in code.",
       "script": [
         {
           "do": "Have this slide on screen while people come in."
@@ -24,22 +24,22 @@ window.SLIDES = [
           "say": "Yesterday you built a sorting machine for customer messages in n8n, by connecting blocks. Today we build exactly the same machine, but in code."
         },
         {
-          "say": "Why code? Code you can test, save and limit: you decide what each agent may and may not do."
+          "say": "Why code? Because you can test it, save it and limit it. You decide what each agent may and may not do."
         },
         {
-          "ask": "Who still remembers what the last block of yesterday's flow was?",
-          "say": "(Answer: a person checks before anything goes to the customer. That stays today too.)"
+          "ask": "Who remembers what the last block of yesterday's flow was?",
+          "say": "(Answer: a person checks before anything goes to the customer. That stays true today.)"
         }
       ],
       "do": [
         "Welcome everyone.",
-        "Name the goal: same flow, now in code."
+        "Name the goal: the same flow, now in code."
       ],
       "done": [
-        "Everyone knows today is yesterday's flow, now in code."
+        "Everyone knows that today is yesterday's flow, now in code."
       ],
       "watch": [
-        "Day 3 did not work for someone? Reassure them: the package has example results, nobody is behind."
+        "Did Day 3 not work for someone? Reassure them: the package has example results, so nobody is behind."
       ]
     }
   },
@@ -70,10 +70,10 @@ window.SLIDES = [
       "Connect 'wrong' to today: test, tool list, hook",
       "Keep the goals for the close"
     ],
-    "notes": "Time: 6 min, three rounds of 2 min. Write the answers on the board. Round 2: connect each problem to today. Hard to test → npm run check. Every agent could do everything → a tool list per agent. No stop before a change → a hook. Round 3: keep the goals on the board and come back to them at the close.",
+    "notes": "Time: 6 minutes, three rounds of 2 minutes. Write the answers on the board. In round 2, connect each problem to today. Hard to test: npm run check. Every agent could do everything: a tool list per agent. No stop before a change: a hook. In round 3, keep the goals on the board and come back to them at the close.",
     "teach": {
       "time": "6 min",
-      "gist": "Three short rounds: what was useful, what went wrong, what is your goal today.",
+      "gist": "Three short rounds: what was useful, what went wrong, and what is your goal for today.",
       "script": [
         {
           "do": "Point at card 1. Start a 2-minute timer.",
@@ -85,23 +85,23 @@ window.SLIDES = [
         },
         {
           "do": "Connect each answer to today.",
-          "say": "Hard to test? Today you get one command that tests everything. Every agent could do everything? Today each agent gets its own list. No stop before a change? Today we build a brake: a person says yes first."
+          "say": "Was it hard to test? Today you get one command that tests everything. Could every agent do everything? Today each agent gets its own list. Was there no stop before a change? Today we build a brake: a person says yes first."
         },
         {
           "do": "Point at card 3.",
-          "say": "Round three. What do you want to be able to do at the end of today? Write it down. We come back to it at the end."
+          "say": "Round three. What do you want to be able to do at the end of today? Write it down. We will come back to it at the end."
         }
       ],
       "do": [
-        "Three rounds, two minutes each.",
-        "Answers on the board."
+        "Three rounds of two minutes each.",
+        "Put the answers on the board."
       ],
       "done": [
-        "One answer per table for each round.",
+        "Each table has given one answer for each round.",
         "The goals are on the board for the close."
       ],
       "watch": [
-        "A table stays quiet? Ask one person directly: what surprised you yesterday?",
+        "Is a table quiet? Ask one person directly: what surprised you yesterday?",
         "Keep it short: the real work starts in 5 minutes."
       ]
     }
@@ -131,11 +131,11 @@ window.SLIDES = [
       "Ticket Input: One support message.",
       "Switch: Three routes: low, medium, high."
     ],
-    "notes": "Recap 1/4 (10:05). Show Maarten’s first flow: manual trigger, Ticket Input, Switch with three routes. Say: today the Switch becomes lib/switch.mjs.",
+    "notes": "Recap 1 of 4 (10:05). Show Maarten’s first flow: a manual trigger, Ticket Input, and a Switch with three routes. Say that today the Switch becomes lib/switch.mjs.",
     "stateId": "4:Yesterday’s flow · 1. Ticket in, Switch out",
     "teach": {
       "time": "2 min",
-      "gist": "The Switch = the sorting clerk: the AI gives the label, the Switch picks the tray.",
+      "gist": "The Switch is the sorting clerk: the AI gives the label, and the Switch picks the tray.",
       "script": [
         {
           "do": "Point at Ticket Input.",
@@ -143,7 +143,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at Switch.",
-          "say": "Then the Switch. Think of the post room: a letter comes in and the clerk puts it in one of three trays. High, medium or low. The Switch is that clerk: fixed rules, no thinking."
+          "say": "Then comes the Switch. Think of the post room: a letter comes in and the clerk puts it in one of three trays: high, medium or low. The Switch is that clerk. It follows fixed rules and does not think."
         },
         {
           "say": "The AI reads the message and says: this is high. The Switch then puts it in the right tray. So you always know exactly where a message goes."
@@ -158,13 +158,13 @@ window.SLIDES = [
       ],
       "do": [
         "Show the first n8n flow.",
-        "Explain: the AI gives the label, the Switch picks the tray."
+        "Explain: the AI gives the label, and the Switch picks the tray."
       ],
       "done": [
         "Everyone can say what the Switch does."
       ],
       "watch": [
-        "People mix up the AI and the Switch. Repeat: AI = label, Switch = tray."
+        "People mix up the AI and the Switch. Repeat: the AI gives the label, the Switch picks the tray."
       ]
     }
   },
@@ -198,11 +198,11 @@ window.SLIDES = [
       "New customer = start fresh",
       "Never carry customer A's chat over to customer B"
     ],
-    "notes": "Yesterday's second flow: a chat in front of the AI Agent, and memory under it. Ask: what happened before you added memory, and after? Today npm run chat does the same: it remembers within one conversation. A new conversation must never get another customer's messages.",
+    "notes": "Yesterday's second flow had a chat in front of the AI Agent, and memory under it. Ask: what happened before you added memory, and what happened after? Today npm run chat does the same: it remembers within one conversation. A new conversation must never receive another customer's messages.",
     "stateId": "5:Yesterday’s flow · 2. Chat and an AI Agent",
     "teach": {
       "time": "2 min",
-      "gist": "Chat in, AI Agent reads, memory remembers the conversation. Never mix customers.",
+      "gist": "The chat comes in, the AI Agent reads it, and the memory keeps the conversation. Never mix up customers.",
       "script": [
         {
           "do": "Point at the chat block.",
@@ -210,25 +210,25 @@ window.SLIDES = [
         },
         {
           "do": "Point at the Memory socket under the agent.",
-          "say": "Under the agent you plug in memory. Think of a conversation at the desk: as long as the same customer stands in front of you, you remember what he just said."
+          "say": "Under the agent you plug in memory. Think of a conversation at the desk: as long as the same customer is standing in front of you, you remember what they just said."
         },
         {
-          "say": "A new customer? Then you start fresh. You may never take the conversation of customer A to customer B."
+          "say": "A new customer? Then you start fresh. You may never carry the conversation of customer A over to customer B."
         },
         {
           "ask": "Why is that so important at a payment company?",
-          "say": "(Answer: privacy. Customer B may never see anything of customer A.)"
+          "say": "(Answer: privacy. Customer B may never see anything from customer A.)"
         }
       ],
       "do": [
-        "Explain chat, agent and memory.",
-        "Name the rule: never mix customers."
+        "Explain the chat, the agent and the memory.",
+        "Name the rule: never mix up customers."
       ],
       "done": [
         "Everyone can say what memory does, and where it stops."
       ],
       "watch": [
-        "People think memory means the AI learns forever. No: it only remembers within one conversation."
+        "People may think memory means the AI keeps learning forever. It does not: it only remembers within one conversation."
       ]
     }
   },
@@ -258,20 +258,20 @@ window.SLIDES = [
       "Parser = the form, and the check",
       "Switch = the trays"
     ],
-    "notes": "Yesterday the Parser had two fields: priority and message. Today the package has its own form (priority-schema.mjs), with its own fields; it is not exactly the same as Day 3. Two different kinds of mistakes: the form is not filled in correctly (a parse error), or the form is correct but the priority is wrong (a wrong decision). Look at them separately.",
+    "notes": "Yesterday the Parser had two fields: priority and message. Today the package has its own form (priority-schema.mjs) with its own fields, so it is not exactly the same as on Day 3. There are two different kinds of mistake. In the first, the form is not filled in correctly (a parse error). In the second, the form is correct but the priority is wrong (a wrong decision). Look at them separately.",
     "stateId": "6:Yesterday’s flow · 3. Structured output",
     "tagline": "An AI likes to talk, but a machine cannot do anything with a story. So we ask the AI to fill in a form.",
     "teach": {
       "time": "2 min",
-      "gist": "Parser = the form the AI must fill in. Switch = the trays. AI gives the label, code picks the route.",
+      "gist": "The Parser is the form the AI must fill in. The Switch is the trays. The AI gives the label, and the code picks the route.",
       "script": [
         {
           "do": "Point at the AI Agent.",
-          "say": "An AI likes to talk. Ask it something and you get a story. But a machine can't do anything with a story."
+          "say": "An AI likes to talk. Ask it something and you get a story. But a machine cannot do anything with a story."
         },
         {
           "do": "Point at Structured Output Parser.",
-          "say": "So we give the AI a form. Field one: priority, high, medium or low. Field two: the message. The Parser hands out the form and checks it is filled in correctly."
+          "say": "So we give the AI a form. Field one: priority, which is high, medium or low. Field two: the message. The Parser hands out the form and checks that it is filled in correctly."
         },
         {
           "do": "Point at the Switch.",
@@ -279,18 +279,18 @@ window.SLIDES = [
         },
         {
           "ask": "What can go wrong here? Two things.",
-          "say": "(Answer: the form is filled in wrong, or the form is right but the priority is wrong. Two different problems.)"
+          "say": "(Answer: the form is filled in wrongly, or the form is right but the priority is wrong. Those are two different problems.)"
         }
       ],
       "do": [
-        "Explain: AI talks, machine needs a form.",
-        "Parser = form, Switch = trays."
+        "Explain: the AI talks, but the machine needs a form.",
+        "The Parser is the form, and the Switch is the trays."
       ],
       "done": [
-        "Everyone can say the difference between the Parser and the Switch."
+        "Everyone can say what the difference is between the Parser and the Switch."
       ],
       "watch": [
-        "Today's form has its own fields. Don't promise it is exactly the same as yesterday."
+        "Today's form has its own fields. Do not promise that it is exactly the same as yesterday's."
       ]
     }
   },
@@ -324,37 +324,37 @@ window.SLIDES = [
       "Each specialist has one job",
       "Today: 2 agents + 1 lookup tool"
     ],
-    "notes": "Yesterday's team: three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? Was someone's Day 3 flow blocked? Show this screenshot as the example and explain the idea; do not say their flow worked. Today Reply and Risk become subagents; the Customer Context Agent becomes an MCP tool that looks up customers.",
+    "notes": "Yesterday's team had three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? If someone's Day 3 flow was blocked, show this screenshot as the example and explain the idea. Do not say that their flow worked. Today Reply and Risk become subagents, and the Customer Context Agent becomes an MCP tool that looks up customers.",
     "stateId": "7:Optional yesterday, explained today: specialist agents",
     "teach": {
       "time": "3 min",
-      "gist": "Three specialists, each one job. Today: 2 agents in code + 1 lookup tool.",
+      "gist": "Three specialists, each with one job. Today we build two agents in code and one lookup tool.",
       "script": [
         {
-          "say": "Yesterday's last step: a team of specialists. Just like at the office: you don't ask one person to do everything."
+          "say": "Yesterday's last step was a team of specialists. Just like at the office: you do not ask one person to do everything."
         },
         {
           "do": "Point at the three agents, left to right.",
-          "say": "The writer writes the reply. The risk expert decides how risky it is. The records desk looks up the customer."
+          "say": "The writer writes the reply. The risk expert decides how risky the message is. The records desk looks up the customer."
         },
         {
           "do": "Point at the tagline.",
-          "say": "Today we build this team in code. The writer and the risk expert become two agents. The records desk becomes a lookup tool: it only looks things up, it doesn't think."
+          "say": "Today we build this team in code. The writer and the risk expert become two agents. The records desk becomes a lookup tool: it only looks things up and does not think."
         },
         {
           "ask": "Who called the Risk Agent in your flow yesterday?",
-          "say": "(Listen. If someone's flow did not work: show this screenshot as the example.)"
+          "say": "(Listen to the answers. If someone's flow did not work, show this screenshot as the example.)"
         }
       ],
       "do": [
-        "Name the three specialists and their job.",
+        "Name the three specialists and their jobs.",
         "Say what they become today."
       ],
       "done": [
-        "Everyone knows: today 2 agents and 1 lookup tool."
+        "Everyone knows that today we build two agents and one lookup tool."
       ],
       "watch": [
-        "Someone's Day 3 did not work? Use this screenshot as the example; nobody is behind."
+        "Did someone's Day 3 not work? Use this screenshot as the example. Nobody is behind."
       ]
     }
   },
@@ -384,24 +384,24 @@ window.SLIDES = [
       "Who may do what",
       "A person says yes before a change"
     ],
-    "notes": "Say the goal in one sentence: at 16:00 you have an agent team you built yourself, and you can explain it. Come back to this at the close, together with the goals people wrote down on slide 2.",
+    "notes": "Say the goal in one sentence: at 16:00 you will have an agent team that you built yourself, and you can explain it. Come back to this at the close, together with the goals that people wrote down on slide 2.",
     "stateId": "9:Goal of today",
     "teach": {
       "time": "1 min",
-      "gist": "At 16:00: built it yourself, can explain who may do what, knows when a person says yes.",
+      "gist": "At 16:00 you will have built it yourself, be able to explain who may do what, and know when a person says yes.",
       "script": [
         {
-          "say": "At four o'clock you have an agent team that you built yourself, and that you can explain."
+          "say": "At four o'clock you will have an agent team that you built yourself, and that you can explain."
         },
         {
           "do": "Point at the three cards.",
           "say": "You built it. You can say which agent may do what. And you know when a person must say yes before anything changes."
         },
         {
-          "say": "At the end of the day we come back to this, and to the goals you wrote down this morning."
+          "say": "At the end of the day we will come back to this, and to the goals you wrote down this morning."
         },
         {
-          "say": "And this is how we get there. Next slide: the day in four blocks."
+          "say": "And this is how we get there. On the next slide: the day in four blocks."
         }
       ],
       "do": [
@@ -442,24 +442,24 @@ window.SLIDES = [
     "keyPoints": [
       "Rhythm: I show it, you do it, we check it"
     ],
-    "notes": "Name the breaks out loud. Fell behind? Each step has a finished version you can switch to (step-1 … step-4). Step 5, build your own agent, is optional: at home. Workshop package: github.com/RyanLisse/aetherlink-day5-n8n-to-agent (checked 4 Nov: the steps and commands on the slides match the step-1 … step-4 branches).",
+    "notes": "Name the breaks out loud. Has someone fallen behind? Each step has a finished version that they can switch to (step-1 … step-4). Step 5, build your own agent, is optional: it is for at home. Workshop package: github.com/RyanLisse/aetherlink-day5-n8n-to-agent (checked on 4 Nov: the steps and commands on the slides match the step-1 … step-4 branches).",
     "stateId": "8:Today · agenda",
     "teach": {
       "time": "1 min",
-      "gist": "The day in four blocks. Rhythm: I show it, you do it, we check it.",
+      "gist": "The day in four blocks. The rhythm: I show it, you do it, we check it.",
       "script": [
         {
           "do": "Point at the four blocks, left to right.",
-          "say": "This is our day: four blocks. The start, step 1, then steps 2 to 4, and at the end your own assignment."
+          "say": "This is our day, in four blocks: the start, step 1, then steps 2 to 4, and at the end your own assignment."
         },
         {
-          "say": "The rhythm all day: first I show it, then you do it, then we check together if your screen shows the same."
+          "say": "The rhythm all day is the same. First I show it, then you do it, and then we check together whether your screen shows the same."
         },
         {
-          "say": "Fell behind? No problem. Every step has a finished version you can jump to."
+          "say": "Have you fallen behind? No problem. Every step has a finished version that you can jump to."
         },
         {
-          "do": "Name the breaks: 11:00, lunch at 12:00, 14:45."
+          "do": "Name the breaks: 11:00, lunch at 12:00, and 14:45."
         }
       ],
       "do": [
@@ -503,29 +503,29 @@ window.SLIDES = [
       "Check: your labels against the answer key",
       "Limit: key ring · Control: barrier"
     ],
-    "notes": "These are the three problems from the recap on slide 2: hard to test, every agent could do everything, no stop before a change. npm run check compares the labels you wrote down (low, medium, high per message) with a hidden answer key, and says per message: correct or revise. A hook is a piece of code that runs before a change, and can say no. npm comes with Node.js; the buttons are listed under 'scripts' in package.json. They only work inside the package folder.",
+    "notes": "These are the three problems from the recap on slide 2: hard to test, every agent could do everything, and no stop before a change. npm run check compares the labels you wrote down (low, medium or high for each message) with a hidden answer key, and says for each message: correct or revise. A hook is a piece of code that runs before a change and can say no. npm comes with Node.js. The buttons are listed under 'scripts' in package.json, and they only work inside the package folder.",
     "stateId": "10:Why move the flow to code?",
     "teach": {
       "time": "2 min",
-      "gist": "Three reasons for code: test with one command, limit with a key ring per agent, control with a barrier.",
+      "gist": "There are three reasons for code: test with one command, limit with a key ring per agent, and control with a barrier.",
       "script": [
         {
           "say": "Why leave n8n? n8n is great for drawing. But remember the three problems from this morning."
         },
         {
           "do": "Point at Test it.",
-          "say": "One: testing. In code you type one command, npm run check, and it marks all your answers against the answer key. Like a teacher with the answer sheet."
+          "say": "One: testing. In code you type one command, npm run check, and it marks all your answers against the answer key, like a teacher with the answer sheet."
         },
         {
           "do": "Point at the card 'Where does npm run check come from?'.",
-          "say": "What is npm? It comes with Node.js, and it is the remote control of a code project. Someone built buttons into this package: check, doctor, verify. npm run check means: press the button called check."
+          "say": "What is npm? It comes with Node.js, and it is the remote control of a code project. Someone built buttons into this package: check, doctor and verify. npm run check means: press the button called check."
         },
         {
-          "say": "Careful: the buttons only work in the project they were built for. Like a remote control: it only works with its own TV. In another project, check may not exist, or do something else."
+          "say": "Be careful: the buttons only work in the project they were built for. It is like a remote control, which only works with its own TV. In another project, check may not exist, or it may do something else."
         },
         {
           "do": "Point at Limit it.",
-          "say": "Two: limiting. Each agent gets its own key ring. A new colleague doesn't get the key to the vault on day one either."
+          "say": "Two: limiting. Each agent gets its own key ring. A new colleague does not get the key to the vault on day one either."
         },
         {
           "do": "Point at Control it.",
@@ -544,8 +544,8 @@ window.SLIDES = [
         "Everyone can name test, limit and control."
       ],
       "watch": [
-        "Someone types npm run check outside the package folder? Then npm can't find the buttons: first cd into the package folder.",
-        "The answer key is encrypted: nobody can peek, everybody has to think."
+        "Does someone type npm run check outside the package folder? Then npm cannot find the buttons. Tell them to cd into the package folder first.",
+        "The answer key is encrypted: nobody can peek, so everybody has to think."
       ]
     },
     "tagline": "These buttons only work inside the workshop package folder."
@@ -609,17 +609,17 @@ window.SLIDES = [
       "Only the name changes",
       "Same person at the end"
     ],
-    "notes": "Go row by row, top to bottom. Everything they built yesterday comes back today, only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv); the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
+    "notes": "Go row by row, from top to bottom. Everything they built yesterday comes back today, and only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv), and the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
     "stateId": "11:n8n ↔ Agent SDK at a glance",
     "teach": {
       "time": "3 min",
-      "gist": "The dictionary: yesterday's block, today's name, what it means. One row per click.",
+      "gist": "The dictionary: yesterday's block, today's name, and what it means. One row per click.",
       "script": [
         {
-          "say": "This is our dictionary. Left: what you built yesterday. Middle: what it is called today. Right: what it means."
+          "say": "This is our dictionary. On the left is what you built yesterday. In the middle is what it is called today. On the right is what it means."
         },
         {
-          "do": "Go through the rows top to bottom. Read the right column out loud.",
+          "do": "Go through the rows from top to bottom. Read the right column out loud.",
           "say": "The AI Agent becomes query(): ask the AI. The System Message becomes CLAUDE.md: the work instructions. And so on."
         },
         {
@@ -631,18 +631,18 @@ window.SLIDES = [
           "say": "(Answer: Priority Parser, json_schema.)"
         },
         {
-          "say": "Everything from yesterday comes back. Only the name changes. And at the end: still a person who checks."
+          "say": "Everything from yesterday comes back. Only the name changes. And at the end there is still a person who checks."
         }
       ],
       "do": [
-        "Click row by row.",
+        "Click through row by row.",
         "Read the right column."
       ],
       "done": [
         "Everyone can find yesterday's blocks in today's names."
       ],
       "watch": [
-        "Don't explain every technical name in depth. The right column is enough for now: the details come with each step."
+        "Do not explain every technical name in depth. The right column is enough for now. The details come with each step."
       ]
     }
   },
@@ -679,18 +679,18 @@ window.SLIDES = [
       "Text is not success; check evidence.",
       "Errors, limits and people can stop the run."
     ],
-    "notes": "Think of a chef and a kitchen assistant. The AI is the chef: it thinks and asks 'give me the customer details'. The code is the assistant: it checks 'is the chef allowed this?', fetches it and hands it back. The chef carries on with what it got. Round after round, until the dish is ready, or the maximum number of rounds (maxTurns) is reached, or something is refused. Two things to remember: the AI never touches anything itself, it only asks. And 'the AI says it is done' is not proof: always check the proof. A hook checks at fixed moments (for example before a change); it is not the same as a person approving.",
+    "notes": "Think of a chef and a kitchen assistant. The AI is the chef: it thinks and asks 'give me the customer details'. The code is the assistant: it checks 'is the chef allowed this?', fetches it and hands it back. The chef carries on with what it received. This goes on round after round, until the dish is ready, until the maximum number of rounds (maxTurns) is reached, or until something is refused. There are two things to remember. The AI never touches anything itself: it only asks. And 'the AI says it is done' is not proof, so always check the evidence. A hook checks at fixed moments (for example before a change). That is not the same as a person approving.",
     "stateId": "12:One agent loop. Bounded actions.",
     "teach": {
       "time": "4 min",
-      "gist": "Chef (AI) asks, kitchen assistant (code) checks and does. AI never touches anything itself. 'Done' is not proof.",
+      "gist": "The chef (the AI) asks, and the kitchen assistant (the code) checks and does. The AI never touches anything itself. 'Done' is not proof.",
       "script": [
         {
           "say": "How does an agent actually work? Think of a chef and a kitchen assistant."
         },
         {
           "do": "Point at box 1 and 2.",
-          "say": "The AI is the chef. It thinks and says: give me the customer details."
+          "say": "The AI is the chef. It thinks, and then says: give me the customer details."
         },
         {
           "do": "Point at box 3 and 4.",
@@ -698,11 +698,11 @@ window.SLIDES = [
         },
         {
           "do": "Trace the arrows round with your finger.",
-          "say": "The chef carries on with what it got. Round after round, until the dish is ready."
+          "say": "The chef carries on with what it received. Round after round, until the dish is ready."
         },
         {
           "do": "Point at the orange line at the top.",
-          "say": "And when the chef says: the dish is ready? Then a person tastes it first."
+          "say": "And when the chef says the dish is ready? Then a person tastes it first."
         },
         {
           "say": "Remember two things. One: the AI never touches anything itself. It only asks. Two: when the AI says it is done, that is not proof. You always check the evidence."
@@ -713,14 +713,14 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Tell the chef and kitchen assistant story.",
-        "Two rules: AI only asks, 'done' is not proof."
+        "Tell the story of the chef and the kitchen assistant.",
+        "Give the two rules: the AI only asks, and 'done' is not proof."
       ],
       "done": [
         "Everyone can say who asks and who does."
       ],
       "watch": [
-        "People think the AI 'goes into' the system itself. Repeat: it only asks, the code does it.",
+        "People may think the AI 'goes into' the system itself. Repeat: it only asks, and the code does it.",
         "The loop also stops when the maximum number of rounds is reached, or when something is refused."
       ]
     }
@@ -746,14 +746,14 @@ window.SLIDES = [
       "Use your Claude Code login",
       "No API key needed"
     ],
-    "notes": "For you: the same agent can also run with a paid API key. Careful: if someone has an API key set on their laptop, the package uses it by itself. Then add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here.",
+    "notes": "For you: the same agent can also run with a paid API key. Be careful: if someone has an API key set on their laptop, the package uses it by itself. In that case, add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here.",
     "stateId": "13:Two ways to run the same agent",
     "teach": {
       "time": "1 min",
-      "gist": "We run on the Claude Code login from Day 1. No API key.",
+      "gist": "We run on the Claude Code login from Day 1. No API key is needed.",
       "script": [
         {
-          "say": "Good news: you already have everything. We use your Claude Code login from Day 1. You don't need to request anything new."
+          "say": "Good news: you already have everything. We use your Claude Code login from Day 1. You do not need to request anything new."
         }
       ],
       "do": [
@@ -763,7 +763,7 @@ window.SLIDES = [
         "Nobody is looking for an API key."
       ],
       "watch": [
-        "Someone's run picks 'sdk' by itself? Then an API key is set on their laptop. Add --backend claude-code to the command.",
+        "Does someone's run choose 'sdk' by itself? Then an API key is set on their laptop. Add --backend claude-code to the command.",
         "The n8n trial credits from yesterday do not work here."
       ]
     }
@@ -798,17 +798,17 @@ window.SLIDES = [
       "The AI does nothing yet",
       "Look for: backend: claude-code"
     ],
-    "notes": "You show this; participants do it on the next slide. Run the commands exactly as in SOLO.md. Point at the line 'backend: claude-code': that means the login is used. A dry run does not call the AI: so it says nothing yet about how good the agent is. Setup per platform (Windows, WSL, Mac, Docker) is in docs/SETUP.md.",
+    "notes": "You show this, and the participants do it on the next slide. Run the commands exactly as in SOLO.md. Point at the line 'backend: claude-code': it means that the login is being used. A dry run does not call the AI, so it does not yet tell you how good the agent is. Setup for each platform (Windows, WSL, Mac, Docker) is in docs/SETUP.md.",
     "stateId": "14:Demo · Step 0: the offline path",
     "teach": {
       "time": "5 min",
-      "gist": "Demo: install, health check, tests, dress rehearsal. The AI does nothing yet.",
+      "gist": "Demo: install, health check, tests and dress rehearsal. The AI does nothing yet.",
       "script": [
         {
-          "say": "Before we build anything, I'll show you how to check your laptop is ready. Just watch. On the next slide you do it yourself."
+          "say": "Before we build anything, I will show you how to check that your laptop is ready. Just watch. On the next slide you do it yourself."
         },
         {
-          "say": "Before we build anything, we check that the stage is set. Like a dress rehearsal: the AI does nothing yet."
+          "say": "First we check that the stage is set. It is like a dress rehearsal: the AI does nothing yet."
         },
         {
           "do": "Type npm ci.",
@@ -817,7 +817,7 @@ window.SLIDES = [
         },
         {
           "do": "Type npm run doctor.",
-          "say": "The health check: are Node and Claude Code installed, and new enough? Look for 'meets minimum'."
+          "say": "This is the health check: are Node and Claude Code installed, and are they recent enough? Look for 'meets minimum'."
         },
         {
           "do": "Type npm run verify.",
@@ -826,7 +826,7 @@ window.SLIDES = [
         },
         {
           "do": "Type npm run lesson1 -- MSG-01 --dry-run. Point at 'backend: claude-code'.",
-          "say": "And the dress rehearsal. See this line? It uses your Claude Code login. And it says: dry run, no model call.",
+          "say": "And this is the dress rehearsal. Do you see this line? It uses your Claude Code login. And it says: dry run, no model call.",
           "clip": "assets/day4-teach/a07-3-dry-runs.mp4"
         },
         {
@@ -839,11 +839,11 @@ window.SLIDES = [
         "Point at 'backend: claude-code'."
       ],
       "done": [
-        "Everyone saw the four commands and knows what each one does."
+        "Everyone has seen the four commands and knows what each one does."
       ],
       "watch": [
         "Windows laptops: check docs/SETUP.md beforehand.",
-        "A dry run says nothing about the quality of the agent: it only checks the setup."
+        "A dry run says nothing about the quality of the agent. It only checks the setup."
       ]
     },
     "tagline": "Why first? If something is missing, you find out now, not halfway through an exercise."
@@ -894,14 +894,14 @@ window.SLIDES = [
       "main is Step 0; step-1 through step-4 contain the finished steps.",
       "With ANTHROPIC_API_KEY in your shell, the runner picks sdk. Use --backend to choose."
     ],
-    "notes": "Participants do the five steps; you walk around. npm run verify also tests the chat, so no separate step for that. Someone's screen says backend: sdk? Then an API key is set on their laptop: add --backend claude-code. Use the break after the next slide to help people without fail 0.",
+    "notes": "The participants do the five steps while you walk around. npm run verify also tests the chat, so there is no separate step for that. Does someone's screen say backend: sdk? Then an API key is set on their laptop, so add --backend claude-code. Use the break after the next slide to help people who do not have fail 0.",
     "stateId": "15:Get the workshop package.",
     "teach": {
       "time": "10 min",
-      "gist": "Participants do Step 0 themselves: download, install, health check, tests, dress rehearsal.",
+      "gist": "Participants do Step 0 themselves: download, install, health check, tests and dress rehearsal.",
       "script": [
         {
-          "say": "Now you. The same steps I just showed. Every command has a copy button: you don't type anything yourself."
+          "say": "Now it is your turn. These are the same steps that I just showed you. Every command has a copy button, so you do not have to type anything."
         },
         {
           "do": "Point at steps 1 and 2.",
@@ -909,30 +909,30 @@ window.SLIDES = [
         },
         {
           "do": "Point at step 3.",
-          "say": "Then into the folder, and install the parts. That takes about a minute."
+          "say": "Then go into the folder and install the parts. That takes about a minute."
         },
         {
           "do": "Point at steps 4 and 5.",
-          "say": "Then the health check, the tests and the dress rehearsal. Look at the Done when line: that's what your screen should say."
+          "say": "Then run the health check, the tests and the dress rehearsal. Look at the 'Done when' line: that is what your screen should say."
         },
         {
           "do": "Start the 10-minute timer and walk around."
         }
       ],
       "do": [
-        "Copy each command, run it.",
-        "Check: meets minimum, fail 0, dry run."
+        "Copy each command and run it.",
+        "Check for: meets minimum, fail 0, dry run."
       ],
       "done": [
         "verify shows fail 0.",
         "The dry run ends with 'dry run — no model call'."
       ],
       "watch": [
-        "'npm' not found → Node.js is not installed (npm comes with Node.js): see docs/SETUP.md.",
-        "'Missing script' or 'could not find package.json' → they are in the wrong folder: cd aetherlink-day5-n8n-to-agent first.",
-        "'git' not found → Git is not installed: see docs/SETUP.md.",
-        "Error at npm ci → check Node version: node --version must be 22 or higher.",
-        "Backend says sdk → add --backend claude-code."
+        "'npm' not found: Node.js is not installed (npm comes with Node.js). See docs/SETUP.md.",
+        "'Missing script' or 'could not find package.json': they are in the wrong folder. They should cd aetherlink-day5-n8n-to-agent first.",
+        "'git' not found: Git is not installed. See docs/SETUP.md.",
+        "Error at npm ci: check the Node version. node --version must be 22 or higher.",
+        "The backend says sdk: add --backend claude-code."
       ]
     }
   },
@@ -961,31 +961,31 @@ window.SLIDES = [
         "body": "The last line reads: dry run — no model call. That is correct: the AI has not done anything yet."
       }
     ],
-    "notes": "Show this after Step 0. The first line of the dry run says which way the agent runs (backend: claude-code = your login). A dry run does not call the AI, so it says nothing about how good the agent is.",
+    "notes": "Show this after Step 0. The first line of the dry run says how the agent runs (backend: claude-code means your login). A dry run does not call the AI, so it says nothing about how good the agent is.",
     "stateId": "16:What you see · Step 0",
     "teach": {
       "time": "2 min",
-      "gist": "Compare screens: fail 0, and the dry-run last line.",
+      "gist": "Compare screens: fail 0, and the last line of the dry run.",
       "script": [
         {
-          "say": "Compare your screen with this one. Two things."
+          "say": "Compare your screen with this one. There are two things to look for."
         },
         {
           "do": "Point at card 1.",
-          "say": "After verify: fail 0. Then your setup is correct."
+          "say": "After verify, you should see fail 0. Then your setup is correct."
         },
         {
           "do": "Point at card 2.",
-          "say": "After the dry run, the last line says: dry run, no model call. That is right: the AI did nothing yet."
+          "say": "After the dry run, the last line says: dry run, no model call. That is right: the AI has not done anything yet."
         },
         {
           "ask": "Hands up: who has fail 0?",
-          "say": "(Not everyone? Help them in the break.)"
+          "say": "(Not everyone there yet? Help them in the break.)"
         }
       ],
       "do": [
         "Compare with the screenshot.",
-        "Count hands: who has fail 0?"
+        "Count the hands: who has fail 0?"
       ],
       "done": [
         "Most of the room has fail 0. The rest get help in the break."
@@ -1021,10 +1021,10 @@ window.SLIDES = [
     "stateId": "17:Short break",
     "teach": {
       "time": "15 min",
-      "gist": "Break. Help anyone without fail 0.",
+      "gist": "Break. Help anyone who does not have fail 0.",
       "script": [
         {
-          "say": "Fifteen minutes break. Back at 11:15. Not at fail 0 yet? Stay for a moment, we'll fix it together."
+          "say": "We have a fifteen-minute break. Be back at 11:15. Not at fail 0 yet? Stay for a moment, and we will fix it together."
         },
         {
           "do": "Start the countdown."
@@ -1032,10 +1032,10 @@ window.SLIDES = [
       ],
       "do": [
         "Start the countdown.",
-        "Help people without fail 0."
+        "Help people who do not have fail 0."
       ],
       "done": [
-        "Everyone at fail 0 before Step 1."
+        "Everyone is at fail 0 before Step 1."
       ],
       "watch": []
     }
@@ -1056,37 +1056,37 @@ window.SLIDES = [
     "keyPoints": [
       "The system message now lives in a file next to the code."
     ],
-    "notes": "Like the work instructions of a new colleague on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions, Required output. The last line of Priority definitions is the tone trap: judge impact, not tone. In Step 1 they will cut that section out and see what happens.",
+    "notes": "It is like the work instructions that a new colleague gets on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions and Required output. The last line of the Priority definitions is the tone trap: judge the impact, not the tone. In Step 1 they will cut that section out and see what happens.",
     "stateId": "18:System prompt",
     "teach": {
       "time": "3 min",
-      "gist": "CLAUDE.md = the work instructions: who you are, what you may not do, when is it high/medium/low.",
+      "gist": "CLAUDE.md holds the work instructions: who you are, what you may not do, and when a message is high, medium or low.",
       "script": [
         {
-          "say": "Remember the System Message in n8n? Today that is a file: CLAUDE.md. Think of the work instructions a new colleague gets on day one."
+          "say": "Do you remember the System Message in n8n? Today that is a file: CLAUDE.md. Think of the work instructions that a new colleague gets on day one."
         },
         {
           "do": "Point at the three orange headings, left to right.",
-          "say": "Three parts. Who you are: a support assistant at a payment company. What you may not do: invent facts. And when a message is high, medium or low."
+          "say": "There are three parts. Who you are: a support assistant at a payment company. What you may not do: invent facts. And when a message is high, medium or low."
         },
         {
           "do": "Point at the orange box bottom right.",
-          "say": "Look at this line: an angry tone alone never makes it high. Remember it: in Step 1 we test it."
+          "say": "Look at this line: an angry tone alone never makes a message high. Remember it, because in Step 1 we will test it."
         },
         {
           "ask": "Why would you write that down?",
-          "say": "(Answer: a calm customer can have a big problem, and an angry one a small problem. The AI must look at the problem, not the tone.)"
+          "say": "(Answer: a calm customer can have a big problem, and an angry customer can have a small one. The AI must look at the problem, not the tone.)"
         }
       ],
       "do": [
-        "Explain: CLAUDE.md = work instructions.",
+        "Explain: CLAUDE.md is the work instructions.",
         "Name the three parts."
       ],
       "done": [
         "Everyone can say what is in CLAUDE.md."
       ],
       "watch": [
-        "People think CLAUDE.md is where Claude gets its knowledge. No: it says how to behave, not what it knows."
+        "People may think CLAUDE.md is where Claude gets its knowledge. It is not: it says how to behave, not what Claude knows."
       ]
     }
   },
@@ -1126,34 +1126,34 @@ window.SLIDES = [
       "outputFormat uses json_schema.",
       "lib/switch.mjs routes the parsed priority."
     ],
-    "notes": "The Structured Output Parser becomes outputFormat with type json_schema (file 01-single-agent/priority-schema.mjs). In Claude Code in the terminal the same is the --json-schema flag. Then lib/switch.mjs maps low, medium and high to a fixed action and team. The AI gives the label; the code picks the route.",
+    "notes": "The Structured Output Parser becomes outputFormat with type json_schema (file 01-single-agent/priority-schema.mjs). In Claude Code in the terminal, the equivalent is the --json-schema flag. Then lib/switch.mjs maps low, medium and high to a fixed action and team. The AI gives the label, and the code picks the route.",
     "stateId": "19:Structured output: parser to JSON schema",
     "teach": {
       "time": "2 min",
-      "gist": "Parser becomes json_schema (the form as a file). The Switch stays code: AI gives the label, code picks the route.",
+      "gist": "The Parser becomes json_schema (the form as a file). The Switch stays code: the AI gives the label, and the code picks the route.",
       "script": [
         {
-          "say": "Remember the form from yesterday, the Priority Parser? Today it is a file: the JSON schema."
+          "say": "Do you remember the form from yesterday, the Priority Parser? Today it is a file: the JSON schema."
         },
         {
           "do": "Point at the middle card.",
-          "say": "Same form, same fields. The AI has to fill it in, otherwise it is refused."
+          "say": "It is the same form with the same fields. The AI has to fill it in, otherwise the answer is refused."
         },
         {
           "do": "Point at the last card.",
-          "say": "And the trays stay plain code. No AI. The AI gives the label, the code picks the route."
+          "say": "And the trays stay plain code. No AI. The AI gives the label, and the code picks the route."
         },
         {
-          "ask": "Why do we want the route in plain code, not in the AI?",
-          "say": "(Answer: then you always know exactly where a message goes. Same input, same route.)"
+          "ask": "Why do we want the route in plain code, and not in the AI?",
+          "say": "(Answer: then you always know exactly where a message goes. The same input always gives the same route.)"
         }
       ],
       "do": [
-        "Parser → json_schema.",
-        "Switch stays code."
+        "The Parser becomes json_schema.",
+        "The Switch stays code."
       ],
       "done": [
-        "Everyone can say: AI gives the label, code picks the route."
+        "Everyone can say: the AI gives the label, and the code picks the route."
       ],
       "watch": []
     }
@@ -1187,14 +1187,14 @@ window.SLIDES = [
       "npm run chat resumes with the previous sessionId.",
       "--no-memory starts each turn without resume."
     ],
-    "notes": "The conversation is the memory: npm run chat passes the previous conversation on to the next message. With --no-memory every message starts fresh. Every npm run lesson1 is a new conversation on purpose: one ticket is one case.",
+    "notes": "The conversation is the memory: npm run chat passes the previous conversation on to the next message. With --no-memory every message starts fresh. Every npm run lesson1 is a new conversation on purpose, because one ticket is one case.",
     "stateId": "20:Memory is the session",
     "teach": {
       "time": "2 min",
-      "gist": "Memory = the conversation. npm run chat remembers, --no-memory forgets.",
+      "gist": "Memory is the conversation. npm run chat remembers it, and --no-memory forgets it.",
       "script": [
         {
-          "say": "Remember the desk? Same customer, you remember what he said. That is memory."
+          "say": "Do you remember the desk? With the same customer, you remember what they said. That is memory."
         },
         {
           "do": "Point at the first card.",
@@ -1202,16 +1202,16 @@ window.SLIDES = [
         },
         {
           "do": "Point at the other two cards.",
-          "say": "Today: npm run chat carries on the conversation, so it remembers. With --no-memory every message is a new conversation, so it forgets."
+          "say": "Today npm run chat carries on the conversation, so it remembers. With --no-memory every message is a new conversation, so it forgets."
         },
         {
           "ask": "Why do we want every customer ticket to start fresh?",
-          "say": "(Answer: customer B may never see anything of customer A.)"
+          "say": "(Answer: customer B may never see anything from customer A.)"
         }
       ],
       "do": [
-        "Memory = the conversation.",
-        "With and without --no-memory."
+        "Memory is the conversation.",
+        "Show it with and without --no-memory."
       ],
       "done": [
         "Everyone can say what --no-memory does."
@@ -1246,22 +1246,22 @@ window.SLIDES = [
     "keyPoints": [
       "One agent returns a fixed priority. Code routes it."
     ],
-    "notes": "Step 1 in the package (SOLO.md, Step 1): Build 1 options.mjs, Build 2 CLAUDE.md, Build 3 priority-schema.mjs, Build 4 the memory test; then six live runs (MSG-01 to MSG-06) and the tone trap. Participants copy the code from SOLO.md: they don't type it. The six labels are needed in Step 4 (npm run check).",
+    "notes": "Step 1 in the package (SOLO.md, Step 1): Build 1 options.mjs, Build 2 CLAUDE.md, Build 3 priority-schema.mjs, Build 4 the memory test. Then come six live runs (MSG-01 to MSG-06) and the tone trap. Participants copy the code from SOLO.md and do not type it. The six labels are needed in Step 4 (npm run check).",
     "stateId": "21:Step 1 · Structured priority output and chat memory",
     "teach": {
       "time": "2 min",
-      "gist": "Step 1: one agent + work instructions + form. Done = six labels and the tone trap tested.",
+      "gist": "Step 1: one agent with work instructions and a form. You are done when you have six labels and have tested the tone trap.",
       "script": [
         {
           "say": "Step 1. You build one agent. You give it its work instructions, CLAUDE.md, and the form."
         },
         {
           "do": "Point at Why.",
-          "say": "Why the form? Then the answer is always the same shape, and the code can sort it."
+          "say": "Why the form? Because then the answer always has the same shape, and the code can sort it."
         },
         {
           "do": "Point at Done when.",
-          "say": "You are done when you have six labels written down, and you tested the tone trap. Keep the labels: you need them in Step 4."
+          "say": "You are done when you have written down six labels and tested the tone trap. Keep the labels, because you need them in Step 4."
         }
       ],
       "do": [
@@ -1298,32 +1298,32 @@ window.SLIDES = [
     "keyPoints": [
       "Show the dry run first. Then show a live run or the sample trace."
     ],
-    "notes": "Show it on the finished version (git switch step-1), so the build is already done. 1: the dry run shows the options, including outputFormat. 2: a live run (Claude Code login) prints Structured output with priority and reason, then the Switch line. No live run possible? Show docs/sample-trace.md and say it is a sample. 3: the colour test with and without --no-memory.",
+    "notes": "Show it on the finished version (git switch step-1), so the build is already done. First, the dry run shows the options, including outputFormat. Second, a live run (with the Claude Code login) prints Structured output with the priority and reason, then the Switch line. If a live run is not possible, show docs/sample-trace.md and say that it is a sample. Third, the colour test with and without --no-memory.",
     "stateId": "22:Demo · Step 1: schema, route, and memory",
     "tagline": "The AI gives the label. The code picks the tray.",
     "teach": {
       "time": "5 min",
-      "gist": "Demo on step-1: dry run, a real run with the Switch line, the memory test.",
+      "gist": "Demo on step-1: a dry run, a real run with the Switch line, and the memory test.",
       "script": [
         {
           "do": "Before class: git switch step-1 in your own copy."
         },
         {
-          "say": "I show it first, on the finished version. Just watch."
+          "say": "I will show it first, on the finished version. Just watch."
         },
         {
           "do": "Run the dry run. Point at outputFormat.",
-          "say": "The dress rehearsal. See outputFormat? That is the form.",
+          "say": "This is the dress rehearsal. Do you see outputFormat? That is the form.",
           "clip": "assets/day4-teach/a09-1-dry-run.mp4"
         },
         {
           "do": "Run npm run lesson1 -- MSG-01. Point at Structured output and the Switch line.",
-          "say": "Now a real run. The AI fills in the form: priority low, plus the reason. And then the code: Switch, low, auto reply.",
+          "say": "Now a real run. The AI fills in the form: priority low, plus the reason. And then the code does its part: Switch, low, auto reply.",
           "clip": "assets/day4-teach/a09-2-msg01-msg02.mp4"
         },
         {
           "do": "Run npm run chat, then npm run chat -- --no-memory.",
-          "say": "And the memory test. Same conversation: it remembers red. A new conversation: it forgets."
+          "say": "And now the memory test. In the same conversation, it remembers red. In a new conversation, it forgets."
         },
         {
           "ask": "Who picked the tray: the AI or the code?",
@@ -1331,14 +1331,14 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Dry run, real run, memory test."
+        "Show the dry run, the real run and the memory test."
       ],
       "done": [
-        "Everyone saw the form and the Switch line."
+        "Everyone has seen the form and the Switch line."
       ],
       "watch": [
         "A real run needs your Claude Code login and takes a moment.",
-        "No internet or login? Show docs/sample-trace.md and say clearly it is a sample."
+        "No internet or no login? Show docs/sample-trace.md and say clearly that it is a sample."
       ]
     }
   },
@@ -1385,18 +1385,18 @@ window.SLIDES = [
     ],
     "teach": {
       "time": "15 min",
-      "gist": "Build 1-3 from SOLO.md (settings, work instructions, form), then verify.",
+      "gist": "Do Build 1 to 3 from SOLO.md (settings, work instructions, form), then run verify.",
       "script": [
         {
-          "say": "Now you build it. Open SOLO.md and go to Step 1. Everything you need is in there, as Build 1, 2 and 3. You copy it, you don't type it."
+          "say": "Now you build it. Open SOLO.md and go to Step 1. Everything you need is in there, as Build 1, 2 and 3. You copy it, you do not type it."
         },
         {
           "do": "Point at steps 2 and 3.",
-          "say": "Build 1: the settings. Build 2: the work instructions, CLAUDE.md."
+          "say": "Build 1 is the settings. Build 2 is the work instructions, CLAUDE.md."
         },
         {
           "do": "Point at step 4.",
-          "say": "Build 3: the form. Careful: you also add one line to options.mjs, the outputFormat line, and an import at the top. That's the one people forget."
+          "say": "Build 3 is the form. Be careful: you also add one line to options.mjs, the outputFormat line, and an import at the top. That is the one that people forget."
         },
         {
           "do": "Point at step 5.",
@@ -1408,19 +1408,19 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Paste Build 1-3 from SOLO.md.",
-        "Copy the test, run npm run verify."
+        "Paste Build 1 to 3 from SOLO.md.",
+        "Copy the test and run npm run verify."
       ],
       "done": [
         "verify shows fail 0."
       ],
       "watch": [
-        "Verify fails on the schema → the outputFormat line or the import is missing in options.mjs.",
-        "Someone retyping code → remind them: copy from SOLO.md.",
-        "Stuck: git stash -u, then git switch step-1."
+        "Does verify fail on the schema? Then the outputFormat line or the import is missing in options.mjs.",
+        "Is someone retyping the code? Remind them to copy it from SOLO.md.",
+        "If they are stuck: git stash -u, then git switch step-1."
       ]
     },
-    "notes": "Participants copy Build 1 to 3 from SOLO.md, Step 1. The first test file is copied from the finished branch, then npm run verify. Fell behind or stuck? git switch step-1 (first git stash -u if they changed files)."
+    "notes": "Participants copy Build 1 to 3 from SOLO.md, Step 1. The first test file is copied from the finished branch, and then they run npm run verify. If someone has fallen behind or is stuck, they can use git switch step-1 (first git stash -u if they changed files)."
   },
   {
     "lessonId": "workshop-4",
@@ -1460,22 +1460,22 @@ window.SLIDES = [
     ],
     "teach": {
       "time": "10 min",
-      "gist": "SOLO 1: dry run to see the schema, open schema + Switch, then the favourite-colour test with and without memory.",
+      "gist": "SOLO 1: do a dry run to see the schema, open the schema and the Switch, then do the favourite-colour test with and without memory.",
       "script": [
         {
-          "say": "Your turn. Four steps on the slide, every command has a copy button. You don't type anything yourself."
+          "say": "Your turn. There are four steps on the slide, and every command has a copy button. You do not type anything yourself."
         },
         {
           "do": "Point at step 1.",
-          "say": "First a dry run: no model, you only see what the agent would get. Look for outputFormat. That is the parser from yesterday in n8n."
+          "say": "First, a dry run. There is no model, so you only see what the agent would receive. Look for outputFormat. That is the parser from yesterday in n8n."
         },
         {
           "do": "Point at step 2.",
-          "say": "Then open two files. The schema says what the answer must look like. The Switch picks the route. The model gives a label, the code decides where it goes."
+          "say": "Then open two files. The schema says what the answer must look like. The Switch picks the route. The model gives a label, and the code decides where it goes."
         },
         {
           "do": "Point at steps 3 and 4.",
-          "say": "Then the memory test. Tell the chat your favourite colour, ask it back, exit. Do it again with --no-memory.",
+          "say": "Then the memory test. Tell the chat your favourite colour, ask for it back, and exit. Then do it again with --no-memory.",
           "clip": "assets/day4-teach/a10-2-memory-test.mp4"
         },
         {
@@ -1487,7 +1487,7 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Dry run MSG-01, find outputFormat.",
+        "Do a dry run of MSG-01 and find outputFormat.",
         "Open priority-schema.mjs and lib/switch.mjs.",
         "Chat with memory, then with --no-memory."
       ],
@@ -1496,12 +1496,12 @@ window.SLIDES = [
         "They can say why only the first chat remembers the colour."
       ],
       "watch": [
-        "Do not present the dry-run output as model JSON or as a Switch result. That only comes from a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md, as a sample.",
-        "The chat needs a logged-in Claude Code. Not logged in: run claude once and log in.",
-        "Funny but expected: 'My favourite colour is red' also gets a priority (low), because CLAUDE.md makes it a triage agent. Use it: the rules in CLAUDE.md apply to everything you type."
+        "Do not present the dry-run output as model JSON or as a Switch result. That only comes from a live run (Claude Code login, or --backend sdk with a key) or from docs/sample-trace.md, as a sample.",
+        "The chat needs a logged-in Claude Code. If they are not logged in, they should run claude once and log in.",
+        "This is funny but expected: 'My favourite colour is red' also gets a priority (low), because CLAUDE.md makes it a triage agent. Use it: the rules in CLAUDE.md apply to everything you type."
       ]
     },
-    "notes": "10 minutes. The dry run shows the settings, including the form (outputFormat). The filled-in form and the Switch line only appear in a real run with the Claude Code login, or in docs/sample-trace.md (say it is a sample). Then the colour test with and without --no-memory.",
+    "notes": "10 minutes. The dry run shows the settings, including the form (outputFormat). The filled-in form and the Switch line only appear in a real run with the Claude Code login, or in docs/sample-trace.md (say that it is a sample). Then do the colour test with and without --no-memory.",
     "stateId": "23:Run Step 1 and test chat memory."
   },
   {
@@ -1549,46 +1549,46 @@ window.SLIDES = [
     ],
     "teach": {
       "time": "15 min",
-      "gist": "Six live runs, labels written down; then the tone trap: remove the definitions, rerun 01 and 06, restore.",
+      "gist": "Do six live runs and write down the labels. Then the tone trap: remove the definitions, rerun 01 and 06, and restore them.",
       "script": [
         {
-          "say": "Now your agent does real work: six customer messages. Write down every label, you need them in Step 4.",
+          "say": "Now your agent does real work: six customer messages. Write down every label, because you need them in Step 4.",
           "clip": "assets/day4-teach/a11-1-six-labels.mp4"
         },
         {
           "do": "Point at steps 2 and 3.",
-          "say": "Then the tone trap. You remove the rules for high, medium and low from CLAUDE.md, and run two messages again.",
+          "say": "Then comes the tone trap. You remove the rules for high, medium and low from CLAUDE.md, and run two messages again.",
           "clip": "assets/day4-teach/a11-2-tone-trap.mp4"
         },
         {
           "ask": "What do you expect will happen without those rules?",
-          "say": "(Answer: the AI may judge by tone. An angry message looks urgent, a calm one harmless.)"
+          "say": "(Answer: the AI may judge by tone. An angry message looks urgent, and a calm one looks harmless.)"
         },
         {
           "do": "Point at steps 4 and 5.",
-          "say": "Then put the rules back, and check fail 0 again."
+          "say": "Then put the rules back, and check that you have fail 0 again."
         },
         {
           "do": "Start the 15-minute timer."
         }
       ],
       "do": [
-        "Six runs, labels written down.",
-        "Tone trap: cut, rerun 01 and 06, restore.",
-        "npm run verify."
+        "Do six runs and write down the labels.",
+        "Tone trap: cut the rules, rerun 01 and 06, then restore them.",
+        "Run npm run verify."
       ],
       "done": [
-        "Six labels written down.",
-        "Tone-trap comparison noted.",
-        "CLAUDE.md restored, fail 0."
+        "Six labels are written down.",
+        "The tone-trap comparison is noted.",
+        "CLAUDE.md is restored, and verify shows fail 0."
       ],
       "watch": [
         "For you only: MSG-01 low, 02 high, 03 medium, 04 low, 05 high, 06 low.",
-        "The label often does NOT change without the definitions (strong model). Say: 'the model got lucky, but now nothing in the file guarantees it. Would you bet the escalation queue on luck?'",
+        "The label often does NOT change without the definitions (a strong model). Say: 'The model got lucky, but now nothing in the file guarantees it. Would you bet the escalation queue on luck?'",
         "Each live run takes a moment and uses their Claude Code quota."
       ]
     },
-    "notes": "Expected labels, for you only, don't say them aloud: MSG-01 low, 02 high, 03 medium, 04 low, 05 high, 06 low (checked against the package answer key). The tone trap: without the priority definitions the model may judge by tone, so a loud message looks urgent. A strong model often keeps the same label: that's fine, the point is that nothing in the file guarantees it any more. Each live run uses the participant's Claude Code quota; six runs is fine."
+    "notes": "Expected labels, for you only. Do not say them aloud: MSG-01 low, 02 high, 03 medium, 04 low, 05 high, 06 low (checked against the package answer key). The tone trap: without the priority definitions the model may judge by tone, so a loud message looks urgent. A strong model often keeps the same label. That is fine: the point is that nothing in the file guarantees it any more. Each live run uses the participant's Claude Code quota, and six runs is fine."
   },
   {
     "lessonId": "workshop-4",
@@ -1615,33 +1615,33 @@ window.SLIDES = [
         "body": "Switch → low → AUTO_REPLY. The code picked the tray, not the AI."
       }
     ],
-    "notes": "This is the labelled sample in docs/sample-trace.md. A live run shows the same labels with other text. The [result] line shows turns, time and cost.",
+    "notes": "This is the labelled sample in docs/sample-trace.md. A live run shows the same labels with different text. The [result] line shows the turns, the time and the cost.",
     "stateId": "24:What you see · Step 1",
     "teach": {
       "time": "2 min",
       "gist": "Compare: the filled-in form, then the Switch line.",
       "script": [
         {
-          "say": "Compare your screen with this one. Two things."
+          "say": "Compare your screen with this one. There are two things to look for."
         },
         {
           "do": "Point at card 1.",
-          "say": "The filled-in form: priority and reason."
+          "say": "The first is the filled-in form: the priority and the reason."
         },
         {
           "do": "Point at card 2.",
-          "say": "And the Switch line: the code picked the tray."
+          "say": "The second is the Switch line: the code picked the tray."
         },
         {
           "ask": "Your reason text is different from mine. Is that a problem?",
-          "say": "(Answer: no. The words differ per run. The priority and the route are what matter.)"
+          "say": "(Answer: no. The words differ on every run. The priority and the route are what matter.)"
         }
       ],
       "do": [
         "Compare with the screenshot."
       ],
       "done": [
-        "Everyone found both lines."
+        "Everyone has found both lines."
       ],
       "watch": [
         "This screenshot is a sample: the reason text is different on every run."
@@ -1683,14 +1683,14 @@ window.SLIDES = [
       "lib/switch.mjs routes the parsed priority.",
       "Chat session resume carries memory across turns."
     ],
-    "notes": "Answers: the form allows only low, medium or high. The code (lib/switch.mjs) picks the route, the AI only gives the label. With --no-memory every message is a new conversation, so it forgets.",
+    "notes": "Answers: the form allows only low, medium or high. The code (lib/switch.mjs) picks the route, and the AI only gives the label. With --no-memory every message is a new conversation, so it forgets.",
     "stateId": "25:Discuss: what makes the route predictable?",
     "teach": {
       "time": "4 min",
-      "gist": "Discussion: form, tray, memory. AI gives the label, code picks the route.",
+      "gist": "Discussion: the form, the tray and the memory. The AI gives the label, and the code picks the route.",
       "script": [
         {
-          "say": "Two minutes at your table. Three questions on the screen."
+          "say": "You have two minutes at your table. There are three questions on the screen."
         },
         {
           "ask": "Which values can priority have?",
@@ -1706,10 +1706,10 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Let tables talk, then click per card."
+        "Let the tables talk, then click through each card."
       ],
       "done": [
-        "Every table answered at least one question."
+        "Every table has answered at least one question."
       ],
       "watch": []
     }
@@ -1733,17 +1733,17 @@ window.SLIDES = [
       "Loaded history and tool results use tokens.",
       "Keep room for the response."
     ],
-    "notes": "The context window is the desk: everything the AI can see in one go (instructions, CLAUDE.md, the conversation, tool results). It has a maximum size. Show /context in Claude Code itself (not in npm run chat): it shows how full the desk is.",
+    "notes": "The context window is the desk: everything the AI can see in one go (the instructions, CLAUDE.md, the conversation and the tool results). It has a maximum size. Show /context in Claude Code itself (not in npm run chat): it shows how full the desk is.",
     "teach": {
       "time": "3 min",
-      "gist": "Context = the desk. The AI only sees what is on it, and the desk has a limit.",
+      "gist": "Context is the desk. The AI only sees what is on it, and the desk has a limit.",
       "script": [
         {
           "say": "How much can the AI see at once? Think of a desk."
         },
         {
           "do": "Point at the diagram.",
-          "say": "On the desk: the work instructions, the conversation so far, and what the tools handed back. Only that. And the desk has a maximum size."
+          "say": "On the desk are the work instructions, the conversation so far, and what the tools handed back. Only that. And the desk has a maximum size."
         },
         {
           "do": "Open Claude Code and type /context.",
@@ -1751,7 +1751,7 @@ window.SLIDES = [
         },
         {
           "ask": "What happens when the desk is full?",
-          "say": "(Answer: something has to go. That is the next two slides.)"
+          "say": "(Answer: something has to go. That is what the next two slides are about.)"
         }
       ],
       "do": [
@@ -1785,27 +1785,27 @@ window.SLIDES = [
       "Cache reads, cache writes and output have different costs.",
       "A cache hit does not enlarge the context window."
     ],
-    "notes": "Claude Code does this by itself (prompt caching): a part that is exactly the same as before is reused, which saves time and cost. It does not make the desk bigger: the cached part still counts in the context.",
+    "notes": "Claude Code does this by itself (prompt caching): a part that is exactly the same as before is reused, which saves time and cost. It does not make the desk bigger, because the cached part still counts in the context.",
     "teach": {
       "time": "2 min",
-      "gist": "Caching = a bookmark: faster, but still on the desk.",
+      "gist": "Caching is a bookmark: it is faster, but the text is still on the desk.",
       "script": [
         {
-          "say": "Caching is like a bookmark. What the AI already read, it does not need to read again. That is faster and cheaper."
+          "say": "Caching is like a bookmark. What the AI has already read, it does not need to read again. That is faster and cheaper."
         },
         {
-          "say": "But careful: it still lies on the desk. Caching makes it faster, not bigger."
+          "say": "But be careful: it still lies on the desk. Caching makes it faster, not bigger."
         },
         {
           "ask": "Does caching give the AI more memory?",
-          "say": "(Answer: no. Only speed.)"
+          "say": "(Answer: no. It only gives speed.)"
         }
       ],
       "do": [
-        "Bookmark: faster, not bigger."
+        "The bookmark: faster, not bigger."
       ],
       "done": [
-        "Everyone knows caching is not extra memory."
+        "Everyone knows that caching is not extra memory."
       ],
       "watch": []
     }
@@ -1829,13 +1829,13 @@ window.SLIDES = [
       "Compare /context before and after /compact.",
       "Restore missing requirements before continuing."
     ],
-    "notes": "Compaction replaces the long history with a shorter summary (/compact in Claude Code). That is not a perfect copy: details can disappear. Do it at a natural break (end of a task), then check that the important rules still hold, for example 'priority must be low, medium or high' and 'draft only: a person checks first'. Try it in Claude Code itself, not inside npm run chat.",
+    "notes": "Compaction replaces the long history with a shorter summary (/compact in Claude Code). That is not a perfect copy, and details can disappear. Do it at a natural break (the end of a task), and then check that the important rules still hold, for example 'priority must be low, medium or high' and 'draft only: a person checks first'. Try it in Claude Code itself, not inside npm run chat.",
     "teach": {
       "time": "3 min",
-      "gist": "Compaction = summarise to make room. A summary loses details, so check.",
+      "gist": "Compaction means summarising to make room. A summary loses details, so check it afterwards.",
       "script": [
         {
-          "say": "Desk full? Then the conversation is summarised. In Claude Code: /compact."
+          "say": "Is the desk full? Then the conversation is summarised. In Claude Code, that is /compact."
         },
         {
           "say": "A summary is not a copy. Details can disappear. So after compacting you check: are the important rules still there?"
@@ -1878,14 +1878,14 @@ window.SLIDES = [
       "Fell behind? Switch to step-1 after lunch.",
       "Check your Claude Code login."
     ],
-    "notes": "Say the return time: 13:00. Participants who fell behind can catch up with git switch step-1 after lunch.",
+    "notes": "Say the return time: 13:00. Participants who have fallen behind can catch up with git switch step-1 after lunch.",
     "stateId": "26:Lunch",
     "teach": {
       "time": "60 min",
-      "gist": "Lunch. Back at 13:00.",
+      "gist": "Lunch. Be back at 13:00.",
       "script": [
         {
-          "say": "Enjoy your lunch. Back at 13:00. Fell behind? After lunch: git switch step-1."
+          "say": "Enjoy your lunch. Be back at 13:00. Have you fallen behind? After lunch, use git switch step-1."
         },
         {
           "do": "Start the countdown."
@@ -1895,7 +1895,7 @@ window.SLIDES = [
         "Start the countdown."
       ],
       "done": [
-        "Everyone knows the return time."
+        "Everyone knows the time to be back."
       ],
       "watch": []
     }
@@ -1927,22 +1927,22 @@ window.SLIDES = [
     "keyPoints": [
       "In code you state exactly which tools exist and which are allowed."
     ],
-    "notes": "Like a key ring: tools is which keys exist, allowedTools which doors open without asking, disallowedTools which doors stay locked. Step 1: tools is empty and WebSearch, WebFetch and Bash are forbidden. Step 3 adds the read-only lookup tools.",
+    "notes": "It works like a key ring. tools says which keys exist, allowedTools says which doors open without asking, and disallowedTools says which doors stay locked. In Step 1, tools is empty, and WebSearch, WebFetch and Bash are forbidden. Step 3 adds the read-only lookup tools.",
     "stateId": "27:Tools",
     "teach": {
       "time": "2 min",
-      "gist": "The key ring: tools, allowedTools, disallowedTools.",
+      "gist": "The key ring: tools, allowedTools and disallowedTools.",
       "script": [
         {
-          "say": "Remember the key ring? In code you write it down."
+          "say": "Do you remember the key ring? In code, you write it down."
         },
         {
           "do": "Point at the three cards.",
-          "say": "Which tools exist. Which it may use without asking. And which never, not even if the AI asks."
+          "say": "You write down which tools exist, which ones the agent may use without asking, and which ones it may never use, not even if the AI asks."
         },
         {
           "ask": "Which tools did our agent from Step 1 get?",
-          "say": "(Answer: none. It may only read and answer. Search the web is forbidden.)"
+          "say": "(Answer: none. It may only read and answer. Searching the web is forbidden.)"
         }
       ],
       "do": [
@@ -1980,14 +1980,14 @@ window.SLIDES = [
     "keyPoints": [
       "The orchestrator delegates. Each specialist does one task."
     ],
-    "notes": "Step 2: the orchestrator delegates to risk-agent first, then passes that result to customer-reply-agent. In the trace you see it as Agent → risk-agent, then Agent → customer-reply-agent. Yesterday in n8n the Risk Agent was wired as a tool of the Reply Agent. Step 3 adds a third: customer-context-agent.",
+    "notes": "Step 2: the orchestrator delegates to risk-agent first, and then passes that result to customer-reply-agent. In the trace you see this as Agent → risk-agent, then Agent → customer-reply-agent. Yesterday in n8n the Risk Agent was wired as a tool of the Reply Agent. Step 3 adds a third agent: customer-context-agent.",
     "stateId": "28:Subagents",
     "teach": {
       "time": "2 min",
-      "gist": "Team lead hands out work: risk first, then the writer.",
+      "gist": "The team lead hands out the work: risk first, then the writer.",
       "script": [
         {
-          "say": "Step 2: our agent gets a team. One team lead, two specialists."
+          "say": "Step 2: our agent gets a team. One team lead and two specialists."
         },
         {
           "do": "Point at the cards left to right.",
@@ -2044,33 +2044,33 @@ window.SLIDES = [
       "The folder starts with a dot. Use ls -a to see it.",
       "main has no agents yet. They come in step-2."
     ],
-    "notes": "Show the folder on step-2 (git switch step-2, then open .claude/agents). On main the folder does not exist yet. Claude Code and the package both read this folder. A folder called .agents or a file AGENTS.md is something else: those are not loaded as specialists.",
+    "notes": "Show the folder on step-2 (git switch step-2, then open .claude/agents). On main the folder does not exist yet. Claude Code and the package both read this folder. A folder called .agents or a file called AGENTS.md is something else: those are not loaded as specialists.",
     "stateId": "29:Where do the agents live?",
     "teach": {
       "time": "2 min",
-      "gist": "One file per specialist in .claude/agents/.",
+      "gist": "There is one file per specialist, in .claude/agents/.",
       "script": [
         {
           "say": "Where do the specialists live? Each one is one file, in the folder .claude/agents."
         },
         {
           "do": "Point at the middle card.",
-          "say": "At the top: the name and which tools it may use. Below: its work instructions, just like CLAUDE.md."
+          "say": "At the top are the name and the tools it may use. Below that are its work instructions, just like CLAUDE.md."
         },
         {
           "do": "Point at the last card.",
-          "say": "Careful: not .agents and not AGENTS.md. Only this folder is read."
+          "say": "Be careful: not .agents and not AGENTS.md. Only this folder is read."
         }
       ],
       "do": [
         "One file per agent.",
-        "Top = who, text = instructions."
+        "The top says who it is, and the text gives the instructions."
       ],
       "done": [
         "Everyone can find the folder."
       ],
       "watch": [
-        "On main the folder does not exist yet: it comes with Step 2."
+        "On main the folder does not exist yet. It comes with Step 2."
       ]
     }
   },
@@ -2110,18 +2110,18 @@ window.SLIDES = [
       "The description decides when Claude uses the agent.",
       "The SDK reads the same folder with settingSources: ['user', 'project']."
     ],
-    "notes": "You add a specialist by adding a file: no extra code. Claude reads the description of each specialist to decide who gets the task. Show risk-agent.md on step-2: the description line is the job ad.",
+    "notes": "You add a specialist by adding a file, with no extra code. Claude reads the description of each specialist to decide who gets the task. Show risk-agent.md on step-2: the description line is the job advert.",
     "stateId": "30:Why this folder? Claude finds the agents.",
     "teach": {
       "time": "2 min",
-      "gist": "Claude reads the folder; the description is the job ad.",
+      "gist": "Claude reads the folder, and the description is the job advert.",
       "script": [
         {
-          "say": "How does Claude know the specialists exist? You put the file in the folder. That's it."
+          "say": "How does Claude know that the specialists exist? You put the file in the folder. That is all."
         },
         {
           "do": "Point at card 2.",
-          "say": "Then it reads the description. Think of a job ad: when should this agent get the work?"
+          "say": "Then it reads the description. Think of a job advert: when should this agent get the work?"
         },
         {
           "ask": "What happens with a vague description like 'helps with things'?",
@@ -2129,10 +2129,10 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Folder → description → delegate."
+        "Folder, then description, then delegate."
       ],
       "done": [
-        "Everyone knows the description decides."
+        "Everyone knows that the description decides."
       ],
       "watch": []
     }
@@ -2175,14 +2175,14 @@ window.SLIDES = [
     "stateId": "31:Step 2 · Risk analysis and customer reply agents",
     "teach": {
       "time": "2 min",
-      "gist": "Step 2: team lead + two specialists. Done = right order + description test.",
+      "gist": "Step 2: a team lead and two specialists. You are done when you see the right order and have done the description test.",
       "script": [
         {
           "say": "Step 2: your agent becomes a team."
         },
         {
           "do": "Point at Done when.",
-          "say": "You are done when you see the right order, risk first then reply, and you did the description test."
+          "say": "You are done when you see the right order, risk first and then the reply, and you have done the description test."
         }
       ],
       "do": [
@@ -2218,22 +2218,22 @@ window.SLIDES = [
     "keyPoints": [
       "Show the dry run first. Then show a live run or the sample trace."
     ],
-    "notes": "Show it on step-2. The dry run only shows the setup: no specialists are called. The real run (Claude Code login) shows Agent → risk-agent, then Agent → customer-reply-agent, and writes the draft in 02-subagents/claude-project/output/MSG-05.md. No real run possible? Show docs/sample-trace.md and say it is a sample.",
+    "notes": "Show it on step-2. The dry run only shows the setup: no specialists are called. The real run (with the Claude Code login) shows Agent → risk-agent, then Agent → customer-reply-agent, and writes the draft in 02-subagents/claude-project/output/MSG-05.md. If a real run is not possible, show docs/sample-trace.md and say that it is a sample.",
     "stateId": "32:Demo · Step 2: trace the two agents",
     "tagline": "Risk first, then the writer. The draft waits for a person.",
     "teach": {
       "time": "5 min",
-      "gist": "Demo on step-2: dry run, real run with the order of the agents, the draft.",
+      "gist": "Demo on step-2: a dry run, a real run with the order of the agents, and the draft.",
       "script": [
         {
           "do": "Before class: git switch step-2 in your own copy."
         },
         {
-          "say": "I show it on the finished version. Just watch."
+          "say": "I will show it on the finished version. Just watch."
         },
         {
           "do": "Run the real run. Point at the two Agent lines.",
-          "say": "See? First the risk expert, then the writer. The team lead hands out the work.",
+          "say": "Do you see that? First the risk expert, then the writer. The team lead hands out the work.",
           "clip": "assets/day4-teach/a16-msg05-orchestrator.mp4"
         },
         {
@@ -2242,10 +2242,10 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Dry run, real run, open the draft."
+        "Show the dry run and the real run, then open the draft."
       ],
       "done": [
-        "Everyone saw the order risk → reply."
+        "Everyone has seen the order: risk, then reply."
       ],
       "watch": []
     }
@@ -2290,45 +2290,45 @@ window.SLIDES = [
     "keyPoints": [
       "Do the dry run. Then read a live run or the sample trace."
     ],
-    "notes": "20 minutes. Build from SOLO.md or use the shortcut (it copies all Step 2 files). No Agent → lines? Then the team lead did the work itself: run again and discuss why. The description test: with 'Helps with things.' the team lead may stop calling the risk expert. Same as yesterday in n8n with an empty Description.",
+    "notes": "20 minutes. Build from SOLO.md or use the shortcut (it copies all the Step 2 files). If there are no Agent → lines, the team lead did the work itself: run it again and discuss why. The description test: with 'Helps with things.' the team lead may stop calling the risk expert. It is the same as yesterday in n8n with an empty Description.",
     "stateId": "33:Run the orchestrator and inspect the draft.",
     "teach": {
       "time": "20 min",
-      "gist": "Step 2 hands-on: files, two runs, read the draft, description test, restore.",
+      "gist": "Step 2 hands-on: the files, two runs, read the draft, do the description test, then restore.",
       "script": [
         {
-          "say": "Now you. Build the team from SOLO.md, or use the shortcut in step 1 if you are short on time."
+          "say": "Now it is your turn. Build the team from SOLO.md, or use the shortcut in step 1 if you are short on time."
         },
         {
           "do": "Point at step 2.",
-          "say": "Run two messages. Look for the order: risk first, then the writer. MSG-10 is missing information: watch the team ask for it.",
+          "say": "Run two messages. Look for the order: risk first, then the writer. MSG-10 is missing information, so watch the team ask for it.",
           "clip": "assets/day4-teach/a17-1-msg10-missing.mp4"
         },
         {
           "do": "Point at step 4.",
-          "say": "Then the description test. Make the job ad vague, and see if the team lead still calls the risk expert.",
+          "say": "Then do the description test. Make the job advert vague, and see whether the team lead still calls the risk expert.",
           "clip": "assets/day4-teach/a17-2-description-test.mp4"
         },
         {
           "ask": "What do you expect?",
-          "say": "(Answer: it may stop delegating. Just like yesterday in n8n with an empty Description.)"
+          "say": "(Answer: it may stop delegating. It is just like yesterday in n8n with an empty Description.)"
         },
         {
           "do": "Start the 20-minute timer."
         }
       ],
       "do": [
-        "Files, two runs, read the draft.",
-        "Description test, then restore."
+        "Do the files, run two messages, and read the draft.",
+        "Do the description test, then restore."
       ],
       "done": [
-        "Order risk → reply seen.",
-        "Draft read.",
-        "Description test done and restored."
+        "They have seen the order: risk, then reply.",
+        "They have read the draft.",
+        "They have done the description test and restored it."
       ],
       "watch": [
-        "No Agent → lines: the team lead did it itself. Run again.",
-        "The description test does not always change the result. Point: nothing guarantees it any more."
+        "No Agent → lines? Then the team lead did the work itself. Run it again.",
+        "The description test does not always change the result. The point is that nothing guarantees it any more."
       ]
     }
   },
@@ -2361,13 +2361,13 @@ window.SLIDES = [
     "stateId": "34:What you see · Step 2",
     "teach": {
       "time": "2 min",
-      "gist": "Compare: two Agent lines, and a draft that asks for missing facts.",
+      "gist": "Compare: two Agent lines, and a draft that asks for the missing facts.",
       "script": [
         {
           "say": "Compare. Two Agent lines, in this order. And a draft that only asks for what is missing."
         },
         {
-          "ask": "Does the draft say something no tool gave it?",
+          "ask": "Does the draft say something that no tool gave it?",
           "say": "(If yes: that is made up. The draft must not say it.)"
         }
       ],
@@ -2375,7 +2375,7 @@ window.SLIDES = [
         "Compare with the screenshot."
       ],
       "done": [
-        "Everyone found both Agent lines."
+        "Everyone has found both Agent lines."
       ],
       "watch": []
     }
@@ -2414,7 +2414,7 @@ window.SLIDES = [
     "stateId": "35:Discuss: which facts came from a tool?",
     "teach": {
       "time": "3 min",
-      "gist": "Discussion: order (risk first) and where the Description lives now.",
+      "gist": "Discussion: the order (risk first) and where the Description lives now.",
       "script": [
         {
           "ask": "Which agent runs first, and why?",
@@ -2422,14 +2422,14 @@ window.SLIDES = [
         },
         {
           "ask": "Where is yesterday's n8n Description now?",
-          "say": "(Answer: the description line at the top of the agent file.)"
+          "say": "(Answer: in the description line at the top of the agent file.)"
         }
       ],
       "do": [
-        "Let tables talk, then click."
+        "Let the tables talk, then click."
       ],
       "done": [
-        "Both questions answered."
+        "Both questions are answered."
       ],
       "watch": []
     }
@@ -2463,33 +2463,33 @@ window.SLIDES = [
     "keyPoints": [
       "The MCP server owns the data. The agent only sees what the tool returns."
     ],
-    "notes": "MCP = a standard way to give an agent a lookup desk. Two desks: customers (reads docs/customer_context.csv) and transactions (reads docs/transactions.xlsx). Read-only: they can look up, not change. Yesterday's Customer Context Agent with its Data Table becomes this desk.",
+    "notes": "MCP is a standard way to give an agent a lookup desk. There are two desks: customers (reads docs/customer_context.csv) and transactions (reads docs/transactions.xlsx). They are read-only: they can look things up but not change them. Yesterday's Customer Context Agent with its Data Table becomes this desk.",
     "stateId": "36:MCP: external data",
     "teach": {
       "time": "3 min",
-      "gist": "MCP = the lookup desk. Read-only: look up, never change.",
+      "gist": "MCP is the lookup desk. It is read-only: it looks things up and never changes them.",
       "script": [
         {
           "say": "Step 3 adds outside data. Think of a lookup desk."
         },
         {
           "do": "Point at the two cards.",
-          "say": "Two desks: one for customers, one for payments. The agent asks, the desk looks it up and hands over only that."
+          "say": "There are two desks: one for customers and one for payments. The agent asks, and the desk looks it up and hands over only that."
         },
         {
-          "say": "And the desk can only look up. It cannot change anything."
+          "say": "And the desk can only look things up. It cannot change anything."
         },
         {
-          "ask": "Why would we want facts from a desk instead of from the AI itself?",
+          "ask": "Why do we want facts from a desk instead of from the AI itself?",
           "say": "(Answer: the AI would make it up. The desk has the real data.)"
         }
       ],
       "do": [
         "Explain the lookup desk.",
-        "Read-only."
+        "It is read-only."
       ],
       "done": [
-        "Everyone knows: MCP looks up, never changes."
+        "Everyone knows: MCP looks things up and never changes them."
       ],
       "watch": []
     }
@@ -2529,18 +2529,18 @@ window.SLIDES = [
     "keyPoints": [
       "The agents get facts from tools. They cannot change data yet."
     ],
-    "notes": "Two lookup desks: customers (reads docs/customer_context.csv, tool get_customer, used by customer-context-agent) and transactions (reads docs/transactions.xlsx, tools get_transaction and list_transactions, used by risk-agent). Both can only look up. The package starts the desks by itself. The reply stays a draft for a person.",
+    "notes": "There are two lookup desks: customers (reads docs/customer_context.csv, tool get_customer, used by customer-context-agent) and transactions (reads docs/transactions.xlsx, tools get_transaction and list_transactions, used by risk-agent). Both can only look things up. The package starts the desks by itself. The reply stays a draft for a person.",
     "stateId": "37:Step 3 · Read-only customer and transaction MCP tools",
     "teach": {
       "time": "2 min",
-      "gist": "Step 3: two lookup desks. Done = both lookups in the trace + 3 labels.",
+      "gist": "Step 3: two lookup desks. You are done when both lookups are in the trace and you have three more labels.",
       "script": [
         {
           "say": "Step 3: your team gets the lookup desks."
         },
         {
           "do": "Point at Done when.",
-          "say": "Done when you see both lookups, and you wrote down three more labels: MSG-07, 08 and 09. You need them in Step 4."
+          "say": "You are done when you see both lookups, and you have written down three more labels: MSG-07, 08 and 09. You need them in Step 4."
         }
       ],
       "do": [
@@ -2578,23 +2578,23 @@ window.SLIDES = [
       "risk-agent uses get_transaction and list_transactions.",
       "Review the customer-reply-agent draft before sending."
     ],
-    "notes": "Show it on step-3. npm run smoke:mcp tests both desks without the AI. Then a real run of MSG-08: point at both lookups and at the External data section in the draft. The draft waits for a person.",
+    "notes": "Show it on step-3. npm run smoke:mcp tests both desks without the AI. Then do a real run of MSG-08: point at both lookups and at the External data section in the draft. The draft waits for a person.",
     "stateId": "38:Demo · Step 3: read-only customer and transaction lookups",
     "teach": {
       "time": "5 min",
-      "gist": "Demo on step-3: smoke test, real run with both lookups, External data.",
+      "gist": "Demo on step-3: a smoke test, a real run with both lookups, and External data.",
       "script": [
         {
           "do": "Before class: git switch step-3 in your own copy."
         },
         {
           "do": "Run npm run smoke:mcp.",
-          "say": "First I test the desks, without the AI. Last line: MCP servers OK.",
+          "say": "First I test the desks, without the AI. The last line says: MCP servers OK.",
           "clip": "assets/day4-teach/a20-1-smoke-mcp.mp4"
         },
         {
           "do": "Run npm run lesson3 -- MSG-08. Point at the two lookup lines.",
-          "say": "Now a real run. See? The agent asks the customer desk and the payment desk.",
+          "say": "Now a real run. Do you see that? The agent asks the customer desk and the payment desk.",
           "clip": "assets/day4-teach/a20-2-msg08-mcp.mp4"
         },
         {
@@ -2603,10 +2603,10 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Smoke test, real run, External data."
+        "Do the smoke test, the real run and External data."
       ],
       "done": [
-        "Everyone saw both lookups."
+        "Everyone has seen both lookups."
       ],
       "watch": []
     }
@@ -2657,10 +2657,10 @@ window.SLIDES = [
     "stateId": "39:Run Step 3 customer and transaction lookups.",
     "teach": {
       "time": "20 min",
-      "gist": "Step 3 hands-on: files, smoke test, three runs with labels, find the lookups.",
+      "gist": "Step 3 hands-on: the files, a smoke test, three runs with labels, and find the lookups.",
       "script": [
         {
-          "say": "Now you. First get the files and install the desks: all in step 1."
+          "say": "Now it is your turn. First get the files and install the desks. It is all in step 1."
         },
         {
           "do": "Point at step 2.",
@@ -2668,7 +2668,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at step 3.",
-          "say": "Then three messages. Write down every label: you need them in Step 4.",
+          "say": "Then run three messages. Write down every label, because you need them in Step 4.",
           "clip": "assets/day4-teach/a21-msg07-msg09.mp4"
         },
         {
@@ -2676,15 +2676,15 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Files, smoke test, three runs, labels."
+        "Do the files, the smoke test and three runs, and write down the labels."
       ],
       "done": [
-        "Both lookups seen.",
-        "Three labels written down."
+        "They have seen both lookups.",
+        "Three labels are written down."
       ],
       "watch": [
         "For you only: MSG-07 medium, 08 high, 09 medium.",
-        "Error in the nested npm ci → they are not in the package folder."
+        "An error in the nested npm ci? Then they are not in the package folder."
       ]
     }
   },
@@ -2720,7 +2720,7 @@ window.SLIDES = [
       "gist": "Compare: only lookup tools, and MCP servers OK.",
       "script": [
         {
-          "say": "Compare. Only lookup tools, nothing that changes data. And the last line: MCP servers OK."
+          "say": "Compare. There should be only lookup tools, and nothing that changes data. And the last line says: MCP servers OK."
         },
         {
           "ask": "CUST-999 says: no customer. Is that an error?",
@@ -2766,11 +2766,11 @@ window.SLIDES = [
       "Use get_transaction or list_transactions for transaction facts.",
       "A person reviews reply drafts before they are sent."
     ],
-    "notes": "Answers: customer facts came from get_customer (customer list), payment facts from get_transaction (transaction list): see the External data section. A person reads every draft before it is sent.",
+    "notes": "Answers: the customer facts came from get_customer (the customer list), and the payment facts came from get_transaction (the transaction list). See the External data section. A person reads every draft before it is sent.",
     "stateId": "41:Discuss: tools and external data.",
     "teach": {
       "time": "3 min",
-      "gist": "Discussion: facts from the desks; a person reads every draft.",
+      "gist": "Discussion: the facts come from the desks, and a person reads every draft.",
       "script": [
         {
           "ask": "Which facts came from a lookup desk?",
@@ -2782,10 +2782,10 @@ window.SLIDES = [
         }
       ],
       "do": [
-        "Let tables talk, then click."
+        "Let the tables talk, then click."
       ],
       "done": [
-        "Both questions answered."
+        "Both questions are answered."
       ],
       "watch": []
     }
@@ -2821,25 +2821,25 @@ window.SLIDES = [
     "keyPoints": [
       "Code where it must. The agent chooses where it may. Always a human at the end."
     ],
-    "notes": "Fixed: the Switch (lib/switch.mjs) and npm run check: same input, always the same result. Thinking: the team lead decides which specialist to call. A person checks the result. Use fixed code for anything that must be exact or safe.",
+    "notes": "Fixed: the Switch (lib/switch.mjs) and npm run check give the same result for the same input, every time. Thinking: the team lead decides which specialist to call. A person checks the result. Use fixed code for anything that must be exact or safe.",
     "stateId": "42:Fixed workflow vs. dynamic agent",
     "teach": {
       "time": "2 min",
-      "gist": "Fixed code where it must be exact, the agent where it may think, a person at the end.",
+      "gist": "Use fixed code where it must be exact, the agent where it may think, and a person at the end.",
       "script": [
         {
-          "say": "Two kinds of work. Fixed rules: the Switch, the check. Same input, always the same answer."
+          "say": "There are two kinds of work. Fixed rules, like the Switch and the check: the same input always gives the same answer."
         },
         {
-          "say": "And thinking: the team lead deciding who gets the work. And at the end: a person."
+          "say": "And thinking, like the team lead deciding who gets the work. And at the end: a person."
         },
         {
           "ask": "Would you let the AI decide the route of a fraud message?",
-          "say": "(Answer: no. The label yes, the route is fixed code.)"
+          "say": "(Answer: no. The label, yes, but the route is fixed code.)"
         }
       ],
       "do": [
-        "Fixed vs thinking."
+        "Fixed versus thinking."
       ],
       "done": [
         "Everyone can give one example of each."
@@ -2886,14 +2886,14 @@ window.SLIDES = [
     "keyPoints": [
       "A fixed check tells you if the agent is right. The model does not grade itself."
     ],
-    "notes": "15 minutes. 'revise' means: reread the priority definitions and the trace. Do not change a label just to pass. MSG-10 is not graded. Expected, for you only: 01 low, 02 high, 03 medium, 04 low, 05 high, 06 low, 07 medium, 08 high, 09 medium.",
+    "notes": "15 minutes. 'revise' means: reread the priority definitions and the trace. Do not change a label just to pass. MSG-10 is not graded. Expected labels, for you only: 01 low, 02 high, 03 medium, 04 low, 05 high, 06 low, 07 medium, 08 high, 09 medium.",
     "stateId": "43:Step 4 · Acceptance table and npm run check",
     "teach": {
       "time": "15 min",
-      "gist": "Step 4: get the checker, fill labels.json, npm run check, acceptance table.",
+      "gist": "Step 4: get the checker, fill in labels.json, run npm run check, and save the acceptance table.",
       "script": [
         {
-          "say": "Remember the button from slide 9? Now you press it. Your labels against the answer key."
+          "say": "Do you remember the button from slide 9? Now you press it. It compares your labels with the answer key."
         },
         {
           "do": "Point at step 1.",
@@ -2906,18 +2906,18 @@ window.SLIDES = [
         },
         {
           "ask": "You get 'revise'. Do you just change the label?",
-          "say": "(Answer: no. Reread the definitions and the trace. Changing it just to pass is cheating yourself.)"
+          "say": "(Answer: no. Reread the definitions and the trace. If you change it just to pass, you are only cheating yourself.)"
         },
         {
           "do": "Start the 15-minute timer."
         }
       ],
       "do": [
-        "Checker, labels, check, table."
+        "Get the checker, fill in the labels, run check, and fill in the table."
       ],
       "done": [
-        "npm run check run with their own labels.",
-        "Table saved."
+        "They have run npm run check with their own labels.",
+        "The table is saved."
       ],
       "watch": [
         "For you only: 01 low, 02 high, 03 medium, 04 low, 05 high, 06 low, 07 medium, 08 high, 09 medium."
@@ -2953,14 +2953,14 @@ window.SLIDES = [
     "stateId": "44:What you see · Step 4",
     "teach": {
       "time": "1 min",
-      "gist": "First run makes labels.json: not an error.",
+      "gist": "The first run makes labels.json. That is not an error.",
       "script": [
         {
-          "say": "The first run says: created labels.json. That is correct. Fill it in, run again."
+          "say": "The first run says: created labels.json. That is correct. Fill it in, and run it again."
         }
       ],
       "do": [
-        "Compare."
+        "Compare with the screenshot."
       ],
       "done": [
         "Nobody thinks it is broken."
@@ -2990,14 +2990,14 @@ window.SLIDES = [
       "Press ▶ Start on the timer.",
       "Fell behind? Switch to step-4."
     ],
-    "notes": "Say the return time: 15:00. The assignment starts from step-4. Participants who fell behind switch to step-4 now.",
+    "notes": "Say the return time: 15:00. The assignment starts from step-4. Participants who have fallen behind should switch to step-4 now.",
     "stateId": "45:Short break",
     "teach": {
       "time": "15 min",
-      "gist": "Break. Behind? Switch to step-4 now.",
+      "gist": "Break. Have you fallen behind? Switch to step-4 now.",
       "script": [
         {
-          "say": "Coffee break, back at 15:00. Fell behind? Switch now: git switch step-4. Then you start the assignment with everyone."
+          "say": "Coffee break. Be back at 15:00. Have you fallen behind? Switch now with git switch step-4. Then you start the assignment together with everyone else."
         },
         {
           "do": "Start the countdown."
@@ -3038,14 +3038,14 @@ window.SLIDES = [
       "Stretch: Part 3 and Part 4.",
       "Step 3 stays read-only. Writes go to a working copy."
     ],
-    "notes": "The room target is the core (Parts 1 and 2). Fast squads do the stretch; the rest can do it at home. npm run check:assignment shows core and stretch separately, without the AI. The changes go to a working copy (participant-output/transactions.working.json), never to the real workbook.",
+    "notes": "The target for the room is the core (Parts 1 and 2). Fast squads do the stretch, and the rest can do it at home. npm run check:assignment shows the core and the stretch separately, without the AI. The changes go to a working copy (participant-output/transactions.working.json), never to the real workbook.",
     "stateId": "46:Assignment · Extend the MCP",
     "teach": {
       "time": "3 min",
-      "gist": "The assignment: one agent may change data, with a barrier. Core first.",
+      "gist": "The assignment: one agent may change data, behind a barrier. Do the core first.",
       "script": [
         {
-          "say": "Until now the agents could only look up. Now one agent may change data. But never without a barrier."
+          "say": "Until now the agents could only look things up. Now one agent may change data. But never without a barrier."
         },
         {
           "do": "Point at Core.",
@@ -3053,14 +3053,14 @@ window.SLIDES = [
         },
         {
           "do": "Point at Stretch.",
-          "say": "Fast? Do the stretch. Otherwise at home."
+          "say": "Are you fast? Then do the stretch. Otherwise, do it at home."
         }
       ],
       "do": [
-        "Explain core vs stretch."
+        "Explain the difference between the core and the stretch."
       ],
       "done": [
-        "Everyone knows the target is the core."
+        "Everyone knows that the target is the core."
       ],
       "watch": []
     }
@@ -3092,17 +3092,17 @@ window.SLIDES = [
     "keyPoints": [
       "A human or a rule decides before a tool changes anything."
     ],
-    "notes": "A hook is code that runs at a fixed moment: just before a tool is used, or just after. In the assignment the 'before' hook lets lookups and small changes through, and asks a person for big changes, adding and deleting. The 'after' hook writes every change to a log (audit.jsonl). It works in Claude Code and in the package.",
+    "notes": "A hook is code that runs at a fixed moment: just before a tool is used, or just after. In the assignment, the 'before' hook lets lookups and small changes through, and asks a person about big changes, additions and deletions. The 'after' hook writes every change to a log (audit.jsonl). It works in Claude Code and in the package.",
     "stateId": "47:Control: hooks and approval",
     "teach": {
       "time": "3 min",
-      "gist": "Hook = the barrier: small goes, big asks a person.",
+      "gist": "The hook is the barrier: a small change goes through, and a big change asks a person.",
       "script": [
         {
-          "say": "Remember the barrier from slide 9? This is it. Before a tool changes data, the hook checks."
+          "say": "Do you remember the barrier from slide 9? This is it. Before a tool changes data, the hook checks."
         },
         {
-          "say": "A small change: through. A big change: a person must say yes first. And afterwards everything is written down in a log."
+          "say": "A small change goes through. For a big change, a person must say yes first. And afterwards everything is written down in a log."
         },
         {
           "ask": "Why can't the AI drive around this barrier?",
@@ -3113,7 +3113,7 @@ window.SLIDES = [
         "Explain the barrier."
       ],
       "done": [
-        "Everyone knows: small goes, big asks."
+        "Everyone knows: small goes through, big asks."
       ],
       "watch": []
     }
@@ -3144,7 +3144,7 @@ window.SLIDES = [
       "Read-only context does not authorise a customer action.",
       "A person reviews every draft."
     ],
-    "notes": "Inspect the configured tools before the run. The current core package reads customer and transaction context; it does not grant permission to change a payment or send a reply. Ask the participant to identify the requested tool, its permitted scope and the human review decision. Keep the removed Anatomy illustration out of this route. The bounded-loop diagram earlier in the deck distinguishes pre-execution permission checks from post-tool checks.",
+    "notes": "Inspect the configured tools before the run. The current core package reads customer and transaction context, but it does not grant permission to change a payment or send a reply. Ask the participant to identify the requested tool, its permitted scope and the human review decision. Keep the removed Anatomy illustration out of this route. The bounded-loop diagram earlier in the deck shows the difference between permission checks before execution and checks after the tool has run.",
     "stateId": "48:Not every agent has every tool",
     "visual": {
       "bot": "point",
@@ -3152,15 +3152,15 @@ window.SLIDES = [
     },
     "teach": {
       "time": "2 min",
-      "gist": "Only the keys it needs; check before, not after; a person decides.",
+      "gist": "Give it only the keys it needs, check before and not after, and a person decides.",
       "script": [
         {
           "do": "Point at the three cards.",
-          "say": "Three rules. Only the keys it needs. The barrier before the change, not after. And a key is not permission: a person still decides."
+          "say": "There are three rules. Give it only the keys it needs. Put the barrier before the change, not after. And a key is not permission: a person still decides."
         }
       ],
       "do": [
-        "Three rules."
+        "Give the three rules."
       ],
       "done": [
         "Everyone can name them."
@@ -3217,14 +3217,14 @@ window.SLIDES = [
         },
         {
           "ask": "A, B, C or D?",
-          "say": "(Answer: B, transaction-agent. Only it has the write tools. The team lead must hand it over.)"
+          "say": "(Answer: B, transaction-agent. Only it has the write tools. The team lead must hand the work over to it.)"
         }
       ],
       "do": [
-        "Vote, then reveal."
+        "Vote, then reveal the answer."
       ],
       "done": [
-        "Everyone knows: one agent writes."
+        "Everyone knows that only one agent writes."
       ],
       "watch": []
     }
@@ -3263,15 +3263,15 @@ window.SLIDES = [
       "Large updates, adds and deletes ask a person.",
       "No person to ask means deny."
     ],
-    "notes": "Read the cards one by one. The threshold is one constant: AUTO_APPROVE_TRANSACTION_AMOUNT = 100 in 03-mcp/hooks/transaction-guard.mjs. In interactive claude the hook returns ask and Claude Code shows the prompt. When fraud-check-agent says medium, or a fact is missing, the orchestrator asks the person with AskUserQuestion. Under claude -p, or in the SDK without a terminal, no person can answer: the write is denied. A denied write is final: the agent reports it and stops.",
+    "notes": "Read the cards one by one. The threshold is one constant: AUTO_APPROVE_TRANSACTION_AMOUNT = 100 in 03-mcp/hooks/transaction-guard.mjs. In interactive claude, the hook returns ask and Claude Code shows the prompt. When fraud-check-agent says medium, or a fact is missing, the orchestrator asks the person with AskUserQuestion. Under claude -p, or in the SDK without a terminal, no person can answer, so the write is denied. A denied write is final: the agent reports it and stops.",
     "stateId": "50:When does the hook ask?",
     "teach": {
       "time": "2 min",
-      "gist": "Allow, ask, deny.",
+      "gist": "Allow, ask or deny.",
       "script": [
         {
           "do": "Point at the three stamps.",
-          "say": "Allow: small things go through. Ask: big things, a person says yes. Deny: fraud, or the person says no: the agent stops."
+          "say": "Allow: small things go through. Ask: for big things, a person says yes. Deny: for fraud, or when the person says no, the agent stops."
         },
         {
           "ask": "A change of 250 euros. Which stamp?",
@@ -3315,26 +3315,26 @@ window.SLIDES = [
       "MSG-07 shows ask, allow and deny.",
       "MSG-08 and MSG-09 show hold and ask."
     ],
-    "notes": "Run check:assignment on step-4 and read the hints. Then switch to the solution branch and show hook:demo small (allow) and large (ask). These run without the AI. Optional: npm run resolve -- MSG-07 on solution and answer y or N. Afterwards npm run reset:mcp resets the working copy.",
+    "notes": "Run check:assignment on step-4 and read the hints. Then switch to the solution branch and show hook:demo small (allow) and large (ask). These run without the AI. Optional: run npm run resolve -- MSG-07 on solution and answer y or N. Afterwards, npm run reset:mcp resets the working copy.",
     "stateId": "51:Demo · Assignment: one write, three outcomes",
     "teach": {
       "time": "5 min",
-      "gist": "Demo: check:assignment hints, hook small = allow, large = ask.",
+      "gist": "Demo: check:assignment gives hints, and the hook says allow for a small change and ask for a large one.",
       "script": [
         {
           "do": "On step-4: npm run check:assignment.",
-          "say": "This tells you what is still missing. Every line: one file, one change."
+          "say": "This tells you what is still missing. Every line is one file and one change."
         },
         {
           "do": "On solution: npm run hook:demo -- small, then -- large.",
-          "say": "Small change: allow. Big change: ask. That is the barrier."
+          "say": "A small change: allow. A big change: ask. That is the barrier."
         }
       ],
       "do": [
-        "Three commands."
+        "Run three commands."
       ],
       "done": [
-        "Everyone saw allow and ask."
+        "Everyone has seen allow and ask."
       ],
       "watch": []
     }
@@ -3375,19 +3375,19 @@ window.SLIDES = [
       "The hook makes the decision in code.",
       "The workflow fixes the order."
     ],
-    "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction; they write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft; it writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists.\n\nCLAUDE.md is advice to the model: the model can make a mistake. The tools list and the hook are code: the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs lookup, fraud check, update, hook and draft in a fixed order.",
+    "notes": "Show each file in the editor. server.js gets add_transaction, update_transaction and delete_transaction, which write to participant-output/transactions.working.json. drafts-server.js gets save_reply_draft, which writes participant-output/drafts/MSG-0N.md. The agent files list the tools for each agent. The SDK agents definition uses the same tool lists.\n\nCLAUDE.md is advice to the model, and the model can make a mistake. The tools list and the hook are code, and the model cannot go around them. The SDK loads the hook through the hooks option. Claude Code loads the same file through .claude/settings.json. resolve.mjs runs the lookup, fraud check, update, hook and draft in a fixed order.",
     "stateId": "52:Where you change what · core",
     "teach": {
       "time": "3 min",
-      "gist": "Four files: tools, the one writing agent, the rules, the barrier.",
+      "gist": "Four files: the tools, the one agent that writes, the rules and the barrier.",
       "script": [
         {
           "do": "Point at the four cards.",
-          "say": "Four files. The tools. The one agent that may write. The rules in CLAUDE.md. And the barrier."
+          "say": "There are four files. The tools. The one agent that may write. The rules in CLAUDE.md. And the barrier."
         }
       ],
       "do": [
-        "Four files."
+        "Show the four files."
       ],
       "done": [
         "Everyone knows where to start."
@@ -3424,14 +3424,14 @@ window.SLIDES = [
     "stateId": "53:What you see · Assignment start",
     "teach": {
       "time": "1 min",
-      "gist": "Red at the start = the to-do list.",
+      "gist": "Red at the start is the to-do list.",
       "script": [
         {
-          "say": "Lots of red. Good: that is your to-do list. Fix one line, run again."
+          "say": "Lots of red? Good: that is your to-do list. Fix one line, then run it again."
         }
       ],
       "do": [
-        "Show it before they start."
+        "Show this before they start."
       ],
       "done": [
         "Nobody panics at red."
@@ -3469,11 +3469,11 @@ window.SLIDES = [
       "hook:demo small: Decision allow. No question.",
       "hook:demo large: Decision ask. The reason shows amount and limit."
     ],
-    "notes": "Show this after participants run npm run check:assignment and npm run hook:demo -- small and -- large. These run without the AI and need no key. check:assignment fails? Read the hint: it names the file.",
+    "notes": "Show this after the participants run npm run check:assignment and npm run hook:demo -- small and -- large. These run without the AI and need no key. If check:assignment fails, read the hint: it names the file.",
     "stateId": "54:What good looks like: core",
     "teach": {
       "time": "1 min",
-      "gist": "Done = core passed, small allow, large ask.",
+      "gist": "Done means: the core has passed, a small change is allowed, and a large change asks.",
       "script": [
         {
           "say": "This is your goal. Core passed. Small change: allow. Big change: ask."
@@ -3483,7 +3483,7 @@ window.SLIDES = [
         "Show the goal."
       ],
       "done": [
-        "Everyone knows the end picture."
+        "Everyone knows what the end picture looks like."
       ],
       "watch": []
     }
@@ -3529,18 +3529,18 @@ window.SLIDES = [
       "Only transaction-agent writes.",
       "A denied write is final."
     ],
-    "notes": "35 to 45 minutes. check:assignment runs without the AI and says what is missing. The solution branch has the reference answer. After live runs: npm run reset:mcp resets the working copy.",
+    "notes": "35 to 45 minutes. check:assignment runs without the AI and says what is missing. The solution branch has the reference answer. After live runs, npm run reset:mcp resets the working copy.",
     "stateId": "55:Assignment core: write tools and a hook.",
     "teach": {
       "time": "35 min",
-      "gist": "Core: tools, writing agent, rules, barrier; check:assignment until Core passed.",
+      "gist": "Core: the tools, the writing agent, the rules and the barrier. Run check:assignment until Core passed.",
       "script": [
         {
-          "say": "Now you. Start on step-4 and look at the to-do list. Fix one line, run again."
+          "say": "Now it is your turn. Start on step-4 and look at the to-do list. Fix one line, then run it again."
         },
         {
           "do": "Point at step 4.",
-          "say": "The barrier is the most important part: small goes, big asks a person."
+          "say": "The barrier is the most important part: a small change goes through, and a big change asks a person."
         },
         {
           "do": "Start the 35-minute timer."
@@ -3551,11 +3551,11 @@ window.SLIDES = [
       ],
       "done": [
         "Core passed.",
-        "Small allow, large ask."
+        "A small change is allowed, and a large change asks."
       ],
       "watch": [
-        "Stuck: read the hint, it names the file.",
-        "Reference answer: git switch solution."
+        "If they are stuck, they should read the hint. It names the file.",
+        "The reference answer is on the solution branch: git switch solution."
       ]
     }
   },
@@ -3587,22 +3587,22 @@ window.SLIDES = [
     "keyPoints": [
       "Stretch: three tickets, three safe stops."
     ],
-    "notes": "These are real runs on the solution branch. The model words can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again.",
+    "notes": "These are real runs on the solution branch. The model's wording can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again.",
     "stateId": "56:What good looks like: stretch",
     "teach": {
       "time": "2 min",
-      "gist": "Stretch goal: three tickets, three safe stops.",
+      "gist": "The stretch goal: three tickets, three safe stops.",
       "script": [
         {
           "do": "Point at the three cards.",
-          "say": "This is the stretch goal. Three tickets, and each one stops safely: a 'no' stops it, fraud stops it, and a doubt goes to a person."
+          "say": "This is the stretch goal. There are three tickets, and each one stops safely: a 'no' stops it, fraud stops it, and a doubt goes to a person."
         }
       ],
       "do": [
         "Show the goal."
       ],
       "done": [
-        "Fast squads know the end picture."
+        "Fast squads know what the end picture looks like."
       ],
       "watch": []
     }
@@ -3636,14 +3636,14 @@ window.SLIDES = [
       "fraud-check-agent only reads. Hold or high means ESCALATE.",
       "Only the orchestrator has AskUserQuestion."
     ],
-    "notes": "Stretch only. drafts-server.js gives customer-reply-agent one tool, save_reply_draft. The draft starts with \"DRAFT - a person reviews this before sending\". fraud-check-agent reads the customer and the transaction and returns fraud_risk and hold; with hold or high the workflow writes nothing and reports ESCALATE. resolve.mjs runs the fixed order: look up, fraud check, propose, hook, draft. AskUserQuestion is for the orchestrator only; subagents cannot use it. With no terminal, the question becomes ESCALATE.",
+    "notes": "Stretch only. drafts-server.js gives customer-reply-agent one tool, save_reply_draft. The draft starts with \"DRAFT - a person reviews this before sending\". fraud-check-agent reads the customer and the transaction and returns fraud_risk and hold. With hold or high, the workflow writes nothing and reports ESCALATE. resolve.mjs runs the fixed order: look up, fraud check, propose, hook, draft. AskUserQuestion is for the orchestrator only, and subagents cannot use it. With no terminal, the question becomes ESCALATE.",
     "stateId": "57:Where you change what · stretch",
     "teach": {
       "time": "2 min",
-      "gist": "Stretch: three more files.",
+      "gist": "The stretch: three more files.",
       "script": [
         {
-          "say": "Only for fast squads: three more files. A draft tool, a fraud check, and a fixed order with a question to a person."
+          "say": "This is only for fast squads: three more files. A draft tool, a fraud check, and a fixed order with a question to a person."
         }
       ],
       "do": [
@@ -3690,22 +3690,22 @@ window.SLIDES = [
       "A denied write stops the run."
     ],
     "visual": {},
-    "notes": "Optional. Check before class that resolve works on your branch: on solution the npm run resolve script exists; on step-4 the participants add it.",
+    "notes": "Optional. Check before class that resolve works on your branch. On solution the npm run resolve script exists, and on step-4 the participants add it.",
     "stateId": "58:Assignment stretch: drafts, fraud check, a question.",
     "teach": {
       "time": "open",
-      "gist": "Stretch hands-on, only after core passes.",
+      "gist": "Stretch hands-on, only after the core passes.",
       "script": [
         {
-          "say": "Core passed? Then the stretch. Otherwise: at home."
+          "say": "Has the core passed? Then do the stretch. Otherwise, do it at home."
         },
         {
           "do": "Point at step 4.",
-          "say": "Test with MSG-07 and answer N: the barrier says no and the agent stops."
+          "say": "Test with MSG-07 and answer N: the barrier says no, and the agent stops."
         }
       ],
       "do": [
-        "Stretch steps."
+        "Do the stretch steps."
       ],
       "done": [
         "A 'no' stops the run."
@@ -3750,11 +3750,11 @@ window.SLIDES = [
       "Which writes need a person?",
       "Where do you put the rule?"
     ],
-    "notes": "Answers: only transaction-agent. From 100. A rule in CLAUDE.md is advice to the AI; the tools list and the barrier are code, the AI cannot get around them. In n8n the Wait and IF nodes did this.",
+    "notes": "Answers: only transaction-agent. From 100. A rule in CLAUDE.md is advice to the AI. The tools list and the barrier are code, and the AI cannot get around them. In n8n, the Wait and IF nodes did this.",
     "stateId": "59:Discuss: who can change data, and when?",
     "teach": {
       "time": "4 min",
-      "gist": "Discussion: one writing agent, limit 100, code beats advice.",
+      "gist": "Discussion: one writing agent, the limit of 100, and code beats advice.",
       "script": [
         {
           "ask": "Which agent needs write tools?",
@@ -3765,15 +3765,15 @@ window.SLIDES = [
           "say": "(Answer: 100.)"
         },
         {
-          "ask": "CLAUDE.md, tools list or barrier: which is strongest?",
-          "say": "(Answer: the tools list and the barrier: they are code. CLAUDE.md is advice.)"
+          "ask": "CLAUDE.md, the tools list or the barrier: which is strongest?",
+          "say": "(Answer: the tools list and the barrier, because they are code. CLAUDE.md is advice.)"
         }
       ],
       "do": [
-        "Let tables talk, then click."
+        "Let the tables talk, then click."
       ],
       "done": [
-        "All three answered."
+        "All three questions are answered."
       ],
       "watch": []
     }
@@ -3805,14 +3805,14 @@ window.SLIDES = [
     "keyPoints": [
       "Homework, or after 15:50 if you have time. Build a small agent from zero."
     ],
-    "notes": "Explain the final Step 5 in the step-4 branch. The starter is 05-build-your-own/agent.mjs. Participants identify the prompt, allowed tools, and result handling.",
+    "notes": "Explain the final Step 5 in the step-4 branch. The starter is 05-build-your-own/agent.mjs. Participants identify the prompt, the allowed tools and the result handling.",
     "stateId": "60:Step 5 · Build your own agent",
     "teach": {
       "time": "2 min",
       "gist": "Homework: build your own small agent.",
       "script": [
         {
-          "say": "Homework: build your own small agent. It finds a bug and fixes it. Everything you learned today, in one small file."
+          "say": "Homework: build your own small agent. It finds a bug and fixes it. It is everything you learned today, in one small file."
         }
       ],
       "do": [
@@ -3846,7 +3846,7 @@ window.SLIDES = [
       "The CLI command uses Read, Edit, and Glob.",
       "The permission mode accepts edits within that scope."
     ],
-    "notes": "Run the commands from SOLO.md, Step 5. The dry run does not call the AI. Then show the same in Claude Code with claude -p.",
+    "notes": "Run the commands from SOLO.md, Step 5. The dry run does not call the AI. Then show the same thing in Claude Code with claude -p.",
     "stateId": "61:Demo · Step 5: run the starter",
     "teach": {
       "time": "3 min",
@@ -3854,19 +3854,19 @@ window.SLIDES = [
       "script": [
         {
           "do": "cd 05-build-your-own, then node agent.mjs --dry-run.",
-          "say": "The dress rehearsal of your own agent."
+          "say": "This is the dress rehearsal of your own agent."
         },
         {
           "do": "Show the claude -p command.",
-          "say": "And the same in Claude Code: the question, and the three tools it may use.",
+          "say": "And here is the same thing in Claude Code: the question, and the three tools it may use.",
           "clip": "assets/day4-teach/a25-build-your-own.mp4"
         }
       ],
       "do": [
-        "Dry run, Claude Code command."
+        "Show the dry run and the Claude Code command."
       ],
       "done": [
-        "Everyone saw the starter."
+        "Everyone has seen the starter."
       ],
       "watch": []
     }
@@ -3906,11 +3906,11 @@ window.SLIDES = [
       "Keep model calls optional.",
       "Explain the tool-use and result messages."
     ],
-    "notes": "Give participants 15–20 minutes. Keep the API key optional: without a model call they can use the dry run; participants with a Claude Code login can use the equivalent CLI command.",
+    "notes": "Give participants 15 to 20 minutes. Keep the API key optional: without a model call they can use the dry run, and participants with a Claude Code login can use the equivalent CLI command.",
     "stateId": "62:Your turn · build your own agent",
     "teach": {
       "time": "at home",
-      "gist": "Homework: run the starter, find the question, tools and result.",
+      "gist": "Homework: run the starter, and find the question, the tools and the result.",
       "script": [
         {
           "say": "At home: go to the starter, do the dress rehearsal, and find three things: the question, the tools, and where the result comes back."
@@ -3950,18 +3950,18 @@ window.SLIDES = [
         "body": "Change the question or the tools, run the dry run again and compare."
       }
     ],
-    "notes": "The starter has three tools: Read, Edit and Glob. acceptEdits lets the agent edit files without a question. Use it only in a test folder.",
+    "notes": "The starter has three tools: Read, Edit and Glob. acceptEdits lets the agent edit files without asking. Use it only in a test folder.",
     "stateId": "63:What you see · Step 5",
     "teach": {
       "time": "1 min",
-      "gist": "Compare: the Claude Code command; change and compare.",
+      "gist": "Compare: the Claude Code command. Then change something and compare again.",
       "script": [
         {
           "say": "This is what you should see. Then change the question or the tools, and compare."
         }
       ],
       "do": [
-        "Compare."
+        "Compare with the screenshot."
       ],
       "done": [
         "Everyone knows how to experiment."
@@ -3989,27 +3989,27 @@ window.SLIDES = [
     "keyPoints": [
       "Optional. A skill is a recipe that Claude loads when it fits. No step uses it."
     ],
-    "notes": "Not in today's exercise: concept only. A skill is a folder with a SKILL.md file. Claude reads its description and uses it when it fits, just like the job ad of a specialist.",
+    "notes": "Not in today's exercise: concept only. A skill is a folder with a SKILL.md file. Claude reads its description and uses it when it fits, just like the job advert of a specialist.",
     "stateId": "64:Skills",
     "teach": {
       "time": "2 min",
-      "gist": "Skills = a recipe Claude picks when it fits. Not in today's exercise.",
+      "gist": "Skills are a recipe that Claude picks when it fits. They are not part of today's exercise.",
       "script": [
         {
-          "say": "One extra. A skill is a recipe in a folder. Claude reads the description and uses it when it fits. Just like the agent's job ad."
+          "say": "One extra thing. A skill is a recipe in a folder. Claude reads the description and uses it when it fits. It is just like the agent's job advert."
         },
         {
-          "say": "Not in today's exercise: just so you know it exists."
+          "say": "It is not in today's exercise. I just want you to know that it exists."
         }
       ],
       "do": [
         "Mention it."
       ],
       "done": [
-        "Everyone knows skills exist."
+        "Everyone knows that skills exist."
       ],
       "watch": [
-        "Not in the package: concept only."
+        "It is not in the package: it is a concept only."
       ]
     }
   },
@@ -4042,33 +4042,33 @@ window.SLIDES = [
         "caption": "We build on this agent team."
       }
     ],
-    "notes": "Recap round: everyone shows one result in one minute (a trace, a draft, the check output, or the chat). Go back to the goals on the board from slide 2. Ask: what was easier in n8n, what in code? Where must a person still decide? Extra for fast people: chat in, chat out: npm run chat -- --lesson 3.",
+    "notes": "Recap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Go back to the goals on the board from slide 2. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.",
     "stateId": "65:Close: keep a human in the loop.",
     "subtitle": "One agent, a team, lookup desks and a barrier. And at the end, always a person.",
     "teach": {
       "time": "10 min",
-      "gist": "Close: one result each, back to this morning's goals, bridge to Workshop 5.",
+      "gist": "Close: one result each, back to this morning's goals, and a bridge to Workshop 5.",
       "script": [
         {
-          "say": "We started this morning with a sorting machine in n8n blocks. Now you have a team of agents in code. And at the end: always a person."
+          "say": "This morning we started with a sorting machine in n8n blocks. Now you have a team of agents in code. And at the end there is always a person."
         },
         {
           "do": "Point at the goals on the board from slide 2.",
           "say": "Look at the goal you wrote down this morning. Who got there?"
         },
         {
-          "ask": "What was easier in n8n, and what in code?",
-          "say": "(Listen. Typical: n8n easier to see, code easier to test and limit.)"
+          "ask": "What was easier in n8n, and what was easier in code?",
+          "say": "(Listen to the answers. Typically: n8n is easier to see, and code is easier to test and limit.)"
         },
         {
-          "say": "Thank you. Next time we build on this."
+          "say": "Thank you. Next time we will build on this."
         }
       ],
       "do": [
-        "One result each, back to the goals."
+        "Ask for one result each, and go back to the goals."
       ],
       "done": [
-        "Everyone showed one result."
+        "Everyone has shown one result."
       ],
       "watch": []
     }
