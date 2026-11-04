@@ -3494,7 +3494,7 @@ window.SLIDES = [
       "MSG-07 shows ask, allow and deny.",
       "MSG-08 and MSG-09 show hold and ask."
     ],
-    "notes": "Run check:assignment on step-4 and read the hints. Then switch to the solution branch and show hook:demo small (allow) and large (ask). These run without the AI. Optional: run npm run resolve -- MSG-07 on solution and answer y or N. Afterwards, npm run reset:mcp resets the working copy.",
+    "notes": "Run check:assignment on step-4 and read the hints. Then switch to the solution branch and show hook:demo small (allow) and large (ask). These run without the AI. Optional: run npm run resolve -- MSG-07 --backend sdk-login on solution and answer y or N. Afterwards, npm run reset:mcp resets the working copy.",
     "stateId": "51:Demo · Assignment: one write, three outcomes",
     "teach": {
       "time": "5 min",
@@ -3689,7 +3689,7 @@ window.SLIDES = [
       },
       {
         "text": "The one agent that may change data",
-        "after": "SOLO.md, Part 1: create 03-mcp/claude-project/.claude/agents/transaction-agent.md with get, update and add. Add the rules for changing data to 03-mcp/claude-project/CLAUDE.md."
+        "after": "SOLO.md, Part 1: create 03-mcp/claude-project/.claude/agents/transaction-agent.md with get, update and add. Copy the three rules for changing data into 03-mcp/claude-project/CLAUDE.md word for word: the check looks for those exact sentences."
       },
       {
         "text": "The barrier",
@@ -3858,8 +3858,8 @@ window.SLIDES = [
       },
       {
         "text": "Test it",
-        "prompt": "npm run resolve -- MSG-07",
-        "after": "Answer N: the barrier says no and the agent stops."
+        "prompt": "npm run resolve -- MSG-07 --backend sdk-login",
+        "after": "In your own terminal. Answer N: the barrier says no and the agent stops. With the default backend nobody is asked: the barrier stops a change of €100 or more by itself."
       }
     ],
     "expected": "check:assignment passes, and a 'no' stops the run.",
@@ -3890,7 +3890,7 @@ window.SLIDES = [
         "A 'no' stops the run."
       ],
       "watch": [
-        "Test npm run resolve before class: it exists on the solution branch."
+        "Test npm run resolve before class: it exists on the solution branch. The question only appears with --backend sdk-login (or sdk with an API key) in a real terminal; under the default claude-code backend the hook denies the €899 change without asking."
       ]
     }
   },
