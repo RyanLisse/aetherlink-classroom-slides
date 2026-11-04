@@ -2,15 +2,15 @@
 window.SLIDES = [
   {
     "lessonId": "workshop-4",
-    "title": "Welcome to Workshop 4 · From n8n to Claude Agents SDK",
-    "kicker": "Workshop 4 · From n8n to Claude Agents SDK",
+    "title": "Welcome to Day 4",
+    "kicker": "Day 4 · From n8n to the Claude Agent SDK",
     "type": "concept",
     "visual": {
       "opener": "welcome",
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Rebuild the behaviour you checked in n8n, now in code.",
+    "subtitle": "From n8n to the Claude Agent SDK: yesterday's flow, now in code.",
     "notes": "On screen while people arrive. Today we build yesterday's n8n support flow again, now in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages: we do not import the n8n flow. Did someone's Day 3 flow not work? No problem: they use the example results in the package.",
     "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK",
     "teach": {
@@ -48,11 +48,7 @@ window.SLIDES = [
     "title": "Look back, look ahead: three questions",
     "kicker": "W4 · RECAP · 3 ROUNDS",
     "type": "context",
-    "visual": {
-      "opener": "ask",
-      "bot": "think",
-      "place": "beside"
-    },
+    "visual": {},
     "subtitle": "Two minutes per round. One answer per table.",
     "timer": 6,
     "cards": [
@@ -182,7 +178,7 @@ window.SLIDES = [
       "image": "assets/day3-maarten-n8n/03-chat-memory.jpeg",
       "imageLink": "n8n · Chat trigger → AI Agent"
     },
-    "subtitle": "The customer types in the chat. The AI Agent reads it. Memory remembers the conversation.",
+    "subtitle": "Memory works like a conversation at the desk: same customer, you remember. New customer, you start fresh.",
     "cards": [
       {
         "title": "Chat trigger",
@@ -204,7 +200,6 @@ window.SLIDES = [
     ],
     "notes": "Yesterday's second flow: a chat in front of the AI Agent, and memory under it. Ask: what happened before you added memory, and after? Today npm run chat does the same: it remembers within one conversation. A new conversation must never get another customer's messages.",
     "stateId": "5:Yesterday’s flow · 2. Chat and an AI Agent",
-    "tagline": "Memory works like a conversation at the desk: same customer, you remember. New customer, you start fresh.",
     "teach": {
       "time": "2 min",
       "gist": "Chat in, AI Agent reads, memory remembers the conversation. Never mix customers.",
@@ -309,7 +304,7 @@ window.SLIDES = [
       "image": "assets/day3-maarten-n8n/11-three-sub-agents.jpeg",
       "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
     },
-    "subtitle": "Like an office: you don't ask one person to do everything.",
+    "subtitle": "Like an office: one job each. Today Reply and Risk become agents in code; Customer Context becomes a lookup tool (MCP).",
     "cards": [
       {
         "title": "Customer Reply Agent",
@@ -331,7 +326,6 @@ window.SLIDES = [
     ],
     "notes": "Yesterday's team: three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? Was someone's Day 3 flow blocked? Show this screenshot as the example and explain the idea; do not say their flow worked. Today Reply and Risk become subagents; the Customer Context Agent becomes an MCP tool that looks up customers.",
     "stateId": "7:Optional yesterday, explained today: specialist agents",
-    "tagline": "Today Reply and Risk become two agents in code. Customer Context becomes a lookup tool (MCP).",
     "teach": {
       "time": "3 min",
       "gist": "Three specialists, each one job. Today: 2 agents in code + 1 lookup tool.",
@@ -369,12 +363,7 @@ window.SLIDES = [
     "title": "Goal of today",
     "kicker": "Welcome · Goal of today",
     "type": "context",
-    "visual": {
-      "keyLine": 2,
-      "stamp": "EXPLAIN",
-      "bot": "head",
-      "place": "key"
-    },
+    "visual": {},
     "subtitle": "At 16:00 you have an agent team you built yourself, and you can explain it.",
     "cards": [
       {
@@ -430,22 +419,7 @@ window.SLIDES = [
     "title": "Today · agenda",
     "kicker": "Run of show · 10:00–16:00",
     "type": "context",
-    "visual": {
-      "bot": "wave",
-      "place": "left",
-      "dayRoute": [
-        "Recap",
-        "Concepts",
-        "Step 0",
-        "Step 1",
-        "Lunch",
-        "Step 2",
-        "Step 3",
-        "Step 4",
-        "Assignment",
-        "Close"
-      ]
-    },
+    "visual": {},
     "subtitle": "The rhythm all day: I show it. You do it. We check it.",
     "cards": [
       {
@@ -583,7 +557,6 @@ window.SLIDES = [
     "type": "concept",
     "layout": "compare",
     "visual": {
-      "stepThrough": true,
       "highlight": [
         {
           "in": "subtitle",
@@ -636,7 +609,7 @@ window.SLIDES = [
       "Only the name changes",
       "Same person at the end"
     ],
-    "notes": "Go row by row: the slide reveals one row per click. Everything they built yesterday comes back today, only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv); the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
+    "notes": "Go row by row, top to bottom. Everything they built yesterday comes back today, only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv); the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
     "stateId": "11:n8n ↔ Agent SDK at a glance",
     "teach": {
       "time": "3 min",
@@ -646,7 +619,7 @@ window.SLIDES = [
           "say": "This is our dictionary. Left: what you built yesterday. Middle: what it is called today. Right: what it means."
         },
         {
-          "do": "Click through the rows one by one. Read the right column out loud.",
+          "do": "Go through the rows top to bottom. Read the right column out loud.",
           "say": "The AI Agent becomes query(): ask the AI. The System Message becomes CLAUDE.md: the work instructions. And so on."
         },
         {
@@ -741,16 +714,16 @@ window.SLIDES = [
     "title": "Two ways to run the same agent",
     "kicker": "Concept · choose a backend",
     "type": "concept",
-    "visual": {
-      "spotlight": 0,
-      "bot": "point",
-      "place": "beside"
-    },
+    "visual": {},
     "subtitle": "We use your Claude Code login from Day 1. Nothing new to request.",
     "cards": [
       {
-        "title": "Your Claude Code login",
-        "body": "The default. The same login as Day 1 and 2. No API key needed."
+        "title": "What you use",
+        "body": "Your Claude Code login. The same one as Day 1 and 2."
+      },
+      {
+        "title": "What you don't need",
+        "body": "An API key. Nothing new to request."
       }
     ],
     "keyPoints": [
