@@ -10,8 +10,13 @@ window.SLIDES = [
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Rebuild the behaviour you checked in n8n, now in code.",
-    "notes": "Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. Use a labelled reference if the required Day 3 specialist run was blocked to start.",
+    "subtitle": "Learning goal: use the AI-SDLC to build, test and review a code change. The Claude Agents SDK is the practice system.",
+    "keyPoints": [
+      "Start with the ticket and the observed result.",
+      "Build one change, then check it.",
+      "A person reviews the diff and decides whether to release."
+    ],
+    "notes": "Name the AI-SDLC as the learning goal before the recap. Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. Use a labelled reference if the required Day 3 specialist run was blocked to start.",
     "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK"
   },
   {
@@ -773,6 +778,7 @@ window.SLIDES = [
       }
     ],
     "steps": [
+      "Open SOLO.md and complete Step 1. Build the options, project instructions and Priority Parser.",
       "Run npm run lesson1 -- MSG-01 --dry-run.",
       "Open priority-schema.mjs and lib/switch.mjs.",
       "Run npm run chat. Give a colour. Ask for it again.",
@@ -783,7 +789,8 @@ window.SLIDES = [
       "Do the dry run. Then compare chat with and without memory."
     ],
     "notes": "Give participants 15 minutes. Offline, inspect 01-single-agent/priority-schema.mjs, outputFormat in the dry-run options, and lib/switch.mjs. Do not present dry-run output as model JSON or a Switch → result; show those only from a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md, labelled as an illustrative sample. Then compare a favourite-colour follow-up in the same chat with --no-memory.",
-    "stateId": "23:Run Step 1 and test chat memory."
+    "stateId": "23:Run Step 1 and test chat memory.",
+    "progressId": "w4-step1-progress-v2"
   },
   {
     "lessonId": "workshop-4",
@@ -1169,8 +1176,9 @@ window.SLIDES = [
       }
     ],
     "steps": [
+      "Open SOLO.md and complete Step 2. Build both prompts, the loader, schema and orchestrator options.",
       "Run npm run lesson2 -- MSG-05 --dry-run.",
-      "In a live run or docs/sample-trace.md, find risk-agent and customer-reply-agent.",
+      "A dry run makes no model call. Use a live run or docs/sample-trace.md, labelled as a sample, to find both agent calls.",
       "After a live run, open output/MSG-05.md.",
       "Read the draft before you use it."
     ],
@@ -1179,7 +1187,8 @@ window.SLIDES = [
       "Do the dry run. Then read a live run or the sample trace."
     ],
     "notes": "Give participants 20 minutes. A dry run only shows setup and the backend command. The expected live or sample order is Agent → risk-agent followed by Agent → customer-reply-agent; the MSG-10 missing-information path also requires a live run (Claude Code login, or --backend sdk with a key) or the clearly labelled sample trace. Ask them to point to the frontmatter description and prompt body. Keep the output as a draft for human review.",
-    "stateId": "33:Run the orchestrator and inspect the draft."
+    "stateId": "33:Run the orchestrator and inspect the draft.",
+    "progressId": "w4-step2-progress-v2"
   },
   {
     "lessonId": "workshop-4",
@@ -1371,10 +1380,11 @@ window.SLIDES = [
       }
     ],
     "steps": [
+      "Open SOLO.md and complete Step 3. Build both read-only MCP tools.",
       "Once: (cd 03-mcp/transaction-mcp && npm ci).",
       "Run npm run smoke:mcp. It makes no model call.",
-      "Run npm run lesson3 -- MSG-08 --dry-run. Find both MCP servers.",
-      "In the trace, find get_customer and get_transaction."
+      "Run npm run lesson3 -- MSG-08 --dry-run. Check the MCP server settings.",
+      "In a live run or labelled sample trace, find get_customer and get_transaction."
     ],
     "expected": "The trace shows both read-only lookups. The draft waits for a person.",
     "keyPoints": [
@@ -1383,7 +1393,8 @@ window.SLIDES = [
       "A person reviews the draft before sending."
     ],
     "notes": "Give participants 20 minutes. Start with npm run smoke:mcp, then run the lesson 3 dry run to inspect the MCP configuration. For real results, use a live run (Claude Code login, or --backend sdk with a key). Keep customer and transaction facts tied to the read-only MCP results, and have a person review the reply draft before sending.",
-    "stateId": "39:Run Step 3 customer and transaction lookups."
+    "stateId": "39:Run Step 3 customer and transaction lookups.",
+    "progressId": "w4-step3-progress-v2"
   },
   {
     "lessonId": "workshop-4",

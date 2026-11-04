@@ -8,6 +8,23 @@ const ctx = {window: {}};
 vm.runInNewContext(read('workshop4-slides.js'), ctx);
 const slides = ctx.window.SLIDES;
 
+test('Day 4 deck and presenter request the current versioned slide data', () => {
+  const version = file => {
+    const match = read(file).match(/src="workshop4-slides\.js\?v=(\d+)"/);
+    assert.ok(match, file + ' must load a versioned slide script');
+    return Number(match[1]);
+  };
+  const deckVersion = version('workshop4.html');
+  assert.ok(deckVersion > 19);
+  assert.equal(version('workshop4-presenter.html'), deckVersion);
+});
+
+test('Day 4 deck requests the current app runtime for progress versions', () => {
+  const match = read('workshop4.html').match(/src="app\.js\?v=(\d+)"/);
+  assert.ok(match, 'Day 4 deck must load a versioned app runtime');
+  assert.ok(Number(match[1]) > 101);
+});
+
 test('The memory discussion leads into three illustrated explanations', () => {
   const start = slides.findIndex(s => s.title === 'Discuss: what makes the route predictable?') + 1;
   assert.deepEqual(Array.from(slides.slice(start, start + 3), s => s.stateId), [
@@ -21,6 +38,51 @@ test('The memory discussion leads into three illustrated explanations', () => {
     assert.match(read(slide.visual.image), /<svg /);
     assert.match(slide.notes, /Participant:/);
     assert.match(slide.notes, /\bCheck(?::| each\b)/);
+  }
+});
+
+test('Workshop 4 starts with the AI-SDLC goal and tells participants what to build', () => {
+  const welcome = slides[0];
+  assert.match(welcome.subtitle, /Learning goal: use the AI-SDLC/);
+  assert.match(welcome.subtitle, /practice system/);
+
+  const step1 = slides.find(s => s.title === 'Run Step 1 and test chat memory.');
+  const step2 = slides.find(s => s.title === 'Run the orchestrator and inspect the draft.');
+  const step3 = slides.find(s => s.title === 'Run Step 3 customer and transaction lookups.');
+  assert.ok(step1.steps.some(step => /complete Step 1.*Build the options, project instructions and Priority Parser/.test(step)));
+  assert.ok(step2.steps.some(step => /complete Step 2.*Build both prompts, the loader, schema and orchestrator options/.test(step)));
+  assert.ok(step2.steps.some(step => /dry run makes no model call/.test(step)));
+  assert.ok(step3.steps.some(step => /complete Step 3.*Build both read-only MCP tools/.test(step)));
+  assert.ok(step3.steps.some(step => /live run or labelled sample trace/.test(step)));
+});
+
+test('New Day 4 build steps reset old checkmarks without resetting their timers', () => {
+  const affected = [
+    ['Run Step 1 and test chat memory.', '23:Run Step 1 and test chat memory.'],
+    ['Run the orchestrator and inspect the draft.', '33:Run the orchestrator and inspect the draft.'],
+    ['Run Step 3 customer and transaction lookups.', '39:Run Step 3 customer and transaction lookups.'],
+  ];
+  const source = read('app.js');
+  const start = source.indexOf('const stateKey = () =>');
+  const end = source.indexOf('\nfunction renderInstructions', start);
+  const stateFunctions = source.slice(start, end);
+  const timerContext = {window: {}};
+  vm.runInNewContext(read('timers.js'), timerContext);
+
+  for (const [title, stateId] of affected) {
+    const slide = slides.find(item => item.title === title);
+    assert.equal(slide.stateId, stateId);
+    assert.ok(slide.progressId);
+    const oldKey = 'als:' + stateId;
+    const result = vm.runInNewContext(stateFunctions + '; ({ key: stateKey(), state: loadState() })', {
+      slides: [slide],
+      current: 0,
+      sessionStorage: {getItem: key => key === oldKey ? JSON.stringify({done: [true], passed: true}) : null},
+    });
+    assert.equal(result.key, 'als:' + slide.progressId);
+    assert.equal(result.state.done, undefined);
+    assert.equal(result.state.passed, undefined);
+    assert.equal(timerContext.window.ALSTimer.key(0, slide.title, slide.stateId), 'als:timer:' + stateId);
   }
 });
 

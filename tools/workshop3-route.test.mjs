@@ -10,6 +10,17 @@ const load = name => {
   return context.window.SLIDES;
 };
 
+test('Day 3 deck and presenter request the current versioned slide data', () => {
+  const version = file => {
+    const match = read(file).match(/src="workshop3-slides\.js\?v=(\d+)"/);
+    assert.ok(match, file + ' must load a versioned slide script');
+    return Number(match[1]);
+  };
+  const deckVersion = version('workshop3.html');
+  assert.ok(deckVersion > 11);
+  assert.equal(version('workshop3-presenter.html'), deckVersion);
+});
+
 test('Break timers render with or without a card grid', () => {
   const source = read('app.js');
   const extras = source.slice(source.indexOf('function renderExtras('), source.indexOf('\nconst REACT ='));
@@ -51,6 +62,16 @@ test('Cloud checkpoints show the result relevant to each assignment', () => {
     assert.ok(slide.visual.shotAlt);
     assert.ok(existsSync(new URL('../' + slide.visual.shot, import.meta.url)));
   }
+});
+
+test('Day 3 opens with the AI-SDLC goal and a Snake show-and-tell', () => {
+  const slides = load('workshop3-slides.js');
+  assert.match(slides[0].title, /AI-SDLC/);
+  assert.match(slides[0].keyPoints.join(' '), /learning goal/);
+  assert.equal(slides[1].stateId, 'w3-snake-share');
+  assert.match(slides[1].title, /Share your Snake game/);
+  assert.match(slides[1].subtitle, /Day 1 or 2/);
+  assert.match(slides[2].subtitle, /AI-SDLC/);
 });
 
 test('W3 core requires flat and nested subagent communication before completion', () => {
