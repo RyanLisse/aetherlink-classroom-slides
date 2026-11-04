@@ -14,9 +14,9 @@ production in their own work. Each step gets its own pull request in each repo i
 | 1 · One agent | 19-29 | walked, fixed | [#22](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/22) (main), #23 to #28 (step branches) | none needed |
 | 2 · Subagents | 34-42 | walked, fixed | [#29](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/29) (main), #30 to #35 | this branch |
 | 3 · MCP | 43-48 | walked, fixed | [#43](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/43) (main), #44 to #49 | this branch |
-| 4 · Check | 49-51 | next | | |
-| Assignment | 53-67 | not yet | | |
-| 5 · Homework | 68-71 | not yet | | |
+| 4 · Check | 49-51 | walked, fixed | #50 to #56 | none needed |
+| Assignment | 53-67 | walked, fixed | #57 to #63 | this branch |
+| 5 · Homework | 68-71 | walked | #61 to #63 (catch-up line) | none needed |
 
 ## Step 0 · Setup (slides 13-17)
 
@@ -99,6 +99,35 @@ Live: MSG-08 high, MSG-07 medium, MSG-09 medium, matching the trainer key; $0.20
 `customer-context-agent` calling `get_customer` and `risk-agent` calling `get_transaction`, once each. The MSG-08 draft
 lists the TX-1014 facts under `External data`. Rerunning a message whose draft exists shows one harmless
 `File has not been read yet` line before the write succeeds.
+
+## Step 4 · Check (slides 49-51)
+
+`npm run check` behaves as slides 50 and 51 say: the first run creates `labels.json`, a wrong label gives `revise`,
+and labels from the live runs give 6/6 and 9/9 PASS. Fixed in SOLO (package #50 to #56): `main` and `step-4` had two
+different Step 4 texts; labels for MSG-01 to MSG-09; where to save the acceptance table
+(`participant-output/acceptance-table.md`); `git stash -u` before `git switch`.
+
+## Assignment (slides 53-67)
+
+Walked the starting point on `step-4` and the finished state on `solution`. `check:assignment` on `step-4` shows
+Core 14 to fix and Stretch 20 open (slide 60); on `solution` both pass (slide 61). `hook:demo`: allow for small
+and read, ask for large, add and delete (slide 57). MSG-08 reports `ESCALATE` with no write (slide 63).
+
+| # | What the participant sees | Why it matters | Fix | Where |
+| --- | --- | --- | --- | --- |
+| 1 | `step-4` SOLO has an older assignment text than `solution`. | Participants work on `step-4`. | One assignment text on `step-4`, `solution`, `facilitator`. | Package #61 to #63 |
+| 2 | The check wants exact sentences and files SOLO only describes: three `CLAUDE.md` rules, `03-mcp/claude-project/.mcp.json` with `TRANSACTIONS_WRITES_ENABLED`, `.claude/settings.json` hooks, `buildResolveOptions()`. | A participant who writes "only transaction-agent may write" stays red. | SOLO gives them literally. On a fresh `step-4` the literal blocks alone take the to-do list from 14 to 8; the 8 left are coding tasks. | Package #61 to #63, slide 62 |
+| 3 | Slide 65: "npm run resolve -- MSG-07, answer N". | With the default backend nobody is asked: the hook denies the €899 change by itself (fail-safe). The question needs `--backend sdk-login` in a terminal. | Slide 65 and SOLO Part 4 say so. | This branch, package #61 to #63 |
+| 4 | `resolve` on `sdk-login` costs $5.03. | The SDK backends still loaded the account's claude.ai connectors. | `strictMcpConfig` for the SDK backends: $0.19. | Package #57 to #63 |
+
+Verified on `solution` in a pseudo-terminal: `Approve update_transaction (TX-1007, amount 899)? [y/N] N` gives
+`Denied by a human reviewer`, no retry, no draft.
+
+## Step 5 and close (slides 68-74)
+
+`cd 05-build-your-own && node agent.mjs --dry-run` prints the Claude Code command with prompt, tools and permission
+mode, as slides 69 to 71 say. SOLO's catch-up line gained `git stash -u`. Open suggestion, not changed: a real
+`node agent.mjs` run at home does not pass `strictMcpConfig`, so it also loads the participant's claude.ai connectors.
 
 ## Company login (Vertex AI, Bedrock)
 
