@@ -20,7 +20,7 @@ test('Maarten Day 4 keeps its path and adds a usable setup step',()=>{
  assert.ok(slides.every(s=>(s.keyPoints?.length||0)<=3));
  const setup=slides[5];
  assert.equal(setup.layout,'exercise');
- assert.equal(setup.repo.url,'https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent');
+ assert.equal(setup.repo.url,'https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent');
  assert.match(setup.cards[0].body,/npm run verify/);
  assert.match(setup.cards[0].body,/--dry-run/);
  assert.match(slides[2].notes,/three specialist roles/);

@@ -442,7 +442,7 @@ window.SLIDES = [
     "keyPoints": [
       "Rhythm: I show it, you do it, we check it"
     ],
-    "notes": "Name the breaks out loud. Has someone fallen behind? Each step has a finished version that they can switch to (step-1 … step-4). Step 5, build your own agent, is optional: it is for at home. Workshop package: github.com/RyanLisse/aetherlink-day5-n8n-to-agent (checked on 4 Nov: the steps and commands on the slides match the step-1 … step-4 branches).",
+    "notes": "Name the breaks out loud. Has someone fallen behind? Each step has a finished version that they can switch to (step-1 … step-4). Step 5, build your own agent, is optional: it is for at home. The workshop package: https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent (public, so every participant can download it).",
     "stateId": "8:Today · agenda",
     "teach": {
       "time": "1 min",
@@ -909,7 +909,7 @@ window.SLIDES = [
       "The AI does nothing yet",
       "Look for: backend: claude-code"
     ],
-    "notes": "You show this, and the participants do it on the next slide. Run the commands exactly as in SOLO.md. Point at the line 'backend: claude-code': it means that the login is being used. A dry run does not call the AI, so it does not yet tell you how good the agent is. Setup for each platform (Windows, WSL, Mac, Docker) is in docs/SETUP.md.",
+    "notes": "You show this, and the participants do it on the next slide. Run the commands exactly as in SOLO.md. Point at the line 'backend: claude-code': it means that the login is being used. A dry run does not call the AI, so it does not yet tell you how good the agent is. Setup for each platform (Windows, WSL, Mac, Docker) is in docs/SETUP.md. The workshop package: https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent (public, so every participant can download it).",
     "stateId": "14:Demo · Step 0: the offline path",
     "teach": {
       "time": "5 min",
@@ -980,12 +980,12 @@ window.SLIDES = [
       },
       {
         "text": "Download the package",
-        "prompt": "git clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git",
-        "after": "This gives you your own copy of the package. (It is called “day5” for historical reasons: it is today's package.)"
+        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git",
+        "after": "This gives you your own copy of the package."
       },
       {
         "text": "Go into the folder and install the parts",
-        "prompt": "cd aetherlink-day5-n8n-to-agent\nnpm ci",
+        "prompt": "cd aetherlink-day4-n8n-to-agent\nnpm ci",
         "after": "This takes about a minute. Lines starting with “npm warn” are fine. A line starting with “npm error” means something went wrong: ask for help."
       },
       {
@@ -1005,7 +1005,7 @@ window.SLIDES = [
       "main is Step 0; step-1 through step-4 contain the finished steps.",
       "With ANTHROPIC_API_KEY in your shell, the runner picks sdk. Use --backend to choose."
     ],
-    "notes": "The participants do the five steps while you walk around. npm run verify also tests the chat, so there is no separate step for that. Does someone's screen say backend: sdk? Then an API key is set on their laptop, so add --backend claude-code. Use the break after the next slide to help people who do not have fail 0.",
+    "notes": "The participants do the five steps while you walk around. npm run verify also tests the chat, so there is no separate step for that. Does someone's screen say backend: sdk? Then an API key is set on their laptop, so add --backend claude-code. Use the break after the next slide to help people who do not have fail 0. The workshop package: https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent (public, so every participant can download it).",
     "stateId": "15:Get the workshop package.",
     "teach": {
       "time": "10 min",
@@ -1039,8 +1039,9 @@ window.SLIDES = [
         "The dry run ends with 'dry run — no model call'."
       ],
       "watch": [
+        "The package lives at https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent. Someone cloned the old RyanLisse link? Same content, but the folder name differs: use the new link.",
         "'npm' not found: Node.js is not installed (npm comes with Node.js). See docs/SETUP.md.",
-        "'Missing script' or 'could not find package.json': they are in the wrong folder. They should cd aetherlink-day5-n8n-to-agent first.",
+        "'Missing script' or 'could not find package.json': they are in the wrong folder. They should cd aetherlink-day4-n8n-to-agent first.",
         "'git' not found: Git is not installed. See docs/SETUP.md.",
         "Error at npm ci: check the Node version. node --version must be 22 or higher.",
         "The backend says sdk: add --backend claude-code."

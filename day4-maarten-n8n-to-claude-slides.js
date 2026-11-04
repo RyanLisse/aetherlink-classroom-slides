@@ -81,9 +81,9 @@ window.SLIDES = [
   subtitle: "Clone once, verify the starter, then use the lesson folders during the day.",
   type: "practice",
   layout: "exercise",
-  repo: { label: "Open the workshop repository", url: "https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent" },
+  repo: { label: "Open the workshop repository", url: "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent" },
   cards: [
-    { title: "Terminal", body: "git clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git\ncd aetherlink-day5-n8n-to-agent\nnpm ci\nnpm run verify\nnpm run doctor\nnpm run lesson1 -- MSG-01 --dry-run" }
+    { title: "Terminal", body: "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nnpm ci\nnpm run verify\nnpm run doctor\nnpm run lesson1 -- MSG-01 --dry-run" }
   ],
   stepsHeading: "Steps:",
   steps: [
@@ -94,7 +94,7 @@ window.SLIDES = [
   ],
   expected: "The verification passes and the dry run prints the prompt, project folder and dry-run notice.",
   keyPoints: ["Clone and install at the repository root","Verify and run doctor before Lesson 1","Dry run does not call a model"],
-  notes: "Give everyone time to clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent. Run the commands exactly as shown. npm run verify checks the package and npm run doctor checks Node.js, Claude Code and the selected backend. The dry run shows what Lesson 1 would send without calling a model. Main is the Step 0 starter; step-1 through step-4 contain finished catch-up states."
+  notes: "Give everyone time to clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent. Run the commands exactly as shown. npm run verify checks the package and npm run doctor checks Node.js, Claude Code and the selected backend. The dry run shows what Lesson 1 would send without calling a model. Main is the Step 0 starter; step-1 through step-4 contain finished catch-up states."
 },
 
 /* ---------------------------------------------------------------------- */
