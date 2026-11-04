@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-labelledby="t d">
+  <title id="t">CLAUDE.md: the agent's work instructions, in three parts</title>
+  <desc id="d">CLAUDE.md splits into three parts. Purpose: who you are, a support assistant at a payment company. Rules: what you may not do, invent facts or search the web. Priority definitions: when is it what, high, medium or low; an angry tone alone never makes it high.</desc>
+  <style>
+    .card{fill:#0c1928;stroke-width:5}
+    .file{fill:#0c1928;stroke:#e9f0fc;stroke-width:5}
+    .fname{font:900 50px 'Nunito','Segoe UI',sans-serif;fill:#e9f0fc}
+    .q{font:900 38px 'Nunito','Segoe UI',sans-serif;fill:#ffb545}
+    .sec{font:700 26px 'Consolas','Menlo',monospace;fill:#69e2f2}
+    .b{font:800 34px 'Nunito','Segoe UI',sans-serif;fill:#e9f0fc}
+    .hi{font:900 34px 'Nunito','Segoe UI',sans-serif}
+    .warn{font:900 28px 'Nunito','Segoe UI',sans-serif;fill:#ffb545}
+    .ln{stroke:#ffb545;stroke-width:5;fill:none}
+  </style>
+  <rect class="file" x="370" y="8" width="460" height="104" rx="18"/>
+  <path d="M410 30 h34 l16 16 v50 h-50 z" fill="none" stroke="#e9f0fc" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M444 30 v16 h16" fill="none" stroke="#e9f0fc" stroke-width="5"/>
+  <text class="fname" x="482" y="78">CLAUDE.md</text>
+  <path class="ln" d="M600 112 V160 H200 V200"/>
+  <path class="ln" d="M600 112 V200"/>
+  <path class="ln" d="M600 160 H1000 V200"/>
+  <circle cx="600" cy="160" r="9" fill="#ffb545"/>
+  <rect class="card" x="15" y="208" width="370" height="470" rx="24" stroke="#9b7bff"/>
+  <text class="q" x="200" y="268" text-anchor="middle">WHO YOU ARE</text>
+  <text class="sec" x="200" y="306" text-anchor="middle">## Purpose</text>
+  <text class="b" x="200" y="400" text-anchor="middle">A support</text>
+  <text class="b" x="200" y="444" text-anchor="middle">assistant at a</text>
+  <text class="b" x="200" y="488" text-anchor="middle">payment</text>
+  <text class="b" x="200" y="532" text-anchor="middle">company.</text>
+  <rect class="card" x="415" y="208" width="370" height="470" rx="24" stroke="#69e2f2"/>
+  <text class="q" x="600" y="268" text-anchor="middle">WHAT YOU</text>
+  <text class="q" x="600" y="310" text-anchor="middle">MAY NOT DO</text>
+  <text class="sec" x="600" y="348" text-anchor="middle">## Rules</text>
+  <text class="b" x="450" y="430">✗ Invent facts</text>
+  <text class="b" x="450" y="490">✗ Search the web</text>
+  <text class="b" x="450" y="550">✗ Use outside info</text>
+  <rect class="card" x="815" y="208" width="370" height="470" rx="24" stroke="#ffb545"/>
+  <text class="q" x="1000" y="268" text-anchor="middle">WHEN IS IT</text>
+  <text class="q" x="1000" y="310" text-anchor="middle">WHAT</text>
+  <text class="sec" x="1000" y="348" text-anchor="middle" style="font-size:21px">## Priority definitions</text>
+  <text class="hi" x="850" y="420" fill="#ff6b6b">HIGH</text><text class="b" x="980" y="420">fraud</text>
+  <text class="hi" x="850" y="470" fill="#ffb545">MEDIUM</text><text class="b" x="1010" y="470">problem</text>
+  <text class="hi" x="850" y="520" fill="#5ee0a0">LOW</text><text class="b" x="980" y="520">question</text>
+  <rect x="838" y="560" width="324" height="96" rx="14" fill="#ffb545" fill-opacity="0.14" stroke="#ffb545" stroke-width="3"/>
+  <text class="warn" x="1000" y="600" text-anchor="middle">Angry tone alone</text>
+  <text class="warn" x="1000" y="636" text-anchor="middle">is never HIGH</text>
+</svg>

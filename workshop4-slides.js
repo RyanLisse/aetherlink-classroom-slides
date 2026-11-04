@@ -925,9 +925,10 @@ window.SLIDES = [
         "The dry run ends with 'dry run — no model call'."
       ],
       "watch": [
+        "'npm' not found → Node.js is not installed (npm comes with Node.js): see docs/SETUP.md.",
+        "'Missing script' or 'could not find package.json' → they are in the wrong folder: cd aetherlink-day5-n8n-to-agent first.",
         "'git' not found → Git is not installed: see docs/SETUP.md.",
         "Error at npm ci → check Node version: node --version must be 22 or higher.",
-        "Ran a command outside the folder? Then npm can't find the buttons: cd aetherlink-day5-n8n-to-agent first.",
         "Backend says sdk → add --backend claude-code."
       ]
     }
@@ -1042,40 +1043,13 @@ window.SLIDES = [
     "kicker": "Concept · work instructions",
     "type": "concept",
     "visual": {
-      "mdfile": 0,
-      "mdName": "CLAUDE.md",
-      "guides": [
-        [
-          "🧩",
-          "System Message",
-          "lives in the node"
-        ],
-        [
-          "📄",
-          "CLAUDE.md",
-          "lives next to the code"
-        ]
-      ]
+      "opener": "showcase",
+      "image": "assets/workshop-4/claude-md-three-parts.svg",
+      "imageAlt": "CLAUDE.md in three parts: who you are, what you may not do, when is it what.",
+      "imageLink": "01-single-agent/claude-project/CLAUDE.md"
     },
     "subtitle": "Yesterday the instructions were inside the n8n block (System Message). Today they are a file next to the code.",
-    "cards": [
-      {
-        "title": "CLAUDE.md",
-        "body": "Purpose\nRules\nPriority definitions"
-      },
-      {
-        "title": "Purpose · who you are",
-        "body": "A support assistant at a payment company."
-      },
-      {
-        "title": "Rules · what you may not do",
-        "body": "Invent facts. Search the web for customers."
-      },
-      {
-        "title": "Priority definitions · when is it what",
-        "body": "When a message is high, medium or low. An angry tone alone never makes it high."
-      }
-    ],
+    "cards": [],
     "keyPoints": [
       "The system message now lives in a file next to the code."
     ],
@@ -1089,11 +1063,11 @@ window.SLIDES = [
           "say": "Remember the System Message in n8n? Today that is a file: CLAUDE.md. Think of the work instructions a new colleague gets on day one."
         },
         {
-          "do": "Point at the three cards on the right.",
+          "do": "Point at the three orange headings, left to right.",
           "say": "Three parts. Who you are: a support assistant at a payment company. What you may not do: invent facts. And when a message is high, medium or low."
         },
         {
-          "do": "Point at the last line of Priority definitions.",
+          "do": "Point at the orange box bottom right.",
           "say": "Look at this line: an angry tone alone never makes it high. Remember it: in Step 1 we test it."
         },
         {
