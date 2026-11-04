@@ -10,6 +10,17 @@ const load = name => {
   return context.window.SLIDES;
 };
 
+test('Day 3 deck and presenter request the current versioned slide data', () => {
+  const version = file => {
+    const match = read(file).match(/src="workshop3-slides\.js\?v=(\d+)"/);
+    assert.ok(match, file + ' must load a versioned slide script');
+    return Number(match[1]);
+  };
+  const deckVersion = version('workshop3.html');
+  assert.ok(deckVersion > 11);
+  assert.equal(version('workshop3-presenter.html'), deckVersion);
+});
+
 test('Break timers render with or without a card grid', () => {
   const source = read('app.js');
   const extras = source.slice(source.indexOf('function renderExtras('), source.indexOf('\nconst REACT ='));

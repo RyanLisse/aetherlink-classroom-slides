@@ -759,7 +759,7 @@ function renderVisual(stage, body, main, s) {
 const TYPE_LABEL = { practice: 'Assignment', concept: 'Concept', review: 'Review', quiz: 'Quiz', recap: 'Recap', pause: 'Break', context: 'Context' };
 function slideType(s) { return TYPE_LABEL[s.type] ? s.type : (s.layout === 'exercise' ? 'practice' : s.layout === 'recap' ? 'recap' : 'context'); }
 
-const stateKey = () => 'als:' + (slides[current].stateId || current + ':' + slides[current].title);
+const stateKey = () => 'als:' + (slides[current].progressId || slides[current].stateId || current + ':' + slides[current].title);
 function loadState() { try { return JSON.parse(sessionStorage.getItem(stateKey()) || '{}') || {}; } catch { return {}; } }
 function saveState(st) { try { sessionStorage.setItem(stateKey(), JSON.stringify(st)); } catch {} }
 

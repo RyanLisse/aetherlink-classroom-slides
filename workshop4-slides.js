@@ -789,7 +789,8 @@ window.SLIDES = [
       "Do the dry run. Then compare chat with and without memory."
     ],
     "notes": "Give participants 15 minutes. Offline, inspect 01-single-agent/priority-schema.mjs, outputFormat in the dry-run options, and lib/switch.mjs. Do not present dry-run output as model JSON or a Switch → result; show those only from a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md, labelled as an illustrative sample. Then compare a favourite-colour follow-up in the same chat with --no-memory.",
-    "stateId": "23:Run Step 1 and test chat memory."
+    "stateId": "23:Run Step 1 and test chat memory.",
+    "progressId": "w4-step1-progress-v2"
   },
   {
     "lessonId": "workshop-4",
@@ -1186,7 +1187,8 @@ window.SLIDES = [
       "Do the dry run. Then read a live run or the sample trace."
     ],
     "notes": "Give participants 20 minutes. A dry run only shows setup and the backend command. The expected live or sample order is Agent → risk-agent followed by Agent → customer-reply-agent; the MSG-10 missing-information path also requires a live run (Claude Code login, or --backend sdk with a key) or the clearly labelled sample trace. Ask them to point to the frontmatter description and prompt body. Keep the output as a draft for human review.",
-    "stateId": "33:Run the orchestrator and inspect the draft."
+    "stateId": "33:Run the orchestrator and inspect the draft.",
+    "progressId": "w4-step2-progress-v2"
   },
   {
     "lessonId": "workshop-4",
@@ -1391,7 +1393,8 @@ window.SLIDES = [
       "A person reviews the draft before sending."
     ],
     "notes": "Give participants 20 minutes. Start with npm run smoke:mcp, then run the lesson 3 dry run to inspect the MCP configuration. For real results, use a live run (Claude Code login, or --backend sdk with a key). Keep customer and transaction facts tied to the read-only MCP results, and have a person review the reply draft before sending.",
-    "stateId": "39:Run Step 3 customer and transaction lookups."
+    "stateId": "39:Run Step 3 customer and transaction lookups.",
+    "progressId": "w4-step3-progress-v2"
   },
   {
     "lessonId": "workshop-4",
