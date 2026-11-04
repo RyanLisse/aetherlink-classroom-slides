@@ -812,7 +812,8 @@ window.SLIDES = [
         },
         {
           "do": "Type npm ci.",
-          "say": "This installs all the parts."
+          "say": "This installs all the parts.",
+          "clip": "assets/day4-teach/a07-1-clone-install-doctor.mp4"
         },
         {
           "do": "Type npm run doctor.",
@@ -820,11 +821,13 @@ window.SLIDES = [
         },
         {
           "do": "Type npm run verify.",
-          "say": "This runs the tests."
+          "say": "This runs the tests.",
+          "clip": "assets/day4-teach/a07-2-verify.mp4"
         },
         {
           "do": "Type npm run lesson1 -- MSG-01 --dry-run. Point at 'backend: claude-code'.",
-          "say": "And the dress rehearsal. See this line? It uses your Claude Code login. And it says: dry run, no model call."
+          "say": "And the dress rehearsal. See this line? It uses your Claude Code login. And it says: dry run, no model call.",
+          "clip": "assets/day4-teach/a07-3-dry-runs.mp4"
         },
         {
           "ask": "Why do we rehearse first?",
@@ -1310,11 +1313,13 @@ window.SLIDES = [
         },
         {
           "do": "Run the dry run. Point at outputFormat.",
-          "say": "The dress rehearsal. See outputFormat? That is the form."
+          "say": "The dress rehearsal. See outputFormat? That is the form.",
+          "clip": "assets/day4-teach/a09-1-dry-run.mp4"
         },
         {
           "do": "Run npm run lesson1 -- MSG-01. Point at Structured output and the Switch line.",
-          "say": "Now a real run. The AI fills in the form: priority low, plus the reason. And then the code: Switch, low, auto reply."
+          "say": "Now a real run. The AI fills in the form: priority low, plus the reason. And then the code: Switch, low, auto reply.",
+          "clip": "assets/day4-teach/a09-2-msg01-msg02.mp4"
         },
         {
           "do": "Run npm run chat, then npm run chat -- --no-memory.",
@@ -1470,7 +1475,8 @@ window.SLIDES = [
         },
         {
           "do": "Point at steps 3 and 4.",
-          "say": "Then the memory test. Tell the chat your favourite colour, ask it back, exit. Do it again with --no-memory."
+          "say": "Then the memory test. Tell the chat your favourite colour, ask it back, exit. Do it again with --no-memory.",
+          "clip": "assets/day4-teach/a10-2-memory-test.mp4"
         },
         {
           "ask": "What do you expect with --no-memory?",
@@ -1546,11 +1552,13 @@ window.SLIDES = [
       "gist": "Six live runs, labels written down; then the tone trap: remove the definitions, rerun 01 and 06, restore.",
       "script": [
         {
-          "say": "Now your agent does real work: six customer messages. Write down every label, you need them in Step 4."
+          "say": "Now your agent does real work: six customer messages. Write down every label, you need them in Step 4.",
+          "clip": "assets/day4-teach/a11-1-six-labels.mp4"
         },
         {
           "do": "Point at steps 2 and 3.",
-          "say": "Then the tone trap. You remove the rules for high, medium and low from CLAUDE.md, and run two messages again."
+          "say": "Then the tone trap. You remove the rules for high, medium and low from CLAUDE.md, and run two messages again.",
+          "clip": "assets/day4-teach/a11-2-tone-trap.mp4"
         },
         {
           "ask": "What do you expect will happen without those rules?",
