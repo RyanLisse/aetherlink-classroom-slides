@@ -87,6 +87,10 @@ test('Every W3 exercise has visible instructions and reachable local evidence ai
     }
     if (s.type !== 'practice') continue;
     assert.ok(s.steps?.length && s.expected && s.timer > 0, s.title);
+    if (s.stateId === 'w3-setup') {
+      assert.equal(s.repo.url, 'https://github.com/RyanLisse/aetherlink-day3-n8n');
+      continue;
+    }
     const [file, anchor] = s.repo.url.split('#');
     assert.ok(existsSync(new URL('../' + file, import.meta.url)), file);
     if (anchor) assert.ok(guide.includes(`id="${anchor}"`), anchor);
@@ -145,6 +149,17 @@ test('Day 3 uses trial model credits and reserves provider keys for the SDK rout
   }
   const backend = load('workshop4-slides.js').find(s => s.title === 'Two ways to run the same agent');
   assert.match(backend.subtitle, /n8n trial credits stay in n8n/);
+});
+
+test('Day 3 account setup links to the public setup-only participant repository', () => {
+  const slides = load('workshop3-slides.js');
+  const safety = slides.find(s => s.stateId === 'w3-build-zip-13');
+  const setup = slides.find(s => s.stateId === 'w3-setup');
+  const url = 'https://github.com/RyanLisse/aetherlink-day3-n8n';
+  assert.equal(safety.source.url, url);
+  assert.equal(safety.source.label, 'n8n Cloud setup guide');
+  assert.equal(setup.repo.url, url);
+  assert.equal(setup.repo.label, 'n8n Cloud setup guide');
 });
 
 test('The proof pack explains how to share a separate export without changing the live workflow', () => {

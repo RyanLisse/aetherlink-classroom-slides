@@ -144,8 +144,8 @@ window.SLIDES = [
     ],
     "notes": "Guardrails. No real Jira/payments; no secrets on screen; import ≠ model-run proof without trace.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
     "source": {
-      "label": "Setup and participant guide",
-      "url": "assets/workshop-3/participant-guide.html#setup"
+      "label": "n8n Cloud setup guide",
+      "url": "https://github.com/RyanLisse/aetherlink-day3-n8n"
     },
     "stateId": "w3-build-zip-13"
   },
@@ -164,8 +164,8 @@ window.SLIDES = [
     "expected": "Your own account and workspace are open; the active trial has free model credits and an expiry noted; W3 support triage is saved with no production connection.",
     "timer": 10,
     "repo": {
-      "label": "Participant steps, checks and stop conditions",
-      "url": "assets/workshop-3/participant-guide.html#setup"
+      "label": "n8n Cloud setup guide",
+      "url": "https://github.com/RyanLisse/aetherlink-day3-n8n"
     },
     "stateId": "w3-setup",
     "visual": {
