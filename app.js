@@ -133,6 +133,7 @@ const BOTS = {
   think: { src: 'assets/aetherbot/aetherbot-think.webp', hatch: [51.3, 14.8] },
   point: { src: 'assets/aetherbot/aetherbot-point.webp', hatch: [32.6, 14.6] },
   head:  { src: 'assets/aetherbot/aetherbot-head.webp',  hatch: [49.6, 25.8] },
+  coffee: { src: 'assets/aetherbot/aetherbot-coffee.webp' },
   // stretch-arm poses: tip = fingertip position in % of the image (used by place: 'pointer')
   stretchLeft:  { src: 'assets/aetherbot/stretch/aetherbot-stretch-links.webp',  tip: [0.1, 48], ratio: 900 / 541 },
   sleepy:       { src: 'assets/aetherbot/faces/aetherbot-face-slaperig.webp' },

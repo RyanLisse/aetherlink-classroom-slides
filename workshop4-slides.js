@@ -994,12 +994,12 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Short break",
+    "title": "Coffee break",
     "kicker": "Day 4 · Break",
     "type": "pause",
     "visual": {
       "countdown": 15,
-      "bot": "sleepy",
+      "bot": "coffee",
       "place": "beside"
     },
     "subtitle": "Back at 11:15. Not at fail 0 yet? Stay, we'll fix it together.",
