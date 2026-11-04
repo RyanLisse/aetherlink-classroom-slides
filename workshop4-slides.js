@@ -1617,6 +1617,68 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Quiz: message 6",
+    "kicker": "Quiz · before the tone trap",
+    "type": "quiz",
+    "subtitle": "“URGENT!!! My logo is wrong!!! Fix it NOW please.” Which priority? Vote by raising your hand.",
+    "visual": {
+      "quiz": {
+        "answer": 0
+      },
+      "bot": "stretchLeft",
+      "place": "pointer",
+      "pointAt": 0
+    },
+    "cards": [
+      {
+        "title": "A",
+        "body": "LOW: a cosmetic issue with little customer or financial impact."
+      },
+      {
+        "title": "B",
+        "body": "MEDIUM: a real service problem for one customer."
+      },
+      {
+        "title": "C",
+        "body": "HIGH: the customer is angry and says it is urgent."
+      }
+    ],
+    "check": "Answer: LOW",
+    "notes": "From Maarten's Day 4 deck. Answer: LOW. An old logo in the portal is cosmetic, however loud the message is. Contrast it with message 2: polite, but three card payments the customer does not recognise is possible fraud, so HIGH. That is exactly why the work instructions say: judge impact and risk, not tone. Next: what happens without those rules.",
+    "teach": {
+      "time": "3 min",
+      "gist": "Quiz: the loud logo message is LOW. Impact, not tone.",
+      "script": [
+        {
+          "say": "Before the tone trap, a quick quiz. Read the message on the screen. Hands up: low, medium or high?"
+        },
+        {
+          "do": "Count the hands, then press → to strike the wrong answers."
+        },
+        {
+          "say": "The answer is LOW. An old logo is cosmetic, however loud the message is."
+        },
+        {
+          "ask": "Message 2 was polite. Which priority did it get, and why?",
+          "say": "(Answer: HIGH. Three card payments the customer does not recognise could be fraud. Impact, not tone.)"
+        },
+        {
+          "say": "Now let's see what happens when we remove that rule."
+        }
+      ],
+      "do": [
+        "Vote, reveal, contrast with message 2."
+      ],
+      "done": [
+        "Everyone can say: impact, not tone."
+      ],
+      "watch": [
+        "Many people vote HIGH. That is the point: it is exactly the tone trap."
+      ]
+    }
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Your turn · Step 1c: six messages and the tone trap",
     "kicker": "SOLO 1c · Your turn",
     "type": "practice",
@@ -2560,7 +2622,7 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "The agent asks the desk for facts. The desk holds the data and hands over only what was asked for. In Step 3 it can only look things up.",
+    "subtitle": "The agent asks the desk for facts. The desk reads the customer list (docs/customer_context.csv) and the transactions spreadsheet (docs/transactions.xlsx), and hands over only what was asked for. In Step 3 it can only look things up.",
     "cards": [
       {
         "title": "customers · get_customer",

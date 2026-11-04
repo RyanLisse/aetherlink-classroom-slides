@@ -38,41 +38,42 @@ test('Maarten Day 4 keeps its path and adds a usable setup step',()=>{
 });
 
 test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
- for(const name of ['day4-maarten-n8n-to-claude','workshop4']){
-  const html=read(name+'.html');
-  const presenter=read(name+'-presenter.html');
-  assert.match(html,/styles\.css\?v=147/);
-  assert.match(html,/demo-fallback\.js\?v=94/);
-  assert.match(html,/timers\.js\?v=92/);
-  assert.match(html,/sessions\.js\?v=19/);
-  assert.match(html,/app\.js\?v=129/);
-  assert.match(html,/id="timer-btn"/);
-  assert.match(presenter,/styles\.css\?v=129/);
-  assert.match(presenter,/timers\.js\?v=92/);
-  assert.match(presenter,/presenter\.js\?v=96/);
- }
- assert.match(read('workshop4.html'),/workshop4-slides\.js\?v=5/);
- assert.match(read('workshop4-presenter.html'),/workshop4-slides\.js\?v=5/);
+ const maarten='day4-maarten-n8n-to-claude';
+ const html=read(maarten+'.html'), presenter=read(maarten+'-presenter.html');
+ assert.match(html,/styles\.css\?v=147/);
+ assert.match(html,/demo-fallback\.js\?v=94/);
+ assert.match(html,/timers\.js\?v=92/);
+ assert.match(html,/sessions\.js\?v=19/);
+ assert.match(html,/app\.js\?v=129/);
+ assert.match(html,/id="timer-btn"/);
+ assert.match(presenter,/styles\.css\?v=129/);
+ assert.match(presenter,/timers\.js\?v=92/);
+ assert.match(presenter,/presenter\.js\?v=96/);
  assert.match(read('day4-maarten-n8n-to-claude.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  assert.match(read('day4-maarten-n8n-to-claude-presenter.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
- const ryan=deck('workshop4-slides.js');
- assert.equal(ryan.length,28);
- assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').sourceSlides,28);
- assert.ok(ryan.every(s=>s.layout!=='compare'));
- assert.ok(ryan.filter(s=>s.type==='concept').every(s=>(s.keyPoints?.length||0)<=3));
- const visibleConcepts=ryan.filter((s,i)=>s.type==='concept'&&i!==0);
- assert.ok(visibleConcepts.every(s=>!s.layout&&s.cards?.length>=1&&s.cards.length<=3));
- assert.ok(visibleConcepts.every(s=>s.cards.every(card=>card.title?.trim()&&card.body?.trim())));
- assert.deepEqual(Array.from(ryan.slice(3,7),s=>s.title),['Yesterday in n8n','Agent SDK: the query loop','Agent SDK: project instructions','Get the workshop package.']);
- assert.ok(!ryan.some(s=>/Hooks|Skills/.test(s.title)));
- const active=JSON.stringify(ryan);
+ const w4=read('workshop4.html'), w4p=read('workshop4-presenter.html');
+ assert.match(w4,/styles\.css\?v=147/);
+ assert.match(w4,/app\.js\?v=130/);
+ assert.match(w4,/fit-stage\.js\?v=1/);
+ assert.match(w4,/id="timer-btn"/);
+ assert.match(w4,/workshop4-slides\.js\?v=21/);
+ assert.match(w4p,/workshop4-slides\.js\?v=21/);
+ assert.match(w4p,/presenter\.js\?v=105/);
+});
+
+test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
+ const day4=deck('workshop4-slides.js');
+ assert.equal(day4.length,74);
+ assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,74);
+ assert.ok(day4.every(s=>s.teach&&s.teach.script?.length),'every slide has a teach card');
+ assert.ok(day4.every(s=>!s.visual?.stepThrough),'nothing hidden behind a click that should just show');
+ assert.ok(day4.every(s=>s.title?.trim()));
+ const active=JSON.stringify(day4);
  assert.doesNotMatch(active,/ticket-analyst|email-responder|transaction-clerk|npm run clerk/);
- assert.match(active,/risk-agent/);
- assert.match(active,/customer-reply-agent/);
- assert.match(active,/customer-context-agent/);
- assert.match(active,/get_customer/);
- assert.match(active,/get_transaction/);
- const lesson1=ryan.find(s=>s.title==='Run Lesson 1 and test the tone trap.');
- assert.match(lesson1.steps[0],/git switch step-1/);
- assert.match(lesson1.steps.join('\n'),/01-single-agent\/claude-project\/CLAUDE\.md/);
+ for(const name of ['risk-agent','customer-reply-agent','customer-context-agent','get_customer','get_transaction','transaction-agent','Assignment · Extend the MCP'])assert.ok(active.includes(name),name);
+ assert.doesNotMatch(active,/\(cd [^)]*&&/,'no bash-only subshells: Windows PowerShell 5.1 cannot run them');
+ const prompts=day4.flatMap(s=>(s.steps||[]).filter(st=>typeof st==='object'&&st.prompt).map(st=>st.prompt));
+ for(const pr of prompts)if(/^git switch /m.test(pr))assert.match(pr,/git stash -u/,'stash before every switch');
+ const trap=day4.find(s=>s.title==='Your turn · Step 1c: six messages and the tone trap');
+ assert.match(JSON.stringify(trap.steps),/01-single-agent\/claude-project\/CLAUDE\.md/);
 });
