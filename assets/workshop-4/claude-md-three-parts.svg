@@ -34,10 +34,10 @@
   <text class="sec" x="600" y="348" text-anchor="middle">## Rules</text>
   <text class="b" x="450" y="430">✗ Invent facts</text>
   <text class="b" x="450" y="490">✗ Search the web</text>
-  <text class="b" x="450" y="550">✗ Use outside info</text>
+  <text class="b" x="450" y="550">✗ Use outside sources</text>
   <rect class="card" x="815" y="208" width="370" height="470" rx="24" stroke="#ffb545"/>
-  <text class="q" x="1000" y="268" text-anchor="middle">When is it</text>
-  <text class="q" x="1000" y="310" text-anchor="middle">what?</text>
+  <text class="q" x="1000" y="268" text-anchor="middle">Which</text>
+  <text class="q" x="1000" y="310" text-anchor="middle">priority?</text>
   <text class="sec" x="1000" y="348" text-anchor="middle" style="font-size:21px">## Priority definitions</text>
   <text class="hi" x="850" y="420" fill="#ff6b6b">HIGH</text><text class="b" x="980" y="420">fraud</text>
   <text class="hi" x="850" y="470" fill="#ffb545">MEDIUM</text><text class="b" x="1010" y="470">problem</text>
