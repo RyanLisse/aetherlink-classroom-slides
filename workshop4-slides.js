@@ -2813,7 +2813,7 @@ window.SLIDES = [
       {
         "text": "Run three messages",
         "prompt": "npm run lesson3 -- MSG-08\nnpm run lesson3 -- MSG-07\nnpm run lesson3 -- MSG-09",
-        "after": "Write each label down (on paper or in a notes file): you will enter them in labels.json in Step 4."
+        "after": "Write each label down (on paper or in a notes file): you will enter them in labels.json in Step 4. The label is under Result in the draft, for example 03-mcp/claude-project/output/MSG-08.md."
       },
       {
         "text": "Find the lookups",

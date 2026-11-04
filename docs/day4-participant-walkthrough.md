@@ -13,8 +13,8 @@ production in their own work. Each step gets its own pull request in each repo i
 | 0 · Setup | 13-17 | walked, fixed | [#7](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/7) | this branch |
 | 1 · One agent | 19-29 | walked, fixed | [#22](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/22) (main), #23 to #28 (step branches) | none needed |
 | 2 · Subagents | 34-42 | walked, fixed | [#29](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/29) (main), #30 to #35 | this branch |
-| 3 · MCP | 43-48 | next | | |
-| 4 · Check | 49-51 | not yet | | |
+| 3 · MCP | 43-48 | walked, fixed | [#43](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/43) (main), #44 to #49 | this branch |
+| 4 · Check | 49-51 | next | | |
 | Assignment | 53-67 | not yet | | |
 | 5 · Homework | 68-71 | not yet | | |
 
@@ -83,6 +83,22 @@ as slide 40's watch line expects.
 
 The trainer's `worldline` shell function does not change this on its own: the lessons start the `claude` binary
 directly, so only its environment reaches them, not its `--strict-mcp-config`. Its env file is still empty.
+
+## Step 3 · MCP (slides 43-48)
+
+Walked from a Step 2 state, following slide 46 literally. Step 3 is a copy step: participants take the files from
+`step-3` and read along.
+
+| # | What the participant sees | Why it matters | Fix | Where |
+| --- | --- | --- | --- | --- |
+| 1 | After slide 46 step 1, `npm run verify` fails: 19 pass, 1 fail in `test/step0.test.mjs`. | Slide 46 copies `lib/` from `step-3`; main's Step 0 test needs the empty-options guard that only main's `lib/run.mjs` had. Introduced by the Step 0 fix. | `lib/run.mjs` and `test/step0.test.mjs` are now the same on every branch. | Package #44 to #49 |
+| 2 | SOLO's Step 3 code differs from the files the participant just copied. | Four of six excerpts had drifted, including a different orchestrator prompt. | The read-along code is generated from `step-3`, and `test/solo-step3.test.mjs` keeps it exact. | Package #43 to #49 |
+| 3 | "Write each label down", but where is it? | Step 3 prints no `Switch` line; the label is in the draft. | Slide 46 and SOLO say: under `Result` in the draft. | Package #43 to #49, this branch |
+
+Live: MSG-08 high, MSG-07 medium, MSG-09 medium, matching the trainer key; $0.20 to $0.26 per message. The trace shows
+`customer-context-agent` calling `get_customer` and `risk-agent` calling `get_transaction`, once each. The MSG-08 draft
+lists the TX-1014 facts under `External data`. Rerunning a message whose draft exists shows one harmless
+`File has not been read yet` line before the write succeeds.
 
 ## Company login (Vertex AI, Bedrock)
 
