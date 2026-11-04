@@ -512,26 +512,63 @@ window.SLIDES = [
       "bot": "think",
       "place": "beside"
     },
-    "subtitle": "n8n shows the flow. Code lets you test it and control it.",
+    "subtitle": "n8n is great for drawing the flow. Code lets you test it, limit it and control it.",
     "cards": [
       {
         "title": "Test it",
-        "body": "npm run check gives the same result on each laptop."
+        "body": "One command, npm run check, marks your answers against the answer key. Same result on every laptop."
       },
       {
         "title": "Limit it",
-        "body": "Each agent gets a list of its tools."
+        "body": "Each agent gets its own key ring: a list of the tools it may use."
       },
       {
         "title": "Control it",
-        "body": "A hook decides each write. The model cannot skip the hook."
+        "body": "A hook is a barrier: before any change, the code checks first. The AI cannot skip it."
       }
     ],
     "keyPoints": [
-      "n8n showed the flow. Code lets you test it, limit it and control it."
+      "Test: one command marks everything",
+      "Limit: each agent its own key ring",
+      "Control: a barrier the AI cannot skip"
     ],
-    "notes": "Say why we leave n8n for code: tests, least privilege per agent, hooks as code, and the same flow on your own Claude Code. The mapping itself is on the next slide.",
-    "stateId": "10:Why move the flow to code?"
+    "notes": "These are the three problems from the recap on slide 2: hard to test, every agent could do everything, no stop before a change. npm run check compares the labels you wrote down (low, medium, high per message) with a hidden answer key, and says per message: correct or revise. A hook is a piece of code that runs before a change, and can say no.",
+    "stateId": "10:Why move the flow to code?",
+    "teach": {
+      "time": "2 min",
+      "gist": "Three reasons for code: test with one command, limit with a key ring per agent, control with a barrier.",
+      "script": [
+        {
+          "say": "Why leave n8n? n8n is great for drawing. But remember the three problems from this morning."
+        },
+        {
+          "do": "Point at Test it.",
+          "say": "One: testing. In code you type one command, npm run check, and it marks all your answers against the answer key. Like a teacher with the answer sheet."
+        },
+        {
+          "do": "Point at Limit it.",
+          "say": "Two: limiting. Each agent gets its own key ring. A new colleague doesn't get the key to the vault on day one either."
+        },
+        {
+          "do": "Point at Control it.",
+          "say": "Three: control. A hook is a barrier. Before anything changes, the code checks first. And the AI cannot drive around it."
+        },
+        {
+          "ask": "Which of yesterday's problems does the barrier solve?",
+          "say": "(Answer: there was no stop before a change.)"
+        }
+      ],
+      "do": [
+        "Name the three reasons.",
+        "Link them to the problems from slide 2."
+      ],
+      "done": [
+        "Everyone can name test, limit and control."
+      ],
+      "watch": [
+        "npm = the tool that runs commands in a JavaScript project. 'npm run check' just means: run the command called check."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -549,10 +586,10 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Same labels. Same specialists. Same person at the end.",
+    "subtitle": "A dictionary: every block from yesterday, with its name in code. Same person at the end.",
     "columns": [
       {
-        "title": "n8n · Workshop 3",
+        "title": "n8n · yesterday",
         "items": [
           "AI Agent",
           "System Message",
@@ -564,7 +601,7 @@ window.SLIDES = [
         ]
       },
       {
-        "title": "Agent SDK · Workshop 4",
+        "title": "Code · today",
         "items": [
           "query()",
           "CLAUDE.md",
@@ -574,13 +611,61 @@ window.SLIDES = [
           "lib/switch.mjs",
           "MCP tool"
         ]
+      },
+      {
+        "title": "What it means",
+        "items": [
+          "Ask the AI",
+          "The agent's work instructions",
+          "Max rounds, so it never loops forever",
+          "Carry on the conversation",
+          "The form",
+          "The trays",
+          "The lookup desk"
+        ]
       }
     ],
     "keyPoints": [
-      "Same labels, same specialists, same human at the end."
+      "Everything from yesterday comes back",
+      "Only the name changes",
+      "Same person at the end"
     ],
-    "notes": "Map the final participant README table row by row: Chat trigger → npm run chat; AI Agent → query(); System Message → CLAUDE.md; Max Iterations → maxTurns; Simple Memory → session resume; Priority Parser → outputFormat json_schema; n8n Description → frontmatter description; Customer Context Agent + Data Table → customer-context-agent → customers MCP get_customer over customer_context.csv; transaction workbook lookup → risk-agent → transactions MCP get_transaction over transactions.xlsx; Switch → lib/switch.mjs. Every draft has human review.",
-    "stateId": "11:n8n ↔ Agent SDK at a glance"
+    "notes": "Go row by row: the slide reveals one row per click. Everything they built yesterday comes back today, only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv); the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
+    "stateId": "11:n8n ↔ Agent SDK at a glance",
+    "teach": {
+      "time": "3 min",
+      "gist": "The dictionary: yesterday's block, today's name, what it means. One row per click.",
+      "script": [
+        {
+          "say": "This is our dictionary. Left: what you built yesterday. Middle: what it is called today. Right: what it means."
+        },
+        {
+          "do": "Click through the rows one by one. Read the right column out loud.",
+          "say": "The AI Agent becomes query(): ask the AI. The System Message becomes CLAUDE.md: the work instructions. And so on."
+        },
+        {
+          "do": "Stop at Max Iterations.",
+          "say": "maxTurns is the maximum number of rounds. So the agent can never keep going forever."
+        },
+        {
+          "ask": "Which row is the form from slide 5?",
+          "say": "(Answer: Priority Parser, json_schema.)"
+        },
+        {
+          "say": "Everything from yesterday comes back. Only the name changes. And at the end: still a person who checks."
+        }
+      ],
+      "do": [
+        "Click row by row.",
+        "Read the right column."
+      ],
+      "done": [
+        "Everyone can find yesterday's blocks in today's names."
+      ],
+      "watch": [
+        "Don't explain every technical name in depth. The right column is enough for now: the details come with each step."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -593,7 +678,7 @@ window.SLIDES = [
       "imageAlt": "Context, model call, permission check, runtime tool execution, result and next turn. Answers need review; denial, errors and limits can stop the run.",
       "imageLink": "Concept diagram · trace one real run next"
     },
-    "subtitle": "The SDK runtime runs the loop. Your code sets tools, limits and controls.",
+    "subtitle": "The AI thinks and asks. The code checks and does. Round after round, until it is done.",
     "cards": [],
     "keyPoints": [
       "Model requests; runtime executes.",
@@ -602,8 +687,48 @@ window.SLIDES = [
       "Text is not success; check evidence.",
       "Errors, limits and people can stop the run."
     ],
-    "notes": "Use WL-1026: the model may request a customer lookup; the runtime checks permission, runs the allowed tool, and adds its result to context. A second model call can use that evidence. At this point the one-Agent baseline has no lookup. The required specialist exercise adds it later. Before any tools exist, show the short path from model to an unapproved draft. Hooks are callbacks at defined runtime events; they are not the model, do not universally intercept every operation, and do not grant human approval. A post-tool hook cannot prevent an action that already ran. A no-tool answer is one normal end path, not proof that acceptance checks passed. A denied action may be returned as an error for safe continuation or may stop the run, depending on policy. Unrecoverable failures, turn/budget limits and cancellation are separate end paths. This diagram shows one agent invocation, not the full AI-SDLC.\nDemonstrate one request and response. Participants identify them in their own trace. Discuss: who executed the code, and which evidence supports the answer? In the SDK inspect query(), tool_use/tool_result, the result subtype and maxTurns. n8n Max Iterations and SDK maxTurns are related limits, not identical counters. Not every n8n node has Claude SDK hook APIs.",
-    "stateId": "12:One agent loop. Bounded actions."
+    "notes": "Think of a chef and a kitchen assistant. The AI is the chef: it thinks and asks 'give me the customer details'. The code is the assistant: it checks 'is the chef allowed this?', fetches it and hands it back. The chef carries on with what it got. Round after round, until the dish is ready, or the maximum number of rounds (maxTurns) is reached, or something is refused. Two things to remember: the AI never touches anything itself, it only asks. And 'the AI says it is done' is not proof: always check the evidence. A hook checks at fixed moments (for example before a change); it is not the same as a person approving.",
+    "stateId": "12:One agent loop. Bounded actions.",
+    "tagline": "The AI never touches anything itself. It only asks.",
+    "teach": {
+      "time": "4 min",
+      "gist": "Chef (AI) asks, kitchen assistant (code) checks and does. AI never touches anything itself. 'Done' is not proof.",
+      "script": [
+        {
+          "say": "How does an agent actually work? Think of a chef and a kitchen assistant."
+        },
+        {
+          "do": "Point at the model step in the diagram.",
+          "say": "The AI is the chef. It thinks and says: give me the customer details."
+        },
+        {
+          "do": "Point at the permission check and the tool step.",
+          "say": "The code is the kitchen assistant. First it checks: is the chef allowed this? Then it fetches it and hands it back."
+        },
+        {
+          "do": "Point at the arrow back to the start.",
+          "say": "The chef carries on with what it got. Round after round, until the dish is ready."
+        },
+        {
+          "say": "Remember two things. One: the AI never touches anything itself. It only asks. Two: when the AI says it is done, that is not proof. You always check the evidence."
+        },
+        {
+          "ask": "Who actually looks up the customer: the AI or the code?",
+          "say": "(Answer: the code. The AI only asks.)"
+        }
+      ],
+      "do": [
+        "Tell the chef and kitchen assistant story.",
+        "Two rules: AI only asks, 'done' is not proof."
+      ],
+      "done": [
+        "Everyone can say who asks and who does."
+      ],
+      "watch": [
+        "People think the AI 'goes into' the system itself. Repeat: it only asks, the code does it.",
+        "The loop also stops when the maximum number of rounds is reached, or when something is refused."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -615,26 +740,38 @@ window.SLIDES = [
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "n8n trial credits stay in n8n. Choose your Claude access separately.",
+    "subtitle": "We use your Claude Code login from Day 1. Nothing new to request.",
     "cards": [
       {
-        "title": "claude-code · default",
-        "body": "Uses your Claude Code login. No API key."
-      },
-      {
-        "title": "sdk",
-        "body": "Uses query() and ANTHROPIC_API_KEY."
-      },
-      {
-        "title": "Same options",
-        "body": "Each SDK option has a CLI flag."
+        "title": "Your Claude Code login",
+        "body": "The default. The same login as Day 1 and 2. No API key needed."
       }
     ],
     "keyPoints": [
-      "Claude Code is the default. The SDK is the second way."
+      "Use your Claude Code login",
+      "No API key needed"
     ],
-    "notes": "Day 3 uses n8n Cloud trial model credits without a personal provider API key. Those credits do not transfer to Claude. The Anthropic API key is introduced only for the Claude SDK route. claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. The SDK backend uses query() with ANTHROPIC_API_KEY; sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume.",
-    "stateId": "13:Two ways to run the same agent"
+    "notes": "For you, not for the slide: the same agent can also run with an Anthropic API key (the 'sdk' backend). Careful: if ANTHROPIC_API_KEY is set on someone's laptop, the package picks that way by itself. Force the login with --backend claude-code. The n8n trial credits from Day 3 do not carry over to Claude.",
+    "stateId": "13:Two ways to run the same agent",
+    "teach": {
+      "time": "1 min",
+      "gist": "We run on the Claude Code login from Day 1. No API key.",
+      "script": [
+        {
+          "say": "Good news: you already have everything. We use your Claude Code login from Day 1. You don't need to request anything new."
+        }
+      ],
+      "do": [
+        "Say: your Claude Code login is enough."
+      ],
+      "done": [
+        "Nobody is looking for an API key."
+      ],
+      "watch": [
+        "Someone's run picks 'sdk' by itself? Then an API key is set on their laptop. Add --backend claude-code to the command.",
+        "The n8n trial credits from yesterday do not work here."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -660,24 +797,72 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Prove your setup first. A dry run makes no model call.",
+    "subtitle": "First we check that the stage is set. A dress rehearsal: the AI does nothing yet.",
     "cards": [
       {
-        "title": "Facilitator demo",
-        "body": "npm ci\nnpm run doctor\nnpm run verify\nnpm run lesson1 -- MSG-01 --dry-run"
+        "title": "npm ci",
+        "body": "Install the parts."
       },
       {
-        "title": "Point at the trace",
-        "body": "backend: claude-code (claude -p)"
+        "title": "npm run doctor",
+        "body": "The health check: is everything there?"
+      },
+      {
+        "title": "npm run verify",
+        "body": "Run the tests."
+      },
+      {
+        "title": "--dry-run",
+        "body": "The dress rehearsal: show what would happen, without calling the AI."
       }
     ],
     "keyPoints": [
-      "docs/SETUP.md: Windows, WSL, Linux/macOS or Docker.",
-      "npm run doctor checks the backend. npm run verify runs the tests.",
-      "A dry run makes no model call."
+      "Install, health check, tests, rehearsal",
+      "The AI does nothing yet",
+      "Look for: backend: claude-code"
     ],
-    "notes": "Choose the platform instructions in docs/SETUP.md. Run the facilitator commands exactly as in SOLO.md. Point to the backend: line and Claude Code equivalent: line; claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. A dry run is not model evidence.",
-    "stateId": "14:Demo · Step 0: the offline path"
+    "notes": "You show this; participants do it on the next slide. Run the commands exactly as in SOLO.md. Point at the line 'backend: claude-code': that means the login is used. A dry run does not call the AI: so it says nothing yet about how good the agent is. Setup per platform (Windows, WSL, Mac, Docker) is in docs/SETUP.md.",
+    "stateId": "14:Demo · Step 0: the offline path",
+    "teach": {
+      "time": "5 min",
+      "gist": "Demo: install, health check, tests, dress rehearsal. The AI does nothing yet.",
+      "script": [
+        {
+          "say": "Before we build anything, we check that the stage is set. Like a dress rehearsal: the AI does nothing yet."
+        },
+        {
+          "do": "Type npm ci.",
+          "say": "This installs all the parts."
+        },
+        {
+          "do": "Type npm run doctor.",
+          "say": "The health check: is everything there?"
+        },
+        {
+          "do": "Type npm run verify.",
+          "say": "This runs the tests."
+        },
+        {
+          "do": "Type npm run lesson1 -- MSG-01 --dry-run. Point at 'backend: claude-code'.",
+          "say": "And the dress rehearsal. See this line? It uses your Claude Code login. And it says: dry run, no model call."
+        },
+        {
+          "ask": "Why do we rehearse first?",
+          "say": "(Answer: if something is missing, you find out now, not halfway through the exercise.)"
+        }
+      ],
+      "do": [
+        "Show the four commands.",
+        "Point at 'backend: claude-code'."
+      ],
+      "done": [
+        "Everyone saw the four commands and knows what each one does."
+      ],
+      "watch": [
+        "Windows laptops: check docs/SETUP.md beforehand.",
+        "A dry run says nothing about the quality of the agent: it only checks the setup."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
