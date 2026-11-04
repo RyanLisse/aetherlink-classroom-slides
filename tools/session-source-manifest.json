@@ -6,8 +6,8 @@
       "file": "workshop3-slides.js",
       "source": "workshop3-slides.js",
       "slides": 45,
-      "sourceSha256": "d1dbaf97013f23a3c9044bf891cb079f1120e680f00050f2b38d8b34d9a2cc68",
-      "normalizedDataSha256": "61a35994bd0d68aaa0dbe6025179b09abb1301c88ca30535df3a1c181691e5e2",
+      "sourceSha256": "5305b0b822e64e955514ccb0e02194292c86d62cd89358fc11f87e613e0be222",
+      "normalizedDataSha256": "7a5fba6b0e71fdc08c764c2dc6aa907f30680521ed8ece46c891b2c531e31771",
       "importedFrom": {
         "source": "apps/web/src/deck/workshop3-slides.ts",
         "slides": 18,
@@ -26,8 +26,8 @@
       "file": "workshop4-slides.js",
       "source": "workshop4-slides.js",
       "slides": 69,
-      "sourceSha256": "f53dcbe65fb32207fd1daad38168bf2646efe394d7126451085d0fba152b6631",
-      "normalizedDataSha256": "7c224bc588e7bc1eac91f637720885245fd3e500410f5b6e0b69b02cd7504972",
+      "sourceSha256": "61161c7eb04c08e6846609621377a90952fcd9c10059c255ccbef8f3df9f43bd",
+      "normalizedDataSha256": "9010a7289d6ba761c22e12649f004875b06b9dde3f81c4242136798f8e9bf428",
       "importedFrom": {
         "source": "apps/web/src/deck/workshop4-slides.ts",
         "slides": 36,

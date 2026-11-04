@@ -11,7 +11,7 @@ window.SLIDES = [
       "place": "beside"
     },
     "subtitle": "Rebuild the behaviour you checked in n8n, now in code.",
-    "notes": "Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. No specialist extension is required to start.",
+    "notes": "Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. Use a labelled reference if the required Day 3 specialist run was blocked to start.",
     "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK"
   },
   {
@@ -168,7 +168,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Optional yesterday, explained today: specialist agents",
+    "title": "Yesterday: specialists exchange context and results",
     "kicker": "Recap · n8n flow 4/4",
     "type": "recap",
     "visual": {
@@ -176,7 +176,7 @@ window.SLIDES = [
       "image": "assets/workshop-4/n8n/05-three-agents.png",
       "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
     },
-    "subtitle": "You can start today after the one-Agent core. No L3 completion is required.",
+    "subtitle": "Recall the flat team and Reply → Risk consultation. Bring the execution evidence.",
     "cards": [
       {
         "title": "Customer Reply Agent",
@@ -196,7 +196,7 @@ window.SLIDES = [
       "Risk Agent: Decides the risk.",
       "Customer Context Agent: Reads the Data Table."
     ],
-    "notes": "Yesterday’s specialist route was optional. Show this as a reference, not an assumed participant result. Briefly identify Reply, Risk and Context, then explain the code equivalent before asking learners to build it.",
+    "notes": "Day 3 now requires both flat delegation and nested consultation. Ask who called Risk and which context reached Reply. If a participant was blocked, label the screenshot as a reference and explain the pattern before the SDK exercise; do not claim their Day 3 run passed.",
     "stateId": "7:Optional yesterday, explained today: specialist agents"
   },
   {
@@ -387,7 +387,7 @@ window.SLIDES = [
       "Text is not success; check evidence.",
       "Errors, limits and people can stop the run."
     ],
-    "notes": "Use WL-1026: the model may request a customer lookup; the runtime checks permission, runs the allowed tool, and adds its result to context. A second model call can use that evidence. Do not claim this lookup exists in the core chat flow: it is an optional tool example. Before any tools exist, show the short path from model to an unapproved draft. Hooks are callbacks at defined runtime events; they are not the model, do not universally intercept every operation, and do not grant human approval. A post-tool hook cannot prevent an action that already ran. A no-tool answer is one normal end path, not proof that acceptance checks passed. A denied action may be returned as an error for safe continuation or may stop the run, depending on policy. Unrecoverable failures, turn/budget limits and cancellation are separate end paths. This diagram shows one agent invocation, not the full AI-SDLC.\nDemonstrate one request and response. Participants identify them in their own trace. Discuss: who executed the code, and which evidence supports the answer? In the SDK inspect query(), tool_use/tool_result, the result subtype and maxTurns. n8n Max Iterations and SDK maxTurns are related limits, not identical counters. Not every n8n node has Claude SDK hook APIs.",
+    "notes": "Use WL-1026: the model may request a customer lookup; the runtime checks permission, runs the allowed tool, and adds its result to context. A second model call can use that evidence. At this point the one-Agent baseline has no lookup. The required specialist exercise adds it later. Before any tools exist, show the short path from model to an unapproved draft. Hooks are callbacks at defined runtime events; they are not the model, do not universally intercept every operation, and do not grant human approval. A post-tool hook cannot prevent an action that already ran. A no-tool answer is one normal end path, not proof that acceptance checks passed. A denied action may be returned as an error for safe continuation or may stop the run, depending on policy. Unrecoverable failures, turn/budget limits and cancellation are separate end paths. This diagram shows one agent invocation, not the full AI-SDLC.\nDemonstrate one request and response. Participants identify them in their own trace. Discuss: who executed the code, and which evidence supports the answer? In the SDK inspect query(), tool_use/tool_result, the result subtype and maxTurns. n8n Max Iterations and SDK maxTurns are related limits, not identical counters. Not every n8n node has Claude SDK hook APIs.",
     "stateId": "12:One agent loop. Bounded actions."
   },
   {
@@ -400,7 +400,7 @@ window.SLIDES = [
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "Claude Code is the default. The SDK is the second way.",
+    "subtitle": "n8n trial credits stay in n8n. Choose your Claude access separately.",
     "cards": [
       {
         "title": "claude-code · default",
@@ -418,7 +418,7 @@ window.SLIDES = [
     "keyPoints": [
       "Claude Code is the default. The SDK is the second way."
     ],
-    "notes": "claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. The SDK backend uses query() with ANTHROPIC_API_KEY; sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume.",
+    "notes": "Day 3 uses n8n Cloud trial model credits without a personal provider API key. Those credits do not transfer to Claude. The Anthropic API key is introduced only for the Claude SDK route. claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend. The SDK backend uses query() with ANTHROPIC_API_KEY; sdk-login is opt-in for local learning. The CLI mappings are maxTurns/--max-turns, agents/--agents, mcpServers/--mcp-config, outputFormat/--json-schema, and resume/--resume.",
     "stateId": "13:Two ways to run the same agent"
   },
   {
@@ -589,7 +589,7 @@ window.SLIDES = [
     "keyPoints": [
       "The system message now lives in a file next to the code."
     ],
-    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['project'] loads CLAUDE.md · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)",
+    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['user', 'project'] loads user and project settings · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)",
     "stateId": "18:System prompt"
   },
   {
@@ -972,7 +972,7 @@ window.SLIDES = [
     "visual": {
       "swap": true
     },
-    "subtitle": "The orchestrator delegates. Each specialist does one task.",
+    "subtitle": "The coordinator passes Risk’s result to Reply. Prove the handoff in the trace.",
     "cards": [
       {
         "title": "Orchestrator",
@@ -990,7 +990,7 @@ window.SLIDES = [
     "keyPoints": [
       "The orchestrator delegates. Each specialist does one task."
     ],
-    "notes": "The final chain maps n8n Description to frontmatter description and System Message to the prompt body. Step 2 delegates first to risk-agent, then customer-reply-agent; Step 3 adds customer-context-agent. Claude Code reads the same .claude/agents/*.md files directly.",
+    "notes": "The final chain maps n8n Description to frontmatter description and System Message to the prompt body. Step 2 delegates first to risk-agent, then customer-reply-agent; Step 3 adds customer-context-agent. Claude Code reads the same .claude/agents/*.md files directly. Compare with Day 3: n8n explicitly wires Risk as a tool of Reply. Here the coordinator relays the result. A file instruction such as “send your analysis to the other agent” does not establish a runtime connection. Inspect the delegation and the result passed to Reply.",
     "stateId": "28:Subagents"
   },
   {
@@ -1031,7 +1031,7 @@ window.SLIDES = [
       "The folder starts with a dot. Use ls -a to see it.",
       "main has no agents yet. They come in step-2."
     ],
-    "notes": "Show the folder on step-2: git switch step-2, then ls -a and ls .claude/agents. main is Step 0, so it has no .claude/agents yet. Claude Code looks for project subagents in .claude/agents/, walking up from the working folder; the SDK reads the same folder with settingSources: ['project']. A .agents/ folder is not loaded as subagents by Claude Code or the SDK. AGENTS.md is the cross-tool note for coding agents, not a subagent definition. In the assignment the new agents live in 03-mcp/claude-project/.claude/agents/.",
+    "notes": "Show the folder on step-2: git switch step-2, then ls -a and ls .claude/agents. main is Step 0, so it has no .claude/agents yet. Claude Code looks for project subagents in .claude/agents/, walking up from the working folder; the SDK reads the same folder with settingSources: ['user', 'project']. A .agents/ folder is not loaded as subagents by Claude Code or the SDK. AGENTS.md is the cross-tool note for coding agents, not a subagent definition. In the assignment the new agents live in 03-mcp/claude-project/.claude/agents/.",
     "stateId": "29:Where do the agents live?"
   },
   {
@@ -1069,7 +1069,7 @@ window.SLIDES = [
     "keyPoints": [
       "Claude Code loads the folder by itself.",
       "The description decides when Claude uses the agent.",
-      "The SDK reads the same folder with settingSources: ['project']."
+      "The SDK reads the same folder with settingSources: ['user', 'project']."
     ],
     "notes": "Why this folder: Claude Code and the Agent SDK look for project subagents in .claude/agents/, so you add an agent by adding a file. No registration code. Claude uses each subagent description to decide when to delegate (code.claude.com/docs/en/sub-agents). Show risk-agent.md on step-2: the description line is the trigger. Claude Code also watches the folder: edit the file and the next delegation uses the new version. In our lessons the orchestrator prompt also names the agents, so the order stays fixed. Check it in the trace: [tool_use] Agent → risk-agent.",
     "stateId": "30:Why this folder? Claude finds the agents."

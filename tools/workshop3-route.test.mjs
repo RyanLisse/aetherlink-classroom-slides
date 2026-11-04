@@ -10,7 +10,50 @@ const load = name => {
   return context.window.SLIDES;
 };
 
-test('W3 core can finish without specialist extensions', () => {
+test('Break timers render with or without a card grid', () => {
+  const source = read('app.js');
+  const extras = source.slice(source.indexOf('function renderExtras('), source.indexOf('\nconst REACT ='));
+  for (const slide of load('workshop3-slides.js').filter(s => s.type === 'pause')) {
+    for (const withCards of [false, true]) {
+      const timer = {children: [], append(...items) { this.children.push(...items); }};
+      const grid = {replaceWith(item) { children.splice(children.indexOf(grid), 1, item); }};
+      const children = withCards ? [grid] : [];
+      const main = {querySelectorAll: () => [], querySelector: () => withCards ? grid : null, append: item => children.push(item)};
+      let options;
+      const context = {
+        current: 0,
+        slideController: {signal: new AbortController().signal},
+        node: (tag, cls, text) => ({tag, cls, text}),
+        ALSTimer: {key: (index, title, stateId) => stateId, mount: value => { options = value; return timer; }}
+      };
+      vm.runInNewContext(extras, context);
+      const data = withCards ? {...slide, cards: [{body: 'Resume the lab.'}]} : slide;
+      context.renderExtras({}, main, data, data.visual);
+      assert.deepEqual(children, [timer]);
+      assert.equal(options.key, slide.stateId);
+      assert.equal(options.defaultSec, slide.visual.countdown * 60);
+      assert.equal(timer.children.length, withCards ? 1 : 0);
+    }
+  }
+});
+
+test('Cloud checkpoints show the result relevant to each assignment', () => {
+  const slides = load('workshop3-slides.js');
+  const expected = {
+    'w3-setup': 'cloud-empty.png',
+    'w3-rule-limit': 'if-rule-limitation.png',
+    'w3-invalid': 'invalid-urgent.png',
+    'w3-review': 'human-review-stop.png'
+  };
+  for (const [id, file] of Object.entries(expected)) {
+    const slide = slides.find(s => s.stateId === id);
+    assert.equal(slide.visual.shot, 'assets/workshop-3/cloud/' + file);
+    assert.ok(slide.visual.shotAlt);
+    assert.ok(existsSync(new URL('../' + slide.visual.shot, import.meta.url)));
+  }
+});
+
+test('W3 core requires flat and nested subagent communication before completion', () => {
   const slides = load('workshop3-slides.js');
   assert.equal(new Set(slides.map(s => s.stateId)).size, slides.length);
   const core = slides.filter(s => !s.optional);
@@ -18,7 +61,22 @@ test('W3 core can finish without specialist extensions', () => {
   assert.ok(slides.filter(s => s.optional).every(s => s.hidden));
   assert.equal(core.filter(s => s.type === 'pause').length, 3);
   const final = core.find(s => s.title.startsWith('Final build:'));
-  assert.match(final.expected, /One Agent completes the core/);
+  assert.match(final.expected, /one-Agent run alone is incomplete/);
+  assert.ok(final.steps.some(step => /chat reply for each priority/.test(step)));
+  assert.match(final.expected, /Chat returns an unapproved draft for each valid priority/);
+  assert.equal(final.visual.shot, 'assets/workshop-3/subagent-communication.svg');
+  const flat = core.find(s => s.stateId === 'w3-build-zip-38');
+  const nested = core.find(s => s.stateId === 'w3-build-zip-40');
+  assert.ok(flat && nested);
+  assert.ok(core.indexOf(flat) < core.indexOf(nested));
+  assert.ok(core.indexOf(nested) < core.indexOf(final));
+  assert.equal(flat.repo.url, 'assets/workshop-3/participant-guide.html#flat-check');
+  assert.equal(nested.repo.url, 'assets/workshop-3/participant-guide.html#nested');
+  assert.match(flat.expected, /all three calls/);
+  assert.match(nested.expected, /Missing consultation is rejected/);
+  assert.ok(nested.steps.some(step => step.includes('Disconnect Risk')));
+  assert.ok(nested.steps.some(step => step.includes('Restore the connection')));
+  assert.deepEqual(Array.from(slides.filter(s => s.optional), s => s.stateId), ['w3-build-zip-41']);
   assert.ok(core.find(s => s.stateId === 'w3-invalid'));
   assert.ok(core.find(s => s.stateId === 'w3-review'));
 });
@@ -31,16 +89,89 @@ test('Every W3 exercise has visible instructions and reachable local evidence ai
     }
     if (s.type !== 'practice') continue;
     assert.ok(s.steps?.length && s.expected && s.timer > 0, s.title);
+    if (s.stateId === 'w3-setup') {
+      assert.equal(s.repo.url, 'https://github.com/RyanLisse/aetherlink-day3-n8n');
+      continue;
+    }
     const [file, anchor] = s.repo.url.split('#');
     assert.ok(existsSync(new URL('../' + file, import.meta.url)), file);
     if (anchor) assert.ok(guide.includes(`id="${anchor}"`), anchor);
   }
 });
 
-test('Day 4 bridges the real fields and does not require W3 specialists', () => {
+test('Day 4 translates the required communication without assuming identical runtimes', () => {
   const slides = load('workshop4-slides.js');
-  assert.ok(slides.some(s => s.notes?.includes('No specialist extension is required')));
+  assert.ok(slides.some(s => s.notes?.includes('Day 3 now requires both flat delegation and nested consultation')));
+  assert.ok(slides.some(s => s.notes?.includes('does not establish a runtime connection')));
+  assert.ok(slides.some(s => s.notes?.includes("settingSources: ['user', 'project']")));
   assert.ok(slides.some(s => s.cards?.some(c => c.body.includes('Day 3: priority and message'))));
+});
+
+test('Subagent instructions preserve context, require call evidence and keep failures visible', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  for (const id of ['specialists', 'flat-check', 'nested', 'sdk-handoff']) assert.ok(guide.includes(`id="${id}"`));
+  for (const phrase of ['03-specialists', '04-nested', "$fromAI('task'", "$fromAI('customer_id'", 'STOP — customer record not verified', 'No customer record returned', 'coordinator → Reply → Risk → Reply → coordinator', 'STOP — required consultation missing', '03-specialists-shareable.json', '04-nested-shareable.json']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const plainGuide = guide.replace(/<[^>]+>/g, ' ');
+  assert.ok(/tested Cloud Data Table Tool v1\.1,\s+Settings did not show the regular node's\s+Always Output Data\s+setting/.test(plainGuide), 'guide explains the tested Cloud Tool setting limitation');
+  assert.doesNotMatch(plainGuide, /(?:enable|turn on)\s+Always Output Data/i);
+  assert.doesNotMatch(JSON.stringify(load('workshop3-slides.js')), /Enable Always Output Data/);
+  const core = load('workshop3-slides.js').filter(s => !s.optional);
+  assert.doesNotMatch(JSON.stringify(core), /Specialists are optional|Specialist tools are optional|No prerequisite specialist build|The orchestrator never sees the risk call/);
+  const structure = read('TEACHING-STRUCTURE.md');
+  assert.match(structure, /one-Agent baseline, flat specialist team and\s+nested Reply → Risk consultation are required/);
+  assert.doesNotMatch(structure, /Specialist, nested-agent and CRUD exercises are\s+extensions|optional\s+three-specialist build/);
+});
+
+test('The participant guide explains Maarten’s progression and the synthetic data fixture', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  const text = guide.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1');
+  assert.ok(text.includes('L1 uses deterministic IF/Switch rules (no model). L2 adds one Agent, memory and validated output. L3 adds specialist calls: first flat delegation, then nested Reply → Risk.'));
+  assert.ok(text.includes('Maarten\'s reference deck calls the same rows customer-context.csv; use the linked filename here.'));
+  for (const field of ['customer_id', 'customer_name', 'customer_type', 'transactions_per_hour', 'previous_incidents', 'critical']) assert.ok(text.includes(field), field);
+  assert.ok(text.includes('Description tells the coordinator when to call a specialist. System Message sets that specialist\'s behavior. Prompt (User Message) carries the actual ticket, ID and findings.'));
+  assert.ok(text.includes('prompt text alone does not create a call.'));
+});
+
+test('Day 3 uses trial model credits and reserves provider keys for the SDK route', () => {
+  const slides = load('workshop3-slides.js');
+  const setup = slides.find(s => s.stateId === 'w3-setup');
+  const chat = slides.find(s => s.stateId === 'w3-chat');
+  assert.match(setup.subtitle, /Cloud trial/);
+  assert.ok(setup.steps[0].includes('Create your own'));
+  assert.match(chat.steps[0], /Save 01-switch\. Create a separate workflow named 02-chat\./);
+  assert.ok(chat.steps.some(step => step.includes('Use Gateway credits')));
+  assert.match(chat.expected, /Do not substitute an API key/);
+  assert.doesNotMatch(JSON.stringify(slides), /add your own OpenAI credential|Select your credential in the model node/);
+  const guide = read('assets/workshop-3/participant-guide.html');
+  assert.match(guide, /complete any email verification prompt/i);
+  for (const phrase of ['Assistant credits are different', 'Do not buy credits', 'Gateway credits are not available on self-hosted', 'Only the Claude SDK route uses']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const backend = load('workshop4-slides.js').find(s => s.title === 'Two ways to run the same agent');
+  assert.match(backend.subtitle, /n8n trial credits stay in n8n/);
+});
+
+test('Day 3 account setup links to the public setup-only participant repository', () => {
+  const slides = load('workshop3-slides.js');
+  const safety = slides.find(s => s.stateId === 'w3-build-zip-13');
+  const setup = slides.find(s => s.stateId === 'w3-setup');
+  const url = 'https://github.com/RyanLisse/aetherlink-day3-n8n';
+  assert.equal(safety.source.url, url);
+  assert.equal(safety.source.label, 'n8n Cloud setup guide');
+  assert.equal(setup.repo.url, url);
+  assert.equal(setup.repo.label, 'n8n Cloud setup guide');
+});
+
+test('The proof pack explains how to share a separate export without changing the live workflow', () => {
+  const guide = read('assets/workshop-3/participant-guide.html');
+  for (const phrase of ['id="safe-export"', 'Export JSON', '02-chat-shareable.json', 'Do not edit credentials in the live workflow', '02-chat-share-check', 'without executing', 'Valid JSON alone does not prove']) {
+    assert.ok(guide.includes(phrase), phrase);
+  }
+  const proof = load('workshop3-slides.js').find(s => s.stateId === 'w3-build-zip-44');
+  assert.match(proof.expected, /checked sharing copy/);
+  assert.equal(proof.repo.url, 'assets/workshop-3/participant-guide.html#finish');
 });
 
 test('Both days explain the same bounded loop without equating text with success', () => {

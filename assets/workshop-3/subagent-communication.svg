@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+<title id="title">Two ways to pass a ticket between subagents</title>
+<desc id="desc">Flat: the coordinator calls Context, Risk and Reply, forwarding each result. Nested: the coordinator calls Context and Reply; Reply calls Risk and returns the risk note with its draft. Check actual tool calls, inputs and returns. Both paths stop at human review.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="#64d9c6"/></marker></defs>
+<style>text{font-family:system-ui,sans-serif;fill:#eaf5ff}.title{font-size:34px;font-weight:700}.label{font-size:23px;font-weight:650}.small{font-size:19px;fill:#bed0e0}.box{fill:#18354d;stroke:#4c768f;stroke-width:2}.wire{fill:none;stroke:#64d9c6;stroke-width:3;marker-start:url(#arrow);marker-end:url(#arrow)}</style>
+<rect width="1280" height="760" rx="24" fill="#071725"/>
+<text x="48" y="60" class="title">Who calls whom? What comes back?</text>
+<text x="48" y="95" class="small">Expected wiring · a diagram is not execution evidence</text>
+<rect x="32" y="123" width="590" height="470" rx="18" fill="#10263a"/>
+<rect x="650" y="123" width="598" height="470" rx="18" fill="#10263a"/>
+<text x="60" y="163" class="label">03-specialists · flat</text>
+<rect x="170" y="190" width="310" height="68" rx="12" class="box"/>
+<text x="325" y="233" class="label" text-anchor="middle">Coordinator</text>
+<path d="M220 270V315H132V356" class="wire"/><path d="M325 270V356" class="wire"/><path d="M430 270V315H520V356" class="wire"/>
+<rect x="62" y="370" width="145" height="65" rx="12" class="box"/><text x="134" y="410" class="label" text-anchor="middle">Context</text>
+<rect x="253" y="370" width="145" height="65" rx="12" class="box"/><text x="325" y="410" class="label" text-anchor="middle">Risk</text>
+<rect x="447" y="370" width="145" height="65" rx="12" class="box"/><text x="520" y="410" class="label" text-anchor="middle">Reply</text>
+<text x="62" y="482" class="small">1. Context returns the customer record.</text>
+<text x="62" y="517" class="small">2. The coordinator forwards it to Risk.</text>
+<text x="62" y="552" class="small">3. It forwards both results to Reply.</text>
+<text x="678" y="163" class="label">04-nested · consultation</text>
+<rect x="794" y="190" width="310" height="68" rx="12" class="box"/>
+<text x="949" y="233" class="label" text-anchor="middle">Coordinator</text>
+<path d="M870 270V290H774V311" class="wire"/><path d="M1030 270V311" class="wire"/>
+<rect x="687" y="325" width="175" height="60" rx="12" class="box"/><text x="774" y="363" class="label" text-anchor="middle">Context</text>
+<rect x="943" y="325" width="175" height="60" rx="12" class="box"/><text x="1030" y="363" class="label" text-anchor="middle">Reply</text>
+<path d="M1030 399V438" class="wire"/>
+<text x="698" y="420" class="small">Ticket + context →</text>
+<text x="698" y="449" class="small">← Priority + risk note</text>
+<rect x="943" y="452" width="175" height="60" rx="12" class="box"/><text x="1030" y="490" class="label" text-anchor="middle">Risk</text>
+<text x="678" y="554" class="small">Reply returns its draft AND the risk result.</text>
+<rect x="32" y="616" width="1216" height="112" rx="16" fill="#213426" stroke="#c8d67c"/>
+<text x="60" y="657" class="label">Both paths: inspect the calls → review the draft → record a human decision</text>
+<text x="60" y="695" class="small">Missing call, missing facts or invented result? STOP. No email, refund or automatic approval.</text>
+</svg>

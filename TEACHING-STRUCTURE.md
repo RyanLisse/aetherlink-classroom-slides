@@ -30,11 +30,11 @@ This is the target structure, not a claim that every existing deck has passed a
 participant walkthrough.
 
 - Day 3 now uses Ryan's expanded deck from the supplied ZIP. The core has its
-  own participant guide. Specialist, nested-agent and CRUD exercises are
-  extensions, not requirements for the final core assignment.
+  own participant guide. The one-Agent baseline, flat specialist team and
+  nested Reply → Risk consultation are required. CRUD remains optional.
 - Day 4 already has explain, demo, solo, expected-output and discussion blocks.
-  Its recap now maps the actual Day 3 fields and does not require the optional
-  three-specialist build. Its complete SDK route still needs its own walkthrough.
+  Its recap maps the actual Day 3 fields and carries both communication paths
+  into the SDK route. Its complete SDK route still needs its own walkthrough.
 - Jessy owns days 1 and 2. They are the teaching-quality reference and remain
   unchanged. This pass does not migrate their decks or participant projects.
 - Day 5 has a separate ongoing AI-SDLC revision. Reconcile that revision before
