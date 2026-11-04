@@ -12,8 +12,8 @@ production in their own work. Each step gets its own pull request in each repo i
 | --- | --- | --- | --- | --- |
 | 0 · Setup | 13-17 | walked, fixed | [#7](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/7) | this branch |
 | 1 · One agent | 19-29 | walked, fixed | [#22](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/22) (main), #23 to #28 (step branches) | none needed |
-| 2 · Subagents | 34-42 | next | | |
-| 3 · MCP | 43-48 | not yet | | |
+| 2 · Subagents | 34-42 | walked, fixed | [#29](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/29) (main), #30 to #35 | this branch |
+| 3 · MCP | 43-48 | next | | |
 | 4 · Check | 49-51 | not yet | | |
 | Assignment | 53-67 | not yet | | |
 | 5 · Homework | 68-71 | not yet | | |
@@ -61,6 +61,28 @@ slides 22 to 29 in order (1a build, 1b look inside and test memory, 1c six messa
 Live runs on the claude-code backend, about $0.02 each: MSG-01 low, 02 high, 03 medium, 04 low, 05 high,
 06 low. All match the trainer key on slide 27. Tone trap without definitions: MSG-01 and MSG-06 stayed low
 twice each. That is what slide 27's watch line expects ("the model got lucky").
+
+## Step 2 · Subagents (slides 34-42)
+
+Walked on package `main` at `88caada` with Step 1 built, following SOLO.md Option A literally and checking
+Option B. The slides lead; SOLO.md Step 2 now follows slides 38 to 42.
+
+| # | What the participant sees | Why it matters | Fix | Where |
+| --- | --- | --- | --- | --- |
+| 1 | One Step 2 message costs $5.13 on one account and $1.70 on a Worldline account. | Every subagent also loaded the claude.ai connectors of the participant's account. | claude-code runs always pass `--strict-mcp-config`: $0.13 to $0.15 per message on both accounts. | Package #29 to #35 |
+| 2 | A run can print three results with three different `Switch` lines. | `CLAUDE_CODE_FORK_SUBAGENT` in the shell or settings splits the run. Seen from inside a Claude Code session; a normal terminal gives one result. | The settings `env` block is filtered to login and provider variables. | Package #29 to #35 |
+| 3 | SOLO says "add lesson2 after lesson1" and "update verify" in words. | Editing JSON from a description is where non-technical participants get stuck. | SOLO gives both lines literally. | Package #29 to #35 |
+| 4 | Slide 36 says the top of an agent file holds "name and tools". | The files hold `name` and `description`; tools are set in code. | Slide 36 card and teach script corrected. | This branch |
+| 5 | Slide 37 says "No extra code". | SOLO Build 2 writes a loader (`lib/agents.mjs`). True for Claude Code itself, not for the package. | Slide 37 says both. | This branch |
+| 6 | SOLO and `step-2` can drift apart. | Same failure as Step 1. | `test/solo-step2.test.mjs` on `step-2`, mutation-checked. | Package #31 |
+
+Option A from SOLO.md gave files identical to `step-2` and `verify` 23/0. Option B gave `verify` with no failures.
+Live after the fix: MSG-05 and MSG-10 each show `Agent → risk-agent` then `Agent → customer-reply-agent`; the MSG-10
+draft asks only for the missing facts. Description test with `Helps with things.`, run twice: the risk expert still ran both times,
+as slide 40's watch line expects.
+
+The trainer's `worldline` shell function does not change this on its own: the lessons start the `claude` binary
+directly, so only its environment reaches them, not its `--strict-mcp-config`. Its env file is still empty.
 
 ## Company login (Vertex AI, Bedrock)
 

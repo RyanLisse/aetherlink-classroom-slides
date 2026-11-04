@@ -2209,8 +2209,8 @@ window.SLIDES = [
         "body": "One file = one specialist."
       },
       {
-        "title": "Top: name and tools · below: instructions",
-        "body": "The top says who the agent is and what it may use. The text below is its work instructions."
+        "title": "Top: name and description · below: instructions",
+        "body": "The top says who the agent is and when to use it. The text below is its work instructions. Which tools it may use is set in code."
       },
       {
         "title": "Not .agents/ · not AGENTS.md",
@@ -2233,7 +2233,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at the middle card.",
-          "say": "At the top are the name and the tools it may use. Below that are its work instructions, just like CLAUDE.md."
+          "say": "At the top are the name and the description: when should this specialist be used? Below that are its work instructions, just like CLAUDE.md. Which tools it may use, we set in code."
         },
         {
           "do": "Point at the last card.",
@@ -2268,11 +2268,11 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "No extra code: Claude reads the folder, and the description decides who gets the task.",
+    "subtitle": "Claude reads the folder, and the description decides who gets the task.",
     "cards": [
       {
         "title": "1 · Claude Code starts",
-        "body": "It reads .claude/agents/ in your project and in ~/.claude/agents/."
+        "body": "It reads .claude/agents/ in your project and in ~/.claude/agents/. In the package, lib/agents.mjs reads the same files for the SDK."
       },
       {
         "title": "2 · It reads the description",
@@ -2288,14 +2288,14 @@ window.SLIDES = [
       "The description decides when Claude uses the agent.",
       "The SDK reads the same folder with settingSources: ['user', 'project']."
     ],
-    "notes": "You add a specialist by adding a file, with no extra code. Claude reads the description of each specialist to decide who gets the task. Show risk-agent.md on step-2: the description line is the job advert.",
+    "notes": "You add a specialist by adding a file. In Claude Code that is all; in the package, lib/agents.mjs reads the folder and gives the files to the SDK, so it is one line in 02-subagents/agents.mjs. Claude reads the description of each specialist to decide who gets the task. Show risk-agent.md on step-2: the description line is the job advert.",
     "stateId": "30:Why this folder? Claude finds the agents.",
     "teach": {
       "time": "2 min",
       "gist": "Claude reads the folder, and the description is the job advert.",
       "script": [
         {
-          "say": "How does Claude know that the specialists exist? You put the file in the folder. That is all."
+          "say": "How does Claude know that the specialists exist? You put the file in the folder. In Claude Code that is all. In our package, a small loader reads the same folder for the SDK."
         },
         {
           "do": "Point at card 2.",
