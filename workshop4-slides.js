@@ -366,79 +366,6 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Today · agenda",
-    "kicker": "Run of show · 10:00–16:00",
-    "type": "context",
-    "visual": {
-      "bot": "wave",
-      "place": "left",
-      "dayRoute": [
-        "Recap",
-        "Concepts",
-        "Step 0",
-        "Step 1",
-        "Lunch",
-        "Step 2",
-        "Step 3",
-        "Step 4",
-        "Assignment",
-        "Close"
-      ]
-    },
-    "subtitle": "The rhythm all day: I show it. You do it. We check it.",
-    "cards": [
-      {
-        "title": "10:00 · Start",
-        "body": "Welcome and recap\nFrom n8n to code\nStep 0: get the package\n☕ Break 11:00"
-      },
-      {
-        "title": "11:15 · Step 1",
-        "body": "One agent\nThe form and memory\n🍽 Lunch 12:00"
-      },
-      {
-        "title": "13:00 · Steps 2–4",
-        "body": "Step 2: two specialists\nStep 3: lookup tools (MCP)\nStep 4: the check\n☕ Break 14:45"
-      },
-      {
-        "title": "15:00 · Assignment",
-        "body": "Extend the lookup tools\nClose 15:50"
-      }
-    ],
-    "keyPoints": [
-      "Rhythm: I show it, you do it, we check it"
-    ],
-    "notes": "Name the breaks out loud. Fell behind? Each step has a finished version you can switch to (step-1 … step-4). Step 5, build your own agent, is optional: at home. Workshop package link: still to confirm with Ryan.",
-    "stateId": "8:Today · agenda",
-    "teach": {
-      "time": "1 min",
-      "gist": "The day in four blocks. Rhythm: I show it, you do it, we check it.",
-      "script": [
-        {
-          "do": "Point at the four blocks, left to right.",
-          "say": "This is our day: four blocks. The start, step 1, then steps 2 to 4, and at the end your own assignment."
-        },
-        {
-          "say": "The rhythm all day: first I show it, then you do it, then we check together if your screen shows the same."
-        },
-        {
-          "say": "Fell behind? No problem. Every step has a finished version you can jump to."
-        },
-        {
-          "do": "Name the breaks: 11:00, lunch at 12:00, 14:45."
-        }
-      ],
-      "do": [
-        "Walk through the four blocks.",
-        "Name the rhythm and the breaks."
-      ],
-      "done": [
-        "Everyone knows the rhythm and when the breaks are."
-      ],
-      "watch": []
-    }
-  },
-  {
-    "lessonId": "workshop-4",
     "title": "Goal of today",
     "kicker": "Welcome · Goal of today",
     "type": "context",
@@ -483,6 +410,9 @@ window.SLIDES = [
         },
         {
           "say": "At the end of the day we come back to this, and to the goals you wrote down this morning."
+        },
+        {
+          "say": "And this is how we get there. Next slide: the day in four blocks."
         }
       ],
       "do": [
@@ -491,6 +421,79 @@ window.SLIDES = [
       ],
       "done": [
         "Everyone knows what they will have at 16:00."
+      ],
+      "watch": []
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Today · agenda",
+    "kicker": "Run of show · 10:00–16:00",
+    "type": "context",
+    "visual": {
+      "bot": "wave",
+      "place": "left",
+      "dayRoute": [
+        "Recap",
+        "Concepts",
+        "Step 0",
+        "Step 1",
+        "Lunch",
+        "Step 2",
+        "Step 3",
+        "Step 4",
+        "Assignment",
+        "Close"
+      ]
+    },
+    "subtitle": "The rhythm all day: I show it. You do it. We check it.",
+    "cards": [
+      {
+        "title": "10:00 · Start",
+        "body": "Welcome and recap\nFrom n8n to code\nStep 0: get the package\n☕ Break 11:00"
+      },
+      {
+        "title": "11:15 · Step 1",
+        "body": "One agent\nThe form and memory\n🍽 Lunch 12:00"
+      },
+      {
+        "title": "13:00 · Steps 2–4",
+        "body": "Step 2: two specialists\nStep 3: lookup tools (MCP)\nStep 4: the check\n☕ Break 14:45"
+      },
+      {
+        "title": "15:00 · Assignment",
+        "body": "Extend the lookup tools\nClose 15:50"
+      }
+    ],
+    "keyPoints": [
+      "Rhythm: I show it, you do it, we check it"
+    ],
+    "notes": "Name the breaks out loud. Fell behind? Each step has a finished version you can switch to (step-1 … step-4). Step 5, build your own agent, is optional: at home. Workshop package: github.com/RyanLisse/aetherlink-day5-n8n-to-agent (checked 4 Nov: the steps and commands on the slides match the step-1 … step-4 branches).",
+    "stateId": "8:Today · agenda",
+    "teach": {
+      "time": "1 min",
+      "gist": "The day in four blocks. Rhythm: I show it, you do it, we check it.",
+      "script": [
+        {
+          "do": "Point at the four blocks, left to right.",
+          "say": "This is our day: four blocks. The start, step 1, then steps 2 to 4, and at the end your own assignment."
+        },
+        {
+          "say": "The rhythm all day: first I show it, then you do it, then we check together if your screen shows the same."
+        },
+        {
+          "say": "Fell behind? No problem. Every step has a finished version you can jump to."
+        },
+        {
+          "do": "Name the breaks: 11:00, lunch at 12:00, 14:45."
+        }
+      ],
+      "do": [
+        "Walk through the four blocks.",
+        "Name the rhythm and the breaks."
+      ],
+      "done": [
+        "Everyone knows the rhythm and when the breaks are."
       ],
       "watch": []
     }
