@@ -19,6 +19,12 @@ test('Day 4 deck and presenter request the current versioned slide data', () => 
   assert.equal(version('workshop4-presenter.html'), deckVersion);
 });
 
+test('Day 4 deck requests the current app runtime for progress versions', () => {
+  const match = read('workshop4.html').match(/src="app\.js\?v=(\d+)"/);
+  assert.ok(match, 'Day 4 deck must load a versioned app runtime');
+  assert.ok(Number(match[1]) > 101);
+});
+
 test('The memory discussion leads into three illustrated explanations', () => {
   const start = slides.findIndex(s => s.title === 'Discuss: what makes the route predictable?') + 1;
   assert.deepEqual(Array.from(slides.slice(start, start + 3), s => s.stateId), [
