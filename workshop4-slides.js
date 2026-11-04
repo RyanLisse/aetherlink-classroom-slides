@@ -179,26 +179,63 @@ window.SLIDES = [
     "type": "recap",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-4/n8n/02-chat-agent.png",
+      "image": "assets/day3-maarten-n8n/03-chat-memory.jpeg",
       "imageLink": "n8n · Chat trigger → AI Agent"
     },
-    "subtitle": "The chat sends a message to the AI Agent. Memory keeps the session.",
+    "subtitle": "The customer types in the chat. The AI Agent reads it. Memory remembers the conversation.",
     "cards": [
       {
         "title": "Chat trigger",
-        "body": "When chat message received."
+        "body": "The customer types a message."
+      },
+      {
+        "title": "AI Agent",
+        "body": "Reads what the customer means."
       },
       {
         "title": "Simple Memory",
-        "body": "Adds earlier messages from the same session."
+        "body": "Plugs in under the agent. Remembers what was said earlier in the same conversation."
       }
     ],
     "keyPoints": [
-      "Compare the observed runs.",
-      "Check session boundaries."
+      "Same customer = same conversation",
+      "New customer = start fresh",
+      "Never carry customer A's chat over to customer B"
     ],
-    "notes": "Ask for the before-memory, same-session and new-session results. Do not promise an exact model answer. Today npm run chat resumes the session; a new session must not inherit another customer’s conversation.",
-    "stateId": "5:Yesterday’s flow · 2. Chat and an AI Agent"
+    "notes": "Yesterday's second flow: a chat in front of the AI Agent, and memory under it. Ask: what happened before you added memory, and after? Today npm run chat does the same: it remembers within one conversation. A new conversation must never get another customer's messages.",
+    "stateId": "5:Yesterday’s flow · 2. Chat and an AI Agent",
+    "tagline": "Memory works like a conversation at the desk: same customer, you remember. New customer, you start fresh.",
+    "teach": {
+      "time": "2 min",
+      "gist": "Chat in, AI Agent reads, memory remembers the conversation. Never mix customers.",
+      "script": [
+        {
+          "do": "Point at the chat block.",
+          "say": "Yesterday's second step: the customer types in a chat, and the AI Agent reads the message."
+        },
+        {
+          "do": "Point at the Memory socket under the agent.",
+          "say": "Under the agent you plug in memory. Think of a conversation at the desk: as long as the same customer stands in front of you, you remember what he just said."
+        },
+        {
+          "say": "A new customer? Then you start fresh. You may never take the conversation of customer A to customer B."
+        },
+        {
+          "ask": "Why is that so important at a payment company?",
+          "say": "(Answer: privacy. Customer B may never see anything of customer A.)"
+        }
+      ],
+      "do": [
+        "Explain chat, agent and memory.",
+        "Name the rule: never mix customers."
+      ],
+      "done": [
+        "Everyone can say what memory does, and where it stops."
+      ],
+      "watch": [
+        "People think memory means the AI learns forever. No: it only remembers within one conversation."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -207,27 +244,60 @@ window.SLIDES = [
     "type": "recap",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-4/n8n/03-parser.png",
+      "image": "assets/day3-maarten-n8n/05-output-parser.jpeg",
       "imageLink": "n8n · AI Agent + Structured Output Parser"
     },
-    "subtitle": "The Priority Parser gives a fixed shape. Then the Switch routes.",
+    "subtitle": "The AI fills in a fixed form. Then the Switch can sort.",
     "cards": [
       {
-        "title": "Structured Output Parser",
-        "body": "Day 3: priority and message. Day 4: inspect the target schema."
+        "title": "Structured Output Parser = the form",
+        "body": "Tells the AI which fields to fill in: priority and message. Checks that the answer fits the form."
       },
       {
-        "title": "Switch",
-        "body": "Routes on priority."
+        "title": "Switch = the trays",
+        "body": "Reads the priority field and puts the message in the right tray: high, medium or low."
       }
     ],
     "keyPoints": [
-      "Keep the priority values consistent.",
-      "Map message to the new contract deliberately.",
-      "Check parse errors and wrong decisions separately."
+      "AI talks, the machine needs a form",
+      "Parser = the form, and the check",
+      "Switch = the trays"
     ],
-    "notes": "Day 3 used priority and message. Day 4 has its own schema and fixtures; do not claim they are identical. Open priority-schema.mjs and name each required field. Translate deliberately and keep the failed-case evidence.",
-    "stateId": "6:Yesterday’s flow · 3. Structured output"
+    "notes": "Yesterday the Parser had two fields: priority and message. Today the package has its own form (priority-schema.mjs), with its own fields; it is not exactly the same as Day 3. Two different kinds of mistakes: the form is not filled in correctly (a parse error), or the form is correct but the priority is wrong (a wrong decision). Look at them separately.",
+    "stateId": "6:Yesterday’s flow · 3. Structured output",
+    "tagline": "An AI likes to talk. A machine can’t do anything with a story. So the AI fills in a form.",
+    "teach": {
+      "time": "2 min",
+      "gist": "Parser = the form the AI must fill in. Switch = the trays. AI gives the label, code picks the route.",
+      "script": [
+        {
+          "do": "Point at the AI Agent.",
+          "say": "An AI likes to talk. Ask it something and you get a story. But a machine can't do anything with a story."
+        },
+        {
+          "do": "Point at Structured Output Parser.",
+          "say": "So we give the AI a form. Field one: priority, high, medium or low. Field two: the message. The Parser hands out the form and checks it is filled in correctly."
+        },
+        {
+          "do": "Point at the Switch.",
+          "say": "Then the Switch reads the priority field and puts the message in the right tray."
+        },
+        {
+          "ask": "What can go wrong here? Two things.",
+          "say": "(Answer: the form is filled in wrong, or the form is right but the priority is wrong. Two different problems.)"
+        }
+      ],
+      "do": [
+        "Explain: AI talks, machine needs a form.",
+        "Parser = form, Switch = trays."
+      ],
+      "done": [
+        "Everyone can say the difference between the Parser and the Switch."
+      ],
+      "watch": [
+        "Today's form has its own fields. Don't promise it is exactly the same as yesterday."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -236,31 +306,63 @@ window.SLIDES = [
     "type": "recap",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-4/n8n/05-three-agents.png",
+      "image": "assets/day3-maarten-n8n/11-three-sub-agents.jpeg",
       "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
     },
-    "subtitle": "Recall the flat team and Reply → Risk consultation. Bring the execution evidence.",
+    "subtitle": "Like an office: you don't ask one person to do everything.",
     "cards": [
       {
         "title": "Customer Reply Agent",
-        "body": "Writes the reply."
+        "body": "The writer. Writes the reply to the customer."
       },
       {
         "title": "Risk Agent",
-        "body": "Decides the risk."
+        "body": "The risk expert. Decides how risky the message is."
       },
       {
         "title": "Customer Context Agent",
-        "body": "Reads the Data Table."
+        "body": "The records desk. Looks up the customer in the Data Table."
       }
     ],
     "keyPoints": [
-      "Customer Reply Agent: Writes the reply.",
-      "Risk Agent: Decides the risk.",
-      "Customer Context Agent: Reads the Data Table."
+      "Writer, risk expert, records desk",
+      "Each specialist has one job",
+      "Today: 2 agents + 1 lookup tool"
     ],
-    "notes": "Day 3 now requires both flat delegation and nested consultation. Ask who called Risk and which context reached Reply. If a participant was blocked, label the screenshot as a reference and explain the pattern before the SDK exercise; do not claim their Day 3 run passed.",
-    "stateId": "7:Optional yesterday, explained today: specialist agents"
+    "notes": "Yesterday's team: three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? Was someone's Day 3 flow blocked? Show this screenshot as the example and explain the idea; do not say their flow worked. Today Reply and Risk become subagents; the Customer Context Agent becomes an MCP tool that looks up customers.",
+    "stateId": "7:Optional yesterday, explained today: specialist agents",
+    "tagline": "Today Reply and Risk become two agents in code. Customer Context becomes a lookup tool (MCP).",
+    "teach": {
+      "time": "3 min",
+      "gist": "Three specialists, each one job. Today: 2 agents in code + 1 lookup tool.",
+      "script": [
+        {
+          "say": "Yesterday's last step: a team of specialists. Just like at the office: you don't ask one person to do everything."
+        },
+        {
+          "do": "Point at the three agents, left to right.",
+          "say": "The writer writes the reply. The risk expert decides how risky it is. The records desk looks up the customer."
+        },
+        {
+          "do": "Point at the tagline.",
+          "say": "Today we build this team in code. The writer and the risk expert become two agents. The records desk becomes a lookup tool: it only looks things up, it doesn't think."
+        },
+        {
+          "ask": "Who called the Risk Agent in your flow yesterday?",
+          "say": "(Listen. If someone's flow did not work: show this screenshot as the example.)"
+        }
+      ],
+      "do": [
+        "Name the three specialists and their job.",
+        "Say what they become today."
+      ],
+      "done": [
+        "Everyone knows: today 2 agents and 1 lookup tool."
+      ],
+      "watch": [
+        "Someone's Day 3 did not work? Use this screenshot as the example; nobody is behind."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -283,34 +385,57 @@ window.SLIDES = [
         "Close"
       ]
     },
-    "subtitle": "I show it. Then you do it.",
+    "subtitle": "The rhythm all day: I show it. You do it. We check it.",
     "cards": [
       {
         "title": "10:00 · Start",
-        "body": "Recap, concepts, Step 0."
+        "body": "Welcome and recap\nFrom n8n to code\nStep 0: get the package\n☕ Break 11:00"
       },
       {
         "title": "11:15 · Step 1",
-        "body": "Structured output and memory."
+        "body": "One agent\nThe form and memory\n🍽 Lunch 12:00"
       },
       {
         "title": "13:00 · Steps 2–4",
-        "body": "Subagents, MCP tools, the check."
+        "body": "Step 2: two specialists\nStep 3: lookup tools (MCP)\nStep 4: the check\n☕ Break 14:45"
       },
       {
         "title": "15:00 · Assignment",
-        "body": "Extend the MCP. Close at 15:50."
+        "body": "Extend the lookup tools\nClose 15:50"
       }
     ],
     "keyPoints": [
-      "10:00 Welcome, recap, goal · 10:15 Concepts n8n → Agent SDK · 10:45 Step 0 · 11:00 Break · 11:15 Step 1 · 12:00 Lunch",
-      "13:00 Step 2 · subagents · 13:40 Step 3 · MCP · 14:20 Step 4 · check · 14:45 Break · 15:00 Assignment · extend the MCP · 15:50 Close",
-      "Step 5 (build your own agent) is optional: do it at home.",
-      "Workshop repo: https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent",
-      "Fell behind? Fetch first, then switch to step-1 … step-4 for the finished state."
+      "Rhythm: I show it, you do it, we check it"
     ],
-    "notes": "Run of show 10:00–16:00 (break 11:00–11:15, lunch 12:00–13:00, break 14:45–15:00). Format: I show it, you do it.",
-    "stateId": "8:Today · agenda"
+    "notes": "Name the breaks out loud. Fell behind? Each step has a finished version you can switch to (step-1 … step-4). Step 5, build your own agent, is optional: at home. Workshop package link: still to confirm with Ryan.",
+    "stateId": "8:Today · agenda",
+    "teach": {
+      "time": "1 min",
+      "gist": "The day in four blocks. Rhythm: I show it, you do it, we check it.",
+      "script": [
+        {
+          "do": "Point at the four blocks, left to right.",
+          "say": "This is our day: four blocks. The start, step 1, then steps 2 to 4, and at the end your own assignment."
+        },
+        {
+          "say": "The rhythm all day: first I show it, then you do it, then we check together if your screen shows the same."
+        },
+        {
+          "say": "Fell behind? No problem. Every step has a finished version you can jump to."
+        },
+        {
+          "do": "Name the breaks: 11:00, lunch at 12:00, 14:45."
+        }
+      ],
+      "do": [
+        "Walk through the four blocks.",
+        "Name the rhythm and the breaks."
+      ],
+      "done": [
+        "Everyone knows the rhythm and when the breaks are."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -323,28 +448,52 @@ window.SLIDES = [
       "bot": "head",
       "place": "key"
     },
-    "subtitle": "At 16:00 you have an agent system that you control.",
+    "subtitle": "At 16:00 you have an agent team you built yourself, and you can explain it.",
     "cards": [
       {
-        "title": "Morning",
-        "body": "One agent in code. Structured output and memory."
-      },
-      {
-        "title": "Afternoon",
-        "body": "Subagents, MCP tools and a hook for each write."
+        "title": "You built",
+        "body": "An agent team in code: one agent, two specialists and a lookup tool."
       },
       {
         "title": "You can explain",
-        "body": "Which agent has which tool. When a person must approve."
+        "body": "Which agent may do what. And what it may not do."
+      },
+      {
+        "title": "You know",
+        "body": "When a person must say yes before anything changes."
       }
     ],
     "keyPoints": [
-      "One flow, from n8n to code.",
-      "Least privilege for each agent.",
-      "A person approves risky writes."
+      "Built it yourself",
+      "Who may do what",
+      "A person says yes before a change"
     ],
-    "notes": "Say the goal in one sentence: at 16:00 each participant has an agent system that they built and can explain. Point at the agenda times. Say when the breaks are.",
-    "stateId": "9:Goal of today"
+    "notes": "Say the goal in one sentence: at 16:00 you have an agent team you built yourself, and you can explain it. Come back to this at the close, together with the goals people wrote down on slide 2.",
+    "stateId": "9:Goal of today",
+    "teach": {
+      "time": "1 min",
+      "gist": "At 16:00: built it yourself, can explain who may do what, knows when a person says yes.",
+      "script": [
+        {
+          "say": "At four o'clock you have an agent team that you built yourself, and that you can explain."
+        },
+        {
+          "do": "Point at the three cards.",
+          "say": "You built it. You can say which agent may do what. And you know when a person must say yes before anything changes."
+        },
+        {
+          "say": "At the end of the day we come back to this, and to the goals you wrote down this morning."
+        }
+      ],
+      "do": [
+        "Say the goal in one sentence.",
+        "Link it to the goals on the board."
+      ],
+      "done": [
+        "Everyone knows what they will have at 16:00."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
