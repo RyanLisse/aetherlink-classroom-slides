@@ -1,9 +1,9 @@
 /* Locally maintained classroom content. See tools/SESSION-SOURCES.md. */
 window.SLIDES = [
   {
-    "title": "Welcome to Day 3!",
+    "title": "Welcome to Day 3 · AI-SDLC in practice",
     "kicker": "AETHERLINK × WORLDLINE · DAY 3",
-    "subtitle": "Build a support workflow you can explain, test and stop.",
+    "subtitle": "Use n8n to build a workflow you can explain, test and stop.",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -11,17 +11,34 @@ window.SLIDES = [
       "place": "beside"
     },
     "keyPoints": [
-      "On screen as people arrive",
-      "Warm welcome once seated",
-      "Keep it to a few sentences"
+      "The AI-SDLC is the learning goal.",
+      "n8n is today’s practice system.",
+      "A person reviews every customer draft."
     ],
-    "notes": "Have this on screen while people walk in. Once everyone is seated, give a warm welcome back: keep it to a few sentences.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Have this on screen while people walk in. Once everyone is seated, name the learning goal before the n8n workflow. Keep the welcome to a few sentences.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
     "stateId": "w3-build-zip-1"
   },
   {
-    "title": "What did you build, check or stop?",
+    "title": "Share your Snake game",
+    "kicker": "DAY 3 · OPENING",
+    "subtitle": "Show the game you made on Day 1 or 2.",
+    "type": "recap",
+    "cards": [
+      {"title": "Show", "body": "Run the game or point to one part you want to explain."},
+      {"title": "Explain", "body": "Name one choice you made and how you checked it."},
+      {"title": "Connect", "body": "Where could AI help you make a safe change?"}
+    ],
+    "keyPoints": [
+      "Give each person one minute.",
+      "If you missed Day 1 or 2, listen and name a check you heard."
+    ],
+    "notes": "Invite participants to share the Snake game they made on Day 1 or 2. Give each person one minute. Ask for one design choice and one visible check. Participants who missed those days can listen and name a check. Do not change the Day 1 or Day 2 slides.",
+    "stateId": "w3-snake-share"
+  },
+  {
+    "title": "What did your Snake demo prove?",
     "kicker": "DAY 3 · RECAP",
-    "subtitle": "One example from day 1 or 2. No previous attendance is required.",
+    "subtitle": "Connect the game to the steps in the AI-SDLC.",
     "type": "recap",
     "tagline": "Answer from memory first, no peeking.",
     "visual": {
@@ -50,7 +67,7 @@ window.SLIDES = [
       "Let the room answer first",
       "Last question leads into today"
     ],
-    "notes": "Cold retrieval: make people answer without looking at last week's slides. Open one question per click and let the room answer before you add anything. The last question is the bridge to today: n8n is about workflows, and a good workflow has clear places where a person decides.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
+    "notes": "Ask participants to connect the Snake demo to the delivery steps. Open one question per click and let the room answer before you add anything. The last question is the bridge to today: n8n is the practice system; the learning goal is to build, test and review a safe change.\nTeaching rhythm: explain the next change, demonstrate it, let participants do it, check the visible result, then discuss why it happened. Solo: write the explanation instead of screen-sharing.",
     "stateId": "w3-build-zip-2"
   },
   {

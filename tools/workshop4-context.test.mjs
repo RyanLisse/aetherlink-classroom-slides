@@ -24,6 +24,21 @@ test('The memory discussion leads into three illustrated explanations', () => {
   }
 });
 
+test('Workshop 4 starts with the AI-SDLC goal and tells participants what to build', () => {
+  const welcome = slides[0];
+  assert.match(welcome.subtitle, /Learning goal: use the AI-SDLC/);
+  assert.match(welcome.subtitle, /practice system/);
+
+  const step1 = slides.find(s => s.title === 'Run Step 1 and test chat memory.');
+  const step2 = slides.find(s => s.title === 'Run the orchestrator and inspect the draft.');
+  const step3 = slides.find(s => s.title === 'Run Step 3 customer and transaction lookups.');
+  assert.ok(step1.steps.some(step => /complete Step 1.*Build the options, project instructions and Priority Parser/.test(step)));
+  assert.ok(step2.steps.some(step => /complete Step 2.*Build both prompts, the loader, schema and orchestrator options/.test(step)));
+  assert.ok(step2.steps.some(step => /dry run makes no model call/.test(step)));
+  assert.ok(step3.steps.some(step => /complete Step 3.*Build both read-only MCP tools/.test(step)));
+  assert.ok(step3.steps.some(step => /live run or labelled sample trace/.test(step)));
+});
+
 test('Inserting explanations preserves every original W4 slide identity', () => {
   const originals = slides.filter(s => !s.stateId.startsWith('w4-'));
   assert.equal(originals.length, 66);

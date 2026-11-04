@@ -6,7 +6,7 @@ Workshop 3 is adapted from Ryan's 47-slide deck in the supplied
 `jyse/aetherlink-classroom-slides` archive at
 `3bc44efae16b82a79077eeba41286ff02e4deba5`. Its source images and optional
 orchestration download are retained with the same paths. Reference screenshots
-are not participant-run evidence. The core has 44 slides; only the separate
+are not participant-run evidence. The deck has 45 core slides; only the separate
 CRUD exercise is hidden by default. Flat delegation and nested Reply → Risk
 consultation are required. `assets/workshop-3/participant-guide.html` contains the
 standalone instructions, test inputs, stop conditions and downloads.

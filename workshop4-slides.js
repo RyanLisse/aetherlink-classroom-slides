@@ -10,8 +10,13 @@ window.SLIDES = [
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Rebuild the behaviour you checked in n8n, now in code.",
-    "notes": "Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. Use a labelled reference if the required Day 3 specialist run was blocked to start.",
+    "subtitle": "Learning goal: use the AI-SDLC to build, test and review a code change. The Claude Agents SDK is the practice system.",
+    "keyPoints": [
+      "Start with the ticket and the observed result.",
+      "Build one change, then check it.",
+      "A person reviews the diff and decides whether to release."
+    ],
+    "notes": "Name the AI-SDLC as the learning goal before the recap. Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. Use a labelled reference if the required Day 3 specialist run was blocked to start.",
     "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK"
   },
   {
@@ -773,6 +778,7 @@ window.SLIDES = [
       }
     ],
     "steps": [
+      "Open SOLO.md and complete Step 1. Build the options, project instructions and Priority Parser.",
       "Run npm run lesson1 -- MSG-01 --dry-run.",
       "Open priority-schema.mjs and lib/switch.mjs.",
       "Run npm run chat. Give a colour. Ask for it again.",
@@ -1169,8 +1175,9 @@ window.SLIDES = [
       }
     ],
     "steps": [
+      "Open SOLO.md and complete Step 2. Build both prompts, the loader, schema and orchestrator options.",
       "Run npm run lesson2 -- MSG-05 --dry-run.",
-      "In a live run or docs/sample-trace.md, find risk-agent and customer-reply-agent.",
+      "A dry run makes no model call. Use a live run or docs/sample-trace.md, labelled as a sample, to find both agent calls.",
       "After a live run, open output/MSG-05.md.",
       "Read the draft before you use it."
     ],
@@ -1371,10 +1378,11 @@ window.SLIDES = [
       }
     ],
     "steps": [
+      "Open SOLO.md and complete Step 3. Build both read-only MCP tools.",
       "Once: (cd 03-mcp/transaction-mcp && npm ci).",
       "Run npm run smoke:mcp. It makes no model call.",
-      "Run npm run lesson3 -- MSG-08 --dry-run. Find both MCP servers.",
-      "In the trace, find get_customer and get_transaction."
+      "Run npm run lesson3 -- MSG-08 --dry-run. Check the MCP server settings.",
+      "In a live run or labelled sample trace, find get_customer and get_transaction."
     ],
     "expected": "The trace shows both read-only lookups. The draft waits for a person.",
     "keyPoints": [

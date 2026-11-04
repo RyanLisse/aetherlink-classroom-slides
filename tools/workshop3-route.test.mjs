@@ -53,6 +53,16 @@ test('Cloud checkpoints show the result relevant to each assignment', () => {
   }
 });
 
+test('Day 3 opens with the AI-SDLC goal and a Snake show-and-tell', () => {
+  const slides = load('workshop3-slides.js');
+  assert.match(slides[0].title, /AI-SDLC/);
+  assert.match(slides[0].keyPoints.join(' '), /learning goal/);
+  assert.equal(slides[1].stateId, 'w3-snake-share');
+  assert.match(slides[1].title, /Share your Snake game/);
+  assert.match(slides[1].subtitle, /Day 1 or 2/);
+  assert.match(slides[2].subtitle, /AI-SDLC/);
+});
+
 test('W3 core requires flat and nested subagent communication before completion', () => {
   const slides = load('workshop3-slides.js');
   assert.equal(new Set(slides.map(s => s.stateId)).size, slides.length);
