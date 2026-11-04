@@ -377,7 +377,7 @@ return [
     ],
     next: "Why n8n: two jobs, learning agents and prototyping one for your team."
   },
-  notes: "Storyline: slide 9 explained what n8n is. This slide answers the question the room is asking: why a new tool, when we already have Claude Code? Answer: in Claude Code the agent loop ran out of sight; in n8n you build an agent from parts you can see and open. It calls back to Day 1's slide 'You are using an agent, not building one (yet)': today is the 'yet'.\n\nSay: On Day 1 we said: you are using an agent, not building one, yet. Today is the 'yet'.\n\nClick once per card. In Claude Code the loop, observe, decide, act, check, happened inside the tool; you only saw the outcome. In n8n you draw the same parts yourself, and every run shows the data at every step. Point at the picture: the AI Agent at the top, and under it the Chat Model, the Memory, the Tool slot and the Output Parser. Note: in the picture the Tool slot is empty (just a +): say 'this slot is for tools, we fill it this afternoon'. By the end of today you have built every one of them.\n\nWhy now: it answers 'why a new tool?' before anyone asks it.\n\nThe tagline ('Then decide what your team should build') points ahead: once they know the parts of an agent, they can judge which agent would help their own team. That is what they build on Days 6 and 7 (hackathon). The closing slide (45) collects their first workflow ideas on the flipchart."
+  notes: "Storyline: slide 9 explained what n8n is. This slide answers the question the room is asking: why a new tool, when we already have Claude Code? Answer: in Claude Code the agent loop ran out of sight; in n8n you build an agent from parts you can see and open. It calls back to Day 1's slide 'You are using an agent, not building one (yet)': today is the 'yet'.\n\nSay: On Day 1 we said: you are using an agent, not building one, yet. Today is the 'yet'.\n\nClick once per card. In Claude Code the loop, observe, decide, act, check, happened inside the tool; you only saw the outcome. In n8n you draw the same parts yourself, and every run shows the data at every step. Point at the picture: the AI Agent at the top, and under it the Chat Model, the Memory, the Tool slot and the Output Parser. Note: in the picture the Tool slot is empty (just a +): say 'this slot is for tools, we fill it this afternoon'. By the end of today you have built every one of them.\n\nWhy now: it answers 'why a new tool?' before anyone asks it.\n\nThe tagline ('Then decide what your team should build') points ahead: once they know the parts of an agent, they can judge which agent would help their own team. That is what they build on Days 6 and 7 (hackathon). The closing slide (45) collects their first workflow ideas in the chat."
 },
 
 { // Slide 11
@@ -1659,7 +1659,7 @@ return [
     "watch": [
       "The prompt and the System Message are NOT visible in the picture: both are text fields inside the AI Agent node (double-click it). Say that, so nobody searches the canvas for them.",
       "The picture also shows an empty Output Parser slot under the agent. Not used yet: if asked, 'we use that one in the next step'.",
-      "Don't run it on the projector yet: in A35 everyone sees for themselves that the Switch stays grey. Save that 'problem' for the end of A35.",
+      "Don't run it on your shared screen yet: in A35 everyone sees for themselves that the Switch stays grey. Save that 'problem' for the end of A35.",
       "If someone asks why it's written in words instead of rules: rules only match exact words; the agent understands what the customer means."
     ],
     "terms": [
@@ -3219,7 +3219,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
       "One idea for your own team."
     ],
     "watch": [
-      "Maarten's notes mention a flipchart with this morning's success wishes. Online: use wherever you collected them in the morning (chat, a shared doc, a whiteboard). Check beforehand.",
+      "Maarten's classroom notes collect this morning's success wishes on paper. Online: use wherever you collected them in the morning (chat, a shared doc, a whiteboard). Check beforehand.",
       "'Questions feed Day 4': collect the open questions in one place (chat or doc) so you can pass them on."
     ],
     "terms": [],
