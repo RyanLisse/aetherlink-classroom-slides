@@ -108,23 +108,23 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday’s flow · 1. Ticket in, Switch out",
+    "title": "Yesterday · 1. The sorting machine",
     "kicker": "Recap · n8n flow 1/4",
     "type": "recap",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-4/n8n/01-switch.png",
+      "image": "assets/day3-maarten-n8n/01-basic-flow.jpeg",
       "imageLink": "n8n · Ticket Input → Switch"
     },
-    "subtitle": "A ticket goes in. The Switch picks LOW, MEDIUM or HIGH.",
+    "subtitle": "A customer message comes in. The Switch sorts it into one of three trays: high, medium or low.",
     "cards": [
       {
         "title": "Ticket Input",
-        "body": "One support message."
+        "body": "The customer message comes in."
       },
       {
-        "title": "Switch",
-        "body": "Three routes: low, medium, high."
+        "title": "Switch = the sorting clerk",
+        "body": "Fixed rules, no thinking: three trays, high, medium and low."
       }
     ],
     "keyPoints": [
@@ -170,7 +170,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday’s flow · 2. Chat and an AI Agent",
+    "title": "Yesterday · 2. The chat and the memory",
     "kicker": "Recap · n8n flow 2/4",
     "type": "recap",
     "visual": {
@@ -234,7 +234,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday’s flow · 3. Structured output",
+    "title": "Yesterday · 3. The form",
     "kicker": "Recap · n8n flow 3/4",
     "type": "recap",
     "visual": {
@@ -296,7 +296,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday: specialists exchange context and results",
+    "title": "Yesterday · 4. The team of specialists",
     "kicker": "Recap · n8n flow 4/4",
     "type": "recap",
     "visual": {
@@ -552,7 +552,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "n8n ↔ Agent SDK at a glance",
+    "title": "The dictionary: yesterday's blocks, today's names",
     "kicker": "Concept recap · overview",
     "type": "concept",
     "layout": "compare",
@@ -669,7 +669,7 @@ window.SLIDES = [
       },
       {
         "title": "Done is not proof",
-        "body": "When the AI says “done”, a person checks the evidence."
+        "body": "When the AI says “done”, a person checks the proof."
       }
     ],
     "keyPoints": [
@@ -679,7 +679,7 @@ window.SLIDES = [
       "Text is not success; check evidence.",
       "Errors, limits and people can stop the run."
     ],
-    "notes": "Think of a chef and a kitchen assistant. The AI is the chef: it thinks and asks 'give me the customer details'. The code is the assistant: it checks 'is the chef allowed this?', fetches it and hands it back. The chef carries on with what it got. Round after round, until the dish is ready, or the maximum number of rounds (maxTurns) is reached, or something is refused. Two things to remember: the AI never touches anything itself, it only asks. And 'the AI says it is done' is not proof: always check the evidence. A hook checks at fixed moments (for example before a change); it is not the same as a person approving.",
+    "notes": "Think of a chef and a kitchen assistant. The AI is the chef: it thinks and asks 'give me the customer details'. The code is the assistant: it checks 'is the chef allowed this?', fetches it and hands it back. The chef carries on with what it got. Round after round, until the dish is ready, or the maximum number of rounds (maxTurns) is reached, or something is refused. Two things to remember: the AI never touches anything itself, it only asks. And 'the AI says it is done' is not proof: always check the proof. A hook checks at fixed moments (for example before a change); it is not the same as a person approving.",
     "stateId": "12:One agent loop. Bounded actions.",
     "teach": {
       "time": "4 min",
@@ -746,7 +746,7 @@ window.SLIDES = [
       "Use your Claude Code login",
       "No API key needed"
     ],
-    "notes": "For you, not for the slide: the same agent can also run with an Anthropic API key (the 'sdk' backend). Careful: if ANTHROPIC_API_KEY is set on someone's laptop, the package picks that way by itself. Force the login with --backend claude-code. The n8n trial credits from Day 3 do not carry over to Claude.",
+    "notes": "For you: the same agent can also run with a paid API key. Careful: if someone has an API key set on their laptop, the package uses it by itself. Then add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here.",
     "stateId": "13:Two ways to run the same agent",
     "teach": {
       "time": "1 min",
@@ -894,7 +894,7 @@ window.SLIDES = [
       "main is Step 0; step-1 through step-4 contain the finished steps.",
       "With ANTHROPIC_API_KEY in your shell, the runner picks sdk. Use --backend to choose."
     ],
-    "notes": "Participants do the five steps; you walk around. npm run verify also runs the chat dry run, so no separate step for that. Someone's run says backend: sdk? Then an ANTHROPIC_API_KEY is set on their laptop: add --backend claude-code. Use the break after the next slide to help people who don't have fail 0 yet.",
+    "notes": "Participants do the five steps; you walk around. npm run verify also tests the chat, so no separate step for that. Someone's screen says backend: sdk? Then an API key is set on their laptop: add --backend claude-code. Use the break after the next slide to help people without fail 0.",
     "stateId": "15:Get the workshop package.",
     "teach": {
       "time": "10 min",
@@ -961,7 +961,7 @@ window.SLIDES = [
         "body": "Last line: dry run — no model call. That is correct: the AI did nothing yet."
       }
     ],
-    "notes": "Show this screen after Step 0. The first line of the dry run shows the backend: claude-code or sdk. A dry run prints the command but does not call the model, so it is not model evidence.",
+    "notes": "Show this after Step 0. The first line of the dry run says which way the agent runs (backend: claude-code = your login). A dry run does not call the AI, so it says nothing about how good the agent is.",
     "stateId": "16:What you see · Step 0",
     "teach": {
       "time": "2 min",
@@ -1187,7 +1187,7 @@ window.SLIDES = [
       "npm run chat resumes with the previous sessionId.",
       "--no-memory starts each turn without resume."
     ],
-    "notes": "The conversation is the memory: npm run chat passes the previous session on to the next message (resume: sessionId in lib/chat.mjs). With --no-memory every message starts fresh. Every npm run lesson1 is a new session on purpose: one ticket is one case.",
+    "notes": "The conversation is the memory: npm run chat passes the previous conversation on to the next message. With --no-memory every message starts fresh. Every npm run lesson1 is a new conversation on purpose: one ticket is one case.",
     "stateId": "20:Memory is the session",
     "teach": {
       "time": "2 min",
@@ -1501,7 +1501,7 @@ window.SLIDES = [
         "Funny but expected: 'My favourite colour is red' also gets a priority (low), because CLAUDE.md makes it a triage agent. Use it: the rules in CLAUDE.md apply to everything you type."
       ]
     },
-    "notes": "Give participants 15 minutes. Offline, inspect 01-single-agent/priority-schema.mjs, outputFormat in the dry-run options, and lib/switch.mjs. Do not present dry-run output as model JSON or a Switch → result; show those only from a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md, labelled as an illustrative sample. Then compare a favourite-colour follow-up in the same chat with --no-memory.",
+    "notes": "10 minutes. The dry run shows the settings, including the form (outputFormat). The filled-in form and the Switch line only appear in a real run with the Claude Code login, or in docs/sample-trace.md (say it is a sample). Then the colour test with and without --no-memory.",
     "stateId": "23:Run Step 1 and test chat memory."
   },
   {
@@ -1722,9 +1722,10 @@ window.SLIDES = [
     "type": "concept",
     "subtitle": "Think of a desk. The AI only sees what is on the desk: the instructions, the conversation and the tool results. The desk has a limit.",
     "visual": {
-      "opener": "sdlc-loop",
-      "image": "assets/workshop-4/context-window.svg",
-      "imageAlt": "Instructions, loaded files and conversation share the context window. Unread files and customer records remain outside until retrieved. Leave room for the response."
+      "opener": "showcase",
+      "image": "assets/workshop-4/context-desk.svg",
+      "imageAlt": "The desk: what the AI sees at once",
+      "imageLink": "Context · the desk"
     },
     "cards": [],
     "keyPoints": [
@@ -1773,9 +1774,10 @@ window.SLIDES = [
     "type": "concept",
     "subtitle": "Like a bookmark: what the AI already read can be reused, so it is faster. But it still takes space on the desk.",
     "visual": {
-      "opener": "sdlc-loop",
-      "image": "assets/workshop-4/prompt-cache.svg",
-      "imageAlt": "An earlier request and a later request share an exact prefix. A valid cache reuses that computation; the new exchange is processed. Cached tokens still occupy context space."
+      "opener": "showcase",
+      "image": "assets/workshop-4/caching-bookmark.svg",
+      "imageAlt": "The bookmark: reuse what was read",
+      "imageLink": "Caching · the bookmark"
     },
     "cards": [],
     "keyPoints": [
@@ -1816,9 +1818,10 @@ window.SLIDES = [
     "type": "concept",
     "subtitle": "When the desk is full, the conversation is summarised. A summary loses details: so check that the important rules are still there.",
     "visual": {
-      "opener": "sdlc-loop",
-      "image": "assets/workshop-4/context-compaction.svg",
-      "imageAlt": "Before compaction: instructions and detailed history. After: unchanged instructions, a shorter summary and room for new work. Check one acceptance criterion and the draft-only boundary against your notes."
+      "opener": "showcase",
+      "image": "assets/workshop-4/compaction-summary.svg",
+      "imageAlt": "Summarise to make room, then check",
+      "imageLink": "Compaction · summarise"
     },
     "cards": [],
     "keyPoints": [
@@ -1876,7 +1879,26 @@ window.SLIDES = [
       "Check your Claude Code login."
     ],
     "notes": "Say the return time: 13:00. Participants who fell behind can catch up with git switch step-1 after lunch.",
-    "stateId": "26:Lunch"
+    "stateId": "26:Lunch",
+    "teach": {
+      "time": "60 min",
+      "gist": "Lunch. Back at 13:00.",
+      "script": [
+        {
+          "say": "Enjoy your lunch. Back at 13:00. Fell behind? After lunch: git switch step-1."
+        },
+        {
+          "do": "Start the countdown."
+        }
+      ],
+      "do": [
+        "Start the countdown."
+      ],
+      "done": [
+        "Everyone knows the return time."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -2022,7 +2044,7 @@ window.SLIDES = [
       "The folder starts with a dot. Use ls -a to see it.",
       "main has no agents yet. They come in step-2."
     ],
-    "notes": "Show the folder on step-2: git switch step-2, then ls -a and ls .claude/agents. main is Step 0, so it has no .claude/agents yet. Claude Code looks for project subagents in .claude/agents/, walking up from the working folder; the SDK reads the same folder with settingSources: ['user', 'project']. A .agents/ folder is not loaded as subagents by Claude Code or the SDK. AGENTS.md is the cross-tool note for coding agents, not a subagent definition. In the assignment the new agents live in 03-mcp/claude-project/.claude/agents/.",
+    "notes": "Show the folder on step-2 (git switch step-2, then open .claude/agents). On main the folder does not exist yet. Claude Code and the package both read this folder. A folder called .agents or a file AGENTS.md is something else: those are not loaded as specialists.",
     "stateId": "29:Where do the agents live?",
     "teach": {
       "time": "2 min",
@@ -2088,7 +2110,7 @@ window.SLIDES = [
       "The description decides when Claude uses the agent.",
       "The SDK reads the same folder with settingSources: ['user', 'project']."
     ],
-    "notes": "Why this folder: Claude Code and the Agent SDK look for project subagents in .claude/agents/, so you add an agent by adding a file. No registration code. Claude uses each subagent description to decide when to delegate (code.claude.com/docs/en/sub-agents). Show risk-agent.md on step-2: the description line is the trigger. Claude Code also watches the folder: edit the file and the next delegation uses the new version. In our lessons the orchestrator prompt also names the agents, so the order stays fixed. Check it in the trace: [tool_use] Agent → risk-agent.",
+    "notes": "You add a specialist by adding a file: no extra code. Claude reads the description of each specialist to decide who gets the task. Show risk-agent.md on step-2: the description line is the job ad.",
     "stateId": "30:Why this folder? Claude finds the agents.",
     "teach": {
       "time": "2 min",
@@ -2149,7 +2171,7 @@ window.SLIDES = [
       "customer-reply-agent writes the reply draft.",
       "The orchestrator delegates in order and saves a file."
     ],
-    "notes": "Explain Step 2. The final names are risk-agent and customer-reply-agent. The orchestrator delegates first to Agent → risk-agent, then Agent → customer-reply-agent. In n8n terms, Description maps to frontmatter description and System Message maps to the prompt body.",
+    "notes": "Step 2 in the package (SOLO.md, Step 2): two specialist files, a loader and the team lead. The team lead calls risk-agent first, then customer-reply-agent. Yesterday's n8n Description is now the description line at the top of each specialist file.",
     "stateId": "31:Step 2 · Risk analysis and customer reply agents",
     "teach": {
       "time": "2 min",
@@ -2196,7 +2218,7 @@ window.SLIDES = [
     "keyPoints": [
       "Show the dry run first. Then show a live run or the sample trace."
     ],
-    "notes": "Run npm run lesson2 -- MSG-05 --dry-run, then run it live (Claude Code login, or --backend sdk with a key). The dry run prints the Claude Code equivalent and setup only; it does not call agents or produce a model result. Show the completed trace or docs/sample-trace.md, explicitly labelled as an illustrative sample. Point out [tool_use] Agent → risk-agent before [tool_use] Agent → customer-reply-agent, then the draft written for human review. The description test shows why n8n Description maps to the agent frontmatter description.",
+    "notes": "Show it on step-2. The dry run only shows the setup: no specialists are called. The real run (Claude Code login) shows Agent → risk-agent, then Agent → customer-reply-agent, and writes the draft in 02-subagents/claude-project/output/MSG-05.md. No real run possible? Show docs/sample-trace.md and say it is a sample.",
     "stateId": "32:Demo · Step 2: trace the two agents",
     "tagline": "Risk first, then the writer. The draft waits for a person.",
     "teach": {
@@ -2507,7 +2529,7 @@ window.SLIDES = [
     "keyPoints": [
       "The agents get facts from tools. They cannot change data yet."
     ],
-    "notes": "Explain Step 3. The customer CSV is read by the customers MCP server and get_customer is assigned to customer-context-agent. transactions.xlsx is read by the transactions MCP server; get_transaction and list_transactions are read-only lookups assigned to risk-agent. Both servers use stdio and return external data. The reply remains a draft for human review before sending.",
+    "notes": "Two lookup desks: customers (reads docs/customer_context.csv, tool get_customer, used by customer-context-agent) and transactions (reads docs/transactions.xlsx, tools get_transaction and list_transactions, used by risk-agent). Both can only look up. The package starts the desks by itself. The reply stays a draft for a person.",
     "stateId": "37:Step 3 · Read-only customer and transaction MCP tools",
     "teach": {
       "time": "2 min",
@@ -2556,7 +2578,7 @@ window.SLIDES = [
       "risk-agent uses get_transaction and list_transactions.",
       "Review the customer-reply-agent draft before sending."
     ],
-    "notes": "Run (cd 03-mcp/transaction-mcp && npm ci), then npm run smoke:mcp; it verifies the servers without a model. Demo a live lesson3 customer and transaction lookup, point to both MCP tool traces and the External data: line. Keep the generated reply as a draft for human review. Do not treat dry-run output as model evidence.",
+    "notes": "Show it on step-3. npm run smoke:mcp tests both desks without the AI. Then a real run of MSG-08: point at both lookups and at the External data section in the draft. The draft waits for a person.",
     "stateId": "38:Demo · Step 3: read-only customer and transaction lookups",
     "teach": {
       "time": "5 min",
@@ -2969,7 +2991,27 @@ window.SLIDES = [
       "Fell behind? Switch to step-4."
     ],
     "notes": "Say the return time: 15:00. The assignment starts from step-4. Participants who fell behind switch to step-4 now.",
-    "stateId": "45:Short break"
+    "stateId": "45:Short break",
+    "teach": {
+      "time": "15 min",
+      "gist": "Break. Behind? Switch to step-4 now.",
+      "script": [
+        {
+          "say": "Coffee break, back at 15:00. Fell behind? Switch now: git switch step-4. Then you start the assignment with everyone."
+        },
+        {
+          "do": "Start the countdown."
+        }
+      ],
+      "do": [
+        "Start the countdown.",
+        "Help people switch to step-4."
+      ],
+      "done": [
+        "Everyone is on step-4 after the break."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -3050,7 +3092,7 @@ window.SLIDES = [
     "keyPoints": [
       "A human or a rule decides before a tool changes anything."
     ],
-    "notes": "A hook is code that runs at a fixed moment: before a tool (PreToolUse) or after (PostToolUse). In the assignment the before-hook allows reads, lets small updates through, and asks a person for large updates, adds and deletes. The after-hook writes a line to the audit log. It works in both Claude Code (.claude/settings.json) and the SDK.",
+    "notes": "A hook is code that runs at a fixed moment: just before a tool is used, or just after. In the assignment the 'before' hook lets lookups and small changes through, and asks a person for big changes, adding and deleting. The 'after' hook writes every change to a log (audit.jsonl). It works in Claude Code and in the package.",
     "stateId": "47:Control: hooks and approval",
     "teach": {
       "time": "3 min",
@@ -3427,7 +3469,7 @@ window.SLIDES = [
       "hook:demo small: Decision allow. No question.",
       "hook:demo large: Decision ask. The reason shows amount and limit."
     ],
-    "notes": "Show this screen after the participants run npm run check:assignment and npm run hook:demo -- small and -- large. These checks run offline and need no key. If check:assignment fails, read the hints: each hint names a file. The fixtures do not call the tool and do not change data.",
+    "notes": "Show this after participants run npm run check:assignment and npm run hook:demo -- small and -- large. These run without the AI and need no key. check:assignment fails? Read the hint: it names the file.",
     "stateId": "54:What good looks like: core",
     "teach": {
       "time": "1 min",
@@ -3527,7 +3569,7 @@ window.SLIDES = [
       "image": "assets/workshop-4/11-good-live.png",
       "imageLink": "Terminal: MSG-07 denied write, MSG-08 fraud hold, MSG-09 AskUserQuestion"
     },
-    "subtitle": "Stretch: three tickets, three safe stops.",
+    "subtitle": "On the finished version: three tickets, and each one stops safely.",
     "cards": [
       {
         "title": "MSG-07 · answer N",
@@ -3546,7 +3588,24 @@ window.SLIDES = [
       "Stretch: three tickets, three safe stops."
     ],
     "notes": "These are real runs on the solution branch. The model words can differ, but the stops must be the same. Check participant-output/audit.jsonl: each applied write and each saved draft has one line. A denied write adds no line. After MSG-07 with y, a draft is in participant-output/drafts/MSG-07.md and starts with DRAFT. Run npm run reset:mcp to start again.",
-    "stateId": "56:What good looks like: stretch"
+    "stateId": "56:What good looks like: stretch",
+    "teach": {
+      "time": "2 min",
+      "gist": "Stretch goal: three tickets, three safe stops.",
+      "script": [
+        {
+          "do": "Point at the three cards.",
+          "say": "This is the stretch goal. Three tickets, and each one stops safely: a 'no' stops it, fraud stops it, and a doubt goes to a person."
+        }
+      ],
+      "do": [
+        "Show the goal."
+      ],
+      "done": [
+        "Fast squads know the end picture."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -3578,7 +3637,23 @@ window.SLIDES = [
       "Only the orchestrator has AskUserQuestion."
     ],
     "notes": "Stretch only. drafts-server.js gives customer-reply-agent one tool, save_reply_draft. The draft starts with \"DRAFT - a person reviews this before sending\". fraud-check-agent reads the customer and the transaction and returns fraud_risk and hold; with hold or high the workflow writes nothing and reports ESCALATE. resolve.mjs runs the fixed order: look up, fraud check, propose, hook, draft. AskUserQuestion is for the orchestrator only; subagents cannot use it. With no terminal, the question becomes ESCALATE.",
-    "stateId": "57:Where you change what · stretch"
+    "stateId": "57:Where you change what · stretch",
+    "teach": {
+      "time": "2 min",
+      "gist": "Stretch: three more files.",
+      "script": [
+        {
+          "say": "Only for fast squads: three more files. A draft tool, a fraud check, and a fixed order with a question to a person."
+        }
+      ],
+      "do": [
+        "Name the three files."
+      ],
+      "done": [
+        "Fast squads know where to start."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -3616,7 +3691,29 @@ window.SLIDES = [
     ],
     "visual": {},
     "notes": "Optional. Check before class that resolve works on your branch: on solution the npm run resolve script exists; on step-4 the participants add it.",
-    "stateId": "58:Assignment stretch: drafts, fraud check, a question."
+    "stateId": "58:Assignment stretch: drafts, fraud check, a question.",
+    "teach": {
+      "time": "open",
+      "gist": "Stretch hands-on, only after core passes.",
+      "script": [
+        {
+          "say": "Core passed? Then the stretch. Otherwise: at home."
+        },
+        {
+          "do": "Point at step 4.",
+          "say": "Test with MSG-07 and answer N: the barrier says no and the agent stops."
+        }
+      ],
+      "do": [
+        "Stretch steps."
+      ],
+      "done": [
+        "A 'no' stops the run."
+      ],
+      "watch": [
+        "Test npm run resolve before class: it exists on the solution branch."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -3749,7 +3846,7 @@ window.SLIDES = [
       "The CLI command uses Read, Edit, and Glob.",
       "The permission mode accepts edits within that scope."
     ],
-    "notes": "Run the exact Step 5 demo commands from SOLO.md. Point out that the dry run is not model evidence and then show the Claude Code equivalent command.",
+    "notes": "Run the commands from SOLO.md, Step 5. The dry run does not call the AI. Then show the same in Claude Code with claude -p.",
     "stateId": "61:Demo · Step 5: run the starter",
     "teach": {
       "time": "3 min",
@@ -3810,7 +3907,23 @@ window.SLIDES = [
       "Explain the tool-use and result messages."
     ],
     "notes": "Give participants 15–20 minutes. Keep the API key optional: without a model call they can use the dry run; participants with a Claude Code login can use the equivalent CLI command.",
-    "stateId": "62:Your turn · build your own agent"
+    "stateId": "62:Your turn · build your own agent",
+    "teach": {
+      "time": "at home",
+      "gist": "Homework: run the starter, find the question, tools and result.",
+      "script": [
+        {
+          "say": "At home: go to the starter, do the dress rehearsal, and find three things: the question, the tools, and where the result comes back."
+        }
+      ],
+      "do": [
+        "Explain the homework steps."
+      ],
+      "done": [
+        "Everyone knows what to do at home."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -3822,7 +3935,7 @@ window.SLIDES = [
       "image": "assets/workshop-4/see-step5.png",
       "imageLink": "Terminal: the Step 5 starter prints the Claude Code command"
     },
-    "subtitle": "Compare your terminal with this screen.",
+    "subtitle": "After the dress rehearsal of your own agent.",
     "keyPoints": [
       "Claude Code equivalent: The prompt, the allowed tools and the permission mode.",
       "Your change: Change the prompt or the tools. Run the dry run again and compare."
@@ -3838,7 +3951,23 @@ window.SLIDES = [
       }
     ],
     "notes": "The starter has three tools: Read, Edit and Glob. acceptEdits lets the agent edit files without a question. Use it only in a test folder.",
-    "stateId": "63:What you see · Step 5"
+    "stateId": "63:What you see · Step 5",
+    "teach": {
+      "time": "1 min",
+      "gist": "Compare: the Claude Code command; change and compare.",
+      "script": [
+        {
+          "say": "This is what you should see. Then change the question or the tools, and compare."
+        }
+      ],
+      "do": [
+        "Compare."
+      ],
+      "done": [
+        "Everyone knows how to experiment."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -3860,7 +3989,7 @@ window.SLIDES = [
     "keyPoints": [
       "Optional. A skill is a recipe that Claude loads when it fits. No step uses it."
     ],
-    "notes": "NOT in the exercise: neither repo has .claude/skills or the skills option. Concept only. Source: docs.claude.com/en/docs/agent-sdk/skills ('Extend agents with skills'): skills are SKILL.md files, loaded via settingSources, model-invoked, scoped with the skills option; no programmatic API like agents. No live step. Visual: concepts/visuals/07-skills.png (light: visuals/light/07-skills.png).",
+    "notes": "Not in today's exercise: concept only. A skill is a folder with a SKILL.md file. Claude reads its description and uses it when it fits, just like the job ad of a specialist.",
     "stateId": "64:Skills",
     "teach": {
       "time": "2 min",
@@ -3887,7 +4016,7 @@ window.SLIDES = [
   {
     "lessonId": "workshop-4",
     "title": "Close: a person stays in charge",
-    "kicker": "Done when · bridge to Workshop 5",
+    "kicker": "Close · Day 4",
     "type": "recap",
     "layout": "recap",
     "visual": {
@@ -3897,39 +4026,25 @@ window.SLIDES = [
     },
     "items": [
       {
-        "label": "Structured output",
-        "caption": "A JSON schema. Code routes."
+        "label": "The form",
+        "caption": "The AI fills it in. The code picks the tray."
       },
       {
-        "label": "Least privilege",
-        "caption": "Only transaction-agent writes."
+        "label": "Only the keys it needs",
+        "caption": "Only one agent may change data."
       },
       {
-        "label": "Hooks + a person",
-        "caption": "Large writes ask. A deny is final."
+        "label": "The barrier + a person",
+        "caption": "Big changes ask. A 'no' is final."
       },
       {
         "label": "Next: Workshop 5",
-        "caption": "Build your own agent."
+        "caption": "We build on this agent team."
       }
     ],
     "notes": "Recap round: everyone shows one result in one minute (a trace, a draft, the check output, or the chat). Go back to the goals on the board from slide 2. Ask: what was easier in n8n, what in code? Where must a person still decide? Extra for fast people: chat in, chat out: npm run chat -- --lesson 3.",
     "stateId": "65:Close: keep a human in the loop.",
     "subtitle": "One agent, a team, lookup desks and a barrier. And at the end: always a person.",
-    "cards": [
-      {
-        "title": "You built",
-        "body": "An agent team in code, with lookup desks and a barrier."
-      },
-      {
-        "title": "Back to your goal",
-        "body": "Look at the goal you wrote down this morning. Did you get there?"
-      },
-      {
-        "title": "Next time",
-        "body": "Workshop 5 builds on this agent loop."
-      }
-    ],
     "teach": {
       "time": "10 min",
       "gist": "Close: one result each, back to this morning's goals, bridge to Workshop 5.",
@@ -3938,7 +4053,7 @@ window.SLIDES = [
           "say": "We started this morning with a sorting machine in n8n blocks. Now you have a team of agents in code. And at the end: always a person."
         },
         {
-          "do": "Point at the goals on the board.",
+          "do": "Point at the goals on the board from slide 2.",
           "say": "Look at the goal you wrote down this morning. Who got there?"
         },
         {
