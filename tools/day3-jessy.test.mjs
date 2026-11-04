@@ -104,6 +104,6 @@ test('Deck and presenter load the same Day 3 source on the current Day 1 and 2 s
   assert.ok(deck.includes('app.js?v=129'));
   assert.ok(presenter.includes('styles.css?v=129'));
   assert.ok(presenter.includes('sessions.js?v=19'));
-  assert.ok(presenter.includes('presenter.js?v=104'));
+  assert.ok(presenter.includes('presenter.js?v=106'));
   assert.ok(presenter.includes('window.DECK_PAGE = "day3-jessy.html"'));
 });

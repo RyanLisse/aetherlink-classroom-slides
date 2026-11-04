@@ -48,7 +48,7 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(html,/id="timer-btn"/);
  assert.match(presenter,/styles\.css\?v=129/);
  assert.match(presenter,/timers\.js\?v=92/);
- assert.match(presenter,/presenter\.js\?v=96/);
+ assert.match(presenter,/presenter\.js\?v=106/);
  assert.match(read('day4-maarten-n8n-to-claude.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  assert.match(read('day4-maarten-n8n-to-claude-presenter.html'),/day4-maarten-n8n-to-claude-slides\.js\?v=4/);
  const w4=read('workshop4.html'), w4p=read('workshop4-presenter.html');
@@ -58,7 +58,7 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(w4,/id="timer-btn"/);
  assert.match(w4,/workshop4-slides\.js\?v=21/);
  assert.match(w4p,/workshop4-slides\.js\?v=21/);
- assert.match(w4p,/presenter\.js\?v=105/);
+ assert.match(w4p,/presenter\.js\?v=106/);
 });
 
 test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{

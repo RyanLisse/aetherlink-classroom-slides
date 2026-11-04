@@ -188,7 +188,7 @@ function renderSlide(index) {
   $('ptype-wrap').dataset.ptype = type;
   $('p-type-label').textContent = TYPE_LABEL[type] || 'Context';
   $('p-kicker-text').textContent = s.kicker || '';
-  $('p-progress').textContent = dayCount(current, 'index.html').join(' / ');
+  $('p-progress').textContent = dayCount(current, DECK_ID).join(' / ');
   $('p-hidden').hidden = !isHidden(current);
   $('p-title').textContent = s.title;
   const keys = s.keyPoints || [];

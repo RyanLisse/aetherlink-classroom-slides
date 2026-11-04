@@ -47,3 +47,9 @@ test('Hidden and shown preferences are separated by deck and shared with its pre
  for(const file of ['app.js','presenter.js']){const source=read(file);assert.ok(source.includes("const HIDDEN_KEY = 'als:hidden:' + DECK_ID"));assert.ok(source.includes("const SHOWN_KEY = 'als:shown:' + DECK_ID"));}
  const presenter=read('presenter.js');assert.ok(presenter.includes('list(SHOWN_KEY)'));assert.ok(presenter.includes('e.key === SHOWN_KEY'));
 });
+test('Presenter counts slides per day of its own deck',()=>{
+ const src=read('presenter.js');const fn=src.slice(src.indexOf('function dayCount'),src.indexOf('const DECK_ID ='));const call=src.match(/dayCount\(current, ([^)]+)\)/)[1];
+ const count=(deck,slidesFile,i)=>{const ctx={window:{DECK_PAGE:deck,CLASSROOM_SESSIONS:sessions}};vm.runInNewContext(read(slidesFile),ctx);ctx.window.CLASSROOM_SESSIONS=sessions;return vm.runInNewContext(`const slides=window.SLIDES;${fn}const DECK_ID=window.DECK_PAGE||'index.html';const current=${i};dayCount(current, ${call}).join(' / ')`,ctx)};
+ assert.equal(count('workshop3.html','workshop3-slides.js',15),'16 / 47');
+ assert.equal(count('index.html','slides.js',60),'61 / 82');
+});
