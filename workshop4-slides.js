@@ -847,72 +847,149 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Get the workshop package.",
+    "title": "Your turn · Step 0",
     "kicker": "SOLO 0 · Your turn",
     "type": "practice",
     "layout": "exercise",
     "timer": 10,
     "visual": {
-      "bot": "wave",
-      "place": "left",
-      "oneCol": true,
-      "cmdCards": [
-        1
-      ]
+      "bot": "point",
+      "place": "slot"
     },
-    "subtitle": "Install the repo. Then do a dry run.",
-    "cards": [
+    "subtitle": "The same steps I just showed. Every command has a copy button: you don't type anything yourself.",
+    "cards": [],
+    "steps": [
       {
-        "title": "Level",
-        "body": "SOLO 0"
+        "text": "Open a terminal and go to your Documents folder",
+        "prompt": "cd ~/Documents",
+        "after": "Windows: PowerShell. Mac: Terminal. Other setup? See docs/SETUP.md in the package."
       },
       {
-        "title": "Workshop repo",
-        "body": "git clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git\ncd aetherlink-day5-n8n-to-agent\nnpm ci"
+        "text": "Download the package",
+        "prompt": "git clone https://github.com/RyanLisse/aetherlink-day5-n8n-to-agent.git",
+        "after": "You now have your own copy of the package on your laptop."
+      },
+      {
+        "text": "Go into the folder and install the parts",
+        "prompt": "cd aetherlink-day5-n8n-to-agent\nnpm ci",
+        "after": "Takes about a minute. Warnings are fine, errors are not."
+      },
+      {
+        "text": "Health check and tests",
+        "prompt": "npm run doctor\nnpm run verify",
+        "after": "Look for: meets minimum, and fail 0."
+      },
+      {
+        "text": "Dress rehearsal",
+        "prompt": "npm run lesson1 -- MSG-01 --dry-run",
+        "after": "The last line says: dry run — no model call. That is correct: the AI does nothing yet."
       }
     ],
-    "steps": [
-      "Choose your platform in docs/SETUP.md.",
-      "Run npm run doctor. Then run npm run verify.",
-      "Run npm run lesson1 -- MSG-01 --dry-run. Find the backend: line.",
-      "Run npm run chat -- --dry-run."
-    ],
-    "expected": "verify shows fail 0. The dry run ends with “dry run — no model call”.",
+    "expected": "verify shows fail 0, and the dry run ends with “dry run — no model call”.",
     "keyPoints": [
       "Use docs/SETUP.md for Windows, WSL, Linux/macOS, or Docker.",
       "main is Step 0; step-1 through step-4 contain the finished steps.",
       "With ANTHROPIC_API_KEY in your shell, the runner picks sdk. Use --backend to choose."
     ],
-    "notes": "Participants follow docs/SETUP.md, then the exact Step 0 commands in SOLO.md. Confirm npm ci, doctor, verify, and both dry runs finish without ANTHROPIC_API_KEY. The output includes backend: and Claude Code equivalent:. claude-code is the default, but if ANTHROPIC_API_KEY is set in your shell the runner picks sdk; force one with --backend.",
-    "stateId": "15:Get the workshop package."
+    "notes": "Participants do the five steps; you walk around. npm run verify also runs the chat dry run, so no separate step for that. Someone's run says backend: sdk? Then an ANTHROPIC_API_KEY is set on their laptop: add --backend claude-code. Use the break after the next slide to help people who don't have fail 0 yet.",
+    "stateId": "15:Get the workshop package.",
+    "teach": {
+      "time": "10 min",
+      "gist": "Participants do Step 0 themselves: download, install, health check, tests, dress rehearsal.",
+      "script": [
+        {
+          "say": "Now you. The same steps I just showed. Every command has a copy button: you don't type anything yourself."
+        },
+        {
+          "do": "Point at steps 1 and 2.",
+          "say": "First go to your Documents folder, then download the package. That makes your own copy."
+        },
+        {
+          "do": "Point at step 3.",
+          "say": "Then into the folder, and install the parts. That takes about a minute."
+        },
+        {
+          "do": "Point at steps 4 and 5.",
+          "say": "Then the health check, the tests and the dress rehearsal. Look at the Done when line: that's what your screen should say."
+        },
+        {
+          "do": "Start the 10-minute timer and walk around."
+        }
+      ],
+      "do": [
+        "Copy each command, run it.",
+        "Check: meets minimum, fail 0, dry run."
+      ],
+      "done": [
+        "verify shows fail 0.",
+        "The dry run ends with 'dry run — no model call'."
+      ],
+      "watch": [
+        "'git' not found → Git is not installed: see docs/SETUP.md.",
+        "Error at npm ci → check Node version: node --version must be 22 or higher.",
+        "Ran a command outside the folder? Then npm can't find the buttons: cd aetherlink-day5-n8n-to-agent first.",
+        "Backend says sdk → add --backend claude-code."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
-    "title": "What you see · Step 0",
-    "kicker": "What you see · Expected output",
+    "title": "Check: does your screen look like this?",
+    "kicker": "What you see · Step 0",
     "type": "concept",
     "visual": {
       "opener": "showcase",
       "image": "assets/workshop-4/see-step0.png",
       "imageLink": "Terminal: npm run verify passes, then the lesson 1 dry run"
     },
-    "subtitle": "Compare your terminal with this screen.",
+    "subtitle": "Compare your terminal with this screenshot. Two things to look for.",
     "keyPoints": [
       "npm run verify: pass 9, fail 0. Your setup is correct.",
       "Dry run: The last line says: dry run — no model call. That is correct."
     ],
     "cards": [
       {
-        "title": "npm run verify",
-        "body": "pass 9, fail 0. Your setup is correct."
+        "title": "1 · After npm run verify",
+        "body": "Look for: fail 0. Your setup is correct."
       },
       {
-        "title": "Dry run",
-        "body": "The last line says: dry run — no model call. That is correct."
+        "title": "2 · After the dry run",
+        "body": "Last line: dry run — no model call. That is correct: the AI did nothing yet."
       }
     ],
     "notes": "Show this screen after Step 0. The first line of the dry run shows the backend: claude-code or sdk. A dry run prints the command but does not call the model, so it is not model evidence.",
-    "stateId": "16:What you see · Step 0"
+    "stateId": "16:What you see · Step 0",
+    "teach": {
+      "time": "2 min",
+      "gist": "Compare screens: fail 0, and the dry-run last line.",
+      "script": [
+        {
+          "say": "Compare your screen with this one. Two things."
+        },
+        {
+          "do": "Point at card 1.",
+          "say": "After verify: fail 0. Then your setup is correct."
+        },
+        {
+          "do": "Point at card 2.",
+          "say": "After the dry run, the last line says: dry run, no model call. That is right: the AI did nothing yet."
+        },
+        {
+          "ask": "Hands up: who has fail 0?",
+          "say": "(Not everyone? Help them in the break.)"
+        }
+      ],
+      "do": [
+        "Compare with the screenshot.",
+        "Count hands: who has fail 0?"
+      ],
+      "done": [
+        "Most of the room has fail 0. The rest get help in the break."
+      ],
+      "watch": [
+        "The dry run says nothing about how good the agent is. It only checks the setup."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -924,7 +1001,7 @@ window.SLIDES = [
       "bot": "sleepy",
       "place": "beside"
     },
-    "subtitle": "Return in 15 minutes.",
+    "subtitle": "Back at 11:15. Not at fail 0 yet? Stay, we'll fix it together.",
     "cards": [
       {
         "title": "Back at 11:15",
@@ -937,12 +1014,32 @@ window.SLIDES = [
       "Check that everyone passed Step 0."
     ],
     "notes": "Say the return time out loud: 11:15. Use the break to help people who did not pass npm run verify in Step 0.",
-    "stateId": "17:Short break"
+    "stateId": "17:Short break",
+    "teach": {
+      "time": "15 min",
+      "gist": "Break. Help anyone without fail 0.",
+      "script": [
+        {
+          "say": "Fifteen minutes break. Back at 11:15. Not at fail 0 yet? Stay for a moment, we'll fix it together."
+        },
+        {
+          "do": "Start the countdown."
+        }
+      ],
+      "do": [
+        "Start the countdown.",
+        "Help people without fail 0."
+      ],
+      "done": [
+        "Everyone at fail 0 before Step 1."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
-    "title": "System prompt",
-    "kicker": "Concept · System prompt",
+    "title": "CLAUDE.md: the agent's work instructions",
+    "kicker": "Concept · work instructions",
     "type": "concept",
     "visual": {
       "mdfile": 0,
@@ -960,57 +1057,91 @@ window.SLIDES = [
         ]
       ]
     },
-    "subtitle": "The System Message is now a file next to the code.",
+    "subtitle": "Yesterday the instructions were inside the n8n block (System Message). Today they are a file next to the code.",
     "cards": [
       {
         "title": "CLAUDE.md",
         "body": "Purpose\nRules\nPriority definitions"
+      },
+      {
+        "title": "Purpose · who you are",
+        "body": "A support assistant at a payment company."
+      },
+      {
+        "title": "Rules · what you may not do",
+        "body": "Invent facts. Search the web for customers."
+      },
+      {
+        "title": "Priority definitions · when is it what",
+        "body": "When a message is high, medium or low. An angry tone alone never makes it high."
       }
     ],
     "keyPoints": [
       "The system message now lives in a file next to the code."
     ],
-    "notes": "n8n text verbatim from day5 n8n/support-triage.json (AI Agent options.systemMessage). SDK: 01-single-agent/options.mjs:8-11 (cwd, settingSources, systemPrompt preset); 01-single-agent/claude-project/CLAUDE.md (Priority definitions l.13-16, Required output l.18-20). day5: src/prompts.ts COORDINATOR_SYSTEM + settingSources: [] in src/agent.ts. Live: Step 1 (tone trap). Visual: concepts/visuals/02-systeemprompt.png (light: visuals/light/02-systeemprompt.png). Detail: CLAUDE.md: Purpose · Rules · Priority definitions · settingSources: ['user', 'project'] loads user and project settings · systemPrompt: preset 'claude_code' · Alternative: systemPrompt as a string (day5)",
-    "stateId": "18:System prompt"
+    "notes": "Like the work instructions of a new colleague on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions, Required output. The last line of Priority definitions is the tone trap: judge impact, not tone. In Step 1 they will cut that section out and see what happens.",
+    "stateId": "18:System prompt",
+    "teach": {
+      "time": "3 min",
+      "gist": "CLAUDE.md = the work instructions: who you are, what you may not do, when is it high/medium/low.",
+      "script": [
+        {
+          "say": "Remember the System Message in n8n? Today that is a file: CLAUDE.md. Think of the work instructions a new colleague gets on day one."
+        },
+        {
+          "do": "Point at the three cards on the right.",
+          "say": "Three parts. Who you are: a support assistant at a payment company. What you may not do: invent facts. And when a message is high, medium or low."
+        },
+        {
+          "do": "Point at the last line of Priority definitions.",
+          "say": "Look at this line: an angry tone alone never makes it high. Remember it: in Step 1 we test it."
+        },
+        {
+          "ask": "Why would you write that down?",
+          "say": "(Answer: a calm customer can have a big problem, and an angry one a small problem. The AI must look at the problem, not the tone.)"
+        }
+      ],
+      "do": [
+        "Explain: CLAUDE.md = work instructions.",
+        "Name the three parts."
+      ],
+      "done": [
+        "Everyone can say what is in CLAUDE.md."
+      ],
+      "watch": [
+        "People think CLAUDE.md is where Claude gets its knowledge. No: it says how to behave, not what it knows."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
-    "title": "Structured output: parser to JSON schema",
-    "kicker": "Concept · structured output",
+    "title": "The form, now in code",
+    "kicker": "Concept · the form",
     "type": "concept",
     "visual": {
-      "stagger": "pop",
-      "stepThrough": true,
-      "cardArt": {
-        "3": "route"
-      },
-      "bot": "think",
-      "place": "left",
+      "bot": "point",
+      "place": "beside",
       "highlight": [
         {
           "in": "subtitle",
-          "text": "The Switch stays code",
+          "text": "The trays (Switch) stay plain code",
           "tone": "orange"
         }
       ]
     },
-    "subtitle": "The parser becomes a JSON schema. The Switch stays code.",
+    "subtitle": "Yesterday's Priority Parser becomes a JSON schema. The trays (Switch) stay plain code.",
     "cards": [
       {
-        "title": "n8n",
-        "body": "Priority Parser"
+        "title": "Yesterday · Priority Parser",
+        "body": "The form in the n8n block."
       },
       {
-        "title": "Agent SDK",
-        "body": "outputFormat: json_schema"
+        "title": "Today · json_schema",
+        "body": "The same form, as a file: priority-schema.mjs. The AI must fill it in."
       },
       {
-        "title": "Claude Code",
-        "body": "claude -p --json-schema"
-      },
-      {
-        "title": "Route",
-        "body": "lib/switch.mjs"
+        "title": "The trays · lib/switch.mjs",
+        "body": "Reads the priority and picks the route. Plain code, no AI."
       }
     ],
     "keyPoints": [
@@ -1018,8 +1149,37 @@ window.SLIDES = [
       "outputFormat uses json_schema.",
       "lib/switch.mjs routes the parsed priority."
     ],
-    "notes": "Map the Structured Output Parser / Priority Parser to outputFormat with type json_schema and to Claude Code's --json-schema flag. The runner prints structured output, then lib/switch.mjs maps low, medium, and high to a fixed action and team.",
-    "stateId": "19:Structured output: parser to JSON schema"
+    "notes": "The Structured Output Parser becomes outputFormat with type json_schema (file 01-single-agent/priority-schema.mjs). In Claude Code in the terminal the same is the --json-schema flag. Then lib/switch.mjs maps low, medium and high to a fixed action and team. The AI gives the label; the code picks the route.",
+    "stateId": "19:Structured output: parser to JSON schema",
+    "teach": {
+      "time": "2 min",
+      "gist": "Parser becomes json_schema (the form as a file). The Switch stays code: AI gives the label, code picks the route.",
+      "script": [
+        {
+          "say": "Remember the form from yesterday, the Priority Parser? Today it is a file: the JSON schema."
+        },
+        {
+          "do": "Point at the middle card.",
+          "say": "Same form, same fields. The AI has to fill it in, otherwise it is refused."
+        },
+        {
+          "do": "Point at the last card.",
+          "say": "And the trays stay plain code. No AI. The AI gives the label, the code picks the route."
+        },
+        {
+          "ask": "Why do we want the route in plain code, not in the AI?",
+          "say": "(Answer: then you always know exactly where a message goes. Same input, same route.)"
+        }
+      ],
+      "do": [
+        "Parser → json_schema.",
+        "Switch stays code."
+      ],
+      "done": [
+        "Everyone can say: AI gives the label, code picks the route."
+      ],
+      "watch": []
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -1175,7 +1335,7 @@ window.SLIDES = [
         "warn": true
       }
     ],
-    "expected": "Done when you can point at the schema and the Switch, and say why only the first chat remembered red.",
+    "expected": "You can point at the schema and the Switch, and say why only the first chat remembered red.",
     "keyPoints": [
       "Do the dry run. Then compare chat with and without memory."
     ],
