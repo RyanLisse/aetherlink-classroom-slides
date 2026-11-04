@@ -11,75 +11,104 @@ window.SLIDES = [
       "place": "beside"
     },
     "subtitle": "Rebuild the behaviour you checked in n8n, now in code.",
-    "notes": "Bring one W3 ticket, observed output, failed case and human review decision. Today uses a separate package and new messages, not an import of the n8n workflow. Use a labelled reference if the required Day 3 specialist run was blocked to start.",
-    "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK"
+    "notes": "On screen while people arrive. Today we build yesterday's n8n support flow again, now in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages: we do not import the n8n flow. Did someone's Day 3 flow not work? No problem: they use the example results in the package.",
+    "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK",
+    "teach": {
+      "time": "2 min",
+      "gist": "Welcome: yesterday the sorting machine in n8n blocks, today the same machine in code.",
+      "script": [
+        {
+          "do": "Have this slide on screen while people come in."
+        },
+        {
+          "say": "Yesterday you built a sorting machine for customer messages in n8n, by connecting blocks. Today we build exactly the same machine, but in code."
+        },
+        {
+          "say": "Why code? Code you can test, save and limit: you decide what each agent may and may not do."
+        },
+        {
+          "ask": "Who still remembers what the last block of yesterday's flow was?",
+          "say": "(Answer: a person checks before anything goes to the customer. That stays today too.)"
+        }
+      ],
+      "do": [
+        "Welcome everyone.",
+        "Name the goal: same flow, now in code."
+      ],
+      "done": [
+        "Everyone knows today is yesterday's flow, now in code."
+      ],
+      "watch": [
+        "Day 3 did not work for someone? Reassure them: the package has example results, nobody is behind."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
+    "title": "Look back, look ahead: three questions",
+    "kicker": "W4 · RECAP · 3 ROUNDS",
     "type": "context",
-    "title": "What was most useful in the last session?",
-    "kicker": "W4 · RECAP",
     "visual": {
       "opener": "ask",
       "bot": "think",
       "place": "beside"
     },
-    "subtitle": "Share one thing you learned or used.",
-    "cards": [],
-    "keyPoints": [
-      "One useful takeaway per table.",
-      "Ask for a concrete example."
-    ],
-    "notes": "Time: 3 min.\n1. Give each table 1 minute to discuss.\n2. Ask each table to share one useful takeaway from the n8n session.\n3. Ask where they could use it.\n4. Write the main takeaways on the board.",
-    "stateId": "1:What was most useful in the last session?"
-  },
-  {
-    "lessonId": "workshop-4",
-    "type": "context",
-    "title": "What went wrong? What did you learn?",
-    "kicker": "W4 · W3 RECAP · LESSONS",
-    "visual": {
-      "bot": "point",
-      "place": "left",
-      "stepThrough": true
-    },
-    "subtitle": "Give one lesson per table.",
+    "subtitle": "Two minutes per round. One answer per table.",
+    "timer": 6,
     "cards": [
       {
-        "title": "Wrong",
-        "body": "What did the flow do that you did not expect?"
+        "title": "1 · Useful",
+        "body": "What did you learn yesterday that you can really use?"
       },
       {
-        "title": "Lesson",
-        "body": "What was hard to see or to test in n8n?"
+        "title": "2 · Wrong",
+        "body": "What did your flow do that you did not expect?"
+      },
+      {
+        "title": "3 · Your goal",
+        "body": "What do you want to be able to do at the end of today?"
       }
     ],
     "keyPoints": [
-      "One lesson per table.",
-      "Listen for things that were hard to test or to limit.",
-      "Connect the lessons to today: tests, tool lists and hooks."
+      "One answer per table, per round",
+      "Connect 'wrong' to today: test, tool list, hook",
+      "Keep the goals for the close"
     ],
-    "notes": "Time: 3 min.\n1. Ask each table to share one unexpected result and one lesson.\n2. Write the lessons on the board.\n3. Connect them to today: hard to test → npm run check; every tool allowed → a tools list per agent; no stop before a write → a hook.",
-    "stateId": "2:What went wrong? What did you learn?"
-  },
-  {
-    "lessonId": "workshop-4",
-    "type": "context",
-    "title": "What would success look like for you today?",
-    "kicker": "W4 · YOUR GOAL",
-    "visual": {
-      "opener": "ask",
-      "bot": "happy",
-      "place": "beside"
-    },
-    "subtitle": "Name one thing you want to be able to do after this workshop.",
-    "cards": [],
-    "keyPoints": [
-      "One concrete outcome per person.",
-      "Keep the outcomes for the close."
-    ],
-    "notes": "Time: 3 min.\n1. Give each person 1 minute to write their desired outcome.\n2. Collect one or two outcomes per table on the board.\n3. Connect them to the goal of today. Say what fits today and what does not.\n4. Return to the outcomes at the close.",
-    "stateId": "3:What would success look like for you today?"
+    "notes": "Time: 6 min, three rounds of 2 min. Write the answers on the board. Round 2: connect each problem to today. Hard to test → npm run check. Every agent could do everything → a tool list per agent. No stop before a change → a hook. Round 3: keep the goals on the board and come back to them at the close.",
+    "teach": {
+      "time": "6 min",
+      "gist": "Three short rounds: what was useful, what went wrong, what is your goal today.",
+      "script": [
+        {
+          "do": "Point at card 1. Start a 2-minute timer.",
+          "say": "Round one. What did you learn yesterday that you can really use? One answer per table."
+        },
+        {
+          "do": "Write the answers on the board. Point at card 2.",
+          "say": "Round two. What did your flow do that you did not expect?"
+        },
+        {
+          "do": "Connect each answer to today.",
+          "say": "Hard to test? Today you get one command that tests everything. Every agent could do everything? Today each agent gets its own list. No stop before a change? Today we build a brake: a person says yes first."
+        },
+        {
+          "do": "Point at card 3.",
+          "say": "Round three. What do you want to be able to do at the end of today? Write it down. We come back to it at the end."
+        }
+      ],
+      "do": [
+        "Three rounds, two minutes each.",
+        "Answers on the board."
+      ],
+      "done": [
+        "One answer per table for each round.",
+        "The goals are on the board for the close."
+      ],
+      "watch": [
+        "A table stays quiet? Ask one person directly: what surprised you yesterday?",
+        "Keep it short: the real work starts in 5 minutes."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
@@ -107,7 +136,41 @@ window.SLIDES = [
       "Switch: Three routes: low, medium, high."
     ],
     "notes": "Recap 1/4 (10:05). Show Maarten’s first flow: manual trigger, Ticket Input, Switch with three routes. Say: today the Switch becomes lib/switch.mjs.",
-    "stateId": "4:Yesterday’s flow · 1. Ticket in, Switch out"
+    "stateId": "4:Yesterday’s flow · 1. Ticket in, Switch out",
+    "teach": {
+      "time": "2 min",
+      "gist": "The Switch = the sorting clerk: the AI gives the label, the Switch picks the tray.",
+      "script": [
+        {
+          "do": "Point at Ticket Input.",
+          "say": "A customer message comes in. That is the ticket."
+        },
+        {
+          "do": "Point at Switch.",
+          "say": "Then the Switch. Think of the post room: a letter comes in and the clerk puts it in one of three trays. High, medium or low. The Switch is that clerk: fixed rules, no thinking."
+        },
+        {
+          "say": "The AI reads the message and says: this is high. The Switch then puts it in the right tray. So you always know exactly where a message goes."
+        },
+        {
+          "say": "Today this block becomes a file with code: lib/switch.mjs."
+        },
+        {
+          "ask": "Who decides the tray: the AI or the Switch?",
+          "say": "(Answer: the Switch. The AI only gives the label.)"
+        }
+      ],
+      "do": [
+        "Show the first n8n flow.",
+        "Explain: the AI gives the label, the Switch picks the tray."
+      ],
+      "done": [
+        "Everyone can say what the Switch does."
+      ],
+      "watch": [
+        "People mix up the AI and the Switch. Repeat: AI = label, Switch = tray."
+      ]
+    }
   },
   {
     "lessonId": "workshop-4",
