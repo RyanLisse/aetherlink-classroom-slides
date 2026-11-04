@@ -62,6 +62,8 @@ test('W3 core requires flat and nested subagent communication before completion'
   assert.equal(core.filter(s => s.type === 'pause').length, 3);
   const final = core.find(s => s.title.startsWith('Final build:'));
   assert.match(final.expected, /one-Agent run alone is incomplete/);
+  assert.ok(final.steps.some(step => /chat reply for each priority/.test(step)));
+  assert.match(final.expected, /Chat returns an unapproved draft for each valid priority/);
   assert.equal(final.visual.shot, 'assets/workshop-3/subagent-communication.svg');
   const flat = core.find(s => s.stateId === 'w3-build-zip-38');
   const nested = core.find(s => s.stateId === 'w3-build-zip-40');

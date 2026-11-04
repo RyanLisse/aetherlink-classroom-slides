@@ -1146,12 +1146,13 @@ window.SLIDES = [
       "shotAlt": "Expected flat and nested paths · prove your own runs"
     },
     "steps": [
-      "Show valid routing and the invalid-priority stop from 02-chat.",
+      "Show one chat reply for each priority: low, medium and high. Confirm each reply is a draft.",
+      "Show the invalid-priority stop from 02-chat. Confirm that no message was sent.",
       "Show the three tool calls and CUST-999 result or recorded STOP from 03-specialists.",
       "Show Reply → Risk → Reply in 04-nested, plus the disconnected-tool STOP.",
       "Review the final draft. Prepare safe exports and explain what information crossed each boundary."
     ],
-    "expected": "The baseline, flat delegation and nested consultation each have evidence or an explicit blocker. A one-Agent run alone is incomplete.",
+    "expected": "Chat returns an unapproved draft for each valid priority. The baseline, flat delegation and nested consultation each have evidence or an explicit blocker. A one-Agent run alone is incomplete.",
     "keyPoints": [
       "Baseline plus two communication paths",
       "Inspect calls, inputs and returns",
