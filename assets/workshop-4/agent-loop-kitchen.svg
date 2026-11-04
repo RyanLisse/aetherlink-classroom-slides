@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">The agent loop: the chef and the kitchen assistant</title>
+  <desc id="d">1. The AI thinks. 2. The AI asks for a tool. 3. The code checks if that is allowed. 4. The code does it and hands the result back. Then the AI thinks again, round after round. When it is done, a person checks the answer.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e9f0fc"/></marker>
+    <marker id="o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffb545"/></marker>
+  </defs>
+  <style>
+    .box{fill:#0c1928;stroke-width:4}
+    .ai{stroke:#9b7bff}.code{stroke:#69e2f2}
+    .num{font:800 30px 'Nunito','Segoe UI',sans-serif;fill:#02070d}
+    .h{font:800 34px 'Nunito','Segoe UI',sans-serif;fill:#e9f0fc}
+    .b{font:500 25px 'Nunito','Segoe UI',sans-serif;fill:#b9c7dc}
+    .who{font:800 22px 'Nunito','Segoe UI',sans-serif;letter-spacing:3px}
+    .mid{font:700 26px 'Nunito','Segoe UI',sans-serif;fill:#e9f0fc}
+    .out{font:800 26px 'Nunito','Segoe UI',sans-serif;fill:#ffb545}
+    .small{font:500 21px 'Nunito','Segoe UI',sans-serif;fill:#b9c7dc}
+    .line{stroke:#e9f0fc;stroke-width:4;fill:none}
+  </style>
+
+  <!-- 1 AI thinks -->
+  <rect class="box ai" x="40" y="70" width="470" height="200" rx="22"/>
+  <circle cx="90" cy="120" r="26" fill="#9b7bff"/><text class="num" x="90" y="131" text-anchor="middle">1</text>
+  <text class="who" x="132" y="112" fill="#9b7bff">AI · THE CHEF</text>
+  <text class="h" x="132" y="152">Thinks</text>
+  <text class="b" x="70" y="200">Reads the message and decides</text>
+  <text class="b" x="70" y="234">what it needs.</text>
+
+  <!-- 2 AI asks -->
+  <rect class="box ai" x="690" y="70" width="470" height="200" rx="22"/>
+  <circle cx="740" cy="120" r="26" fill="#9b7bff"/><text class="num" x="740" y="131" text-anchor="middle">2</text>
+  <text class="who" x="782" y="112" fill="#9b7bff">AI · THE CHEF</text>
+  <text class="h" x="782" y="152">Asks</text>
+  <text class="b" x="720" y="200">“Give me the customer details.”</text>
+  <text class="b" x="720" y="234">It never takes them itself.</text>
+
+  <!-- 3 Code checks -->
+  <rect class="box code" x="690" y="420" width="470" height="200" rx="22"/>
+  <circle cx="740" cy="470" r="26" fill="#69e2f2"/><text class="num" x="740" y="481" text-anchor="middle">3</text>
+  <text class="who" x="782" y="462" fill="#69e2f2">CODE · THE ASSISTANT</text>
+  <text class="h" x="782" y="502">Checks</text>
+  <text class="b" x="720" y="550">Is the chef allowed this?</text>
+  <text class="b" x="720" y="584">Key ring and barrier. No → refused.</text>
+
+  <!-- 4 Code does -->
+  <rect class="box code" x="40" y="420" width="470" height="200" rx="22"/>
+  <circle cx="90" cy="470" r="26" fill="#69e2f2"/><text class="num" x="90" y="481" text-anchor="middle">4</text>
+  <text class="who" x="132" y="462" fill="#69e2f2">CODE · THE ASSISTANT</text>
+  <text class="h" x="132" y="502">Does it, hands it back</text>
+  <text class="b" x="70" y="550">Looks it up and gives the result</text>
+  <text class="b" x="70" y="584">to the chef.</text>
+
+  <!-- loop arrows -->
+  <path class="line" d="M515 170 H682" marker-end="url(#a)"/>
+  <path class="line" d="M925 275 V412" marker-end="url(#a)"/>
+  <path class="line" d="M685 520 H518" marker-end="url(#a)"/>
+  <path class="line" d="M275 415 V278" marker-end="url(#a)"/>
+  <text class="mid" x="600" y="335" text-anchor="middle">Round after round</text>
+  <text class="small" x="600" y="370" text-anchor="middle">until the dish is ready</text>
+
+  <!-- exit -->
+  <path d="M275 65 V30 H1100" stroke="#ffb545" stroke-width="4" fill="none" stroke-dasharray="10 8" marker-end="url(#o)"/>
+  <text class="out" x="560" y="22">Done? → a person checks the answer</text>
+
+  <text class="small" x="600" y="690" text-anchor="middle">The loop also stops at the maximum number of rounds (maxTurns), or when something is refused.</text>
+</svg>

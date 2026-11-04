@@ -648,17 +648,30 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "One agent loop. Bounded actions.",
-    "kicker": "Concept · Agent",
+    "title": "How does an agent work?",
+    "kicker": "Concept · the agent loop",
     "type": "concept",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-3/agent-loop.svg",
-      "imageAlt": "Context, model call, permission check, runtime tool execution, result and next turn. Answers need review; denial, errors and limits can stop the run.",
-      "imageLink": "Concept diagram · trace one real run next"
+      "image": "assets/workshop-4/agent-loop-kitchen.svg",
+      "imageAlt": "1 The AI thinks. 2 The AI asks. 3 The code checks if it is allowed. 4 The code does it and hands it back. Round after round, until done; then a person checks the answer.",
+      "imageLink": "The agent loop · chef and kitchen assistant"
     },
-    "subtitle": "The AI thinks and asks. The code checks and does. Round after round, until it is done.",
-    "cards": [],
+    "subtitle": "Think of a chef and a kitchen assistant. The AI thinks and asks. The code checks and does.",
+    "cards": [
+      {
+        "title": "AI = the chef",
+        "body": "Thinks and asks. Never touches anything itself."
+      },
+      {
+        "title": "Code = the kitchen assistant",
+        "body": "Checks if it is allowed, does it, hands it back."
+      },
+      {
+        "title": "Done is not proof",
+        "body": "When the AI says “done”, a person checks the evidence."
+      }
+    ],
     "keyPoints": [
       "Model requests; runtime executes.",
       "Check permission before a tool runs.",
@@ -668,7 +681,6 @@ window.SLIDES = [
     ],
     "notes": "Think of a chef and a kitchen assistant. The AI is the chef: it thinks and asks 'give me the customer details'. The code is the assistant: it checks 'is the chef allowed this?', fetches it and hands it back. The chef carries on with what it got. Round after round, until the dish is ready, or the maximum number of rounds (maxTurns) is reached, or something is refused. Two things to remember: the AI never touches anything itself, it only asks. And 'the AI says it is done' is not proof: always check the evidence. A hook checks at fixed moments (for example before a change); it is not the same as a person approving.",
     "stateId": "12:One agent loop. Bounded actions.",
-    "tagline": "The AI never touches anything itself. It only asks.",
     "teach": {
       "time": "4 min",
       "gist": "Chef (AI) asks, kitchen assistant (code) checks and does. AI never touches anything itself. 'Done' is not proof.",
@@ -677,16 +689,20 @@ window.SLIDES = [
           "say": "How does an agent actually work? Think of a chef and a kitchen assistant."
         },
         {
-          "do": "Point at the model step in the diagram.",
+          "do": "Point at box 1 and 2.",
           "say": "The AI is the chef. It thinks and says: give me the customer details."
         },
         {
-          "do": "Point at the permission check and the tool step.",
+          "do": "Point at box 3 and 4.",
           "say": "The code is the kitchen assistant. First it checks: is the chef allowed this? Then it fetches it and hands it back."
         },
         {
-          "do": "Point at the arrow back to the start.",
+          "do": "Trace the arrows round with your finger.",
           "say": "The chef carries on with what it got. Round after round, until the dish is ready."
+        },
+        {
+          "do": "Point at the orange line at the top.",
+          "say": "And when the chef says: the dish is ready? Then a person tastes it first."
         },
         {
           "say": "Remember two things. One: the AI never touches anything itself. It only asks. Two: when the AI says it is done, that is not proof. You always check the evidence."
@@ -754,27 +770,27 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Demo · Step 0: the offline path",
-    "kicker": "Demo · Step 0",
+    "title": "Demo · Step 0: is your laptop ready?",
+    "kicker": "Demo · Step 0 · I show it",
     "type": "concept",
     "visual": {},
-    "subtitle": "First we check that the stage is set. A dress rehearsal: the AI does nothing yet.",
+    "subtitle": "Before we build, we check that everything is in place. I show it now. On the next slide you do the same.",
     "cards": [
       {
-        "title": "npm ci",
-        "body": "Install the parts."
+        "title": "1 · npm ci",
+        "body": "Installs the parts of the package. Like unpacking a toolbox."
       },
       {
-        "title": "npm run doctor",
-        "body": "The health check: is everything there?"
+        "title": "2 · npm run doctor",
+        "body": "The health check: are Node and Claude Code installed, and new enough? Look for: meets minimum."
       },
       {
-        "title": "npm run verify",
-        "body": "Run the tests."
+        "title": "3 · npm run verify",
+        "body": "Runs the tests. Look for: fail 0."
       },
       {
-        "title": "--dry-run",
-        "body": "The dress rehearsal: show what would happen, without calling the AI."
+        "title": "4 · npm run lesson1 -- MSG-01 --dry-run",
+        "body": "Dress rehearsal: shows what the agent would get, without calling the AI. Look for: backend: claude-code."
       }
     ],
     "keyPoints": [
@@ -789,6 +805,9 @@ window.SLIDES = [
       "gist": "Demo: install, health check, tests, dress rehearsal. The AI does nothing yet.",
       "script": [
         {
+          "say": "Before we build anything, I'll show you how to check your laptop is ready. Just watch. On the next slide you do it yourself."
+        },
+        {
           "say": "Before we build anything, we check that the stage is set. Like a dress rehearsal: the AI does nothing yet."
         },
         {
@@ -797,7 +816,7 @@ window.SLIDES = [
         },
         {
           "do": "Type npm run doctor.",
-          "say": "The health check: is everything there?"
+          "say": "The health check: are Node and Claude Code installed, and new enough? Look for 'meets minimum'."
         },
         {
           "do": "Type npm run verify.",
@@ -823,7 +842,8 @@ window.SLIDES = [
         "Windows laptops: check docs/SETUP.md beforehand.",
         "A dry run says nothing about the quality of the agent: it only checks the setup."
       ]
-    }
+    },
+    "tagline": "Why first? If something is missing, you find out now, not halfway through the exercise."
   },
   {
     "lessonId": "workshop-4",
