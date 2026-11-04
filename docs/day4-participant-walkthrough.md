@@ -44,3 +44,30 @@ Walked on macOS, Node.js 24.18.0, Claude Code 2.1.318, on package `main` at `9b9
   `assets/day4-teach/a07-*.mp4` clips. That needs its own decision.
 - **Slide 16 depends on package #7.** The "Step 1 is not built yet" wording on slide 16 matches the package
   only once #7 is merged.
+
+## Company login (Vertex AI, Bedrock)
+
+Participants on a Worldline laptop run Claude Code through Vertex AI. That login lives in the `env` block of
+`~/.claude/settings.json`. The lessons load only project settings (`settingSources: ['project']`), so the
+login never reached them. Last time those participants needed a `.env` file and separate API keys.
+
+Tested alternative: `settingSources: ['project', 'user']`. The login reaches the lesson, but so do the
+participant's own `CLAUDE.md`, claude.ai connectors and hooks. On one laptop the triage answer picked up a
+personal assistant persona, and the run cost $5.08 against $0.04.
+
+Chosen: the `claude-code` and `sdk-login` backends copy only the `env` block from the user settings into the
+agent's environment. A fake `claude` on `PATH` proved the variables now arrive. A real run kept only the
+`StructuredOutput` tool and cost $0.018. Not tested on a real Vertex account.
+
+Package PRs, one per branch: main
+[#15](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/15), step-1
+[#16](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/16), step-2
+[#17](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/17), step-3
+[#18](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/18), step-4
+[#19](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/19), solution
+[#20](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/20), facilitator
+[#21](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/21).
+
+Teacher note on slides 13 and 16: if a run on a company laptop says it is not logged in, run
+`npm run doctor`. The `Login settings` line should name `CLAUDE_CODE_USE_VERTEX`. If it says none, the
+company sets the login elsewhere, so follow `docs/SETUP.md`, Company login.
