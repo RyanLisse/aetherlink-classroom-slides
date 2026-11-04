@@ -3106,7 +3106,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
     ],
     "watch": [
       "Maarten's notes say: 'say which Day 4 track your group follows'. Check with Maarten what to say here before the session.",
-      "'Tomorrow' on the slide: Day 4 is Thursday, the day after today. Correct."
+      "'Next session' on the slide: Day 4 is not always the day after Day 3, so the slides say next session instead of a day."
     ],
     "terms": [
       [
@@ -3117,7 +3117,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
     "next": "Recap: three levels."
   },
   kicker: "DAY 3 · BRIDGE · → DAY 4",
-  subtitle: "Same labels, same specialists, same human gate. Tomorrow it's Claude Code instead of a canvas.",
+  subtitle: "Same labels, same specialists, same human gate. Next session it's Claude Code instead of a canvas.",
   type: "concept",
   visual: { bot: 'point', place: 'beside', stagger: 'pop', stepThrough: true },
   cards: [

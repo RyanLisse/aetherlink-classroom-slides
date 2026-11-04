@@ -145,7 +145,7 @@ window.SLIDES = [
     { title: "Day 7", body: "Your team shows a working AI app." }
   ],
   keyPoints: ["Walk the route left to right","Each day added one piece","Today: idea becomes a plan","Day 7: a working app"],
-  notes: "Walk the route once: the two teaching days gave them the working method and Claude Code, Day 3 gave them workflows in n8n, Day 6 the Claude Agent SDK, and yesterday placed it all in the software development life cycle. Today all of that comes together in one team project. Day 7 is the finish line: a working AI app the team can show."
+  notes: "Walk the route once: the two teaching days gave them the working method and Claude Code, Day 3 gave them workflows in n8n, Day 6 the Claude Agent SDK, and last session placed it all in the software development life cycle. Today all of that comes together in one team project. Day 7 is the finish line: a working AI app the team can show."
 },
 
 { // Slide 3
@@ -163,7 +163,7 @@ window.SLIDES = [
     { title: "Where does a person have to decide?", body: "" }
   ],
   keyPoints: ["Cold retrieval","One question per click","Room answers first","Gaps = what to support today"],
-  notes: "Cold retrieval: no slides, no notes. Open one question per click and let the room answer. These questions follow yesterday: writing an intent, fetching tickets read-only, and the SDLC. Read-only is the important habit: first look, then change, and only with approval. 'Which files help AI help you?' leads straight into the next slide. Note the gaps out loud: whatever the room can't answer is what you will support most today."
+  notes: "Cold retrieval: no slides, no notes. Open one question per click and let the room answer. These questions follow last session: writing an intent, fetching tickets read-only, and the SDLC. Read-only is the important habit: first look, then change, and only with approval. 'Which files help AI help you?' leads straight into the next slide. Note the gaps out loud: whatever the room can't answer is what you will support most today."
 },
 
 { // Slide 4
@@ -180,13 +180,13 @@ window.SLIDES = [
   ],
   tagline: "Written decisions are context: for your team and for Claude.",
   keyPoints: ["Intent, design doc, ADR","Record decisions, not only code","Let Claude ask questions first","Best on new projects","Existing code: start from what's there"],
-  notes: "Structured files make AI help much better, because they give Claude the context it otherwise has to guess. An intent says what and why, a design doc says how, an ADR (architecture decision record) keeps one decision and its reason. Recording decisions also helps the team: tomorrow nobody has to remember why. Letting Claude ask clarifying questions works very well on a new project, where the scope is still open. On an existing (legacy) project it is less clear: the code, its history and the tickets already answer many questions, so start from what is there."
+  notes: "Structured files make AI help much better, because they give Claude the context it otherwise has to guess. An intent says what and why, a design doc says how, an ADR (architecture decision record) keeps one decision and its reason. Recording decisions also helps the team: next session nobody has to remember why. Letting Claude ask clarifying questions works very well on a new project, where the scope is still open. On an existing (legacy) project it is less clear: the code, its history and the tickets already answer many questions, so start from what is there."
 },
 
 { // Slide 5
   title: "The software development life cycle",
   kicker: "DAY 6 · RECAP · SDLC",
-  subtitle: "Yesterday in one slide. Today you walk the first part of it as a team.",
+  subtitle: "Last session in one slide. Today you walk the first part of it as a team.",
   type: "concept",
   layout: "steps",
   visual: { stepKeys: true, bot: 'point', place: 'beside' },
@@ -200,7 +200,7 @@ window.SLIDES = [
   ],
   tagline: "Plan and Design first, about 30 minutes. Then build in short rounds.",
   keyPoints: ["Short recap, not a new lesson","Plan + Design: about 30 minutes","Build in short rounds, plan mode","Day 7 = Test and show","Maintain: who owns it later?"],
-  notes: "Keep it short: this was yesterday's topic. Click through the phases and say where the team will be today. Plan and Design together take about 30 minutes once the idea is chosen; don't let them take the whole morning. Then Build in short rounds: plan mode first, build a little, test it, adjust. Expect to go back and change the plan during the build; that is normal. Day 7 is Test and showing it. Don't skip Maintain: asking who owns the app after this week is a good reality check."
+  notes: "Keep it short: this was last session's topic. Click through the phases and say where the team will be today. Plan and Design together take about 30 minutes once the idea is chosen; don't let them take the whole morning. Then Build in short rounds: plan mode first, build a little, test it, adjust. Expect to go back and change the plan during the build; that is normal. Day 7 is Test and showing it. Don't skip Maintain: asking who owns the app after this week is a good reality check."
 },
 
 /* ---------------------------------------------------------------------- */
@@ -351,7 +351,7 @@ window.SLIDES = [
   ],
   tagline: "Start by reading. Writing to a real system needs a person's approval.",
   keyPoints: ["Name the source of truth","Connect with approved tools","Repos, history, tickets","Read-only first"],
-  notes: "Design starts with the input. Ask every team: where does the real information live? Then: how do we connect to it (MCP or another approved connection), and which data do we actually need? Repos and their history and the tickets are usually the richest sources. Start read-only, exactly like fetching tickets yesterday: an app that only reads is much easier to make safe, and it is enough for a first slice."
+  notes: "Design starts with the input. Ask every team: where does the real information live? Then: how do we connect to it (MCP or another approved connection), and which data do we actually need? Repos and their history and the tickets are usually the richest sources. Start read-only, exactly like fetching tickets last session: an app that only reads is much easier to make safe, and it is enough for a first slice."
 },
 
 { // Slide 13
@@ -529,7 +529,7 @@ window.SLIDES = [
 { // Slide 21
   title: "Day 7: your presentation",
   kicker: "DAY 6 · LOOKING AHEAD",
-  subtitle: "Tomorrow every team presents what it built.",
+  subtitle: "Next session every team presents what it built.",
   type: "context",
   visual: { stagger: 'pop', stepThrough: true, bot: 'wave', place: 'beside' },
   cards: [
@@ -546,15 +546,15 @@ window.SLIDES = [
 { // Slide 22
   title: "Ready for Day 7?",
   kicker: "DAY 6 · CLOSING",
-  subtitle: "Tomorrow your team shows a working AI app.",
+  subtitle: "Next session your team shows a working AI app.",
   type: "recap",
   visual: { checklist: 0, bot: 'happy', place: 'left' },
   cards: [
-    { title: "By the end of today", body: "the canvas is in the repo\nyou know when your app is successful\nthe first slice works\nCLAUDE.md and settings.json are in place\nsecurity questions are answered or OPEN\nyou have a plan for the presentation\nyou know what to build tomorrow morning" }
+    { title: "By the end of today", body: "the canvas is in the repo\nyou know when your app is successful\nthe first slice works\nCLAUDE.md and settings.json are in place\nsecurity questions are answered or OPEN\nyou have a plan for the presentation\nyou know what to build at the start of the next session" }
   ],
-  tagline: "Tomorrow: finish, test, and show what you built.",
-  keyPoints: ["Seven checks per team","Missing one? Plan it first thing tomorrow","Day 7 = finish, test, show"],
-  notes: "Go through the list with each team. Anything that isn't ticked becomes the first task for tomorrow morning. Tell them what Day 7 looks like: finish, test, and present a working app."
+  tagline: "Next session: finish, test, and show what you built.",
+  keyPoints: ["Seven checks per team","Missing one? Plan it first thing next session","Day 7 = finish, test, show"],
+  notes: "Go through the list with each team. Anything that isn't ticked becomes the first task for the start of the next session. Tell them what Day 7 looks like: finish, test, and present a working app."
 },
 
 { // Slide 23
@@ -568,7 +568,7 @@ window.SLIDES = [
     { title: "Our app helps…", body: "" },
     { title: "Working as a team, I learned…", body: "" },
     { title: "The security question that changed our plan was…", body: "" },
-    { title: "Tomorrow we first…", body: "" }
+    { title: "Next session we first…", body: "" }
   ],
   keyPoints: ["Three quiet minutes","Then a few answers aloud","Security answers are worth sharing"],
   notes: "Give three quiet minutes, then collect a few answers. Ask at least one team which security question changed their plan: it shows the room that the security questions made the work better, not slower."

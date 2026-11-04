@@ -377,7 +377,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-6",
-    "title": "Tomorrow: polish, gate, present.",
+    "title": "Next session: polish, gate, present.",
     "kicker": "Done when · bridge → Workshop 7",
     "type": "recap",
     "layout": "recap",
