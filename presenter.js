@@ -80,6 +80,105 @@ function renderNotes(el, text) {
   }));
 }
 
+// teach: an optional coloured teaching card (presenter only). Fixed sections, each a short list.
+// Text between `backticks` is shown as code.
+// script: numbered beats in the order you perform them; each beat {do, say, ask} (any may be left out).
+const TEACH_SECTIONS = [
+  ['do', 'They build', 'left'], ['done', 'Done when', 'left'],
+  ['learn', 'They learn', 'right'], ['watch', 'Watch for', 'right'], ['terms', 'If they ask', 'right']
+];
+function renderScript(beats) {
+  const sec = document.createElement('section'); sec.className = 't-script';
+  const h = document.createElement('h3'); h.textContent = 'Script'; sec.append(h);
+  const ol = document.createElement('ol');
+  for (const b of beats) {
+    const li = document.createElement('li');
+    // A question step reads in the order it happens: do → question → answer → what you say next.
+    // The answer is `answer`, or a leading "(Answer: …)" / "(…)" in `say`.
+    let say = b.say || '', answer = b.answer || '', note = '';
+    const m = b.ask && !answer && /^\(([^)]*)\)\s*/.exec(say);
+    if (m) {
+      say = say.slice(m[0].length);
+      const a = /^Answers?:\s*/.exec(m[1]);
+      if (a) answer = m[1].slice(a[0].length); else note = m[1];
+    }
+    const lines = b.ask
+      ? [[b.do, 't-b-do', '▶ '], [b.ask, 't-b-ask', '? Ask: '], [answer, 't-b-answer', '✓ Answer: '], [note, 't-b-note', '→ '], [say, 't-b-say', '']]
+      : [[b.do, 't-b-do', '▶ '], [say, 't-b-say', '']];
+    // warn: a red reminder at the top of the beat
+    if (b.warn) lines.unshift([b.warn, 't-b-warn', '⚠ ']);
+    for (const [text, cls, prefix] of lines) {
+      if (!text) continue;
+      const p = document.createElement('p'); p.className = cls; teachText(p, prefix + text); li.append(p);
+    }
+    if (b.copy) {
+      // copy: [[label, text], …] texts to paste in this step
+      const box = document.createElement('div'); box.className = 't-copy t-copy-inline';
+      for (const [label, text] of b.copy) box.append(...copyItem(label, text));
+      li.append(box);
+    }
+    if (b.clip) {
+      // a short screen recording of this step; click opens it full size in a new tab
+      const v = document.createElement('video');
+      Object.assign(v, { src: b.clip, muted: true, loop: true, autoplay: true, playsInline: true, preload: 'metadata', className: 't-clip', title: 'Click to open full size' });
+      v.addEventListener('click', () => window.open(b.clip, '_blank'));
+      li.append(v);
+    }
+    ol.append(li);
+  }
+  sec.append(ol); return sec;
+}
+function teachText(el, text) {
+  String(text).split('`').forEach((part, i) => {
+    if (i % 2) { const c = document.createElement('code'); c.textContent = part; el.append(c); } else el.append(part);
+  });
+}
+// copy: [[label, text], …] texts to paste during the demo (tickets, prompts); click a box to copy it
+function copyItem(label, text) {
+  const head = document.createElement('div'); head.className = 't-copy-head';
+  const b = document.createElement('strong'); b.className = 't-copy-label'; b.textContent = label;
+  const btn = document.createElement('button'); btn.type = 'button'; btn.className = 't-copy-btn'; btn.textContent = 'Copy';
+  const pre = document.createElement('pre'); pre.className = 't-copy-box'; pre.textContent = text; pre.title = 'Click to copy';
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(text); } catch { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); document.execCommand('copy'); }
+    pre.classList.add('copied'); btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+    setTimeout(() => { pre.classList.remove('copied'); btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  };
+  btn.addEventListener('click', copy); pre.addEventListener('click', copy);
+  head.append(b, btn); return [head, pre];
+}
+function renderCopy(items) {
+  const sec = document.createElement('section'); sec.className = 't-sec t-copy';
+  const h = document.createElement('h3'); h.textContent = 'Copy-paste'; sec.append(h);
+  for (const [label, text] of items) sec.append(...copyItem(label, text));
+  return sec;
+}
+function renderTeach(el, t) {
+  el.hidden = !t; if (!t) { el.replaceChildren(); return; }
+  const gist = document.createElement('p'); gist.className = 't-gist';
+  if (t.time) { const b = document.createElement('span'); b.className = 't-time'; b.textContent = t.time; gist.append(b); }
+  teachText(gist, t.gist || '');
+  const cols = { left: document.createElement('div'), right: document.createElement('div') };
+  if (t.script && t.script.length) cols.left.append(renderScript(t.script));
+  if (t.copy && t.copy.length) cols.right.append(renderCopy(t.copy));
+  for (const [key, label, col] of TEACH_SECTIONS) {
+    const items = t[key]; if (!items || !items.length) continue;
+    const sec = document.createElement('section'); sec.className = 't-sec t-' + key;
+    const h = document.createElement('h3'); h.textContent = label;
+    const ul = document.createElement('ul');
+    for (const item of items) {
+      const li = document.createElement('li');
+      if (Array.isArray(item)) { const b = document.createElement('strong'); teachText(b, item[0]); li.append(b, ' — '); teachText(li, item[1]); }
+      else teachText(li, item);
+      ul.append(li);
+    }
+    sec.append(h, ul); cols[col].append(sec);
+  }
+  const grid = document.createElement('div'); grid.className = 't-grid'; grid.append(cols.left, cols.right);
+  el.replaceChildren(gist, grid);
+  if (t.next) { const n = document.createElement('p'); n.className = 't-next'; teachText(n, 'Next → ' + t.next); el.append(n); }
+}
+
 function renderSlide(index) {
   if (!Number.isInteger(index) || index < 0 || index >= slides.length) return;
   current = index;
@@ -97,6 +196,11 @@ function renderSlide(index) {
   $('p-keys').replaceChildren(...keys.map(k => { const li = document.createElement('li'); li.textContent = k; return li; }));
   if (s.notes) renderNotes($('p-notes'), s.notes); else $('p-notes').textContent = 'No facilitator notes on this slide.';
   $('p-notes').classList.toggle('p-empty', !s.notes);
+  if ($('p-teach')) {
+    renderTeach($('p-teach'), s.teach);
+    if (s.teach) $('p-keys-block').hidden = true;
+    if ($('p-full')) $('p-full').open = !s.teach;
+  }
   const promptBlock = $('p-prompt-block');
   if (s.prompt) { promptBlock.hidden = false; $('p-prompt').textContent = s.prompt; } else { promptBlock.hidden = true; }
   const nextIndex = current + 1 < slides.length ? current + 1 : null;
