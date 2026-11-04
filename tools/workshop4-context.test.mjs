@@ -27,7 +27,10 @@ test('The memory discussion leads into three illustrated explanations', () => {
 test('Inserting explanations preserves every original W4 slide identity', () => {
   const originals = slides.filter(s => !s.stateId.startsWith('w4-'));
   assert.equal(originals.length, 66);
-  originals.forEach((slide, oldIndex) => assert.equal(slide.stateId, oldIndex + ':' + slide.title));
+  originals.forEach((slide, oldIndex) => {
+    const originalTitle = oldIndex === 7 ? 'Optional yesterday, explained today: specialist agents' : slide.title;
+    assert.equal(slide.stateId, oldIndex + ':' + originalTitle);
+  });
   assert.equal(new Set(slides.map(s => s.stateId)).size, slides.length);
 });
 

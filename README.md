@@ -37,6 +37,12 @@ Every participant must first create their own n8n Cloud trial account before
 building; do not use a shared participant login.
 The local n8n package is optional for deterministic rules practice only.
 The Claude SDK route introduces the Anthropic API key on Day 4.
+Day 3 requires both flat specialist delegation and nested Reply → Risk
+consultation. Participants inspect the actual calls, forwarded context and
+returned results, then test a missing tool connection. Keep `02-chat`,
+`03-specialists` and `04-nested` as separate evidence checkpoints. Only the
+separate CRUD exercise is optional; unavailable credits are a recorded blocker,
+not permission to call a baseline-only run complete.
 The legacy Day 3 introduction remains a separate session; the complete revised
 route is `workshop3.html`.
 
