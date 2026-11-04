@@ -33,6 +33,12 @@ L2, adds Day 1–2 bridge lines, and adds two stretch exercises: subagents that 
 each other (with `assets/day3-orchestration/n8n-triage-l3-orchestration.json`) and
 Data Table CRUD. It is marked as adapted in the manifest, like Day 4.
 
+On 2026-11-04 the route was merged with Jessy's Day 3 (`day3-jessy-slides.js`):
+Jessy's deck is now the base, with her assignments A30 to A42 and presenter notes.
+Ryan's warm-up (a first If-node workflow and a free explore) sits between the tour
+and the L1 → L3 ladder, and Assignments 36, 37 and 38 show the parser, Reply Agent
+and Risk Agent screenshots. Still 47 slides; the manifest digest was updated.
+
 Other authored text, notes, timers and exercises are retained. TypeScript annotations were removed.
 Image prefixes were changed to local `assets/` paths. Three W3 JPEGs and nine W4 PNGs
 come from the same source revision's `apps/web/public/` directory.
