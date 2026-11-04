@@ -778,25 +778,7 @@ window.SLIDES = [
     "title": "Demo · Step 0: the offline path",
     "kicker": "Demo · Step 0",
     "type": "concept",
-    "visual": {
-      "term": [
-        {
-          "c": "npm ci"
-        },
-        {
-          "c": "npm run doctor"
-        },
-        {
-          "c": "npm run lesson1 -- MSG-01 --dry-run"
-        },
-        {
-          "o": "backend: claude-code (claude -p)"
-        },
-        {
-          "o": "dry run — no model call"
-        }
-      ]
-    },
+    "visual": {},
     "subtitle": "First we check that the stage is set. A dress rehearsal: the AI does nothing yet.",
     "cards": [
       {
