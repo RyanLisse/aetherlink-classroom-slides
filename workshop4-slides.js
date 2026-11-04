@@ -773,15 +773,73 @@ window.SLIDES = [
       }
     ],
     "steps": [
-      "Run npm run lesson1 -- MSG-01 --dry-run.",
-      "Open priority-schema.mjs and lib/switch.mjs.",
-      "Run npm run chat. Give a colour. Ask for it again.",
-      "Do it again with npm run chat -- --no-memory."
+      {
+        "text": "Look at the plan, without the model",
+        "prompt": "npm run lesson1 -- MSG-01 --dry-run",
+        "after": "You see the options the agent gets. Find outputFormat: that is the priority schema."
+      },
+      {
+        "text": "Open 01-single-agent/priority-schema.mjs and lib/switch.mjs in your editor",
+        "after": "The schema says what the answer looks like. The Switch picks the route. Code decides the route, not the model."
+      },
+      {
+        "text": "Start the chat and give it something to remember",
+        "prompt": "npm run chat",
+        "after": "Type: My favourite colour is red. Then ask: What is my favourite colour? Type exit to stop."
+      },
+      {
+        "text": "Do it again, without memory",
+        "prompt": "npm run chat -- --no-memory",
+        "after": "Ask the same question. Now it does not know. Each message is a new session.",
+        "warn": true
+      }
     ],
-    "expected": "You can show the schema and the route. You can say why only one chat remembers the colour.",
+    "expected": "Done when you can point at the schema and the Switch, and say why only the first chat remembered red.",
     "keyPoints": [
       "Do the dry run. Then compare chat with and without memory."
     ],
+    "teach": {
+      "time": "15 min",
+      "gist": "SOLO 1: dry run to see the schema, open schema + Switch, then the favourite-colour test with and without memory.",
+      "script": [
+        {
+          "say": "Your turn. Four steps on the slide, every command has a copy button. You don't type anything yourself."
+        },
+        {
+          "do": "Point at step 1.",
+          "say": "First a dry run: no model, you only see what the agent would get. Look for outputFormat. That is the parser from yesterday in n8n."
+        },
+        {
+          "do": "Point at step 2.",
+          "say": "Then open two files. The schema says what the answer must look like. The Switch picks the route. The model gives a label, the code decides where it goes."
+        },
+        {
+          "do": "Point at steps 3 and 4.",
+          "say": "Then the memory test. Tell the chat your favourite colour, ask it back, exit. Do it again with --no-memory."
+        },
+        {
+          "ask": "What do you expect with --no-memory?",
+          "say": "(Answer: it forgets. Every message is a new session, like n8n without Simple Memory.)"
+        },
+        {
+          "do": "Start the 15-minute timer."
+        }
+      ],
+      "do": [
+        "Dry run MSG-01, find outputFormat.",
+        "Open priority-schema.mjs and lib/switch.mjs.",
+        "Chat with memory, then with --no-memory."
+      ],
+      "done": [
+        "They can point at the schema and the Switch.",
+        "They can say why only the first chat remembers the colour."
+      ],
+      "watch": [
+        "Do not present the dry-run output as model JSON or as a Switch result. That only comes from a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md, as a sample.",
+        "The chat needs a logged-in Claude Code. Not logged in: run claude once and log in.",
+        "Funny but expected: 'My favourite colour is red' also gets a priority (low), because CLAUDE.md makes it a triage agent. Use it: the rules in CLAUDE.md apply to everything you type."
+      ]
+    },
     "notes": "Give participants 15 minutes. Offline, inspect 01-single-agent/priority-schema.mjs, outputFormat in the dry-run options, and lib/switch.mjs. Do not present dry-run output as model JSON or a Switch → result; show those only from a live run (Claude Code login, or --backend sdk with a key) or docs/sample-trace.md, labelled as an illustrative sample. Then compare a favourite-colour follow-up in the same chat with --no-memory.",
     "stateId": "23:Run Step 1 and test chat memory."
   },
