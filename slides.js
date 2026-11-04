@@ -3051,7 +3051,7 @@ Check: show the evidence for your answer; mark anything you are not sure of as O
   expected: "The arcade runs on the arcade laptop, the tests pass, and everyone knows what their game must send.",
   prompt: "Read the arcade-score skill in this repo. Explain in five lines what my game must do to join the arcade, and what I must never change.",
   keyPoints: ["The agreement is given: arcade.js + skill","Manager sets up the repo","Everyone reads the skill","npm test, node serve.js","Example game = first score"],
-  notes: "The agreement is already made: one contract (arcade.js) and one skill (arcade-score) that every game uses. The manager creates the arcade repo on GitLab, copies the starter in and pushes; the trainer has the starter (https://github.com/jyse/aetherlink-classroom-slides/tree/main/arcade-starter). Everyone clones it and reads the skill: the Example prompt lets Claude summarise it in five lines. On the arcade laptop: npm test (it tests the contract), then node serve.js and open localhost:8080. Play the example game once so there is a first score. No install is needed: serve.js uses Node only."
+  notes: "The agreement is already made: one contract (arcade.js) and one skill (arcade-score) that every game uses. The manager creates the arcade repo on GitLab, copies the starter in and pushes; the trainer has the starter (https://github.com/AetherLink-bv/aetherlink-classroom-slides/tree/main/arcade-starter). Everyone clones it and reads the skill: the Example prompt lets Claude summarise it in five lines. On the arcade laptop: npm test (it tests the contract), then node serve.js and open localhost:8080. Play the example game once so there is a first score. No install is needed: serve.js uses Node only."
 },
 
 { // Slide 141
