@@ -10,7 +10,7 @@ test('Maarten Day 4 keeps its path and adds a usable setup step',()=>{
  const slides=deck('day4-maarten-n8n-to-claude-slides.js');
  assert.equal(slides.length,21);
  assert.deepEqual(Array.from(slides,s=>s.title),[
-  'Welcome to Day 4!','Today','Yesterday in n8n','Today in Claude Code',"Today's customer messages",'Get the workshop package',
+  'Welcome to Day 4!','Today','Last session in n8n','Today in Claude Code',"Today's customer messages",'Get the workshop package',
   'Lesson 1: one agent + CLAUDE.md','Lesson 1: try it','Quiz: message 6','Lesson 2: orchestrator + subagents',
   'What is in a subagent file?','Lesson 2: try it','Lesson 3: MCP + external data','Connect the MCP server',
   'What is behind the IDs?','Lesson 3: try it','Look back at the three lessons','Choose n8n when the route is fixed','Choose Claude Code when the work varies',

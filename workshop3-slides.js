@@ -1568,8 +1568,8 @@ window.SLIDES = [
       "Three quiet minutes",
       "Let people write first",
       "Collect a few answers aloud",
-      "Questions feed tomorrow"
+      "Questions feed the next session"
     ],
-    "notes": "Give three quiet minutes to complete the statements, then collect a few out loud. Write the workflow ideas and open questions on the flipchart: they are the starting point for tomorrow."
+    "notes": "Give three quiet minutes to complete the statements, then collect a few out loud. Write the workflow ideas and open questions on the flipchart: they are the starting point for the next session."
   }
 ];

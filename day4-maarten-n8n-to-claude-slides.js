@@ -28,7 +28,7 @@ window.SLIDES = [
 { // Slide 2
   title: "Today",
   kicker: "DAY 4 · OVERVIEW",
-  subtitle: "Yesterday's support-ticket workflow, rebuilt in Claude Code.",
+  subtitle: "Last session's support-ticket workflow, rebuilt in Claude Code.",
   type: "context",
   visual: { stepThrough: true, bot: 'point', place: 'left', dayRoute: ['Welcome', 'n8n → Claude', 'Setup', 'Lesson 1', 'Lesson 2', 'Lesson 3', 'Review', 'What you learned'] },
   cards: [
@@ -36,12 +36,12 @@ window.SLIDES = [
     { title: "What you learn", body: "CLAUDE.md, subagents in .claude/agents, and connecting an MCP server." },
     { title: "What you can do with it", body: "Choose between n8n and Claude Code, and move a workflow from one to the other." }
   ],
-  keyPoints: ["Same ticket as yesterday","Three lessons, each adds one thing","Rhythm: explain, demo, try, discuss"],
-  notes: "Tell how the day goes. We take the same support tickets as yesterday and build the triage in Claude Code, in three lessons that each add one thing: one agent with CLAUDE.md, then an orchestrator with subagents, then external transaction data through MCP. Each lesson follows the same rhythm: short explanation, demo, participants try it, discussion."
+  keyPoints: ["Same ticket as last session","Three lessons, each adds one thing","Rhythm: explain, demo, try, discuss"],
+  notes: "Tell how the day goes. We take the same support tickets as last session and build the triage in Claude Code, in three lessons that each add one thing: one agent with CLAUDE.md, then an orchestrator with subagents, then external transaction data through MCP. Each lesson follows the same rhythm: short explanation, demo, participants try it, discussion."
 },
 
 { // Slide 3
-  title: "Yesterday in n8n",
+  title: "Last session in n8n",
   kicker: "DAY 4 · N8N ANCHOR",
   subtitle: "A visible workflow connected the ticket, three specialists and a customer-data lookup.",
   type: "concept",
@@ -113,7 +113,7 @@ window.SLIDES = [
   ],
   tagline: "The priority depends on impact and risk, not on tone.",
   keyPoints: ["Switch to step-1","CLAUDE.md holds the project rules","Output: Priority + Reason"],
-  notes: "Fetch and switch to step-1, run npm ci, then open 01-single-agent/claude-project in VS Code. Walk through CLAUDE.md: it is the system message of yesterday's AI Agent, but now as a file the agent loads for each run. Point out the rules and the required output. The finished step gives the room a runnable baseline; the exercise temporarily removes the definitions to expose the tone trap."
+  notes: "Fetch and switch to step-1, run npm ci, then open 01-single-agent/claude-project in VS Code. Walk through CLAUDE.md: it is the system message of last session's AI Agent, but now as a file the agent loads for each run. Point out the rules and the required output. The finished step gives the room a runnable baseline; the exercise temporarily removes the definitions to expose the tone trap."
 },
 
 { // Slide 7
@@ -171,7 +171,7 @@ window.SLIDES = [
     { label: "output/", caption: "The orchestrator writes one Markdown file: message, priority, reason, email." }
   ],
   keyPoints: ["CLAUDE.md defines the workflow","Each specialist owns one job","The result lands in output/"],
-  notes: "Save Lesson 1 work, fetch and switch to step-2, then open 02-subagents/claude-project. CLAUDE.md now describes the workflow and tells the main session to use specialists. Yesterday's Risk Agent maps to risk-agent and Customer Reply Agent maps to customer-reply-agent. Customer Context returns in Lesson 3. Step through the four steps; the result is a file in output/ you can review."
+  notes: "Save Lesson 1 work, fetch and switch to step-2, then open 02-subagents/claude-project. CLAUDE.md now describes the workflow and tells the main session to use specialists. Last session's Risk Agent maps to risk-agent and Customer Reply Agent maps to customer-reply-agent. Customer Context returns in Lesson 3. Step through the four steps; the result is a file in output/ you can review."
 },
 
 { // Slide 10
@@ -207,7 +207,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
 - Risk note: customer risk, complaint risk, urgency, escalate yes/no
 - Missing information: none, or a short list`,
   keyPoints: ["One file per specialist","The description says when to call it","The body says how it works"],
-  notes: "Open .claude/agents/risk-agent.md. The header between the --- lines has a name and a description: the orchestrator reads the description to decide when to use this agent, exactly like yesterday's Description field. The rest is the agent's own prompt, like the System Message. The priority definitions now live here. Use the Example prompt button to show the file. Then open customer-reply-agent.md for its style and output rules."
+  notes: "Open .claude/agents/risk-agent.md. The header between the --- lines has a name and a description: the orchestrator reads the description to decide when to use this agent, exactly like last session's Description field. The rest is the agent's own prompt, like the System Message. The priority definitions now live here. Use the Example prompt button to show the file. Then open customer-reply-agent.md for its style and output rules."
 },
 
 { // Slide 11
@@ -249,7 +249,7 @@ description: Payment risk and escalation specialist. Reviews one customer-suppor
   ],
   tagline: "Data files → MCP servers → read-only tools → specialist agents",
   keyPoints: ["Data files stay outside the agent project","Tools expose customer and transaction facts","Agents receive results, not file access"],
-  notes: "Save Lesson 2 work, fetch and switch to step-3, then open 03-mcp/claude-project. docs/customer_context.csv and docs/transactions.xlsx sit outside the agent project. The MCP servers expose narrow read-only tools. customer-context-agent calls get_customer, like yesterday's Data Table lookup. risk-agent calls get_transaction for transaction IDs. Neither specialist reads the data files itself."
+  notes: "Save Lesson 2 work, fetch and switch to step-3, then open 03-mcp/claude-project. docs/customer_context.csv and docs/transactions.xlsx sit outside the agent project. The MCP servers expose narrow read-only tools. customer-context-agent calls get_customer, like last session's Data Table lookup. risk-agent calls get_transaction for transaction IDs. Neither specialist reads the data files itself."
 },
 
 { // Slide 13

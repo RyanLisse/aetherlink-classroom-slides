@@ -10,24 +10,24 @@ window.SLIDES = [
       "bot": "wave",
       "place": "beside"
     },
-    "subtitle": "Yesterday you built the flow in n8n. Today you build the same flow in code.",
-    "notes": "Keep this slide on screen while people arrive. Today we build yesterday's n8n support flow again, this time in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages. We do not import the n8n flow. If someone's Day 3 flow did not work, that is no problem: they can use the example results in the package.",
+    "subtitle": "Last session you built the flow in n8n. Today you build the same flow in code.",
+    "notes": "Keep this slide on screen while people arrive. Today we build last session's n8n support flow again, this time in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages. We do not import the n8n flow. If someone's Day 3 flow did not work, that is no problem: they can use the example results in the package.",
     "stateId": "0:Welcome to Workshop 4 · From n8n to Claude Agents SDK",
     "teach": {
       "time": "2 min",
-      "gist": "Welcome. Yesterday you built the sorting machine from n8n blocks. Today we build the same machine in code.",
+      "gist": "Welcome. Last session you built the sorting machine from n8n blocks. Today we build the same machine in code.",
       "script": [
         {
           "do": "Have this slide on screen while people come in."
         },
         {
-          "say": "Yesterday you built a sorting machine for customer messages in n8n, by connecting blocks. Today we build exactly the same machine, but in code."
+          "say": "Last session you built a sorting machine for customer messages in n8n, by connecting blocks. Today we build exactly the same machine, but in code."
         },
         {
           "say": "Why code? Because you can test it, save it and limit it. You decide what each agent may and may not do."
         },
         {
-          "ask": "Who remembers what the last block of yesterday's flow was?",
+          "ask": "Who remembers what the last block of last session's flow was?",
           "say": "(Answer: a person checks before anything goes to the customer. That stays true today.)"
         }
       ],
@@ -36,7 +36,7 @@ window.SLIDES = [
         "Name the goal: the same flow, now in code."
       ],
       "done": [
-        "Everyone knows that today is yesterday's flow, now in code."
+        "Everyone knows that today is last session's flow, now in code."
       ],
       "watch": [
         "Did Day 3 not work for someone? Reassure them: the package has example results, so nobody is behind."
@@ -54,7 +54,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "1 · What was useful?",
-        "body": "What did you learn yesterday that you can actually use?"
+        "body": "What did you learn last session that you can actually use?"
       },
       {
         "title": "2 · What went wrong?",
@@ -77,7 +77,7 @@ window.SLIDES = [
       "script": [
         {
           "do": "Point at card 1. Start a 2-minute timer.",
-          "say": "Round one. What did you learn yesterday that you can really use? One answer per table."
+          "say": "Round one. What did you learn last session that you can really use? One answer per table."
         },
         {
           "do": "Write the answers on the board. Point at card 2.",
@@ -101,14 +101,14 @@ window.SLIDES = [
         "The goals are on the board for the close."
       ],
       "watch": [
-        "Is a table quiet? Ask one person directly: what surprised you yesterday?",
+        "Is a table quiet? Ask one person directly: what surprised you last session?",
         "Keep it short: the real work starts in 5 minutes."
       ]
     }
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday · 1. The sorting machine",
+    "title": "Last session · 1. The sorting machine",
     "kicker": "Recap · n8n flow 1/4",
     "type": "recap",
     "visual": {
@@ -170,7 +170,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday · 2. The chat and the memory",
+    "title": "Last session · 2. The chat and the memory",
     "kicker": "Recap · n8n flow 2/4",
     "type": "recap",
     "visual": {
@@ -198,7 +198,7 @@ window.SLIDES = [
       "New customer = start fresh",
       "Never carry customer A's chat over to customer B"
     ],
-    "notes": "Yesterday's second flow had a chat in front of the AI Agent, and memory under it. Ask: what happened before you added memory, and what happened after? Today npm run chat does the same: it remembers within one conversation. A new conversation must never receive another customer's messages.",
+    "notes": "Last session's second flow had a chat in front of the AI Agent, and memory under it. Ask: what happened before you added memory, and what happened after? Today npm run chat does the same: it remembers within one conversation. A new conversation must never receive another customer's messages.",
     "stateId": "5:Yesterday’s flow · 2. Chat and an AI Agent",
     "teach": {
       "time": "2 min",
@@ -206,7 +206,7 @@ window.SLIDES = [
       "script": [
         {
           "do": "Point at the chat block.",
-          "say": "Yesterday's second step: the customer types in a chat, and the AI Agent reads the message."
+          "say": "Last session's second step: the customer types in a chat, and the AI Agent reads the message."
         },
         {
           "do": "Point at the Memory socket under the agent.",
@@ -234,7 +234,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday · 3. The form",
+    "title": "Last session · 3. The form",
     "kicker": "Recap · n8n flow 3/4",
     "type": "recap",
     "visual": {
@@ -258,7 +258,7 @@ window.SLIDES = [
       "Parser = the form, and the check",
       "Switch = the trays"
     ],
-    "notes": "Yesterday the Parser had two fields: priority and message. Today the package has its own form (priority-schema.mjs) with its own fields, so it is not exactly the same as on Day 3. There are two different kinds of mistake. In the first, the form is not filled in correctly (a parse error). In the second, the form is correct but the priority is wrong (a wrong decision). Look at them separately.",
+    "notes": "Last session the Parser had two fields: priority and message. Today the package has its own form (priority-schema.mjs) with its own fields, so it is not exactly the same as on Day 3. There are two different kinds of mistake. In the first, the form is not filled in correctly (a parse error). In the second, the form is correct but the priority is wrong (a wrong decision). Look at them separately.",
     "stateId": "6:Yesterday’s flow · 3. Structured output",
     "tagline": "An AI likes to talk, but a machine cannot do anything with a story. So we ask the AI to fill in a form.",
     "teach": {
@@ -290,13 +290,13 @@ window.SLIDES = [
         "Everyone can say what the difference is between the Parser and the Switch."
       ],
       "watch": [
-        "Today's form has its own fields. Do not promise that it is exactly the same as yesterday's."
+        "Today's form has its own fields. Do not promise that it is exactly the same as last session's."
       ]
     }
   },
   {
     "lessonId": "workshop-4",
-    "title": "Yesterday · 4. The team of specialists",
+    "title": "Last session · 4. The team of specialists",
     "kicker": "Recap · n8n flow 4/4",
     "type": "recap",
     "visual": {
@@ -324,14 +324,14 @@ window.SLIDES = [
       "Each specialist has one job",
       "Today: 2 agents + 1 lookup tool"
     ],
-    "notes": "Yesterday's team had three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? If someone's Day 3 flow was blocked, show this screenshot as the example and explain the idea. Do not say that their flow worked. Today Reply and Risk become subagents, and the Customer Context Agent becomes an MCP tool that looks up customers.",
+    "notes": "Last session's team had three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? If someone's Day 3 flow was blocked, show this screenshot as the example and explain the idea. Do not say that their flow worked. Today Reply and Risk become subagents, and the Customer Context Agent becomes an MCP tool that looks up customers.",
     "stateId": "7:Optional yesterday, explained today: specialist agents",
     "teach": {
       "time": "3 min",
       "gist": "Three specialists, each with one job. Today we build two agents in code and one lookup tool.",
       "script": [
         {
-          "say": "Yesterday's last step was a team of specialists. Just like at the office: you do not ask one person to do everything."
+          "say": "Last session's last step was a team of specialists. Just like at the office: you do not ask one person to do everything."
         },
         {
           "do": "Point at the three agents, left to right.",
@@ -342,7 +342,7 @@ window.SLIDES = [
           "say": "Today we build this team in code. The writer and the risk expert become two agents. The records desk becomes a lookup tool: it only looks things up and does not think."
         },
         {
-          "ask": "Who called the Risk Agent in your flow yesterday?",
+          "ask": "Who called the Risk Agent in your flow last session?",
           "say": "(Listen to the answers. If someone's flow did not work, show this screenshot as the example.)"
         }
       ],
@@ -574,7 +574,7 @@ window.SLIDES = [
           "say": "Three: control. A hook is a barrier. Before anything changes, the code checks first. And the AI cannot drive around it."
         },
         {
-          "ask": "Which of yesterday's problems does the barrier solve?",
+          "ask": "Which of last session's problems does the barrier solve?",
           "say": "(Answer: there was no stop before a change.)"
         }
       ],
@@ -594,7 +594,7 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
-    "title": "The dictionary: yesterday's blocks, today's names",
+    "title": "The dictionary: last session's blocks, today's names",
     "kicker": "Concept recap · overview",
     "type": "concept",
     "layout": "compare",
@@ -607,10 +607,10 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Every block from yesterday, with its name in code. And still a person at the end.",
+    "subtitle": "Every block from last session, with its name in code. And still a person at the end.",
     "columns": [
       {
-        "title": "n8n · yesterday",
+        "title": "n8n · last session",
         "items": [
           "AI Agent",
           "System Message",
@@ -647,18 +647,18 @@ window.SLIDES = [
       }
     ],
     "keyPoints": [
-      "Everything from yesterday comes back",
+      "Everything from last session comes back",
       "Only the name changes",
       "Same person at the end"
     ],
-    "notes": "Go row by row, from top to bottom. Everything they built yesterday comes back today, and only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv), and the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
+    "notes": "Go row by row, from top to bottom. Everything they built last session comes back today, and only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv), and the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
     "stateId": "11:n8n ↔ Agent SDK at a glance",
     "teach": {
       "time": "3 min",
-      "gist": "The dictionary: yesterday's block, today's name, and what it means. One row per click.",
+      "gist": "The dictionary: last session's block, today's name, and what it means. One row per click.",
       "script": [
         {
-          "say": "This is our dictionary. On the left is what you built yesterday. In the middle is what it is called today. On the right is what it means."
+          "say": "This is our dictionary. On the left is what you built last session. In the middle is what it is called today. On the right is what it means."
         },
         {
           "do": "Go through the rows from top to bottom. Read the right column out loud.",
@@ -669,11 +669,11 @@ window.SLIDES = [
           "say": "maxTurns is the maximum number of rounds. So the agent can never keep going forever."
         },
         {
-          "ask": "Which row is yesterday's form?",
+          "ask": "Which row is last session's form?",
           "say": "(Answer: Priority Parser, json_schema.)"
         },
         {
-          "say": "Everything from yesterday comes back. Only the name changes. And at the end there is still a person who checks."
+          "say": "Everything from last session comes back. Only the name changes. And at the end there is still a person who checks."
         }
       ],
       "do": [
@@ -681,7 +681,7 @@ window.SLIDES = [
         "Read the right column."
       ],
       "done": [
-        "Everyone can find yesterday's blocks in today's names."
+        "Everyone can find last session's blocks in today's names."
       ],
       "watch": [
         "Do not explain every technical name in depth. The right column is enough for now. The details come with each step."
@@ -813,7 +813,7 @@ window.SLIDES = [
       ],
       "watch": [
         "Does someone's run choose 'sdk' by itself? Then an API key is set on their laptop. Add --backend claude-code to the command.",
-        "The n8n trial credits from yesterday do not work here.",
+        "The n8n trial credits from last session do not work here.",
         "Company laptop on Vertex AI and a run says it is not logged in? Run npm run doctor. The Login settings line should name CLAUDE_CODE_USE_VERTEX. If it says none, follow docs/SETUP.md, Company login (three variables in the terminal)."
       ]
     }
@@ -1167,7 +1167,7 @@ window.SLIDES = [
       "imageAlt": "CLAUDE.md in three parts: who you are, what you may not do, when is it what.",
       "imageLink": "01-single-agent/claude-project/CLAUDE.md"
     },
-    "subtitle": "Yesterday, the instructions lived inside the n8n block (System Message). Today, they are a file next to the code, read on top of Claude's own system prompt.",
+    "subtitle": "Last session, the instructions lived inside the n8n block (System Message). Today, they are a file next to the code, read on top of Claude's own system prompt.",
     "cards": [],
     "keyPoints": [
       "The system message now lives in a file next to the code."
@@ -1222,10 +1222,10 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Yesterday's Priority Parser becomes a JSON schema. The trays (the Switch) remain plain code.",
+    "subtitle": "Last session's Priority Parser becomes a JSON schema. The trays (the Switch) remain plain code.",
     "cards": [
       {
-        "title": "Yesterday · Priority Parser",
+        "title": "Last session · Priority Parser",
         "body": "The form inside the n8n block."
       },
       {
@@ -1249,7 +1249,7 @@ window.SLIDES = [
       "gist": "The Parser becomes json_schema (the form as a file). The Switch stays code: the AI gives the label, and the code picks the route.",
       "script": [
         {
-          "say": "Do you remember the form from yesterday, the Priority Parser? Today it is a file: the JSON schema."
+          "say": "Do you remember the form from last session, the Priority Parser? Today it is a file: the JSON schema."
         },
         {
           "do": "Point at the middle card.",
@@ -1286,7 +1286,7 @@ window.SLIDES = [
     "subtitle": "Just like the shop counter from this morning's recap: with the same customer, you remember; with a new customer, you start afresh.",
     "cards": [
       {
-        "title": "Yesterday · Simple Memory",
+        "title": "Last session · Simple Memory",
         "body": "The n8n block that remembered your favourite colour."
       },
       {
@@ -1314,7 +1314,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at the first card.",
-          "say": "Yesterday that was the Simple Memory block. You tested it with your favourite colour."
+          "say": "Last session that was the Simple Memory block. You tested it with your favourite colour."
         },
         {
           "do": "Point at the other two cards.",
@@ -1583,7 +1583,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at step 1.",
-          "say": "First, a dry run. There is no model, so you only see what the agent would receive. Look for outputFormat. That is the parser from yesterday in n8n."
+          "say": "First, a dry run. There is no model, so you only see what the agent would receive. Look for outputFormat. That is the parser from last session in n8n."
         },
         {
           "do": "Point at step 2.",
@@ -2158,7 +2158,7 @@ window.SLIDES = [
     "keyPoints": [
       "The orchestrator delegates. Each specialist does one task."
     ],
-    "notes": "Step 2: the orchestrator delegates to risk-agent first, and then passes that result to customer-reply-agent. In the trace you see this as Agent → risk-agent, then Agent → customer-reply-agent. Yesterday in n8n the Risk Agent was wired as a tool of the Reply Agent. Step 3 adds a third agent: customer-context-agent.",
+    "notes": "Step 2: the orchestrator delegates to risk-agent first, and then passes that result to customer-reply-agent. In the trace you see this as Agent → risk-agent, then Agent → customer-reply-agent. Last session in n8n the Risk Agent was wired as a tool of the Reply Agent. Step 3 adds a third agent: customer-context-agent.",
     "stateId": "28:Subagents",
     "teach": {
       "time": "2 min",
@@ -2349,7 +2349,7 @@ window.SLIDES = [
       "customer-reply-agent writes the reply draft.",
       "The orchestrator delegates in order and saves a file."
     ],
-    "notes": "Step 2 in the package (SOLO.md, Step 2): two specialist files, a loader and the team lead. The team lead calls risk-agent first, then customer-reply-agent. Yesterday's n8n Description is now the description line at the top of each specialist file.",
+    "notes": "Step 2 in the package (SOLO.md, Step 2): two specialist files, a loader and the team lead. The team lead calls risk-agent first, then customer-reply-agent. Last session's n8n Description is now the description line at the top of each specialist file.",
     "stateId": "31:Step 2 · Risk analysis and customer reply agents",
     "teach": {
       "time": "2 min",
@@ -2468,7 +2468,7 @@ window.SLIDES = [
     "keyPoints": [
       "Do the dry run. Then read a live run or the sample trace."
     ],
-    "notes": "20 minutes. Build from SOLO.md or use the shortcut (it copies all the Step 2 files). If there are no Agent → lines, the team lead did the work itself: run it again and discuss why. The description test: with 'Helps with things.' the team lead may stop calling the risk expert. It is the same as yesterday in n8n with an empty Description.",
+    "notes": "20 minutes. Build from SOLO.md or use the shortcut (it copies all the Step 2 files). If there are no Agent → lines, the team lead did the work itself: run it again and discuss why. The description test: with 'Helps with things.' the team lead may stop calling the risk expert. It is the same as last session in n8n with an empty Description.",
     "stateId": "33:Run the orchestrator and inspect the draft.",
     "teach": {
       "time": "20 min",
@@ -2489,7 +2489,7 @@ window.SLIDES = [
         },
         {
           "ask": "What do you expect?",
-          "say": "(Answer: it may stop delegating. It is just like yesterday in n8n with an empty Description.)"
+          "say": "(Answer: it may stop delegating. It is just like last session in n8n with an empty Description.)"
         },
         {
           "do": "Start the 20-minute timer."
@@ -2580,7 +2580,7 @@ window.SLIDES = [
       },
       {
         "title": "The job ad",
-        "body": "Where is yesterday's n8n Description now?"
+        "body": "Where is last session's n8n Description now?"
       }
     ],
     "keyPoints": [
@@ -2599,7 +2599,7 @@ window.SLIDES = [
           "say": "(Answer: risk. The writer needs to know how serious it is.)"
         },
         {
-          "ask": "Where is yesterday's n8n Description now?",
+          "ask": "Where is last session's n8n Description now?",
           "say": "(Answer: in the description line at the top of the agent file.)"
         }
       ],
@@ -2641,7 +2641,7 @@ window.SLIDES = [
     "keyPoints": [
       "The MCP server owns the data. The agent only sees what the tool returns."
     ],
-    "notes": "MCP is a standard way to give an agent a lookup desk. There are two desks: customers (reads docs/customer_context.csv) and transactions (reads docs/transactions.xlsx). They are read-only: they can look things up but not change them. Yesterday's Customer Context Agent with its Data Table becomes this desk.",
+    "notes": "MCP is a standard way to give an agent a lookup desk. There are two desks: customers (reads docs/customer_context.csv) and transactions (reads docs/transactions.xlsx). They are read-only: they can look things up but not change them. Last session's Customer Context Agent with its Data Table becomes this desk.",
     "stateId": "36:MCP: external data",
     "teach": {
       "time": "3 min",
