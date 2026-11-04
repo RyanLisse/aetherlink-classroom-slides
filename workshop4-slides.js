@@ -792,7 +792,7 @@ window.SLIDES = [
       "Use your Claude Code login",
       "No API key needed"
     ],
-    "notes": "For you: the same agent can also run with a paid API key. Be careful: if someone has an API key set on their laptop, the package uses it by itself. In that case, add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here.",
+    "notes": "For you: the same agent can also run with a paid API key. Be careful: if someone has an API key set on their laptop, the package uses it by itself. In that case, add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here. Company laptops (Worldline) often run Claude Code through Vertex AI. The package reads that login from the env block in ~/.claude/settings.json, so nobody needs a .env file or an API key. If a run on such a laptop says it is not logged in, run npm run doctor: the Login settings line should name CLAUDE_CODE_USE_VERTEX. If it says none, the company sets the login somewhere else, for example in a script or alias. Then follow docs/SETUP.md, Company login: three variables in the terminal, and the lesson runs.",
     "stateId": "13:Two ways to run the same agent",
     "teach": {
       "time": "1 min",
@@ -813,7 +813,8 @@ window.SLIDES = [
       ],
       "watch": [
         "Does someone's run choose 'sdk' by itself? Then an API key is set on their laptop. Add --backend claude-code to the command.",
-        "The n8n trial credits from yesterday do not work here."
+        "The n8n trial credits from yesterday do not work here.",
+        "Company laptop on Vertex AI and a run says it is not logged in? Run npm run doctor. The Login settings line should name CLAUDE_CODE_USE_VERTEX. If it says none, follow docs/SETUP.md, Company login (three variables in the terminal)."
       ]
     }
   },
@@ -1046,6 +1047,7 @@ window.SLIDES = [
         "'git' not found: Git is not installed. See docs/SETUP.md.",
         "Error at npm ci: check the Node version. node --version must be 22 or higher.",
         "The backend says sdk: add --backend claude-code.",
+        "Login error on a company (Vertex AI) laptop: run npm run doctor and check the Login settings line, then docs/SETUP.md, Company login.",
         "Someone ran it without --dry-run and sees Step 1 is not built yet: that is correct before Step 1. Add --dry-run."
       ]
     }
