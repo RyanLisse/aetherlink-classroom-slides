@@ -4515,15 +4515,15 @@ const stageSlide = ({title, stage, beat, subtitle, points, next, clip}) => ({
         ? 'Guided evidence review from a saved Claude Code excerpt. This is not a complete live run.'
         : 'Guided evidence review from a technical simulation. The participant still performs every human decision.'}] : []),
       {say: subtitle},
-      {do: beat === 'check' ? 'Ask participants to point to every result on their own screen.' :
-        beat === 'discuss' ? 'Let pairs compare evidence before one person shares.' :
-        beat === 'demo' ? 'Pause on the named evidence and state which human actions remain OPEN.' :
-        'Name the artifact, visible result and stop condition.'}
+      {do: beat === 'check' ? `Inspect this result on the participant screen: ${points[0]}` :
+        beat === 'discuss' ? `Compare answers to this question: ${points[0]}` :
+        beat === 'demo' ? `Pause on this evidence and name the human action that remains OPEN: ${points[0]}` :
+        `Connect this artifact to the assignment: ${points[0]}`}
     ],
-    do: [beat === 'check' ? 'Inspect the participant’s own evidence.' :
-      beat === 'discuss' ? 'Compare evidence in pairs.' :
-      beat === 'demo' ? 'Review the guided evidence without claiming a complete live run.' :
-      'Connect the artifact to its assignment.'],
+    do: [beat === 'check' ? `Inspect this result on the participant screen: ${points[0]}` :
+      beat === 'discuss' ? `Compare answers to this question: ${points[0]}` :
+      beat === 'demo' ? `Review this evidence without claiming a complete live run: ${points[0]}` :
+      `Connect this artifact to the assignment: ${points[0]}`],
     done: [points[points.length - 1]],
     watch: clip ? ['The clip is guided evidence, not proof of a complete live Claude Code run.'] : [],
     next
@@ -4573,21 +4573,33 @@ window.SLIDES = coreSlides.flatMap(slide => removedOpeningTitles.has(slide.title
   ? []
   : [...(before.get(slide.title) || []), slide, ...(after.get(slide.title) || [])]);
 
+const beatOrder = new Map([
+  ['concept', 0], ['what', 1], ['demo', 2], ['turn', 3], ['check', 4], ['discuss', 5]
+]);
+for (const stage of Object.keys(stageConfig)) {
+  const indices = window.SLIDES.flatMap((slide, index) => slide.stage === stage ? [index] : []);
+  const ordered = indices.map(index => window.SLIDES[index])
+    .sort((left, right) => beatOrder.get(left.beat) - beatOrder.get(right.beat));
+  indices.forEach((index, position) => { window.SLIDES[index] = ordered[position]; });
+}
+
 const teachDoByTitle = new Map([
   ['Why build an on-call agent?', 'Show INC-1001 and ask where evidence gathering costs time.'],
   ['The use case on one page', 'Trace intent, evidence, proposal and human decision from left to right.'],
   ['One ticket, nine assignments', 'Point to A1–A9 and name the artifact each assignment leaves behind.'],
   ['intent.md', 'Open intent.md and point to the boundary and repeatable checks.'],
   ['MCP', 'Open the tool trace and separate tool evidence from model text.'],
+  ['Allow · ask · deny', 'Point to one allowed action, one confirmation and one denied mutation.'],
   ['plan.md', 'Open plan.md and inspect Files, Order, Risks, Proof and Rollback.'],
   ['subagents', 'Show the verifier result and ask which claim it challenged.'],
   ['eval: the bench', 'Open the bench result and identify the case, expected behavior and score.'],
   ['From lab to hackathon', 'Map the lab artifacts to one participant hackathon idea.'],
+  ['The loop keeps running. Human judgment stays above it.', 'Trace one incident from intent through the named human gate and the next eval case.'],
   ['Time left? The loop, solo', 'Let participants choose one remaining stage and state its stop condition.'],
   ['Watch: one source, one gate', 'Show the prepared source and the single human gate.'],
   ['What changes when you work alone', 'Ask participants to name the reviewer, QA check and evidence trail they still need.']
 ]);
 for (const slide of window.SLIDES) {
   const action = teachDoByTitle.get(slide.title);
-  if (action && slide.teach && !slide.teach.do?.length) slide.teach.do = [action];
+  if (action && slide.teach) slide.teach.do = [action];
 }

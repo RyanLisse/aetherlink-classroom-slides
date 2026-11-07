@@ -13,11 +13,18 @@ test('Day 5 keeps the 80-slide SRE route without Anatomy figures',()=>{
  assert.equal(slides.length,80);
  assert.equal(slides.filter(slide=>slide.visual?.anatomy).map(slide=>slide.title).join(', '),'');
  for(const stage of ['setup','plan','design','controls','diagnose','test','gate','maintain']){
-  const beats=new Set(slides.filter(slide=>slide.stage===stage).map(slide=>slide.beat));
+  const route=slides.filter(slide=>slide.stage===stage).map(slide=>slide.beat);
+  const beats=new Set(route);
   for(const beat of ['concept','what','demo','turn','check','discuss'])assert.ok(beats.has(beat),`${stage} has ${beat}`);
+  const rank=new Map([['concept',0],['what',1],['demo',2],['turn',3],['check',4],['discuss',5]]);
+  assert.equal(route.join(','),[...route].sort((left,right)=>rank.get(left)-rank.get(right)).join(','),`${stage} follows the teaching loop`);
  }
  assert.ok(slides.every(slide=>slide.teach?.script?.length&&slide.teach.do?.length),'every slide has actionable presenter guidance');
  assert.ok(slides.every(slide=>slide.teach.script.every(item=>!/^\d{1,2}:?$/.test(item.say||item.do||'')&&!/:\s*$/.test(item.say||item.do||''))),'presenter guidance keeps times and ports intact');
+ assert.equal(slides.filter(slide=>slide.teach.do.some(action=>/connect it to the next participant decision/.test(action))).length,0,'presenter actions are slide-specific');
+ for(const generic of ['Connect the artifact to its assignment.','Inspect the participant’s own evidence.','Compare evidence in pairs.']){
+  assert.equal(slides.filter(slide=>slide.teach.do.includes(generic)).length,0,`no generic presenter action: ${generic}`);
+ }
  for(const title of ['MCP','Allow · ask · deny','subagents','eval: the bench']){
   const slide=slides.find(item=>item.title===title);
   assert.ok(slide,title);
