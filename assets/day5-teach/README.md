@@ -16,3 +16,5 @@ These clips support the speaker notes for the Day 5 AI-SDLC lesson. Each clip co
 | `a9.mp4` | Show the proposed lesson and handoff. | Human resolution and lesson promotion stayed OPEN. |
 
 All files are H.264 at 1440 x 900 and 25 fps. They come from the independently reviewed `dag-5-deelnemer.mp4` montage dated 2026-11-07.
+
+The matching `.webm` files use VP8 without audio. They are transcoded from these MP4 clips with FFmpeg. The presenter tries WebM first and retains MP4 as a fallback for codec compatibility.
