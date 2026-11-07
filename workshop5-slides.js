@@ -4603,6 +4603,19 @@ for (const slide of window.SLIDES) {
   const action = teachDoByTitle.get(slide.title);
   if (action && slide.teach) slide.teach.do = [action];
 }
+const demoClips = new Map([
+  ['Watch: Claude interviews me', ['assets/day5-teach/a2.mp4', 'Guided evidence review from a saved Claude Code excerpt. This is not a complete live run.']],
+  ['Watch: red contract → green', ['assets/day5-teach/a3.mp4', 'Guided evidence review from a technical simulation. The participant still accepts the contract.']],
+  ['Watch: the tools in the trace', ['assets/day5-teach/a5.mp4', 'Guided evidence review from a technical simulation. The participant still inspects the read-only tool boundary.']],
+  ['Watch: try to break the rules', ['assets/day5-teach/a4.mp4', 'Guided evidence review from a technical simulation. The human still owns the guard edit.']],
+  ['Watch: /show-me → plan → diagnose', ['assets/day5-teach/a6.mp4', 'Guided evidence review from a technical simulation. Plan acceptance and unsupported claims remain human decisions.']],
+  ['Watch: the bench and the ratchet', ['assets/day5-teach/a7.mp4', 'Guided evidence review from a technical simulation. The participant still accepts the case and protects the ratchet.']],
+  ['Watch: the approval gate', ['assets/day5-teach/a8.mp4', 'Guided evidence review from a technical simulation. Approval and execution remain human actions.']]
+]);
+for (const slide of window.SLIDES) {
+  const clip = demoClips.get(slide.title);
+  if (clip && slide.teach) slide.teach.script.unshift({clip: clip[0], say: clip[1]});
+}
 window.SLIDES.forEach((slide, index) => {
   if (slide.teach) slide.teach.next = window.SLIDES[index + 1]?.title;
   if (slide.stage === 'controls' && ['concept', 'what', 'demo'].includes(slide.beat)) {

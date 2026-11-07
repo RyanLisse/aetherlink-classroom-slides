@@ -18,6 +18,7 @@ test('Day 5 keeps the 80-slide SRE route without Anatomy figures',()=>{
   for(const beat of ['concept','what','demo','turn','check','discuss'])assert.ok(beats.has(beat),`${stage} has ${beat}`);
   const rank=new Map([['concept',0],['what',1],['demo',2],['turn',3],['check',4],['discuss',5]]);
   assert.equal(route.join(','),[...route].sort((left,right)=>rank.get(left)-rank.get(right)).join(','),`${stage} follows the teaching loop`);
+  assert.ok(slides.some(slide=>slide.stage===stage&&slide.beat==='demo'&&slide.teach.script.some(item=>item.clip)),`${stage} demo has presenter video`);
  }
  assert.ok(slides.every(slide=>slide.teach?.script?.length&&slide.teach.do?.length),'every slide has actionable presenter guidance');
  assert.ok(slides.every(slide=>slide.teach.script.every(item=>!/^\d{1,2}:?$/.test(item.say||item.do||'')&&!/:\s*$/.test(item.say||item.do||''))),'presenter guidance keeps times and ports intact');
