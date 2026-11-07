@@ -139,5 +139,25 @@
   </div>
   <script>window.DECK_PAGE = "workshop5.html";</script><script src="workshop5-slides.js?v=5" defer></script>
   <script src="timers.js?v=92" defer></script>
+  <script>
+    const upgradeDay5Clip = video => {
+      const mp4 = video.getAttribute('src');
+      if (!mp4?.startsWith('assets/day5-teach/') || !mp4.endsWith('.mp4')) return;
+      video.removeAttribute('src');
+      const webm = document.createElement('source');
+      webm.src = mp4.replace(/\.mp4$/, '.webm');
+      webm.type = 'video/webm';
+      const fallback = document.createElement('source');
+      fallback.src = mp4;
+      fallback.type = 'video/mp4';
+      video.append(webm, fallback);
+      video.load();
+    };
+    new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+      if (node.matches?.('video.t-clip')) upgradeDay5Clip(node);
+      node.querySelectorAll?.('video.t-clip').forEach(upgradeDay5Clip);
+    }))).observe(document.documentElement, {childList: true, subtree: true});
+  </script>
   <script src="presenter.js?v=106" defer></script>
 </body></html>

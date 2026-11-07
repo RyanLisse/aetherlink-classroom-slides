@@ -4603,3 +4603,9 @@ for (const slide of window.SLIDES) {
   const action = teachDoByTitle.get(slide.title);
   if (action && slide.teach) slide.teach.do = [action];
 }
+window.SLIDES.forEach((slide, index) => {
+  if (slide.teach) slide.teach.next = window.SLIDES[index + 1]?.title;
+  if (slide.stage === 'controls' && ['concept', 'what', 'demo'].includes(slide.beat)) {
+    slide.notes = slide.notes.replace(/^[^\n]*/, 'Controls block · before Assignment 4.');
+  }
+});

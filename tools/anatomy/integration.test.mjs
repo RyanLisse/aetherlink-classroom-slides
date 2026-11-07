@@ -21,6 +21,8 @@ test('Day 5 keeps the 80-slide SRE route without Anatomy figures',()=>{
  }
  assert.ok(slides.every(slide=>slide.teach?.script?.length&&slide.teach.do?.length),'every slide has actionable presenter guidance');
  assert.ok(slides.every(slide=>slide.teach.script.every(item=>!/^\d{1,2}:?$/.test(item.say||item.do||'')&&!/:\s*$/.test(item.say||item.do||''))),'presenter guidance keeps times and ports intact');
+ slides.forEach((slide,index)=>assert.equal(slide.teach.next,slides[index+1]?.title,`${slide.title} points to the actual next slide`));
+ assert.ok(slides.filter(slide=>slide.stage==='controls'&&['concept','what','demo'].includes(slide.beat)).every(slide=>slide.notes.startsWith('Controls block · before Assignment 4.')),'reordered controls slides do not retain backwards clock times');
  assert.equal(slides.filter(slide=>slide.teach.do.some(action=>/connect it to the next participant decision/.test(action))).length,0,'presenter actions are slide-specific');
  for(const generic of ['Connect the artifact to its assignment.','Inspect the participant’s own evidence.','Compare evidence in pairs.']){
   assert.equal(slides.filter(slide=>slide.teach.do.includes(generic)).length,0,`no generic presenter action: ${generic}`);
@@ -46,4 +48,7 @@ test('Classroom and presenter reference the same cached slide and style versions
   const extract=html=>html.match(new RegExp(asset.replace('.','\\.')+'\\?v=([^"\\s]+)'))?.[1];
   assert.ok(extract(main),asset);assert.equal(extract(main),extract(presenter),asset);
  }
+ assert.match(presenter,/video\/webm/);
+ assert.match(presenter,/video\/mp4/);
+ assert.match(presenter,/assets\/day5-teach\//);
 });
