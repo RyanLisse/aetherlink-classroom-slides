@@ -8,16 +8,21 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
-test('Day 5 keeps 65 slides (4 hidden bonus) without Anatomy figures, and the former figure slides keep their content',()=>{
+test('Day 5 keeps the 80-slide SRE route without Anatomy figures',()=>{
  const slides=context.window.SLIDES;
- assert.equal(slides.length,65);
+ assert.equal(slides.length,80);
  assert.equal(slides.filter(slide=>slide.visual?.anatomy).map(slide=>slide.title).join(', '),'');
- for(const title of ['MCP','Allow · ask · deny','subagents','eval','Watch: PASS and REJECTED']){
+ for(const stage of ['setup','plan','design','controls','diagnose','test','gate','maintain']){
+  const beats=new Set(slides.filter(slide=>slide.stage===stage).map(slide=>slide.beat));
+  for(const beat of ['concept','what','demo','turn','check','discuss'])assert.ok(beats.has(beat),`${stage} has ${beat}`);
+ }
+ assert.ok(slides.every(slide=>slide.teach?.script?.length&&slide.teach.do?.length),'every slide has actionable presenter guidance');
+ assert.ok(slides.every(slide=>slide.teach.script.every(item=>!/^\d{1,2}:?$/.test(item.say||item.do||'')&&!/:\s*$/.test(item.say||item.do||''))),'presenter guidance keeps times and ports intact');
+ for(const title of ['MCP','Allow · ask · deny','subagents','eval: the bench']){
   const slide=slides.find(item=>item.title===title);
   assert.ok(slide,title);
   assert.ok((slide.cards?.length||slide.columns?.length)&&slide.notes&&slide.keyPoints.length,`${title} retains teaching content`);
  }
- for(const id of ['bottleneck','loop','mcp','hooks','subagents','eval'])assert.ok(existsSync(path.join(root,`assets/anatomy/${id}.html`)),id);
 });
 test('Presenter uses posters before the legacy bot renderer',()=>{
  const app=read('app.js');

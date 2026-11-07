@@ -16,13 +16,24 @@
     {
       "file": "workshop4-slides.js",
       "source": "RyanLisse/aetherlink-classroom-slides@76dc323:workshop4-slides.js",
-      "slides": 74,
+      "slides": 54,
       "sourceSlides": 69,
       "adapted": true,
       "sourceSha256": "61161c7eb04c08e6846609621377a90952fcd9c10059c255ccbef8f3df9f43bd",
       "adaptedFromNormalizedSha256": "9010a7289d6ba761c22e12649f004875b06b9dde3f81c4242136798f8e9bf428",
-      "normalizedDataSha256": "ebcf856f41bf6792f146e14baafbcd3cc3f828a11088aef1f94322efa33a7c42",
-      "adaptedDataSha256": "ebcf856f41bf6792f146e14baafbcd3cc3f828a11088aef1f94322efa33a7c42"
+      "normalizedDataSha256": "dfbc7004a3e9d0ec86f936ba9c5cc76e96e91f587cfb5332d850d363056683dd",
+      "adaptedDataSha256": "dfbc7004a3e9d0ec86f936ba9c5cc76e96e91f587cfb5332d850d363056683dd"
+    },
+    {
+      "file": "workshop5-slides.js",
+      "source": "AetherLink-bv/aetherlink-classroom-slides@289b345:workshop5-slides.js",
+      "slides": 80,
+      "sourceSlides": 69,
+      "adapted": true,
+      "sourceSha256": "0c15909b9dedb68c78d3b62b0dd3924b8a3db87314c723215e3bd4cd58e2ec08",
+      "adaptedFromNormalizedSha256": "27f56cd646ce0b5ce3f2291b043f8a6453b9dd7b19041849cb2b2d8656bd12aa",
+      "normalizedDataSha256": "83c6139520ea9def535faca9fc5bbace0ddde13f497ec178f3c27a8bb1e3d8ad",
+      "adaptedDataSha256": "83c6139520ea9def535faca9fc5bbace0ddde13f497ec178f3c27a8bb1e3d8ad"
     },
     {
       "file": "workshop6-slides.js",
