@@ -1,16 +1,28 @@
-# Aetherlink × Worldline — classroom deck
+# AetherLink × Worldline classroom slides
 
-The 109-slide HTML deck for the two teaching days ("Working with AI and
-Claude Code" and "Reusable and connected AI workflows"), built around the
-**Aether Library** practice project. Slides 1–4 are a short opening
-(welcome, a show-of-hands question, agreements, who we are) added on
-23 Sep 2026; they are not in `CURRICULUM.md`, so curriculum slide numbers
-are deck numbers minus 4. Plain static site — HTML, CSS,
-vanilla JS. No build step, no framework, no dependencies to install.
+This repository contains the static classroom decks for Days 1–7. Each deck
+has participant slides, presenter notes and copy-ready prompts. There is no
+framework and no dependency install.
 
-Content source of truth: `CURRICULUM.md` in this repo, including its
-"Resolved alignment decisions" section, which overrides three points in the
-base document and was applied when `slides.js` was authored:
+For Days 4 and 5, use these current routes:
+
+| Day | Participant slides | Presenter notes | Participant repository |
+| --- | --- | --- | --- |
+| Day 4 · n8n to Claude Agent SDK | [`workshop4.html`](workshop4.html) | [`workshop4-presenter.html`](workshop4-presenter.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
+| Day 5 · AI-native SDLC | [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
+| Day 5 bonus · Daily Brief | Slide 79 in [`workshop5.html`](workshop5.html#79) | Open slide 79 first, then use **Presenter view** | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main` |
+
+Facilitators should start with [`FACILITATOR.md`](FACILITATOR.md). The slides
+set the lesson order. The participant repositories provide the matching
+starter files and assignments.
+
+## Day 1 and Day 2 curriculum decisions
+
+`index.html` contains the original 109-slide Day 1 and Day 2 deck built around
+the **Aether Library** practice project. Its content source is `CURRICULUM.md`,
+including its "Resolved alignment decisions" section. Those decisions override
+three points in the base document and were applied when `slides.js` was
+authored:
 
 1. **Assignment 11 (Slide 64)** — AI feedback is *required*, not an optional
    extension, and needs no API credentials. The participant's own
@@ -36,11 +48,9 @@ python3 serve.py 8080
 Then open `http://localhost:8080/#1`. Stop the server with Ctrl-C. No install,
 no build — that's the whole workflow.
 
-`serve.py` also disables browser caching outright, but this deck's own HTML
-tags additionally cache-bust every asset with a `?v=` query string
-(currently `?v=92` on `styles.css`, `slides.js`, `demo-fallback.js`, `timers.js`, `app.js` / `presenter.js`) —
-bump that number — in **both** `index.html` and `presenter.html` — whenever you edit `slides.js`, `app.js`, `styles.css` or
-`presenter.js` and want to be certain a stale tab picks up the change.
+`serve.py` disables browser caching. The HTML files also use `?v=` query
+strings for changed assets. Update the matching query string in both the deck
+and presenter HTML when you change a loaded JavaScript or CSS file.
 
 **Use `serve.py`, not plain `python3 -m http.server`.** Browsers cache
 `index.html`/`slides.js` aggressively, so after editing a slide a normal
