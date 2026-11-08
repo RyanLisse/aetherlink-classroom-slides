@@ -4286,7 +4286,7 @@ const coreSlides = [
       "gist": "Follow SOLO.md. Each step has a check.",
       "script": [
         {
-          "say": "Let them do: steps 1–4 of SOLO.md. Steps 5–7 are homework before W"
+          "say": "Let them do: steps 1–4 of SOLO.md. Steps 5–7 are homework before W6."
         },
         {
           "do": "Check step 2: git log shows the test commit before src/brief.ts."
