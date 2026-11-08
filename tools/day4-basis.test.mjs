@@ -56,8 +56,8 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(w4,/app\.js\?v=130/);
  assert.match(w4,/fit-stage\.js\?v=1/);
  assert.match(w4,/id="timer-btn"/);
- assert.match(w4,/workshop4-slides\.js\?v=25/);
- assert.match(w4p,/workshop4-slides\.js\?v=25/);
+ assert.match(w4,/workshop4-slides\.js\?v=27/);
+ assert.match(w4p,/workshop4-slides\.js\?v=27/);
  assert.match(w4p,/presenter\.js\?v=106/);
 });
 
@@ -82,6 +82,9 @@ test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  const setup=day4.find(s=>s.title==='Your turn · Step 0');
  assert.match(JSON.stringify(setup.steps),/Keep working in your own starter/);
  assert.match(JSON.stringify(setup.steps),/Copy no finished files/);
+ assert.match(JSON.stringify(setup.steps),/claude --setting-sources project --strict-mcp-config --no-chrome/);
+ assert.doesNotMatch(active,/settingSources: \['user', 'project'\]|~\/\.claude\/agents/,'Day 4 loads project context only');
+ assert.match(active,/settingSources: \['project'\]/,'Day 4 SDK uses project settings');
  const memory=day4.findIndex(s=>s.title==='Your turn · Build T-001 memory');
  assert.deepEqual(Array.from(day4.slice(memory-2,memory+3),s=>s.title),[
   'n8n recap · before memory was connected','n8n recap · after Simple Memory was connected',

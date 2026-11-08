@@ -889,7 +889,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Clone your own starter. Keep its TODOs for the assignments.",
-        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nclaude"
+        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nclaude --setting-sources project --strict-mcp-config --no-chrome"
       },
       {
         "text": "Add the trainer’s separate read-only reference folder or evidence pack to Claude Code context.",
@@ -1427,10 +1427,7 @@ window.SLIDES = [
     "visual": {
       "quiz": {
         "answer": 0
-      },
-      "bot": "stretchLeft",
-      "place": "pointer",
-      "pointAt": 0
+    }
     },
     "cards": [
       {
@@ -2239,7 +2236,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "1 · Claude Code starts",
-        "body": "It reads .claude/agents/ in your project and in ~/.claude/agents/. In the package, lib/agents.mjs reads the same files for the SDK."
+        "body": "It reads .claude/agents/ in this project. User and global agent folders stay unloaded. The package reads the same project files for the SDK."
       },
       {
         "title": "2 · It reads the description",
@@ -2253,7 +2250,7 @@ window.SLIDES = [
     "keyPoints": [
       "Claude Code loads the folder by itself.",
       "The description decides when Claude uses the agent.",
-      "The SDK reads the same folder with settingSources: ['user', 'project']."
+      "The SDK reads the same folder with settingSources: ['project']."
     ],
     "notes": "A specialist is one file. Claude Code builds the files from the SOLO 2 prompt. The package reads the same folder through lib/agents.mjs. In the prepared trainer copy, show risk-agent.md and its description line.",
     "stateId": "41:Why this folder? Claude finds the agents.",
@@ -3250,12 +3247,8 @@ window.SLIDES = [
         "prompt": "Use n8n MCP to find and read “Day 3 · 12 · Reference · Full ticket triage (L1→L3)”. Do not modify or activate it. Save sanitized JSON without credentials as n8n/support-triage.json. If access fails, use the repository export and mark the live read OPEN.\n\nRead AGENTS.md, README.md, docs/SETUP.md and SOLO.md. Map the nodes, connections, system messages and output parser. Then build a bounded working app from this starter. Preserve Customer Context → Risk → Customer Reply, output {priority, message}, case-insensitive routes and memory isolation by ticket_id. Enforce draft-only output as deliberate hardening. Explain setup commands, show the actual diff, run the documented checks and one real case, and list every unverified behavior as OPEN.\n\nOnly after the actual build and run, list every current SOLO.md build step in order and propose the teaching storyline. Then stop. Wait for the trainer to choose which steps are essential, too large or less important. Do not create assignments or edit SOLO.md or the participant repository before the trainer accepts that selection.\n\nAfter the trainer accepts the selection, turn each kept step into one reviewed copy/paste or typing assignment. Give every assignment a starting state, a visible expected result and a stop condition. Then update SOLO.md and the participant repository to match the leading Workshop 4 slides. Show the documentation diff for trainer review. Deliver a separate read-only reference folder, mapping, evidence and OPEN gaps to the participants. Keep the participant starter TODOs unimplemented. Stop before adding optional features.",
         "after": "Claude rebuilds and proves the app before it proposes the lesson story."
       },
-      "Claude Code reads the n8n JSON before proposing code.",
-      "Claude Code rebuilds the app and proves the source contract.",
-      "Ask Claude Code to list every SOLO.md step in order.",
-      "Ask for one storyline that connects those steps.",
-      "Remove optional detail, then turn each kept step into a copy/paste or typing assignment.",
-      "Review the slide route first. Only then align SOLO.md and the participant repository to it."
+    "Review the ordered SOLO.md steps and one connecting storyline. Remove optional detail before accepting the route.",
+    "Turn each kept step into a copy/paste or typing assignment. Review the slide route first, then align SOLO.md and the participant repository."
     ],
     "expected": "A reviewer accepts one slide-led lesson route. SOLO.md and the participant repository then match its reviewed assignments and evidence.",
     "notes": "Required trainer preparation before class, outside the participant route. Share the completed reference separately from the unsolved participant starter. It is not a participant assignment. Use the n8n MCP when it is available. Never import, activate or expose credentials. Build first. Ask for the storyline only after the app and evidence exist.",

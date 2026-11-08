@@ -37,10 +37,27 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
 
  const live=slides.findIndex(slide=>slide.kicker==='W5 · OPTIONAL LIVE MODEL');
  const skills=slides.findIndex(slide=>slide.kicker==='W5 · PROJECT SKILLS');
- assert.ok(live>=0&&live<skills,'optional live-model setup appears before A1');
- assert.equal(slides[skills].source?.url,'https://github.com/AetherLink-bv/claude-code-skills-pack','project-skills slide links the public skills pack');
- assert.match(slides[skills].prompt,/only that skill.*project's \.claude\/skills.*preserve it.*approval.*Do not install the full pack/s,'project-skills slide exposes the selective install prompt');
- assert.ok(slides[skills].keyPoints.some(point=>/project-local skill.*Do not bulk install/.test(point)),'skills pack stays selective and optional');
+ const a5=slides.findIndex(slide=>slide.title==='Assignment 5: build a read-only deploy tool');
+ const a6=slides.findIndex(slide=>slide.title==='A6 · Create the live counterpart');
+ const handoffClose=slides.findIndex(slide=>slide.kicker==='W5 · HANDOFF');
+ const method=slides.findIndex(slide=>slide.title==='The method you take with you');
+ const hackathon=slides.findIndex(slide=>slide.kicker==='W5 · HACKATHON SKILLS');
+ assert.ok(skills>=0&&skills<slides.findIndex(slide=>slide.kicker==='W5 · A1 · CONCEPT'),'included project skills appear before A1');
+ assert.ok(a5>=0&&live===a5+1&&live<a6,'optional product-model setup appears directly after A5 and before A6');
+ assert.equal(slides[skills].source,undefined,'opening project-skills slide uses only the included skills');
+ assert.equal(slides[skills].prompt,undefined,'opening project-skills slide does not install the public pack');
+ assert.ok(slides.some(slide=>slide.steps?.some(step=>step.prompt==='claude --setting-sources project --strict-mcp-config --no-chrome')),'Day 5 starts Claude Code with project context only');
+ assert.doesNotMatch(slides[skills].notes,/user settings|global settings/i,'project-skills introduction does not load wider settings');
+ assert.equal(handoffClose+1,method,'the handoff flows into the Day 5 method');
+ assert.equal(hackathon,45,'the full skills pack starts on physical slide 46, after slide 45');
+ assert.equal(hackathon,method+1,'the full skills pack follows the Day 5 method');
+ assert.equal(slides[handoffClose].source,undefined,'the handoff does not introduce the full skills pack early');
+ assert.equal(slides[hackathon].source?.url,'https://github.com/AetherLink-bv/claude-code-skills-pack','slide 46 links the public skills pack');
+ assert.match(slides[hackathon].prompt,/only that skill.*project's \.claude\/skills.*preserve it.*approval.*Do not install the full pack/s,'slide 46 exposes the selective install prompt');
+ assert.ok(slides[hackathon].keyPoints.some(point=>/Do not bulk install/.test(point)),'skills pack stays selective and belongs after the lesson');
+ assert.ok(slides[hackathon].cards.some(card=>/claude --setting-sources project --strict-mcp-config --no-chrome/.test(card.body)),'hackathon pack uses project-only settings without Claude in Chrome');
+ const a1MapPrompt=slides.flatMap(slide=>slide.steps||[]).find(step=>step.prompt?.startsWith('/show-me Read CLAUDE.md'))?.prompt||'';
+ assert.doesNotMatch(a1MapPrompt,/README\.md|WORKSHOP\.md|package\.json/,'A1 repo map stays within the bounded source set');
  assert.equal(slides[live].layout,'exercise','optional live-model setup uses the copy-enabled assignment renderer');
  assert.ok(slides[live].steps.every(step=>typeof step.prompt==='string'&&step.prompt.trim()),'every live-model step exposes copy-ready text');
  assert.match(slides[live].steps[0].prompt,/Claude Code builder session.*Claude Agent SDK product runtime/);
@@ -49,7 +66,7 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
  assert.match(slides[live].steps[3].prompt,/^env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console$/);
  assert.match(slides[live].notes,/completed diagnosis.*tool trace/i);
  assert.ok(slides[live].keyPoints.some(point=>/between turns.*exceed/i.test(point)),'live-model setup warns that the budget can overshoot within one turn');
- assert.match(slides[live].cards.find(card=>card.title==='Product · after A5')?.body||'',/turn-checked.*One turn can exceed the budget/,'the overshoot warning is in the visible assignment card');
+ assert.match(slides[live].cards.find(card=>card.title==='Product · optional now')?.body||'',/turn-checked.*One turn can exceed the budget/,'the overshoot warning is in the visible assignment card');
 
  const handoff=slides.find(slide=>slide.title==='Assignment 9: turn the lesson into a hackathon handoff');
  assert.ok(handoff,'A9 handoff assignment exists');
