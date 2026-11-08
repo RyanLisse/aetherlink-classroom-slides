@@ -45,6 +45,8 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
  assert.match(slides[live].steps[2].prompt,/AGENT_MODEL=sonnet/);
  assert.match(slides[live].steps[3].prompt,/^env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console$/);
  assert.match(slides[live].notes,/completed diagnosis.*tool trace/i);
+ assert.ok(slides[live].keyPoints.some(point=>/between turns.*exceed/i.test(point)),'live-model setup warns that the budget can overshoot within one turn');
+ assert.match(slides[live].cards.find(card=>card.title==='Product · after A5')?.body||'',/turn-checked.*One turn can exceed the budget/,'the overshoot warning is in the visible assignment card');
 
  const handoff=slides.find(slide=>slide.title==='Assignment 9: turn the lesson into a hackathon handoff');
  assert.ok(handoff,'A9 handoff assignment exists');

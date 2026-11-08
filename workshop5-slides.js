@@ -215,7 +215,7 @@ openingSlides.push(
     stepsHeading: 'Prepare now, activate only after A5:',
     cards: [
       {title: 'Builder · now', body: 'Run claude in your own clone. Use /login only on your own machine.'},
-      {title: 'Product · after A5', body: 'Run one budget-capped CLI proof before you optionally restart the console.'},
+      {title: 'Product · after A5', body: 'Run one turn-checked CLI proof before you optionally restart the console. One turn can exceed the budget.'},
       {title: 'Proof', body: 'Require one completed diagnosis and its visible tool trace. A health label alone is not proof.'},
       {title: 'Fallback', body: 'Stop your console and restart without AGENT_MODEL. The required route remains scripted.'}
     ],
@@ -225,7 +225,7 @@ openingSlides.push(
       {text: 'After A5, optionally restart your own console', prompt: 'AGENT_MODEL=sonnet AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The console is ready for one approved live-model investigation.'},
       {text: 'Return to the required scripted route', prompt: 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'Any exported model override is cleared and the scripted investigator runs again.'}
     ],
-    keyPoints: ['Never copy credentials to chat, Git, a browser field, or a remote host.', 'Claude Code login uses plan limits; an intentional API-key path may use paid credits.', 'The console has no global model-budget guard; stop after one approved proof.'],
+    keyPoints: ['Never copy credentials to chat, Git, a browser field, or a remote host.', 'The SDK checks the budget between turns, so one turn can exceed it.', 'The console has no global model-budget guard; stop after one approved proof.'],
     notes: note({time: '10:15 · 90 sec', why: 'Participants need to connect their own local Claude without confusing the builder with the product runtime.', predict: 'Ask which evidence proves a model actually answered.', see: 'Login, bounded CLI proof, optional console activation, and fallback are separate.', inside: 'The Agent SDK can use the local Claude Code login. The core route still works without a model.', participant: 'Sign in locally and review the preparation prompt. Do not activate the product model before A5.', watch: 'Never request, display, or transfer credentials. A model name in health proves configuration only. The console has no global model-budget guard.', stuck: 'Keep the product offline and continue with A1.', stop: 'Everyone can state that a completed diagnosis plus its visible tool trace proves the model path.', next: 'The repository already knows how to help'})
   }),
   baseSlide({
