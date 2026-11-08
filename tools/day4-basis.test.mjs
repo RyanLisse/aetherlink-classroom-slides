@@ -56,15 +56,15 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(w4,/app\.js\?v=130/);
  assert.match(w4,/fit-stage\.js\?v=1/);
  assert.match(w4,/id="timer-btn"/);
- assert.match(w4,/workshop4-slides\.js\?v=22/);
- assert.match(w4p,/workshop4-slides\.js\?v=22/);
+ assert.match(w4,/workshop4-slides\.js\?v=23/);
+ assert.match(w4p,/workshop4-slides\.js\?v=23/);
  assert.match(w4p,/presenter\.js\?v=106/);
 });
 
 test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  const day4=deck('workshop4-slides.js');
- assert.equal(day4.length,59);
- assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,59);
+ assert.equal(day4.length,60);
+ assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,60);
  assert.ok(day4.every(s=>s.teach&&s.teach.script?.length),'every slide has a teach card');
  assert.ok(day4.every(s=>s.teach.do?.length),'every teach card has a concrete trainer action');
  assert.ok(day4.every(s=>s.title?.trim()));
@@ -94,4 +94,10 @@ test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  assert.match(memoryPrompts[2],/docs\/memory-lab\/T-002\.md only/);
  assert.match(memoryPrompts[2],/Do not read docs\/memory-lab\/T-001\.md/);
  assert.match(memoryPrompts[2],/credentials, authentication data, tokens, personal data/);
+ const map=day4.find(s=>s.title==='Visual reference · the Day 4 agent route');
+ assert.equal(map.source.url,'assets/agent-map/index.html');
+ assert.equal(map.visual.image,'assets/agent-map/poster.png');
+ assert.match(JSON.stringify(map),/Teaching simulation — no model calls/);
+ assert.match(JSON.stringify(map),/memory\.md is a local exercise extension/);
+ for(const label of ['Customer Context','Risk','Reply','output contract','human gate'])assert.ok(JSON.stringify(map).includes(label),label);
 });

@@ -362,6 +362,46 @@ window.SLIDES = [
   },
   {
     "lessonId": "workshop-4",
+    "title": "Visual reference · the Day 4 agent route",
+    "kicker": "React Flow · trainer reference",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/agent-map/poster.png",
+      "imageLink": "Interactive map · use the button below"
+    },
+    "source": {
+      "label": "Open the interactive React Flow map",
+      "url": "assets/agent-map/index.html"
+    },
+    "subtitle": "Chat and commands enter the same route. Three specialists produce one draft, and a person reviews it.",
+    "cards": [
+      {"title":"One route","body":"Chat or command → Orchestrator → Customer Context → Risk → Reply."},
+      {"title":"One contract","body":"Return {priority, message}; route low, medium and high without case sensitivity."},
+      {"title":"One human gate","body":"The output is a draft. A named person reviews it before customer use."}
+    ],
+    "keyPoints": [
+      "Teaching simulation — no model calls",
+      "technical logs ≠ curated memory",
+      "memory.md is a local exercise extension"
+    ],
+    "notes": "Open the interactive map if the room needs the whole route at once. Click the nodes or use Play route. This is a teaching simulation with no model calls. It maps the real n8n order and Day 4 contract. The ticket memory.md node is labelled as a local exercise extension; do not present it as n8n parity. Technical logs remain append-only evidence, while memory.md is a reviewed summary.",
+    "teach": {
+      "time": "3 min",
+      "gist": "Show the complete Day 4 route as one interactive React Flow map.",
+      "script": [
+        {"do":"Open the interactive map and choose Play route.","say":"Chat and commands are two doors into the same ticket flow. The route and output contract stay the same."},
+        {"do":"Click Context, Risk and Reply in order.","say":"Context reads first, Risk advises before priority is final, and Reply writes the draft last."},
+        {"do":"Click technical logs and ticket memory.md.","say":"Logs record execution events. The reviewed memory file is a separate local exercise extension."}
+      ],
+      "do": ["Play the route once.","Show the output contract and human gate.","Separate technical logs from reviewed file memory."],
+      "done": ["Participants can describe the route without treating the map as a live run."],
+      "watch": ["The map is a teaching simulation, not runtime evidence.","memory.md is not part of the original n8n workflow."],
+      "next": "Today's goal"
+    }
+  },
+  {
+    "lessonId": "workshop-4",
     "title": "Today's goal",
     "kicker": "Welcome · Today's goal",
     "type": "context",

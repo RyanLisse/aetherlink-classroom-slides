@@ -16,13 +16,13 @@
     {
       "file": "workshop4-slides.js",
       "source": "RyanLisse/aetherlink-classroom-slides@76dc323:workshop4-slides.js",
-      "slides": 59,
+      "slides": 60,
       "sourceSlides": 69,
       "adapted": true,
       "sourceSha256": "61161c7eb04c08e6846609621377a90952fcd9c10059c255ccbef8f3df9f43bd",
       "adaptedFromNormalizedSha256": "9010a7289d6ba761c22e12649f004875b06b9dde3f81c4242136798f8e9bf428",
-      "normalizedDataSha256": "0d78dde8ef44583d4a02eeb20d9f3b46ccc0afedbc610c1e73f18d97a793c2ec",
-      "adaptedDataSha256": "0d78dde8ef44583d4a02eeb20d9f3b46ccc0afedbc610c1e73f18d97a793c2ec"
+      "normalizedDataSha256": "4e43844b065f0434c0ec15c9785f9b46b1f59754003a1a10d11b9396cde65852",
+      "adaptedDataSha256": "4e43844b065f0434c0ec15c9785f9b46b1f59754003a1a10d11b9396cde65852"
     },
     {
       "file": "workshop5-slides.js",

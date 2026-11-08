@@ -1,0 +1,14 @@
+{
+  "name": "aetherlink-day4-agent-map",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@xyflow/react": "12.9.3",
+    "esbuild": "0.25.12",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}
