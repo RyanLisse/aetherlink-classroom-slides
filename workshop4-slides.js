@@ -889,7 +889,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Clone your own starter. Keep its TODOs for the assignments.",
-        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nclaude"
+        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nclaude --setting-sources project --strict-mcp-config --no-chrome"
       },
       {
         "text": "Add the trainer’s separate read-only reference folder or evidence pack to Claude Code context.",
@@ -2239,7 +2239,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "1 · Claude Code starts",
-        "body": "It reads .claude/agents/ in your project and in ~/.claude/agents/. In the package, lib/agents.mjs reads the same files for the SDK."
+        "body": "It reads .claude/agents/ in this project. User and global agent folders stay unloaded. The package reads the same project files for the SDK."
       },
       {
         "title": "2 · It reads the description",
@@ -2253,7 +2253,7 @@ window.SLIDES = [
     "keyPoints": [
       "Claude Code loads the folder by itself.",
       "The description decides when Claude uses the agent.",
-      "The SDK reads the same folder with settingSources: ['user', 'project']."
+      "The SDK reads the same folder with settingSources: ['project']."
     ],
     "notes": "A specialist is one file. Claude Code builds the files from the SOLO 2 prompt. The package reads the same folder through lib/agents.mjs. In the prepared trainer copy, show risk-agent.md and its description line.",
     "stateId": "41:Why this folder? Claude finds the agents.",

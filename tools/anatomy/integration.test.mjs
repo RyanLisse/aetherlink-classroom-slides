@@ -41,9 +41,14 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
  assert.ok(live>=0&&live<skills,'optional live-model setup appears before A1');
  assert.equal(slides[skills].source,undefined,'opening project-skills slide uses only the included skills');
  assert.equal(slides[skills].prompt,undefined,'opening project-skills slide does not install the public pack');
+ assert.ok(slides.some(slide=>slide.steps?.some(step=>step.prompt==='claude --setting-sources project --strict-mcp-config --no-chrome')),'Day 5 starts Claude Code with project context only');
+ assert.doesNotMatch(slides[skills].notes,/user settings|global settings/i,'project-skills introduction does not load wider settings');
  assert.equal(slides[hackathon].source?.url,'https://github.com/AetherLink-bv/claude-code-skills-pack','hackathon close links the public skills pack');
  assert.match(slides[hackathon].prompt,/only that skill.*project's \.claude\/skills.*preserve it.*approval.*Do not install the full pack/s,'hackathon close exposes the selective install prompt');
- assert.ok(slides[hackathon].keyPoints.some(point=>/After the lesson.*project-local reuse.*Do not bulk install/.test(point)),'skills pack stays selective and belongs after the lesson');
+ assert.ok(slides[hackathon].keyPoints.some(point=>/public-pack skill.*project-local reuse.*Do not bulk install/.test(point)),'skills pack stays selective and belongs after the lesson');
+ assert.ok(slides[hackathon].keyPoints.some(point=>/claude --setting-sources project --strict-mcp-config --no-chrome/.test(point)),'hackathon pack uses project-only settings without Claude in Chrome');
+ const a1MapPrompt=slides.flatMap(slide=>slide.steps||[]).find(step=>step.prompt?.startsWith('/show-me Read CLAUDE.md'))?.prompt||'';
+ assert.doesNotMatch(a1MapPrompt,/README\.md|WORKSHOP\.md|package\.json/,'A1 repo map stays within the bounded source set');
  assert.equal(slides[live].layout,'exercise','optional live-model setup uses the copy-enabled assignment renderer');
  assert.ok(slides[live].steps.every(step=>typeof step.prompt==='string'&&step.prompt.trim()),'every live-model step exposes copy-ready text');
  assert.match(slides[live].steps[0].prompt,/Claude Code builder session.*Claude Agent SDK product runtime/);
