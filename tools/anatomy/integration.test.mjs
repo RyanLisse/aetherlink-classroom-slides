@@ -13,6 +13,9 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
  assert.ok(slides.length>0,'Day 5 deck loads');
  assert.equal(slides.filter(slide=>slide.visual?.anatomy).length,0,'Day 5 has no Anatomy figures');
  assert.ok(slides.every(slide=>typeof slide.notes==='string'&&slide.notes.trim()),'every slide has speaker notes');
+ assert.ok(slides.every(slide=>slide.teach?.script?.length),'every slide has a presenter teach card');
+ assert.ok(slides.every(slide=>slide.teach?.do?.length&&slide.teach?.done?.length),'every teach card has an action and stop result');
+ assert.ok(slides.slice(0,-1).every((slide,index)=>slide.teach.next===slides[index+1].title),'teach.next follows the slide order');
 
  let promptCount=0;
  for(let number=1;number<=9;number+=1){

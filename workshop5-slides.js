@@ -5,14 +5,14 @@ const PROMPTS = {
   a1Setup: `Use the repository map we just reviewed. Check Node and my current diff. Install dependencies only if they are missing, then generate the sample fixtures. Run the main tests. Run the workshop tests and explain why A3, A4, A5, and A8 are expected to fail. Do not solve them. Run npm run workshop:check only to locate unfinished markers; it is not a completion gate. Check port 4320. If it is free, start the console with AGENT_LISTEN_WINDOW_MIN=1. If it is occupied, do not stop the process. Report whether it belongs to this lab and whether its listener window is known. Show the console health and local URL. Do not push or change hooks. Stop for my setup review.`,
   a2Design: `/design-control-loop Read intent.md, fixtures/incidents/bad-deploy.json, and REVIEW.md. Ask me at most three questions in one round about the operator, the observable outcome, and the read-only boundary. Recommend an answer for each question. Map my answers to intent.md fields. Stay in design mode. Do not edit or build. Stop after the field map.`,
   a2Write: `Use the decisions from the design-control-loop interview. Propose an exact intent.md diff with one operator outcome, three checks a stranger can repeat, the sample-data boundary, and the named human decisions. Wait for my approval. After I approve, edit only intent.md and show the diff. Do not build or push.`,
-  a3Contract: `Read the accepted intent.md, docs/spec.md, src/contract.ts, src/runtime.ts, src/prompts.ts, and the A3 workshop test. Explain the current verdict contract in plain English. Propose the smallest contract change that requires non-empty customer_impact, keeps unsupported claims OPEN, and keeps the offline and optional real-model schemas aligned. Do not edit code or tests. Stop for my contract review.`,
-  a3Build: `Use the contract I accepted. Run the focused A3 test and show the red assertion. Explain the failure before editing. Then implement the accepted A3 contract without weakening tests. Change TODO(A3), the contract schema and types, all offline runtime verdict branches, the real-model schema in src/prompts.ts, and the relevant contract, approval, and executor fixtures that consume customer_impact. Do not change unrelated product scaffolding. Rerun the focused A3 test. Run the main tests, typecheck, and the offline investigation. Show the exact outputs and diff. Do not copy a solved implementation, approve, execute, resolve, or push.`,
+  a3Contract: `Read the accepted intent.md, docs/spec.md, src/contract.ts, src/runtime.ts, src/prompts.ts, and the A3 workshop test. Explain the current verdict contract in plain English. Propose the smallest contract change that requires non-empty customer_impact, keeps unsupported claims OPEN, and keeps the offline and optional real-model schemas aligned. Describe observed request failures or latency; keep affected versions, regions, and customer segments OPEN unless the cited metric establishes them. Do not edit code or tests. Stop for my contract review.`,
+  a3Build: `Use the contract I accepted. Run the focused A3 test and show the red assertion. Explain the failure before editing. Then implement the accepted A3 contract without weakening tests. Change TODO(A3), docs/spec.md, the contract schema and types, all offline runtime verdict branches, the real-model schema in src/prompts.ts, the relevant contract, approval, and executor fixtures that consume customer_impact, and display customer_impact in src/cli.ts and console/index.html. Do not change unrelated product scaffolding. Rerun the focused A3 test. Run the main tests, typecheck, and the offline investigation. Show the exact CLI output, console field, test outputs, and diff. Do not copy a solved implementation, approve, execute, resolve, or push.`,
   a3Verify: `/verify-this Verify this claim: the A3 verdict contract cannot pass without non-empty customer_impact and the offline investigation still reports customer impact. Use the accepted spec, the focused A3 test, the main tests, typecheck, and the offline output. Report VERIFIED, NOT VERIFIED, or INCONCLUSIVE with file and output references. Stay read-only.`,
-  a4Chat: `Read intent.md, src/chat.ts, and test/workshop/chat.test.ts. Explain the chat-refusal contract in plain English. Keep the named MUTATION constant because the progress hook checks it. Add a negative test that the read-only question "Was the deploy the cause?" remains a question and is not refused. Ask me to choose one extra operational mutation phrase. Add that phrase to the focused test, show the test red, then implement only TODO(A4) in src/chat.ts. Rerun the focused chat test and show the diff. Do not edit .claude/, approvals/, lessons/lessons.md, PROGRESS.md, or bench/ratchet.json. Do not approve or execute anything. Stop before the human hook step.`,
+  a4Chat: `Read intent.md, src/chat.ts, and test/workshop/chat.test.ts. Explain the chat-refusal contract in plain English. Add a named MUTATION regex constant because the progress hook checks it. Add a negative test that the read-only question "Was the deploy the cause?" remains a question and is not refused. Ask me to choose one extra operational mutation phrase. Add that phrase to the focused test, show the test red, then implement only TODO(A4) in src/chat.ts. Rerun the focused chat test and show the diff. Do not edit .claude/, approvals/, lessons/lessons.md, PROGRESS.md, or bench/ratchet.json. Do not approve or execute anything. Stop before the human hook step.`,
   a4Review: `Read the human edit in .claude/hooks/guard.mjs and test/workshop/guard.test.ts. Do not edit either file. Run only the focused guard test. Explain whether Edit and Write to bench/ratchet.json are denied, and show the audit result. Do not claim that the hook blocks every shell command. Stop for my review.`,
   a5Build: `Read intent.md, src/tools.ts, src/runtime.ts, src/chat.ts, and test/workshop/tools.test.ts. Explain how list_deploys stays read-only and where its trace arguments are recorded. Show the three starter bypasses that read deploys without the new handler. Ask me to choose one edge case: an empty time window or a missing deploy. Show the focused A5 test red. After my approval, implement TODO(A5) in src/tools.ts and remove the list_deploys bypasses from src/runtime.ts and src/chat.ts so offline investigation and chat use the registered handler. Add my edge case and rerun the focused test. Then run the main tests, typecheck, and the offline investigation. Show the tool result and exact trace arguments. Do not add a mutation tool, approve, execute, resolve, or push.`,
   a6Map: `/show-me Read docs/plan.md, fixtures/incidents/bad-deploy.json, and the existing shop, traffic, chaos, and console scripts. Map two shallow paths: the fixture CLI for INC-1001 and the live listener that creates a new incident id from shop telemetry. Show where both paths use the shared investigate flow and tool trace. Stay read-only. Do not generate HTML. Separate scripted fixture output from optional model output, then stop.`,
-  a6Build: `Use the incident path we reviewed. Propose a local demo plan with files, order, risks, proof, rollback, and one alternative cause. Wait for my approval. Reuse running processes. After I approve, give me exact commands for separate terminals. I will start the console with AGENT_LISTEN_WINDOW_MIN=1, start the shop, keep traffic running, and run the one-shot bad-deploy chaos command in its own terminal. Do not run chaos or stop processes yourself. When I confirm the incident exists, help me trace each diagnosis claim to a stable source:ref label. Keep diagnosis-snapshot evidence separate from current telemetry. Ask before writing docs/diagnosis-live.md. Mark missing evidence OPEN. Do not approve, execute, resolve, or push.`,
+  a6Build: `Use the incident path we reviewed. Propose a local demo plan with files, order, risks, proof, rollback, and one alternative cause. Wait for my approval. Reuse running processes. After I approve, give me exact commands for separate terminals. I will start the console with AGENT_LISTEN_WINDOW_MIN=1, start the shop, keep healthy traffic running for two minutes to establish the before state, and then run the one-shot bad-deploy chaos command in its own terminal. Do not run chaos or stop processes yourself. When I confirm the incident exists, help me trace each diagnosis claim to a stable source:ref label. Keep diagnosis-snapshot evidence separate from current telemetry. Ask before writing docs/diagnosis-live.md. Mark missing evidence OPEN. Do not approve, execute, resolve, or push.`,
   a6Evidence: `Which evidence supports the proposed rollback? Show stable source:ref labels. Separate the diagnosis snapshot from current telemetry. Do not approve or execute anything.`,
   a6Alternative: `Could this be something other than the deployment?`,
   a6Mutation: `Roll back now.`,
@@ -39,8 +39,28 @@ const note = ({time, why, predict, play, pause, see, inside, participant, watch,
   `Next: ${next}`
 ].filter(Boolean).join('\n\n');
 
+const noteValue = (notes, label) => String(notes || '')
+  .split('\n\n')
+  .find((line) => line.startsWith(`${label}: `))
+  ?.slice(label.length + 2);
+
+const teachFromNotes = ({title, subtitle, keyPoints, notes}) => {
+  const gist = subtitle || title;
+  const predict = noteValue(notes, 'Predict');
+  return {
+    time: noteValue(notes, 'Time') || 'Facilitator',
+    gist,
+    script: predict ? [{say: noteValue(notes, 'Why now') || gist}, {ask: predict}] : [{say: gist}],
+    do: [noteValue(notes, 'Participant does') || `Present ${title}.`],
+    done: [noteValue(notes, 'Stop') || keyPoints.at(-1) || gist],
+    watch: [noteValue(notes, 'Watch for')].filter(Boolean),
+    next: noteValue(notes, 'Next') || ''
+  };
+};
+
 const baseSlide = ({title, kicker, subtitle, type = 'concept', cards = [], keyPoints = [], notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo, teach}) => ({
-  title, kicker, subtitle, type, cards, keyPoints, notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo, teach
+  title, kicker, subtitle, type, cards, keyPoints, notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo,
+  teach: teach || teachFromNotes({title, subtitle, keyPoints, notes})
 });
 
 const demoSlide = ({number, title, subtitle, clip, predict, pause, points, stage, next}) => baseSlide({
@@ -97,14 +117,14 @@ openingSlides.push(
   baseSlide({
     title: 'Day 5 starts with one broken checkout',
     kicker: 'W5 · AI-NATIVE SDLC',
-    subtitle: 'You are new to the codebase. INC-1001 is already active.',
+    subtitle: 'You are new to the codebase. One failure story already has a fixture record.',
     type: 'context',
     cards: [
       {title: 'Customer', body: 'Checkout errors rose after deploy d-4821.'},
       {title: 'You', body: 'You have 15 minutes before the next handoff.'},
       {title: 'Claude Code', body: 'The builder reads and changes the project with your review.'}
     ],
-    keyPoints: ['Start with the customer impact.', 'Keep one incident open all day.', 'A human owns every operational action.'],
+    keyPoints: ['Start with the customer impact.', 'Follow the failure across fixture and live records.', 'A human owns every operational action.'],
     visual: {opener: 'welcome', bot: 'alert', place: 'beside'},
     notes: note({time: '10:00 · 2 min', why: 'The incident gives every later file, test, and gate a reason to exist.', predict: 'Ask what you would inspect before you changed code.', see: 'Checkout errors rose after one deploy.', inside: 'The learner starts without codebase knowledge.', participant: 'Give one first check.', watch: 'Do not introduce AI-native SDLC jargon yet.', stuck: 'Read the incident and ask for the first observable fact.', stop: 'Collect two answers.', next: 'Meet the builder and the product'})
   }),
@@ -136,7 +156,7 @@ openingSlides.push(
   baseSlide({
     title: 'What you have built by 16:00',
     kicker: 'W5 · OUTCOME',
-    subtitle: 'A local first responder for INC-1001 and a handoff for your hackathon.',
+    subtitle: 'A local first responder for one failure story and a handoff for your hackathon.',
     type: 'context',
     cards: [
       {title: 'Investigate', body: 'Read metrics, deploys, the diff, and logs.'},
@@ -144,8 +164,8 @@ openingSlides.push(
       {title: 'Stop safely', body: 'Refuse mutation requests and wait at the human gate.'},
       {title: 'Continue later', body: 'Leave tested evidence, OPEN items, and one next step.'}
     ],
-    keyPoints: ['Visible result first.', 'One incident connects all nine assignments.', 'The hackathon starts from the handoff.'],
-    notes: note({time: '10:06 · 2 min', why: 'Participants can judge every assignment against the final result.', predict: 'Ask which card would be hardest to prove.', see: 'Four observable outcomes.', inside: 'Each outcome becomes a later checkpoint.', participant: 'Choose the outcome you want to inspect most closely.', watch: 'Do not promise a production agent.', stuck: 'Connect each card to INC-1001.', stop: 'The room can describe the finished local lab.', next: 'Today repeats the Day 1–4 loop'})
+    keyPoints: ['Visible result first.', 'One failure story connects all nine assignments.', 'The hackathon starts from the handoff.'],
+    notes: note({time: '10:06 · 2 min', why: 'Participants can judge every assignment against the final result.', predict: 'Ask which card would be hardest to prove.', see: 'Four observable outcomes.', inside: 'Each outcome becomes a later checkpoint.', participant: 'Choose the outcome you want to inspect most closely.', watch: 'Do not promise a production agent.', stuck: 'Connect each card to the failure story.', stop: 'The room can describe the finished local lab.', next: 'Today repeats the Day 1–4 loop'})
   }),
   baseSlide({
     title: 'Today repeats the Day 1–4 loop',
@@ -153,8 +173,8 @@ openingSlides.push(
     subtitle: 'You know the working method. Today the evidence gets stricter.',
     type: 'concept',
     cards: [
-      {title: 'Day 1', body: 'intent.md, CLAUDE.md, plan mode, and permissions.'},
-      {title: 'Day 2', body: 'Project skills and hooks make a method repeatable.'},
+      {title: 'Day 1', body: 'intent.md, CLAUDE.md, plan mode, permissions, and hooks.'},
+      {title: 'Day 2', body: 'Project skills, reusable workflows, and subagents make methods repeatable.'},
       {title: 'Day 3', body: 'The n8n triage used chat, memory, structured output, subagents, and tools.'},
       {title: 'Day 4', body: 'Claude Code rebuilt the known workflow with prompts, agents, and read-only data.'}
     ],
@@ -213,7 +233,7 @@ openingSlides.push(
       {label: 'A9', caption: 'Lesson, hackathon intent, and handoff'}
     ],
     keyPoints: ['Claude builds one step.', 'You choose and inspect.', 'The human gate remains OPEN.'],
-    notes: note({time: '10:16 · 1 min', why: 'The route prevents a beginner from solving the whole codebase at once.', predict: 'Ask where the first human-only edit appears.', see: 'Nine small results form one incident response.', inside: 'Each artifact is evidence for the next assignment.', participant: 'Keep this route open when you lose your place.', watch: 'Do not jump to a solved branch or tag.', stuck: 'Return to the current artifact.', stop: 'Point to A1.', next: 'The starter stack'})
+    notes: note({time: '10:16 · 1 min', why: 'The route prevents a beginner from solving the whole codebase at once.', predict: 'Ask where the first human-only edit appears.', see: 'Nine small results form one investigation and handoff route.', inside: 'Each artifact is evidence for the next assignment.', participant: 'Keep this route open when you lose your place.', watch: 'Do not jump to a solved branch or tag.', stuck: 'Return to the current artifact.', stop: 'Point to A1.', next: 'The starter stack'})
   }),
   baseSlide({
     title: 'The starter stack',
@@ -302,7 +322,7 @@ assignmentSlides.push(
   baseSlide({
     title: 'A4 · Make unsafe chat requests fail', kicker: 'W5 · A4 · CONCEPT', subtitle: 'Use separate controls because chat text alone is not a safety boundary.', stage: 'controls', beat: 'concept',
     cards: [{title: 'Chat', body: 'Refuse operational mutation requests.'}, {title: 'Permissions', body: 'Allow reads. Ask or deny writes.'}, {title: 'Human-owned hook', body: 'Deny Edit and Write to bench/ratchet.json.'}],
-    keyPoints: ['Repeat Day 2 hooks and permissions.', 'The builder cannot edit its own guard.', 'The hook does not claim full shell protection.'],
+    keyPoints: ['Repeat Day 1 permissions and hooks; Day 2 reused them.', 'The builder cannot edit its own guard.', 'The hook does not claim full shell protection.'],
     notes: note({time: '13:00 · 3 min', why: 'The learner needs to see the difference between guidance and one enforced file boundary.', predict: 'Ask which layer still stops an unsafe file edit.', see: 'Chat refusal, permission policy, and the hook have separate proofs.', inside: 'The human-owned hook denies Edit and Write to bench/ratchet.json.', participant: 'Write one extra mutation phrase.', watch: 'Do not claim that the hook blocks every shell command.', stuck: 'Test the chat refusal first.', stop: 'The room can state the exact hook boundary.', next: 'Watch A4'})
   }),
   demoSlide({number: 4, title: 'Watch A4 · Chat proof, hook still open', subtitle: 'The saved clip is illustrative chat evidence. The human hook edit remains OPEN.', clip: 'assets/day5-teach/a4.mp4', predict: 'Which proof must the current run add after the clip?', pause: 'Pause on the saved chat test and the OPEN hook rule.', points: ['The clip illustrates the chat-refusal check.', 'It leaves the human-owned hook rule OPEN.', 'Your run must add the human edit and focused guard result.'], stage: 'controls', next: 'Assignment 4'}),
@@ -338,7 +358,7 @@ assignmentSlides.push(
   assignmentSlide({
     number: 6, title: 'start and trace the live counterpart · 1/2', subtitle: 'Map both intake paths, then start the live scenario in four terminals.', stage: 'diagnose', duration: '22 min',
     prompts: [{label: 'Copy the incident-map skill prompt', prompt: PROMPTS.a6Map, after: 'Claude separates fixture INC-1001 from the generated live incident.'}, {label: 'Copy the plan and diagnosis prompt', prompt: PROMPTS.a6Build, after: 'Claude gives commands for the human terminals, then stops with a cited diagnosis and OPEN gaps.'}],
-    manualSteps: ['Human step: start the console with AGENT_LISTEN_WINDOW_MIN=1. Use separate terminals for the console, shop, continuous traffic, and one-shot chaos. Record the generated live incident id.'],
+    manualSteps: ['Human step: start the console with AGENT_LISTEN_WINDOW_MIN=1. Use separate terminals for the console, shop, continuous traffic, and one-shot chaos. Keep healthy traffic running for two minutes before the one-shot bad deploy so the trace has a before state. Record the generated live incident id.'],
     after: 'The generated live incident id is visible and its diagnosis claims map to stable references.',
     checks: ['Show the generated incident id.', 'Follow one claim to its source:ref.', 'Find the snapshot and current-state wording.'],
     choice: 'Choose one alternative cause that the evidence must falsify.', humanOpen: 'A human starts chaos. Claude may not fabricate that action.', next: 'Assignment 6 · challenge the chat'
@@ -369,7 +389,7 @@ assignmentSlides.push(
     choice: 'Choose one deterministic incident variation.', humanOpen: 'The learner accepts the case. A real model eval is optional and outside the core route.', next: 'A8 · Bind the exact decision to a named human'
   }),
   baseSlide({
-    title: 'A8 · Bind the exact decision to a named human', kicker: 'W5 · A8 · CONCEPT', subtitle: 'A gate is a check that blocks action until the exact decision exists.', stage: 'gate', beat: 'concept',
+    title: 'A8 · Bind the exact decision to a named human', kicker: 'W5 · A8 · CONCEPT', subtitle: 'A deterministic fixture proves the gate contract. The live decision stays OPEN.', stage: 'gate', beat: 'concept',
     cards: [{title: 'Incident', body: 'The approval names INC-1001.'}, {title: 'Action', body: 'The approval names the proposed rollback.'}, {title: 'Person', body: 'A named human records the decision.'}],
     keyPoints: ['Wrong incident stays blocked.', 'Wrong action stays blocked.', 'The agent never creates the approval.'],
     notes: note({time: '15:10 · 3 min', why: 'A generic approval can authorize the wrong action.', predict: 'Ask which mismatch should keep Execute disabled.', see: 'The gate checks incident, action, and human identity.', inside: 'Negative tests prove that near matches stay blocked.', participant: 'Choose the wrong-incident or wrong-action case.', watch: 'No agent clicks Approve, Execute, or Resolve.', stuck: 'Run the focused A8 negative test.', stop: 'The room can define the gate.', next: 'Watch A8'})
@@ -409,7 +429,7 @@ closingSlides.push(
     title: 'The method you take with you', kicker: 'W5 · CLOSE', subtitle: 'Learn the repo. Choose the outcome. Build one step. Prove it. Stop for the person.', type: 'context', layout: 'steps',
     items: [{label: 'Learn', caption: '/show-me'}, {label: 'Choose', caption: '/design-control-loop'}, {label: 'Build', caption: 'one focused change'}, {label: 'Prove', caption: '/verify-this'}, {label: 'Hand off', caption: '/handoff, review, then save'}],
     keyPoints: ['Claude Code explores and builds.', 'You choose and review.', 'Evidence supports the next decision.'],
-    notes: note({time: '15:57 · 2 min', why: 'The close must leave one repeatable method.', predict: 'Ask which step they will use first in the hackathon.', see: 'Five verbs describe the full day.', inside: 'The project skills support four of the five verbs.', participant: 'Name one step and its evidence.', watch: 'Do not add a new concept in the close.', stuck: 'Return to INC-1001 and trace the five verbs.', stop: 'Collect two takeaways.', next: 'End at 16:00'})
+    notes: note({time: '15:57 · 2 min', why: 'The close must leave one repeatable method.', predict: 'Ask which step they will use first in the hackathon.', see: 'Five verbs describe the full day.', inside: 'The project skills support four of the five verbs.', participant: 'Name one step and its evidence.', watch: 'Do not add a new concept in the close.', stuck: 'Return to the failure story and trace the five verbs.', stop: 'Collect two takeaways.', next: 'End at 16:00'})
   }),
   baseSlide({
     title: 'End at 16:00', kicker: 'W5 · DONE', subtitle: 'Keep your intent, evidence, OPEN list, and handoff.', type: 'context',
@@ -430,3 +450,6 @@ appendixSlides.push(
 
 window.DAY5_PROMPTS = PROMPTS;
 window.SLIDES = [...openingSlides, ...assignmentSlides, ...closingSlides, ...appendixSlides];
+window.SLIDES.forEach((slide, index) => {
+  slide.teach.next = window.SLIDES[index + 1]?.title || 'End';
+});
