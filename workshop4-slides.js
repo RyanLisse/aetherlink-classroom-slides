@@ -1573,7 +1573,7 @@ window.SLIDES = [
       }
     ],
     "expected": "The approved T-001 memory file contains sourced facts, decisions, open questions and a next step.",
-    "notes": "This is a documentation exercise inside Claude Code, not a new application feature. Ask participants to show the approval pause before each write. File memory is manual curation: it complements SDK session resume but does not replace or magically load it. Logs remain append-only technical evidence; memory.md is a small reviewed summary. Reject secrets, authentication data, full transcripts and unsupported claims.",
+    "notes": "This is a documentation exercise inside Claude Code, not a new application feature. Ask participants to show the T-001 proposal and approval pause before the write. File memory is manual curation. Logs remain append-only technical evidence; memory.md is a small reviewed summary. Reject secrets, authentication data, full transcripts and unsupported claims. Stop after the T-001 file and diff.",
     "teach": {
       "time": "10 min",
       "gist": "Propose and approve the T-001 memory before Claude Code writes it.",
@@ -1584,25 +1584,15 @@ window.SLIDES = [
         {
           "do": "Ask for the T-001 proposal. Stop before the write.",
           "say": "Review the four sections and every source reference. Remove secrets, transcript dumps and guesses."
-        },
-        {
-          "do": "After approval, start a fresh Claude Code session and explicitly read tickets/T-001/memory.md.",
-          "say": "The new session resumes because we told it to read the file. Nothing loaded the file magically."
-        },
-        {
-          "do": "Review T-002 without reading T-001 memory.",
-          "say": "The final check is isolation: T-002 gets its own file and none of T-001’s facts."
         }
       ],
       "do": [
         "Review the T-001 proposal before writing.",
-        "Prove explicit read in a fresh Claude Code session.",
-        "Inspect T-002 for cross-ticket leakage."
+        "Inspect the approved T-001 file and diff."
       ],
       "done": [
-        "Both files are small, sourced and approved.",
-        "T-001 resumes after an explicit read.",
-        "T-002 contains no T-001 facts."
+        "The T-001 file is small, sourced and approved.",
+        "The T-001 source fixture is unchanged."
       ],
       "watch": [
         "File memory is curated context, not a transcript dump.",
