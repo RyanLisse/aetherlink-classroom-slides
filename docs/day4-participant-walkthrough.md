@@ -1,5 +1,12 @@
 # Day 4 participant walkthrough
 
+> **Historical audit.** This document records an earlier 74-slide route with
+> solved step branches. Do not use it to run the current lesson. Use
+> [`workshop4.html`](../workshop4.html), the current participant repository
+> [`README.md`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent)
+> and the central [`FACILITATOR.md`](../FACILITATOR.md). The current route keeps
+> participants on their own unsolved `main` branch.
+
 A walkthrough of Day 4 (`workshop4.html`, 74 slides) from a participant's seat. Each step follows the
 slides and `SOLO.md` literally in a fresh clone of
 [`aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) and
