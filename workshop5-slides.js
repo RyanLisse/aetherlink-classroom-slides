@@ -59,8 +59,8 @@ const teachFromNotes = ({title, subtitle, keyPoints, notes}) => {
   };
 };
 
-const baseSlide = ({title, kicker, subtitle, type = 'concept', cards = [], keyPoints = [], notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo, teach}) => ({
-  title, kicker, subtitle, type, cards, keyPoints, notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo,
+const baseSlide = ({title, kicker, subtitle, type = 'concept', cards = [], keyPoints = [], notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo, source, teach}) => ({
+  title, kicker, subtitle, type, cards, keyPoints, notes, stage, beat, visual, layout, items, tagline, prompt, stepsHeading, steps, expected, repo, source,
   teach: teach || teachFromNotes({title, subtitle, keyPoints, notes})
 });
 
@@ -229,18 +229,20 @@ openingSlides.push(
     notes: note({time: '10:15 · 90 sec', why: 'Participants need to connect their own local Claude without confusing the builder with the product runtime.', predict: 'Ask which evidence proves a model actually answered.', see: 'Login, bounded CLI proof, optional console activation, and fallback are separate.', inside: 'The Agent SDK can use the local Claude Code login. The core route still works without a model.', participant: 'Sign in locally and review the preparation prompt. Do not activate the product model before A5.', watch: 'Never request, display, or transfer credentials. A model name in health proves configuration only. The console has no global model-budget guard.', stuck: 'Keep the product offline and continue with A1.', stop: 'Everyone can state that a completed diagnosis plus its visible tool trace proves the model path.', next: 'The repository already knows how to help'})
   }),
   baseSlide({
-    title: 'The repository already knows how to help',
+    title: 'Project skills now, public pack later',
     kicker: 'W5 · PROJECT SKILLS',
-    subtitle: 'Invoke a project skill by starting the prompt with its slash command.',
+    subtitle: 'Use the included skills for A1–A9. Save the public pack for selective reuse after the core route.',
     type: 'concept',
+    source: {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'},
+    prompt: "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
     cards: [
       {title: '/show-me', body: 'Map the repo or explain one flow.'},
       {title: '/design-control-loop', body: 'Interview, map, and stop before implementation.'},
       {title: '/verify-this', body: 'Return VERIFIED, NOT VERIFIED, or INCONCLUSIVE for one falsifiable claim.'},
       {title: '/handoff', body: 'Write a portable prompt for the next agent.'}
     ],
-    keyPoints: ['The slash command must start the prompt.', 'Skills guide a method. They do not replace review.', 'No global install is required.'],
-    notes: note({time: '10:16:30 · 30 sec', why: 'The first assignment uses a project skill to learn the codebase.', predict: 'Ask which skill should run before the first edit.', see: 'Four skills match four decisions in the day.', inside: 'These skills require explicit slash invocation.', participant: 'Choose the skill that maps an unknown repository.', watch: 'Do not write a normal prompt that merely mentions a slash skill.', stuck: 'Point to /show-me.', stop: 'The room knows that the slash command starts the prompt.', next: 'One ticket, nine assignments'})
+    keyPoints: ['The slash command must start the prompt.', 'The SRE repository already includes today’s project skills.', 'For the hackathon, clone the public pack separately and ask Claude to propose one project-local skill. Do not bulk install.'],
+    notes: note({time: '10:16:30 · 30 sec', why: 'The first assignment uses an included project skill. The public pack remains available for later reuse.', predict: 'Ask which skill should run before the first edit.', see: 'Four included skills match four decisions, with one public pack link for later.', inside: 'The included skills require explicit slash invocation. The pack supports selective project-local installs.', participant: 'Choose the skill that maps an unknown repository. Save the public pack link for the hackathon.', watch: 'Do not pause the core route for a bulk or global installation.', stuck: 'Point to /show-me and share the pack link in participant chat.', stop: 'The room can distinguish today’s included skills from the optional public pack.', next: 'One ticket, nine assignments'})
   }),
   baseSlide({
     title: 'One ticket, nine assignments',
