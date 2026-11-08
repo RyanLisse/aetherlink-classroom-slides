@@ -142,11 +142,11 @@ const coreSlides = [
     "cards": [
       {
         "title": "Morning",
-        "body": "10:00 Welcome + W4 recap\n10:30 Why AI-native\n10:43 Use case · 10:54 Setup\n11:15 Plan · 11:40 Design"
+        "body": "10:00 Welcome · 10:10 Use case\n10:20 Setup\n11:15 Plan · 11:40 Design"
       },
       {
         "title": "Afternoon",
-        "body": "13:00 Build 1 · 13:50 Build 2\n14:55 Test · 15:15 Deploy\n15:30 Maintain · 15:40 Hackathon"
+        "body": "13:00 Controls · 13:50 Tool\n14:08 Diagnose · 14:55 Test\n15:15 Deploy · 15:30 Maintain · 15:40 Hackathon"
       }
     ],
     "tagline": "Breaks: 11:00, 12:00 (lunch), 14:40. Close at 15:50.",
@@ -155,7 +155,7 @@ const coreSlides = [
       "Five skill showcases.",
       "15:40: your hackathon intent.md."
     ],
-    "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (13:52), /verify-this (15:00), /review-and-ship + /visual-pr (15:18), /handoff (15:45).\n5. Say: “At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”",
+    "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (14:08), /verify-this (15:00), /review-and-ship (15:18), /handoff (15:45).\n5. Say: “At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”",
     "beat": "open",
     "teach": {
       "time": "2–4 min",
@@ -165,30 +165,24 @@ const coreSlides = [
           "say": "“Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”"
         },
         {
-          "do": "Show: the breaks at 11:00, 12:00, and 14:"
+          "do": "Show the breaks at 11:00, 12:00 and 14:40."
         },
         {
-          "say": "4"
-        },
-        {
-          "do": "Show: the end point at 15:"
-        },
-        {
-          "say": "4"
+          "do": "Show the end point at 15:40."
         },
         {
           "say": "Each team writes the intent.md for its hackathon idea."
         },
         {
-          "say": "the five showcases: /design-control-loop (11:25), /show-me (13:52), /verify-this (15:00), /review-and-ship + /visual-pr (15:18), /handoff (15:45)."
+          "say": "The five showcases are /design-control-loop at 11:25, /show-me at 14:08, /verify-this at 15:00, /review-and-ship at 15:18 and /handoff at 15:45."
         },
         {
           "say": "“At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”"
         }
       ],
       "do": [
-        "Show: the breaks at 11:00, 12:00, and 14:",
-        "Show: the end point at 15:"
+        "Show the breaks at 11:00, 12:00 and 14:40.",
+        "Show the end point at 15:40."
       ],
       "done": [
         "The room can explain what we do today."
@@ -4612,6 +4606,41 @@ const demoClips = new Map([
   ['Watch: the bench and the ratchet', ['assets/day5-teach/a7.mp4', 'Guided evidence review from a technical simulation. The participant still accepts the case and protects the ratchet.']],
   ['Watch: the approval gate', ['assets/day5-teach/a8.mp4', 'Guided evidence review from a technical simulation. Approval and execution remain human actions.']]
 ]);
+const retimedNotes = new Map([
+  ['Why build an on-call agent?', 'Time: 10:10 · 1 min.'],
+  ['The ticket: INC-1001', 'Time: 10:11 · 1 min.'],
+  ['With the agent: what it does, what you do', 'Time: 10:12 · 1 min.'],
+  ['The use case on one page', 'Time: 10:13 · 1 min.'],
+  ['One ticket, nine assignments', 'Time: 10:14 · 1 min.'],
+  ['Our project: a local AI SRE agent', 'Time: 10:15 · 1 min.'],
+  ['What you build: the on-call console', 'Time: 10:16 · 1 min.'],
+  ['Your own copy, your own console', 'Time: 10:17 · 1 min.'],
+  ['Stage 0: what you build', 'Time: 10:18 · 1 min.'],
+  ['Demo · Stage 0: review the setup evidence', 'Time: 10:19 · 1 min.'],
+  ['Assignment 1: Setup check', 'Time: 10:20 · 40 min.'],
+  ['plan.md', 'Time: 14:05 · 1 min. Showcase 2 starts at 14:08.'],
+  ['subagents', 'Time: 14:06 · 1 min.'],
+  ['Stage 4: what you build', 'Time: 14:07 · 1 min.'],
+  ['Watch: /show-me → plan → diagnose', 'Time: 14:08 · 10 min. Showcase 2.'],
+  ['Assignment 6: Diagnose a live incident', 'Time: 14:20 · 20 min.']
+]);
+for (const slide of window.SLIDES) {
+  const firstLine = retimedNotes.get(slide.title);
+  if (firstLine && slide.notes) slide.notes = slide.notes.replace(/^[^\n]*/, firstLine);
+}
+const setupAssignment = window.SLIDES.find(slide => slide.title === 'Assignment 1: Setup check');
+if (setupAssignment?.teach) setupAssignment.teach.time = '40 min';
+const diagnoseAssignment = window.SLIDES.find(slide => slide.title === 'Assignment 6: Diagnose a live incident');
+if (diagnoseAssignment?.teach) diagnoseAssignment.teach.time = '20 min';
+const diagnoseShowcase = window.SLIDES.find(slide => slide.title === 'Watch: /show-me → plan → diagnose');
+if (diagnoseShowcase) diagnoseShowcase.kicker = 'W5 · SHOWCASE 2 · 14:08 · 10 MIN';
+const assignmentMap = window.SLIDES.find(slide => slide.title === 'One ticket, nine assignments');
+if (assignmentMap) {
+  assignmentMap.notes = assignmentMap.notes.replace('At 14:10 you work the ticket live.', 'At 14:20 you work the ticket live.');
+  for (const step of assignmentMap.teach?.script || []) {
+    if (step.say) step.say = step.say.replace('At 14:10 you work the ticket live.', 'At 14:20 you work the ticket live.');
+  }
+}
 for (const slide of window.SLIDES) {
   const clip = demoClips.get(slide.title);
   if (clip && slide.teach) slide.teach.script.unshift({clip: clip[0], say: clip[1]});
