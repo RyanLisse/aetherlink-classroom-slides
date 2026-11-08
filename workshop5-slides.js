@@ -149,7 +149,7 @@ const coreSlides = [
         "body": "13:00 Controls · 13:50 Tool\n14:08 Diagnose · 14:55 Test\n15:15 Deploy · 15:30 Maintain · 15:40 Hackathon"
       }
     ],
-    "tagline": "Breaks: 11:00, 12:00 (lunch), 14:40. Close at 15:50.",
+    "tagline": "Breaks: 11:00, 12:00 (lunch), 14:40. Close at 16:00.",
     "keyPoints": [
       "Breaks: 11:00, 12:00, 14:40.",
       "Five skill showcases.",
@@ -4622,7 +4622,8 @@ const retimedNotes = new Map([
   ['subagents', 'Time: 14:06 · 1 min.'],
   ['Stage 4: what you build', 'Time: 14:07 · 1 min.'],
   ['Watch: /show-me → plan → diagnose', 'Time: 14:08 · 10 min. Showcase 2.'],
-  ['Assignment 6: Diagnose a live incident', 'Time: 14:20 · 20 min.']
+  ['Assignment 6: Diagnose a live incident', 'Time: 14:20 · 20 min.'],
+  ['Assignment 9: Maintain + your hackathon intent.md', 'Time: 15:42 · 14 min. Showcase 5 at 15:45 (1–2 min).']
 ]);
 for (const slide of window.SLIDES) {
   const firstLine = retimedNotes.get(slide.title);
@@ -4632,8 +4633,26 @@ const setupAssignment = window.SLIDES.find(slide => slide.title === 'Assignment 
 if (setupAssignment?.teach) setupAssignment.teach.time = '40 min';
 const diagnoseAssignment = window.SLIDES.find(slide => slide.title === 'Assignment 6: Diagnose a live incident');
 if (diagnoseAssignment?.teach) diagnoseAssignment.teach.time = '20 min';
+const maintainAssignment = window.SLIDES.find(slide => slide.title === 'Assignment 9: Maintain + your hackathon intent.md');
+if (maintainAssignment?.teach) maintainAssignment.teach.time = '14 min';
 const diagnoseShowcase = window.SLIDES.find(slide => slide.title === 'Watch: /show-me → plan → diagnose');
 if (diagnoseShowcase) diagnoseShowcase.kicker = 'W5 · SHOWCASE 2 · 14:08 · 10 MIN';
+const retimedTeachTimes = new Map([
+  ['Why build an on-call agent?', '1 min'],
+  ['The ticket: INC-1001', '1 min'],
+  ['With the agent: what it does, what you do', '1 min'],
+  ['The use case on one page', '1 min'],
+  ['One ticket, nine assignments', '1 min'],
+  ['Our project: a local AI SRE agent', '1 min'],
+  ['What you build: the on-call console', '1 min'],
+  ['plan.md', '1 min'],
+  ['subagents', '1 min'],
+  ['Watch: /show-me → plan → diagnose', '10 min']
+]);
+for (const slide of window.SLIDES) {
+  const duration = retimedTeachTimes.get(slide.title);
+  if (duration && slide.teach) slide.teach.time = duration;
+}
 const assignmentMap = window.SLIDES.find(slide => slide.title === 'One ticket, nine assignments');
 if (assignmentMap) {
   assignmentMap.notes = assignmentMap.notes.replace('At 14:10 you work the ticket live.', 'At 14:20 you work the ticket live.');
