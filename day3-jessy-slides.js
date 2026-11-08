@@ -2916,7 +2916,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
 { // Slide 40
   title: "Assignment 42: Save every reply for approval",
   teach: {
-    "time": "15 min",
+    "time": "20 min",
     "gist": "Make the human gate real. Every draft reply is saved in a data table 'replies' with status 'waiting for approval', and only a person changes it to approved. Build: make the table, an Insert row before each of the low, medium and high nodes, and let those nodes read {{ $json.reply }}. Then send the three tickets again and approve one reply yourself.",
     "script": [
       {
@@ -2928,23 +2928,30 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
         "say": "This is human in the loop. The workflow writes every reply into a table with the status 'waiting for approval'. The workflow never sets 'approved'. Only a person does."
       },
       {
-        "do": "Point at step 1.",
-        "say": "First the table: Overview, Data tables, Create Data table. Name it replies, and give it four text columns: message, priority, reply and status."
+        "do": "Point at step 1. Play clip 1 (table and Insert row on high).",
+        "clip": "assets/day3-teach/a42-1-table-and-insert-row.mp4",
+        "say": "First the table: Overview, Data tables, Create Data table. Name it replies, and give it four columns with Add Column: message, priority, reply and status. The type stays on string."
       },
       {
         "do": "Point at step 2.",
         "say": "Now the save step on the high path. Hover over the line between the Switch's high exit and the high node, click plus, Data table, Insert row. Choose the table replies and map the four columns: copy them from the slide. Status is just the fixed text 'waiting for approval'."
       },
       {
-        "do": "Point at step 3.",
-        "say": "The same on the other two paths. Select the node, Ctrl+C, Ctrl+V, and put one copy before medium and one before low. Nothing to change inside."
+        "do": "Point at step 3. Play clip 2 (medium, low and the chat text).",
+        "clip": "assets/day3-teach/a42-2-medium-low-and-reply.mp4",
+        "say": "The same on the other two paths: plus on the line Switch to medium, Data table, Insert row, the same four columns. Then the line to low. n8n connects the new node by itself. Messy canvas? Tidy up, bottom left."
       },
       {
         "do": "Point at step 4. Point at the orange warning.",
         "say": "This is the trap. After the Insert row, the data is the saved row. So the chat text must now read reply, not output.message. Change it in all three nodes, or the chat shows an empty draft."
       },
       {
-        "do": "Start the timer (15 min).",
+        "do": "Point at steps 5 and 6. Play clip 3 (chat and approve).",
+        "clip": "assets/day3-teach/a42-3-chat-and-approve.mp4",
+        "say": "Then the proof: three tickets in the chat, three rows in replies, all waiting for approval. And you are the gate: double-click a status and type approved."
+      },
+      {
+        "do": "Start the timer (20 min).",
         "say": "Go. Then send the three tickets from the last assignment again, and open the table."
       },
       {
@@ -2957,7 +2964,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
       "Overview → Data tables → Create Data table: replies (message, priority, reply, status)",
       "Hover the line Switch (high) → high node → + → Data table → Insert row",
       "Map message, priority, reply, status = waiting for approval",
-      "Copy the node before medium and before low",
+      "+ on the lines to medium and low → Insert row, the same four columns; then Tidy up",
       "low/medium/high: output now uses {{ $json.reply }}",
       "Chat: send CUST-006, CUST-004, CUST-001 again",
       "Open replies: set one status to approved"
@@ -2977,6 +2984,8 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
       "Low or medium tickets appear in the chat but not in the table: that path has no Insert row yet.",
       "The message column stays empty: the chat trigger was renamed. Use its name in the expression instead of When chat message received.",
       "The Insert row node starts on the wrong table or operation: check Insert row and the table replies.",
+      "Insert rows land on top of other nodes: Tidy up, bottom left of the canvas.",
+      "The chat says 'Error: Failed to receive response' but the Logs show a green run: the chat panel lost the answer. Check the Logs and the table; send the next ticket.",
       "Test this assignment once in your own trial before the session."
     ],
     "terms": [
@@ -3001,14 +3010,14 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
   layout: "exercise",
   calm: true,
   cards: [
-    { title: "Table", body: "Name: replies\nColumns (all text): message, priority, reply, status" },
+    { title: "Table", body: "Name: replies\nColumns (type string): message, priority, reply, status" },
     { title: "The human gate", body: "This is human in the loop: the workflow writes status waiting for approval.\nOnly a person changes it to approved." }
   ],
   stepsHeading: "In your chat to chat workflow:",
   steps: [
     { text: "Make the table", after: "Overview → Data tables → Create Data table: replies, with the four text columns on the right." },
     { text: "Save on the high path", parts: [["message", "{{ $('When chat message received').item.json.chatInput }}"], ["priority", "{{ $json.output.priority }}"], ["reply", "{{ $json.output.message }}"], ["status", "waiting for approval"]], after: "Between the Switch's high exit and the high node: Data table → Insert row, table replies. Map the four columns." },
-    { text: "The same on medium and low", after: "Copy the node (Ctrl+C, Ctrl+V): one copy before medium, one before low." },
+    { text: "The same on medium and low", after: "+ on the line Switch → medium: Data table → Insert row, the same four columns. Then the line to low. Messy canvas? Tidy up (bottom left)." },
     { text: "Let the chat read the saved reply", prompt: "HIGH priority, escalate today. Draft reply for review: {{ $json.reply }}", after: "The high node now reads reply from the saved row. Same in medium and low.", warn: true },
     { text: "Send the three tickets again", after: "CUST-006, CUST-004, CUST-001: three rows, status waiting for approval." },
     { text: "You are the gate", after: "Open replies, read one reply, set its status to approved." }
