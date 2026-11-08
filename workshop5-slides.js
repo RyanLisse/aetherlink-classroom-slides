@@ -155,7 +155,7 @@ const coreSlides = [
       "Five skill showcases.",
       "15:40: your hackathon intent.md."
     ],
-    "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (14:08), /verify-this (15:00), /review-and-ship (15:18), /handoff (15:45).\n5. Say: “At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”",
+    "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (14:08), /verify-this (15:00), /review-and-ship (15:18), /handoff (15:45).\n5. Say: “At the start of each block, run npm run progress. Show the local signals. Open PROGRESS.md and confirm validation is OPEN until you review the actual checks. This takes 30 seconds.”",
     "beat": "open",
     "teach": {
       "time": "5 min",
@@ -177,7 +177,7 @@ const coreSlides = [
           "say": "The five showcases are /design-control-loop at 11:25, /show-me at 14:08, /verify-this at 15:00, /review-and-ship at 15:18 and /handoff at 15:45."
         },
         {
-          "say": "“At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”"
+          "say": "“At the start of each block, run npm run progress. Show the local signals. Open PROGRESS.md and confirm validation is OPEN until you review the actual checks. This takes 30 seconds.”"
         }
       ],
       "do": [
@@ -1493,7 +1493,7 @@ const coreSlides = [
       "Clone workshop/start with git clone --branch workshop/start --single-branch https://github.com/AetherLink-bv/sre-oncall-agent.git. Open it in Claude Code and check /status.",
       "Open localhost:4320 yourself. Read the expected red exercise failures.",
       "Ask Claude to show the remaining TODOs. Choose the first one you will build.",
-      "Optional: restart with claude --plugin-dir ./course/ai-sdlc-mod and open /sdlc to see the nine assignments and their evidence status."
+      "Optional: restart with claude --plugin-dir ./course/ai-sdlc-mod and open /sdlc to see the nine assignments, expected evidence and human decisions."
     ],
     "expected": "You can open the console. Main tests pass; the A3/A4/A5/A8 exercise tests still fail as expected.",
     "stepsHeading": "Prompt, build, inspect:",
@@ -1618,10 +1618,10 @@ const coreSlides = [
     },
     "keyPoints": [
       "Read the form before the name.",
-      "Progress check: show your counter.",
+      "Progress check: show your local-signal counter.",
       "A wish is not a rule."
     ],
-    "notes": "Time: 11:15 · 2 min.\n1. Progress check (30 s): “Run npm run progress. Show your current counter.”\n2. If a person is at 0: a neighbor helps. You visit them at lunch.\n3. Show: intent.md in the repo. Read one outcome and one boundary aloud.\n4. Say the term “intent.md” only after that.",
+    "notes": "Time: 11:15 · 2 min.\n1. Progress check (30 s): “Run npm run progress. Show your local-signal counter. This is not validated evidence.”\n2. If a person is at 0: a neighbor helps. You visit them at lunch.\n3. Show: intent.md in the repo. Read one outcome and one boundary aloud.\n4. Say the term “intent.md” only after that.",
     "stage": "plan",
     "beat": "concept",
     "teach": {
@@ -1629,7 +1629,7 @@ const coreSlides = [
       "gist": "intent.md says what must be true at the end.",
       "script": [
         {
-          "say": "Progress check (30 s): “Run npm run progress. Show your current counter.”"
+          "say": "Progress check (30 s): “Run npm run progress. Show your local-signal counter. This is not validated evidence.”"
         },
         {
           "say": "If a person is at 0: a neighbor helps. You visit them at lunch."
@@ -2219,7 +2219,7 @@ const coreSlides = [
       "Keep it short.",
       "People maintain it."
     ],
-    "notes": "Time: 13:00 · 3 min.\n1. Progress check (30 s): run npm run progress for the current checks. Open PROGRESS.md for the latest dated evidence. Ask which current check supports it. Do not call it verified from an agent claim.\n2. Show: the lab CLAUDE.md. Show the commands, the rules (“propose, never execute”), and how to verify.\n3. Say: “If the agent makes the same mistake two times, add the rule here.”\n4. Say: “PROGRESS.md and SOLO.md are next to CLAUDE.md. This workshop branch does not contain AGENTS.md.”",
+    "notes": "Time: 13:00 · 3 min.\n1. Progress check (30 s): run npm run progress for the local signals. Open PROGRESS.md for the latest dated signal entry. Validation stays OPEN until you review the actual check output separately.\n2. Show: the lab CLAUDE.md. Show the commands, the rules (“propose, never execute”), and how to verify.\n3. Say: “If the agent makes the same mistake two times, add the rule here.”\n4. Say: “PROGRESS.md and SOLO.md are next to CLAUDE.md. This workshop branch does not contain AGENTS.md.”",
     "stage": "controls",
     "beat": "concept",
     "teach": {
@@ -2243,7 +2243,7 @@ const coreSlides = [
         "The room can explain claude.md."
       ],
       "watch": [
-        "Progress check (30 s): run npm run progress for the current checks. Open PROGRESS.md for the latest dated evidence. Ask which current check supports it. Do not call it verified from an agent claim."
+        "Progress check (30 s): run npm run progress for the local signals. Open PROGRESS.md for the latest dated signal entry. Validation stays OPEN until you review the actual check output separately."
       ],
       "next": "PROGRESS.md"
     }
@@ -2251,7 +2251,7 @@ const coreSlides = [
   {
     "title": "PROGRESS.md",
     "kicker": "W5 · DEFINITION · BUILD 1",
-    "subtitle": "Append-only history. Current evidence lives in --status.",
+    "subtitle": "Append-only signal log. Actual checks are reviewed separately.",
     "type": "concept",
     "source": {
       "url": "https://github.com/AetherLink-bv/claude-code-skills-pack/blob/main/PROGRESS.md",
@@ -2263,57 +2263,57 @@ const coreSlides = [
         "body": "Example: 2026-10-11T21:30:00+02:00"
       },
       {
-        "title": "Change + mechanism",
-        "body": "What shipped · Why"
+        "title": "Local signal",
+        "body": "Detected · Not verified"
       },
       {
         "title": "Validation",
-        "body": "Commands, results, and evidence"
+        "body": "OPEN until actual checks are reviewed"
       },
       {
-        "title": "Open scope",
-        "body": "Deliberately not done · Known limits"
+        "title": "Checks to run",
+        "body": "Commands to review · Known limits"
       }
     ],
-    "tagline": "--status = current evidence. PROGRESS.md = append-only history.",
+    "tagline": "--status = local signals. Actual check output = reviewed validation.",
     "visual": {
       "compact": true,
       "stagger": "pop"
     },
     "keyPoints": [
-      "npm run progress shows the current checklist.",
+      "npm run progress shows current local signals.",
       "Dated log entries preserve history. Never rewrite them.",
-      "A correction gets its own timestamp and evidence."
+      "A timestamp records the signal and log entry, not performed validation."
     ],
-    "notes": "Time: 13:03 · 3 min.\n1. Show: run npm run progress. It reads current evidence and writes nothing.\n2. Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made.\n3. Read the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and add the new evidence.”\n6. Say: “A historical entry is not current status. Run the status command for current evidence.”",
+    "notes": "Time: 13:03 · 3 min.\n1. Show: run npm run progress. It reads current local signals and writes nothing. Validation remains OPEN.\n2. Open PROGRESS.md. The hook appends one dated STEP entry when a local signal first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the signal and log entry were made, not when validation was performed.\n3. Read the fields: Observed local signals, Validation OPEN, Checks to run, Why, How, and Deliberately not done. Review actual check output separately before claiming evidence.\n4. Say: “Dated entries are append-only. Never rewrite history.”\n5. Say: “A correction gets a new timestamp. Explain what changed and record the newly reviewed check output.”\n6. Say: “A historical entry is not current status. The status command shows local signals, not proof.”",
     "stage": "controls",
     "beat": "concept",
     "teach": {
       "time": "2–4 min",
-      "gist": "Append-only history. Current evidence lives in --status.",
+      "gist": "Append-only signal log. Actual checks are reviewed separately.",
       "script": [
         {
-          "do": "Show: run npm run progress. It reads current evidence and writes nothing."
+          "do": "Show: run npm run progress. It reads current local signals and writes nothing. Validation remains OPEN."
         },
         {
-          "do": "Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made."
+          "do": "Open PROGRESS.md. The hook appends one dated STEP entry when a local signal first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the signal and log entry were made, not when validation was performed."
         },
         {
-          "say": "the four fields: What shipped, Why, Validation, and Deliberately not done. Under Why, include how it works and which options you rejected."
+          "say": "the fields: Observed local signals, Validation OPEN, Checks to run, Why, How, and Deliberately not done. Review actual check output separately before claiming evidence."
         },
         {
           "say": "“Dated entries are append-only. Never rewrite history.”"
         },
         {
-          "say": "“A correction gets a new timestamp. Explain what changed and add the new evidence.”"
+          "say": "“A correction gets a new timestamp. Explain what changed and record the newly reviewed check output.”"
         },
         {
-          "say": "“A historical entry is not current status. Run the status command for current evidence.”"
+          "say": "“A historical entry is not current status. The status command shows local signals, not proof.”"
         }
       ],
       "do": [
-        "Show: run npm run progress. It reads current evidence and writes nothing.",
-        "Open PROGRESS.md. The hook appends one dated STEP entry when evidence first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the validation and log entry were made."
+        "Show: run npm run progress. It reads current local signals and writes nothing. Validation remains OPEN.",
+        "Open PROGRESS.md. The hook appends one dated STEP entry when a local signal first exists. Each entry starts with an ISO 8601 timestamp and timezone offset. The timestamp records when the signal and log entry were made, not when validation was performed."
       ],
       "done": [
         "The room can explain progress.md."
@@ -3767,7 +3767,7 @@ const coreSlides = [
       "A human triages.",
       "Only mention /improve-claude-md."
     ],
-    "notes": "Time: 15:30 · 10 min.\n1. Progress check (30 s): run npm run progress.\n2. Show: the resolution notes from the incident are in lessons/lessons.md. The agent wrote only to lessons/proposed/.\n3. Show: turn the incident into a bench case in bench/cases.json. Run npm run bench.\n4. Say: control bands 1σ, 2σ, 3σ.\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”",
+    "notes": "Time: 15:30 · 10 min.\n1. Progress check (30 s): run npm run progress. Treat the count as local signals; review actual checks separately.\n2. Show: the resolution notes from the incident are in lessons/lessons.md. The agent wrote only to lessons/proposed/.\n3. Show: turn the incident into a bench case in bench/cases.json. Run npm run bench.\n4. Say: control bands 1σ, 2σ, 3σ.\n5. Say (20 s): “/improve-claude-md rewrites a long CLAUDE.md. Review the result as a PR/MR.”",
     "stage": "maintain",
     "beat": "concept",
     "teach": {
@@ -3775,7 +3775,7 @@ const coreSlides = [
       "gist": "The running system teaches you. Put the lesson back in the loop.",
       "script": [
         {
-          "say": "Progress check (30 s): run npm run progress."
+          "say": "Progress check (30 s): run npm run progress. Treat the count as local signals; review actual checks separately."
         },
         {
           "do": "Show: the resolution notes from the incident are in lessons/lessons.md. The agent wrote only to lessons/proposed/."
@@ -4761,7 +4761,7 @@ for (const slide of window.SLIDES) {
 
 const controlCalls = new Map([
   ['CLAUDE.md', 'Quick call: which rule must every Claude session read first?'],
-  ['PROGRESS.md', 'Quick call: which line is evidence and which line is only a claim?'],
+  ['PROGRESS.md', 'Quick call: which line is a local signal, and which actual check still needs review?'],
   ['MCP', 'Quick call: which INC-1001 fact must come from a tool?'],
   ['skills', 'Quick call: when should Claude load a method instead of another prompt?'],
   ['Two types of skills', 'Quick call: which skill belongs in this repository?'],
