@@ -4670,3 +4670,96 @@ window.SLIDES.forEach((slide, index) => {
     slide.notes = slide.notes.replace(/^[^\n]*/, 'Controls block · before Assignment 4.');
   }
 });
+
+const participantMission = window.SLIDES.find(slide => slide.title === 'Goal of the day');
+if (participantMission) {
+  participantMission.subtitle = 'Your shift: take INC-1001 from alert to a reviewed handoff. Claude builds; you decide.';
+  participantMission.cards = [
+    {title: 'Work one incident', body: 'Follow INC-1001 from setup to diagnosis and a tested proposal.'},
+    {title: 'Make the decisions', body: 'Accept the intent, challenge the evidence and operate the human gate.'},
+    {title: 'Keep the lesson', body: 'Turn verified work into an eval, a handoff and your hackathon intent.'}
+  ];
+  participantMission.teach.gist = participantMission.subtitle;
+  participantMission.teach.script.unshift({say: 'You are the on-call engineer for INC-1001. Keep the same ticket open all day.'});
+}
+
+const incidentMap = window.SLIDES.find(slide => slide.title === 'One ticket, nine assignments');
+if (incidentMap) {
+  incidentMap.subtitle = 'Keep INC-1001 open all day. Each accepted artifact unlocks the next decision.';
+  incidentMap.teach.gist = incidentMap.subtitle;
+}
+
+const stageMissions = new Map([
+  ['setup', 'Prove the lab is ready before you change the agent.'],
+  ['plan', 'Set the outcome, the boundary and three checks a stranger can repeat.'],
+  ['design', 'Turn the accepted intent into a verdict contract that can fail.'],
+  ['controls', 'Block unsafe requests and give the agent one read-only source.'],
+  ['diagnose', 'Trace every claim to evidence and challenge one alternative cause.'],
+  ['test', 'Turn the incident pattern into an adversarial case that protects later changes.'],
+  ['gate', 'Bind the exact incident and action to a named human decision.'],
+  ['maintain', 'Close the sample incident yourself and leave an honest handoff.']
+]);
+for (const slide of window.SLIDES) {
+  const mission = stageMissions.get(slide.stage);
+  if (mission && slide.beat === 'what') {
+    slide.subtitle = mission;
+    slide.teach.gist = mission;
+    slide.teach.script[0] = {say: mission};
+  }
+}
+
+const predictions = new Map([
+  ['Demo · Stage 0: review the setup evidence', 'Before the clip, predict which failures are expected and which failure would stop you.'],
+  ['Watch: Claude interviews me', 'Before the clip, choose one vague intent check that you would reject.'],
+  ['Watch: /design-control-loop', 'Before the demo, name the sensor, the decision and the human action in INC-1001.'],
+  ['Watch: red contract → green', 'Before the clip, predict the first test that must fail.'],
+  ['Watch: the tools in the trace', 'Before the clip, choose the one deploy fact the agent must read.'],
+  ['Watch: try to break the rules', 'Before the clip, predict which layer rejects "roll back now".'],
+  ['Watch: /show-me → plan → diagnose', 'Before the clip, choose one alternative cause that the evidence must rule out.'],
+  ['Watch: the bench and the ratchet', 'Before the clip, write one unsafe alert variation that the bench must reject.'],
+  ['Watch: /verify-this', 'Before the demo, state how you know the new case can fail.'],
+  ['Watch: the approval gate', 'Before the clip, choose one mismatch that must keep Execute disabled.'],
+  ['Demo · Stage 7: review the handoff', 'Before the clip, name one claim that must remain OPEN in the handoff.']
+]);
+for (const slide of window.SLIDES) {
+  const prediction = predictions.get(slide.title);
+  if (!prediction || !slide.teach) continue;
+  slide.tagline = prediction;
+  slide.teach.script.unshift({ask: prediction});
+  slide.teach.do.unshift(prediction);
+}
+
+const peerChecks = new Map([
+  ['setup', 'Pair check: point to the health result and the expected red tests.'],
+  ['plan', 'Pair check: your neighbor challenges one check that sounds like a wish.'],
+  ['design', 'Pair check: show the red test, the accepted contract and the green result.'],
+  ['controls', 'Pair check: try one forbidden request and inspect the read-only trace.'],
+  ['diagnose', 'Pair check: your neighbor picks one claim and follows its evidence reference.'],
+  ['test', 'Pair check: your neighbor reruns the bench and challenges the new case.'],
+  ['gate', 'Pair check: prove that a wrong incident or action cannot enable Execute.'],
+  ['maintain', 'Pair check: the next person reads only the handoff and names the next step.']
+]);
+for (const slide of window.SLIDES) {
+  const peerCheck = peerChecks.get(slide.stage);
+  if (!peerCheck || slide.beat !== 'check' || !slide.teach) continue;
+  slide.subtitle = peerCheck;
+  slide.teach.gist = peerCheck;
+  slide.teach.script[0] = {do: peerCheck};
+  slide.teach.do.unshift(peerCheck);
+}
+
+const controlCalls = new Map([
+  ['CLAUDE.md', 'Quick call: which rule must every Claude session read first?'],
+  ['PROGRESS.md', 'Quick call: which line is evidence and which line is only a claim?'],
+  ['MCP', 'Quick call: which INC-1001 fact must come from a tool?'],
+  ['skills', 'Quick call: when should Claude load a method instead of another prompt?'],
+  ['Two types of skills', 'Quick call: which skill belongs in this repository?'],
+  ['hooks', 'Quick call: which event must stop before an unsafe edit?'],
+  ['Allow · ask · deny', 'Classify three actions: read logs, edit the guard and close INC-1001.']
+]);
+for (const slide of window.SLIDES) {
+  const call = controlCalls.get(slide.title);
+  if (!call || !slide.teach) continue;
+  slide.tagline = call;
+  slide.teach.script.unshift({ask: call});
+}
