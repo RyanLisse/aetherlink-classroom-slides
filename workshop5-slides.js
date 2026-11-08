@@ -4774,3 +4774,30 @@ for (const slide of window.SLIDES) {
   slide.tagline = call;
   slide.teach.script.unshift({ask: call});
 }
+
+const playbookBridge = window.SLIDES.find(slide => slide.title === 'One ticket, nine assignments');
+if (playbookBridge) {
+  playbookBridge.notes += '\nPlaybook bridge. Anthropic names six non-linear stages: Plan, Design, Build, Test, Deploy and Maintain. Our Setup and Controls stages prepare the safe workspace. Diagnose keeps incident evidence explicit. Each accepted artifact becomes the next stage input. Source: https://claude.com/resources/articles/the-ai-native-sdlc-playbook';
+}
+
+const maintainLoop = window.SLIDES.find(slide => slide.title === 'Maintain: each incident becomes an eval');
+if (maintainLoop) {
+  maintainLoop.notes += '\nINC-1001 completes the loop. The reviewed lesson becomes a new intent or regression case. Run the path manually first. Keep each artifact handoff visible. Automate only what the team can still inspect.';
+}
+
+for (const slide of window.SLIDES) {
+  const clipStep = slide.teach?.script?.find(step => step.clip);
+  if (!clipStep) continue;
+  const proof = slide.keyPoints?.[0] || slide.teach.done?.[0] || 'the visible result';
+  slide.notes += `\nVideo cue. Ask the participant to predict the visible result. Play ${clipStep.clip}. Pause on "${proof}". The participant's own output remains the check. Continue to ${slide.teach.next || 'the next step'}.`;
+}
+
+const noClipShowcases = new Map([
+  ['Watch: /design-control-loop', 'Live showcase. No saved video. Ask for the prediction. Run one interview round. Inspect the accepted intent artifact, then stop.'],
+  ['Watch: /verify-this', 'Live showcase. No saved video. Ask how the test can fail. Run the check. Inspect the result, then continue to Assignment 7.'],
+  ['Watch: one source, one gate', 'Prepared facilitator preview. No saved video. Ask which decision needs a person. Show one source and one gate, then move to the bonus assignment.']
+]);
+for (const slide of window.SLIDES) {
+  const showcaseNote = noClipShowcases.get(slide.title);
+  if (showcaseNote) slide.notes += `\n${showcaseNote}`;
+}
