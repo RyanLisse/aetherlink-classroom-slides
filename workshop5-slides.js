@@ -7,7 +7,7 @@ const coreSlides = [
   {
     "title": "Welcome to Workshop 5",
     "kicker": "W5 · OPENING · AI-NATIVE SDLC",
-    "subtitle": "Today we build an SRE agent.",
+    "subtitle": "Today we build an SRE agent: an on-call assistant that helps keep a site running.",
     "type": "context",
     "visual": {
       "opener": "welcome",
@@ -20,14 +20,19 @@ const coreSlides = [
       "Welcome the room.",
       "Check the setup."
     ],
-    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node 22+ and Claude Code before today?\n3. If a person has no setup: pair them during Assignment 1 or help them in the first break.",
+    "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent: an on-call assistant that helps keep a site running.”\n   SRE = Site Reliability Engineering: the work of keeping systems reliable, and fixing them when they break.\n2. Check: ask for hands. Who installed Node 22+ and Claude Code before today?\n3. If a person has no setup: pair them during Assignment 1 or help them in the first break.",
     "beat": "open",
     "teach": {
+<<<<<<< Updated upstream
       "time": "2–4 min",
       "gist": "Today we build an SRE agent.",
+=======
+      "time": "1 min",
+      "gist": "Today we build an SRE agent: an on-call assistant that helps keep a site running. SRE = Site Reliability Engineering: keeping systems reliable, and fixing them when they break.",
+>>>>>>> Stashed changes
       "script": [
         {
-          "say": "“Welcome. Today we build an SRE agent.”"
+          "say": "“Welcome. Today we build an SRE agent: an on-call assistant that helps keep a site running. SRE stands for Site Reliability Engineering: keeping systems reliable, and fixing them fast when they break.”"
         },
         {
           "do": "Check: ask for hands. Who installed Node 22+ and Claude Code before today?"
