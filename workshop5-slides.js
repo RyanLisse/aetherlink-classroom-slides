@@ -207,28 +207,6 @@ openingSlides.push(
     notes: note({time: '10:11 · 4 min', why: 'Everyone needs the same trusted repository before the first prompt.', predict: 'Ask which folder Claude Code may trust.', see: 'The terminal is at the root of the participant clone.', inside: 'Project skills load only after the participant trusts that folder.', participant: 'Review the path, accept trust only for your own clone, and restart Claude Code if the project skills remain missing.', watch: 'Never bypass trust or accept an unfamiliar folder. Cursor is optional.', stuck: 'Check the path and workshop/start branch, then restart Claude Code.', stop: 'Every participant can see the Claude Code prompt and project skills.', next: 'The repository already knows how to help'})
   }),
   baseSlide({
-    title: 'Connect your own Claude, keep the core route offline',
-    kicker: 'W5 · OPTIONAL LIVE MODEL',
-    subtitle: 'Sign in locally now. Activate the product model only after A5 and only with approved usage.',
-    type: 'practice',
-    layout: 'exercise',
-    stepsHeading: 'Prepare now, activate only after A5:',
-    cards: [
-      {title: 'Builder · now', body: 'Run Claude Code with project settings and strict MCP isolation. Use /login only on your own machine.'},
-      {title: 'Product · after A5', body: 'Run one turn-checked CLI proof before you optionally restart the console. One turn can exceed the budget.'},
-      {title: 'Proof', body: 'Require one completed diagnosis and its visible tool trace. A health label alone is not proof.'},
-      {title: 'Fallback', body: 'Stop your console and restart without AGENT_MODEL. The required route remains scripted.'}
-    ],
-    steps: [
-      {text: 'Copy this preparation prompt into Claude Code', prompt: PROMPTS.liveModelSetup, after: 'Claude explains the two runtimes and stops before starting the product model.'},
-      {text: 'After A5, run one bounded model proof', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json --model sonnet --max-turns 8 --max-budget-usd 0.30 --dry-run', after: 'Review the completed diagnosis, cost line, and visible tool trace.'},
-      {text: 'After A5, optionally restart your own console', prompt: 'AGENT_MODEL=sonnet AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The console is ready for one approved live-model investigation.'},
-      {text: 'Return to the required scripted route', prompt: 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'Any exported model override is cleared and the scripted investigator runs again.'}
-    ],
-    keyPoints: ['Never copy credentials to chat, Git, a browser field, or a remote host.', 'The SDK checks the budget between turns, so one turn can exceed it.', 'The console has no global model-budget guard; stop after one approved proof.'],
-    notes: note({time: '10:15 · 90 sec', why: 'Participants need to connect their own local Claude without confusing the builder with the product runtime.', predict: 'Ask which evidence proves a model actually answered.', see: 'Login, bounded CLI proof, optional console activation, and fallback are separate.', inside: 'The Agent SDK can use the local Claude Code login. The core route still works without a model.', participant: 'Sign in locally and review the preparation prompt. Do not activate the product model before A5.', watch: 'Never request, display, or transfer credentials. A model name in health proves configuration only. The console has no global model-budget guard.', stuck: 'Keep the product offline and continue with A1.', stop: 'Everyone can state that a completed diagnosis plus its visible tool trace proves the model path.', next: 'The repository already knows how to help'})
-  }),
-  baseSlide({
     title: 'The repository already knows how to help',
     kicker: 'W5 · PROJECT SKILLS',
     subtitle: 'Use the included project skills for A1–A9.',
@@ -369,7 +347,29 @@ assignmentSlides.push(
     prompts: [{label: 'Copy the build prompt', prompt: PROMPTS.a5Build, after: 'The focused test passes and the offline trace shows the exact arguments.'}],
     after: 'list_deploys is registered, read-only, tested, and visible in the trace.',
     checks: ['Show the chosen edge case.', 'Show the tool result.', 'Show the exact trace arguments.'],
-    choice: 'Choose an empty time window or a missing deploy.', humanOpen: 'The tool reads evidence only. Operational action stays outside the agent.', next: 'A6 · Create the live counterpart'
+    choice: 'Choose an empty time window or a missing deploy.', humanOpen: 'The tool reads evidence only. Operational action stays outside the agent.', next: 'Connect the product to your own Claude'
+  }),
+  baseSlide({
+    title: 'Connect the product to your own Claude',
+    kicker: 'W5 · OPTIONAL LIVE MODEL',
+    subtitle: 'A5 is complete. Activate one approved model proof, or keep the required route scripted.',
+    type: 'practice',
+    layout: 'exercise',
+    stepsHeading: 'Activate only with approved usage:',
+    cards: [
+      {title: 'Builder · already connected', body: 'Claude Code uses your local login and the included project skills.'},
+      {title: 'Product · optional now', body: 'Run one turn-checked CLI proof before you optionally restart the console. One turn can exceed the budget.'},
+      {title: 'Proof', body: 'Require one completed diagnosis and its visible tool trace. A health label alone is not proof.'},
+      {title: 'Fallback', body: 'Stop your console and restart without AGENT_MODEL. The required route remains scripted.'}
+    ],
+    steps: [
+      {text: 'Copy this review prompt into Claude Code', prompt: PROMPTS.liveModelSetup, after: 'Claude explains the two runtimes and stops before starting the product model.'},
+      {text: 'Run one bounded model proof', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json --model sonnet --max-turns 8 --max-budget-usd 0.30 --dry-run', after: 'Review the completed diagnosis, cost line, and visible tool trace.'},
+      {text: 'Optionally restart your own console', prompt: 'AGENT_MODEL=sonnet AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The console is ready for one approved live-model investigation.'},
+      {text: 'Return to the required scripted route', prompt: 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'Any exported model override is cleared and the scripted investigator runs again.'}
+    ],
+    keyPoints: ['Never copy credentials to chat, Git, a browser field, or a remote host.', 'The SDK checks the budget between turns, so one turn can exceed it.', 'The console has no global model-budget guard; stop after one approved proof.'],
+    notes: note({time: 'After A5 · 3 min', why: 'The read-only tool path now exists, so an optional product-model proof has a bounded purpose.', predict: 'Ask which evidence proves a model actually answered.', see: 'Bounded CLI proof, optional console activation, and fallback are separate.', inside: 'The Agent SDK can use the local Claude Code login. The core route still works without a model.', participant: 'Choose the scripted route or run one approved product-model proof on your own machine.', watch: 'Never request, display, or transfer credentials. A model name in health proves configuration only. The console has no global model-budget guard.', stuck: 'Keep the product offline and continue with A6.', stop: 'Everyone can state that a completed diagnosis plus its visible tool trace proves the model path.', next: 'A6 · Create the live counterpart'})
   }),
   baseSlide({
     title: 'A6 · Create the live counterpart', kicker: 'W5 · A6 · CONCEPT', subtitle: 'INC-1001 is the fixture reference. The listener creates a new live incident id.', stage: 'diagnose', beat: 'concept',
@@ -444,17 +444,23 @@ assignmentSlides.push(
 closingSlides.push(
   baseSlide({
     title: 'You now have a hackathon start point', kicker: 'W5 · HANDOFF', subtitle: 'Keep the same working method. Change the customer problem.', type: 'context',
-    source: {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'},
-    prompt: "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
     cards: [{title: 'Problem', body: 'One concrete customer or operator pain.'}, {title: 'Checks', body: 'Three results another person can repeat.'}, {title: 'Boundary', body: 'What the agent may inspect and what a human decides.'}, {title: 'First step', body: 'One small build with a visible proof.'}],
-    keyPoints: ['Start from docs/hackathon-intent.md.', 'Use HANDOFF.md to resume.', 'After cloning the pack, run claude --setting-sources project --strict-mcp-config --no-chrome.', 'Choose one public-pack skill for project-local reuse. Do not bulk install.'],
-    notes: note({time: '15:55 · 2 min', why: 'The hackathon should begin from reviewed evidence, then add only the reusable skill it needs.', predict: 'Ask which workshop artifact becomes the first hackathon input.', see: 'The handoff, public skills-pack link, and selective-install prompt are together at the end.', inside: 'The intent and handoff reduce restart work. The pack supports selective project-local installs.', participant: 'Share the problem and first check with a partner. Then save the pack link for the hackathon.', watch: 'Do not make the SRE sample the required hackathon topic or bulk-install the pack.', stuck: 'Reuse the operator, checks, boundary, and OPEN structure. Choose no extra skill until the project needs one.', stop: 'Each learner has one problem, one first step, and an optional selective skills route.', next: 'The method you take with you'})
+    keyPoints: ['Start from docs/hackathon-intent.md.', 'Use HANDOFF.md to resume.', 'Keep the customer problem and human boundary explicit.'],
+    notes: note({time: '15:55 · 2 min', why: 'The hackathon should begin from reviewed evidence.', predict: 'Ask which workshop artifact becomes the first hackathon input.', see: 'The handoff carries the intent, evidence, OPEN items, and next step.', inside: 'The intent and handoff reduce restart work.', participant: 'Share the problem and first check with a partner.', watch: 'Do not make the SRE sample the required hackathon topic.', stuck: 'Reuse the operator, checks, boundary, and OPEN structure.', stop: 'Each learner has one problem and one first step.', next: 'The method you take with you'})
   }),
   baseSlide({
     title: 'The method you take with you', kicker: 'W5 · CLOSE', subtitle: 'Learn the repo. Choose the outcome. Build one step. Prove it. Stop for the person.', type: 'context', layout: 'steps',
     items: [{label: 'Learn', caption: '/show-me'}, {label: 'Choose', caption: '/design-control-loop'}, {label: 'Build', caption: 'one focused change'}, {label: 'Prove', caption: '/verify-this'}, {label: 'Hand off', caption: '/handoff, review, then save'}],
     keyPoints: ['Claude Code explores and builds.', 'You choose and review.', 'Evidence supports the next decision.'],
-    notes: note({time: '15:57 · 2 min', why: 'The close must leave one repeatable method.', predict: 'Ask which step they will use first in the hackathon.', see: 'Five verbs describe the full day.', inside: 'The project skills support four of the five verbs.', participant: 'Name one step and its evidence.', watch: 'Do not add a new concept in the close.', stuck: 'Return to the failure story and trace the five verbs.', stop: 'Collect two takeaways.', next: 'End at 16:00'})
+    notes: note({time: '15:57 · 1 min', why: 'The close must leave one repeatable method.', predict: 'Ask which step they will use first in the hackathon.', see: 'Five verbs describe the full day.', inside: 'The project skills support four of the five verbs.', participant: 'Name one step and its evidence.', watch: 'Do not add a new concept in the close.', stuck: 'Return to the failure story and trace the five verbs.', stop: 'Collect two takeaways.', next: 'Choose one skill for the hackathon'})
+  }),
+  baseSlide({
+    title: 'Choose one skill for the hackathon', kicker: 'W5 · HACKATHON SKILLS', subtitle: 'The full pack starts after the lesson. Install only what your project needs.', type: 'context',
+    source: {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'},
+    prompt: "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
+    cards: [{title: 'Clone after Day 5', body: 'Keep the workshop project skills separate from the full public pack.'}, {title: 'Start isolated', body: 'Run claude --setting-sources project --strict-mcp-config --no-chrome in the pack clone.'}, {title: 'Choose one', body: 'Inspect one skill that supports your hackathon problem.'}, {title: 'Review first', body: 'Approve the exact source and project-local target before copying.'}],
+    keyPoints: ['Do not bulk install the pack.', 'Preserve an existing skill with the same name.', 'Keep project settings local to the chosen repository.'],
+    notes: note({time: '15:58 · 1 min', why: 'The full pack is hackathon support, not lesson setup.', predict: 'Ask which one skill could support the problem they just chose.', see: 'The public link and selective-install prompt are together after the Day 5 method.', inside: 'The pack remains separate. Claude proposes one project-local copy and waits for approval.', participant: 'Save the public pack link and copy the prompt. Choose or install a skill during the hackathon.', watch: 'Do not bulk-install or change global settings.', stuck: 'Choose no skill until the hackathon problem needs one.', stop: 'Each learner has the optional selective-skills route.', next: 'End at 16:00'})
   }),
   baseSlide({
     title: 'End at 16:00', kicker: 'W5 · DONE', subtitle: 'Keep your intent, evidence, OPEN list, and handoff.', type: 'context',
