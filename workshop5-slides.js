@@ -1179,7 +1179,7 @@ const coreSlides = [
       "Offline. No API key needed.",
       "Sample data and a local shop only."
     ],
-    "notes": "Time: 10:49 · 1 min.\n1. Say: “Today you build an on-call agent for a small checkout shop. It runs on your laptop. No cloud, no API key.”\n2. Say: “It reads logs, metrics, deploys and the diff. It cannot change anything.”\n3. Say: “The console shows the diagnosis. Every claim has a reference. You can challenge it in chat.”\n4. Say: “Approve, execute and resolve are buttons with your name. Never chat commands.”\n5. Show the training branch: https://github.com/RyanLisse/sre-oncall-agent/tree/workshop/start. The newer main branch is a separate three-core reference, not this nine-assignment workshop.",
+    "notes": "Time: 10:49 · 1 min.\n1. Say: “Today you build an on-call agent for a small checkout shop. It runs on your laptop. No cloud, no API key.”\n2. Say: “It reads logs, metrics, deploys and the diff. It cannot change anything.”\n3. Say: “The console shows the diagnosis. Every claim has a reference. You can challenge it in chat.”\n4. Say: “Approve, execute and resolve are buttons with your name. Never chat commands.”\n5. Show the training branch: https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start. The newer main branch is a separate three-core reference, not this nine-assignment workshop.",
     "beat": "what",
     "teach": {
       "time": "2–4 min",
@@ -1202,11 +1202,11 @@ const coreSlides = [
           "say": "“Approve, execute and resolve are buttons with your name. Never chat commands.”"
         },
         {
-          "do": "Show the training branch: https://github.com/RyanLisse/sre-oncall-agent/tree/workshop/start. The newer main branch is a separate three-core reference, not this nine-assignment workshop."
+          "do": "Show the training branch: https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start. The newer main branch is a separate three-core reference, not this nine-assignment workshop."
         }
       ],
       "do": [
-        "Show the training branch: https://github.com/RyanLisse/sre-oncall-agent/tree/workshop/start. The newer main branch is a separate three-core reference, not this nine-assignment workshop."
+        "Show the training branch: https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start. The newer main branch is a separate three-core reference, not this nine-assignment workshop."
       ],
       "done": [
         "The room can explain our project: a local ai sre agent."
@@ -1479,8 +1479,8 @@ const coreSlides = [
     "kicker": "W5 · SETUP · YOUR TURN",
     "subtitle": "INC-1001: open the console you work the ticket in. Native on your laptop. Offline. No API key.",
     "repo": {
-      "url": "https://github.com/RyanLisse/sre-oncall-agent/tree/workshop/start",
-      "label": "github.com/RyanLisse/sre-oncall-agent · branch workshop/start"
+      "url": "https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start",
+      "label": "github.com/AetherLink-bv/sre-oncall-agent · branch workshop/start"
     },
     "type": "practice",
     "layout": "exercise",
@@ -1490,7 +1490,7 @@ const coreSlides = [
         "prompt": "We are on workshop/start. Read README.md, WORKSHOP.md, CLAUDE.md and package.json first. Check Node and my current diff. Install the dependencies and generate the sample fixtures. Run the main tests and the workshop tests. Explain why the workshop failures are expected; do not solve them yet. Reuse my existing console or start one on port 4320 if free. Show its health and the local URL. Do not push or change hooks. Stop for my setup review.",
         "after": "You can open the console. Main tests pass; the A3/A4/A5/A8 exercise tests still fail as expected."
       },
-      "Clone workshop/start with git clone --branch workshop/start --single-branch https://github.com/RyanLisse/sre-oncall-agent.git. Open it in Claude Code and check /status.",
+      "Clone workshop/start with git clone --branch workshop/start --single-branch https://github.com/AetherLink-bv/sre-oncall-agent.git. Open it in Claude Code and check /status.",
       "Open localhost:4320 yourself. Read the expected red exercise failures.",
       "Ask Claude to show the remaining TODOs. Choose the first one you will build.",
       "Optional: restart with claude --plugin-dir ./course/ai-sdlc-mod and open /sdlc to see the nine assignments and their evidence status."
@@ -2254,7 +2254,7 @@ const coreSlides = [
     "subtitle": "Append-only history. Current evidence lives in --status.",
     "type": "concept",
     "source": {
-      "url": "https://github.com/RyanLisse/claude-code-skills-pack/blob/main/PROGRESS.md",
+      "url": "https://github.com/AetherLink-bv/claude-code-skills-pack/blob/main/PROGRESS.md",
       "label": "Open the PROGRESS.md template"
     },
     "cards": [
@@ -2532,9 +2532,9 @@ const coreSlides = [
     "keyPoints": [
       "allowed-tools gives more permission. The hook keeps the boundary.",
       "disableSkillShellExecution: true.",
-      "Source: RyanLisse/claude-code-skills-pack."
+      "Source: AetherLink-bv/claude-code-skills-pack."
     ],
-    "notes": "Time: 13:15 · 3 min.\n1. Say: “Left: one policy skill. Claude loads it automatically.”\n2. Say: “Right: 7 workflow skills. You start them only with /name (disable-model-invocation).”\n3. Say: “allowed-tools in a skill gives more permission. The hook still decides.”\n4. Say: “disableSkillShellExecution: true stops hidden shell commands when a skill loads.”\n5. Show the sources: RyanLisse/claude-code-skills-pack (subset approved for today) and humanlayer/skills (MIT, license included).",
+    "notes": "Time: 13:15 · 3 min.\n1. Say: “Left: one policy skill. Claude loads it automatically.”\n2. Say: “Right: 7 workflow skills. You start them only with /name (disable-model-invocation).”\n3. Say: “allowed-tools in a skill gives more permission. The hook still decides.”\n4. Say: “disableSkillShellExecution: true stops hidden shell commands when a skill loads.”\n5. Show the sources: AetherLink-bv/claude-code-skills-pack (subset approved for today) and humanlayer/skills (MIT, license included).",
     "stage": "controls",
     "beat": "concept",
     "teach": {
@@ -2554,11 +2554,11 @@ const coreSlides = [
           "say": "“disableSkillShellExecution: true stops hidden shell commands when a skill loads.”"
         },
         {
-          "do": "Show the sources: RyanLisse/claude-code-skills-pack (subset approved for today) and humanlayer/skills (MIT, license included)."
+          "do": "Show the sources: AetherLink-bv/claude-code-skills-pack (subset approved for today) and humanlayer/skills (MIT, license included)."
         }
       ],
       "do": [
-        "Show the sources: RyanLisse/claude-code-skills-pack (subset approved for today) and humanlayer/skills (MIT, license included)."
+        "Show the sources: AetherLink-bv/claude-code-skills-pack (subset approved for today) and humanlayer/skills (MIT, license included)."
       ],
       "done": [
         "The room can explain two types of skills."
@@ -4149,8 +4149,8 @@ const coreSlides = [
     ],
     "notes": "Time: 1 min.\n1. Say: “This is the same loop as this afternoon, solo and small. The guide is SOLO.md in aetherlink-daily-brief-lab-s1.”\n2. Say the rules: work on my/<your-name>, sample data first (npm run brief:sample needs no API key), tokens only read-only and only in .env, a human reads the PR against intent.md.\n3. Say: “Today: steps 1–4 (about 40 min). Steps 5–7 are homework before W6.”",
     "source": {
-      "url": "https://github.com/RyanLisse/aetherlink-daily-brief-lab-s1",
-      "label": "github.com/RyanLisse/aetherlink-daily-brief-lab-s1"
+      "url": "https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1",
+      "label": "github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1"
     },
     "beat": "close",
     "teach": {
@@ -4244,8 +4244,8 @@ const coreSlides = [
     "kicker": "W5 · BONUS · YOUR TURN",
     "subtitle": "Follow SOLO.md. Each step has a check.",
     "repo": {
-      "url": "https://github.com/RyanLisse/aetherlink-daily-brief-lab-s1",
-      "label": "github.com/RyanLisse/aetherlink-daily-brief-lab-s1"
+      "url": "https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1",
+      "label": "github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1"
     },
     "type": "practice",
     "layout": "exercise",
@@ -4544,7 +4544,7 @@ for (const [stage, config] of Object.entries(stageConfig)) {
 }
 
 before.set(stageConfig.setup.assignment, [
-  stageSlide({title:'Your own copy, your own console',stage:'setup',beat:'concept',subtitle:'Start from workshop/start. Keep the lab local and preserve your current diff.',points:['Use RyanLisse/sre-oncall-agent on workshop/start.','Do not use a solved step branch.','Do not push or change hooks during setup.'],next:stageConfig.setup.whatTitle}),
+  stageSlide({title:'Your own copy, your own console',stage:'setup',beat:'concept',subtitle:'Start from workshop/start. Keep the lab local and preserve your current diff.',points:['Use AetherLink-bv/sre-oncall-agent on workshop/start.','Do not use a solved step branch.','Do not push or change hooks during setup.'],next:stageConfig.setup.whatTitle}),
   ...before.get(stageConfig.setup.assignment),
   stageSlide({title:'Demo · Stage 0: review the setup evidence',stage:'setup',beat:'demo',subtitle:'Watch the review pattern. Your own terminal output proves your setup.',points:['Read /status and the current diff.','Read the exact test failures.','Confirm the console health on port 4320.'],next:stageConfig.setup.assignment,clip:'assets/day5-teach/a1.mp4'})
 ]);
