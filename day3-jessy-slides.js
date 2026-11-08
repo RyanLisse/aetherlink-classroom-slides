@@ -148,7 +148,7 @@ return [
     { title: "Where does the human stay in charge?", body: "" }
   ],
   keyPoints: ["Cold retrieval: no slides, no notes", "One question per click", "Let the room answer first", "Last question leads into today"],
-  notes: "Say: Before we start something new: what stuck from last week? Answer from memory, no peeking.\n\nClick once per question and let the room answer before you add anything.\nA good result:\n1. Working method: explore, plan, build, check, and you decide at the end.\n2. CLAUDE.md holds the house rules Claude reads; settings.json holds the permissions (ask, allow, deny).\n3. A skill writes down how a task is done once, so Claude does it the same way every time.\n4. MCP connects Claude Code to other systems, like Jira, GitLab and Confluence.\n5. The human stays in charge at the gates: you approve the plan, the edits and the merge, not Claude.\n\nWhy now: the last question is the bridge to today. n8n is about workflows, and a good workflow has clear places where a person decides.\n\nNext: today's story."
+  notes: "Say: Before we start something new: what stuck from last week? Answer from memory, no peeking.\n\nClick once per question and let the room answer before you add anything.\nA good result:\n1. Working method: explore, plan, build, check, and you decide at the end.\n2. CLAUDE.md holds the house rules Claude reads; settings.json holds the permissions (ask, allow, deny).\n3. A skill writes down how a task is done once, so Claude does it the same way every time.\n4. Bobby, the level-checker subagent, worked in its own context: it checked the levels against the spec, ran the test and reported back. It changed and approved nothing: you decided.\n5. The human stays in charge at the gates: you approve the plan, the edits and the merge, not Claude.\n\nWhy now: the last question is the bridge to today. n8n is about workflows, and a good workflow has clear places where a person decides.\n\nNext: today's story."
 },
 
 { // Slide 3
@@ -164,14 +164,14 @@ return [
   keyPoints: ["Open with the inbox: 200 tickets, one urgent", "Goal: the right priority, fast, with a human gate", "Grow one ticket flow from rules to specialists", "Screen-share after every level", "End with reflection"],
   teach: {
     time: "1 min",
-    gist: "The agenda as a story: 200 tickets, the urgent one is #147. Today we build the sorter that finds it.",
+    gist: "The agenda as a story: 200 tickets, the urgent one is #147. Today we build the sorter that flags it as soon as it arrives.",
     script: [
       { do: "Slide appears. Point at the title line.",
         say: "Imagine: Monday, 08:00, at a payment company like Worldline. There are 200 support tickets in the inbox." },
       { do: "Point at the left card, The problem.",
-        say: "One of them is urgent: WL-1026, 'I was charged twice'. It's number 147. Someone has to read 146 others before they find it." },
+        say: "One of them is urgent: WL-1026, 'I was charged twice'. It's number 147. Nobody knows it's urgent until someone gets to it." },
       { do: "Point at the right card, Today's build.",
-        say: "Today we build the thing that finds it. We start simple, with plain rules. Then we add AI. Then a small team of AI helpers." },
+        say: "Today we build a sorter that gives every new ticket a priority, so the urgent one is flagged straight away. We start simple, with plain rules. Then we add AI. Then a small team of AI helpers." },
       { say: "And one thing never changes: the AI never answers a customer on its own. It writes a draft, a person approves it." },
       { do: "Sweep your hand along the numbered route, left to right. Don't explain each stop.",
         say: "This is our route for today. We take it one stop at a time, and after every level we look at each other's screens." },
@@ -188,9 +188,9 @@ return [
       ["L3", "small AI helpers with one job each, like Bobby"],
       ["Human gate", "AI writes a draft, a person approves it"]
     ],
-    next: "who is in the room (team intro)."
+    next: "introducing myself."
   },
-  notes: "What this slide is: the agenda for the day, told as a small story. Three parts: the problem (left card), what we build (right card), and the route of the day (the numbered line).\n\n1. The problem. A support team at a payment company like Worldline. Monday morning: 200 customer messages ('tickets') in the inbox. One is urgent: WL-1026, a customer who was charged twice. It sits at number 147, so someone has to read 146 others first.\n\n2. Today's build. We build an automatic sorter in n8n: it reads each ticket and gives it a priority, low, medium or high. Three versions, each a bit smarter:\n• L1 rules: a fixed rule, no AI ('if priority = high, escalate'). Only works if a person already typed the priority.\n• L2 AI Agent: the AI reads the message itself and decides the priority, so 'I paid two times' becomes high.\n• L3 specialists: the work is split over small AI helpers (one writes the reply, one assesses the risk, one looks up the customer), like Bobby on Day 2.\n'A person approves' = the AI only writes a draft reply; a human always checks it before anything reaches a customer.\n\n3. The route. The 10 stops of the day, in order: sign up for n8n, a tour, L1, chat + memory (a practice agent), L2, L3, everything behind one chat box, save every reply for approval, reflect. No clock times on purpose: say the break times out loud.\n\nSay (about 1 minute): Monday morning, 200 tickets, and the one that matters is number 147. Today we build the thing that finds it. We start dumb, with plain rules, then add AI, then a team of AI helpers. And the AI never answers a customer by itself: a person always approves.\nThen point along the route once and say when the breaks are.\n\nNext: who is in the room."
+  notes: "What this slide is: the agenda for the day, told as a small story. Three parts: the problem (left card), what we build (right card), and the route of the day (the numbered line).\n\n1. The problem. A support team at a payment company like Worldline. Monday morning: 200 customer messages ('tickets') in the inbox. One is urgent: WL-1026, a customer who was charged twice. It sits at number 147, and nobody knows it's urgent until someone reads it.\n\n2. Today's build. We build an automatic sorter in n8n: it reads each ticket and gives it a priority, low, medium or high. Three versions, each a bit smarter:\n• L1 rules: a fixed rule, no AI ('if priority = high, escalate'). Only works if a person already typed the priority.\n• L2 AI Agent: the AI reads the message itself and decides the priority, so 'I paid two times' becomes high.\n• L3 specialists: the work is split over small AI helpers (one writes the reply, one assesses the risk, one looks up the customer), like Bobby on Day 2.\n'A person approves' = the AI only writes a draft reply; a human always checks it before anything reaches a customer.\n\n3. The route. The 10 stops of the day, in order: sign up for n8n, a tour, L1, chat + memory (a practice agent), L2, L3, everything behind one chat box, save every reply for approval, reflect. No clock times on purpose: say the break times out loud.\n\nSay (about 1 minute): Monday morning, 200 tickets, and the one that matters is number 147. Today we build a workflow that gives every new ticket a priority, so the urgent one is flagged straight away. We start dumb, with plain rules, then add AI, then a team of AI helpers. And the AI never answers a customer by itself: a person always approves.\nThen point along the route once and say when the breaks are.\n\nNext: introducing myself."
 },
 
 { // Slide 4
@@ -219,7 +219,7 @@ return [
     { title: "Your work", body: "One task in your team that is repetitive, or where someone reads a lot before deciding." }
   ],
   keyPoints: ["Name, role, one task", "Write the tasks down", "Use them as examples during the day", "Come back to them at the close"],
-  notes: "Say: One sentence each: your name, your role, whether you have used n8n or a tool like it, and what would make today a success for you.\n\nGo down the participant list and keep it moving; cameras on if people are comfortable with it. Ask everyone to also type their success wish in the chat: you come back to it in the closing round.\n\nWatch for: people who already use n8n. Put them with someone new when you use breakout rooms for the assignments."
+  notes: "Say: One sentence each: your name, your role, and one task in your team that is repetitive, or where someone reads a lot before deciding.\n\nGo down the participant list and keep it moving; cameras on if people are comfortable with it. Ask everyone to also type their task in the chat: you use them as examples during the day, and come back to them in the closing round.\n\nWatch for: people who already use n8n. Put them with someone new when you use breakout rooms for the assignments."
 },
 
 { // Slide 6
@@ -300,7 +300,7 @@ return [
     ],
     next: "why build an agent here, when you already used one in Claude Code."
   },
-  notes: "Storyline: this is the first n8n slide. Slide 3 told the problem (200 tickets, the urgent one is #147). Now we show where we'll solve it. The screenshot is not a random example: it is exactly the L1 workflow everyone builds in Assignment 31. So this slide is a preview of their own build, and it teaches the three words we use all day: workflow, trigger, node.\n\nSay: n8n, you say 'n-eight-n', is a tool to automate work. You draw the steps on a canvas, and n8n runs them by itself. This picture is our ticket problem, drawn in n8n.\n\nClick once per card and tie each card to the picture:\n• A workflow: the whole picture, read left to right like a sentence.\n• A trigger: the node on the far left. Here it's a button ('When clicking Execute workflow'); later a chat message starts it.\n• Nodes: each box is one step. Ticket Input holds the ticket, the Switch is the rule, and low / medium / high are the three outcomes. Data flows from node to node.\n\nAsk: which node makes the decision here? The Switch: that's where the line splits into three paths. (Don't ask where WL-1026 ends up: the picture doesn't show the ticket's priority or the rule, so nobody can answer that yet.) Then follow the line into the Switch: it gets its input from Ticket Input, the node before it, so it looks at the ticket. It chooses a path with rules ('mode: Rules' under the Switch).\n\n'Rules' on this slide and all day means fixed if-this-then-that logic you write yourself (same input, same path, no AI). In n8n it's also a real setting: the Switch node has Mode: Rules, with Routing Rules you add.\n\nBackground: n8n has hundreds of ready-made integrations (Gmail, Slack, Jira…); when one is missing you use the HTTP Request node or a Code node. We don't need them today. The name is short for 'nodemation'.\n\nEnd on the tagline as the one-line definition: a ticket arrives → n8n runs the steps → the priority lands where your team works.\n\nNext: why build an agent here, when you already used one in Claude Code."
+  notes: "Storyline: this is the first n8n slide. The 'Today in n8n' slide told the problem (200 tickets, the urgent one is #147). Now we show where we'll solve it. The screenshot is not a random example: it is exactly the L1 workflow everyone builds in Assignment 31. So this slide is a preview of their own build, and it teaches the three words we use all day: workflow, trigger, node.\n\nSay: n8n, you say 'n-eight-n', is a tool to automate work. You draw the steps on a canvas, and n8n runs them by itself. This picture is our ticket problem, drawn in n8n.\n\nClick once per card and tie each card to the picture:\n• A workflow: the whole picture, read left to right like a sentence.\n• A trigger: the node on the far left. Here it's a button ('When clicking Execute workflow'); later a chat message starts it.\n• Nodes: each box is one step. Ticket Input holds the ticket, the Switch is the rule, and low / medium / high are the three outcomes. Data flows from node to node.\n\nAsk: which node makes the decision here? The Switch: that's where the line splits into three paths. (Don't ask where WL-1026 ends up: the picture doesn't show the ticket's priority or the rule, so nobody can answer that yet.) Then follow the line into the Switch: it gets its input from Ticket Input, the node before it, so it looks at the ticket. It chooses a path with rules ('mode: Rules' under the Switch).\n\n'Rules' on this slide and all day means fixed if-this-then-that logic you write yourself (same input, same path, no AI). In n8n it's also a real setting: the Switch node has Mode: Rules, with Routing Rules you add.\n\nBackground: n8n has hundreds of ready-made integrations (Gmail, Slack, Jira…); when one is missing you use the HTTP Request node or a Code node. We don't need them today. The name is short for 'nodemation'.\n\nEnd on the tagline as the one-line definition: a ticket arrives → n8n runs the steps → the priority lands where your team works.\n\nNext: why build an agent here, when you already used one in Claude Code."
 },
 
 { // Slide 9
@@ -357,7 +357,7 @@ return [
     ],
     next: "Why n8n: two jobs, learning agents and prototyping one for your team."
   },
-  notes: "Storyline: slide 9 explained what n8n is. This slide answers the question the room is asking: why a new tool, when we already have Claude Code? Answer: in Claude Code the agent loop ran out of sight; in n8n you build an agent from parts you can see and open. It calls back to Day 1's slide 'You are using an agent, not building one (yet)': today is the 'yet'.\n\nSay: On Day 1 we said: you are using an agent, not building one, yet. Today is the 'yet'.\n\nClick once per card. In Claude Code the loop, observe, decide, act, check, happened inside the tool; you only saw the outcome. In n8n you draw the same parts yourself, and every run shows the data at every step. Point at the picture: the AI Agent at the top, and under it the Chat Model, the Memory, the Tool slot and the Output Parser. Note: in the picture the Tool slot is empty (just a +): say 'this slot is for tools, we fill it this afternoon'. By the end of today you have built every one of them.\n\nWhy now: it answers 'why a new tool?' before anyone asks it.\n\nThe tagline ('Then decide what your team should build') points ahead: once they know the parts of an agent, they can judge which agent would help their own team. That is what they build on Days 6 and 7 (hackathon). The closing slide (45) collects their first workflow ideas in the chat."
+  notes: "Storyline: the 'What is n8n?' slide explained what n8n is. This slide answers the question the room is asking: why a new tool, when we already have Claude Code? Answer: in Claude Code the agent loop ran out of sight; in n8n you build an agent from parts you can see and open. It calls back to Day 1's slide 'You are using an agent, not building one (yet)': today is the 'yet'.\n\nSay: On Day 1 we said: you are using an agent, not building one, yet. Today is the 'yet'.\n\nClick once per card. In Claude Code the loop, observe, decide, act, check, happened inside the tool; you only saw the outcome. In n8n you draw the same parts yourself, and every run shows the data at every step. Point at the picture: the AI Agent at the top, and under it the Chat Model, the Memory, the Tool slot and the Output Parser. Note: in the picture the Tool slot is empty (just a +): say 'this slot is for tools, we fill it this afternoon'. By the end of today you have built every one of them.\n\nWhy now: it answers 'why a new tool?' before anyone asks it.\n\nThe tagline ('Then decide what your team should build') points ahead: once they know the parts of an agent, they can judge which agent would help their own team. That is what they build on Days 6 and 7 (hackathon). The closing slide (45) collects their first workflow ideas in the chat."
 },
 
 { // Slide 10
@@ -374,7 +374,7 @@ return [
   tagline: "AI does the steps. People decide where the workflow stops for a human.",
   teach: {
     time: "2 min",
-    gist: "n8n does two jobs for us: a classroom to learn how agents work (left), and a quick way to test an agent idea for your own team (right). Keep it brisk: the left column repeats slide 10.",
+    gist: "n8n does two jobs for us: a classroom to learn how agents work (left), and a quick way to test an agent idea for your own team (right). Keep it brisk: the left column repeats the 'You used an agent' slide.",
     script: [
       { do: "Slide appears with only the title.",
         say: "So why n8n? We use it for two jobs." },
@@ -397,8 +397,8 @@ return [
       "The human gate: a person approves before a customer gets anything."
     ],
     watch: [
-      "Don't linger on the left column: it repeats slide 10. The new parts are the right column and the ChatGPT question.",
-      "Someone asks 'can we use this at Worldline?': n8n can run on Worldline's own servers, but that's a decision for their IT. Today is workshop data only (slide 14)."
+      "Don't linger on the left column: it repeats the 'You used an agent' slide. The new parts are the right column and the ChatGPT question.",
+      "Someone asks 'can we use this at Worldline?': n8n can run on Worldline's own servers, but that's a decision for their IT. Today is workshop data only (the 'Workshop data only' slide)."
     ],
     terms: [
       ["Human gate", "the point in the workflow where it stops and a person approves"],
@@ -555,7 +555,7 @@ return [
       "Confirmation email in spam or company quarantine: wait a few minutes, check spam.",
       "Can't register (site blocked, no email): don't pair them up (online class). Let them follow your screen share for now, and help them in a breakout room or the break.",
       "Old expired trial from weeks ago: it's gone, they create a new one (if n8n refuses the same email, use another).",
-      "Fast people waiting: let them click around the empty canvas, or start on slide 14."
+      "Fast people waiting: let them click around the empty canvas, or start on the tour."
     ],
     terms: [
       ["n8n Cloud", "n8n run by n8n itself, in the browser"],
@@ -922,7 +922,7 @@ return [
   expected: "WL-1026 runs from the trigger to the high node, and the output of the high node shows the ticket plus action: escalate.",
   keyPoints: ["No AI, no credits", "The ticket JSON has a priority", "Switch: priority is equal to …", "Drag fields from Input, don't type them", "Rule order: low, medium, high"],
   teach: {
-    time: "build",
+    time: "15 min",
     gist: "Everyone builds L1: one ticket → a Switch → three paths. No AI, no credits. This is the skeleton for the whole day.",
     script: [
       { say: "Now you build level 1 yourself: the workflow from the picture this morning. No AI yet, so it costs no credits." },
@@ -1148,7 +1148,7 @@ return [
     ],
     "watch": [
       "Card 3 mixes slots and a setting: Chat Model, Memory and Tools hang UNDER the agent node (slots); the System Message is a text box INSIDE the node. Say it that way, so nobody looks for a System Message node later.",
-      "Slide 10's picture also showed an Output Parser slot. It's not on this card; it comes in A36. If someone asks: 'that's the fourth slot, we add it later today'.",
+      "The picture on the 'You used an agent' slide also showed an Output Parser slot. It's not on this card; it comes in A36. If someone asks: 'that's the fourth slot, we add it later today'.",
       "Keep it short: the next slide (the agentic loop) goes deeper."
     ],
     "terms": [
@@ -1893,7 +1893,7 @@ return [
   title: "Assignment 36: Fixed fields for the Switch",
   teach: {
     "time": "15 min",
-    "gist": "Build the fix from slide 29. AI Agent: Require Specific Output Format on → Structured Output Parser with {priority, message}. Switch: all three rules read {{ $json.output.priority }} (drag it from the Input), Ignore Case on. Then run WL-1026, WL-1030 and WL-9002: all three now reach a path. This is L2, the goal for everyone.",
+    "gist": "Build the fix from the Output Parser slide. AI Agent: Require Specific Output Format on → Structured Output Parser with {priority, message}. Switch: all three rules read {{ $json.output.priority }} (drag it from the Input), Ignore Case on. Then run WL-1026, WL-1030 and WL-9002: all three now reach a path. This is L2, the goal for everyone.",
     "script": [
       {
         "do": "Slide appears. Point at the subtitle.",
@@ -2807,7 +2807,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
         "say": "Think of it as: same brain, new front door. We only swap how the ticket comes in. The agent, the three specialists, the parser, the Switch: they stay exactly the same. A trigger is just how the work comes in. Tomorrow it could be an email or a form, and the rest wouldn't change."
       },
       {
-        "ask": "Look at the ticket on the slide, step 4. What's different from the tickets in Ticket Input?",
+        "ask": "Look at the ticket on the slide, step 3. What's different from the tickets in Ticket Input?",
         "say": "(Answer: it's one sentence. No separate ticket_id, customer_id and message fields.) Exactly. That's the hidden test. The agent now has to pick the customer ID out of the text itself, and pass it to the Customer Context Agent. If CUST-006 still comes out high, the whole team works on input the way a person would type it."
       },
       {
@@ -2818,29 +2818,29 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
         "say": "First a copy, so your L3 stays safe: three dots next to the workflow name, Duplicate, name it Day 3 · chat to chat. It opens in a NEW browser tab: work in that tab."
       },
       {
-        "do": "Point at step 2. Play the new clip (swap the trigger). Narrate each move as it happens.",
+        "do": "Point at step 1. Play the new clip (swap the trigger). Narrate each move as it happens.",
         "clip": "assets/day3-teach/a41-0-swap-trigger.mp4",
         "warn": "Go slowly here: this is the step people miss. Hover a node → a small toolbar appears ABOVE it → the bin icon deletes it.",
         "say": "Now we swap the start. Hover over the manual trigger, the first node: a small row of icons appears above it. Click the bin: gone. Same for Ticket Input: hover, bin. Now the AI Agent has nothing in front of it. Plus at the top right. n8n asks: what triggers this workflow? Type chat, click Chat, then On new Chat event. A panel opens: just close it. The new node, When chat message received, is on the canvas. Drag from its little dot on the right to the left side of the AI Agent: a line. Then open the AI Agent: Source for Prompt, change Define below back to Connected Chat Trigger Node. Close. Open Simple Memory: Session ID, also Connected Chat Trigger Node. Close. The chat box at the bottom appears by itself."
       },
       {
-        "do": "Point at step 3. Play clip 1 from the middle (the low/medium/high nodes).",
+        "do": "Point at step 2. Play clip 1 from the middle (the low/medium/high nodes).",
         "say": "And the answer must come back in the chat. The chat shows a field called output. So in the high node: Add Field, name output, paste the text from the slide, and switch it to Expression: green. Do the same in medium and low, with MEDIUM and LOW in the first line.",
         "clip": "assets/day3-teach/a41-1-chat-to-chat-setup.mp4"
       },
       {
-        "do": "Point at step 4. Play clip 2.",
+        "do": "Point at step 3. Play clip 2.",
         "clip": "assets/day3-teach/a41-2-chat-test.mp4",
         "say": "Now paste the ticket from the slide in the chat: CUST-006, card reader broken. Wait, about 40 seconds. HIGH priority, escalate today, draft reply… and the reply. Notice: we never typed a customer_id field. The agent read CUST-006 from the sentence and looked it up. That's the hidden test passed."
       },
       {
         "do": "Start the timer (25 min).",
-        "say": "Go. Done early? Look at the card on the right: add one extra node."
+        "say": "Go. Done early? Help someone who is stuck, or try a ticket of your own in the chat."
       },
       {
         "do": "At the end: one or two people share their screen with a chat answer.",
         "ask": "The reply says 'a person reviews it before sending'. Where in this workflow does that person actually decide?",
-        "say": "(Answer: nowhere yet: it's only a label. Nothing is sent to a customer.) Right. In a real flow the high path would stop and wait for a person's approval. That's done-early idea number one."
+        "say": "(Answer: nowhere yet: it's only a label. Nothing is sent to a customer.) Right. In a real flow the workflow would stop and wait for a person's approval. That's exactly what you build in the next assignment."
       },
       {
         "ask": "What does this chat-to-chat version prove that the Execute button didn't?",
@@ -2875,10 +2875,9 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
       "Duplicate opens in a NEW browser tab. Make sure they edit the copy.",
       "The field value is a one-line box: the empty line from the slide disappears. Fine. It MUST be switched to Expression (green), or the chat shows '{{ $json.output.message }}' literally.",
       "Chat shows nothing or a block of JSON: the last node has no field named exactly output.",
-      "Error about the prompt or 'No session ID found': step 2, both must be Connected Chat Trigger Node again.",
+      "Error about the prompt or 'No session ID found': step 1, both must be Connected Chat Trigger Node again.",
       "'customer not found': the customer ID must be in the chat message (CUST-006: …).",
-      "The slide says 'then CUST-004 with the invoice copy': that text is WL-1027's message from A32 ('Please send me a copy of my invoice…'). Paste it in chat for them.",
-      "~40 seconds per answer. Online: tell them to wait before sending again."
+            "~40 seconds per answer. Online: tell them to wait before sending again."
     ],
     "terms": [
       [
@@ -2891,7 +2890,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
       ],
       [
         "Human gate",
-        "a step where the workflow stops until a person approves: not built yet, only labelled"
+        "a step where the workflow stops until a person approves: you build it in the next assignment"
       ]
     ],
     "next": "Assignment 42: save every reply for approval."
@@ -2911,11 +2910,91 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
   ],
   expected: "You type a ticket in the chat and get a draft reply back that names its priority, and that a person still has to approve. In the next assignment the workflow saves it for that person.",
   keyPoints: ["Duplicate first: it opens a new tab", "Chat → On new Chat event", "Prompt and memory: Connected Chat Trigger Node", "Field output, set to Expression", "Next: save every reply"],
-  notes: "Say: The final build. Everything you made today, behind one chat box.\n\nType the minutes on the timer and press start. Visit the breakout rooms, or ask everyone to type 'done' or 'stuck' in the chat and help the stuck ones first. Note one or two good workflows for the closing round.\n\nWhy now: this is what a support colleague would actually use: paste a ticket, get a priority and a draft reply.\nWhat you see: the chat answers with 'HIGH priority, escalate today. Draft reply...' and the reply. In the Logs the whole flow: agent, specialists, parser, Switch, one path.\n\nWatch for: the chat shows nothing or a block of JSON. The last node needs a field named exactly output, set to Expression. If the field stays on Fixed, the chat shows the {{ }} text literally.\nWatch for: Duplicate opens the copy in a new browser tab. Some people keep working in the old tab and break their L3 workflow. Check the workflow name at the top.\nWatch for: an error about the prompt. Step 1: with the chat trigger, the prompt and the memory both come from the Connected Chat Trigger Node again.\nWatch for: 'customer not found'. The customer ID must be in the message; the agent reads it from the text now.\n\nDone early: one extra node with a useful effect. Ideas: an IF that stops high tickets for a person's approval, a Code node that cleans up the input, or their own idea, if they can explain what it adds.\n\nBackground: the human gate. The reply is labelled a draft, and nothing is sent to a customer. In a real flow the high path would stop at a person: n8n has nodes that send a message and wait for an approval click. Done-early idea number one.\n\nNext: save every reply for approval."
+  notes: "Say: The final build. Everything you made today, behind one chat box.\n\nType the minutes on the timer and press start. Visit the breakout rooms, or ask everyone to type 'done' or 'stuck' in the chat and help the stuck ones first. Note one or two good workflows for the closing round.\n\nWhy now: this is what a support colleague would actually use: paste a ticket, get a priority and a draft reply.\nWhat you see: the chat answers with 'HIGH priority, escalate today. Draft reply...' and the reply. In the Logs the whole flow: agent, specialists, parser, Switch, one path.\n\nWatch for: the chat shows nothing or a block of JSON. The last node needs a field named exactly output, set to Expression. If the field stays on Fixed, the chat shows the {{ }} text literally.\nWatch for: Duplicate opens the copy in a new browser tab. Some people keep working in the old tab and break their L3 workflow. Check the workflow name at the top.\nWatch for: an error about the prompt. Step 1: with the chat trigger, the prompt and the memory both come from the Connected Chat Trigger Node again.\nWatch for: 'customer not found'. The customer ID must be in the message; the agent reads it from the text now.\n\nDone early: they help someone who is stuck, or test a ticket of their own in the chat.\n\nBackground: the human gate. Here the reply is only labelled a draft, and nothing is sent to a customer. In the next assignment the workflow saves every reply in a table where a person approves it. In production, n8n also has nodes that send a message and wait for an approval click.\n\nNext: save every reply for approval."
 },
 
 { // Slide 40
   title: "Assignment 42: Save every reply for approval",
+  teach: {
+    "time": "15 min",
+    "gist": "Make the human gate real. Every draft reply is saved in a data table 'replies' with status 'waiting for approval', and only a person changes it to approved. Build: make the table, an Insert row before each of the low, medium and high nodes, and let those nodes read {{ $json.reply }}. Then send the three tickets again and approve one reply yourself.",
+    "script": [
+      {
+        "do": "Slide appears.",
+        "say": "In the last assignment the reply said 'draft for review'. But where does that person actually review it? Nowhere yet. Now we build that step."
+      },
+      {
+        "do": "Point at the card The human gate.",
+        "say": "This is human in the loop. The workflow writes every reply into a table with the status 'waiting for approval'. The workflow never sets 'approved'. Only a person does."
+      },
+      {
+        "do": "Point at step 1.",
+        "say": "First the table: Overview, Data tables, Create Data table. Name it replies, and give it four text columns: message, priority, reply and status."
+      },
+      {
+        "do": "Point at step 2.",
+        "say": "Now the save step on the high path. Hover over the line between the Switch's high exit and the high node, click plus, Data table, Insert row. Choose the table replies and map the four columns: copy them from the slide. Status is just the fixed text 'waiting for approval'."
+      },
+      {
+        "do": "Point at step 3.",
+        "say": "The same on the other two paths. Select the node, Ctrl+C, Ctrl+V, and put one copy before medium and one before low. Nothing to change inside."
+      },
+      {
+        "do": "Point at step 4. Point at the orange warning.",
+        "say": "This is the trap. After the Insert row, the data is the saved row. So the chat text must now read reply, not output.message. Change it in all three nodes, or the chat shows an empty draft."
+      },
+      {
+        "do": "Start the timer (15 min).",
+        "say": "Go. Then send the three tickets from the last assignment again, and open the table."
+      },
+      {
+        "do": "At the end: one person shares the replies table.",
+        "ask": "Who decides when a reply may go to the customer?",
+        "say": "(Answer: a person, by changing the status.) Right. The AI drafts, the table holds it, a person decides. That's the human gate."
+      }
+    ],
+    "do": [
+      "Overview → Data tables → Create Data table: replies (message, priority, reply, status)",
+      "Hover the line Switch (high) → high node → + → Data table → Insert row",
+      "Map message, priority, reply, status = waiting for approval",
+      "Copy the node before medium and before low",
+      "low/medium/high: output now uses {{ $json.reply }}",
+      "Chat: send CUST-006, CUST-004, CUST-001 again",
+      "Open replies: set one status to approved"
+    ],
+    "done": [
+      "Three rows in replies, each with status waiting for approval.",
+      "The chat still shows the draft reply.",
+      "One row set to approved by hand."
+    ],
+    "learn": [
+      "A human gate is a step you can see, not a sentence in a prompt.",
+      "The workflow writes 'waiting for approval'; only a person writes 'approved'.",
+      "After a Data table node, $json is the saved row."
+    ],
+    "watch": [
+      "The chat shows 'Draft reply for review:' with nothing after it: the node still reads {{ $json.output.message }}. After the Insert row it must be {{ $json.reply }}.",
+      "Low or medium tickets appear in the chat but not in the table: that path has no Insert row yet.",
+      "The message column stays empty: the chat trigger was renamed. Use its name in the expression instead of When chat message received.",
+      "The Insert row node starts on the wrong table or operation: check Insert row and the table replies.",
+      "Test this assignment once in your own trial before the session."
+    ],
+    "terms": [
+      [
+        "Insert row",
+        "a Data table operation that adds one new row"
+      ],
+      [
+        "status",
+        "the column a person changes from waiting for approval to approved"
+      ],
+      [
+        "Human in the loop",
+        "the workflow stops at a person before anything reaches a customer"
+      ]
+    ],
+    "next": "what's next on Day 4."
+  },
   kicker: "DAY 3 · ASSIGNMENT 42 · BUILD",
   subtitle: "Every draft reply is saved in a table, and waits there until a person approves it.",
   type: "practice",
@@ -2995,7 +3074,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
   title: "L1 rules. L2 judgment. L3 specialists.",
   teach: {
     "time": "3 min",
-    "gist": "Recap. Per level: ask the room for one sentence first, then show it. L1 = Switch on a typed priority (exact, but a person reads every ticket). L2 = one agent decides, the parser makes it readable. L3 = specialists with one job each, one human gate. Human gate = every reply waits in the table for a person.",
+    "gist": "Recap. Per level: ask the room for one sentence first, then show it. L1 = Switch on a typed priority (exact, but a person reads every ticket). L2 = one agent decides, the parser makes it readable. L3 = specialists with one job each; the customer table changes the answer. Human gate = every reply waits in the table for a person.",
     "script": [
       {
         "do": "Slide appears.",
@@ -3054,7 +3133,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
   title: "What did you learn?",
   teach: {
     "time": "8 min",
-    "gist": "Closing. Three quiet minutes: everyone completes the five statements for themselves. Then collect a few answers, let one or two people show their chat-to-chat workflow, and go back to this morning's wishes. Workflow ideas and questions feed Day 4 (and Days 6–7).",
+    "gist": "Closing. Three quiet minutes: everyone completes the five statements for themselves. Then collect a few answers, let one or two people show their chat-to-chat workflow, and go back to this morning's tasks. Workflow ideas and questions feed Day 4 (and Days 6–7).",
     "script": [
       {
         "do": "Slide appears. The 3-minute timer starts by itself.",
@@ -3069,11 +3148,11 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
         "say": "Show us one ticket going through."
       },
       {
-        "ask": "'A workflow I could build for my team is…' Who has one?",
+        "ask": "'For the task I named this morning, a workflow would…' Who has one?",
         "say": "(Any idea is fine.) Keep these. On Days 6 and 7 you build your own idea; this is a start."
       },
       {
-        "say": "And this morning you wrote what you wanted from today. Did we get there?"
+        "say": "Look back at the tasks from this morning: which ones could you now build, at least as a first version?"
       }
     ],
     "learn": [
@@ -3081,7 +3160,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
       "One idea for your own team."
     ],
     "watch": [
-      "Maarten's classroom notes collect this morning's success wishes on paper. Online: use wherever you collected them in the morning (chat, a shared doc, a whiteboard). Check beforehand.",
+      "This morning's tasks: online they are in the chat, or wherever you collected them. Scroll back to them before the closing round.",
       "'Questions feed Day 4': collect the open questions in one place (chat or doc) so you can pass them on."
     ],
     "terms": [],
@@ -3100,7 +3179,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
     { title: "I still have a question about…", body: "" }
   ],
   keyPoints: ["Three quiet minutes", "Let people write first", "Collect a few answers aloud", "Back to this morning's tasks", "Questions feed Day 4"],
-  notes: "Say: Three quiet minutes. Complete the statements for yourself first, then we share.\n\nAsk everyone to type one completed statement in the chat, then read a few out loud. Let one or two people share their chat-to-chat workflow on screen.\n\nScroll back to the success wishes people typed in the chat this morning: which ones did we meet?\n\nCopy the workflow ideas and open questions from the chat into a shared document: they are the starting point for Day 4."
+  notes: "Say: Three quiet minutes. Complete the statements for yourself first, then we share.\n\nAsk everyone to type one completed statement in the chat, then read a few out loud. Let one or two people share their chat-to-chat workflow on screen.\n\nScroll back to the tasks people named this morning: for which ones can they now sketch a workflow?\n\nCopy the workflow ideas and open questions from the chat into a shared document: they are the starting point for Day 4."
 }
 
 ];
