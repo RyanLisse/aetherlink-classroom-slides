@@ -4679,8 +4679,17 @@ if (participantMission) {
     {title: 'Make the decisions', body: 'Accept the intent, challenge the evidence and operate the human gate.'},
     {title: 'Keep the lesson', body: 'Turn verified work into an eval, a handoff and your hackathon intent.'}
   ];
+  participantMission.notes = 'Time: 10:01 · 2 min.\n1. Say: "You are the on-call engineer for INC-1001. Keep the same ticket open all day."\n2. Point to the three outcomes: work the incident, make the decisions and keep the lesson.\n3. Say: "Claude builds. You inspect the evidence and operate the human gate."\n4. Say: "At 15:40 you turn the reviewed lesson into your hackathon intent.md."';
   participantMission.teach.gist = participantMission.subtitle;
-  participantMission.teach.script.unshift({say: 'You are the on-call engineer for INC-1001. Keep the same ticket open all day.'});
+  participantMission.teach.script = [
+    {say: 'You are the on-call engineer for INC-1001. Keep the same ticket open all day.'},
+    {do: 'Point to the three outcomes: work the incident, make the decisions and keep the lesson.'},
+    {say: 'Claude builds. You inspect the evidence and operate the human gate.'},
+    {say: 'At 15:40 you turn the reviewed lesson into your hackathon intent.md.'}
+  ];
+  participantMission.teach.do = ['Point to the three outcomes: work the incident, make the decisions and keep the lesson.'];
+  participantMission.teach.done = ['Participants can name their role in INC-1001 and the three outcomes.'];
+  participantMission.teach.watch = ['A named human still approves and operates the sample action.'];
 }
 
 const incidentMap = window.SLIDES.find(slide => slide.title === 'One ticket, nine assignments');
