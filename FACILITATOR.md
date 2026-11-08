@@ -16,8 +16,8 @@ Open these pairs from the same server:
 
 | Day | Projector | Trainer screen |
 | --- | --- | --- |
-| Day 4 | `http://localhost:8080/workshop4.html#1` | `http://localhost:8080/workshop4-presenter.html#1` |
-| Day 5 | `http://localhost:8080/workshop5.html#1` | `http://localhost:8080/workshop5-presenter.html#1` |
+| Day 4 | `http://localhost:8080/workshop4.html#1` | `http://localhost:8080/workshop4-presenter.html?i=0` |
+| Day 5 | `http://localhost:8080/workshop5.html#1` | `http://localhost:8080/workshop5-presenter.html?i=0` |
 
 For each assignment, use **Copy** on the slide. Share that prompt in the class
 chat. Participants paste it into Claude Code, inspect the result and stop at
