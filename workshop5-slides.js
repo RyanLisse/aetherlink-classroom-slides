@@ -4658,6 +4658,7 @@ if (assignmentMap) {
   assignmentMap.notes = assignmentMap.notes.replace('At 14:10 you work the ticket live.', 'At 14:20 you work the ticket live.');
   for (const step of assignmentMap.teach?.script || []) {
     if (step.say) step.say = step.say.replace('At 14:10 you work the ticket live.', 'At 14:20 you work the ticket live.');
+    if (step.do) step.do = step.do.replace('At 14:10 you work the ticket live.', 'At 14:20 you work the ticket live.');
   }
 }
 for (const slide of window.SLIDES) {
@@ -4674,6 +4675,7 @@ window.SLIDES.forEach((slide, index) => {
 const participantMission = window.SLIDES.find(slide => slide.title === 'Goal of the day');
 if (participantMission) {
   participantMission.subtitle = 'Your shift: take INC-1001 from alert to a reviewed handoff. Claude builds; you decide.';
+  participantMission.keyPoints = ['Own INC-1001 from alert to handoff.', 'Inspect evidence before accepting a result.', 'A named human approves and operates the sample action.'];
   participantMission.cards = [
     {title: 'Work one incident', body: 'Follow INC-1001 from setup to diagnosis and a tested proposal.'},
     {title: 'Make the decisions', body: 'Accept the intent, challenge the evidence and operate the human gate.'},
