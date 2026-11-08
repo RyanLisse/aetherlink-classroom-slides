@@ -229,20 +229,18 @@ openingSlides.push(
     notes: note({time: '10:15 · 90 sec', why: 'Participants need to connect their own local Claude without confusing the builder with the product runtime.', predict: 'Ask which evidence proves a model actually answered.', see: 'Login, bounded CLI proof, optional console activation, and fallback are separate.', inside: 'The Agent SDK can use the local Claude Code login. The core route still works without a model.', participant: 'Sign in locally and review the preparation prompt. Do not activate the product model before A5.', watch: 'Never request, display, or transfer credentials. A model name in health proves configuration only. The console has no global model-budget guard.', stuck: 'Keep the product offline and continue with A1.', stop: 'Everyone can state that a completed diagnosis plus its visible tool trace proves the model path.', next: 'The repository already knows how to help'})
   }),
   baseSlide({
-    title: 'Project skills now, public pack later',
+    title: 'The repository already knows how to help',
     kicker: 'W5 · PROJECT SKILLS',
-    subtitle: 'Use the included skills for A1–A9. Save the public pack for selective reuse after the core route.',
+    subtitle: 'Use the included project skills for A1–A9.',
     type: 'concept',
-    source: {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'},
-    prompt: "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
     cards: [
       {title: '/show-me', body: 'Map the repo or explain one flow.'},
       {title: '/design-control-loop', body: 'Interview, map, and stop before implementation.'},
       {title: '/verify-this', body: 'Return VERIFIED, NOT VERIFIED, or INCONCLUSIVE for one falsifiable claim.'},
       {title: '/handoff', body: 'Write a portable prompt for the next agent.'}
     ],
-    keyPoints: ['The slash command must start the prompt.', 'The SRE repository already includes today’s project skills.', 'For the hackathon, clone the public pack separately and ask Claude to propose one project-local skill. Do not bulk install.'],
-    notes: note({time: '10:16:30 · 30 sec', why: 'The first assignment uses an included project skill. The public pack remains available for later reuse.', predict: 'Ask which skill should run before the first edit.', see: 'Four included skills match four decisions, with one public pack link for later.', inside: 'The included skills require explicit slash invocation. The pack supports selective project-local installs.', participant: 'Choose the skill that maps an unknown repository. Save the public pack link for the hackathon.', watch: 'Do not pause the core route for a bulk or global installation.', stuck: 'Point to /show-me and share the pack link in participant chat.', stop: 'The room can distinguish today’s included skills from the optional public pack.', next: 'One ticket, nine assignments'})
+    keyPoints: ['The slash command must start the prompt.', 'The SRE repository already includes today’s project skills.', 'No extra skill installation is needed for the lesson.'],
+    notes: note({time: '10:16:30 · 30 sec', why: 'The first assignment uses an included project skill to learn the codebase.', predict: 'Ask which skill should run before the first edit.', see: 'Four included skills match four decisions in the day.', inside: 'The included skills require explicit slash invocation.', participant: 'Choose the skill that maps an unknown repository.', watch: 'Do not pause the core route to install more skills.', stuck: 'Point to /show-me.', stop: 'The room knows that today’s project skills are already available.', next: 'One ticket, nine assignments'})
   }),
   baseSlide({
     title: 'One ticket, nine assignments',
@@ -446,9 +444,11 @@ assignmentSlides.push(
 closingSlides.push(
   baseSlide({
     title: 'You now have a hackathon start point', kicker: 'W5 · HANDOFF', subtitle: 'Keep the same working method. Change the customer problem.', type: 'context',
+    source: {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'},
+    prompt: "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
     cards: [{title: 'Problem', body: 'One concrete customer or operator pain.'}, {title: 'Checks', body: 'Three results another person can repeat.'}, {title: 'Boundary', body: 'What the agent may inspect and what a human decides.'}, {title: 'First step', body: 'One small build with a visible proof.'}],
-    keyPoints: ['Start from docs/hackathon-intent.md.', 'Use HANDOFF.md to resume.', 'Keep human decisions OPEN until they happen.'],
-    notes: note({time: '15:55 · 2 min', why: 'The hackathon should begin from evidence, not a blank chat.', predict: 'Ask which workshop artifact becomes the first hackathon input.', see: 'The same method applies to a new problem.', inside: 'The intent and handoff reduce restart work.', participant: 'Share the problem and first check with a partner.', watch: 'Do not make the SRE sample the required hackathon topic.', stuck: 'Reuse the operator, checks, boundary, and OPEN structure.', stop: 'Each learner has one problem and one first step.', next: 'The method you take with you'})
+    keyPoints: ['Start from docs/hackathon-intent.md.', 'Use HANDOFF.md to resume.', 'After the lesson, choose one public-pack skill for project-local reuse. Do not bulk install.'],
+    notes: note({time: '15:55 · 2 min', why: 'The hackathon should begin from reviewed evidence, then add only the reusable skill it needs.', predict: 'Ask which workshop artifact becomes the first hackathon input.', see: 'The handoff, public skills-pack link, and selective-install prompt are together at the end.', inside: 'The intent and handoff reduce restart work. The pack supports selective project-local installs.', participant: 'Share the problem and first check with a partner. Then save the pack link for the hackathon.', watch: 'Do not make the SRE sample the required hackathon topic or bulk-install the pack.', stuck: 'Reuse the operator, checks, boundary, and OPEN structure. Choose no extra skill until the project needs one.', stop: 'Each learner has one problem, one first step, and an optional selective skills route.', next: 'The method you take with you'})
   }),
   baseSlide({
     title: 'The method you take with you', kicker: 'W5 · CLOSE', subtitle: 'Learn the repo. Choose the outcome. Build one step. Prove it. Stop for the person.', type: 'context', layout: 'steps',

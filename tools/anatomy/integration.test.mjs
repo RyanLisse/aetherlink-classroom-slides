@@ -37,10 +37,13 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
 
  const live=slides.findIndex(slide=>slide.kicker==='W5 · OPTIONAL LIVE MODEL');
  const skills=slides.findIndex(slide=>slide.kicker==='W5 · PROJECT SKILLS');
+ const hackathon=slides.findIndex(slide=>slide.kicker==='W5 · HANDOFF');
  assert.ok(live>=0&&live<skills,'optional live-model setup appears before A1');
- assert.equal(slides[skills].source?.url,'https://github.com/AetherLink-bv/claude-code-skills-pack','project-skills slide links the public skills pack');
- assert.match(slides[skills].prompt,/only that skill.*project's \.claude\/skills.*preserve it.*approval.*Do not install the full pack/s,'project-skills slide exposes the selective install prompt');
- assert.ok(slides[skills].keyPoints.some(point=>/project-local skill.*Do not bulk install/.test(point)),'skills pack stays selective and optional');
+ assert.equal(slides[skills].source,undefined,'opening project-skills slide uses only the included skills');
+ assert.equal(slides[skills].prompt,undefined,'opening project-skills slide does not install the public pack');
+ assert.equal(slides[hackathon].source?.url,'https://github.com/AetherLink-bv/claude-code-skills-pack','hackathon close links the public skills pack');
+ assert.match(slides[hackathon].prompt,/only that skill.*project's \.claude\/skills.*preserve it.*approval.*Do not install the full pack/s,'hackathon close exposes the selective install prompt');
+ assert.ok(slides[hackathon].keyPoints.some(point=>/After the lesson.*project-local reuse.*Do not bulk install/.test(point)),'skills pack stays selective and belongs after the lesson');
  assert.equal(slides[live].layout,'exercise','optional live-model setup uses the copy-enabled assignment renderer');
  assert.ok(slides[live].steps.every(step=>typeof step.prompt==='string'&&step.prompt.trim()),'every live-model step exposes copy-ready text');
  assert.match(slides[live].steps[0].prompt,/Claude Code builder session.*Claude Agent SDK product runtime/);
