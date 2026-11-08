@@ -35,6 +35,22 @@ test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
  }
  assert.equal(promptCount,21,'the approved exercises expose all 21 copy-ready prompts');
 
+ const live=slides.findIndex(slide=>slide.kicker==='W5 · OPTIONAL LIVE MODEL');
+ const skills=slides.findIndex(slide=>slide.kicker==='W5 · PROJECT SKILLS');
+ assert.ok(live>=0&&live<skills,'optional live-model setup appears before A1');
+ assert.equal(slides[live].layout,'exercise','optional live-model setup uses the copy-enabled assignment renderer');
+ assert.ok(slides[live].steps.every(step=>typeof step.prompt==='string'&&step.prompt.trim()),'every live-model step exposes copy-ready text');
+ assert.match(slides[live].steps[0].prompt,/Claude Code builder session.*Claude Agent SDK product runtime/);
+ assert.match(slides[live].steps[1].prompt,/--max-turns 8 --max-budget-usd 0\.30 --dry-run/);
+ assert.match(slides[live].steps[2].prompt,/AGENT_MODEL=sonnet/);
+ assert.match(slides[live].steps[3].prompt,/^env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console$/);
+ assert.match(slides[live].notes,/completed diagnosis.*tool trace/i);
+
+ const handoff=slides.find(slide=>slide.title==='Assignment 9: turn the lesson into a hackathon handoff');
+ assert.ok(handoff,'A9 handoff assignment exists');
+ const handoffPrompt=handoff.steps.find(step=>step.prompt?.startsWith('/handoff '))?.prompt||'';
+ assert.match(handoffPrompt,/forbidden service mutations.*allowed local verification evidence writes under docs\/verify\//);
+
  const stack=slides.findIndex(slide=>slide.title==='The starter stack');
  const scope=slides.findIndex(slide=>slide.title==='What is ready and what you build');
  const a1=slides.findIndex(slide=>slide.kicker==='W5 · A1 · CONCEPT');

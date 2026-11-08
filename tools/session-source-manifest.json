@@ -27,13 +27,13 @@
     {
       "file": "workshop5-slides.js",
       "source": "RyanLisse/aetherlink-classroom-slides@fea0b603681caeb557f1397bd60d6c2e867c45e2:workshop5-slides.js; route adapted to RyanLisse/sre-oncall-agent@0d8ada8c82b7e56b2d9a1748e74297a6d6db0c0a",
-      "slides": 51,
+      "slides": 52,
       "sourceSlides": 68,
       "adapted": true,
       "sourceSha256": "2b65626a79607eb0f28178c7c43eb83bf5cc95a8b921f7c6caa4da08d2773a3b",
       "adaptedFromNormalizedSha256": "a73586820fa2a71a3a34a036f47d9f89daaa53669bdef52bb1854ba0fe6c1684",
-      "normalizedDataSha256": "dce0cb685af60d7bd29445356ab5fa4af1377eed32f6b4fc35390a1fe90fd2bf",
-      "adaptedDataSha256": "dce0cb685af60d7bd29445356ab5fa4af1377eed32f6b4fc35390a1fe90fd2bf"
+      "normalizedDataSha256": "9064825235b182ff06f666ce4caa48c77052865a80d23e54cad3a889c7da00a5",
+      "adaptedDataSha256": "9064825235b182ff06f666ce4caa48c77052865a80d23e54cad3a889c7da00a5"
     },
     {
       "file": "workshop6-slides.js",
