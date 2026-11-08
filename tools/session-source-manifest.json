@@ -21,8 +21,8 @@
       "adapted": true,
       "sourceSha256": "61161c7eb04c08e6846609621377a90952fcd9c10059c255ccbef8f3df9f43bd",
       "adaptedFromNormalizedSha256": "9010a7289d6ba761c22e12649f004875b06b9dde3f81c4242136798f8e9bf428",
-      "normalizedDataSha256": "23df541e940248888fb1e75f891338807ca6e841a97a99fd8426e5f49c205e92",
-      "adaptedDataSha256": "23df541e940248888fb1e75f891338807ca6e841a97a99fd8426e5f49c205e92"
+      "normalizedDataSha256": "27b1a9a83670807c87175aba0a5aebdf822c8448e1085b3619b343dad50b488e",
+      "adaptedDataSha256": "27b1a9a83670807c87175aba0a5aebdf822c8448e1085b3619b343dad50b488e"
     },
     {
       "file": "workshop5-slides.js",
@@ -32,8 +32,8 @@
       "adapted": true,
       "sourceSha256": "2b65626a79607eb0f28178c7c43eb83bf5cc95a8b921f7c6caa4da08d2773a3b",
       "adaptedFromNormalizedSha256": "a73586820fa2a71a3a34a036f47d9f89daaa53669bdef52bb1854ba0fe6c1684",
-      "normalizedDataSha256": "d58fd264008054fb475342f12ff7d7012adfa9365802f33c60f3455e74dd51f6",
-      "adaptedDataSha256": "d58fd264008054fb475342f12ff7d7012adfa9365802f33c60f3455e74dd51f6"
+      "normalizedDataSha256": "c188300160719932f000a924213294db878391692bc9e447dee735be6588dc2c",
+      "adaptedDataSha256": "c188300160719932f000a924213294db878391692bc9e447dee735be6588dc2c"
     },
     {
       "file": "workshop6-slides.js",

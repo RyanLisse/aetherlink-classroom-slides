@@ -75,9 +75,13 @@ test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  const prompts=day4.flatMap(s=>(s.steps||[]).filter(st=>typeof st==='object'&&st.prompt).map(st=>st.prompt));
  assert.ok(prompts.length>=6,'trainer and participant prompts are copy-ready');
  assert.ok(prompts.every(pr=>!/^git (checkout|switch).*step-/m.test(pr)),'no finished-step branch route');
- const trainer=day4.find(s=>s.title==='Optional appendix · trainer preparation');
+ const trainer=day4.find(s=>s.title==='Trainer appendix · prepare before class');
  assert.match(JSON.stringify(trainer.steps),/Only after the actual build and run/);
  assert.match(JSON.stringify(trainer.steps),/Wait for the trainer/);
+ assert.match(JSON.stringify(trainer.steps),/separate read-only reference folder/);
+ const setup=day4.find(s=>s.title==='Your turn · Step 0');
+ assert.match(JSON.stringify(setup.steps),/Keep working in your own starter/);
+ assert.match(JSON.stringify(setup.steps),/Copy no finished files/);
  const memory=day4.findIndex(s=>s.title==='Your turn · Build T-001 memory');
  assert.deepEqual(Array.from(day4.slice(memory-2,memory+3),s=>s.title),[
   'n8n recap · before memory was connected','n8n recap · after Simple Memory was connected',
@@ -95,7 +99,7 @@ test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  assert.match(memoryPrompts[2],/Do not read docs\/memory-lab\/T-001\.md/);
  assert.match(memoryPrompts[2],/credentials, authentication data, tokens, personal data/);
  assert.deepEqual(Array.from(day4.slice(-2),s=>s.title),[
-  'Optional appendix · fast lane','Optional appendix · trainer preparation'
+  'Optional appendix · fast lane','Trainer appendix · prepare before class'
  ]);
  assert.ok(day4.slice(0,-1).every((slide,index)=>slide.teach.next===day4[index+1].title),'teach.next follows the physical slide order');
  assert.ok(day4.every((slide,index)=>!/^\d+:/.test(slide.stateId||'')||slide.stateId.startsWith(`${index+1}:`)),'numeric state IDs follow the physical slide order');

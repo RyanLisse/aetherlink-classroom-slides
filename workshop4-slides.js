@@ -885,11 +885,15 @@ window.SLIDES = [
     "type": "practice",
     "layout": "exercise",
     "timer": 10,
-    "subtitle": "Open Claude Code. Let it explain the prepared app and its evidence.",
+    "subtitle": "Open your own starter in Claude Code. Review the separate trainer reference without copying its implementation.",
     "steps": [
       {
-        "text": "Clone the workshop repository",
+        "text": "Clone your own starter. Keep its TODOs for the assignments.",
         "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nclaude"
+      },
+      {
+        "text": "Add the trainer’s separate read-only reference folder or evidence pack to Claude Code context.",
+        "after": "Keep working in your own starter. Copy no finished files. If the reference is missing, ask the trainer before SOLO 0."
       },
       {
         "text": "Paste the SOLO 0 prompt",
@@ -901,14 +905,14 @@ window.SLIDES = [
       }
     ],
     "expected": "You can explain the mapping and name the evidence behind the prepared baseline.",
-    "notes": "Keep this to ten minutes. Participants type one fictional case and its observable check. They stay on their own branch for the rest of the day.",
+    "notes": "Before class, the trainer prepares a separate reviewed reference and shares its diff, checks and real-run evidence. Participants keep their own unsolved main starter. During these ten minutes, review the reference without copying finished files. If it is missing, stop and ask the trainer. Then choose a fictional case and continue building in the starter on one personal branch.",
     "teach": {
       "next": "Check: does your screen look like this?",
       "time": "10 min",
-      "gist": "Open Claude Code. Let it explain the prepared app and its evidence.",
+      "gist": "Open your own starter in Claude Code. Review the separate trainer reference without copying its implementation.",
       "script": [
         {
-          "say": "Keep this to ten minutes. Participants type one fictional case and its observable check. They stay on their own branch for the rest of the day."
+          "say": "Before class, the trainer prepares a separate reviewed reference and shares its diff, checks and real-run evidence. Participants keep their own unsolved main starter. During these ten minutes, review the reference without copying finished files. If it is missing, stop and ask the trainer. Then choose a fictional case and continue building in the starter on one personal branch."
         }
       ],
       "do": [],
@@ -3198,7 +3202,7 @@ window.SLIDES = [
     ],
     "notes": "Optional appendix after the close. Do not replace or shorten a required memory assignment with this material. The challenges cover label variation, transaction limits and an audit trail.",
     "teach": {
-      "next": "Optional appendix · trainer preparation",
+      "next": "Trainer appendix · prepare before class",
       "time": "1 min",
       "gist": "Fast lane: three challenges for whoever finishes early.",
       "script": [
@@ -3217,15 +3221,15 @@ window.SLIDES = [
   },
 {
     "lessonId": "workshop-4",
-    "title": "Optional appendix · trainer preparation",
-    "kicker": "Optional appendix · trainer preparation",
+    "title": "Trainer appendix · prepare before class",
+    "kicker": "Trainer appendix · prepare before class",
     "type": "practice",
     "layout": "exercise",
     "visual": {
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "Trainer preparation outside the participant route. Start from the real workflow, then review the story before class.",
+    "subtitle": "Required before SOLO 0. Build and review a separate trainer reference; participants keep their own unsolved starter.",
     "link": {
       "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/blob/main/n8n/support-triage.json",
       "label": "n8n/support-triage.json"
@@ -3243,7 +3247,7 @@ window.SLIDES = [
       },
       {
         "text": "Paste this trainer prompt into Claude Code",
-        "prompt": "Use n8n MCP to find and read “Day 3 · 12 · Reference · Full ticket triage (L1→L3)”. Do not modify or activate it. Save sanitized JSON without credentials as n8n/support-triage.json. If access fails, use the repository export and mark the live read OPEN.\n\nRead AGENTS.md, README.md, docs/SETUP.md and SOLO.md. Map the nodes, connections, system messages and output parser. Then build a bounded working app from this starter. Preserve Customer Context → Risk → Customer Reply, output {priority, message}, case-insensitive routes and memory isolation by ticket_id. Enforce draft-only output as deliberate hardening. Explain setup commands, show the actual diff, run the documented checks and one real case, and list every unverified behavior as OPEN.\n\nOnly after the actual build and run, list every current SOLO.md build step in order and propose the teaching storyline. Then stop. Wait for the trainer to choose which steps are essential, too large or less important. Do not create assignments or edit SOLO.md or the participant repository before the trainer accepts that selection.\n\nAfter the trainer accepts the selection, turn each kept step into one reviewed copy/paste or typing assignment. Give every assignment a starting state, a visible expected result and a stop condition. Then update SOLO.md and the participant repository to match the leading Workshop 4 slides. Show the documentation diff for trainer review. Deliver the reviewed working folder, mapping, evidence and OPEN gaps to the participants. Stop before adding optional features.",
+        "prompt": "Use n8n MCP to find and read “Day 3 · 12 · Reference · Full ticket triage (L1→L3)”. Do not modify or activate it. Save sanitized JSON without credentials as n8n/support-triage.json. If access fails, use the repository export and mark the live read OPEN.\n\nRead AGENTS.md, README.md, docs/SETUP.md and SOLO.md. Map the nodes, connections, system messages and output parser. Then build a bounded working app from this starter. Preserve Customer Context → Risk → Customer Reply, output {priority, message}, case-insensitive routes and memory isolation by ticket_id. Enforce draft-only output as deliberate hardening. Explain setup commands, show the actual diff, run the documented checks and one real case, and list every unverified behavior as OPEN.\n\nOnly after the actual build and run, list every current SOLO.md build step in order and propose the teaching storyline. Then stop. Wait for the trainer to choose which steps are essential, too large or less important. Do not create assignments or edit SOLO.md or the participant repository before the trainer accepts that selection.\n\nAfter the trainer accepts the selection, turn each kept step into one reviewed copy/paste or typing assignment. Give every assignment a starting state, a visible expected result and a stop condition. Then update SOLO.md and the participant repository to match the leading Workshop 4 slides. Show the documentation diff for trainer review. Deliver a separate read-only reference folder, mapping, evidence and OPEN gaps to the participants. Keep the participant starter TODOs unimplemented. Stop before adding optional features.",
         "after": "Claude rebuilds and proves the app before it proposes the lesson story."
       },
       "Claude Code reads the n8n JSON before proposing code.",
@@ -3254,9 +3258,9 @@ window.SLIDES = [
       "Review the slide route first. Only then align SOLO.md and the participant repository to it."
     ],
     "expected": "A reviewer accepts one slide-led lesson route. SOLO.md and the participant repository then match its reviewed assignments and evidence.",
-    "notes": "Optional appendix for trainer preparation before class. It is not a participant assignment. Use the n8n MCP when it is available. Never import, activate or expose credentials. Build first. Ask for the storyline only after the app and evidence exist.",
+    "notes": "Required trainer preparation before class, outside the participant route. Share the completed reference separately from the unsolved participant starter. It is not a participant assignment. Use the n8n MCP when it is available. Never import, activate or expose credentials. Build first. Ask for the storyline only after the app and evidence exist.",
     "teach": {
-      "time": "10–15 min",
+      "time": "Before class",
       "gist": "Start from the real workflow. Build the story, then let the reviewed slide route lead SOLO.md and the participant repository.",
       "script": [
         {
@@ -3276,9 +3280,9 @@ window.SLIDES = [
 
 const teachDoByTitle = new Map([
   ['Today · agenda', 'Point to the JSON-first route and the four build steps.'],
-  ['Optional appendix · trainer preparation', 'Use Copy and inspect the n8n JSON before any app edit.'],
+  ['Trainer appendix · prepare before class', 'Use Copy and inspect the n8n JSON before any app edit.'],
   ['Words you need today', 'Ask participants to connect each term to one file in the starter.'],
-  ['Your turn · Step 0', 'Use Copy, then inspect the running baseline and its actual output.'],
+  ['Your turn · Step 0', 'Review the separate trainer reference and its actual output. Keep the starter TODOs unimplemented.'],
   ['Your turn · Step 1: build the policy', 'Use Copy, then compare the policy result with the n8n route.'],
   ['Your turn · Step 1b: inspect the form and memory', 'Use Copy, then inspect the submitted form and ticket_id memory.'],
   ['Your turn · Step 1c: challenge the policy', 'Use Copy, then run the selected edge case and read the refusal or route.'],
