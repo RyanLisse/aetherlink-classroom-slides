@@ -10,7 +10,7 @@ For Days 4 and 5, use these current routes:
 | --- | --- | --- | --- |
 | Day 4 · n8n to Claude Agent SDK | [`workshop4.html`](workshop4.html) | [`workshop4-presenter.html`](workshop4-presenter.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
 | Day 5 · AI-native SDLC | [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
-| Day 5 bonus · Daily Brief | Slide 79 in [`workshop5.html`](workshop5.html#79) | Slide 79 in [`workshop5-presenter.html`](workshop5-presenter.html?i=78) | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main` |
+| Day 5 bonus · Daily Brief | Slide 79 in [`workshop5.html`](workshop5.html#79) | Open slide 79 first, then use **Presenter view** | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main` |
 
 Facilitators should start with [`FACILITATOR.md`](FACILITATOR.md). The slides
 set the lesson order. The participant repositories provide the matching
