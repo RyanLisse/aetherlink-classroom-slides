@@ -1,4 +1,4 @@
-/* Shrinks #stage (CSS zoom) until the slide and the controls fit the viewport, so no slide needs scrolling. */
+/* Fits desktop slides to the viewport. */
 'use strict';
 (function () {
   const MIN = 0.72, STEP = 0.02;
@@ -8,6 +8,10 @@
     queued = false;
     const stage = document.getElementById('stage');
     if (!stage || document.fullscreenElement && document.fullscreenElement !== document.documentElement) return;
+    if (document.body.classList.contains('day5-mobile') && matchMedia('(max-width: 800px)').matches) {
+      stage.style.zoom = '';
+      return;
+    }
     stage.style.zoom = '';
     let z = 1;
     while (overflow() > 0 && z > MIN) { z = Math.max(MIN, z - STEP); stage.style.zoom = String(z); }

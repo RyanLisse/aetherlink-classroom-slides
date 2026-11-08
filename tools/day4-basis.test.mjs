@@ -56,24 +56,53 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(w4,/app\.js\?v=130/);
  assert.match(w4,/fit-stage\.js\?v=1/);
  assert.match(w4,/id="timer-btn"/);
- assert.match(w4,/workshop4-slides\.js\?v=21/);
- assert.match(w4p,/workshop4-slides\.js\?v=21/);
+ assert.match(w4,/workshop4-slides\.js\?v=24/);
+ assert.match(w4p,/workshop4-slides\.js\?v=24/);
  assert.match(w4p,/presenter\.js\?v=106/);
 });
 
 test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  const day4=deck('workshop4-slides.js');
- assert.equal(day4.length,74);
- assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,74);
+ assert.equal(day4.length,60);
+ assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,60);
  assert.ok(day4.every(s=>s.teach&&s.teach.script?.length),'every slide has a teach card');
- assert.ok(day4.every(s=>!s.visual?.stepThrough),'nothing hidden behind a click that should just show');
+ assert.ok(day4.every(s=>s.teach.do?.length),'every teach card has a concrete trainer action');
  assert.ok(day4.every(s=>s.title?.trim()));
  const active=JSON.stringify(day4);
  assert.doesNotMatch(active,/ticket-analyst|email-responder|transaction-clerk|npm run clerk/);
- for(const name of ['risk-agent','customer-reply-agent','customer-context-agent','get_customer','get_transaction','transaction-agent','Assignment · Extend the MCP'])assert.ok(active.includes(name),name);
+ for(const name of ['risk-agent','customer-reply-agent','customer-context-agent','get_customer','get_transaction','n8n/support-triage.json'])assert.ok(active.includes(name),name);
  assert.doesNotMatch(active,/\(cd [^)]*&&/,'no bash-only subshells: Windows PowerShell 5.1 cannot run them');
  const prompts=day4.flatMap(s=>(s.steps||[]).filter(st=>typeof st==='object'&&st.prompt).map(st=>st.prompt));
- for(const pr of prompts)if(/^git switch /m.test(pr))assert.match(pr,/git stash -u/,'stash before every switch');
- const trap=day4.find(s=>s.title==='Your turn · Step 1c: six messages and the tone trap');
- assert.match(JSON.stringify(trap.steps),/01-single-agent\/claude-project\/CLAUDE\.md/);
+ assert.ok(prompts.length>=6,'trainer and participant prompts are copy-ready');
+ assert.ok(prompts.every(pr=>!/^git (checkout|switch).*step-/m.test(pr)),'no finished-step branch route');
+ const trainer=day4.find(s=>s.title==='Optional appendix · trainer preparation');
+ assert.match(JSON.stringify(trainer.steps),/Only after the actual build and run/);
+ assert.match(JSON.stringify(trainer.steps),/Wait for the trainer/);
+ const memory=day4.findIndex(s=>s.title==='Your turn · Build T-001 memory');
+ assert.deepEqual(Array.from(day4.slice(memory-2,memory+3),s=>s.title),[
+  'n8n recap · before memory was connected','n8n recap · after Simple Memory was connected',
+  'Your turn · Build T-001 memory','Your turn · Resume T-001 explicitly','Your turn · Prove T-002 isolation'
+ ]);
+ assert.equal(day4[memory-2].visual.image,'assets/day3-maarten-n8n/03-chat-memory.jpeg');
+ assert.equal(day4[memory-1].visual.image,'assets/day4-memory/with-memory.png');
+ const memoryPrompts=day4.slice(memory,memory+3).flatMap(s=>(s.steps||[]).filter(step=>typeof step==='object'&&step.prompt).map(step=>step.prompt));
+ assert.equal(memoryPrompts.length,3);
+ assert.match(memoryPrompts[0],/docs\/memory-lab\/T-001\.md only/);
+ assert.match(memoryPrompts[0],/Preserve uncertain source claims as OPEN:/);
+ assert.match(memoryPrompts[1],/Read only tickets\/T-001\/memory\.md/);
+ assert.match(memoryPrompts[1],/not loaded automatically/);
+ assert.match(memoryPrompts[2],/docs\/memory-lab\/T-002\.md only/);
+ assert.match(memoryPrompts[2],/Do not read docs\/memory-lab\/T-001\.md/);
+ assert.match(memoryPrompts[2],/credentials, authentication data, tokens, personal data/);
+ assert.deepEqual(Array.from(day4.slice(-2),s=>s.title),[
+  'Optional appendix · fast lane','Optional appendix · trainer preparation'
+ ]);
+ assert.ok(day4.slice(0,-1).every((slide,index)=>slide.teach.next===day4[index+1].title),'teach.next follows the physical slide order');
+ assert.ok(day4.every((slide,index)=>!/^\d+:/.test(slide.stateId||'')||slide.stateId.startsWith(`${index+1}:`)),'numeric state IDs follow the physical slide order');
+ const map=day4.find(s=>s.title==='Visual reference · the Day 4 agent route');
+ assert.equal(map.source.url,'assets/agent-map/index.html');
+ assert.equal(map.visual.image,'assets/agent-map/poster.png');
+ assert.match(JSON.stringify(map),/Teaching simulation — no model calls/);
+ assert.match(JSON.stringify(map),/memory\.md is a local exercise extension/);
+ for(const label of ['Customer Context','Risk','Reply','output contract','human gate'])assert.ok(JSON.stringify(map).includes(label),label);
 });
