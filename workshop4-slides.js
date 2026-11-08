@@ -1455,7 +1455,7 @@ window.SLIDES = [
       "watch": [
         "Do not call dry-run JSON model output. A model run or the marked sample trace provides model evidence."
       ],
-      "next": "Quiz: message 6"
+      "next": "n8n recap · before memory was connected"
     }
   },
   {
@@ -1540,7 +1540,7 @@ window.SLIDES = [
       "watch": [
         "Do not claim that conversation memory automatically writes or loads memory.md."
       ],
-      "next": "Your turn · Build reviewed memory per ticket"
+      "next": "Your turn · Build T-001 memory"
     }
   },
   {
