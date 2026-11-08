@@ -1114,7 +1114,7 @@ window.SLIDES = [
     "notes": "The Structured Output Parser becomes outputFormat with type json_schema (file 01-single-agent/priority-schema.mjs). In Claude Code in the terminal, the equivalent is the --json-schema flag. Then lib/switch.mjs maps low, medium and high to a fixed action and team. The AI gives the label, and the code picks the route.",
     "stateId": "19:Structured output: parser to JSON schema",
     "teach": {
-      "next": "Memory: the chat remembers the conversation",
+      "next": "Session memory: the chat remembers this conversation",
       "time": "2 min",
       "gist": "The Parser becomes json_schema (the form as a file). The Switch stays code: the AI gives the label, and the code picks the route.",
       "script": [
@@ -1146,7 +1146,7 @@ window.SLIDES = [
   },
 {
     "lessonId": "workshop-4",
-    "title": "Memory: the chat remembers the conversation",
+    "title": "Session memory: the chat remembers this conversation",
     "kicker": "Concept · memory",
     "type": "concept",
     "visual": {
@@ -1999,7 +1999,7 @@ window.SLIDES = [
     "kicker": "Day 4 · Lunch",
     "type": "pause",
     "visual": {
-      "countdown": 60,
+      "countdown": 45,
       "bot": "sleepy",
       "place": "beside"
     },
@@ -2019,7 +2019,7 @@ window.SLIDES = [
     "stateId": "37:Lunch",
     "teach": {
       "next": "Tools: what may each agent use?",
-      "time": "60 min",
+      "time": "45 min",
       "gist": "Lunch. Be back at 14:00.",
       "script": [
         {
