@@ -1,7 +1,7 @@
 # Classroom session sources
 
 Days 1 and 2 use the existing `slides.js` deck. Their opening slides are 1 and 83.
-Day 5 retains the local SRE workshop and its reviewed changes. A later local edit explains the term on the welcome slide (SRE = Site Reliability Engineering: an on-call assistant that helps keep a site running); the manifest digest was updated.
+Day 5 retains the local SRE workshop and its reviewed changes.
 
 The four additional decks were imported as plain data from
 https://github.com/RyanLisse/aetherlink-academy-app/tree/b491cc0187b948a9717186fa9d2cb3f79dbc59ca/apps/web/src/deck.
