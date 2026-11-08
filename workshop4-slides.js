@@ -376,7 +376,7 @@ window.SLIDES = [
     },
     "subtitle": "Chat and commands enter the same route. Three specialists produce one draft, and a person reviews it.",
     "cards": [
-      {"title":"One route","body":"Chat or command → Orchestrator → Customer Context → Risk → Reply."},
+      {"title":"One route","body":"Chat or command → Orchestrator → Customer Context → Risk → Priority decision → Reply."},
       {"title":"One contract","body":"Return {priority, message}; route low, medium and high without case sensitivity."},
       {"title":"One human gate","body":"The output is a draft. A named person reviews it before customer use."}
     ],

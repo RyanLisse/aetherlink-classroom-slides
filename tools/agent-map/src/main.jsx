@@ -9,11 +9,12 @@ const initialEdges = [...routeIds.slice(0,-1).map((source,index) => [source,rout
   .map(([source,target]) => ({id: `${source}-${target}`,source,target,markerEnd:{type:MarkerType.ArrowClosed}}));
 
 function RouteNode({data, selected}) {
+  const positions = {left:Position.Left,right:Position.Right,top:Position.Top,bottom:Position.Bottom};
   return <button className={`route-node ${data.kind} ${data.active ? 'active' : ''} ${selected ? 'selected' : ''}`} aria-label={`${data.label}. ${data.description}`}>
-    <Handle type="target" position={Position.Left}/>
+    <Handle type="target" position={positions[data.targetPosition] || Position.Left}/>
     <span className="kind">{data.kind}</span>
     <strong>{data.label}</strong>
-    <Handle type="source" position={Position.Right}/>
+    <Handle type="source" position={positions[data.sourcePosition] || Position.Right}/>
   </button>;
 }
 
