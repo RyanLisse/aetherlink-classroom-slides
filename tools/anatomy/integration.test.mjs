@@ -8,31 +8,43 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=name=>readFileSync(path.join(root,name),'utf8');
 const context={window:{}};
 vm.runInNewContext(read('workshop5-slides.js'),context);
-test('Day 5 keeps the 80-slide SRE route without Anatomy figures',()=>{
+test('Day 5 keeps the approved A1-A9 build route without Anatomy figures',()=>{
  const slides=context.window.SLIDES;
- assert.equal(slides.length,80);
- assert.equal(slides.filter(slide=>slide.visual?.anatomy).map(slide=>slide.title).join(', '),'');
- for(const stage of ['setup','plan','design','controls','diagnose','test','gate','maintain']){
-  const route=slides.filter(slide=>slide.stage===stage).map(slide=>slide.beat);
-  const beats=new Set(route);
-  for(const beat of ['concept','what','demo','turn','check','discuss'])assert.ok(beats.has(beat),`${stage} has ${beat}`);
-  const rank=new Map([['concept',0],['what',1],['demo',2],['turn',3],['check',4],['discuss',5]]);
-  assert.equal(route.join(','),[...route].sort((left,right)=>rank.get(left)-rank.get(right)).join(','),`${stage} follows the teaching loop`);
-  assert.ok(slides.some(slide=>slide.stage===stage&&slide.beat==='demo'&&slide.teach.script.some(item=>item.clip)),`${stage} demo has presenter video`);
+ assert.ok(slides.length>0,'Day 5 deck loads');
+ assert.equal(slides.filter(slide=>slide.visual?.anatomy).length,0,'Day 5 has no Anatomy figures');
+ assert.ok(slides.every(slide=>typeof slide.notes==='string'&&slide.notes.trim()),'every slide has speaker notes');
+
+ let promptCount=0;
+ for(let number=1;number<=9;number+=1){
+  const prefix=`W5 · A${number} ·`;
+  const route=slides.filter(slide=>slide.kicker?.startsWith(prefix));
+  assert.ok(route.some(slide=>slide.beat==='concept'),`A${number} has a concept slide`);
+  const demos=route.filter(slide=>slide.beat==='demo');
+  assert.equal(demos.length,1,`A${number} has one illustrative demo`);
+  assert.match(demos[0].teach.script.find(item=>item.clip)?.clip||'',new RegExp(`/a${number}\\.mp4$`),`A${number} demo uses its video`);
+  const exercises=route.filter(slide=>slide.beat==='turn');
+  assert.ok(exercises.length>=1,`A${number} has a participant exercise`);
+  for(const exercise of exercises){
+   const prompts=(exercise.steps||[]).filter(step=>typeof step.prompt==='string'&&step.prompt.trim());
+   assert.ok(prompts.length>=1,`${exercise.title} has a copy-ready prompt`);
+   promptCount+=prompts.length;
+  }
  }
- assert.ok(slides.every(slide=>slide.teach?.script?.length&&slide.teach.do?.length),'every slide has actionable presenter guidance');
- assert.ok(slides.every(slide=>slide.teach.script.every(item=>!/^\d{1,2}:?$/.test(item.say||item.do||'')&&!/:\s*$/.test(item.say||item.do||''))),'presenter guidance keeps times and ports intact');
- slides.forEach((slide,index)=>assert.equal(slide.teach.next,slides[index+1]?.title,`${slide.title} points to the actual next slide`));
- assert.ok(slides.filter(slide=>slide.stage==='controls'&&['concept','what','demo'].includes(slide.beat)).every(slide=>slide.notes.startsWith('Controls block · before Assignment 4.')),'reordered controls slides do not retain backwards clock times');
- assert.equal(slides.filter(slide=>slide.teach.do.some(action=>/connect it to the next participant decision/.test(action))).length,0,'presenter actions are slide-specific');
- for(const generic of ['Connect the artifact to its assignment.','Inspect the participant’s own evidence.','Compare evidence in pairs.']){
-  assert.equal(slides.filter(slide=>slide.teach.do.includes(generic)).length,0,`no generic presenter action: ${generic}`);
- }
- for(const title of ['MCP','Allow · ask · deny','subagents','eval: the bench']){
-  const slide=slides.find(item=>item.title===title);
-  assert.ok(slide,title);
-  assert.ok((slide.cards?.length||slide.columns?.length)&&slide.notes&&slide.keyPoints.length,`${title} retains teaching content`);
- }
+ assert.equal(promptCount,21,'the approved exercises expose all 21 copy-ready prompts');
+
+ const stack=slides.findIndex(slide=>slide.title==='The starter stack');
+ const scope=slides.findIndex(slide=>slide.title==='What is ready and what you build');
+ const a1=slides.findIndex(slide=>slide.kicker==='W5 · A1 · CONCEPT');
+ assert.ok(stack>=0&&scope===stack+1&&a1>scope,'starter stack and learner scope appear before A1');
+ assert.deepEqual([...slides[stack].items.map(item=>item.label)],['Browser','Console','Runtime','Evidence']);
+ assert.deepEqual([...slides[scope].cards.map(card=>card.title)],['Starter','You build and prove']);
+
+ const close=slides.findIndex(slide=>slide.kicker==='W5 · DONE');
+ const appendix=slides.findIndex(slide=>slide.kicker==='W5 · APPENDIX');
+ const bonus=slides.findIndex(slide=>slide.kicker==='W5 · BONUS');
+ assert.ok(close>0&&appendix>close&&bonus>appendix,'the main SRE route closes before appendix and bonus');
+ assert.match(slides[bonus].repo.url,/aetherlink-daily-brief-lab-s1$/,'Daily Brief remains the bonus');
+ for(const slide of slides.filter(item=>item.beat==='turn'))assert.match(slide.repo.url,/sre-oncall-agent\/tree\/workshop\/start$/,'main exercises use the SRE starter');
 });
 test('Presenter uses posters before the legacy bot renderer',()=>{
  const app=read('app.js');

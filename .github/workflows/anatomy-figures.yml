@@ -108,22 +108,27 @@ jobs:
               await presenter.screenshot({path:`anatomy-evidence/session-${session.id}-presenter.png`,fullPage:true});
               await presenter.close();
             }
-            // Day 5 no longer embeds Anatomy figures: the former figure slides show their own cards and columns.
-            for(const slide of [31,36,40,44,45]){
-              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
+            await page.goto('http://127.0.0.1:8765/workshop5.html#1');
+            const teachingSlides=await page.evaluate(()=>window.SLIDES
+              .map((slide,index)=>({number:index+1,title:slide.title,beat:slide.beat,layout:slide.layout,kind:slide.columns?.length?'columns':slide.cards?.length?'cards':null}))
+              .filter(slide=>slide.beat==='concept'&&slide.kind&&!['steps','exercise'].includes(slide.layout)));
+            assert.ok(teachingSlides.length>0,'Day 5 must expose concept slides with visible teaching content');
+            for(const slide of teachingSlides){
+              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide.number}`);
               await page.locator('.heading h1').waitFor();
-              assert.equal(await page.locator('.anatomy-figure').count(),0,`Slide ${slide} must not embed an Anatomy figure`);
-              assert.ok(await page.locator('main .card, main .compare-col').count()>0,`Slide ${slide} must show its teaching content`);
-              await page.screenshot({path:`anatomy-evidence/slide-${slide}-desktop.png`,fullPage:true});
+              assert.equal(await page.locator('.anatomy-figure').count(),0,`${slide.title} must not embed an Anatomy figure`);
+              const content=slide.kind==='columns'?'main .compare-col':'main .card';
+              assert.ok(await page.locator(content).count()>0,`${slide.title} must show its ${slide.kind}`);
+              await page.screenshot({path:`anatomy-evidence/slide-${slide.number}-desktop.png`,fullPage:true});
             }
             await page.setViewportSize({width:390,height:844});
             await page.emulateMedia({reducedMotion:'reduce'});
-            for(const slide of [31,36,40,44,45]){
-              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide}`);
+            for(const slide of teachingSlides){
+              await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide.number}`);
               await page.locator('.heading h1').waitFor();
               const pageOverflow=await page.evaluate(overflowState);
-              assert.ok(pageOverflow.scrollWidth<=pageOverflow.width+1,`Slide ${slide} mobile page overflow: ${JSON.stringify(pageOverflow)}`);
-              await page.screenshot({path:`anatomy-evidence/slide-${slide}-mobile-reduced.png`,fullPage:true});
+              assert.ok(pageOverflow.scrollWidth<=pageOverflow.width+1,`${slide.title} mobile page overflow: ${JSON.stringify(pageOverflow)}`);
+              await page.screenshot({path:`anatomy-evidence/slide-${slide.number}-mobile-reduced.png`,fullPage:true});
             }
             const closeup=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:4});
             closeup.on('pageerror',error=>errors.push(error.message));

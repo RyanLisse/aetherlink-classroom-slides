@@ -46,19 +46,47 @@ ticket isolation.
 ## Run Day 5 as the main AI-native SDLC lesson
 
 Participants use [`workshop/start`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start)
-and complete A1 through A9. Use the repository's
+and complete A1 through A9. Start with INC-1001 and the customer impact. Keep
+the AI-native SDLC explanation in the appendix until the room needs it.
+
+Use any terminal at the participant clone's root and run `claude`. Review the
+displayed path. Accept trust only for the participant's own clone. Restart
+Claude Code if project skills remain missing after trust. Never bypass trust
+or approve an unfamiliar folder. Cursor is optional; if it opens **Agents**,
+choose **IDE** and use its terminal.
+
+Use the repository's
 [`FACILITATOR.md`](https://github.com/AetherLink-bv/sre-oncall-agent/blob/workshop/start/FACILITATOR.md)
 for the time boxes and recovery notes. Use its
 [`SOLO.md`](https://github.com/AetherLink-bv/sre-oncall-agent/blob/workshop/start/SOLO.md)
-for the matching assignments.
+for the matching assignments. Every Copy prompt in the deck must match the
+corresponding `SOLO.md` fence exactly.
 
 At the start, the main test suite is green. The workshop tests are red for the
 unfinished A3, A4, A5 and A8 contracts. Reuse existing services on ports 4310
 and 4320. Do not start duplicate shop or console processes.
 
 The SRE repository already includes the skills used by the lesson. Participants
-do not need to install the full skills pack globally. The `/sdlc` mod is an
-optional visual route through the same nine assignments.
+do not need to install the full skills pack globally. Start explicit skill
+prompts with `/show-me`, `/design-control-loop`, `/verify-this`, or `/handoff`.
+The `/sdlc` mod is an optional visual route through the first prompt of each
+assignment.
+
+The core product is offline and scripted. A real model investigator is
+optional. Never present scripted output or an older clip as current model
+evidence. Each presenter clip is illustrative. Pause on the evidence boundary,
+then inspect the participant's own result.
+
+In A4, the participant edits `.claude/hooks/guard.mjs`. Replace the `TODO(A4)`
+comment immediately before `else if (SDLC_ARTEFACT.test(rel))` with
+`else if (rel === "bench/ratchet.json") decide("deny", "guard: ratchet is human-owned");`.
+Claude Code reviews the edit and runs the focused test. It does not make the
+human-owned edit.
+
+Use the one-minute listener setting from A1. If port 4320 is free, start the
+console with `AGENT_LISTEN_WINDOW_MIN=1 npm run console`. If an owned console
+already uses the default five-minute window, let the human accept that wait or
+restart only that owned console.
 
 ## Keep Daily Brief as the bonus
 
