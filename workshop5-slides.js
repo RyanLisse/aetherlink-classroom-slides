@@ -23,7 +23,7 @@ const coreSlides = [
     "notes": "Time: 10:00 · 1 min. Show this slide while people arrive.\n1. Say: “Welcome. Today we build an SRE agent.”\n2. Check: ask for hands. Who installed Node 22+ and Claude Code before today?\n3. If a person has no setup: pair them during Assignment 1 or help them in the first break.",
     "beat": "open",
     "teach": {
-      "time": "2–4 min",
+      "time": "1 min",
       "gist": "Today we build an SRE agent.",
       "script": [
         {
@@ -89,7 +89,7 @@ const coreSlides = [
     "notes": "Time: 10:01 · 2 min.\n1. Say: “Goal: your team can run a 2-day hackathon with Claude in W6–W7.”\n2. Show: the three badges. Say each one in one sentence.\n3. Say: “The agent reads alerts, logs, and metrics. It writes a diagnosis. It proposes a fix as a PR or MR. It never executes.”\n4. Say: “The human gate: a named human approves. Not the agent.”\n5. Say: “At 15:40 you write your hackathon intent.md. You take the skills pack home.”",
     "beat": "open",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "Your team can run a 2-day hackathon with Claude in W6–W7.",
       "script": [
         {
@@ -158,7 +158,7 @@ const coreSlides = [
     "notes": "Time: 10:05 · 5 min.\n1. Say: “Each block has three parts. I explain one concept. I show it in my IDE. You do it with a timer.”\n2. Show: the breaks at 11:00, 12:00, and 14:40.\n3. Show: the end point at 15:40. Each team writes the intent.md for its hackathon idea.\n4. Say the five showcases: /design-control-loop (11:25), /show-me (14:08), /verify-this (15:00), /review-and-ship (15:18), /handoff (15:45).\n5. Say: “At the start of each block, run npm run progress. Show the current checks. Open PROGRESS.md for your latest dated evidence. This takes 30 seconds.”",
     "beat": "open",
     "teach": {
-      "time": "2–4 min",
+      "time": "5 min",
       "gist": "Concept. Demo. Your turn.",
       "script": [
         {
@@ -1573,7 +1573,7 @@ const coreSlides = [
     "notes": "Time: 11:00 · 15 min.\n1. Start the countdown.\n2. Help each person with a red setup check. Use the A1 failures in FACILITATOR.md.\n3. At 11:15, start Plan. Pair each person without setup with a neighbor.",
     "beat": "pause",
     "teach": {
-      "time": "2–4 min",
+      "time": "15 min",
       "gist": "Break",
       "script": [
         {
@@ -1625,7 +1625,7 @@ const coreSlides = [
     "stage": "plan",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "intent.md says what must be true at the end.",
       "script": [
         {
@@ -1687,7 +1687,7 @@ const coreSlides = [
     "stage": "plan",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "Three checks that a stranger can verify. At least one is OPEN.",
       "script": [
         {
@@ -1745,7 +1745,7 @@ const coreSlides = [
     "stage": "plan",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "5 min",
       "gist": "One question at a time. I remove each wish.",
       "script": [
         {
@@ -1818,7 +1818,7 @@ const coreSlides = [
     "stage": "plan",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "3 min",
       "gist": "The agent is a control loop: set point, sensor, actuator.",
       "script": [
         {
@@ -1895,7 +1895,7 @@ const coreSlides = [
     "stage": "plan",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "12–15 min",
       "gist": "INC-1001: agree who the agent serves and what it may never do.",
       "script": [
         {
@@ -1969,7 +1969,7 @@ const coreSlides = [
     "stage": "design",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "3 min",
       "gist": "The verdict contract. src/contract.ts holds it.",
       "script": [
         {
@@ -2039,7 +2039,7 @@ const coreSlides = [
     "stage": "design",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "4 min",
       "gist": "First a failing test. Then the contract.",
       "script": [
         {
@@ -2108,7 +2108,7 @@ const coreSlides = [
     "stage": "design",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "12 min",
       "gist": "INC-1001: decide what a diagnosis must contain. Test first.",
       "script": [
         {
@@ -2159,7 +2159,7 @@ const coreSlides = [
     "notes": "Time: 12:00 · 60 min.\n1. Start the countdown.\n2. Visit each person who was behind at the progress check.\n3. At 13:00, start Build 1.",
     "beat": "pause",
     "teach": {
-      "time": "2–4 min",
+      "time": "60 min",
       "gist": "Lunch",
       "script": [
         {
@@ -2827,7 +2827,7 @@ const coreSlides = [
     "stage": "controls",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "20 min",
       "gist": "INC-1001: make the chat refuse “roll back now”.",
       "script": [
         {
@@ -2903,7 +2903,7 @@ const coreSlides = [
     "stage": "controls",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "15 min",
       "gist": "INC-1001: let the agent read the deploy list. One tool. Read-only. Bound to the telemetry.",
       "script": [
         {
@@ -3193,7 +3193,7 @@ const coreSlides = [
     "notes": "Time: 14:40 · 15 min.\n1. Start the countdown.\n2. Visit teams without docs/diagnosis-live.md. Ask what evidence is missing.\n3. After their own attempt, preserve local work and compare git diff w5-step-5-diagnose -- docs/diagnosis-live.md. Keep unsupported claims OPEN.",
     "beat": "pause",
     "teach": {
-      "time": "2–4 min",
+      "time": "15 min",
       "gist": "Break",
       "script": [
         {
@@ -3242,7 +3242,7 @@ const coreSlides = [
     "stage": "test",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "It runs in CI. The ratchet only goes up.",
       "script": [
         {
@@ -3287,7 +3287,7 @@ const coreSlides = [
     "stage": "test",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "3 min",
       "gist": "Every case passes. Harmful 0.",
       "script": [
         {
@@ -3346,7 +3346,7 @@ const coreSlides = [
     "stage": "test",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "4 min",
       "gist": "A test that cannot fail is not evidence.",
       "script": [
         {
@@ -3418,7 +3418,7 @@ const coreSlides = [
     "stage": "test",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "11 min",
       "gist": "INC-1001: prove the agent on old tickets.",
       "script": [
         {
@@ -3493,7 +3493,7 @@ const coreSlides = [
     "stage": "gate",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "1 min",
       "gist": "A repeatable path of steps. Here: CI. Both run offline.",
       "script": [
         {
@@ -3552,7 +3552,7 @@ const coreSlides = [
     "stage": "gate",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "The agent goes to the gate. It does not go through.",
       "script": [
         {
@@ -3625,7 +3625,7 @@ const coreSlides = [
     "stage": "gate",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "5 min",
       "gist": "Claude builds the check. A human approves and executes in the local sample console.",
       "script": [
         {
@@ -3696,7 +3696,7 @@ const coreSlides = [
     "stage": "gate",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "7–8 min",
       "gist": "INC-1001: a named human signs the rollback.",
       "script": [
         {
@@ -3771,7 +3771,7 @@ const coreSlides = [
     "stage": "maintain",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "10 min",
       "gist": "The running system teaches you. Put the lesson back in the loop.",
       "script": [
         {
@@ -3836,7 +3836,7 @@ const coreSlides = [
     "stage": "maintain",
     "beat": "concept",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "This is your toolbox inside the rules.",
       "script": [
         {
@@ -4078,7 +4078,7 @@ const coreSlides = [
     "notes": "Time: 15:56 · 4 min.\n1. Say: “The loop keeps running. Human judgement stays above it.”\n2. Explain the four lines.\n3. Homework for W6: improve your hackathon intent.md and review every OPEN item.\n4. If time remains: do the separate Daily Brief bonus. Otherwise keep it as homework before W6.",
     "beat": "check",
     "teach": {
-      "time": "2–4 min",
+      "time": "4 min",
       "gist": "The loop keeps running. Human judgment stays above it.",
       "script": [
         {
@@ -4154,7 +4154,7 @@ const coreSlides = [
     },
     "beat": "close",
     "teach": {
-      "time": "2–4 min",
+      "time": "1 min",
       "gist": "Time left? The loop, solo",
       "script": [
         {
@@ -4207,7 +4207,7 @@ const coreSlides = [
     "notes": "Time: 18 min. This is a facilitator preview of prepared evidence, not a participant build of steps 1–4.\n1. Prepare a reviewed branch that already contains the step 1–4 artifacts and their red-to-green history. Open SOLO.md. Use two terminals at font size 18+.\n2. 0–4 min: show intent.md and the accepted boundary. Paste the step 1 prompt only to explain how the interview starts.\n3. 4–8 min: show the schema test failing before src/brief.ts makes it pass. Read the actual output.\n4. 8–12 min: show the accepted plan and the render test history. Do not claim that the audience built it.\n5. 12–15 min: run npm run brief:sample and open out/latest.html.\n6. 15–18 min: show one evidence row and the human PASS / FAIL / OPEN gate.\n7. Say: “Participants build steps 1–4 in the next 30–40 minute block. This preview only shows the route and its proof.”",
     "beat": "demo",
     "teach": {
-      "time": "2–4 min",
+      "time": "18 min",
       "gist": "Preview one prepared route in 18 minutes.",
       "script": [
         {
@@ -4253,14 +4253,14 @@ const coreSlides = [
       {
         "text": "Paste this prompt into Claude Code",
         "prompt": "Read SOLO.md, AGENTS.md and progress.md in the daily-brief repo. Help me build steps 1–4 with Claude Code, one step at a time. Interview me for intent.md; ask before edits. Show a red schema test, then build the schema. Stay in plan mode until I accept. Build the sample renderer with a red-to-green test and render out/latest.html without a model call. Ask me to choose one style variation. Show its diff and test result. Run commands yourself and stop after each step for my review. Do not copy solved tags or add live credentials.",
-        "after": "out/latest.html renders without an API key. npm test green. A PR from my/<name>."
+        "after": "out/latest.html renders without an API key and npm test is green. Keep your work on your own branch. Open a PR only after the step 7 human review."
       },
       "Open the linked repo in Claude Code on your own branch.",
       "Choose one style variation. Inspect its diff, test and rendered page.",
       "For homework, ask Claude to build one read-only tool from the accepted plan.",
       "Have a neighbor rerun one evidence check before the human gate."
     ],
-    "expected": "out/latest.html renders without an API key. npm test green. A PR from my/<name>.",
+    "expected": "out/latest.html renders without an API key and npm test is green. Keep your work on your own branch. Open a PR only after the step 7 human review.",
     "stepsHeading": "Do this now:",
     "cards": [
       {
@@ -4282,11 +4282,11 @@ const coreSlides = [
     "notes": "Time: 30–40 min.\n1. Let them do: steps 1–4 of SOLO.md. Steps 5–7 are homework before W6.\n2. Check step 2: git log shows the test commit before src/brief.ts.\n3. Check step 4: npm run brief:sample writes out/latest.html. The page opens without an API key.\n4. Catch-up: each step has a tag (step-1-intent … step-7-gate-deploy). Preserve your work and compare the relevant tag with git diff. Apply only a reviewed change after your own attempt.\n5. Step 5 needs a read-only token in .env (GitHub, Linear or Notion). Never in the repo.\n6. Step 6: a neighbor reruns one command from docs/evidence.md and writes their name.",
     "beat": "turn",
     "teach": {
-      "time": "10–15 min",
+      "time": "30–40 min",
       "gist": "Follow SOLO.md. Each step has a check.",
       "script": [
         {
-          "say": "Let them do: steps 1–4 of SOLO.md. Steps 5–7 are homework before W"
+          "say": "Let them do: steps 1–4 of SOLO.md. Steps 5–7 are homework before W6."
         },
         {
           "do": "Check step 2: git log shows the test commit before src/brief.ts."
@@ -4306,7 +4306,7 @@ const coreSlides = [
         "Check step 4: npm run brief:sample writes out/latest.html. The page opens without an API key."
       ],
       "done": [
-        "out/latest.html renders without an API key. npm test green. A PR from my/<name>."
+        "out/latest.html renders without an API key and npm test is green. Keep your work on your own branch. Open a PR only after the step 7 human review."
       ],
       "watch": [
         "Step 5 needs a read-only token in .env (GitHub, Linear or Notion). Never in the repo."
@@ -4350,7 +4350,7 @@ const coreSlides = [
     "notes": "Time: 2 min.\n1. Say: “Solo work still has controls.”\n2. Say: “Plan mode is your reviewer. Tests are your QA. A neighbor reading your PR against intent.md is your four eyes. Evals are your memory.”\n3. Say: “Use this loop between the hackathon sessions in W6–W7.”",
     "beat": "discuss",
     "teach": {
-      "time": "2–4 min",
+      "time": "2 min",
       "gist": "What changes when you work alone",
       "script": [
         {
