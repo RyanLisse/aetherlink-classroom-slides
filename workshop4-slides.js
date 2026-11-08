@@ -177,7 +177,7 @@ window.SLIDES = [
     "type": "recap",
     "visual": {
       "opener": "showcase",
-      "image": "assets/day3-maarten-n8n/03-chat-memory.jpeg",
+      "image": "assets/day4-memory/with-memory.png",
       "imageLink": "n8n · Chat trigger → AI Agent"
     },
     "subtitle": "Memory works like a conversation at a shop counter: with the same customer, you remember what was said. With a new customer, you start afresh.",
@@ -429,7 +429,7 @@ window.SLIDES = [
       },
       {
         "title": "11:15 · SOLO 1",
-        "body": "Policy, structured output and memory.\nOne prompt, then inspect."
+        "body": "Policy and structured output.\nThen 20 minutes: build, resume and isolate ticket memory."
       },
       {
         "title": "13:00 · SOLO 2–3",
@@ -1455,6 +1455,221 @@ window.SLIDES = [
       "watch": [
         "Do not call dry-run JSON model output. A model run or the marked sample trace provides model evidence."
       ],
+      "next": "Quiz: message 6"
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "n8n recap · before memory was connected",
+    "kicker": "Real class screenshot · before",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day3-maarten-n8n/03-chat-memory.jpeg",
+      "imageLink": "n8n · AI Agent with an empty Memory socket"
+    },
+    "subtitle": "This is the real class flow before Simple Memory was attached. The model is connected; the Memory socket is still empty.",
+    "cards": [],
+    "keyPoints": [
+      "A conversation is not a curated memory file.",
+      "An execution log is not user memory.",
+      "The empty socket proves memory was not connected yet."
+    ],
+    "notes": "Show the real screenshot from the class. Point to the chat panel, the execution log and the empty Memory socket. Say explicitly that the model is connected but memory is not. This prevents the screenshot from being used as false evidence.",
+    "teach": {
+      "time": "2 min",
+      "gist": "Before Simple Memory: chat and logs exist, but the Memory socket is empty.",
+      "script": [
+        {
+          "do": "Point to the Memory socket under the AI Agent.",
+          "say": "This is our real n8n flow before memory was connected. The chat and the execution log exist, but the empty socket does not remember anything."
+        },
+        {
+          "do": "Point to the chat panel and then the execution log.",
+          "say": "The conversation contains messages. The log contains technical events. Neither one is the curated ticket memory we will build."
+        }
+      ],
+      "do": [
+        "Show the empty Memory socket and name what the screenshot does not prove."
+      ],
+      "done": [
+        "Participants can distinguish conversation, logs and absent memory."
+      ],
+      "watch": [
+        "Do not say that Simple Memory is connected in this screenshot."
+      ],
+      "next": "n8n recap · after Simple Memory was connected"
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "n8n recap · after Simple Memory was connected",
+    "kicker": "Real class screenshot · after",
+    "type": "recap",
+    "visual": {
+      "opener": "showcase",
+      "image": "assets/day4-memory/with-memory.png",
+      "imageLink": "n8n · Simple Memory connected and a colour recalled"
+    },
+    "subtitle": "This real class run shows Simple Memory connected. The same chat recalls that the favourite colour is red.",
+    "cards": [],
+    "keyPoints": [
+      "The screenshot shows real connected memory.",
+      "The recalled colour is visible evidence.",
+      "File memory is a separate, reviewed artifact."
+    ],
+    "notes": "Point to the connected Simple Memory node and the answer in the chat. This is evidence for conversation memory. Then draw the boundary: today the participant will add a small reviewed file for durable ticket facts. Claude Code does not load that file magically; a new session must read it explicitly.",
+    "teach": {
+      "time": "2 min",
+      "gist": "After Simple Memory: the same conversation recalls a fact. Durable ticket memory remains a separate artifact.",
+      "script": [
+        {
+          "do": "Point to the connected Simple Memory node and the recalled colour.",
+          "say": "Now we have evidence. The memory node is connected, and the same conversation remembers red."
+        },
+        {
+          "say": "Our next step is different. We create one reviewed memory.md per ticket. A new Claude Code session must read that file explicitly."
+        }
+      ],
+      "do": [
+        "Show the connected node and the recalled fact."
+      ],
+      "done": [
+        "Participants can explain why conversation memory and file memory are different."
+      ],
+      "watch": [
+        "Do not claim that conversation memory automatically writes or loads memory.md."
+      ],
+      "next": "Your turn · Build reviewed memory per ticket"
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Your turn · Build T-001 memory",
+    "kicker": "SOLO 1M · Paste into Claude Code",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 10,
+    "subtitle": "Use Claude Code itself as the chat. Propose, review and write one small T-001 memory file.",
+    "cards": [
+      {
+        "title": "Scenario",
+        "body": "Create durable T-001 context without inventing a conversation or log event."
+      },
+      {
+        "title": "Starting state",
+        "body": "Two separate fictional source files exist. No conversation, log event or memory file exists yet."
+      },
+      {
+        "title": "Stop",
+        "body": "Stop after the approved T-001 file and diff are visible."
+      }
+    ],
+    "steps": [
+      {
+        "text": "1 · Build T-001 memory in this Claude Code session",
+        "prompt": "Use Claude Code itself as our chat. Do not build a UI, add a model API call, or change the Agent SDK flow. Read docs/memory-lab/T-001.md only. No conversation or technical log exists for this exercise, so do not invent either one. Explain the difference between conversation/session resume, append-only technical logging, and a curated ticket memory file.\n\nPropose tickets/T-001/memory.md with exactly these headings: Confirmed facts, Decisions, Open questions, and Next step. Map every item to a stable T-001 source label. Preserve uncertain source claims as OPEN: under Open questions. Keep only durable ticket context. Do not include credentials, authentication data, tokens, personal data, a transcript dump, or speculation. Show the proposed file and wait for my approval. After I approve, create only tickets/T-001/memory.md and show the diff. Stop and tell me to open a fresh Claude Code session.",
+        "after": "The approved T-001 file exists. The fictional source pack remains unchanged. No log event was invented."
+      }
+    ],
+    "expected": "The approved T-001 memory file contains sourced facts, decisions, open questions and a next step.",
+    "notes": "This is a documentation exercise inside Claude Code, not a new application feature. Ask participants to show the approval pause before each write. File memory is manual curation: it complements SDK session resume but does not replace or magically load it. Logs remain append-only technical evidence; memory.md is a small reviewed summary. Reject secrets, authentication data, full transcripts and unsupported claims.",
+    "teach": {
+      "time": "10 min",
+      "gist": "Propose and approve the T-001 memory before Claude Code writes it.",
+      "script": [
+        {
+          "say": "Use Claude Code itself as the chat. We are not building another UI and we are not adding an API call."
+        },
+        {
+          "do": "Ask for the T-001 proposal. Stop before the write.",
+          "say": "Review the four sections and every source reference. Remove secrets, transcript dumps and guesses."
+        },
+        {
+          "do": "After approval, start a fresh Claude Code session and explicitly read tickets/T-001/memory.md.",
+          "say": "The new session resumes because we told it to read the file. Nothing loaded the file magically."
+        },
+        {
+          "do": "Review T-002 without reading T-001 memory.",
+          "say": "The final check is isolation: T-002 gets its own file and none of T-001’s facts."
+        }
+      ],
+      "do": [
+        "Review the T-001 proposal before writing.",
+        "Prove explicit read in a fresh Claude Code session.",
+        "Inspect T-002 for cross-ticket leakage."
+      ],
+      "done": [
+        "Both files are small, sourced and approved.",
+        "T-001 resumes after an explicit read.",
+        "T-002 contains no T-001 facts."
+      ],
+      "watch": [
+        "File memory is curated context, not a transcript dump.",
+        "Technical logs stay append-only and are not memory.md.",
+        "Never store credentials, authentication data or tokens."
+      ],
+      "next": "Your turn · Resume T-001 explicitly"
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Your turn · Resume T-001 explicitly",
+    "kicker": "SOLO 1M · Fresh Claude Code session",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 5,
+    "subtitle": "Open a fresh Claude Code session. Read only the reviewed memory file; do not replay the conversation or read logs.",
+    "steps": [
+      {
+        "text": "Paste this into a fresh Claude Code session",
+        "prompt": "This is a fresh Claude Code session. Read only tickets/T-001/memory.md. Do not read a transcript, technical log, T-002 source, or T-002 memory. Summarize the confirmed facts, decisions, open questions, and next step with their source references. State that you read this file explicitly and that it was not loaded automatically. Propose no implementation. Stop after the summary.",
+        "after": "The new session resumes from memory.md without replaying a conversation or reading logs."
+      }
+    ],
+    "expected": "The summary comes only from tickets/T-001/memory.md and states that the file was read explicitly.",
+    "notes": "This is the proof that file memory is manual curation, not automatic session memory. The participant must open a genuinely fresh Claude Code session and must not replay the earlier conversation.",
+    "teach": {
+      "time": "5 min",
+      "gist": "A fresh session resumes T-001 only after explicitly reading its reviewed file.",
+      "script": [
+        {"do":"Ask participants to open a fresh Claude Code session.","say":"Do not continue the old conversation. Paste the resume prompt and watch which file Claude reads."},
+        {"do":"Inspect the summary and source references.","say":"Nothing loaded this file magically. The prompt named it explicitly."}
+      ],
+      "do": ["Prove the fresh session reads only tickets/T-001/memory.md."],
+      "done": ["T-001 resumes without replaying a conversation or reading logs."],
+      "watch": ["A continued session is not fresh-session evidence."],
+      "next": "Your turn · Prove T-002 isolation"
+    }
+  },
+  {
+    "lessonId": "workshop-4",
+    "title": "Your turn · Prove T-002 isolation",
+    "kicker": "SOLO 1M · Another fresh session",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 5,
+    "subtitle": "Read only the separate T-002 fixture. You compare T-001 and T-002 after Claude stops.",
+    "steps": [
+      {
+        "text": "Paste this into another fresh Claude Code session",
+        "prompt": "This is another fresh Claude Code session. Read docs/memory-lab/T-002.md only. Do not read docs/memory-lab/T-001.md or tickets/T-001/memory.md. Propose tickets/T-002/memory.md with exactly these headings: Confirmed facts, Decisions, Open questions, and Next step. Map every item to a stable T-002 source label. Preserve uncertain source claims as OPEN: under Open questions. Do not include credentials, authentication data, tokens, personal data, a transcript dump, or speculation. Show the proposal and wait for my approval. After I approve, create only tickets/T-002/memory.md and show the diff. Do not create or rewrite technical logs. Stop for my isolation review.",
+        "after": "Every T-002 item maps to a T-002 label. A human compares both files for leakage."
+      },
+      "Compare the two files yourself. T-002 must contain none of T-001/F1, T-001/D1, T-001/O1 or T-001/N1."
+    ],
+    "expected": "T-002 has a separate reviewed file. Every item maps to a T-002 label, and your comparison finds no T-001 fact.",
+    "notes": "Claude does not read T-001 during this session and therefore cannot prove absence against it. The participant performs the final comparison after Claude stops. This is a learning protocol, not a filesystem security boundary.",
+    "teach": {
+      "time": "5 min",
+      "gist": "Build T-002 from its own source, then let the participant compare both files for leakage.",
+      "script": [
+        {"do":"Start another fresh session and paste the T-002 prompt.","say":"Claude reads only the T-002 fixture. Every claim must map to a T-002 label."},
+        {"do":"After Claude stops, compare both memory files yourself.","say":"The human comparison is the isolation check. Claude never opened T-001 in this session."}
+      ],
+      "do": ["Map T-002 claims to T-002 labels.","Perform the cross-ticket comparison yourself."],
+      "done": ["T-002 contains no T-001 source label or fact."],
+      "watch": ["Do not ask the isolated session to read T-001 for its own comparison."],
       "next": "Quiz: message 6"
     }
   },
