@@ -1,6 +1,7 @@
 'use strict';
 
 const PROMPTS = {
+  liveModelSetup: `Read README.md, src/runtime.ts, src/e2e.ts, console/server.ts, and package.json. Explain the difference between my local Claude Code builder session and the optional Claude Agent SDK product runtime. Check only whether Claude Code is signed in and whether npm run doctor reports the Claude Code login path; never print, read, or copy credentials. Propose the smallest local activation plan that keeps the core lesson offline, waits until after A5, first runs one CLI investigation with max-turns 8 and max-budget-usd 0.30, and only then optionally restarts my own console with AGENT_MODEL=sonnet. Require one completed model diagnosis plus its tool trace. State that the console has no global model-budget guard. Include the usage/cost warning and the fallback that restarts without AGENT_MODEL. Do not run a paid model, edit files, or start processes. Stop for my review.`,
   a1Map: `/show-me Read README.md, WORKSHOP.md, CLAUDE.md, package.json, fixtures/incidents/bad-deploy.json, and the runtime entry points. Give me a shallow repository map of two intake paths: the fixture CLI for INC-1001 and the live console listener that creates a new incident id from shop telemetry. Show where both paths call the shared investigate flow. Stay read-only. Do not generate HTML. Name the four files I should inspect next, then stop.`,
   a1Setup: `Use the repository map we just reviewed. Check Node and my current diff. Install dependencies only if they are missing, then generate the sample fixtures. Run the main tests. Run the workshop tests and explain why A3, A4, A5, and A8 are expected to fail. Do not solve them. Run npm run workshop:check only to locate unfinished markers; it is not a completion gate. Check port 4320. If it is free, start the console with AGENT_LISTEN_WINDOW_MIN=1. If it is occupied, do not stop the process. Report whether it belongs to this lab and whether its listener window is known. Show the console health and local URL. Do not push or change hooks. Stop for my setup review.`,
   a2Design: `/design-control-loop Read intent.md, fixtures/incidents/bad-deploy.json, and REVIEW.md. Ask me at most three questions in one round about the operator, the observable outcome, and the read-only boundary. Recommend an answer for each question. Map my answers to intent.md fields. Stay in design mode. Do not edit or build. Stop after the field map.`,
@@ -20,7 +21,7 @@ const PROMPTS = {
   a7Verify: `/verify-this Verify this claim: the new deterministic fixture case increases the case count by one, the new case passes, harmful remains 0, and both ratchet values are unchanged. Compare the saved baseline and treatment outputs and the neighboring rerun. Report VERIFIED, NOT VERIFIED, or INCONCLUSIVE with evidence references. Stay read-only.`,
   a8Build: `Read intent.md, src/executor.ts, approvals/README.md, and the A8 workshop test. Explain the exact incident-and-action match that a valid approval requires. Ask me to choose one negative case: wrong incident or wrong action. Show the focused A8 test red. After my approval, implement only TODO(A8), add the negative case, and rerun the focused test. Then run the main tests and typecheck. Show why the negative case stays blocked. Do not create an approval, click Approve, Execute, or Resolve, edit a human decision record, or push. Stop with the real console action marked HUMAN OPEN.`,
   a9Maintain: `Read docs/diagnosis-live.md, lessons/proposed/, lessons/lessons.md, approvals/audit.jsonl, and PROGRESS.md. Explain the difference between curated operational knowledge, the action log, and local progress signals. Propose one reusable lesson with the incident id and stable evidence references. Do not edit lessons/lessons.md. Ask me which claim a human can accept and which claim must stay OPEN. Then interview me one question at a time about a hackathon problem. Draft docs/hackathon-intent.md with an outcome, three repeatable checks, boundaries, and OPEN questions. Show the proposed lesson and intent diff for review. Do not resolve the incident, promote the lesson, or push.`,
-  a9Handoff: `/handoff Create a handoff prompt for the next teammate. Include the accepted intent, verified checks with evidence references, every HUMAN OPEN item, the hackathon intent, and one concrete next step. Do not claim that the incident was resolved, the lesson was promoted, or a human action happened. For this classroom run, do not copy to the clipboard. Print the full handoff here for my review. Stop before editing any file.`,
+  a9Handoff: `/handoff Create a handoff prompt for the next teammate. Include the accepted intent, verified checks with evidence references, every HUMAN OPEN item, the hackathon intent, and one concrete next step. Do not claim that the incident was resolved, the lesson was promoted, or a human action happened. Distinguish forbidden service mutations from allowed local verification evidence writes under docs/verify/. For this classroom run, do not copy to the clipboard. Print the full handoff here for my review. Stop before editing any file.`,
   a9Save: `Save the exact handoff text I just approved to HANDOFF.md. Ask before writing the file. Do not add new claims or change the reviewed wording. Show the diff, then stop. Do not push.`
 };
 
@@ -206,6 +207,28 @@ openingSlides.push(
     notes: note({time: '10:11 · 4 min', why: 'Everyone needs the same trusted repository before the first prompt.', predict: 'Ask which folder Claude Code may trust.', see: 'The terminal is at the root of the participant clone.', inside: 'Project skills load only after the participant trusts that folder.', participant: 'Review the path, accept trust only for your own clone, and restart Claude Code if the project skills remain missing.', watch: 'Never bypass trust or accept an unfamiliar folder. Cursor is optional.', stuck: 'Check the path and workshop/start branch, then restart Claude Code.', stop: 'Every participant can see the Claude Code prompt and project skills.', next: 'The repository already knows how to help'})
   }),
   baseSlide({
+    title: 'Connect your own Claude, keep the core route offline',
+    kicker: 'W5 · OPTIONAL LIVE MODEL',
+    subtitle: 'Sign in locally now. Activate the product model only after A5 and only with approved usage.',
+    type: 'practice',
+    layout: 'exercise',
+    stepsHeading: 'Prepare now, activate only after A5:',
+    cards: [
+      {title: 'Builder · now', body: 'Run claude in your own clone. Use /login only on your own machine.'},
+      {title: 'Product · after A5', body: 'Run one budget-capped CLI proof before you optionally restart the console.'},
+      {title: 'Proof', body: 'Require one completed diagnosis and its visible tool trace. A health label alone is not proof.'},
+      {title: 'Fallback', body: 'Stop your console and restart without AGENT_MODEL. The required route remains scripted.'}
+    ],
+    steps: [
+      {text: 'Copy this preparation prompt into Claude Code', prompt: PROMPTS.liveModelSetup, after: 'Claude explains the two runtimes and stops before starting the product model.'},
+      {text: 'After A5, run one bounded model proof', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json --model sonnet --max-turns 8 --max-budget-usd 0.30 --dry-run', after: 'Review the completed diagnosis, cost line, and visible tool trace.'},
+      {text: 'After A5, optionally restart your own console', prompt: 'AGENT_MODEL=sonnet AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The console is ready for one approved live-model investigation.'},
+      {text: 'Return to the required scripted route', prompt: 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'Any exported model override is cleared and the scripted investigator runs again.'}
+    ],
+    keyPoints: ['Never copy credentials to chat, Git, a browser field, or a remote host.', 'Claude Code login uses plan limits; an intentional API-key path may use paid credits.', 'The console has no global model-budget guard; stop after one approved proof.'],
+    notes: note({time: '10:15 · 90 sec', why: 'Participants need to connect their own local Claude without confusing the builder with the product runtime.', predict: 'Ask which evidence proves a model actually answered.', see: 'Login, bounded CLI proof, optional console activation, and fallback are separate.', inside: 'The Agent SDK can use the local Claude Code login. The core route still works without a model.', participant: 'Sign in locally and review the preparation prompt. Do not activate the product model before A5.', watch: 'Never request, display, or transfer credentials. A model name in health proves configuration only. The console has no global model-budget guard.', stuck: 'Keep the product offline and continue with A1.', stop: 'Everyone can state that a completed diagnosis plus its visible tool trace proves the model path.', next: 'The repository already knows how to help'})
+  }),
+  baseSlide({
     title: 'The repository already knows how to help',
     kicker: 'W5 · PROJECT SKILLS',
     subtitle: 'Invoke a project skill by starting the prompt with its slash command.',
@@ -217,7 +240,7 @@ openingSlides.push(
       {title: '/handoff', body: 'Write a portable prompt for the next agent.'}
     ],
     keyPoints: ['The slash command must start the prompt.', 'Skills guide a method. They do not replace review.', 'No global install is required.'],
-    notes: note({time: '10:15 · 1 min', why: 'The first assignment uses a project skill to learn the codebase.', predict: 'Ask which skill should run before the first edit.', see: 'Four skills match four decisions in the day.', inside: 'These skills require explicit slash invocation.', participant: 'Choose the skill that maps an unknown repository.', watch: 'Do not write a normal prompt that merely mentions a slash skill.', stuck: 'Point to /show-me.', stop: 'The room knows that the slash command starts the prompt.', next: 'One ticket, nine assignments'})
+    notes: note({time: '10:16:30 · 30 sec', why: 'The first assignment uses a project skill to learn the codebase.', predict: 'Ask which skill should run before the first edit.', see: 'Four skills match four decisions in the day.', inside: 'These skills require explicit slash invocation.', participant: 'Choose the skill that maps an unknown repository.', watch: 'Do not write a normal prompt that merely mentions a slash skill.', stuck: 'Point to /show-me.', stop: 'The room knows that the slash command starts the prompt.', next: 'One ticket, nine assignments'})
   }),
   baseSlide({
     title: 'One ticket, nine assignments',
@@ -233,7 +256,7 @@ openingSlides.push(
       {label: 'A9', caption: 'Lesson, hackathon intent, and handoff'}
     ],
     keyPoints: ['Claude builds one step.', 'You choose and inspect.', 'The human gate remains OPEN.'],
-    notes: note({time: '10:16 · 1 min', why: 'The route prevents a beginner from solving the whole codebase at once.', predict: 'Ask where the first human-only edit appears.', see: 'Nine small results form one investigation and handoff route.', inside: 'Each artifact is evidence for the next assignment.', participant: 'Keep this route open when you lose your place.', watch: 'Do not jump to a solved branch or tag.', stuck: 'Return to the current artifact.', stop: 'Point to A1.', next: 'The starter stack'})
+    notes: note({time: '10:17 · 30 sec', why: 'The route prevents a beginner from solving the whole codebase at once.', predict: 'Ask where the first human-only edit appears.', see: 'Nine small results form one investigation and handoff route.', inside: 'Each artifact is evidence for the next assignment.', participant: 'Keep this route open when you lose your place.', watch: 'Do not jump to a solved branch or tag.', stuck: 'Return to the current artifact.', stop: 'Point to A1.', next: 'The starter stack'})
   }),
   baseSlide({
     title: 'The starter stack',
@@ -248,7 +271,7 @@ openingSlides.push(
       {label: 'Evidence', caption: 'Read-only tools, fictional fixtures, and tests.'}
     ],
     keyPoints: ['Use the supplied layers.', 'Keep the core route offline.', 'Do not regenerate the app.'],
-    notes: note({time: '10:17 · 30 sec', why: 'The learner needs the supplied technical layers before deciding what to build.', predict: 'Ask which layer owns the fictional evidence.', see: 'Browser, plain console, runtime, and evidence form one local stack.', inside: 'The optional model SDK sits outside the core offline proof.', participant: 'Trace the four layers once.', watch: 'Do not label the console React.', stuck: 'Read the layers from top to bottom.', stop: 'The room can name the supplied stack.', next: 'What is ready and what you build'})
+    notes: note({time: '10:17:30 · 15 sec', why: 'The learner needs the supplied technical layers before deciding what to build.', predict: 'Ask which layer owns the fictional evidence.', see: 'Browser, plain console, runtime, and evidence form one local stack.', inside: 'The optional model SDK sits outside the core offline proof.', participant: 'Trace the four layers once.', watch: 'Do not label the console React.', stuck: 'Read the layers from top to bottom.', stop: 'The room can name the supplied stack.', next: 'What is ready and what you build'})
   }),
   baseSlide({
     title: 'What is ready and what you build',
@@ -260,7 +283,7 @@ openingSlides.push(
       {title: 'You build and prove', body: 'A3 contract, A4 controls, A5 tool path, A8 gate, cited diagnosis, and handoff.'}
     ],
     keyPoints: ['Do not regenerate the supplied app.', 'Prompt one bounded behavior.', 'Spend time on decisions and proof.'],
-    notes: note({time: '10:17:30 · 30 sec', why: 'Building a console from scratch would consume tokens and class time without teaching the agent contract.', predict: 'Ask which four behaviors participants still implement.', see: 'The starter supplies the runtime surface. The learner supplies the agent behavior and proof.', inside: 'A3, A4, A5, and A8 contain the missing behavior.', participant: 'Name one supplied component and one behavior you will build.', watch: 'Do not ask Claude to replace the console, shop, traffic generator, fixtures, tests, or tool infrastructure.', stuck: 'Point to the You build and prove card.', stop: 'The room can separate starter code from learner work.', next: 'A1 · Learn the repo before you build'})
+    notes: note({time: '10:17:45 · 15 sec', why: 'Building a console from scratch would consume tokens and class time without teaching the agent contract.', predict: 'Ask which four behaviors participants still implement.', see: 'The starter supplies the runtime surface. The learner supplies the agent behavior and proof.', inside: 'A3, A4, A5, and A8 contain the missing behavior.', participant: 'Name one supplied component and one behavior you will build.', watch: 'Do not ask Claude to replace the console, shop, traffic generator, fixtures, tests, or tool infrastructure.', stuck: 'Point to the You build and prove card.', stop: 'The room can separate starter code from learner work.', next: 'A1 · Learn the repo before you build'})
   })
 );
 

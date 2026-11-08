@@ -404,7 +404,7 @@ yourself before teaching:
 
 ## Workshop 5 deck
 
-`workshop5.html` loads `workshop5-slides.js` (51 slides: AI-native SDLC with an SRE agent, English) with the same
+`workshop5.html` loads `workshop5-slides.js` (52 slides: AI-native SDLC with an SRE agent, English) with the same
 `app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
