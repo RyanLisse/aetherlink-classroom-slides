@@ -135,7 +135,7 @@ const pauseSlide = (title, time, next, at) => baseSlide({
   teach: {time, gist: title, script: [{do: 'Start the timer.'}], do: ['Start the timer.'], done: [`Resume with ${next}.`], watch: [], next}
 });
 
-const slides = [
+const day5Slides = [
   baseSlide({
     title: 'Day 5 starts with one broken checkout', kicker: 'Day 5 · AI-NATIVE SDLC', subtitle: 'You are new to the codebase. Start from the customer impact.', type: 'context',
     cards: [{title: 'Customer', body: 'Checkout errors rose after deploy d-4821.'}, {title: 'You', body: 'You have one day to build a safe first responder.'}, {title: 'Boundary', body: 'The agent investigates. A named human decides.'}],
@@ -512,7 +512,7 @@ const slides = [
 ];
 
 window.DAY5_PROMPTS = PROMPTS;
-window.SLIDES = slides;
+window.SLIDES = day5Slides;
 window.SLIDES.forEach((slide, index) => {
   slide.teach.next = window.SLIDES[index + 1]?.title || 'End';
 });
