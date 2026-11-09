@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#06111e"><title>Presenter view · Day 5 · AI-native SDLC</title>
-<link rel="stylesheet" href="styles.css?v=147">
+<link rel="stylesheet" href="styles.css?v=148">
 <style>
   body{padding:1.4rem clamp(1rem,3vw,2.2rem);gap:1.2rem;min-height:100vh}
   .p-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:1rem}
@@ -61,13 +61,18 @@
   .t-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:1rem 1.4rem}
   .t-script h3{margin:0 0 .5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
   .t-script ol{margin:0;padding:0;list-style:none;counter-reset:beat;display:grid;gap:.55rem}
-  .t-script li{counter-increment:beat;position:relative;padding:.55rem .8rem .55rem 2.7rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px}
+  .t-script li{position:relative;padding:.55rem .8rem .55rem 2.7rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px}
   .t-script li::before{content:counter(beat);position:absolute;left:.7rem;top:.55rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--aether-orange);color:#06111e;font-weight:800;font-size:.85rem;display:grid;place-items:center}
   .t-script p{margin:0;line-height:1.45}
   .t-script p + p{margin-top:.3rem}
   .t-b-do{color:var(--violet);font-weight:750;font-size:.95rem}
   .t-b-say{font-size:1.08rem}
   .t-b-say::before{content:"“"}.t-b-say::after{content:"”"}
+  .t-b-say-list{margin:.3rem 0 0;padding-left:1.2rem}.t-b-say-list::before,.t-b-say-list::after{content:none}
+  .t-script ol > li{counter-increment:beat}
+  .t-script .t-b-say-list{list-style:disc;display:block}
+  .t-script .t-b-say-list li{counter-increment:none;position:static;padding:0;background:none;border:0;border-radius:0;line-height:1.45;margin:.15rem 0;font-size:1.05rem}
+  .t-script .t-b-say-list li::before{content:none}.t-script .t-b-say-list li::marker{color:var(--muted)}
   .t-b-ask{color:var(--aether-orange);font-weight:700;font-size:1.05rem}
   .t-b-answer{color:var(--ok);font-weight:700;padding-left:1rem}
   .t-b-warn{color:#fff;background:#d93838;font-weight:800;font-size:.95rem;padding:.35rem .6rem;border-radius:6px;margin-bottom:.35rem}
@@ -79,6 +84,7 @@
   .t-sec h3{margin:0 0 .35rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
   .t-sec ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:1.02rem;line-height:1.4}
   .t-sec strong{color:var(--c)}
+  .t-changes{--c:#5fd38d;margin-top:1rem;background:color-mix(in srgb,#5fd38d 6%,transparent);border-radius:0 10px 10px 0;padding:.6rem .9rem}
   .t-sec code,.t-gist code,.t-next code{font-size:.9em;padding:.05rem .3rem;border-radius:5px;background:var(--surface2);border:1px solid var(--border)}
   .t-do{--c:var(--amber)} .t-done{--c:#9be15d}
   .t-copy{--c:var(--cyan)} .t-copy-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin:.5rem 0 .25rem}
@@ -137,7 +143,7 @@
       </div>
     </div>
   </div>
-  <script>window.DECK_PAGE = "workshop5.html";</script><script src="workshop5-slides.js?v=21" defer></script>
+  <script>window.DECK_PAGE = "workshop5.html";</script><script src="workshop5-slides.js?v=22" defer></script>
   <script src="timers.js?v=92" defer></script>
   <script>
     const upgradeDay5Clip = video => {
@@ -159,5 +165,5 @@
       node.querySelectorAll?.('video.t-clip').forEach(upgradeDay5Clip);
     }))).observe(document.documentElement, {childList: true, subtree: true});
   </script>
-  <script src="presenter.js?v=107" defer></script>
+  <script src="presenter.js?v=108" defer></script>
 </body></html>

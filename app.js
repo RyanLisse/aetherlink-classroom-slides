@@ -46,6 +46,28 @@ function showPrompt() {
 /* ---- card icons (kept from the source engine, keyword-matched) ---- */
 const ICONS = { target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>', route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/>', inbox: '<path d="M3 13l2-8h14l2 8v6H3z"/><path d="M3 13h5l2 3h4l2-3h5"/>', check: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>', cross: '<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>', gate: '<path d="M4 20V6l8-3 8 3v14"/><path d="M9 20v-7h6v7"/><path d="M4 12h16"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', users: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19a6 6 0 0 1 12 0"/><path d="M15 19a4 4 0 0 1 6-3.5"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', file: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>', cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>', search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>', bulb: '<path d="M9 18h6M10 21h4"/><path d="M8 13a5 5 0 1 1 8 0c-1 1-1.5 2-1.5 3h-5c0-1-.5-2-1.5-3z"/>', flag: '<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>', hand: '<path d="M8 12V6a1.5 1.5 0 0 1 3 0v5"/><path d="M11 11V4a1.5 1.5 0 0 1 3 0v7"/><path d="M14 11V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0v1"/>', play: '<path d="M7 5v14l11-7z"/>', repeat: '<path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/>', stop: '<path d="M8 3h8l5 5v8l-5 5H8l-5-5V8z"/>', list: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/>', dot: '<circle cx="12" cy="12" r="3"/>' };
 const ICON_RULES = [[/goal|outcome|what$/, 'target'], [/boundar|guard|scope/, 'shield'], [/^stop/, 'stop'], [/^mode|route|during/, 'route'], [/input|source|read|deliver|include|contain/, 'inbox'], [/result|check|expected/, 'check'], [/must not|negative|problem|fail/, 'cross'], [/gate|decision/, 'gate'], [/open|time|when/, 'clock'], [/rotate|repeat|loop|again/, 'repeat'], [/group|mob|roles|team|squad|users|driver|navigator/, 'users'], [/individual|analyst|developer|tester|reviewer|observer|engineer|you/, 'user'], [/packet|claim|evidence|log|record|handoff|trace|contract|file|brief|plan|note|status/, 'file'], [/model|agent|adapter|tool|harness|hook|checker|cpu|subagent|session|repo|skill|mcp/, 'cpu'], [/review|search|inspect|compare/, 'search'], [/learned|why|idea|concept/, 'bulb'], [/can do|flag|deliver|ship|transfer|required output/, 'flag'], [/pick|choose|decide/, 'hand'], [/run|demo|execute|play|watch|ask/, 'play'], [/step|list|todo|checklist/, 'list']];
+// SDLC phase tracker: six dots in the slide header; slide.sdlc = 'plan' | … | 'maintain' | 'all'; slide.sdlcLoop adds ↺ (back to the start)
+const SDLC_PHASES = [['plan', 'Plan'], ['design', 'Design'], ['build', 'Build'], ['test', 'Test'], ['deploy', 'Deploy'], ['maintain', 'Maintain']];
+function sdlcTrack(s) {
+  const p = s.sdlc; if (!p) return null;
+  const el = node('div', 'sdlc-track'); el.setAttribute('role', 'img');
+  el.setAttribute('aria-label', p === 'all' ? 'SDLC: all six phases' : 'SDLC phase: ' + (SDLC_PHASES.find(([k]) => k === p) || ['', p])[1]);
+  SDLC_PHASES.forEach(([k, label], i) => { const st = node('span', 'sdlc-step' + (p === 'all' || p === k ? ' on' : '')); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); el.append(st); });
+  if (s.sdlcLoop) el.append(node('span', 'sdlc-loop', '↺'));
+  return el;
+}
+// larger icons for the definitions layout (v.glossary)
+const GLOSS_ICONS = {
+  terminal: '<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M7 10l3 2.5L7 15M12.5 15H17"/>',
+  alert: '<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5h.01"/>',
+  replay: '<path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M4 4v4h4"/><path d="M10.5 9.2l4.5 2.8-4.5 2.8z"/>',
+  chart: '<path d="M3 20.5h18"/><path d="M4 16l4.5-4.5 4 3L20 6"/><path d="M16 6h4v4"/>',
+  trace: '<path d="M4 6h9M4 11h9M4 16h5"/><circle cx="16.5" cy="15.5" r="3.2"/><path d="M19 18l2.5 2.5"/>',
+  human: '<circle cx="12" cy="9.5" r="3"/><path d="M7 18.5a5 5 0 0 1 10 0"/><path d="M19.5 9A8 8 0 0 0 5 6.5"/><path d="M4.5 15A8 8 0 0 0 19 17.5"/><path d="M5 3.5v3h3M19 20.5v-3h-3"/>',
+  cart: '<path d="M2.5 4h2.6l2.3 10.5h10.4L20 7.5H6.2"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/>',
+  bolt: '<path d="M13.5 2.5L5 13.5h6l-1 8 8.5-11h-6z"/>',
+  open: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.8"/><path d="M12 17h.01"/>'
+};
 function cardIcon(title) { const t = (title || '').toLowerCase(); const hit = ICON_RULES.find(([re]) => re.test(t)); const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true'); svg.innerHTML = ICONS[hit ? hit[1] : 'dot']; const wrap = node('span', 'card-icon'); wrap.append(svg); return wrap; }
 function cardBody(body) {
   const text = String(body || '');
@@ -70,6 +92,7 @@ function renderSteps(stage, s) {
     if (co && co.at === i + 1) { const c = node('div', 'step-callout'); c.append(node('span', 'step-callout-text', co.text), node('span', 'step-callout-arrow', '▼')); li.append(c); }
     const b = node('button', 'step-btn'); b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', 'Step ' + (i + 1) + ': ' + it.label);
     b.append(node('span', 'step-circle', String(i + 1))); li.append(b, node('span', 'step-label', it.label));
+    if (it.phase) li.append(node('span', 'step-phase', it.phase));
     if (it.caption) li.append(node('span', 'step-caption', it.caption));
     b.addEventListener('click', () => { active = i; els.forEach((e, k) => { e.classList.toggle('active', k === i); e.querySelector('button').setAttribute('aria-pressed', String(k === i)); }); cap.textContent = it.detail || it.caption || it.label; });
     els.push(li); row.append(li);
@@ -196,6 +219,116 @@ function renderExtras(stage, main, s, v) {
     main.classList.add('has-key'); cards.forEach((c, i) => { if (i !== v.keyLine) c.classList.add('card-lead'); });
     const key = cards[v.keyLine]; key.classList.add('card-key'); const row = node('div', 'key-row'); key.replaceWith(row); row.append(key);
     const stamp = node('span', 'stamp'); stamp.append(node('span', 'stamp-in', v.stamp || 'VERIFY')); key.append(stamp); x.aim.push(stamp); x.row = row;
+  }
+  if (v.sdlcIntro && cards.length >= 2) {                       // SDLC: traditional line (handovers) vs AI-native loop (phases light up, a person approves in the middle)
+    grid.classList.add('sdlc-intro');
+    const line = node('div', 'sdlc-line');
+    SDLC_PHASES.forEach(([, label], i) => { if (i) line.append(node('span', 'sdlc-hand', '→')); const c = node('span', 'sdlc-chip', label); c.style.setProperty('--i', i); line.append(c); });
+    cards[0].append(line);
+    const cx = 120, cy = 118, R = 78, pt = (deg, r) => [cx + r * Math.cos(deg * Math.PI / 180), cy + r * Math.sin(deg * Math.PI / 180)];
+    let svgTxt = '<svg class="sdlc-loop-svg" viewBox="0 0 240 236" aria-hidden="true"><defs><marker id="sdlcArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="sdlc-ah"/></marker></defs>';
+    SDLC_PHASES.forEach((_, i) => { const a = -90 + i * 60; const [x1, y1] = pt(a + 13, R), [x2, y2] = pt(a + 47, R); svgTxt += `<path class="sdlc-arc" d="M${x1.toFixed(1)},${y1.toFixed(1)} A${R},${R} 0 0 1 ${x2.toFixed(1)},${y2.toFixed(1)}" marker-end="url(#sdlcArrow)"/>`; });
+    SDLC_PHASES.forEach(([, label], i) => { const a = -90 + i * 60; const [x, y] = pt(a, R), [lx, ly] = pt(a, R + 24); const anchor = Math.abs(lx - cx) < 8 ? 'middle' : lx > cx ? 'start' : 'end';
+      svgTxt += `<circle class="sdlc-node" style="--i:${i}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8"/><text class="sdlc-lbl" x="${(anchor === 'start' ? lx - 8 : anchor === 'end' ? lx + 8 : lx).toFixed(1)}" y="${(ly + 4).toFixed(1)}" text-anchor="${anchor}">${label}</text>`; });
+    svgTxt += `<g class="sdlc-human" transform="translate(${cx - 18},${cy - 30}) scale(1.5)">${GLOSS_ICONS.human}</g><text class="sdlc-human-txt" x="${cx}" y="${cy + 22}" text-anchor="middle">a person approves</text></svg>`;
+    const holder = node('div', 'sdlc-loop-wrap'); holder.innerHTML = svgTxt;
+    cards[1].append(holder);
+  }
+  if (v.roles && cards.length >= 2) {                           // two roles side by side: builder → product (Aetherbot sits in the product card)
+    grid.classList.add('roles'); cards.forEach((c) => c.querySelector('.card-icon')?.remove());
+    const ic = node('div', 'gl-icon role-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[v.roles.icon || 'terminal']}</svg>`; cards[0].prepend(ic);
+    const arrow = node('div', 'role-arrow'); arrow.append(node('span', 'role-arrow-glyph', '→'), node('span', 'role-arrow-label', v.roles.arrow || '')); cards[0].after(arrow);
+  }
+  if (v.story) {                                                // story strip: numbered panels with a big icon, arrows between them, one example chip each
+    grid.classList.add('story');
+    cards.forEach((c, i) => { const g = v.story[i]; if (!g) return; c.classList.add('gl-card', 'story-card'); c.style.setProperty('--gl', g.color || 'var(--cyan)'); c.style.setProperty('--i', i);
+      c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[g.icon] || ICONS.dot}</svg>`;
+      c.prepend(node('span', 'story-num', String(i + 1)), ic);
+      if (g.eg) c.append(node('span', 'gl-eg', g.eg));
+      if (i < cards.length - 1) c.after(node('div', 'story-arrow', '→')); });
+  }
+  if (v.skillTrees) {                                           // skills: per card an owner icon, where the skills live (folder tree) and what each does
+    grid.classList.add('skill-trees'); if (cards.length === 1) grid.classList.add('one');
+    cards.forEach((c, i) => { const T = v.skillTrees[i]; if (!T) return; c.classList.add('sk-card'); c.style.setProperty('--gl', T.color || 'var(--cyan)');
+      c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon sk-icon');
+      if (T.icon === 'bot') { const im = document.createElement('img'); im.src = BOTS.head.src; im.alt = ''; ic.append(im); }
+      else ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[T.icon] || ICONS.dot}</svg>`;
+      c.prepend(ic);
+      const tree = node('div', 'sk-tree');
+      (T.lines || []).forEach(([depth, name, note, tag, kind]) => {
+        const row = node('div', 'sk-row' + (kind ? ' sk-' + kind : '')); row.style.setProperty('--d', depth);
+        const glyph = kind === 'more' ? '' : /\/$/.test(name) ? '📁' : '📄';
+        row.append(node('span', 'sk-name', (glyph ? glyph + ' ' : '') + name));
+        if (note) row.append(node('span', 'sk-note', note));
+        if (tag) row.append(node('span', 'sk-tag', tag));
+        tree.append(row); });
+      c.append(tree);
+      if (T.steps) { const ol = node('ol', 'sk-steps'); T.steps.forEach(t => ol.append(node('li', null, t))); c.append(ol); } });
+  }
+  if (v.sdlcRoute) {                                            // the day as the SDLC: one column per phase with its assignments; → or click walks the phases, the current one is orange
+    grid.classList.add('sdlc-route'); let k = 0;
+    cards.forEach((c, i) => { const R = v.sdlcRoute[i] || {}; c.classList.add('sr-card'); c.classList.toggle('sr-opt', !!R.optional); c.style.setProperty('--i', i);
+      c.querySelector('.card-icon')?.remove();
+      c.prepend(node('span', 'sr-dot', String(i + 1)));
+      const list = node('div', 'sr-items');
+      (R.items || []).forEach(([tag, text, opt]) => { const it = node('div', 'sr-item' + (opt ? ' opt' : '')); it.append(node('span', 'sr-tag', tag), node('span', 'sr-text', text)); list.append(it); });
+      c.querySelector('.card-head')?.after(list);
+      c.addEventListener('click', () => { k = i; paint(); }); });
+    const paint = () => cards.forEach((c, i) => { c.classList.toggle('on', i === k); c.classList.toggle('done', i < k); });
+    paint();
+    const next = () => { if (k < cards.length - 1) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.readyBuild && cards.length >= 2) {                      // project: ready blocks (dim, ✓) vs missing pieces (orange, red test)
+    grid.classList.add('ready-build');
+    cards.forEach((c, i) => { const R = v.readyBuild[i]; if (!R) return; c.classList.add(i ? 'rb-todo' : 'rb-ready'); c.querySelector('.card-icon')?.remove();
+      const box = node('div', 'rb-items');
+      R.items.forEach((it) => { const [tag, text] = Array.isArray(it) ? it : [null, it]; const b = node('div', 'rb-item');
+        b.append(node('span', 'rb-mark', i ? '●' : '✓')); if (tag) b.append(node('span', 'rb-tag', tag)); b.append(node('span', 'rb-text', text));
+        if (i) b.append(node('span', 'rb-red', 'red test')); box.append(b); });
+      c.append(box); });
+  }
+  if (v.intentFlow && cards.length >= 3) {                     // A2: you decide → intent.md (gaps orange) → Claude Code reads it before every build
+    grid.classList.add('intent-flow');
+    cards.forEach((c, i) => { const F = v.intentFlow[i]; if (!F) return; c.classList.add('if-card', 'if-' + i); c.querySelector('.card-icon')?.remove();
+      if (F.doc) { const d = node('div', 'if-doc'); d.append(node('div', 'if-doc-name', F.docName || 'intent.md'));
+        F.doc.forEach(([sec, gap, label]) => { const r = node('div', 'if-sec' + (gap ? ' gap' : '')); r.append(node('span', 'if-sec-name', sec), node('span', 'if-sec-state', label || (gap ? 'fill in' : '✓ filled'))); d.append(r); });
+        c.append(d); }
+      if (F.items) { const l = node('div', 'if-items');
+        F.items.forEach(([tag, text, cls]) => { const it = node('div', 'if-item' + (cls ? ' ' + cls : '')); if (tag) it.append(node('span', 'if-tag', tag)); it.append(node('span', 'if-text', text)); l.append(it); });
+        c.append(l); } });
+    [cards[0], cards[1]].forEach((c) => c.after(node('div', 'if-arrow', '→')));
+  }
+  if (v.pipeline) {                                             // a row of numbered steps with arrows; each step shows its file and the assignment that builds it
+    grid.classList.add('pipeline');
+    cards.forEach((c, i) => { const P = v.pipeline[i] || {}; c.classList.add('pl-card'); c.classList.toggle('pl-hl', !!P.hl); c.querySelector('.card-icon')?.remove();
+      c.prepend(node('span', 'pl-num', String(i + 1)));
+      const meta = node('div', 'pl-meta'); if (P.file) meta.append(node('code', 'pl-file', P.file)); if (P.tag) meta.append(node('span', 'pl-tag', P.tag)); c.append(meta); if (P.warn) c.querySelector('.card-head')?.after(node('div', 'pl-warn', P.warn));
+      if (i < cards.length - 1) c.after(node('div', 'pl-arrow', '→')); });
+  }
+  if (v.filePair && cards.length >= 2) {                        // one file before → after, drawn as an editor: h = heading, gap = empty, new = written, keep = unchanged
+    grid.classList.add('file-pair');
+    cards.forEach((c, i) => { const F = v.filePair[i]; if (!F) return; c.classList.add('fp-card', i ? 'fp-after' : 'fp-before'); c.querySelector('.card-icon')?.remove();
+      const ed = node('div', 'fp-editor'); ed.append(node('div', 'fp-tab', F.file));
+      F.lines.forEach(([kind, text, tag]) => { const r = node('div', 'fp-line fp-' + kind); r.append(node('span', 'fp-text', text)); if (tag) r.append(node('span', 'fp-tag', tag)); ed.append(r); });
+      c.append(ed); });
+    cards[0].after(node('div', 'fp-arrow', '→'));
+  }
+  if (v.doors && cards.length >= 3) {                           // two ways in (door 1, door 2) → one investigation
+    grid.classList.add('doors');
+    cards.forEach((c, i) => { const D = v.doors[i]; if (!D) return; c.classList.add('door-card'); c.style.setProperty('--gl', D.color || 'var(--cyan)'); c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[D.icon] || ICONS.dot}</svg>`; c.prepend(ic);
+      const meta = node('div', 'door-meta'); if (D.when) meta.append(node('span', 'gl-eg', D.when)); if (D.file) meta.append(node('code', 'door-file', D.file)); c.append(meta); });
+    const arrows = node('div', 'door-arrows'); arrows.innerHTML = '<span>→</span><span>→</span>'; cards[1].after(arrows);
+  }
+  if (v.glossary) {                                             // definitions: big icon, term, plain meaning, one real example
+    grid.classList.add('glossary');
+    cards.forEach((c, i) => { const g = v.glossary[i]; if (!g) return; c.classList.add('gl-card'); c.style.setProperty('--gl', g.color || 'var(--cyan)');
+      c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[g.icon] || ICONS.dot}</svg>`; c.prepend(ic);
+      if (g.eg) c.append(node('span', 'gl-eg', g.eg)); });
   }
   if (v.art === 'flow' && cards.length >= 3) {                  // 9: input + context -> model -> output
     grid.classList.add('flow'); const left = node('div', 'flow-in'); left.append(cards[0], cards[1]);
@@ -1041,7 +1174,7 @@ function renderAssignment(stage, s) {
   eyebrow.append(node('span', 'type-chip', label));
   if (s.mode) eyebrow.append(node('span', 'mode-chip mode-' + s.mode, ({ manual: '⏵ Start in manual mode', plan: '⏸ Start in plan mode', librechat: 'In LibreChat, not Claude Code' })[s.mode] || s.mode));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
-  const right = node('div', 'asg-top-right'); right.append(timerPill(s), node('p', 'slide-count', countText(current)));
+  const right = node('div', 'asg-top-right'); const trk = sdlcTrack(s); right.append(timerPill(s)); if (trk) right.append(trk); right.append(node('p', 'slide-count', countText(current)));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
   if (s.subtitle) head.append(node('p', 'subtitle', s.subtitle));
   if (s.repo?.url) {
@@ -1109,7 +1242,9 @@ function render() {
   const head = node('section', 'heading'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
   const parts = (s.kicker || '').split('·').map(x => x.trim());
   eyebrow.append(node('span', 'type-chip', TYPE_LABEL[type]), node('span', 'kicker-text', parts.join(' · ')));
-  top.append(eyebrow, node('p', 'slide-count', countText(current)));
+  const trk = sdlcTrack(s);
+  if (trk) { const r = node('div', 'top-right'); r.append(trk, node('p', 'slide-count', countText(current))); top.append(eyebrow, r); }
+  else top.append(eyebrow, node('p', 'slide-count', countText(current)));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
   head.append(top, node('h1', null, s.title), node('p', 'subtitle', s.subtitle));
   if (s.source?.url) {

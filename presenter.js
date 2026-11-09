@@ -95,10 +95,13 @@ function renderScript(beats) {
     const li = document.createElement('li');
     // A question step reads in the order it happens: do → question → answer → what you say next.
     // The answer is `answer`, or a leading "(Answer: …)" / "(…)" in `say`.
-    let say = b.say || '', answer = b.answer || '', note = '';
+    // say may be a list of short bullets; a leading "(Answer: …)" sits in the first bullet
+    const sayList = Array.isArray(b.say) ? b.say.slice() : null;
+    let say = sayList ? (sayList[0] || '') : (b.say || ''), answer = b.answer || '', note = '';
     const m = b.ask && !answer && /^\(([^)]*)\)\s*/.exec(say);
     if (m) {
       say = say.slice(m[0].length);
+      if (sayList) { if (say) sayList[0] = say; else sayList.shift(); }
       const a = /^Answers?:\s*/.exec(m[1]);
       if (a) answer = m[1].slice(a[0].length); else note = m[1];
     }
@@ -108,6 +111,12 @@ function renderScript(beats) {
     // warn: a red reminder at the top of the beat
     if (b.warn) lines.unshift([b.warn, 't-b-warn', '⚠ ']);
     for (const [text, cls, prefix] of lines) {
+      if (cls === 't-b-say' && sayList) {
+        if (!sayList.length) continue;
+        const ul = document.createElement('ul'); ul.className = 't-b-say t-b-say-list';
+        for (const t of sayList) { const item = document.createElement('li'); teachText(item, t); ul.append(item); }
+        li.append(ul); continue;
+      }
       if (!text) continue;
       const p = document.createElement('p'); p.className = cls; teachText(p, prefix + text); li.append(p);
     }
@@ -176,6 +185,15 @@ function renderTeach(el, t) {
   }
   const grid = document.createElement('div'); grid.className = 't-grid'; grid.append(cols.left, cols.right);
   el.replaceChildren(gist, grid);
+  if (t.changes && t.changes.length) {                          // assignments: what git status shows after each step ([step, what you see])
+    const sec = document.createElement('section'); sec.className = 't-sec t-changes';
+    const h = document.createElement('h3'); h.textContent = 'After each step: git status'; sec.append(h);
+    const ul = document.createElement('ul');
+    for (const item of t.changes) { const li = document.createElement('li');
+      if (Array.isArray(item)) { const b = document.createElement('strong'); teachText(b, item[0]); li.append(b, ' — '); teachText(li, item[1]); } else teachText(li, item);
+      ul.append(li); }
+    sec.append(ul); el.append(sec);
+  }
   if (t.next) { const n = document.createElement('p'); n.className = 't-next'; teachText(n, 'Next → ' + t.next); el.append(n); }
 }
 
