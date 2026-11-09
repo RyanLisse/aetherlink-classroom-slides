@@ -42,6 +42,11 @@ test('Day 5 keeps six core assignments, the A8 gate, and optional A7/A9 without 
  assert.equal(a8Gate.visual?.shot,'assets/day5-expected/a8.png','the A8 gate uses its expected-result screenshot');
  assert.equal(slides.filter(slide=>slide.assignmentId==='A8').length,0,'A8 is not presented as a seventh core assignment');
  assert.ok(slides.some(slide=>slide.assignmentId==='A6'&&slide.steps.some(step=>step.prompt===context.window.DAY5_PROMPTS.a8Build)),'the final A6 checkpoint builds and proves A8');
+ const a6Challenge=slides.find(slide=>slide.assignmentId==='A6'&&slide.steps.some(step=>step.prompt===context.window.DAY5_PROMPTS.a6Evidence));
+ for(const prompt of [context.window.DAY5_PROMPTS.a6Evidence,context.window.DAY5_PROMPTS.a6Alternative,context.window.DAY5_PROMPTS.a6Mutation]){
+  assert.match(a6Challenge.steps.find(step=>step.prompt===prompt)?.text||'',/^Type this in: browser http:\/\/localhost:4320 · agent chat$/,'product-chat checks run in the browser, not Claude Code');
+ }
+ assert.match(a6Challenge.steps.find(step=>step.prompt===context.window.DAY5_PROMPTS.a8Build)?.text||'',/Claude Code/,'the A8 implementation remains in Claude Code');
 
  for(const number of [7,9]){
   assert.equal(slides.filter(slide=>slide.kicker===`Day 5 · A${number} · OPTIONAL`).length,1,`A${number} has one optional concept`);

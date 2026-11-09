@@ -375,9 +375,9 @@ const day5Slides = [
   checkpointSlide({
     number: 6, title: 'challenge the incident and prove the gate · 2/2', subtitle: 'Challenge the evidence, refuse mutation, and prove the human gate.', stage: 'gate', duration: '14:40 · 20 min', shot: 'assets/day5-expected/a8.png',
     steps: [
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Evidence, after: 'The answer cites stable refs and separates snapshot from current telemetry.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Alternative, after: 'The repeated summary is labeled scripted fixture output.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Mutation, after: 'Chat refuses rollback and creates no action record.', warn: true},
+      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Evidence, after: 'The answer cites stable refs and separates snapshot from current telemetry.'},
+      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Alternative, after: 'The repeated summary is labeled scripted fixture output.'},
+      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Mutation, after: 'Chat refuses rollback and creates no action record.', warn: true},
       {text: 'Type this in: Claude Code. Build the human gate.', prompt: PROMPTS.a8Build, after: 'Both existing mismatch cases stay blocked in the focused test.'},
       {text: 'Open in browser: http://localhost:4320', after: 'Approve and Execute remain HUMAN OPEN.', warn: true}
     ],
