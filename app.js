@@ -917,7 +917,7 @@ function renderVisual(stage, body, main, s) {
 }
 
 /* ---- slide type -> colour chip, footer segment ---- */
-const TYPE_LABEL = { practice: 'Assignment', concept: 'Concept', review: 'Review', quiz: 'Quiz', recap: 'Recap', pause: 'Break', context: 'Context' };
+const TYPE_LABEL = { practice: 'Assignment', concept: 'Concept', demo: 'Demo', review: 'Review', quiz: 'Quiz', recap: 'Recap', pause: 'Break', context: 'Context' };
 function slideType(s) { return TYPE_LABEL[s.type] ? s.type : (s.layout === 'exercise' ? 'practice' : s.layout === 'recap' ? 'recap' : 'context'); }
 
 const stateKey = () => 'als:' + current + ':' + slides[current].title;
@@ -1033,7 +1033,10 @@ function timerPill(s) {
   wrap.append(pop, pill); return wrap;
 }
 function renderAssignment(stage, s) {
-  const { label, title } = assignmentLabel(s);
+  const assignment = assignmentLabel(s);
+  const type = slideType(s);
+  const label = type === 'practice' ? assignment.label : TYPE_LABEL[type];
+  const title = assignment.title;
   const head = node('section', 'heading asg-head'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
   eyebrow.append(node('span', 'type-chip', label));
   if (s.mode) eyebrow.append(node('span', 'mode-chip mode-' + s.mode, ({ manual: '⏵ Start in manual mode', plan: '⏸ Start in plan mode', librechat: 'In LibreChat, not Claude Code' })[s.mode] || s.mode));
@@ -1075,7 +1078,7 @@ function renderAssignment(stage, s) {
   }
   body.append(main);
   const v = s.visual || {}; const side = node('aside', 'asg-side'); side.append(node('p', 'asg-side-k', v.shotLabel || 'What it looks like'));
-  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = ''; f.append(img); side.append(f); }
+  if (v.shot) { const f = node('figure', 'asg-shot'); const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotLabel || 'Expected result'; f.append(img); side.append(f); }
   else if (v.cardImages) { const row = node('div', 'asg-thumbs'); v.cardImages.forEach((src, i) => { const f = node('figure', 'thumb'); const img = document.createElement('img'); img.src = src; img.alt = ''; f.append(img, node('figcaption', null, s.cards?.[i]?.title || '')); row.append(f); }); side.append(row); }
   else if (s.cards?.length) {
     const mini = node('div', 'slide-main asg-mini'); const grid = node('div', 'cards one-col'); s.cards.forEach((c, i) => grid.append(renderCard(c, i))); mini.append(grid); side.append(mini);
@@ -1097,7 +1100,7 @@ function render() {
   document.body.dataset.opener = s.visual?.anatomy ? 'anatomy' : s.visual?.opener || '';
   document.title = s.title + ' · Aetherlink classroom';
   const stage = $('stage'); stage.replaceChildren();
-  if (type === 'practice' && s.layout === 'exercise') { renderAssignment(stage, s); finishRender(s); return; }
+  if (s.layout === 'exercise') { renderAssignment(stage, s); finishRender(s); return; }
   if (type === 'practice') {
     const banner = node('div', 'assignment-banner');
     banner.append(node('span', 'dot'), document.createTextNode('Assignment in progress'));

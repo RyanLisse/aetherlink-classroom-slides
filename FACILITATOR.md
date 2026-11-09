@@ -26,9 +26,9 @@ The participant deck stays on the projector. The presenter notes include the
 video clips. They also provide the predict, play, pause and participant-proof
 cues for the trainer.
 
-For each assignment, use **Copy** on the slide. Share that prompt in the class
-chat. Participants paste it into Claude Code, inspect the result and stop at
-the stated review point.
+Share each copy-ready prompt in the class chat. Participants follow the slide's
+**Type this in** label: Claude Code, Terminal 2, or the browser agent chat. They
+inspect the result and stop at the stated review point.
 
 ## Prepare Day 4 before class
 
@@ -46,8 +46,9 @@ ticket isolation.
 ## Run Day 5 as the main AI-native SDLC lesson
 
 Participants use [`workshop/start`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start)
-and complete A1 through A9. Start with INC-1001 and the customer impact. Keep
-the AI-native SDLC explanation in the appendix until the room needs it.
+and complete the required A1 through A6 route. A8 is the human gate inside A6.
+A7 and A9 are optional appendix exercises. Start with INC-1001 and the customer
+impact. Define AI-native SDLC near the start; use the appendix only for depth.
 
 Use any terminal at the participant clone's root and run `claude`. Review the
 displayed path. Accept trust only for the participant's own clone. Restart

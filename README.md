@@ -10,7 +10,7 @@ For Days 4 and 5, use these current routes:
 | --- | --- | --- | --- |
 | Day 4 · n8n to Claude Agent SDK | [`workshop4.html`](workshop4.html) | [`workshop4-presenter.html`](workshop4-presenter.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
 | Day 5 · AI-native SDLC | [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
-| Day 5 bonus · Daily Brief | Slide 51 in [`workshop5.html`](workshop5.html#51) | Open slide 51 first, then use **Presenter view** | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main` |
+| Day 5 bonus · Daily Brief | Final slide in [`workshop5.html`](workshop5.html#57) | Open the final slide first, then use **Presenter view** | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main` |
 
 Facilitators should start with [`FACILITATOR.md`](FACILITATOR.md). The slides
 set the lesson order. The participant repositories provide the matching
@@ -404,7 +404,7 @@ yourself before teaching:
 
 ## Workshop 5 deck
 
-`workshop5.html` loads `workshop5-slides.js` (52 slides: AI-native SDLC with an SRE agent, English) with the same
+`workshop5.html` loads `workshop5-slides.js` (57 slides: AI-native SDLC with an SRE agent, English) with the same
 `app.js`, `styles.css` and `timers.js` as the classroom deck. Presenter view: `workshop5-presenter.html` (or press S).
 Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only shared-code change: `app.js` and
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
