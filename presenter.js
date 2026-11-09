@@ -184,7 +184,7 @@ function renderSlide(index) {
   current = index;
   const s = slides[current];
   const type = s.type || (s.layout === 'exercise' ? 'practice' : s.layout === 'recap' ? 'recap' : 'context');
-  const TYPE_LABEL = { practice: 'Assignment', concept: 'Concept', review: 'Review', quiz: 'Quiz', recap: 'Recap', pause: 'Break', context: 'Context' };
+  const TYPE_LABEL = { practice: 'Assignment', concept: 'Concept', demo: 'Demo', review: 'Review', quiz: 'Quiz', recap: 'Recap', pause: 'Break', context: 'Context' };
   $('ptype-wrap').dataset.ptype = type;
   $('p-type-label').textContent = TYPE_LABEL[type] || 'Context';
   $('p-kicker-text').textContent = s.kicker || '';
