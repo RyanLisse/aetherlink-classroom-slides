@@ -19,11 +19,11 @@ const PROMPTS = {
   a6Map: `/show-me Read docs/plan.md, fixtures/incidents/bad-deploy.json, and the shop, traffic, chaos, and console scripts. Map the fixture CLI for INC-1001 and the listener-created live incident. Show where both use the shared investigate flow and tool trace. Stay read-only. Separate fixture output from optional model output, then stop.`,
   a6Build: `Use the incident path we reviewed. Propose the demo order, risks, proof, rollback, and one alternative cause. Reuse owned processes. Keep diagnosis-snapshot evidence separate from current telemetry, mark missing evidence OPEN, and leave approval, execution, and resolution to the human. Do not run or stop processes. Wait for my approval.`,
   a6Evidence: `Which evidence supports the proposed rollback? Show stable source:ref labels. Separate the diagnosis snapshot from current telemetry. Do not approve or execute anything.`,
-  a6Alternative: `Could this be something other than the deployment? In the scripted offline route, show the expected fixed snapshot summary and label it scripted fixture output. Do not present it as distinct alternative reasoning or model evidence.`,
+  a6Alternative: `Could this be something other than the deployment? Label the repeated offline snapshot summary as scripted fixture output, not alternative reasoning or model evidence.`,
   a6Mutation: `Roll back now.`,
   a7Build: `Read bench/cases.json, bench/ratchet.json, and the current bench results. Explain what the offline bench proves and what it does not prove. Save a baseline. Propose one deterministic case that reuses the bad-deploy data with the alert text "Customers report checkout problems" and wait for approval. Add the case without weakening existing cases or lowering the score floor. Save the treatment result and rerun one neighboring case. Show the diff, case count, pass result, and harmful count. Do not claim live model resistance or push.`,
   a7Verify: `/verify-this Verify that the new deterministic case increases the case count by one, passes, keeps harmful at 0, and leaves both ratchet values unchanged. Compare the saved baseline and treatment outputs. Report VERIFIED, NOT VERIFIED, or INCONCLUSIVE with evidence references. Stay read-only.`,
-  a8Build: `Read intent.md, src/executor.ts, approvals/README.md, and the A8 workshop test. Explain the exact incident-and-action match that a valid approval requires. Show the focused A8 test red. After my approval, implement only TODO(A8). Keep the existing wrong-incident and wrong-action cases unchanged. Rerun the focused test, the main tests, and typecheck. Show why both mismatches stay blocked. Do not create an approval or click Approve, Execute, or Resolve. Stop with the real console action marked HUMAN OPEN.`,
+  a8Build: `Read intent.md, src/executor.ts, approvals/README.md, and the A8 workshop test. Explain the exact incident-and-action match. Show the focused test red. After my approval, implement only TODO(A8). Keep the existing wrong-incident and wrong-action cases. Rerun the focused test, main tests, and typecheck. Show both mismatches blocked. Do not create an approval or click Approve, Execute, or Resolve. Stop with the console action HUMAN OPEN.`,
   a9Maintain: `Read docs/diagnosis-live.md, lessons/proposed/, lessons/lessons.md, approvals/audit.jsonl, and PROGRESS.md. Explain the difference between curated knowledge, the action log, and local progress signals. Detect whether docs/diagnosis-live.md is still a placeholder. If it is, report the lesson proposal as HUMAN OPEN and stop. Do not edit any file.`,
   a9MaintainDraft: `Ask the named human to confirm that docs/diagnosis-live.md contains the reviewed current-run incident id and stable evidence references. If that confirmation is missing, stop with HUMAN OPEN. Otherwise, propose one reusable lesson from only those reviewed references. Keep unsupported claims OPEN. Write only under lessons/proposed/ after I approve the exact wording. Do not edit lessons/lessons.md or claim that the lesson was promoted. Show the diff, then stop.`,
   a9Handoff: `/handoff Create a handoff prompt for the next teammate. Include the accepted intent, verified checks with evidence references, every HUMAN OPEN item, the hackathon intent, and one next step. Do not claim that the incident was resolved, the lesson was promoted, or a human action happened. Print the full handoff for review. Stop before editing any file.`,
@@ -363,9 +363,9 @@ const day5Slides = [
     steps: [
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Map, after: 'Claude Code maps the fixture and live routes without editing.'},
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Build, after: 'Claude Code proposes the terminal order and waits for approval.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows). Use three terminal windows.', parts: [['Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Window 2', 'npm run shop'], ['Window 3', 'npm run traffic']], after: 'The console, shop, and healthy traffic processes report ready. Reuse owned processes.', warn: true},
-      {text: 'Human review. Keep healthy traffic running for two minutes.', after: 'The browser shows a healthy before-state. About 55 seconds remain after the bad deploy.', warn: true},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows). Use Window 4.', parts: [['Window 4', 'npm run chaos -- deploy v2.15.0 --mode bad-deploy']], after: 'About 55 seconds later, one bad-deploy event creates a new listener incident at http://localhost:4320.', warn: true}
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows). Use three terminal windows.', parts: [['Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Window 2', 'npm run shop'], ['Window 3', 'npm run traffic']], after: 'All three processes report ready. Reuse owned processes.', warn: true},
+      {text: 'Human review. Keep healthy traffic running for two minutes.', after: 'A healthy before-state is visible. About 55 seconds remain after the deploy.', warn: true},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows). Use Window 4.', parts: [['Window 4', 'npm run chaos -- deploy v2.15.0 --mode bad-deploy']], after: 'About 55 seconds later, a new incident appears at localhost:4320.', warn: true}
     ],
     after: 'A new live incident exists with a healthy before-state and a visible tool trace.',
     checks: ['Show the live incident id.', 'Show the two-minute baseline.', 'Show the diagnosis trace.'],
@@ -373,16 +373,16 @@ const day5Slides = [
   }),
   screenshotSlide({number: 8, title: 'Human approval gate · Part of A6', kicker: 'Day 5 · A6 · HUMAN GATE', subtitle: 'This stable contract is the final safety checkpoint inside A6.', stage: 'gate', shot: 'assets/day5-expected/a8.png', points: ['A wrong incident stays blocked.', 'A wrong action stays blocked.', 'The real approval and execution remain HUMAN OPEN.'], next: 'Assignment 6 · challenge and gate', time: '14:38 · 2 min'}),
   checkpointSlide({
-    number: 6, title: 'challenge the incident and prove the gate · 2/2', subtitle: 'Ask for evidence, test an alternative, refuse mutation, and prove the named-human gate.', stage: 'gate', duration: '14:40 · 20 min', shot: 'assets/day5-expected/a8.png',
+    number: 6, title: 'challenge the incident and prove the gate · 2/2', subtitle: 'Challenge the evidence, refuse mutation, and prove the human gate.', stage: 'gate', duration: '14:40 · 20 min', shot: 'assets/day5-expected/a8.png',
     steps: [
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Evidence, after: 'The answer cites stable refs and separates snapshot from current telemetry.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Alternative, after: 'The offline route repeats its fixed snapshot summary and echoes the question. Label it scripted fixture output, not alternative reasoning or model proof.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Mutation, after: 'Chat refuses the rollback request and creates no action record.', warn: true},
+      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Alternative, after: 'The repeated summary is labeled scripted fixture output.'},
+      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Mutation, after: 'Chat refuses rollback and creates no action record.', warn: true},
       {text: 'Type this in: Claude Code. Build the human gate.', prompt: PROMPTS.a8Build, after: 'Both existing mismatch cases stay blocked in the focused test.'},
       {text: 'Open in browser: http://localhost:4320', after: 'Approve and Execute remain HUMAN OPEN.', warn: true}
     ],
-    after: 'The incident answer is cited, mutation is refused, and the exact human gate stays closed.',
-    checks: ['Show stable evidence refs.', 'Show the refused mutation.', 'Show the A8 mismatch test and HUMAN OPEN action.'],
+    after: 'The answer is cited, mutation is refused, and the human gate stays closed.',
+    checks: ['Show stable refs.', 'Show refused mutation.', 'Show both mismatch tests and HUMAN OPEN.'],
     humanOpen: 'Only a named human may approve, execute, mitigate, or resolve.', next: 'Break'
   }),
   pauseSlide('Break', '15 min', 'A6 catch-up and recap', '15:00'),
