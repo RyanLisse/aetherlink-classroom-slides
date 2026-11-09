@@ -11,6 +11,7 @@ vm.runInNewContext(read('workshop5-slides.js'),context);
 
 test('Day 5 keeps six core assignments, the A8 gate, and optional A7/A9 without Anatomy figures',()=>{
  const slides=context.window.SLIDES;
+ const facilitator=read('FACILITATOR.md');
  assert.ok(slides.length>0,'Day 5 deck loads');
  assert.equal(slides.filter(slide=>slide.visual?.anatomy).length,0,'Day 5 has no Anatomy figures');
  assert.ok(slides.every(slide=>typeof slide.notes==='string'&&slide.notes.trim()),'every slide has speaker notes');
@@ -18,6 +19,10 @@ test('Day 5 keeps six core assignments, the A8 gate, and optional A7/A9 without 
  assert.ok(slides.every(slide=>slide.teach?.do?.length&&slide.teach?.done?.length),'every teach card has an action and stop result');
  assert.ok(slides.slice(0,-1).every((slide,index)=>slide.teach.next===slides[index+1].title),'teach.next follows the slide order');
  assert.ok(slides.every(slide=>slide.kicker?.startsWith('Day 5 ·')),'every kicker uses the Day 5 label');
+ assert.match(facilitator,/Type this in.*Claude Code, Terminal 2, or the browser agent chat/s,'the facilitator routes prompts to the labeled surface');
+ assert.doesNotMatch(facilitator,/Participants paste it into Claude Code/,'the facilitator does not send every prompt to Claude Code');
+ assert.match(facilitator,/required A1 through A6 route.*A8 is the human gate inside A6.*A7 and A9 are optional/s,'the facilitator states the core and optional route');
+ assert.match(facilitator,/Define AI-native SDLC near the start/,'the facilitator introduces the definition near the start');
 
  for(let number=1;number<=6;number+=1){
   const concept=slides.filter(slide=>slide.kicker===`Day 5 · A${number} · CONCEPT`);

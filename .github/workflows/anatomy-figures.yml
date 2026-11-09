@@ -110,9 +110,9 @@ jobs:
             }
             await page.goto('http://127.0.0.1:8765/workshop5.html#1');
             const teachingSlides=await page.evaluate(()=>window.SLIDES
-              .map((slide,index)=>({number:index+1,title:slide.title,beat:slide.beat,layout:slide.layout,kind:slide.columns?.length?'columns':slide.cards?.length?'cards':null}))
-              .filter(slide=>slide.beat==='concept'&&slide.kind&&!['steps','exercise'].includes(slide.layout)));
-            assert.ok(teachingSlides.length>0,'Day 5 must expose concept slides with visible teaching content');
+              .map((slide,index)=>({number:index+1,title:slide.title,kicker:slide.kicker,layout:slide.layout,kind:slide.columns?.length?'columns':slide.cards?.length?'cards':null}))
+              .filter(slide=>/^Day 5 · A[1-6] · CONCEPT$/.test(slide.kicker)&&slide.kind&&!['steps','exercise'].includes(slide.layout)));
+            assert.equal(teachingSlides.length,6,'Day 5 must expose six core concept slides with visible teaching content');
             for(const slide of teachingSlides){
               await page.goto(`http://127.0.0.1:8765/workshop5.html#${slide.number}`);
               await page.locator('.heading h1').waitFor();
