@@ -166,12 +166,13 @@ const day5Slides = [
     notes: 'Time: 10:00 · 2 min. Sets the scene before the incident. The shop is the demo shop in the practice repo (npm run shop, used live in A6). The order times are all the same moment in different time zones.',
     teach: {
       time: '2 min',
+      openShot: 'assets/day5-jessy-teach/s2-3.webp',
       gist: 'The world of today: a global web shop, you are the operator on call, and today you build Sonny, the on-call agent that helps you.',
       script: [
         {do: 'Slide appears with three closed blocks. Click a block (or press →) to open them, left to right.', say: ['Before we build anything: the story of today.']},
-        {do: 'Click block 1. Orders come in from everywhere.', say: ['This is a web shop. Customers from all over the world pay here.', 'Look at the times: when it is afternoon in Singapore, it is night in New York.', 'So this shop never sleeps. Somewhere, someone is always paying.']},
-        {do: 'Click block 2.', say: ['And this is you: the operator.', 'This week you are on call. That means: if the shop breaks, at any hour, your phone rings. Also at night.']},
-        {do: 'Click block 3.', say: ['Today you build an AI agent that helps you when that happens: the on-call agent.', 'We call him Sonny. Later he can run on Claude Sonnet, hence the name.', 'Claude Code, from Day 1 and 2, helps you build him.']},
+        {shot: 'assets/day5-jessy-teach/s2-1.webp', do: 'Click block 1. Orders come in from everywhere.', say: ['This is a web shop. Customers from all over the world pay here.', 'Look at the times: when it is afternoon in Singapore, it is night in New York.', 'So this shop never sleeps. Somewhere, someone is always paying.']},
+        {shot: 'assets/day5-jessy-teach/s2-2.webp', do: 'Click block 2.', say: ['And this is you: the operator.', 'This week you are on call. That means: if the shop breaks, at any hour, your phone rings. Also at night.']},
+        {shot: 'assets/day5-jessy-teach/s2-3.webp', do: 'Click block 3.', say: ['Today you build an AI agent that helps you when that happens: the on-call agent.', 'We call him Sonny. Later he can run on Claude Sonnet, hence the name.', 'Claude Code, from Day 1 and 2, helps you build him.']},
         {ask: 'Who here has ever been on call, or been called about something that broke?', say: ['(Let one or two people tell it in one sentence. It makes the next slide land.)']}
       ],
       learn: ['The shop is global, so it has customers at every hour.', 'The operator is the on-call engineer: the person who gets called when it breaks.', 'Today you build Sonny, the on-call agent that helps the operator.'],
@@ -194,13 +195,14 @@ const day5Slides = [
     notes: 'Time: 10:00 · 3 min. The alert text matches the terminal in A1: “Error rate 12% for 5 min on checkout (threshold 2%)”. The cause (update d-4821 reads a missing secret key for EU payments) is what the agent finds. Do not tell the room yet.',
     teach: {
       time: '3 min',
+      openShot: 'assets/day5-jessy-teach/s3-3.webp',
       gist: 'At 03:45 an incident happens: 12% of payments fail. Sonny got the alert too. What do you expect him to do, and what never without you?',
       script: [
         {do: 'Slide appears with three closed blocks. Click a block (or press →) to open them, left to right.', say: ['And then, one night. It is 03:45. Your phone wakes you up.', 'You are on call, so this is for you.']},
-        {do: 'Click block 1. Aetherbot wakes up after a second.', say: ['That is you, the operator. Half asleep, and now wide awake.']},
-        {do: 'Click block 2. The alert, the graph and the clocks pop up one by one.', say: ['The alert: on checkout, the payment step of the shop, 12% of payments fail. The green line is the limit: 2%.', 'The orange line: an update went live at 03:43. Two minutes later the graph shoots up.', 'It gets a number: incident INC-1001.']},
+        {shot: 'assets/day5-jessy-teach/s3-1.webp', do: 'Click block 1. Aetherbot wakes up after a second.', say: ['That is you, the operator. Half asleep, and now wide awake.']},
+        {shot: 'assets/day5-jessy-teach/s3-2.webp', do: 'Click block 2. The alert, the graph and the clocks pop up one by one.', say: ['The alert: on checkout, the payment step of the shop, 12% of payments fail. The green line is the limit: 2%.', 'The orange line: an update went live at 03:43. Two minutes later the graph shoots up.', 'It gets a number: incident INC-1001.']},
         {do: 'Point at the three clocks.', say: ['For you it is the middle of the night. But this is a global shop.', 'In Singapore people are shopping in the late morning, in New York in the evening.', 'Right now, 12 out of every 100 of them cannot pay.']},
-        {do: 'Click block 3. Sonny appears with his speech bubble.', say: ['You are not alone. Sonny, your on-call agent, got the same alert. He is already on it.']},
+        {shot: 'assets/day5-jessy-teach/s3-3.webp', do: 'Click block 3. Sonny appears with his speech bubble.', say: ['You are not alone. Sonny, your on-call agent, got the same alert. He is already on it.']},
         {ask: 'What do you expect Sonny to do now?', say: ['(Answers: look at the graphs, check what changed, read the error messages, find the cause, propose a fix.)', 'Collect two or three answers. The next slide comes back to them.']},
         {ask: 'And what should he never do without you?', say: ['(Answers: roll back on his own, change production, close the incident.)', 'Keep these in mind too: they come back two slides later.']}
       ],
@@ -216,21 +218,22 @@ const day5Slides = [
       botTag: 'SONNY',
       looks: [['📈', 'the graphs'], ['🚀', 'the latest updates'], ['🧩', 'what changed in the code'], ['📜', 'the error messages']],
       docName: 'diagnosis · INC-1001',
-      doc: [['Cause', 'update v2.15.0 at 03:43 broke EU payments', 'deploys:d-4821'], ['Evidence', 'error: missing key for EU payments', 'logs:03:45:03'], ['Proposed fix', 'roll back to v2.14.0, the version before']],
+      doc: [['What’s happening', 'failed payments jumped from 0.3% to 12% at 03:45, two minutes after update v2.15.0', 'metrics:03:45'], ['Root cause (high)', 'the update changed the EU payment settings, and the error log says a key for EU payments is missing', ['deploys:d-4821', 'diff:d-4821', 'logs:03:45:03']], ['Proposed fix', 'roll back to v2.14.0, then watch the error rate']],
       wait: 'waiting for the operator', yes: 'Approve', no: 'Reject'
     }, reveal: 'click', covers: []},
     cards: [{title: 'He looks', body: 'At the graphs, the updates, the code and the errors. He only reads. He changes nothing.'}, {title: 'He writes a diagnosis', body: 'What is wrong, the evidence for it, and one proposed fix.'}, {title: 'He asks you', body: 'Nothing changes until you approve. That is human in the loop.'}],
     tagline: 'Sonny proposes, you decide. Today you build Sonny, with Claude Code.',
     keyPoints: ['Sonny looks where you would look. He only reads.', 'He writes a diagnosis with evidence and one proposed fix.', 'He asks the operator: human in the loop.'],
-    notes: 'Time: 10:03 · 3 min. Merges the old slides “Meet the builder and the product” and “What the on-call agent does”. The diagnosis lines come from the real offline output of npm run investigate on INC-1001 (A1 step 7). Today the agent runs offline on scripted answers (src/runtime.ts): free and the same for everyone. A real model is optional (appendix).',
+    notes: 'Time: 10:03 · 3 min. Merges the old slides “Meet the builder and the product” and “What the on-call agent does”. The diagnosis lines come from the real offline output of npm run investigate -- fixtures/incidents/bad-deploy.json (A1 step 7), shortened: the labels are metrics:2026-10-05T03:45:00.000Z, deploys:d-4821, diff:d-4821, logs:2026-10-05T03:45:03.000Z (PaymentConfigError: missing key PAYMENT_PROVIDER_SECRET_EU). The terminal headings are “What’s happening”, “Root cause (high)” and “Proposed fix”. The real text calls the update a candidate cause and keeps non-deploy causes OPEN. Today the agent runs offline on scripted answers (src/runtime.ts): free and the same for everyone. A real model is optional (appendix).',
     teach: {
       time: '3 min',
+      openShot: 'assets/day5-jessy-teach/s4-3.webp',
       gist: 'How we want Sonny to work: he looks, writes a diagnosis with evidence, proposes one fix, and asks the operator. Sonny proposes, you decide.',
       script: [
         {do: 'Slide appears with three closed blocks. Point back at the answers from the last slide.', say: ['You just said what you expect Sonny to do. Let us see how we want him to work.', 'At 03:45, half awake, these checks take you a while. Sonny does them before you are even at your laptop.']},
-        {do: 'Click block 1. The four checks pop up.', say: ['He looks where you would look: the graphs, the latest updates, what changed in the code, the error messages.', 'He only reads. He changes nothing.']},
-        {do: 'Click block 2. The diagnosis appears line by line.', say: ['Then he writes a diagnosis: what is wrong, and the evidence for it.', 'See the small blue labels: that is where he found it. The update list, the error log. You can check it yourself.', 'And one proposed fix: roll back, go back to the version from before the update.']},
-        {do: 'Click block 3.', say: ['And then he asks you, the operator.', 'Nothing changes until you approve. That is human in the loop: you know it from Day 3 and 4.']},
+        {shot: 'assets/day5-jessy-teach/s4-1.webp', do: 'Click block 1. The four checks pop up.', say: ['He looks where you would look: the graphs, the latest updates, what changed in the code, the error messages.', 'He only reads. He changes nothing.']},
+        {shot: 'assets/day5-jessy-teach/s4-2.webp', do: 'Click block 2. The diagnosis appears line by line.', say: ['Then he writes a diagnosis. These lines come from the real output you will see yourself in Assignment 1.', 'What is happening: failed payments jumped to 12%, two minutes after an update.', 'The root cause, with four pieces of evidence: the graph, the update list, the code change, the error log. The small blue labels say where he found each one, so you can check it yourself.', 'And one proposed fix: roll back to the version from before the update, then watch the error rate.']},
+        {shot: 'assets/day5-jessy-teach/s4-3.webp', do: 'Click block 3.', say: ['And then he asks you, the operator.', 'Nothing changes until you approve. That is human in the loop: you know it from Day 3 and 4.']},
         {ask: 'Which of your answers from the last slide do you see back here?', say: ['(Point at the matches: looking at what changed, the errors, proposing a fix.)']},
         {ask: 'Why would he ask, if he already knows the fix?', say: ['(Answer: he could be wrong, and you are responsible for production. Next slide.)']},
         {do: 'Point at the line at the bottom.', say: ['Sonny proposes, you decide.', 'Today you build Sonny. Claude Code, from Day 1 and 2, helps you build him.']}
@@ -242,35 +245,38 @@ const day5Slides = [
     }
   }),
   baseSlide({
-    title: 'Key terms for today', kicker: 'Day 5 · DEFINITIONS', subtitle: 'Six words we use in every assignment.', type: 'concept',
+    title: 'Key terms for today', kicker: 'Day 5 · DEFINITIONS', subtitle: 'Eight words you will meet in the project and in the terminal. We use them all day, with exactly this meaning.', type: 'concept',
     visual: {glossary: [
-      {icon: 'alert', color: '#ff6b6b', eg: 'INC-1001 · payments fail'},
+      {icon: 'bolt', color: '#ff6b6b', eg: 'INC-1001'},
       {icon: 'replay', color: 'var(--violet)', eg: 'bad-deploy.json'},
-      {icon: 'chart', color: 'var(--cyan)', eg: 'error rate 0.3% → 12%'},
-      {icon: 'trace', color: 'var(--amber)', eg: 'list_deploys → d-4821'},
-      {icon: 'human', color: 'var(--ok)', eg: 'Approve · your name'},
-      {icon: 'open', color: '#a6b8d2', eg: 'Which customers? OPEN'}
-    ]},
-    cards: [{title: 'Incident', body: 'A problem in a live service. It gets a number, a status and evidence.'}, {title: 'Fixture', body: 'A saved copy of an incident, so the same story plays out every time.'}, {title: 'Telemetry', body: 'What the service records about itself: graphs, updates and error messages.'}, {title: 'Tool trace', body: 'The list of everything the agent looked at, in order. It shows where each claim comes from.'}, {title: 'Human in the loop', body: 'A person approves before anything happens: the right incident, the right action, a real name.'}, {title: 'OPEN', body: 'Something the evidence does not settle yet. The agent says so instead of guessing.'}],
-    keyPoints: ['INC-1001 is the saved incident. A live incident gets its own new number.', 'Every claim points to its source.', 'A person approves before anything happens.'],
-    notes: note({time: '10:06 · 3 min', why: 'The lesson uses SRE terms that must stay concrete.', predict: 'Ask whether INC-1001 is the live listener record.', see: 'One story can produce distinct records.', inside: 'Fixture and live evidence can share a cause without sharing an id.', participant: 'Define one term in plain English.', watch: 'Keep the fixture incident and live incident distinct.', stuck: 'Use the card definitions.', stop: 'The room can explain all six terms.', next: 'Today: break a shop'}),
+      {icon: 'chart', color: 'var(--violet)', eg: 'graphs · updates · error logs'},
+      {icon: 'doc', color: 'var(--cyan)', eg: 'what’s happening · root cause'},
+      {icon: 'evidence', color: 'var(--cyan)', eg: 'deploys:d-4821'},
+      {icon: 'open', color: '#a6b8d2', eg: 'regions remain OPEN'},
+      {icon: 'fix', color: 'var(--amber)', eg: 'rollback → v2.14.0'},
+      {icon: 'sign', color: 'var(--ok)', eg: 'decided_by: your name'}
+    ], glossCols: 4, reveal: 'click', covers: []},
+    cards: [{title: 'Incident', body: 'A problem in the shop, with a number and a status.'}, {title: 'Fixture', body: 'A saved, made-up incident with all its data. Everyone gets the same case, every time.'}, {title: 'Telemetry', body: 'What the shop records about itself: graphs, updates and error logs. Sonny reads it.'}, {title: 'Diagnosis', body: 'What Sonny writes: what is happening, the root cause with evidence, one proposed fix.'}, {title: 'Evidence', body: 'One line of data that shows something: where it is, and which entry.'}, {title: 'OPEN', body: 'Not known or not decided yet. Sonny writes OPEN instead of guessing.'}, {title: 'Proposed fix', body: 'The one step Sonny suggests. A proposal, not an action.'}, {title: 'Approval', body: 'A named person approves or rejects one proposed fix for one incident. Sonny only drafts it.'}],
+    keyPoints: ['A fixture is a saved incident: the same case for everyone.', 'Sonny writes OPEN instead of guessing.', 'A proposed fix is not an action. Only a person approves or rejects it.'],
+    notes: 'Time: 10:06 · 3 min. Words taken from the repo (README “Shared terms”: incident, fixture, proposal, approval) plus what participants see in the terminal in A1 (telemetry, evidence, OPEN). The code says “verdict” for diagnosis and “proposal” for proposed fix: mention that once, in Assignment 3. Rule, contract and test come in Assignment 3. Approval in the repo (approvals/README.md): one record per incident and proposal; Sonny writes a pending draft with decided_by: "OPEN"; a pending draft is not an approval. The rollback program (src/executor.ts) only continues when incident, proposal, decision “approved” and a named person all match. Running the rollback is a separate step after the approval.',
     teach: {
       time: '3 min',
-      gist: 'Six words for all day, each with a real example.',
+      openShot: 'assets/day5-jessy-teach/s5-5.webp',
+      gist: 'Eight words from the project and the terminal, each with one meaning for the whole day.',
       script: [
-        {do: 'Slide appears with the six tiles.', say: ['Six words that come back in every assignment.', 'Each with an example from our web shop.']},
-        {do: 'Point at Incident.', say: ['Incident: a problem in a live service.', 'It gets a number, for example INC-1001.']},
-        {do: 'Point at Fixture.', say: ['Fixture: a saved copy of an incident, like a recording.', 'Same story every time, so everyone works on the same problem.']},
-        {do: 'Point at Telemetry.', say: ['Telemetry: what the shop records about itself.', 'Graphs, updates, error messages. Here: error rate 0.3% → 12%.']},
-        {do: 'Point at Tool trace.', say: ['Tool trace: everything the agent looked at, in order.', 'It shows where each claim comes from.']},
-        {do: 'Point at Human in the loop.', say: ['Human in the loop: known from Day 3 and 4.', 'A person approves before anything happens.', 'Right incident, right action, real name.']},
-        {do: 'Point at OPEN.', say: ['OPEN: something the evidence does not answer yet.', 'Then the agent writes OPEN instead of guessing.']},
-        {ask: 'This afternoon you break the shop yourself, and a new incident appears. Does it get number INC-1001?', say: ['(Answer: no. INC-1001 is the saved copy. A live incident gets its own number.)']}
+        {do: 'Slide appears with eight closed blocks.', say: ['Eight words you will meet today, in the project and in the terminal.', 'Let us agree what they mean, so everyone means the same thing.']},
+        {shot: 'assets/day5-jessy-teach/s5-1.webp', do: 'Click Incident and Fixture.', say: ['An incident: a problem in the shop, with a number. INC-1001 is the one from 03:45.', 'A fixture: a saved, made-up copy of that incident, with all its data. Like a recording.', 'So everyone in the room gets exactly the same case. You will start it with that file name.']},
+        {shot: 'assets/day5-jessy-teach/s5-2.webp', do: 'Click Telemetry.', say: ['Telemetry: what the shop records about itself. The graphs, the list of updates, the error logs.', 'That is what Sonny reads. In the fixture it is saved too.']},
+        {shot: 'assets/day5-jessy-teach/s5-3.webp', do: 'Click Diagnosis and Evidence.', say: ['The diagnosis is what Sonny writes about the incident.', 'Evidence is one line of data that shows something: where it is, and which entry. deploys:d-4821 means: the update list, update d-4821.']},
+        {shot: 'assets/day5-jessy-teach/s5-4.webp', do: 'Click OPEN.', say: ['OPEN: Sonny does not know it yet, or nobody has decided yet.', 'For example: which regions are hit? The data does not say, so Sonny writes OPEN instead of guessing.']},
+        {shot: 'assets/day5-jessy-teach/s5-5.webp', do: 'Click Proposed fix and Approval.', say: ['The proposed fix is the one step Sonny suggests. A proposal, not an action.', 'An approval: a named person approves or rejects that one fix, for that one incident. Sonny only drafts it. Until a person signs, it says OPEN.']},
+        {ask: 'Sonny proposes a rollback and drafts the approval. Has anything changed in the shop?', say: ['(Answer: no. The draft says OPEN until a person approves. Without that, the rollback is refused.)']},
+        {say: ['Three more words come in Assignment 3: rule, contract and test. We explain them when you need them.']}
       ],
-      learn: ['Incident, fixture, telemetry, tool trace, human in the loop, OPEN.', 'A fixture is a replayable copy, so everyone has the same story.', 'OPEN is honest: the agent does not guess.'],
-      watch: ['Not in depth: they come back in the assignments.', '“Fixture” from testing? Same idea: saved input, same result.'],
-      terms: [['SRE', 'site reliability engineering: the team that keeps live services running'], ['On call', 'being the person who is reachable when something breaks'], ['Error rate', 'how many requests fail, out of all requests'], ['d-4821', 'the number of the update that went live just before the problem']],
-      next: 'the six steps every piece of software goes through: the SDLC.'
+      learn: ['Incident, fixture, telemetry, diagnosis, evidence, OPEN, proposed fix, approval: one meaning each.', 'A fixture is a saved incident, so everyone gets the same case.', 'A proposed fix is not an action: a named person approves or rejects it.'],
+      watch: ['Do not add rule, contract and test here: they come in Assignment 3.', 'Someone sees “verdict” or “proposal” in the code: the code’s words for diagnosis and proposed fix.', 'Approval is not the rollback itself. After an approval, running the rollback is still a separate step.'],
+      terms: [['Verdict', 'the code’s word for diagnosis'], ['Proposal', 'the code’s word for proposed fix'], ['Rollback', 'putting the previous version back live']],
+      next: 'would you trust Sonny at 03:45?'
     }
   }),
   baseSlide({

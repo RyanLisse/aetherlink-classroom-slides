@@ -45,7 +45,7 @@ function showInFrame(frame, index) {
   const hash = '#' + (index + 1);
   // once the deck has loaded inside the frame, only change its hash (no reload); before that, (re)load it
   try { if (frame.dataset.ready) { frame.contentWindow.location.hash = hash; return; } } catch {}
-  frame.src = (window.DECK_PAGE || 'index.html') + '?embed=1' + hash;
+  frame.src = (window.DECK_PAGE || 'index.html') + '?embed=1' + (window.PREVIEW_OPEN ? '&open=1' : '') + hash;
 }
 [$('p-frame'), $('p-next-frame')].forEach(f => f.addEventListener('load', () => { f.dataset.ready = '1'; }));
 const ro = new ResizeObserver(entries => entries.forEach(e => fitShot(e.target)));
@@ -119,6 +119,10 @@ function renderScript(beats) {
       }
       if (!text) continue;
       const p = document.createElement('p'); p.className = cls; teachText(p, prefix + text); li.append(p);
+    }
+    if (b.shot) {
+      // shot: a small picture of the slide at this step (what the room sees after this click)
+      const img = document.createElement('img'); img.className = 't-b-shot'; img.src = b.shot; img.alt = ''; img.loading = 'lazy'; img.title = 'Click to enlarge'; img.addEventListener('click', () => img.classList.toggle('big')); li.append(img);
     }
     if (b.copy) {
       // copy: [[label, text], …] texts to paste in this step
@@ -224,17 +228,26 @@ function renderSlide(index) {
   const nextIndex = current + 1 < slides.length ? current + 1 : null;
   $('p-next-title').textContent = nextIndex != null ? (nextIndex + 1) + '. ' + slides[nextIndex].title : 'This is the last slide.';
   showInFrame($('p-frame'), current);
+  // openShot: a picture of this slide with every block opened, shown under the live (closed) preview
+  { let box = $('p-open'); const src = s.teach?.openShot;
+    if (!box) { box = document.createElement('figure'); box.id = 'p-open'; box.className = 'p-open'; $('p-shot').after(box); }
+    box.hidden = !src; box.replaceChildren();
+    if (src) { const cap = document.createElement('figcaption'); cap.textContent = 'When every block is open'; const img = document.createElement('img'); img.src = src; img.alt = ''; box.append(cap, img); } }
   showInFrame($('p-next-frame'), nextIndex);
   setupTimer(s);
 }
 
 /* ---- sync ---- */
+// ?notes=1: notes only, for the deck's Overview page. No sync with the main window: the Overview tells it which slide to show.
+const NOTES_ONLY = new URLSearchParams(location.search).has('notes');
+if (NOTES_ONLY) document.documentElement.classList.add('notes-only');
 let channel = null;
-try { if ('BroadcastChannel' in window) channel = new BroadcastChannel(PRESENTER_CHANNEL); } catch {}
+try { if (!NOTES_ONLY && 'BroadcastChannel' in window) channel = new BroadcastChannel(PRESENTER_CHANNEL); } catch {}
 if (channel) {
   channel.addEventListener('message', e => { if (e.data && e.data.type === 'slide') { setSyncStatus(true); renderSlide(e.data.index); } });
 }
 window.addEventListener('storage', e => {
+  if (NOTES_ONLY) return;
   if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { $('p-hidden').hidden = !isHidden(current); return; }
   if (e.key !== PRESENTER_KEY || !e.newValue) return;
   try { const data = JSON.parse(e.newValue); setSyncStatus(true); renderSlide(data.index); } catch {}
@@ -245,6 +258,7 @@ window.addEventListener('storage', e => {
   const params = new URLSearchParams(location.search);
   const fromUrl = Number(params.get('i'));
   if (Number.isInteger(fromUrl) && fromUrl >= 0 && fromUrl < slides.length) { renderSlide(fromUrl); }
+  if (NOTES_ONLY) return;
   try {
     const stored = JSON.parse(localStorage.getItem(PRESENTER_KEY) || 'null');
     if (stored && Number.isInteger(stored.index)) { renderSlide(stored.index); if (Date.now() - (stored.at || 0) < 15000) setSyncStatus(true); }

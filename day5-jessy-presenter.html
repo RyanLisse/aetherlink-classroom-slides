@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#06111e"><title>Presenter view · Day 5 · AI-native SDLC</title>
-<link rel="stylesheet" href="styles.css?v=153">
+<link rel="stylesheet" href="styles.css?v=155">
 <style>
   body{padding:1.4rem clamp(1rem,3vw,2.2rem);gap:1.2rem;min-height:100vh}
   .p-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:1rem}
@@ -102,6 +102,12 @@
   @media (max-width:900px){.t-grid{grid-template-columns:1fr}}
   .p-nav{display:flex;gap:.5rem;margin-top:.8rem}
   .p-progress{font-size:.85rem;color:var(--muted)}
+  .t-b-shot{display:block;width:min(100%,360px);margin:.5rem 0 .2rem;border-radius:8px;border:1px solid rgba(255,255,255,.18);cursor:zoom-in}
+  .t-b-shot.big{width:100%;cursor:zoom-out}
+  .p-open{max-width:min(100%,560px);margin:-.4rem 0 1rem}.p-open figcaption{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .35rem}.p-open img{display:block;width:100%;border:1px solid var(--border);border-radius:12px}
+  #p-shot::before{content:'What the room sees first';position:absolute;z-index:1;left:.5rem;top:.4rem;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding:.1rem .35rem;border-radius:4px}
+  html.notes-only .p-top,html.notes-only .p-side,html.notes-only #p-shot,html.notes-only #p-open,html.notes-only #p-keys-block{display:none!important}
+  html.notes-only .p-grid{display:block}html.notes-only body{padding:1rem 1.1rem}html.notes-only .p-title{font-size:1.4rem}
 </style>
 </head>
 <body>
@@ -143,7 +149,7 @@
       </div>
     </div>
   </div>
-  <script>window.DECK_PAGE = "day5-jessy.html";</script><script src="day5-jessy-slides.js?v=2" defer></script>
+  <script>window.DECK_PAGE = "day5-jessy.html";</script><script src="day5-jessy-slides.js?v=6" defer></script>
   <script src="timers.js?v=92" defer></script>
   <script>
     const upgradeDay5Clip = video => {
@@ -165,5 +171,5 @@
       node.querySelectorAll?.('video.t-clip').forEach(upgradeDay5Clip);
     }))).observe(document.documentElement, {childList: true, subtree: true});
   </script>
-  <script src="presenter.js?v=108" defer></script>
+  <script src="presenter.js?v=111" defer></script>
 </body></html>
