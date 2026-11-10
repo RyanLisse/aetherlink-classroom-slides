@@ -582,6 +582,32 @@ function renderExtras(stage, main, s, v) {
     window.__reveal = next; window.__revealBack = back;
     slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
   }
+  if (v.guardRail) {                                             // Jessy Day 5 opt-in: guardrails. The chain alert → Sonny looks → proposes → [guardrail] → a person decides; below, the guardrails with what they stop. → reveals the guardrail, each rail, then the foot
+    const G = v.guardRail; const wrap = node('div', 'gr-wrap'); let k = 0; const steps = [];
+    const chain = node('div', 'gr-chain');
+    G.chain.forEach(([ico, t, sub], i) => {
+      if (i === G.chain.length - 1) { const gate = node('div', 'gr-gate'); gate.append(node('span', 'gr-gate-ico', '🚧'), node('span', 'gr-gate-t', G.gate || 'guardrail')); chain.append(gate); steps.push(gate); }
+      else if (i) chain.append(node('span', 'gr-to', '→'));
+      const b = node('div', 'gr-step' + (i === G.chain.length - 1 ? ' human' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
+    });
+    wrap.append(chain);
+    const rails = node('div', 'gr-rails');
+    G.rails.forEach((R) => { const c = node('div', 'gr-rail'); const h = node('div', 'gr-rail-h'); h.append(node('span', 'gr-ico', R.icon), node('strong', null, R.title)); c.append(h);
+      const tr = node('div', 'gr-try'); tr.append(node('span', 'gr-lab', R.tryLabel || 'Try'), node('span', null, R.try)); c.append(tr);
+      const st = node('div', 'gr-stop'); st.append(node('span', 'gr-x', '✋'), node('span', null, R.stop)); c.append(st);
+      const m = node('div', 'gr-meta'); m.append(node('code', null, R.where)); if (R.today) m.append(node('span', 'gr-today', R.today)); c.append(m);
+      rails.append(c); steps.push(c); });
+    wrap.append(rails);
+    if (G.foot) { const f = node('p', 'gr-foot', G.foot); wrap.append(f); steps.push(f); }
+    if (grid) grid.replaceWith(wrap); else { const tg = main.querySelector('.tagline'); if (tg) tg.before(wrap); else main.append(wrap); }
+    const paint = () => steps.forEach((el, i) => { el.classList.toggle('shown', i < k); el.classList.toggle('now', i === k - 1); });
+    steps.forEach((el, i) => el.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }));
+    paint();
+    const next = () => { if (k < steps.length) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
   if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
     const ls = node('div', 'ls-row');
     v.layerStrip.forEach((L, i) => { if (i) ls.append(node('div', 'ls-arrow', '→')); const c = node('div', 'ls-card' + (L.state ? ' ' + L.state : '')); c.style.setProperty('--i', i);
@@ -1626,7 +1652,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList || s.visual?.guardRail)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
