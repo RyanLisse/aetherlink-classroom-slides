@@ -16,7 +16,7 @@ const PROMPTS = {
   a4GuardBefore: `Run only the focused guard test: npx tsx --test test/workshop/guard.test.ts. Do not edit any file. Explain in plain words which test is red and what it means for bench/ratchet.json. Stop for my review.`,
   a4Review: `Read the human edit in .claude/hooks/guard.mjs and test/workshop/guard.test.ts. Do not edit either file. Run only the focused guard test. Explain whether Edit and Write to bench/ratchet.json are denied. Do not claim that the hook blocks every shell command. Stop for my review.`,
   a5See: `Read intent.md, src/tools.ts, src/runtime.ts, src/chat.ts, and test/workshop/tools.test.ts. Explain in plain words what the list_deploys tool should do and why it may only read. Show every place where the code reads the update list around the tool (the “A5 bypass” comments). Run only the focused A5 test and show it red. Do not edit anything. Stop for my review.`,
-  a5Implement: `Implement TODO(A5): bind list_deploys in src/tools.ts to listDeploys from src/telemetry.ts and register it on the telemetry server, read-only, cited as deploys:<id>. Remove the A5 bypasses in src/runtime.ts and src/chat.ts so both use the tool. Add one case: an empty time window returns [] and the diagnosis stays unknown (OPEN, low confidence, investigate-more), never healthy. Rerun the focused A5 test, the main tests and typecheck, and show the diff. Do not add a tool that changes anything. Do not push.`,
+  a5Implement: `Implement TODO(A5): bind list_deploys in src/tools.ts to listDeploys from src/telemetry.ts and register it on the telemetry server, read-only, cited as deploys:<id>. Remove the A5 bypasses in src/runtime.ts and src/chat.ts, including their “A5 bypass” comments, so both use the tool. Add one case: an empty time window returns [] and the diagnosis stays unknown (OPEN, low confidence, investigate-more), never healthy. Rerun the focused A5 test, the main tests and typecheck, and show the diff. Do not add a tool that changes anything. Do not push.`,
   a5Build: `Read intent.md, src/tools.ts, src/runtime.ts, src/chat.ts, and test/workshop/tools.test.ts. Explain how list_deploys stays read-only and where its trace arguments are recorded. Show the three starter bypasses. Show the focused A5 test red. After my approval, implement TODO(A5) in src/tools.ts and remove the bypasses from src/runtime.ts and src/chat.ts. Add either an empty-window or missing-deploy case. Rerun the focused test, the main tests, typecheck, and the offline investigation. Show the tool result and exact trace arguments. Do not add a mutation tool or push.`,
   a6Map: `/show-me Read docs/plan.md, fixtures/incidents/bad-deploy.json, and the shop, traffic, chaos, and console scripts. Map the fixture CLI for INC-1001 and the listener-created live incident. Show where both use the shared investigate flow and tool trace. Stay read-only. Separate fixture output from optional model output, then stop.`,
   a6Build: `Use the incident path we reviewed. Propose the demo order, risks, proof, rollback, and one alternative cause. Reuse owned processes. Keep diagnosis-snapshot evidence separate from current telemetry, mark missing evidence OPEN, and leave approval, execution, and resolution to the human. Do not run or stop processes. Wait for my approval.`,
@@ -1120,13 +1120,71 @@ const day5Slides = [
         ['After step 6', '`modified: .claude/hooks/guard.mjs`: your two lines.'],
         ['After step 7', 'Nothing new.']
       ],
-      next: 'Sonny’s eyes in the code: one tool is missing.'
+      next: 'Where we are: an agent you can trust.'
     },
     humanOpen: 'Only you write the guard line. The chat proposes; a named person presses the buttons.', next: 'A5 · Add one read-only tool'
   }),
   baseSlide({
-    title: 'Sonny’s eyes in the code: one tool is missing', kicker: 'Day 5 · IN THE CODE · TOOLS', type: 'context',
-    subtitle: 'The four looks from slide 4 are four tools in src/tools.ts: small functions that only read. Three work. The update list is empty, and the code takes a detour around it.',
+    title: 'Where we are: an agent you can trust', kicker: 'Day 5 · RECAP', type: 'recap',
+    subtitle: 'An agent you can trust needs four things. You built three of them. Now the fourth: what Sonny can see.',
+    visual: {guardRail: {
+      plainChain: true, doneSteps: [0, 1, 2], brokenStep: 3,
+      chainTitle: 'Four parts of an agent you can trust',
+      chain: [['🎯', 'What it must do', 'Assignment 2 · intent.md ✓'], ['📋', 'What it may say', 'Assignment 3 · the contract ✓'], ['🚧', 'What it may do', 'Assignment 4 · the guardrails ✓'], ['👀', 'What it can see', 'Assignment 5 · the tools · now']],
+      rails: [],
+      foot: 'And in Assignment 6: all four together, live, on a shop you break yourself.'
+    }},
+    keyPoints: ['Must do: the intent (A2).', 'May say: the contract (A3).', 'May do: the guardrails (A4).', 'Can see: the tools (A5, now).'],
+    notes: 'Time: 13:43 · 2 min. One click shows the line at the bottom. The first three boxes have a green line (done), the fourth a dashed orange border (now).',
+    teach: {
+      time: '2 min',
+      gist: 'A short recap: an agent you can trust needs four things. Three are done. Now the fourth: what Sonny can see.',
+      script: [
+        {shot: 'assets/day5-jessy-teach/s31-1.webp', do: 'Slide appears. Point at the boxes, left to right.', say: ['Let us zoom out. All day you are building an agent you can trust. That needs four things.', 'What it must do: you wrote that down in intent.md, Assignment 2.', 'What it may say: the contract checks every diagnosis, Assignment 3.', 'What it may do: the guardrails, Assignment 4.', 'And the fourth: what it can see. Where does its information come from? That is Assignment 5.']},
+        {do: 'Click: the line at the bottom.', say: ['And in Assignment 6 you see all four together, live.']}
+      ],
+      learn: ['Must do, may say, may do, can see.'],
+      watch: ['Keep it short: this is a recap, not new content.'],
+      next: 'Tools: how an AI agent sees.'
+    }
+  }),
+  baseSlide({
+    title: 'Tools: how an AI agent sees', kicker: 'Day 5 · TOOLS', type: 'context',
+    subtitle: 'An AI cannot open a database or a log file by itself. It asks a tool: “give me the updates between 02:50 and 03:50”. So the tools decide what an agent can see.',
+    visual: {guardRail: {
+      plainChain: true, railCols: 3,
+      chainTitle: 'Sonny’s four tools: the four looks from slide 4',
+      chain: [['📈', 'The graphs', 'summarize_metrics'], ['🚀', 'The update list', 'list_deploys'], ['🧩', 'The code change', 'get_diff'], ['📜', 'The error logs', 'search_logs']],
+      railsTitle: 'Three things must be true',
+      rails: [
+        {icon: '👀', title: '1 · It has the eyes it needs', whoLabel: 'Sonny', who: 'four tools: the graphs, the update list, the code change, the error logs', stop: 'Without the update list, he cannot see that v2.15.0 went out at 03:43. He would have to guess.', where: 'src/tools.ts'},
+        {icon: '✋', title: '2 · Only eyes, no hands', whoLabel: 'Sonny', who: 'all four tools only read. No tool rolls back or installs anything', stop: 'Changing things stays a button for a person, like the guardrails in Assignment 4.', where: 'src/tools.ts'},
+        {icon: '📜', title: '3 · Every look is written down', whoLabel: 'Sonny', who: 'his trace: “list_deploys, 02:50 to 03:50 → v2.15.0”', stop: 'So you can check where his evidence comes from. The trace must be true.', where: 'the top of his output'}
+      ],
+      foot: 'Next: in the code, one of these four is not built yet.'
+    }},
+    keyPoints: ['An AI agent sees only through its tools.', 'Only eyes, no hands: the tools only read.', 'Every look is in the trace, so you can check the evidence.'],
+    notes: 'Time: 13:45 · 3 min. Clicks (→): 1 the heading · 2–4 the three cards · 5 the line at the bottom. The four tools are the four looks from slide 4 and the four trace lines from Assignment 1. In the code: the handlers in src/tools.ts, offered to a real model via the telemetry MCP server (createTelemetryServer); the offline script calls the same handlers.',
+    teach: {
+      time: '3 min',
+      gist: 'Tools are how an AI agent sees. Three things must be true: it has the eyes it needs, only eyes and no hands, and every look is written down in the trace.',
+      script: [
+        {shot: 'assets/day5-jessy-teach/s32-1.webp', do: 'Slide appears. Point at the four tools.', say: ['You know these four: the looks from slide 4. The graphs, the update list, the code change, the error logs.', 'An AI cannot open a database or a log file by itself. It asks a tool: give me the updates between 02:50 and 03:50. The tool looks, and gives the answer back.', 'So the tools decide what an agent can see.']},
+        {shot: 'assets/day5-jessy-teach/s32-2.webp', do: 'Click: “Three things must be true”, then card 1.', say: ['One: it has the eyes it needs. Without the update list, Sonny cannot see that v2.15.0 went out two minutes before the errors. He would have to guess.']},
+        {shot: 'assets/day5-jessy-teach/s32-3.webp', do: 'Click: card 2.', say: ['Two: only eyes, no hands. All four tools only read. There is no tool that rolls back. Changing things stays a button for a person.']},
+        {shot: 'assets/day5-jessy-teach/s32-4.webp', do: 'Click: card 3.', say: ['Three: every look is written down. That is the trace at the top of his output. You use it to check where his evidence comes from. So the trace must be true.']},
+        {ask: 'Which of the three would break if a tool could roll back?', say: ['(Answer: number 2, only eyes. Sonny would get hands.)']},
+        {shot: 'assets/day5-jessy-teach/s32-5.webp', do: 'Click: the line at the bottom.', say: ['Now let us look in the code. One of these four is not built yet.']}
+      ],
+      learn: ['An AI agent sees only through its tools.', 'Only eyes, no hands.', 'The trace shows every look.'],
+      watch: ['Someone asks what a tool looks like: next slide, in the code.'],
+      terms: [['Tool', 'a small function an AI agent can ask to look at something; Sonny’s four only read'], ['Trace', 'the list of every tool Sonny used, with what he asked for']],
+      next: 'In the code: the update-list tool.'
+    }
+  }),
+  baseSlide({
+    title: 'In the code: the update-list tool is not built yet', kicker: 'Day 5 · IN THE CODE · TOOLS', type: 'context',
+    subtitle: 'The project you downloaded leaves four pieces for you to build. One is the update-list tool. So that Assignments 1 to 3 could still find update v2.15.0, the code reads the update list directly: a temporary detour around the tool.',
     visual: {codeRoute: {
       steps: [
         {file: 'Your terminal · Assignment 1 · Sonny’s trace', term: true, code: '── trace (what the agent looked at) ──\n1. summarize_metrics {since 02:50, until 03:50}\n2. list_deploys      {since 02:50, until 03:50}\n   → [{"id":"d-4821","version":"v2.15.0","at":"03:43" …}]\n3. get_diff          {"deploy":"d-4821"}\n4. search_logs       {"level":"error" …}'},
@@ -1136,76 +1194,115 @@ const day5Slides = [
         {file: 'src/runtime.ts · what goes in the trace', lit: true, code: 'const outputs = {\n  summarize_metrics: h.summarize_metrics(windowInput),  // ✓\n  list_deploys: listDeploys(t, …),   // ✗ A5 bypass\n  search_logs: h.search_logs(logInput),                // ✓\n};\n// the trace prints “list_deploys”, but the tool was skipped'},
         {file: 'src/chat.ts · the chat on the desk', lit: true, code: 'const h = handlers(t);   // h = the tools\n\nconst m = h.summarize_metrics({});  // ✓ tool\nconst d = listDeploys(t);           // ✗ detour\nconst errs = h.search_logs(…);      // ✓ tool'}
       ],
-      run: {label: 'See it yourself · Assignment 5, step 2', cmd: 'npx tsx --test test/workshop/tools.test.ts', when: 'Claude Code runs this test for you in step 2. After the build in step 4: pass 4, fail 0.',
+      run: {label: 'See it yourself · Assignment 5, step 3', cmd: 'npx tsx --test test/workshop/tools.test.ts', when: 'Claude Code runs this test for you in step 3. After the build in step 5: pass 4, fail 0.',
         outLabel: 'Today', out: 'not ok 1 - A5: list_deploys is bound to telemetry.listDeploys and returns deploys\nnot ok 2 - A5: list_deploys is registered on the telemetry MCP server\nnot ok 3 - A5: chat and offline runtime use the shared list_deploys capability\n# pass 0\n# fail 3'},
       foot: 'h.something(…) = through the tool. listDeploys(t, …) straight away = the detour. Assignment 5: one real tool, and all three places use it.'
     }},
     cards: [
       {title: 'The four looks, in his trace', body: 'Slide 4’s four looks, as you saw them in Assignment 1. Each line is one tool call.'},
-      {title: 'The four tools', body: 'Three read real data. list_deploys gives back an empty list: the TODO for Assignment 5.'},
+      {title: 'The four tools', body: 'Three are built. list_deploys gives back an empty list: not built yet, the TODO for Assignment 5.'},
       {title: 'The update list itself', body: 'listDeploys reads the updates in a time window. The tool should call it.'},
       {title: 'The detour in Sonny’s run', body: 'Graphs go through the tool (h.). The update list is read directly, around the tool.'},
       {title: 'The trace is not quite true', body: 'It prints “list_deploys”, while the data came in around the tool.'},
       {title: 'The same detour in the chat', body: 'The desk’s chat answers also read the update list directly.'}
     ],
     keyPoints: ['The four looks from slide 4 are four tools in src/tools.ts; they only read.', 'list_deploys is empty today; Sonny’s run and the chat read the update list around it.', 'A real AI would not get the tool, and the trace would not be true. Assignment 5 fixes both.'],
-    notes: 'Time: 13:43 · 5 min. Same visual as slide 20 (code blocks with arrows). Clicks (→): 1–6 open the code blocks one by one, 7 the orange “see it yourself” bar and the line at the bottom. Click a block to jump; ← steps back. All code is from workshop/start (the version participants clone, with four pieces cut out), shortened with “…”: src/tools.ts lines 39–53 (handlers; list_deploys returns [] under TODO(A5)), src/telemetry.ts line 169 (listDeploys), src/runtime.ts lines 104–106 (offlineVerdict: the bypass) and 224–227 (the outputs that go in the trace), src/chat.ts line 63 (offlineAnswer). A second TODO(A5) in src/tools.ts: list_deploys is not registered on the telemetry server (createTelemetryServer), so a real AI model could not call it at all. Tested: tools test pass 0 / fail 3 on day5-after-a3, pass 4 / fail 0 on day5-after-a5; npm run investigate output identical on both; main 56/56 and typecheck clean after A5. Not on the slide, but true: no tool can change anything (eyes, no hands); say it in the wrap-up.',
+    notes: 'Time: 13:48 · 4 min. Same visual as slide 20 (code blocks with arrows). Clicks (→): 1–6 open the code blocks one by one, 7 the orange “see it yourself” bar and the line at the bottom. Click a block to jump; ← steps back. All code is from workshop/start (the version participants clone, with four pieces cut out), shortened with “…”: src/tools.ts lines 39–53 (handlers; list_deploys returns [] under TODO(A5)), src/telemetry.ts line 169 (listDeploys), src/runtime.ts lines 104–106 (offlineVerdict: the bypass) and 224–227 (the outputs that go in the trace), src/chat.ts line 63 (offlineAnswer). A second TODO(A5) in src/tools.ts: list_deploys is not registered on the telemetry server (createTelemetryServer), so a real AI model could not call it at all. Tested: tools test pass 0 / fail 3 on day5-after-a3, pass 4 / fail 0 on day5-after-a5; npm run investigate output identical on both; main 56/56 and typecheck clean after A5. Not on the slide, but true: no tool can change anything (eyes, no hands); say it in the wrap-up.',
     teach: {
-      time: '5 min',
+      time: '4 min',
       gist: 'Slide 4’s four looks are four tools in the code. One, the update list, is empty, and the code takes a detour around it. In the code you can see the difference: h.something = through the tool, listDeploys directly = around it.',
       script: [
-        {shot: 'assets/day5-jessy-teach/s31-1.webp', do: 'Slide appears. Point back: slide 4, “He looks”.', say: ['On slide 4 Sonny looked in four places: the graphs, the update list, the code change, the error logs.', 'In the code, each of those looks is a tool: a small function that only reads. Let us follow them.']},
-        {shot: 'assets/day5-jessy-teach/s31-2.webp', do: 'Click: block 1, the trace.', say: ['You saw this in Assignment 1, at the top of Sonny’s output: his trace. Four lines, the four looks.', 'Line 2: list_deploys, between 02:50 and 03:50, and it found update v2.15.0 at 03:43. That is how he knew the update caused it.']},
-        {shot: 'assets/day5-jessy-teach/s31-3.webp', do: 'Click: block 2, src/tools.ts.', say: ['Here are the four tools. Point at the left side: search_logs, summarize_metrics, list_deploys, get_diff. The same four names as in the trace.', 'Three of them read real data. list_deploys gives back an empty list: two square brackets. With a TODO for Assignment 5 above it.']},
+        {shot: 'assets/day5-jessy-teach/s33-1.webp', do: 'Slide appears. Point back: slide 4, “He looks”.', say: ['On slide 4 Sonny looked in four places: the graphs, the update list, the code change, the error logs.', 'In the code, each of those looks is a tool: a small function that only reads. Let us follow them.']},
+        {shot: 'assets/day5-jessy-teach/s33-2.webp', do: 'Click: block 1, the trace.', say: ['You saw this in Assignment 1, at the top of Sonny’s output: his trace. Four lines, the four looks.', 'Line 2: list_deploys, between 02:50 and 03:50, and it found update v2.15.0 at 03:43. That is how he knew the update caused it.']},
+        {shot: 'assets/day5-jessy-teach/s33-3.webp', do: 'Click: block 2, src/tools.ts.', say: ['Here are the four tools. Point at the left side: search_logs, summarize_metrics, list_deploys, get_diff. The same four names as in the trace.', 'Three of them read real data. list_deploys gives back an empty list: two square brackets. With a TODO for Assignment 5 above it.']},
         {ask: 'If the tool is empty, how did Sonny find update v2.15.0 this morning?', say: ['(Answer: he did not use the tool. Next blocks.)']},
-        {shot: 'assets/day5-jessy-teach/s31-4.webp', do: 'Click: block 3, src/telemetry.ts.', say: ['This is where the update list really is: listDeploys. It takes the updates within a time window.', 'The tool should call this function. Today it does not.']},
-        {shot: 'assets/day5-jessy-teach/s31-5.webp', do: 'Click: block 4, Sonny’s run.', say: ['Look at the two lines. The graphs: h.summarize_metrics. The h means: through the tool.', 'The update list: listDeploys, straight away. No h. That is the detour: it reads the list itself, around the tool. The comment even says so: A5 bypass.', 'Why is it there? The tool was cut out for this workshop. Without the detour, this morning would not have worked.']},
-        {shot: 'assets/day5-jessy-teach/s31-6.webp', do: 'Click: block 5, what goes in the trace.', say: ['And this is what gets written in the trace. For list_deploys it writes the name of the tool, but the data came from the detour.', 'So the trace you saw this morning was not quite true. And the trace is exactly what you use to check Sonny.']},
-        {shot: 'assets/day5-jessy-teach/s31-7.webp', do: 'Click: block 6, the chat.', say: ['The same detour in the chat on the desk: the graphs through the tool, the update list directly.']},
-        {shot: 'assets/day5-jessy-teach/s31-8.webp', do: 'Click: the orange bar appears.', say: ['The A5 test checks exactly this: is the tool real, is it offered to the AI, and do Sonny’s run and the chat use it? Today: 0 of 3.', 'In Assignment 5 Claude Code builds the tool and removes the detours. Then: 4 of 4. Sonny’s output stays the same, but now it really comes through the tool.']},
+        {shot: 'assets/day5-jessy-teach/s33-4.webp', do: 'Click: block 3, src/telemetry.ts.', say: ['This is where the update list really is: listDeploys. It takes the updates within a time window.', 'The tool should call this function. Today it does not.']},
+        {shot: 'assets/day5-jessy-teach/s33-5.webp', do: 'Click: block 4, Sonny’s run.', say: ['Look at the two lines. The graphs: h.summarize_metrics. The h means: through the tool.', 'The update list: listDeploys, straight away. No h. That is the detour: it reads the list itself, around the tool. The comment even says so: A5 bypass.', 'Why is it there? The update-list tool is one of the pieces left for you to build. Without the detour, Sonny would have been blind to updates in Assignments 1 to 3: no v2.15.0, no 03:45 story. So the code reads the list itself, for now.']},
+        {shot: 'assets/day5-jessy-teach/s33-6.webp', do: 'Click: block 5, what goes in the trace.', say: ['And this is what gets written in the trace. For list_deploys it writes the name of the tool, but the data came from the detour.', 'So the trace you saw this morning was not quite true. And the trace is exactly what you use to check Sonny.']},
+        {shot: 'assets/day5-jessy-teach/s33-7.webp', do: 'Click: block 6, the chat.', say: ['The same detour in the chat on the desk: the graphs through the tool, the update list directly.']},
+        {shot: 'assets/day5-jessy-teach/s33-8.webp', do: 'Click: the orange bar appears.', say: ['The A5 test checks exactly this: is the tool real, is it offered to the AI, and do Sonny’s run and the chat use it? Today: 0 of 3.', 'In Assignment 5 Claude Code builds the tool and removes the detours. Then: 4 of 4. Sonny’s output stays the same, but now it really comes through the tool.']},
         {ask: 'Why does it matter, if the answer is the same?', say: ['(Answer: a real AI only gets tools. Without list_deploys it could never see the update. And the trace must be true, because that is how you check him.)']},
         {do: 'Wrap up.', say: ['One more thing. Look at the four tools again: they all only read. There is no tool that rolls back or installs anything. Sonny has eyes, no hands. Changing things stays a button for a person.']}
       ],
       learn: ['Slide 4’s four looks are four tools in src/tools.ts.', 'h.something = through the tool; listDeploys directly = the detour.', 'The trace must be true: it is how you check Sonny.', 'Eyes, no hands: no tool changes anything.'],
       watch: ['Do not read the code line by line: point at the one line per block (the trace line, the empty [], listDeploys, h. vs no h., the bypass comment).', 'Someone asks why the detour was there: the project is a starting version with pieces cut out; the detour kept the morning working.', 'Someone asks if it is a bug: it is a temporary shortcut, marked “A5 bypass”. In real projects this is called technical debt.', 'Clicked too far? ← steps back.'],
       terms: [['Tool', 'a small function Sonny can call to look at something; these four only read'], ['Trace', 'the list of every tool Sonny used, with what he asked for'], ['h.', 'short for the handlers: the tools. h.summarize_metrics(…) = through the tool'], ['Detour (bypass)', 'code that reads the data around the tool, so the tool is skipped'], ['Deploy', 'an update to the shop, like v2.15.0']],
+      next: 'Up next: Assignment 5, step by step.'
+    }
+  }),
+  baseSlide({
+    title: 'Up next: Assignment 5, step by step', kicker: 'Day 5 · A5 PREVIEW', type: 'context',
+    subtitle: 'What you are about to do. You look at the detour before and after, so you can see the change for yourself.',
+    visual: {previewList: {
+      order: [['Find the detour', 'you'], ['Test: red', 'red'], ['Build the tool', ''], ['Test: green', 'green'], ['Detour gone', 'you'], ['Run Sonny', 'A']],
+      rows: [
+        {step: 'Step 1', text: 'Manual mode on, so you see every file change', who: 'you', out: 'manual mode on'},
+        {step: 'Step 2', text: 'Find the detour yourself: search for Ryan’s marker', cmd: 'git grep -n "A5 bypass"', who: 'you look', out: '3 places', tone: 'red'},
+        {step: 'Step 3', text: 'Claude Code explains the tool, shows the detours and runs the A5 test', moment: 'B', label: 'the tests', out: 'red · 0 ✓ 3 ✗', tone: 'red'},
+        {step: 'Step 4', text: 'You accept the plan: the tool may only read', who: 'you decide', out: '“accepted”'},
+        {step: 'Step 5', text: 'Claude Code builds the tool, removes the detours, runs the tests', moment: 'B', label: 'the tests', out: 'green · 4 ✓ · main 56 ✓', tone: 'green'},
+        {step: 'Step 6', text: 'Search for the marker again', cmd: 'git grep -n "A5 bypass"', who: 'you look', out: 'nothing found', tone: 'pass'},
+        {step: 'Step 7', text: 'Run Sonny once more: same diagnosis, list_deploys in the trace', cmd: 'npm run investigate -- fixtures/incidents/bad-deploy.json', moment: 'A', label: 'Sonny’s run', out: 'same answer', tone: 'pass'}
+      ],
+      foot: 'Find the detour, test red, build, test green, detour gone, Sonny the same.'
+    }},
+    keyPoints: ['Before and after: git grep finds 3 detours, then none.', 'The A5 test: red, then green.', 'Sonny’s answer stays the same.'],
+    notes: 'Time: 13:52 · 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row; after the last row the line at the bottom appears. Tested: git grep -n "A5 bypass" finds 3 lines on workshop/start (src/chat.ts:63, src/runtime.ts:105 and 226) and none on day5-after-a5. A5 test 0/3 → 4/4; main 56/56 and typecheck clean after A5; npm run investigate output identical.',
+    teach: {
+      time: '2 min',
+      gist: 'A preview of Assignment 5. The before/after is git grep: 3 detours, then none. Plus the A5 test red, then green. Sonny’s answer stays the same.',
+      script: [
+        {shot: 'assets/day5-jessy-teach/s34-1.webp', do: 'Slide appears. Point at the row of pills.', say: ['The same rhythm as Assignment 3, with one extra: you look at the detour yourself, before and after.']},
+        {shot: 'assets/day5-jessy-teach/s34-2.webp', do: 'Click twice: steps 1 and 2.', say: ['Step 2: you search the code for Ryan’s marker, “A5 bypass”. You find 3 places: the detours from the last slide.']},
+        {shot: 'assets/day5-jessy-teach/s34-3.webp', do: 'Click twice: steps 3 and 4.', say: ['Claude Code explains the tool and runs the A5 test: 0 of 3. You accept the plan, and check one thing: the tool only reads.']},
+        {shot: 'assets/day5-jessy-teach/s34-4.webp', do: 'Click: step 5.', say: ['Claude Code builds the tool and removes the detours. The A5 test: 4 of 4. And the main tests still 56: done means everything still works.']},
+        {shot: 'assets/day5-jessy-teach/s34-5.webp', do: 'Click: step 6.', say: ['You search again: nothing found. The detours are really gone. That is your before and after.']},
+        {shot: 'assets/day5-jessy-teach/s34-6.webp', do: 'Click: step 7. The line at the bottom appears.', say: ['And Sonny once more: the same answer. Nothing changed for the operator, but now it really comes through the tool.']}
+      ],
+      learn: ['Before and after with git grep: 3 detours, then none.', 'Test red, build, test green.'],
+      watch: ['Someone asks what git grep is: search all files in the project for a piece of text.'],
+      terms: [['git grep', 'search every file in the project for a piece of text']],
       next: 'Assignment 5.'
     }
   }),
   assignmentSlide({
-    number: 5, title: 'Repair Sonny’s missing eye', subtitle: 'See the red test and the detour, build the update-list tool, test it green. Sonny’s output stays the same, but now it is true.', stage: 'tools', duration: '13:47 · 15 min', shot: 'assets/day5-expected/a5.png',
+    number: 5, title: 'Repair Sonny’s missing eye', subtitle: 'Find the detour, build the update-list tool, and check that the detour is gone. Sonny’s answer stays the same, but now it really comes through the tool.', stage: 'tools', duration: '13:54 · 15 min', shot: 'assets/day5-expected/a5.png',
     steps: [
       {text: 'Check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is.', warn: true},
-      {text: 'Type this in: Claude Code. Goal: see what is missing before anything changes.', prompt: PROMPTS.a5See, after: 'What the tool should do, the detours in src/runtime.ts and src/chat.ts, and the A5 test red (0 of 3). Nothing changes yet.'},
+      {text: 'Type this in: Window 2. Goal: find the detour yourself, before anything changes.', prompt: 'git grep -n "A5 bypass"', after: '3 lines: src/chat.ts once, src/runtime.ts twice. These are the detours around the tool.'},
+      {text: 'Type this in: Claude Code. Goal: see what is missing before anything changes.', prompt: PROMPTS.a5See, after: 'What the tool should do, the same detours, and the A5 test red (0 of 3). Nothing changes yet.'},
       {text: 'You decide. Goal: accept the plan. The tool may only read: no tool that changes anything.', after: 'Agree? Type “accepted”.'},
       {text: 'Type this in: Claude Code. Goal: build the tool and remove the detours.', prompt: PROMPTS.a5Implement, after: 'Claude Code asks per file. At the end: the A5 test green (4 of 4), the main tests and the type check green, and the diff.'},
-      {text: 'Type this in: Window 2. Goal: run Sonny again, same command as Assignment 1.', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The same diagnosis as in Assignment 3, with list_deploys in the trace. Same answer, but now the update list really comes through the tool.'}
+      {text: 'Type this in: Window 2. Goal: the same search as step 2.', prompt: 'git grep -n "A5 bypass"', after: 'Nothing found. The detours are gone.'},
+      {text: 'Type this in: Window 2. Goal: run Sonny again, same command as Assignment 1.', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The same diagnosis as in Assignment 3, with list_deploys in the trace. Same answer, but now it really comes through the tool.'}
     ],
     after: 'The update-list tool works and only reads, the detours are gone, and the trace tells the truth.',
-    checks: ['The A5 test: red first (0 of 3), then green (4 of 4).', 'You saw where the detours were.', 'Sonny’s output: the same diagnosis, with list_deploys in the trace.'],
+    checks: ['git grep: 3 detours before (step 2), none after (step 6).', 'The A5 test: red first (0 of 3), then green (4 of 4).', 'Sonny’s output: the same diagnosis, with list_deploys in the trace.'],
     teach: {
       time: '15 min',
       gist: 'Same rhythm as Assignment 3: see what is missing (red test, the detours), accept the plan, build, test green. Sonny’s output does not change: the point is that it now really comes through the tool.',
-      do: ['Check manual mode, let Claude Code show what is missing, accept, let it build, run Sonny again.'],
-      done: ['A5 test red, then green.', 'They can point at one detour that was removed.', 'Same diagnosis, list_deploys in the trace.'],
-      copy: [['Step 2 · Claude Code', PROMPTS.a5See], ['Step 4 · Claude Code', PROMPTS.a5Implement], ['Step 5 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json'], ['After each step · Window 2', 'git status']],
+      do: ['Check manual mode, find the detour with git grep, let Claude Code show what is missing, accept, let it build, git grep again, run Sonny again.'],
+      done: ['git grep: 3 places, then none.', 'A5 test red, then green.', 'Same diagnosis, list_deploys in the trace.'],
+      copy: [['Step 2 · Window 2', 'git grep -n "A5 bypass"'], ['Step 3 · Claude Code', PROMPTS.a5See], ['Step 5 · Claude Code', PROMPTS.a5Implement], ['Step 6 · Window 2', 'git grep -n "A5 bypass"'], ['Step 7 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json'], ['After each step · Window 2', 'git status']],
       script: [
         {do: 'Slide appears. Goal of this assignment.', say: ['The missing eye from the last slide: the update list. Same rhythm as Assignment 3: first see what is missing, then build, then test.', 'Shorter than Assignment 3: about 4 files.']},
         {do: 'Step 1 · manual mode.', say: ['Claude Code is about to change files: you want to see each change.']},
-        {do: 'Step 2 · see what is missing. Paste the first prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a5See]], say: ['Why: you only fix what you understand.', 'In the project: Claude Code reads the tool file, the two files with the detour, and the A5 test. It changes nothing.', 'They see: what list_deploys should do, the detours (marked “A5 bypass” in the code: two in src/runtime.ts, one in src/chat.ts), and the A5 test red: 0 of 3.']},
+        {do: 'Step 2 · find the detour yourself. Window 2: git grep.', copy: [['Step 2 · Window 2', 'git grep -n "A5 bypass"']], say: ['Why: before anything changes, see the detour with your own eyes. git grep searches every file for a piece of text: here Ryan’s marker “A5 bypass”.', 'They see 3 lines: src/chat.ts line 63, src/runtime.ts lines 105 and 226. The detours from the code slide.', 'Remember the number 3.']},
+        {do: 'Step 3 · see what is missing. Paste the first prompt.', copy: [['Step 3 · Claude Code', PROMPTS.a5See]], say: ['Why: you only fix what you understand.', 'In the project: Claude Code reads the tool file, the two files with the detour, and the A5 test. It changes nothing.', 'They see: what list_deploys should do, the same 3 detours, and the A5 test red: 0 of 3.']},
         {ask: 'If the detour works, why remove it?', say: ['(Answer: a real AI would not get the tool, so it could not see the update. And the trace would say list_deploys while the data came in around it.)']},
-        {do: 'Step 3 · you decide.', say: ['Check one thing: the tool only reads. If Claude Code proposes anything that changes something, say no.', 'Agree: type “accepted”.']},
-        {do: 'Step 4 · build. Paste the second prompt.', copy: [['Step 4 · Claude Code', PROMPTS.a5Implement]], say: ['In the project: src/tools.ts gets the real tool, offered to the AI. src/runtime.ts and src/chat.ts lose the detour and use the tool. And one test file gets a new case.', 'The new case: if there is no data at all in the time window, Sonny must say “unknown”: OPEN, low confidence, investigate more. Never “healthy”. No data is not good news.', 'At the end: the A5 test green, 4 of 4. The main tests and the type check still green: done means everything still works.']},
-        {do: 'Step 5 · run Sonny again, in Window 2.', copy: [['Step 5 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json']], say: ['They see: exactly the same diagnosis as after Assignment 3. In the trace: list_deploys, 02:50 to 03:50.', 'Same answer. But now it really comes through the tool, and the trace tells the truth.']},
+        {do: 'Step 4 · you decide.', say: ['Check one thing: the tool only reads. If Claude Code proposes anything that changes something, say no.', 'Agree: type “accepted”.']},
+        {do: 'Step 5 · build. Paste the second prompt.', copy: [['Step 5 · Claude Code', PROMPTS.a5Implement]], say: ['In the project: src/tools.ts gets the real tool, offered to the AI. src/runtime.ts and src/chat.ts lose the detour and use the tool. And one test file gets a new case.', 'The new case: if there is no data at all in the time window, Sonny must say “unknown”: OPEN, low confidence, investigate more. Never “healthy”. No data is not good news.', 'At the end: the A5 test green, 4 of 4. The main tests and the type check still green: done means everything still works.']},
+        {do: 'Step 6 · the same search again. Window 2: git grep.', copy: [['Step 6 · Window 2', 'git grep -n "A5 bypass"']], say: ['They see: nothing. Before 3, now 0. The detours are really gone.', 'That is the before and after you can see. The test proves the rest.']},
+        {do: 'Step 7 · run Sonny again, in Window 2.', copy: [['Step 7 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json']], say: ['They see: exactly the same diagnosis as after Assignment 3. In the trace: list_deploys, 02:50 to 03:50.', 'Same answer. But now it really comes through the tool, and the trace tells the truth.']},
         {do: 'Wrap up.', say: ['Sonny has four working eyes now, and no hands.', 'Next: you break the shop yourself, and watch him use those eyes live.']}
       ],
       learn: ['First see what is missing: red test and the detour.', 'Every look goes through one tool that only reads, so the trace is true.', 'No data means unknown, never healthy.'],
-      watch: ['Someone is disappointed that the output did not change: that is expected. Ask them to open src/runtime.ts and find where the detour was.', 'Claude Code proposes a tool that changes something: reject it.', 'Main tests red after step 4: ask Claude Code to show the red line and fix only that.', 'Someone asks about the console: it still runs the old code until the restart in Assignment 6. Nothing to do now.', 'Stuck far behind: the catch-up slide after this assignment jumps to the finished A5.'],
+      watch: ['Someone is disappointed that the output did not change: that is expected. Point at step 6: 3 detours before, none after.', 'Step 6 still finds a line: Claude Code removed the detour but kept the comment, or missed one. Ask it to show that line and fix only that.', 'Claude Code proposes a tool that changes something: reject it.', 'Main tests red after step 4: ask Claude Code to show the red line and fix only that.', 'Someone asks about the console: it still runs the old code until the restart in Assignment 6. Nothing to do now.', 'Stuck far behind: the catch-up slide after this assignment jumps to the finished A5.'],
       terms: [['Tool', 'a small piece of code Sonny can call to look at something; these only read'], ['Trace', 'the list of every tool Sonny used, with what he asked for'], ['Detour (bypass)', 'code that reads the data around the tool, so the tool is skipped']],
       changes: [
-        ['After steps 1–3', 'Nothing new. Claude Code only read and ran the A5 test.'],
-        ['After step 4', '`modified: src/tools.ts`, `src/runtime.ts`, `src/chat.ts`, `test/workshop/tools.test.ts` (plus PROGRESS.md). The exact list can differ.'],
-        ['After step 5', 'Nothing new.']
+        ['After steps 1–4', 'Nothing new. git grep and Claude Code only read; the A5 test only runs.'],
+        ['After step 5', '`modified: src/tools.ts`, `src/runtime.ts`, `src/chat.ts`, `test/workshop/tools.test.ts` (plus PROGRESS.md). The exact list can differ.'],
+        ['After steps 6 and 7', 'Nothing new.']
       ],
       next: 'Catch-up · Ready for the live route.'
     },
@@ -1299,7 +1396,7 @@ const SDLC_BY_TITLE = [
   [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|What Sonny should do, and what he does today|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
   [/^(Assignment 3B|Done means: everything still works)/, 'test'],
   [/^A diagnosis you can trust/, 'design'],
-  [/^(Assignment 3:|Guardrails:|Assignment 4:|Sonny’s eyes|Assignment 5:)/, 'build'],
+  [/^(Assignment 3:|Guardrails:|Assignment 4:|Where we are: an agent|Tools: how an AI agent sees|In the code: the update-list tool|Up next: Assignment 5|Assignment 5:)/, 'build'],
   [/^Catch-up · Ready for the live route/, 'test'],
   [/^(Run the live counterpart|Example live incident|A6 |Assignment 6:|Human in the loop · Part of A6|Catch-up · Six required)/, 'deploy'],
   [/^Hackathon intent studio/, 'plan', true],

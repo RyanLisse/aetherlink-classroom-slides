@@ -589,18 +589,18 @@ function renderExtras(stage, main, s, v) {
     G.chain.forEach(([ico, t, sub], i) => {
       if (i === G.chain.length - 1 && G.gate) { const gate = node('div', 'gr-gate'); gate.append(node('span', 'gr-gate-ico', '🚧'), node('span', 'gr-gate-t', G.gate)); chain.append(gate); steps.push(gate); }
       else if (i) chain.append(node('span', 'gr-to', '→'));
-      const b = node('div', 'gr-step' + (i === G.chain.length - 1 && !G.plainChain ? ' human' : '') + ((G.brokenStep === i) ? ' broken' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
+      const b = node('div', 'gr-step' + (i === G.chain.length - 1 && !G.plainChain ? ' human' : '') + ((G.brokenStep === i) ? ' broken' : '') + ((G.doneSteps || []).includes(i) ? ' done' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
     });
     wrap.append(chain);
     if (G.railsTitle) { const rt = node('div', 'gr-title gr-title-rails', G.railsTitle); wrap.append(rt); steps.push(rt); }
-    const rails = node('div', 'gr-rails');
+    const rails = node('div', 'gr-rails' + (G.railCols ? ' c' + G.railCols : ''));
     G.rails.forEach((R) => { const c = node('div', 'gr-rail'); const h = node('div', 'gr-rail-h'); h.append(node('span', 'gr-ico', R.icon), node('strong', null, R.title)); c.append(h);
       if (R.who) { const w = node('div', 'gr-try'); w.append(node('span', 'gr-lab', R.whoLabel || 'Who'), node('span', null, R.who)); c.append(w); }
-      const tr = node('div', 'gr-try'); tr.append(node('span', 'gr-lab', R.tryLabel || 'Try'), node('span', null, R.try)); c.append(tr);
+      if (R.try) { const tr = node('div', 'gr-try'); tr.append(node('span', 'gr-lab', R.tryLabel || 'Try'), node('span', null, R.try)); c.append(tr); }
       const st = node('div', 'gr-stop'); st.append(node('span', 'gr-x', '✋'), node('span', null, R.stop)); c.append(st);
       const m = node('div', 'gr-meta'); m.append(node('code', null, R.where)); if (R.today) m.append(node('span', 'gr-today', R.today)); c.append(m);
       rails.append(c); steps.push(c); });
-    wrap.append(rails);
+    if (G.rails.length) wrap.append(rails);
     if (G.foot) { const f = node('p', 'gr-foot', G.foot); wrap.append(f); steps.push(f); }
     if (grid) grid.replaceWith(wrap); else { const tg = main.querySelector('.tagline'); if (tg) tg.before(wrap); else main.append(wrap); }
     const paint = () => steps.forEach((el, i) => { el.classList.toggle('shown', i < k); el.classList.toggle('now', i === k - 1); });

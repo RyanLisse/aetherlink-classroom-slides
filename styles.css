@@ -2576,3 +2576,5 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .gr-title-rails.shown{opacity:1}
 .gr-step.broken{border:2px dashed var(--aether-orange)}
 .gr-step.broken .gr-sub{color:var(--aether-orange);font-weight:700}
+.gr-rails.c3{grid-template-columns:repeat(3,1fr)}
+.gr-step.done .gr-sub{color:var(--green,#4ade80);font-weight:700}
