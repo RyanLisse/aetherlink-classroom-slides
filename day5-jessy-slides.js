@@ -327,7 +327,7 @@ const day5Slides = [
       {title: 'Design', body: 'Everyone agrees what a good diagnosis contains.'},
       {title: 'Build', body: 'Sonny follows the rules, refuses fixes in the chat and can look up updates.'},
       {title: 'Test', body: 'Proof that it works, before it goes live.'},
-      {title: 'Deploy', body: 'Sonny investigates a live incident. A person approves.'},
+      {title: 'Deploy', body: 'Sonny investigates a live incident. You, the operator, approve.'},
       {title: 'Maintain', body: ''}
     ],
     keyPoints: ['The six steps, now with today’s assignments.', 'Each assignment builds on the one before.', 'Maintain (A7, A9) is optional, for who is fast.'],
