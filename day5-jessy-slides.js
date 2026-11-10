@@ -1154,7 +1154,6 @@ window.SLIDES = day5Slides;
 const SDLC_BY_TITLE = [
   [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|What Sonny should do, and what he does today|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
   [/^Assignment 3B/, 'test'],
-  [/^Rules, tests, code/, 'test'],
   [/^A diagnosis you can trust/, 'design'],
   [/^(Assignment 3:|Refuse unsafe chat actions|Example refusal|Assignment 4:|Give the agent one read-only tool|Example tool and trace|Assignment 5:)/, 'build'],
   [/^Catch-up · Ready for the live route/, 'test'],
