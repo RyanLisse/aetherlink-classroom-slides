@@ -2135,3 +2135,20 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .cz-decide{margin:.8rem 0 0;text-align:center;font-weight:900;font-size:1.05rem;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
 .cz-decide.shown{opacity:1;transform:none}
 @media (max-width:900px){.cards.cz-flow{flex-wrap:wrap}.cz-panel{grid-template-columns:1fr}}
+/* assignment slides, wide (opt-in: window.ASG_WIDE): steps in two columns over the full width, the picture as a thumbnail in the header (click = big) */
+.asg-head.has-thumb{position:relative}
+.asg-head.has-thumb h1,.asg-head.has-thumb .subtitle,.asg-head.has-thumb .asg-repo{margin-right:clamp(180px,19vw,260px)}
+.asg-thumb{all:unset;box-sizing:border-box;cursor:zoom-in;position:absolute;right:0;top:3.4rem;width:clamp(170px,18vw,240px);display:grid;gap:.3rem;padding:.45rem .5rem .4rem;border-radius:12px;border:1px dashed var(--border);background:var(--surface2);transition:border-color .2s,transform .2s}
+.asg-thumb:hover,.asg-thumb:focus-visible{border-color:var(--aether-orange);transform:translateY(-2px)}
+.asg-thumb img{display:block;width:100%;max-height:8.5rem;object-fit:cover;object-position:top;border-radius:7px}
+.asg-thumb-k{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:900}
+.asg-thumb-zoom{font-size:.62rem;font-weight:800;color:var(--aether-orange);text-align:right}
+.asg-body.asg-wide .asg-steps{display:block;columns:2;column-gap:clamp(.8rem,1.6vw,1.3rem)}
+.asg-body.asg-wide .asg-step{break-inside:avoid;margin-bottom:clamp(.45rem,1vh,.7rem)}
+.asg-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(3,8,16,.88);display:grid;place-items:center;align-content:center;gap:.6rem;padding:2rem;cursor:zoom-out}
+.asg-lightbox img{max-width:min(1400px,94vw);max-height:84vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.asg-lightbox-k{margin:0;color:#cfd8e6;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:900px){.asg-body.asg-wide .asg-steps{columns:1}.asg-thumb{position:static;width:100%;margin-top:.6rem}.asg-head.has-thumb h1,.asg-head.has-thumb .subtitle,.asg-head.has-thumb .asg-repo{margin-right:0}}
+.asg-head.has-thumb{min-height:calc(3.4rem + 9.6rem)}
+.asg-thumb img{height:6.4rem;max-height:none}
+.asg-body.asg-wide .asg-step-prompt .asg-prompt-text{font-size:.78em;line-height:1.4}

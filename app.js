@@ -1350,6 +1350,19 @@ function renderAssignment(stage, s) {
     renderVisual(stage, body, mini, { ...s, visual: { ...v, bot: undefined, compact: undefined, cardImages: undefined } });
     return;
   }
+  if (window.ASG_WIDE && v.shot) {                               // opt-in per deck: steps use the full width (two columns), the picture becomes a thumbnail in the header; click = big
+    body.classList.add('solo', 'asg-wide'); head.classList.add('has-thumb');
+    const th = node('button', 'asg-thumb'); th.type = 'button'; th.title = 'Click to enlarge';
+    const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotLabel || 'Expected result';
+    th.append(node('span', 'asg-thumb-k', v.shotLabel || 'What it looks like'), img, node('span', 'asg-thumb-zoom', '⤢ click to enlarge'));
+    th.addEventListener('click', (e) => { e.stopPropagation();
+      const box = node('div', 'asg-lightbox'); const big = document.createElement('img'); big.src = v.shot; big.alt = img.alt;
+      box.append(node('p', 'asg-lightbox-k', (v.shotLabel || 'What it looks like') + ' · click or Esc to close'), big);
+      const close = () => { box.remove(); document.removeEventListener('keydown', onKey, true); };
+      const onKey = (ev) => { if (ev.key === 'Escape') { ev.stopPropagation(); ev.preventDefault(); close(); } };
+      box.addEventListener('click', close); document.addEventListener('keydown', onKey, true); document.body.append(box); });
+    head.append(th); stage.append(body); return;
+  }
   if (v.shot || v.cardImages) body.append(side); else body.classList.add('solo');
   stage.append(body);
 }
