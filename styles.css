@@ -2258,3 +2258,54 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .ov-sheet{margin-left:auto;padding:.45rem .8rem;border-radius:10px;border:1px solid var(--aether-orange);color:var(--aether-orange);font-weight:800;font-size:.9rem;text-decoration:none;white-space:nowrap}
 .ov-sheet:hover,.ov-sheet:focus-visible{background:color-mix(in srgb,var(--aether-orange) 14%,transparent);outline:none}
 .ov-sheet + .ov-fold{margin-left:0}
+
+/* contractZoom v2 (Jessy Day 5 "A diagnosis you can trust"): he looks box → diagnosis drops in → rules open/close → switch → Sonny asks you */
+.cz-panel{grid-template-areas:"left right"}
+.cz-look,.cz-doc{grid-area:left}
+.cz-side{grid-area:right}
+.cz-look{display:flex;gap:.8rem;align-items:flex-start;padding:.8rem .9rem;border-radius:12px;border:1px solid var(--border);border-top:3px solid var(--cyan);background:var(--surface);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .35s,transform .35s,visibility .35s}
+.cz-panel.show-look .cz-look{opacity:1;visibility:visible;transform:none}
+.cz-look .aj-bot{width:84px}
+.cz-look-body{display:grid;gap:.35rem;flex:1;min-width:0}
+.cz-look-h{font-size:1.05rem}
+.cz-look-p{margin:0;color:var(--muted);font-size:.9rem}
+.cz-panel:not(.show-look) .cz-look .aj-chip{animation:none}
+.cz-doc{transform:translateY(-14px);visibility:hidden}
+.cz-panel.show-doc .cz-doc{visibility:visible}
+.cz-rule{cursor:pointer;user-select:none}
+.cz-rule.open:hover{filter:brightness(1.1)}
+.cz-ghost.fixed{border-color:var(--ok,#4cd38a);border-style:solid}
+.cz-ghost.fixed span{color:var(--text);font-style:normal}
+.cz-switch{all:unset;box-sizing:border-box;grid-column:2 / -1;justify-self:start;display:inline-flex;align-items:center;gap:.45rem;margin-top:.15rem;cursor:pointer;font-size:.72rem;font-weight:800;color:var(--muted);padding:.15rem .5rem .15rem .2rem;border-radius:999px;border:1px dashed var(--border)}
+.cz-switch:hover,.cz-switch:focus-visible{color:var(--text);border-color:var(--ok,#4cd38a)}
+.cz-switch-knob{position:relative;width:1.9rem;height:1.05rem;border-radius:999px;background:var(--border);transition:background .25s}
+.cz-switch-knob::after{content:'';position:absolute;top:.15rem;left:.15rem;width:.75rem;height:.75rem;border-radius:50%;background:#fff;transition:transform .25s}
+.cz-switch.on .cz-switch-knob{background:var(--ok,#4cd38a)}
+.cz-switch.on .cz-switch-knob::after{transform:translateX(.85rem)}
+.cz-switch.on{color:var(--ok,#4cd38a);border-style:solid;border-color:var(--ok,#4cd38a)}
+.cz-gate.lit .cz-gate-t{background:var(--ok,#4cd38a);border-color:var(--ok,#4cd38a);color:#04120a;box-shadow:0 0 18px color-mix(in srgb,var(--ok,#4cd38a) 60%,transparent);animation:czPop .5s ease-out}
+.cz-gate.lit{opacity:1}
+.cz-gate.lit > span:last-child{color:var(--ok,#4cd38a)}
+.card.cz-chip.cz-4.on{box-shadow:0 0 0 1.5px var(--ok,#4cd38a),0 0 22px color-mix(in srgb,var(--ok,#4cd38a) 35%,transparent)}
+.cz-ask{display:none;align-items:center;gap:.7rem;padding:.6rem .8rem;border-radius:12px;border:1.5px solid var(--ok,#4cd38a);background:color-mix(in srgb,var(--ok,#4cd38a) 8%,transparent)}
+.cz-ask.shown{display:flex;animation:czPop .5s ease-out}
+.cz-ask .aj-bot{width:78px;animation:czWave 1.4s ease-in-out .3s 2}
+.cz-bubble{display:grid;gap:.45rem;flex:1;min-width:0}
+.cz-say{margin:0;font-weight:800;font-size:.95rem}
+.cz-ask .aj-btn{cursor:pointer;background:none;font:inherit;font-weight:900;font-size:.85rem}
+.cz-ask .aj-yes{color:var(--ok,#4cd38a);border-color:var(--ok,#4cd38a)}
+.cz-ask .aj-no{color:#ff8f8f;border-color:#ff8f8f}
+.cz-ask .aj-yes.picked{background:var(--ok,#4cd38a);color:#04120a}
+.cz-ask .aj-no.picked{background:#ff8f8f;color:#1a0505}
+.cz-reply{margin:0;font-size:.85rem;font-weight:700;color:var(--muted);display:none}
+.cz-reply.shown{display:block;animation:czPop .35s ease-out}
+@keyframes czPop{0%{transform:scale(.92);opacity:0}60%{transform:scale(1.03);opacity:1}100%{transform:none}}
+@keyframes czWave{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+@media (max-width:900px){.cz-panel{grid-template-areas:"left" "right"}}
+.cz-ask{padding:.4rem .7rem;gap:.6rem}
+.cz-ask .aj-bot{width:54px}
+.cz-say{font-size:.86rem}
+.cz-bubble{gap:.3rem}
+.cz-ask .aj-btns{gap:.4rem}
+.cz-ask .aj-btn{font-size:.78rem;padding:.25rem .65rem}
+.cz-reply{font-size:.78rem}

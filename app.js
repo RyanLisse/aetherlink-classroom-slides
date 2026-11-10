@@ -364,40 +364,65 @@ function renderExtras(stage, main, s, v) {
     cards[four ? 3 : 2].querySelector('.card-head')?.after(ask);
     (four ? [cards[0], cards[1], cards[2]] : [cards[0], cards[1]]).forEach((c) => c.after(node('div', 'aj-arrow', '→')));
   }
-  if (v.contractZoom && cards.length >= 5) {                     // human in the loop: a small flow on top, then Sonny's diagnosis held against the contract's rules, one click per rule (each rule lights the part it looks at)
-    const Z = v.contractZoom; grid.classList.add('cz-flow'); let k = 0;
+  if (v.contractZoom && cards.length >= 5) {                     // Jessy Day 5 "A diagnosis you can trust": slide 4's blocks on top; he looks (box) → his diagnosis (left) → the five rules (right, click to open/close, each lights what it looks at) → only if all five are met: Sonny asks you
+    const Z = v.contractZoom; grid.classList.add('cz-flow');
     cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('cz-chip', 'cz-' + i); c.prepend(node('span', 'cz-ico', (Z.icons || [])[i] || '')); });
-    cards.forEach((c, i) => { if (i < cards.length - 1) { if (i === 3) { const g = node('div', 'cz-arrow cz-gate'); g.append(node('span', 'cz-gate-t', Z.gate || 'only if every rule is met'), node('span', null, '→')); c.after(g); } else c.after(node('div', 'cz-arrow', '→')); } });
+    let gate = null;
+    cards.forEach((c, i) => { if (i < cards.length - 1) { if (i === 3) { gate = node('div', 'cz-arrow cz-gate'); gate.append(node('span', 'cz-gate-t', Z.gate || 'only if every rule is met'), node('span', null, '→')); c.after(gate); } else c.after(node('div', 'cz-arrow', '→')); } });
+    // 1 · he looks: the first box of "How we want Sonny to work"
+    const look = node('div', 'cz-look'); const L = Z.look || {};
+    const lb = node('div', 'aj-bot'); lb.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; lb.append(node('span', 'aj-bot-tag', 'SONNY'));
+    const lc = node('div', 'cz-look-body'); lc.append(node('strong', 'cz-look-h', L.title || 'He looks'), node('p', 'cz-look-p', L.body || ''));
+    const chips = node('div', 'aj-chips'); (L.items || []).forEach(([ico, txt], i) => { const ch = node('div', 'aj-chip'); ch.style.setProperty('--i', i); ch.append(node('span', 'aj-chip-i', ico), node('span', null, txt), node('span', 'aj-tick', '✓')); chips.append(ch); });
+    lc.append(chips); look.append(lb, lc);
+    // 2 · his diagnosis (left)
     const panel = node('div', 'cz-panel');
     const doc = node('div', 'aj-doc cz-doc'); doc.append(node('div', 'aj-doc-tab', Z.docName || 'diagnosis'));
-    const marks = {};                                              // key → elements to light up
-    const mark = (key, el) => { (marks[key] = marks[key] || []).push(el); el.classList.add('cz-hl-able'); };
-    Z.doc.forEach((R) => { const r = node('div', 'aj-row cz-row' + (R.ghost ? ' cz-ghost' : '') + (R.small ? ' cz-small' : '')); const lab = node('b', null, R.label); if (R.conf) { const cf = node('span', 'cz-conf', ' (' + R.conf + ')'); lab.append(cf); mark('conf', cf); } r.append(lab, node('span', null, R.text));   // opt-in small: a less important field, one compact line
+    const marks = {}; const mark = (key, el) => { (marks[key] = marks[key] || []).push(el); el.classList.add('cz-hl-able'); };
+    let ghost = null;
+    Z.doc.forEach((R) => { const r = node('div', 'aj-row cz-row' + (R.ghost ? ' cz-ghost' : '') + (R.small ? ' cz-small' : '')); const lab = node('b', null, R.label); if (R.conf) { const cf = node('span', 'cz-conf', ' (' + R.conf + ')'); lab.append(cf); mark('conf', cf); }
+      const txt = node('span', null, R.text); r.append(lab, txt);
       if (R.ev) { const evs = node('span', 'aj-evs'); R.ev.forEach((e) => { const ch = node('code', 'aj-ev', e); mark(e, ch); evs.append(ch); }); r.append(evs); }
-      if (R.key) mark(R.key, r); doc.append(r); });
-    if (Z.docFoot) doc.append(node('div', 'cz-docfoot', Z.docFoot));   // opt-in: the line under the diagnosis (draft only, a person approves)
-    const side = node('div', 'cz-side');
-    if (Z.format) { const f = node('div', 'cz-format'); f.append(node('div', 'cz-format-h', Z.format.title)); Z.format.items.forEach((t) => { const it = node('div', 'cz-format-it'); it.append(node('span', 'cz-rule-mark', '✓'), node('span', null, t)); f.append(it); }); side.append(f); }   // opt-in: the part of the contract that already works today
-    side.append(node('div', 'cz-side-h', Z.rulesTitle || 'The contract: five rules'));
-    const rules = Z.rules.map((R, i) => { const r = node('button', 'cz-rule'); r.type = 'button'; r.append(node('span', 'cz-rule-mark', '?'), node('span', 'cz-rule-txt', R.text), node('span', 'cz-rule-note', R.note || ''));
-      r.addEventListener('click', () => { k = Math.max(k, 3 + i); focus = i; paint(); }); side.append(r); return r; });
-    const result = node('p', 'cz-result', Z.result || ''); side.append(result);
-    panel.append(doc, side); grid.after(panel);
-    const decide = node('p', 'cz-decide', Z.decide || ''); panel.after(decide);
-    const nR = rules.length, last = 3 + nR + 1;                    // 1 = alert, looks, diagnosis · 2 = the contract · 3..2+n = one rule each · 3+n = result · 4+n = you decide
-    let focus = -1;
+      if (R.key) mark(R.key, r); if (R.ghost) ghost = { row: r, txt, off: R.text, on: R.fixed || R.text }; doc.append(r); });
+    if (Z.docFoot) doc.append(node('div', 'cz-docfoot', Z.docFoot));
+    // 3 · the five rules (right): click to open or close; the last one has a switch "add it"
+    const side = node('div', 'cz-side'); side.append(node('div', 'cz-side-h', Z.rulesTitle || 'The contract: five rules'));
+    const open = Z.rules.map(() => false); let fixed = false; let focus = -1; let k = 0; let answer = '';
+    const okOf = (i) => i === Z.rules.length - 1 && Z.fixLabel ? fixed : !!Z.rules[i].ok;
+    const rules = Z.rules.map((R, i) => { const r = node('div', 'cz-rule'); r.tabIndex = 0; r.setAttribute('role', 'button'); r.append(node('span', 'cz-rule-mark', '?'), node('span', 'cz-rule-txt', R.text), node('span', 'cz-rule-note', ''));
+      const flip = () => { open[i] = !open[i]; focus = open[i] ? i : open.lastIndexOf(true); k = Math.max(k, 3); paint(); };
+      r.addEventListener('click', flip); r.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+      if (i === Z.rules.length - 1 && Z.fixLabel) { const sw = node('button', 'cz-switch'); sw.type = 'button'; sw.append(node('span', 'cz-switch-knob'), node('span', 'cz-switch-t', Z.fixLabel));
+        sw.addEventListener('click', (e) => { e.stopPropagation(); fixed = !fixed; open[i] = true; focus = i; answer = ''; paint(); }); r.append(sw); r._sw = sw; }
+      side.append(r); return r; });
+    const result = node('p', 'cz-result', ''); side.append(result);
+    // 4 · only if all five are met: Sonny asks you
+    const ask = node('div', 'cz-ask'); const ab = node('div', 'aj-bot'); ab.innerHTML = '<img src="assets/aetherbot/aetherbot-wave.webp" alt="">'; ab.append(node('span', 'aj-bot-tag', 'SONNY'));
+    const bubble = node('div', 'cz-bubble'); const say = node('p', 'cz-say', Z.ask?.say || 'All five rules are met. You decide.');
+    const btns = node('div', 'aj-btns'); const yes = node('button', 'aj-btn aj-yes', Z.ask?.yes || 'Approve'); const no = node('button', 'aj-btn aj-no', Z.ask?.no || 'Reject'); yes.type = no.type = 'button'; btns.append(yes, no);
+    const reply = node('p', 'cz-reply', ''); bubble.append(say, btns, reply); ask.append(ab, bubble);
+    yes.addEventListener('click', (e) => { e.stopPropagation(); answer = answer === 'yes' ? '' : 'yes'; paint(); }); no.addEventListener('click', (e) => { e.stopPropagation(); answer = answer === 'no' ? '' : 'no'; paint(); });
+    side.append(ask); panel.append(look, doc, side); grid.after(panel);
+    const n = Z.rules.length;
     const paint = () => {
-      cards.forEach((c, i) => c.classList.toggle('on', i < 3 ? k >= 1 : i === 3 ? k >= 2 : k >= last));
-      grid.querySelectorAll('.cz-arrow').forEach((a, i) => a.classList.toggle('on', i < 2 ? k >= 1 : i === 2 ? k >= 2 : k >= last));
-      panel.classList.toggle('show-doc', k >= 1); panel.classList.toggle('show-rules', k >= 2);
-      rules.forEach((r, i) => { const open = k >= 3 + i; r.classList.toggle('open', open); r.classList.toggle('ok', open && !!Z.rules[i].ok); r.classList.toggle('bad', open && !Z.rules[i].ok); r.querySelector('.cz-rule-mark').textContent = open ? (Z.rules[i].ok ? '✓' : '✗') : '?'; r.classList.toggle('focus', i === focus); });
+      const allOpen = open.every(Boolean), allOk = Z.rules.every((_, i) => okOf(i)), through = allOpen && allOk;
+      cards.forEach((c, i) => c.classList.toggle('on', i === 0 ? k >= 1 : i === 1 ? k >= 1 : i === 2 ? k >= 2 : i === 3 ? k >= 3 : through));
+      grid.querySelectorAll('.cz-arrow').forEach((a, i) => a.classList.toggle('on', i === 0 ? k >= 1 : i === 1 ? k >= 2 : i === 2 ? k >= 3 : through));
+      gate?.classList.toggle('lit', through);
+      panel.classList.toggle('show-look', k === 1); panel.classList.toggle('show-doc', k >= 2); panel.classList.toggle('show-rules', k >= 3); panel.classList.toggle('through', through);
+      rules.forEach((r, i) => { const o = open[i], ok = okOf(i); r.classList.toggle('open', o); r.classList.toggle('ok', o && ok); r.classList.toggle('bad', o && !ok); r.classList.toggle('focus', i === focus);
+        r.querySelector('.cz-rule-mark').textContent = o ? (ok ? '✓' : '✗') : '?'; r.querySelector('.cz-rule-note').textContent = o ? (i === n - 1 && Z.fixLabel ? (fixed ? Z.rules[i].noteOk || 'there' : Z.rules[i].note) : Z.rules[i].note || '') : '';
+        if (r._sw) { r._sw.classList.toggle('on', fixed); r._sw.setAttribute('aria-pressed', String(fixed)); } });
       Object.values(marks).flat().forEach((el) => el.classList.remove('cz-hl', 'cz-hl-bad'));
-      if (focus >= 0 && k >= 3 + focus) (Z.rules[focus].hl || []).forEach((key) => (marks[key] || []).forEach((el) => el.classList.add(Z.rules[focus].ok ? 'cz-hl' : 'cz-hl-bad')));
-      doc.querySelectorAll('.cz-ghost').forEach((g) => g.classList.toggle('shown', k >= 3 + nR - 1 && Z.rules[nR - 1] && !Z.rules[nR - 1].ok));
-      result.classList.toggle('shown', k >= 3 + nR); decide.classList.toggle('shown', k >= last);
+      if (focus >= 0 && open[focus]) (Z.rules[focus].hl || []).forEach((key) => (marks[key] || []).forEach((el) => el.classList.add(okOf(focus) ? 'cz-hl' : 'cz-hl-bad')));
+      if (ghost) { const show = open[n - 1] || fixed; ghost.row.classList.toggle('shown', show); ghost.row.classList.toggle('fixed', fixed); ghost.txt.textContent = fixed ? ghost.on : ghost.off; }
+      result.textContent = allOpen && !allOk ? (Z.result || '') : ''; result.classList.toggle('shown', allOpen && !allOk);
+      ask.classList.toggle('shown', through); reply.textContent = answer === 'yes' ? (Z.ask?.yesReply || '') : answer === 'no' ? (Z.ask?.noReply || '') : ''; reply.classList.toggle('shown', !!answer);
+      yes.classList.toggle('picked', answer === 'yes'); no.classList.toggle('picked', answer === 'no');
     };
     paint();
-    const next = () => { if (k < last) { k++; if (k >= 3 && k < 3 + nR) focus = k - 3; paint(); return true; } return false; };
+    // → : 1 he looks · 2 diagnosis · 3 rules appear · 4..3+n open the rules in order · then the switch (all met → Sonny asks you)
+    const next = () => { if (k < 3) { k++; paint(); return true; } const i = open.indexOf(false); if (i >= 0) { open[i] = true; focus = i; paint(); return true; } if (Z.fixLabel && !fixed) { fixed = true; focus = n - 1; paint(); return true; } return false; };
     window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
   }
   if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
