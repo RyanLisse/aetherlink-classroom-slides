@@ -2143,8 +2143,11 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .asg-thumb img{display:block;width:100%;max-height:8.5rem;object-fit:cover;object-position:top;border-radius:7px}
 .asg-thumb-k{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:900}
 .asg-thumb-zoom{font-size:.62rem;font-weight:800;color:var(--aether-orange);text-align:right}
-.asg-body.asg-wide .asg-steps{display:block;columns:2;column-gap:clamp(.8rem,1.6vw,1.3rem)}
-.asg-body.asg-wide .asg-step{break-inside:avoid;margin-bottom:clamp(.45rem,1vh,.7rem)}
+.asg-body.asg-wide .asg-steps{display:block;columns:1}
+.asg-body.asg-wide .asg-step{break-inside:avoid;margin-bottom:clamp(.3rem,.7vh,.5rem)}
+.asg-body.asg-wide .asg-steps .asg-step{padding-top:clamp(.3rem,.7vh,.5rem);padding-bottom:clamp(.3rem,.7vh,.5rem)}
+.asg-body.asg-wide .asg-step-prompt{margin:.3rem 0 .2rem}
+.asg-body.asg-wide .asg-head.has-thumb{min-height:0}
 .asg-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(3,8,16,.88);display:grid;place-items:center;align-content:center;gap:.6rem;padding:2rem;cursor:zoom-out}
 .asg-lightbox img{max-width:min(1400px,94vw);max-height:84vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .asg-lightbox-k{margin:0;color:#cfd8e6;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
@@ -2163,3 +2166,8 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .asg-prompt-btns{display:flex;flex-direction:column;align-items:center;gap:.25rem;flex:none}
 .asg-more{all:unset;cursor:pointer;font-size:.6rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange);white-space:nowrap}
 .asg-more:hover{text-decoration:underline}
+/* wide assignment layout, stacked: smaller title and one-line prompts so fit-stage zooms out less */
+.asg-body.asg-wide .asg-step-prompt.folded .asg-prompt-text{max-height:1.45em;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);white-space:nowrap;text-overflow:ellipsis}
+.asg-body.asg-wide .asg-prompt-btns{flex-direction:row;gap:.6rem}
+#stage:has(.asg-wide) .asg-head h1{font-size:clamp(1.8rem,3.2vw,2.7rem);line-height:1.08}
+#stage:has(.asg-wide) .asg-head.has-thumb{min-height:0}
