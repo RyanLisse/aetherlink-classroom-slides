@@ -316,8 +316,11 @@ function renderExtras(stage, main, s, v) {
     grid.classList.add('intent-flow');
     cards.forEach((c, i) => { const F = v.intentFlow[i]; if (!F) return; c.classList.add('if-card', 'if-' + i); c.querySelector('.card-icon')?.remove();
       if (F.doc) { const d = node('div', 'if-doc'); d.append(node('div', 'if-doc-name', F.docName || 'intent.md'));
-        F.doc.forEach(([sec, gap, label]) => { const r = node('div', 'if-sec' + (gap ? ' gap' : '')); r.append(node('span', 'if-sec-name', sec), node('span', 'if-sec-state', label || (gap ? 'fill in' : '✓ filled'))); d.append(r); });
+        F.doc.forEach(([sec, gap, label, note]) => { const r = node('div', 'if-sec' + (gap ? ' gap' : '')); const nm = node('span', 'if-sec-name', sec); if (note) nm.append(node('small', 'if-sec-note', note)); r.append(nm, node('span', 'if-sec-state', label || (gap ? 'fill in' : '✓ filled'))); d.append(r); });   // opt-in note: what the part is for
         c.append(d); }
+      if (F.tree) { const t = node('div', 'if-tree');                     // opt-in: where the file lives (small folder tree)
+        F.tree.forEach(([depth, name, note, hl]) => { const r = node('div', 'if-tr' + (hl ? ' hl' : '')); r.style.setProperty('--d', depth); r.append(node('span', 'if-tr-name', (/\/$/.test(name) ? '📁 ' : '📄 ') + name)); if (note) r.append(node('span', 'if-tr-note', note)); t.append(r); });
+        c.append(t); }
       if (F.items) { const l = node('div', 'if-items');
         F.items.forEach(([tag, text, cls]) => { const it = node('div', 'if-item' + (cls ? ' ' + cls : '')); if (tag) it.append(node('span', 'if-tag', tag)); it.append(node('span', 'if-text', text)); l.append(it); });
         c.append(l); } });

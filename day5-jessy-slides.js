@@ -541,7 +541,7 @@ const day5Slides = [
     ],
     after: 'You know both routes, saw Sonny’s diagnosis, 56 green / 14 red, and the console runs.',
     checks: ['You can explain both routes into Sonny.', '56 main tests pass, 14 workshop tests are red.', 'The console runs, and you saw the diagnosis for INC-1001.'],
-    humanOpen: 'Change nothing yet. The red tests are for the next assignments.', next: 'Write down what Sonny must do',
+    humanOpen: 'Change nothing yet. The red tests are for the next assignments.', next: 'intent.md: what goes in it, and why',
     teach: {
       time: '18 min',
       gist: 'Research before you build: does it run, where does an incident come in, what does Sonny do now, what can he not do yet. Plus the console for all day. Change nothing yet.',
@@ -579,40 +579,86 @@ const day5Slides = [
         ['After step 7 · investigate', 'Nothing new. The agent only reads and prints.'],
         ['Never in git status', '`approvals/audit.jsonl`: Git ignores it on purpose (a log, not code). Open it in the editor to show it.']
       ],
-      next: 'write down what Sonny must do.'
+      next: 'intent.md: what goes in it, and why.'
     }
   }),
   baseSlide({
-    title: 'Write down what Sonny must do', kicker: 'Day 5 · PLAN', subtitle: 'At 03:45 you said what you expect from Sonny, and what he must never do without you. Now you write it down, so Claude Code builds the right thing.',
+    title: 'intent.md: what goes in it, and why', kicker: 'Day 5 · PLAN', subtitle: 'Before you build, you always write down what it must do, and what not. After Assignment 1 you know what Sonny can do today, and what he cannot do yet.',
     visual: {intentFlow: [
-      {items: [['1', 'Who uses Sonny? You, the operator.'], ['2', 'What do you get? A diagnosis with evidence, and one proposed fix.'], ['3', 'What may he never do? Change the shop himself.']]},
-      {doc: [['Problem', true], ['Proposed outcome', true], ['Users and systems', false], ['Constraints', false], ['Open questions', true]]},
-      {items: [['🛠️', 'Claude Code reads it before it builds'], ['🤖', 'Sonny never reads it: he follows the code'], ['🚀', 'Day 6–7: your own project starts with this file']]}
+      {items: [['✓', 'He reads the graphs, the updates, the code change and the error logs', 'good'], ['✓', 'He writes a diagnosis with evidence and one proposed fix', 'good'], ['✓', 'He waits for you: “OPEN: a human decides”', 'good'], ['✗', 'No line about what customers notice', 'bad'], ['✗', 'Nobody checks his diagnosis yet: “PASS contract”', 'bad'], ['✗', '14 red tests: more he cannot do yet', 'bad']]},
+      {doc: [['Problem', true, '', 'what goes wrong today'], ['Proposed outcome', true, '', 'what Sonny must deliver'], ['Users and systems', false, '', 'who uses him, what he reads'], ['Constraints', false, '', 'what he may never do'], ['Open questions', true, '', 'what we do not know yet']]},
+      {tree: [[0, 'sre-oncall-agent/'], [1, 'intent.md', 'what Sonny must do', true], [1, 'CLAUDE.md', 'how to work in this project'], [1, 'src/', 'Sonny’s code'], [1, 'test/', 'the tests'], [1, 'docs/', 'the details, like the shape of a diagnosis']]}
     ]},
-    cards: [{title: 'At 03:45 you said…', body: 'Claude Code asks the same three questions, with a suggested answer. You decide.'}, {title: 'intent.md: the brief', body: 'Two parts are already written. Three are still empty: you fill them in.'}, {title: 'Who reads it?', body: 'Claude Code, before it builds. Not Sonny.'}],
-    tagline: 'Like a brief for a builder: first agree on what “good” means, then build.',
-    keyPoints: ['Your answers from 03:45 go into intent.md.', 'Claude Code asks, you decide, Claude Code writes.', 'Claude Code reads intent.md before it builds. Sonny never reads it.'],
-    notes: 'Time: 10:53 · 3 min. The three questions come from the Assignment 2 prompt for /design-control-loop: “the operator, observable outcome, and read-only boundary” = who uses Sonny, what do you get from him (in a form you can see), what may he never do. Those are the two questions from the 03:45 slide. intent.md has three “<fill in>” sections (Problem, Proposed outcome, Open questions); “Affected users and systems” (Serves / Never writes: propose, don’t act) and “Constraints” are already filled. No code file loads intent.md: the link runs through the prompts (the Assignment 3–6 prompts start with “Read (the accepted) intent.md”). intent.md does NOT create the five rules: those are already in docs/spec.md and TODO(A3) in src/contract.ts. Day 6–7: the repo has docs/hackathon-intent.md for their own project.',
+    cards: [{title: 'What you saw in Assignment 1', body: 'What Sonny can do today, and what he cannot do yet.'}, {title: 'What goes in intent.md', body: 'Five parts. Orange = still empty: you fill them in.'}, {title: 'Where it lives', body: 'At the top of the project, next to Sonny’s code. Not inside it.'}],
+    tagline: 'Why: everyone builds toward the same goal, Claude Code too. And afterwards you can check the result against it.',
+    keyPoints: ['Before you build: write down what it must do, and what not.', 'Start from what you saw in Assignment 1: what Sonny can do, and cannot do yet.', 'intent.md has five parts; three are still empty.', 'It lives at the top of the project, next to src/.'],
+    notes: 'Time: 10:53 · 3 min. What Sonny can do after Assignment 1, step 7 (the real offline run): four tools (graphs, update list, diff, logs), a diagnosis with four evidence lines and one proposed fix (rollback → Deploy owner), blast radius OPEN, last line “PASS contract · OPEN: a human decides. Nothing was rolled back, scaled or paged.” What he cannot do yet: no customer_impact line; the contract is empty (TODO(A3) in src/contract.ts), so everything passes; 14 red workshop tests (A3 contract, A4 chat refusal + guard, A5 list_deploys, A8 approval check). intent.md sits at the project root (sre-oncall-agent/intent.md), not in src/. Its parts: Problem, Proposed outcome, Open questions are “<fill in>”; Affected users and systems (Serves / Reads / Never writes / Boundary) and Constraints are already written. No code file loads intent.md: the build prompts start with “Read intent.md”. intent.md does NOT create the five rules: those are in docs/spec.md and TODO(A3). Day 6–7: the repo has docs/hackathon-intent.md for their own project.',
     teach: {
       time: '3 min',
-      gist: 'Your answers from 03:45 (what Sonny must do, what never without you) become intent.md: the brief Claude Code reads before it builds. Sonny never reads it.',
-      copy: [['Show the gaps (optional)', 'grep -n "fill in" intent.md']],
+      gist: 'Before you build, you write down what it must do, and what not: intent.md. Start from what Assignment 1 showed Sonny can and cannot do yet. Five parts, three still empty. It lives at the top of the project.',
+      copy: [['Show the empty parts (optional)', 'grep -n "fill in" intent.md']],
       script: [
-        {do: 'Slide appears.', say: ['At 03:45 I asked you two things: what do you expect Sonny to do, and what should he never do without you?', 'You answered. Then we drew how we want him to work: look, write a diagnosis, check it against rules, ask you.', 'Assignment 1 showed what Sonny is today. Now we write down what he must become.']},
-        {ask: 'Those answers are in your head and on a slide. What happens if Claude Code starts building without them?', say: ['(Answer: it guesses what you want, and you only find out at the end that it is not what you meant.)', 'Same with a builder: no brief, no house you like.']},
-        {do: 'Point at the left block.', say: ['In Assignment 2, Claude Code asks you exactly these questions: who uses Sonny, what you get from him, and what he may never do.', 'It uses /design-control-loop, one of the four project skills. For each question it suggests an answer.', 'You decide. Claude Code does not decide what Sonny is for.']},
-        {do: 'Point at the middle block. Optional: open intent.md, or run the command.', copy: 'grep -n "fill in" intent.md', say: ['Your answers go into intent.md: a plain text file in the project.', 'Two parts are already written by the team: who Sonny serves, and what he may never do: change the shop himself.', 'Three parts still say “fill in”: the problem, the outcome, and open questions. That is what you write.']},
-        {do: 'Point at the right block.', say: ['Who reads it? Claude Code, every time before it builds: the build prompts start with “Read intent.md”.', 'Sonny never reads it. He follows the code that Claude Code builds.', 'On Day 6 and 7 you start your own project the same way: first this file, then the code.']},
-        {ask: 'Does Sonny read intent.md while he works on an incident?', say: ['(Answer: no. Claude Code, the builder, reads it. Sonny follows the code.)', 'intent.md is for the builders: Claude Code and you.']}
+        {do: 'Slide appears.', say: ['Before you build anything, you write down what it must do, and what not. Always.', 'In this project that file is called intent.md.', 'So first: what do we know about Sonny now?']},
+        {do: 'Point at the left block.', say: ['In Assignment 1, step 7, you watched him work on the 03:45 incident.', 'What he can do: read the graphs, the updates, the code change and the logs. Write a diagnosis with evidence. Propose one fix, and wait for you.', 'What he cannot do yet: there is no line about what customers notice. Nobody checks his diagnosis: the terminal said “PASS contract”, because there are no rules yet. And 14 tests are still red.']},
+        {ask: 'Think back to 03:45. What should Sonny do, that he does not do yet?', say: ['(Answers: say what customers notice. Only send a diagnosis that meets the rules. Never roll back without you.)', 'That is the kind of thing that goes into intent.md.']},
+        {do: 'Point at the middle block.', say: ['intent.md has five parts.', 'Problem: what goes wrong today. Proposed outcome: what Sonny must deliver.', 'Users and systems: who uses him and what he reads. Constraints: what he may never do. Those two are already written by the team.', 'Open questions: what we do not know yet.', 'The orange parts are still empty. In Assignment 2 you fill them in, together with Claude Code.']},
+        {do: 'Point at the right block. Optional: open intent.md in your editor, or run the command.', copy: 'grep -n "fill in" intent.md', say: ['Where is it? At the top of the project, next to CLAUDE.md. Sonny’s code is in src/.', 'So it is not part of Sonny. It is a plain text file about Sonny.']},
+        {ask: 'Why write this down before you build?', say: ['(Answer: so everyone builds toward the same goal, Claude Code too. And afterwards you can check the result against it.)', 'On Day 6 and 7 your own project starts the same way: first this file, then the code.']}
       ],
-      learn: ['Your answers from 03:45 become intent.md.', 'You decide what goes in it; Claude Code writes it.', 'Claude Code reads intent.md before it builds. Sonny never reads it.'],
-      watch: ['Someone thinks intent.md makes Claude Code write the five rules: no. Those rules are already in the project (docs/spec.md, a TODO in src/contract.ts). intent.md gives Claude Code the goal and the limits next to them.', 'No code file loads intent.md. The link runs through the prompts.', 'Skip the theory behind the skill name (control loop): not needed today.'],
-      terms: [['intent.md', 'a short file that says what the agent must do and must not do'], ['Brief', 'the instructions you give someone before they build something for you']],
-      next: 'what intent.md looks like before and after.'
+      learn: ['Before you build: write down what it must do, and what not.', 'Start from what you know: Assignment 1 showed what Sonny can and cannot do yet.', 'intent.md has five parts; three are still empty.', 'It lives at the top of the project, next to src/.'],
+      watch: ['Do not explain the questions Claude Code will ask: they come up by themselves in Assignment 2.', 'Someone thinks intent.md makes Claude Code write the five rules: no. Those rules are already in the project (docs/spec.md, a TODO in src/contract.ts).', 'Someone asks how Claude Code uses it: the build prompts start with “Read intent.md”. No code loads it. Only explain this if asked.'],
+      terms: [['intent.md', 'a short file that says what the agent must do and must not do'], ['Project root', 'the top folder of the project: here sre-oncall-agent/']],
+      next: 'Assignment 2: write down what Sonny must do.'
+    }
+  }),
+  assignmentSlide({
+    number: 2, title: 'Write down what Sonny must do', subtitle: 'Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.', stage: 'intent', duration: '10:56 · 10 min', shot: 'assets/day5-expected/a2-diff.png', shotLabel: 'What you should see at the end (an example)',
+    steps: [
+      {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code now asks before it changes a file.', warn: true},
+      {text: 'Type this in: Claude Code. Goal: let Claude Code interview you about what the agent is for.', prompt: PROMPTS.a2Design, after: 'At most three questions (operator, outcome, what it may not do), each with a suggested answer. Then a small table: your answer → which part of intent.md. Nothing changes yet.'},
+      {text: 'You decide. Goal: the answers are yours, not Claude Code’s. Type “yes” or your own answer for each question.', after: 'Ask yourself per answer: can I test this later? “The agent is helpful” is too vague.'},
+      {text: 'Type this in: Claude Code. Goal: turn your answers into text in intent.md.', prompt: PROMPTS.a2Write, after: 'Claude Code shows the exact change: the three empty parts filled in, plus three checks. Then it stops and waits.'},
+      {text: 'You check. Goal: read the change before it is saved. Then approve the edit.', after: 'Claude Code asks “confirm this edit with the human”. Yes = intent.md is saved. No other file changes.', warn: true},
+      {text: 'Type this in: Window 2. Goal: see for yourself what changed.', prompt: 'git diff -- intent.md', after: 'Red lines: the old “fill in” text. Green lines: your sentences. Only intent.md.'}
+    ],
+    after: 'intent.md is filled in with your answers and three checks. Claude Code reads it again before every build.',
+    checks: ['No “fill in” is left in intent.md.', 'You can read your three checks out loud.', 'git diff shows only intent.md.'],
+    humanOpen: 'You decide what Sonny is for. Claude Code only suggests.', next: 'Your intent.md: before and after',
+    teach: {
+      time: '10 min',
+      gist: 'Claude Code asks, you decide, Claude Code writes, you check. At the end intent.md is filled in, and only that file changed.',
+      do: ['Check manual mode, answer Claude Code’s questions, approve the change to intent.md, check it with git diff.'],
+      done: ['No “fill in” left in intent.md.', 'Three checks they can read out loud.', 'git diff shows only intent.md.'],
+      copy: [['Step 2 · Claude Code', PROMPTS.a2Design], ['Step 4 · Claude Code', PROMPTS.a2Write], ['Step 6 · Window 2', 'git diff -- intent.md'], ['Optional · Window 2', 'grep -n "fill in" intent.md'], ['After each step · Window 2', 'git status']],
+      script: [
+        {do: 'Slide appears. Goal of A2.', say: ['In Assignment 1 you got to know the project. Now you write down what Sonny must do.', 'Four moves: Claude Code asks, you decide, Claude Code writes, you check.', 'That is the human in the loop. You practise it yourself before you build it into the agent.', 'At the end only one file has changed: intent.md.']},
+        {do: 'Step 1 · manual mode. Show the bottom of your Claude Code.', say: ['Why: in this assignment the moment Claude Code asks permission is the point.', '“manual mode on”. Not there? Shift+Tab.']},
+        {do: 'Step 2 · the interview. Paste the /design-control-loop prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a2Design]], say: ['Why: before anything gets written, Claude Code has to know what you want.', '/design-control-loop: one of the four project skills. It only interviews, it builds nothing.', 'In the project: Claude Code reads intent.md, the saved incident (INC-1001) and REVIEW.md, the project’s safety checklist. It changes nothing.', 'They see: at most three questions, each with a suggested answer.', 'Who is the operator? The on-call engineer who uses the agent’s diagnosis.', 'What does the operator get? What may the agent not do?', 'Then a small table, the “field map”: your answer → which part of intent.md it goes in.']},
+        {do: 'Step 3 · you decide. Type your answers.', say: ['Why: if you say yes to everything, Claude Code decided what the agent is for. You decide.', 'Type “yes” to a suggestion, or write your own answer.', 'Test per answer: can I check this later with yes or no?', 'Too vague? Ask Claude Code: “make answer 2 something I can test”.']},
+        {ask: 'Claude Code suggests: “The agent helps the operator work faster.” Good check?', say: ['(Answer: no, too vague. Better: “within a minute, a diagnosis with its evidence”.)']},
+        {do: 'Step 4 · the text. Paste the write prompt.', copy: [['Step 4 · Claude Code', PROMPTS.a2Write]], say: ['Why: your answers become text in the file that Claude Code reads before every build.', 'In the project: still nothing saved. Claude Code shows a proposal.', 'They see: the change to intent.md in the chat. The three “fill in” parts get sentences, and three checks are added.', 'Then it stops and waits.']},
+        {do: 'Step 5 · you check. Read the change, then approve.', say: ['Why: read before it is saved. Same as the agent later: it proposes, a person approves.', 'They see: Claude Code asks permission, with “SDLC artefact: confirm this edit with the human”.', 'That is the project’s guard: intent.md is an important file, so it always asks, even outside manual mode.', 'In the project after yes: intent.md is saved. The guard logs the edit in approvals/audit.jsonl.', 'PROGRESS.md gets an “A-2 intent” entry, because no “fill in” is left.']},
+        {do: 'Step 6 · see for yourself. In Window 2: git diff.', copy: [['Step 6 · Window 2', 'git diff -- intent.md']], say: ['Why: do not just trust what Claude Code says it did. Check it yourself.', 'Window 2: the normal terminal you opened in Assignment 1. Window 1 keeps running the console.', 'They see: red lines = the old “fill in” text, green lines = their sentences. Only intent.md.', 'Want an extra check? grep -n "fill in" intent.md shows nothing when every part is filled.']},
+        {ask: 'Who reads intent.md from now on?', say: ['(Answer: Claude Code, before every build: those prompts begin with “Read intent.md”. Sonny never reads it.)']},
+        {do: 'Wrap up: what is in the project now.', say: ['intent.md: your answers and three checks.', 'A line in audit.jsonl and an “A-2 intent” entry in PROGRESS.md.', 'Then we compare your intent.md with an example, and take a break.']}
+      ],
+      learn: ['First agree what the agent must do, then build.', 'Claude Code suggests; you decide and approve.', 'Check the result yourself with git diff.'],
+      watch: ['Someone accepts every suggestion without reading: ask them to read their three checks out loud.', 'Claude Code starts editing in step 2: the skill should only ask. Say “stop, only ask questions”.', 'Claude Code asks more than three questions or a second round: say “one round is enough, give the field map”.', 'Approved by mistake? git checkout -- intent.md puts the file back, then redo step 4.', 'git diff shows other files: someone changed files earlier. Only intent.md should be new in A2.', 'No “A-2 intent” in PROGRESS.md? A “fill in” is still in the file, or it appears after Claude Code’s next action.', 'Do not let them copy the example on the right: their own answers.'],
+      terms: [['Operator', 'the on-call engineer who uses the agent’s diagnosis'], ['Field map', 'a small table: your answer → which part of intent.md it goes in'], ['Diff', 'what changed in a file compared to the last saved version in Git'], ['Window 2', 'a normal terminal in the project folder, next to Claude Code and the console']],
+      changes: [
+        ['Before step 2', 'Whatever A1 left: `modified: PROGRESS.md`, maybe a `docs/show-me/` file. Nothing else.'],
+        ['After step 2 · interview', 'Nothing new. Claude Code only read and asked.'],
+        ['After step 3 · you decide', 'Nothing new. Your answers are only in the chat.'],
+        ['After step 4 · proposal', 'Nothing new. The change is only shown in the chat.'],
+        ['After step 5 · approve', '`modified: intent.md`. PROGRESS.md gets an “A-2 intent” entry (it was already modified since A1).'],
+        ['Step 6 · git diff', '`git diff -- intent.md` shows only intent.md. Plain `git diff` also shows the PROGRESS.md lines: those come from the hook, not from Claude Code.'],
+        ['Never in git status', 'The new line in `approvals/audit.jsonl` (ignored by Git).']
+      ],
+      next: 'compare your intent.md with an example.'
     }
   }),
   baseSlide({
-    title: 'intent.md: before and after', kicker: 'Day 5 · PLAN · EXAMPLE', subtitle: 'You do not type this yourself. In Assignment 2, Claude Code asks you three questions, writes your answers into intent.md, and waits for your OK.',
+    title: 'Your intent.md: before and after', kicker: 'Day 5 · PLAN · CHECK', subtitle: 'Compare it with yours. Your sentences will be different. What counts: no empty part is left, and there are three checks.',
     visual: {filePair: [
       {file: 'intent.md', lines: [
         ['h', '## Problem'], ['gap', '<fill in>'],
@@ -629,69 +675,22 @@ const day5Slides = [
         ['h', '## Open questions'], ['new', 'How long is evidence still valid before we check again?']
       ]}
     ]},
-    cards: [{title: 'Now: three empty parts', body: 'This is the file as you got it.'}, {title: 'After Assignment 2: an example', body: 'Your answers, written by Claude Code. Yours will be different.'}],
-    tagline: 'Tip: write things you can test later. “The agent is helpful” ✗ too vague · “Every claim shows where it came from” ✓ you can look and see',
-    keyPoints: ['Claude Code writes intent.md from your answers; you approve.', 'Three empty parts get filled; a Checks part is added.', 'Checks: promises you can check later, just by looking.'],
-    notes: 'Time: 10:56 · 2 min. Example only: participants answer the questions themselves. The Checks part is new: the write prompt asks for three checks. Honest about the link: the checks do not create code. The five rules are already in the project (docs/spec.md, TODO(A3) in src/contract.ts) and the chat refusal is TODO(A4) in src/chat.ts. Claude Code reads intent.md next to them before it builds, so your promises and the project’s rules should match.',
+    cards: [{title: 'Before: three empty parts', body: 'The file as you got it.'}, {title: 'After: an example', body: 'Written by Claude Code from someone’s answers. Yours will be different.'}],
+    tagline: 'Check your checks: can you see if they are true by looking? “The agent is helpful” ✗ too vague · “Every claim shows where it came from” ✓',
+    keyPoints: ['Compare with your own intent.md: same parts, your own sentences.', 'No empty part left; a Checks part is added.', 'Checks: promises you can check later, just by looking.'],
+    notes: 'Time: 11:06 · 2 min. Shown after Assignment 2, so they compare instead of copy. Example only. The Checks part is new: the write prompt asks for three checks. Honest about the link: the checks do not create code. The five rules are already in the project (docs/spec.md, TODO(A3) in src/contract.ts) and the chat refusal is TODO(A4) in src/chat.ts. Claude Code reads intent.md next to them before it builds, so your promises and the project’s rules should match.',
     teach: {
       time: '2 min',
-      gist: 'This is intent.md before and after Assignment 2. Claude Code writes it from your answers; the checks are promises you can check later by looking.',
+      gist: 'After Assignment 2: compare your intent.md with this example. No empty part left, three checks you can check by looking.',
       script: [
-        {do: 'Slide appears.', say: ['Same file twice: intent.md in the project.', 'Left: how you got it. Right: an example of how it looks after Assignment 2.']},
-        {do: 'Point at the subtitle.', say: ['You do not type this yourself.', 'Claude Code asks you three questions, you answer in the Claude Code terminal.', 'Then it writes your answers into this file, and waits for your OK.']},
-        {do: 'Point at the orange <fill in> lines left, then the green lines right.', say: ['Left: three empty parts.', 'Right: each filled with one or two plain sentences.', 'Yours will be different: that is fine.']},
+        {do: 'Slide appears. Ask everyone to open their own intent.md next to it.', say: ['You just wrote your intent.md. Let us compare.', 'Left: the file as you got it. Right: an example of how it can look now.']},
+        {do: 'Point at the orange <fill in> lines left, then the green lines right.', say: ['Left: three empty parts.', 'Right: each filled with one or two plain sentences.', 'Yours will be different: that is fine. Is any part in yours still empty?']},
         {do: 'Point at ## Checks.', say: ['Checks is a new part. Claude Code adds it.', 'Three promises about Sonny, written so you can check them later just by looking.', 'The project already has rules in its code that match promises like these. Claude Code reads your intent.md next to them before it builds.', 'Later today the tests show if Sonny keeps these promises.']},
-        {ask: 'Look at the tip at the bottom. Why is “the agent is helpful” a bad check?', say: ['(Answer: too vague. You cannot look and see if it is true.)', '“Every claim shows where it came from”: you open a diagnosis and look.', 'When Claude Code suggests an answer, ask yourself: could I test this later?']}
+        {ask: 'Look at the line at the bottom. Why is “the agent is helpful” a bad check?', say: ['(Answer: too vague. You cannot look and see if it is true.)', '“Every claim shows where it came from”: you open a diagnosis and look.', 'Look at your own three checks: could you see if they are true by looking? If not, ask Claude Code to make them sharper.']}
       ],
       learn: ['intent.md gets filled by Claude Code from your answers; you approve.', 'Three empty parts get filled, and a Checks part is added.', 'The checks are promises you can check by looking; the tests check them later today.'],
-      watch: ['They should not copy this example word for word: they answer the questions themselves.', 'Someone thinks the checks make Claude Code write the rules: no. The rules are already in the project; Claude Code reads intent.md next to them.', 'Someone asks “do I type this in the browser?”: no, everything in Assignment 2 happens in the Claude Code terminal and the file intent.md.', 'File names or code in intent.md: it says what, not how.'],
+      watch: ['Someone’s intent.md looks very different: fine, as long as no part is empty and the checks can be checked by looking.', 'Someone thinks the checks make Claude Code write the rules: no. The rules are already in the project; Claude Code reads intent.md next to them.', 'File names or code in intent.md: it says what, not how.'],
       terms: [['intent.md', 'a short file that says what the agent must do and must not do'], ['OPEN', 'the agent says: I do not know this yet']],
-      next: 'Assignment 2: write your own.'
-    }
-  }),
-  assignmentSlide({
-    number: 2, title: 'Write down what the agent must do', subtitle: 'Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.', stage: 'intent', duration: '10:58 · 10 min', shot: 'assets/day5-expected/a2-diff.png', shotLabel: 'What you should see at the end (an example)',
-    steps: [
-      {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code now asks before it changes a file.', warn: true},
-      {text: 'Type this in: Claude Code. Goal: let Claude Code interview you about what the agent is for.', prompt: PROMPTS.a2Design, after: 'At most three questions (operator, outcome, what it may not do), each with a suggested answer. Then a small table: your answer → which part of intent.md. Nothing changes yet.'},
-      {text: 'You decide. Goal: the answers are yours, not Claude Code’s. Type “yes” or your own answer for each question.', after: 'Ask yourself per answer: can I test this later? “The agent is helpful” is too vague.'},
-      {text: 'Type this in: Claude Code. Goal: turn your answers into text in intent.md.', prompt: PROMPTS.a2Write, after: 'Claude Code shows the exact change: the three empty parts filled in, plus three checks. Then it stops and waits.'},
-      {text: 'You check. Goal: read the change before it is saved. Then approve the edit.', after: 'Claude Code asks “confirm this edit with the human”. Yes = intent.md is saved. No other file changes.', warn: true},
-      {text: 'Type this in: Window 2. Goal: see for yourself what changed.', prompt: 'git diff -- intent.md', after: 'Red lines: the old “fill in” text. Green lines: your sentences. Only intent.md.'}
-    ],
-    after: 'intent.md is filled in with your answers and three checks. Claude Code reads it again before every build.',
-    checks: ['No “fill in” is left in intent.md.', 'You can read your three checks out loud.', 'git diff shows only intent.md.'],
-    humanOpen: 'You decide what the agent is for. Claude Code only suggests.', next: 'Break',
-    teach: {
-      time: '10 min',
-      gist: 'Claude Code asks, you decide, Claude Code writes, you check. At the end intent.md is filled in, and only that file changed.',
-      do: ['Check manual mode, answer Claude Code’s questions, approve the change to intent.md, check it with git diff.'],
-      done: ['No “fill in” left in intent.md.', 'Three checks they can read out loud.', 'git diff shows only intent.md.'],
-      copy: [['Step 2 · Claude Code', PROMPTS.a2Design], ['Step 4 · Claude Code', PROMPTS.a2Write], ['Step 6 · Window 2', 'git diff -- intent.md'], ['Optional · Window 2', 'grep -n "fill in" intent.md'], ['After each step · Window 2', 'git status']],
-      script: [
-        {do: 'Slide appears. Goal of A2.', say: ['In A1 you got to know the project. Now you write down what the agent must do.', 'Four moves: Claude Code asks, you decide, Claude Code writes, you check.', 'That is the human in the loop. You practise it yourself before you build it into the agent.', 'At the end only one file has changed: intent.md.']},
-        {do: 'Step 1 · manual mode. Show the bottom of your Claude Code.', say: ['Why: in this assignment the moment Claude Code asks permission is the point.', '“manual mode on”. Not there? Shift+Tab.']},
-        {do: 'Step 2 · the interview. Paste the /design-control-loop prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a2Design]], say: ['Why: before anything gets written, Claude Code has to know what you want.', '/design-control-loop: one of the skills from slide 9. It only interviews, it builds nothing.', 'In the project: Claude Code reads intent.md, the saved incident (INC-1001) and REVIEW.md, the project’s safety checklist. It changes nothing.', 'They see: at most three questions, each with a suggested answer.', 'Who is the operator? The on-call engineer who uses the agent’s diagnosis.', 'What does the operator get? What may the agent not do?', 'Then a small table, the “field map”: your answer → which part of intent.md it goes in.']},
-        {do: 'Step 3 · you decide. Type your answers.', say: ['Why: if you say yes to everything, Claude Code decided what the agent is for. You decide.', 'Type “yes” to a suggestion, or write your own answer.', 'Test per answer: can I check this later with yes or no?', 'Too vague? Ask Claude Code: “make answer 2 something I can test”.']},
-        {ask: 'Claude Code suggests: “The agent helps the operator work faster.” Good check?', say: ['(Answer: no, too vague. Better: “within a minute, a diagnosis with its evidence”.)']},
-        {do: 'Step 4 · the text. Paste the write prompt.', copy: [['Step 4 · Claude Code', PROMPTS.a2Write]], say: ['Why: your answers become text in the file that Claude Code reads before every build.', 'In the project: still nothing saved. Claude Code shows a proposal.', 'They see: the change to intent.md in the chat. The three “fill in” parts get sentences, and three checks are added.', 'Then it stops and waits.']},
-        {do: 'Step 5 · you check. Read the change, then approve.', say: ['Why: read before it is saved. Same as the agent later: it proposes, a person approves.', 'They see: Claude Code asks permission, with “SDLC artefact: confirm this edit with the human”.', 'That is the project’s guard: intent.md is an important file, so it always asks, even outside manual mode.', 'In the project after yes: intent.md is saved. The guard logs the edit in approvals/audit.jsonl.', 'PROGRESS.md gets an “A-2 intent” entry, because no “fill in” is left.']},
-        {do: 'Step 6 · see for yourself. In Window 2: git diff.', copy: [['Step 6 · Window 2', 'git diff -- intent.md']], say: ['Why: do not just trust what Claude Code says it did. Check it yourself.', 'Window 2: the normal terminal from A1 step 7. Window 1 keeps running the console.', 'They see: red lines = the old “fill in” text, green lines = their sentences. Only intent.md.', 'Want an extra check? grep -n "fill in" intent.md shows nothing when every part is filled.']},
-        {ask: 'Who reads intent.md from now on?', say: ['(Answer: Claude Code, before every build: those prompts begin with “Read intent.md”. Sonny never reads it.)']},
-        {do: 'Wrap up: what is in the project now.', say: ['intent.md: your answers and three checks.', 'A line in audit.jsonl and an “A-2 intent” entry in PROGRESS.md.', 'Break. After the break, A3: we build the first check, a good diagnosis.']}
-      ],
-      learn: ['First agree what the agent must do, then build.', 'Claude Code suggests; you decide and approve.', 'Check the result yourself with git diff.'],
-      watch: ['Someone accepts every suggestion without reading: ask them to read their three checks out loud.', 'Claude Code starts editing in step 2: the skill should only ask. Say “stop, only ask questions”.', 'Claude Code asks more than three questions or a second round: say “one round is enough, give the field map”.', 'Approved by mistake? git checkout -- intent.md puts the file back, then redo step 4.', 'git diff shows other files: someone changed files earlier. Only intent.md should be new in A2.', 'No “A-2 intent” in PROGRESS.md? A “fill in” is still in the file, or it appears after Claude Code’s next action.', 'Do not let them copy the example on the right: their own answers.'],
-      terms: [['Operator', 'the on-call engineer who uses the agent’s diagnosis'], ['Field map', 'a small table: your answer → which part of intent.md it goes in'], ['Diff', 'what changed in a file compared to the last saved version in Git'], ['Window 2', 'a normal terminal in the project folder, next to Claude Code and the console']],
-      changes: [
-        ['Before step 2', 'Whatever A1 left: `modified: PROGRESS.md`, maybe a `docs/show-me/` file. Nothing else.'],
-        ['After step 2 · interview', 'Nothing new. Claude Code only read and asked.'],
-        ['After step 3 · you decide', 'Nothing new. Your answers are only in the chat.'],
-        ['After step 4 · proposal', 'Nothing new. The change is only shown in the chat.'],
-        ['After step 5 · approve', '`modified: intent.md`. PROGRESS.md gets an “A-2 intent” entry (it was already modified since A1).'],
-        ['Step 6 · git diff', '`git diff -- intent.md` shows only intent.md. Plain `git diff` also shows the PROGRESS.md lines: those come from the hook, not from Claude Code.'],
-        ['Never in git status', 'The new line in `approvals/audit.jsonl` (ignored by Git).']
-      ],
       next: 'break, then how your agent handles an incident.'
     }
   }),
@@ -1132,7 +1131,7 @@ window.SLIDES = day5Slides;
 // SDLC tracker: which of the six phases lights up on each slide (see sdlcTrack in app.js).
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
-  [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|Write down what Sonny must do|intent\.md: before and after|Assignment 2:)/, 'plan'],
+  [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^How do we know the rules work/, 'test'],
   [/^(How your agent handles an incident|You only get a diagnosis that meets the rules)/, 'design'],

@@ -2188,3 +2188,11 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .asg-step-prompt[data-open] .asg-prompt-full{display:block}
 .asg-body.asg-wide .asg-step:has(.asg-step-prompt[data-open]){position:relative;z-index:50}
 .asg-body.asg-wide .asg-step-prompt[data-open] .asg-more{color:var(--text)}
+/* intentFlow opt-in extras (Jessy Day 5): a note per intent.md part, and a small folder tree */
+.if-sec-note{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-top:.05rem}
+.if-tree{margin-top:.5rem;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.04);padding:.45rem .55rem;display:grid;gap:.2rem}
+.if-tr{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .5rem;padding:.22rem .45rem .22rem calc(.45rem + var(--d) * 1.1rem);border-radius:7px;font-size:.86rem}
+.if-tr-name{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800;font-size:.82rem}
+.if-tr-note{font-size:.74rem;color:var(--muted)}
+.if-tr.hl{border:1.5px solid var(--aether-orange);background:color-mix(in srgb,var(--aether-orange) 12%,transparent)}
+.if-tr.hl .if-tr-name{color:var(--aether-orange)}
