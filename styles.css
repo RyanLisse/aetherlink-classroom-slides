@@ -2152,3 +2152,14 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .asg-head.has-thumb{min-height:calc(3.4rem + 9.6rem)}
 .asg-thumb img{height:6.4rem;max-height:none}
 .asg-body.asg-wide .asg-step-prompt .asg-prompt-text{font-size:.78em;line-height:1.4}
+/* wide assignment layout: where-chip, folded prompts, magnifier */
+.asg-where{display:inline-block;vertical-align:.12em;margin-right:.5rem;font-size:.62em;font-weight:900;letter-spacing:.04em;padding:.12rem .5rem;border-radius:999px;border:1.5px solid;white-space:nowrap}
+.asg-where.w-cc{color:var(--aether-purple-text,#b9a6ff);border-color:var(--aether-purple-text,#b9a6ff);background:color-mix(in srgb,var(--aether-purple) 16%,transparent)}
+.asg-where.w-term{color:var(--cyan);border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,transparent)}
+.asg-where.w-web{color:var(--ok,#4cd38a);border-color:var(--ok,#4cd38a);background:color-mix(in srgb,var(--ok,#4cd38a) 12%,transparent)}
+.asg-step-prompt.folded .asg-prompt-text{max-height:2.9em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent)}
+.asg-step-prompt{position:relative}
+.asg-thumb-zoom{position:absolute;right:.5rem;bottom:.45rem;font-size:1rem;line-height:1;padding:.2rem .3rem;border-radius:7px;background:rgba(3,8,16,.75);color:#fff}
+.asg-prompt-btns{display:flex;flex-direction:column;align-items:center;gap:.25rem;flex:none}
+.asg-more{all:unset;cursor:pointer;font-size:.6rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange);white-space:nowrap}
+.asg-more:hover{text-decoration:underline}

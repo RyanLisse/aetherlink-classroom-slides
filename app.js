@@ -1323,10 +1323,20 @@ function renderAssignment(stage, s) {
   const inline = (s.steps || []).some(t => t.prompt && !isCmd(t.prompt));              // steps with their own prompt: no prompt box at the bottom
   (s.steps || []).forEach((t, i) => {
     const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
-    const text = node('span', 'asg-text', t.text ?? t);
+    let label = t.text ?? t, where = t.where || null;              // wide layout (opt-in): "Type this in: X. Goal: …" → a where-chip [X] + the goal as the title
+    if (window.ASG_WIDE && !where && typeof label === 'string') { const m = label.match(/^Type this in:\s*([^.]+?)\.\s*(?:Goal:\s*)?([\s\S]*)$/) || label.match(/^Open in (browser):\s*([\s\S]*)$/i); if (m) { where = m[1].replace(/^browser$/i, 'Browser'); label = /^https?:/i.test(m[2]) ? m[2] : m[2].charAt(0).toUpperCase() + m[2].slice(1); label = label.replace(/^([^.]*[^.\s])\.$/, '$1'); } }
+    const text = node('span', 'asg-text');
+    if (where && window.ASG_WIDE) text.append(node('span', 'asg-where ' + (/claude/i.test(where) ? 'w-cc' : /browser/i.test(where) ? 'w-web' : 'w-term'), where));
+    text.append(document.createTextNode(where && !window.ASG_WIDE ? where + '. ' + label : label));
     const cmds = t.cmds || (t.prompt && isCmd(t.prompt) ? [t.prompt] : null);  // short commands: chips on the same line, 'then' between two
     (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd' + (p[0] !== '!' ? ' no-copy' : '')); c.append(node('code', null, p)); if (p[0] === '!') c.append(copyBtn(p)); text.append(c); });  // only !commands get Copy; /exit, claude: just type them
-    if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
+    if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); const cb = copyBtn(t.prompt);
+      if (window.ASG_WIDE && t.prompt.length > 110) {           // wide layout: long prompts fold to two lines; Copy still copies the whole prompt
+        pr.classList.add('folded'); const more = node('button', 'asg-more', 'show all'); more.type = 'button';
+        more.addEventListener('click', (e) => { e.stopPropagation(); const f = pr.classList.toggle('folded'); more.textContent = f ? 'show all' : 'show less'; });
+        const col = node('div', 'asg-prompt-btns'); col.append(cb, more); pr.append(node('pre', 'asg-prompt-text', t.prompt), col);
+      } else pr.append(node('pre', 'asg-prompt-text', t.prompt), cb);
+      text.append(pr); }
     if (t.parts) { const row = node('span', 'asg-parts'); t.parts.forEach(([k, v]) => { const p = node('span', 'asg-part'); p.append(node('span', 'asg-part-k', k), node('code', null, v)); row.append(p); }); text.append(row); }  // the pieces of what Claude made, labelled: moment, matcher, command
     if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
@@ -1354,7 +1364,7 @@ function renderAssignment(stage, s) {
     body.classList.add('solo', 'asg-wide'); head.classList.add('has-thumb');
     const th = node('button', 'asg-thumb'); th.type = 'button'; th.title = 'Click to enlarge';
     const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotLabel || 'Expected result';
-    th.append(node('span', 'asg-thumb-k', v.shotLabel || 'What it looks like'), img, node('span', 'asg-thumb-zoom', '⤢ click to enlarge'));
+    th.append(node('span', 'asg-thumb-k', v.shotLabel || 'What it looks like'), img, node('span', 'asg-thumb-zoom', '🔍'));
     th.addEventListener('click', (e) => { e.stopPropagation();
       const box = node('div', 'asg-lightbox'); const big = document.createElement('img'); big.src = v.shot; big.alt = img.alt;
       box.append(node('p', 'asg-lightbox-k', (v.shotLabel || 'What it looks like') + ' · click or Esc to close'), big);
