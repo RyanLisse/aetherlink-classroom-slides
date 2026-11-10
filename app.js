@@ -584,15 +584,18 @@ function renderExtras(stage, main, s, v) {
   }
   if (v.guardRail) {                                             // Jessy Day 5 opt-in: guardrails. The chain alert → Sonny looks → proposes → [guardrail] → a person decides; below, the guardrails with what they stop. → reveals the guardrail, each rail, then the foot
     const G = v.guardRail; const wrap = node('div', 'gr-wrap'); let k = 0; const steps = [];
+    if (G.chainTitle) wrap.append(node('div', 'gr-title', G.chainTitle));
     const chain = node('div', 'gr-chain');
     G.chain.forEach(([ico, t, sub], i) => {
-      if (i === G.chain.length - 1) { const gate = node('div', 'gr-gate'); gate.append(node('span', 'gr-gate-ico', '🚧'), node('span', 'gr-gate-t', G.gate || 'guardrail')); chain.append(gate); steps.push(gate); }
+      if (i === G.chain.length - 1 && G.gate) { const gate = node('div', 'gr-gate'); gate.append(node('span', 'gr-gate-ico', '🚧'), node('span', 'gr-gate-t', G.gate)); chain.append(gate); steps.push(gate); }
       else if (i) chain.append(node('span', 'gr-to', '→'));
       const b = node('div', 'gr-step' + (i === G.chain.length - 1 ? ' human' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
     });
     wrap.append(chain);
+    if (G.railsTitle) { const rt = node('div', 'gr-title gr-title-rails', G.railsTitle); wrap.append(rt); steps.push(rt); }
     const rails = node('div', 'gr-rails');
     G.rails.forEach((R) => { const c = node('div', 'gr-rail'); const h = node('div', 'gr-rail-h'); h.append(node('span', 'gr-ico', R.icon), node('strong', null, R.title)); c.append(h);
+      if (R.who) { const w = node('div', 'gr-try'); w.append(node('span', 'gr-lab', R.whoLabel || 'Who'), node('span', null, R.who)); c.append(w); }
       const tr = node('div', 'gr-try'); tr.append(node('span', 'gr-lab', R.tryLabel || 'Try'), node('span', null, R.try)); c.append(tr);
       const st = node('div', 'gr-stop'); st.append(node('span', 'gr-x', '✋'), node('span', null, R.stop)); c.append(st);
       const m = node('div', 'gr-meta'); m.append(node('code', null, R.where)); if (R.today) m.append(node('span', 'gr-today', R.today)); c.append(m);
