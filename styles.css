@@ -2535,3 +2535,12 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .sm-ex-to{font-weight:900;color:var(--muted);font-size:.85rem}
 .sm-ex-foot{margin:0;font-size:.9rem;font-weight:800}
 @media (max-width:900px){.cards.sm-grid{grid-template-columns:1fr}.sm-ex-row{grid-template-columns:1fr}}
+
+/* Overview: a review note for a colleague (opt-in: slide.review) */
+.ov-review-tag{margin-left:auto;flex:none;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:#ffe9a8;color:#5a4300;white-space:nowrap}
+.ov-review{display:flex;gap:10px;align-items:flex-start;margin-top:8px;padding:10px 12px;border-radius:8px;background:#fff6d6;border:1px solid #f0d27a;color:#4a3a00;font-size:13px;line-height:1.45}
+.ov-review strong{flex:none;white-space:nowrap}
+.ov-review[hidden]{display:none}
+.ov-review{max-height:12vh;overflow:auto}
+.ov-bigcol:has(.ov-review:not([hidden])){width:min(100%,calc(44vh * 16 / 9))}
+.ov.notes-open .ov-bigcol:has(.ov-review:not([hidden])){width:min(100%,calc(38vh * 16 / 9))}

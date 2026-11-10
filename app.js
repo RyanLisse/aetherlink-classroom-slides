@@ -1691,7 +1691,8 @@ function renderOverviewPage() {
   const next = node('button', 'ov-arrow', '→'); next.setAttribute('aria-label', 'Next slide');
   const screen = node('div', 'ov-screen'); const bf = document.createElement('iframe'); bf.tabIndex = -1; bf.setAttribute('aria-hidden', 'true'); bf.scrolling = 'no'; screen.append(bf);
   const info = node('div', 'ov-info'); const title = node('strong'); const notesBtn = node('button', 'ov-deck', 'Presenter notes'); const deckBtn = node('button', 'ov-deck', 'Show in deck ↗'); info.append(title, notesBtn, deckBtn);
-  const col = node('div', 'ov-bigcol'); col.append(screen, info);
+  const review = node('div', 'ov-review'); review.hidden = true;   // opt-in per slide: slide.review = {to, text}, a note for a colleague, only on this page
+  const col = node('div', 'ov-bigcol'); col.append(screen, info, review);
   // presenter notes of the selected slide, beside the big view (the presenter page in notes-only mode)
   const notes = node('div', 'ov-notes'); let nf = null;
   const showNotes = () => { try { nf?.contentWindow?.renderSlide?.(sel); } catch {} };
@@ -1728,6 +1729,7 @@ function renderOverviewPage() {
     const tile = node('button', 'ov-tile' + (isHidden(i) ? ' is-hidden' : '')); tile.dataset.type = slideType(s);
     const shot = node('div', 'ov-shot'); shot.dataset.n = String(i + 1);
     const cap = node('div', 'ov-cap'); cap.append(node('span', 'ov-num', String(i + 1)), node('strong', null, s.title));
+    if (s.review) { const t = node('span', 'ov-review-tag', '✎ ' + (s.review.to || 'Review')); t.title = s.review.text; cap.append(t); }
     // eye on hover: hide or show this slide (same list as H in the deck: the arrows skip it); a hidden slide stays visible here, darker
     const eye = node('span', 'ov-eye'); eye.setAttribute('role', 'button'); eye.tabIndex = 0;
     const paintEye = () => { const h = isHidden(i); tile.classList.toggle('is-hidden', h); eye.innerHTML = h ? EYE_OFF : EYE_ON; eye.title = h ? 'Hidden: click to show this slide again' : 'Hide this slide (the arrows skip it)'; eye.setAttribute('aria-label', (h ? 'Show' : 'Hide') + ' slide ' + (i + 1)); };
@@ -1740,7 +1742,11 @@ function renderOverviewPage() {
     tile.addEventListener('dblclick', () => showInDeck(i));
     grid.append(tile); io.observe(shot); ro.observe(shot); return tile;
   });
-  function paintSel() { title.textContent = (sel + 1) + ' · ' + slides[sel].title + (isHidden(sel) ? '  (hidden)' : ''); }
+  function paintSel() {
+    title.textContent = (sel + 1) + ' · ' + slides[sel].title + (isHidden(sel) ? '  (hidden)' : '');
+    const r = slides[sel].review; review.hidden = !r; review.replaceChildren();
+    if (r) review.append(node('strong', null, '✎ For ' + (r.to || 'review')), node('span', null, r.text));
+  }
   function select(i) {
     sel = Math.min(Math.max(i, 0), slides.length - 1);
     tiles.forEach((t, k) => t.classList.toggle('is-current', k === sel));
