@@ -589,7 +589,7 @@ function renderExtras(stage, main, s, v) {
     G.chain.forEach(([ico, t, sub], i) => {
       if (i === G.chain.length - 1 && G.gate) { const gate = node('div', 'gr-gate'); gate.append(node('span', 'gr-gate-ico', '🚧'), node('span', 'gr-gate-t', G.gate)); chain.append(gate); steps.push(gate); }
       else if (i) chain.append(node('span', 'gr-to', '→'));
-      const b = node('div', 'gr-step' + (i === G.chain.length - 1 ? ' human' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
+      const b = node('div', 'gr-step' + (i === G.chain.length - 1 && !G.plainChain ? ' human' : '') + ((G.brokenStep === i) ? ' broken' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
     });
     wrap.append(chain);
     if (G.railsTitle) { const rt = node('div', 'gr-title gr-title-rails', G.railsTitle); wrap.append(rt); steps.push(rt); }

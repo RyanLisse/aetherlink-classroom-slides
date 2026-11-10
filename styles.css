@@ -2574,3 +2574,5 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .gr-title{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted,#9fb0c3);margin-bottom:-.5rem}
 .gr-title-rails{color:var(--aether-orange);opacity:0;transition:opacity .4s ease}
 .gr-title-rails.shown{opacity:1}
+.gr-step.broken{border:2px dashed var(--aether-orange)}
+.gr-step.broken .gr-sub{color:var(--aether-orange);font-weight:700}
