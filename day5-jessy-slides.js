@@ -1033,13 +1033,7 @@ const day5Slides = [
     notes: note({time: '12:15 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
   }),
   pauseSlide('Lunch', '60 min', 'Recall the morning before A4', '12:00'),
-  pauseSlide('Restart and settle', '10 min', 'Post-lunch recap', '13:00'),
-  baseSlide({
-    title: 'Post-lunch recap · Intent becomes a contract', kicker: 'Day 5 · RECAP', subtitle: 'Reconnect A1, A2, and A3 before the control work.', type: 'recap',
-    cards: [{title: 'A1', body: 'Map both intake paths.'}, {title: 'A2', body: 'Accept the operator outcome.'}, {title: 'A3', body: 'Require customer impact and keep gaps OPEN.'}],
-    keyPoints: ['The repo map bounded the work.', 'The intent defined success.', 'The contract made success testable.'],
-    notes: note({time: '13:10 · 3 min', why: 'The room needs the morning chain before adding controls.', predict: 'Ask which artifact A3 implements.', see: 'Map, intent, and contract form one chain.', inside: 'A4 now protects the action boundary.', participant: 'Write one link in your notes. Optionally share it in chat.', watch: 'Do not introduce new content.', stuck: 'Read the three cards.', stop: 'The room can state the chain.', next: 'A4 · Refuse unsafe chat actions'})
-  }),
+  pauseSlide('Restart and settle', '10 min', 'Refuse unsafe chat actions', '13:10'),
   baseSlide({
     title: 'Refuse unsafe chat actions', kicker: 'Day 5 · CONCEPT', subtitle: 'Chat may investigate. Buttons and a named person own mutations.',
     cards: [{title: 'Question', body: 'Read-only evidence questions stay allowed.'}, {title: 'Mutation', body: 'Rollback, approval, scaling, and resolution stay refused.'}, {title: 'File guard', body: 'A human-owned hook protects bench/ratchet.json edits.'}],
@@ -1059,219 +1053,39 @@ const day5Slides = [
     ],
     after: 'Chat refuses mutations, evidence questions work, and the human-owned file guard passes.',
     checks: ['Show the focused chat output for both exact sentences.', 'Show the focused guard output.', 'Do not use the root audit file as A4 proof.'],
-    humanOpen: 'Only the participant edits the human-owned hook line.', next: 'A5 · Add one read-only tool'
+    humanOpen: 'Only the participant edits the human-owned hook line.', next: 'Close: what you learned on Day 5'
   }),
   baseSlide({
-    title: 'Give the agent one read-only tool', kicker: 'Day 5 · CONCEPT', subtitle: 'A tool supplies evidence. It does not supply authority.',
-    cards: [{title: 'Handler', body: 'list_deploys returns deployment evidence.'}, {title: 'Trace', body: 'The trace records the exact arguments.'}, {title: 'No bypass', body: 'Offline runtime and chat use the registered handler.'}],
-    keyPoints: ['No mutation tool exists.', 'Empty windows remain data gaps.', 'Trace arguments must match the request.'],
-    notes: note({time: '13:40 · 3 min', why: 'The diagnosis needs facts outside the prompt.', predict: 'Ask which tool call proves a deploy claim.', see: 'One read-only handler appears in the trace.', inside: 'Three bypasses must disappear.', participant: 'Choose an empty-window or missing-deploy case.', watch: 'Do not add a write tool.', stuck: 'Run the focused A5 test.', stop: 'The tool boundary is clear.', next: 'A5 example target'})
-  }),
-  screenshotSlide({number: 5, title: 'Example tool and trace proof', subtitle: 'The result and the arguments both belong in the proof.', stage: 'tools', shot: 'assets/day5-expected/a5.png', points: ['The registered handler returns deploy evidence.', 'The trace shows exact list_deploys arguments.', 'The offline runtime and chat no longer bypass the handler.'], next: 'Assignment 5', time: '13:43 · 2 min'}),
-  assignmentSlide({
-    number: 5, title: 'build a read-only deploy tool', subtitle: 'Bind one evidence tool and prove every route uses it.', stage: 'tools', duration: '13:45 · 20 min', shot: 'assets/day5-expected/a5.png',
-    steps: [
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a5Build, after: 'Claude Code shows the red focused test and the three bypasses.'},
-      {text: 'Human review. Approve only the handler and bypass-removal scope.', after: 'The implementation stays read-only.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run test:workshop -- --test-name-pattern=A5:', after: 'Only the focused A5 checks run and pass.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The trace shows list_deploys and exact arguments.'},
-      {text: 'Human review. Compare the result with the trace.', after: 'Every deploy claim has a tool reference.'}
+    title: 'Close: what you learned on Day 5', kicker: 'Close · Day 5', type: 'recap', layout: 'recap',
+    subtitle: 'From an idea to a change you can trust: plan it, build it, test it, and a person decides.',
+    visual: {levelUp: true, bot: 'happy', place: 'beside'},
+    items: [
+      {label: 'The map', caption: 'Claude Code read the project first and showed the two ways into Sonny (Assignment 1).'},
+      {label: 'The intent', caption: 'You wrote down what Sonny must do for the operator, before any code (Assignment 2).'},
+      {label: 'The contract and its test', caption: 'Five rules every diagnosis must pass. The test was red first, green after the build (Assignment 3).'},
+      {label: 'Done means everything', caption: 'All 56 main tests, the type check and a second opinion, not just your own test (Assignment 3B).'},
+      {label: 'Chat may look, not act', caption: 'The chat refuses “roll back”, and you wrote the guard line yourself (Assignment 4).'},
+      {label: 'Next: Day 6', caption: 'The same loop, on your own team project.'}
     ],
-    after: 'The deploy tool is read-only, traced, and used by every investigation route.',
-    checks: ['Show the handler result.', 'Show exact trace arguments.', 'Show no direct deploy-reader bypass.'],
-    humanOpen: 'A tool result informs a decision. It never authorizes one.', next: 'A5 catch-up checkpoint'
-  }),
-  baseSlide({
-    title: 'Catch-up · Ready for the live route', kicker: 'Day 5 · CHECKPOINT A5', subtitle: 'Save your work before using the reviewed A5 checkpoint.', type: 'review', layout: 'exercise', mode: 'manual', calm: true,
-    stepsHeading: 'Use only when blocked',
-    steps: [
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git status --short', after: 'You can see every local change before recovery.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git stash push -u -m "before Day 5 A5 catch-up"', after: 'Tracked and untracked participant work is saved.', warn: true},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git switch -c day5-catch-up-a5 day5-after-a5', after: 'A new branch starts at the reviewed A5 checkpoint.'},
-      {text: 'Human review. Continue with A6 only.', after: 'Your original work remains in the named stash.'}
-    ],
-    expected: 'A new catch-up branch is ready without discarding participant work.',
-    cards: [{title: 'A3', body: 'customer_impact is required and visible.'}, {title: 'A4', body: 'Mutations are refused and the guard passes.'}, {title: 'A5', body: 'list_deploys returns evidence with trace arguments.'}],
-    keyPoints: ['Self-check the first missing checkpoint.', 'Do not rerun every suite.', 'Continue when all three proofs are visible.'],
-    notes: note({time: '14:05 · 5 min', why: 'The live route depends on the three completed contracts.', predict: 'Ask which proof is missing first.', see: 'Three compact checkpoints.', inside: 'The recovery commands preserve work and create a separate branch.', participant: 'Self-check A3, A4, and A5. Optionally share one blocker in chat.', watch: 'Never reset or overwrite participant work.', stuck: 'Use the reviewed day5-after-a5 tag.', stop: 'All three checkpoints are visible.', next: 'A6 · Run the live counterpart'})
-  }),
-  baseSlide({
-    title: 'Run the live counterpart', kicker: 'Day 5 · CONCEPT', subtitle: 'Create a new live incident, challenge its evidence, and keep action human-owned.',
-    cards: [{title: 'Before', body: 'Run healthy traffic for two minutes.'}, {title: 'Change', body: 'Run one bad deploy in its own terminal.'}, {title: 'Explain', body: 'Use stable refs and keep current telemetry separate.'}, {title: 'Human in the loop', body: 'Wrong incident or action stays blocked.'}],
-    keyPoints: ['Window 1 is the console from A1. Restart it. Do not open a second one.', 'Do not let Claude run chaos.', 'The A8 human-in-the-loop check is the last A6 step.'],
-    notes: note({time: '14:10 · 4 min', why: 'The learner now has the contracts needed for a real local route.', predict: 'Ask why the healthy baseline comes first.', see: 'The listener creates a new live incident about three minutes after healthy traffic starts.', inside: 'Run Window 1: AGENT_LISTEN_WINDOW_MIN=1 npm run console. Run Window 2: npm run shop. Run Window 3: npm run traffic. After the two-minute baseline, run Window 4: npm run chaos -- deploy v2.15.0 --mode bad-deploy. Detection and diagnosis take about 55 seconds.', participant: 'Write one plausible alternative cause.', watch: 'Keep fixture, live, diagnosis snapshot, and current telemetry distinct.', stuck: 'Stay on the scripted route.', stop: 'The room can state all four commands and the wait.', next: 'A6 example target'})
-  }),
-  screenshotSlide({number: 6, title: 'Example live incident proof', subtitle: 'The current run must reproduce the route and its evidence labels.', stage: 'live', shot: 'assets/day5-expected/a6.png', points: ['The live incident has its own id.', 'Diagnosis claims cite stable source:ref labels.', 'Snapshot evidence and current telemetry are labeled separately.'], next: 'Assignment 6 · start and trace', time: '14:14 · 2 min'}),
-  assignmentSlide({
-    number: 6, title: 'start and trace the live route · 1/2', subtitle: 'Map the path, reuse services, establish a baseline, then create one incident.', stage: 'live', duration: '14:16 · 22 min', shot: 'assets/day5-expected/a6.png',
-    steps: [
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Map, after: 'Claude Code maps the fixture and live routes without editing.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Build, after: 'Claude Code proposes the terminal order and waits for approval.'},
-      {text: 'You, not Claude. Window 1 already runs the console from A1: press Ctrl+C there and start it again. Open two new windows for the shop and the traffic.', parts: [['Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Window 2', 'npm run shop'], ['Window 3', 'npm run traffic']], after: 'All three windows say they are running. Do not start a second console.', warn: true},
-      {text: 'Human review. Keep healthy traffic running for two minutes.', after: 'A healthy before-state is visible. About 55 seconds remain after the deploy.', warn: true},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows). Use Window 4.', parts: [['Window 4', 'npm run chaos -- deploy v2.15.0 --mode bad-deploy']], after: 'About 55 seconds later, a new incident appears at localhost:4320.', warn: true}
-    ],
-    after: 'A new live incident exists with a healthy before-state and a visible tool trace.',
-    checks: ['Show the live incident id.', 'Show the two-minute baseline.', 'Show the diagnosis trace.'],
-    humanOpen: 'The participant starts chaos. Claude Code never runs or stops the processes.', next: 'Human in the loop · Part of A6'
-  }),
-  screenshotSlide({number: 8, title: 'Human in the loop · Part of A6', kicker: 'Day 5 · HUMAN IN THE LOOP', subtitle: 'The last safety check inside A6: only the right incident, the right action and a named person.', stage: 'gate', shot: 'assets/day5-expected/a8.png', points: ['A wrong incident stays blocked.', 'A wrong action stays blocked.', 'The real approval and execution remain HUMAN OPEN.'], next: 'Assignment 6 · challenge and human in the loop', time: '14:38 · 2 min'}),
-  checkpointSlide({
-    number: 6, title: 'challenge the incident and prove human in the loop · 2/2', subtitle: 'Challenge the evidence, refuse mutation, and prove the human in the loop.', stage: 'gate', duration: '14:40 · 20 min', shot: 'assets/day5-expected/a8.png',
-    steps: [
-      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Evidence, after: 'The answer cites stable refs and separates snapshot from current telemetry.'},
-      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Alternative, after: 'The offline bot repeats the same summary. That is expected: it is a script, not a model, so it cannot think of other causes. Write one other possible cause in your own notes.'},
-      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Mutation, after: 'Chat refuses rollback and creates no action record.', warn: true},
-      {text: 'Type this in: Claude Code. Build the human-in-the-loop check.', prompt: PROMPTS.a8Build, after: 'Both existing mismatch cases stay blocked in the focused test.'},
-      {text: 'Open in browser: http://localhost:4320', after: 'Approve and Execute remain HUMAN OPEN.', warn: true}
-    ],
-    after: 'The answer is cited, mutation is refused, and the human in the loop stays in charge.',
-    checks: ['Show stable refs.', 'Show refused mutation.', 'Show both mismatch tests and HUMAN OPEN.'],
-    humanOpen: 'Only a named human may approve, execute, mitigate, or resolve.', next: 'Break'
-  }),
-  pauseSlide('Break', '15 min', 'A6 catch-up and recap', '15:00'),
-  baseSlide({
-    title: 'Catch-up · Six required assignments complete', kicker: 'Day 5 · CHECKPOINT A6', subtitle: 'Save your work before using the reviewed A6 checkpoint.', type: 'review', layout: 'exercise', mode: 'manual', calm: true,
-    stepsHeading: 'Use only when blocked',
-    steps: [
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git status --short', after: 'You can see every local change before recovery.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git stash push -u -m "before Day 5 A6 catch-up"', after: 'Tracked and untracked participant work is saved.', warn: true},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git switch -c day5-catch-up-a6 day5-after-a6', after: 'A new branch starts at the reviewed A6 checkpoint.'},
-      {text: 'Human review. Keep approval and execution HUMAN OPEN.', after: 'The checkpoint remains safe and ready for the recap.', warn: true}
-    ],
-    expected: 'A safe A6 catch-up branch is ready and participant work is preserved.',
-    cards: [{title: 'Evidence', body: 'Stable refs support the diagnosis.'}, {title: 'Boundary', body: 'Mutation is refused and approval stays HUMAN OPEN.'}, {title: 'Identity', body: 'The fixture and live incident remain distinct.'}],
-    keyPoints: ['Use one focused check.', 'Keep unsupported claims OPEN.', 'Stop when the missing proof appears.'],
-    notes: note({time: '15:15 · 5 min', why: 'The required build route is now complete.', predict: 'Ask which proof another participant could repeat.', see: 'Three final A6 checks.', inside: 'The recovery commands preserve work and keep actions closed.', participant: 'Self-check the first missing proof. Optionally share one blocker in chat.', watch: 'Do not invent resolution or approval.', stuck: 'Use the reviewed day5-after-a6 tag.', stop: 'All required proof is visible.', next: 'Hackathon intent studio'})
-  }),
-  baseSlide({
-    title: 'Hackathon intent studio', kicker: 'Day 5 · PRACTICE', subtitle: 'Back to Plan: sharpen one problem and three checks for your own Day 6–7 project.', type: 'review', layout: 'exercise', calm: true, mode: 'manual',
-    stepsHeading: 'Prepare the next build',
-    steps: [
-      {text: 'Human review. Write one customer or operator problem.', after: 'The problem describes current pain, not a feature.'},
-      {text: 'Human review. Write three results another person can repeat.', after: 'Each check has a visible result.'},
-      {text: 'Human review. Mark the data and action boundaries.', after: 'The agent and human responsibilities are distinct.'},
-      {text: 'Human review. Choose one small first build.', after: 'The next step fits one focused work session.'}
-    ],
-    expected: 'You have one problem, three checks, explicit boundaries, and one first build.',
-    cards: [{title: 'Use on Day 6', body: 'This intent is the first hackathon input.'}, {title: 'Keep small', body: 'Do not design the full product today.'}],
-    keyPoints: ['Problem before solution.', 'Checks before implementation.', 'One build before a roadmap.'],
-    notes: note({time: '15:20 · 30 min', why: 'The workshop method becomes useful when it transfers to a new problem.', predict: 'Ask whether the first sentence describes pain or a feature.', see: 'One bounded hackathon intent.', inside: 'The same intent, build, proof, and review loop repeats.', participant: 'Write and self-review the four parts. Optionally share one in chat.', watch: 'Do not force the SRE sample as the hackathon topic.', stuck: 'Reuse operator, outcome, boundary, first build.', stop: 'Each learner has a reviewed start point.', next: 'Final recap'})
-  }),
-  baseSlide({
-    title: 'Recap · The six-assignment loop', kicker: 'Day 5 · RECAP', subtitle: 'You went round the loop once. On Day 6 and 7 you do it again with your own project.', type: 'recap', layout: 'steps',
-    items: [{label: 'A1', caption: 'repo map + setup proof'}, {label: 'A2', caption: 'reviewed intent'}, {label: 'A3', caption: 'verdict contract'}, {label: 'A4', caption: 'refusal + guard'}, {label: 'A5', caption: 'read tool + trace'}, {label: 'A6', caption: 'live evidence + human gate'}],
-    keyPoints: ['Learn the repo.', 'Choose the outcome.', 'Build one contract.', 'Prove it.', 'Stop for the person.'],
-    notes: note({time: '15:50 · 7 min', why: 'The final recall turns six builds into one reusable method.', predict: 'Ask which assignment created the first accepted artifact.', see: 'Six artifacts form one loop.', inside: 'The handoff carries only verified work forward.', participant: 'Explain one assignment in your own notes. Optionally share it in chat.', watch: 'Do not introduce new content.', stuck: 'Read the artifact captions.', stop: 'Collect one method each learner will reuse.', next: 'End at 16:00'})
-  }),
-  baseSlide({
-    title: 'End at 16:00', kicker: 'Day 5 · DONE', subtitle: 'Keep your intent, evidence, OPEN list, and handoff.', type: 'context',
-    cards: [{title: 'Keep', body: 'intent.md · evidence refs · focused checks · HANDOFF.md'}, {title: 'Do not claim', body: 'A human approval, execution, resolution, or promoted lesson that did not happen.'}],
-    keyPoints: ['Thank the room.', 'Name the hackathon first step.', 'Keep the human boundary explicit.'],
-    notes: 'Time: 15:57 · 3 min.\n\nThank the room. Invite an optional chat share of the first handoff line. End at 16:00.'
-  }),
-  baseSlide({
-    title: 'Appendix · Optional product model', kicker: 'Day 5 · APPENDIX · OPTIONAL LIVE MODEL', subtitle: 'Run one approved model proof only after the required route.', type: 'concept', layout: 'exercise', calm: true, mode: 'manual',
-    stepsHeading: 'Optional local proof',
-    steps: [
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.liveModelSetup, after: 'Claude Code proposes the bounded proof and waits.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json --model sonnet --max-turns 8 --max-budget-usd 0.30 --dry-run', after: 'One diagnosis and tool trace complete, or the run stops with a clear reason.', warn: true},
-      {text: 'Human review. Inspect cost, diagnosis, and trace before any console restart.', after: 'A health label alone is not accepted as proof.', warn: true},
-      {text: 'Open skills/triage/SKILL.md: the team runbook. With a real model, the agent reads it as its instructions. Compare the tool trace with the runbook’s order.', after: 'Runbook order: updates first, then the error graph, then the change, then the logs. Did the agent follow it? If not, write down where it differs.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The required scripted route is restored.'}
-    ],
-    expected: 'One bounded product-model proof is separate from the required scripted route.',
-    keyPoints: ['Never display credentials.', 'One turn can exceed the budget.', 'The console has no global model-budget guard.'],
-    notes: 'Appendix. Use only after the required six assignments and with approved model access. The model name in health is configuration, not proof. The runbook (skills/triage/SKILL.md) is loaded into the agent’s instructions only in real-model mode (src/prompts.ts, loadRunbook). In Ryan’s test run (docs/verification.md) the trace was summarize_metrics → list_deploys → get_diff → search_logs: the model looked at the graph before the updates, while the runbook says updates first.',
+    keyPoints: ['Plan before you build: map and intent.', 'Rules in code, proven by a test.', 'Done means everything still works.', 'A person decides about actions.'],
+    notes: 'Time: 13:40 · 15 min (end time still to be decided). Recap round, like the close of Day 3 and Day 4. Each click on Reveal shows the next line. Everyone shows one result in one minute: the red-then-green contract test, the Customer impact line, the 56 green main tests, or the chat refusal. Back to the six SDLC phases: which ones did they do today? Ask where a person still had to decide.',
     teach: {
-      time: '10 min · optional',
-      gist: 'Optional: the agent investigates once with a real AI model. Now it reads the team runbook. Check cost, diagnosis and trace, then go back to the script.',
-      copy: [['Step 1 · Claude Code', PROMPTS.liveModelSetup], ['Step 2 · Terminal', 'npm run investigate -- fixtures/incidents/bad-deploy.json --model sonnet --max-turns 8 --max-budget-usd 0.30 --dry-run'], ['Step 5 · Terminal', 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console']],
+      time: '15 min',
+      gist: 'Close: one result each, the six lines of today, and a bridge to Day 6.',
       script: [
-        {do: 'Only for people who finished A6, with approved model access.', say: ['Until now the agent ran on a script.', 'Now it investigates once with a real AI model.']},
-        {do: 'Paste the setup prompt in Claude Code.', copy: [['Step 1 · Claude Code', PROMPTS.liveModelSetup]], say: ['Claude Code explains the difference: itself is the builder; the agent now runs on its own model.', 'It proposes one test run and waits.']},
-        {do: 'Run the investigate line in the terminal.', copy: [['Step 2 · Terminal', 'npm run investigate -- fixtures/incidents/bad-deploy.json --model sonnet --max-turns 8 --max-budget-usd 0.30 --dry-run']], say: ['One real run: at most 8 steps and $0.30.', 'The budget is checked between steps, so one step can go a bit over.']},
-        {do: 'Check cost, diagnosis and trace together.', say: ['How much did it cost?', 'Does the diagnosis cite its sources?', 'Which tools did it use, in which order?']},
-        {do: 'Open skills/triage/SKILL.md.', say: ['This is the team runbook: the shop team’s checklist for when something breaks.', 'With a real model, the agent reads it as its instructions.', 'Runbook order: updates first, then the error graph, the change, the logs.']},
-        {ask: 'Did the agent follow the runbook’s order?', say: ['(Answer: look at the trace. In Ryan’s test it checked the graph first, then the updates.)', 'Is that a problem? Discuss: a model follows instructions, but not always exactly. That is why we check the trace.']},
-        {do: 'Restart the console without the model.', copy: [['Step 5 · Terminal', 'env -u AGENT_MODEL AGENT_LISTEN_WINDOW_MIN=1 npm run console']], say: ['Back to the script, so everyone is on the same route again.']}
+        {do: 'Slide appears.', say: ['This morning Sonny was an agent you had never seen. Now he follows your rules, and you proved it.']},
+        {do: 'Click Reveal: The map.', say: ['First you let Claude Code read the project before changing anything. You saw the two ways into Sonny.']},
+        {do: 'Click Reveal: The intent.', say: ['Then you wrote down what Sonny must do for the operator at 03:45, before any code.']},
+        {do: 'Click Reveal: The contract and its test.', say: ['From the intent came five rules in the contract. The test was red first, and green after the build.'], ask: ['What did the Customer impact line say in your run?']},
+        {do: 'Click Reveal: Done means everything.', say: ['Your own test was green, but that is not done. Done means all main tests, the type check, and a second opinion.']},
+        {do: 'Click Reveal: Chat may look, not act.', say: ['The chat may look at evidence, but it may not act. Rolling back is a button for a named person.'], ask: ['Where today did a person have to decide, and not the AI?']},
+        {do: 'Click Reveal: Next: Day 6.', say: ['On Day 6 you do the same loop on your own team project: map, intent, rules, test, done.']}
       ],
-      learn: ['With a real model, the agent reads the team runbook as its instructions.', 'Always check cost, diagnosis and trace.', 'A model can differ from its instructions: the trace shows it.'],
-      watch: ['Never show or copy credentials or keys.', 'No approved model access? Skip this slide.', 'Do not read the runbook’s “Things that have burned us” list aloud before the cause is found.'],
-      terms: [['Runbook', 'a team’s checklist for when something breaks; here skills/triage/SKILL.md'], ['Tool trace', 'the list of tools the agent used, in order'], ['Budget', 'the maximum cost of one run, here $0.30']]
+      do: ['Everyone shows one result in one minute.', 'Go through the six lines.', 'Bridge to Day 6.'],
+      done: ['Each person named one result.', 'The room can say where a person decides.'],
+      watch: ['Do not introduce anything new.']
     }
-  }),
-  baseSlide({
-    title: 'Appendix · A7 optional offline coverage', kicker: 'Day 5 · A7 · OPTIONAL', subtitle: 'Add one deterministic case without lowering the expected result.', type: 'concept',
-    cards: [{title: 'Baseline', body: 'Save case count, score floor, and harmful count.'}, {title: 'Treatment', body: 'Add one reviewed fixture case.'}, {title: 'Limit', body: 'The offline bench does not prove live model resistance.'}],
-    keyPoints: ['A7 is optional.', 'Keep both ratchet values unchanged.', 'Compare baseline and treatment.'],
-    notes: 'Appendix. Use when the core route finishes early. Keep fixture evidence separate from model evidence.'
-  }),
-  screenshotSlide({number: 7, title: 'Appendix · A7 example bench comparison', subtitle: 'The example shows the proof shape for the optional exercise.', stage: 'optional', shot: 'assets/day5-expected/a7.png', points: ['The case count increases by one.', 'The new case passes and harmful stays 0.', 'Both score-floor values remain unchanged.'], next: 'Optional A7 prompt'}),
-  baseSlide({
-    title: 'Appendix · Run optional A7', kicker: 'Day 5 · A7 · OPTIONAL PRACTICE', subtitle: 'Use only when the required route is complete.', type: 'review', layout: 'exercise', calm: true, mode: 'manual',
-    stepsHeading: 'Optional offline depth',
-    steps: [
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a7Build, after: 'Claude Code saves baseline and treatment evidence.'},
-      {text: 'Human review. Inspect the new case and unchanged floor.', after: 'The case does not weaken an existing expectation.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a7Verify, after: 'Claude Code reports a cited verification verdict.'},
-      {text: 'Human review. Keep the model-eval claim OPEN.', after: 'The result is described as deterministic fixture evidence only.'}
-    ],
-    expected: 'One reviewed case increases offline coverage without moving the floor.',
-    visual: {shot: 'assets/day5-expected/a7.png', shotLabel: 'A7 optional example'},
-    keyPoints: ['Optional only.', 'No floor reduction.', 'No live-model claim.'],
-    notes: 'Appendix. This is not a seventh required assignment.'
-  }),
-  baseSlide({
-    title: 'Appendix · A9 optional lesson proposal', kicker: 'Day 5 · A9 · OPTIONAL', subtitle: 'Propose reusable knowledge. Do not promote it automatically.', type: 'concept',
-    cards: [{title: 'Curated knowledge', body: 'lessons/lessons.md contains human-reviewed lessons.'}, {title: 'Action log', body: 'approvals/audit.jsonl records decisions and attempts.'}, {title: 'Progress signal', body: 'PROGRESS.md is not validation.'}, {title: 'Handoff', body: 'HANDOFF.md carries verified work and OPEN items.'}],
-    keyPoints: ['A human promotes a lesson.', 'An audit log is not memory.', 'A handoff does not invent closure.'],
-    notes: 'Appendix. Use after the handoff recap if the room has time.'
-  }),
-  screenshotSlide({number: 9, title: 'Appendix · A9 example lesson boundary', subtitle: 'The example separates a proposal, a log, progress, and a handoff.', stage: 'optional', shot: 'assets/day5-expected/a9.png', points: ['The lesson remains proposed.', 'The audit log records actions without becoming memory.', 'The handoff keeps resolution and promotion OPEN.'], next: 'Optional A9 prompt'}),
-  baseSlide({
-    title: 'Appendix · Run optional A9', kicker: 'Day 5 · A9 · OPTIONAL PRACTICE', subtitle: 'Review one lesson proposal without promoting it.', type: 'review', layout: 'exercise', calm: true, mode: 'manual',
-    stepsHeading: 'Optional maintain step',
-    steps: [
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a9Maintain, after: 'Claude Code separates the three file roles or stops with HUMAN OPEN for a placeholder diagnosis.'},
-      {text: 'Human review. Separate curated knowledge, the action log, and progress signals.', after: 'The file roles are clear before any proposal.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a9MaintainDraft, after: 'Claude Code shows one cited proposal under lessons/proposed/.'},
-      {text: 'Human review. Leave lessons/lessons.md unchanged.', after: 'Promotion remains a named human action.'},
-      {text: 'Human review. Carry only accepted wording into the handoff.', after: 'The handoff stays honest and reusable.'}
-    ],
-    expected: 'One reusable lesson is proposed and remains unpromoted.',
-    visual: {shot: 'assets/day5-expected/a9.png', shotLabel: 'A9 optional example'},
-    keyPoints: ['Optional only.', 'Proposal is not promotion.', 'Progress is not proof.'],
-    notes: 'Appendix. Do not present this as a required assignment.'
-  }),
-  baseSlide({
-    title: 'Appendix · A9 handoff recap', kicker: 'Day 5 · A9 · OPTIONAL HANDOFF', subtitle: 'Carry verified work and OPEN items forward without inventing closure.', type: 'review', layout: 'exercise', calm: true, mode: 'manual',
-    stepsHeading: 'Review the next-team handoff',
-    steps: [
-      {text: 'Human review. Name the operator problem and accepted intent.', after: 'The handoff begins with the reviewed outcome.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a9Handoff, after: 'Claude Code prints a full handoff and stops before writing.'},
-      {text: 'Human review. Check every evidence reference and HUMAN OPEN item.', after: 'Resolution, promotion, approval, and execution remain honest.'},
-      {text: 'Type this in: Claude Code', prompt: PROMPTS.a9Save, after: 'Claude Code asks before saving the exact reviewed text.'}
-    ],
-    expected: 'HANDOFF.md contains only reviewed intent, verified checks, OPEN items, and one next step.',
-    visual: {shot: 'assets/day5-expected/a9.png', shotLabel: 'A9 optional handoff example'},
-    keyPoints: ['Optional recap only.', 'Review before save.', 'Do not invent closure.'],
-    notes: 'Appendix. This handoff recap is not a seventh required assignment.'
-  }),
-  baseSlide({
-    title: 'Appendix · Choose one skill for the hackathon', kicker: 'Day 5 · APPENDIX · HACKATHON SKILLS', subtitle: 'Install only the project skill that your hackathon needs.', type: 'context',
-    source: {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'},
-    prompt: "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
-    cards: [{title: 'After Day 5', body: 'Keep the lesson project skills separate.'}, {title: 'Start isolated', body: 'Use project-only settings and no Chrome integration.'}, {title: 'Choose one', body: 'Inspect one skill for the hackathon problem.'}, {title: 'Review first', body: 'Approve the source and project-local target.'}],
-    keyPoints: ['Do not bulk install.', 'Preserve an existing skill.', 'Do not change global settings.'],
-    notes: 'Appendix. The full pack is hackathon support, not lesson setup.'
-  }),
-  baseSlide({title: 'Appendix · Why this is an AI-native SDLC loop', kicker: 'Day 5 · APPENDIX', subtitle: 'Each accepted artifact becomes the next step input.', cards: [{title: 'Intent', body: 'intent.md'}, {title: 'Build', body: 'one bounded contract'}, {title: 'Proof', body: 'focused checks and visible output'}, {title: 'Human review', body: 'accepted wording and action boundary'}], keyPoints: ['The loop is non-linear.', 'Evidence crosses each handoff.', 'Humans own decisions.'], notes: 'Appendix. Source: https://claude.com/resources/articles/the-ai-native-sdlc-playbook'}),
-  baseSlide({title: 'Appendix · Guidance and enforcement differ', kicker: 'Day 5 · APPENDIX', subtitle: 'CLAUDE.md guides. Tests, permissions, and hooks enforce defined boundaries.', cards: [{title: 'Guide', body: 'CLAUDE.md · intent.md · skills'}, {title: 'Enforce', body: 'tests · permissions · human-owned hook'}, {title: 'Record', body: 'trace · audit · HUMAN OPEN list'}], keyPoints: ['A written rule can be ignored.', 'A hook blocks a defined edit.', 'A human reviews both.'], notes: 'Appendix. Use after A4 when a learner asks why chat refusal is not enough.'}),
-  baseSlide({title: 'Appendix · Optional /sdlc course mod', kicker: 'Day 5 · APPENDIX · OPTIONAL', subtitle: 'The mod opens the current prompt inside Claude Code.', cards: [{title: 'It does', body: 'Open an assignment and fill its prompt.'}, {title: 'It does not', body: 'Submit the prompt or complete a human decision.'}], keyPoints: ['Optional route only.', 'The slides remain the prompt source.', 'No plugin is required.'], notes: 'Appendix. The mod fills a prompt. The participant reviews and submits it.'}),
-  baseSlide({title: 'Appendix · Recovery without a solved branch', kicker: 'Day 5 · APPENDIX · FACILITATOR', subtitle: 'Recover the current step. Preserve participant work.', cards: [{title: 'After 2 minutes', body: 'Ask for the blocker and next focused check.'}, {title: 'After one failed attempt', body: 'Self-check the current artifact, then optionally share the blocker in chat.'}, {title: 'After two failed attempts', body: 'Use facilitator evidence and apply only the reviewed change.'}], keyPoints: ['No branch checkout between assignments.', 'No full suite after every prompt.', 'Preserve the participant diff.'], notes: 'Appendix. Never replace participant work with solved code.'}),
-  baseSlide({title: 'Appendix · Optional real-model eval', kicker: 'Day 5 · APPENDIX · OPTIONAL', subtitle: 'Run only with approved access, cost, and data.', cards: [{title: 'Required proof', body: 'The scripted route checks deterministic fixtures.'}, {title: 'Optional proof', body: 'A separately approved eval can test model behavior.'}], keyPoints: ['Keep fixture and model evidence separate.', 'Record model, cost, and exact input.', 'Do not fill waiting time with a paid run.'], notes: 'Appendix. The required route needs no paid model.'}),
-  baseSlide({title: 'Bonus · Daily Brief agent', kicker: 'Day 5 · BONUS', subtitle: 'Use the Daily Brief lab only after the SRE lesson.', repo: {url: 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1', label: 'AetherLink-bv/aetherlink-daily-brief-lab-s1'}, cards: [{title: 'Core route', body: 'Steps 1 to 4 · 30 to 40 minutes'}, {title: 'Homework', body: 'Steps 5 to 7'}, {title: 'Human in the loop', body: 'Open a pull request only after human review.'}], keyPoints: ['SRE is the main lesson.', 'Daily Brief is the bonus.', 'Reuse the same evidence and human-in-the-loop method.'], notes: 'Bonus only. Do not shorten the six required assignments to fit this lab.'})
+  })
 ];
 
 window.DAY5_PROMPTS = PROMPTS;
@@ -1286,7 +1100,7 @@ const SDLC_BY_TITLE = [
   [/^Catch-up · Ready for the live route/, 'test'],
   [/^(Run the live counterpart|Example live incident|A6 |Assignment 6:|Human in the loop · Part of A6|Catch-up · Six required)/, 'deploy'],
   [/^Hackathon intent studio/, 'plan', true],
-  [/^(Recap · |End at 16:00)/, 'all'],
+  [/^(Recap · |End at 16:00|Close: what you learned)/, 'all'],
   [/^Appendix · (A7|Run optional A7|A9|Run optional A9)/, 'maintain']
 ];
 let sdlcCarry = null;
