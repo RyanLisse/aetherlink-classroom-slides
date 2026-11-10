@@ -1164,7 +1164,7 @@ const day5Slides = [
         {icon: '✋', title: '2 · Only eyes, no hands', whoLabel: 'Sonny', who: 'all four tools only read. No tool rolls back or installs anything', stop: 'Changing things stays a button for a person, like the guardrails in Assignment 4.', where: 'src/tools.ts'},
         {icon: '📜', title: '3 · Every look is written down', whoLabel: 'Sonny', who: 'his trace: “list_deploys, 02:50 to 03:50 → v2.15.0”', stop: 'So you can check where his evidence comes from. The trace must be true.', where: 'the top of his output'}
       ],
-      foot: 'Next: in the code, one of these four is an empty box.'
+      foot: 'Today a script plays Sonny’s brain, so everyone gets the same result. A real AI would use exactly these four tools. Next: in the code, one of them is an empty box.'
     }},
     keyPoints: ['The AI only reads and writes text: it sees only through the tools on its menu.', 'Only eyes, no hands: the tools only read.', 'Every look is in the trace, so you can check the evidence.'],
     notes: 'Time: 13:45 · 3 min. Clicks (→): 1 the heading · 2–4 the three cards · 5 the line at the bottom. The four tools are the four looks from slide 4 and the four trace lines from Assignment 1. In the code: the handlers in src/tools.ts, offered to a real model via the telemetry MCP server (createTelemetryServer); the offline script calls the same handlers.',
@@ -1177,7 +1177,7 @@ const day5Slides = [
         {shot: 'assets/day5-jessy-teach/s32-3.webp', do: 'Click: card 2.', say: ['Two: only eyes, no hands. All four tools only read. There is no tool that rolls back. Changing things stays a button for a person.']},
         {shot: 'assets/day5-jessy-teach/s32-4.webp', do: 'Click: card 3.', say: ['Three: every look is written down. That is the trace at the top of his output. You use it to check where his evidence comes from. So the trace must be true.']},
         {ask: 'Which of the three would break if a tool could roll back?', say: ['(Answer: number 2, only eyes. Sonny would get hands.)']},
-        {shot: 'assets/day5-jessy-teach/s32-5.webp', do: 'Click: the line at the bottom.', say: ['Now let us look in the code. One of these four is an empty box.']}
+        {shot: 'assets/day5-jessy-teach/s32-5.webp', do: 'Click: the line at the bottom.', say: ['One more thing: today a script plays Sonny’s brain, not a real AI. That way everyone gets the same result. A real AI would use exactly these four tools.', 'Now let us look in the code. One of these four is an empty box.']}
       ],
       learn: ['An AI agent sees only through its tools.', 'Only eyes, no hands.', 'The trace shows every look.'],
       watch: ['Someone asks what a tool looks like: next slide, in the code.'],
