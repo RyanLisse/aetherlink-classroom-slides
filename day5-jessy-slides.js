@@ -1135,13 +1135,14 @@ const day5Slides = [
       foot: 'And in Assignment 6: all four together, live, on a shop you break yourself.'
     }},
     keyPoints: ['Must do: the intent (A2).', 'May say: the contract (A3).', 'May do: the guardrails (A4).', 'Can see: the tools (A5, now).'],
-    notes: 'Time: 13:43 · 2 min. One click shows the line at the bottom. The first three boxes have a green line (done), the fourth a dashed orange border (now).',
+    notes: 'Time: 13:43 · 2 min. One click shows the line at the bottom. The first three boxes have a green line (done), the fourth a dashed orange border (now). The four parts map on the assignments: intent.md (A2), the contract in src/contract.ts (A3), the chat refusal in src/chat.ts plus the guard hook (A4), the tools in src/tools.ts (A5). A recap: no new words.',
     teach: {
       time: '2 min',
       gist: 'A short recap: an agent you can trust needs four things. Three are done. Now the fourth: what Sonny can see.',
       script: [
         {shot: 'assets/day5-jessy-teach/s31-1.webp', do: 'Slide appears. Point at the boxes, left to right.', say: ['Let us zoom out. All day you are building an agent you can trust. That needs four things.', 'What it must do: you wrote that down in intent.md, Assignment 2.', 'What it may say: the contract checks every diagnosis, Assignment 3.', 'What it may do: the guardrails, Assignment 4.', 'And the fourth: what it can see. Where does its information come from? That is Assignment 5.']},
-        {do: 'Click: the line at the bottom.', say: ['And in Assignment 6 you see all four together, live.']}
+        {ask: 'Which assignment made sure Sonny cannot roll back through the chat?', say: ['(Answer: Assignment 4, the guardrails: what it may do.)']},
+        {shot: 'assets/day5-jessy-teach/s31-2.webp', do: 'Click: the line at the bottom.', say: ['And in Assignment 6 you see all four together, live, on a shop you break yourself.', 'First the fourth part. Next slide: what a tool is.']}
       ],
       learn: ['Must do, may say, may do, can see.'],
       watch: ['Keep it short: this is a recap, not new content.'],
@@ -1315,7 +1316,7 @@ const day5Slides = [
       time: '3 min',
       gist: 'Only for who is stuck: put your own work aside with git stash, then switch to Ryan’s finished version of A3–A5. Nothing is lost.',
       script: [
-        {do: 'Slide appears. Ask who is stuck or far behind.', say: ['Not done with Assignment 5, or something broke? No problem. The project has a finished version built in. You jump to it in three commands.', 'The rest: keep going, or help someone in the chat.']},
+        {shot: 'assets/day5-jessy-teach/s36-1.webp', do: 'Slide appears. Ask who is stuck or far behind.', say: ['Not done with Assignment 5, or something broke? No problem. The project has a finished version built in. You jump to it in three commands.', 'The rest: keep going, or help someone in the chat.']},
         {do: 'Step 1 · git status.', copy: [['Step 1 · Window 2', 'git status --short']], say: ['First see your own work: the files you changed today.']},
         {do: 'Step 2 · git stash.', copy: [['Step 2 · Window 2', 'git stash push -u -m "my work before the A5 catch-up"']], say: ['This puts your work aside. Not deleted: it waits in a safe place, with a name.']},
         {do: 'Step 3 · git switch.', copy: [['Step 3 · Window 2', 'git switch -c day5-catch-up-a5 day5-after-a5']], say: ['Now you switch to the finished version. Assignments 3, 4 and 5 are done there.']},
