@@ -1523,6 +1523,7 @@ function renderOverviewPage() {
   const grid = node('div', 'ov-grid'); page.append(head, big, grid); document.body.append(page);
   // chevron: fold the big view away to see more of the grid; remembered per browser
   const fold = node('button', 'ov-fold'); fold.setAttribute('aria-controls', 'ov-big'); big.id = 'ov-big'; head.append(fold);
+  if (window.OVERVIEW_SHEET) { const sh = node('a', 'ov-sheet', 'Overview sheet ↗'); sh.href = window.OVERVIEW_SHEET; sh.target = '_blank'; sh.rel = 'noopener'; sh.title = 'The cheat sheet for this day, in a new tab'; fold.before(sh); }   // opt-in per deck: a link to the day's cheat sheet
   const setFolded = (on) => { page.classList.toggle('big-folded', on); fold.innerHTML = '<span class="ov-chev">⌃</span> Preview'; fold.title = on ? 'Show the large preview' : 'Fold the large preview away'; fold.setAttribute('aria-expanded', String(!on)); try { localStorage.setItem('als:ov-folded', on ? '1' : '0'); } catch {} };
   let folded = false; try { folded = localStorage.getItem('als:ov-folded') === '1'; } catch {}
   setFolded(folded); fold.addEventListener('click', () => setFolded(!page.classList.contains('big-folded')));

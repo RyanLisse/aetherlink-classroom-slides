@@ -2253,3 +2253,8 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .ls-who{font-size:.74rem;font-weight:700;color:var(--muted)}
 .ls-card.you .ls-who{color:var(--aether-orange)}
 @media (max-width:900px){.ls-row{grid-template-columns:1fr}.ls-arrow{display:none}}
+
+/* Overview opt-in: link to the day's cheat sheet (window.OVERVIEW_SHEET) */
+.ov-sheet{margin-left:auto;padding:.45rem .8rem;border-radius:10px;border:1px solid var(--aether-orange);color:var(--aether-orange);font-weight:800;font-size:.9rem;text-decoration:none;white-space:nowrap}
+.ov-sheet:hover,.ov-sheet:focus-visible{background:color-mix(in srgb,var(--aether-orange) 14%,transparent);outline:none}
+.ov-sheet + .ov-fold{margin-left:0}
