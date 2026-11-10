@@ -2504,3 +2504,4 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 @media (max-width:900px){.pv-row{grid-template-columns:1.6rem minmax(0,1fr)}.pv-step,.pv-moment,.pv-out{grid-column:2}}
 .cr-mAB{--m:var(--cyan)}.cr-run.solo{grid-template-columns:1fr}
 .pv-wrap{gap:.75rem}.pv-list{gap:.45rem}.pv-row{padding:.55rem .8rem;grid-template-columns:1.8rem 6rem minmax(0,1fr) 8rem 13rem}.pv-text{font-size:1.08rem}.pv-cmd{font-size:.8rem}.pv-step{font-size:.8rem}.pv-moment{font-size:.78rem}.pv-out{font-size:.88rem}.pv-pill{font-size:.95rem;padding:.3rem .8rem}.pv-foot{font-size:1.05rem}.pv-box{width:1.55rem;height:1.55rem}
+.card.cr-card{animation:none}
