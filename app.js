@@ -511,7 +511,7 @@ function renderExtras(stage, main, s, v) {
     if (R.entry) {
       const E = R.entry, en = node('div', 'cr-entry'); en.append(node('span', 'cr-entry-h', E.title || ''));
       const row = node('div', 'cr-entry-row');
-      const door = (D, i) => { const d = node('div', 'cr-door cr-m' + D.tag + (i === E.here ? ' here' : ' other')); const h = node('div', 'cr-door-h'); h.append(node('span', 'cr-tag', D.tag), node('b', null, D.name)); d.append(h, node('span', 'cr-when', D.when));
+      const door = (D, i) => { const d = node('div', 'cr-door cr-m' + D.tag + (i === E.here ? ' here' : ' other')); const h = node('div', 'cr-door-h'); h.append(node('span', 'cr-tag', D.icon || D.tag), node('b', null, D.name)); d.append(h, node('span', 'cr-when', D.when));
         const p = node('div', 'cr-door-path'); [D.cmd, ...(D.path || [])].forEach((x, j) => { if (j) p.append(node('span', 'cr-to', '→')); p.append(node('code', null, x)); }); d.append(p); if (i !== E.here && E.otherNote) d.append(node('span', 'cr-other', E.otherNote)); return d; };
       const tgt = node('div', 'cr-target'); tgt.append(node('code', null, E.target || 'src/contract.ts')); if (E.targetNote) tgt.append(node('span', null, E.targetNote));
       row.append(door(E.doors[0], 0), node('span', 'cr-in', '→'), tgt, node('span', 'cr-in', '←'), door(E.doors[1], 1)); en.append(row); grid.before(en);
@@ -548,7 +548,7 @@ function renderExtras(stage, main, s, v) {
     const list = node('div', 'pv-list');
     const rows = P.rows.map((Rw, i) => { const r = node('div', 'pv-row'); r.append(node('span', 'pv-box', ''), node('span', 'pv-step', Rw.step || ''));
       const mid = node('div', 'pv-mid'); mid.append(node('span', 'pv-text', Rw.text)); if (Rw.cmd) mid.append(node('code', 'pv-cmd', Rw.cmd)); r.append(mid);
-      r.append(node('span', 'pv-moment' + (Rw.moment ? ' cr-m' + Rw.moment.replace(/[^AB]/g, '') : ' none'), Rw.moment ? 'Moment ' + Rw.moment : (Rw.who || '')));
+      r.append(node('span', 'pv-moment' + (Rw.moment ? ' cr-m' + Rw.moment.replace(/[^AB]/g, '') : ' none'), Rw.label || (Rw.moment ? 'Moment ' + Rw.moment : (Rw.who || ''))));
       r.append(node('span', 'pv-out ' + (Rw.tone || ''), Rw.out || ''));
       r.addEventListener('click', () => { k = i + 1 > k ? i + 1 : i; paint(); }); list.append(r); return r; });
     wrap.append(list); const foot = P.foot ? node('p', 'pv-foot', P.foot) : null; if (foot) wrap.append(foot);
