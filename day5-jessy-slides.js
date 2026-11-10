@@ -280,61 +280,174 @@ const day5Slides = [
     }
   }),
   baseSlide({
-    title: 'The software development life cycle (SDLC)', kicker: 'Day 5 · THE PROCESS', subtitle: 'Six steps every piece of software goes through. Today you go through them with AI.', type: 'concept',
-    visual: {sdlcIntro: true},
-    cards: [{title: 'Traditional: a line', body: 'Each step is handed over to the next team. One round takes weeks.'}, {title: 'AI-native: a loop', body: 'AI helps in every step, so one round takes hours. A person approves at the important moments.'}],
-    keyPoints: ['Plan, Design, Build, Test, Deploy, Maintain.', 'The six dots at the top of each slide show where we are.', 'Day 6 and 7: the same loop with your own project.'],
-    notes: 'Time: 10:09 · 3 min. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).',
+    title: 'The software development life cycle (SDLC)', kicker: 'Day 5 · THE PROCESS', subtitle: 'Six steps every piece of software goes through, from idea to running and getting better. Today you go through all six once, while you build Sonny.', type: 'concept',
+    visual: {sdlcLine: true},
+    cards: [
+      {title: 'What do we want, and what not?', body: 'For Sonny: what must he do at 03:45, and what never?'},
+      {title: 'How should it work?', body: 'For Sonny: what must a good diagnosis contain?'},
+      {title: 'Make it', body: 'Write the code. With Claude Code, one piece at a time.'},
+      {title: 'Does it do what we agreed?', body: 'Proof that it works, not a feeling.'},
+      {title: 'Put it live', body: 'For Sonny: a real incident in the shop.'},
+      {title: 'Keep it running, and learn', body: 'What went wrong becomes better for next time.'}
+    ],
+    tagline: 'These six dots are at the top of every slide today. The lit one shows where we are.',
+    keyPoints: ['Plan, Design, Build, Test, Deploy, Maintain.', 'The six dots at the top of each slide show where we are.', 'Day 6 and 7: the same six steps with your own project.'],
+    notes: 'Time: 10:09 · 3 min. Each click (→) lights the next dot and shows its card. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).',
     teach: {
       time: '3 min',
-      gist: 'Six steps of all software. Traditional: a line. AI-native: a loop. Today one round; Day 6–7 your own.',
+      gist: 'The six steps all software goes through, on one line. The same line is at the top of every slide today.',
       script: [
-        {do: 'Slide appears with the title.', say: ['One word in the name of today: SDLC.', 'Software development life cycle.', 'Sounds big, but it is just the six steps all software goes through.']},
-        {do: 'Point at the six steps in the left card, one by one.', say: ['Plan: what do we want, and what not.', 'Design: how should it work.', 'Build: write the code.', 'Test: does it do what we agreed.', 'Deploy: put it live.', 'Maintain: keep it running, learn from what goes wrong.']},
-        {do: 'Point at Traditional: a line.', say: ['Traditionally: a line.', 'Every step is a different team; the work is handed over each time.', 'One round takes weeks.']},
-        {do: 'Point at the loop in the right card while the dots light up.', say: ['AI-native: a loop.', 'AI helps in every step, so one round takes hours.', 'What goes wrong in Maintain feeds the next Plan.']},
-        {do: 'Point at “a person approves” in the middle of the loop.', say: ['What does not change: a person approves at the important moments.']},
-        {ask: 'If AI can do every step, why is a person still in the middle?', say: ['(Answer: the AI can be wrong, and someone is responsible for what goes live.)']},
-        {do: 'Point at the six dots at the top right of the slide.', say: ['These six dots are on every slide from now on.', 'The lit one is the step we are in.', 'Today we go round the loop once.']},
-        {say: ['Day 6 and 7, the hackathon: the same loop with your own project.', 'So today is the practice round.']}
+        {do: 'Slide appears: six grey dots on one line.', say: ['We know what we want from Sonny.', 'Now: how do you build something like that, so you can trust it?', 'All software goes through the same six steps. That is the SDLC: software development life cycle.']},
+        {do: 'Click: Plan lights up.', say: ['Plan: what do we want, and what not.', 'For Sonny: what must he do at 03:45, and what must he never do?']},
+        {do: 'Click: Design.', say: ['Design: how should it work.', 'For Sonny: what must a good diagnosis contain?']},
+        {do: 'Click: Build.', say: ['Build: write the code.', 'Today Claude Code writes it with you, one piece at a time.']},
+        {do: 'Click: Test.', say: ['Test: does it do what we agreed?', 'Proof that it works, not a feeling.']},
+        {do: 'Click: Deploy.', say: ['Deploy: put it live.', 'For Sonny: this afternoon, a real incident in the shop.']},
+        {do: 'Click: Maintain.', say: ['Maintain: keep it running, and learn from what went wrong.', 'That feeds the next Plan, and you go round again.']},
+        {ask: 'Claude Code can help in every step. Why is a person still needed?', say: ['(Answer: AI can be wrong, and someone is responsible for what goes live.)']},
+        {do: 'Point at the six small dots at the top right of the slide.', say: ['This same line is at the top of every slide today.', 'The lit dot shows where we are.', 'Day 6 and 7, the hackathon: the same six steps with your own project. Today is the practice round.']}
       ],
-      learn: ['SDLC = the six steps all software goes through: Plan, Design, Build, Test, Deploy, Maintain.', 'Traditional = a slow line with handovers. AI-native = a fast loop.', 'A person approves at the important moments.', 'Today is the practice round for Day 6 and 7.'],
-      watch: ['Keep it short: the dots bring the phases back all day.', '“We do agile/sprints”? Fine: same steps. Today’s point: AI helps in every step.'],
-      terms: [['SDLC', 'software development life cycle: the six steps all software goes through'], ['AI-native', 'working with AI in every step from the start, instead of adding it to one step'], ['Handover', 'passing the work to the next team, which costs time and loses information'], ['Deploy', 'putting a new version live']],
-      next: 'the big picture of today, as a story.'
+      learn: ['SDLC = the six steps all software goes through: Plan, Design, Build, Test, Deploy, Maintain.', 'Today you go through them once, while you build Sonny.', 'The dots at the top of each slide show the current step.'],
+      watch: ['Keep it short: the dots bring the steps back all day.', '“We do agile/sprints”? Fine: the same steps, just in smaller rounds.'],
+      terms: [['SDLC', 'software development life cycle: the six steps all software goes through'], ['Deploy', 'putting a new version live']],
+      next: 'today’s assignments, step by step.'
     }
   }),
   baseSlide({
-    title: 'Today: break a shop, and let your agent find out why', kicker: 'Day 5 · THE BIG PICTURE', subtitle: 'Claude Code helps you build an on-call agent. Then you break a web shop on purpose and watch your agent at work.', type: 'context',
-    visual: {story: [
-      {icon: 'cart', color: 'var(--cyan)', eg: 'customers pay ✓'},
-      {icon: 'bolt', color: '#ff6b6b', eg: 'payments fail ✗'},
-      {icon: 'trace', color: 'var(--violet)', eg: 'likely cause + sources'},
-      {icon: 'human', color: 'var(--ok)', eg: 'Approve · your name'}
+    title: 'Today: build Sonny through the SDLC', kicker: 'Day 5 · ROUTE', subtitle: 'The same six steps, now with today’s assignments under each one. Each assignment adds one piece to Sonny, and the next one builds on it.', type: 'context',
+    visual: {routeLine: true, sdlcRoute: [
+      {items: [['A1', 'Find out what Sonny is today'], ['A2', 'Write down what he must do']]},
+      {items: [['A3', 'Agree on the rules for a good diagnosis']]},
+      {items: [['A3', 'Build those rules'], ['A4', 'Say no to “Roll back now”'], ['A5', 'A tool to look up updates']]},
+      {items: [['A3 · 2/2', 'Prove A3 with fresh evidence'], ['Catch-up', 'Everything works before going live']]},
+      {items: [['A6', 'Break the shop, live']]},
+      {optional: true, items: [['A7', 'More test cases', true], ['A9', 'A lesson and a handoff note', true]]}
     ]},
-    cards: [{title: 'Run the shop', body: 'A small web shop runs on your laptop. Fake customers keep buying and paying.'}, {title: 'Break it', body: 'You push a bad update on purpose. Payments start to fail.'}, {title: 'Your agent investigates', body: 'The on-call agent spots the problem, collects the evidence and explains the likely cause.'}, {title: 'You stay in control', body: 'The agent prepares the fix and asks for your approval before it continues.'}],
-    keyPoints: ['Claude Code helps you build the agent, one assignment at a time.', 'Then you break the shop and watch your agent at work.', 'Day 6 and 7: the same loop, with your own idea.'],
-    notes: 'Time: 10:09 · 3 min. The big picture of the day as a story in four panels.',
+    cards: [
+      {title: 'Plan', body: 'You know the project and what Sonny must do.'},
+      {title: 'Design', body: 'Everyone agrees what a good diagnosis contains.'},
+      {title: 'Build', body: 'Sonny follows the rules, refuses fixes in the chat and can look up updates.'},
+      {title: 'Test', body: 'Proof that it works, before it goes live.'},
+      {title: 'Deploy', body: 'Sonny investigates a live incident. A person approves.'},
+      {title: 'Maintain', body: 'Optional: make him better for next time.'}
+    ],
+    keyPoints: ['The six steps, now with today’s assignments.', 'Each assignment builds on the one before.', 'Maintain (A7, A9) is optional, for who is fast.'],
+    notes: 'Time: 10:12 · 2 min. Required route: A1–A6. Test = the second part of A3 and the catch-up before A6. A7 (more test cases) and A9 (lesson + handoff) are optional appendix work. The human-in-the-loop part (once called A8) is inside A6. → or a click moves to the next step; the next → after Maintain goes to the next slide.',
     teach: {
-      time: '3 min',
-      gist: 'The day as one story: run the shop, break it, the agent investigates, you approve.',
+      time: '2 min',
+      gist: 'Today’s route: which assignment belongs to which of the six steps.',
       script: [
-        {do: 'Slide appears with the four panels.', say: ['The whole day in one picture.', 'Read it left to right, like a comic strip.']},
-        {do: 'Point at Run the shop.', say: ['A small web shop on your own laptop.', 'Fake customers keep buying and paying.']},
-        {do: 'Point at Break it.', say: ['You break it yourself, on purpose: a bad update.', 'Payments fail: the story from slide 2, now live.']},
-        {do: 'Point at Your agent investigates.', say: ['Your on-call agent takes over.', 'It notices the problem by itself.', 'It collects evidence and explains the likely cause, with sources.']},
-        {do: 'Point at You stay in control.', say: ['The most important panel.', 'The agent prepares the fix and asks for your approval before it continues.', 'You stay in control of your own work: human in the loop.']},
-        {ask: 'Which part do we spend most of the day on?', say: ['(Answer: the agent in panel 3. Claude Code helps you build it step by step.)']},
-        {do: 'Point at the key points.', say: ['Day 6 and 7: the same loop, with your own idea.']}
+        {do: 'Slide appears. Plan is lit.', say: ['The same six dots, now with today’s assignments under them.']},
+        {do: 'Plan.', say: ['Plan: A1 and A2.', 'First find out what Sonny is today, then write down what he must do.']},
+        {do: 'Press → : Design.', say: ['Design: in A3 you first agree on the rules for a good diagnosis.', 'For example: always say what customers notice.']},
+        {do: 'Press → : Build.', say: ['Build: A3 builds those rules.', 'A4: Sonny says no when someone types “Roll back now” in the chat.', 'A5: a tool so he can look up the updates.']},
+        {do: 'Press → : Test.', say: ['Test: prove A3 with fresh evidence, and make sure everything works before we go live.']},
+        {do: 'Press → : Deploy.', say: ['Deploy: A6. You break the shop yourself, and Sonny investigates live.']},
+        {do: 'Press → : Maintain (dashed).', say: ['Maintain: A7 and A9 are extras for who is fast.']},
+        {ask: 'In which step do you first see Sonny work on a live shop?', say: ['(Answer: Deploy, in A6. Before that he works on a saved incident.)']}
       ],
-      learn: ['The day is one story: run, break, investigate, approve.', 'You build the agent first, then you test it on a shop you break yourself.', 'The agent asks for approval before it continues, so you stay in control.'],
-      watch: ['Not how the agent works yet.', 'Do not reveal what the bad update breaks.'],
-      terms: [['Bad update', 'a new version of the shop that contains a mistake'], ['Fake customers', 'a small script that keeps placing orders, so the shop has traffic']],
-      next: 'let’s set up the project on your laptop.'
+      learn: ['Today follows the six steps: Plan, Design, Build, Test, Deploy, Maintain.', 'Each assignment builds on the one before.', 'Maintain is optional today.'],
+      watch: ['Do not explain each assignment in depth: each has its own slides.', 'Do not call A7 or A9 required.', 'One more → after Maintain goes to the next slide.'],
+      terms: [['Diagnosis', 'what Sonny writes: what is happening, the root cause with evidence, one proposed fix']],
+      next: 'how Sonny handles an incident, and what is still missing.'
     }
   }),
   baseSlide({
-    title: 'Let’s start the project', kicker: 'Day 5 · SET UP TOGETHER', subtitle: 'Get your own copy of the project and open Claude Code in it. We do this together, step by step.', type: 'context', layout: 'exercise', mode: 'manual', calm: true,
+    title: 'How Sonny handles an incident, and what is still missing', kicker: 'Day 5 · SONNY’S MAP', subtitle: 'Five steps, from the alert to your decision. Some already work. The pieces that make Sonny safe to trust are missing on purpose: you build them today.', type: 'context',
+    visual: {reveal: 'click', covers: [], pipeline: [
+      {file: 'src/cli.ts · console/server.ts', have: [['ok', 'a fixture with one command, or live from the shop']]},
+      {file: 'src/tools.ts', have: [['ok', 'graphs, code change, error logs'], ['todo', 'the tool for the update list gives back nothing yet', 'A5']]},
+      {file: 'src/agent.ts', have: [['ok', 'what is happening, root cause with evidence, one proposed fix']]},
+      {file: 'src/contract.ts', hl: true, have: [['todo', 'the contract is there, but empty: every diagnosis gets PASS', 'A3']]},
+      {file: 'terminal · console', have: [['ok', 'you read it and ask questions in the chat'], ['todo', '“roll back now” in the chat is not refused yet', 'A4'], ['todo', 'nothing may run without a matching approval', 'A6']]}
+    ]},
+    cards: [
+      {title: 'An alert comes in', body: 'Checkout errors at 12%.'},
+      {title: 'Sonny looks at the data', body: 'Only reading. He changes nothing.'},
+      {title: 'He writes a diagnosis', body: 'In plain words, with evidence.'},
+      {title: 'The contract checks it', body: 'Five rules in plain code, on every diagnosis, before you see it.'},
+      {title: 'You decide', body: 'Approve or reject the proposed fix. Human in the loop.'}
+    ],
+    tagline: 'In Assignment 1 you see 14 red tests: exactly these missing pieces. Red means still to build, not broken.',
+    keyPoints: ['Alert → Sonny looks → diagnosis → the contract checks it → you decide.', 'Each missing piece has its place in this flow, and its own red tests.', 'This map comes back before every assignment.'],
+    notes: 'Time: 10:14 · 3 min. Each click opens the next step. Facts (workshop/start): the contract is parseVerdict in src/contract.ts with TODO(A3); it is wired in (validateVerdict in src/router.ts, called from investigate() in src/agent.ts), so every diagnosis prints “PASS contract” today. A5: list_deploys in src/tools.ts returns [] (TODO(A5)); offline the scripted answers still cite deploys:d-4821, so you only notice it with the real model or in tools.test.ts. A4: TODO(A4) in src/chat.ts (refuse “roll back”, “approve”, “resolve”, “scale up”) plus a guard that protects bench/ratchet.json. A6: checkApproval in src/executor.ts (the tests call it A8). Red at the start: 14 workshop tests.',
+    teach: {
+      time: '3 min',
+      gist: 'Sonny’s map: the five steps, and in each step what already works and what you build today.',
+      script: [
+        {do: 'Slide appears: five closed blocks.', say: ['We said how we want Sonny to work: he looks, he writes a diagnosis, he asks you.', 'Here is what that looks like inside the project, step by step.', 'And per step: what already works, and what is still missing.']},
+        {do: 'Click: An alert comes in.', say: ['An alert comes in: checkout errors at 12%.', 'That already works: from a saved incident, or live from the shop.']},
+        {do: 'Click: Sonny looks at the data.', say: ['He reads the graphs, the code change and the error logs. Only reading.', 'One thing is missing: the tool for the update list gives back nothing yet. You build it in A5.']},
+        {do: 'Click: He writes a diagnosis.', say: ['That works: what is happening, the root cause with evidence, one proposed fix.']},
+        {do: 'Click: The contract checks it (orange).', say: ['Here is the biggest gap.', 'The contract: five rules in plain code that check every diagnosis before you see it.', 'It is wired in, but empty. So today every diagnosis gets PASS, even a bad one.', 'Why does that matter? An AI can sound very sure without evidence. You build the five rules in A3.']},
+        {do: 'Click: You decide.', say: ['You read the diagnosis and ask questions in the chat. That works.', 'Two pieces are missing.', 'A4: if someone types “roll back now” in the chat, Sonny must refuse. Actions are buttons a person clicks.', 'A6: nothing may run without a matching approval from a named person.']},
+        {ask: 'Which missing piece would worry you most at 03:45?', say: ['(No wrong answer. Often: the empty contract, because then a confident but wrong diagnosis gets to you unchecked.)']},
+        {do: 'Point at the line at the bottom.', say: ['In Assignment 1 you see 14 red tests.', 'Those are exactly these missing pieces. Red means still to build, not broken.', 'This map comes back before every assignment, with that assignment’s piece lit.']}
+      ],
+      learn: ['Sonny’s flow: alert → looks at the data → diagnosis → contract → you decide.', 'Already there: the alert, reading the data, writing the diagnosis, the chat.', 'Missing on purpose: the update tool (A5), the contract rules (A3), refusing actions in the chat (A4), approval before anything runs (A6).'],
+      watch: ['Someone asks “but the trace shows the update list”: offline, the scripted answers fill it in. The tool itself is still empty: the A5 tests show it.', 'Do not explain how to build each piece: each assignment does that.', 'Someone asks about “A8” in the tests: that is the approval piece, part of A6.'],
+      terms: [['Contract', 'the five rules together, as code; it runs on every diagnosis before the operator sees it'], ['Tool', 'a small function Sonny may call to read data, like the update list'], ['Red test', 'a test for a piece that is not built yet']],
+      next: 'how the day runs: morning a fixture, afternoon live.'
+    }
+  }),
+  baseSlide({
+    title: 'Morning: a fixture. Afternoon: live.', kicker: 'Day 5 · HOW THE DAY RUNS', subtitle: 'Sonny gets incidents in two ways. In the morning nothing breaks: you practise on a saved incident. In the afternoon you break the shop yourself.', type: 'context',
+    visual: {doors: [
+      {icon: 'replay', color: 'var(--violet)', when: 'Morning · A1–A5'},
+      {icon: 'alert', color: '#ff6b6b', when: 'Afternoon · A6'},
+      {icon: 'trace', color: 'var(--aether-orange)', when: 'All day'}
+    ]},
+    cards: [{title: 'The fixture: INC-1001', body: 'A saved, made-up incident with all its data: graphs, updates, logs. The shop is not involved. One command hands it to Sonny: the same for everyone, every time.'}, {title: 'Live from the shop', body: 'The shop runs on your laptop and fake customers keep paying. You push a bad update on purpose. The console sees the errors and makes a new incident with a new number.'}, {title: 'Sonny handles both the same way', body: 'Same Sonny, same steps. So what you build on the fixture in the morning also works live.'}],
+    keyPoints: ['Morning: practise on the fixture INC-1001. Nothing breaks.', 'Afternoon: you break the shop, a live incident gets a new number.', 'Sonny handles both the same way.'],
+    notes: 'Time: 10:17 · 2 min. Fixture: npm run investigate -- fixtures/incidents/bad-deploy.json → src/cli.ts → investigate() in src/agent.ts. Its data lives in fixtures/telemetry/. Live: the console (console/server.ts) listens for alerts, creates a new incident (INC-<digits>) and investigates through src/chat.ts → investigate() in src/agent.ts. Claude Code draws both routes in A1.',
+    teach: {
+      time: '2 min',
+      gist: 'Morning on a fixture (nothing breaks), afternoon live (you break the shop). Sonny handles both the same way.',
+      script: [
+        {do: 'Slide appears.', say: ['Sonny gets incidents in two ways.', 'This decides how the whole day runs.']},
+        {do: 'Point at The fixture.', say: ['Morning: nothing breaks.', 'INC-1001 is a fixture: a saved, made-up incident with all its data, the graphs, the updates, the logs.', 'The shop is not involved. One command hands it to Sonny.', 'Same for everyone, every time. So after each change you run it again and compare.']},
+        {do: 'Point at Live from the shop.', say: ['Afternoon, in A6: the shop runs on your laptop and fake customers keep paying.', 'You push a bad update on purpose.', 'The console sees the errors by itself and makes a new incident, with a new number.']},
+        {do: 'Point at Sonny handles both the same way.', say: ['Both go to the same Sonny, who takes the same steps.', 'So what you build on the fixture in the morning works live in the afternoon.']},
+        {ask: 'This afternoon a live incident appears. Will it be INC-1001?', say: ['(Answer: no. INC-1001 is the fixture. A live incident gets a new number.)']}
+      ],
+      learn: ['Morning: the fixture INC-1001. Nothing breaks.', 'Afternoon: you break the shop. A live incident gets its own number.', 'Sonny handles both the same way.'],
+      watch: ['Do not reveal what the bad update breaks.', 'Do not open the files now: Claude Code draws both routes in A1.'],
+      terms: [['Fixture', 'a saved, made-up incident with all its data; the same case for everyone, every time'], ['Fake customers', 'a small script that keeps placing orders, so the shop has traffic'], ['Bad update', 'a new version of the shop that contains a mistake']],
+      next: 'Assignment 1 starts with research.'
+    }
+  }),
+  baseSlide({
+    title: 'A1 · Before you build: find out what Sonny is today', kicker: 'Day 5 · A1 · RESEARCH', subtitle: 'Like a new team member: first look, then build. Nothing to type yet. You answer these four questions in Assignment 1.', type: 'concept',
+    visual: {reveal: 'click', covers: [], glossCols: 4, glossary: [
+      {icon: 'terminal', color: 'var(--cyan)', eg: 'you see: 56 green tests'},
+      {icon: 'trace', color: 'var(--violet)', eg: 'you see: a map with two routes'},
+      {icon: 'bot', color: 'var(--aether-orange)', eg: 'you see: his diagnosis for INC-1001'},
+      {icon: 'sign', color: 'var(--ok)', eg: 'you see: 14 red tests · “OPEN: a human decides”'}
+    ]},
+    cards: [{title: 'Does it run?', body: 'Set the project up on your laptop. Do the tests pass?'}, {title: 'Where does an incident come in?', body: 'And where is Sonny in the code? That is where your work lands.'}, {title: 'What does Sonny do now?', body: 'Watch him investigate the fixture INC-1001.'}, {title: 'What can he not do yet?', body: 'And what must he never do without you?'}],
+    tagline: 'You change nothing yet. First look, then build.',
+    keyPoints: ['A1 is research: you change nothing.', 'Four questions: does it run, where does an incident come in, what does Sonny do now, what can he not do yet.', 'Set-up, the tour, the skills and Assignment 1 answer them.'],
+    notes: 'Time: 10:19 · 2 min. This slide has no task and no command. It frames the next slides (set-up, tour, skills) and Assignment 1 as one research round. Each block opens on click.',
+    teach: {
+      time: '2 min',
+      gist: 'A1 is research: four questions a new team member asks before building. Nothing to type yet.',
+      script: [
+        {do: 'Slide appears: four closed blocks.', say: ['You join a project someone else made. Sonny already exists, but he is not finished.', 'What do you do on your first day in a new team? You do not start typing code. You look first.', 'That is Assignment 1: research. You change nothing.']},
+        {do: 'Click: Does it run?', say: ['First: does it run on your laptop? Do the tests pass?', 'Otherwise, when something fails later, you cannot tell if it was your change or the set-up.']},
+        {do: 'Click: Where does an incident come in?', say: ['Where does an incident come in, and where is Sonny in the code?', 'That is where your work lands. Claude Code draws it for you.']},
+        {do: 'Click: What does Sonny do now?', say: ['You watch him investigate the fixture INC-1001, with your own eyes.']},
+        {do: 'Click: What can he not do yet?', say: ['What can he not do yet: the red tests, the missing pieces from the map.', 'And what must he never do without you? Look for “OPEN: a human decides” at the end of his diagnosis.']},
+        {ask: 'Why not start building straight away?', say: ['(Answer: you would change code you do not understand, in a project you have not seen run.)']},
+        {say: ['Nothing to type yet. First we get the project on your laptop.']}
+      ],
+      learn: ['A1 = research before building.', 'Four questions: does it run, where does an incident come in, what does Sonny do now, what can he not do yet.', 'You change nothing in A1.'],
+      watch: ['Someone starts typing: nothing to do on this slide yet.', 'Keep it short: the answers come in the next slides and in Assignment 1.'],
+      terms: [['Research', 'looking before you change anything: read, run, observe']],
+      next: 'let’s start the project.'
+    }
+  }),
+  baseSlide({
+    title: 'Let’s start the project', kicker: 'Day 5 · A1 · RESEARCH · SET UP', subtitle: 'Get your own copy of the project and open Claude Code in it. We do this together, step by step.', type: 'context', layout: 'exercise', mode: 'manual', calm: true,
     stage: 'setup',
     repo: {url: 'https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start', label: 'AetherLink-bv/sre-oncall-agent · workshop/start'},
     stepsHeading: 'Set up once',
@@ -358,7 +471,7 @@ const day5Slides = [
       do: ['Check Node, download the project, go into the folder, start Claude Code, trust the folder.'],
       done: ['Claude Code is open in the sre-oncall-agent folder on every laptop.'],
       script: [
-        {do: 'Slide appears. Open your own terminal on the projector.', say: ['We do this together: I type, you type.', 'Something looks different? Raise your hand straight away.']},
+        {do: 'Slide appears. Open your own terminal on the projector.', say: ['First research question: does it run? For that we need the project on your laptop.', 'We do this together: I type, you type.', 'Something looks different? Raise your hand straight away.']},
         {do: 'Type node --version.', copy: [['Step 1 · Terminal', 'node --version']], say: ['Node runs our project.', 'We need 22.13 or higher.', 'Why: the project saves incidents in a small database that only newer Node has.']},
         {ask: 'Who sees a number lower than 22?', say: ['(Answer: they raise their hand.)', 'They follow on the screen; we fix Node with them during Assignment 1.']},
         {do: 'Type the git clone line.', copy: [['Step 2 · Terminal', 'git clone --branch workshop/start https://github.com/AetherLink-bv/sre-oncall-agent.git']], say: ['We download our own copy of the project.', 'Your own copy: you can never break someone else’s work.']},
@@ -371,6 +484,50 @@ const day5Slides = [
       learn: ['Everyone works in their own copy of the project.', 'The extra words after claude give everyone the same clean start.', 'Trust only a folder you know.'],
       watch: ['Node below 22.13: project does not run. Install the LTS from nodejs.org (or nvm).', 'Cannot install (locked laptop)? Follow on screen, catch up later with the checkpoint branch.', 'Windows: Git Bash, not PowerShell.', '“already exists” on git clone: delete the old folder or clone elsewhere.', 'Bottom not “manual mode on”? Shift+Tab.', 'Yellow “Deny rule Write(…) never matches” lines: harmless, the Edit rule already blocks it.'],
       terms: [['Node', 'the program that runs JavaScript and TypeScript projects on your laptop'], ['git clone', 'download your own copy of a project from GitHub'], ['Connector (MCP)', 'a link from Claude Code to another app, like Gmail or n8n'], ['Trust', 'you allow Claude Code to read, change and run files in this folder'], ['Pre-approved permission', 'a command the project allows Claude Code to run without asking, like npm test'], ['Personal settings', 'settings in the .claude folder in your home folder; they count for every project'], ['Deny rule', 'something Claude Code is never allowed to do, written in the settings']],
+      next: 'a tour of the project.'
+    }
+  }),
+  baseSlide({
+    title: 'A tour of the project', kicker: 'Day 5 · A1 · RESEARCH · TOUR', subtitle: 'Where everything lives. Open your own sre-oncall-agent folder and follow along.', type: 'context',
+    visual: {skillTrees: [
+      {icon: 'chart', color: 'var(--cyan)', lines: [
+        [0, 'sre-oncall-agent/'],
+        [1, 'demo/', 'the web shop, the fake customers, the “break it” script', 'A6', 'hl'],
+        [1, 'console/', 'the web page where Sonny works', 'A1 · A6', 'hl'],
+        [1, 'fixtures/', 'the fixtures: saved incidents (INC-1001)', 'A1–A5', 'hl'],
+        [1, 'docs/', 'plans and explanations', '', '']
+      ]},
+      {icon: 'bot', color: 'var(--aether-orange)', lines: [
+        [0, 'sre-oncall-agent/'],
+        [1, 'src/', 'Sonny himself', 'A3–A5', 'hl'],
+        [1, 'test/workshop/', 'the red tests: your to-do list', 'A3–A6', 'hl'],
+        [1, '.claude/', 'Claude Code’s skills, settings and safety rules', '', 'hl'],
+        [1, 'intent.md', 'what the agent must do: you fill it in', 'A2', 'hl'],
+        [1, 'CLAUDE.md', 'what Claude Code reads first', '', 'hl']
+      ]}
+    ]},
+    cards: [{title: 'The world around Sonny', body: 'The shop, the console and the fixtures.'}, {title: 'Sonny and his rules', body: 'The code, the tests, and the files that steer Claude Code.'}],
+    keyPoints: ['demo/ and console/: the shop and the web page.', 'src/ and test/workshop/: Sonny and his red tests.', 'intent.md: you fill it in at A2.'],
+    notes: 'Time: 10:22 · 4 min. Trainer demo: open the sre-oncall-agent folder in your editor or file explorer on the projector. Other folders (bench/, lessons/, approvals/, course/, scripts/, skills/) come back in the optional parts or are for the trainer; skip them unless asked.',
+    teach: {
+      time: '4 min · demo',
+      gist: 'Show where everything lives. Left: the world around Sonny. Right: Sonny and his rules.',
+      do: ['Open their own sre-oncall-agent folder and follow along.'],
+      done: ['Everyone has seen demo/, console/, src/, test/workshop/, intent.md and CLAUDE.md.'],
+      script: [
+        {do: 'Open the sre-oncall-agent folder in your editor or file explorer on the projector.', say: ['The project is on your laptop. Before Claude Code shows you around: a short tour of the folders.', 'Open your own sre-oncall-agent folder and follow along.']},
+        {do: 'Open demo/.', say: ['demo/: the web shop, the fake customers, and the script that breaks it.', 'You use this in A6.']},
+        {do: 'Open console/.', say: ['console/: the web page where Sonny works.', 'You start it in A1 and keep it open all day.']},
+        {do: 'Open fixtures/incidents/.', say: ['fixtures/: the saved incidents.', 'INC-1001 is the fixture you practise on all morning.']},
+        {do: 'Open src/ and point at agent.ts.', say: ['src/: Sonny himself.', 'This is where most of your work lands in A3 to A5.']},
+        {do: 'Open test/workshop/.', say: ['test/workshop/: five test files.', 'They are red now: your to-do list.']},
+        {do: 'Open intent.md and scroll through it.', say: ['intent.md: what the agent must do.', 'Still full of “fill in”: you fill it in at A2.']},
+        {do: 'Open CLAUDE.md, then .claude/.', say: ['CLAUDE.md: what Claude Code reads first in this project.', '.claude/: Claude Code’s skills (the next slide), its settings and the safety rules (the yellow deny lines you saw at the start).']},
+        {ask: 'Where would you look for the red tests?', say: ['(Answer: test/workshop/.)']}
+      ],
+      learn: ['demo/ and console/: the world around Sonny.', 'src/: Sonny. test/workshop/: the red tests.', 'intent.md and CLAUDE.md steer the work.'],
+      watch: ['Do not open the code itself in depth: A1 does that with Claude Code.', 'Other folders (bench/, lessons/, approvals/, course/, scripts/, skills/): optional parts or trainer material. Skip unless asked.', 'skills/triage/ is Sonny’s own runbook: only if they ask (more in the skills notes).'],
+      terms: [['Folder tree', 'the folders and files of a project, nested inside each other'], ['CLAUDE.md', 'a file with project instructions that Claude Code reads at the start']],
       next: 'the skills Claude Code uses today.'
     }
   }),
@@ -396,150 +553,14 @@ const day5Slides = [
       gist: 'Four ready skills for Claude Code. You start one with a slash. Check that everyone sees /show-me before A1.',
       script: [
         {do: 'Slide appears.', say: ['You know skills from Day 2: a written set of steps that Claude Code follows.', 'Four are ready in this project.']},
-        {do: 'Point at the folder tree.', say: ['They live in .claude/skills/, one folder per skill.', 'Each folder has a SKILL.md: plain text you can open and read.']},
+        {do: 'Point at the folder tree.', say: ['Remember the .claude folder from the tour? They live in .claude/skills/, one folder per skill.', 'Each folder has a SKILL.md: plain text you can open and read.']},
         {do: 'Point at the four highlighted skills, top to bottom.', say: ['/show-me: draws how the code works. First one, in A1.', '/design-control-loop: asks you questions and writes the plan. A2.', '/verify-this: checks a claim with fresh proof. A3.', '/handoff: writes a note for the next person. In the extra part.']},
         {ask: 'You want Claude Code to check whether something really works. Which skill do you use?', say: ['(Answer: /verify-this.)']},
-        {do: 'Ask everyone to type / in Claude Code.', say: ['Type a slash in Claude Code.', 'Do you see show-me in the list? Then you are ready for A1.']}
+        {do: 'Ask everyone to type / in Claude Code.', say: ['Type a slash in Claude Code.', 'Do you see show-me in the list? Then you are ready for Assignment 1.']}
       ],
       learn: ['A skill is a written set of steps for Claude Code.', 'Skills live in .claude/skills/. You start one with a slash.', 'Four are used today: show-me, design-control-loop, verify-this, handoff.'],
       watch: ['No show-me after typing /? Restart Claude Code inside the sre-oncall-agent folder.', 'Do not install other skill packs now.'],
       terms: [['Skill', 'a written set of steps (a SKILL.md file) that Claude Code follows'], ['Slash command', 'typing / plus a name, like /show-me, to start a skill'], ['Text after a skill name', 'works with every skill: “/show-me Read CLAUDE.md…” means follow the show-me steps for this request. Some skills place your text in a fixed spot: /verify-this has “Claim: $ARGUMENTS” in its file. Without text, the skill works on what you are talking about.'], ['skills/triage/SKILL.md', 'the on-call agent’s own skill: the team’s runbook (a checklist for when something breaks). Students do not build it; the team writes it. Only the real-AI version of the agent reads it: see “Appendix · Optional product model”. Today’s script follows the same order, written into code.']],
-      next: 'the six assignments, one on-call agent.'
-    }
-  }),
-  baseSlide({
-    title: 'Today: build your agent through the SDLC', kicker: 'Day 5 · ROUTE', subtitle: 'Six phases, one on-call agent. Each assignment adds one piece, and the next one builds on it.', type: 'context',
-    visual: {sdlcRoute: [
-      {items: [['A1', 'Get to know the code'], ['A2', 'Write down what it must do']]},
-      {items: [['A3', 'Agree on the rules for a good diagnosis']]},
-      {items: [['A3', 'Build those rules'], ['A4', 'Say no to “Roll back now”'], ['A5', 'A tool to look up updates']]},
-      {items: [['Check', 'Prove A3 with fresh evidence'], ['Check', 'Everything green before going live']]},
-      {items: [['A6', 'Break the shop, live']]},
-      {optional: true, items: [['A7', 'More test cases', true], ['A9', 'A lesson and a handoff note', true]]}
-    ]},
-    cards: [
-      {title: 'Plan', body: 'You know the code and what the agent must do.'},
-      {title: 'Design', body: 'Everyone agrees what a good diagnosis contains.'},
-      {title: 'Build', body: 'The agent follows the rules, refuses fixes and can look up updates.'},
-      {title: 'Test', body: 'Proof that it works, before it goes live.'},
-      {title: 'Deploy', body: 'Your agent investigates a live incident. A person approves.'},
-      {title: 'Maintain', body: 'Optional: make it better for next time.'}
-    ],
-    keyPoints: ['The six phases of slide 6, now with today’s assignments.', 'Each assignment builds on the one before.', 'Maintain (A7, A9) is optional, for who is fast.'],
-    notes: 'Time: 10:22 · 2 min. Required route: A1–A6. Test = the A3 verify step and the catch-up checkpoint before A6. A7 (more test cases) and A9 (lesson + handoff) are optional appendix work. The human-in-the-loop check (once called A8) is part of A6. → or a click moves the orange phase; the next → after Maintain goes to the next slide.',
-    teach: {
-      time: '2 min',
-      gist: 'Today’s route through the six SDLC phases: which assignment belongs to which phase.',
-      script: [
-        {do: 'Slide appears. Plan is orange.', say: ['Remember the six phases from slide 6?', 'Here they are again, with today’s assignments in them.']},
-        {do: 'Plan is orange.', say: ['Plan: A1 and A2.', 'First get to know the code, then write down what the agent must do.']},
-        {do: 'Press → : Design.', say: ['Design: in A3 you first agree on the rules for a good diagnosis.', 'For example: always say which customers are affected.']},
-        {do: 'Press → : Build.', say: ['Build: A3 builds those rules, A4 makes the agent say no to “Roll back now”, A5 gives it a tool to look up updates.']},
-        {do: 'Press → : Test.', say: ['Test: two checks.', 'Prove A3 with fresh evidence, and everything green before we go live.']},
-        {do: 'Press → : Deploy.', say: ['Deploy: A6, the moment from slide 7.', 'You break the shop, and your agent investigates live.']},
-        {do: 'Press → : Maintain (dashed).', say: ['Maintain: A7 and A9 are extras for who is fast.', 'More test cases, and a lesson for next time.']},
-        {ask: 'In which phase do you first see your agent work on a live shop?', say: ['(Answer: Deploy, in A6. Before that it works on the saved copy, INC-1001.)']}
-      ],
-      learn: ['Today follows the SDLC: Plan, Design, Build, Test, Deploy, Maintain.', 'Each assignment builds on the one before.', 'Maintain is optional today.'],
-      watch: ['Do not explain each assignment in depth: each has its own slides.', 'Do not call A7 or A9 required.', 'One more → after Maintain goes to the next slide.'],
-      terms: [['Diagnosis', 'the agent’s written explanation of what went wrong, with sources'], ['Checkpoint', 'a moment to check that everything works before you go on']],
-      next: 'a short tour of the project.'
-    }
-  }),
-  baseSlide({
-    title: 'A tour of the project', kicker: 'Day 5 · TOUR', subtitle: 'Where everything lives. Open your own sre-oncall-agent folder and follow along.', type: 'context',
-    visual: {skillTrees: [
-      {icon: 'chart', color: 'var(--cyan)', lines: [
-        [0, 'sre-oncall-agent/'],
-        [1, 'demo/', 'the web shop, the fake customers, the “break it” script', 'A6', 'hl'],
-        [1, 'console/', 'the web page where your agent works', 'A1 · A6', 'hl'],
-        [1, 'fixtures/', 'the saved incidents (INC-1001)', 'A1–A5', 'hl'],
-        [1, 'docs/', 'plans and explanations', '', '']
-      ]},
-      {icon: 'bot', color: 'var(--aether-orange)', lines: [
-        [0, 'sre-oncall-agent/'],
-        [1, 'src/', 'the agent itself', 'A3–A5', 'hl'],
-        [1, 'test/workshop/', 'the red tests: your to-do list', 'A3–A6', 'hl'],
-        [1, '.claude/', 'Claude Code’s skills, settings and safety rules', '', 'hl'],
-        [1, 'intent.md', 'what the agent must do: you fill it in', 'A2', 'hl'],
-        [1, 'CLAUDE.md', 'what Claude Code reads first', '', 'hl']
-      ]}
-    ]},
-    cards: [{title: 'The world around the agent', body: 'The shop, the console and the saved incidents.'}, {title: 'The agent and its rules', body: 'The code, the tests, and the files that steer Claude Code.'}],
-    keyPoints: ['demo/ and console/: the shop and the web page.', 'src/ and test/workshop/: the agent and its red tests.', 'intent.md: you fill it in at A2.'],
-    notes: 'Time: 10:22 · 4 min. Trainer demo: open the sre-oncall-agent folder in your editor or file explorer on the projector. Other folders (bench/, lessons/, approvals/, course/, scripts/, skills/) come back in the optional parts or are for the trainer; skip them unless asked.',
-    teach: {
-      time: '4 min · demo',
-      gist: 'Show where everything lives. Left: the world around the agent. Right: the agent and its rules.',
-      do: ['Open their own sre-oncall-agent folder and follow along.'],
-      done: ['Everyone has seen demo/, console/, src/, test/workshop/, intent.md and CLAUDE.md.'],
-      script: [
-        {do: 'Open the sre-oncall-agent folder in your editor or file explorer on the projector.', say: ['Before we build: a short tour.', 'Open your own sre-oncall-agent folder and follow along.']},
-        {do: 'Open demo/.', say: ['demo/: the web shop, the fake customers, and the script that breaks it.', 'You use this in A6.']},
-        {do: 'Open console/.', say: ['console/: the web page where your agent works.', 'You start it in A1 and keep it open all day.']},
-        {do: 'Open fixtures/incidents/.', say: ['fixtures/: the saved incidents.', 'INC-1001 is the recording you practise on all morning.']},
-        {do: 'Open src/ and point at agent.ts.', say: ['src/: the agent itself.', 'This is where most of your work lands in A3 to A5.']},
-        {do: 'Open test/workshop/.', say: ['test/workshop/: five test files.', 'They are red now: your to-do list.']},
-        {do: 'Open intent.md and scroll through it.', say: ['intent.md: what the agent must do.', 'Still full of “fill in”: you fill it in at A2.']},
-        {do: 'Open CLAUDE.md, then .claude/.', say: ['CLAUDE.md: what Claude Code reads first in this project.', '.claude/: the skills from slide 9, the settings and the safety rules (the yellow deny lines from slide 8).']},
-        {ask: 'Where would you look for the red tests?', say: ['(Answer: test/workshop/.)']}
-      ],
-      learn: ['demo/ and console/: the world around the agent.', 'src/: the agent. test/workshop/: the red tests.', 'intent.md and CLAUDE.md steer the work.'],
-      watch: ['Do not open the code itself in depth: A1 does that with Claude Code.', 'Other folders (bench/, lessons/, approvals/, course/, scripts/, skills/): optional parts or trainer material. Skip unless asked.', 'skills/triage/ is the agent’s runbook: only if they ask (see slide 9).'],
-      terms: [['Folder tree', 'the folders and files of a project, nested inside each other'], ['CLAUDE.md', 'a file with project instructions that Claude Code reads at the start']],
-      next: 'what we build today: the missing pieces.'
-    }
-  }),
-  baseSlide({
-    title: 'What we build today: the missing pieces', kicker: 'Day 5 · THE PROJECT', subtitle: 'The shop and the console are there to work with. The agent’s most important pieces are missing. We build them together, one assignment at a time.', type: 'context',
-    visual: {readyBuild: [
-      {items: ['The web shop', 'The console (web page)', 'Saved incidents (INC-1001)', 'The tests', 'The skills']},
-      {items: [['A3', 'Rules for a good diagnosis'], ['A4', 'Say no to “Roll back now”, protect one file'], ['A5', 'A tool to look up updates'], ['A6', 'Human in the loop']]}
-    ]},
-    cards: [{title: 'Already there: you work with it', body: 'You use these. You do not rebuild them.'}, {title: 'We build: each has red tests', body: 'Missing on purpose. This is the real work of today.'}],
-    tagline: 'In A1 you see 14 red tests. Nothing is broken: that is your work for today.',
-    keyPoints: ['The shop and console are there to work with.', 'The agent’s key pieces are missing, each with red tests.', 'Red tests are your to-do list.'],
-    notes: 'Time: 10:24 · 3 min. Starter tech: TypeScript, Node 22, local files; interfaces: command line, browser console, Claude Code. At the start: main tests 56/56 green, workshop tests 6 pass / 14 red. Red markers: A3 contract.test.ts, A4 chat.test.ts and guard.test.ts, A5 tools.test.ts, A8 executor.test.ts (A8 = the human-in-the-loop check, part of A6).',
-    teach: {
-      time: '3 min',
-      gist: 'We build the agent’s missing pieces together. Each has red tests: your to-do list.',
-      script: [
-        {do: 'Slide appears.', say: ['You do not start from an empty folder today, like on Day 1 and 2.', 'You join an existing project. That is how most real work goes.']},
-        {do: 'Point at the left card.', say: ['Already there: the shop, the console, the saved incidents, the tests, the skills.', 'You work with these. Rebuilding them costs time and Claude usage.']},
-        {do: 'Point at the right card.', say: ['Missing on purpose: the agent’s most important pieces.', 'This is the real work of today. We build them together, one per assignment.', 'Each piece already has tests, and they are red.']},
-        {ask: 'What does a red test mean here?', say: ['(Answer: not that something is broken. It is a piece you still have to build.)', 'Red tests are your to-do list. You build until they turn green.']},
-        {do: 'Point at the line at the bottom.', say: ['In A1 you see 14 red tests.', 'Do not panic and do not fix them yet: that is today’s work.']}
-      ],
-      learn: ['You join an existing project and build its missing pieces.', 'The missing pieces have red tests.', 'Red tests are your to-do list: build until green.'],
-      watch: ['Someone asks “why is A8 in the tests?”: A8 is the human-in-the-loop check, part of A6.', 'Do not go into how each piece works: each assignment explains its own.'],
-      terms: [['Test', 'a small program that checks one thing the code must do; green = it works, red = not yet'], ['TypeScript · Node 22', 'what the project is written in and runs on (only if they ask)']],
-      next: 'morning on a recording, afternoon live.'
-    }
-  }),
-  baseSlide({
-    title: 'A1 · Morning: a recording. Afternoon: live.', kicker: 'Day 5 · A1 · CONCEPT', subtitle: 'Your agent gets incidents in two ways. It handles both the same way, so what you build in the morning works live in the afternoon.',
-    visual: {doors: [
-      {icon: 'replay', color: 'var(--violet)', file: 'src/cli.ts', when: 'Morning · A1–A5'},
-      {icon: 'alert', color: '#ff6b6b', file: 'console/server.ts', when: 'Afternoon · A6'},
-      {icon: 'trace', color: 'var(--aether-orange)', file: 'src/agent.ts', when: 'All day'}
-    ]},
-    cards: [{title: 'A recording: INC-1001', body: 'A saved incident, the same for everyone. You start it with a command.'}, {title: 'Live from the shop', body: 'You break the shop. The console notices it by itself and gives it a new number.'}, {title: 'Your agent: handles both the same way', body: 'Same agent, same steps. What you build on the recording works live.'}],
-    keyPoints: ['Morning: practise on a recording (INC-1001).', 'Afternoon: a live incident with a new number.', 'The same agent handles both.'],
-    notes: 'Time: 10:27 · 2 min. Recording: npm run investigate → src/cli.ts → investigate() in src/agent.ts. Live: the console (console/server.ts) listens for alerts, creates a new incident (INC-<digits>) and investigates through src/chat.ts → investigate() in src/agent.ts.',
-    teach: {
-      time: '2 min',
-      gist: 'Morning on a recording, afternoon live. The same agent handles both.',
-      script: [
-        {do: 'Slide appears.', say: ['Your agent gets incidents in two ways.', 'This decides how the whole day is built.']},
-        {do: 'Point at the recording.', say: ['Morning: a recording, INC-1001.', 'A saved incident, the same for everyone. You start it with a command.', 'Safe to practise: you can replay it as often as you want.']},
-        {do: 'Point at Live from the shop.', say: ['Afternoon, in A6: you break the shop yourself.', 'The console notices it by itself and gives it a new number.']},
-        {do: 'Point at Your agent.', say: ['Both go to the same agent, which takes the same steps.', 'So what you build on the recording in the morning works live in the afternoon.']},
-        {ask: 'This afternoon a live incident appears. Will it be INC-1001?', say: ['(Answer: no. INC-1001 is the recording. A live incident gets a new number.)']},
-        {do: 'Point at the file names.', say: ['In A1 Claude Code draws this for you, with these three files.']}
-      ],
-      learn: ['Morning: a recording. Afternoon: live.', 'The same agent handles both.', 'A live incident gets its own number.'],
-      watch: ['Do not open the files now: Claude Code shows them in A1.', 'The live route also passes src/chat.ts (console → chat → agent). The A1 prompt includes it.'],
-      terms: [['Recording', 'a saved incident (fixture) you can replay, the same every time'], ['Command line', 'typing a command in the terminal, like npm run investigate']],
       next: 'Assignment 1: get to know the project, and check that it works.'
     }
   }),
@@ -559,12 +580,12 @@ const day5Slides = [
     humanOpen: 'Change nothing yet. The red tests are for the next assignments.', next: 'A2 · First write down what the agent must do',
     teach: {
       time: '18 min',
-      gist: 'Before you build: a map, a working start, a to-do list, and a first look at your agent at work (INC-1001). Plus the console for all day. Change nothing yet.',
+      gist: 'Research before you build: does it run, where does an incident come in, what does Sonny do now, what can he not do yet. Plus the console for all day. Change nothing yet.',
       do: ['Check manual mode, ask for the map, get the project ready, run the tests, start the console, run the agent on INC-1001.'],
       done: ['They can explain both routes into the agent.', '56 green, 14 red.', 'The console runs at localhost:4320.', 'They saw the INC-1001 diagnosis (without Customer impact).'],
       copy: [['Step 2 · Claude Code', PROMPTS.a1Map], ['Step 3 · Claude Code', PROMPTS.a1Setup], ['Step 4 · Claude Code', PROMPTS.a1SetupChecks], ['Step 5 · Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Step 6 · Browser', 'http://localhost:4320'], ['Step 7 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json'], ['After each step · Window 2', 'git status']],
       script: [
-        {do: 'Slide appears. Goal of A1.', say: ['You are about to build an agent in a project someone else made.', 'Before you build, you need three things: a map (where is what), a working start (does it run?), and a to-do list (what is missing).', 'A1 gives you all three, plus the console you use all day, and at the end you watch your agent investigate a saved incident. Nothing in the agent changes yet.', 'This is the Plan phase. On Day 6–7 you start your own project the same way.']},
+        {do: 'Slide appears. Goal of A1.', say: ['Now the research itself: the four questions from before.', 'Does it run? Where does an incident come in? What does Sonny do now? What can he not do yet?', 'Each step answers one of them, and you also start the console you use all day. Nothing in Sonny changes yet.', 'This is the Plan phase. On Day 6–7 you start your own project the same way.']},
         {do: 'Step 1 · manual mode. Show the bottom of your Claude Code.', say: ['Why: Claude Code is about to read and run things in a project you do not know yet. You want to see every action first.', '“manual mode on”. Not there? Shift+Tab, like Day 1–2.']},
         {do: 'Step 2 · the map. Paste the /show-me prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a1Map]], say: ['Why: today you change this agent. You need to know where an incident comes in and where the agent is: that is where your work lands.', 'In the project: Claude Code reads the 6 files named in the prompt (maybe a few more, like SOLO.md). It changes nothing.', 'Every action passes the project’s guard (a hook, like Day 2). The guard writes each one to approvals/audit.jsonl: “allow” or “deny”.', 'They see: a diagram in the chat. Saved incident → src/cli.ts. Live alert → console/server.ts → src/chat.ts. Both → the investigate function in src/agent.ts.', 'Sometimes also an HTML diagram in docs/show-me/; Claude Code says the path.']},
         {ask: 'Look at the diagram: where do both routes meet?', say: ['(Answer: in the agent: the investigate function in src/agent.ts.)', 'So what you build this morning also works live this afternoon.']},
@@ -578,10 +599,11 @@ const day5Slides = [
         {do: 'Step 6 · see it. Open localhost:4320.', say: ['The shop, its numbers, and “listening”.', 'In A6 the live incident appears right here.']},
         {do: 'Step 7 · see the agent work. New terminal window, Window 2: run the saved incident.', copy: [['Step 7 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json']], say: ['Why: so far you only saw a drawing of the route. Now you see your agent actually work.', 'In the project: src/cli.ts reads the saved incident INC-1001 and its telemetry from fixtures/, and hands it to the agent in src/agent.ts. Nothing changes.', 'They see, top to bottom:', 'The alert: error rate 12% on checkout.', 'Four tool calls: graphs, the update list, the code change, the error logs.', 'The diagnosis: update v2.15.0 at 03:43, error “missing key PAYMENT_PROVIDER_SECRET_EU”, confidence high, proposed fix: rollback → Deploy owner.', 'Window 2 stays open: you use it for git status and git diff.']},
         {ask: 'Look at the diagnosis. What does it not say?', say: ['(Answer: what customers notice. There is no Customer impact line.)', 'Remember that. In A3 you add it, and you run this same command again to see the difference.']},
-        {do: 'Wrap up: four things in the project now.', say: ['The map: the diagram in the chat.', 'A working start: node_modules/, green main tests, the console running.', 'The to-do list: 14 red tests, each with a TODO in the code.', 'A first look at your agent: the INC-1001 diagnosis, still without Customer impact.', 'Next, A2: before we build, we write down what the agent must do.']}
+        {ask: 'What did Sonny do, and what did he not do?', say: ['(Answer: he proposed a rollback, but he did not run it. The last line says OPEN: a human decides.)', 'And what did the contract check? (Nothing yet: it says PASS because it is empty. That is A3.)']},
+        {do: 'Wrap up: the four research questions, answered.', say: ['Does it run? Yes: 56 green main tests, the console running.', 'Where does an incident come in? The map: two routes, both into investigate in src/agent.ts.', 'What does Sonny do now? You saw his diagnosis for INC-1001, still without Customer impact.', 'What can he not do yet? 14 red tests, each with a TODO in the code. And he proposes, he never runs the fix himself.', 'Next, A2: before we build, we write down what the agent must do.']}
       ],
       learn: ['Before you build: a map, a working start, a to-do list.', 'Check the starting point: 56 green, 14 red.', 'Red tests are your to-do list. The console runs all day.', 'The agent already works on INC-1001, but its diagnosis has no Customer impact yet.'],
-      watch: ['Node below 22.13: tests fail on store.test.ts. Back to slide 8.', 'A new terminal window can start on an older Node than the one checked at slide 8 (common with nvm). Symptom: “No such built-in module: node:sqlite”. Fix: nvm use 22, or nvm alias default 22.', 'The picture on the right was recorded on a test server: it shows port 18881. On the laptop it is 4320.', 'Claude Code says “A8”: that is the human-in-the-loop check, part of A6.', 'Port 4320 already in use? A console is already running somewhere: close it or use that one.', 'Someone starts fixing red tests: stop them, that is A3 to A6.', 'Step 3 shows a non-empty diff? Someone already changed files. git stash or a fresh clone gives a clean start.', 'npm ci takes about 5–30 seconds, depending on the network.', 'Step 7 says “npm: command not found” or a Node error in Window 2: a new window can start on an older Node, same fix: nvm use 22.', 'Someone runs step 7 inside Claude Code instead of Window 2: fine, same output, but the point is that they run their agent themselves.', 'No “A-1 setup” line in PROGRESS.md? It appears after Claude Code’s next action; it is only a signal, not proof.'],
+      watch: ['Node below 22.13: tests fail on store.test.ts. Back to the set-up slide.', 'A new terminal window can start on an older Node than the one checked at set-up (common with nvm). Symptom: “No such built-in module: node:sqlite”. Fix: nvm use 22, or nvm alias default 22.', 'The picture on the right was recorded on a test server: it shows port 18881. On the laptop it is 4320.', 'Claude Code says “A8”: that is the human-in-the-loop check, part of A6.', 'Port 4320 already in use? A console is already running somewhere: close it or use that one.', 'Someone starts fixing red tests: stop them, that is A3 to A6.', 'Step 3 shows a non-empty diff? Someone already changed files. git stash or a fresh clone gives a clean start.', 'npm ci takes about 5–30 seconds, depending on the network.', 'Step 7 says “npm: command not found” or a Node error in Window 2: a new window can start on an older Node, same fix: nvm use 22.', 'Someone runs step 7 inside Claude Code instead of Window 2: fine, same output, but the point is that they run their agent themselves.', 'No “A-1 setup” line in PROGRESS.md? It appears after Claude Code’s next action; it is only a signal, not proof.'],
       terms: [['npm ci', 'installs the packages the project needs'], ['Fixtures', 'the sample data: the saved incidents and their graphs, logs and updates (fixtures/telemetry/)'], ['Diff', 'what changed in the files compared to the last saved version in Git'], ['Dependencies', 'the packages a project needs to run (node_modules)'], ['Console', 'the web page at localhost:4320 where your agent works']],
       changes: [
         ['How', '`git status` in a normal terminal. Window 2 only opens at step 7: for steps 2–5 open it early yourself, or type `! git status` in Claude Code. It also shows new files; `git diff` only shows changes inside files Git already knows.'],
@@ -614,7 +636,7 @@ const day5Slides = [
       script: [
         {do: 'Slide appears.', say: ['A1: we got to know the project.', 'Now, before we build anything, we write down what the agent must do.', 'Still the Plan phase: the second half.']},
         {ask: 'Why not just start building right away?', say: ['(Answer: then Claude Code guesses what you want, and you only find out at the end that it is not what you meant.)', 'Same with a builder: no brief, no house you like.']},
-        {do: 'Point at the left card.', say: ['/design-control-loop: one of the skills from slide 9.', 'It asks you three questions, each with a suggested answer.', 'You choose. Claude Code does not decide what the agent is for.']},
+        {do: 'Point at the left card.', say: ['/design-control-loop: one of the four project skills you saw before Assignment 1.', 'It asks you three questions, each with a suggested answer.', 'You choose. Claude Code does not decide what the agent is for.']},
         {do: 'Point at the middle card. Optional: open intent.md, or run the command.', copy: 'grep -n "fill in" intent.md', say: ['intent.md: a normal text file in the project.', 'Two parts are already filled in: who it serves, and what it may never do.', 'Three gaps still say “fill in”: Problem, Outcome, Open questions.', 'That is what you write in A2.']},
         {do: 'Point at the right card.', say: ['Look ahead at the prompts of A3, A4 and A5: each starts with “Read intent.md”.', 'So Claude Code reads your agreement again before every build.', 'Your sentences steer what gets built.']},
         {ask: 'Does the agent itself read intent.md while it works?', say: ['(Answer: no. Claude Code, the builder, reads it. The agent follows the rules that are built from it.)', 'intent.md is for the builders: Claude Code and you.']}
@@ -1126,7 +1148,7 @@ window.SLIDES = day5Slides;
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
   [/^The software development life cycle/, 'all'],
-  [/^(Let’s start the project|The skills Claude Code uses today|Today: build your agent through the SDLC|A tour of the project|What we build today|A1 |Assignment 1:|A2 |Assignment 2:)/, 'plan'],
+  [/^(Let’s start the project|The skills Claude Code uses today|Today: build Sonny through the SDLC|How Sonny handles an incident|Morning: a fixture|A tour of the project|A1 |Assignment 1:|A2 |Assignment 2:)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^A3 · How do we know/, 'test'],
   [/^(How your agent handles an incident|A3 · )/, 'design'],

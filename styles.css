@@ -1991,3 +1991,29 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .ov.notes-open .ov-bigcol{width:min(100%,calc(46vh * 16 / 9))}
 .ov-deck[aria-pressed=true]{border-color:var(--aether-orange);color:var(--aether-orange)}
 .ov-tile[data-type=practice] .ov-cap strong{color:var(--aether-orange)}
+
+/* ---- big SDLC line (opt-in: visual.sdlcLine, sdlcRoute + routeLine): the header's six dots, across the slide ---- */
+.sdlc-track-big{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.7rem;margin:.3rem 0 .5rem}
+.sdlc-track-big .sdlc-step{width:auto;gap:.55rem;cursor:pointer}
+.sdlc-track-big .sdlc-step+.sdlc-step::before{top:1rem;width:calc(100% + .7rem);height:3px;transition:background .3s}
+.sdlc-track-big .sdlc-step.on+.sdlc-step.on::before{background:var(--aether-purple)}
+.sdlc-track-big .sdlc-dot{width:2rem;height:2rem;border-width:3px;transition:transform .3s,background .3s,box-shadow .3s}
+.sdlc-track-big .sdlc-step.cur .sdlc-dot{transform:scale(1.18)}
+.sdlc-track-big .sdlc-label{font-size:1rem;display:block}
+.cards.sdlc-big{grid-template-columns:repeat(6,minmax(0,1fr));gap:.7rem;align-items:start}
+.card.sb-card{opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s,border-color .3s;padding:.9rem .85rem;border-top-color:var(--border)}
+.card.sb-card.shown{opacity:.72;transform:none}
+.card.sb-card.cur{opacity:1;border-top-color:var(--aether-purple);box-shadow:0 10px 30px -14px color-mix(in srgb,var(--aether-purple) 70%,transparent)}
+.sb-card .card-head h2{font-size:1rem}
+.sb-card p,.sb-card .card-body{font-size:.88rem}
+.cards.sdlc-route.sr-lined .card.sr-card{padding-top:1rem}
+@media (max-width:760px){.cards.sdlc-big{grid-template-columns:1fr 1fr}.sdlc-track-big .sdlc-label{font-size:.6rem}.sdlc-track-big .sdlc-dot{width:1.3rem;height:1.3rem}.sdlc-track-big .sdlc-step+.sdlc-step::before{top:.65rem}}
+/* pipeline: per step what is already there (✓) and what is still missing (A-number) */
+.pl-have{display:grid;gap:.3rem;margin-top:.55rem}
+.pl-have-row{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;font-size:.8rem;line-height:1.3;padding:.3rem .45rem;border-radius:8px}
+.pl-have-row.pl-ok{color:var(--ok,#4ade80);background:color-mix(in srgb,var(--ok,#4ade80) 9%,transparent)}
+.pl-have-row.pl-todo{color:var(--text);border:1px dashed var(--aether-orange);background:color-mix(in srgb,var(--aether-orange) 8%,transparent)}
+.pl-have-mark{font-weight:900;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase}
+.pl-todo .pl-have-mark{color:var(--aether-orange)}
+.pl-have-text{flex:1 1 100%}
+.pl-ok .pl-have-text{flex:1;color:var(--text)}

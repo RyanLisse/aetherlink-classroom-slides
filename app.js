@@ -272,16 +272,31 @@ function renderExtras(stage, main, s, v) {
       c.append(tree);
       if (T.steps) { const ol = node('ol', 'sk-steps'); T.steps.forEach(t => ol.append(node('li', null, t))); c.append(ol); } });
   }
+  const bigTrack = (onPick) => {                                // the header's six-dot SDLC line, drawn big across the slide (sdlcLine, sdlcRoute + routeLine)
+    const track = node('div', 'sdlc-track sdlc-track-big'); track.setAttribute('role', 'img'); track.setAttribute('aria-label', 'SDLC: ' + SDLC_PHASES.map(([, l]) => l).join(', '));
+    const steps = SDLC_PHASES.map(([, label], i) => { const st = node('span', 'sdlc-step'); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); st.addEventListener('click', () => onPick(i)); track.append(st); return st; });
+    return [track, steps];
+  };
+  if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots: each click lights the next phase and shows its card below it
+    grid.classList.add('sdlc-big'); let k = -1;
+    const [track, steps] = bigTrack(i => { k = i; paint(); }); grid.prepend(track);
+    cards.forEach((c, i) => { c.classList.add('sb-card'); c.querySelector('.card-icon')?.remove(); c.addEventListener('click', () => { k = i; paint(); }); });
+    const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
+    paint();
+    const next = () => { if (k < cards.length - 1) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
   if (v.sdlcRoute) {                                            // the day as the SDLC: one column per phase with its assignments; → or click walks the phases, the current one is orange
-    grid.classList.add('sdlc-route'); let k = 0;
+    grid.classList.add('sdlc-route'); let k = 0; let lineSteps = [];
+    if (v.routeLine) { const [track, steps] = bigTrack(i => { k = i; paint(); }); grid.prepend(track); grid.classList.add('sr-lined'); lineSteps = steps; }
     cards.forEach((c, i) => { const R = v.sdlcRoute[i] || {}; c.classList.add('sr-card'); c.classList.toggle('sr-opt', !!R.optional); c.style.setProperty('--i', i);
       c.querySelector('.card-icon')?.remove();
-      c.prepend(node('span', 'sr-dot', String(i + 1)));
+      if (!v.routeLine) c.prepend(node('span', 'sr-dot', String(i + 1)));
       const list = node('div', 'sr-items');
       (R.items || []).forEach(([tag, text, opt]) => { const it = node('div', 'sr-item' + (opt ? ' opt' : '')); it.append(node('span', 'sr-tag', tag), node('span', 'sr-text', text)); list.append(it); });
       c.querySelector('.card-head')?.after(list);
       c.addEventListener('click', () => { k = i; paint(); }); });
-    const paint = () => cards.forEach((c, i) => { c.classList.toggle('on', i === k); c.classList.toggle('done', i < k); });
+    const paint = () => { cards.forEach((c, i) => { c.classList.toggle('on', i === k); c.classList.toggle('done', i < k); }); lineSteps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); };
     paint();
     const next = () => { if (k < cards.length - 1) { k++; paint(); return true; } return false; };
     window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
@@ -357,6 +372,7 @@ function renderExtras(stage, main, s, v) {
     cards.forEach((c, i) => { const P = v.pipeline[i] || {}; c.classList.add('pl-card'); c.classList.toggle('pl-hl', !!P.hl); c.querySelector('.card-icon')?.remove();
       c.prepend(node('span', 'pl-num', String(i + 1)));
       const meta = node('div', 'pl-meta'); if (P.file) meta.append(node('code', 'pl-file', P.file)); if (P.tag) meta.append(node('span', 'pl-tag', P.tag)); c.append(meta); if (P.warn) c.querySelector('.card-head')?.after(node('div', 'pl-warn', P.warn));
+      if (P.have) { const ul = node('div', 'pl-have'); P.have.forEach(([kind, text, tag]) => { const r = node('div', 'pl-have-row pl-' + kind); r.append(node('span', 'pl-have-mark', kind === 'ok' ? '✓' : 'missing')); if (tag) r.append(node('span', 'pl-tag', tag)); r.append(node('span', 'pl-have-text', text)); ul.append(r); }); meta.before(ul); }
       if (i < cards.length - 1) c.after(node('div', 'pl-arrow', '→')); });
   }
   if (v.filePair && cards.length >= 2) {                        // one file before → after, drawn as an editor: h = heading, gap = empty, new = written, keep = unchanged
@@ -1311,7 +1327,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && s.visual?.reveal === 'click') { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
