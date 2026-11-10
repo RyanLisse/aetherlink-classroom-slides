@@ -888,7 +888,7 @@ const day5Slides = [
         {step: 'Step 5', text: 'Claude Code builds the five rules into contract.ts, teaches Sonny to write customer impact, and runs the test again', moment: 'B', label: 'the tests', out: 'green · 7 ✓', tone: 'green'},
         {step: 'Step 6', text: 'You run Sonny yourself', cmd: 'npm run investigate -- fixtures/incidents/bad-deploy.json', moment: 'A', label: 'Sonny’s run', out: 'PASS + Customer impact', tone: 'pass'},
         {step: 'Steps 7–8', text: 'Restart the console and see it in the browser', cmd: 'http://localhost:4320', moment: 'A', label: 'Sonny’s run', out: 'Customer impact line', tone: 'pass'},
-        {step: '3B', text: 'All tests, the type check, Sonny once more, and /verify-this', moment: 'A + B', label: 'both', out: 'all green · VERIFIED', tone: 'green'}
+        {step: '3B', text: 'All 56 main tests, the type check, Sonny once more, and /verify-this', moment: 'A + B', label: 'both', out: 'all green · VERIFIED', tone: 'green'}
       ],
       foot: 'Test first (red), then the rules, then test again (green), then run Sonny himself.'
     }},
@@ -921,12 +921,12 @@ const day5Slides = [
       {text: 'Type this in: Claude Code. Goal: see the red test and the plan before anything changes.', prompt: PROMPTS.a3Build, after: '6 of the 7 A3 tests red, why, and a list of about 9 files that must change. Nothing changes yet.'},
       {text: 'Type this in: Claude Code. Goal: build it.', prompt: PROMPTS.a3BuildImplement, after: 'Claude Code asks permission per file. At the end: the A3 test 7 of 7 green, and the diff.'},
       {text: 'Type this in: Window 2. Goal: see the difference with Assignment 1, same command.', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The same diagnosis as in Assignment 1, now with a new line: “Customer impact: … users of checkout may see failures or slowness …”.'},
-      {text: 'Type this in: Window 1. Press Ctrl+C first, then start the console again. The console does not pick up new code by itself.', prompt: 'AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The console runs again with your new code.', warn: true},
-      {text: 'Open in browser: http://localhost:4320. Click “+ New investigation”, then “Investigate: customers report checkout errors”.', after: 'The diagnosis shows a “Customer impact” line.'}
+      {text: 'Type this in: Window 1. The console is Sonny in the browser: the page the operator works in. It still runs your old code, so press Ctrl+C first, then start it again.', prompt: 'AGENT_LISTEN_WINDOW_MIN=1 npm run console', after: 'The console runs again, now with your new contract.', warn: true},
+      {text: 'Open in browser: http://localhost:4320. Click “+ New investigation”, then “Investigate: customers report checkout errors”. This runs the same investigation as step 6, now where the operator sees it.', after: 'The diagnosis shows a “Customer impact” line.'}
     ],
     after: 'The A3 tests are green, and the diagnosis shows Customer impact in the terminal and the browser.',
     checks: ['The A3 test: 7 of 7 green.', 'You can name the five rules.', 'The browser shows a Customer impact line.'],
-    humanOpen: 'You accept the rules and review every file change. Nothing is approved or rolled back.', next: 'Assignment 3B: check that it really works',
+    humanOpen: 'You accept the rules and review every file change. Nothing is approved or rolled back.', next: 'Done means: everything still works',
     teach: {
       time: '25 min',
       gist: 'Claude Code explains the five rules, you accept them, it shows the plan, then builds. The A3 tests go from 6 red to 7 green.',
@@ -943,12 +943,12 @@ const day5Slides = [
         {do: 'Step 5 · build. Paste the third prompt.', copy: [['Step 5 · Claude Code', PROMPTS.a3BuildImplement]], say: ['Why: now the rules go into the code, everywhere the diagnosis goes.', 'In the project, about 9 files change:', 'src/contract.ts: the check itself, the five rules.', 'src/runtime.ts and src/prompts.ts: the agent’s answers now include customer impact.', 'docs/spec.md: the description of a diagnosis.', 'src/cli.ts and console/index.html: the terminal and the web page show the new line.', 'Plus a few test files and approvals/README.md get one line.', 'They see: a permission question per file. For docs/spec.md and test files the guard asks extra: “confirm this edit with the human”.', 'At the end: the A3 test 7 of 7 green, and the diff.']},
         {do: 'Show PROGRESS.md.', say: ['The hook adds an “A-3 spec + contract” entry: the check now mentions customer_impact.']},
         {do: 'Step 6 · same command as Assignment 1, in Window 2.', copy: [['Step 6 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json']], say: ['Why: see with your own eyes what changed, with the exact same incident. Now Sonny’s run: does he still get through the new contract?', 'They see: the same diagnosis as in Assignment 1, plus a new line: Customer impact.', '“affected segments remain OPEN”: it does not guess which customers.']},
-        {do: 'Step 7 · restart the console in Window 1.', copy: [['Step 7 · Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console']], say: ['Why: the console loaded the old code when it started. It does not see new code by itself.', 'Ctrl+C, then start it again.']},
-        {do: 'Step 8 · see it. Browser: + New investigation.', say: ['They see: the diagnosis with a new line, Customer impact.', 'Same line as in Window 2 at step 6.']},
-        {do: 'Wrap up.', say: ['The check works: every diagnosis is now tested against five rules.', 'Next, Assignment 3B: we check that it really works, with fresh evidence, instead of just trusting Claude Code.']}
+        {do: 'Step 7 · restart the console in Window 1.', copy: [['Step 7 · Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console']], say: ['What it is: the console is Sonny in the browser, the page the operator works in at 03:45. A list of incidents, a chat, Approve and Reject buttons. You started it in Assignment 1.', 'Why restart: it loaded Sonny’s code when it started, so it still has the old contract. Ctrl+C, then start it again.', 'The terminal command is the builder’s quick way in. The console is where the real user works. You check your change in both places.']},
+        {do: 'Step 8 · see it. Browser: + New investigation.', say: ['“+ New investigation” is like a customer calling in: it makes an incident, and Sonny runs the same investigation as in step 6. The browser way in from the code slide.', 'They see: the diagnosis with a new line, Customer impact. Same line as in Window 2 at step 6.', 'This afternoon you work in the console: refusing “roll back” in the chat, and a live incident with Approve and Reject.']},
+        {do: 'Wrap up.', say: ['The contract works: every diagnosis now goes through five rules, in the terminal and in the browser.', 'But you changed the shape of every diagnosis. Does the rest of Sonny still work? That is next.']}
       ],
       learn: ['Understand and accept the rules before building.', 'See the red test and the file list first, then build.', 'One rule ends up everywhere the diagnosis goes: contract, agent, description, terminal, web page.'],
-      watch: ['Many permission questions in step 5: read the first few. Then they may pick “allow edits for this session”; the guard still asks for docs/spec.md and test files.', 'Claude Code edits in step 2 or 4: say “stop, do not edit yet”.', 'Claude Code removes or weakens an existing rule to make a test green: reject it.', 'Test still red after step 5: ask Claude Code to show the red line and fix only that.', 'No Customer impact in the browser: the console was not restarted (step 7), or it is an old incident: start a new investigation.', 'Port 4320 in use after Ctrl+C: wait a second, or close the old window.', 'Stuck far behind: Assignment 3B has a catch-up command that jumps to the finished A3.'],
+      watch: ['Many permission questions in step 5: read the first few. Then they may pick “allow edits for this session”; the guard still asks for docs/spec.md and test files.', 'Claude Code edits in step 2 or 4: say “stop, do not edit yet”.', 'Claude Code removes or weakens an existing rule to make a test green: reject it.', 'Test still red after step 5: ask Claude Code to show the red line and fix only that.', 'No Customer impact in the browser: the console was not restarted (step 7), or it is an old incident: start a new investigation.', 'Port 4320 in use after Ctrl+C: wait a second, or close the old window.', 'Someone asks what AGENT_LISTEN_WINDOW_MIN=1 does: the console also watches the live shop’s graphs every 10 seconds and opens an incident by itself after 1 minute of errors (default 5). That matters in Assignment 6; for Assignment 3 you can ignore it.', 'Stuck far behind: Assignment 3B has a catch-up command that jumps to the finished A3.'],
       terms: [['Diagnosis', 'what Sonny writes: what is happening, root cause with evidence, how sure, one proposed fix (the code calls it “verdict”)'], ['Contract', 'the rules every diagnosis must follow (src/contract.ts)'], ['Schema', 'the form a diagnosis must have: which fields, which types'], ['Fixtures', 'the sample data and saved answers the tests use'], ['OPEN', 'the agent says: I do not know this yet']],
       changes: [
         ['Before step 2', 'From A1 and A2: `modified: intent.md`, `modified: PROGRESS.md`. Nothing else.'],
@@ -957,36 +957,75 @@ const day5Slides = [
         ['Show one change', '`git diff -- src/cli.ts`: one new line, the Customer impact output. Small and easy to read.'],
         ['After steps 6, 7 and 8', 'Nothing new. Running the agent and restarting the console change no files.']
       ],
+      next: 'Done means: everything still works.'
+    }
+  }),
+  baseSlide({
+    title: 'Done means: everything still works', kicker: 'Day 5 · TESTING', subtitle: 'The contract test is green. But your rule changed the shape of every diagnosis. Does the rest of Sonny still work?',
+    visual: {suiteMap: {
+      groups: [
+        {icon: '🛡️', count: '56', state: 'green all day', tone: 'green', cmd: 'npm test', where: 'test/ · 13 files', rule: 'Must stay green. Red means your change broke something that worked.'},
+        {icon: '📝', count: '20', state: 'red until you build it', tone: 'amber', cmd: 'npm run test:workshop', where: 'test/workshop/ · 5 files',
+          files: [['contract', 'A3', '7', '7/7 ✓ now', 'ok'], ['chat + guard', 'A4', '5', 'still red'], ['tools', 'A5', '3', 'still red'], ['executor', 'extra', '5', 'still red']], rule: 'Red is normal. Each assignment turns its own file green.'},
+        {icon: '🧩', state: 'no errors', tone: 'cyan', cmd: 'npm run typecheck', where: 'every code file', rule: 'Add a field in one place and forget another: it shows you where.'}
+      ],
+      convention: [['While you build', 'run only your own test: fast'], ['Before you say “done”', 'run everything']],
+      example: {title: 'Why: tested on this project', left: {label: 'Only the contract changed', lines: ['Contract test   7/7 ✓']}, right: {label: 'Then run everything', lines: ['Main tests      52/56 · 4 ✗', 'Type check      errors in 3 files', 'Sonny           FAIL contract']},
+        foot: 'The contract works, but the rest of Sonny does not know the new field yet. Assignment 3B finds this.'}
+    }},
+    cards: [
+      {title: 'Main tests', body: 'Everything that already worked: Sonny’s investigation, the graphs and logs, approvals, the executor, the chat, the console.'},
+      {title: 'Workshop tests', body: 'The pieces cut out of this project, one file per piece. Your to-do list for the day.'},
+      {title: 'Type check', body: 'Not a test. It checks that every file agrees on the shape of a diagnosis.'}
+    ],
+    keyPoints: ['Main tests (56): what already worked. They must stay green.', 'Workshop tests (20): your to-do list. Red is normal until you build that piece.', 'While you build: your own test. Before “done”: everything, plus the type check.'],
+    notes: 'Time: 12:05 · 3 min. SDLC tracker: Test. Clicks (→): 1 main tests · 2 workshop tests · 3 type check · 4 the convention line · 5 the tested example. Click a box to open it too; ← steps back. Builds on Assignment 1, where they saw “56 green, 14 red” without an explanation. The practice project (workshop/start) is the finished product with pieces cut out. Main tests: npm test = tsx --test test/*.test.ts, 13 files, 56 tests (agent, approval, bench, chat, console, contract format, deployWatch, executor, lessons, scan, store, telemetry, watch); 56/56 green on workshop/start and on day5-after-a3. Workshop tests: npm run test:workshop = scripts/test-workshop.mjs over test/workshop/*.test.ts, 5 files, 20 tests; each file starts with “Red on workshop/start; rebuild in src/…”. Per file on workshop/start → after A3: contract 1/7 → 7/7, chat 1/3, guard 1/2 (chat + guard = Assignment 4), tools 0/3 (Assignment 5), executor 3/5 (optional extra). Total 6/20 at the start, 12/20 after A3: the 8 still red are normal. Type check: npm run typecheck = tsc --noEmit; not a test, it checks that all files use the same data shapes. The example was run on workshop/start with only src/contract.ts taken from day5-after-a3: contract test 7/7, npm test 52/56 (agent loop, model-skips-tools, identity, a complete verdict passes), typecheck errors in src/runtime.ts, test/approval.test.ts and test/executor.test.ts (customer_impact missing), npm run investigate: FAIL contract, customer_impact: expected a non-empty string. The convention is normal in real teams: a focused test while building, the full suite before you call it done (often run automatically on every change).',
+    teach: {
+      time: '3 min',
+      gist: 'There are two groups of tests: the main tests guard what already worked (must stay green), the workshop tests are the day’s to-do list (red until built). Plus the type check. While you build you run your own test; before “done” you run everything. Assignment 3B does that.',
+      script: [
+        {shot: 'assets/day5-jessy-teach/s24-1.webp', do: 'Slide appears. Read the subtitle.', say: ['The contract test is green. Is Assignment 3 done?', 'You changed what every diagnosis looks like. Other parts of Sonny use that shape too. So: does the rest still work?']},
+        {shot: 'assets/day5-jessy-teach/s24-2.webp', do: 'Click: main tests.', say: ['Remember Assignment 1: “56 green, 14 red”? These are the 56.', 'They test everything that already worked: his investigation, approvals, the executor, the chat.', 'Their job is to stay green. Red means: your change broke something that worked.']},
+        {shot: 'assets/day5-jessy-teach/s24-3.webp', do: 'Click: workshop tests.', say: ['And these are the 14 red ones from this morning, 20 in total.', 'The team cut pieces out of this project. Each file describes one missing piece. It is your to-do list for the day.', 'Assignment 3 turned the contract file green. The others are still red, and that is normal: that is this afternoon.']},
+        {shot: 'assets/day5-jessy-teach/s24-4.webp', do: 'Click: type check.', say: ['The type check is not a test. It checks that every file agrees on what a diagnosis looks like.', 'Add a field in one place and forget it in another: the type check shows you where.']},
+        {shot: 'assets/day5-jessy-teach/s24-5.webp', do: 'Click: the line in the middle.', say: ['This is how teams work: while you build, only your own test, because it is fast. Before you say “done”: everything.']},
+        {shot: 'assets/day5-jessy-teach/s24-6.webp', do: 'Click: the example.', say: ['We tried it on this project. Only the contract changed: the contract test is green.', 'Run everything: four main tests red, the type check finds three files, and Sonny himself gets FAIL contract.', 'That is what Assignment 3B looks for.']},
+        {ask: 'Seven workshop tests are still red after Assignment 3. Is that a problem?', say: ['(Answer: no. Those are the pieces for Assignment 4 and 5. Only the main tests must be green.)']}
+      ],
+      learn: ['Main tests guard what already worked; they must stay green.', 'Workshop tests are the day’s to-do list; red is normal until you build that piece.', 'Your own test while building, everything before “done”.'],
+      watch: ['Someone asks why the team cut pieces out: so you build them yourself, with a test that tells you when you are done.', 'Someone asks why not always run everything: you can, it just takes longer. While building, one fast test keeps you moving.', 'Someone asks who runs this in real life: usually it runs automatically on every change (“CI”). Today we do it by hand.', 'Do not go through all 13 main test files: the groups are enough.'],
+      terms: [['Main tests', 'tests for everything that already works; they must stay green (regression tests)'], ['Workshop tests', 'tests for the pieces you build today; red until you build them'], ['Type check', 'a check that every file uses the same shape for a diagnosis; not a test']],
       next: 'Assignment 3B: check that it really works.'
     }
   }),
   {...checkpointSlide({
-    number: 3, title: 'verify the verdict contract', subtitle: 'Do not just trust Claude Code. Run every test, then let a second check look at the evidence with fresh eyes. You read the evidence yourself.', stage: 'contract', duration: '12:05 · 7 min', shot: 'assets/day5-expected/a3.png',
+    number: 3, title: 'verify the verdict contract', subtitle: 'Prove the whole Sonny still works with your new rule, not just the contract. Then a second check that does not take Claude Code’s word for it. You read the evidence yourself.', stage: 'contract', duration: '12:08 · 7 min', shot: 'assets/day5-expected/a3.png',
     steps: [
-      {text: 'Type this in: Claude Code. Goal: run all checks, not just the contract test.', prompt: PROMPTS.a3BuildProve, after: 'All main tests, the type check, the terminal output and the browser line: all visible, all green.'},
+      {text: 'Type this in: Claude Code. Goal: run everything, not just the contract test: the main tests, the type check, and Sonny.', prompt: PROMPTS.a3BuildProve, after: 'Main tests 56 of 56 green, the type check without errors, and Customer impact in the terminal and the browser. Something red? Claude Code reports it before it changes anything.'},
       {text: 'Type this in: Claude Code. Goal: a second, independent check of the claim.', prompt: PROMPTS.a3Verify, after: 'One word back: VERIFIED, NOT VERIFIED or INCONCLUSIVE, with the files and output it looked at.'},
       {text: 'You check. Goal: open every file and output it names.', after: 'Each one really shows what the check says.'},
       {text: 'Open in browser: http://localhost:4320', after: 'The Customer impact line matches what was verified.'},
       {text: 'Type this in: Window 2. Goal: only if you are stuck: save your work and jump to the finished version of Assignment 3.', prompt: 'git stash push -u -m "before Day 5 A3 catch-up" && git switch -c day5-catch-up-a3 day5-after-a3', after: 'Your work is saved, and you continue from the finished Assignment 3.', warn: true}
     ],
     after: 'The claim “the contract refuses a diagnosis without customer impact” is verified, with the files and output to show it.',
-    checks: ['VERIFIED from the second check.', 'You opened the evidence it names.', 'All main tests and the type check are green.'],
+    checks: ['Main tests 56 of 56 green, type check clean.', 'You opened the evidence the second check names.', 'VERIFIED from the second check.'],
     humanOpen: 'A check result approves nothing and runs nothing.', next: 'Pre-lunch quiz'
   }), title: 'Assignment 3B: Check that it really works', kicker: 'Day 5 · ASSIGNMENT 3B · TEST', type: 'practice', visual: {shot: 'assets/day5-expected/a3.png', shotLabel: 'What you should see at the end'},
     teach: {
       time: '7 min',
-      gist: 'The Test step: do not trust Claude Code’s own “done”. Run every test, let /verify-this check the claim with fresh eyes, and read the evidence yourself.',
+      gist: 'The Test step: prove the whole Sonny still works with the new rule (main tests, type check, Sonny himself), then let /verify-this check the claim with fresh eyes, and read the evidence yourself.',
       copy: [['Step 1 · Claude Code', PROMPTS.a3BuildProve], ['Step 2 · Claude Code', PROMPTS.a3Verify], ['Stuck · Window 2', 'git stash push -u -m "before Day 5 A3 catch-up" && git switch -c day5-catch-up-a3 day5-after-a3']],
       script: [
-        {do: 'Slide appears. Goal of this assignment.', say: ['Claude Code says it is done. Do you believe it?', 'In the SDLC this is the Test step: check with evidence, not with trust.']},
-        {do: 'Step 1 · all checks. Paste the first prompt.', copy: PROMPTS.a3BuildProve, say: ['Why: the contract test was green, but did anything else break?', 'In the project: all main tests, the type check, the terminal run and the browser. Nothing changes.', 'They see: everything green, and the Customer impact line in the terminal and in the browser.']},
-        {do: 'Step 2 · a second check. Paste the second prompt.', say: ['Why: a second check that only reads, with one question: is the claim true?', '/verify-this is a skill: it looks at the spec, the tests and the output, and answers VERIFIED, NOT VERIFIED or INCONCLUSIVE.', 'It changes nothing.']},
+        {do: 'Slide appears. Goal of this assignment.', say: ['Claude Code says it is done. Do you believe it?', 'Same idea as the contract, one level up: the contract checks Sonny’s work before the operator sees it. Now the tests and a second check look at Claude Code’s work before you accept it.', 'In the SDLC this is the Test step.']},
+        {do: 'Step 1 · run everything. Paste the first prompt.', copy: PROMPTS.a3BuildProve, say: ['Why: the last slide. The contract test was green, but did anything else break?', 'In the project: the 56 main tests, the type check, and Sonny himself in the terminal and the browser. Nothing changes.', 'Normal: 56 of 56 green, no type errors, Customer impact in both places. The workshop tests for this afternoon are not part of this: they are still red, and that is fine.']},
+        {ask: 'Claude Code reports 4 main tests red. What now?', say: ['(Answer: something that worked is broken. Usually Sonny does not write customer impact everywhere yet. Let Claude Code show the red line and fix only that, then run everything again.)']},
+        {do: 'Step 2 · a second check. Paste the second prompt.', say: ['Why: so far Claude Code checked its own work. Now a separate check that only reads, with one claim: no diagnosis gets through without customer impact, and Sonny still writes it.', '/verify-this is a skill in the project. It looks at the spec, the tests and the output, and answers VERIFIED, NOT VERIFIED or INCONCLUSIVE, with the files it looked at.']},
         {ask: 'INCONCLUSIVE: is that bad?', say: ['(Answer: no. It means: not enough evidence to say yes or no. Ask what is missing.)']},
-        {do: 'Step 3 · you check.', say: ['Why: the human in the loop again. Open what it names, and look for yourself.']},
+        {do: 'Step 3 · you check.', say: ['Why: the human in the loop again. Open what it names, and look for yourself. Then step 4: the same line in the browser.']},
         {do: 'Stuck: point at the last step.', say: ['Far behind? This saves your work and jumps to the finished Assignment 3, so you are ready after lunch.']}
       ],
-      learn: ['Test means: check with evidence, not trust.', 'A second check that only reads gives fresh eyes.', 'You still read the evidence yourself.'],
-      watch: ['NOT VERIFIED: ask Claude Code which check failed and fix only that.', 'The stuck command needs a clean start: it saves their work first (git stash), nothing is lost.', 'Someone thinks VERIFIED approves a rollback: no. It only says the claim is true.'],
+      learn: ['Done means: the main tests and the type check are still green, not only your own test.', 'A second check that only reads gives fresh eyes.', 'You still read the evidence yourself.'],
+      watch: ['Someone expects the workshop tests to be green: only the contract file is (7/7). The other 8 red ones are Assignment 4, 5 and an extra.', 'NOT VERIFIED: ask Claude Code which check failed and fix only that.', 'The stuck command needs a clean start: it saves their work first (git stash), nothing is lost.', 'Someone thinks VERIFIED approves a rollback: no. It only says the claim is true.'],
       terms: [['/verify-this', 'a skill that checks one claim, read-only, and answers VERIFIED, NOT VERIFIED or INCONCLUSIVE'], ['Type check', 'a check that every piece of code uses the right kind of data']],
       next: 'pre-lunch quiz.'
     }},
@@ -994,7 +1033,7 @@ const day5Slides = [
     title: 'Pre-lunch quiz · What is true now?', kicker: 'Day 5 · QUIZ', subtitle: 'Vote first. Reveal the answers second.', type: 'quiz',
     cards: [{title: 'A', body: 'INC-1001 and the listener incident are the same record.'}, {title: 'B', body: 'The builder and product runtime are separate.'}, {title: 'C', body: 'A green contract test proves a human approved rollback.'}, {title: 'D', body: 'Unsupported customer scope stays OPEN.'}],
     keyPoints: ['B and D are true.', 'A confuses two records.', 'C confuses proof with authority.'],
-    notes: note({time: '12:12 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
+    notes: note({time: '12:15 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
   }),
   pauseSlide('Lunch', '60 min', 'Recall the morning before A4', '12:00'),
   pauseSlide('Restart and settle', '10 min', 'Post-lunch recap', '13:00'),
@@ -1244,7 +1283,7 @@ window.SLIDES = day5Slides;
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
   [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|What Sonny should do, and what he does today|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
-  [/^Assignment 3B/, 'test'],
+  [/^(Assignment 3B|Done means: everything still works)/, 'test'],
   [/^A diagnosis you can trust/, 'design'],
   [/^(Assignment 3:|Refuse unsafe chat actions|Example refusal|Assignment 4:|Give the agent one read-only tool|Example tool and trace|Assignment 5:)/, 'build'],
   [/^Catch-up · Ready for the live route/, 'test'],

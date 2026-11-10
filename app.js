@@ -542,6 +542,28 @@ function renderExtras(stage, main, s, v) {
     window.__reveal = next; window.__revealBack = back;
     slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
   }
+  if (v.suiteMap && cards.length >= 3) {                         // Jessy Day 5 opt-in: the tests in the project as three boxes (main tests · workshop tests · type check), then the convention line, then a tested example. → opens them one by one
+    const M = v.suiteMap; grid.classList.add('sm-grid'); let k = 0;
+    cards.forEach((c, i) => { const G = M.groups[i] || {}; c.querySelector('.card-icon')?.remove(); c.classList.add('sm-card', 'sm-' + (G.tone || 'green'));
+      const h = c.querySelector('.card-head'); h?.prepend(node('span', 'sm-ico', G.icon || ''));
+      const meta = node('div', 'sm-meta'); if (G.count) meta.append(node('b', 'sm-count', G.count)); meta.append(node('span', 'sm-state', G.state || '')); h?.after(meta);
+      const where = node('div', 'sm-where'); where.append(node('code', null, G.cmd || ''), node('span', null, G.where || '')); meta.after(where);
+      if (G.files) { const t = node('div', 'sm-files'); G.files.forEach(([name, who, n, now, tone]) => { const r = node('div', 'sm-file ' + (tone || '')); r.append(node('span', 'sm-f-name', name), node('span', 'sm-f-who', who), node('span', 'sm-f-n', n), node('span', 'sm-f-now', now || '')); t.append(r); }); where.after(t); }
+      if (G.rule) c.append(node('p', 'sm-rule', G.rule));
+      c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
+    const conv = node('div', 'sm-conv'); (M.convention || []).forEach(([when, what], j) => { const p = node('div', 'sm-conv-i'); p.append(node('span', null, when), node('b', null, what)); conv.append(p); if (!j) conv.append(node('span', 'sm-conv-to', '→')); });
+    const ex = node('div', 'sm-ex'); if (M.example) { const E = M.example; ex.append(node('span', 'sm-ex-h', E.title || ''));
+      const row = node('div', 'sm-ex-row'); [E.left, E.right].forEach((P, j) => { const b = node('div', 'cr-code term ' + (j ? 'sm-bad' : 'sm-good')); b.append(node('span', 'cr-file', P.label), node('pre', null, P.lines.join('\n'))); row.append(b); if (!j) row.append(node('span', 'sm-ex-to', 'but')); });
+      ex.append(row); if (E.foot) ex.append(node('p', 'sm-ex-foot', E.foot)); }
+    grid.after(conv); conv.after(ex);
+    const LAST = cards.length + 2;
+    const paint = () => { cards.forEach((c, i) => c.classList.toggle('shown', i < k)); conv.classList.toggle('shown', k > cards.length); ex.classList.toggle('shown', k >= LAST); };
+    paint();
+    const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
   if (v.previewList) {                                           // Jessy Day 5 opt-in: a checklist preview of the next assignment. Rows start as ☐; → ticks them one by one; each row shows which moment (A Sonny's run / B the tests) and what you should see
     const P = v.previewList; const wrap = node('div', 'pv-wrap'); let k = 0;
     if (P.order) { const o = node('div', 'pv-order'); P.order.forEach(([t, tone], j) => { if (j) o.append(node('span', 'pv-to', '→')); o.append(node('span', 'pv-pill ' + (tone || ''), t)); }); wrap.append(o); }
