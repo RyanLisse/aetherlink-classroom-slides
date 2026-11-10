@@ -290,9 +290,8 @@ const day5Slides = [
       {title: 'Put it live', body: 'Real users start using it.'},
       {title: 'Keep it running, and learn', body: 'Fix, improve, and start again at Plan.'}
     ],
-    tagline: 'These six dots are at the top of every slide today. The lit one shows where we are.',
     keyPoints: ['Plan, Design, Build, Test, Deploy, Maintain.', 'The six dots at the top of each slide show where we are.', 'Day 6 and 7: the same six steps with your own project.'],
-    notes: 'Time: 10:09 · 3 min. Each click (→) lights the next dot and shows its card. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).',
+    notes: 'Time: 10:09 · 3 min. Each click (→) lights the next dot and shows its card. Clicking a dot jumps to that step; the current dot is orange. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).',
     teach: {
       time: '3 min',
       gist: 'The six steps all software goes through, on one line. The same line is at the top of every slide today.',
@@ -305,7 +304,7 @@ const day5Slides = [
         {do: 'Click: Deploy.', say: ['Deploy: put it live for real users.']},
         {do: 'Click: Maintain.', say: ['Maintain: keep it running, and learn from what went wrong.', 'That feeds the next Plan, and you go round again.']},
         {ask: 'Claude Code can help in every step. Why is a person still needed?', say: ['(Answer: AI can be wrong, and someone is responsible for what goes live.)']},
-        {do: 'Point at the tagline.', say: ['From the next slides on, this line is small at the top right of every slide.', 'The lit dot shows where we are.', 'Day 6 and 7, the hackathon: the same six steps with your own project. Today is the practice round.']}
+        {do: 'Click any dot to jump back to that step (it turns orange).', say: ['From the next slides on, this line is small at the top right of every slide.', 'The lit dot shows where we are.', 'Day 6 and 7, the hackathon: the same six steps with your own project. Today is the practice round.']}
       ],
       learn: ['SDLC = the six steps all software goes through: Plan, Design, Build, Test, Deploy, Maintain.', 'Today you go through them once.', 'The dots at the top of each slide show the current step.'],
       watch: ['Keep it short: the dots bring the steps back all day.', '“We do agile/sprints”? Fine: the same steps, just in smaller rounds.'],

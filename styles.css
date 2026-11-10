@@ -2028,3 +2028,8 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .pl-gate-text{font-size:.62rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;line-height:1.25;text-align:center;color:var(--aether-orange);border:1.5px solid var(--aether-orange);border-radius:8px;padding:.25rem .3rem;background:color-mix(in srgb,var(--aether-orange) 10%,transparent)}
 .pl-gate-glyph{font-size:1.9rem;line-height:1}
 @media (max-width:900px){.pl-gate{width:auto;flex-direction:row;transform:none}.pl-gate .pl-gate-glyph{transform:rotate(90deg)}}
+/* big SDLC line: the current (clicked) step is orange */
+.sdlc-track-big .sdlc-step:hover .sdlc-dot{border-color:var(--aether-orange)}
+.sdlc-track-big .sdlc-step.cur .sdlc-dot{background:var(--aether-orange);border-color:var(--aether-orange);box-shadow:0 0 0 4px color-mix(in srgb,var(--aether-orange) 28%,transparent),0 0 16px color-mix(in srgb,var(--aether-orange) 80%,transparent)}
+.sdlc-track-big .sdlc-step.cur .sdlc-label{color:var(--aether-orange)}
+.card.sb-card.cur{border-top-color:var(--aether-orange)}
