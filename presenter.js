@@ -211,12 +211,16 @@ function renderSlide(index) {
 }
 
 /* ---- sync ---- */
+// ?notes=1: notes only, for the deck's Overview page. No sync with the main window: the Overview tells it which slide to show.
+const NOTES_ONLY = new URLSearchParams(location.search).has('notes');
+if (NOTES_ONLY) document.documentElement.classList.add('notes-only');
 let channel = null;
-try { if ('BroadcastChannel' in window) channel = new BroadcastChannel(PRESENTER_CHANNEL); } catch {}
+try { if (!NOTES_ONLY && 'BroadcastChannel' in window) channel = new BroadcastChannel(PRESENTER_CHANNEL); } catch {}
 if (channel) {
   channel.addEventListener('message', e => { if (e.data && e.data.type === 'slide') { setSyncStatus(true); renderSlide(e.data.index); } });
 }
 window.addEventListener('storage', e => {
+  if (NOTES_ONLY) return;
   if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { $('p-hidden').hidden = !isHidden(current); return; }
   if (e.key !== PRESENTER_KEY || !e.newValue) return;
   try { const data = JSON.parse(e.newValue); setSyncStatus(true); renderSlide(data.index); } catch {}
@@ -227,6 +231,7 @@ window.addEventListener('storage', e => {
   const params = new URLSearchParams(location.search);
   const fromUrl = Number(params.get('i'));
   if (Number.isInteger(fromUrl) && fromUrl >= 0 && fromUrl < slides.length) { renderSlide(fromUrl); }
+  if (NOTES_ONLY) return;
   try {
     const stored = JSON.parse(localStorage.getItem(PRESENTER_KEY) || 'null');
     if (stored && Number.isInteger(stored.index)) { renderSlide(stored.index); if (Date.now() - (stored.at || 0) < 15000) setSyncStatus(true); }

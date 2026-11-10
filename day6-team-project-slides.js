@@ -139,13 +139,29 @@ window.SLIDES = [
   kicker: "DAY 6 · ROUTE",
   subtitle: "Everything so far was practice. Today the team project starts for real.",
   type: "context",
-  visual: { bot: 'wave', place: 'left', dayRoute: ['Teaching day 1', 'Teaching day 2', 'n8n', 'Agent SDK', 'SDLC', 'Today: team project', 'Day 7: AI app'] },
+  visual: { bot: 'wave', place: 'left', dayRoute: ['Day 1: Claude Code', 'Day 2: skills, agents', 'Day 3: n8n', 'Day 4: Agent SDK', 'Day 5: SDLC, Sonny', 'Today: team project', 'Day 7: AI app'] },
   cards: [
     { title: "Today", body: "Your team turns an idea into a plan you can build, and starts building." },
     { title: "Day 7", body: "Your team shows a working AI app." }
   ],
   keyPoints: ["Walk the route left to right","Each day added one piece","Today: idea becomes a plan","Day 7: a working app"],
-  notes: "Walk the route once: the two teaching days gave them the working method and Claude Code, Day 3 gave them workflows in n8n, Day 6 the Claude Agent SDK, and last session placed it all in the software development life cycle. Today all of that comes together in one team project. Day 7 is the finish line: a working AI app the team can show."
+  notes: "Walk the route once: Day 1 Claude Code and the working method, Day 2 skills, agents and workflows, Day 3 workflows in n8n, Day 4 the Claude Agent SDK, Day 5 the software development life cycle with Sonny, the on-call agent. Today all of that comes together in one team project. Day 7 is the finish line: a working AI app the team can show.",
+  teach: {
+    time: '3 min',
+    gist: 'Where we are in the week: five days of practice, today the team project starts, Day 7 the team shows a working AI app.',
+    script: [
+      {do: 'Slide appears. The route fills in from left to right.', say: 'Before we start: where are we? Five days behind us. Each day added one piece.'},
+      {do: 'Point at Day 1 and Day 2.', say: 'Day 1: Claude Code and the way we work with it. Day 2: skills, agents and workflows.'},
+      {do: 'Point at Day 3 and Day 4.', say: 'Day 3: workflows in n8n. Day 4: agents with the Claude Agent SDK.'},
+      {do: 'Point at Day 5.', say: 'Day 5: the software development life cycle. You built Sonny, the on-call agent, step by step: on your own, with Claude Code.'},
+      {ask: 'Which of these days did you find most useful for your own work?', say: '(Let two or three people answer. Keep it short.)'},
+      {do: 'Point at Today and the Today card.', say: 'Everything so far was practice. Today your team picks one idea, turns it into a plan you can build, and starts building.'},
+      {do: 'Point at Day 7 and the Day 7 card.', say: 'Day 7 is the finish line: your team shows a working AI app.'}
+    ],
+    learn: ['Each day added one piece; today they all come together.', 'Today: from idea to a plan you can build, and a first build.', 'Day 7: a working AI app the team shows.'],
+    watch: ['Keep it to the route: what each day was about comes back on the next slides.', 'Someone missed a day: reassure them, the recap on the next slides covers what they need.'],
+    next: 'what do you remember from Day 5?'
+  }
 },
 
 { // Slide 3
@@ -156,51 +172,94 @@ window.SLIDES = [
   tagline: "Answer from memory first, no peeking.",
   visual: { reveal: 'click', bot: 'peek', place: 'slot', noReact: true },
   cards: [
-    { title: "What is an intent, and what goes in it?", body: "" },
-    { title: "Why do we fetch tickets in read-only mode?", body: "" },
-    { title: "Which files help AI help you?", body: "" },
-    { title: "What are the phases of the software development life cycle?", body: "" },
-    { title: "Where does a person have to decide?", body: "" }
+    { title: "03:45, checkout errors at 12%. What did Sonny do, and what did he not do?", body: "" },
+    { title: "What is evidence, and why does a diagnosis need it?", body: "" },
+    { title: "What goes in intent.md, and why does Claude Code read it before every build?", body: "" },
+    { title: "What does the contract do, and how do you know it works?", body: "" },
+    { title: "Where did the operator have to decide, and why?", body: "" }
   ],
   keyPoints: ["Cold retrieval","One question per click","Room answers first","Gaps = what to support today"],
-  notes: "Cold retrieval: no slides, no notes. Open one question per click and let the room answer. These questions follow last session: writing an intent, fetching tickets read-only, and the SDLC. Read-only is the important habit: first look, then change, and only with approval. 'Which files help AI help you?' leads straight into the next slide. Note the gaps out loud: whatever the room can't answer is what you will support most today."
+  notes: "Cold retrieval: no slides, no notes. Open one question per click and let the room answer. The questions follow Day 5: the 03:45 incident, Sonny, intent.md, the contract and the operator's approval. Note the gaps out loud: whatever the room can't answer is what you will support most today.",
+  teach: {
+    time: '6 min',
+    gist: 'Five questions about Day 5, answered from memory. Whatever the room cannot answer is what you support most today.',
+    script: [
+      {do: 'Slide appears with five closed questions.', say: 'Day 5, from memory. No slides, no notes. I open one question at a time. You answer first, then I add what is missing.'},
+      {do: 'Click question 1.', ask: '03:45, checkout errors at 12%. What did Sonny do, and what did he not do?', say: '(Answer: he looked where you would look: the graphs, the latest updates, what changed in the code, the error messages. He wrote a diagnosis with evidence and one proposed fix. He changed nothing himself: he only read, and asked the operator.)'},
+      {do: 'Click question 2.', ask: 'What is evidence, and why does a diagnosis need it?', say: '(Answer: one line of data that shows something: where it is and which entry, like deploys:d-4821. With evidence the operator can check the diagnosis instead of just believing it.)'},
+      {do: 'Click question 3.', ask: 'What goes in intent.md, and why does Claude Code read it before every build?', say: '(Answer: what the agent must do: the problem, the outcome, who uses it, what it may not do, and open questions. You decide, Claude Code writes it down. Because every build starts from it, Claude Code builds what you agreed instead of guessing.)'},
+      {do: 'Click question 4.', ask: 'What does the contract do, and how do you know it works?', say: '(Answer: the contract is the five rules together, as code. It runs on every diagnosis before the operator sees it. Tests give it made-up diagnoses, good and bad, and show that it catches the bad ones: red first, green when the rules are built.)'},
+      {do: 'Click question 5.', ask: 'Where did the operator have to decide, and why?', say: '(Answer: before anything changes, for example before a rollback. A named person approves one proposed fix for one incident. The AI can be wrong, and a person is responsible for what goes live.)'},
+      {say: 'Name the gaps out loud: “Question 4 was hard, so we will come back to rules and tests when you build.”'}
+    ],
+    learn: ['Sonny only reads, writes a diagnosis with evidence, proposes one fix, and asks.', 'intent.md first, then build.', 'The contract and its tests catch bad diagnoses.', 'A person approves before anything changes.'],
+    watch: ['Wait for the room before you answer. Silence is fine for a few seconds.', 'Online participants: ask them to type their answer in the chat.', 'Do not teach Day 5 again: one or two sentences per answer is enough.'],
+    terms: [['Diagnosis', 'what Sonny writes: what is wrong, the evidence, one proposed fix'], ['Evidence', 'one line of data: where it is and which entry'], ['Contract', 'the five rules together, as code, run on every diagnosis'], ['Test', 'example diagnoses you run with npm test to show the contract catches bad ones'], ['Approval', 'a named person signs one proposed fix for one incident']],
+    next: 'which of these you take into your own project.'
+  }
 },
 
 { // Slide 4
-  title: "Write it down, and AI works better",
+  title: "What you take from Day 5",
   kicker: "DAY 6 · RECAP · WORKING WITH AI",
-  subtitle: "The more your team writes down, the better Claude can help.",
+  subtitle: "With Sonny you did it on your own. Today your team uses the same four pieces for its own project.",
   type: "concept",
   visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
   cards: [
-    { title: "Intent", body: "What you want to achieve, for whom, and what is out of scope." },
-    { title: "Design doc", body: "How it will work: data, tools, steps and risks." },
-    { title: "ADR", body: "One decision: what you chose, why, and what you didn't choose." },
-    { title: "Let AI ask", body: "Give Claude your rough intent and let it ask clarifying questions before it writes anything." }
+    { title: "intent.md", body: "Before you build, write down what it must do, for whom, and what it may not do. You decide; Claude asks the questions." },
+    { title: "Rules and tests", body: "Write results someone can check. A test shows that your rules catch a bad answer." },
+    { title: "Read first", body: "Like Sonny: first look at the data and change nothing. Changing a real system comes later, with approval." },
+    { title: "Approval", body: "The AI proposes. A named person decides before anything changes." }
   ],
-  tagline: "Written decisions are context: for your team and for Claude.",
-  keyPoints: ["Intent, design doc, ADR","Record decisions, not only code","Let Claude ask questions first","Best on new projects","Existing code: start from what's there"],
-  notes: "Structured files make AI help much better, because they give Claude the context it otherwise has to guess. An intent says what and why, a design doc says how, an ADR (architecture decision record) keeps one decision and its reason. Recording decisions also helps the team: next session nobody has to remember why. Letting Claude ask clarifying questions works very well on a new project, where the scope is still open. On an existing (legacy) project it is less clear: the code, its history and the tickets already answer many questions, so start from what is there."
+  tagline: "Write it down first: then Claude Code builds what you mean, not what it guesses.",
+  keyPoints: ["Same four pieces as Day 5","intent.md before building","Results you can check","Read first, change later","A person approves"],
+  notes: "These are the four pieces from Day 5 that work for any AI project, not only an on-call agent. Written down, they are context for the team and for Claude Code, so Claude Code does not have to guess. Today the team writes them for its own idea: the intent first, then rules it can check, read-only access to its data, and a clear point where a person approves.",
+  teach: {
+    time: '4 min',
+    gist: 'Four pieces from Day 5 that work in any AI project. Today the team writes them for its own idea.',
+    script: [
+      {do: 'Slide appears.', say: 'You just remembered Day 5. Four of those pieces work in every AI project, not only for Sonny. On Day 5 you did them on your own. Today your team does them for its own idea.'},
+      {do: 'Press → : intent.md.', say: 'First write down what it must do, for whom, and what it may not do. On Day 5, Claude Code asked you the questions and you decided. Do the same today.'},
+      {do: 'Press → : Rules and tests.', say: 'Write results someone else can check. “The app is helpful” is too vague. “Every answer shows where it came from” you can look at and see. A test shows that your rules catch a bad answer.'},
+      {do: 'Press → : Read first.', say: 'Like Sonny: first look at the data, change nothing. An app that only reads is much easier to make safe, and it is enough for a first version.'},
+      {do: 'Press → : Approval.', say: 'The AI proposes, a person decides. Where in your app does that moment come?'},
+      {ask: 'Why write it down at all? Claude Code can just start.', say: '(Answer: then Claude Code guesses what you want, and you only find out at the end. Written down, it is context for your team and for Claude Code.)'},
+      {do: 'Point at the line at the bottom.', say: 'Write it down first: then Claude Code builds what you mean, not what it guesses.'}
+    ],
+    learn: ['intent.md, rules and tests, read first, approval: four pieces for any AI project.', 'Written down, they are context for the team and for Claude Code.'],
+    watch: ['Do not explain how to write them yet: the team assignments later today do that.', 'Someone asks if their project needs a contract like Sonny: not the same code, but the same idea: rules you can check.'],
+    terms: [['Read-only', 'the app may look at the data but not change it']],
+    next: 'the same loop as Day 5, now with your own project.'
+  }
 },
 
 { // Slide 5
-  title: "The software development life cycle",
-  kicker: "DAY 6 · RECAP · SDLC",
-  subtitle: "Last session in one slide. Today you walk the first part of it as a team.",
+  title: "Same loop, now with your own project",
+  kicker: "DAY 6 · SDLC",
+  subtitle: "On Day 5 you went round the loop once with Sonny. Today and on Day 7 your team goes round it with its own idea.",
   type: "concept",
-  layout: "steps",
-  visual: { stepKeys: true, bot: 'point', place: 'beside' },
-  items: [
-    { label: "Plan", caption: "Which problem, for whom, and why now?" },
-    { label: "Design", caption: "What does it do, which data, which tools, which risks?" },
-    { label: "Build", caption: "Short rounds in plan mode, with Claude Code and n8n." },
-    { label: "Test", caption: "Does it do what we said, also with wrong input?" },
-    { label: "Deploy", caption: "Day 7: show it working." },
-    { label: "Maintain", caption: "Who owns it after this week?" }
-  ],
+  visual: { sdlcLine: true, bot: 'point', place: 'beside' },
   tagline: "Plan and Design first, about 30 minutes. Then build in short rounds.",
-  keyPoints: ["Short recap, not a new lesson","Plan + Design: about 30 minutes","Build in short rounds, plan mode","Day 7 = Test and show","Maintain: who owns it later?"],
-  notes: "Keep it short: this was last session's topic. Click through the phases and say where the team will be today. Plan and Design together take about 30 minutes once the idea is chosen; don't let them take the whole morning. Then Build in short rounds: plan mode first, build a little, test it, adjust. Expect to go back and change the plan during the build; that is normal. Day 7 is Test and showing it. Don't skip Maintain: asking who owns the app after this week is a good reality check."
+  keyPoints: ["Same six phases as Day 5","Today: Plan, Design, Build","Plan + Design: about 30 minutes","Day 7: Test and show","Maintain: who owns it later?"],
+  notes: "Keep it short: the six phases were on every slide of Day 5. Click through and say where the team will be today. Plan and Design together take about 30 minutes once the idea is chosen; don't let them take the whole morning. Then Build in short rounds: plan mode first, build a little, try it, adjust. Going back to change the plan during the build is normal. Day 7 is Test and showing it. Don't skip Maintain: asking who owns the app after this week is a good reality check.",
+  teach: {
+    time: '3 min',
+    gist: 'The six SDLC phases from Day 5, now for the team project: Plan, Design and Build today; Test and show on Day 7.',
+    script: [
+      {do: 'Slide appears with the six dots from Day 5, none lit yet.', say: 'The six phases from Day 5. They were on every slide with Sonny. Day 5 was the practice round. Now the same loop, with your own idea.'},
+      {do: 'Press → : Plan lights up.', say: 'Plan: today you choose one idea and write the intent.'},
+      {do: 'Press → : Design.', say: 'Design: which data do you need, which rules, which risks?'},
+      {do: 'Press → : Build.', say: 'Build: a first small slice that works from start to end, in short rounds.'},
+      {do: 'Press → : Test.', say: 'Test: on Day 7. Does it follow your rules, also with wrong input?'},
+      {do: 'Press → : Deploy.', say: 'Deploy: on Day 7 you show it working.'},
+      {do: 'Press → : Maintain.', say: 'Maintain: who owns it after this week? A good question to ask now already.'},
+      {ask: 'Plan and Design take about 30 minutes. Why not longer?', say: '(Answer: the plan changes anyway once you build. Build a little, learn, adjust: that is the loop.)'},
+      {do: 'Point at the line at the bottom.', say: 'Plan and Design first, about 30 minutes. Then build in short rounds.'}
+    ],
+    learn: ['Same six phases as Day 5.', 'Today: Plan, Design and a first Build. Day 7: Test and show.', 'Plan and Design are short; changing the plan during the build is normal.'],
+    watch: ['Do not teach the SDLC again: it was Day 5.', 'Teams that want to plan all morning: point at the 30 minutes.'],
+    next: 'how today works: we facilitate, you decide and build.'
+  }
 },
 
 /* ---------------------------------------------------------------------- */
@@ -238,18 +297,29 @@ window.SLIDES = [
   kicker: "DAY 6 · YOUR TOOLBOX",
   subtitle: "Everything from the last days is now a tool for your team.",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'head', place: 'beside', tool: 'toolbox' },
+  visual: { stepThrough: true, toolWall: [
+    { day: 'Day 1', pic: { kind: 'term', lines: ['$ claude', '> explore first, then plan', '● plan ready · approve?', '✓ tests pass'] } },
+    { day: 'Day 1', pic: { kind: 'file', name: 'CLAUDE.md', lines: ['# How this project works', 'Run tests: npm test', '# Rules', 'Never push to main'] } },
+    { day: 'Day 2', pic: { kind: 'tree', lines: [[0, '.claude/'], [1, 'skills/'], [2, 'show-me/'], [3, 'SKILL.md'], [2, 'verify-this/']] } },
+    { day: 'Day 2', pic: { kind: 'bots', tags: ['plan', 'build', 'check'] } },
+    { day: 'Day 3', pic: { kind: 'img', src: 'assets/workshop-3/01-n8n.jpeg', pos: '40% 32%', zoom: 2.6, origin: '42% 33%' } },
+    { day: 'Day 4', pic: { kind: 'code', lines: ['import { query } from', "  '@anthropic-ai/claude-agent-sdk'", 'for await (const m of query({', '  prompt, options })) { … }'] } },
+    { day: 'Day 4', pic: { kind: 'plug', sources: ['tickets', 'repo', 'files'] } },
+    { day: 'Day 5', pic: { kind: 'sdlc' } }
+  ] },
   cards: [
-    { title: "The working method", body: "Explore, plan, create, test, human review, handoff." },
-    { title: "Claude Code", body: "Builds and changes the app. CLAUDE.md guides it, settings.json sets the limits." },
+    { title: "Claude Code", body: "Builds and changes your app, with the working method." },
+    { title: "CLAUDE.md", body: "Tells Claude Code how your project works." },
     { title: "Skills", body: "A method you repeat, written down once." },
-    { title: "MCP", body: "Approved connections to tools and data outside your laptop." },
-    { title: "n8n", body: "Workflows that run on their own, with AI as one of the steps." },
-    { title: "The SDLC", body: "Plan, design, build, test, deploy, maintain." }
+    { title: "Agents", body: "Helpers that each do one job." },
+    { title: "n8n", body: "Workflows with AI as one of the steps." },
+    { title: "Agent SDK", body: "Your own agent, in code." },
+    { title: "MCP", body: "Approved connections to tools and data." },
+    { title: "SDLC", body: "Plan to Maintain, a person approves." }
   ],
   tagline: "You don't need everything. Pick what your app needs.",
-  keyPoints: ["Everything learned = a tool now","Claude Code builds the app","n8n runs the workflow","Pick what fits, not all of it"],
-  notes: "A quick reminder of what they have, one sentence per card. The key message is the tagline: a good team project uses the tools that fit the problem. A simple app built with Claude Code is fine; so is an n8n workflow with a Claude step. Using everything is not the goal."
+  keyPoints: ["Everything learned = a tool now","One tile per tool, with its day","Claude Code builds the app","n8n or the Agent SDK runs it","Pick what fits, not all of it"],
+  notes: "A quick reminder of what they have: press → for each tile and say one sentence. Claude Code builds the app with the working method (explore, plan, create, test, human review, handoff); CLAUDE.md tells it how the project works and what it may never do; skills are a method written down once; agents are helpers that each do one job; n8n runs workflows with AI as a step; the Agent SDK is your own agent in code; MCP gives approved connections to tools and data; the SDLC with Sonny was Day 5. The key message is the tagline: a good team project uses the tools that fit the problem. A simple app built with Claude Code is fine; so is an n8n workflow with a Claude step. Using everything is not the goal."
 },
 
 /* ---------------------------------------------------------------------- */

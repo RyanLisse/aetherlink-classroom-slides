@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#06111e"><title>Presenter view · Day 6 · Team project</title>
-<link rel="stylesheet" href="styles.css?v=94">
+<link rel="stylesheet" href="styles.css?v=130">
 <style>
   body{padding:1.4rem clamp(1rem,3vw,2.2rem);gap:1.2rem;min-height:100vh}
   .p-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:1rem}
@@ -51,6 +51,51 @@
   .p-timer .ctrl{display:flex;gap:.5rem;justify-content:center;margin-top:.6rem}
   .p-timer button{min-height:36px;padding:.4rem .8rem;font-size:.8rem}
   .p-empty{color:var(--muted);font-style:italic}
+  #p-notes .p-note-par{display:block;margin:0 0 .75em}
+  #p-notes .p-note-par:last-child{margin-bottom:0}
+  #p-notes strong{color:var(--amber)}
+  /* teaching card (presenter only) */
+  .t-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;margin-bottom:1rem}
+  .t-gist{font-size:1.3rem;font-weight:800;line-height:1.35;margin:0 0 1rem;padding:.75rem 1rem;border-radius:10px;background:var(--surface2);border-left:6px solid var(--aether-orange)}
+  .t-time{display:inline-block;margin-right:.6rem;padding:.1rem .55rem;border-radius:999px;background:var(--aether-orange);color:#06111e;font-size:.8rem;font-weight:800;vertical-align:middle}
+  .t-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:1rem 1.4rem}
+  .t-script h3{margin:0 0 .5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
+  .t-script ol{margin:0;padding:0;list-style:none;counter-reset:beat;display:grid;gap:.55rem}
+  .t-script li{counter-increment:beat;position:relative;padding:.55rem .8rem .55rem 2.7rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px}
+  .t-script li::before{content:counter(beat);position:absolute;left:.7rem;top:.55rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--aether-orange);color:#06111e;font-weight:800;font-size:.85rem;display:grid;place-items:center}
+  .t-script p{margin:0;line-height:1.45}
+  .t-script p + p{margin-top:.3rem}
+  .t-b-do{color:var(--violet);font-weight:750;font-size:.95rem}
+  .t-b-say{font-size:1.08rem}
+  .t-b-say::before{content:"“"}.t-b-say::after{content:"”"}
+  .t-b-ask{color:var(--aether-orange);font-weight:700;font-size:1.05rem}
+  .t-b-answer{color:var(--ok);font-weight:700;padding-left:1rem}
+  .t-b-warn{color:#fff;background:#d93838;font-weight:800;font-size:.95rem;padding:.35rem .6rem;border-radius:6px;margin-bottom:.35rem}
+  .t-b-note{color:var(--muted);font-style:italic;padding-left:1rem}
+  .t-clip{display:block;width:100%;max-width:520px;margin-top:.5rem;border:1px solid var(--border);border-radius:8px;cursor:zoom-in;background:#000}
+  .t-script code{font-size:.9em;padding:.05rem .3rem;border-radius:5px;background:var(--surface);border:1px solid var(--border)}
+  .t-grid > div{display:flex;flex-direction:column;gap:.9rem}
+  .t-sec{--c:var(--cyan);border-left:4px solid var(--c);padding:.15rem 0 .15rem .8rem}
+  .t-sec h3{margin:0 0 .35rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+  .t-sec ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:1.02rem;line-height:1.4}
+  .t-sec strong{color:var(--c)}
+  .t-sec code,.t-gist code,.t-next code{font-size:.9em;padding:.05rem .3rem;border-radius:5px;background:var(--surface2);border:1px solid var(--border)}
+  .t-do{--c:var(--amber)} .t-done{--c:#9be15d}
+  .t-copy{--c:var(--cyan)} .t-copy-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin:.5rem 0 .25rem}
+  .t-copy-inline{margin-top:.4rem}
+  .t-copy-label{font-size:.9rem}
+  .t-copy-btn{flex:none;font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .7rem;border-radius:6px;border:1px solid var(--c);background:transparent;color:var(--c);cursor:pointer}
+  .t-copy-btn:hover{background:var(--c);color:var(--bg)} .t-copy-btn.copied{border-color:var(--ok);background:var(--ok);color:var(--bg)}
+  .t-copy-box{margin:0;padding:.45rem .6rem;font-size:.85rem;line-height:1.35;white-space:pre-wrap;word-break:break-word;background:var(--surface2);border:1px solid var(--border);border-radius:6px;cursor:copy}
+  .t-copy-box:hover{border-color:var(--c)} .t-copy-box.copied{border-color:var(--ok);outline:2px solid var(--ok)}
+  .t-learn{--c:var(--ok)} .t-watch{--c:#ff6b6b} .t-terms{--c:var(--muted)}
+  .t-next{margin:1rem 0 0;padding-top:.7rem;border-top:1px dashed var(--border);color:var(--muted);font-weight:700}
+  #p-full > summary{cursor:pointer;list-style:none}
+  #p-full > summary h2{display:inline}
+  #p-full:not([open]) > summary h2::after{content:" ▸ click to open"}
+  @media (max-width:900px){.t-grid{grid-template-columns:1fr}}
+  html.notes-only .p-top,html.notes-only .p-side,html.notes-only #p-shot,html.notes-only #p-open,html.notes-only #p-keys-block{display:none!important}
+  html.notes-only .p-grid{display:block}html.notes-only body{padding:1rem 1.1rem}html.notes-only .p-title{font-size:1.4rem}
   .p-nav{display:flex;gap:.5rem;margin-top:.8rem}
   .p-progress{font-size:.85rem;color:var(--muted)}
 </style>
@@ -72,10 +117,11 @@
         <h2>Key points</h2>
         <ul class="p-keys" id="p-keys"></ul>
       </div>
-      <div class="p-block notes">
-        <h2>Full text</h2>
+      <div class="t-card" id="p-teach" hidden></div>
+      <details class="p-block notes" id="p-full" open>
+        <summary><h2>Full text</h2></summary>
         <p id="p-notes" class="p-empty">Open the main deck and navigate a slide to see its notes here.</p>
-      </div>
+      </details>
       <div class="p-block prompt" id="p-prompt-block" hidden>
         <h2>Say / paste this</h2>
         <p id="p-prompt"></p>
@@ -93,7 +139,9 @@
       </div>
     </div>
   </div>
-  <script>window.DECK_PAGE = "day6-team-project.html";</script><script src="day6-team-project-slides.js?v=3" defer></script>
-  <script src="timers.js?v=93" defer></script>
-  <script src="presenter.js?v=106" defer></script>
+  <script>window.DECK_PAGE = "day6-team-project.html";</script>
+<script src="day6-team-project-slides.js?v=4" defer></script>
+  <script src="timers.js?v=92" defer></script>
+  <script src="sessions.js?v=19" defer></script>
+  <script src="presenter.js?v=107" defer></script>
 </body></html>

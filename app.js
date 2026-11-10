@@ -45,6 +45,8 @@ function showPrompt() {
 
 /* ---- card icons (kept from the source engine, keyword-matched) ---- */
 const ICONS = { target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>', route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/>', inbox: '<path d="M3 13l2-8h14l2 8v6H3z"/><path d="M3 13h5l2 3h4l2-3h5"/>', check: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>', cross: '<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>', gate: '<path d="M4 20V6l8-3 8 3v14"/><path d="M9 20v-7h6v7"/><path d="M4 12h16"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', users: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19a6 6 0 0 1 12 0"/><path d="M15 19a4 4 0 0 1 6-3.5"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', file: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>', cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>', search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>', bulb: '<path d="M9 18h6M10 21h4"/><path d="M8 13a5 5 0 1 1 8 0c-1 1-1.5 2-1.5 3h-5c0-1-.5-2-1.5-3z"/>', flag: '<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>', hand: '<path d="M8 12V6a1.5 1.5 0 0 1 3 0v5"/><path d="M11 11V4a1.5 1.5 0 0 1 3 0v7"/><path d="M14 11V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0v1"/>', play: '<path d="M7 5v14l11-7z"/>', repeat: '<path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/>', stop: '<path d="M8 3h8l5 5v8l-5 5H8l-5-5V8z"/>', list: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/>', dot: '<circle cx="12" cy="12" r="3"/>' };
+// SDLC phases (the six dots of the Day 5 deck)
+const SDLC_PHASES = [['plan', 'Plan'], ['design', 'Design'], ['build', 'Build'], ['test', 'Test'], ['deploy', 'Deploy'], ['maintain', 'Maintain']];
 const ICON_RULES = [[/goal|outcome|what$/, 'target'], [/boundar|guard|scope/, 'shield'], [/^stop/, 'stop'], [/^mode|route|during/, 'route'], [/input|source|read|deliver|include|contain/, 'inbox'], [/result|check|expected/, 'check'], [/must not|negative|problem|fail/, 'cross'], [/gate|decision/, 'gate'], [/open|time|when/, 'clock'], [/rotate|repeat|loop|again/, 'repeat'], [/group|mob|roles|team|squad|users|driver|navigator/, 'users'], [/individual|analyst|developer|tester|reviewer|observer|engineer|you/, 'user'], [/packet|claim|evidence|log|record|handoff|trace|contract|file|brief|plan|note|status/, 'file'], [/model|agent|adapter|tool|harness|hook|checker|cpu|subagent|session|repo|skill|mcp/, 'cpu'], [/review|search|inspect|compare/, 'search'], [/learned|why|idea|concept/, 'bulb'], [/can do|flag|deliver|ship|transfer|required output/, 'flag'], [/pick|choose|decide/, 'hand'], [/run|demo|execute|play|watch|ask/, 'play'], [/step|list|todo|checklist/, 'list']];
 function cardIcon(title) { const t = (title || '').toLowerCase(); const hit = ICON_RULES.find(([re]) => re.test(t)); const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true'); svg.innerHTML = ICONS[hit ? hit[1] : 'dot']; const wrap = node('span', 'card-icon'); wrap.append(svg); return wrap; }
 function cardBody(body) {
@@ -192,6 +194,34 @@ function highlight(root, s) {
 // slides 8-13: extra layouts, all keep the slide text verbatim
 function renderExtras(stage, main, s, v) {
   const x = { aim: [] }; const cards = [...main.querySelectorAll('.card')]; const grid = main.querySelector('.cards');
+  if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots (as in the Day 5 deck); each click / → lights the next phase; cards below are optional
+    const track = node('div', 'sdlc-track sdlc-track-big'); track.setAttribute('role', 'img'); track.setAttribute('aria-label', 'SDLC: ' + SDLC_PHASES.map(([, l]) => l).join(', '));
+    let k = -1; const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
+    const steps = SDLC_PHASES.map(([, label], i) => { const st = node('span', 'sdlc-step'); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); st.addEventListener('click', () => { k = i; paint(); }); track.append(st); return st; });
+    if (grid) { grid.classList.add('sdlc-big'); grid.prepend(track); } else { track.classList.add('sdlc-solo'); const tag = main.querySelector(':scope > .tagline'); if (tag) tag.before(track); else main.append(track); }
+    paint();
+    const next = () => { if (k < steps.length - 1) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.toolWall && grid) {                                     // toolbox wall: per card a small picture of the tool (terminal, file, folder tree, screenshot, code, plug, bots, SDLC dots) + the day it came from
+    grid.classList.add('tool-wall');
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const pic = (P) => {
+      const box = node('div', 'tw-pic tw-' + P.kind);
+      if (P.kind === 'term') box.innerHTML = '<div class="tw-bar"><i></i><i></i><i></i></div>' + P.lines.map((l) => `<div class="tw-line${/^\$/.test(l) ? ' cmd' : /^[✓●]/.test(l) ? ' ok' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'file') box.innerHTML = `<div class="tw-fname">📄 ${esc(P.name)}</div>` + P.lines.map((l) => `<div class="tw-line${/^#/.test(l) ? ' h' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'tree') box.innerHTML = P.lines.map(([d, n]) => `<div class="tw-line" style="--d:${d}">${/\/$/.test(n) ? '📁' : '📄'} ${esc(n)}</div>`).join('');
+      else if (P.kind === 'code') box.innerHTML = P.lines.map((l) => `<div class="tw-line">${esc(l)}</div>`).join('');
+      else if (P.kind === 'img') { const im = document.createElement('img'); im.src = P.src; im.alt = ''; im.loading = 'lazy'; if (P.pos) im.style.objectPosition = P.pos; if (P.zoom) im.style.transform = 'scale(' + P.zoom + ')'; if (P.origin) im.style.transformOrigin = P.origin; box.append(im); }
+      else if (P.kind === 'bots') box.innerHTML = (P.tags || []).map((t, k) => `<span class="tw-bot" style="--k:${k}"><img src="assets/aetherbot/aetherbot-head.webp" alt=""><b>${esc(t)}</b></span>`).join('');
+      else if (P.kind === 'plug') box.innerHTML = `<img class="tw-plug-bot" src="assets/aetherbot/aetherbot-head.webp" alt=""><span class="tw-wire"></span><span class="tw-mcp">MCP</span><span class="tw-wire"></span><span class="tw-srcs">${(P.sources || []).map((x) => `<span>${esc(x)}</span>`).join('')}</span>`;
+      else if (P.kind === 'sdlc') box.innerHTML = `<span class="tw-dots">${SDLC_PHASES.map(([, l], k) => `<span class="tw-dot" title="${l}" style="--k:${k}"></span>`).join('')}</span><span class="tw-sonny"><img src="assets/aetherbot/aetherbot-wave.webp" alt=""><b>SONNY</b></span>`;
+      return box;
+    };
+    cards.forEach((c, i) => { const T = v.toolWall[i]; if (!T) return; c.classList.add('tw-card'); c.querySelector('.card-icon')?.remove();
+      if (T.day) c.prepend(node('span', 'tw-day', T.day));
+      if (T.pic) c.prepend(pic(T.pic)); });
+  }
   if (v.keyLine != null && cards[v.keyLine]) {                 // 8: calm lead + key line that gets stamped
     main.classList.add('has-key'); cards.forEach((c, i) => { if (i !== v.keyLine) c.classList.add('card-lead'); });
     const key = cards[v.keyLine]; key.classList.add('card-key'); const row = node('div', 'key-row'); key.replaceWith(row); row.append(key);
@@ -978,6 +1008,8 @@ function openPresenterView() {
 /* ---- embed mode: presenter.html shows this page in an iframe (?embed=1) as a live preview ---- */
 const EMBED = new URLSearchParams(location.search).has('embed');
 if (EMBED) document.documentElement.classList.add('embed');
+const EMBED_OPEN = EMBED && new URLSearchParams(location.search).has('open');
+if (EMBED_OPEN) document.documentElement.classList.add('embed-open');
 
 /* ---- hide a slide for now: H toggles; arrows, Home and End skip hidden slides ---- */
 const HIDDEN_KEY = 'als:hidden:' + DECK_ID;
@@ -1122,6 +1154,8 @@ function render() {
   renderTagline(main, s);
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
+  // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.stepThrough || s.visual?.sdlcLine)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
@@ -1169,6 +1203,81 @@ $('chapters').addEventListener('click', () => {
   openPanel('Chapters', list);
   list.querySelector('[aria-current=true]')?.scrollIntoView({ block: 'center' });   // open where you are, not at slide 1
 });
+// Overview (only on decks whose toolbar has the button): opens in a new tab as a storyboard of every slide, all blocks open
+const OVERVIEW_PAGE = new URLSearchParams(location.search).has('overview');
+function openOverview() { window.open(DECK + '?overview=1#' + (current + 1), 'overview-' + DECK); }
+$('overview')?.addEventListener('click', openOverview);
+function renderOverviewPage() {
+  document.documentElement.classList.add('ov-page'); document.title = 'Overview · ' + document.title;
+  let sel = Math.min(Math.max(Number(location.hash.slice(1)) - 1 || 0, 0), slides.length - 1);
+  const page = node('div', 'ov');
+  const head = node('div', 'ov-head'); head.append(node('h2', null, 'Overview · all ' + slides.length + ' slides'), node('span', 'ov-hint', 'Click a slide to see it big · ← → to browse · Enter or double-click shows it in the deck tab'));
+  // the big view on top (like Finder's gallery): the selected slide, all blocks open, with arrows
+  const big = node('div', 'ov-big');
+  const prev = node('button', 'ov-arrow', '←'); prev.setAttribute('aria-label', 'Previous slide');
+  const next = node('button', 'ov-arrow', '→'); next.setAttribute('aria-label', 'Next slide');
+  const screen = node('div', 'ov-screen'); const bf = document.createElement('iframe'); bf.tabIndex = -1; bf.setAttribute('aria-hidden', 'true'); bf.scrolling = 'no'; screen.append(bf);
+  const info = node('div', 'ov-info'); const title = node('strong'); const notesBtn = node('button', 'ov-deck', 'Presenter notes'); const deckBtn = node('button', 'ov-deck', 'Show in deck ↗'); info.append(title, notesBtn, deckBtn);
+  const col = node('div', 'ov-bigcol'); col.append(screen, info);
+  // presenter notes of the selected slide, beside the big view (the presenter page in notes-only mode)
+  const notes = node('div', 'ov-notes'); let nf = null;
+  const showNotes = () => { try { nf?.contentWindow?.renderSlide?.(sel); } catch {} };
+  const setNotes = (on) => {
+    page.classList.toggle('notes-open', on); notesBtn.setAttribute('aria-pressed', String(on)); try { localStorage.setItem('als:ov-notes', on ? '1' : '0'); } catch {}
+    if (on && !nf && window.PRESENTER_PAGE) { nf = document.createElement('iframe'); nf.title = 'Presenter notes'; nf.src = window.PRESENTER_PAGE + '?notes=1&i=' + sel; nf.addEventListener('load', showNotes); notes.append(nf); }
+    if (on) showNotes();
+  };
+  notesBtn.addEventListener('click', () => setNotes(!page.classList.contains('notes-open')));
+  big.append(prev, col, next, notes);
+  const grid = node('div', 'ov-grid'); page.append(head, big, grid); document.body.append(page);
+  // chevron: fold the big view away to see more of the grid; remembered per browser
+  const fold = node('button', 'ov-fold'); fold.setAttribute('aria-controls', 'ov-big'); big.id = 'ov-big'; head.append(fold);
+  const setFolded = (on) => { page.classList.toggle('big-folded', on); fold.innerHTML = '<span class="ov-chev">⌃</span> Preview'; fold.title = on ? 'Show the large preview' : 'Fold the large preview away'; fold.setAttribute('aria-expanded', String(!on)); try { localStorage.setItem('als:ov-folded', on ? '1' : '0'); } catch {} };
+  let folded = false; try { folded = localStorage.getItem('als:ov-folded') === '1'; } catch {}
+  setFolded(folded); fold.addEventListener('click', () => setFolded(!page.classList.contains('big-folded')));
+  const fitBig = () => { const w = screen.clientWidth; bf.style.transform = 'scale(' + (w / 1600) + ')'; };
+  new ResizeObserver(fitBig).observe(screen);
+  const fit = (shot) => { const f = shot.querySelector('iframe'); if (f) f.style.transform = 'scale(' + (shot.clientWidth / 1600) + ')'; };
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return; const shot = e.target; io.unobserve(shot);
+    const f = document.createElement('iframe'); f.tabIndex = -1; f.setAttribute('aria-hidden', 'true'); f.scrolling = 'no';
+    f.src = DECK + '?embed=1&open=1#' + shot.dataset.n; shot.append(f); fit(shot);
+  }), { root: grid, rootMargin: '400px' });
+  const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target)));
+  const showInDeck = (i) => {                          // the deck tab that opened this one jumps there; without it, open the deck here
+    try { if (window.opener && !window.opener.closed) { window.opener.location.hash = String(i + 1); window.opener.focus(); return; } } catch {}
+    location.href = DECK + '#' + (i + 1);
+  };
+  const tiles = slides.map((s, i) => {
+    const tile = node('button', 'ov-tile' + (isHidden(i) ? ' is-hidden' : '')); tile.dataset.type = slideType(s);
+    const shot = node('div', 'ov-shot'); shot.dataset.n = String(i + 1);
+    const cap = node('div', 'ov-cap'); cap.append(node('span', 'ov-num', String(i + 1)), node('strong', null, s.title));
+    tile.append(shot, cap);
+    tile.addEventListener('click', () => { if (page.classList.contains('big-folded')) setFolded(false); select(i); });
+    tile.addEventListener('dblclick', () => showInDeck(i));
+    grid.append(tile); io.observe(shot); ro.observe(shot); return tile;
+  });
+  function select(i) {
+    sel = Math.min(Math.max(i, 0), slides.length - 1);
+    tiles.forEach((t, k) => t.classList.toggle('is-current', k === sel));
+    title.textContent = (sel + 1) + ' · ' + slides[sel].title;
+    try { if (bf.dataset.ready) bf.contentWindow.location.hash = String(sel + 1); else bf.src = DECK + '?embed=1&open=1#' + (sel + 1); } catch { bf.src = DECK + '?embed=1&open=1#' + (sel + 1); }
+    history.replaceState(null, '', '#' + (sel + 1));
+    prev.disabled = sel === 0; next.disabled = sel === slides.length - 1; showNotes();
+    tiles[sel].scrollIntoView({ block: 'nearest' });
+  }
+  bf.addEventListener('load', () => { bf.dataset.ready = '1'; });
+  prev.addEventListener('click', () => select(sel - 1)); next.addEventListener('click', () => select(sel + 1));
+  deckBtn.addEventListener('click', () => showInDeck(sel));
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); select(sel - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); select(sel + 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); showInDeck(sel); }
+  });
+  select(sel);
+  let notesOn = false; try { notesOn = localStorage.getItem('als:ov-notes') === '1'; } catch {} if (notesOn) setNotes(true);
+}
 // generic timer in the toolbar (any slide): same look as the pause slides, one shared timer
 let timerCtl = null;
 $('timer-btn')?.addEventListener('click', () => {
@@ -1180,7 +1289,9 @@ $('fullscreen').addEventListener('click', async () => { try { if (document.fulls
 document.addEventListener('fullscreenchange', () => $('fullscreen').setAttribute('aria-label', document.fullscreenElement ? 'Exit fullscreen' : 'Enter fullscreen'));
 document.addEventListener('keydown', e => {
   if (EMBED) return;
+  if (OVERVIEW_PAGE) return;
   if (panel.open || e.altKey || e.ctrlKey || e.metaKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.closest('[role=tablist]')) return;
+  if ((e.key === 'g' || e.key === 'G') && $('overview')) { e.preventDefault(); openOverview(); return; }
   if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); if (window.__reveal?.()) return; step(1); }
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
   if (e.key === 'Home') { e.preventDefault(); const n = visibleFrom(0, 1); if (n !== null) go(n); }
@@ -1190,5 +1301,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 's' || e.key === 'S') { e.preventDefault(); openPresenterView(); }
 });
 window.addEventListener('pagehide', () => { slideController?.abort(); });
+if (OVERVIEW_PAGE) renderOverviewPage(); else {
 window.addEventListener('hashchange', fromHash);
 fromHash();
+}
