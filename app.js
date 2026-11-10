@@ -423,7 +423,14 @@ function renderExtras(stage, main, s, v) {
     paint();
     // → : 1 he looks · 2 diagnosis · 3 rules appear · 4..3+n open the rules in order · then the switch (all met → Sonny asks you)
     const next = () => { if (k < 3) { k++; paint(); return true; } const i = open.indexOf(false); if (i >= 0) { open[i] = true; focus = i; paint(); return true; } if (Z.fixLabel && !fixed) { fixed = true; focus = n - 1; paint(); return true; } return false; };
-    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+    // ← : the same steps backwards (switch off → close the last open rule → back to the earlier block); at the start ← goes to the previous slide
+    const back = () => { if (answer) { answer = ''; paint(); return true; } if (fixed) { fixed = false; focus = open.lastIndexOf(true); paint(); return true; } const j = open.lastIndexOf(true); if (j >= 0 && k >= 3) { open[j] = false; focus = open.lastIndexOf(true); paint(); return true; } if (k > 0) { k--; paint(); return true; } return false; };
+    // the blocks on top are buttons too: alert / he looks → 1, he writes a diagnosis → 2, he checks it → 3, he asks you → only opens when all five rules are met (otherwise the gate shakes)
+    cards.forEach((c, i) => { c.classList.add('cz-click'); c.tabIndex = 0; c.setAttribute('role', 'button');
+      const go = () => { if (i <= 3) { k = Math.max(i, 1); paint(); return; } const ok = open.every(Boolean) && Z.rules.every((_, j) => okOf(j)); if (ok) return; k = Math.max(k, 3); paint(); gate?.classList.remove('shake'); void gate?.offsetWidth; gate?.classList.add('shake'); setTimeout(() => gate?.classList.remove('shake'), 600); };
+      c.addEventListener('click', go); c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
   }
   if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
     const ls = node('div', 'ls-row');
@@ -1622,7 +1629,7 @@ document.addEventListener('keydown', e => {
   if (panel.open || e.altKey || e.ctrlKey || e.metaKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.closest('[role=tablist]')) return;
   if ((e.key === 'g' || e.key === 'G') && $('overview')) { e.preventDefault(); openOverview(); return; }
   if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); if (window.__reveal?.()) return; step(1); }
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); if (window.__revealBack?.()) return; step(-1); }   // opt-in per visual: step back inside the slide first
   if (e.key === 'Home') { e.preventDefault(); const n = visibleFrom(0, 1); if (n !== null) go(n); }
   if (e.key === 'End') { e.preventDefault(); const n = visibleFrom(slides.length - 1, -1); if (n !== null) go(n); }
   if (e.key === 'h' || e.key === 'H') { e.preventDefault(); const h = toggleHidden(current); notify(h ? 'Slide hidden — the arrows will skip it (H to show again)' : 'Slide shown again'); render(); return; }

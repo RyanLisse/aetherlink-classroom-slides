@@ -2309,3 +2309,13 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .cz-ask .aj-btns{gap:.4rem}
 .cz-ask .aj-btn{font-size:.78rem;padding:.25rem .65rem}
 .cz-reply{font-size:.78rem}
+
+.card.cz-chip.cz-click{cursor:pointer}
+.card.cz-chip.cz-click:hover{opacity:.75}
+.card.cz-chip.cz-click.on:hover{filter:brightness(1.15)}
+.card.cz-chip.cz-click:focus-visible{outline:2px solid var(--aether-orange);outline-offset:2px}
+.cz-side{pointer-events:none}
+.cz-panel.show-rules .cz-side{pointer-events:auto}
+.cz-look{pointer-events:none}
+.cz-gate.shake .cz-gate-t{animation:czShake .5s ease-in-out;border-color:#ff6b6b;color:#ff8f8f}
+@keyframes czShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
