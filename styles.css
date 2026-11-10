@@ -1864,3 +1864,89 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .pl-warn{display:inline-block;align-self:flex-start;margin:.15rem 0 .35rem;font-size:.72rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .5rem;border-radius:999px;color:#ff8f8f;border:1px dashed #ff6b6b}
 .if-tag{white-space:nowrap;flex:none}
 .if-2 .if-tag{min-width:4.6em}
+
+/* wakeUp: 03:45 story. Operator (Aetherbot) wakes up, the laptop fills with what is happening, then the question */
+.cards.wake-up{display:grid;grid-template-columns:1fr 2.1fr 1fr;gap:1rem;align-items:stretch}
+.wk-card{display:flex;flex-direction:column}
+.wk-0{border-top-color:var(--violet)}.wk-1{border-top-color:#ff6b6b}.wk-2{border-top-color:var(--aether-orange)}
+.wk-bot{position:relative;align-self:center;width:min(100%,190px);aspect-ratio:520/565;margin:.2rem 0 .7rem}
+.wk-bot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.wk-awake{opacity:0;animation:wkWake .35s ease-out 1s forwards}
+.wk-sleep{animation:wkSleep .35s ease-out 1s forwards}
+.wk-clock{position:absolute;top:-.2rem;left:-.4rem;z-index:2;font-weight:900;font-size:1.15rem;font-variant-numeric:tabular-nums;color:#111;background:var(--aether-orange);padding:.1rem .5rem;border-radius:8px;animation:wkBuzz .12s linear .3s 6}
+.wk-z{position:absolute;top:8%;right:2%;z-index:2;font-weight:900;color:var(--violet);font-size:1.1rem;letter-spacing:.1em;animation:wkFade .3s ease-out .9s forwards}
+.wk-z i{font-style:normal;font-size:1.35rem}.wk-z b{font-size:1.6rem}
+.wk-tag{position:absolute;left:50%;bottom:-.4rem;transform:translateX(-50%);white-space:nowrap;font-size:.68rem;font-weight:900;letter-spacing:.08em;padding:.15rem .55rem;border-radius:999px;background:var(--violet);color:#fff}
+.wk-screen{border:2px solid var(--border);border-radius:12px;background:#050b14;padding:.5rem;display:grid;gap:.5rem;margin-bottom:.6rem}
+.wk-bar{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.68rem;color:var(--muted);display:flex;align-items:center;gap:.35rem}
+.wk-bar::before{content:'';width:.5rem;height:.5rem;border-radius:50%;background:#ff6b6b;box-shadow:.8rem 0 0 #f5c542,1.6rem 0 0 #4cd38a;margin-right:1.9rem}
+.wk-pop{opacity:0;transform:translateY(8px) scale(.98);animation:wkPop .4s ease-out forwards;animation-delay:calc(.4s + var(--i) * .7s);border-radius:9px;padding:.45rem .6rem;background:rgba(255,255,255,.05);border:1px solid var(--border)}
+.wk-alert{display:flex;align-items:center;gap:.55rem;border-color:#ff6b6b;background:color-mix(in srgb,#ff6b6b 14%,transparent);font-weight:800;font-size:.95rem}
+.wk-dot{flex:none;width:.7rem;height:.7rem;border-radius:50%;background:#ff6b6b;animation:wkPulse 1s ease-in-out infinite}
+.wk-chart-h{display:flex;justify-content:space-between;font-size:.75rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.wk-chart-h b{color:#ff8f8f;font-size:1rem}
+.wk-chart svg{width:100%;height:auto;display:block}
+.wk-limit{stroke:#4cd38a;stroke-width:1.2;stroke-dasharray:4 4}.wk-limit-t{fill:#4cd38a;font-size:9px;font-weight:800}
+.wk-mark{stroke:var(--aether-orange);stroke-width:1.2;stroke-dasharray:3 3}.wk-mark-t{fill:var(--aether-orange);font-size:9px;font-weight:800}
+.wk-line{fill:none;stroke:#ff6b6b;stroke-width:3;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:wkDraw 1.2s ease-out 1.1s forwards}
+.wk-from{fill:var(--muted);font-size:9px}
+.wk-world{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;padding:.35rem}
+.wk-zone{display:grid;justify-items:center;text-align:center;font-size:.78rem;line-height:1.25;color:var(--muted)}
+.wk-zone b{color:var(--text);font-size:.85rem}.wk-zone-i{font-size:1.2rem}
+@keyframes wkPop{to{opacity:1;transform:none}}
+@keyframes wkWake{to{opacity:1}}@keyframes wkSleep{to{opacity:0}}@keyframes wkFade{to{opacity:0;transform:translateY(-6px)}}
+@keyframes wkBuzz{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+@keyframes wkPulse{50%{opacity:.35}}
+@keyframes wkDraw{to{stroke-dashoffset:0}}
+@media (max-width:900px){.cards.wake-up{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.wk-pop,.wk-awake{opacity:1}.wk-sleep,.wk-z{opacity:0}.wk-line{stroke-dashoffset:0}}
+.reveal-grid .wk-card.closed *{animation-play-state:paused}
+
+/* agentJob: what the on-call agent does. It looks → writes a diagnosis → waits for you */
+.cards.agent-job{display:grid;grid-template-columns:1fr auto 1.25fr auto 1fr;gap:.6rem;align-items:stretch}
+.aj-card{display:flex;flex-direction:column}
+.aj-0{border-top-color:var(--cyan)}.aj-1{border-top-color:var(--violet)}.aj-2{border-top-color:var(--ok,#4cd38a)}
+.aj-arrow{align-self:center;font-size:1.8rem;font-weight:900;color:var(--aether-orange)}
+.aj-look{display:flex;gap:.6rem;align-items:center;margin-bottom:.7rem}
+.aj-bot{position:relative;flex:none;width:74px}.aj-bot img{width:100%;display:block}
+.aj-bot-tag{position:absolute;left:50%;bottom:-.3rem;transform:translateX(-50%);font-size:.6rem;font-weight:900;letter-spacing:.08em;padding:.08rem .4rem;border-radius:999px;background:var(--aether-orange);color:#111;white-space:nowrap}
+.aj-chips{display:grid;gap:.3rem;flex:1;min-width:0}
+.aj-chip{display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:800;padding:.25rem .45rem;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.04);opacity:0;animation:wkPop .35s ease-out forwards;animation-delay:calc(.3s + var(--i) * .35s)}
+.aj-chip-i{font-size:.95rem}.aj-tick{margin-left:auto;color:var(--ok,#4cd38a);font-weight:900}
+.aj-doc{border:1px solid var(--border);border-radius:10px;background:#050b14;padding:.45rem .55rem;display:grid;gap:.35rem;margin-bottom:.7rem}
+.aj-doc-tab{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.68rem;color:var(--muted)}
+.aj-row{display:grid;grid-template-columns:auto 1fr;column-gap:.5rem;row-gap:.1rem;font-size:.82rem;line-height:1.3;opacity:0;animation:wkPop .35s ease-out forwards;animation-delay:calc(.3s + var(--i) * .45s)}
+.aj-row b{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;padding-top:.12rem}
+.aj-ev{grid-column:2;justify-self:start;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.68rem;color:var(--cyan);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);border-radius:6px;padding:0 .35rem}
+.aj-ask{display:grid;gap:.5rem;margin-bottom:.7rem;justify-items:start}
+.aj-wait{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange);display:flex;align-items:center;gap:.4rem}
+.aj-wait::before{content:'';width:.6rem;height:.6rem;border-radius:50%;background:var(--aether-orange);animation:wkPulse 1s ease-in-out infinite}
+.aj-btns{display:flex;gap:.45rem;flex-wrap:wrap}
+.aj-btn{font-weight:900;font-size:.85rem;padding:.4rem .8rem;border-radius:8px;border:1.5px solid}
+.aj-yes{color:#4cd38a;border-color:#4cd38a;background:color-mix(in srgb,#4cd38a 12%,transparent)}.aj-no{color:#ff8f8f;border-color:#ff6b6b}
+.reveal-grid .aj-card.closed *{animation-play-state:paused}
+@media (max-width:900px){.cards.agent-job{grid-template-columns:1fr}.aj-arrow{transform:rotate(90deg);justify-self:center}}
+@media(prefers-reduced-motion:reduce){.aj-chip,.aj-row{opacity:1}}
+
+/* shopDay: the world before the incident. Shop, you the operator, today's goal */
+.cards.shop-day{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:1rem;align-items:stretch}
+.sd-card{display:flex;flex-direction:column}
+.sd-0{border-top-color:var(--cyan)}.sd-1{border-top-color:var(--violet)}.sd-2{border-top-color:var(--aether-orange)}
+.sd-shop{border:2px solid var(--border);border-radius:12px;background:#050b14;padding:.5rem;display:grid;gap:.35rem;margin-bottom:.7rem}
+.sd-order{display:flex;align-items:center;gap:.45rem;font-size:.85rem;padding:.3rem .5rem;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--border);opacity:0;animation:wkPop .35s ease-out forwards;animation-delay:calc(.3s + var(--i) * .45s)}
+.sd-order span:last-child{margin-left:auto;color:var(--muted);font-size:.78rem}
+.sd-ok{color:#4cd38a;font-weight:900}
+.sd-health{font-size:.75rem;font-weight:800;color:#4cd38a;letter-spacing:.04em;padding:.1rem .2rem}
+.sd-figure{position:relative;align-self:center;width:min(100%,150px);margin:.2rem 0 1rem}
+.sd-figure img{width:100%;display:block}
+.sd-goal{width:min(100%,110px)}
+.sd-phone{position:absolute;right:-.6rem;top:30%;font-size:1.6rem}
+.reveal-grid .sd-card.closed *{animation-play-state:paused}
+@media (max-width:900px){.cards.shop-day{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.sd-order{opacity:1}}
+/* wakeUp: Sonny got the alert too */
+.wk-sonny{display:grid;justify-items:center;gap:.4rem;margin:.1rem 0 .8rem}
+.wk-bubble{position:relative;font-weight:800;font-size:.85rem;padding:.4rem .65rem;border-radius:12px;background:var(--aether-orange);color:#111;opacity:0;animation:wkPop .35s ease-out .9s forwards}
+.wk-bubble::after{content:'';position:absolute;left:50%;bottom:-7px;margin-left:-7px;border:7px solid transparent;border-bottom:0;border-top-color:var(--aether-orange)}
+.wk-sonny-fig{position:relative;width:96px;opacity:0;animation:wkPop .35s ease-out .3s forwards}.wk-sonny-fig img{width:100%;display:block}
+@media(prefers-reduced-motion:reduce){.wk-bubble,.wk-sonny-fig{opacity:1}}

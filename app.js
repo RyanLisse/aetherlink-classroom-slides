@@ -301,6 +301,52 @@ function renderExtras(stage, main, s, v) {
         c.append(l); } });
     [cards[0], cards[1]].forEach((c) => c.after(node('div', 'if-arrow', '→')));
   }
+  if (v.shopDay && cards.length >= 3) {                         // the world before the incident: the shop (orders tick in), you the operator (on call), today's goal (the agent)
+    const D = v.shopDay; grid.classList.add('shop-day'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('sd-card', 'sd-' + i); });
+    const shop = node('div', 'sd-shop'); shop.append(node('div', 'wk-bar', D.shopBar || 'shop · checkout'));
+    D.orders.forEach(([where, what], i) => { const o = node('div', 'sd-order'); o.style.setProperty('--i', i); o.append(node('span', 'sd-ok', '✓'), node('b', null, where), node('span', null, what)); shop.append(o); });
+    if (D.health) shop.append(node('div', 'sd-health', D.health));
+    cards[0].querySelector('.card-head')?.after(shop);
+    const you = node('div', 'sd-figure'); you.innerHTML = `<img src="assets/aetherbot/faces/aetherbot-face-blij.webp" alt=""><span class="sd-phone">📱</span>`; you.append(node('span', 'wk-tag', D.youTag || 'YOU · THE OPERATOR'));
+    cards[1].querySelector('.card-head')?.after(you);
+    const goal = node('div', 'sd-figure sd-goal'); goal.innerHTML = `<img src="assets/aetherbot/aetherbot-think.webp" alt="">`; goal.append(node('span', 'aj-bot-tag', D.agentTag || 'ON CALL'));
+    cards[2].querySelector('.card-head')?.after(goal);
+  }
+  if (v.agentJob && cards.length >= 3) {                        // what the on-call agent does: it looks (data chips), writes a diagnosis (mini doc), waits for you (buttons)
+    const J = v.agentJob; grid.classList.add('agent-job'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('aj-card', 'aj-' + i); });
+    const look = node('div', 'aj-look');
+    const bot = node('div', 'aj-bot'); bot.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; bot.append(node('span', 'aj-bot-tag', J.botTag || 'ON CALL')); look.append(bot);
+    const chips = node('div', 'aj-chips'); J.looks.forEach(([ico, txt], i) => { const ch = node('div', 'aj-chip'); ch.style.setProperty('--i', i); ch.append(node('span', 'aj-chip-i', ico), node('span', null, txt), node('span', 'aj-tick', '✓')); chips.append(ch); });
+    look.append(chips); cards[0].querySelector('.card-head')?.after(look);
+    const doc = node('div', 'aj-doc'); doc.append(node('div', 'aj-doc-tab', J.docName || 'diagnosis'));
+    J.doc.forEach(([k, val, ev], i) => { const r = node('div', 'aj-row'); r.style.setProperty('--i', i); r.append(node('b', null, k), node('span', null, val)); if (ev) r.append(node('code', 'aj-ev', ev)); doc.append(r); });
+    cards[1].querySelector('.card-head')?.after(doc);
+    const ask = node('div', 'aj-ask'); ask.append(node('div', 'aj-wait', J.wait || 'waiting for the operator'));
+    const btns = node('div', 'aj-btns'); btns.append(node('span', 'aj-btn aj-yes', J.yes || 'Approve'), node('span', 'aj-btn aj-no', J.no || 'Reject')); ask.append(btns);
+    cards[2].querySelector('.card-head')?.after(ask);
+    [cards[0], cards[1]].forEach((c) => c.after(node('div', 'aj-arrow', '→')));
+  }
+  if (v.wakeUp && cards.length >= 3) {                          // 03:45 story: the operator (Aetherbot) wakes up, the screen fills with what is happening, then the question
+    const W = v.wakeUp; grid.classList.add('wake-up'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('wk-card', 'wk-' + i); });
+    const bot = node('div', 'wk-bot');
+    bot.innerHTML = `<span class="wk-clock">${W.clock || '03:45'}</span><img class="wk-sleep" src="assets/aetherbot/faces/aetherbot-face-slaperig.webp" alt=""><img class="wk-awake" src="assets/aetherbot/faces/aetherbot-face-verrast.webp" alt=""><span class="wk-z">z<i>z</i><b>z</b></span>`;
+    bot.append(node('span', 'wk-tag', W.tag || 'YOU · THE OPERATOR'));
+    cards[0].querySelector('.card-head')?.after(bot);
+    const scr = node('div', 'wk-screen'); scr.append(node('div', 'wk-bar', W.screen || 'on-call laptop'));
+    const al = node('div', 'wk-pop wk-alert'); al.style.setProperty('--i', 0); al.append(node('span', 'wk-dot'), node('span', 'wk-alert-txt', W.alert)); scr.append(al);
+    const C = W.chart, ch = node('div', 'wk-pop wk-chart'); ch.style.setProperty('--i', 1);
+    ch.innerHTML = `<div class="wk-chart-h"><span>${C.label}</span><b>${C.to}</b></div><svg viewBox="0 0 300 100" aria-hidden="true"><path class="wk-limit" d="M0 72H300"/><text class="wk-limit-t" x="4" y="68">limit ${C.limit}</text><path class="wk-mark" d="M196 4V88"/><text class="wk-mark-t" x="190" y="14" text-anchor="end">${C.mark}</text><path class="wk-line" d="M0 84L40 83L80 84L120 83L160 84L196 83L212 18L240 14L270 16L300 14"/><text class="wk-from" x="4" y="98">before: ${C.from}</text></svg>`;
+    scr.append(ch);
+    const wd = node('div', 'wk-pop wk-world'); wd.style.setProperty('--i', 2);
+    (W.world || []).forEach(([place, time, icon]) => { const z = node('div', 'wk-zone'); z.append(node('span', 'wk-zone-i', icon), node('b', null, place), node('span', null, time)); wd.append(z); });
+    scr.append(wd);
+    cards[1].querySelector('.card-head')?.after(scr);
+    if (W.sonny) {                                              // the on-call agent got the alert too: full-body bot + speech bubble
+      const so = node('div', 'wk-sonny'); so.append(node('div', 'wk-bubble', W.sonny.bubble || ''));
+      const fig = node('div', 'wk-sonny-fig'); fig.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; fig.append(node('span', 'aj-bot-tag', W.sonny.tag || 'ON CALL'));
+      so.append(fig); cards[2].querySelector('.card-head')?.after(so);
+    }
+  }
   if (v.pipeline) {                                             // a row of numbered steps with arrows; each step shows its file and the assignment that builds it
     grid.classList.add('pipeline');
     cards.forEach((c, i) => { const P = v.pipeline[i] || {}; c.classList.add('pl-card'); c.classList.toggle('pl-hl', !!P.hl); c.querySelector('.card-icon')?.remove();
@@ -347,7 +393,7 @@ function renderExtras(stage, main, s, v) {
     if (v.answers) grid.classList.add('qa');                    // quiz: the question shows, only the answer is covered
     cards.forEach((c, i) => {
       c.classList.add('closed'); if (!v.answers) c.setAttribute('aria-hidden', 'true');
-      const cover = node('span', 'card-cover', v.answers ? '?' : String(i + 1));
+      const cover = node('span', 'card-cover', v.answers ? '?' : v.covers ? (v.covers[i] || '') : String(i + 1));
       if (v.answers) { const ans = node('div', 'qa-answer'); ans.append(c.lastElementChild, cover); c.append(ans); } else c.append(cover);
       c.addEventListener('click', () => open(i));
     });
