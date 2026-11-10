@@ -85,7 +85,7 @@ const assignmentSlide = ({number, title, subtitle, stage, duration, steps, after
   teach,
   cards: [{title: 'Checkpoint', body: checks.join('\n')}, {title: 'Human boundary', body: humanOpen}],
   keyPoints: checks,
-  notes: note({time: duration, why: subtitle, predict: `Ask which visible result shows A${number} is complete.`, see: after, inside: checks.join(' '), participant: 'Complete one step at a time. Inspect each result before continuing.', watch: `${humanOpen} The picture is an example of the end result, not their own run.`, stuck: 'Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.', stop: checks.at(-1), next})
+  notes: note({time: duration, why: subtitle, predict: `Ask which visible result shows Assignment ${number} is done.`, see: after, inside: checks.join(' '), participant: 'Complete one step at a time. Inspect each result before continuing.', watch: `${humanOpen} The picture is an example of the end result, not their own run.`, stuck: 'Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.', stop: checks.at(-1), next})
 });
 
 const checkpointSlide = ({number, title, subtitle, stage, duration, steps, after, checks, humanOpen, next, shot}) => baseSlide({
@@ -206,7 +206,7 @@ const day5Slides = [
         {ask: 'What do you expect Sonny to do now?', say: ['(Answers: look at the graphs, check what changed, read the error messages, find the cause, propose a fix.)', 'Collect two or three answers. The next slide comes back to them.']},
         {ask: 'And what should he never do without you?', say: ['(Answers: roll back on his own, change production, close the incident.)', 'Keep these in mind too: they come back on the next slide.']}
       ],
-      learn: ['An incident starts with an alert: here, 12% of payments fail right after an update.', 'A global shop has customers awake at every hour, so every minute counts.', 'Sonny gets the same alert as the operator. What he may and may not do on his own is a choice we make.'],
+      learn: ['An incident starts with an alert: here, 12% of payments fail right after an update.', 'A global shop has customers awake at every hour, so every minute counts.', 'Sonny gets the same alert as the operator. What he may and may not do on his own is a choice we make.', 'What the operator needs here is where “what Sonny should do” comes from: it comes back before Assignment 2.'],
       watch: ['Do not reveal the cause yet (a missing EU payment key). On the next slide Sonny finds it.', 'Keep it a story. No technical words yet.'],
       terms: [['Operator', 'the on-call engineer: the person who gets the alert and decides what happens'], ['Alert', 'the message that starts an incident'], ['Incident', 'the problem, with a number: INC-1001'], ['Checkout', 'the payment step of a web shop'], ['Update (deploy)', 'putting a new version of the software live']],
       next: 'how we want Sonny to work.'
@@ -240,7 +240,7 @@ const day5Slides = [
         {ask: 'Why would he ask, if he already knows the fix?', say: ['(Answer: the rules catch a diagnosis that is not good enough, but they cannot judge if a rollback is wise right now. And you are responsible for production.)']},
         {do: 'Point at the line at the bottom.', say: ['Sonny proposes, you decide.', 'Today you build Sonny. Claude Code, from Day 1 and 2, helps you build him.']}
       ],
-      learn: ['Sonny does the first checks for the operator. He only reads.', 'He writes a diagnosis with evidence and one proposed fix.', 'He checks his own diagnosis against fixed rules before it gets to the operator.', 'He changes nothing himself: the operator approves or rejects. That is human in the loop.', 'Claude Code helps you build Sonny; Sonny is what you build.'],
+      learn: ['Sonny does the first checks for the operator. He only reads.', 'He writes a diagnosis with evidence and one proposed fix.', 'He checks his own diagnosis against fixed rules before it gets to the operator.', 'He changes nothing himself: the operator approves or rejects. That is human in the loop.', 'Claude Code helps you build Sonny; Sonny is what you build.', 'These four blocks are the goal: after Assignment 1 you compare them with what Sonny does today.'],
       watch: ['Someone asks if Sonny is a real AI: today he runs offline on scripted answers, so everyone gets the same result and it costs nothing. Running him on Claude Sonnet is optional, at the end.', 'Do not explain rollback in depth yet. One line is enough: going back to the version before the update.', 'Do not go into the rules one by one: just before Assignment 3 we zoom in on them. Here it is enough that the step exists.', 'Someone asks if Sonny does this today: not yet. In Assignment 1 you see the rules are still empty; in Assignment 3 you build them.'],
       terms: [['Sonny', 'our name for the on-call agent: the AI you build today'], ['Human in the loop', 'the AI proposes, a person decides'], ['Diagnosis', 'what the agent writes about the incident: what is wrong, the evidence, one proposed fix'], ['Evidence', 'one line of data that shows something: where it is, and which entry'], ['Proposed fix', 'the one step the agent suggests, for example a rollback'], ['Rollback', 'putting the previous version back live'], ['Rule', 'one requirement every diagnosis must meet']],
       next: 'key terms for today.'
@@ -541,7 +541,7 @@ const day5Slides = [
     ],
     after: 'You know both routes, saw Sonny’s diagnosis, 56 green / 14 red, and the console runs.',
     checks: ['You can explain both routes into Sonny.', '56 main tests pass, 14 workshop tests are red.', 'The console runs, and you saw the diagnosis for INC-1001.'],
-    humanOpen: 'Change nothing yet. The red tests are for the next assignments.', next: 'intent.md: what goes in it, and why',
+    humanOpen: 'Change nothing yet. The red tests are for the next assignments.', next: 'What Sonny should do, and what he does today',
     teach: {
       time: '18 min',
       gist: 'Research before you build: does it run, where does an incident come in, what does Sonny do now, what can he not do yet. Plus the console for all day. Change nothing yet.',
@@ -564,7 +564,7 @@ const day5Slides = [
         {do: 'Step 7 · Window 2, a new terminal: watch Sonny investigate the 03:45 incident. Run the saved incident.', copy: [['Step 7 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json']], say: ['Why: so far you only saw a drawing of the route. Now you see your agent actually work.', 'In the project: src/cli.ts reads the saved incident INC-1001 and its telemetry from fixtures/, and hands it to the agent in src/agent.ts. Nothing changes.', 'They see, top to bottom:', 'The alert: error rate 12% on checkout.', 'Four tool calls: graphs, the update list, the code change, the error logs.', 'The diagnosis: update v2.15.0 at 03:43, error “missing key PAYMENT_PROVIDER_SECRET_EU”, confidence high, proposed fix: rollback → Deploy owner.', 'Window 2 stays open: you use it for git status and git diff.']},
         {ask: 'Look at the diagnosis. What does it not say?', say: ['(Answer: what customers notice. There is no Customer impact line.)', 'Remember that. In A3 you add it, and you run this same command again to see the difference.']},
         {ask: 'What did Sonny do, and what did he not do?', say: ['(Answer: he proposed a rollback, but he did not run it. The last line says OPEN: a human decides.)', 'And the rules he should check his diagnosis against? The terminal says “PASS contract”. “Contract” is the project’s word for those fixed rules, block 3 of how we want Sonny to work. Today there are no rules yet, so everything passes. You build them in Assignment 3.']},
-        {do: 'Wrap up: the four research questions, answered.', say: ['Does it run? Yes: 56 green main tests, the console running.', 'Where does an incident come in? The map: two routes, both into investigate in src/agent.ts.', 'What does Sonny do now? You saw his diagnosis for INC-1001, still without Customer impact.', 'What can he not do yet? 14 red tests, each with a TODO in the code. And he proposes, he never runs the fix himself.', 'Next: before we build, we write down what Sonny must do.']}
+        {do: 'Wrap up: the four research questions, answered.', say: ['Does it run? Yes: 56 green main tests, the console running.', 'Where does an incident come in? The map: two routes, both into investigate in src/agent.ts.', 'What does Sonny do now? You saw his diagnosis for INC-1001, still without Customer impact.', 'What can he not do yet? 14 red tests, each with a TODO in the code. And he proposes, he never runs the fix himself.', 'Next: what Sonny should do, compared with what you just saw. Then we write it down.']}
       ],
       learn: ['Before you build: a map, a working start, a to-do list.', 'Check the starting point: 56 green, 14 red.', 'Red tests are your to-do list. The console runs all day.', 'The agent already works on INC-1001, but its diagnosis has no Customer impact yet.'],
       watch: ['Windows: Window 1 and Window 2 are Git Bash windows, not PowerShell.', 'Node below 22.13: tests fail on store.test.ts. Back to the set-up slide.', 'Step 5 or 7: “No such built-in module: node:sqlite”, “npm: command not found” or another Node error? A new terminal window can start on an older Node (common with nvm). Fix: nvm use 22 (or nvm alias default 22), then start again.', 'Claude Code says “A8”: that is the human-in-the-loop check, part of A6.', 'Port 4320 already in use? A console is already running somewhere: close it or use that one.', 'Someone starts fixing red tests: stop them, that is A3 to A6.', 'Step 3 shows a non-empty diff? Someone already changed files. git stash or a fresh clone gives a clean start.', 'npm ci takes about 5–30 seconds, depending on the network.', 'Someone runs step 7 inside Claude Code instead of Window 2: fine, same output, but the point is that they run their agent themselves.', 'No “A-1 setup” line in PROGRESS.md? It appears after Claude Code’s next action; it is only a signal, not a check that it works.'],
@@ -579,40 +579,70 @@ const day5Slides = [
         ['After step 7 · investigate', 'Nothing new. The agent only reads and prints.'],
         ['Never in git status', '`approvals/audit.jsonl`: Git ignores it on purpose (a log, not code). Open it in the editor to show it.']
       ],
-      next: 'intent.md: what goes in it, and why.'
+      next: 'what Sonny should do, and what he does today.'
     }
   }),
   baseSlide({
-    title: 'intent.md: what goes in it, and why', kicker: 'Day 5 · PLAN', subtitle: 'Before you build, you always write down what it must do, and what not. After Assignment 1 you know what Sonny can do today, and what he cannot do yet.',
-    visual: {intentFlow: [
-      {items: [['✓', 'He reads the graphs, the updates, the code change and the error logs', 'good'], ['✓', 'He writes a diagnosis with evidence and one proposed fix', 'good'], ['✓', 'He waits for you: “OPEN: a human decides”', 'good'], ['✗', 'No line about what customers notice', 'bad'], ['✗', 'Nobody checks his diagnosis yet: “PASS contract”', 'bad'], ['✗', '14 red tests: more he cannot do yet', 'bad']]},
-      {doc: [['Problem', true, '', 'what goes wrong today'], ['Proposed outcome', true, '', 'what Sonny must deliver'], ['Users and systems', false, '', 'who uses him, what he reads'], ['Constraints', false, '', 'what he may never do'], ['Open questions', true, '', 'what we do not know yet']]},
-      {tree: [[0, 'sre-oncall-agent/'], [1, 'intent.md', 'what Sonny must do', true], [1, 'CLAUDE.md', 'how to work in this project'], [1, 'src/', 'Sonny’s code'], [1, 'test/', 'the tests'], [1, 'docs/', 'the details, like the shape of a diagnosis']]}
-    ]},
-    cards: [{title: 'What you saw in Assignment 1', body: 'What Sonny can do today, and what he cannot do yet.'}, {title: 'What goes in intent.md', body: 'Five parts. Orange = still empty: you fill them in.'}, {title: 'Where it lives', body: 'At the top of the project, next to Sonny’s code. Not inside it.'}],
-    tagline: 'Why: everyone builds toward the same goal, Claude Code too. And afterwards you can check the result against it.',
-    keyPoints: ['Before you build: write down what it must do, and what not.', 'Start from what you saw in Assignment 1: what Sonny can do, and cannot do yet.', 'intent.md has five parts; three are still empty.', 'It lives at the top of the project, next to src/.'],
-    notes: 'Time: 10:53 · 3 min. What Sonny can do after Assignment 1, step 7 (the real offline run): four tools (graphs, update list, diff, logs), a diagnosis with four evidence lines and one proposed fix (rollback → Deploy owner), blast radius OPEN, last line “PASS contract · OPEN: a human decides. Nothing was rolled back, scaled or paged.” What he cannot do yet: no customer_impact line; the contract is empty (TODO(A3) in src/contract.ts), so everything passes; 14 red workshop tests (A3 contract, A4 chat refusal + guard, A5 list_deploys, A8 approval check). intent.md sits at the project root (sre-oncall-agent/intent.md), not in src/. Its parts: Problem, Proposed outcome, Open questions are “<fill in>”; Affected users and systems (Serves / Reads / Never writes / Boundary) and Constraints are already written. No code file loads intent.md: the build prompts start with “Read intent.md”. intent.md does NOT create the five rules: those are in docs/spec.md and TODO(A3). Day 6–7: the repo has docs/hackathon-intent.md for their own project.',
+    title: 'What Sonny should do, and what he does today', kicker: 'Day 5 · PLAN', subtitle: 'At 03:45 you said what you need. That became how we want Sonny to work. Assignment 1 showed what he does today. The difference is what you write down.',
+    visual: {gapCompare: {
+      icons: ['🚨', '🧭', '🖥️', '↔️', '📝'], focus: 3,
+      head: ['How we want Sonny to work', 'What Assignment 1, step 7 shows'],
+      rows: [
+        ['He looks: the graphs, the updates, the code change, the errors', ['four “Tool:” lines'], true],
+        ['He writes a diagnosis with evidence and one proposed fix', ['Root cause (high) + four evidence lines', 'Proposed fix: rollback'], true],
+        ['He checks it against fixed rules, like “say what customers notice”', ['no “Customer impact:” line', 'PASS contract'], false],
+        ['He asks you', ['OPEN: a human decides. Nothing was rolled back'], true]
+      ],
+      note: 'The difference is the gap. You write down how we want Sonny to work: that is intent.md.'
+    }},
+    cards: [{title: '03:45: what you need', body: ''}, {title: 'How we want Sonny to work', body: ''}, {title: 'What step 7 shows', body: ''}, {title: 'The gap', body: ''}, {title: 'intent.md', body: ''}],
+    keyPoints: ['What Sonny should do comes from what you need at 03:45.', 'Assignment 1 showed what he does today: three of the four blocks.', 'The gap: nobody checks his diagnosis yet. You write down how we want it: intent.md.'],
+    notes: 'Time: 10:52 · 3 min. The “should” comes from the operator’s need at 03:45 (slide 3), turned into the four blocks of “How we want Sonny to work” (slide 4). The right column is the real offline output of npm run investigate -- fixtures/incidents/bad-deploy.json at workshop/start: four Tool: lines (summarize_metrics, list_deploys, get_diff, search_logs), Root cause (high) with metrics/deploys/diff/logs evidence, Proposed fix: rollback → Deploy owner, last line “PASS contract · OPEN: a human decides. Nothing was rolled back, scaled or paged.” There is no Customer impact line; Blast radius says customer segments remain OPEN. “PASS contract” means: parseVerdict in src/contract.ts has no rules yet (TODO(A3)), so everything passes. The 14 red tests are from step 4, not step 7: they come back in Assignment 3.',
     teach: {
       time: '3 min',
-      gist: 'Before you build, you write down what it must do, and what not: intent.md. Start from what Assignment 1 showed Sonny can and cannot do yet. Five parts, three still empty. It lives at the top of the project.',
+      gist: 'Where “what Sonny should do” comes from: your need at 03:45 → how we want him to work → what Assignment 1 showed he does today. The gap is what you write down in intent.md.',
+      script: [
+        {do: 'Slide appears. Point at the chain at the top, left to right.', say: ['How do we know what Sonny should do? Not from the terminal.', 'It starts at 03:45: what you, the operator, need. Know fast what is going on, with evidence you can check, and nothing happens without you.', 'That became how we want Sonny to work: the four blocks from this morning.', 'Assignment 1, step 7 showed what he does today. The difference is the gap. And the gap is what you write down: intent.md.']},
+        {do: 'Point at the first two rows.', say: ['He looks: you saw four “Tool:” lines in the terminal. ✓', 'He writes a diagnosis with evidence and one proposed fix: Root cause, four evidence lines, Proposed fix: rollback. ✓']},
+        {ask: 'Third block: he checks his diagnosis against fixed rules, like “say what customers notice”. Did you see that in step 7?', say: ['(Answer: no. There is no “Customer impact:” line.)', 'And the last line said “PASS contract”. That sounds good, but it means: there are no rules yet, so everything passes. ✗']},
+        {do: 'Point at the last row.', say: ['He asks you: “OPEN: a human decides. Nothing was rolled back.” ✓']},
+        {do: 'Point at the orange line at the bottom.', say: ['So three of the four blocks work. The checking block is missing.', 'Before we build anything, we write down how we want Sonny to work. That file is intent.md.']}
+      ],
+      learn: ['What Sonny should do comes from the operator’s need at 03:45.', 'Today he does three of the four blocks: the checking block is missing.', 'The gap is what you write down, before you build.'],
+      watch: ['“PASS contract” confuses people: it sounds like good news. It means: there are no rules yet, so everything passes.', 'Someone ran step 7 again later and sees a Customer impact line: they are already past Assignment 3. Fine.', 'The 14 red tests are from step 4: leave them for Assignment 3.'],
+      terms: [['Gap', 'the difference between how we want it and how it is today']],
+      next: 'intent.md: what goes in it, and where it lives.'
+    }
+  }),
+  baseSlide({
+    title: 'intent.md: what goes in it, and where it lives', kicker: 'Day 5 · PLAN', subtitle: 'Before you build, you always write down what it must do, and what not. In this project the team already wrote the rules and the tests. You write the goal, and then the code.',
+    visual: {intentFlow: [
+      {doc: [['Problem', true, '', 'what goes wrong today'], ['Proposed outcome', true, '', 'what Sonny must deliver'], ['Users and systems', false, '', 'who uses him, what he reads'], ['Constraints', false, '', 'what he may never do'], ['Open questions', true, '', 'what we do not know yet']]},
+      {tree: [[0, 'sre-oncall-agent/'], [1, 'intent.md', 'the goal · the team + you, Assignment 2', true, 'Plan'], [1, 'docs/spec.md', 'the rules: what a good diagnosis is · the team', false, 'Design'], [1, 'test/workshop/', 'the tests: do the rules work? · the team', false, 'Test'], [1, 'src/', 'the code: Sonny himself · you, Assignments 3–6', false, 'Build']]}
+    ]},
+    cards: [{title: 'What goes in intent.md', body: 'Five parts. Orange = still empty: you fill them in.'}, {title: 'Where it lives: four layers', body: 'Goal, rules, tests, code. Each in its own place, at the top of the project.'}],
+    tagline: 'Day 6–7: you write all four layers yourself. First the goal, then the rules, then the tests, then the code.',
+    keyPoints: ['intent.md has five parts; three are still empty.', 'Four layers: goal (intent.md), rules (docs/spec.md), tests (test/workshop/), code (src/).', 'Here the team already wrote the rules and the tests. You write the goal and the code.'],
+    notes: 'Time: 10:55 · 2 min. intent.md sits at the project root (sre-oncall-agent/intent.md), not in src/. Its parts: Problem, Proposed outcome and Open questions are “<fill in>”; Affected users and systems (Serves / Reads / Never writes / Boundary) and Constraints are already written. The rules: the verdict-contract table in docs/spec.md (customer_impact, a rollback needs a deploys line, high refused while data_gaps) and all five in the TODO(A3) comment in src/contract.ts; spec.md also has an empty “Rules worth writing down” part that Assignment 3 fills. Tests: test/workshop/contract.test.ts (7 for the rules) and the other workshop tests; participants make them green, they do not write them (extra test cases only in the optional A7). The normal order is goal → rules → tests → code (the SDLC of slide 6); in this practice project the team wrote two layers ahead of time. No code file loads intent.md: the build prompts start with “Read intent.md”. Day 6–7: docs/hackathon-intent.md.',
+    teach: {
+      time: '2 min',
+      gist: 'intent.md has five parts, three still empty. It is the first of four layers: goal, rules, tests, code. Here the team already wrote the rules and tests; you write the goal and the code.',
       copy: [['Show the empty parts (optional)', 'grep -n "fill in" intent.md']],
       script: [
-        {do: 'Slide appears.', say: ['Before you build anything, you write down what it must do, and what not. Always.', 'In this project that file is called intent.md.', 'So first: what do we know about Sonny now?']},
-        {do: 'Point at the left block.', say: ['In Assignment 1, step 7, you watched him work on the 03:45 incident.', 'What he can do: read the graphs, the updates, the code change and the logs. Write a diagnosis with evidence. Propose one fix, and wait for you.', 'What he cannot do yet: there is no line about what customers notice. Nobody checks his diagnosis: the terminal said “PASS contract”, because there are no rules yet. And 14 tests are still red.']},
-        {ask: 'Think back to 03:45. What should Sonny do, that he does not do yet?', say: ['(Answers: say what customers notice. Only send a diagnosis that meets the rules. Never roll back without you.)', 'That is the kind of thing that goes into intent.md.']},
-        {do: 'Point at the middle block.', say: ['intent.md has five parts.', 'Problem: what goes wrong today. Proposed outcome: what Sonny must deliver.', 'Users and systems: who uses him and what he reads. Constraints: what he may never do. Those two are already written by the team.', 'Open questions: what we do not know yet.', 'The orange parts are still empty. In Assignment 2 you fill them in, together with Claude Code.']},
-        {do: 'Point at the right block. Optional: open intent.md in your editor, or run the command.', copy: 'grep -n "fill in" intent.md', say: ['Where is it? At the top of the project, next to CLAUDE.md. Sonny’s code is in src/.', 'So it is not part of Sonny. It is a plain text file about Sonny.']},
-        {ask: 'Why write this down before you build?', say: ['(Answer: so everyone builds toward the same goal, Claude Code too. And afterwards you can check the result against it.)', 'On Day 6 and 7 your own project starts the same way: first this file, then the code.']}
+        {do: 'Slide appears. Point at the left block.', say: ['intent.md has five parts.', 'Problem: what goes wrong today. Proposed outcome: what Sonny must deliver.', 'Users and systems: who uses him and what he reads. Constraints: what he may never do. Those two are already written by the team.', 'Open questions: what we do not know yet.', 'The orange parts are still empty. In Assignment 2 you fill them in, together with Claude Code.']},
+        {do: 'Point at the right block, top to bottom. Optional: open the folder in your editor.', copy: 'grep -n "fill in" intent.md', say: ['Where is it? At the top of the project. Not inside Sonny: his code is in src/.', 'And it is the first of four layers. The goal: intent.md. The rules: docs/spec.md, what a good diagnosis is. The tests: they check if the rules work. The code: src/, Sonny himself.', 'That is the normal order: first the goal, then the rules, then the tests, then the code.']},
+        {do: 'Point at the small labels after each line.', say: ['In this practice project the team already wrote the rules and the tests.', 'You write the goal now, and the code in Assignments 3 to 6.']},
+        {ask: 'Why write the goal down before you build?', say: ['(Answer: so everyone builds toward the same goal, Claude Code too. And afterwards you can check the result against it.)']},
+        {do: 'Point at the line at the bottom.', say: ['On Day 6 and 7 you write all four layers yourself, for your own project. Starting with this file.']}
       ],
-      learn: ['Before you build: write down what it must do, and what not.', 'Start from what you know: Assignment 1 showed what Sonny can and cannot do yet.', 'intent.md has five parts; three are still empty.', 'It lives at the top of the project, next to src/.'],
-      watch: ['Do not explain the questions Claude Code will ask: they come up by themselves in Assignment 2.', 'Someone thinks intent.md makes Claude Code write the five rules: no. Those rules are already in the project (docs/spec.md, a TODO in src/contract.ts).', 'Someone asks how Claude Code uses it: the build prompts start with “Read intent.md”. No code loads it. Only explain this if asked.'],
-      terms: [['intent.md', 'a short file that says what the agent must do and must not do'], ['Project root', 'the top folder of the project: here sre-oncall-agent/']],
+      learn: ['intent.md has five parts; three are still empty.', 'Four layers: goal, rules, tests, code. Normal order: in that order.', 'Here the team wrote the rules and tests; you write the goal and the code.'],
+      watch: ['Do not explain the questions Claude Code will ask: they come up by themselves in Assignment 2.', 'Someone thinks intent.md makes Claude Code write the rules: no. The rules are already in docs/spec.md and a TODO in src/contract.ts.', 'Someone asks if they write tests today: no, they make the team’s tests green. Writing extra test cases is an optional extra.', 'Someone asks how Claude Code uses intent.md: the build prompts start with “Read intent.md”. No code loads it. Only explain this if asked.'],
+      terms: [['intent.md', 'a short file that says what the agent must do and must not do'], ['spec.md', 'the exact rules: what a good diagnosis must contain'], ['Project root', 'the top folder of the project: here sre-oncall-agent/']],
       next: 'Assignment 2: write down what Sonny must do.'
     }
   }),
   assignmentSlide({
-    number: 2, title: 'Write down what Sonny must do', subtitle: 'Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.', stage: 'intent', duration: '10:56 · 10 min', shot: 'assets/day5-expected/a2-diff.png', shotLabel: 'What you should see at the end (an example)',
+    number: 2, title: 'Write down what Sonny must do', subtitle: 'Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.', stage: 'intent', duration: '10:57 · 10 min', shot: 'assets/day5-expected/a2-diff.png', shotLabel: 'What you should see at the end (an example)',
     steps: [
       {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code now asks before it changes a file.', warn: true},
       {text: 'Type this in: Claude Code. Goal: let Claude Code interview you about what the agent is for.', prompt: PROMPTS.a2Design, after: 'At most three questions (operator, outcome, what it may not do), each with a suggested answer. Then a small table: your answer → which part of intent.md. Nothing changes yet.'},
@@ -631,7 +661,7 @@ const day5Slides = [
       done: ['No “fill in” left in intent.md.', 'Three checks they can read out loud.', 'git diff shows only intent.md.'],
       copy: [['Step 2 · Claude Code', PROMPTS.a2Design], ['Step 4 · Claude Code', PROMPTS.a2Write], ['Step 6 · Window 2', 'git diff -- intent.md'], ['Optional · Window 2', 'grep -n "fill in" intent.md'], ['After each step · Window 2', 'git status']],
       script: [
-        {do: 'Slide appears. Goal of A2.', say: ['In Assignment 1 you got to know the project. Now you write down what Sonny must do.', 'Four moves: Claude Code asks, you decide, Claude Code writes, you check.', 'That is the human in the loop. You practise it yourself before you build it into the agent.', 'At the end only one file has changed: intent.md.']},
+        {do: 'Slide appears. Goal of this assignment.', say: ['You just saw the gap: nobody checks his diagnosis yet. And intent.md still has three empty parts.', 'Now you fill them in: you write down what Sonny must do.', 'Four moves: Claude Code asks, you decide, Claude Code writes, you check.', 'That is the human in the loop. You practise it yourself before you build it into the agent.', 'At the end only one file has changed: intent.md.']},
         {do: 'Step 1 · manual mode. Show the bottom of your Claude Code.', say: ['Why: in this assignment the moment Claude Code asks permission is the point.', '“manual mode on”. Not there? Shift+Tab.']},
         {do: 'Step 2 · the interview. Paste the /design-control-loop prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a2Design]], say: ['Why: before anything gets written, Claude Code has to know what you want.', '/design-control-loop: one of the four project skills. It only interviews, it builds nothing.', 'In the project: Claude Code reads intent.md, the saved incident (INC-1001) and REVIEW.md, the project’s safety checklist. It changes nothing.', 'They see: at most three questions, each with a suggested answer.', 'Who is the operator? The on-call engineer who uses the agent’s diagnosis.', 'What does the operator get? What may the agent not do?', 'Then a small table, the “field map”: your answer → which part of intent.md it goes in.']},
         {do: 'Step 3 · you decide. Type your answers.', say: ['Why: if you say yes to everything, Claude Code decided what the agent is for. You decide.', 'Type “yes” to a suggestion, or write your own answer.', 'Test per answer: can I check this later with yes or no?', 'Too vague? Ask Claude Code: “make answer 2 something I can test”.']},
@@ -643,7 +673,7 @@ const day5Slides = [
         {do: 'Wrap up: what is in the project now.', say: ['intent.md: your answers and three checks.', 'A line in audit.jsonl and an “A-2 intent” entry in PROGRESS.md.', 'Then we compare your intent.md with an example, and take a break.']}
       ],
       learn: ['First agree what the agent must do, then build.', 'Claude Code suggests; you decide and approve.', 'Check the result yourself with git diff.'],
-      watch: ['Someone accepts every suggestion without reading: ask them to read their three checks out loud.', 'Claude Code starts editing in step 2: the skill should only ask. Say “stop, only ask questions”.', 'Claude Code asks more than three questions or a second round: say “one round is enough, give the field map”.', 'Approved by mistake? git checkout -- intent.md puts the file back, then redo step 4.', 'git diff shows other files: someone changed files earlier. Only intent.md should be new in A2.', 'No “A-2 intent” in PROGRESS.md? A “fill in” is still in the file, or it appears after Claude Code’s next action.', 'Do not let them copy the example on the right: their own answers.'],
+      watch: ['Someone accepts every suggestion without reading: ask them to read their three checks out loud.', 'Claude Code starts editing in step 2: the skill should only ask. Say “stop, only ask questions”.', 'Claude Code asks more than three questions or a second round: say “one round is enough, give the field map”.', 'Approved by mistake? git checkout -- intent.md puts the file back, then redo step 4.', 'git diff shows other files: someone changed files earlier. Only intent.md should be new in this assignment.', 'No “A-2 intent” in PROGRESS.md? A “fill in” is still in the file, or it appears after Claude Code’s next action.', 'Do not let them copy the example on the right: their own answers.'],
       terms: [['Operator', 'the on-call engineer who uses the agent’s diagnosis'], ['Field map', 'a small table: your answer → which part of intent.md it goes in'], ['Diff', 'what changed in a file compared to the last saved version in Git'], ['Window 2', 'a normal terminal in the project folder, next to Claude Code and the console']],
       changes: [
         ['Before step 2', 'Whatever A1 left: `modified: PROGRESS.md`, maybe a `docs/show-me/` file. Nothing else.'],
@@ -678,7 +708,7 @@ const day5Slides = [
     cards: [{title: 'Before: three empty parts', body: 'The file as you got it.'}, {title: 'After: an example', body: 'Written by Claude Code from someone’s answers. Yours will be different.'}],
     tagline: 'Check your checks: can you see if they are true by looking? “The agent is helpful” ✗ too vague · “Every claim shows where it came from” ✓',
     keyPoints: ['Compare with your own intent.md: same parts, your own sentences.', 'No empty part left; a Checks part is added.', 'Checks: promises you can check later, just by looking.'],
-    notes: 'Time: 11:06 · 2 min. Shown after Assignment 2, so they compare instead of copy. Example only. The Checks part is new: the write prompt asks for three checks. Honest about the link: the checks do not create code. The five rules are already in the project (docs/spec.md, TODO(A3) in src/contract.ts) and the chat refusal is TODO(A4) in src/chat.ts. Claude Code reads intent.md next to them before it builds, so your promises and the project’s rules should match.',
+    notes: 'Time: 11:07 · 2 min. Shown after Assignment 2, so they compare instead of copy. Example only. The Checks part is new: the write prompt asks for three checks. Honest about the link: the checks do not create code. The five rules are already in the project (docs/spec.md, TODO(A3) in src/contract.ts) and the chat refusal is TODO(A4) in src/chat.ts. Claude Code reads intent.md next to them before it builds, so your promises and the project’s rules should match.',
     teach: {
       time: '2 min',
       gist: 'After Assignment 2: compare your intent.md with this example. No empty part left, three checks you can check by looking.',
@@ -694,7 +724,7 @@ const day5Slides = [
       next: 'break, then how your agent handles an incident.'
     }
   }),
-  pauseSlide('Break', '15 min', 'How your agent handles an incident', '11:08'),
+  pauseSlide('Break', '15 min', 'How your agent handles an incident', '11:09'),
   baseSlide({
     title: 'How your agent handles an incident', kicker: 'Day 5 · THE AGENT', subtitle: 'An alert comes in, the agent looks at the data and writes a diagnosis. Then plain code checks that diagnosis against fixed rules, and the operator decides.',
     visual: {pipeline: [
@@ -713,7 +743,7 @@ const day5Slides = [
     ],
     tagline: 'Each assignment builds one part of this.',
     keyPoints: ['Alert → look at the data → diagnosis → code checks it → the operator decides.', 'Two safety layers: fixed rules in code, then a person.', 'A3 builds the rules.'],
-    notes: 'Time: 11:23 · 2 min. Saved incident: npm run investigate → src/cli.ts → investigate() in src/agent.ts. Live: console/server.ts → src/chat.ts → investigate(). Four read-only tools in src/tools.ts: summarize_metrics, list_deploys, get_diff, search_logs. The diagnosis goes to validateVerdict (src/router.ts) → parseVerdict (src/contract.ts). Offline the diagnosis comes from scripted answers (src/runtime.ts); with a real model the instructions are in src/prompts.ts.',
+    notes: 'Time: 11:24 · 2 min. Saved incident: npm run investigate → src/cli.ts → investigate() in src/agent.ts. Live: console/server.ts → src/chat.ts → investigate(). Four read-only tools in src/tools.ts: summarize_metrics, list_deploys, get_diff, search_logs. The diagnosis goes to validateVerdict (src/router.ts) → parseVerdict (src/contract.ts). Offline the diagnosis comes from scripted answers (src/runtime.ts); with a real model the instructions are in src/prompts.ts.',
     teach: {
       time: '2 min',
       gist: 'How the agent works, start to end: alert, look at the data, write a diagnosis, check it, a person decides.',
@@ -756,7 +786,7 @@ const day5Slides = [
     }},
     cards: [{title: '03:45 alert', body: ''}, {title: 'Sonny looks', body: ''}, {title: 'Diagnosis', body: ''}, {title: 'The contract', body: ''}, {title: 'You decide', body: ''}],
     keyPoints: ['Sonny proposes, the contract holds his diagnosis against fixed rules, then you decide.', 'The rules use the key terms: evidence, proposed fix, OPEN.', 'Today the contract has no rules yet: in Assignment 3 you write them.'],
-    notes: 'Time: 11:25 · 4 min. Zooms in on block 3 of “How we want Sonny to work”. Clicks: 1 the alert, Sonny looks, the diagnosis (the same lines as “How we want Sonny to work”) · 2 the contract · 3–7 one rule each: ✓ or ✗ appears and the part of the diagnosis it looks at lights up (you can also click a rule) · 8 the result · 9 you decide. The five rules are TODO(A3) in src/contract.ts (code words: a strong proposal needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line, and “PASS contract” today because the rules are empty. These five are Ryan’s rules for this project, not an industry standard, but the ideas are normal SRE practice (incident reports ask for impact, evidence and confidence) and a common AI-agent pattern (check the AI’s output with code before a person sees it).',
+    notes: 'Time: 11:26 · 4 min. Zooms in on block 3 of “How we want Sonny to work”. Clicks: 1 the alert, Sonny looks, the diagnosis (the same lines as “How we want Sonny to work”) · 2 the contract · 3–7 one rule each: ✓ or ✗ appears and the part of the diagnosis it looks at lights up (you can also click a rule) · 8 the result · 9 you decide. The five rules are TODO(A3) in src/contract.ts (code words: a strong proposal needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line, and “PASS contract” today because the rules are empty. These five are Ryan’s rules for this project, not an industry standard, but the ideas are normal SRE practice (incident reports ask for impact, evidence and confidence) and a common AI-agent pattern (check the AI’s output with code before a person sees it).',
     teach: {
       time: '4 min',
       gist: 'Human in the loop with an AI agent: Sonny proposes, the contract holds his diagnosis against fixed rules, and only a diagnosis that meets every rule gets to you. Then you decide.',
@@ -799,7 +829,7 @@ const day5Slides = [
     cards: [{title: 'Today: red = wrong answer', body: '6 of the 7 A3 tests are red.'}, {title: 'After A3: green = right answer', body: 'All 7 green. Same idea for every rule.'}],
     tagline: 'Goal of A3: all A3 tests green, and the diagnosis shows what customers notice.',
     keyPoints: ['A test gives the check a made-up diagnosis and expects an answer.', 'Red = wrong answer, green = right answer.', 'Today 6 of 7 A3 tests are red; after A3 all 7 green.'],
-    notes: 'Time: 11:29 · 2 min. test/workshop/contract.test.ts has 7 A3 tests; at the start pass 1 / fail 6 (the 7th, “evidence has to carry at least one line”, already passes). Test 2 = “A3: customer_impact is required and non-empty”: it builds a verdict without customer_impact and expects parseVerdict to fail. Verified on the reference tag day5-after-a3: pass 7 / fail 0, and npm run investigate prints “Customer impact: … users of checkout may see failures or slowness …; affected segments remain OPEN”.',
+    notes: 'Time: 11:30 · 2 min. test/workshop/contract.test.ts has 7 A3 tests; at the start pass 1 / fail 6 (the 7th, “evidence has to carry at least one line”, already passes). Test 2 = “A3: customer_impact is required and non-empty”: it builds a verdict without customer_impact and expects parseVerdict to fail. Verified on the reference tag day5-after-a3: pass 7 / fail 0, and npm run investigate prints “Customer impact: … users of checkout may see failures or slowness …; affected segments remain OPEN”.',
     teach: {
       time: '2 min',
       gist: 'A test gives the check a made-up diagnosis and says what the answer should be. Today the check answers wrong (red); after A3 it answers right (green).',
@@ -818,7 +848,7 @@ const day5Slides = [
     }
   }),
   assignmentSlide({
-    number: 3, title: 'Build the rules for a good diagnosis · 1/2', subtitle: 'Build the check with five rules. Claude Code explains, you accept, it shows the plan, then builds. The A3 tests turn green.', stage: 'contract', duration: '11:31 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
+    number: 3, title: 'Build the rules for a good diagnosis · 1/2', subtitle: 'Build the check with five rules. Claude Code explains, you accept, it shows the plan, then builds. The A3 tests turn green.', stage: 'contract', duration: '11:32 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
     steps: [
       {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code asks before every file it changes.', warn: true},
       {text: 'Type this in: Claude Code. Goal: understand the five rules before anything is built.', prompt: PROMPTS.a3Contract, after: 'The five rules in plain English, and the smallest change that adds them. Nothing changes yet.'},
@@ -866,7 +896,7 @@ const day5Slides = [
     }
   }),
   checkpointSlide({
-    number: 3, title: 'verify the verdict contract · 2/2', subtitle: 'Check the claim with independent evidence before lunch.', stage: 'contract', duration: '11:56 · 7 min', shot: 'assets/day5-expected/a3.png',
+    number: 3, title: 'verify the verdict contract · 2/2', subtitle: 'Check the claim with independent evidence before lunch.', stage: 'contract', duration: '11:57 · 7 min', shot: 'assets/day5-expected/a3.png',
     steps: [
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a3BuildProve, after: 'The main tests, typecheck, offline output, and browser field are visible.'},
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a3Verify, after: 'Claude Code returns VERIFIED, NOT VERIFIED, or INCONCLUSIVE.'},
@@ -1131,7 +1161,7 @@ window.SLIDES = day5Slides;
 // SDLC tracker: which of the six phases lights up on each slide (see sdlcTrack in app.js).
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
-  [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
+  [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|What Sonny should do, and what he does today|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^How do we know the rules work/, 'test'],
   [/^(How your agent handles an incident|You only get a diagnosis that meets the rules)/, 'design'],

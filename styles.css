@@ -2196,3 +2196,28 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .if-tr-note{font-size:.74rem;color:var(--muted)}
 .if-tr.hl{border:1.5px solid var(--aether-orange);background:color-mix(in srgb,var(--aether-orange) 12%,transparent)}
 .if-tr.hl .if-tr-name{color:var(--aether-orange)}
+/* intentFlow with two cards + tree phase tags (Jessy Day 5) */
+.cards.intent-flow.if-two{grid-template-columns:minmax(0,1fr) auto minmax(0,1.25fr)}
+.if-tr-tag{flex:none;min-width:4.4em;text-align:center;font-size:.62rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:.08rem .35rem;border-radius:999px;border:1px solid var(--violet);color:var(--violet)}
+.if-tr.hl .if-tr-tag{border-color:var(--aether-orange);color:var(--aether-orange)}
+.if-tr-who{font-size:.7rem;font-weight:800;color:var(--cyan)}
+/* gapCompare (Jessy Day 5): chain chips on top, want vs. today below */
+.cards.gc-flow{display:flex;align-items:center;gap:.35rem;flex-wrap:nowrap}
+.card.gc-chip{flex:1;min-width:0;display:flex;align-items:center;gap:.45rem;padding:.45rem .6rem;border-radius:10px;border-top-color:var(--cyan)}
+.gc-chip .card-head h2{font-size:.78rem;margin:0}
+.gc-chip > p,.gc-chip .card-body{display:none}
+.gc-ico{font-size:1.05rem}
+.card.gc-chip.gc-focus{border-top-color:var(--aether-orange);box-shadow:0 0 0 1.5px var(--aether-orange)}
+.gc-chip.gc-focus .card-head h2{color:var(--aether-orange)}
+.gc-arrow{font-weight:900;color:var(--aether-orange)}
+.gc-table{margin-top:1rem;display:grid;gap:.4rem}
+.gc-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 2.4rem;gap:.8rem;align-items:center;padding:.55rem .8rem;border-radius:12px;border:1px solid var(--border);background:var(--surface);font-size:clamp(.92rem,1.25vw,1.08rem);font-weight:700;animation:enter .4s both;animation-delay:calc(var(--i) * .1s)}
+.gc-head{background:none;border:0;padding:.1rem .8rem;font-size:.7rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);animation:none}
+.gc-seen{display:flex;flex-wrap:wrap;gap:.3rem}
+.gc-seen code{font-size:.8em;padding:.12rem .45rem;border-radius:7px;background:var(--surface2);border:1px solid var(--border);white-space:normal}
+.gc-mark{justify-self:center;font-size:1.3rem;font-weight:900}
+.gc-row.ok .gc-mark{color:var(--ok,#4cd38a)}
+.gc-row.bad{border-color:#ff6b6b;background:color-mix(in srgb,#ff6b6b 9%,var(--surface))}
+.gc-row.bad .gc-mark{color:#ff6b6b}
+.gc-note{margin:.8rem 0 0;text-align:center;font-weight:800;color:var(--aether-orange)}
+@media (max-width:900px){.cards.gc-flow{flex-wrap:wrap}.gc-arrow{display:none}.gc-row{grid-template-columns:1fr 2rem}.gc-seen{grid-column:1}}

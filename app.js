@@ -312,19 +312,27 @@ function renderExtras(stage, main, s, v) {
         if (i) b.append(node('span', 'rb-red', 'red test')); box.append(b); });
       c.append(box); });
   }
-  if (v.intentFlow && cards.length >= 3) {                     // A2: you decide → intent.md (gaps orange) → Claude Code reads it before every build
+  if (v.intentFlow && cards.length >= 2) {                     // A2: you decide → intent.md (gaps orange) → Claude Code reads it before every build
     grid.classList.add('intent-flow');
     cards.forEach((c, i) => { const F = v.intentFlow[i]; if (!F) return; c.classList.add('if-card', 'if-' + i); c.querySelector('.card-icon')?.remove();
       if (F.doc) { const d = node('div', 'if-doc'); d.append(node('div', 'if-doc-name', F.docName || 'intent.md'));
         F.doc.forEach(([sec, gap, label, note]) => { const r = node('div', 'if-sec' + (gap ? ' gap' : '')); const nm = node('span', 'if-sec-name', sec); if (note) nm.append(node('small', 'if-sec-note', note)); r.append(nm, node('span', 'if-sec-state', label || (gap ? 'fill in' : '✓ filled'))); d.append(r); });   // opt-in note: what the part is for
         c.append(d); }
       if (F.tree) { const t = node('div', 'if-tree');                     // opt-in: where the file lives (small folder tree)
-        F.tree.forEach(([depth, name, note, hl]) => { const r = node('div', 'if-tr' + (hl ? ' hl' : '')); r.style.setProperty('--d', depth); r.append(node('span', 'if-tr-name', (/\/$/.test(name) ? '📁 ' : '📄 ') + name)); if (note) r.append(node('span', 'if-tr-note', note)); t.append(r); });
+        F.tree.forEach(([depth, name, note, hl, tag]) => { const r = node('div', 'if-tr' + (hl ? ' hl' : '')); r.style.setProperty('--d', depth); if (tag) r.append(node('span', 'if-tr-tag', tag)); r.append(node('span', 'if-tr-name', (/\/$/.test(name) ? '📁 ' : '📄 ') + name)); if (note) r.append(node('span', 'if-tr-note', note)); t.append(r); });
         c.append(t); }
       if (F.items) { const l = node('div', 'if-items');
         F.items.forEach(([tag, text, cls]) => { const it = node('div', 'if-item' + (cls ? ' ' + cls : '')); if (tag) it.append(node('span', 'if-tag', tag)); it.append(node('span', 'if-text', text)); l.append(it); });
         c.append(l); } });
-    [cards[0], cards[1]].forEach((c) => c.after(node('div', 'if-arrow', '→')));
+    cards.slice(0, -1).forEach((c) => c.after(node('div', 'if-arrow', '→'))); if (cards.length === 2) grid.classList.add('if-two');
+  }
+  if (v.gapCompare && cards.length >= 2) {                      // Jessy Day 5: the chain (need → how we want it → what you saw → the gap → intent.md) on top, then want vs. today per block
+    const G = v.gapCompare; grid.classList.add('gc-flow');
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('gc-chip', 'gc-' + i); if (i === G.focus) c.classList.add('gc-focus'); c.prepend(node('span', 'gc-ico', (G.icons || [])[i] || '')); });
+    cards.slice(0, -1).forEach((c) => c.after(node('div', 'gc-arrow', '→')));
+    const tbl = node('div', 'gc-table'); const hd = node('div', 'gc-row gc-head'); hd.append(node('span', null, G.head[0]), node('span', null, G.head[1]), node('span', null, '')); tbl.append(hd);
+    G.rows.forEach(([want, seen, ok], i) => { const r = node('div', 'gc-row' + (ok ? ' ok' : ' bad')); r.style.setProperty('--i', i); r.append(node('span', 'gc-want', want)); const sv = node('span', 'gc-seen'); [].concat(seen).forEach((x) => sv.append(node('code', null, x))); r.append(sv, node('span', 'gc-mark', ok ? '✓' : '✗')); tbl.append(r); });
+    grid.after(tbl); if (G.note) tbl.after(node('p', 'gc-note', G.note));
   }
   if (v.shopDay && cards.length >= 3) {                         // the world before the incident: the shop (orders tick in), you the operator (on call), today's goal (the agent)
     const D = v.shopDay; grid.classList.add('shop-day'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('sd-card', 'sd-' + i); });
