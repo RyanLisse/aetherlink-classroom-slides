@@ -16,7 +16,7 @@ const PROMPTS = {
   a4GuardBefore: `Run only the focused guard test: npx tsx --test test/workshop/guard.test.ts. Do not edit any file. Explain in plain words which test is red and what it means for bench/ratchet.json. Stop for my review.`,
   a4Review: `Read the human edit in .claude/hooks/guard.mjs and test/workshop/guard.test.ts. Do not edit either file. Run only the focused guard test. Explain whether Edit and Write to bench/ratchet.json are denied. Do not claim that the hook blocks every shell command. Stop for my review.`,
   a5See: `Read intent.md, src/tools.ts, src/runtime.ts, src/chat.ts, and test/workshop/tools.test.ts. Explain in plain words what the list_deploys tool should do and why it may only read. Show every place where the code grabs the update list itself, past the tool (the “A5 bypass” comments). Run only the focused A5 test and show it red. Do not edit anything. Stop for my review.`,
-  a5Implement: `Implement TODO(A5): bind list_deploys in src/tools.ts to listDeploys from src/telemetry.ts and register it on the telemetry server, read-only, cited as deploys:<id>. Remove the A5 bypasses in src/runtime.ts and src/chat.ts, including their “A5 bypass” comments, so both use the tool. Add one case: an empty time window returns [] and the diagnosis stays unknown (OPEN, low confidence, investigate-more), never healthy. Rerun the focused A5 test, the main tests and typecheck, and show the diff. Do not add a tool that changes anything. Do not push.`,
+  a5Implement: `Implement TODO(A5): bind list_deploys in src/tools.ts to listDeploys from src/telemetry.ts and register it on the telemetry server, read-only, cited as deploys:<id>. Remove the A5 bypasses in src/runtime.ts and src/chat.ts, including their “A5 bypass” comments, so both use the tool. Rerun the focused A5 test, the main tests and typecheck, and show the diff. Do not add a tool that changes anything. Do not push.`,
   a5Build: `Read intent.md, src/tools.ts, src/runtime.ts, src/chat.ts, and test/workshop/tools.test.ts. Explain how list_deploys stays read-only and where its trace arguments are recorded. Show the three starter bypasses. Show the focused A5 test red. After my approval, implement TODO(A5) in src/tools.ts and remove the bypasses from src/runtime.ts and src/chat.ts. Add either an empty-window or missing-deploy case. Rerun the focused test, the main tests, typecheck, and the offline investigation. Show the tool result and exact trace arguments. Do not add a mutation tool or push.`,
   a6Map: `/show-me Read docs/plan.md, fixtures/incidents/bad-deploy.json, and the shop, traffic, chaos, and console scripts. Map the fixture CLI for INC-1001 and the listener-created live incident. Show where both use the shared investigate flow and tool trace. Stay read-only. Separate fixture output from optional model output, then stop.`,
   a6Build: `Use the incident path we reviewed. Propose the demo order, risks, proof, rollback, and one alternative cause. Reuse owned processes. Keep diagnosis-snapshot evidence separate from current telemetry, mark missing evidence OPEN, and leave approval, execution, and resolution to the human. Do not run or stop processes. Wait for my approval.`,
@@ -1191,7 +1191,7 @@ const day5Slides = [
         {file: 'src/runtime.ts · Sonny’s run', lit: true, code: 'const h = handlers(t);   // h = the four tools\n\nconst metrics = h.summarize_metrics(…);\n//               ↑ through the tool ✓\n\n// A5 bypass: … read deploys directly\nconst deploys = listDeploys(t, …);\n//               ↑ past the tool: the shortcut ✗'},
         {file: 'Your terminal · Assignment 1 · Sonny’s trace', term: true, code: '── trace (what the agent looked at) ──\n1. summarize_metrics {since 02:50, until 03:50}\n2. list_deploys      {since 02:50, until 03:50}\n   → [{"version":"v2.15.0","at":"03:43" …}]\n3. get_diff          {"deploy":"d-4821"}\n4. search_logs       {"level":"error" …}\n\n← line 2 says “list_deploys”, but that tool is\n  the empty box. The data came via the shortcut.'}
       ],
-      run: {label: 'See it yourself · Assignment 5, step 3', cmd: 'npx tsx --test test/workshop/tools.test.ts', when: 'Claude Code runs this test for you in step 3. After the build in step 5: pass 4, fail 0.',
+      run: {label: 'See it yourself · Assignment 5, step 3', cmd: 'npx tsx --test test/workshop/tools.test.ts', when: 'Claude Code runs this test for you in step 3. After the build in step 5: pass 3, fail 0.',
         outLabel: 'Today', out: 'not ok 1 - A5: list_deploys is bound to telemetry.listDeploys and returns deploys\nnot ok 2 - A5: list_deploys is registered on the telemetry MCP server\nnot ok 3 - A5: chat and offline runtime use the shared list_deploys capability\n# pass 0\n# fail 3'},
       foot: 'A real AI only gets the tools. Empty tool = blind to updates. Assignment 5: fill the box, remove the three shortcuts.'
     }},
@@ -1201,7 +1201,7 @@ const day5Slides = [
       {title: 'The trace is not true', body: 'You saw this in Assignment 1. It says list_deploys, but the data came via the shortcut.'}
     ],
     keyPoints: ['list_deploys is an empty box: it gives back nothing.', 'Sonny found v2.15.0 anyway, because the code grabs the update list past the tool, in three places.', 'A real AI only gets the tools, so it would see no updates. And the trace is not true. Assignment 5 fixes both.'],
-    notes: 'Time: 13:48 · 4 min. Same visual as slide 20 (code blocks with arrows), now 3 blocks. Clicks (→): 1–3 open the blocks, 4 the orange “see it yourself” bar and the line at the bottom. Click a block to jump; ← steps back. Code from workshop/start (the version participants clone), shortened with “…”: src/tools.ts lines 39–53 (handlers; list_deploys returns [] under TODO(A5)); src/runtime.ts lines 104–106 (offlineVerdict: shortcut 1). Not on the slide: the other two shortcuts are src/runtime.ts line 226 (the outputs that go in the trace: list_deploys: listDeploys(t, …)) and src/chat.ts line 63 (the desk chat). The real update list is listDeploys in src/telemetry.ts line 169: the shortcut calls that function directly, the tool should call it. A second TODO(A5) in src/tools.ts: list_deploys is not offered to a real AI at all (createTelemetryServer). Why the shortcut exists: without it Sonny would have been blind to updates in Assignments 1–3 (no v2.15.0, no 03:45 story). Tested: tools test pass 0 / fail 3 on day5-after-a3, pass 4 / fail 0 on day5-after-a5; npm run investigate output identical on both; main 56/56 and typecheck clean after A5.',
+    notes: 'Time: 13:48 · 4 min. Same visual as slide 20 (code blocks with arrows), now 3 blocks. Clicks (→): 1–3 open the blocks, 4 the orange “see it yourself” bar and the line at the bottom. Click a block to jump; ← steps back. Code from workshop/start (the version participants clone), shortened with “…”: src/tools.ts lines 39–53 (handlers; list_deploys returns [] under TODO(A5)); src/runtime.ts lines 104–106 (offlineVerdict: shortcut 1). Not on the slide: the other two shortcuts are src/runtime.ts line 230 (after A4; 226 on workshop/start) (the outputs that go in the trace: list_deploys: listDeploys(t, …)) and src/chat.ts line 63 (the desk chat). The real update list is listDeploys in src/telemetry.ts line 169: the shortcut calls that function directly, the tool should call it. A second TODO(A5) in src/tools.ts: list_deploys is not offered to a real AI at all (createTelemetryServer). Why the shortcut exists: without it Sonny would have been blind to updates in Assignments 1–3 (no v2.15.0, no 03:45 story). Tested: tools test pass 0 / fail 3 before A5, pass 3 / fail 0 after the participant’s own A5 build (tested 2026-11-10 with the deck prompts in Claude Code, from an after-A4 state). Ryan’s checkpoint day5-after-a5 adds a 4th test, so catch-up people see 4/4; npm run investigate output identical on both; main 56/56 and typecheck clean after A5.',
     teach: {
       time: '4 min',
       gist: 'One tool, the update list, is an empty box. Sonny still found v2.15.0 because the code grabs the update list itself, past the tool, in three places. A real AI only gets the tools, so it would see no updates. And the trace says list_deploys, which is not true.',
@@ -1229,15 +1229,15 @@ const day5Slides = [
         {step: 'Step 1', text: 'Manual mode on, so you see every file change', who: 'you', out: 'manual mode on'},
         {step: 'Step 2', text: 'Find the shortcuts yourself: search for Ryan’s marker', cmd: 'git grep -n "A5 bypass"', who: 'you look', out: '3 places', tone: 'red'},
         {step: 'Step 3', text: 'Claude Code explains the tool, shows the shortcuts and runs the A5 test', moment: 'B', label: 'the tests', out: 'red · 0 ✓ 3 ✗', tone: 'red'},
-        {step: 'Step 4', text: 'You accept the plan: the tool may only read', who: 'you decide', out: '“accepted”'},
-        {step: 'Step 5', text: 'Claude Code builds the tool, removes the shortcuts, runs the tests', moment: 'B', label: 'the tests', out: 'green · 4 ✓ · main 56 ✓', tone: 'green'},
+        {step: 'Step 4', text: 'You decide: does the plan only read? Then step 5 is your yes', who: 'you decide', out: 'only reads'},
+        {step: 'Step 5', text: 'Claude Code builds the tool, removes the shortcuts, runs the tests', moment: 'B', label: 'the tests', out: 'green · 3 ✓ · main 56 ✓', tone: 'green'},
         {step: 'Step 6', text: 'Search for the marker again', cmd: 'git grep -n "A5 bypass"', who: 'you look', out: 'nothing found', tone: 'pass'},
         {step: 'Step 7', text: 'Run Sonny once more: same diagnosis, list_deploys in the trace', cmd: 'npm run investigate -- fixtures/incidents/bad-deploy.json', moment: 'A', label: 'Sonny’s run', out: 'same answer', tone: 'pass'}
       ],
       foot: 'Find the shortcuts, test red, build, test green, shortcuts gone, Sonny the same.'
     }},
     keyPoints: ['Before and after: git grep finds 3 shortcuts, then none.', 'The A5 test: red, then green.', 'Sonny’s answer stays the same.'],
-    notes: 'Time: 13:52 · 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row; after the last row the line at the bottom appears. Tested: git grep -n "A5 bypass" finds 3 lines on workshop/start (src/chat.ts:63, src/runtime.ts:105 and 226) and none on day5-after-a5. A5 test 0/3 → 4/4; main 56/56 and typecheck clean after A5; npm run investigate output identical.',
+    notes: 'Time: 13:52 · 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row; after the last row the line at the bottom appears. Tested: git grep -n "A5 bypass" finds 3 lines on workshop/start (after A4: src/chat.ts:75, src/runtime.ts:105 and 230; on workshop/start 63/105/226) and none after the build. A5 test 0/3 → 3/3 (tested 2026-11-10 in Claude Code with the deck prompts); main 56/56 and typecheck clean after A5; npm run investigate output identical.',
     teach: {
       time: '2 min',
       gist: 'A preview of Assignment 5. The before/after is git grep: 3 shortcuts, then none. Plus the A5 test red, then green. Sonny’s answer stays the same.',
@@ -1245,7 +1245,7 @@ const day5Slides = [
         {shot: 'assets/day5-jessy-teach/s34-1.webp', do: 'Slide appears. Point at the row of pills.', say: ['The same rhythm as Assignment 3, with one extra: you look at the shortcuts yourself, before and after.']},
         {shot: 'assets/day5-jessy-teach/s34-2.webp', do: 'Click twice: steps 1 and 2.', say: ['Step 2: you search the code for Ryan’s marker, “A5 bypass”. You find 3 places: the shortcuts from the last slide.']},
         {shot: 'assets/day5-jessy-teach/s34-3.webp', do: 'Click twice: steps 3 and 4.', say: ['Claude Code explains the tool and runs the A5 test: 0 of 3. You accept the plan, and check one thing: the tool only reads.']},
-        {shot: 'assets/day5-jessy-teach/s34-4.webp', do: 'Click: step 5.', say: ['Claude Code builds the tool and removes the shortcuts. The A5 test: 4 of 4. And the main tests still 56: done means everything still works.']},
+        {shot: 'assets/day5-jessy-teach/s34-4.webp', do: 'Click: step 5.', say: ['Claude Code builds the tool and removes the shortcuts. The A5 test: 3 of 3. And the main tests still 56: done means everything still works.']},
         {shot: 'assets/day5-jessy-teach/s34-5.webp', do: 'Click: step 6.', say: ['You search again: nothing found. The shortcuts are really gone. That is your before and after.']},
         {shot: 'assets/day5-jessy-teach/s34-6.webp', do: 'Click: step 7. The line at the bottom appears.', say: ['And Sonny once more: the same answer. Nothing changed for the operator, but now it really comes through the tool.']}
       ],
@@ -1261,13 +1261,13 @@ const day5Slides = [
       {text: 'Check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is.', warn: true},
       {text: 'Type this in: Window 2. Goal: find the shortcuts yourself, before anything changes.', prompt: 'git grep -n "A5 bypass"', after: '3 lines: src/chat.ts once, src/runtime.ts twice. These are the shortcuts past the tool.'},
       {text: 'Type this in: Claude Code. Goal: see what is missing before anything changes.', prompt: PROMPTS.a5See, after: 'What the tool should do, the same shortcuts, and the A5 test red (0 of 3). Nothing changes yet.'},
-      {text: 'You decide. Goal: accept the plan. The tool may only read: no tool that changes anything.', after: 'Agree? Type “accepted”.'},
-      {text: 'Type this in: Claude Code. Goal: build the tool and remove the shortcuts.', prompt: PROMPTS.a5Implement, after: 'Claude Code asks per file. At the end: the A5 test green (4 of 4), the main tests and the type check green, and the diff.'},
+      {text: 'You decide. Goal: check the plan. The tool may only read: no tool that changes anything.', after: 'Agree? Do not type “accepted”: the prompt in step 5 is your yes. Not agreeing? Say what is wrong.'},
+      {text: 'Type this in: Claude Code. Goal: build the tool and remove the shortcuts.', prompt: PROMPTS.a5Implement, after: 'Claude Code asks per file. At the end: the A5 test green (3 of 3), the main tests (56) and the type check green, and the diff.'},
       {text: 'Type this in: Window 2. Goal: the same search as step 2.', prompt: 'git grep -n "A5 bypass"', after: 'Nothing found. The shortcuts are gone.'},
       {text: 'Type this in: Window 2. Goal: run Sonny again, same command as Assignment 1.', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The same diagnosis as in Assignment 3, with list_deploys in the trace. Same answer, but now it really comes through the tool.'}
     ],
     after: 'The update-list tool works and only reads, the shortcuts are gone, and the trace tells the truth.',
-    checks: ['git grep: 3 shortcuts before (step 2), none after (step 6).', 'The A5 test: red first (0 of 3), then green (4 of 4).', 'Sonny’s output: the same diagnosis, with list_deploys in the trace.'],
+    checks: ['git grep: 3 shortcuts before (step 2), none after (step 6).', 'The A5 test: red first (0 of 3), then green (3 of 3).', 'Sonny’s output: the same diagnosis, with list_deploys in the trace.'],
     teach: {
       time: '15 min',
       gist: 'Same rhythm as Assignment 3: see what is missing (red test, the shortcuts), accept the plan, build, test green. Sonny’s output does not change: the point is that it now really comes through the tool.',
@@ -1277,40 +1277,56 @@ const day5Slides = [
       script: [
         {do: 'Slide appears. Goal of this assignment.', say: ['The missing eye from the last slide: the update list. Same rhythm as Assignment 3: first see what is missing, then build, then test.', 'Shorter than Assignment 3: about 4 files.']},
         {do: 'Step 1 · manual mode.', say: ['Claude Code is about to change files: you want to see each change.']},
-        {do: 'Step 2 · find the shortcuts yourself. Window 2: git grep.', copy: [['Step 2 · Window 2', 'git grep -n "A5 bypass"']], say: ['Why: before anything changes, see the shortcuts with your own eyes. git grep searches every file for a piece of text: here Ryan’s marker “A5 bypass”.', 'They see 3 lines: src/chat.ts line 63, src/runtime.ts lines 105 and 226. The three shortcuts; you saw one on the code slide.', 'Remember the number 3.']},
+        {do: 'Step 2 · find the shortcuts yourself. Window 2: git grep.', copy: [['Step 2 · Window 2', 'git grep -n "A5 bypass"']], say: ['Why: before anything changes, see the shortcuts with your own eyes. git grep searches every file for a piece of text: here Ryan’s marker “A5 bypass”.', 'They see 3 lines: src/chat.ts once (around line 75), src/runtime.ts twice (around 105 and 230). The three shortcuts; you saw one on the code slide.', 'Remember the number 3.']},
         {do: 'Step 3 · see what is missing. Paste the first prompt.', copy: [['Step 3 · Claude Code', PROMPTS.a5See]], say: ['Why: you only fix what you understand.', 'In the project: Claude Code reads the tool file, the two files with the shortcuts, and the A5 test. It changes nothing.', 'They see: what list_deploys should do, the same 3 shortcuts, and the A5 test red: 0 of 3.']},
         {ask: 'If the shortcuts work, why remove them?', say: ['(Answer: a real AI only gets the tools, so with the empty box it could not see the update. And the trace would say list_deploys while the data came via the shortcut.)']},
-        {do: 'Step 4 · you decide.', say: ['Check one thing: the tool only reads. If Claude Code proposes anything that changes something, say no.', 'Agree: type “accepted”.']},
-        {do: 'Step 5 · build. Paste the second prompt.', copy: [['Step 5 · Claude Code', PROMPTS.a5Implement]], say: ['In the project: src/tools.ts gets the real tool, offered to the AI. src/runtime.ts and src/chat.ts lose the shortcuts and use the tool. And one test file gets a new case.', 'The new case: if there is no data at all in the time window, Sonny must say “unknown”: OPEN, low confidence, investigate more. Never “healthy”. No data is not good news.', 'At the end: the A5 test green, 4 of 4. The main tests and the type check still green: done means everything still works.']},
+        {do: 'Step 4 · you decide.', say: ['Check one thing: the tool only reads. If Claude Code proposes anything that changes something, say no.', 'Agree? Do not type “accepted”. Go straight to step 5: that prompt is your yes.', 'Why: tested. If you type “accepted”, Claude Code starts building right away, without the instructions from step 5.']},
+        {do: 'Step 5 · build. Paste the second prompt.', copy: [['Step 5 · Claude Code', PROMPTS.a5Implement]], say: ['In the project: src/tools.ts gets the real tool, offered to the AI. src/runtime.ts and src/chat.ts lose the shortcuts and use the tool. Claude Code asks per file: say yes.', 'At the end: the A5 test green, 3 of 3. The main tests and the type check still green: done means everything still works.']},
         {do: 'Step 6 · the same search again. Window 2: git grep.', copy: [['Step 6 · Window 2', 'git grep -n "A5 bypass"']], say: ['They see: nothing. Before 3, now 0. The shortcuts are really gone.', 'That is the before and after you can see. The test proves the rest.']},
         {do: 'Step 7 · run Sonny again, in Window 2.', copy: [['Step 7 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json']], say: ['They see: exactly the same diagnosis as after Assignment 3. In the trace: list_deploys, 02:50 to 03:50.', 'Same answer. But now it really comes through the tool, and the trace tells the truth.']},
         {do: 'Wrap up.', say: ['Sonny has four working eyes now, and no hands.', 'Next: you break the shop yourself, and watch him use those eyes live.']}
       ],
-      learn: ['First see what is missing: red test and the shortcuts.', 'Every look goes through one tool that only reads, so the trace is true.', 'No data means unknown, never healthy.'],
-      watch: ['Someone is disappointed that the output did not change: that is expected. Point at step 6: 3 shortcuts before, none after.', 'Step 6 still finds a line: Claude Code removed the shortcuts but kept the comment, or missed one. Ask it to show that line and fix only that.', 'Claude Code proposes a tool that changes something: reject it.', 'Main tests red after step 4: ask Claude Code to show the red line and fix only that.', 'Someone asks about the console: it still runs the old code until the restart in Assignment 6. Nothing to do now.', 'Stuck far behind: the catch-up slide after this assignment jumps to the finished A5.'],
+      learn: ['First see what is missing: red test and the shortcuts.', 'Every look goes through one tool that only reads, so the trace is true.'],
+      watch: ['Someone is disappointed that the output did not change: that is expected. Point at step 6: 3 shortcuts before, none after.', 'Step 6 still finds a line: Claude Code removed the shortcuts but kept the comment, or missed one. Ask it to show that line and fix only that.', 'Claude Code proposes a tool that changes something: reject it.', 'Someone typed “accepted” and Claude Code is already building: fine, let it ask per file. Then still paste step 5: it checks that nothing is missing and runs the A5 test, the main tests and the type check.', 'Main tests red after step 5: ask Claude Code to show the red line and fix only that.', 'Someone asks about the console: it still runs the old code until the restart in Assignment 6. Nothing to do now.', 'Stuck far behind: the catch-up slide after this assignment jumps to the finished A5.'],
       terms: [['Tool', 'a small piece of code Sonny can call to look at something; these only read'], ['Trace', 'the list of every tool Sonny used, with what he asked for'], ['Shortcut (“A5 bypass”)', 'code that grabs the data itself, past the tool, so the tool is skipped']],
       changes: [
         ['After steps 1–4', 'Nothing new. git grep and Claude Code only read; the A5 test only runs.'],
-        ['After step 5', '`modified: src/tools.ts`, `src/runtime.ts`, `src/chat.ts`, `test/workshop/tools.test.ts` (plus PROGRESS.md). The exact list can differ.'],
+        ['After step 5', '`modified: src/tools.ts`, `src/runtime.ts`, `src/chat.ts` (plus PROGRESS.md). Tested: exactly these.'],
         ['After steps 6 and 7', 'Nothing new.']
       ],
-      next: 'Catch-up · Ready for the live route.'
+      next: 'Catch-up: jump to the finished Assignment 5.'
     },
     humanOpen: 'A tool only reads. What it shows informs a decision; a person still makes it.', next: 'A5 catch-up checkpoint'
   }),
   baseSlide({
-    title: 'Catch-up · Ready for the live route', kicker: 'Day 5 · CHECKPOINT A5', subtitle: 'Save your work before using the reviewed A5 checkpoint.', type: 'review', layout: 'exercise', mode: 'manual', calm: true,
-    stepsHeading: 'Use only when blocked',
+    title: 'Catch-up: jump to the finished Assignment 5', kicker: 'Day 5 · CATCH-UP', subtitle: 'Only if you are stuck or far behind. The project has a finished version of Assignments 3, 4 and 5 built in, called day5-after-a5. First you put your own work aside, then you switch to that version. Nothing is lost.', type: 'review', layout: 'exercise', calm: true,
+    stepsHeading: 'Only when you are stuck',
     steps: [
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git status --short', after: 'You can see every local change before recovery.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git stash push -u -m "before Day 5 A5 catch-up"', after: 'Tracked and untracked participant work is saved.', warn: true},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git switch -c day5-catch-up-a5 day5-after-a5', after: 'A new branch starts at the reviewed A5 checkpoint.'},
-      {text: 'Human review. Continue with A6 only.', after: 'Your original work remains in the named stash.'}
+      {text: 'Type this in: Window 2. Goal: see your own work first.', prompt: 'git status --short', after: 'A list of the files you changed today. That is your work.'},
+      {text: 'Type this in: Window 2. Goal: put your work aside, safely.', prompt: 'git stash push -u -m "my work before the A5 catch-up"', after: '“Saved working directory …”. Your work is put aside, not deleted.', warn: true},
+      {text: 'Type this in: Window 2. Goal: switch to the finished version.', prompt: 'git switch -c day5-catch-up-a5 day5-after-a5', after: '“Switched to a new branch ‘day5-catch-up-a5’”. You now have the finished Assignments 3, 4 and 5.'},
+      {text: 'Go on with Assignment 6. It restarts the console, so the console picks up this version.', after: 'Shop and customers in Windows 3 and 4 keep running. Nothing to do there.'}
     ],
-    expected: 'A new catch-up branch is ready without discarding participant work.',
-    cards: [{title: 'A3', body: 'customer_impact is required and visible.'}, {title: 'A4', body: 'Mutations are refused and the guard passes.'}, {title: 'A5', body: 'list_deploys returns evidence with trace arguments.'}],
-    keyPoints: ['Self-check the first missing checkpoint.', 'Do not rerun every suite.', 'Continue when all three proofs are visible.'],
-    notes: note({time: '14:05 · 5 min', why: 'The live route depends on the three completed contracts.', predict: 'Ask which proof is missing first.', see: 'Three compact checkpoints.', inside: 'The recovery commands preserve work and create a separate branch.', participant: 'Self-check A3, A4, and A5. Optionally share one blocker in chat.', watch: 'Never reset or overwrite participant work.', stuck: 'Use the reviewed day5-after-a5 tag.', stop: 'All three checkpoints are visible.', next: 'A6 · Run the live counterpart'})
+    expected: 'You are on the finished version. Your own work waits in a safe place.',
+    cards: [{title: 'Assignment 3', body: 'The contract: every diagnosis has a Customer impact row.'}, {title: 'Assignment 4', body: 'The guardrails: the chat refuses actions, the pass mark is locked.'}, {title: 'Assignment 5', body: 'The update-list tool works; the shortcuts are gone.'}],
+    keyPoints: ['Only if you are stuck.', 'First put your work aside (git stash), then switch.', 'Nothing is lost: git stash list shows your work.'],
+    notes: 'Time: 14:05 · 3 min. Only for people who are stuck; the others wait or help in the chat. day5-after-a5 is a tag (a saved point) in Ryan’s practice repo with A3, A4 and A5 finished. It comes with the clone from Assignment 1. Tested 2026-11-10 in a fresh clone of workshop/start: the three commands work; git stash -u also saves new files; the new branch is at checkpoint 34e7046; package.json is the same, so no npm install is needed. Not saved by git stash (git ignores them, and they stay where they are): incidents in console/data and the shop data in demo/data. On this version the A5 test shows 4 of 4 (Ryan added a 4th test), main tests 56 of 56. Getting your own work back later: git stash list, then git stash pop on your own branch; help them one-on-one, not in the room.',
+    teach: {
+      time: '3 min',
+      gist: 'Only for who is stuck: put your own work aside with git stash, then switch to Ryan’s finished version of A3–A5. Nothing is lost.',
+      script: [
+        {do: 'Slide appears. Ask who is stuck or far behind.', say: ['Not done with Assignment 5, or something broke? No problem. The project has a finished version built in. You jump to it in three commands.', 'The rest: keep going, or help someone in the chat.']},
+        {do: 'Step 1 · git status.', copy: [['Step 1 · Window 2', 'git status --short']], say: ['First see your own work: the files you changed today.']},
+        {do: 'Step 2 · git stash.', copy: [['Step 2 · Window 2', 'git stash push -u -m "my work before the A5 catch-up"']], say: ['This puts your work aside. Not deleted: it waits in a safe place, with a name.']},
+        {do: 'Step 3 · git switch.', copy: [['Step 3 · Window 2', 'git switch -c day5-catch-up-a5 day5-after-a5']], say: ['Now you switch to the finished version. Assignments 3, 4 and 5 are done there.']},
+        {do: 'Step 4 · on to Assignment 6.', say: ['Assignment 6 restarts the console, so it picks up this version. Shop and customers keep running.']}
+      ],
+      learn: ['git stash puts your work aside; nothing is lost.', 'A tag is a saved point in the project, like day5-after-a5.'],
+      watch: ['Step 3 says “invalid reference: day5-after-a5”: their clone has no tags. Window 2: git fetch --tags, then step 3 again.', 'Step 3 says “a branch named day5-catch-up-a5 already exists”: they did this before. Use git switch day5-catch-up-a5 (without -c).', 'Someone wants their own work back: git stash list shows it. Help one-on-one after the day, not now.'],
+      terms: [['git stash', 'put your changes aside in a safe place, without saving them as a commit'], ['Tag', 'a saved point in the project with a name, like day5-after-a5']],
+      changes: [['After step 2', '`git status` shows nothing: your work is aside.'], ['After step 3', 'You are on branch day5-catch-up-a5.']],
+      next: 'Run the live counterpart (Assignment 6).'
+    }
   }),
   baseSlide({
     title: 'Run the live counterpart', kicker: 'Day 5 · CONCEPT', subtitle: 'Create a new live incident, challenge its evidence, and keep action human-owned.',
@@ -1387,7 +1403,7 @@ const SDLC_BY_TITLE = [
   [/^(Assignment 3B|Done means: everything still works)/, 'test'],
   [/^A diagnosis you can trust/, 'design'],
   [/^(Assignment 3:|Guardrails:|Assignment 4:|Where we are: an agent|Tools: how an AI agent sees|In the code: one tool is an empty box|Up next: Assignment 5|Assignment 5:)/, 'build'],
-  [/^Catch-up · Ready for the live route/, 'test'],
+  [/^Catch-up: jump to the finished Assignment 5/, 'test'],
   [/^(Run the live counterpart|Example live incident|A6 |Assignment 6:|Human in the loop · Part of A6|Catch-up · Six required)/, 'deploy'],
   [/^Hackathon intent studio/, 'plan', true],
   [/^(Recap · |End at 16:00|Close: what you learned)/, 'all'],
