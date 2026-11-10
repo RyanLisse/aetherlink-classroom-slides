@@ -2319,3 +2319,26 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .cz-look{pointer-events:none}
 .cz-gate.shake .cz-gate-t{animation:czShake .5s ease-in-out;border-color:#ff6b6b;color:#ff8f8f}
 @keyframes czShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* fileFlow (Jessy Day 5 "Where the contract sits"): incident → files → contract → PASS / FAIL */
+.ff-wrap{margin:0 0 .9rem}
+.ff-row{display:flex;align-items:stretch;gap:.4rem}
+.ff-arrow{align-self:center;color:var(--muted);font-weight:900}
+.ff-node{flex:1;min-width:0;display:flex;flex-direction:column;gap:.15rem;padding:.5rem .6rem;border-radius:11px;border:1px solid var(--border);background:var(--surface);animation:enter .4s both;animation-delay:calc(.1s + var(--i) * .12s)}
+.ff-node.hl{flex:1.35;border:2px solid var(--aether-orange);box-shadow:0 0 0 4px color-mix(in srgb,var(--aether-orange) 14%,transparent)}
+.ff-label{font-size:.78rem;font-weight:900}
+.ff-node.hl .ff-label{color:var(--aether-orange)}
+.ff-file{font-size:.66rem;color:var(--cyan);overflow-wrap:anywhere}
+.ff-note{font-size:.66rem;font-weight:700;color:var(--muted);line-height:1.25}
+.ff-node.hl .ff-note{color:#ffb27a}
+.ff-end{display:grid;gap:.3rem;flex:1.1;min-width:0;animation:enter .4s both;animation-delay:calc(.1s + var(--i) * .12s)}
+.ff-pass,.ff-fail{display:flex;flex-direction:column;gap:.05rem;padding:.3rem .5rem;border-radius:9px;font-size:.66rem;font-weight:700;line-height:1.25}
+.ff-pass{border:1.5px solid var(--ok,#4cd38a);background:color-mix(in srgb,var(--ok,#4cd38a) 9%,transparent)}
+.ff-fail{border:1.5px solid #ff6b6b;background:color-mix(in srgb,#ff6b6b 9%,transparent)}
+.ff-pass b{color:var(--ok,#4cd38a)}.ff-fail b{color:#ff8f8f}
+.ff-foot{margin:.45rem 0 0;font-size:.78rem;font-weight:700;color:var(--muted)}
+.ff-card-file{display:inline-block;margin:.1rem 0 .35rem;font-size:.78rem;color:var(--cyan)}
+.ff-card-who{display:inline-block;margin-top:.4rem;font-size:.72rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.ff-card.ff-c2{border-color:var(--aether-orange)}
+.ff-card.ff-c2 .ff-card-who{color:var(--aether-orange)}
+@media (max-width:900px){.ff-row{flex-direction:column}.ff-arrow{transform:rotate(90deg);align-self:center}}

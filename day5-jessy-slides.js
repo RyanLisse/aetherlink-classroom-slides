@@ -776,53 +776,51 @@ const day5Slides = [
       learn: ['A diagnosis you can trust: always the same format, with evidence, checked before it gets to you.', 'Only if all five rules are met does Sonny ask you.', 'The five rules are not in the code yet: Assignment 3 builds them.'],
       watch: ['Clicked something by mistake? ← steps back one click at a time. A rule closes when you click it again; the switch and Approve / Reject toggle back. You can also click the blocks at the top to jump: He looks, He writes a diagnosis, He checks it. “He asks you” only opens when all five rules are met; otherwise the gate shakes.', 'Do not explain how to build the rules: the assignment does that.', 'Someone asks why today it says PASS: the code already checks the format (every field there, at least one evidence line), but not the five rules.', 'Someone asks where the instructions are: src/prompts.ts (with a real AI model). Offline, src/runtime.ts writes his diagnosis by script.', 'Approve / Reject here only show the idea. The real approval comes in Assignment 6.', '“Contract” confuses someone: the rules something must meet, checked in code.'],
       terms: [['Contract', 'the rules every diagnosis must meet, checked in plain code before the operator sees it'], ['Rule', 'one requirement every diagnosis must meet']],
-      next: 'rules, tests, code: who writes what.'
+      next: 'where the contract sits, and how you know it works.'
     }
   }),
   baseSlide({
-    title: 'Rules, tests, code: who writes what', kicker: 'Day 5 · TEST', subtitle: 'The rules say what a good diagnosis is. The tests check if the code follows them. In this project the team already wrote the rules and the tests. In Assignment 3 you write the code, until the tests are green.',
-    visual: {layerStrip: [
-      {phase: 'Plan', name: 'Goal', file: 'intent.md', who: 'you, Assignment 2 ✓', state: 'done'},
-      {phase: 'Design', name: 'Rules', file: 'docs/spec.md', who: 'the team · you accept them', state: 'team'},
-      {phase: 'Test', name: 'Tests', file: 'test/workshop/', who: 'the team · 7 tests, 6 red', state: 'team'},
-      {phase: 'Build', name: 'Code', file: 'src/contract.ts', who: 'you, Assignment 3', state: 'you'}
-    ], filePair: [
-      {file: 'One test · today', lines: [
-        ['h', 'The test gives the contract'], ['keep', 'a diagnosis without customer impact'],
-        ['h', 'The test expects'], ['keep', '“refused”'],
-        ['h', 'The contract answers'], ['red', '“ok” (the rules are not in the code yet)'],
-        ['red', '✗ red: wrong answer']
-      ]},
-      {file: 'The same test · after Assignment 3', lines: [
-        ['h', 'The test gives the contract'], ['keep', 'a diagnosis without customer impact'],
-        ['h', 'The test expects'], ['keep', '“refused”'],
-        ['h', 'The contract answers'], ['new', '“refused: customer impact is missing”'],
-        ['green', '✓ green: right answer']
-      ]}
-    ]},
-    cards: [{title: 'Today: red = wrong answer', body: '6 of the 7 contract tests are red.'}, {title: 'After Assignment 3: green = right answer', body: 'All 7 green. One test per rule.'}],
-    tagline: 'Goal of Assignment 3: all 7 contract tests green, and the diagnosis says what customers notice.',
-    keyPoints: ['Rules (docs/spec.md) and tests (test/workshop/) are already written by the team.', 'A test gives the contract a made-up diagnosis and expects an answer: red = wrong, green = right.', 'In Assignment 3 you write the code: 6 red tests become 7 green.'],
-    notes: 'Time: 11:29 · 2 min. The order is goal → rules → tests → code (the four layers of “intent.md: what goes in it, and where it lives”). Rules: the verdict-contract table in docs/spec.md plus TODO(A3) in src/contract.ts; spec.md also has an empty “Rules worth writing down” that Assignment 3 fills. Tests: test/workshop/contract.test.ts has 7 A3 tests: a complete verdict with customer_impact passes; customer_impact is required and non-empty; rollback needs a deploys evidence line; one signal is a hunch (strong proposals need two sources); low confidence cannot carry a strong proposal; evidence has to carry at least one line (already passes); high confidence refused while data_gaps exist. At the start pass 1 / fail 6. Participants do not write tests (extra test cases only in the optional A7). Verified on the reference tag day5-after-a3: pass 7 / fail 0, and npm run investigate prints “Customer impact: … users of checkout may see failures or slowness …; affected segments remain OPEN”.',
-    teach: {
-      time: '2 min',
-      gist: 'Who writes what: the team wrote the rules and the tests, you write the code. A test gives the contract a made-up diagnosis and checks the answer: today red, after Assignment 3 green.',
-      script: [
-        {do: 'Slide appears. Point at the row at the top, left to right.', say: ['Remember the four layers: goal, rules, tests, code.', 'The goal: you wrote it in Assignment 2.', 'The rules: the team already wrote them down, in docs/spec.md. In Assignment 3 you read them and accept them.', 'The tests: also written by the team. They check if the code follows the rules.', 'The code: that is you, in Assignment 3.']},
-        {ask: 'So are you writing the rules in Assignment 3?', say: ['(Answer: no. The rules are written down. You put them into the code, with Claude Code, until the tests are green.)']},
-        {do: 'Point at the left card, top to bottom.', say: ['How does a test work? This one gives the contract a made-up diagnosis without customer impact.', 'It expects: “refused”.', 'Today the contract says “ok”: the rules are not in the code yet.', 'Wrong answer: the test is red.']},
-        {do: 'Point at the right card.', say: ['After Assignment 3: same diagnosis, same expectation.', 'Now the contract says “refused: customer impact is missing”. Right answer: green.']},
-        {ask: 'Another test gives the contract a rollback without evidence from the update list. What should it answer?', say: ['(Answer: refused. A rollback needs evidence from the update list.)']},
-        {do: 'Point at the bottom line.', say: ['At the end of Assignment 3 you see two things: the 7 contract tests are green, and the diagnosis has a Customer impact line.', 'Of the 14 red tests from Assignment 1, 6 are these. The rest come in the afternoon.']}
+    title: 'Where the contract sits, and how you know it works', kicker: 'Day 5 · THE CONTRACT', subtitle: 'This is the path every incident takes through the project. The contract sits between Sonny and you. The rules are written down, the tests check them, and in Assignment 3 you build them into the contract.',
+    visual: {fileFlow: {
+      nodes: [
+        {label: 'Incident', file: 'fixtures/incidents/', note: 'or live from the shop'},
+        {label: 'Start', file: ['src/cli.ts', 'console/server.ts'], note: 'terminal or browser'},
+        {label: 'Sonny investigates', file: 'src/agent.ts', note: 'investigate()'},
+        {label: 'His brain', file: ['src/prompts.ts', 'src/runtime.ts'], note: 'AI model with instructions · offline: a script'},
+        {label: 'The contract', file: 'src/contract.ts', note: 'checks the diagnosis · the 5 rules: still TODO', hl: true}
       ],
-      learn: ['The team wrote the rules and the tests; you write the code.', 'A test gives the contract a made-up diagnosis and expects an answer.', 'Red = wrong answer, green = right answer.'],
-      watch: ['Someone asks if they write tests today: no. Extra test cases are an optional extra at the end.', 'Someone asks why the tests were written first: so you know when you are done. That is normal: first say what “right” looks like, then build.', 'Do not explain the 8 afternoon tests now.'],
-      terms: [['Test', 'a small program that gives the code a made-up input and checks the answer'], ['Red / green', 'wrong answer / right answer']],
+      end: {pass: 'you see the diagnosis', fail: 'you see the broken rule, not the diagnosis'},
+      note: 'Claude Code is not in this path. Claude Code is the builder: it changes these files. Sonny is what runs.',
+      cardFiles: [['docs/spec.md', 'the team'], ['test/workshop/contract.test.ts', 'the team'], ['src/contract.ts', 'you · Assignment 3']]
+    }},
+    cards: [
+      {title: 'The rules, in words', body: 'What a good diagnosis contains. The agreement.'},
+      {title: 'The tests', body: 'Give the contract a made-up diagnosis with one thing wrong, and check it says “refused”.'},
+      {title: 'The rules, as code', body: 'The contract itself. Today the five rules are missing, so everything passes.'}
+    ],
+    tagline: 'Example test: take away customer impact → the contract must say “refused”. Today it says “ok”: red. After Assignment 3: “refused”: green.',
+    keyPoints: ['Every incident: start → Sonny investigates → his brain writes a diagnosis → the contract checks it → you.', 'The rules in words (docs/spec.md) and the tests are written by the team. The rules as code (src/contract.ts) are yours in Assignment 3.', 'A test gives the contract a made-up diagnosis with one thing wrong and checks it is refused.'],
+    notes: 'Time: 11:29 · 3 min. No SDLC tracker on this slide: running the tests is part of building (they are the finish line), not a separate phase. The path (real code): src/cli.ts (npm run investigate) or console/server.ts → src/chat.ts → investigate() in src/agent.ts → the brain: with a real model the Claude Agent SDK with systemPrompt ONCALL_SYSTEM from src/prompts.ts, outputFormat VERDICT_SCHEMA and only the read-only tools from src/tools.ts; offline (today) offlineQuery in src/runtime.ts → the JSON diagnosis → validateVerdict in src/router.ts → parseVerdict in src/contract.ts (the contract) → checkTrace (every cited evidence source must be a tool he really called) → routeVerdict attaches the owner → the terminal prints the diagnosis and “PASS contract”, or “FAIL contract” with the reasons. Words: intent.md = the goal (no rules); docs/spec.md = the rules in words (the field table: customer_impact, rollback needs a deploys line, high refused while data_gaps; plus an empty “Rules worth writing down” that Assignment 3 fills; the two-sources and low-confidence rules are only in the TODO(A3) comment); src/contract.ts = the rules as code. Tests: test/workshop/contract.test.ts imports parseVerdict directly (Sonny does not run). It builds one complete diagnosis that must pass, then six variants that each break one rule (no customer_impact, rollback without deploys, scale with one source, low confidence with rollback, no evidence, high confidence with data_gaps) and must be refused. At the start: pass 1 / fail 6. Written first on purpose: the tests are the finish line. In Assignment 3 src/runtime.ts must change too: once the customer-impact rule exists, Sonny’s own offline diagnosis would otherwise get FAIL contract.',
+    teach: {
+      time: '3 min',
+      gist: 'Where the contract sits: between Sonny and you, on the path every incident takes. The rules in words and the tests are already written by the team; in Assignment 3 you build the rules into the contract until the tests are green.',
+      script: [
+        {do: 'Slide appears. Point at the path at the top, left to right.', say: ['This is the path every incident takes through the project.', 'An incident comes in. In the terminal or the browser, Sonny starts investigating.', 'His brain writes the diagnosis: with a real AI model, following his instructions. Today offline: a script, so everyone gets the same one.', 'Then the contract checks it. Rules met: you see the diagnosis. A rule broken: you see which rule, not the diagnosis.']},
+        {do: 'Point at the orange block.', say: ['That is the contract. Today the five rules are missing in there, so everything passes. In Assignment 3 you build them.']},
+        {do: 'Point at the line under the path.', say: ['Where is Claude Code? Not in this path. Claude Code is the builder: it changes these files. Sonny is what runs at 03:45.']},
+        {do: 'Point at the three cards, left to right.', say: ['Three files, one agreement.', 'spec.md: the rules in words, what a good diagnosis contains. Written by the team.', 'The tests: also by the team. They give the contract a made-up diagnosis with one thing wrong, and check that it says “refused”.', 'contract.ts: the same rules as code. That is yours.']},
+        {ask: 'Why would the team write the tests before the code?', say: ['(Answer: so you know exactly when you are done. The tests are the finish line: red now, green when it works.)']},
+        {do: 'Point at the example at the bottom.', say: ['One example: take away customer impact. The contract must say “refused”.', 'Today it says “ok”: red. After Assignment 3: “refused”: green.']},
+        {do: 'Bridge to the assignment.', say: ['One more thing to watch in Assignment 3: Sonny’s own diagnosis has no customer impact yet. Once the rule exists, the contract would stop him too. So Claude Code also teaches him to write it.', 'The contract protects you from Sonny as well.']}
+      ],
+      learn: ['The contract sits between Sonny and you: every diagnosis goes through it.', 'Rules in words (spec.md) and tests: the team. Rules as code (contract.ts): you.', 'A test gives the contract a made-up diagnosis with one thing wrong and checks it is refused.'],
+      watch: ['Someone mixes up intent.md and the rules: intent.md is the goal, in words. The rules are in spec.md (words) and contract.ts (code).', 'Someone asks if the tests run Sonny: no. They give the contract made-up diagnoses directly. Assignment 3B then checks the whole thing with Sonny running.', 'Someone asks why spec.md is half empty: two rules are only in the code comment so far, and the “Rules worth writing down” part is filled in during Assignment 3.', 'Do not walk through every file in depth: the path is enough.'],
+      terms: [['Contract', 'the rules as code (src/contract.ts); every diagnosis goes through it before you see it'], ['spec.md', 'the rules in words: what a good diagnosis contains'], ['Test', 'a small program that gives the contract a made-up diagnosis and checks the answer']],
       next: 'Assignment 3: agree on the rules, then build them.'
     }
   }),
   assignmentSlide({
-    number: 3, title: 'Agree on the rules, then build them', subtitle: 'Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.', stage: 'contract', duration: '11:31 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
+    number: 3, title: 'Agree on the rules, then build them', subtitle: 'Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.', stage: 'contract', duration: '11:32 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
     steps: [
       {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code asks before every file it changes.', warn: true},
       {text: 'Type this in: Claude Code. Goal: understand the five rules before anything is built.', prompt: PROMPTS.a3Contract, after: 'The five rules in plain English, and the smallest change that adds them. Nothing changes yet.'},
@@ -843,7 +841,7 @@ const day5Slides = [
       done: ['The A3 test: 7 of 7 green.', 'They can name the five rules.', 'Customer impact shows in the browser.'],
       copy: [['Step 2 · Claude Code', PROMPTS.a3Contract], ['Step 4 · Claude Code', PROMPTS.a3Build], ['Step 5 · Claude Code', PROMPTS.a3BuildImplement], ['Step 6 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json'], ['Step 7 · Window 1 (Ctrl+C first)', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Step 8 · Browser', 'http://localhost:4320'], ['After each step · Window 2', 'git status']],
       script: [
-        {do: 'Slide appears. Goal of this assignment.', say: ['You know the five rules, and the team’s tests that check them. Now you build them into the contract.', 'Same rhythm as Assignment 2: Claude Code explains, you decide, then it builds.', 'The biggest assignment of the day: 25 minutes, about 9 files.']},
+        {do: 'Slide appears. Goal of this assignment.', say: ['You know where the contract sits, and the team’s tests that check it. Now you build the five rules into it.', 'Same rhythm as Assignment 2: Claude Code explains, you decide, then it builds.', 'The biggest assignment of the day: 25 minutes, about 9 files.']},
         {do: 'Step 1 · manual mode.', say: ['Why: Claude Code is about to change about 9 files. You want to see each change.', '“manual mode on”. Not there? Shift+Tab.']},
         {do: 'Step 2 · understand. Paste the first prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a3Contract]], say: ['Why: you only accept rules you understand.', 'In the project: Claude Code reads intent.md (your work from Assignment 2), docs/spec.md, src/contract.ts, two agent files and the A3 test. It changes nothing.', 'They see: the five rules in plain English, and the smallest change that adds them.']},
         {do: 'Step 3 · you decide.', say: ['Why: you own the rules, not Claude Code.', 'Check: are all five there? Does it keep unknown things OPEN: versions, regions, customer groups?', 'Agree: type “accepted”.']},
@@ -870,7 +868,7 @@ const day5Slides = [
     }
   }),
   {...checkpointSlide({
-    number: 3, title: 'verify the verdict contract', subtitle: 'Do not just trust Claude Code. Run every test, then let a second check look at the evidence with fresh eyes. You read the evidence yourself.', stage: 'contract', duration: '11:56 · 7 min', shot: 'assets/day5-expected/a3.png',
+    number: 3, title: 'verify the verdict contract', subtitle: 'Do not just trust Claude Code. Run every test, then let a second check look at the evidence with fresh eyes. You read the evidence yourself.', stage: 'contract', duration: '11:57 · 7 min', shot: 'assets/day5-expected/a3.png',
     steps: [
       {text: 'Type this in: Claude Code. Goal: run all checks, not just the contract test.', prompt: PROMPTS.a3BuildProve, after: 'All main tests, the type check, the terminal output and the browser line: all visible, all green.'},
       {text: 'Type this in: Claude Code. Goal: a second, independent check of the claim.', prompt: PROMPTS.a3Verify, after: 'One word back: VERIFIED, NOT VERIFIED or INCONCLUSIVE, with the files and output it looked at.'},
@@ -903,7 +901,7 @@ const day5Slides = [
     title: 'Pre-lunch quiz · What is true now?', kicker: 'Day 5 · QUIZ', subtitle: 'Vote first. Reveal the answers second.', type: 'quiz',
     cards: [{title: 'A', body: 'INC-1001 and the listener incident are the same record.'}, {title: 'B', body: 'The builder and product runtime are separate.'}, {title: 'C', body: 'A green contract test proves a human approved rollback.'}, {title: 'D', body: 'Unsupported customer scope stays OPEN.'}],
     keyPoints: ['B and D are true.', 'A confuses two records.', 'C confuses proof with authority.'],
-    notes: note({time: '12:03 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
+    notes: note({time: '12:04 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
   }),
   pauseSlide('Lunch', '60 min', 'Recall the morning before A4', '12:00'),
   pauseSlide('Restart and settle', '10 min', 'Post-lunch recap', '13:00'),

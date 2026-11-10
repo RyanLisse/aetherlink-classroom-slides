@@ -432,6 +432,15 @@ function renderExtras(stage, main, s, v) {
     window.__reveal = next; window.__revealBack = back;
     slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
   }
+  if (v.fileFlow) {                                             // Jessy Day 5 opt-in: the real path of an incident through the files, one node lit (the contract), ending in PASS / FAIL
+    const F = v.fileFlow; const wrap = node('div', 'ff-wrap'); const row = node('div', 'ff-row');
+    F.nodes.forEach((N, i) => { if (i) row.append(node('div', 'ff-arrow', '→')); const c = node('div', 'ff-node' + (N.hl ? ' hl' : '')); c.style.setProperty('--i', i);
+      c.append(node('span', 'ff-label', N.label)); [].concat(N.file || []).forEach((f) => c.append(node('code', 'ff-file', f))); if (N.note) c.append(node('span', 'ff-note', N.note)); row.append(c); });
+    if (F.end) { row.append(node('div', 'ff-arrow', '→')); const e = node('div', 'ff-end'); e.style.setProperty('--i', F.nodes.length);
+      const ok = node('div', 'ff-pass'); ok.append(node('b', null, 'PASS'), node('span', null, F.end.pass)); const no = node('div', 'ff-fail'); no.append(node('b', null, 'FAIL'), node('span', null, F.end.fail)); e.append(ok, no); row.append(e); }
+    wrap.append(row); if (F.note) wrap.append(node('p', 'ff-foot', F.note)); grid.before(wrap);
+    if (F.cardFiles) cards.forEach((c, i) => { const f = F.cardFiles[i]; if (!f) return; c.classList.add('ff-card', 'ff-c' + i); c.querySelector('.card-icon')?.remove(); c.querySelector('.card-head')?.after(node('code', 'ff-card-file', f[0])); if (f[1]) c.append(node('span', 'ff-card-who', f[1])); });
+  }
   if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
     const ls = node('div', 'ls-row');
     v.layerStrip.forEach((L, i) => { if (i) ls.append(node('div', 'ls-arrow', '→')); const c = node('div', 'ls-card' + (L.state ? ' ' + L.state : '')); c.style.setProperty('--i', i);
