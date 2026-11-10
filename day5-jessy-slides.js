@@ -292,11 +292,11 @@ const day5Slides = [
       {title: 'Put it live', body: 'Real users start using it.'},
       {title: 'Keep it running, and learn', body: 'Fix, improve, and start again at Plan.'}
     ],
-    keyPoints: ['Plan, Design, Build, Test, Deploy, Maintain.', 'The six dots at the top of each slide show where we are.', 'Day 6 and 7: the same six steps with your own project.'],
+    keyPoints: ['Plan, Design, Build, Test, Deploy, Maintain.', 'The six dots at the top of most slides show where we are.', 'Day 6 and 7: the same six steps with your own project.'],
     notes: 'Time: 10:12 · 3 min. Each click (→) lights the next dot and shows its card. Clicking a dot jumps to that step; the current dot is orange. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).',
     teach: {
       time: '3 min',
-      gist: 'The six steps all software goes through, on one line. The same line is at the top of every slide today.',
+      gist: 'The six steps all software goes through, on one line. The same line is at the top of most slides today.',
       script: [
         {do: 'Slide appears: six grey dots on one line.', say: ['How do you build software you can trust?', 'All software goes through the same six steps. That is the SDLC: software development life cycle.']},
         {do: 'Click: Plan lights up.', say: ['Plan: decide what it must do, and what not.']},
@@ -306,9 +306,9 @@ const day5Slides = [
         {do: 'Click: Deploy.', say: ['Deploy: put it live for real users.']},
         {do: 'Click: Maintain.', say: ['Maintain: keep it running, and learn from what went wrong.', 'That feeds the next Plan, and you go round again.']},
         {ask: 'Claude Code can help in every step. Why is a person still needed?', say: ['(Answer: AI can be wrong, and someone is responsible for what goes live.)']},
-        {do: 'Click any dot to jump back to that step (it turns orange).', say: ['After the next slide, this line is small at the top right of every slide.', 'The lit dot shows where we are.', 'Day 6 and 7, the hackathon: the same six steps with your own project. Today is the practice round.']}
+        {do: 'Click any dot to jump back to that step (it turns orange).', say: ['After the next slide, this line is small at the top right of most slides.', 'The lit dot shows where we are.', 'Day 6 and 7, the hackathon: the same six steps with your own project. Today is the practice round.']}
       ],
-      learn: ['SDLC = the six steps all software goes through: Plan, Design, Build, Test, Deploy, Maintain.', 'Today you go through them once.', 'The dots at the top of each slide show the current step.'],
+      learn: ['SDLC = the six steps all software goes through: Plan, Design, Build, Test, Deploy, Maintain.', 'Today you go through them once.', 'The dots at the top of most slides show the current step.'],
       watch: ['Keep it short: the dots bring the steps back all day.', '“We do agile/sprints”? Fine: the same steps, just in smaller rounds.'],
       terms: [['SDLC', 'software development life cycle: the six steps all software goes through'], ['Deploy', 'putting a new version live']],
       next: 'today’s assignments, step by step.'
@@ -1132,7 +1132,7 @@ window.SLIDES = day5Slides;
 // SDLC tracker: which of the six phases lights up on each slide (see sdlcTrack in app.js).
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
-  [/^(Let’s start the project|The skills Claude Code uses today|Two scenarios to test Sonny|A tour of the project|Assignment 1:|Write down what Sonny must do|intent\.md: before and after|Assignment 2:)/, 'plan'],
+  [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|Write down what Sonny must do|intent\.md: before and after|Assignment 2:)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^How do we know the rules work/, 'test'],
   [/^(How your agent handles an incident|You only get a diagnosis that meets the rules)/, 'design'],
