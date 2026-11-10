@@ -877,12 +877,12 @@ const day5Slides = [
       {text: 'Type this in: Claude Code. Goal: a second, independent check of the claim.', prompt: PROMPTS.a3Verify, after: 'One word back: VERIFIED, NOT VERIFIED or INCONCLUSIVE, with the files and output it looked at.'},
       {text: 'You check. Goal: open every file and output it names.', after: 'Each one really shows what the check says.'},
       {text: 'Open in browser: http://localhost:4320', after: 'The Customer impact line matches what was verified.'},
-      {text: 'Stuck? Type this in: Window 2. Goal: save your work and jump to the finished version of Assignment 3.', prompt: 'git stash push -u -m "before Day 5 A3 catch-up" && git switch -c day5-catch-up-a3 day5-after-a3', after: 'Your work is saved, and you continue from the finished Assignment 3.', warn: true}
+      {text: 'Type this in: Window 2. Goal: only if you are stuck: save your work and jump to the finished version of Assignment 3.', prompt: 'git stash push -u -m "before Day 5 A3 catch-up" && git switch -c day5-catch-up-a3 day5-after-a3', after: 'Your work is saved, and you continue from the finished Assignment 3.', warn: true}
     ],
     after: 'The claim “the contract refuses a diagnosis without customer impact” is verified, with the files and output to show it.',
     checks: ['VERIFIED from the second check.', 'You opened the evidence it names.', 'All main tests and the type check are green.'],
     humanOpen: 'A check result approves nothing and runs nothing.', next: 'Pre-lunch quiz'
-  }), title: 'Assignment 3B: Check that it really works', kicker: 'Day 5 · ASSIGNMENT 3B · TEST', type: 'practice',
+  }), title: 'Assignment 3B: Check that it really works', kicker: 'Day 5 · ASSIGNMENT 3B · TEST', type: 'practice', visual: {shot: 'assets/day5-expected/a3.png', shotLabel: 'What you should see at the end'},
     teach: {
       time: '7 min',
       gist: 'The Test step: do not trust Claude Code’s own “done”. Run every test, let /verify-this check the claim with fresh eyes, and read the evidence yourself.',
