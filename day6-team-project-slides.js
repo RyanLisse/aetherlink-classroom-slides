@@ -317,9 +317,8 @@ window.SLIDES = [
     { title: "MCP", body: "Approved connections to tools and data." },
     { title: "SDLC", body: "Plan to Maintain, a person approves." }
   ],
-  tagline: "You don't need everything. Pick what your app needs.",
-  keyPoints: ["Everything learned = a tool now","One tile per tool, with its day","Claude Code builds the app","n8n or the Agent SDK runs it","Pick what fits, not all of it"],
-  notes: "A quick reminder of what they have: press → for each tile and say one sentence. Claude Code builds the app with the working method (explore, plan, create, test, human review, handoff); CLAUDE.md tells it how the project works and what it may never do; skills are a method written down once; agents are helpers that each do one job; n8n runs workflows with AI as a step; the Agent SDK is your own agent in code; MCP gives approved connections to tools and data; the SDLC with Sonny was Day 5. The key message is the tagline: a good team project uses the tools that fit the problem. A simple app built with Claude Code is fine; so is an n8n workflow with a Claude step. Using everything is not the goal."
+  keyPoints: ["Everything learned = a tool now","One tile per tool, with its day","Claude Code builds the app","n8n or the Agent SDK runs it","Teams pick what fits"],
+  notes: "A quick reminder of what they have: press → for each tile and say one sentence. Claude Code builds the app with the working method (explore, plan, create, test, human review, handoff); CLAUDE.md tells it how the project works and what it may never do; skills are a method written down once; agents are helpers that each do one job; n8n runs workflows with AI as a step; the Agent SDK is your own agent in code; MCP gives approved connections to tools and data; the SDLC with Sonny was Day 5. Say it out loud: a good team project uses the tools that fit the problem. A simple app built with Claude Code is fine; so is an n8n workflow with a Claude step. Using everything is not the goal."
 },
 
 /* ---------------------------------------------------------------------- */
