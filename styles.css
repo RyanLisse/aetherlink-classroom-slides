@@ -1964,7 +1964,14 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .ov-tile{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:.4rem;border-radius:10px;padding:.35rem;border:2px solid transparent}
 .ov-tile:hover,.ov-tile:focus-visible{border-color:var(--cyan)}
 .ov-tile.is-current{border-color:var(--aether-orange)}
-.ov-tile.is-hidden{opacity:.45}
+.ov-tile.is-hidden .ov-shot iframe{filter:brightness(.35) saturate(.5)}
+.ov-tile.is-hidden .ov-cap{opacity:.5}
+.ov-eye{position:absolute;top:.4rem;right:.4rem;z-index:2;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:rgba(3,8,16,.82);color:#fff;border:1px solid var(--border);opacity:0;transition:opacity .15s;cursor:pointer}
+.ov-tile:hover .ov-eye,.ov-tile:focus-within .ov-eye,.ov-tile.is-hidden .ov-eye{opacity:1}
+.ov-eye:hover,.ov-eye:focus-visible{border-color:var(--cyan);color:var(--cyan);outline:none}
+.ov-tile.is-hidden .ov-eye{color:var(--aether-orange);border-color:var(--aether-orange)}
+.ov-hidden-tag{display:none;position:absolute;left:.45rem;bottom:.4rem;z-index:2;padding:.1rem .45rem;border-radius:999px;font-size:.62rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange);background:rgba(3,8,16,.85);border:1px solid var(--aether-orange)}
+.ov-tile.is-hidden .ov-hidden-tag{display:block}
 .ov-shot{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:8px;border:1px solid var(--border);background:var(--surface)}
 .ov-shot iframe{position:absolute;left:0;top:0;width:1600px;height:900px;border:0;transform-origin:0 0;pointer-events:none}
 .ov-cap{display:flex;align-items:baseline;gap:.4rem;font-size:.8rem;line-height:1.3}
@@ -2181,13 +2188,16 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .aj-gate{margin-top:.15rem;font-size:.66rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
 .reveal-grid .aj-card.closed .aj-rule{animation-play-state:paused}
 @media (max-width:900px){.cards.agent-job.aj-four{grid-template-columns:1fr}}
-/* wide assignment layout: no click-to-cross-out; "show all" drops the full prompt down over the slide without changing the box */
+/* wide assignment layout: no click-to-cross-out; "show all" opens the whole prompt in the same box, growing down over the slide */
 .asg-body.asg-wide .asg-step{cursor:default}
 .asg-body.asg-wide .asg-step-prompt{position:relative}
-.asg-prompt-full{display:none;position:absolute;left:-1px;right:-1px;top:calc(100% + 6px);z-index:60;margin:0;max-height:min(52vh,26rem);overflow:auto;padding:.8rem 1rem;white-space:pre-wrap;font:inherit;font-family:var(--mono,ui-monospace,monospace);font-size:.8em;line-height:1.5;color:var(--text);background:var(--surface,#0b1626);border:1.5px solid var(--aether-orange);border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.6);cursor:text;user-select:text}
+.asg-prompt-full{display:none;position:absolute;left:-1px;right:-1px;top:-1px;z-index:60;margin:0;max-height:min(60vh,30rem);overflow:auto;padding:.3rem 12rem .55rem .6rem;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78em;line-height:1.4;color:#d7dcef;background:#0b0f19;border:1.5px solid var(--aether-orange);border-radius:10px;box-shadow:0 18px 48px rgba(0,0,0,.6);cursor:text;user-select:text}
 .asg-step-prompt[data-open] .asg-prompt-full{display:block}
 .asg-body.asg-wide .asg-step:has(.asg-step-prompt[data-open]){position:relative;z-index:50}
 .asg-body.asg-wide .asg-step-prompt[data-open] .asg-more{color:var(--text)}
+/* open: the same box grows downward with the whole prompt (the one-line version hides, so the prompt shows once); Copy and show less stay on top, right */
+.asg-step-prompt[data-open] > .asg-prompt-text{visibility:hidden}
+.asg-step-prompt[data-open] .asg-prompt-btns{position:relative;z-index:61}
 /* intentFlow opt-in extras (Jessy Day 5): a note per intent.md part, and a small folder tree */
 .if-sec-note{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-top:.05rem}
 .if-tree{margin-top:.5rem;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.04);padding:.45rem .55rem;display:grid;gap:.2rem}

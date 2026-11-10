@@ -225,16 +225,20 @@ function renderSlide(index) {
   }
   const promptBlock = $('p-prompt-block');
   if (s.prompt) { promptBlock.hidden = false; $('p-prompt').textContent = s.prompt; } else { promptBlock.hidden = true; }
-  const nextIndex = current + 1 < slides.length ? current + 1 : null;
-  $('p-next-title').textContent = nextIndex != null ? (nextIndex + 1) + '. ' + slides[nextIndex].title : 'This is the last slide.';
   showInFrame($('p-frame'), current);
   // openShot: a picture of this slide with every block opened, shown under the live (closed) preview
   { let box = $('p-open'); const src = s.teach?.openShot;
     if (!box) { box = document.createElement('figure'); box.id = 'p-open'; box.className = 'p-open'; $('p-shot').after(box); }
     box.hidden = !src; box.replaceChildren();
     if (src) { const cap = document.createElement('figcaption'); cap.textContent = 'When every block is open'; const img = document.createElement('img'); img.src = src; img.alt = ''; box.append(cap, img); } }
-  showInFrame($('p-next-frame'), nextIndex);
+  renderNext();
   setupTimer(s);
+}
+function renderNext() {
+  let nextIndex = current + 1 < slides.length ? current + 1 : null;
+  if (window.PRESENTER_SKIP_HIDDEN) { nextIndex = null; for (let n = current + 1; n < slides.length; n++) if (!isHidden(n)) { nextIndex = n; break; } }   // opt-in: Next shows the slide the arrows go to (hidden ones skipped)
+  $('p-next-title').textContent = nextIndex != null ? (nextIndex + 1) + '. ' + slides[nextIndex].title : 'This is the last slide.';
+  showInFrame($('p-next-frame'), nextIndex);
 }
 
 /* ---- sync ---- */
@@ -248,7 +252,7 @@ if (channel) {
 }
 window.addEventListener('storage', e => {
   if (NOTES_ONLY) return;
-  if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { $('p-hidden').hidden = !isHidden(current); return; }
+  if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { $('p-hidden').hidden = !isHidden(current); if (window.PRESENTER_SKIP_HIDDEN) renderNext(); return; }
   if (e.key !== PRESENTER_KEY || !e.newValue) return;
   try { const data = JSON.parse(e.newValue); setSyncStatus(true); renderSlide(data.index); } catch {}
 });
