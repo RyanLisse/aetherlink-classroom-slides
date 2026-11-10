@@ -222,6 +222,19 @@ function renderExtras(stage, main, s, v) {
       if (T.day) c.prepend(node('span', 'tw-day', T.day));
       if (T.pic) c.prepend(pic(T.pic)); });
   }
+  if (v.temple && grid) {                                       // five pillars as a temple: roof = the idea, per pillar an icon + its questions (body lines), base = the total score; scores show once the base is stepped in
+    const T = v.temple; const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
+    const wrap = node('div', 'temple-wrap'); grid.replaceWith(wrap); grid.classList.add('temple');
+    const roof = node('div', 'temple-roof'); roof.append(node('span', 'temple-roof-label', T.roof || 'Your idea'));
+    cards.forEach((c, i) => { c.classList.add('temple-col'); c.querySelector('.card-icon')?.remove();
+      c.querySelector('.card-head')?.prepend(svg('0 0 24 24', ICO[i % ICO.length], 'temple-ico'));
+      const p = c.querySelector(':scope > p'); if (p) { const ul = node('ul', 'temple-qs'); p.textContent.split('\n').filter(Boolean).forEach((q) => ul.append(node('li', null, q))); p.replaceWith(ul); }
+      if (T.scores?.[i] != null) c.append(node('span', 'temple-score', String(T.scores[i]))); });
+    const base = node('div', 'temple-base');
+    if (T.scores) { const sum = T.scores.reduce((a, b) => a + b, 0); base.append(node('span', 'temple-base-txt', T.base || 'Score every pillar from 1 to 5, then add them up'), node('span', 'temple-total', sum + ' / ' + T.scores.length * 5)); }
+    else base.append(node('span', 'temple-base-txt', T.base || ''));
+    wrap.append(roof, grid, base);
+  }
   if (v.keyLine != null && cards[v.keyLine]) {                 // 8: calm lead + key line that gets stamped
     main.classList.add('has-key'); cards.forEach((c, i) => { if (i !== v.keyLine) c.classList.add('card-lead'); });
     const key = cards[v.keyLine]; key.classList.add('card-key'); const row = node('div', 'key-row'); key.replaceWith(row); row.append(key);
@@ -855,6 +868,7 @@ function renderVisual(stage, body, main, s) {
   else if (v.place === 'left') { body.prepend(fig); body.classList.add('with-bot', 'bot-left'); }
   else if (v.place === 'beside') { body.append(fig); body.classList.add('with-bot', 'bot-beside'); }
   else if (v.place === 'under') { main.append(fig); }
+  else if (v.place === 'bigword') { stage.append(fig); }                // big-word slide: AetherBOT stands next to the one big line
   else if (v.place === 'popout' && popRow) { popRow.prepend(fig); }
   else if (v.place === 'nest' && nest) { nest.row.prepend(fig); }
   else if (v.place === 'key' && ex.row) { ex.row.prepend(fig); }

@@ -1779,3 +1779,40 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .tw-dots{display:flex;align-items:center}.tw-dot{width:.85rem;height:.85rem;border-radius:50%;background:var(--aether-purple);border:2px solid var(--aether-purple-text)}.tw-dot+.tw-dot{margin-left:.9rem;position:relative}.tw-dot+.tw-dot::before{content:'';position:absolute;right:100%;top:50%;width:.9rem;height:2px;background:var(--aether-purple)}
 .tw-sonny{display:flex;align-items:center;gap:.35rem}.tw-sonny img{width:3.6rem;height:3.6rem;object-fit:contain}.tw-sonny b{font-size:.6rem;letter-spacing:.06em;padding:.1rem .4rem;border-radius:999px;background:var(--aether-orange);color:#111}
 @media (max-width:1100px){.cards.tool-wall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Day 6 big-word slide with AetherBOT beside the line ("Let's brainstorm ideas!") */
+body.big-word #stage:has(> .place-bigword){flex-direction:row;align-items:center;justify-content:center;gap:clamp(1.5rem,4vw,4rem)}
+body.big-word #stage>.bot.place-bigword{display:block;order:-1;flex:0 0 auto;height:min(52vh,460px);margin:0}
+body.big-word #stage>.bot.place-bigword .bot-live,body.big-word #stage>.bot.place-bigword img{height:100%;width:auto}
+body.big-word #stage:has(> .place-bigword) .heading{text-align:left;padding-bottom:0}
+body.big-word #stage:has(> .place-bigword) .heading .eyebrow{justify-content:flex-start}
+body.big-word #stage:has(> .place-bigword) .heading h1{font-size:clamp(3rem,7vw,7.5rem);max-width:9ch;margin:.15em 0}
+@media(max-width:800px){body.big-word #stage:has(> .place-bigword){flex-direction:column}body.big-word #stage>.bot.place-bigword{height:30vh}body.big-word #stage:has(> .place-bigword) .heading{text-align:center}}
+
+/* Day 6 five pillars as a temple: roof = your idea, five columns with their questions, base = the total score */
+.temple-wrap{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:1250px;margin:0 auto}
+.temple-roof{position:relative;height:clamp(52px,8vh,84px);margin:0 -1.2%;background:linear-gradient(180deg,color-mix(in srgb,#FF7A1A 30%,var(--surface)),color-mix(in srgb,#FF7A1A 12%,var(--surface)));clip-path:polygon(50% 0,100% 100%,0 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:.45rem}
+.temple-roof-label{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:clamp(.8rem,1.1vw,1rem);color:#fff}
+.cards.temple{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.5rem,1.2vw,1.1rem);margin:0;padding:0 1%;border-top:6px solid color-mix(in srgb,#FF7A1A 55%,transparent)}
+.cards.temple>.card.temple-col{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;margin:0;padding:clamp(.7rem,1.4vh,1.1rem) clamp(.5rem,.9vw,.9rem) clamp(1.6rem,3vh,2.2rem);border-radius:0;border:1px solid var(--border);border-top:none;background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--cyan) 7%,var(--surface)) 0 14px,var(--surface) 14px 22px)}
+.cards.temple>.card.temple-col:nth-child(even){background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--violet) 9%,var(--surface)) 0 14px,var(--surface) 14px 22px)}
+.cards.temple>.card.temple-col::before{content:'';position:absolute;top:0;left:-6px;right:-6px;height:10px;background:color-mix(in srgb,var(--cyan) 45%,var(--surface));border-radius:2px}
+.cards.temple>.card.temple-col:nth-child(even)::before{background:color-mix(in srgb,var(--violet) 55%,var(--surface))}
+.temple-col .card-head{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin-top:.5rem}
+.temple-col .temple-ico{width:clamp(38px,3.6vw,56px);height:clamp(38px,3.6vw,56px);padding:.55rem;border-radius:50%;background:var(--bg,#0b1220);border:2px solid var(--cyan);fill:none;stroke:var(--cyan);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.temple-col:nth-child(even) .temple-ico{border-color:var(--violet);stroke:var(--violet)}
+.temple-col h2{font-size:clamp(1.05rem,1.6vw,1.45rem);margin:0;text-transform:uppercase;letter-spacing:.06em}
+.temple-qs{list-style:none;margin:.3rem 0 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.temple-qs li{font-size:clamp(.85rem,1.15vw,1.08rem);line-height:1.35;color:var(--text,#e8eef7);padding-top:.5rem;border-top:1px dashed color-mix(in srgb,var(--muted,#9fb0c8) 40%,transparent)}
+.temple-qs li:first-child{border-top:none;padding-top:0}
+.temple-score{position:absolute;bottom:-.95rem;left:50%;transform:translateX(-50%) scale(.4);opacity:0;width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:1.15rem;background:#FF7A1A;color:#fff;box-shadow:0 0 0 4px var(--bg,#0b1220);transition:transform .45s cubic-bezier(.3,1.6,.5,1),opacity .3s;transition-delay:calc(var(--i,0) * 90ms);z-index:2}
+.temple-wrap:has(.temple-base.st-shown) .temple-score,.temple-wrap:not(:has(.st-pending)) .temple-score{opacity:1;transform:translateX(-50%) scale(1)}
+.temple-base{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin:0 -1.2%;padding:clamp(1.3rem,2.6vh,1.8rem) 1rem clamp(.6rem,1.2vh,.9rem);background:linear-gradient(180deg,color-mix(in srgb,#FF7A1A 22%,var(--surface)),color-mix(in srgb,#FF7A1A 8%,var(--surface)));border-top:6px solid color-mix(in srgb,#FF7A1A 55%,transparent)}
+.temple-base-txt{font-weight:700;font-size:clamp(.95rem,1.35vw,1.25rem)}
+.temple-total{font-weight:900;font-size:clamp(1.3rem,2.2vw,2rem);color:#FF9A4D;padding:.1rem .8rem;border-radius:999px;border:2px solid #FF9A4D}
+.step-through .temple-col.st-pending,.step-through .temple-base.st-pending{opacity:0;transform:translateY(14px)}
+.step-through .temple-col.st-shown,.step-through .temple-base.st-shown{opacity:1;transform:none;transition:opacity .4s,transform .4s}
+@media(max-width:900px){.cards.temple{grid-template-columns:repeat(2,minmax(0,1fr))}.temple-roof{display:none}}
+.cards.temple,.cards.temple>.card.temple-col{overflow:visible}
+.cards.temple{position:relative;z-index:2}
+.temple-base{position:relative;z-index:1}

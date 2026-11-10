@@ -326,38 +326,63 @@ window.SLIDES = [
 /* ---------------------------------------------------------------------- */
 
 { // Slide 8
-  title: "From many ideas to one team idea",
+  title: "Let's brainstorm ideas!",
   kicker: "DAY 6 · CHOOSING AN IDEA",
-  subtitle: "Start with everyone's ideas. End with one idea the whole team wants.",
+  subtitle: "",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'point', place: 'beside' },
-  cards: [
-    { title: "Bring your own", body: "Everyone brings ideas from their own work: what annoys you, what costs time, what goes wrong." },
-    { title: "Look for overlap", body: "Which problems come back? Where do your interests meet?" },
-    { title: "Combine", body: "Two good ideas can become one stronger idea." },
-    { title: "Choose one", body: "One team, one shared project. Not one project per person." }
-  ],
-  tagline: "Choosing together takes time. That time is part of the work.",
-  keyPoints: ["Ideas from your own work","Look for shared interest","Combining makes ideas stronger","One shared project"],
-  notes: "Teams often arrive with each person still thinking about their own work or their own project. Name that, and ask everyone for one or two ideas first. Then look for overlap and give it time: a team that hasn't agreed on one idea loses more time later. Combining is often the best move: two mid-sized ideas can make one strong idea. The next two slides give the team a way to choose."
+  visual: { bigWord: true, bot: 'think', place: 'bigword', highlight: [{ in: 'title', text: 'ideas!', tone: 'orange' }] },
+  keyPoints: ["One big line, no content","Energy up: now the team starts","Everyone brings ideas from their own work","Next slide: how we choose"],
+  notes: "A moment to switch gears: the recap is over, now the teams start. Leave the slide up and ask everyone to think of one or two ideas from their own work: what annoys you, what costs time, what goes wrong. Don't judge ideas yet: the next slide shows how the team scores them.",
+  teach: {
+    time: '1 min',
+    gist: 'Switch from recap to team work: everyone starts thinking of ideas from their own work.',
+    script: [
+      {do: 'Slide appears: AetherBOT and one big line.', say: "Enough looking back. Now it is your turn. Let's brainstorm ideas!"},
+      {do: 'Wait a moment, let the room think.', say: 'Think of your own work. What annoys you? What costs you time every week? What goes wrong too often?'},
+      {ask: 'Who already has an idea? Just say it in one sentence.', say: '(Take two or three ideas. Do not judge them yet: every idea is welcome at this point.)'},
+      {do: 'Press → to the five pillars.', say: 'Many ideas is good. But you build only one. So how do you choose? With five pillars.'}
+    ],
+    learn: ['Ideas come from your own work.', 'Every idea counts at this point; choosing comes next.'],
+    watch: ['Do not discuss or score ideas here: that is the next slide and the assignment.', 'Someone says "I have no idea": ask what took them too long last week.'],
+    next: 'the five pillars every idea is scored on.'
+  }
 },
 
 { // Slide 9
   title: "Five pillars for choosing an idea",
   kicker: "DAY 6 · CHOOSING AN IDEA",
-  subtitle: "Ask every idea the same five questions.",
+  subtitle: "Every idea gets the same questions. The idea with the highest total score wins.",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
+  visual: { stepThrough: '.temple > .card, .temple-base, .slide-main > .tagline', temple: { roof: 'Your idea', scores: [4, 5, 3, 4, 4], base: 'Score each pillar from 1 to 5 and add them up' } },
   cards: [
-    { title: "Interest", body: "Do we want to build this? Will it keep us going for two days?" },
-    { title: "Gain", body: "What do we gain, and how big is it? Time, quality, fewer mistakes?" },
-    { title: "Problem", body: "How big and how real is the problem? Who has it, and how often?" },
-    { title: "Team", body: "How much does it help our team? Do we know what other teams are building?" },
-    { title: "Security", body: "How hard is it to make this safe? Which data, which environment, who has to approve?" }
+    { title: "Interest", body: "Do we want to build this?\nWill it keep us going for two days?" },
+    { title: "Gain", body: "What do we gain: time, quality, fewer mistakes?\nHow big is that gain?" },
+    { title: "Problem", body: "How real is the problem?\nWho has it, and how often?" },
+    { title: "Team", body: "How much does it help our team?\nIs another team already building it?" },
+    { title: "Security", body: "How easy is it to make safe?\nWhich data, and who has to approve?" }
   ],
-  tagline: "A good idea scores well on all five, not only on one.",
-  keyPoints: ["Five pillars, five questions","Interest and gain go together","Problem: real and frequent?","Team: check other teams' ideas","Security: how hard to make safe?"],
-  notes: "Open the pillars one by one and ask the room each question. Interest and gain go together: an idea the team cares about but that gains nothing is a hobby, and a big gain nobody wants to build won't get finished in two days. Problem is about how real it is: name who has it and how often. Team includes looking outside: ask whether they know what the other teams are building, so two teams don't build the same thing. Security is not a veto but a cost: the harder it is to make safe, for example because it touches production, the more of the two days it will take."
+  tagline: "You build the idea with the highest total, not the one that wins on just one pillar.",
+  keyPoints: ["Five pillars, two questions each","Score 1–5 per pillar","Security: 5 = easy to make safe","Add up: highest total out of 25 wins","Strong on all five beats great on one"],
+  notes: "Press → for each pillar and ask the room its questions. Interest and gain go together: an idea the team cares about but that gains nothing is a hobby, and a big gain nobody wants to build won't get finished in two days. Problem is about how real it is: name who has it and how often. Team includes looking outside: do they know what the other teams are building? Security is about effort: the easier it is to make safe, the higher the score, because an idea that touches production data will eat most of the two days. Then press → for the base: every idea gets a score from 1 to 5 on each pillar, the scores are added up, and the idea with the highest total out of 25 is the one the team builds. The example (4 + 5 + 3 + 4 + 4 = 20) is made up; the team scores its own ideas in the next assignment.",
+  teach: {
+    time: '5 min',
+    gist: 'Five pillars, each with its own questions. Every idea is scored 1 to 5 per pillar; the highest total wins.',
+    script: [
+      {do: 'Slide appears with only the roof: Your idea.', say: 'This is your idea. It needs five pillars to stand on. If one is weak, the whole thing wobbles.'},
+      {do: 'Press → : Interest.', say: 'Interest. Do we want to build this? Will it keep us going for two whole days?'},
+      {do: 'Press → : Gain.', say: 'Gain. What do we win: time, quality, fewer mistakes? And how much?'},
+      {do: 'Press → : Problem.', say: 'Problem. Is it a real problem? Who has it, and how often?'},
+      {do: 'Press → : Team.', say: 'Team. Does it help our own team? And is another team maybe building the same thing?'},
+      {do: 'Press → : Security.', say: 'Security. How easy is it to make this safe? Which data does it touch, and who has to say yes?'},
+      {ask: 'For security, does a 5 mean easy or hard?', say: '(Answer: easy to make safe. All five pillars count the same way: higher is better.)'},
+      {do: 'Press → : the base with the scores.', say: 'We score every idea from 1 to 5 on each pillar and add them up. This made-up idea gets 20 out of 25.'},
+      {do: 'Press → : the line at the bottom.', say: 'You build the idea with the highest total, not the one that wins on just one pillar.'}
+    ],
+    learn: ['Every idea gets the same five pillars and questions.', 'Score 1 to 5 per pillar; for security 5 means easy to make safe.', 'Add the scores up: the highest total out of 25 is the idea you build.'],
+    watch: ['Do not let teams score yet: that is the assignment on the next slide.', 'Someone asks what to do with a tie: look at the top two together, maybe they can become one idea.'],
+    terms: [['Pillar', 'one of the five things an idea is scored on'], ['Total', 'the five scores added up, at most 25']],
+    next: 'the assignment: score your own ideas.'
+  }
 },
 
 { // Slide 10
@@ -367,21 +392,21 @@ window.SLIDES = [
   type: "practice",
   layout: "exercise",
   cards: [
-    { title: "Your score table", body: "one row per idea\none column per pillar: interest · gain · problem · team · security\n1 = low, 5 = high\nsecurity: 5 = hard to make safe\nlast column: votes" }
+    { title: "Your score table", body: "one row per idea\none column per pillar: interest · gain · problem · team · security\n1 = low, 5 = high\nsecurity: 5 = easy to make safe\nlast column: total (out of 25)" }
   ],
   stepsHeading: "Steps:",
   steps: [
     "Everyone names one or two ideas from their own work. Write them all down.",
     "Put ideas that look alike together.",
     "As a team, score every idea from 1 to 5 on the five pillars.",
-    "Vote. Look at the top two: can they become one stronger idea?",
-    "Choose one idea and write down in one sentence why."
+    "Add up the scores. Look at the top two: can they become one stronger idea?",
+    "Choose the idea with the highest total and write down in one sentence why."
   ],
-  expected: "One chosen idea, with its scores and one sentence on why the team chose it.",
+  expected: "One chosen idea with the highest total, its scores, and one sentence on why the team chose it.",
   check: "Can every team member explain why this idea won?",
-  prompt: "Here are our ideas: [list them]. For each idea, ask us one question per pillar: interest, gain, problem, team and security. Help us score each pillar from 1 to 5. Then show all scores in one table and tell us which ideas could be combined. Don't choose for us.",
-  keyPoints: ["Ideas from your own work","Score 1–5 on five pillars","Security: high = hard","Vote, then combine","One idea, one reason"],
-  notes: "Type the minutes on the timer. Draw the table on the flipchart or whiteboard: ideas as rows, the five pillars as columns, votes last. Teams often start with everyone defending their own idea; the scores make the discussion about the idea, not the person. Say clearly that a high security score means hard, so it counts against the idea. After the vote, push on combining: two mid-scoring ideas often make one strong idea. The Example prompt lets Claude ask the pillar questions, but the team scores and chooses."
+  prompt: "Here are our ideas: [list them]. For each idea, ask us one question per pillar: interest, gain, problem, team and security. Help us score each pillar from 1 to 5 (for security, 5 means easy to make safe). Then show all scores and totals in one table and tell us which ideas could be combined. Don't choose for us.",
+  keyPoints: ["Ideas from your own work","Score 1–5 on five pillars","Security: 5 = easy to make safe","Add up: highest total wins","Combine the top two?","One idea, one reason"],
+  notes: "Type the minutes on the timer. Draw the table on the flipchart or whiteboard: ideas as rows, the five pillars as columns, the total last. Teams often start with everyone defending their own idea; the scores make the discussion about the idea, not the person. Say clearly that all pillars count the same way: higher is better, so for security a 5 means easy to make safe. The highest total out of 25 wins. Before they decide, push on combining: two ideas close to the top often make one stronger idea. The Example prompt lets Claude ask the pillar questions, but the team scores and chooses."
 },
 
 /* ---------------------------------------------------------------------- */
