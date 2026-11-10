@@ -441,6 +441,71 @@ function renderExtras(stage, main, s, v) {
     wrap.append(row); if (F.note) wrap.append(node('p', 'ff-foot', F.note)); grid.before(wrap);
     if (F.cardFiles) cards.forEach((c, i) => { const f = F.cardFiles[i]; if (!f) return; c.classList.add('ff-card', 'ff-c' + i); c.querySelector('.card-icon')?.remove(); c.querySelector('.card-head')?.after(node('code', 'ff-card-file', f[0])); if (f[1]) c.append(node('span', 'ff-card-who', f[1])); });
   }
+  if (v.incidentTour && cards.length >= 6) {                     // Jessy Day 5 opt-in: follow one incident through the project. The six stops are the cards; → opens them one by one in a panel below; stop 4 (his brain) has an AI model / offline switch
+    const T = v.incidentTour; grid.classList.add('it-path');
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('it-stop', 'it-s' + i); c.prepend(node('span', 'it-ico', (T.icons || [])[i] || ''));
+      const f = (T.files || [])[i]; if (f) { const fs = node('div', 'it-files'); [].concat(f).forEach((x) => fs.append(node('code', null, x))); c.append(fs); }
+      c.tabIndex = 0; c.setAttribute('role', 'button'); if (i < cards.length - 1) c.after(node('div', 'it-arrow', '→')); });
+    const panel = node('div', 'it-panel'); grid.after(panel);
+    const foot = node('div', 'it-foot'); if (T.foot) foot.append(node('p', 'it-foot-main', T.foot)); if (T.footNote) foot.append(node('p', 'it-foot-note', T.footNote)); panel.after(foot);
+    let k = 0, off = false; const LAST = 7;                        // k: 0 nothing open · 1 alert · 2 start · 3 agent · 4 brain (AI model) · 5 brain (offline) · 6 contract · 7 you + the line at the bottom
+    const stopOf = (s) => (s <= 0 ? -1 : s <= 4 ? s - 1 : s - 2);
+    const block = (B) => {
+      if (B.split) { const w = node('div', 'it-split'); B.split.forEach((b) => w.append(block(b))); return w; }
+      if (B.stack) { const w = node('div', 'it-stack'); B.stack.forEach((b) => w.append(block(b))); return w; }
+      if (B.row) { const w = node('div', 'it-row'); B.row.forEach(([ico, t, file, txt]) => { const m = node('div', 'it-mini'); const h = node('div', 'it-mini-h'); h.append(node('span', 'it-mini-i', ico), node('b', null, t)); m.append(h); if (file) m.append(node('code', 'it-mini-f', file)); if (txt) m.append(node('span', 'it-mini-t', txt)); w.append(m); }); return w; }
+      if (B.code !== undefined) { const w = node('div', 'it-code' + (B.term ? ' term' : '') + (B.tone ? ' ' + B.tone : '')); if (B.label) w.append(node('span', 'it-code-l', B.label)); w.append(node('pre', null, B.code)); return w; }
+      if (B.steps) { const ol = node('ol', 'it-steps'); B.steps.forEach((s) => { const li = node('li'); [].concat(s).forEach((x, j) => li.append(j ? node('code', null, x) : node('span', null, x))); ol.append(li); }); return ol; }
+      if (B.checks) { const w = node('div', 'it-checks'); B.checks.forEach(([mark, t, txt, st]) => { const r = node('div', 'it-check ' + (st || 'ok')); r.append(node('span', 'it-check-m', mark), node('b', null, t), node('span', null, txt || '')); w.append(r); }); return w; }
+      if (B.chips) { const w = node('div', 'it-chips'); B.chips.forEach(([ico, t]) => { const ch = node('span', 'it-chip'); ch.append(node('span', null, ico), node('span', null, t)); w.append(ch); }); return w; }
+      if (B.note) return node('p', 'it-note' + (B.tone ? ' ' + B.tone : ''), B.note);
+      return node('span');
+    };
+    const brain = (B) => {
+      const w = node('div', 'it-brain'); const sw = node('div', 'it-switch'); sw.setAttribute('role', 'group');
+      [['model', B.model.label], ['offline', B.offline.label]].forEach(([key, label]) => { const b = node('button', 'it-sw' + ((key === 'offline') === off ? ' on' : ''), label); b.type = 'button'; b.addEventListener('click', (e) => { e.stopPropagation(); off = key === 'offline'; if (stopOf(k) === 3) k = off ? 5 : 4; paint(); }); sw.append(b); });
+      w.append(sw); const P = off ? B.offline : B.model; const body = node('div', 'it-brain-b ' + (off ? 'offline' : 'model'));
+      if (P.lead) body.append(node('p', 'it-lead', P.lead));
+      if (P.turns) { const list = node('div', 'it-turns'); P.turns.forEach(([think, tool, got], j) => { const r = node('div', 'it-turn'); r.style.setProperty('--j', j); r.append(node('span', 'it-think', think)); if (tool) { r.append(node('span', 'it-to', '→')); r.append(node('code', 'it-tool', tool)); } if (got) { r.append(node('span', 'it-to', '→')); r.append(node('span', 'it-got', got)); } list.append(r); }); body.append(list); }
+      if (P.tools) { const list = node('div', 'it-fixed'); P.tools.forEach((t, j) => { if (j) list.append(node('span', 'it-to', '→')); list.append(node('code', 'it-tool', t)); }); body.append(list); }
+      if (P.ifs) { const ul = node('div', 'it-ifs'); P.ifs.forEach(([cond, then]) => { const r = node('div', 'it-if'); r.append(node('span', null, cond), node('span', 'it-to', '→'), node('b', null, then)); ul.append(r); }); body.append(ul); }
+      if (P.tags) { const tg = node('div', 'it-tags'); P.tags.forEach((t) => tg.append(node('span', 'it-tag', t))); body.append(tg); }
+      w.append(body); if (B.same) w.append(node('p', 'it-same', B.same)); return w;
+    };
+    const paint = () => {
+      const cur = stopOf(k);
+      cards.forEach((c, i) => { c.classList.toggle('on', i === cur); c.classList.toggle('done', i < cur); });
+      grid.querySelectorAll('.it-arrow').forEach((a, i) => a.classList.toggle('lit', i < cur));
+      panel.replaceChildren(); panel.classList.toggle('empty', cur < 0);
+      if (cur < 0) panel.append(node('p', 'it-hint', T.hint || ''));
+      else { const P = T.stops[cur]; const h = node('div', 'it-ph'); h.append(node('span', 'it-num', String(cur + 1)), node('strong', null, P.title)); panel.append(h);
+        if (P.lead) panel.append(node('p', 'it-lead', P.lead)); if (P.brain) panel.append(brain(P.brain)); (P.blocks || []).forEach((b) => panel.append(block(b))); }
+      foot.classList.toggle('shown', k >= LAST);
+    };
+    const next = () => { if (k >= LAST) return false; if (k === 4 && !off) { off = true; k = 5; } else if (k === 4) k = 6; else k++; paint(); return true; };
+    const back = () => { if (k <= 0) return false; if (k === 5) { k = 4; off = false; } else if (k === 6 && !off) k = 4; else k--; paint(); return true; };
+    cards.forEach((c, i) => { const go = () => { k = i <= 2 ? i + 1 : i === 3 ? (off ? 5 : 4) : i + 2; paint(); };
+      c.addEventListener('click', go); c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
+    paint(); window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.proofQs && cards.length >= 3) {                          // Jessy Day 5 opt-in: "how do we know the contract works?" Three questions as cards, opened one by one with →; each card gets its own small picture
+    const Q = v.proofQs; grid.classList.add('pq-grid'); let k = 0;
+    cards.forEach((c, i) => { const P = Q[i] || {}; c.querySelector('.card-icon')?.remove(); c.classList.add('pq-card', 'pq-' + i); c.querySelector('.card-head')?.prepend(node('span', 'pq-num', String(i + 1)));
+      if (P.answer) c.querySelector('.card-head')?.after(node('p', 'pq-answer', P.answer));
+      if (P.rules) { const ul = node('div', 'pq-rules'); P.rules.forEach(([r, why]) => { const li = node('div', 'pq-rule'); li.append(node('b', null, r), node('span', null, why)); ul.append(li); }); c.append(ul); }
+      if (P.tests) { if (P.testsHead) c.append(node('span', 'pq-tests-h', P.testsHead)); const sb = node('div', 'pq-tests'); P.tests.forEach(([lbl, today]) => { const t = node('div', 'pq-test ' + (today ? 'ok' : 'bad')); t.append(node('span', 'pq-dot', today ? '✓' : '✗'), node('span', null, lbl)); sb.append(t); }); c.append(sb); if (P.score) { const s = node('div', 'pq-score'); P.score.forEach((x, j) => { if (j) s.append(node('span', 'pq-to', '→')); s.append(node('b', null, x)); }); c.append(s); } }
+      if (P.terms) P.terms.forEach(([lbl, txt, tone]) => { const t = node('div', 'pq-term ' + (tone || '')); t.append(node('span', 'pq-term-l', lbl), node('pre', null, txt)); c.append(t); });
+      if (P.extra) c.append(node('p', 'pq-extra', P.extra));
+      if (P.where) c.append(node('code', 'pq-where', P.where));
+      c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
+    const paint = () => cards.forEach((c, i) => c.classList.toggle('shown', i < k));
+    paint();
+    const next = () => { if (k < cards.length) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
   if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
     const ls = node('div', 'ls-row');
     v.layerStrip.forEach((L, i) => { if (i) ls.append(node('div', 'ls-arrow', '→')); const c = node('div', 'ls-card' + (L.state ? ' ' + L.state : '')); c.style.setProperty('--i', i);

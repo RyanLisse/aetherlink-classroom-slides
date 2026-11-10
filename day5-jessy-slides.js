@@ -776,51 +776,121 @@ const day5Slides = [
       learn: ['A diagnosis you can trust: always the same format, with evidence, checked before it gets to you.', 'Only if all five rules are met does Sonny ask you.', 'The five rules are not in the code yet: Assignment 3 builds them.'],
       watch: ['Clicked something by mistake? ← steps back one click at a time. A rule closes when you click it again; the switch and Approve / Reject toggle back. You can also click the blocks at the top to jump: He looks, He writes a diagnosis, He checks it. “He asks you” only opens when all five rules are met; otherwise the gate shakes.', 'Do not explain how to build the rules: the assignment does that.', 'Someone asks why today it says PASS: the code already checks the format (every field there, at least one evidence line), but not the five rules.', 'Someone asks where the instructions are: src/prompts.ts (with a real AI model). Offline, src/runtime.ts writes his diagnosis by script.', 'Approve / Reject here only show the idea. The real approval comes in Assignment 6.', '“Contract” confuses someone: the rules something must meet, checked in code.'],
       terms: [['Contract', 'the rules every diagnosis must meet, checked in plain code before the operator sees it'], ['Rule', 'one requirement every diagnosis must meet']],
-      next: 'where the contract sits, and how you know it works.'
+      next: 'follow one incident through the project.'
     }
   }),
   baseSlide({
-    title: 'Where the contract sits, and how you know it works', kicker: 'Day 5 · THE CONTRACT', subtitle: 'This is the path every incident takes through the project. The contract sits between Sonny and you. The rules are written down, the tests check them, and in Assignment 3 you build them into the contract.',
-    visual: {fileFlow: {
-      nodes: [
-        {label: 'Incident', file: 'fixtures/incidents/', note: 'or live from the shop'},
-        {label: 'Start', file: ['src/cli.ts', 'console/server.ts'], note: 'terminal or browser'},
-        {label: 'Sonny investigates', file: 'src/agent.ts', note: 'investigate()'},
-        {label: 'His brain', file: ['src/prompts.ts', 'src/runtime.ts'], note: 'AI model with instructions · offline: a script'},
-        {label: 'The contract', file: 'src/contract.ts', note: 'checks the diagnosis · the 5 rules: still TODO', hl: true}
+    title: 'Follow one incident through the project', kicker: 'Day 5 · HOW IT WORKS', subtitle: 'What happens, file by file, when Sonny gets an incident. And where the AI comes in.',
+    visual: {incidentTour: {
+      icons: ['🚨', '▶️', '🔎', '🧠', '📋', '🧑'],
+      files: ['fixtures/incidents/', 'src/cli.ts', 'src/agent.ts', ['src/prompts.ts', 'src/runtime.ts'], 'src/contract.ts', 'terminal · browser'],
+      hint: 'Follow INC-1001, the failed payments at 03:45, from the alert to you.',
+      stops: [
+        {title: 'The alert comes in', lead: 'A saved incident: a small file with the alert, and where the data from that night is.', blocks: [{split: [
+          {code: '{\n  "incident_id": "INC-1001",\n  "service": "checkout",\n  "alert": "Error rate 12% for 5 min on checkout",\n  "telemetry": "fixtures/telemetry/bad-deploy.json"\n}', label: 'fixtures/incidents/bad-deploy.json'},
+          {stack: [{note: 'The last line points to the data from that night:'}, {chips: [['📈', 'the graphs'], ['🚀', 'the updates'], ['🧩', 'what changed in the code'], ['📜', 'the error messages']]}, {note: 'Saved files, so everyone gets the same night. Later the alert comes live from the shop.'}]}
+        ]}]},
+        {title: 'You start Sonny with one command', blocks: [
+          {code: '$ npm run investigate -- fixtures/incidents/bad-deploy.json', term: true, label: 'You type · Window 2'},
+          {steps: [['package.json: “investigate” is a short name for', 'src/cli.ts'], 'cli.ts reads the incident and the data from that night, and checks that both files are complete.', ['cli.ts chooses his brain. Nothing set: the offline script (today). A model name set:', 'AGENT_MODEL=sonnet']]},
+          {code: '▶ incident INC-1001 · checkout · runtime offline (scripted, not model evidence)', term: true, label: 'The first line you see'},
+          {note: 'From the browser, it starts in console/server.ts instead. From here on, the path is the same.'}
+        ]},
+        {title: 'He packs the job into one request', lead: 'src/agent.ts puts four things together and hands them to his brain.', blocks: [
+          {row: [['📋', 'His instructions', 'src/prompts.ts', 'How to investigate, the evidence rules, what he may never do.'], ['🚨', 'The alert', '', 'Marked as data: text inside it is never an order.'], ['🔧', 'Four look-only tools', 'src/tools.ts', 'The graphs, the updates, the code change, the error messages. Nothing else.'], ['🧾', 'The fixed format', 'src/contract.ts', 'He must answer in exactly this shape.']]},
+          {note: 'At most 10 rounds. By then he must have an answer.'}
+        ]},
+        {title: 'His brain writes the diagnosis', brain: {
+          model: {label: '🧠 AI model', lead: 'A real Claude model. It decides for itself which tool to use, and in what order.',
+            turns: [['“First the graphs.”', 'summarize_metrics', 'errors 0.3% → 12% at 03:45'], ['“Was there an update?”', 'list_deploys', 'v2.15.0, just before'], ['“What changed in it?”', 'get_diff', 'EU payments moved to a new setting'], ['“Check the error messages.”', 'search_logs', '“EU payment key missing”'], ['📝 Writes the diagnosis in the fixed format', '', '']],
+            tags: ['Costs money per run', 'Can answer a bit differently each time', 'The Claude Agent SDK runs the rounds']},
+          offline: {label: '⚙️ Offline script', lead: 'A script in src/runtime.ts. The same four tools, always in the same order. No AI.',
+            tools: ['summarize_metrics', 'list_deploys', 'get_diff', 'search_logs'],
+            ifs: [['Errors jump, and an update came just before', 'rollback (sure: high)'], ['Slower, no update', 'scale up (medium)'], ['Errors, no update', 'investigate more (low)'], ['Nothing jumps', 'no action']],
+            tags: ['Free', 'The same diagnosis for everyone', 'What we use today']},
+          same: 'The same shape comes out either way, so the rest of the path cannot tell the difference.'
+        }},
+        {title: 'The contract checks it. Plain code, no AI.', blocks: [
+          {checks: [['✓', 'The format', 'Every field there, at least one evidence line, only a draft.', 'ok'], ['? ? ? ? ?', 'The five rules', 'Still empty in src/contract.ts. You build them in Assignment 3.', 'todo'], ['✓', 'Did he really look?', 'Every evidence line must come from a tool he really called. Made-up sources are caught.', 'ok']]},
+          {note: 'One check fails: FAIL contract. You never get that diagnosis.', tone: 'warn'}
+        ]},
+        {title: 'You decide', blocks: [
+          {split: [
+            {code: '── diagnosis ──\nWhat’s happening: failed payments 0.3% → 12% …\nRoot cause (high): …\nProposed fix: rollback → deploy owner\n\nPASS contract · OPEN: a human decides.\nNothing was rolled back, scaled or paged.', label: 'PASS · you see the diagnosis', tone: 'pass', term: true},
+            {code: 'FAIL contract\n  - customer impact is missing\n\n(you see the broken rule, not the diagnosis)', label: 'FAIL · you see the broken rule', tone: 'fail', term: true}
+          ]},
+          {note: 'PASS also writes an approval request. It waits until a person signs it.'}
+        ]}
       ],
-      end: {pass: 'you see the diagnosis', fail: 'you see the broken rule, not the diagnosis'},
-      note: 'Claude Code is not in this path. Claude Code is the builder: it changes these files. Sonny is what runs.',
-      cardFiles: [['docs/spec.md', 'the team'], ['test/workshop/contract.test.ts', 'the team'], ['src/contract.ts', 'you · Assignment 3']]
+      foot: 'The AI is asked to follow the rules (his instructions). The code checks them (the contract).',
+      footNote: 'Claude Code is not in this path. Claude Code is the builder: it changes these files. Sonny is what runs.'
     }},
     cards: [
-      {title: 'The rules, in words', body: 'What a good diagnosis contains. The agreement.'},
-      {title: 'The tests', body: 'Give the contract a made-up diagnosis with one thing wrong, and check it says “refused”.'},
-      {title: 'The rules, as code', body: 'The contract itself. Today the five rules are missing, so everything passes.'}
+      {title: 'The alert', body: 'a saved incident'},
+      {title: 'Start', body: 'one command'},
+      {title: 'Sonny investigates', body: 'packs the job'},
+      {title: 'His brain', body: 'AI model or script'},
+      {title: 'The contract', body: 'checks it'},
+      {title: 'You', body: 'PASS or FAIL'}
     ],
-    tagline: 'Example test: take away customer impact → the contract must say “refused”. Today it says “ok”: red. After Assignment 3: “refused”: green.',
-    keyPoints: ['Every incident: start → Sonny investigates → his brain writes a diagnosis → the contract checks it → you.', 'The rules in words (docs/spec.md) and the tests are written by the team. The rules as code (src/contract.ts) are yours in Assignment 3.', 'A test gives the contract a made-up diagnosis with one thing wrong and checks it is refused.'],
-    notes: 'Time: 11:29 · 3 min. No SDLC tracker on this slide: running the tests is part of building (they are the finish line), not a separate phase. The path (real code): src/cli.ts (npm run investigate) or console/server.ts → src/chat.ts → investigate() in src/agent.ts → the brain: with a real model the Claude Agent SDK with systemPrompt ONCALL_SYSTEM from src/prompts.ts, outputFormat VERDICT_SCHEMA and only the read-only tools from src/tools.ts; offline (today) offlineQuery in src/runtime.ts → the JSON diagnosis → validateVerdict in src/router.ts → parseVerdict in src/contract.ts (the contract) → checkTrace (every cited evidence source must be a tool he really called) → routeVerdict attaches the owner → the terminal prints the diagnosis and “PASS contract”, or “FAIL contract” with the reasons. Words: intent.md = the goal (no rules); docs/spec.md = the rules in words (the field table: customer_impact, rollback needs a deploys line, high refused while data_gaps; plus an empty “Rules worth writing down” that Assignment 3 fills; the two-sources and low-confidence rules are only in the TODO(A3) comment); src/contract.ts = the rules as code. Tests: test/workshop/contract.test.ts imports parseVerdict directly (Sonny does not run). It builds one complete diagnosis that must pass, then six variants that each break one rule (no customer_impact, rollback without deploys, scale with one source, low confidence with rollback, no evidence, high confidence with data_gaps) and must be refused. At the start: pass 1 / fail 6. Written first on purpose: the tests are the finish line. In Assignment 3 src/runtime.ts must change too: once the customer-impact rule exists, Sonny’s own offline diagnosis would otherwise get FAIL contract.',
+    keyPoints: ['Alert file → one command → Sonny packs the job → his brain writes the diagnosis → the contract checks it → you.', 'His brain is a real AI model or, today, an offline script. The same shape comes out either way.', 'The AI is asked to follow the rules; the code checks them.'],
+    notes: 'Time: 11:29 · 5 min. No SDLC tracker on this slide. Clicks (→): 1 the alert · 2 start · 3 Sonny investigates · 4 his brain, AI model · 5 the switch flips to the offline script · 6 the contract · 7 you, plus the line at the bottom. Click a stop on top to jump there; click the switch to flip between AI model and offline script; ← steps back. The real path: npm run investigate = tsx src/cli.ts (package.json). cli.ts reads the incident file (incident + a telemetry path), loads fixtures/telemetry/bad-deploy.json, checks both, then resolveRuntime in src/runtime.ts: AGENT_MODEL unset → offline (offlineQuery), AGENT_MODEL=<model> → the Claude Agent SDK. Then investigate() in src/agent.ts: one query with systemPrompt ONCALL_SYSTEM (src/prompts.ts, which also pulls in the runbook skills/triage/SKILL.md), the alert fenced as data plus matching lessons, the four read-only tools from src/tools.ts (permissionMode dontAsk: everything else is refused), outputFormat VERDICT_SCHEMA, maxTurns 10. Offline, offlineQuery fakes the same events: summarize_metrics → list_deploys → get_diff → search_logs, then offlineVerdict (fixed if-then: breakpoint + deploy ≤15 min before → rollback high; slower, no deploy → scale medium; errors, no deploy → investigate-more low; no breakpoint → no-action). Back in agent.ts: parseJson → validateVerdict (src/router.ts) → parseVerdict (src/contract.ts: format today, five rules TODO(A3)) → same incident id → checkTrace (cited sources must be tools he called; metrics and deploys must be called) → routeVerdict adds the owner. cli.ts prints the trace, the diagnosis and “PASS contract · OPEN: a human decides”, or “FAIL contract” with the reasons; without --dry-run it also writes a pending approval in approvals/. The browser path: console/server.ts → src/chat.ts (routes the message by plain rules: investigate, a question, or a refused “roll back”) → the same investigate(). The FAIL example “customer impact is missing” is what you would see after Assignment 3 if Sonny did not write it; the exact wording comes from the rule they build.',
     teach: {
-      time: '3 min',
-      gist: 'Where the contract sits: between Sonny and you, on the path every incident takes. The rules in words and the tests are already written by the team; in Assignment 3 you build the rules into the contract until the tests are green.',
+      time: '5 min',
+      gist: 'Follow one incident from the alert to you, file by file. The key moment is his brain: a real AI model or, today, an offline script. The same shape comes out, and the contract checks it in plain code.',
       script: [
-        {shot: 'assets/day5-jessy-teach/s20-1.webp', do: 'Slide appears. Point at the path at the top, left to right.', say: ['This is the path every incident takes through the project.', 'An incident comes in. In the terminal or the browser, Sonny starts investigating.', 'His brain writes the diagnosis: with a real AI model, following his instructions. Today offline: a script, so everyone gets the same one.', 'Then the contract checks it. Rules met: you see the diagnosis. A rule broken: you see which rule, not the diagnosis.']},
-        {shot: 'assets/day5-jessy-teach/s20-2.webp', do: 'Point at the orange block.', say: ['That is the contract. Today the five rules are missing in there, so everything passes. In Assignment 3 you build them.']},
-        {shot: 'assets/day5-jessy-teach/s20-2.webp', do: 'Point at the line under the path.', say: ['Where is Claude Code? Not in this path. Claude Code is the builder: it changes these files. Sonny is what runs at 03:45.']},
-        {shot: 'assets/day5-jessy-teach/s20-4.webp', do: 'Point at the three cards, left to right.', say: ['Three files, one agreement.', 'spec.md: the rules in words, what a good diagnosis contains. Written by the team.', 'The tests: also by the team. They give the contract a made-up diagnosis with one thing wrong, and check that it says “refused”.', 'contract.ts: the same rules as code. That is yours.']},
-        {ask: 'Why would the team write the tests before the code?', say: ['(Answer: so you know exactly when you are done. The tests are the finish line: red now, green when it works.)']},
-        {shot: 'assets/day5-jessy-teach/s20-5.webp', do: 'Point at the example at the bottom.', say: ['One example: take away customer impact. The contract must say “refused”.', 'Today it says “ok”: red. After Assignment 3: “refused”: green.']},
-        {do: 'Bridge to the assignment.', say: ['One more thing to watch in Assignment 3: Sonny’s own diagnosis has no customer impact yet. Once the rule exists, the contract would stop him too. So Claude Code also teaches him to write it.', 'The contract protects you from Sonny as well.']}
+        {shot: 'assets/day5-jessy-teach/t20-1.webp', do: 'Slide appears.', say: ['Before you build the contract, let’s see where it sits. We follow one incident, INC-1001, from the alert to you.']},
+        {shot: 'assets/day5-jessy-teach/t20-2.webp', do: 'Click: the alert.', say: ['It starts as a small file: the alert, and where the data from that night is.', 'The data is saved, so everyone gets the same night. Later the alert comes live from the shop.']},
+        {shot: 'assets/day5-jessy-teach/t20-3.webp', do: 'Click: start.', say: ['You type one command. “investigate” is a short name for cli.ts.', 'cli.ts reads the incident, checks it, and makes one important choice: which brain Sonny gets.', 'That is the line you saw in Assignment 1: “runtime offline”.']},
+        {shot: 'assets/day5-jessy-teach/t20-4.webp', do: 'Click: Sonny investigates.', say: ['agent.ts packs his job into one request: his instructions, the alert, four tools that can only look, and the fixed format.', 'He gets nothing else. He cannot change anything, because he has no tool for it.']},
+        {shot: 'assets/day5-jessy-teach/t20-5.webp', do: 'Click: his brain. The AI model side is on.', say: ['With a real AI model, the model decides for itself: first the graphs, then the updates, then the code change, then the error messages. Then it writes the diagnosis.', 'That costs money, and the answer can be a bit different each time.']},
+        {shot: 'assets/day5-jessy-teach/t20-6.webp', do: 'Click: the switch flips to the offline script.', say: ['Today we use a script instead. Same four tools, always the same order, and a few if-then rules. No AI.', 'Free, and everyone gets the same diagnosis.', 'The same shape comes out either way. The rest of the path cannot tell the difference.']},
+        {ask: 'If a script can write it, why have an AI model at all?', say: ['(Answer: the script only knows four fixed patterns. A real incident is messier: the model can follow the evidence where it leads.)']},
+        {shot: 'assets/day5-jessy-teach/t20-7.webp', do: 'Click: the contract.', say: ['Then the contract checks it. Plain code, no AI.', 'The format: already checked. The five rules: still empty. And one more check: every evidence line must come from a tool he really called.', 'One check fails: you never get that diagnosis.']},
+        {shot: 'assets/day5-jessy-teach/t20-8.webp', do: 'Click: you. The line at the bottom appears.', say: ['PASS: you see the diagnosis and decide. FAIL: you see which rule is broken.', 'Read the bottom line: the AI is asked to follow the rules, the code checks them. An AI sometimes skips an instruction. Code does not.']},
+        {ask: 'Where is Claude Code in this path?', say: ['(Answer: nowhere. Claude Code is the builder: it changes these files. Sonny is what runs.)']}
       ],
-      learn: ['The contract sits between Sonny and you: every diagnosis goes through it.', 'Rules in words (spec.md) and tests: the team. Rules as code (contract.ts): you.', 'A test gives the contract a made-up diagnosis with one thing wrong and checks it is refused.'],
-      watch: ['Someone mixes up intent.md and the rules: intent.md is the goal, in words. The rules are in spec.md (words) and contract.ts (code).', 'Someone asks if the tests run Sonny: no. They give the contract made-up diagnoses directly. Assignment 3B then checks the whole thing with Sonny running.', 'Someone asks why spec.md is half empty: two rules are only in the code comment so far, and the “Rules worth writing down” part is filled in during Assignment 3.', 'Do not walk through every file in depth: the path is enough.'],
-      terms: [['Contract', 'the rules as code (src/contract.ts); every diagnosis goes through it before you see it'], ['spec.md', 'the rules in words: what a good diagnosis contains'], ['Test', 'a small program that gives the contract a made-up diagnosis and checks the answer']],
+      learn: ['An incident goes: alert file → cli.ts → agent.ts → his brain → the contract → you.', 'His brain is a real AI model or an offline script; the same shape comes out.', 'The AI is asked to follow the rules; the contract checks them in plain code.'],
+      watch: ['Clicked too far? ← steps back. Click a stop on top to jump there; click the switch to flip AI model / offline.', 'Do not go into router.ts, chat.ts or lessons: the six stops are enough. Details are in the notes.', 'Someone asks how to switch to a real model: AGENT_MODEL=sonnet before the command. It costs money and needs a login; today we stay offline.', 'Someone asks if the script is cheating: no, it is a stand-in so everyone gets the same diagnosis. The contract does not care who wrote it.'],
+      terms: [['Offline script', 'a stand-in for the AI model: same tools, fixed order, fixed rules'], ['AI model', 'the real Claude model; it chooses its own steps'], ['Tool', 'one way for Sonny to look: graphs, updates, code change, error messages']],
+      next: 'how do we know the contract works?'
+    }
+  }),
+  baseSlide({
+    title: 'How do we know the contract works?', kicker: 'Day 5 · THE CONTRACT', subtitle: 'Three questions, three different answers. Only one of them is a test.',
+    visual: {proofQs: [
+      {answer: 'People decide. No test can tell you.', rules: [['Evidence from two places', 'else one odd graph and you roll back for nothing'], ['A rollback needs the update', 'else you roll back the wrong thing'], ['Not sure? No strong fix', 'else a guess looks like a plan'], ['Data missing? Then not “sure”', 'else he sounds sure while he is blind'], ['Say what customers notice', 'else you cannot tell how urgent it is']], extra: 'Claude Code explains them, you accept them. Something slips through later? Add a rule and a test.', where: 'intent.md · docs/spec.md'},
+      {answer: 'The tests check it. No Sonny, no AI.', testsHead: 'The 7 tests · ✓ = the contract answers right today', tests: [['A complete diagnosis → passes', false], ['No customer impact → refused', false], ['Rollback without the update → refused', false], ['Scale up from one source → refused', false], ['Not sure, but rollback → refused', false], ['No evidence at all → refused', true], ['Sure while data is missing → refused', false]], score: ['Today 1 ✓ 6 ✗', 'Goal 7 ✓'], extra: 'Made-up diagnoses go straight into the contract, so the answer is the same every time. Red first proves each test really checks something.', where: 'test/workshop/contract.test.ts'},
+      {answer: 'Run Sonny himself and look.', terms: [['Rule added, Sonny not changed', 'FAIL contract\n  - customer impact is missing', 'fail'], ['Sonny taught to write it', 'Customer impact: checkout may fail …\nPASS contract', 'pass']], extra: 'The tests never use Sonny’s own diagnosis. Today he writes no customer impact at all, so the new rule would stop him every time.', where: 'src/runtime.ts · src/prompts.ts · npm run investigate'}
+    ]},
+    cards: [
+      {title: 'Are these the right rules?', body: ''},
+      {title: 'Does the contract follow them?', body: ''},
+      {title: 'Does Sonny still get through?', body: ''}
+    ],
+    tagline: 'While building, Claude Code reads intent.md, spec.md and the tests. At 03:45, Sonny reads none of them.',
+    keyPoints: ['The right rules: people decide, from what goes wrong at 03:45 without them.', 'The tests feed made-up diagnoses straight into the contract: no Sonny, no AI. Today 1 of 7 right, goal 7 of 7.', 'Then run Sonny himself: his own diagnosis must still pass.'],
+    notes: 'Time: 11:34 · 4 min. No SDLC tracker. Clicks (→): 1, 2, 3 open the three questions; click a card to open it too; ← closes the last. Question 1 · the rules come from the team (docs/spec.md field table + the TODO(A3) comment in src/contract.ts; the two-sources and low-confidence rules are only in that comment) and from the goal in intent.md (a diagnosis you can trust at 03:45). In Assignment 3 the first prompt makes Claude Code read intent.md, docs/spec.md, src/contract.ts, src/runtime.ts, src/prompts.ts and the A3 test, explain the contract in plain English and stop “for my contract review”: that is where a person accepts the rules. Later, if a real incident slips through, the fix is a new rule plus a new test (the lessons loop on Day 6–7). Question 2 · test/workshop/contract.test.ts imports parseVerdict directly; npm run test:workshop (or the focused run in the A3 prompt) runs it. Checked on workshop/start: pass 1 / fail 6. Only “evidence has to carry at least one line” is right today (the format check already refuses empty evidence). The complete diagnosis is refused today because the contract does not know the field customer_impact yet (“customer_impact: unknown field”); the five broken ones are accepted because the rules are missing. The six refusal tests also check the reason text (e.g. /rollback requires a deploys/, /at least 2 sources/, /low confidence/, /data_gaps/). Question 3 · src/runtime.ts offlineVerdict writes no customer_impact field today; once parseVerdict requires it, every offline diagnosis gets FAIL contract. So the A3 build also changes runtime.ts (every offline branch), prompts.ts and VERDICT_SCHEMA (so a real model writes it too), cli.ts and console/index.html (to show the line). Assignment 3B then runs all main tests, the type check, npm run investigate and the browser, and /verify-this checks the claim.',
+    teach: {
+      time: '4 min',
+      gist: 'How do we know the contract works? Three separate questions: are these the right rules (people decide), does the contract follow them (the tests, no AI), does Sonny still get through (run him).',
+      script: [
+        {shot: 'assets/day5-jessy-teach/t21-1.webp', do: 'Slide appears. Read the title.', say: ['You are about to build the contract. How will you know it works?', 'That is really three questions, and only one of them is answered by a test.']},
+        {shot: 'assets/day5-jessy-teach/t21-2.webp', do: 'Click: question 1.', say: ['Are these the right rules? No test can tell you that. People decide.', 'Each rule stops something that goes wrong at 03:45. No update in the evidence? Then you might roll back the wrong thing.', 'In the assignment, Claude Code first explains the five rules, and you accept them. And if something slips through later, you add a rule and a test.']},
+        {ask: 'Which of these five would you miss most at 03:45?', say: ['(Any answer works. Let one or two people say why.)']},
+        {shot: 'assets/day5-jessy-teach/t21-3.webp', do: 'Click: question 2.', say: ['Does the contract follow the rules? That is what the tests check.', 'Seven made-up diagnoses go straight into the contract. One complete one that must pass, six that each break one rule and must be refused.', 'No Sonny, no AI. So the answer is the same every time.', 'Today only one is right. Even the complete one is refused: the contract does not know “customer impact” yet. The goal: seven of seven.']},
+        {ask: 'Why is it good that they are red now?', say: ['(Answer: a test that was red and turns green really checks something. A test that is always green proves nothing.)']},
+        {shot: 'assets/day5-jessy-teach/t21-4.webp', do: 'Click: question 3.', say: ['Does Sonny still get through? The tests never use his own diagnosis.', 'And today Sonny writes no customer impact at all. Add the rule, and the contract stops every diagnosis he writes. Tests green, Sonny stuck.', 'So Claude Code also has to teach Sonny to write it: in the script, and in his instructions for a real model.', 'You check that by running him: that is Assignment 3B.']},
+        {do: 'Point at the line at the bottom.', say: ['One last thing: all of this is for building. Claude Code reads intent.md, spec.md and the tests. At 03:45 Sonny reads none of them.']}
+      ],
+      learn: ['The right rules: people decide, from what goes wrong without them.', 'The tests check the contract with made-up diagnoses: no Sonny, no AI, same answer every time.', 'Then run Sonny himself to see that his own diagnosis still passes.'],
+      watch: ['Someone asks why the complete one fails today: the contract still refuses fields it does not know, and customer impact is new.', 'Someone asks why “no evidence” is already green: the format check already wants at least one evidence line.', 'Do not explain how to build the rules: the assignment does that.', 'Someone asks who wrote the tests: the team, before the code, so you know when you are done.'],
+      terms: [['Test', 'a small program that gives the contract a made-up diagnosis and checks the answer'], ['spec.md', 'the rules in words: what a good diagnosis contains'], ['Red / green', 'a test that fails / passes']],
       next: 'Assignment 3: agree on the rules, then build them.'
     }
   }),
   assignmentSlide({
-    number: 3, title: 'Agree on the rules, then build them', subtitle: 'Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.', stage: 'contract', duration: '11:32 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
+    number: 3, title: 'Agree on the rules, then build them', subtitle: 'Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.', stage: 'contract', duration: '11:38 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
     steps: [
       {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code asks before every file it changes.', warn: true},
       {text: 'Type this in: Claude Code. Goal: understand the five rules before anything is built.', prompt: PROMPTS.a3Contract, after: 'The five rules in plain English, and the smallest change that adds them. Nothing changes yet.'},
@@ -841,7 +911,7 @@ const day5Slides = [
       done: ['The A3 test: 7 of 7 green.', 'They can name the five rules.', 'Customer impact shows in the browser.'],
       copy: [['Step 2 · Claude Code', PROMPTS.a3Contract], ['Step 4 · Claude Code', PROMPTS.a3Build], ['Step 5 · Claude Code', PROMPTS.a3BuildImplement], ['Step 6 · Window 2', 'npm run investigate -- fixtures/incidents/bad-deploy.json'], ['Step 7 · Window 1 (Ctrl+C first)', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Step 8 · Browser', 'http://localhost:4320'], ['After each step · Window 2', 'git status']],
       script: [
-        {do: 'Slide appears. Goal of this assignment.', say: ['You know where the contract sits, and the team’s tests that check it. Now you build the five rules into it.', 'Same rhythm as Assignment 2: Claude Code explains, you decide, then it builds.', 'The biggest assignment of the day: 25 minutes, about 9 files.']},
+        {do: 'Slide appears. Goal of this assignment.', say: ['You followed one incident through the project, and you know how we check the contract. Now you build the five rules into it.', 'Same rhythm as Assignment 2: Claude Code explains, you decide, then it builds.', 'The biggest assignment of the day: 25 minutes, about 9 files.']},
         {do: 'Step 1 · manual mode.', say: ['Why: Claude Code is about to change about 9 files. You want to see each change.', '“manual mode on”. Not there? Shift+Tab.']},
         {do: 'Step 2 · understand. Paste the first prompt.', copy: [['Step 2 · Claude Code', PROMPTS.a3Contract]], say: ['Why: you only accept rules you understand.', 'In the project: Claude Code reads intent.md (your work from Assignment 2), docs/spec.md, src/contract.ts, two agent files and the A3 test. It changes nothing.', 'They see: the five rules in plain English, and the smallest change that adds them.']},
         {do: 'Step 3 · you decide.', say: ['Why: you own the rules, not Claude Code.', 'Check: are all five there? Does it keep unknown things OPEN: versions, regions, customer groups?', 'Agree: type “accepted”.']},
@@ -868,7 +938,7 @@ const day5Slides = [
     }
   }),
   {...checkpointSlide({
-    number: 3, title: 'verify the verdict contract', subtitle: 'Do not just trust Claude Code. Run every test, then let a second check look at the evidence with fresh eyes. You read the evidence yourself.', stage: 'contract', duration: '11:57 · 7 min', shot: 'assets/day5-expected/a3.png',
+    number: 3, title: 'verify the verdict contract', subtitle: 'Do not just trust Claude Code. Run every test, then let a second check look at the evidence with fresh eyes. You read the evidence yourself.', stage: 'contract', duration: '12:03 · 7 min', shot: 'assets/day5-expected/a3.png',
     steps: [
       {text: 'Type this in: Claude Code. Goal: run all checks, not just the contract test.', prompt: PROMPTS.a3BuildProve, after: 'All main tests, the type check, the terminal output and the browser line: all visible, all green.'},
       {text: 'Type this in: Claude Code. Goal: a second, independent check of the claim.', prompt: PROMPTS.a3Verify, after: 'One word back: VERIFIED, NOT VERIFIED or INCONCLUSIVE, with the files and output it looked at.'},
@@ -901,7 +971,7 @@ const day5Slides = [
     title: 'Pre-lunch quiz · What is true now?', kicker: 'Day 5 · QUIZ', subtitle: 'Vote first. Reveal the answers second.', type: 'quiz',
     cards: [{title: 'A', body: 'INC-1001 and the listener incident are the same record.'}, {title: 'B', body: 'The builder and product runtime are separate.'}, {title: 'C', body: 'A green contract test proves a human approved rollback.'}, {title: 'D', body: 'Unsupported customer scope stays OPEN.'}],
     keyPoints: ['B and D are true.', 'A confuses two records.', 'C confuses proof with authority.'],
-    notes: note({time: '12:04 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
+    notes: note({time: '12:10 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
   }),
   pauseSlide('Lunch', '60 min', 'Recall the morning before A4', '12:00'),
   pauseSlide('Restart and settle', '10 min', 'Post-lunch recap', '13:00'),
