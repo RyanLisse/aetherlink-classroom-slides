@@ -348,6 +348,39 @@ function renderExtras(stage, main, s, v) {
     cards[2].querySelector('.card-head')?.after(ask);
     [cards[0], cards[1]].forEach((c) => c.after(node('div', 'aj-arrow', '→')));
   }
+  if (v.contractZoom && cards.length >= 5) {                     // human in the loop: a small flow on top, then Sonny's diagnosis held against the contract's rules, one click per rule (each rule lights the part it looks at)
+    const Z = v.contractZoom; grid.classList.add('cz-flow'); let k = 0;
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('cz-chip', 'cz-' + i); c.prepend(node('span', 'cz-ico', (Z.icons || [])[i] || '')); });
+    cards.forEach((c, i) => { if (i < cards.length - 1) { if (i === 3) { const g = node('div', 'cz-arrow cz-gate'); g.append(node('span', 'cz-gate-t', Z.gate || 'only if every rule is met'), node('span', null, '→')); c.after(g); } else c.after(node('div', 'cz-arrow', '→')); } });
+    const panel = node('div', 'cz-panel');
+    const doc = node('div', 'aj-doc cz-doc'); doc.append(node('div', 'aj-doc-tab', Z.docName || 'diagnosis'));
+    const marks = {};                                              // key → elements to light up
+    const mark = (key, el) => { (marks[key] = marks[key] || []).push(el); el.classList.add('cz-hl-able'); };
+    Z.doc.forEach((R) => { const r = node('div', 'aj-row cz-row' + (R.ghost ? ' cz-ghost' : '')); const lab = node('b', null, R.label); if (R.conf) { const cf = node('span', 'cz-conf', ' (' + R.conf + ')'); lab.append(cf); mark('conf', cf); } r.append(lab, node('span', null, R.text));
+      if (R.ev) { const evs = node('span', 'aj-evs'); R.ev.forEach((e) => { const ch = node('code', 'aj-ev', e); mark(e, ch); evs.append(ch); }); r.append(evs); }
+      if (R.key) mark(R.key, r); doc.append(r); });
+    const side = node('div', 'cz-side'); side.append(node('div', 'cz-side-h', Z.rulesTitle || 'The contract: five rules'));
+    const rules = Z.rules.map((R, i) => { const r = node('button', 'cz-rule'); r.type = 'button'; r.append(node('span', 'cz-rule-mark', '?'), node('span', 'cz-rule-txt', R.text), node('span', 'cz-rule-note', R.note || ''));
+      r.addEventListener('click', () => { k = Math.max(k, 3 + i); focus = i; paint(); }); side.append(r); return r; });
+    const result = node('p', 'cz-result', Z.result || ''); side.append(result);
+    panel.append(doc, side); grid.after(panel);
+    const decide = node('p', 'cz-decide', Z.decide || ''); panel.after(decide);
+    const nR = rules.length, last = 3 + nR + 1;                    // 1 = alert, looks, diagnosis · 2 = the contract · 3..2+n = one rule each · 3+n = result · 4+n = you decide
+    let focus = -1;
+    const paint = () => {
+      cards.forEach((c, i) => c.classList.toggle('on', i < 3 ? k >= 1 : i === 3 ? k >= 2 : k >= last));
+      grid.querySelectorAll('.cz-arrow').forEach((a, i) => a.classList.toggle('on', i < 2 ? k >= 1 : i === 2 ? k >= 2 : k >= last));
+      panel.classList.toggle('show-doc', k >= 1); panel.classList.toggle('show-rules', k >= 2);
+      rules.forEach((r, i) => { const open = k >= 3 + i; r.classList.toggle('open', open); r.classList.toggle('ok', open && !!Z.rules[i].ok); r.classList.toggle('bad', open && !Z.rules[i].ok); r.querySelector('.cz-rule-mark').textContent = open ? (Z.rules[i].ok ? '✓' : '✗') : '?'; r.classList.toggle('focus', i === focus); });
+      Object.values(marks).flat().forEach((el) => el.classList.remove('cz-hl', 'cz-hl-bad'));
+      if (focus >= 0 && k >= 3 + focus) (Z.rules[focus].hl || []).forEach((key) => (marks[key] || []).forEach((el) => el.classList.add(Z.rules[focus].ok ? 'cz-hl' : 'cz-hl-bad')));
+      doc.querySelectorAll('.cz-ghost').forEach((g) => g.classList.toggle('shown', k >= 3 + nR - 1 && Z.rules[nR - 1] && !Z.rules[nR - 1].ok));
+      result.classList.toggle('shown', k >= 3 + nR); decide.classList.toggle('shown', k >= last);
+    };
+    paint();
+    const next = () => { if (k < last) { k++; if (k >= 3 && k < 3 + nR) focus = k - 3; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
   if (v.trustMap && cards.length >= 5) {                         // Sonny's map: the slide 3 alert → slide 4's looks and diagnosis → the contract (zoom: five rules on that diagnosis) → you decide; then how he behaves
     const T = v.trustMap; grid.classList.add('trust-map'); let k = 0;
     cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('tm-card', 'tm-' + i); c.prepend(node('span', 'pl-num', String(i + 1))); c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
@@ -1356,7 +1389,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);

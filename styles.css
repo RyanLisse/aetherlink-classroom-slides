@@ -2088,3 +2088,50 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .dm-bot{position:relative;width:6.5rem;margin:.4rem auto .6rem}
 .dm-bot img{display:block;width:100%;height:auto}
 .dm-bot .aj-bot-tag{bottom:auto;top:-.4rem}
+/* contractZoom (opt-in): small flow on top; Sonny's diagnosis vs the contract's rules, one click per rule */
+.cards.cz-flow{display:flex;align-items:center;gap:.35rem;flex-wrap:nowrap}
+.card.cz-chip{flex:1;min-width:0;display:flex;align-items:center;gap:.45rem;padding:.45rem .6rem;border-radius:10px;opacity:.3;transition:opacity .3s,box-shadow .3s;border-top-color:var(--cyan)}
+.card.cz-chip.on{opacity:1}
+.cz-chip .card-head h2{font-size:.78rem;margin:0}
+.cz-chip > p,.cz-chip .card-body{display:none}
+.cz-ico{font-size:1.1rem}
+.card.cz-chip.cz-3{flex:1.4;border-top-color:var(--aether-orange)}
+.card.cz-chip.cz-3.on{box-shadow:0 0 0 1.5px var(--aether-orange)}
+.cz-chip.cz-3 .card-head h2{color:var(--aether-orange)}
+.card.cz-chip.cz-4{border-top-color:var(--ok,#4cd38a)}
+.cz-arrow{font-weight:900;font-size:1.2rem;color:var(--aether-orange);opacity:.2;transition:opacity .3s}
+.cz-arrow.on{opacity:1}
+.cz-gate{display:flex;flex-direction:column;align-items:center;gap:.1rem;width:5rem;flex:none}
+.cz-gate-t{font-size:.58rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;text-align:center;line-height:1.2;color:var(--aether-orange);border:1.5px solid var(--aether-orange);border-radius:7px;padding:.2rem .3rem}
+.cz-panel{margin-top:.8rem;display:grid;grid-template-columns:1.05fr 1fr;gap:1rem;align-items:start}
+.cz-doc{margin:0;padding:.7rem .8rem;gap:.55rem;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.cz-panel.show-doc .cz-doc{opacity:1;transform:none}
+.cz-doc .aj-row{opacity:1;animation:none;font-size:.95rem;line-height:1.35;border-radius:8px;padding:.2rem .3rem;transition:background .3s,box-shadow .3s}
+.cz-doc .aj-row b{font-size:.72rem}
+.cz-doc .aj-ev{font-size:.74rem;transition:background .3s,color .3s,box-shadow .3s}
+.cz-hl{background:color-mix(in srgb,var(--ok,#4cd38a) 18%,transparent);box-shadow:0 0 0 1.5px var(--ok,#4cd38a);border-radius:6px}
+.aj-ev.cz-hl{color:#eafff3}
+.cz-hl-bad{background:color-mix(in srgb,#ff6b6b 16%,transparent);box-shadow:0 0 0 1.5px #ff6b6b}
+.cz-conf{color:var(--text);padding:0 .15rem}
+.cz-ghost{display:none;border:1.5px dashed #ff6b6b}
+.cz-ghost.shown{display:grid}
+.cz-ghost span{color:#ff8f8f;font-style:italic}
+.cz-side{display:grid;gap:.4rem;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.cz-panel.show-rules .cz-side{opacity:1;transform:none}
+.cz-side-h{font-size:.74rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--aether-orange)}
+.cz-rule{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1.6rem 1fr auto;align-items:center;gap:.5rem;padding:.45rem .6rem;border-radius:9px;border:1.5px solid var(--border);background:rgba(255,255,255,.03);font-size:.92rem;line-height:1.3;transition:border-color .3s,background .3s,transform .2s}
+.cz-rule:hover{border-color:var(--aether-orange)}
+.cz-rule:focus-visible{outline:2px solid var(--aether-orange);outline-offset:2px}
+.cz-rule-mark{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:50%;font-weight:900;border:1.5px solid var(--muted);color:var(--muted)}
+.cz-rule-note{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:var(--muted);opacity:0;transition:opacity .3s}
+.cz-rule.open .cz-rule-note{opacity:1}
+.cz-rule.ok .cz-rule-mark{border-color:var(--ok,#4cd38a);color:var(--ok,#4cd38a)}
+.cz-rule.bad{border-color:#ff6b6b;background:color-mix(in srgb,#ff6b6b 10%,transparent)}
+.cz-rule.bad .cz-rule-mark,.cz-rule.bad .cz-rule-note{border-color:#ff6b6b;color:#ff8f8f;font-weight:900}
+.cz-rule.focus{transform:translateX(-4px);border-color:var(--aether-orange)}
+.cz-rule.bad.focus{border-color:#ff6b6b}
+.cz-result{margin:.2rem 0 0;font-size:.9rem;font-weight:800;padding:.5rem .65rem;border-radius:9px;border:1.5px solid var(--aether-orange);background:color-mix(in srgb,var(--aether-orange) 8%,transparent);opacity:0;transition:opacity .4s}
+.cz-result.shown{opacity:1}
+.cz-decide{margin:.8rem 0 0;text-align:center;font-weight:900;font-size:1.05rem;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.cz-decide.shown{opacity:1;transform:none}
+@media (max-width:900px){.cards.cz-flow{flex-wrap:wrap}.cz-panel{grid-template-columns:1fr}}

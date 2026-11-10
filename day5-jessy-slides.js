@@ -348,57 +348,55 @@ const day5Slides = [
       learn: ['Today follows the six steps: Plan, Design, Build, Test, Deploy, Maintain.', 'Each assignment builds on the one before.', 'Maintain is optional today.'],
       watch: ['Do not explain each assignment in depth: each has its own slides.', 'Do not call A7 or A9 required.', 'One more → after Maintain goes to the next slide.'],
       terms: [['Diagnosis', 'what Sonny writes: what is happening, the root cause with evidence, one proposed fix']],
-      next: 'what we want from Sonny, and what is still missing.'
+      next: 'can you trust what Sonny writes? The contract.'
     }
   }),
   baseSlide({
-    title: 'Sonny already runs. Today you make him safe to trust.', kicker: 'Day 5 · SONNY’S MAP', subtitle: 'The alert, what Sonny does, and the rules his diagnosis must meet before you see it. Each piece you build today has its place here.', type: 'context',
-    visual: {plIntro: 'First A1: look at all five steps. Then A2: write down what Sonny must do.', trustMap: {
-      alert: 'ALERT · checkout · 12% · INC-1001',
-      looks: [['📈', 'graphs'], ['🚀', 'updates'], ['🧩', 'code change'], ['📜', 'error messages']],
-      docName: 'diagnosis · INC-1001',
-      doc: [['What’s happening', 'failed payments 0.3% → 12% at 03:45, after update v2.15.0', 'metrics:03:45'], ['Root cause (high)', 'the update changed the EU payment settings; a key is missing', ['deploys:d-4821', 'diff:d-4821', 'logs:03:45:03']], ['Proposed fix', 'roll back to v2.14.0']],
+    title: 'You only get a diagnosis that meets the rules', kicker: 'Day 5 · HUMAN IN THE LOOP', subtitle: 'Sonny proposes. The contract holds his diagnosis against fixed rules. Only then do you decide. That is human in the loop with an AI agent.', type: 'context',
+    visual: {contractZoom: {
+      icons: ['🚨', '👀', '📝', '📋', '🧑'],
       gate: 'only if every rule is met',
-      zoomTitle: 'Zoom: the contract holds this diagnosis against five rules',
-      rules: [
-        ['A strong proposed fix needs evidence from at least two places', true, 'four places'],
-        ['A rollback needs evidence from the update list', true, 'deploys:d-4821'],
-        ['Not sure? Then no strong proposed fix', true, 'sure (high)'],
-        ['Data missing? Then not “sure”: write OPEN', true, 'nothing missing'],
-        ['Say what customers notice', false, 'missing']
+      docName: 'Sonny’s diagnosis · INC-1001',
+      doc: [
+        {label: 'What’s happening', text: 'failed payments jumped from 0.3% to 12% at 03:45, two minutes after update v2.15.0', ev: ['metrics:03:45'], key: 'happening'},
+        {label: 'Root cause', conf: 'high', text: 'the update changed the EU payment settings, and the error log says a key for EU payments is missing', ev: ['deploys:d-4821', 'diff:d-4821', 'logs:03:45:03'], key: 'cause'},
+        {label: 'Proposed fix', text: 'roll back to v2.14.0, then watch the error rate', key: 'fix'},
+        {label: 'Customer impact', text: 'not there', key: 'impact', ghost: true}
       ],
-      today: 'Today the contract has no rules yet, so this diagnosis gets PASS anyway. After A3 it is stopped, and you see which rule broke.',
-      behave: {title: 'And how he behaves, also when you break the shop:', items: [['A5', 'he only reads, through a proper tool'], ['A4', 'he refuses “roll back now” in the chat'], ['A6', 'the rollback only runs after your approval']]}
+      rulesTitle: 'The contract: five rules',
+      rules: [
+        {text: 'A strong proposed fix needs evidence from at least two places', ok: true, note: 'four places', hl: ['metrics:03:45', 'deploys:d-4821', 'diff:d-4821', 'logs:03:45:03', 'fix']},
+        {text: 'A rollback needs evidence from the update list', ok: true, note: 'deploys:d-4821', hl: ['deploys:d-4821', 'fix']},
+        {text: 'Not sure? Then no strong proposed fix', ok: true, note: 'sure (high)', hl: ['conf', 'fix']},
+        {text: 'Data missing? Then not “sure”: write OPEN', ok: true, note: 'nothing missing', hl: ['conf']},
+        {text: 'Say what customers notice', ok: false, note: 'missing', hl: ['impact']}
+      ],
+      result: 'One rule broken. Today the contract has no rules yet, so this diagnosis still gets PASS. After A3 it is stopped, and you see which rule broke.',
+      decide: 'Only a diagnosis that meets every rule gets to you. Then you decide.'
     }},
-    cards: [
-      {title: 'The alert', body: 'The one from 03:45.'},
-      {title: 'Sonny looks', body: 'Only reading.'},
-      {title: 'He writes a diagnosis', body: 'With evidence and one proposed fix.'},
-      {title: 'The contract checks it', body: 'Before you see it.'},
-      {title: 'You decide', body: 'Human in the loop.'}
-    ],
-    tagline: 'In Assignment 1 you see 14 red tests: exactly these pieces. Red means still to build, not broken.',
-    keyPoints: ['Sonny proposes, the contract lets through only a diagnosis that meets every rule, then you decide.', 'The rules use the key terms: evidence, proposed fix, OPEN.', 'Also when you break the shop: he only reads, refuses actions in the chat, and nothing runs without your approval.'],
-    notes: 'Time: 10:14 · 4 min. Six clicks: 1 alert, 2 Sonny looks, 3 diagnosis (the same lines as slide 4), 4 the contract and the zoom, 5 you decide, 6 how he behaves. The five rules are TODO(A3) in src/contract.ts (code words: “a strong proposal needs evidence from at least 2 sources”, “rollback needs a deploys evidence line”, “low confidence cannot carry a strong proposal”, “high confidence is refused while data_gaps is non-empty”, “non-empty customer_impact”). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line; and it prints “PASS contract” today because the rules are empty. A5: list_deploys in src/tools.ts returns [], until then src/runtime.ts and src/chat.ts read the updates directly (“A5 bypass”). A4: TODO(A4) in src/chat.ts plus a guard on bench/ratchet.json. A6: checkApproval in src/executor.ts (tests call it A8). Red at the start: 14 workshop tests.',
+    cards: [{title: '03:45 alert', body: ''}, {title: 'Sonny looks', body: ''}, {title: 'Diagnosis', body: ''}, {title: 'The contract', body: ''}, {title: 'You decide', body: ''}],
+    keyPoints: ['Sonny proposes, the contract holds his diagnosis against fixed rules, then you decide.', 'The rules use the key terms: evidence, proposed fix, OPEN.', 'Today the contract has no rules yet: in A3 you write them.'],
+    notes: 'Time: 10:14 · 4 min. Clicks: 1 the alert, Sonny looks, the diagnosis (the same lines as “How we want Sonny to work”) · 2 the contract · 3–7 one rule each: ✓ or ✗ appears and the part of the diagnosis it looks at lights up (you can also click a rule) · 8 the result · 9 you decide. The five rules are TODO(A3) in src/contract.ts (code words: a strong proposal needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line, and “PASS contract” today because the rules are empty. These five are Ryan’s rules for this project, not an industry standard, but the ideas are normal SRE practice (incident reports ask for impact, evidence and confidence) and a common AI-agent pattern (check the AI’s output with code before a person sees it).',
     teach: {
       time: '4 min',
-      gist: 'Everything the room saw comes together: the 03:45 alert, what Sonny does, and the contract. A diagnosis must meet every rule before it gets to you: that is human in the loop.',
+      gist: 'Human in the loop with an AI agent: Sonny proposes, the contract holds his diagnosis against fixed rules, and only a diagnosis that meets every rule gets to you. Then you decide.',
       script: [
-        {do: 'Slide appears: five faded steps.', say: ['Let us put together what we saw.', 'Sonny already runs from start to end. But nothing makes him safe to trust yet. That is today’s work.']},
-        {do: 'Point at the line above the steps.', say: ['First A1: you look at all five steps. Then A2: you write down what Sonny must do.']},
-        {do: 'Click: The alert.', say: ['The alert from 03:45: 12% of payments fail. INC-1001.']},
-        {do: 'Click: Sonny looks.', say: ['He looks where you would look: graphs, updates, the code change, the error messages. Only reading.']},
-        {do: 'Click: He writes a diagnosis.', say: ['The same diagnosis as before: what is happening, the root cause with evidence, one proposed fix.']},
-        {do: 'Click: The contract checks it. The zoom opens below.', say: ['Here is the step we zoom in on: the contract.', '“Contract” is a normal software word: the rules something must meet.', 'Here: five rules every diagnosis must meet before you see it. Recognise the words? Evidence, proposed fix, OPEN.']},
-        {do: 'Point at the five rules, top to bottom.', say: ['A strong proposed fix needs evidence from at least two places. This one has four.', 'A rollback needs evidence from the update list. Yes: deploys:d-4821.', 'Not sure? Then no strong proposed fix. He is sure: high.', 'Data missing? Then he may not say “sure”: he writes OPEN. Nothing is missing here.', 'And: say what customers notice.']},
-        {ask: 'Which rule does this diagnosis break?', say: ['(Answer: the last one. It does not say what customers notice.)', 'Today the contract has no rules yet, so it still says PASS. After A3 it is stopped, and you see which rule broke.']},
-        {do: 'Click: You decide. Point at the orange marker.', say: ['Only a diagnosis that meets every rule goes on to you.', 'Why? An AI can sound very sure without evidence. So plain code checks first, and you decide with a diagnosis you can trust. That is human in the loop.']},
-        {do: 'Click: the row at the bottom.', say: ['And not only the diagnosis. When you break the shop this afternoon, he must behave too:', 'he only reads, through a proper tool: A5.', 'he refuses “roll back now” in the chat: A4.', 'and the rollback only runs after your approval: A6.']},
-        {do: 'Point at the line at the bottom.', say: ['In Assignment 1 you see 14 red tests: exactly these pieces. Red means still to build, not broken.']}
+        {do: 'Slide appears.', say: ['We saw how we want Sonny to work: he looks, he writes a diagnosis, he asks you.', 'But can you trust what he writes? An AI can sound very sure without evidence.']},
+        {do: 'Click: the alert, Sonny looks, the diagnosis appear. His diagnosis opens below.', say: ['The alert from 03:45. Sonny looks, and writes this diagnosis. The same one as before.']},
+        {do: 'Click: The contract lights up. The five rules appear, each with a question mark.', say: ['Before you see it, the diagnosis goes through the contract.', '“Contract” is a normal software word: the rules something must meet.', 'Here: five rules every diagnosis must meet. Recognise the words? Evidence, proposed fix, OPEN.']},
+        {do: 'Click: rule 1. Its evidence lights up in the diagnosis.', say: ['A strong proposed fix needs evidence from at least two places. He has four. ✓']},
+        {do: 'Click: rule 2.', say: ['A rollback needs evidence from the update list. There it is: deploys:d-4821. ✓']},
+        {do: 'Click: rule 3.', say: ['Not sure? Then no strong proposed fix. He says he is sure: high. ✓']},
+        {do: 'Click: rule 4.', say: ['Data missing? Then he may not say “sure”, he writes OPEN. Nothing is missing here. ✓']},
+        {ask: 'Last rule: say what customers notice. Does the diagnosis do that?', say: ['(Answer: no. There is no customer impact.)']},
+        {do: 'Click: rule 5. The missing line shows in red.', say: ['There is no line about customers. ✗']},
+        {do: 'Click: the result.', say: ['One rule broken. But today the contract has no rules yet, so it still says PASS.', 'You will see that yourself in Assignment 1. In A3 you write the rules, and then this diagnosis is stopped, with the broken rule named.']},
+        {do: 'Click: You decide lights up.', say: ['Only a diagnosis that meets every rule gets to you. Then you decide.', 'That is human in the loop: not you checking everything at 03:45, but you deciding on information you can trust.']},
+        {ask: 'Why not let the operator check the rules themselves?', say: ['(Answer: at 03:45, under stress, you miss things. Code checks the same rules every time, so your attention goes to the decision.)']}
       ],
-      learn: ['Sonny proposes → the contract lets through only a diagnosis that meets every rule → the operator decides. That is human in the loop.', 'The five rules use the key terms: evidence, proposed fix, OPEN.', 'Also live: he only reads (A5), refuses actions in the chat (A4), and the rollback waits for your approval (A6).'],
-      watch: ['Do not explain how to build the rules: A3 does that.', '“Contract” confuses someone: the set of rules a diagnosis must meet; Java developers know it from design by contract.', 'Someone asks why A5 comes so late: a temporary shortcut keeps the morning working; A5 replaces it before the live run.', 'Someone asks about “A8” in the tests: that is the approval piece, part of A6.'],
-      terms: [['Contract', 'the five rules together, as code; every diagnosis must meet them before the operator sees it'], ['Rule', 'one requirement every diagnosis must meet'], ['Red test', 'a test for a piece that is not built yet']],
+      learn: ['Human in the loop with an AI agent: Sonny proposes → the contract holds the diagnosis against fixed rules → you decide.', 'The five rules: evidence from two places, a rollback needs update evidence, not sure means no strong fix, missing data means OPEN, say what customers notice.', 'Today the contract has no rules yet; A3 writes them.'],
+      watch: ['Do not explain how to build the rules: A3 does that.', '“Is this a standard?” These five are this project’s rules. The ideas are normal: incident reports ask for impact, evidence and how sure you are; checking AI output with code is a common pattern.', '“Contract” confuses someone: the set of rules something must meet; Java developers know it from design by contract.', 'Do not go into the afternoon (chat, tools, approval) here: those come with their own assignments.'],
+      terms: [['Contract', 'the five rules together, as code; every diagnosis must meet them before the operator sees it'], ['Rule', 'one requirement every diagnosis must meet']],
       next: 'how we test that Sonny behaves: two scenarios.'
     }
   }),
@@ -416,7 +414,7 @@ const day5Slides = [
       time: '2 min',
       gist: 'We test Sonny on scenarios: in the morning the saved 03:45 incident (the fixture), in the afternoon a live one you cause yourself. Same Sonny, same rules.',
       script: [
-        {do: 'Slide appears.', say: ['We know how Sonny must behave. How do you test that?', 'You cannot wait for a real incident at 03:45. So you give him scenarios.']},
+        {do: 'Slide appears.', say: ['We know what Sonny’s diagnosis must meet. How do you test that he behaves?', 'You cannot wait for a real incident at 03:45. So you give him scenarios.']},
         {do: 'Point at the morning block.', say: ['Morning: the incident from 03:45, saved with all its data. The graphs, the updates, the logs.', 'That is a fixture. Nothing breaks, the shop is not involved.', 'One command hands it to Sonny. The same every time, for everyone.', 'So after each change you run it again and see exactly what your change did.']},
         {do: 'Point at the afternoon block.', say: ['Afternoon, in A6: the shop runs on your laptop, fake customers keep paying.', 'You push a bad update on purpose. The console sees the errors and makes a new incident, with a new number.']},
         {do: 'Point at Sonny.', say: ['Same Sonny, same rules. What you build in the morning also works live.']},
@@ -1160,7 +1158,7 @@ window.SLIDES = day5Slides;
 // SDLC tracker: which of the six phases lights up on each slide (see sdlcTrack in app.js).
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
-  [/^(Let’s start the project|The skills Claude Code uses today|Sonny already runs|Two scenarios to test Sonny|A tour of the project|A1 |Assignment 1:|A2 |Assignment 2:)/, 'plan'],
+  [/^(Let’s start the project|The skills Claude Code uses today|You only get a diagnosis that meets the rules|Two scenarios to test Sonny|A tour of the project|A1 |Assignment 1:|A2 |Assignment 2:)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^A3 · How do we know/, 'test'],
   [/^(How your agent handles an incident|A3 · )/, 'design'],
