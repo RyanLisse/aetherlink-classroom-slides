@@ -2017,3 +2017,14 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .pl-todo .pl-have-mark{color:var(--aether-orange)}
 .pl-have-text{flex:1 1 100%}
 .pl-ok .pl-have-text{flex:1;color:var(--text)}
+/* Sonny walks along the big SDLC line (opt-in: sdlcRoute + routeLine + routeBot) */
+.sdlc-track-big.has-walker{position:relative;margin-top:5.6rem}
+.sr-walker{--k:0;position:absolute;bottom:calc(100% - .2rem);left:calc((var(--k) + .5) * (100% + .7rem) / 6 - .35rem);transform:translateX(-50%);width:3.6rem;transition:left .45s cubic-bezier(.4,.1,.2,1);pointer-events:none}
+.sr-walker img{display:block;width:100%;height:auto}
+.sr-walker .aj-bot-tag{bottom:auto;top:-.5rem}
+/* pipeline: a line above the steps, and a marked arrow ("only if all rules are met") */
+.pl-intro{margin:0 0 .7rem;font-weight:800;color:var(--muted);font-size:.95rem}
+.pl-gate{display:flex;flex-direction:column;align-items:center;gap:.25rem;width:5.2rem;flex:none}
+.pl-gate-text{font-size:.62rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;line-height:1.25;text-align:center;color:var(--aether-orange);border:1.5px solid var(--aether-orange);border-radius:8px;padding:.25rem .3rem;background:color-mix(in srgb,var(--aether-orange) 10%,transparent)}
+.pl-gate-glyph{font-size:1.9rem;line-height:1}
+@media (max-width:900px){.pl-gate{width:auto;flex-direction:row;transform:none}.pl-gate .pl-gate-glyph{transform:rotate(90deg)}}
