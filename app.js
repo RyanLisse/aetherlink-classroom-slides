@@ -506,6 +506,60 @@ function renderExtras(stage, main, s, v) {
     window.__reveal = next; window.__revealBack = back;
     slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
   }
+  if (v.codeRoute && cards.length) {                             // Jessy Day 5 opt-in: one path into src/contract.ts as real code snippets with arrows (Moment A: Sonny's run · Moment B: the tests). Top: the two ways in, this slide's lit. → opens the snippets one by one, then the "run it yourself" bar
+    const R = v.codeRoute; grid.classList.add('cr-grid'); let k = 0;
+    if (R.entry) {
+      const E = R.entry, en = node('div', 'cr-entry'); en.append(node('span', 'cr-entry-h', E.title || ''));
+      const row = node('div', 'cr-entry-row');
+      const door = (D, i) => { const d = node('div', 'cr-door cr-m' + D.tag + (i === E.here ? ' here' : ' other')); const h = node('div', 'cr-door-h'); h.append(node('span', 'cr-tag', D.tag), node('b', null, D.name)); d.append(h, node('span', 'cr-when', D.when));
+        const p = node('div', 'cr-door-path'); [D.cmd, ...(D.path || [])].forEach((x, j) => { if (j) p.append(node('span', 'cr-to', '→')); p.append(node('code', null, x)); }); d.append(p); if (i !== E.here && E.otherNote) d.append(node('span', 'cr-other', E.otherNote)); return d; };
+      const tgt = node('div', 'cr-target'); tgt.append(node('code', null, E.target || 'src/contract.ts')); if (E.targetNote) tgt.append(node('span', null, E.targetNote));
+      row.append(door(E.doors[0], 0), node('span', 'cr-in', '→'), tgt, node('span', 'cr-in', '←'), door(E.doors[1], 1)); en.append(row); grid.before(en);
+    }
+    const cols = R.cols || 3;
+    cards.forEach((c, i) => { const S = (R.steps || [])[i] || {}; c.querySelector('.card-icon')?.remove(); c.classList.add('cr-card'); if (S.lit) c.classList.add('cr-lit');
+      c.style.gridRow = String(Math.floor(i / cols) * 2 + 1); c.style.gridColumn = String((i % cols) * 2 + 1);
+      c.querySelector('.card-head')?.prepend(node('span', 'cr-num', String(i + 1)));
+      const box = node('div', 'cr-code' + (S.term ? ' term' : '')); if (S.file) box.append(node('span', 'cr-file', S.file)); box.append(node('pre', null, S.code || '')); c.querySelector('.card-head')?.after(box);
+      if (S.after) { const a = node('div', 'cr-code cr-after'); a.append(node('span', 'cr-file', S.afterLabel || ''), node('pre', null, S.after)); box.after(a); }
+      c.tabIndex = 0; c.setAttribute('role', 'button'); const go = () => { k = Math.max(k, i + 1); paint(); };
+      c.addEventListener('click', go); c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      if (i < cards.length - 1) { if ((i + 1) % cols) { const a = node('div', 'cr-arrow', '→'); a.style.gridRow = c.style.gridRow; a.style.gridColumn = String((i % cols) * 2 + 2); a.dataset.after = String(i + 1); grid.append(a); }
+        else { const t = node('div', 'cr-turn'); t.style.gridRow = String(Math.floor(i / cols) * 2 + 2); t.style.gridColumn = '1 / -1'; t.dataset.after = String(i + 1); const sv = svg('0 0 1000 40', '<path d="M833 2V18H167V36" /><path class="cr-turn-head" d="M159 28L167 38L175 28" />', 'cr-turn-svg'); sv.setAttribute('preserveAspectRatio', 'none'); t.append(sv); grid.append(t); } } });
+    grid.style.gridTemplateColumns = Array.from({ length: cols }, () => 'minmax(0,1fr)').join(' auto ');
+    const bar = node('div', 'cr-run' + (R.run && !R.run.out ? ' solo' : ''));
+    if (R.run) { const left = node('div', 'cr-run-l'); left.append(node('span', 'cr-run-h', R.run.label || ''), node('code', 'cr-run-cmd', '$ ' + R.run.cmd)); if (R.run.when) left.append(node('p', 'cr-run-when', R.run.when)); bar.append(left);
+      if (R.run.out) { const o = node('div', 'cr-code term cr-run-out'); if (R.run.outLabel) o.append(node('span', 'cr-file', R.run.outLabel)); o.append(node('pre', null, R.run.out)); bar.append(o); } }
+    const foot = node('p', 'cr-foot', R.foot || '');
+    (main.querySelector('.tagline') || grid).after(bar); bar.after(foot);
+    const LAST = cards.length + 1;
+    const paint = () => { cards.forEach((c, i) => { c.classList.toggle('shown', i < k); c.classList.toggle('now', i === k - 1 && k <= cards.length); });
+      grid.querySelectorAll('.cr-arrow,.cr-turn').forEach((a) => a.classList.toggle('shown', k > +a.dataset.after));
+      bar.classList.toggle('shown', k >= LAST); foot.classList.toggle('shown', k >= LAST && !!R.foot); };
+    paint();
+    const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.previewList) {                                           // Jessy Day 5 opt-in: a checklist preview of the next assignment. Rows start as ☐; → ticks them one by one; each row shows which moment (A Sonny's run / B the tests) and what you should see
+    const P = v.previewList; const wrap = node('div', 'pv-wrap'); let k = 0;
+    if (P.order) { const o = node('div', 'pv-order'); P.order.forEach(([t, tone], j) => { if (j) o.append(node('span', 'pv-to', '→')); o.append(node('span', 'pv-pill ' + (tone || ''), t)); }); wrap.append(o); }
+    const list = node('div', 'pv-list');
+    const rows = P.rows.map((Rw, i) => { const r = node('div', 'pv-row'); r.append(node('span', 'pv-box', ''), node('span', 'pv-step', Rw.step || ''));
+      const mid = node('div', 'pv-mid'); mid.append(node('span', 'pv-text', Rw.text)); if (Rw.cmd) mid.append(node('code', 'pv-cmd', Rw.cmd)); r.append(mid);
+      r.append(node('span', 'pv-moment' + (Rw.moment ? ' cr-m' + Rw.moment.replace(/[^AB]/g, '') : ' none'), Rw.moment ? 'Moment ' + Rw.moment : (Rw.who || '')));
+      r.append(node('span', 'pv-out ' + (Rw.tone || ''), Rw.out || ''));
+      r.addEventListener('click', () => { k = i + 1 > k ? i + 1 : i; paint(); }); list.append(r); return r; });
+    wrap.append(list); const foot = P.foot ? node('p', 'pv-foot', P.foot) : null; if (foot) wrap.append(foot);
+    if (grid) grid.replaceWith(wrap); else { const tg = main.querySelector('.tagline'); if (tg) tg.before(wrap); else main.append(wrap); }
+    const paint = () => { rows.forEach((r, i) => { r.classList.toggle('done', i < k); r.classList.toggle('now', i === k - 1); r.querySelector('.pv-box').textContent = i < k ? '✓' : ''; }); foot?.classList.toggle('shown', k >= rows.length); };
+    paint();
+    const next = () => { if (k < rows.length) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
   if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
     const ls = node('div', 'ls-row');
     v.layerStrip.forEach((L, i) => { if (i) ls.append(node('div', 'ls-arrow', '→')); const c = node('div', 'ls-card' + (L.state ? ' ' + L.state : '')); c.style.setProperty('--i', i);
