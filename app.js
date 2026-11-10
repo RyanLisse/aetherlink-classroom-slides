@@ -343,10 +343,15 @@ function renderExtras(stage, main, s, v) {
     const doc = node('div', 'aj-doc'); doc.append(node('div', 'aj-doc-tab', J.docName || 'diagnosis'));
     J.doc.forEach(([k, val, ev], i) => { const r = node('div', 'aj-row'); r.style.setProperty('--i', i); r.append(node('b', null, k), node('span', null, val)); if (ev) { const evs = node('span', 'aj-evs'); [].concat(ev).forEach((e) => evs.append(node('code', 'aj-ev', e))); r.append(evs); } doc.append(r); });
     cards[1].querySelector('.card-head')?.after(doc);
+    const four = J.check && cards.length >= 4;                    // opt-in 4th block: he checks the diagnosis against fixed rules before it gets to you
+    if (four) { grid.classList.add('aj-four'); const chk = node('div', 'aj-check');
+      J.check.rules.forEach((r, i) => { const ru = node('div', 'aj-rule'); ru.style.setProperty('--i', i); ru.append(node('span', 'aj-rule-i', '📏'), node('span', null, r)); chk.append(ru); });
+      if (J.check.gate) chk.append(node('div', 'aj-gate', J.check.gate));
+      cards[2].querySelector('.card-head')?.after(chk); }
     const ask = node('div', 'aj-ask'); ask.append(node('div', 'aj-wait', J.wait || 'waiting for the operator'));
     const btns = node('div', 'aj-btns'); btns.append(node('span', 'aj-btn aj-yes', J.yes || 'Approve'), node('span', 'aj-btn aj-no', J.no || 'Reject')); ask.append(btns);
-    cards[2].querySelector('.card-head')?.after(ask);
-    [cards[0], cards[1]].forEach((c) => c.after(node('div', 'aj-arrow', '→')));
+    cards[four ? 3 : 2].querySelector('.card-head')?.after(ask);
+    (four ? [cards[0], cards[1], cards[2]] : [cards[0], cards[1]]).forEach((c) => c.after(node('div', 'aj-arrow', '→')));
   }
   if (v.contractZoom && cards.length >= 5) {                     // human in the loop: a small flow on top, then Sonny's diagnosis held against the contract's rules, one click per rule (each rule lights the part it looks at)
     const Z = v.contractZoom; grid.classList.add('cz-flow'); let k = 0;
