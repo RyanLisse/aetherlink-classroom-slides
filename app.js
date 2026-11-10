@@ -1419,9 +1419,11 @@ function renderOverviewPage() {
     f.src = DECK + '?embed=1&open=1#' + shot.dataset.n; shot.append(f); fit(shot);
   }), { root: grid, rootMargin: '400px' });
   const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target)));
-  const showInDeck = (i) => {                          // the deck tab that opened this one jumps there; without it, open the deck here
-    try { if (window.opener && !window.opener.closed) { window.opener.location.hash = String(i + 1); window.opener.focus(); return; } } catch {}
-    location.href = DECK + '#' + (i + 1);
+  const showInDeck = (i) => {                          // the deck tab jumps to slide i and comes to the front (a named tab: Chrome ignores opener.focus())
+    const name = 'deck-' + DECK;
+    try { if (window.opener && !window.opener.closed) window.opener.name = name; } catch {}
+    const w = window.open(DECK + '#' + (i + 1), name);
+    if (!w) location.href = DECK + '#' + (i + 1);
   };
   const tiles = slides.map((s, i) => {
     const tile = node('button', 'ov-tile' + (isHidden(i) ? ' is-hidden' : '')); tile.dataset.type = slideType(s);
@@ -1476,6 +1478,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 's' || e.key === 'S') { e.preventDefault(); openPresenterView(); }
 });
 window.addEventListener('pagehide', () => { slideController?.abort(); });
+if (!OVERVIEW_PAGE && !EMBED && (!window.name || window.name.startsWith('deck-'))) window.name = 'deck-' + DECK;   // lets the Overview's “Show in deck” find and focus this tab
 if (OVERVIEW_PAGE) renderOverviewPage(); else {
 window.addEventListener('hashchange', fromHash);
 fromHash();
