@@ -241,7 +241,7 @@ const day5Slides = [
       learn: ['Sonny does the first checks for the operator. He only reads.', 'He writes a diagnosis with evidence and one proposed fix.', 'He changes nothing himself: the operator approves or rejects. That is human in the loop.', 'Claude Code helps you build Sonny; Sonny is what you build.'],
       watch: ['Someone asks if Sonny is a real AI: today he runs offline on scripted answers, so everyone gets the same result and it costs nothing. Running him on Claude Sonnet is optional, at the end.', 'Do not explain rollback in depth yet. One line is enough: going back to the version before the update.'],
       terms: [['Sonny', 'our name for the on-call agent: the AI you build today'], ['Human in the loop', 'a person approves before anything changes'], ['Diagnosis', 'what the agent writes about the incident: what is wrong, the evidence, one proposed fix'], ['Evidence', 'one line of data that shows something: where it is, and which entry'], ['Proposed fix', 'the one step the agent suggests, for example a rollback'], ['Rollback', 'putting the previous version back live']],
-      next: 'would you trust Sonny at 03:45?'
+      next: 'key terms for today.'
     }
   }),
   baseSlide({
@@ -271,12 +271,12 @@ const day5Slides = [
         {shot: 'assets/day5-jessy-teach/s5-4.webp', do: 'Click OPEN.', say: ['OPEN: Sonny does not know it yet, or nobody has decided yet.', 'For example: which regions are hit? The data does not say, so Sonny writes OPEN instead of guessing.']},
         {shot: 'assets/day5-jessy-teach/s5-5.webp', do: 'Click Proposed fix and Approval.', say: ['The proposed fix is the one step Sonny suggests. A proposal, not an action.', 'An approval: a named person approves or rejects that one fix, for that one incident. Sonny only drafts it. Until a person signs, it says OPEN.']},
         {ask: 'Sonny proposes a rollback and drafts the approval. Has anything changed in the shop?', say: ['(Answer: no. The draft says OPEN until a person approves. Without that, the rollback is refused.)']},
-        {say: ['Three more words come in Assignment 3: rule, contract and test. We explain them when you need them.']}
+        {say: ['These words come back soon, in the rules every diagnosis must meet.', 'Rule, contract and test we explain when you need them.']}
       ],
       learn: ['Incident, fixture, telemetry, diagnosis, evidence, OPEN, proposed fix, approval: one meaning each.', 'A fixture is a saved incident, so everyone gets the same case.', 'A proposed fix is not an action: a named person approves or rejects it.'],
-      watch: ['Do not add rule, contract and test here: they come in Assignment 3.', 'Someone sees “verdict” or “proposal” in the code: the code’s words for diagnosis and proposed fix.', 'Approval is not the rollback itself. After an approval, running the rollback is still a separate step.'],
+      watch: ['Do not add rule, contract and test here: they come later today.', 'Someone sees “verdict” or “proposal” in the code: the code’s words for diagnosis and proposed fix.', 'Approval is not the rollback itself. After an approval, running the rollback is still a separate step.'],
       terms: [['Verdict', 'the code’s word for diagnosis'], ['Proposal', 'the code’s word for proposed fix'], ['Rollback', 'putting the previous version back live']],
-      next: 'would you trust Sonny at 03:45?'
+      next: 'the six steps of building software (SDLC).'
     }
   }),
   baseSlide({
@@ -348,72 +348,84 @@ const day5Slides = [
       learn: ['Today follows the six steps: Plan, Design, Build, Test, Deploy, Maintain.', 'Each assignment builds on the one before.', 'Maintain is optional today.'],
       watch: ['Do not explain each assignment in depth: each has its own slides.', 'Do not call A7 or A9 required.', 'One more → after Maintain goes to the next slide.'],
       terms: [['Diagnosis', 'what Sonny writes: what is happening, the root cause with evidence, one proposed fix']],
-      next: 'where Sonny’s incidents come from: morning a fixture, afternoon live.'
+      next: 'what we want from Sonny, and what is still missing.'
     }
   }),
   baseSlide({
-    title: 'Morning: a fixture. Afternoon: live.', kicker: 'Day 5 · HOW THE DAY RUNS', subtitle: 'Sonny gets incidents in two ways. In the morning nothing breaks: you practise on a saved incident. In the afternoon you break the shop yourself.', type: 'context',
-    visual: {doors: [
-      {icon: 'replay', color: 'var(--violet)', when: 'Morning · A1–A5'},
-      {icon: 'alert', color: '#ff6b6b', when: 'Afternoon · A6'},
-      {icon: 'trace', color: 'var(--aether-orange)', when: 'All day'}
-    ]},
-    cards: [{title: 'The fixture: INC-1001', body: 'A saved, made-up incident with all its data: graphs, updates, logs. The shop is not involved. One command hands it to Sonny: the same for everyone, every time.'}, {title: 'Live from the shop', body: 'The shop runs on your laptop and fake customers keep paying. You push a bad update on purpose. The console sees the errors and makes a new incident with a new number.'}, {title: 'Sonny handles both the same way', body: 'Same Sonny, same steps. So what you build on the fixture in the morning also works live.'}],
-    keyPoints: ['Morning: practise on the fixture INC-1001. Nothing breaks.', 'Afternoon: you break the shop, a live incident gets a new number.', 'Sonny handles both the same way.'],
-    notes: 'Time: 10:17 · 2 min. Fixture: npm run investigate -- fixtures/incidents/bad-deploy.json → src/cli.ts → investigate() in src/agent.ts. Its data lives in fixtures/telemetry/. Live: the console (console/server.ts) listens for alerts, creates a new incident (INC-<digits>) and investigates through src/chat.ts → investigate() in src/agent.ts. Claude Code draws both routes in A1.',
-    teach: {
-      time: '2 min',
-      gist: 'Morning on a fixture (nothing breaks), afternoon live (you break the shop). Sonny handles both the same way.',
-      script: [
-        {do: 'Slide appears.', say: ['Before we look inside Sonny: how do incidents get to him?', 'Two ways. This decides how the whole day runs.']},
-        {do: 'Point at The fixture.', say: ['Morning: nothing breaks.', 'INC-1001 is a fixture: a saved, made-up incident with all its data, the graphs, the updates, the logs.', 'The shop is not involved. One command hands it to Sonny.', 'Same for everyone, every time. So after each change you run it again and compare.']},
-        {do: 'Point at Live from the shop.', say: ['Afternoon, in A6: the shop runs on your laptop and fake customers keep paying.', 'You push a bad update on purpose.', 'The console sees the errors by itself and makes a new incident, with a new number.']},
-        {do: 'Point at Sonny handles both the same way.', say: ['Both go to the same Sonny, who takes the same steps.', 'So what you build on the fixture in the morning works live in the afternoon.']},
-        {ask: 'This afternoon a live incident appears. Will it be INC-1001?', say: ['(Answer: no. INC-1001 is the fixture. A live incident gets a new number.)']}
+    title: 'Sonny already runs. Today you make him safe to trust.', kicker: 'Day 5 · SONNY’S MAP', subtitle: 'The alert, what Sonny does, and the rules his diagnosis must meet before you see it. Each piece you build today has its place here.', type: 'context',
+    visual: {plIntro: 'First A1: look at all five steps. Then A2: write down what Sonny must do.', trustMap: {
+      alert: 'ALERT · checkout · 12% · INC-1001',
+      looks: [['📈', 'graphs'], ['🚀', 'updates'], ['🧩', 'code change'], ['📜', 'error messages']],
+      docName: 'diagnosis · INC-1001',
+      doc: [['What’s happening', 'failed payments 0.3% → 12% at 03:45, after update v2.15.0', 'metrics:03:45'], ['Root cause (high)', 'the update changed the EU payment settings; a key is missing', ['deploys:d-4821', 'diff:d-4821', 'logs:03:45:03']], ['Proposed fix', 'roll back to v2.14.0']],
+      gate: 'only if every rule is met',
+      zoomTitle: 'Zoom: the contract holds this diagnosis against five rules',
+      rules: [
+        ['A strong proposed fix needs evidence from at least two places', true, 'four places'],
+        ['A rollback needs evidence from the update list', true, 'deploys:d-4821'],
+        ['Not sure? Then no strong proposed fix', true, 'sure (high)'],
+        ['Data missing? Then not “sure”: write OPEN', true, 'nothing missing'],
+        ['Say what customers notice', false, 'missing']
       ],
-      learn: ['Morning: the fixture INC-1001. Nothing breaks.', 'Afternoon: you break the shop. A live incident gets its own number.', 'Sonny handles both the same way.'],
-      watch: ['Do not reveal what the bad update breaks.', 'Do not open the files now: Claude Code draws both routes in A1.'],
-      terms: [['Fixture', 'a saved, made-up incident with all its data; the same case for everyone, every time'], ['Fake customers', 'a small script that keeps placing orders, so the shop has traffic'], ['Bad update', 'a new version of the shop that contains a mistake']],
-      next: 'what happens inside Sonny, and what is still missing.'
-    }
-  }),
-  baseSlide({
-    title: 'Sonny already runs. Today you make him safe to trust.', kicker: 'Day 5 · SONNY’S MAP', subtitle: 'Five steps, from the alert to your decision. Each piece you build today has its own place here.', type: 'context',
-    visual: {reveal: 'click', covers: [], plIntro: 'First A1: look at all five steps. Then A2: write down what Sonny must do.', pipeline: [
-      {have: [['ok', 'from the fixture (morning) or from the shop you break (afternoon)']]},
-      {have: [['ok', 'graphs, code change, error logs'], ['todo', 'a proper tool to look up the updates. Today he uses a temporary shortcut.', 'A5']]},
-      {have: [['ok', 'what is happening, the cause with evidence, one proposed fix']]},
-      {hl: true, gate: 'only if every rule is met', have: [['ok', 'every diagnosis goes through it'], ['todo', 'there are no rules yet, so today every diagnosis goes through, even a bad one. You write the five rules.', 'A3']]},
-      {have: [['ok', 'you read it and ask questions in the chat'], ['todo', 'Sonny must refuse “roll back now” typed in the chat', 'A4'], ['todo', 'the rollback only runs after a named person approves it', 'A6']]}
-    ]},
+      today: 'Today the contract has no rules yet, so this diagnosis gets PASS anyway. After A3 it is stopped, and you see which rule broke.',
+      behave: {title: 'And how he behaves, also when you break the shop:', items: [['A5', 'he only reads, through a proper tool'], ['A4', 'he refuses “roll back now” in the chat'], ['A6', 'the rollback only runs after your approval']]}
+    }},
     cards: [
-      {title: 'An alert comes in', body: 'Checkout errors at 12%.'},
-      {title: 'Sonny reads the data', body: 'Only reading. He changes nothing.'},
-      {title: 'He writes a diagnosis', body: 'In plain words, with evidence.'},
-      {title: 'The contract checks it, before you see it', body: 'Breaks a rule? You see which one.'},
-      {title: 'You decide', body: 'Human in the loop: approve or reject the proposed fix.'}
+      {title: 'The alert', body: 'The one from 03:45.'},
+      {title: 'Sonny looks', body: 'Only reading.'},
+      {title: 'He writes a diagnosis', body: 'With evidence and one proposed fix.'},
+      {title: 'The contract checks it', body: 'Before you see it.'},
+      {title: 'You decide', body: 'Human in the loop.'}
     ],
     tagline: 'In Assignment 1 you see 14 red tests: exactly these pieces. Red means still to build, not broken.',
-    keyPoints: ['Sonny proposes, the contract lets through only a diagnosis that meets every rule, then you decide.', 'Each piece you build today has its place in this flow, and its own red tests.', 'This map comes back before every assignment.'],
-    notes: 'Time: 10:17 · 3 min. Each click opens the next step. Files (A1 shows them): 1 src/cli.ts (fixture) · console/server.ts (live) · 2 src/tools.ts · 3 src/agent.ts · 4 src/contract.ts · 5 terminal and console. Facts (workshop/start): the contract is parseVerdict in src/contract.ts with TODO(A3); it is wired in (validateVerdict in src/router.ts, called from investigate() in src/agent.ts), so every diagnosis prints “PASS contract” today. A5: list_deploys in src/tools.ts returns [] (TODO(A5)); until then src/runtime.ts and src/chat.ts read the updates directly (“A5 bypass” comments), so the morning works without it. A5 sits in the afternoon next to A4 because both are about limits (what Sonny may be told, what he may look at), and it must be done before the live run. A4: TODO(A4) in src/chat.ts plus a guard that protects bench/ratchet.json. A6: checkApproval in src/executor.ts (the tests call it A8). Red at the start: 14 workshop tests.',
+    keyPoints: ['Sonny proposes, the contract lets through only a diagnosis that meets every rule, then you decide.', 'The rules use the key terms: evidence, proposed fix, OPEN.', 'Also when you break the shop: he only reads, refuses actions in the chat, and nothing runs without your approval.'],
+    notes: 'Time: 10:14 · 4 min. Six clicks: 1 alert, 2 Sonny looks, 3 diagnosis (the same lines as slide 4), 4 the contract and the zoom, 5 you decide, 6 how he behaves. The five rules are TODO(A3) in src/contract.ts (code words: “a strong proposal needs evidence from at least 2 sources”, “rollback needs a deploys evidence line”, “low confidence cannot carry a strong proposal”, “high confidence is refused while data_gaps is non-empty”, “non-empty customer_impact”). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line; and it prints “PASS contract” today because the rules are empty. A5: list_deploys in src/tools.ts returns [], until then src/runtime.ts and src/chat.ts read the updates directly (“A5 bypass”). A4: TODO(A4) in src/chat.ts plus a guard on bench/ratchet.json. A6: checkApproval in src/executor.ts (tests call it A8). Red at the start: 14 workshop tests.',
     teach: {
-      time: '3 min',
-      gist: 'Sonny already runs from start to end, but nothing makes him safe to trust yet. A diagnosis must meet every rule of the contract before it gets to you: that is human in the loop.',
+      time: '4 min',
+      gist: 'Everything the room saw comes together: the 03:45 alert, what Sonny does, and the contract. A diagnosis must meet every rule before it gets to you: that is human in the loop.',
       script: [
-        {do: 'Slide appears: five closed blocks, one line above them.', say: ['We know how incidents get to Sonny. Now: what happens inside him?', 'Five steps, from the alert to your decision.', 'He already runs from start to end. But nothing makes him safe to trust yet. That is today’s work.']},
-        {do: 'Point at the line above the blocks.', say: ['First A1: you look at all five steps. Then A2: you write down what Sonny must do.', 'From A3 on, every assignment builds one piece, at its own place.']},
-        {do: 'Click: An alert comes in.', say: ['That already works: from the fixture in the morning, or from the shop you break in the afternoon.']},
-        {do: 'Click: Sonny reads the data.', say: ['He reads the graphs, the code change and the error logs. Only reading.', 'For the update list he uses a temporary shortcut today. In A5 you build a proper tool for it.']},
-        {do: 'Click: He writes a diagnosis.', say: ['That works: what is happening, the cause with evidence, one proposed fix.']},
-        {do: 'Click: The contract checks it (orange).', say: ['“Contract” is a normal software word: the rules something must meet.', 'Here: the rules every diagnosis must meet before you see it.', 'The contract is already wired in: every diagnosis goes through it. But it has no rules yet. So today every diagnosis goes through, even a bad one.', 'In A3 you write the five rules.']},
-        {do: 'Point at the orange marker “only if every rule is met”.', say: ['This is the heart of it.', 'Only a diagnosis that meets every rule goes on to you. Breaks a rule? You see which one.', 'Why? An AI can sound very sure without evidence. So plain code checks first, and you decide with a diagnosis you can trust.']},
-        {do: 'Click: You decide.', say: ['You read it and ask questions in the chat. That works.', 'A4: if someone types “roll back now” in the chat, Sonny must refuse. Actions are buttons a person clicks.', 'A6: the rollback only runs after a named person approves it.', 'Sonny proposes, the contract checks, you decide. That is human in the loop.']},
-        {ask: 'Why not let the operator check everything themselves?', say: ['(Answer: at 03:45, under stress, you miss things. The contract checks the same rules every time, so you can spend your attention on the decision.)']},
-        {do: 'Point at the line at the bottom.', say: ['In Assignment 1 you see 14 red tests: exactly these pieces. Red means still to build, not broken.', 'This map comes back before every assignment, with that assignment’s piece lit.']}
+        {do: 'Slide appears: five faded steps.', say: ['Let us put together what we saw.', 'Sonny already runs from start to end. But nothing makes him safe to trust yet. That is today’s work.']},
+        {do: 'Point at the line above the steps.', say: ['First A1: you look at all five steps. Then A2: you write down what Sonny must do.']},
+        {do: 'Click: The alert.', say: ['The alert from 03:45: 12% of payments fail. INC-1001.']},
+        {do: 'Click: Sonny looks.', say: ['He looks where you would look: graphs, updates, the code change, the error messages. Only reading.']},
+        {do: 'Click: He writes a diagnosis.', say: ['The same diagnosis as before: what is happening, the root cause with evidence, one proposed fix.']},
+        {do: 'Click: The contract checks it. The zoom opens below.', say: ['Here is the step we zoom in on: the contract.', '“Contract” is a normal software word: the rules something must meet.', 'Here: five rules every diagnosis must meet before you see it. Recognise the words? Evidence, proposed fix, OPEN.']},
+        {do: 'Point at the five rules, top to bottom.', say: ['A strong proposed fix needs evidence from at least two places. This one has four.', 'A rollback needs evidence from the update list. Yes: deploys:d-4821.', 'Not sure? Then no strong proposed fix. He is sure: high.', 'Data missing? Then he may not say “sure”: he writes OPEN. Nothing is missing here.', 'And: say what customers notice.']},
+        {ask: 'Which rule does this diagnosis break?', say: ['(Answer: the last one. It does not say what customers notice.)', 'Today the contract has no rules yet, so it still says PASS. After A3 it is stopped, and you see which rule broke.']},
+        {do: 'Click: You decide. Point at the orange marker.', say: ['Only a diagnosis that meets every rule goes on to you.', 'Why? An AI can sound very sure without evidence. So plain code checks first, and you decide with a diagnosis you can trust. That is human in the loop.']},
+        {do: 'Click: the row at the bottom.', say: ['And not only the diagnosis. When you break the shop this afternoon, he must behave too:', 'he only reads, through a proper tool: A5.', 'he refuses “roll back now” in the chat: A4.', 'and the rollback only runs after your approval: A6.']},
+        {do: 'Point at the line at the bottom.', say: ['In Assignment 1 you see 14 red tests: exactly these pieces. Red means still to build, not broken.']}
       ],
-      learn: ['Sonny proposes → the contract lets through only a diagnosis that meets every rule → the operator decides. That is human in the loop.', 'Already there: the alert, reading the data, writing the diagnosis, the chat.', 'Still to build: the update tool (A5), the contract’s rules (A3), refusing “roll back now” in the chat (A4), approval before the rollback runs (A6).'],
-      watch: ['Someone asks why A5 comes so late: the shortcut keeps the morning working; A5 replaces it before the live run, next to A4 (both are about limits).', '“Contract” confuses someone: it is the set of rules a diagnosis must meet; Java developers know it from design by contract.', 'Someone asks about “A8” in the tests: that is the approval piece, part of A6.'],
-      terms: [['Contract', 'the five rules together, as code; every diagnosis must meet them before the operator sees it'], ['Tool', 'a small function Sonny may call to read data, like the update list'], ['Red test', 'a test for a piece that is not built yet']],
+      learn: ['Sonny proposes → the contract lets through only a diagnosis that meets every rule → the operator decides. That is human in the loop.', 'The five rules use the key terms: evidence, proposed fix, OPEN.', 'Also live: he only reads (A5), refuses actions in the chat (A4), and the rollback waits for your approval (A6).'],
+      watch: ['Do not explain how to build the rules: A3 does that.', '“Contract” confuses someone: the set of rules a diagnosis must meet; Java developers know it from design by contract.', 'Someone asks why A5 comes so late: a temporary shortcut keeps the morning working; A5 replaces it before the live run.', 'Someone asks about “A8” in the tests: that is the approval piece, part of A6.'],
+      terms: [['Contract', 'the five rules together, as code; every diagnosis must meet them before the operator sees it'], ['Rule', 'one requirement every diagnosis must meet'], ['Red test', 'a test for a piece that is not built yet']],
+      next: 'how we test that Sonny behaves: two scenarios.'
+    }
+  }),
+  baseSlide({
+    title: 'Two scenarios to test Sonny', kicker: 'Day 5 · HOW THE DAY RUNS', subtitle: 'You cannot wait for a real 03:45 to see if Sonny behaves. So you give him scenarios.', type: 'context',
+    visual: {doors: [
+      {icon: 'replay', color: 'var(--violet)', when: 'Morning · A1–A5', mini: 'alert', alert: 'ALERT · checkout · 12% · INC-1001', stamp: 'SAVED · FIXTURE', cmd: 'one command'},
+      {icon: 'alert', color: '#ff6b6b', when: 'Afternoon · A6', mini: 'shop', flow: [['🛒', 'customers pay ✓', 'ok'], ['⚡', 'you push a bad update', 'bad'], ['🚨', 'new alert, new number', 'bad']]},
+      {icon: 'trace', color: 'var(--aether-orange)', when: 'All day', bot: true}
+    ]},
+    cards: [{title: 'Morning: the 03:45 incident, saved', body: 'All its data is stored: graphs, updates, logs. One command hands it to Sonny. The same every time, so you see exactly what your change did.'}, {title: 'Afternoon: live', body: 'The shop runs on your laptop and fake customers keep paying. You break it on purpose. The console sees the errors and makes a new incident.'}, {title: 'Same Sonny, same rules', body: 'What you build in the morning also works live.'}],
+    keyPoints: ['Morning: the 03:45 incident, saved as a fixture. Nothing breaks.', 'Afternoon: you break the shop, a live incident gets a new number.', 'Same Sonny, same rules.'],
+    notes: 'Time: 10:18 · 2 min. The fixture: npm run investigate -- fixtures/incidents/bad-deploy.json (A1 last step; again in A3 to see the difference) → src/cli.ts → investigate() in src/agent.ts; its data lives in fixtures/telemetry/. Live (A6): the console (console/server.ts) listens for alerts, creates a new incident (INC-<digits>) and investigates through src/chat.ts → investigate() in src/agent.ts.',
+    teach: {
+      time: '2 min',
+      gist: 'We test Sonny on scenarios: in the morning the saved 03:45 incident (the fixture), in the afternoon a live one you cause yourself. Same Sonny, same rules.',
+      script: [
+        {do: 'Slide appears.', say: ['We know how Sonny must behave. How do you test that?', 'You cannot wait for a real incident at 03:45. So you give him scenarios.']},
+        {do: 'Point at the morning block.', say: ['Morning: the incident from 03:45, saved with all its data. The graphs, the updates, the logs.', 'That is a fixture. Nothing breaks, the shop is not involved.', 'One command hands it to Sonny. The same every time, for everyone.', 'So after each change you run it again and see exactly what your change did.']},
+        {do: 'Point at the afternoon block.', say: ['Afternoon, in A6: the shop runs on your laptop, fake customers keep paying.', 'You push a bad update on purpose. The console sees the errors and makes a new incident, with a new number.']},
+        {do: 'Point at Sonny.', say: ['Same Sonny, same rules. What you build in the morning also works live.']},
+        {ask: 'Why practise on a saved incident instead of a real one?', say: ['(Answer: it is the same every time, so you can compare before and after. And you cannot wait for a real 03:45.)']},
+        {say: ['In Assignment 1 you run the 03:45 scenario yourself, and watch what Sonny does.']}
+      ],
+      learn: ['A scenario is a situation you put Sonny in to test him.', 'Morning: the fixture INC-1001, the saved 03:45 incident. Afternoon: a live incident you cause.', 'Same Sonny, same rules.'],
+      watch: ['Do not reveal what the bad update breaks.', 'This afternoon’s live incident is not INC-1001: it gets a new number.'],
+      terms: [['Scenario', 'a situation you put Sonny in to see how he behaves'], ['Fixture', 'a saved, made-up incident with all its data; the same every time'], ['Fake customers', 'a small script that keeps placing orders, so the shop has traffic']],
       next: 'Assignment 1 starts with research.'
     }
   }),
@@ -1148,7 +1160,7 @@ window.SLIDES = day5Slides;
 // SDLC tracker: which of the six phases lights up on each slide (see sdlcTrack in app.js).
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
-  [/^(Let’s start the project|The skills Claude Code uses today|Sonny already runs|Morning: a fixture|A tour of the project|A1 |Assignment 1:|A2 |Assignment 2:)/, 'plan'],
+  [/^(Let’s start the project|The skills Claude Code uses today|Sonny already runs|Two scenarios to test Sonny|A tour of the project|A1 |Assignment 1:|A2 |Assignment 2:)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^A3 · How do we know/, 'test'],
   [/^(How your agent handles an incident|A3 · )/, 'design'],

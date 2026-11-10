@@ -348,6 +348,29 @@ function renderExtras(stage, main, s, v) {
     cards[2].querySelector('.card-head')?.after(ask);
     [cards[0], cards[1]].forEach((c) => c.after(node('div', 'aj-arrow', '→')));
   }
+  if (v.trustMap && cards.length >= 5) {                         // Sonny's map: the slide 3 alert → slide 4's looks and diagnosis → the contract (zoom: five rules on that diagnosis) → you decide; then how he behaves
+    const T = v.trustMap; grid.classList.add('trust-map'); let k = 0;
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('tm-card', 'tm-' + i); c.prepend(node('span', 'pl-num', String(i + 1))); c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
+    const put = (i, el) => { const h = cards[i].querySelector('.card-head'); if (h) h.after(el); else cards[i].append(el); };
+    const al = node('div', 'wk-alert tm-alert'); al.append(node('span', 'wk-dot'), node('span', 'wk-alert-txt', T.alert)); put(0, al);
+    const chips = node('div', 'aj-chips tm-chips'); T.looks.forEach(([ico, txt]) => { const ch = node('div', 'aj-chip'); ch.append(node('span', 'aj-chip-i', ico), node('span', null, txt), node('span', 'aj-tick', '✓')); chips.append(ch); }); put(1, chips);
+    const doc = node('div', 'aj-doc tm-doc'); doc.append(node('div', 'aj-doc-tab', T.docName || 'diagnosis'));
+    T.doc.forEach(([kk, val, ev]) => { const r = node('div', 'aj-row'); r.append(node('b', null, kk), node('span', null, val)); if (ev) { const evs = node('span', 'aj-evs'); [].concat(ev).forEach((e) => evs.append(node('code', 'aj-ev', e))); r.append(evs); } doc.append(r); }); put(2, doc);
+    const mini = node('div', 'tm-mini-rules'); T.rules.forEach(() => mini.append(node('span', 'tm-mini-rule'))); mini.append(node('span', 'tm-mini-txt', T.rules.length + ' rules')); put(3, mini);
+    const btns = node('div', 'aj-btns'); btns.append(node('span', 'aj-btn aj-yes', T.yes || 'Approve'), node('span', 'aj-btn aj-no', T.no || 'Reject')); put(4, btns);
+    cards.forEach((c, i) => { if (i < cards.length - 1) { if (i === 3 && T.gate) { const g = node('div', 'pl-arrow pl-gate'); g.append(node('span', 'pl-gate-text', T.gate), node('span', 'pl-gate-glyph', '→')); c.after(g); } else c.after(node('div', 'pl-arrow', '→')); } });
+    const zoom = node('div', 'tm-zoom'); zoom.append(node('div', 'tm-zoom-h', T.zoomTitle || 'Zoom: the contract'));
+    const list = node('div', 'tm-rules'); T.rules.forEach(([txt, ok, note]) => { const r = node('div', 'tm-rule ' + (ok ? 'tm-ok' : 'tm-bad')); r.append(node('span', 'tm-rule-mark', ok ? '✓' : '✗'), node('span', 'tm-rule-txt', txt), node('span', 'tm-rule-note', note || '')); list.append(r); }); zoom.append(list);
+    if (T.today) zoom.append(node('p', 'tm-today', T.today));
+    grid.after(zoom);
+    const beh = node('div', 'tm-behave'); beh.append(node('span', 'tm-behave-h', T.behave.title)); T.behave.items.forEach(([tag, txt]) => { const it = node('span', 'tm-behave-item'); it.append(node('span', 'pl-tag', tag), node('span', null, txt)); beh.append(it); }); zoom.after(beh);
+    if (v.plIntro) grid.before(node('p', 'pl-intro', v.plIntro));
+    const steps = cards.length + 1;                                // 1–5 = the five steps (the zoom opens with step 4), 6 = how he behaves
+    const paint = () => { cards.forEach((c, i) => c.classList.toggle('shown', i < k)); zoom.classList.toggle('shown', k >= 4); beh.classList.toggle('shown', k >= steps); grid.querySelectorAll('.pl-arrow').forEach((a, i) => a.classList.toggle('shown', i < k - 1)); };
+    paint();
+    const next = () => { if (k < steps) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
   if (v.wakeUp && cards.length >= 3) {                          // 03:45 story: the operator (Aetherbot) wakes up, the screen fills with what is happening, then the question
     const W = v.wakeUp; grid.classList.add('wake-up'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('wk-card', 'wk-' + i); });
     const bot = node('div', 'wk-bot');
@@ -390,6 +413,9 @@ function renderExtras(stage, main, s, v) {
     grid.classList.add('doors');
     cards.forEach((c, i) => { const D = v.doors[i]; if (!D) return; c.classList.add('door-card'); c.style.setProperty('--gl', D.color || 'var(--cyan)'); c.querySelector('.card-icon')?.remove();
       const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[D.icon] || ICONS.dot}</svg>`; c.prepend(ic);
+      if (D.mini === 'alert') { const m = node('div', 'dm-saved'); const a = node('div', 'wk-alert dm-alert'); a.append(node('span', 'wk-dot'), node('span', 'wk-alert-txt', D.alert || 'ALERT · checkout · 12% · INC-1001')); m.append(a, node('span', 'dm-stamp', D.stamp || 'SAVED · FIXTURE')); if (D.cmd) m.append(node('code', 'dm-cmd', D.cmd)); c.querySelector('.card-head')?.after(m); }
+      if (D.mini === 'shop') { const m = node('div', 'dm-shop'); (D.flow || []).forEach(([ico, txt, kind], j) => { if (j) m.append(node('span', 'dm-arrow', '→')); const st = node('span', 'dm-step' + (kind ? ' dm-' + kind : '')); st.append(node('span', 'dm-ico', ico), node('span', null, txt)); m.append(st); }); c.querySelector('.card-head')?.after(m); }
+      if (D.bot) { const f = node('div', 'dm-bot'); f.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; f.append(node('span', 'aj-bot-tag', D.bot === true ? 'SONNY' : D.bot)); c.querySelector('.card-head')?.after(f); }
       const meta = node('div', 'door-meta'); if (D.when) meta.append(node('span', 'gl-eg', D.when)); if (D.file) meta.append(node('code', 'door-file', D.file)); c.append(meta); });
     const arrows = node('div', 'door-arrows'); arrows.innerHTML = '<span>→</span><span>→</span>'; cards[1].after(arrows);
   }
@@ -1330,7 +1356,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
