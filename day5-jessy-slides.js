@@ -1053,7 +1053,75 @@ const day5Slides = [
     ],
     after: 'Chat refuses mutations, evidence questions work, and the human-owned file guard passes.',
     checks: ['Show the focused chat output for both exact sentences.', 'Show the focused guard output.', 'Do not use the root audit file as A4 proof.'],
-    humanOpen: 'Only the participant edits the human-owned hook line.', next: 'Close: what you learned on Day 5'
+    humanOpen: 'Only the participant edits the human-owned hook line.', next: 'A5 · Add one read-only tool'
+  }),
+  baseSlide({
+    title: 'Give the agent one read-only tool', kicker: 'Day 5 · CONCEPT', subtitle: 'A tool supplies evidence. It does not supply authority.',
+    cards: [{title: 'Handler', body: 'list_deploys returns deployment evidence.'}, {title: 'Trace', body: 'The trace records the exact arguments.'}, {title: 'No bypass', body: 'Offline runtime and chat use the registered handler.'}],
+    keyPoints: ['No mutation tool exists.', 'Empty windows remain data gaps.', 'Trace arguments must match the request.'],
+    notes: note({time: '13:40 · 3 min', why: 'The diagnosis needs facts outside the prompt.', predict: 'Ask which tool call proves a deploy claim.', see: 'One read-only handler appears in the trace.', inside: 'Three bypasses must disappear.', participant: 'Choose an empty-window or missing-deploy case.', watch: 'Do not add a write tool.', stuck: 'Run the focused A5 test.', stop: 'The tool boundary is clear.', next: 'A5 example target'})
+  }),
+  screenshotSlide({number: 5, title: 'Example tool and trace proof', subtitle: 'The result and the arguments both belong in the proof.', stage: 'tools', shot: 'assets/day5-expected/a5.png', points: ['The registered handler returns deploy evidence.', 'The trace shows exact list_deploys arguments.', 'The offline runtime and chat no longer bypass the handler.'], next: 'Assignment 5', time: '13:43 · 2 min'}),
+  assignmentSlide({
+    number: 5, title: 'build a read-only deploy tool', subtitle: 'Bind one evidence tool and prove every route uses it.', stage: 'tools', duration: '13:45 · 20 min', shot: 'assets/day5-expected/a5.png',
+    steps: [
+      {text: 'Type this in: Claude Code', prompt: PROMPTS.a5Build, after: 'Claude Code shows the red focused test and the three bypasses.'},
+      {text: 'Human review. Approve only the handler and bypass-removal scope.', after: 'The implementation stays read-only.'},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run test:workshop -- --test-name-pattern=A5:', after: 'Only the focused A5 checks run and pass.'},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The trace shows list_deploys and exact arguments.'},
+      {text: 'Human review. Compare the result with the trace.', after: 'Every deploy claim has a tool reference.'}
+    ],
+    after: 'The deploy tool is read-only, traced, and used by every investigation route.',
+    checks: ['Show the handler result.', 'Show exact trace arguments.', 'Show no direct deploy-reader bypass.'],
+    humanOpen: 'A tool result informs a decision. It never authorizes one.', next: 'A5 catch-up checkpoint'
+  }),
+  baseSlide({
+    title: 'Catch-up · Ready for the live route', kicker: 'Day 5 · CHECKPOINT A5', subtitle: 'Save your work before using the reviewed A5 checkpoint.', type: 'review', layout: 'exercise', mode: 'manual', calm: true,
+    stepsHeading: 'Use only when blocked',
+    steps: [
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git status --short', after: 'You can see every local change before recovery.'},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git stash push -u -m "before Day 5 A5 catch-up"', after: 'Tracked and untracked participant work is saved.', warn: true},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git switch -c day5-catch-up-a5 day5-after-a5', after: 'A new branch starts at the reviewed A5 checkpoint.'},
+      {text: 'Human review. Continue with A6 only.', after: 'Your original work remains in the named stash.'}
+    ],
+    expected: 'A new catch-up branch is ready without discarding participant work.',
+    cards: [{title: 'A3', body: 'customer_impact is required and visible.'}, {title: 'A4', body: 'Mutations are refused and the guard passes.'}, {title: 'A5', body: 'list_deploys returns evidence with trace arguments.'}],
+    keyPoints: ['Self-check the first missing checkpoint.', 'Do not rerun every suite.', 'Continue when all three proofs are visible.'],
+    notes: note({time: '14:05 · 5 min', why: 'The live route depends on the three completed contracts.', predict: 'Ask which proof is missing first.', see: 'Three compact checkpoints.', inside: 'The recovery commands preserve work and create a separate branch.', participant: 'Self-check A3, A4, and A5. Optionally share one blocker in chat.', watch: 'Never reset or overwrite participant work.', stuck: 'Use the reviewed day5-after-a5 tag.', stop: 'All three checkpoints are visible.', next: 'A6 · Run the live counterpart'})
+  }),
+  baseSlide({
+    title: 'Run the live counterpart', kicker: 'Day 5 · CONCEPT', subtitle: 'Create a new live incident, challenge its evidence, and keep action human-owned.',
+    cards: [{title: 'Before', body: 'Run healthy traffic for two minutes.'}, {title: 'Change', body: 'Run one bad deploy in its own terminal.'}, {title: 'Explain', body: 'Use stable refs and keep current telemetry separate.'}, {title: 'Human in the loop', body: 'Wrong incident or action stays blocked.'}],
+    keyPoints: ['Window 1 is the console from A1. Restart it. Do not open a second one.', 'Do not let Claude run chaos.', 'The A8 human-in-the-loop check is the last A6 step.'],
+    notes: note({time: '14:10 · 4 min', why: 'The learner now has the contracts needed for a real local route.', predict: 'Ask why the healthy baseline comes first.', see: 'The listener creates a new live incident about three minutes after healthy traffic starts.', inside: 'Run Window 1: AGENT_LISTEN_WINDOW_MIN=1 npm run console. Run Window 2: npm run shop. Run Window 3: npm run traffic. After the two-minute baseline, run Window 4: npm run chaos -- deploy v2.15.0 --mode bad-deploy. Detection and diagnosis take about 55 seconds.', participant: 'Write one plausible alternative cause.', watch: 'Keep fixture, live, diagnosis snapshot, and current telemetry distinct.', stuck: 'Stay on the scripted route.', stop: 'The room can state all four commands and the wait.', next: 'A6 example target'})
+  }),
+  screenshotSlide({number: 6, title: 'Example live incident proof', subtitle: 'The current run must reproduce the route and its evidence labels.', stage: 'live', shot: 'assets/day5-expected/a6.png', points: ['The live incident has its own id.', 'Diagnosis claims cite stable source:ref labels.', 'Snapshot evidence and current telemetry are labeled separately.'], next: 'Assignment 6 · start and trace', time: '14:14 · 2 min'}),
+  assignmentSlide({
+    number: 6, title: 'start and trace the live route · 1/2', subtitle: 'Map the path, reuse services, establish a baseline, then create one incident.', stage: 'live', duration: '14:16 · 22 min', shot: 'assets/day5-expected/a6.png',
+    steps: [
+      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Map, after: 'Claude Code maps the fixture and live routes without editing.'},
+      {text: 'Type this in: Claude Code', prompt: PROMPTS.a6Build, after: 'Claude Code proposes the terminal order and waits for approval.'},
+      {text: 'You, not Claude. Window 1 already runs the console from A1: press Ctrl+C there and start it again. Open two new windows for the shop and the traffic.', parts: [['Window 1', 'AGENT_LISTEN_WINDOW_MIN=1 npm run console'], ['Window 2', 'npm run shop'], ['Window 3', 'npm run traffic']], after: 'All three windows say they are running. Do not start a second console.', warn: true},
+      {text: 'Human review. Keep healthy traffic running for two minutes.', after: 'A healthy before-state is visible. About 55 seconds remain after the deploy.', warn: true},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows). Use Window 4.', parts: [['Window 4', 'npm run chaos -- deploy v2.15.0 --mode bad-deploy']], after: 'About 55 seconds later, a new incident appears at localhost:4320.', warn: true}
+    ],
+    after: 'A new live incident exists with a healthy before-state and a visible tool trace.',
+    checks: ['Show the live incident id.', 'Show the two-minute baseline.', 'Show the diagnosis trace.'],
+    humanOpen: 'The participant starts chaos. Claude Code never runs or stops the processes.', next: 'Human in the loop · Part of A6'
+  }),
+  screenshotSlide({number: 8, title: 'Human in the loop · Part of A6', kicker: 'Day 5 · HUMAN IN THE LOOP', subtitle: 'The last safety check inside A6: only the right incident, the right action and a named person.', stage: 'gate', shot: 'assets/day5-expected/a8.png', points: ['A wrong incident stays blocked.', 'A wrong action stays blocked.', 'The real approval and execution remain HUMAN OPEN.'], next: 'Assignment 6 · challenge and human in the loop', time: '14:38 · 2 min'}),
+  checkpointSlide({
+    number: 6, title: 'challenge the incident and prove human in the loop · 2/2', subtitle: 'Challenge the evidence, refuse mutation, and prove the human in the loop.', stage: 'gate', duration: '14:40 · 20 min', shot: 'assets/day5-expected/a8.png',
+    steps: [
+      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Evidence, after: 'The answer cites stable refs and separates snapshot from current telemetry.'},
+      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Alternative, after: 'The offline bot repeats the same summary. That is expected: it is a script, not a model, so it cannot think of other causes. Write one other possible cause in your own notes.'},
+      {text: 'Type this in: browser http://localhost:4320 · agent chat', prompt: PROMPTS.a6Mutation, after: 'Chat refuses rollback and creates no action record.', warn: true},
+      {text: 'Type this in: Claude Code. Build the human-in-the-loop check.', prompt: PROMPTS.a8Build, after: 'Both existing mismatch cases stay blocked in the focused test.'},
+      {text: 'Open in browser: http://localhost:4320', after: 'Approve and Execute remain HUMAN OPEN.', warn: true}
+    ],
+    after: 'The answer is cited, mutation is refused, and the human in the loop stays in charge.',
+    checks: ['Show stable refs.', 'Show refused mutation.', 'Show both mismatch tests and HUMAN OPEN.'],
+    humanOpen: 'Only a named human may approve, execute, mitigate, or resolve.', next: 'Close: what you learned on Day 5'
   }),
   baseSlide({
     title: 'Close: what you learned on Day 5', kicker: 'Close · Day 5', type: 'recap', layout: 'recap',
