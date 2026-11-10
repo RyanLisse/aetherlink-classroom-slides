@@ -1327,7 +1327,8 @@ function renderAssignment(stage, s) {
     return b; };
   const inline = (s.steps || []).some(t => t.prompt && !isCmd(t.prompt));              // steps with their own prompt: no prompt box at the bottom
   (s.steps || []).forEach((t, i) => {
-    const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
+    const wide = !!window.ASG_WIDE;                                 // wide layout: no click-to-cross-out on steps
+    const li = node('li', 'asg-step' + (done[i] && !wide ? ' done' : '')); li.style.setProperty('--i', i); if (!wide) li.tabIndex = 0;
     let label = t.text ?? t, where = t.where || null;              // wide layout (opt-in): "Type this in: X. Goal: …" → a where-chip [X] + the goal as the title
     if (window.ASG_WIDE && !where && typeof label === 'string') { const m = label.match(/^Type this in:\s*([^.]+?)\.\s*(?:Goal:\s*)?([\s\S]*)$/) || label.match(/^Open in (browser):\s*([\s\S]*)$/i); if (m) { where = m[1].replace(/^browser$/i, 'Browser'); label = /^https?:/i.test(m[2]) ? m[2] : m[2].charAt(0).toUpperCase() + m[2].slice(1); label = label.replace(/^([^.]*[^.\s])\.$/, '$1'); } }
     const text = node('span', 'asg-text');
@@ -1336,17 +1337,23 @@ function renderAssignment(stage, s) {
     const cmds = t.cmds || (t.prompt && isCmd(t.prompt) ? [t.prompt] : null);  // short commands: chips on the same line, 'then' between two
     (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd' + (p[0] !== '!' ? ' no-copy' : '')); c.append(node('code', null, p)); if (p[0] === '!') c.append(copyBtn(p)); text.append(c); });  // only !commands get Copy; /exit, claude: just type them
     if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); const cb = copyBtn(t.prompt);
-      if (window.ASG_WIDE && t.prompt.length > 110) {           // wide layout: long prompts fold to two lines; Copy still copies the whole prompt
+      if (window.ASG_WIDE && t.prompt.length > 110) {           // wide layout: long prompts show one line; "show all" drops the full prompt down over the slide (box and layout stay the same); Copy copies the whole prompt
         pr.classList.add('folded'); const more = node('button', 'asg-more', 'show all'); more.type = 'button';
-        more.addEventListener('click', (e) => { e.stopPropagation(); const f = pr.classList.toggle('folded'); more.textContent = f ? 'show all' : 'show less'; });
-        const col = node('div', 'asg-prompt-btns'); col.append(cb, more); pr.append(node('pre', 'asg-prompt-text', t.prompt), col);
+        const full = node('pre', 'asg-prompt-full', t.prompt);
+        const setOpen = (o) => { if (o) pr.dataset.open = ''; else delete pr.dataset.open; more.textContent = o ? 'show less' : 'show all'; };   // a data attribute, not a class: fit-stage does not re-zoom
+        more.addEventListener('click', (e) => { e.stopPropagation(); const o = !('open' in pr.dataset); document.querySelectorAll('.asg-step-prompt[data-open]').forEach((x) => { if (x !== pr) x.querySelector('.asg-more')?.click(); }); setOpen(o); });
+        full.addEventListener('click', (e) => e.stopPropagation());
+        if (!window.__asgPromptClose) { window.__asgPromptClose = true;
+          document.addEventListener('click', () => document.querySelectorAll('.asg-step-prompt[data-open] .asg-more').forEach((b) => b.click()));
+          document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.asg-step-prompt[data-open] .asg-more').forEach((b) => b.click()); }); }
+        const col = node('div', 'asg-prompt-btns'); col.append(cb, more); pr.append(node('pre', 'asg-prompt-text', t.prompt), col, full);
       } else pr.append(node('pre', 'asg-prompt-text', t.prompt), cb);
       text.append(pr); }
     if (t.parts) { const row = node('span', 'asg-parts'); t.parts.forEach(([k, v]) => { const p = node('span', 'asg-part'); p.append(node('span', 'asg-part-k', k), node('code', null, v)); row.append(p); }); text.append(row); }  // the pieces of what Claude made, labelled: moment, matcher, command
     if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };
-    li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+    if (!wide) { li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } }); }
     ol.append(li);
   });
   main.append(ol);
