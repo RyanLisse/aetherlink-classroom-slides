@@ -721,46 +721,10 @@ const day5Slides = [
       learn: ['intent.md gets filled by Claude Code from your answers; you approve.', 'Three empty parts get filled, and a Checks part is added.', 'The checks are promises you can check by looking; the tests check them later today.'],
       watch: ['Someone’s intent.md looks very different: fine, as long as no part is empty and the checks can be checked by looking.', 'Someone thinks the checks make Claude Code write the rules: no. The rules are already in the project; Claude Code reads intent.md next to them.', 'File names or code in intent.md: it says what, not how.'],
       terms: [['intent.md', 'a short file that says what the agent must do and must not do'], ['OPEN', 'the agent says: I do not know this yet']],
-      next: 'break, then how your agent handles an incident.'
+      next: 'break, then: you only get a diagnosis that meets the rules.'
     }
   }),
-  pauseSlide('Break', '15 min', 'How your agent handles an incident', '11:09'),
-  baseSlide({
-    title: 'How your agent handles an incident', kicker: 'Day 5 · THE AGENT', subtitle: 'An alert comes in, the agent looks at the data and writes a diagnosis. Then plain code checks that diagnosis against fixed rules, and the operator decides.',
-    visual: {pipeline: [
-      {file: 'src/cli.ts · console/server.ts'},
-      {file: 'src/tools.ts', tag: 'A5'},
-      {file: 'src/agent.ts'},
-      {file: 'src/contract.ts', tag: 'A3', hl: true},
-      {file: 'terminal · console', tag: 'A4 · A6'}
-    ]},
-    cards: [
-      {title: 'An alert comes in', body: 'Checkout errors at 12%. A saved incident (INC-1001) or live from the shop.'},
-      {title: 'The agent looks at the data', body: 'Graphs, the update list, the code change, the error logs. Only reading.'},
-      {title: 'It writes a diagnosis', body: 'What is wrong, the proof, how sure it is, and a proposed fix.'},
-      {title: 'Code checks the diagnosis', body: 'Fixed rules, like “is there proof?”. Breaks a rule? The operator sees which one.'},
-      {title: 'A person decides', body: 'The operator reads it, asks questions in the chat, approves the fix or not.'}
-    ],
-    tagline: 'Each assignment builds one part of this.',
-    keyPoints: ['Alert → look at the data → diagnosis → code checks it → the operator decides.', 'Two safety layers: fixed rules in code, then a person.', 'A3 builds the rules.'],
-    notes: 'Time: 11:24 · 2 min. Saved incident: npm run investigate → src/cli.ts → investigate() in src/agent.ts. Live: console/server.ts → src/chat.ts → investigate(). Four read-only tools in src/tools.ts: summarize_metrics, list_deploys, get_diff, search_logs. The diagnosis goes to validateVerdict (src/router.ts) → parseVerdict (src/contract.ts). Offline the diagnosis comes from scripted answers (src/runtime.ts); with a real model the instructions are in src/prompts.ts.',
-    teach: {
-      time: '2 min',
-      gist: 'How the agent works, start to end: alert, look at the data, write a diagnosis, check it, a person decides.',
-      script: [
-        {do: 'Slide appears.', say: ['How does your agent work, from start to end?', 'Five steps, left to right.']},
-        {do: 'Point at the first three cards.', say: ['An alert comes in: checkout errors at 12%.', 'The agent looks at the data: graphs, the update list, what changed in the code, the error logs. It only reads.', 'It writes a diagnosis: what is wrong, the proof, how sure it is, a proposed fix.']},
-        {do: 'Point at the orange card.', say: ['Then ordinary code checks the diagnosis. Not the AI, not a person: a few fixed rules.', 'For example: is there proof? Does it say what customers notice?', 'Breaks a rule? The operator sees which rule broke, instead of a diagnosis that only looks convincing.', 'Why? An AI can sound very sure without proof. So you never pass its answer on unchecked.']},
-        {do: 'Still on the orange card.', say: ['This is a common pattern when you build with AI: check the output with code, then let a person decide. Two safety layers.', 'The check is already wired into the agent. Only the rules are missing. That is A3.']},
-        {do: 'Point at the last card.', say: ['A person decides: reads it, asks questions, approves the fix or not.', 'The agent never fixes things on its own.']},
-        {do: 'Point at the labels under the cards.', say: ['Each assignment builds one part: A3 the check, A4 the chat, A5 a data tool, A6 the approval.']}
-      ],
-      learn: ['Alert → data → diagnosis → code checks it → the operator decides.', 'Two safety layers: fixed rules in code catch the obvious mistakes, a person makes the decision.', 'The agent only reads and proposes. A3 builds the rules.'],
-      watch: ['Someone asks where the AI is: offline, the diagnosis comes from scripted answers so everyone gets the same result. A real model is in the appendix.', 'The shop is not used yet: the morning uses the saved incident. The shop starts in A6.'],
-      terms: [['Tool', 'a small function the agent may call to read data, like the update list'], ['Diagnosis', 'what the agent concludes: cause, proof, confidence, proposed fix'], ['Check', 'a small piece of normal code with fixed rules; it runs on every diagnosis before the operator sees it']],
-      next: 'zoom in: you only get a diagnosis that meets the rules.'
-    }
-  }),
+  pauseSlide('Break', '15 min', 'You only get a diagnosis that meets the rules', '11:09'),
   baseSlide({
     title: 'You only get a diagnosis that meets the rules', kicker: 'Day 5 · HUMAN IN THE LOOP', subtitle: 'Sonny proposes. The contract holds his diagnosis against fixed rules. Only then do you decide. That is human in the loop with an AI agent.', type: 'context',
     visual: {contractZoom: {
@@ -786,7 +750,7 @@ const day5Slides = [
     }},
     cards: [{title: '03:45 alert', body: ''}, {title: 'Sonny looks', body: ''}, {title: 'Diagnosis', body: ''}, {title: 'The contract', body: ''}, {title: 'You decide', body: ''}],
     keyPoints: ['Sonny proposes, the contract holds his diagnosis against fixed rules, then you decide.', 'The rules use the key terms: evidence, proposed fix, OPEN.', 'Today the contract has no rules yet: in Assignment 3 you write them.'],
-    notes: 'Time: 11:26 · 4 min. Zooms in on block 3 of “How we want Sonny to work”. Clicks: 1 the alert, Sonny looks, the diagnosis (the same lines as “How we want Sonny to work”) · 2 the contract · 3–7 one rule each: ✓ or ✗ appears and the part of the diagnosis it looks at lights up (you can also click a rule) · 8 the result · 9 you decide. The five rules are TODO(A3) in src/contract.ts (code words: a strong proposal needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line, and “PASS contract” today because the rules are empty. These five are Ryan’s rules for this project, not an industry standard, but the ideas are normal SRE practice (incident reports ask for impact, evidence and confidence) and a common AI-agent pattern (check the AI’s output with code before a person sees it).',
+    notes: 'Time: 11:24 · 4 min. Zooms in on block 3 of “How we want Sonny to work”. Clicks: 1 the alert, Sonny looks, the diagnosis (the same lines as “How we want Sonny to work”) · 2 the contract · 3–7 one rule each: ✓ or ✗ appears and the part of the diagnosis it looks at lights up (you can also click a rule) · 8 the result · 9 you decide. The five rules are TODO(A3) in src/contract.ts (code words: a strong proposal needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Checked against the real offline run of INC-1001: four evidence places, deploys:d-4821, confidence high, no data gaps, no customer impact line, and “PASS contract” today because the rules are empty. These five are Ryan’s rules for this project, not an industry standard, but the ideas are normal SRE practice (incident reports ask for impact, evidence and confidence) and a common AI-agent pattern (check the AI’s output with code before a person sees it).',
     teach: {
       time: '4 min',
       gist: 'Human in the loop with an AI agent: Sonny proposes, the contract holds his diagnosis against fixed rules, and only a diagnosis that meets every rule gets to you. Then you decide.',
@@ -829,7 +793,7 @@ const day5Slides = [
     cards: [{title: 'Today: red = wrong answer', body: '6 of the 7 A3 tests are red.'}, {title: 'After A3: green = right answer', body: 'All 7 green. Same idea for every rule.'}],
     tagline: 'Goal of A3: all A3 tests green, and the diagnosis shows what customers notice.',
     keyPoints: ['A test gives the check a made-up diagnosis and expects an answer.', 'Red = wrong answer, green = right answer.', 'Today 6 of 7 A3 tests are red; after A3 all 7 green.'],
-    notes: 'Time: 11:30 · 2 min. test/workshop/contract.test.ts has 7 A3 tests; at the start pass 1 / fail 6 (the 7th, “evidence has to carry at least one line”, already passes). Test 2 = “A3: customer_impact is required and non-empty”: it builds a verdict without customer_impact and expects parseVerdict to fail. Verified on the reference tag day5-after-a3: pass 7 / fail 0, and npm run investigate prints “Customer impact: … users of checkout may see failures or slowness …; affected segments remain OPEN”.',
+    notes: 'Time: 11:28 · 2 min. test/workshop/contract.test.ts has 7 A3 tests; at the start pass 1 / fail 6 (the 7th, “evidence has to carry at least one line”, already passes). Test 2 = “A3: customer_impact is required and non-empty”: it builds a verdict without customer_impact and expects parseVerdict to fail. Verified on the reference tag day5-after-a3: pass 7 / fail 0, and npm run investigate prints “Customer impact: … users of checkout may see failures or slowness …; affected segments remain OPEN”.',
     teach: {
       time: '2 min',
       gist: 'A test gives the check a made-up diagnosis and says what the answer should be. Today the check answers wrong (red); after A3 it answers right (green).',
@@ -848,7 +812,7 @@ const day5Slides = [
     }
   }),
   assignmentSlide({
-    number: 3, title: 'Build the rules for a good diagnosis · 1/2', subtitle: 'Build the check with five rules. Claude Code explains, you accept, it shows the plan, then builds. The A3 tests turn green.', stage: 'contract', duration: '11:32 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
+    number: 3, title: 'Build the rules for a good diagnosis · 1/2', subtitle: 'Build the check with five rules. Claude Code explains, you accept, it shows the plan, then builds. The A3 tests turn green.', stage: 'contract', duration: '11:30 · 25 min', shot: 'assets/day5-expected/a3-done.png', shotLabel: 'What you should see at the end',
     steps: [
       {text: 'First check the mode: the bottom of Claude Code says “manual mode on”.', after: 'Not there? Press Shift+Tab until it is. Claude Code asks before every file it changes.', warn: true},
       {text: 'Type this in: Claude Code. Goal: understand the five rules before anything is built.', prompt: PROMPTS.a3Contract, after: 'The five rules in plain English, and the smallest change that adds them. Nothing changes yet.'},
@@ -896,7 +860,7 @@ const day5Slides = [
     }
   }),
   checkpointSlide({
-    number: 3, title: 'verify the verdict contract · 2/2', subtitle: 'Check the claim with independent evidence before lunch.', stage: 'contract', duration: '11:57 · 7 min', shot: 'assets/day5-expected/a3.png',
+    number: 3, title: 'verify the verdict contract · 2/2', subtitle: 'Check the claim with independent evidence before lunch.', stage: 'contract', duration: '11:55 · 7 min', shot: 'assets/day5-expected/a3.png',
     steps: [
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a3BuildProve, after: 'The main tests, typecheck, offline output, and browser field are visible.'},
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a3Verify, after: 'Claude Code returns VERIFIED, NOT VERIFIED, or INCONCLUSIVE.'},
@@ -912,7 +876,7 @@ const day5Slides = [
     title: 'Pre-lunch quiz · What is true now?', kicker: 'Day 5 · QUIZ', subtitle: 'Vote first. Reveal the answers second.', type: 'quiz',
     cards: [{title: 'A', body: 'INC-1001 and the listener incident are the same record.'}, {title: 'B', body: 'The builder and product runtime are separate.'}, {title: 'C', body: 'A green contract test proves a human approved rollback.'}, {title: 'D', body: 'Unsupported customer scope stays OPEN.'}],
     keyPoints: ['B and D are true.', 'A confuses two records.', 'C confuses proof with authority.'],
-    notes: note({time: '11:57 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
+    notes: note({time: '12:02 · 3 min', why: 'The quiz catches identity and authority mistakes before lunch.', predict: 'Ask for two true answers.', see: 'B and D remain.', inside: 'The wrong answers repeat the two main risks.', participant: 'Vote before the reveal.', watch: 'Do not explain before the vote.', stuck: 'Read each answer aloud.', stop: 'The room can explain both false answers.', next: 'Lunch'})
   }),
   pauseSlide('Lunch', '60 min', 'Recall the morning before A4', '12:00'),
   pauseSlide('Restart and settle', '10 min', 'Post-lunch recap', '13:00'),
@@ -1164,7 +1128,7 @@ const SDLC_BY_TITLE = [
   [/^(Let’s start the project|Two scenarios to test Sonny|Assignment 1:|What Sonny should do, and what he does today|intent\.md: what goes in it|Assignment 2:|Your intent\.md: before and after)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^How do we know the rules work/, 'test'],
-  [/^(How your agent handles an incident|You only get a diagnosis that meets the rules)/, 'design'],
+  [/^You only get a diagnosis that meets the rules/, 'design'],
   [/^(Assignment 3:|Refuse unsafe chat actions|Example refusal|Assignment 4:|Give the agent one read-only tool|Example tool and trace|Assignment 5:)/, 'build'],
   [/^Catch-up · Ready for the live route/, 'test'],
   [/^(Run the live counterpart|Example live incident|A6 |Assignment 6:|Human in the loop · Part of A6|Catch-up · Six required)/, 'deploy'],
