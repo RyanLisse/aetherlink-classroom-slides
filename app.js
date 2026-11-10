@@ -1604,7 +1604,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
