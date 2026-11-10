@@ -2578,3 +2578,14 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .gr-step.broken .gr-sub{color:var(--aether-orange);font-weight:700}
 .gr-rails.c3{grid-template-columns:repeat(3,1fr)}
 .gr-step.done .gr-sub{color:var(--green,#4ade80);font-weight:700}
+/* Jessy Day 5 · shotPair: two screenshots side by side */
+.cards.shot-pair{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.6rem;align-items:stretch}
+.card.sp-card{display:flex;flex-direction:column;gap:.4rem;padding:.6rem .7rem}
+.sp-card .card-head{display:flex;align-items:center;gap:.45rem}.sp-card .card-head h2{font-size:.95rem;margin:0}
+.sp-img{width:100%;border-radius:10px;border:1px solid var(--border);cursor:zoom-in;display:block}
+.sp-card .card-body,.sp-card > p{font-size:.78rem;line-height:1.35;margin:0;color:var(--muted);font-weight:700}
+.sp-tag{font-size:.62rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:.12rem .5rem;border-radius:999px;border:1.5px solid var(--border)}
+.sp-ok .sp-tag{color:var(--ok);border-color:var(--ok)}.sp-bad .sp-tag{color:#f87171;border-color:#f87171}
+.sp-ok{border-color:color-mix(in srgb,var(--ok) 45%,var(--border))}.sp-bad{border-color:color-mix(in srgb,#f87171 55%,var(--border))}
+.sp-arrow{align-self:center;font-weight:900;font-size:1.4rem;color:var(--aether-orange)}
+@media (max-width:760px){.cards.shot-pair{grid-template-columns:1fr}.sp-arrow{transform:rotate(90deg);justify-self:center}}

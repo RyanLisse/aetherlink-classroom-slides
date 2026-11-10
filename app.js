@@ -678,6 +678,13 @@ function renderExtras(stage, main, s, v) {
       c.append(ed); });
     cards[0].after(node('div', 'fp-arrow', '→'));
   }
+  if (v.shotPair && cards.length >= 2) {                        // Jessy Day 5 opt-in: two screenshots side by side (before → after); a click opens one large
+    grid.classList.add('shot-pair');
+    cards.forEach((c, i) => { const S = v.shotPair[i]; if (!S) return; c.classList.add('sp-card'); if (S.tone) c.classList.add('sp-' + S.tone); c.querySelector('.card-icon')?.remove();
+      const im = node('img', 'sp-img'); im.src = S.src; im.alt = S.alt || ''; im.loading = 'lazy'; im.title = 'Click to open large'; im.addEventListener('click', () => window.open(S.src, '_blank'));
+      c.querySelector('.card-head')?.after(im); if (S.tag) c.querySelector('.card-head')?.prepend(node('span', 'sp-tag', S.tag)); });
+    cards[0].after(node('div', 'sp-arrow', v.shotPairArrow || '→'));
+  }
   if (v.doors && cards.length >= 3) {                           // two ways in (door 1, door 2) → one investigation
     grid.classList.add('doors');
     cards.forEach((c, i) => { const D = v.doors[i]; if (!D) return; c.classList.add('door-card'); c.style.setProperty('--gl', D.color || 'var(--cyan)'); c.querySelector('.card-icon')?.remove();
