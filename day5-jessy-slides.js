@@ -1132,7 +1132,7 @@ window.SLIDES = day5Slides;
 // SDLC tracker: which of the six phases lights up on each slide (see sdlcTrack in app.js).
 // Breaks, the quiz and the post-lunch recap keep the phase of the slide before them.
 const SDLC_BY_TITLE = [
-  [/^(Let’s start the project|The skills Claude Code uses today|Two scenarios to test Sonny|A tour of the project|Before you build|Assignment 1:|Write down what Sonny must do|intent\.md: before and after|Assignment 2:)/, 'plan'],
+  [/^(Let’s start the project|The skills Claude Code uses today|Two scenarios to test Sonny|A tour of the project|Assignment 1:|Write down what Sonny must do|intent\.md: before and after|Assignment 2:)/, 'plan'],
   [/^A3 checkpoint/, 'test'],
   [/^How do we know the rules work/, 'test'],
   [/^(How your agent handles an incident|You only get a diagnosis that meets the rules)/, 'design'],
