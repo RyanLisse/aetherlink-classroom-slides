@@ -372,10 +372,13 @@ function renderExtras(stage, main, s, v) {
     const doc = node('div', 'aj-doc cz-doc'); doc.append(node('div', 'aj-doc-tab', Z.docName || 'diagnosis'));
     const marks = {};                                              // key → elements to light up
     const mark = (key, el) => { (marks[key] = marks[key] || []).push(el); el.classList.add('cz-hl-able'); };
-    Z.doc.forEach((R) => { const r = node('div', 'aj-row cz-row' + (R.ghost ? ' cz-ghost' : '')); const lab = node('b', null, R.label); if (R.conf) { const cf = node('span', 'cz-conf', ' (' + R.conf + ')'); lab.append(cf); mark('conf', cf); } r.append(lab, node('span', null, R.text));
+    Z.doc.forEach((R) => { const r = node('div', 'aj-row cz-row' + (R.ghost ? ' cz-ghost' : '') + (R.small ? ' cz-small' : '')); const lab = node('b', null, R.label); if (R.conf) { const cf = node('span', 'cz-conf', ' (' + R.conf + ')'); lab.append(cf); mark('conf', cf); } r.append(lab, node('span', null, R.text));   // opt-in small: a less important field, one compact line
       if (R.ev) { const evs = node('span', 'aj-evs'); R.ev.forEach((e) => { const ch = node('code', 'aj-ev', e); mark(e, ch); evs.append(ch); }); r.append(evs); }
       if (R.key) mark(R.key, r); doc.append(r); });
-    const side = node('div', 'cz-side'); side.append(node('div', 'cz-side-h', Z.rulesTitle || 'The contract: five rules'));
+    if (Z.docFoot) doc.append(node('div', 'cz-docfoot', Z.docFoot));   // opt-in: the line under the diagnosis (draft only, a person approves)
+    const side = node('div', 'cz-side');
+    if (Z.format) { const f = node('div', 'cz-format'); f.append(node('div', 'cz-format-h', Z.format.title)); Z.format.items.forEach((t) => { const it = node('div', 'cz-format-it'); it.append(node('span', 'cz-rule-mark', '✓'), node('span', null, t)); f.append(it); }); side.append(f); }   // opt-in: the part of the contract that already works today
+    side.append(node('div', 'cz-side-h', Z.rulesTitle || 'The contract: five rules'));
     const rules = Z.rules.map((R, i) => { const r = node('button', 'cz-rule'); r.type = 'button'; r.append(node('span', 'cz-rule-mark', '?'), node('span', 'cz-rule-txt', R.text), node('span', 'cz-rule-note', R.note || ''));
       r.addEventListener('click', () => { k = Math.max(k, 3 + i); focus = i; paint(); }); side.append(r); return r; });
     const result = node('p', 'cz-result', Z.result || ''); side.append(result);
@@ -396,6 +399,12 @@ function renderExtras(stage, main, s, v) {
     paint();
     const next = () => { if (k < last) { k++; if (k >= 3 && k < 3 + nR) focus = k - 3; paint(); return true; } return false; };
     window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
+    const ls = node('div', 'ls-row');
+    v.layerStrip.forEach((L, i) => { if (i) ls.append(node('div', 'ls-arrow', '→')); const c = node('div', 'ls-card' + (L.state ? ' ' + L.state : '')); c.style.setProperty('--i', i);
+      c.append(node('span', 'ls-phase', L.phase), node('strong', 'ls-name', L.name), node('code', 'ls-file', L.file), node('span', 'ls-who', L.who)); ls.append(c); });
+    grid.before(ls);
   }
   if (v.trustMap && cards.length >= 5) {                         // Sonny's map: the slide 3 alert → slide 4's looks and diagnosis → the contract (zoom: five rules on that diagnosis) → you decide; then how he behaves
     const T = v.trustMap; grid.classList.add('trust-map'); let k = 0;
@@ -1290,7 +1299,7 @@ function applyStepThrough(main, s) {
 
 /* ---- assignment slides: one label, big steps, a picture of the result, timer pill top right ---- */
 function assignmentLabel(s) {
-  const m = /^Assignment (\d+[a-z]?):\s*(.*)$/.exec(s.title || '');
+  const m = /^Assignment (\d+[a-zA-Z]?):\s*(.*)$/.exec(s.title || '');
   const day = ((s.kicker || '').match(/DAY \d/) || [''])[0].replace('DAY', 'Day');
   return { label: (m ? 'Assignment ' + m[1] : 'Hands-on') + (day ? ' · ' + day : ''), title: m ? m[2] : s.title };
 }

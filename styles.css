@@ -2231,3 +2231,25 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .gc-row.bad .gc-mark{color:#ff6b6b}
 .gc-note{margin:.8rem 0 0;text-align:center;font-weight:800;color:var(--aether-orange)}
 @media (max-width:900px){.cards.gc-flow{flex-wrap:wrap}.gc-arrow{display:none}.gc-row{grid-template-columns:1fr 2rem}.gc-seen{grid-column:1}}
+
+/* contractZoom opt-ins (Jessy Day 5 "A diagnosis you can trust"): compact fields, a foot line, the format check that already works */
+.cz-row.cz-small{padding-block:.12rem;font-size:.86em;opacity:.85}
+.cz-docfoot{margin-top:.35rem;padding-top:.3rem;border-top:1px dashed var(--border);font-size:.72rem;font-weight:800;letter-spacing:.04em;color:var(--muted)}
+.cz-format{display:grid;gap:.2rem;margin-bottom:.5rem;padding:.45rem .6rem;border-radius:10px;border:1px solid color-mix(in srgb,var(--ok,#4cd38a) 45%,transparent);background:color-mix(in srgb,var(--ok,#4cd38a) 8%,transparent);opacity:0;transition:opacity .3s}
+.cz-panel.show-rules .cz-format{opacity:1}
+.cz-format-h{font-size:.66rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--ok,#4cd38a)}
+.cz-format-it{display:flex;gap:.4rem;align-items:center;font-size:.76rem;font-weight:700}
+.cz-format-it .cz-rule-mark{color:var(--ok,#4cd38a)}
+/* layerStrip (Jessy Day 5): goal → rules → tests → code, who writes each */
+.ls-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:.5rem;align-items:stretch;margin:0 0 .9rem}
+.ls-arrow{align-self:center;color:var(--muted);font-weight:900}
+.ls-card{display:flex;flex-direction:column;gap:.15rem;padding:.55rem .7rem;border-radius:12px;border:1px solid var(--border);background:var(--surface);animation:enter .4s both;animation-delay:calc(.1s + var(--i) * .1s)}
+.ls-card.done{opacity:.6}
+.ls-card.team{border-color:var(--cyan)}
+.ls-card.you{border:2px solid var(--aether-orange);box-shadow:0 0 0 4px color-mix(in srgb,var(--aether-orange) 15%,transparent)}
+.ls-phase{font-size:.6rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ls-name{font-size:1rem}
+.ls-file{font-size:.72rem;color:var(--cyan)}
+.ls-who{font-size:.74rem;font-weight:700;color:var(--muted)}
+.ls-card.you .ls-who{color:var(--aether-orange)}
+@media (max-width:900px){.ls-row{grid-template-columns:1fr}.ls-arrow{display:none}}
