@@ -332,7 +332,20 @@ function renderExtras(stage, main, s, v) {
     cards.slice(0, -1).forEach((c) => c.after(node('div', 'gc-arrow', '→')));
     const tbl = node('div', 'gc-table'); const hd = node('div', 'gc-row gc-head'); hd.append(node('span', null, G.head[0]), node('span', null, G.head[1]), node('span', null, '')); tbl.append(hd);
     G.rows.forEach(([want, seen, ok], i) => { const r = node('div', 'gc-row' + (ok ? ' ok' : ' bad')); r.style.setProperty('--i', i); r.append(node('span', 'gc-want', want)); const sv = node('span', 'gc-seen'); [].concat(seen).forEach((x) => sv.append(node('code', null, x))); r.append(sv, node('span', 'gc-mark', ok ? '✓' : '✗')); tbl.append(r); });
-    grid.after(tbl); if (G.note) tbl.after(node('p', 'gc-note', G.note));
+    grid.after(tbl); const gnote = G.note ? node('p', 'gc-note', G.note) : null; if (gnote) tbl.after(gnote);
+    if (G.reveal) {                                              // opt-in: the table opens step by step (groups of rows, then the note); a click on the gap (or on a closed row) opens the next piece, → too
+      grid.classList.add('gc-reveal'); const rows = [...tbl.querySelectorAll('.gc-row:not(.gc-head)')]; const groups = Array.isArray(G.reveal) ? G.reveal : rows.map(() => 1);
+      const stepOf = []; let s = 1; groups.forEach((n) => { for (let j = 0; j < n; j++) stepOf.push(s); s++; }); while (stepOf.length < rows.length) stepOf.push(s - 1);
+      const LAST = s - 1 + (gnote ? 1 : 0); let k = 0;
+      const paint = () => { tbl.classList.toggle('gc-open', k > 0); rows.forEach((r, i) => { r.classList.toggle('gc-hid', stepOf[i] > k); }); gnote?.classList.toggle('gc-hid', k < LAST); cards[G.focus]?.classList.toggle('gc-ask', k < LAST); };
+      paint();
+      const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
+      const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+      if (cards[G.focus]) { cards[G.focus].style.cursor = 'pointer'; cards[G.focus].addEventListener('click', next); }
+      rows.forEach((r, i) => r.addEventListener('click', () => { k = Math.max(k, stepOf[i]); paint(); })); gnote?.addEventListener('click', () => { k = LAST; paint(); });
+      window.__reveal = next; window.__revealBack = back;
+      slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+    }
   }
   if (v.shopDay && cards.length >= 3) {                         // the world before the incident: the shop (orders tick in), you the operator (on call), today's goal (the agent)
     const D = v.shopDay; grid.classList.add('shop-day'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('sd-card', 'sd-' + i); });
@@ -533,6 +546,7 @@ function renderExtras(stage, main, s, v) {
     const foot = node('p', 'cr-foot', R.foot || '');
     (main.querySelector('.tagline') || grid).after(bar); bar.after(foot);
     const LAST = cards.length + 1;
+    bar.addEventListener('click', () => { k = LAST; paint(); }); foot.addEventListener('click', () => { k = LAST; paint(); });   // the bottom bar opens on a click too, not only with →
     const paint = () => { cards.forEach((c, i) => { c.classList.toggle('shown', i < k); c.classList.toggle('now', i === k - 1 && k <= cards.length); });
       grid.querySelectorAll('.cr-arrow,.cr-turn').forEach((a) => a.classList.toggle('shown', k > +a.dataset.after));
       bar.classList.toggle('shown', k >= LAST); foot.classList.toggle('shown', k >= LAST && !!R.foot); };
@@ -557,6 +571,7 @@ function renderExtras(stage, main, s, v) {
       ex.append(row); if (E.foot) ex.append(node('p', 'sm-ex-foot', E.foot)); }
     grid.after(conv); conv.after(ex);
     const LAST = cards.length + 2;
+    conv.addEventListener('click', () => { k = Math.max(k, cards.length + 1); paint(); }); ex.addEventListener('click', () => { k = LAST; paint(); });   // the bottom opens on a click too, not only with →
     const paint = () => { cards.forEach((c, i) => c.classList.toggle('shown', i < k)); conv.classList.toggle('shown', k > cards.length); ex.classList.toggle('shown', k >= LAST); };
     paint();
     const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
@@ -1662,7 +1677,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList || s.visual?.guardRail)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList || s.visual?.guardRail || s.visual?.suiteMap || s.visual?.gapCompare?.reveal)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);

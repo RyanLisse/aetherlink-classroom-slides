@@ -2230,6 +2230,13 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .gc-row.bad{border-color:#ff6b6b;background:color-mix(in srgb,#ff6b6b 9%,var(--surface))}
 .gc-row.bad .gc-mark{color:#ff6b6b}
 .gc-note{margin:.8rem 0 0;text-align:center;font-weight:800;color:var(--aether-orange)}
+.gc-row,.gc-note{transition:opacity .3s}
+.gc-table:not(.gc-open) .gc-head{opacity:.15}
+.gc-row.gc-hid,.gc-note.gc-hid{opacity:.12;animation:none;cursor:pointer}
+.card.gc-chip.gc-ask{animation:gcAsk 1.6s ease-in-out infinite}
+@keyframes gcAsk{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--aether-orange) 45%,transparent)}}
+.cr-run:not(.shown),.cr-foot:not(.shown),.sm-conv:not(.shown),.sm-ex:not(.shown){cursor:pointer}
+.cr-run:not(.shown),.cr-foot:not(.shown),.sm-conv:not(.shown),.sm-ex:not(.shown){opacity:.14}
 @media (max-width:900px){.cards.gc-flow{flex-wrap:wrap}.gc-arrow{display:none}.gc-row{grid-template-columns:1fr 2rem}.gc-seen{grid-column:1}}
 
 /* contractZoom opt-ins (Jessy Day 5 "A diagnosis you can trust"): compact fields, a foot line, the format check that already works */
