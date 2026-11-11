@@ -394,24 +394,21 @@ window.SLIDES = [
     learn: ['Every idea gets the same five pillars and questions.', 'Score 1 to 5 per pillar; for security 5 means easy to make safe.', 'Add the scores up: the highest total out of 25 is the idea you build.'],
     watch: ['Do not let teams score yet: that is the assignment on the next slide.', 'Someone asks what to do with a tie: look at the top two together, maybe they can become one idea.'],
     terms: [['Pillar', 'one of the five things an idea is scored on'], ['Total', 'the five scores added up, at most 25']],
-    next: 'the assignment: score your own ideas.'
+    next: 'the assignment: brainstorm and choose your idea.'
   }
 },
 
 { // Slide 10
-  title: "Assignment: Score your ideas",
+  title: "Assignment: Brainstorm and choose your idea",
   kicker: "DAY 6 · TEAM ASSIGNMENT 1",
-  subtitle: "Put every idea on the board and score it from 1 to 5 on each pillar.",
+  subtitle: "Collect ideas from your own work, score them on the five pillars, and choose one.",
   type: "practice",
   layout: "exercise",
-  cards: [
-    { title: "Your score table", body: "one row per idea\none column per pillar: interest · gain · problem · team · security\n1 = low, 5 = high\nsecurity: 5 = easy to make safe\nlast column: total (out of 25)" }
-  ],
   stepsHeading: "Steps:",
   steps: [
     "Everyone names one or two ideas from their own work. Write them all down.",
     "Put ideas that look alike together.",
-    "As a team, score every idea from 1 to 5 on the five pillars.",
+    "As a team, score every idea from 1 to 5 on the five pillars. The facilitator helps you put the numbers in the score matrix (next slide).",
     "Add up the scores. Look at the top two: can they become one stronger idea?",
     "Choose the idea with the highest total and write down in one sentence why."
   ],
@@ -419,7 +416,7 @@ window.SLIDES = [
   check: "Can every team member explain why this idea won?",
   prompt: "Here are our ideas: [list them]. For each idea, ask us one question per pillar: interest, gain, problem, team and security. Help us score each pillar from 1 to 5 (for security, 5 means easy to make safe). Then show all scores and totals in one table and tell us which ideas could be combined. Don't choose for us.",
   keyPoints: ["Ideas from your own work","Score 1–5 on five pillars","Security: 5 = easy to make safe","Add up: highest total wins","Combine the top two?","One idea, one reason"],
-  notes: "Type the minutes on the timer. Draw the table on the flipchart or whiteboard: ideas as rows, the five pillars as columns, the total last. Teams often start with everyone defending their own idea; the scores make the discussion about the idea, not the person. Say clearly that all pillars count the same way: higher is better, so for security a 5 means easy to make safe. The highest total out of 25 wins. Before they decide, push on combining: two ideas close to the top often make one stronger idea. The Example prompt lets Claude ask the pillar questions, but the team scores and chooses."
+  notes: "Type the minutes on the timer. At step 3, go to the next slide (the score matrix) and fill it in with the team: type the ideas in the rows, click a score per pillar, the total adds itself up. Teams often start with everyone defending their own idea; the scores make the discussion about the idea, not the person. Say clearly that all pillars count the same way: higher is better, so for security a 5 means easy to make safe. The highest total out of 25 wins. Before they decide, push on combining: two ideas close to the top often make one stronger idea. The Example prompt lets Claude ask the pillar questions, but the team scores and chooses."
 },
 
 /* ---------------------------------------------------------------------- */
@@ -427,6 +424,39 @@ window.SLIDES = [
 /* ---------------------------------------------------------------------- */
 
 { // Slide 11
+  title: "Score matrix: your ideas side by side",
+  kicker: "DAY 6 · TEAM ASSIGNMENT 1 · SCORE MATRIX",
+  subtitle: "Type your ideas, click a score from 1 to 5 per pillar. The total adds itself up; the highest total wins.",
+  type: "practice",
+  visual: { scoreMatrix: { ideas: 4, max: 6, min: 2, hint: 'Click a number to score, click it again to undo. For security, 5 = easy to make safe.' } },
+  cards: [
+    { title: "Interest", body: "Do we want to build this?" },
+    { title: "Gain", body: "What do we gain, and how much?" },
+    { title: "Problem", body: "How real is the problem?" },
+    { title: "Team", body: "How much does it help our team?" },
+    { title: "Security", body: "How easy is it to make safe?" }
+  ],
+  keyPoints: ["One row per idea, usually 3 or 4", "Click 1–5 per pillar", "Total out of 25 adds itself up", "🏆 = highest total with all five scored", "Close totals? Try to combine them"],
+  notes: "Fill this in live with the team while sharing your screen. Type each idea in a row (start with 4 rows; + Add idea goes up to 6, − Remove last down to 2). For every idea, ask the pillar question in the column header and let the team agree on one number; click it (click again to undo). The total updates by itself, and the row with the highest total, once all five pillars are scored, turns orange with a 🏆. The scores stay in this browser, also after a refresh; Clear all (click twice) empties the matrix for the next team. Push on combining when two totals are close.",
+  teach: {
+    time: 'during the assignment',
+    gist: 'The score matrix: the team scores every idea per pillar, the facilitator clicks the numbers in, and the highest total wins.',
+    script: [
+      {do: 'Open this slide at step 3 of the assignment. Share your screen.', say: 'Let us put your ideas side by side. Name them, and I type them in.'},
+      {do: 'Type the ideas in the rows (3 or 4).', say: 'One row per idea. Short names are enough.'},
+      {do: 'Per idea, read the question at the top of each column.', say: 'Interest: do we want to build this? Give me one number from 1 to 5.', ask: 'Do we all agree on that number?'},
+      {do: 'Click the numbers in; the total updates.', say: 'Remember: for security, 5 means easy to make safe. Higher is always better.'},
+      {do: 'When every idea is scored, point at the 🏆 row.', say: 'This one has the highest total. Before we choose: are the top two close? Could they become one stronger idea?'},
+      {ask: 'Why do we add up all five instead of picking the idea with the best interest score?', say: '(Answer: an idea needs to stand on all five pillars. Great on one and weak on the rest will not get finished in two days.)'}
+    ],
+    learn: ['Every idea gets a score per pillar; the total decides.', 'The team scores; the facilitator only types and clicks.'],
+    watch: ['Let the team agree on one number per pillar; do not average everyone’s numbers.', 'The scores stay in this browser. Before the next team, click Clear all twice.', 'A tie: look at the two ideas together, maybe they become one.'],
+    terms: [['Score matrix', 'the table with ideas as rows and the five pillars as columns'], ['Total', 'the five scores added up, at most 25']],
+    next: 'before you build: the problem.'
+  }
+},
+
+{ // Slide 12
   title: "Before you build: the problem",
   kicker: "DAY 6 · QUESTIONS TO ANSWER",
   subtitle: "Most team projects fail here, not in the code.",
@@ -443,7 +473,7 @@ window.SLIDES = [
   notes: "These are the questions teams skip because building is more fun. Open them one by one. 'Why AI?' is worth pushing on: sometimes the honest answer is that a plain form or an n8n workflow without AI is better, and that's a good outcome too. 'When is this app successful?' becomes the definition of done for Day 7. Push for something checkable: not 'it helps', but 'the user gets a short summary with enough information to act on it'."
 },
 
-{ // Slide 12
+{ // Slide 13
   title: "Input: start from the source of truth",
   kicker: "DAY 6 · DESIGN · INPUT",
   subtitle: "Your app is only as good as the data it gets.",
@@ -461,7 +491,7 @@ window.SLIDES = [
   notes: "Design starts with the input. Ask every team: where does the real information live? Then: how do we connect to it (MCP or another approved connection), and which data do we actually need? Repos and their history and the tickets are usually the richest sources. Start read-only, exactly like fetching tickets last session: an app that only reads is much easier to make safe, and it is enough for a first slice."
 },
 
-{ // Slide 13
+{ // Slide 14
   title: "Before you build: the team and the plan",
   kicker: "DAY 6 · QUESTIONS TO ANSWER",
   subtitle: "The questions you need answers on as a team.",
@@ -479,7 +509,7 @@ window.SLIDES = [
 /* DAY 6 — Security                                                         */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 14
+{ // Slide 15
   title: "Security is a requirement",
   kicker: "DAY 6 · SECURITY",
   subtitle: "Not a check at the end, but a question from the start.",
@@ -505,7 +535,7 @@ window.SLIDES = [
   notes: "Frame security as part of good software, not as someone else's veto. There is a security specialist in the room today: introduce them here as a resource for every team. Their questions will feel like friction at times; that's legitimate, because a question answered during design costs minutes and the same problem found on Day 7 costs the demo. Make the difference between environments clear: a sandbox is easier to get access to and the place to try things; changes on production (and pre-production) need permission from legal and management. The goal is a 'yes, if…' for every team: what has to be true for this to be safe enough?"
 },
 
-{ // Slide 15
+{ // Slide 16
   title: "Questions security will ask",
   kicker: "DAY 6 · SECURITY",
   subtitle: "Have an answer ready, or write it down as OPEN.",
@@ -523,7 +553,7 @@ window.SLIDES = [
   notes: "These five groups cover most of what a security specialist will ask about an AI app. Data and secrets are the classics. AI adds its own: whatever goes to the model leaves your laptop; text from users or documents can contain instructions (prompt injection); and the model can be wrong with confidence. Actions ties back to bounded work and settings.json: limit what can happen without a person, and on production let the app notify instead of act. Traces: n8n executions and git history already give a lot. 'OPEN' is the same habit as on the teaching days: an honest open question is better than a guess."
 },
 
-{ // Slide 16
+{ // Slide 17
   title: "A human in the loop",
   kicker: "DAY 6 · SECURITY",
   subtitle: "Fixed rules miss things. AI reasoning catches more, but it doesn't act alone.",
@@ -548,7 +578,7 @@ window.SLIDES = [
   notes: "Many ideas involve watching something: errors, traffic, incidents. Fixed rules (alert when X > Y) are a good start but miss what nobody wrote a rule for; AI reasoning can notice more. That makes the human checkpoint more important, not less: the AI notices, explains and suggests, and a person decides and acts, certainly on production. This keeps control where it belongs and keeps the app within the rules the organisation has to follow. Ask every team where this line is in their app."
 },
 
-{ // Slide 17
+{ // Slide 18
   title: "Assignment: The team canvas",
   kicker: "DAY 6 · TEAM ASSIGNMENT 2",
   subtitle: "Answer the questions as a team and put them on one page.",
@@ -572,7 +602,7 @@ window.SLIDES = [
   notes: "Type the minutes on the timer. Plan and Design together take about 30 minutes, so keep this moving. Walk from team to team and ask the questions from the previous slides instead of giving answers. Plan the security specialist's time: every team gets a short visit, so no team ends up with all the questions at the end. The Example prompt lets Claude interview the team, which helps a team that is stuck; the decisions stay theirs. Watch for teams that skip the scope cut: the first slice must fit in today."
 },
 
-{ // Slide 18
+{ // Slide 19
   title: "Short break",
   kicker: "DAY 6 · BREAK",
   subtitle: "Return in 15 minutes.",
@@ -589,7 +619,7 @@ window.SLIDES = [
 /* DAY 6 — Build                                                            */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 19
+{ // Slide 20
   title: "Assignment: Set up and build the first slice",
   kicker: "DAY 6 · TEAM ASSIGNMENT 3",
   subtitle: "From canvas to something that works, end to end, however small.",
@@ -612,7 +642,7 @@ window.SLIDES = [
   notes: "Type the minutes on the timer. Set-up first: a shared repo, CLAUDE.md written from the canvas, and settings.json rules, just like on the teaching days. Check that no API key ends up in the code or in git. Then build in short rounds: start each round in plan mode, build a little, test it, and adjust the plan when needed. Between rounds the team holds a short briefing so everyone knows what works and what's next. The slice should work end to end, however small: one input, one AI step, one visible result. Human review by someone who didn't build that part, ideally including the security specialist for anything that touches data or secrets."
 },
 
-{ // Slide 20
+{ // Slide 21
   title: "Check-in",
   kicker: "DAY 6 · CHECK-IN",
   subtitle: "Every team, two minutes. Short answers.",
@@ -633,7 +663,7 @@ window.SLIDES = [
 /* DAY 6 — Closing                                                          */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 21
+{ // Slide 22
   title: "Day 7: your presentation",
   kicker: "DAY 6 · LOOKING AHEAD",
   subtitle: "Next session every team presents what it built.",
@@ -650,7 +680,7 @@ window.SLIDES = [
   notes: "Say this today, so teams can keep it in mind while they build. The presentation is about the benefits of the app: why it matters, told along the same five pillars they used to choose the idea. Slides may be fun and creative; making them with Claude Code is a nice extra exercise. Everyone in the team takes part, not only the person who built the most."
 },
 
-{ // Slide 22
+{ // Slide 23
   title: "Ready for Day 7?",
   kicker: "DAY 6 · CLOSING",
   subtitle: "Next session your team shows a working AI app.",
@@ -664,7 +694,7 @@ window.SLIDES = [
   notes: "Go through the list with each team. Anything that isn't ticked becomes the first task for the start of the next session. Tell them what Day 7 looks like: finish, test, and present a working app."
 },
 
-{ // Slide 23
+{ // Slide 24
   title: "What did you learn?",
   kicker: "DAY 6 · CLOSING",
   subtitle: "Complete these statements.",

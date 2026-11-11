@@ -240,6 +240,37 @@ function renderExtras(stage, main, s, v) {
       if (B.moment) c.append(node('div', 'sb-moment', B.moment)); });
     if (v.scrapTake) { const t = node('div', 'sb-take'); t.append(node('span', 'sb-take-label', v.scrapTakeLabel || 'Take with you')); v.scrapTake.forEach((w) => t.append(node('span', 'sb-take-chip', w))); grid.after(t); }
   }
+  if (v.scoreMatrix && grid) {                                  // score matrix: ideas as rows (type the name), the cards as pillar columns (click 1–5), a total per row; the highest full total gets 🏆; kept in this browser
+    const M = v.scoreMatrix; const P = cards.map((c) => ({ name: c.querySelector('.card-head h2')?.textContent || '', q: (c.querySelector(':scope > p')?.textContent || '').split('\n')[0] }));
+    const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
+    const KEY = 'als:score:' + DECK_ID + ':' + s.title; const max = M.max || 6, min = M.min || 2, top = 5 * P.length;
+    const blank = () => ({ name: '', s: P.map(() => 0) });
+    let rows; try { rows = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { rows = null; }
+    if (!Array.isArray(rows) || !rows.length) rows = Array.from({ length: M.ideas || 4 }, blank);
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(rows)); } catch {} };
+    const wrap = node('div', 'smx-wrap'); const table = node('table', 'smx'); wrap.append(table); grid.replaceWith(wrap);
+    const draw = () => {
+      table.replaceChildren(); const head = node('tr'); head.append(node('th', 'smx-idea-h', 'Idea'));
+      P.forEach((p, k) => { const th = node('th', 'smx-p'); th.append(svg('0 0 24 24', ICO[k % ICO.length], 'smx-ico'), node('span', 'smx-pname', p.name), node('small', null, p.q)); head.append(th); });
+      head.append(node('th', 'smx-total-h', 'Total')); const thead = node('thead'); thead.append(head); table.append(thead);
+      const totals = rows.map((r) => r.s.reduce((a, b) => a + b, 0)); const full = rows.map((r) => r.s.every(Boolean));
+      const best = Math.max(0, ...totals.filter((t, i) => full[i])); const tb = node('tbody');
+      rows.forEach((r, i) => { const tr = node('tr', full[i] && totals[i] === best && best > 0 ? 'win' : '');
+        const td = node('td', 'smx-idea'); const inp = document.createElement('input'); inp.type = 'text'; inp.value = r.name; inp.placeholder = 'Idea ' + (i + 1) + '…'; inp.setAttribute('aria-label', 'Idea ' + (i + 1));
+        inp.addEventListener('input', () => { r.name = inp.value; save(); }); inp.addEventListener('keydown', (e) => { e.stopPropagation(); if (e.key === 'Enter') inp.blur(); }); td.append(inp); tr.append(td);
+        P.forEach((p, k) => { const c = node('td', 'smx-cell'); for (let n = 1; n <= 5; n++) { const b = node('button', 'smx-n' + (r.s[k] === n ? ' on' : ''), String(n)); b.type = 'button'; b.setAttribute('aria-label', (r.name || 'Idea ' + (i + 1)) + ', ' + p.name + ': ' + n);
+          b.addEventListener('click', (e) => { e.stopPropagation(); r.s[k] = r.s[k] === n ? 0 : n; save(); draw(); }); c.append(b); } tr.append(c); });
+        const t = node('td', 'smx-total'); t.append(node('strong', null, String(totals[i])), node('span', null, ' / ' + top)); if (!full[i] && totals[i]) t.append(node('em', null, r.s.filter(Boolean).length + ' of ' + P.length + ' scored'));
+        if (tr.classList.contains('win')) t.prepend(node('span', 'smx-cup', '🏆 ')); tr.append(t); tb.append(tr); });
+      table.append(tb);
+      ctrl.querySelector('.smx-add').disabled = rows.length >= max; ctrl.querySelector('.smx-del').disabled = rows.length <= min;
+    };
+    const ctrl = node('div', 'smx-ctrl'); const add = node('button', 'smx-btn smx-add', '+ Add idea'); const del = node('button', 'smx-btn smx-del', '− Remove last'); const clr = node('button', 'smx-btn smx-clear', 'Clear all');
+    [add, del, clr].forEach((b) => { b.type = 'button'; });
+    add.addEventListener('click', () => { rows.push(blank()); save(); draw(); }); del.addEventListener('click', () => { rows.pop(); save(); draw(); });
+    let armed = false; clr.addEventListener('click', () => { if (!armed) { armed = true; clr.textContent = 'Sure? Click again'; setTimeout(() => { armed = false; clr.textContent = 'Clear all'; }, 2500); return; } rows = Array.from({ length: M.ideas || 4 }, blank); save(); draw(); armed = false; clr.textContent = 'Clear all'; });
+    ctrl.append(node('span', 'smx-hint', M.hint || 'Click a number to score, click it again to undo.'), add, del, clr); wrap.append(ctrl); draw();
+  }
   if (v.temple && grid) {                                       // five pillars as a temple: roof = the idea, per pillar an icon + its questions (body lines), base = the total score; scores show once the base is stepped in
     const T = v.temple; const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
     const wrap = node('div', 'temple-wrap'); grid.replaceWith(wrap); grid.classList.add('temple');
