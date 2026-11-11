@@ -1221,18 +1221,21 @@ $('chapters').addEventListener('click', () => {
 const OVERVIEW_PAGE = new URLSearchParams(location.search).has('overview');
 function openOverview() { window.open(DECK + '?overview=1#' + (current + 1), 'overview-' + DECK); }
 $('overview')?.addEventListener('click', openOverview);
+const EYE_ON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10.4 10.4 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.6 4.9-1.4"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
 function renderOverviewPage() {
   document.documentElement.classList.add('ov-page'); document.title = 'Overview · ' + document.title;
   let sel = Math.min(Math.max(Number(location.hash.slice(1)) - 1 || 0, 0), slides.length - 1);
   const page = node('div', 'ov');
-  const head = node('div', 'ov-head'); head.append(node('h2', null, 'Overview · all ' + slides.length + ' slides'), node('span', 'ov-hint', 'Click a slide to see it big · ← → to browse · Enter or double-click shows it in the deck tab'));
+  const head = node('div', 'ov-head'); head.append(node('h2', null, 'Overview · all ' + slides.length + ' slides'), node('span', 'ov-hint', 'Click a slide to see it big · ← → to browse · Enter or double-click shows it in the deck tab · hover a slide and click the eye (or press H) to hide it'));
   // the big view on top (like Finder's gallery): the selected slide, all blocks open, with arrows
   const big = node('div', 'ov-big');
   const prev = node('button', 'ov-arrow', '←'); prev.setAttribute('aria-label', 'Previous slide');
   const next = node('button', 'ov-arrow', '→'); next.setAttribute('aria-label', 'Next slide');
   const screen = node('div', 'ov-screen'); const bf = document.createElement('iframe'); bf.tabIndex = -1; bf.setAttribute('aria-hidden', 'true'); bf.scrolling = 'no'; screen.append(bf);
   const info = node('div', 'ov-info'); const title = node('strong'); const notesBtn = node('button', 'ov-deck', 'Presenter notes'); const deckBtn = node('button', 'ov-deck', 'Show in deck ↗'); info.append(title, notesBtn, deckBtn);
-  const col = node('div', 'ov-bigcol'); col.append(screen, info);
+  const review = node('div', 'ov-review'); review.hidden = true;   // opt-in per slide: slide.review = {to, text}, a note for a colleague, only on this page
+  const col = node('div', 'ov-bigcol'); col.append(screen, info, review);
   // presenter notes of the selected slide, beside the big view (the presenter page in notes-only mode)
   const notes = node('div', 'ov-notes'); let nf = null;
   const showNotes = () => { try { nf?.contentWindow?.renderSlide?.(sel); } catch {} };
@@ -1246,6 +1249,7 @@ function renderOverviewPage() {
   const grid = node('div', 'ov-grid'); page.append(head, big, grid); document.body.append(page);
   // chevron: fold the big view away to see more of the grid; remembered per browser
   const fold = node('button', 'ov-fold'); fold.setAttribute('aria-controls', 'ov-big'); big.id = 'ov-big'; head.append(fold);
+  if (window.OVERVIEW_SHEET) { const sh = node('a', 'ov-sheet', 'Overview sheet ↗'); sh.href = window.OVERVIEW_SHEET; sh.target = '_blank'; sh.rel = 'noopener'; sh.title = 'The cheat sheet for this day, in a new tab'; fold.before(sh); }   // opt-in per deck: a link to the day's cheat sheet
   const setFolded = (on) => { page.classList.toggle('big-folded', on); fold.innerHTML = '<span class="ov-chev">⌃</span> Preview'; fold.title = on ? 'Show the large preview' : 'Fold the large preview away'; fold.setAttribute('aria-expanded', String(!on)); try { localStorage.setItem('als:ov-folded', on ? '1' : '0'); } catch {} };
   let folded = false; try { folded = localStorage.getItem('als:ov-folded') === '1'; } catch {}
   setFolded(folded); fold.addEventListener('click', () => setFolded(!page.classList.contains('big-folded')));
@@ -1258,23 +1262,38 @@ function renderOverviewPage() {
     f.src = DECK + '?embed=1&open=1#' + shot.dataset.n; shot.append(f); fit(shot);
   }), { root: grid, rootMargin: '400px' });
   const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target)));
-  const showInDeck = (i) => {                          // the deck tab that opened this one jumps there; without it, open the deck here
-    try { if (window.opener && !window.opener.closed) { window.opener.location.hash = String(i + 1); window.opener.focus(); return; } } catch {}
-    location.href = DECK + '#' + (i + 1);
+  const showInDeck = (i) => {                          // the deck tab jumps to slide i and comes to the front (a named tab: Chrome ignores opener.focus())
+    const name = 'deck-' + DECK;
+    try { if (window.opener && !window.opener.closed) window.opener.name = name; } catch {}
+    const w = window.open(DECK + '#' + (i + 1), name);
+    if (!w) location.href = DECK + '#' + (i + 1);
   };
   const tiles = slides.map((s, i) => {
     const tile = node('button', 'ov-tile' + (isHidden(i) ? ' is-hidden' : '')); tile.dataset.type = slideType(s);
     const shot = node('div', 'ov-shot'); shot.dataset.n = String(i + 1);
     const cap = node('div', 'ov-cap'); cap.append(node('span', 'ov-num', String(i + 1)), node('strong', null, s.title));
+    if (s.review) { const t = node('span', 'ov-review-tag', '✎ ' + (s.review.to || 'Review')); t.title = s.review.text; cap.append(t); }
+    // eye on hover: hide or show this slide (same list as H in the deck: the arrows skip it); a hidden slide stays visible here, darker
+    const eye = node('span', 'ov-eye'); eye.setAttribute('role', 'button'); eye.tabIndex = 0;
+    const paintEye = () => { const h = isHidden(i); tile.classList.toggle('is-hidden', h); eye.innerHTML = h ? EYE_OFF : EYE_ON; eye.title = h ? 'Hidden: click to show this slide again' : 'Hide this slide (the arrows skip it)'; eye.setAttribute('aria-label', (h ? 'Show' : 'Hide') + ' slide ' + (i + 1)); };
+    const flip = (e) => { e.stopPropagation(); e.preventDefault(); toggleHidden(i); paintEye(); if (i === sel) paintSel(); };
+    eye.addEventListener('click', flip); eye.addEventListener('dblclick', (e) => e.stopPropagation());
+    eye.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') flip(e); });
+    shot.append(eye, node('span', 'ov-hidden-tag', 'Hidden')); paintEye(); tile._paintEye = paintEye;
     tile.append(shot, cap);
     tile.addEventListener('click', () => { if (page.classList.contains('big-folded')) setFolded(false); select(i); });
     tile.addEventListener('dblclick', () => showInDeck(i));
     grid.append(tile); io.observe(shot); ro.observe(shot); return tile;
   });
+  function paintSel() {
+    title.textContent = (sel + 1) + ' · ' + slides[sel].title + (isHidden(sel) ? '  (hidden)' : '');
+    const r = slides[sel].review; review.hidden = !r; review.replaceChildren();
+    if (r) review.append(node('strong', null, '✎ For ' + (r.to || 'review')), node('span', null, r.text));
+  }
   function select(i) {
     sel = Math.min(Math.max(i, 0), slides.length - 1);
     tiles.forEach((t, k) => t.classList.toggle('is-current', k === sel));
-    title.textContent = (sel + 1) + ' · ' + slides[sel].title;
+    paintSel();
     try { if (bf.dataset.ready) bf.contentWindow.location.hash = String(sel + 1); else bf.src = DECK + '?embed=1&open=1#' + (sel + 1); } catch { bf.src = DECK + '?embed=1&open=1#' + (sel + 1); }
     history.replaceState(null, '', '#' + (sel + 1));
     prev.disabled = sel === 0; next.disabled = sel === slides.length - 1; showNotes();
@@ -1288,7 +1307,9 @@ function renderOverviewPage() {
     if (e.key === 'ArrowLeft') { e.preventDefault(); select(sel - 1); }
     else if (e.key === 'ArrowRight') { e.preventDefault(); select(sel + 1); }
     else if (e.key === 'Enter') { e.preventDefault(); showInDeck(sel); }
+    else if (e.key === 'h' || e.key === 'H') { e.preventDefault(); toggleHidden(sel); tiles[sel]._paintEye(); paintSel(); }
   });
+  window.addEventListener('storage', (e) => { if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { tiles.forEach((t) => t._paintEye()); paintSel(); } });   // hidden in the deck (H) → darker here too
   select(sel);
   let notesOn = false; try { notesOn = localStorage.getItem('als:ov-notes') === '1'; } catch {} if (notesOn) setNotes(true);
 }
@@ -1315,7 +1336,9 @@ document.addEventListener('keydown', e => {
   if (e.key === 's' || e.key === 'S') { e.preventDefault(); openPresenterView(); }
 });
 window.addEventListener('pagehide', () => { slideController?.abort(); });
+if (!OVERVIEW_PAGE && !EMBED && (!window.name || window.name.startsWith('deck-'))) window.name = 'deck-' + DECK;   // lets the Overview's “Show in deck” find and focus this tab
 if (OVERVIEW_PAGE) renderOverviewPage(); else {
 window.addEventListener('hashchange', fromHash);
+window.addEventListener('storage', (e) => { if (!EMBED && (e.key === HIDDEN_KEY || e.key === SHOWN_KEY)) render(); });   // hidden or shown in the Overview → progress bar and "Hidden" chip follow
 fromHash();
 }

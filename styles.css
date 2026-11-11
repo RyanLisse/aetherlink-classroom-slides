@@ -1705,7 +1705,14 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .ov-tile{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:.4rem;border-radius:10px;padding:.35rem;border:2px solid transparent}
 .ov-tile:hover,.ov-tile:focus-visible{border-color:var(--cyan)}
 .ov-tile.is-current{border-color:var(--aether-orange)}
-.ov-tile.is-hidden{opacity:.45}
+.ov-tile.is-hidden .ov-shot iframe{filter:brightness(.35) saturate(.5)}
+.ov-tile.is-hidden .ov-cap{opacity:.5}
+.ov-eye{position:absolute;top:.4rem;right:.4rem;z-index:2;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:rgba(3,8,16,.82);color:#fff;border:1px solid var(--border);opacity:0;transition:opacity .15s;cursor:pointer}
+.ov-tile:hover .ov-eye,.ov-tile:focus-within .ov-eye,.ov-tile.is-hidden .ov-eye{opacity:1}
+.ov-eye:hover,.ov-eye:focus-visible{border-color:var(--cyan);color:var(--cyan);outline:none}
+.ov-tile.is-hidden .ov-eye{color:var(--aether-orange);border-color:var(--aether-orange)}
+.ov-hidden-tag{display:none;position:absolute;left:.45rem;bottom:.4rem;z-index:2;padding:.1rem .45rem;border-radius:999px;font-size:.62rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange);background:rgba(3,8,16,.85);border:1px solid var(--aether-orange)}
+.ov-tile.is-hidden .ov-hidden-tag{display:block}
 .ov-shot{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:8px;border:1px solid var(--border);background:var(--surface)}
 .ov-shot iframe{position:absolute;left:0;top:0;width:1600px;height:900px;border:0;transform-origin:0 0;pointer-events:none}
 .ov-cap{display:flex;align-items:baseline;gap:.4rem;font-size:.8rem;line-height:1.3}
@@ -1816,3 +1823,15 @@ body.big-word #stage:has(> .place-bigword) .heading h1{font-size:clamp(3rem,7vw,
 .cards.temple,.cards.temple>.card.temple-col{overflow:visible}
 .cards.temple{position:relative;z-index:2}
 .temple-base{position:relative;z-index:1}
+/* Overview opt-in: link to the day's cheat sheet (window.OVERVIEW_SHEET) */
+.ov-sheet{margin-left:auto;padding:.45rem .8rem;border-radius:10px;border:1px solid var(--aether-orange);color:var(--aether-orange);font-weight:800;font-size:.9rem;text-decoration:none;white-space:nowrap}
+.ov-sheet:hover,.ov-sheet:focus-visible{background:color-mix(in srgb,var(--aether-orange) 14%,transparent);outline:none}
+.ov-sheet + .ov-fold{margin-left:0}
+/* Overview: a review note for a colleague (opt-in: slide.review) */
+.ov-review-tag{margin-left:auto;flex:none;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:#ffe9a8;color:#5a4300;white-space:nowrap}
+.ov-review{display:flex;gap:10px;align-items:flex-start;margin-top:8px;padding:10px 12px;border-radius:8px;background:#fff6d6;border:1px solid #f0d27a;color:#4a3a00;font-size:13px;line-height:1.45}
+.ov-review strong{flex:none;white-space:nowrap}
+.ov-review[hidden]{display:none}
+.ov-review{max-height:12vh;overflow:auto}
+.ov-bigcol:has(.ov-review:not([hidden])){width:min(100%,calc(44vh * 16 / 9))}
+.ov.notes-open .ov-bigcol:has(.ov-review:not([hidden])){width:min(100%,calc(38vh * 16 / 9))}
