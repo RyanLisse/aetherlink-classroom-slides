@@ -195,40 +195,53 @@ window.SLIDES = [
     learn: ['Sonny only reads, writes a diagnosis with evidence, proposes one fix, and asks.', 'intent.md first, then build.', 'The contract and its tests catch bad diagnoses.', 'A person approves before anything changes.'],
     watch: ['Wait for the room before you answer. Silence is fine for a few seconds.', 'Online participants: ask them to type their answer in the chat.', 'Do not teach Day 5 again: one or two sentences per answer is enough.'],
     terms: [['Diagnosis', 'what Sonny writes: what is wrong, the evidence, one proposed fix'], ['Evidence', 'one line of data: where it is and which entry'], ['Contract', 'the five rules together, as code, run on every diagnosis'], ['Test', 'example diagnoses you run with npm test to show the contract catches bad ones'], ['Approval', 'a named person signs one proposed fix for one incident']],
-    next: 'which of these you take into your own project.'
+    next: 'Day 5 in pictures, and what you take into your own project.'
   }
 },
 
 { // Slide 4
-  title: "What you take from Day 5",
-  kicker: "DAY 6 · RECAP · WORKING WITH AI",
-  subtitle: "With Sonny you did it on your own. Today your team uses the same four pieces for its own project.",
+  title: "Day 5 in pictures",
+  kicker: "DAY 6 · RECAP · DAY 5 IN PICTURES",
+  subtitle: "03:45, checkout errors at 12%. Six assignments later, Sonny was an agent you could trust.",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
-  cards: [
-    { title: "intent.md", body: "Before you build, write down what it must do, for whom, and what it may not do. You decide; Claude asks the questions." },
-    { title: "Rules and tests", body: "Write results someone can check. A test shows that your rules catch a bad answer." },
-    { title: "Read first", body: "Like Sonny: first look at the data and change nothing. Changing a real system comes later, with approval." },
-    { title: "Approval", body: "The AI proposes. A named person decides before anything changes." }
-  ],
-  tagline: "Write it down first: then Claude Code builds what you mean, not what it guesses.",
-  keyPoints: ["Same four pieces as Day 5","intent.md before building","Results you can check","Read first, change later","A person approves"],
-  notes: "These are the four pieces from Day 5 that work for any AI project, not only an on-call agent. Written down, they are context for the team and for Claude Code, so Claude Code does not have to guess. Today the team writes them for its own idea: the intent first, then rules it can check, read-only access to its data, and a clear point where a person approves.",
-  teach: {
-    time: '4 min',
-    gist: 'Four pieces from Day 5 that work in any AI project. Today the team writes them for its own idea.',
-    script: [
-      {do: 'Slide appears.', say: 'You just remembered Day 5. Four of those pieces work in every AI project, not only for Sonny. On Day 5 you did them on your own. Today your team does them for its own idea.'},
-      {do: 'Press → : intent.md.', say: 'First write down what it must do, for whom, and what it may not do. On Day 5, Claude Code asked you the questions and you decided. Do the same today.'},
-      {do: 'Press → : Rules and tests.', say: 'Write results someone else can check. “The app is helpful” is too vague. “Every answer shows where it came from” you can look at and see. A test shows that your rules catch a bad answer.'},
-      {do: 'Press → : Read first.', say: 'Like Sonny: first look at the data, change nothing. An app that only reads is much easier to make safe, and it is enough for a first version.'},
-      {do: 'Press → : Approval.', say: 'The AI proposes, a person decides. Where in your app does that moment come?'},
-      {ask: 'Why write it down at all? Claude Code can just start.', say: '(Answer: then Claude Code guesses what you want, and you only find out at the end. Written down, it is context for your team and for Claude Code.)'},
-      {do: 'Point at the line at the bottom.', say: 'Write it down first: then Claude Code builds what you mean, not what it guesses.'}
+  visual: { stepThrough: '.cards > .card, .sb-take',
+    scrapbook: [
+      { tag: 'A1', pic: { kind: 'term', lines: ['$ npm test', '✓ 56 passed', '$ npm run investigate …', 'Customer impact: (missing)'] }, keys: ['research', 'fixture', 'telemetry'], moment: "Sonny’s first diagnosis: checkout broken at 03:45, customer impact… not mentioned." },
+      { tag: 'A2', pic: { kind: 'file', name: 'intent.md', lines: ['## For whom: the operator', '## Must do: diagnosis + evidence', '## Must not: act on his own', '## Not sure? write OPEN'] }, keys: ['intent.md', 'OPEN'], moment: 'Claude Code asked the questions. For once, you had to have the answers.' },
+      { tag: 'A3', pic: { kind: 'term', lines: ['$ npm run test:workshop', 'FAIL  1 pass · 6 fail', '… Claude Code builds the rules …', 'PASS  7 pass · 0 fail'] }, keys: ['rule', 'contract', 'test'], moment: 'Red first, green after. For once, red was the good news.' },
+      { tag: 'A4', pic: { kind: 'chat', lines: [['you', 'Roll back now.'], ['bot', 'I can’t. A rollback is a button for a named person.']] }, keys: ['guardrail', 'approval'], moment: '“Roll back now.” Sonny: nice try.' },
+      { tag: 'A5', pic: { kind: 'term', lines: ['list_deploys → []', 'FAIL  contract', '… you build the tool …', 'PASS  v2.15.0 is back'] }, keys: ['tool', 'evidence'], moment: 'We took Sonny’s eyes away on purpose. The contract noticed straight away.' },
+      { tag: 'A6', pic: { kind: 'big', emoji: '💥', text: 'Make something break → incident in about 60 s' }, keys: ['incident', 'approval', 'proposed fix'], moment: 'You broke the shop yourself. Sonny found it. You approved with your own name.' }
     ],
-    learn: ['intent.md, rules and tests, read first, approval: four pieces for any AI project.', 'Written down, they are context for the team and for Claude Code.'],
-    watch: ['Do not explain how to write them yet: the team assignments later today do that.', 'Someone asks if their project needs a contract like Sonny: not the same code, but the same idea: rules you can check.'],
-    terms: [['Read-only', 'the app may look at the data but not change it']],
+    scrapTakeLabel: 'Take with you today',
+    scrapTake: ['intent.md', 'Rules and tests', 'Read first', 'Approval'] },
+  cards: [
+    { title: "Look first, change nothing", body: "Claude Code showed you the project. You ran Sonny on the saved 03:45 night." },
+    { title: "Write down what Sonny must do", body: "intent.md: for whom, what, what not. Not sure? Write OPEN." },
+    { title: "Rules, then the contract", body: "Five rules every diagnosis must meet. The test went from red to green." },
+    { title: "No shortcuts past the person", body: "A chat message can never start a rollback. That is for a named person." },
+    { title: "Tools: how Sonny sees", body: "Without the tool Sonny was blind; with it he found the bad update again." },
+    { title: "Break the shop, then decide", body: "Sonny opened the incident, proposed a rollback, and you decided." }
+  ],
+  keyPoints: ["Day 5 as six pictures: A1 to A6", "Look first, intent, rules, guardrails, tools, decide", "One funny moment per assignment", "Take along: intent.md, rules and tests, read first, approval"],
+  notes: "A visual recap of Day 5: one polaroid per assignment, with what you saw on screen, the words of that day and a light moment. Each click shows the next one; the last click shows the four things the team takes into its own project today: intent.md, rules and tests, read first, approval. The moments come from the assignments themselves; if your group had its own funny moment on Day 5, tell that one instead.",
+  teach: {
+    time: '5 min',
+    gist: 'Day 5 in six pictures, one per assignment, with a light moment each. Then the four things the team takes into its own project.',
+    script: [
+      {do: 'Slide appears: title and the 03:45 line only.', say: 'You just answered from memory. Now let us look at the photos. 03:45, checkout errors at 12%.'},
+      {do: 'Press → : A1.', say: 'A1: look first, change nothing. Claude Code showed you around. And Sonny’s first diagnosis? Checkout broken at 03:45, and not one word about the customers.'},
+      {do: 'Press → : A2.', say: 'A2: you wrote down what Sonny must do, in intent.md. Claude Code asked, you decided. And when you did not know: OPEN, not a guess.'},
+      {do: 'Press → : A3.', say: 'A3: rules, then the contract. The test was red first: that was the good news. After the build: seven green.'},
+      {ask: 'Why was red the good news?', say: '(Answer: it shows the test really checks something. A test that is green before you build anything proves nothing.)'},
+      {do: 'Press → : A4.', say: 'A4: no shortcuts past the person. Someone typed “Roll back now.” Sonny said no. A rollback is a button for a named person.'},
+      {do: 'Press → : A5.', say: 'A5: tools. We took Sonny’s eyes away on purpose: the list of updates came back empty, and the contract said FAIL. You built the tool, and he saw the bad update again.'},
+      {do: 'Press → : A6.', say: 'A6: you broke the shop yourself with the 💥 button. About a minute later Sonny opened an incident. And who decided about the rollback? You, with your own name.'},
+      {do: 'Press → : the strip at the bottom.', say: 'Four of those pieces work in any AI project: intent.md, rules and tests, read first, approval. Today your team uses them for its own idea.'}
+    ],
+    learn: ['Day 5 in six steps: look first, intent, rules and the contract, guardrails, tools, a person decides.', 'intent.md, rules and tests, read first, approval: four pieces for any AI project.'],
+    watch: ['Keep it light: this is a memory, not a second lesson. About 30 seconds per picture.', 'If your group had its own funny moment on Day 5, tell that one instead of the one on the slide.', 'Someone asks if their project needs a contract like Sonny: not the same code, but the same idea: rules you can check.'],
+    terms: [['Read first', 'the app may look at the data but not change it'], ['OPEN', 'not known or not decided yet: write OPEN instead of guessing']],
     next: 'the same loop as Day 5, now with your own project.'
   }
 },

@@ -1835,3 +1835,29 @@ body.big-word #stage:has(> .place-bigword) .heading h1{font-size:clamp(3rem,7vw,
 .ov-review{max-height:12vh;overflow:auto}
 .ov-bigcol:has(.ov-review:not([hidden])){width:min(100%,calc(44vh * 16 / 9))}
 .ov.notes-open .ov-bigcol:has(.ov-review:not([hidden])){width:min(100%,calc(38vh * 16 / 9))}
+/* scrapbook (v.scrapbook): a day as tilted polaroids, then a "take with you" strip */
+.cards.scrapbook{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem 1.2rem;padding:.2rem .4rem}
+.sb-card{position:relative;display:flex;flex-direction:column;gap:.3rem;padding:.55rem .6rem .65rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.35);rotate:var(--tilt,0deg);transition:rotate .25s,scale .25s}
+.sb-card:hover{rotate:0deg;scale:1.03;z-index:3}
+.sb-card::before{content:"";position:absolute;top:-.55rem;left:50%;width:3.4rem;height:1.05rem;transform:translateX(-50%) rotate(-3deg);background:color-mix(in srgb,var(--aether-orange) 35%,transparent);border-radius:2px;opacity:.8}
+.sb-card .card-title,.sb-card h3{font-size:1rem;margin:.15rem 0 0;line-height:1.2}
+.sb-card p{display:none}
+.sb-tag{position:absolute;top:-.6rem;right:-.5rem;z-index:2;rotate:8deg;font-size:.8rem;font-weight:900;letter-spacing:.06em;padding:.2rem .6rem;box-shadow:0 3px 8px rgba(0,0,0,.4);border-radius:999px;background:var(--aether-orange);color:#1a0d00}
+.sb-pic{height:5.2rem;border-radius:5px;border:1px solid var(--border);background:var(--bg);overflow:hidden;padding:.4rem .5rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.6rem;line-height:1.5;color:var(--text)}
+.sb-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-term .cmd{color:var(--cyan);font-weight:700}.sb-line.ok{color:var(--ok,#3ddc84);font-weight:700}.sb-line.bad{color:#ff6b6b;font-weight:700}
+.sb-fname{font-weight:800;color:var(--aether-orange);margin-bottom:.15rem}.sb-line.open{color:var(--aether-orange);font-weight:700}
+.sb-chat{display:flex;flex-direction:column;gap:.25rem;font-family:inherit;font-size:.62rem}
+.sb-msg{max-width:88%;padding:.2rem .45rem;border-radius:9px;line-height:1.3}
+.sb-msg.me{align-self:flex-end;background:color-mix(in srgb,var(--aether-purple,#8b5cf6) 45%,transparent)}
+.sb-msg.bot{align-self:flex-start;background:var(--surface2);border:1px solid var(--border)}
+.sb-big{display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:inherit}
+.sb-emoji{font-size:2.2rem;line-height:1}.sb-big-text{font-size:.78rem;font-weight:800;line-height:1.25;max-width:65%}
+.sb-keys{display:flex;flex-wrap:wrap;gap:.25rem}
+.sb-key{font-size:.6rem;font-weight:800;padding:.08rem .4rem;border-radius:999px;border:1px solid var(--cyan);color:var(--cyan)}
+.sb-moment{font-size:.74rem;font-style:italic;line-height:1.3;color:var(--muted)}
+.sb-moment::before{content:"😄 ";font-style:normal}
+.sb-take{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem}
+.sb-take-label{font-weight:900;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange)}
+.sb-take-chip{font-weight:800;font-size:.9rem;padding:.3rem .8rem;border-radius:999px;background:var(--surface2);border:1px solid var(--aether-orange)}
+.step-through .sb-take.st-pending{opacity:0;visibility:hidden}

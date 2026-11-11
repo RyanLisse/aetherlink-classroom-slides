@@ -222,6 +222,24 @@ function renderExtras(stage, main, s, v) {
       if (T.day) c.prepend(node('span', 'tw-day', T.day));
       if (T.pic) c.prepend(pic(T.pic)); });
   }
+  if (v.scrapbook && grid) {                                    // a day as a scrapbook: per card a tilted polaroid with a tag (A1…), a small picture (terminal, file, chat, big emoji), keyword chips and a funny moment; v.scrapTake = a strip of what you take along
+    grid.classList.add('scrapbook');
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const pic = (P) => {
+      const box = node('div', 'sb-pic sb-' + P.kind);
+      if (P.kind === 'term') box.innerHTML = P.lines.map((l) => `<div class="sb-line${/^\$/.test(l) ? ' cmd' : /^(✓|PASS)/.test(l) ? ' ok' : /^(✗|FAIL)/.test(l) ? ' bad' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'file') box.innerHTML = `<div class="sb-fname">📄 ${esc(P.name)}</div>` + P.lines.map((l) => `<div class="sb-line${/OPEN/.test(l) ? ' open' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'chat') box.innerHTML = P.lines.map(([who, t]) => `<div class="sb-msg ${who === 'you' ? 'me' : 'bot'}">${esc(t)}</div>`).join('');
+      else if (P.kind === 'big') box.innerHTML = `<span class="sb-emoji">${esc(P.emoji)}</span><span class="sb-big-text">${esc(P.text)}</span>`;
+      return box;
+    };
+    cards.forEach((c, i) => { const B = v.scrapbook[i]; if (!B) return; c.classList.add('sb-card'); c.style.setProperty('--tilt', (B.tilt ?? [-1.2, .9, -.6, 1.1, -.9, .6][i % 6]) + 'deg'); c.querySelector('.card-icon')?.remove();
+      if (B.pic) c.prepend(pic(B.pic));
+      if (B.tag) c.prepend(node('span', 'sb-tag', B.tag));
+      if (B.keys) { const k = node('div', 'sb-keys'); B.keys.forEach((w) => k.append(node('span', 'sb-key', w))); c.append(k); }
+      if (B.moment) c.append(node('div', 'sb-moment', B.moment)); });
+    if (v.scrapTake) { const t = node('div', 'sb-take'); t.append(node('span', 'sb-take-label', v.scrapTakeLabel || 'Take with you')); v.scrapTake.forEach((w) => t.append(node('span', 'sb-take-chip', w))); grid.after(t); }
+  }
   if (v.temple && grid) {                                       // five pillars as a temple: roof = the idea, per pillar an icon + its questions (body lines), base = the total score; scores show once the base is stepped in
     const T = v.temple; const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
     const wrap = node('div', 'temple-wrap'); grid.replaceWith(wrap); grid.classList.add('temple');
