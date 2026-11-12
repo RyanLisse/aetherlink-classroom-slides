@@ -56,15 +56,15 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(w4,/app\.js\?v=130/);
  assert.match(w4,/fit-stage\.js\?v=1/);
  assert.match(w4,/id="timer-btn"/);
- assert.match(w4,/workshop4-slides\.js\?v=28/);
- assert.match(w4p,/workshop4-slides\.js\?v=28/);
+ assert.match(w4,/workshop4-slides\.js\?v=29/);
+ assert.match(w4p,/workshop4-slides\.js\?v=29/);
  assert.match(w4p,/presenter\.js\?v=106/);
 });
 
 test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  const day4=deck('workshop4-slides.js');
- assert.equal(day4.length,60);
- assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,60);
+ assert.equal(day4.length,63);
+ assert.equal(JSON.parse(read('tools/session-source-manifest.json')).decks.find(d=>d.file==='workshop4-slides.js').slides,63);
  assert.ok(day4.every(s=>s.teach&&s.teach.script?.length),'every slide has a teach card');
  assert.ok(day4.every(s=>s.teach.do?.length),'every teach card has a concrete trainer action');
  assert.ok(day4.every(s=>s.title?.trim()));
@@ -76,12 +76,11 @@ test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  assert.ok(prompts.length>=6,'trainer and participant prompts are copy-ready');
  assert.ok(prompts.every(pr=>!/^git (checkout|switch).*step-/m.test(pr)),'no finished-step branch route');
  const trainer=day4.find(s=>s.title==='Trainer appendix · prepare before class');
- assert.match(JSON.stringify(trainer.steps),/Only after the actual build and run/);
- assert.match(JSON.stringify(trainer.steps),/Wait for the trainer/);
- assert.match(JSON.stringify(trainer.steps),/separate read-only reference folder/);
+ assert.match(JSON.stringify(trainer.steps),/git switch trainer\/solution/,'the trainer demos from the solved branch');
+ assert.match(JSON.stringify(trainer.steps),/npm run check:1 && npm run check:2 && npm run check:3/);
+ assert.doesNotMatch(active,/evidence pack|reference folder|prepared trainer copy/i,'no trainer material to build before class');
  const setup=day4.find(s=>s.title==='Your turn · Step 0');
- assert.match(JSON.stringify(setup.steps),/Keep working in your own starter/);
- assert.match(JSON.stringify(setup.steps),/Copy no finished files/);
+ for(const step of [1,2,3])assert.ok(prompts.some(pr=>pr.includes(`npm run check:${step} until it passes`)&&new RegExp(`npm run lesson${step} -- MSG-\\d\\d once`).test(pr)),`SOLO ${step} has a check and one real run`);
  assert.match(JSON.stringify(setup.steps),/claude --setting-sources project,user --strict-mcp-config --no-chrome/);
  assert.doesNotMatch(active,/settingSources: \['project'\]|--setting-sources project /,'Day 4 never loads project settings alone');
  assert.match(active,/settingSources: \['project', 'user'\]/,'Day 4 SDK loads project and user settings');
@@ -102,7 +101,7 @@ test('Day 4 (Agent SDK) follows the Day 1-2 teaching style',()=>{
  assert.match(memoryPrompts[2],/Do not read docs\/memory-lab\/T-001\.md/);
  assert.match(memoryPrompts[2],/credentials, authentication data, tokens, personal data/);
  assert.deepEqual(Array.from(day4.slice(-2),s=>s.title),[
-  'Optional appendix · fast lane','Trainer appendix · prepare before class'
+  'Bonus 3 · Add a specialist','Trainer appendix · prepare before class'
  ]);
  assert.ok(day4.slice(0,-1).every((slide,index)=>slide.teach.next===day4[index+1].title),'teach.next follows the physical slide order');
  assert.ok(day4.every((slide,index)=>!/^\d+:/.test(slide.stateId||'')||slide.stateId.startsWith(`${index+1}:`)),'numeric state IDs follow the physical slide order');

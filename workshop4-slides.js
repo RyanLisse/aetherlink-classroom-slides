@@ -432,7 +432,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "10:00 · Reconstruct",
-        "body": "Read the sanitized n8n JSON.\nMap its behavior.\nRebuild the prepared app."
+        "body": "Read the sanitized n8n JSON.\nMap its behavior.\nBuild the Agent SDK parts, one checked step at a time."
       },
       {
         "title": "11:15 · SOLO 1",
@@ -826,7 +826,7 @@ window.SLIDES = [
       "The AI does nothing yet",
       "Look for: backend: claude-code"
     ],
-    "notes": "Show the prepared trainer result. On the next slide, participants paste the SOLO 0 prompt into Claude Code and inspect the same evidence. Point at 'backend: claude-code': the package uses their Claude Code login. A dry run proves setup, not model quality. Platform setup is in docs/SETUP.md. The public workshop package is https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.",
+    "notes": "Show npm run doctor and npm run verify. On the next slide, participants paste the SOLO 0 prompt and Claude Code runs the same two commands. Point at 'backend: claude-code': the package uses their Claude Code login. A dry run proves setup, not model quality. Platform setup is in docs/SETUP.md. The public workshop package is https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.",
     "stateId": "14:Demo · Step 0: the offline path",
     "teach": {
       "next": "Your turn · Step 0",
@@ -881,43 +881,42 @@ window.SLIDES = [
 {
     "lessonId": "workshop-4",
     "title": "Your turn · Step 0",
-    "kicker": "SOLO 0 · Inspect the prepared baseline",
+    "kicker": "SOLO 0 · Read the n8n flow",
     "type": "practice",
     "layout": "exercise",
-    "timer": 10,
-    "subtitle": "Open your own starter in Claude Code. Review the separate trainer reference without copying its implementation.",
+    "timer": 5,
+    "subtitle": "Open your starter in Claude Code. Map each n8n node to the file that replaces it.",
     "steps": [
       {
-        "text": "Clone your own starter. Keep its TODOs for the assignments.",
-        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nclaude --setting-sources project,user --strict-mcp-config --no-chrome"
-      },
-      {
-        "text": "Add the trainer’s separate read-only reference folder or evidence pack to Claude Code context.",
-        "after": "Keep working in your own starter. Copy no finished files. If the reference is missing, ask the trainer before SOLO 0."
+        "text": "Clone the starter and start Claude Code",
+        "prompt": "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nnpm ci\nclaude --setting-sources project,user --strict-mcp-config --no-chrome"
       },
       {
         "text": "Paste the SOLO 0 prompt",
-        "prompt": "Read n8n/support-triage.json, SOLO.md and the trainer evidence. Explain the source-to-app mapping. Inspect the prepared app diff, checks and real run. Show Customer Context → Risk → Customer Reply, output {priority, message}, the three routes, memory isolation and every OPEN gap. Help me type one fictional case for SOLO 1 and choose its observable check. Do not rebuild the whole app now. Stop after ten minutes."
+        "prompt": "Read n8n/support-triage.json and the Source contract in SOLO.md. Change no file. Show one table: each n8n node, what it does, and the file in this repository that replaces it. Mark each file as built or TODO. Then run npm run doctor and npm run verify and show the exit codes. Stop.",
+        "after": "npm run doctor and npm run verify exit 0."
       },
       {
-        "text": "Inspect the map and evidence",
-        "after": "Ask where each claim comes from. A dry run is setup evidence, not model evidence."
+        "text": "Read the table",
+        "after": "Point to the three specialists in the n8n JSON. A file marked TODO is yours to build today."
       }
     ],
-    "expected": "You can explain the mapping and name the evidence behind the prepared baseline.",
-    "notes": "Before class, the trainer prepares a separate reviewed reference and shares its diff, checks and real-run evidence. Participants keep their own unsolved main starter. During these ten minutes, review the reference without copying finished files. If it is missing, stop and ask the trainer. Then choose a fictional case and continue building in the starter on one personal branch.",
+    "expected": "Both commands exit 0, and you can point to the three specialists in the n8n JSON.",
+    "notes": "Nobody needs trainer material for this step. The starter already has the plumbing: the runner, the read-only MCP server and the checks. Participants build only the Agent SDK parts. Every assignment today is the same loop: paste the prompt, the check goes green, one real run, Claude Code explains why. A check is red before you start a step. That is correct.",
     "teach": {
       "next": "Check: does your screen look like this?",
-      "time": "10 min",
-      "gist": "Open your own starter in Claude Code. Review the separate trainer reference without copying its implementation.",
+      "time": "5 min",
+      "gist": "Open your starter in Claude Code. Map each n8n node to the file that replaces it.",
       "script": [
         {
-          "say": "Before class, the trainer prepares a separate reviewed reference and shares its diff, checks and real-run evidence. Participants keep their own unsolved main starter. During these ten minutes, review the reference without copying finished files. If it is missing, stop and ask the trainer. Then choose a fictional case and continue building in the starter on one personal branch."
+          "say": "Nobody needs trainer material for this step. The starter already has the plumbing: the runner, the read-only MCP server and the checks. Participants build only the Agent SDK parts. Every assignment today is the same loop: paste the prompt, the check goes green, one real run, Claude Code explains why. A check is red before you start a step. That is correct."
         }
       ],
-      "do": [],
+      "do": [
+        "Use Copy. Check that doctor and verify exit 0 on every laptop."
+      ],
       "done": [
-        "You can explain the mapping and name the evidence behind the prepared baseline."
+        "Both commands exit 0, and you can point to the three specialists in the n8n JSON."
       ],
       "watch": []
     }
@@ -1290,19 +1289,19 @@ window.SLIDES = [
     "keyPoints": [
       "Show the dry run first. Then show a live run or the sample trace."
     ],
-    "notes": "Use a prepared trainer copy. First, the dry run shows the options, including outputFormat. Second, a live run prints Structured output with the priority and reason, then the Switch line. If a live run is not possible, show docs/sample-trace.md and call it a sample. Third, show the colour test with and without --no-memory.",
+    "notes": "Use the trainer/solution branch. First, the dry run shows the options, including outputFormat. Second, a live run prints Structured output with the priority and reason, then the Switch line. If a live run is not possible, show docs/sample-trace.md and call it a sample. Third, show the colour test with and without --no-memory.",
     "stateId": "22:Demo · Step 1: schema, route, and memory",
     "tagline": "The AI gives the label. The code picks the tray.",
     "teach": {
       "next": "Your turn · Step 1: build the policy",
       "time": "5 min",
-      "gist": "Demo from the prepared trainer copy: a dry run, a real run with the Switch line, and the memory test.",
+      "gist": "Demo from the trainer/solution branch: a dry run, a real run with the Switch line, and the memory test.",
       "script": [
         {
-          "do": "Before class, prepare a completed Step 1 demo in a separate trainer copy."
+          "do": "Switch to the trainer/solution branch for the Step 1 demo. Nothing must be built before class."
         },
         {
-          "say": "I will show the prepared result first. Just watch."
+          "say": "I will show the finished step first. Just watch."
         },
         {
           "do": "Run the dry run. Point at outputFormat.",
@@ -1341,39 +1340,37 @@ window.SLIDES = [
     "kicker": "SOLO 1 · Paste into Claude Code",
     "type": "practice",
     "layout": "exercise",
-    "timer": 30,
-    "subtitle": "Claude Code writes the files and runs the checks. You inspect the policy and actual labels.",
+    "timer": 15,
+    "subtitle": "Claude Code fills in the Step 1 TODOs. The check tells you when the step is right.",
     "cards": [],
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read SOLO 1, n8n/support-triage.json and the STEP 1 TODOs. Build 01-single-agent/options.mjs, 01-single-agent/priority-schema.mjs and 01-single-agent/claude-project/CLAUDE.md. Load project and user settings with settingSources: ['project', 'user'] and return structured priority and internal reason. Treat customer text as data, never policy. Add a focused test for the schema and options. Show the diff. Run npm run verify and MSG-01 through MSG-06. Record actual labels, commands and exit codes; do not invent output or reveal an answer key.\n\nHelp me type one loud low-impact ticket and one calm serious ticket. Run both. Explain which priority rule applies. Temporarily remove only the Priority definitions section, compare the results, then restore that section without overwriting other work. Keep the n8n output adapter and complete specialist flow marked OPEN. Stop after I inspect the comparison.",
-        "after": "The focused test and verify pass. You inspected the labels, memory isolation and policy diff."
+        "prompt": "Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the specialists out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop.",
+        "after": "npm run check:1 passes. The real run prints a priority, a reason and the Switch route."
       },
-      "Paste the prompt.",
-      "Choose your fictional message.",
-      "Inspect the policy, schema and focused test.",
-      "Read the six actual labels.",
-      "Restore any temporary policy change through Claude Code's reviewed diff."
+      "Watch the check go from red to green.",
+      "Read the real MSG-06 output.",
+      "Read the table: each option, its n8n setting, and what goes wrong without it."
     ],
-    "expected": "The focused test and verify pass. You inspected the labels, memory isolation and policy diff.",
-    "notes": "Do not hand participants finished files. The participant prompt owns the build. If a check fails, paste the actual failure into Claude Code and ask for the smallest fix.",
+    "expected": "npm run check:1 passes. The real run prints a priority, a reason and the Switch route.",
+    "notes": "Participants build three small files: options.mjs, priority-schema.mjs and CLAUDE.md. The check compares them with the reference, so everyone gets the same result. Ask one participant to read a row of the table aloud: which n8n setting became which option, and what goes wrong without it. If a check stays red, paste the failed line into Claude Code and ask for the smallest fix.",
     "teach": {
       "next": "Your turn · Step 1b: inspect the form and memory",
-      "time": "30 min",
-      "gist": "Claude Code writes the files and runs the checks. You inspect the policy and actual labels.",
+      "time": "15 min",
+      "gist": "Claude Code fills in the Step 1 TODOs. The check tells you when the step is right.",
       "script": [
         {
-          "say": "Claude Code writes the files and runs the checks. You inspect the policy and actual labels."
+          "say": "Participants build three small files: options.mjs, priority-schema.mjs and CLAUDE.md. The check compares them with the reference, so everyone gets the same result. Ask one participant to read a row of the table aloud: which n8n setting became which option, and what goes wrong without it. If a check stays red, paste the failed line into Claude Code and ask for the smallest fix."
         }
       ],
-      "do": [],
-      "done": [
-        "The focused test and verify pass. You inspected the labels, memory isolation and policy diff."
+      "do": [
+        "Use Copy. Watch check:1 go from red to green, then read the real MSG-06 run."
       ],
-      "watch": [
-        "Do not hand participants finished files. The participant prompt owns the build. If a check fails, paste the actual failure into Claude Code and ask for the smallest fix."
-      ]
+      "done": [
+        "npm run check:1 passes. The real run prints a priority, a reason and the Switch route."
+      ],
+      "watch": []
     }
   },
 {
@@ -2185,7 +2182,7 @@ window.SLIDES = [
       "The folder starts with a dot. Use ls -a to see it.",
       "Before SOLO 2, your branch has no specialist files. Claude Code builds them from the prompt."
     ],
-    "notes": "Show .claude/agents in the prepared trainer copy. Claude Code and the package both read this folder. A folder called .agents or a file called AGENTS.md is different and does not define these specialists.",
+    "notes": "Show .claude/agents on the trainer/solution branch. Claude Code and the package both read this folder. A folder called .agents or a file called AGENTS.md is different and does not define these specialists.",
     "stateId": "40:Where do the agents live?",
     "teach": {
       "next": "Put the file in the folder: Claude finds it",
@@ -2252,7 +2249,7 @@ window.SLIDES = [
       "The description decides when Claude uses the agent.",
       "The SDK reads the same folder: 'project' in settingSources: ['project', 'user']."
     ],
-    "notes": "A specialist is one file. Claude Code builds the files from the SOLO 2 prompt. The package reads the same folder through lib/agents.mjs. In the prepared trainer copy, show risk-agent.md and its description line.",
+    "notes": "A specialist is one file. Claude Code fills in the files from the SOLO 2 prompt. The package reads the same folder through lib/agents.mjs. on the trainer/solution branch, show risk-agent.md and its description line.",
     "stateId": "41:Why this folder? Claude finds the agents.",
     "teach": {
       "next": "Step 2: a team lead and two specialists",
@@ -2356,22 +2353,22 @@ window.SLIDES = [
       },
       {
         "title": "3 · The draft",
-        "body": "Open the draft file. A person reads it before anything is sent."
+        "body": "Read the draft in message. A person reads it before anything is sent."
       }
     ],
     "keyPoints": [
       "Show the dry run first. Then show a live run or the sample trace."
     ],
-    "notes": "Use the prepared trainer copy. The dry run only shows setup. The real run shows Agent → risk-agent, then Agent → customer-reply-agent, and writes 02-subagents/claude-project/output/MSG-05.md. If a real run is not possible, show docs/sample-trace.md and call it a sample.",
+    "notes": "Use the trainer/solution branch. The dry run only shows setup. The real run shows Agent → risk-agent, then Agent → customer-reply-agent, and returns the draft in message. Each specialist line shows the model it runs on. If a real run is not possible, show docs/sample-trace.md and call it a sample.",
     "stateId": "43:Demo · Step 2: trace the two agents",
     "tagline": "Risk first, then the writer. The draft waits for a person.",
     "teach": {
       "next": "Your turn · Step 2",
       "time": "5 min",
-      "gist": "Demo from the prepared trainer copy: a dry run, a real specialist trace, and the draft.",
+      "gist": "Demo from the trainer/solution branch: a dry run, a real specialist trace with the model of each specialist, and the draft.",
       "script": [
         {
-          "do": "Before class, prepare a completed Step 2 demo in a separate trainer copy."
+          "do": "Switch to the trainer/solution branch for the Step 2 demo. Nothing must be built before class."
         },
         {
           "say": "I will show the prepared result. Just watch."
@@ -2401,35 +2398,35 @@ window.SLIDES = [
     "kicker": "SOLO 2 · Paste into Claude Code",
     "type": "practice",
     "layout": "exercise",
-    "timer": 25,
-    "subtitle": "Build Risk and Reply from the source system messages. Inspect both drafts.",
+    "timer": 15,
+    "subtitle": "Fill in two specialist files and the team-lead options. Read the trace and the draft.",
     "cards": [],
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read SOLO 2 and the Risk and Customer Reply system messages in n8n/support-triage.json. Create the 02-subagents lesson, .claude/agents/risk-agent.md, .claude/agents/customer-reply-agent.md and the smallest loader and runner that follow the existing lib/run.mjs pattern. Risk runs before priority is finalized; Reply runs last and saves a Markdown draft. Keep risk notes internal. Reply may not reclassify priority or promise unsupported refunds. Add a focused role-boundary test and package scripts for lesson2 only after their target files exist. Show the diff. Run npm run verify, then lesson2 with MSG-05 and MSG-10. Open the saved drafts and show the specialist trace.\n\nHelp me type a fictional ticket with missing information. Make Reply ask one clear question, rerun it and compare the drafts. This lesson isolates Risk and Reply; Customer Context remains part of the prepared complete baseline and is added to this lesson in SOLO 3. Send nothing. Stop after my human review.",
-        "after": "Risk runs before Reply. The test prevents Reply from changing priority. A person reviewed both drafts."
+        "prompt": "Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the team lead chooses a specialist, why a specialist has its own context, and why neither specialist has a tool. Stop.",
+        "after": "npm run check:2 passes. The trace shows risk-agent before customer-reply-agent."
       },
-      "Paste the prompt.",
-      "Choose one vague or adversarial description.",
-      "Inspect Risk before Reply in the trace.",
-      "Read both drafts.",
-      "Approve only a focused role-boundary change."
+      "Watch the check go from red to green.",
+      "Find risk-agent before customer-reply-agent in the trace. Each line shows the model.",
+      "Read the draft in message. Nothing is sent."
     ],
-    "expected": "Risk runs before Reply. The test prevents Reply from changing priority. A person reviewed both drafts.",
-    "notes": "The participant builds on one branch and reviews every generated file.",
+    "expected": "npm run check:2 passes. The trace shows risk-agent before customer-reply-agent.",
+    "notes": "Each specialist file is the n8n tool description plus the n8n system message. The description tells the team lead when to delegate. Point at the [subagent] lines in the trace: they show which model each specialist runs on. Ask: why does neither specialist have a tool? Answer: they only think and write, so they cannot look up or change anything.",
     "teach": {
       "next": "Check: does your screen look like this?",
-      "time": "25 min",
-      "gist": "Build Risk and Reply from the source system messages. Inspect both drafts.",
+      "time": "15 min",
+      "gist": "Fill in two specialist files and the team-lead options. Read the trace and the draft.",
       "script": [
         {
-          "say": "The participant builds on one branch and reviews every generated file."
+          "say": "Each specialist file is the n8n tool description plus the n8n system message. The description tells the team lead when to delegate. Point at the [subagent] lines in the trace: they show which model each specialist runs on. Ask: why does neither specialist have a tool? Answer: they only think and write, so they cannot look up or change anything."
         }
       ],
-      "do": [],
+      "do": [
+        "Use Copy. Watch check:2 go green, then point at the model of each specialist in the trace."
+      ],
       "done": [
-        "Risk runs before Reply. The test prevents Reply from changing priority. A person reviewed both drafts."
+        "npm run check:2 passes. The trace shows risk-agent before customer-reply-agent."
       ],
       "watch": []
     }
@@ -2684,15 +2681,15 @@ window.SLIDES = [
       "risk-agent uses get_transaction and list_transactions.",
       "Review the customer-reply-agent draft before sending."
     ],
-    "notes": "Use the prepared trainer copy. Show the smoke check, then a real MSG-08 run. Point at both lookups and the External data section. The draft waits for a person.",
+    "notes": "Use the trainer/solution branch. Show the smoke check, then a real MSG-08 run. Point at both lookups and at the same facts in the draft. The draft waits for a person.",
     "stateId": "49:Demo · Step 3: read-only customer and transaction lookups",
     "teach": {
       "next": "Your turn · Step 3",
       "time": "5 min",
-      "gist": "Demo from the prepared trainer copy: a smoke check, a real run with both lookups, and External data.",
+      "gist": "Demo from the trainer/solution branch: a smoke check, a real run with both lookups, and the facts in the draft.",
       "script": [
         {
-          "do": "Before class, prepare a completed Step 3 demo in a separate trainer copy."
+          "do": "Switch to the trainer/solution branch for the Step 3 demo. Nothing must be built before class."
         },
         {
           "do": "Run npm run smoke:mcp.",
@@ -2724,35 +2721,35 @@ window.SLIDES = [
     "kicker": "SOLO 3 · Paste into Claude Code",
     "type": "practice",
     "layout": "exercise",
-    "timer": 30,
-    "subtitle": "Add Customer Context and read-only MCP tools. Prove every external claim.",
+    "timer": 15,
+    "subtitle": "Add the context specialist and connect the read-only MCP server. Match each fact to a tool result.",
     "cards": [],
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read SOLO 3, n8n/support-triage.json, docs/customer_context.csv and docs/transactions.xlsx. Build 03-mcp and .mcp.json with read-only get_customer and get_transaction tools over stdio. Keep both data files outside every claude-project folder. Add customer-context-agent. Run Customer Context first, Risk before the priority decision and Reply last. Do not guess missing records. Transaction lookup is an extension to the n8n source.\n\nCreate lib/workflow-output.mjs with a pure toWorkflowOutput function that returns exactly {output: {priority, message}} from the internal priority and reply draft. Create lib/ticket-sessions.mjs with a small registry that rejects an empty ticket_id and stores one SDK sessionId per ticket_id. Route output.priority case-insensitively through lib/switch.mjs to auto_reply, investigate or escalate. Never add send or record-write tools. Add focused contract, route, two-ticket isolation, tool-permission and missing-record tests. Add package scripts only after their files exist. Show the diff and permissions. Explain and run the documented install, smoke:mcp and lesson3 checks with MSG-08, MSG-07 and MSG-09.\n\nLet me type one well-formed but missing transaction ID. Run it and show the failed lookup, full specialist order, final output and saved draft. Stop after I inspect the evidence.",
-        "after": "A real trace shows Context → Risk → Reply. Every external claim comes from a read-only tool result."
+        "prompt": "Read the STEP 3 TODOs in 03-mcp/options.mjs and .claude/agents/customer-context-agent.md, and the Customer Context Agent node in n8n/support-triage.json. Fill in customer-context-agent.md and 03-mcp/options.mjs. Change no other file, and do not change support-mcp/server.js. Run npm run check:3 until it passes. Run npm run lesson3 -- MSG-08 once and show the trace. Then show which facts in the answer came from get_customer and get_transaction, and explain why only customer-context-agent has these tools. Stop.",
+        "after": "npm run check:3 passes. The trace shows Context → Risk → Reply with two tool results."
       },
-      "Paste the prompt.",
-      "Choose one missing transaction ID.",
-      "Inspect the tool permissions.",
-      "Trace Context → Risk → Reply.",
-      "Open the draft and match each external claim to a tool result."
+      "Watch the check go from red to green.",
+      "Find get_customer and get_transaction in the trace.",
+      "Match each fact in the draft to a tool result."
     ],
-    "expected": "A real trace shows Context → Risk → Reply. Every external claim comes from a read-only tool result.",
-    "notes": "A smoke test alone is insufficient. Keep the transaction lookup labeled as an extension to the n8n source.",
+    "expected": "npm run check:3 passes. The trace shows Context → Risk → Reply with two tool results.",
+    "notes": "The MCP server is already built and stays unchanged. Participants name it in mcpServers and give its two tools to one specialist. A green check proves the configuration. Only the real run proves the behavior. Keep the transaction lookup labeled as an extension to the n8n source.",
     "teach": {
       "next": "Check: does your screen look like this?",
-      "time": "30 min",
-      "gist": "Add Customer Context and read-only MCP tools. Prove every external claim.",
+      "time": "15 min",
+      "gist": "Add the context specialist and connect the read-only MCP server. Match each fact to a tool result.",
       "script": [
         {
-          "say": "A smoke test alone is insufficient. Keep the transaction lookup labeled as an extension to the n8n source."
+          "say": "The MCP server is already built and stays unchanged. Participants name it in mcpServers and give its two tools to one specialist. A green check proves the configuration. Only the real run proves the behavior. Keep the transaction lookup labeled as an extension to the n8n source."
         }
       ],
-      "do": [],
+      "do": [
+        "Use Copy. Watch check:3 go green, then match one fact in the draft to a tool result."
+      ],
       "done": [
-        "A real trace shows Context → Risk → Reply. Every external claim comes from a read-only tool result."
+        "npm run check:3 passes. The trace shows Context → Risk → Reply with two tool results."
       ],
       "watch": []
     }
@@ -2769,7 +2766,7 @@ window.SLIDES = [
     },
     "subtitle": "After the desk test. Look for two things.",
     "keyPoints": [
-      "Read-only tools: list_transactions and get_transaction. No write tools yet.",
+      "Read-only tools: get_customer and get_transaction. No write tools.",
       "Last line: MCP servers OK. No model call."
     ],
     "cards": [
@@ -2782,7 +2779,7 @@ window.SLIDES = [
         "body": "MCP servers OK. No model was called."
       }
     ],
-    "notes": "smoke:mcp starts both MCP servers and calls each tool once. CUST-999 does not exist, so the tool says so. That is correct.",
+    "notes": "smoke:mcp starts the MCP server and calls each tool. CUST-999 does not exist, so the tool says so. That is correct.",
     "stateId": "51:What you see · Step 3",
     "teach": {
       "next": "Discuss: where did the facts come from?",
@@ -2971,35 +2968,35 @@ window.SLIDES = [
     "kicker": "SOLO 4 · Paste into Claude Code",
     "type": "practice",
     "layout": "exercise",
-    "timer": 25,
-    "subtitle": "Claude Code collects observed evidence. You make the review decision.",
+    "timer": 15,
+    "subtitle": "Three real runs become one acceptance table. You make the review decision.",
     "cards": [],
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read SOLO 4, n8n/support-triage.json and my actual run output. Build a local checker without embedding or displaying expected answer labels. Use only labels observed in my runs. Create participant-output/acceptance-table.md with source behavior, app behavior, parity gap, message, observed label, external-data source, draft path and human review status. Compare output {priority, message}, the three case-insensitive routes, Context → Risk → Reply, memory isolation and missing-data behavior. Mark absent evidence OPEN. Label transaction lookup as an extension and draft-only enforcement as deliberate hardening.\n\nRun the documented checks and record commands, exit codes and short trace excerpts. Suggest one focused fix for a real mismatch, show its diff and rerun that case. Never change a label merely to make a checker pass. Attach my diff, focused test, real trace and acceptance table to participant-output. I make the final review decision. Stop before customer-facing use.",
-        "after": "Every acceptance row points to observed evidence or says OPEN. Nothing is sent or deployed."
+        "prompt": "Run npm run lesson3 for MSG-01, MSG-06 and MSG-09. Create participant-output/acceptance-table.md with one row for each message: observed priority, route, order of the specialists, facts that came from a tool, and the n8n node that gave this behavior. Use only output from these runs. Write OPEN where you did not observe the behavior. Change no source file. Then name one difference between the n8n flow and this app. Stop.",
+        "after": "Every acceptance row points to a real run or says OPEN. Nothing is sent or deployed."
       },
-      "Paste the prompt with your actual run output.",
-      "Choose one real mismatch or missing case.",
-      "Inspect every acceptance row.",
-      "Rerun the focused case.",
-      "Record your own human review decision."
+      "Read one row from the message to the n8n node.",
+      "Choose the difference you would improve first.",
+      "Record your own review decision."
     ],
-    "expected": "Every acceptance row points to observed evidence or says OPEN. Nothing is sent or deployed.",
-    "notes": "This replaces the hidden answer-key exercise. Proof comes from the participant's diff, focused tests, real trace, acceptance table and human review.",
+    "expected": "Every acceptance row points to a real run or says OPEN. Nothing is sent or deployed.",
+    "notes": "The three runs take a few minutes. Use that time: ask participants to predict the priority of MSG-06 before the run ends. Proof comes from real runs, the acceptance table and a human review. There is no hidden answer key.",
     "teach": {
       "next": "Check: does your evidence look like this?",
-      "time": "25 min",
-      "gist": "Claude Code collects observed evidence. You make the review decision.",
+      "time": "15 min",
+      "gist": "Three real runs become one acceptance table. You make the review decision.",
       "script": [
         {
-          "say": "This replaces the hidden answer-key exercise. Proof comes from the participant's diff, focused tests, real trace, acceptance table and human review."
+          "say": "The three runs take a few minutes. Use that time: ask participants to predict the priority of MSG-06 before the run ends. Proof comes from real runs, the acceptance table and a human review. There is no hidden answer key."
         }
       ],
-      "do": [],
+      "do": [
+        "Use Copy. Read one acceptance row from the message to the n8n node."
+      ],
       "done": [
-        "Every acceptance row points to observed evidence or says OPEN. Nothing is sent or deployed."
+        "Every acceptance row points to a real run or says OPEN. Nothing is sent or deployed."
       ],
       "watch": []
     }
@@ -3023,8 +3020,8 @@ window.SLIDES = [
         "body": "Each label and external-data claim points to an actual run, saved draft or tool result."
       },
       {
-        "title": "Focused rerun",
-        "body": "The chosen mismatch has a focused test and a recorded exit code."
+        "title": "One difference",
+        "body": "You named one difference with the n8n flow and the file you would change."
       },
       {
         "title": "Human gate",
@@ -3036,7 +3033,7 @@ window.SLIDES = [
       "Missing evidence stays OPEN.",
       "A human makes the review decision."
     ],
-    "notes": "Show the participant's acceptance table, focused test output and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key.",
+    "notes": "Show the participant's acceptance table and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key.",
     "stateId": "56:What you see · Step 4",
     "teach": {
       "next": "On Monday: take this to your squad",
@@ -3044,11 +3041,11 @@ window.SLIDES = [
       "gist": "Every row points to observed evidence or says OPEN.",
       "script": [
         {
-          "do": "Show the participant's acceptance table, focused test output and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key."
+          "do": "Show the participant's acceptance table and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key."
         }
       ],
       "do": [
-        "Show the participant's acceptance table, focused test output and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key."
+        "Show the participant's acceptance table and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key."
       ],
       "done": [
         "The room can explain check: does your evidence look like this?."
@@ -3145,7 +3142,7 @@ window.SLIDES = [
     "stateId": "58:Close: keep a human in the loop.",
     "subtitle": "One agent, a team, lookup desks and a barrier. And at the end, always a person.",
     "teach": {
-      "next": "Optional appendix · fast lane",
+      "next": "Bonus · finished early?",
       "time": "10 min",
       "gist": "Close: one result each, back to this morning's goals, and a bridge to Workshop 5.",
       "script": [
@@ -3175,43 +3172,173 @@ window.SLIDES = [
   },
 {
     "lessonId": "workshop-4",
-    "title": "Optional appendix · fast lane",
-    "kicker": "Optional appendix · fast lane",
+    "title": "Bonus · finished early?",
+    "kicker": "Bonus · build on your own",
     "type": "concept",
-    "subtitle": "Optional after the close. These challenges are not part of the required workshop route.",
+    "subtitle": "Extend a small weather agent with one tool and one specialist. Same loop, your own pace.",
     "visual": {
       "bot": "point",
       "place": "beside"
     },
     "cards": [
       {
-        "title": "1 · How stable is the label?",
-        "body": "Run MSG-01 to MSG-06 three times each. Which labels change between runs? What does a run cost (see the result line)?"
+        "title": "1 · The same loop",
+        "body": "Paste the prompt. The check goes green. One real run. Claude Code explains why."
       },
       {
-        "title": "2 · Try to break the barrier",
-        "body": "After the assignment: try to get €150 through as two changes of €75. Then fix the hook with a total per transaction."
+        "title": "2 · A smaller agent",
+        "body": "One file holds everything the agent may do: src/options.ts. The tool lives inside the app."
       },
       {
-        "title": "3 · Log every decision",
-        "body": "After the assignment: write allow, ask and deny to the audit log, with the time. Who approved what?"
+        "title": "3 · Then your own idea",
+        "body": "A new tool, a new specialist or a JSON answer. Write the check first."
       }
     ],
-    "notes": "Optional appendix after the close. Do not replace or shorten a required memory assignment with this material. The challenges cover label variation, transaction limits and an audit trail.",
+    "notes": "Optional. Use it when a participant finishes the required route early. It repeats the patterns of the first three days in a new project. Day 1: instructions live in a file, here instructions.md. Day 2: a check says when you are done, here npm run check:tool and check:agent. Day 3: a tool has a description that tells the agent when to use it. Today: options decide what an agent may do. The bonus runs on the Claude Code login, so nobody needs an API key.",
     "teach": {
-      "next": "Trainer appendix · prepare before class",
-      "time": "1 min",
-      "gist": "Fast lane: three challenges for whoever finishes early.",
+      "next": "Bonus 1 · Read the agent and run it",
+      "time": "2 min",
+      "gist": "Extend a small weather agent with one tool and one specialist. Same loop, your own pace.",
       "script": [
         {
-          "say": "Some of you will finish early. That is great. Whenever you are done, pick one of these three. They are not on the test, they are for you."
+          "say": "Finished early? Then you build on your own. The project is a small weather agent."
+        },
+        {
+          "say": "The loop is the same as today: paste the prompt, the check goes green, one real run, and Claude Code explains why."
+        },
+        {
+          "do": "Open BONUS.md in the weather-agent-sdk repository."
         }
       ],
       "do": [
-        "Show the three challenges."
+        "Open BONUS.md in the weather-agent-sdk repository."
       ],
       "done": [
-        "Fast finishers know what to do."
+        "Early finishers know where the bonus is and that it uses the same loop."
+      ],
+      "watch": [
+        "Do not start the bonus before SOLO 4 is reviewed."
+      ]
+    },
+    "link": {
+      "url": "https://github.com/AetherLink-bv/weather-agent-sdk/blob/main/BONUS.md",
+      "label": "weather-agent-sdk · BONUS.md"
+    }
+  },
+{
+    "lessonId": "workshop-4",
+    "title": "Bonus 1 · Read the agent and run it",
+    "kicker": "BONUS 1 · Paste into Claude Code",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 5,
+    "subtitle": "Read one options file and run the agent on your own login.",
+    "cards": [],
+    "steps": [
+      {
+        "text": "Clone the weather agent and start Claude Code",
+        "prompt": "git clone https://github.com/AetherLink-bv/weather-agent-sdk.git\ncd weather-agent-sdk\nnpm install\nclaude --setting-sources project,user --strict-mcp-config --no-chrome"
+      },
+      {
+        "text": "Paste the BONUS 1 prompt",
+        "prompt": "Read src/options.ts, src/tools/get_weather.ts and instructions.md. Change no file. Show one table: each option in buildOptions, what it does, and the Workshop 4 step where I used the same option. Run npm test and npm run live and show the trace. Stop.",
+        "after": "npm test passes. The trace shows mcp__weather__get_weather."
+      },
+      "Read the table: each option and the Workshop 4 step where you used it."
+    ],
+    "expected": "npm test passes. The trace shows mcp__weather__get_weather.",
+    "notes": "This agent has the same parts as the support app, in one file. One difference: the tool lives inside the app with createSdkMcpServer, so there is no separate server to start. The real run takes about ten seconds.",
+    "teach": {
+      "next": "Bonus 2 · Add a tool",
+      "time": "5 min",
+      "gist": "Read one options file and run the agent on your own login.",
+      "script": [
+        {
+          "say": "This agent has the same parts as the support app, in one file. One difference: the tool lives inside the app with createSdkMcpServer, so there is no separate server to start. The real run takes about ten seconds."
+        }
+      ],
+      "do": [
+        "Use Copy. Check that the trace shows get_weather."
+      ],
+      "done": [
+        "npm test passes. The trace shows mcp__weather__get_weather."
+      ],
+      "watch": []
+    }
+  },
+{
+    "lessonId": "workshop-4",
+    "title": "Bonus 2 · Add a tool",
+    "kicker": "BONUS 2 · Paste into Claude Code",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 10,
+    "subtitle": "Build get_forecast: a description, a schema and a handler.",
+    "cards": [],
+    "steps": [
+      {
+        "text": "Paste the BONUS 2 prompt",
+        "prompt": "Read the BONUS 2 TODOs in src/tools/get_forecast.ts and src/options.ts. Build fetchForecast and getForecastTool, add the tool to the MCP server and to allowedTools, and add one line to instructions.md that says when to call get_forecast. Copy the shape of get_weather.ts. Change no other file. Run npm run check:tool until it passes. Run npm run live -- \"Wat is het weer de komende drie dagen in Utrecht?\" once and show the trace. Then explain in four lines: how the agent knows that the tool exists, how it knows when to call it, and what the schema protects against. Stop.",
+        "after": "npm run check:tool passes. The trace shows one mcp__weather__get_forecast call."
+      },
+      "Watch the check go from red to green.",
+      "Find get_forecast in the trace."
+    ],
+    "expected": "npm run check:tool passes. The trace shows one mcp__weather__get_forecast call.",
+    "notes": "A tool has three parts. The description tells the agent when to call it, like the description of a tool node on Day 3. The schema limits the input. The handler is normal code that the check tests without a model. Watch for this: without the new line in instructions.md, the agent calls get_weather three times and never uses the new tool.",
+    "teach": {
+      "next": "Bonus 3 · Add a specialist",
+      "time": "10 min",
+      "gist": "Build get_forecast: a description, a schema and a handler.",
+      "script": [
+        {
+          "say": "A tool has three parts. The description tells the agent when to call it, like the description of a tool node on Day 3. The schema limits the input. The handler is normal code that the check tests without a model. Watch for this: without the new line in instructions.md, the agent calls get_weather three times and never uses the new tool."
+        }
+      ],
+      "do": [
+        "Use Copy. Watch check:tool go from red to green, then find get_forecast in the trace."
+      ],
+      "done": [
+        "npm run check:tool passes. The trace shows one mcp__weather__get_forecast call."
+      ],
+      "watch": []
+    }
+  },
+{
+    "lessonId": "workshop-4",
+    "title": "Bonus 3 · Add a specialist",
+    "kicker": "BONUS 3 · Paste into Claude Code",
+    "type": "practice",
+    "layout": "exercise",
+    "timer": 10,
+    "subtitle": "Add packing-agent: a specialist that has no tools and only writes.",
+    "cards": [],
+    "steps": [
+      {
+        "text": "Paste the BONUS 3 prompt",
+        "prompt": "Read the BONUS 3 TODOs in src/options.ts. Add packing-agent to options.agents with a description, a prompt and tools: []. It turns a forecast into a short packing list in Dutch and never guesses the weather. Set tools to ['Agent'], add 'Agent' to allowedTools, and add one line to instructions.md that says when to ask packing-agent. Change no other file. Run npm run check:agent until it passes. Run npm run live -- \"Ik ga drie dagen naar Utrecht. Wat pak ik in?\" once and show the trace. Then explain in four lines: why the specialist has no tools, what it can see of the conversation, and what the main agent does with its answer. Stop.",
+        "after": "npm run check:agent passes. The trace shows get_forecast before Agent → packing-agent."
+      },
+      "Watch the check go from red to green.",
+      "Find get_forecast before packing-agent in the trace.",
+      "Then choose your own idea from BONUS.md. Write the check first."
+    ],
+    "expected": "npm run check:agent passes. The trace shows get_forecast before Agent → packing-agent.",
+    "notes": "The specialist starts with an empty context and sees only what the main agent gives it. It has no tools, so it cannot look up or change anything. This is the Step 2 pattern in a new project. Participants who finish choose an idea of their own and write the check before the prompt.",
+    "teach": {
+      "next": "Trainer appendix · prepare before class",
+      "time": "10 min",
+      "gist": "Add packing-agent: a specialist that has no tools and only writes.",
+      "script": [
+        {
+          "say": "The specialist starts with an empty context and sees only what the main agent gives it. It has no tools, so it cannot look up or change anything. This is the Step 2 pattern in a new project. Participants who finish choose an idea of their own and write the check before the prompt."
+        }
+      ],
+      "do": [
+        "Use Copy. Watch check:agent go green, then find packing-agent in the trace."
+      ],
+      "done": [
+        "npm run check:agent passes. The trace shows get_forecast before Agent → packing-agent."
       ],
       "watch": []
     }
@@ -3226,46 +3353,48 @@ window.SLIDES = [
       "bot": "point",
       "place": "beside"
     },
-    "subtitle": "Required before SOLO 0. Build and review a separate trainer reference; participants keep their own unsolved starter.",
+    "subtitle": "Nothing to build before class. The solved steps are on the trainer/solution branch.",
     "link": {
-      "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/blob/main/n8n/support-triage.json",
-      "label": "n8n/support-triage.json"
+      "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/tree/trainer/solution",
+      "label": "trainer/solution branch"
     },
     "cards": [
       {
-        "title": "Start with the source",
-        "body": "Open n8n/support-triage.json from the participant repository. Copy the prompt below into Claude Code."
+        "title": "Demo from the solved branch",
+        "body": "Switch to trainer/solution for the demo slides. Participants stay on main."
       }
     ],
     "steps": [
       {
-        "text": "Open the n8n JSON in the participant repository",
-        "after": "Confirm that the export has no credentials and maps the support workflow."
+        "text": "Get the solved steps",
+        "prompt": "git fetch origin trainer/solution\ngit switch trainer/solution\nnpm ci\nnpm run check:1 && npm run check:2 && npm run check:3",
+        "after": "All three checks pass."
       },
       {
-        "text": "Paste this trainer prompt into Claude Code",
-        "prompt": "Use n8n MCP to find and read “Day 3 · 12 · Reference · Full ticket triage (L1→L3)”. Do not modify or activate it. Save sanitized JSON without credentials as n8n/support-triage.json. If access fails, use the repository export and mark the live read OPEN.\n\nRead AGENTS.md, README.md, docs/SETUP.md and SOLO.md. Map the nodes, connections, system messages and output parser. Then build a bounded working app from this starter. Preserve Customer Context → Risk → Customer Reply, output {priority, message}, case-insensitive routes and memory isolation by ticket_id. Enforce draft-only output as deliberate hardening. Explain setup commands, show the actual diff, run the documented checks and one real case, and list every unverified behavior as OPEN.\n\nOnly after the actual build and run, list every current SOLO.md build step in order and propose the teaching storyline. Then stop. Wait for the trainer to choose which steps are essential, too large or less important. Do not create assignments or edit SOLO.md or the participant repository before the trainer accepts that selection.\n\nAfter the trainer accepts the selection, turn each kept step into one reviewed copy/paste or typing assignment. Give every assignment a starting state, a visible expected result and a stop condition. Then update SOLO.md and the participant repository to match the leading Workshop 4 slides. Show the documentation diff for trainer review. Deliver a separate read-only reference folder, mapping, evidence and OPEN gaps to the participants. Keep the participant starter TODOs unimplemented. Stop before adding optional features.",
-        "after": "Claude rebuilds and proves the app before it proposes the lesson story."
+        "text": "Run each demo once before class",
+        "prompt": "npm run lesson1 -- MSG-06\nnpm run lesson2 -- MSG-05\nnpm run lesson3 -- MSG-08",
+        "after": "The last trace shows Context → Risk → Reply and the model of each specialist."
       },
-    "Review the ordered SOLO.md steps and one connecting storyline. Remove optional detail before accepting the route.",
-    "Turn each kept step into a copy/paste or typing assignment. Review the slide route first, then align SOLO.md and the participant repository."
+      "A participant who falls behind pastes the prompt of the current step again. Nobody copies files from this branch."
     ],
-    "expected": "A reviewer accepts one slide-led lesson route. SOLO.md and the participant repository then match its reviewed assignments and evidence.",
-    "notes": "Required trainer preparation before class, outside the participant route. Share the completed reference separately from the unsolved participant starter. It is not a participant assignment. Use the n8n MCP when it is available. Never import, activate or expose credentials. Build first. Ask for the storyline only after the app and evidence exist.",
+    "expected": "All three checks pass and each demo ran once on your laptop.",
+    "notes": "Trainer preparation takes ten minutes. Nothing must be built. Run each demo once, because a real run depends on your login and on your own Claude Code settings. Every run loads project and user settings. A personal CLAUDE.md can change the tone of the trace, and a large personal setup makes a run slower and more expensive.",
     "teach": {
-      "time": "Before class",
-      "gist": "Start from the real workflow. Build the story, then let the reviewed slide route lead SOLO.md and the participant repository.",
+      "time": "10 min",
+      "gist": "Nothing to build before class. The solved steps are on the trainer/solution branch.",
       "script": [
         {
-          "say": "Start from the real workflow. Build the story, then let the reviewed slide route lead SOLO.md and the participant repository."
+          "say": "Trainer preparation takes ten minutes. Nothing must be built. Run each demo once, because a real run depends on your login and on your own Claude Code settings. Every run loads project and user settings. A personal CLAUDE.md can change the tone of the trace, and a large personal setup makes a run slower and more expensive."
         }
       ],
-      "do": [],
+      "do": [
+        "Switch to trainer/solution and run each demo once before class."
+      ],
       "done": [
-        "A reviewer accepts one slide-led lesson route. SOLO.md and the participant repository then match its reviewed assignments and evidence."
+        "All three checks pass and each demo ran once on your laptop."
       ],
       "watch": [
-        "This is trainer preparation. Use the n8n MCP when it is available. Never import, activate or expose credentials. Build first. Ask for the storyline only after the app and evidence exist. The slides lead the lesson design; do not rewrite SOLO.md or the repository until a trainer reviews the route."
+        "Participants stay on main. Do not share files from trainer/solution."
       ]
     }
   }
