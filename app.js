@@ -220,6 +220,127 @@ function highlight(root, s) {
 // slides 8-13: extra layouts, all keep the slide text verbatim
 function renderExtras(stage, main, s, v) {
   const x = { aim: [] }; const cards = [...main.querySelectorAll('.card')]; const grid = main.querySelector('.cards');
+  if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots (as in the Day 5 deck); each click / → lights the next phase; cards below are optional
+    const track = node('div', 'sdlc-track sdlc-track-big'); track.setAttribute('role', 'img'); track.setAttribute('aria-label', 'SDLC: ' + SDLC_PHASES.map(([, l]) => l).join(', '));
+    let k = -1; const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
+    const steps = SDLC_PHASES.map(([, label], i) => { const st = node('span', 'sdlc-step'); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); st.addEventListener('click', () => { k = i; paint(); }); track.append(st); return st; });
+    if (grid) { grid.classList.add('sdlc-big'); grid.prepend(track); } else { track.classList.add('sdlc-solo'); const tag = main.querySelector(':scope > .tagline'); if (tag) tag.before(track); else main.append(track); }
+    paint();
+    const next = () => { if (k < steps.length - 1) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.toolWall && grid) {                                     // toolbox wall: per card a small picture of the tool (terminal, file, folder tree, screenshot, code, plug, bots, SDLC dots) + the day it came from
+    grid.classList.add('tool-wall');
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const pic = (P) => {
+      const box = node('div', 'tw-pic tw-' + P.kind);
+      if (P.kind === 'term') box.innerHTML = '<div class="tw-bar"><i></i><i></i><i></i></div>' + P.lines.map((l) => `<div class="tw-line${/^\$/.test(l) ? ' cmd' : /^[✓●]/.test(l) ? ' ok' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'file') box.innerHTML = `<div class="tw-fname">📄 ${esc(P.name)}</div>` + P.lines.map((l) => `<div class="tw-line${/^#/.test(l) ? ' h' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'tree') box.innerHTML = P.lines.map(([d, n]) => `<div class="tw-line" style="--d:${d}">${/\/$/.test(n) ? '📁' : '📄'} ${esc(n)}</div>`).join('');
+      else if (P.kind === 'code') box.innerHTML = P.lines.map((l) => `<div class="tw-line">${esc(l)}</div>`).join('');
+      else if (P.kind === 'img') { const im = document.createElement('img'); im.src = P.src; im.alt = ''; im.loading = 'lazy'; if (P.pos) im.style.objectPosition = P.pos; if (P.zoom) im.style.transform = 'scale(' + P.zoom + ')'; if (P.origin) im.style.transformOrigin = P.origin; box.append(im); }
+      else if (P.kind === 'bots') box.innerHTML = (P.tags || []).map((t, k) => `<span class="tw-bot" style="--k:${k}"><img src="assets/aetherbot/aetherbot-head.webp" alt=""><b>${esc(t)}</b></span>`).join('');
+      else if (P.kind === 'plug') box.innerHTML = `<img class="tw-plug-bot" src="assets/aetherbot/aetherbot-head.webp" alt=""><span class="tw-wire"></span><span class="tw-mcp">MCP</span><span class="tw-wire"></span><span class="tw-srcs">${(P.sources || []).map((x) => `<span>${esc(x)}</span>`).join('')}</span>`;
+      else if (P.kind === 'sdlc') box.innerHTML = `<span class="tw-dots">${SDLC_PHASES.map(([, l], k) => `<span class="tw-dot" title="${l}" style="--k:${k}"></span>`).join('')}</span><span class="tw-sonny"><img src="assets/aetherbot/aetherbot-wave.webp" alt=""><b>SONNY</b></span>`;
+      return box;
+    };
+    cards.forEach((c, i) => { const T = v.toolWall[i]; if (!T) return; c.classList.add('tw-card'); c.querySelector('.card-icon')?.remove();
+      if (T.day) c.prepend(node('span', 'tw-day', T.day));
+      if (T.pic) c.prepend(pic(T.pic)); });
+  }
+  if (v.scrapbook && grid) {                                    // a day as a scrapbook: per card a tilted polaroid with a tag (A1…), a small picture (terminal, file, chat, big emoji), keyword chips and a funny moment; v.scrapTake = a strip of what you take along
+    grid.classList.add('scrapbook');
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const pic = (P) => {
+      const box = node('div', 'sb-pic sb-' + P.kind);
+      if (P.kind === 'term') box.innerHTML = P.lines.map((l) => `<div class="sb-line${/^\$/.test(l) ? ' cmd' : /^(✓|PASS)/.test(l) ? ' ok' : /^(✗|FAIL)/.test(l) ? ' bad' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'file') box.innerHTML = `<div class="sb-fname">📄 ${esc(P.name)}</div>` + P.lines.map((l) => `<div class="sb-line${/OPEN/.test(l) ? ' open' : ''}">${esc(l)}</div>`).join('');
+      else if (P.kind === 'chat') box.innerHTML = P.lines.map(([who, t]) => `<div class="sb-msg ${who === 'you' ? 'me' : 'bot'}">${esc(t)}</div>`).join('');
+      else if (P.kind === 'big') box.innerHTML = `<span class="sb-emoji">${esc(P.emoji)}</span><span class="sb-big-text">${esc(P.text)}</span>`;
+      return box;
+    };
+    cards.forEach((c, i) => { const B = v.scrapbook[i]; if (!B) return; c.classList.add('sb-card'); c.style.setProperty('--tilt', (B.tilt ?? [-1.2, .9, -.6, 1.1, -.9, .6][i % 6]) + 'deg'); c.querySelector('.card-icon')?.remove();
+      if (B.pic) c.prepend(pic(B.pic));
+      if (B.tag) c.prepend(node('span', 'sb-tag', B.tag));
+      if (B.keys) { const k = node('div', 'sb-keys'); B.keys.forEach((w) => k.append(node('span', 'sb-key', w))); c.append(k); }
+      if (B.moment) c.append(node('div', 'sb-moment', B.moment)); });
+    if (v.scrapTake) { const t = node('div', 'sb-take'); t.append(node('span', 'sb-take-label', v.scrapTakeLabel || 'Take with you')); v.scrapTake.forEach((w) => t.append(node('span', 'sb-take-chip', w))); grid.after(t); }
+  }
+  if (v.scoreMatrix && grid) {                                  // score matrix: ideas as rows (type the name), the cards as pillar columns (click 1–5), a total per row; the highest full total gets 🏆; kept in this browser
+    const M = v.scoreMatrix; const P = cards.map((c) => ({ name: c.querySelector('.card-head h2')?.textContent || '', q: (c.querySelector(':scope > p')?.textContent || '').split('\n')[0] }));
+    const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
+    const KEY = 'als:score:' + DECK_ID + ':' + s.title; const max = M.max || 6, min = M.min || 2, top = 5 * P.length;
+    const blank = () => ({ name: '', s: P.map(() => 0) });
+    let rows; try { rows = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { rows = null; }
+    if (!Array.isArray(rows) || !rows.length) rows = Array.from({ length: M.ideas || 4 }, blank);
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(rows)); } catch {} };
+    const wrap = node('div', 'smx-wrap'); const table = node('table', 'smx'); wrap.append(table); grid.replaceWith(wrap);
+    const draw = () => {
+      table.replaceChildren(); const head = node('tr'); head.append(node('th', 'smx-idea-h', 'Idea'));
+      P.forEach((p, k) => { const th = node('th', 'smx-p'); th.append(svg('0 0 24 24', ICO[k % ICO.length], 'smx-ico'), node('span', 'smx-pname', p.name), node('small', null, p.q)); head.append(th); });
+      head.append(node('th', 'smx-total-h', 'Total')); const thead = node('thead'); thead.append(head); table.append(thead);
+      const totals = rows.map((r) => r.s.reduce((a, b) => a + b, 0)); const full = rows.map((r) => r.s.every(Boolean));
+      const best = Math.max(0, ...totals.filter((t, i) => full[i])); const tb = node('tbody');
+      rows.forEach((r, i) => { const tr = node('tr', full[i] && totals[i] === best && best > 0 ? 'win' : '');
+        const td = node('td', 'smx-idea'); const inp = document.createElement('input'); inp.type = 'text'; inp.value = r.name; inp.placeholder = 'Idea ' + (i + 1) + '…'; inp.setAttribute('aria-label', 'Idea ' + (i + 1));
+        inp.addEventListener('input', () => { r.name = inp.value; save(); }); inp.addEventListener('keydown', (e) => { e.stopPropagation(); if (e.key === 'Enter') inp.blur(); }); td.append(inp); tr.append(td);
+        P.forEach((p, k) => { const c = node('td', 'smx-cell'); for (let n = 1; n <= 5; n++) { const b = node('button', 'smx-n' + (r.s[k] === n ? ' on' : ''), String(n)); b.type = 'button'; b.setAttribute('aria-label', (r.name || 'Idea ' + (i + 1)) + ', ' + p.name + ': ' + n);
+          b.addEventListener('click', (e) => { e.stopPropagation(); r.s[k] = r.s[k] === n ? 0 : n; save(); draw(); }); c.append(b); } tr.append(c); });
+        const t = node('td', 'smx-total'); t.append(node('strong', null, String(totals[i])), node('span', null, ' / ' + top)); if (!full[i] && totals[i]) t.append(node('em', null, r.s.filter(Boolean).length + ' of ' + P.length + ' scored'));
+        if (tr.classList.contains('win')) t.prepend(node('span', 'smx-cup', '🏆 ')); tr.append(t); tb.append(tr); });
+      table.append(tb);
+      ctrl.querySelector('.smx-add').disabled = rows.length >= max; ctrl.querySelector('.smx-del').disabled = rows.length <= min;
+    };
+    const ctrl = node('div', 'smx-ctrl'); const add = node('button', 'smx-btn smx-add', '+ Add idea'); const del = node('button', 'smx-btn smx-del', '− Remove last'); const clr = node('button', 'smx-btn smx-clear', 'Clear all');
+    [add, del, clr].forEach((b) => { b.type = 'button'; });
+    add.addEventListener('click', () => { rows.push(blank()); save(); draw(); }); del.addEventListener('click', () => { rows.pop(); save(); draw(); });
+    let armed = false; clr.addEventListener('click', () => { if (!armed) { armed = true; clr.textContent = 'Sure? Click again'; setTimeout(() => { armed = false; clr.textContent = 'Clear all'; }, 2500); return; } rows = Array.from({ length: M.ideas || 4 }, blank); save(); draw(); armed = false; clr.textContent = 'Clear all'; });
+    ctrl.append(node('span', 'smx-hint', M.hint || 'Click a number to score, click it again to undo.'), add, del, clr); wrap.append(ctrl); draw();
+  }
+  if (v.brief && grid) {                                        // briefing: numbered cards with an emoji and the body lines as questions you can tick off (click)
+    grid.classList.add('brief-grid'); grid.style.setProperty('--n', cards.length);
+    cards.forEach((c, i) => { const B = v.brief[i] || {}; c.classList.add('brief-card'); c.querySelector('.card-icon')?.remove();
+      const head = c.querySelector('.card-head'); head.prepend(node('span', 'brief-num', String(i + 1))); if (B.emoji) head.after(node('div', 'brief-emoji', B.emoji));
+      const p = c.querySelector(':scope > p'); if (p) { const ul = node('ul', 'brief-qs'); p.textContent.split('\n').filter(Boolean).forEach((q) => { const li = node('li'); const b = node('button', 'brief-q'); b.type = 'button'; b.append(node('span', 'brief-box'), node('span', null, q)); b.addEventListener('click', (e) => { e.stopPropagation(); b.classList.toggle('on'); }); li.append(b); ul.append(li); }); p.replaceWith(ul); }
+      if (B.more) c.append(node('span', 'brief-more', B.more)); });
+  }
+  if (v.carousel && grid) {                                     // carousel: one numbered card big in the middle, its neighbours small left and right; → / ← (or click a side card) slides
+    const C = v.carousel; grid.classList.add('car-track'); let k = 0; const n = cards.length;
+    cards.forEach((c, i) => { c.classList.add('car-card'); c.querySelector('.card-icon')?.remove();
+      c.prepend(node('span', 'car-num', (i + 1) + ' / ' + n));
+      const p = c.querySelector(':scope > p'); if (p) { const ul = node('ul', 'car-qs'); p.textContent.split('\n').filter(Boolean).forEach((q) => ul.append(node('li', null, q))); p.replaceWith(ul); }
+      if (C.foot) c.append(node('span', 'car-foot', C.foot));
+      c.addEventListener('click', (e) => { if (i !== k) { e.stopPropagation(); k = i; paint(); } }); });
+    const nav = node('div', 'car-nav'); const prevB = node('button', 'car-btn', '←'); const nextB = node('button', 'car-btn', '→'); prevB.setAttribute('aria-label', 'Previous question'); nextB.setAttribute('aria-label', 'Next question');
+    const dots = node('div', 'car-dots'); cards.forEach((_, i) => { const d = node('button', 'car-dot', String(i + 1)); d.setAttribute('aria-label', 'Question ' + (i + 1)); d.addEventListener('click', () => { k = i; paint(); }); dots.append(d); });
+    nav.append(prevB, dots, nextB); grid.after(nav);
+    const paint = () => { cards.forEach((c, i) => { const d = i - k; c.dataset.pos = Math.abs(d) > 1 ? (d < 0 ? 'far-l' : 'far-r') : String(d); c.setAttribute('aria-hidden', String(d !== 0)); }); [...dots.children].forEach((d, i) => { d.classList.toggle('on', i === k); d.classList.toggle('seen', i < k); }); prevB.disabled = k === 0; nextB.disabled = k === n - 1; announce(cards[k].textContent); };
+    const next = () => { if (k < n - 1) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    prevB.addEventListener('click', back); nextB.addEventListener('click', next); paint();
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.pitch && grid) {                                        // pitch: a big main message on top, cards with a big emoji; one card can show the five pillars as small chips
+    const P = v.pitch; grid.classList.add('pitch-grid');
+    if (P.hero) { const h = node('div', 'pitch-hero'); h.append(node('span', 'pitch-hero-emoji', P.heroEmoji || '🤖'), node('span', 'pitch-hero-text', P.hero)); grid.before(h); }
+    cards.forEach((c, i) => { const B = (P.cards || [])[i] || {}; c.classList.add('pitch-card'); c.querySelector('.card-icon')?.remove();
+      if (B.emoji) c.prepend(node('div', 'pitch-emoji', B.emoji));
+      if (B.chips) { const r = node('div', 'pitch-chips'); B.chips.forEach((t) => r.append(node('span', 'pitch-chip', t))); c.append(r); } });
+  }
+  if (v.temple && grid) {                                       // five pillars as a temple: roof = the idea, per pillar an icon + its questions (body lines), base = the total score; scores show once the base is stepped in
+    const T = v.temple; const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
+    const wrap = node('div', 'temple-wrap'); grid.replaceWith(wrap); grid.classList.add('temple');
+    const roof = node('div', 'temple-roof'); roof.append(node('span', 'temple-roof-label', T.roof || 'Your idea'));
+    cards.forEach((c, i) => { c.classList.add('temple-col'); c.querySelector('.card-icon')?.remove();
+      c.querySelector('.card-head')?.prepend(svg('0 0 24 24', ICO[i % ICO.length], 'temple-ico'));
+      const p = c.querySelector(':scope > p'); if (p) { const ul = node('ul', 'temple-qs'); p.textContent.split('\n').filter(Boolean).forEach((q) => ul.append(node('li', null, q))); p.replaceWith(ul); }
+      if (T.scores?.[i] != null) c.append(node('span', 'temple-score', String(T.scores[i]))); });
+    const base = node('div', 'temple-base');
+    if (T.scores) { const sum = T.scores.reduce((a, b) => a + b, 0); base.append(node('span', 'temple-base-txt', T.base || 'Score every pillar from 1 to 5, then add them up'), node('span', 'temple-total', sum + ' / ' + T.scores.length * 5)); }
+    else base.append(node('span', 'temple-base-txt', T.base || ''));
+    wrap.append(roof, grid, base);
+  }
   if (v.keyLine != null && cards[v.keyLine]) {                 // 8: calm lead + key line that gets stamped
     main.classList.add('has-key'); cards.forEach((c, i) => { if (i !== v.keyLine) c.classList.add('card-lead'); });
     const key = cards[v.keyLine]; key.classList.add('card-key'); const row = node('div', 'key-row'); key.replaceWith(row); row.append(key);
@@ -1345,6 +1466,7 @@ function renderVisual(stage, body, main, s) {
   else if (v.place === 'left') { body.prepend(fig); body.classList.add('with-bot', 'bot-left'); }
   else if (v.place === 'beside') { body.append(fig); body.classList.add('with-bot', 'bot-beside'); }
   else if (v.place === 'under') { main.append(fig); }
+  else if (v.place === 'bigword') { stage.append(fig); }                // big-word slide: AetherBOT stands next to the one big line
   else if (v.place === 'popout' && popRow) { popRow.prepend(fig); }
   else if (v.place === 'nest' && nest) { nest.row.prepend(fig); }
   else if (v.place === 'key' && ex.row) { ex.row.prepend(fig); }
@@ -1603,7 +1725,8 @@ function renderAssignment(stage, s) {
       } else pr.append(node('pre', 'asg-prompt-text', t.prompt), cb);
       text.append(pr); }
     if (t.parts) { const row = node('span', 'asg-parts'); t.parts.forEach(([k, v]) => { const p = node('span', 'asg-part'); p.append(node('span', 'asg-part-k', k), node('code', null, v)); row.append(p); }); text.append(row); }  // the pieces of what Claude made, labelled: moment, matcher, command
-    if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
+    if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));
+    if (t.note) text.append(node('span', 'asg-step-note', t.note));   // opt-in: a line in another colour (e.g. what the facilitator does)  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };
     if (!wide) { li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } }); }
@@ -1655,7 +1778,7 @@ function render() {
   if (s.layout === 'exercise') { renderAssignment(stage, s); finishRender(s); return; }
   if (type === 'practice') {
     const banner = node('div', 'assignment-banner');
-    banner.append(node('span', 'dot'), document.createTextNode('Assignment in progress'));
+    banner.append(node('span', 'dot'), document.createTextNode(s.banner || 'Assignment in progress'));   // opt-in per slide: s.banner
     stage.append(banner);
   }
   const head = node('section', 'heading'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
@@ -1677,7 +1800,7 @@ function render() {
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
   // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
-  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList || s.visual?.guardRail || s.visual?.suiteMap || s.visual?.gapCompare?.reveal)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.stepThrough || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList || s.visual?.guardRail || s.visual?.suiteMap || s.visual?.gapCompare?.reveal)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
