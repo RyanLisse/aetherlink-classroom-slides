@@ -2,7 +2,7 @@
   "sources": [
     {
       "repository": "AetherLink-bv/aetherlink-day4-n8n-to-agent",
-      "commit": "89c755e59a0e6c2062b342868af23014e312b91a"
+      "commit": "5b23f1a0c5d0d2481b50e0799cac7f0cacb32c19"
     },
     {
       "repository": "RyanLisse/weather-agent-sdk",
@@ -16,6 +16,7 @@
     "check:2",
     "check:3",
     "check:agent",
+    "check:starter",
     "check:tool",
     "course:build",
     "course:check",
@@ -61,6 +62,7 @@
     "checks/bonus2.test.ts",
     "checks/bonus3.test.ts",
     "checks/helpers.mjs",
+    "checks/starter.test.mjs",
     "checks/step1.test.mjs",
     "checks/step2.test.mjs",
     "checks/step3.test.mjs",
