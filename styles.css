@@ -1889,3 +1889,47 @@ body.big-word #stage:has(> .place-bigword) .heading h1{font-size:clamp(3rem,7vw,
 .smx-btn{min-height:0;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:8px;padding:.35rem .75rem;font:inherit;font-weight:800;font-size:.82rem;cursor:pointer}
 .smx-btn:hover:not(:disabled){border-color:var(--cyan)}.smx-btn:disabled{opacity:.4;cursor:default}
 .smx-clear{border-color:color-mix(in srgb,#ff6b6b 50%,var(--border))}
+/* assignment step: a line in another colour (step.note) */
+.asg-step-note{display:block;margin-top:.4rem;padding:.35rem .6rem;border-radius:8px;border-left:4px solid var(--aether-orange);background:color-mix(in srgb,var(--aether-orange) 14%,transparent);color:var(--aether-orange);font-weight:800;font-size:.92em}
+.asg-step-note::before{content:"🧭 "}
+/* briefing (v.brief): numbered cards, an emoji, questions you can tick */
+.cards.brief-grid{grid-template-columns:repeat(var(--n,5),minmax(0,1fr));gap:.8rem;align-items:stretch}
+.brief-card{display:flex;flex-direction:column;gap:.35rem;padding:.75rem .7rem .8rem;border-top:4px solid var(--aether-orange)}
+.brief-card .card-head{display:flex;align-items:center;gap:.45rem}
+.brief-card h2{font-size:1rem;line-height:1.2;margin:0}
+.brief-num{flex:none;display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--aether-orange);color:#1a0d00;font-weight:900;font-size:.9rem}
+.brief-emoji{font-size:2rem;line-height:1;text-align:center;margin:.1rem 0}
+.brief-qs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.3rem}
+.brief-q{display:flex;gap:.4rem;align-items:flex-start;width:100%;min-height:0;padding:.3rem .4rem;border:1px solid transparent;border-radius:7px;background:none;text-align:left;font-size:.78rem;line-height:1.3;color:var(--text)}
+.brief-q:hover{border-color:var(--border)}
+.brief-box{flex:none;width:.9rem;height:.9rem;margin-top:.1rem;border-radius:3px;border:2px solid var(--cyan)}
+.brief-q.on .brief-box{background:var(--cyan)}.brief-q.on .brief-box::after{content:"✓";display:block;font-size:.65rem;line-height:.7rem;text-align:center;color:#04121f;font-weight:900}
+.brief-q.on{color:var(--muted)}
+.brief-more{margin-top:auto;font-size:.66rem;font-weight:800;color:var(--cyan);letter-spacing:.03em}
+/* carousel (v.carousel): one big card in the middle, neighbours small at the sides */
+.cards.car-track{position:relative;display:block;height:20rem;overflow:hidden}
+.car-card{position:absolute;top:50%;left:50%;width:min(34rem,52%);box-sizing:border-box;padding:1.2rem 1.4rem 1rem;display:flex;flex-direction:column;gap:.5rem;border:2px solid var(--cyan);animation:none!important;transform:none!important;opacity:1;translate:-50% -50%;scale:1;transition:translate .45s cubic-bezier(.2,.8,.2,1),scale .45s,opacity .45s,filter .45s;cursor:pointer}
+.car-card[data-pos="0"]{z-index:3;cursor:default;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.car-card[data-pos="-1"]{translate:-128% -50%;scale:.78;opacity:.4;filter:blur(1px);z-index:2;border-color:var(--border)}
+.car-card[data-pos="1"]{translate:28% -50%;scale:.78;opacity:.4;filter:blur(1px);z-index:2;border-color:var(--border)}
+.car-card[data-pos="far-l"]{translate:-200% -50%;scale:.6;opacity:0;pointer-events:none}
+.car-card[data-pos="far-r"]{translate:100% -50%;scale:.6;opacity:0;pointer-events:none}
+.car-card h2{font-size:1.5rem;margin:0}
+.car-num{align-self:flex-start;font-size:.75rem;font-weight:900;letter-spacing:.08em;padding:.15rem .55rem;border-radius:999px;background:var(--cyan);color:#04121f}
+.car-qs{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;line-height:1.35}
+.car-foot{margin-top:.3rem;align-self:flex-start;font-size:.8rem;font-weight:800;color:var(--aether-orange)}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-top:.4rem}
+.car-btn{min-height:0;width:2.4rem;height:2.4rem;padding:0;border-radius:50%;font-size:1.4rem;line-height:1;font-weight:900}
+.car-btn:disabled{opacity:.3;cursor:default}
+.car-dots{display:flex;gap:.4rem}
+.car-dot{min-height:0;width:1.8rem;height:1.8rem;padding:0;border-radius:50%;font-size:.75rem;font-weight:900;color:var(--muted)}
+.car-dot.seen{border-color:var(--cyan);color:var(--cyan)}.car-dot.on{background:var(--cyan);border-color:var(--cyan);color:#04121f}
+/* pitch (v.pitch): main message on top, emoji cards */
+.pitch-hero{display:flex;align-items:center;gap:.8rem;margin:0 0 .9rem;padding:.75rem 1rem;border-radius:14px;background:linear-gradient(90deg,color-mix(in srgb,var(--aether-purple,#8b5cf6) 30%,transparent),color-mix(in srgb,var(--aether-orange) 25%,transparent));border:1px solid var(--aether-orange)}
+.pitch-hero-emoji{font-size:2.2rem;line-height:1}.pitch-hero-text{font-size:1.15rem;font-weight:900;line-height:1.3}
+.cards.pitch-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.pitch-card{display:flex;flex-direction:column;gap:.3rem;padding:.75rem .85rem}
+.pitch-card h2{font-size:1.02rem;margin:0}.pitch-card p{font-size:.85rem;line-height:1.35;margin:0;color:var(--muted)}
+.pitch-emoji{font-size:1.9rem;line-height:1}
+.pitch-chips{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.15rem}
+.pitch-chip{font-size:.62rem;font-weight:800;padding:.1rem .45rem;border-radius:999px;border:1px solid var(--cyan);color:var(--cyan)}

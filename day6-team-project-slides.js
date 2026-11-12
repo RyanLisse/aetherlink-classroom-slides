@@ -408,7 +408,7 @@ window.SLIDES = [
   steps: [
     "Everyone names one or two ideas from their own work. Write them all down.",
     "Put ideas that look alike together.",
-    "As a team, score every idea from 1 to 5 on the five pillars. The facilitator helps you put the numbers in the score matrix (next slide).",
+    { text: "As a team, score every idea from 1 to 5 on the five pillars.", note: "The facilitator helps you put the numbers in the score matrix (next slide)." },
     "Add up the scores. Look at the top two: can they become one stronger idea?",
     "Choose the idea with the highest total and write down in one sentence why."
   ],
@@ -426,6 +426,7 @@ window.SLIDES = [
 { // Slide 11
   title: "Score matrix: your ideas side by side",
   kicker: "DAY 6 · TEAM ASSIGNMENT 1 · SCORE MATRIX",
+  banner: "Picking a team project",
   subtitle: "Type your ideas, click a score from 1 to 5 per pillar. The total adds itself up; the highest total wins.",
   type: "practice",
   visual: { scoreMatrix: { ideas: 4, max: 6, min: 2, hint: 'Click a number to score, click it again to undo. For security, 5 = easy to make safe.' } },
@@ -452,25 +453,51 @@ window.SLIDES = [
     learn: ['Every idea gets a score per pillar; the total decides.', 'The team scores; the facilitator only types and clicks.'],
     watch: ['Let the team agree on one number per pillar; do not average everyone’s numbers.', 'The scores stay in this browser. Before the next team, click Clear all twice.', 'A tie: look at the two ideas together, maybe they become one.'],
     terms: [['Score matrix', 'the table with ideas as rows and the five pillars as columns'], ['Total', 'the five scores added up, at most 25']],
-    next: 'before you build: the problem.'
+    next: 'the briefing before you begin.'
   }
 },
 
 { // Slide 12
-  title: "Before you build: the problem",
+  title: "Briefing before you begin",
   kicker: "DAY 6 · QUESTIONS TO ANSWER",
-  subtitle: "Most team projects fail here, not in the code.",
+  subtitle: "Five things your team talks through before anyone builds. Tick off what you can answer.",
   type: "concept",
-  visual: { reveal: 'click', bot: 'think', place: 'slot', noReact: true },
+  visual: { stepThrough: '.brief-grid > .card, .slide-main > .tagline',
+    brief: [
+      { emoji: '🎯' },
+      { emoji: '🗄️' },
+      { emoji: '👥' },
+      { emoji: '🗺️' },
+      { emoji: '🔒', more: 'More on the next slides →' }
+    ] },
   cards: [
-    { title: "Who is it for?", body: "One real user or team. Not \"everyone\"." },
-    { title: "What problem does it solve?", body: "In one sentence they would recognise." },
-    { title: "Why AI?", body: "What does AI do here that a normal form or script can't?" },
-    { title: "When is this app successful?", body: "Write down what has to be true. For example: the user has enough information to act." }
+    { title: "The problem", body: "Who is it for? One real user or team.\nWhat problem, in one sentence?\nWhy AI, and not a form or a script?\nWhen is it successful? Write it so you can check it." },
+    { title: "The data", body: "Where does the real information live? That is your source of truth.\nWhich data do you need: repos, tickets, docs?\nHow do you connect: MCP or another approved way?\nRead-only first." },
+    { title: "Roles: who does what", body: "Who is product owner, who builds, who tests, who presents?\nWho builds which part?\nOne repo: who merges?" },
+    { title: "The plan", body: "What is in for Day 7, and what is not?\nClaude Code, n8n, or both?\nWhat is the first small slice that works end to end?" },
+    { title: "Security", body: "Which data goes in, and is that allowed?\nWhere does a person approve?\nWhat is still OPEN?" }
   ],
-  tagline: "If you can't answer these four, you're not ready to build yet.",
-  keyPoints: ["Who, what, why AI, when successful","One real user","'Why AI?' is a fair question","Success = written down, checkable"],
-  notes: "These are the questions teams skip because building is more fun. Open them one by one. 'Why AI?' is worth pushing on: sometimes the honest answer is that a plain form or an n8n workflow without AI is better, and that's a good outcome too. 'When is this app successful?' becomes the definition of done for Day 7. Push for something checkable: not 'it helps', but 'the user gets a short summary with enough information to act on it'."
+  tagline: "Write the answers down: they become your team canvas, your plan and your CLAUDE.md.",
+  keyPoints: ["Five topics: problem, data, roles, plan, security", "Source of truth: where the real data lives", "Who does what, who merges", "Small first slice", "Security from the start"],
+  notes: "This slide replaces the three separate question slides (the problem, the source of truth, the team and the plan): slides 13 and 14 are hidden by default and can be shown again with the eye in the Overview or H. Press → for each topic. The questions can be ticked off by clicking them, which works well with a team on screen. Push hardest on two: 'Why AI?' (sometimes a plain form or an n8n workflow without AI is better, and that is a good outcome) and scope (teams plan far more than fits in two days). 'When is it successful?' becomes the definition of done for Day 7. Security only gets three questions here; the next slides go deeper.",
+  teach: {
+    time: '6 min',
+    gist: 'Five topics every team talks through before building: the problem, the data, roles, the plan and security.',
+    script: [
+      {do: 'Slide appears: title only.', say: 'You have an idea. Before anyone opens Claude Code, your team talks through five things.'},
+      {do: 'Press → : 1 The problem.', say: 'Who is it for, which problem, why AI, and when is it a success? Write the last one so someone can check it.'},
+      {ask: 'Why ask “why AI?” at all?', say: '(Answer: sometimes a plain form or a workflow without AI does the job better. Then that is the better choice.)'},
+      {do: 'Press → : 2 The data.', say: 'Where does the real information live? That is your source of truth. Start by only reading it, like Sonny on Day 5.'},
+      {do: 'Press → : 3 Roles.', say: 'Who does what? And with one repo: who merges, so you do not overwrite each other.'},
+      {do: 'Press → : 4 The plan.', say: 'What is in for Day 7 and what is not? And what is the first small piece that works from start to end?'},
+      {do: 'Press → : 5 Security.', say: 'Three questions now. The next slides go deeper.'},
+      {do: 'Press → : the line at the bottom.', say: 'Write the answers down. They become your team canvas, your plan and your CLAUDE.md.'}
+    ],
+    learn: ['Talk through the problem, the data, roles, the plan and security before you build.', 'The source of truth is where the real information lives.'],
+    watch: ['Do not let teams answer now: that is the assignment after the security slides.', 'Click a question to tick it; click again to untick.'],
+    terms: [['Source of truth', 'the place where the real, up-to-date information lives'], ['First slice', 'the smallest version that works from start to end']],
+    next: 'why security is a requirement, not a check at the end.'
+  }
 },
 
 { // Slide 13
@@ -478,6 +505,7 @@ window.SLIDES = [
   kicker: "DAY 6 · DESIGN · INPUT",
   subtitle: "Your app is only as good as the data it gets.",
   type: "concept",
+  hidden: true,
   layout: "steps",
   visual: { stepKeys: true, bot: 'point', place: 'beside' },
   items: [
@@ -496,6 +524,7 @@ window.SLIDES = [
   kicker: "DAY 6 · QUESTIONS TO ANSWER",
   subtitle: "The questions you need answers on as a team.",
   type: "concept",
+  hidden: true,
   visual: { checklist: 0, bot: 'point', place: 'left' },
   cards: [
     { title: "Answer as a team", body: "Who does what: product owner, builders, tester, presenter?\nWhat is in for Day 7, and what is not?\nWhich data do we use, and are we allowed to?\nClaude Code, n8n, or both?\nWhere does a person approve or decide?\nHow do we work together: one repo, who merges?\nWhat is our first small slice that works?" }
@@ -538,19 +567,36 @@ window.SLIDES = [
 { // Slide 16
   title: "Questions security will ask",
   kicker: "DAY 6 · SECURITY",
-  subtitle: "Have an answer ready, or write it down as OPEN.",
+  subtitle: "Discuss each question in your team. Have an answer ready, or write it down as OPEN.",
   type: "concept",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'think', place: 'beside' },
+  visual: { carousel: { foot: '💬 Discuss this in your team' } },
   cards: [
-    { title: "Data", body: "Which data goes in? Personal or confidential data? Where does it go, and is that allowed?" },
-    { title: "Access and secrets", body: "Who can use it? Where are API keys and credentials kept? Never in the code or the repo." },
-    { title: "The AI model", body: "What is sent to the model? Can input trick it (prompt injection)? What if the answer is wrong?" },
-    { title: "Actions", body: "What can the app change on its own? On production: notify, don't act. Where does a person approve?" },
-    { title: "Traces", body: "Can you see what happened afterwards? Logs, n8n executions, git history." }
+    { title: "Data", body: "Which data goes in?\nIs it personal or confidential?\nWhere does it go, and is that allowed?" },
+    { title: "Access and secrets", body: "Who can use the app?\nWhere are API keys and passwords kept?\nNever in the code or the repo." },
+    { title: "The AI model", body: "What do you send to the model?\nCan input trick it (prompt injection)?\nWhat if the answer is wrong?" },
+    { title: "Actions", body: "What can the app change on its own?\nOn production: notify, don't act.\nWhere does a person approve?" },
+    { title: "Traces", body: "Can you see afterwards what happened?\nLogs, n8n executions, git history." }
   ],
   tagline: "Not sure? Write it down as OPEN and ask. That's a good answer too.",
-  keyPoints: ["Data: what, where, allowed?","Secrets never in the repo","Model: input, output, injection","Actions: notify, don't act on production","Traces: can we check afterwards?"],
-  notes: "These five groups cover most of what a security specialist will ask about an AI app. Data and secrets are the classics. AI adds its own: whatever goes to the model leaves your laptop; text from users or documents can contain instructions (prompt injection); and the model can be wrong with confidence. Actions ties back to bounded work and settings.json: limit what can happen without a person, and on production let the app notify instead of act. Traces: n8n executions and git history already give a lot. 'OPEN' is the same habit as on the teaching days: an honest open question is better than a guess."
+  keyPoints: ["Five numbered questions, one at a time", "Data: what, where, allowed?", "Secrets never in the repo", "Model: input, output, injection", "Actions: notify, don't act on production", "Traces: can we check afterwards?"],
+  notes: "One question card at a time in the middle, numbered 1 to 5; → slides to the next one, ← back (or click a side card or a number). After card 5, → goes to the next slide. These questions are for the teams to discuss among themselves, not for you to answer: give each card a moment and let the teams talk. Data and secrets are the classics. AI adds its own: whatever goes to the model leaves your laptop; text from users or documents can contain instructions (prompt injection); and the model can be wrong with confidence. Actions ties back to Day 5: on production the app notifies, a person decides. Traces: n8n executions and git history already give a lot. OPEN is an honest answer.",
+  teach: {
+    time: '6 min',
+    gist: 'Five security questions, one at a time, for the teams to discuss among themselves.',
+    script: [
+      {do: 'Slide appears with card 1 (Data) in the middle.', say: 'Five questions a security specialist will ask about your app. Not for me to answer: for your team to discuss.'},
+      {do: 'Card 1: Data. Give the teams a moment.', say: 'Which data goes in, is it personal, and where does it go?'},
+      {do: 'Press → : card 2, Access and secrets.', say: 'Who can use it, and where do the keys live? Never in the repo.'},
+      {do: 'Press → : card 3, The AI model.', say: 'Everything you send to the model leaves your laptop. And text from a user can contain instructions.', ask: 'What happens in your app if the model is wrong?'},
+      {do: 'Press → : card 4, Actions.', say: 'Like Sonny: on production the app notifies, and a person decides.'},
+      {do: 'Press → : card 5, Traces.', say: 'Can you see afterwards what happened? Logs, n8n executions, git history.'},
+      {do: 'Point at the line at the bottom.', say: 'Not sure? Write OPEN and ask. That is a good answer too.'}
+    ],
+    learn: ['Five security questions: data, access and secrets, the AI model, actions, traces.', 'OPEN is an honest answer; a guess is not.'],
+    watch: ['Let the teams talk; do not answer for them.', '→ after card 5 goes to the next slide; ← goes back one card.'],
+    terms: [['Prompt injection', 'text that tries to give the AI new instructions'], ['OPEN', 'not known or not decided yet']],
+    next: 'a human in the loop: AI notices, a person decides.'
+  }
 },
 
 { // Slide 17
@@ -579,30 +625,76 @@ window.SLIDES = [
 },
 
 { // Slide 18
-  title: "Assignment: The team canvas",
+  title: "Assignment: Your plan for the next two days",
   kicker: "DAY 6 · TEAM ASSIGNMENT 2",
-  subtitle: "Answer the questions as a team and put them on one page.",
+  subtitle: "How will you build your idea in two days? Answer the briefing, cut it down to an MVP, and split the work.",
   type: "practice",
   layout: "exercise",
   cards: [
-    { title: "Your canvas", body: "chosen idea, its scores and why\nproblem and user\nwhy AI\nwhen it is successful\nsource of truth and data\nroles\nin and out of scope\ntools\nhuman checkpoint\nsecurity: answers and OPEN questions" }
+    { title: "Your two days", body: "today: plan, set up, first slice\nnext session, start: finish and test\nnext session, end: demo and presentation\nalong the way: let Claude build your presentation with you" }
   ],
   stepsHeading: "Steps:",
   steps: [
-    "Write down your chosen idea, its scores and why you chose it.",
-    "Agree on the problem, the user and when it is successful.",
-    "Fill in the rest of the canvas together. Write OPEN where you don't know yet.",
-    "Ask the security specialist to look at your data, secrets and actions.",
-    "Cut the scope until the first slice fits in today.",
-    "Save the canvas in your repo as notes/team-canvas.md."
+    "Answer the briefing together: problem, data, roles, plan and security. Write OPEN where you don't know yet.",
+    "Cut it down to an MVP: the smallest version that shows your idea works, from input to result.",
+    "Split the MVP into pieces. Give every piece an owner, and agree who tests and who merges.",
+    "Plan the two days: what works by the end of today, what you finish and test next session.",
+    { text: "Ask the security specialist to look at your data, secrets and actions.", note: "The facilitator plans a short visit for every team." },
+    "Ask Claude Code to write it all down: notes/team-canvas.md and notes/plan.md."
   ],
-  expected: "One page your whole team agrees on, with a first slice that fits in today and the security questions answered or marked OPEN.",
-  prompt: "Interview our team about the app we want to build. Ask about the user, the problem, why AI, when the app is successful, the source of truth and data, roles, scope, tools, the human checkpoint and security. Ask one question at a time. Then write notes/team-canvas.md and mark anything we didn't decide as OPEN.",
-  keyPoints: ["Type the minutes on the timer","Chosen idea and success first","OPEN is allowed","Security check per team","Cut scope to one slice"],
-  notes: "Type the minutes on the timer. Plan and Design together take about 30 minutes, so keep this moving. Walk from team to team and ask the questions from the previous slides instead of giving answers. Plan the security specialist's time: every team gets a short visit, so no team ends up with all the questions at the end. The Example prompt lets Claude interview the team, which helps a team that is stuck; the decisions stay theirs. Watch for teams that skip the scope cut: the first slice must fit in today."
+  expected: "A canvas and a two-day plan your whole team agrees on: the MVP, who builds what, what works by tonight, and the security questions answered or OPEN.",
+  prompt: "Interview our team about the app we want to build in two days. Ask one question at a time about the user, the problem, why AI, when it is successful, the source of truth, roles, scope, tools, where a person approves, and security. Then help us cut it down to an MVP, split it into pieces with an owner each, and plan what works by the end of today and what we finish next session. Write notes/team-canvas.md and notes/plan.md, and mark anything we didn't decide as OPEN.",
+  keyPoints: ["Type the minutes on the timer", "Briefing first", "MVP: smallest version that works", "Every piece has an owner", "Plan the two days", "Security visit per team"],
+  notes: "Type the minutes on the timer (about 30 minutes). This assignment is about how the team will build its idea in two days: not the idea itself (chosen at slide 10) but the route. Walk from team to team and ask the briefing questions instead of giving answers. The hardest step is the MVP cut: teams plan far more than fits; ask 'what is the smallest thing you can show working next session?'. Check that every piece has an owner and that someone tests and merges. Plan the security specialist's time: every team gets a short visit. The Example prompt lets Claude interview the team and write both files; the decisions stay theirs."
 },
 
 { // Slide 19
+  title: "Day 7: your presentation",
+  kicker: "DAY 6 · BEFORE YOU BUILD · THE PRESENTATION",
+  subtitle: "Next session every team shows what it built. Start the presentation today, while you build.",
+  type: "context",
+  visual: { stepThrough: '.pitch-grid > .card, .slide-main > .tagline',
+    pitch: { heroEmoji: '🤖', hero: 'Let Claude help you build your presentation while you build your app, not the night before.',
+      cards: [
+        { emoji: '🎬' },
+        { emoji: '🏛️', chips: ['Interest', 'Gain', 'Problem', 'Team', 'Security'] },
+        { emoji: '✨' },
+        { emoji: '💻' },
+        { emoji: '🙌' },
+        { emoji: '⏱️' }
+      ] } },
+  cards: [
+    { title: "A live demo of your MVP", body: "Show it working: your input, the AI step, the result." },
+    { title: "Your story along the five pillars", body: "Why this idea? Tell it with the same pillars you used to choose it." },
+    { title: "Make it interactive", body: "More than slides: a video, a website, a live poll, something people can try." },
+    { title: "Made with Claude Code", body: "Your presentation is a web page Claude Code builds with you, and keeps up to date as the app grows." },
+    { title: "Everybody pitches in", body: "No one hides in the back row: every team member has a part on stage." },
+    { title: "7–10 minutes", body: "Short and to the point. Practise once." }
+  ],
+  tagline: "Tell why it matters, not only what it does.",
+  keyPoints: ["Claude builds the presentation with you, during the hackathon", "Live demo of the MVP", "Story along the five pillars", "Interactive: video, website, poll…", "Made with Claude Code", "Everybody pitches in", "7–10 minutes"],
+  notes: "Show this before the teams start building, so the presentation grows with the app instead of being made the night before. The main message is at the top: ask Claude Code to keep a presentation (a simple web page) up to date while you build, for example after every round: 'add what we just built to our presentation'. Requirements: a live demo of the MVP; the story told along the five pillars; something interactive (a short video, a website, a live poll, something the room can try); made with Claude Code; everybody pitches in, so no high-school culture where one person talks and the rest stand behind; 7–10 minutes.",
+  teach: {
+    time: '4 min',
+    gist: 'What the Day 7 presentation needs, and the main message: let Claude build it with you while you build.',
+    script: [
+      {do: 'Slide appears with the orange line at the top.', say: 'Before you build: next session you present. And the trick is this: let Claude help you build the presentation while you build the app. Not the night before.'},
+      {do: 'Press → : A live demo of your MVP.', say: 'We want to see it work. Your input, the AI step, the result.'},
+      {do: 'Press → : the five pillars.', say: 'Why this idea? Tell it with the same five pillars you used to choose it.'},
+      {do: 'Press → : Make it interactive.', say: 'More than slides. A short video, a website, a poll, something we can try.'},
+      {do: 'Press → : Made with Claude Code.', say: 'Your presentation is a web page Claude Code builds with you. After every round: add what we just built.'},
+      {do: 'Press → : Everybody pitches in.', say: 'No high-school culture where one person talks and the rest stand behind. Everyone has a part.', ask: 'Who in your team presents which part?'},
+      {do: 'Press → : 7–10 minutes.', say: 'Short and to the point. Practise once.'},
+      {do: 'Press → : the line at the bottom.', say: 'Tell us why it matters, not only what it does.'}
+    ],
+    learn: ['The presentation grows with the app: Claude Code builds it with you during the hackathon.', 'A live demo, the five pillars, something interactive, and everyone takes part.'],
+    watch: ['Keep it light: this is a preview, the teams build it later.', 'Someone asks if PowerPoint is allowed: the point is that Claude Code builds it with you; a web page is easiest to keep up to date.'],
+    terms: [['MVP', 'the smallest version that shows your idea works'], ['Interactive', 'something the room can watch, click or try, not only read']],
+    next: 'a short break, then you build your first slice.'
+  }
+},
+
+{ // Slide 20
   title: "Short break",
   kicker: "DAY 6 · BREAK",
   subtitle: "Return in 15 minutes.",
@@ -619,7 +711,7 @@ window.SLIDES = [
 /* DAY 6 — Build                                                            */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 20
+{ // Slide 21
   title: "Assignment: Set up and build the first slice",
   kicker: "DAY 6 · TEAM ASSIGNMENT 3",
   subtitle: "From canvas to something that works, end to end, however small.",
@@ -642,7 +734,7 @@ window.SLIDES = [
   notes: "Type the minutes on the timer. Set-up first: a shared repo, CLAUDE.md written from the canvas, and settings.json rules, just like on the teaching days. Check that no API key ends up in the code or in git. Then build in short rounds: start each round in plan mode, build a little, test it, and adjust the plan when needed. Between rounds the team holds a short briefing so everyone knows what works and what's next. The slice should work end to end, however small: one input, one AI step, one visible result. Human review by someone who didn't build that part, ideally including the security specialist for anything that touches data or secrets."
 },
 
-{ // Slide 21
+{ // Slide 22
   title: "Check-in",
   kicker: "DAY 6 · CHECK-IN",
   subtitle: "Every team, two minutes. Short answers.",
@@ -662,23 +754,6 @@ window.SLIDES = [
 /* ---------------------------------------------------------------------- */
 /* DAY 6 — Closing                                                          */
 /* ---------------------------------------------------------------------- */
-
-{ // Slide 22
-  title: "Day 7: your presentation",
-  kicker: "DAY 6 · LOOKING AHEAD",
-  subtitle: "Next session every team presents what it built.",
-  type: "context",
-  visual: { stagger: 'pop', stepThrough: true, bot: 'wave', place: 'beside' },
-  cards: [
-    { title: "7–10 minutes", body: "Short and to the point." },
-    { title: "Slides", body: "Fun and creative. You may make them with Claude Code." },
-    { title: "The five pillars", body: "Tell your story along interest, gain, problem, team and security." },
-    { title: "Everyone presents", body: "Every team member has a part." }
-  ],
-  tagline: "Tell why it matters, not only what it does.",
-  keyPoints: ["7–10 minutes per team","Fun, creative slides","Story along the five pillars","Every team member speaks"],
-  notes: "Say this today, so teams can keep it in mind while they build. The presentation is about the benefits of the app: why it matters, told along the same five pillars they used to choose the idea. Slides may be fun and creative; making them with Claude Code is a nice extra exercise. Everyone in the team takes part, not only the person who built the most."
-},
 
 { // Slide 23
   title: "Ready for Day 7?",

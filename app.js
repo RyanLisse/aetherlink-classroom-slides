@@ -271,6 +271,37 @@ function renderExtras(stage, main, s, v) {
     let armed = false; clr.addEventListener('click', () => { if (!armed) { armed = true; clr.textContent = 'Sure? Click again'; setTimeout(() => { armed = false; clr.textContent = 'Clear all'; }, 2500); return; } rows = Array.from({ length: M.ideas || 4 }, blank); save(); draw(); armed = false; clr.textContent = 'Clear all'; });
     ctrl.append(node('span', 'smx-hint', M.hint || 'Click a number to score, click it again to undo.'), add, del, clr); wrap.append(ctrl); draw();
   }
+  if (v.brief && grid) {                                        // briefing: numbered cards with an emoji and the body lines as questions you can tick off (click)
+    grid.classList.add('brief-grid'); grid.style.setProperty('--n', cards.length);
+    cards.forEach((c, i) => { const B = v.brief[i] || {}; c.classList.add('brief-card'); c.querySelector('.card-icon')?.remove();
+      const head = c.querySelector('.card-head'); head.prepend(node('span', 'brief-num', String(i + 1))); if (B.emoji) head.after(node('div', 'brief-emoji', B.emoji));
+      const p = c.querySelector(':scope > p'); if (p) { const ul = node('ul', 'brief-qs'); p.textContent.split('\n').filter(Boolean).forEach((q) => { const li = node('li'); const b = node('button', 'brief-q'); b.type = 'button'; b.append(node('span', 'brief-box'), node('span', null, q)); b.addEventListener('click', (e) => { e.stopPropagation(); b.classList.toggle('on'); }); li.append(b); ul.append(li); }); p.replaceWith(ul); }
+      if (B.more) c.append(node('span', 'brief-more', B.more)); });
+  }
+  if (v.carousel && grid) {                                     // carousel: one numbered card big in the middle, its neighbours small left and right; → / ← (or click a side card) slides
+    const C = v.carousel; grid.classList.add('car-track'); let k = 0; const n = cards.length;
+    cards.forEach((c, i) => { c.classList.add('car-card'); c.querySelector('.card-icon')?.remove();
+      c.prepend(node('span', 'car-num', (i + 1) + ' / ' + n));
+      const p = c.querySelector(':scope > p'); if (p) { const ul = node('ul', 'car-qs'); p.textContent.split('\n').filter(Boolean).forEach((q) => ul.append(node('li', null, q))); p.replaceWith(ul); }
+      if (C.foot) c.append(node('span', 'car-foot', C.foot));
+      c.addEventListener('click', (e) => { if (i !== k) { e.stopPropagation(); k = i; paint(); } }); });
+    const nav = node('div', 'car-nav'); const prevB = node('button', 'car-btn', '←'); const nextB = node('button', 'car-btn', '→'); prevB.setAttribute('aria-label', 'Previous question'); nextB.setAttribute('aria-label', 'Next question');
+    const dots = node('div', 'car-dots'); cards.forEach((_, i) => { const d = node('button', 'car-dot', String(i + 1)); d.setAttribute('aria-label', 'Question ' + (i + 1)); d.addEventListener('click', () => { k = i; paint(); }); dots.append(d); });
+    nav.append(prevB, dots, nextB); grid.after(nav);
+    const paint = () => { cards.forEach((c, i) => { const d = i - k; c.dataset.pos = Math.abs(d) > 1 ? (d < 0 ? 'far-l' : 'far-r') : String(d); c.setAttribute('aria-hidden', String(d !== 0)); }); [...dots.children].forEach((d, i) => { d.classList.toggle('on', i === k); d.classList.toggle('seen', i < k); }); prevB.disabled = k === 0; nextB.disabled = k === n - 1; announce(cards[k].textContent); };
+    const next = () => { if (k < n - 1) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    prevB.addEventListener('click', back); nextB.addEventListener('click', next); paint();
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.pitch && grid) {                                        // pitch: a big main message on top, cards with a big emoji; one card can show the five pillars as small chips
+    const P = v.pitch; grid.classList.add('pitch-grid');
+    if (P.hero) { const h = node('div', 'pitch-hero'); h.append(node('span', 'pitch-hero-emoji', P.heroEmoji || '🤖'), node('span', 'pitch-hero-text', P.hero)); grid.before(h); }
+    cards.forEach((c, i) => { const B = (P.cards || [])[i] || {}; c.classList.add('pitch-card'); c.querySelector('.card-icon')?.remove();
+      if (B.emoji) c.prepend(node('div', 'pitch-emoji', B.emoji));
+      if (B.chips) { const r = node('div', 'pitch-chips'); B.chips.forEach((t) => r.append(node('span', 'pitch-chip', t))); c.append(r); } });
+  }
   if (v.temple && grid) {                                       // five pillars as a temple: roof = the idea, per pillar an icon + its questions (body lines), base = the total score; scores show once the base is stepped in
     const T = v.temple; const ICO = ['<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>', '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.2"/><circle cx="12" cy="17" r=".9"/>', PILLAR_ICONS[4], '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.3"/>'];
     const wrap = node('div', 'temple-wrap'); grid.replaceWith(wrap); grid.classList.add('temple');
@@ -1159,7 +1190,8 @@ function renderAssignment(stage, s) {
     (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd' + (p[0] !== '!' ? ' no-copy' : '')); c.append(node('code', null, p)); if (p[0] === '!') c.append(copyBtn(p)); text.append(c); });  // only !commands get Copy; /exit, claude: just type them
     if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
     if (t.parts) { const row = node('span', 'asg-parts'); t.parts.forEach(([k, v]) => { const p = node('span', 'asg-part'); p.append(node('span', 'asg-part-k', k), node('code', null, v)); row.append(p); }); text.append(row); }  // the pieces of what Claude made, labelled: moment, matcher, command
-    if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
+    if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));
+    if (t.note) text.append(node('span', 'asg-step-note', t.note));   // opt-in: a line in another colour (e.g. what the facilitator does)  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };
     li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
@@ -1198,7 +1230,7 @@ function render() {
   if (s.layout === 'exercise') { renderAssignment(stage, s); finishRender(s); return; }
   if (type === 'practice') {
     const banner = node('div', 'assignment-banner');
-    banner.append(node('span', 'dot'), document.createTextNode('Assignment in progress'));
+    banner.append(node('span', 'dot'), document.createTextNode(s.banner || 'Assignment in progress'));   // opt-in per slide: s.banner
     stage.append(banner);
   }
   const head = node('section', 'heading'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
@@ -1377,7 +1409,7 @@ document.addEventListener('keydown', e => {
   if (panel.open || e.altKey || e.ctrlKey || e.metaKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.closest('[role=tablist]')) return;
   if ((e.key === 'g' || e.key === 'G') && $('overview')) { e.preventDefault(); openOverview(); return; }
   if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); if (window.__reveal?.()) return; step(1); }
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); if (window.__revealBack?.()) return; step(-1); }   // opt-in per visual: step back inside the slide first
   if (e.key === 'Home') { e.preventDefault(); const n = visibleFrom(0, 1); if (n !== null) go(n); }
   if (e.key === 'End') { e.preventDefault(); const n = visibleFrom(slides.length - 1, -1); if (n !== null) go(n); }
   if (e.key === 'h' || e.key === 'H') { e.preventDefault(); const h = toggleHidden(current); notify(h ? 'Slide hidden — the arrows will skip it (H to show again)' : 'Slide shown again'); render(); return; }
