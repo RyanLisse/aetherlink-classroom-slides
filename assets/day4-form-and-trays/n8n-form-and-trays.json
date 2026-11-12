@@ -1,0 +1,394 @@
+{
+  "name": "Day 4 · slide 20 · The form and the trays",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -40
+      ],
+      "id": "7ba5243b-e8db-529b-945b-fd4766801ff4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"ticket_id\": \"MSG-01\",\n  \"customer\": \"CUST-004\",\n  \"subject\": \"THIS IS RIDICULOUS!!!\",\n  \"message\": \"I have been trying for ten minutes to find where I can download last month's receipt. Why is this so difficult? Please send me the receipt or tell me where to find it.\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        -40
+      ],
+      "id": "07f9a73a-c2d3-59a5-8990-5fe9302b2107",
+      "name": "Ticket Input"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Customer message {{ $json.ticket_id }}\nCustomer: {{ $json.customer }}\nSubject: {{ $json.subject }}\n\n{{ $json.message }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# Customer Support Triage\n\n## Purpose\nYou are a customer-support assistant for a payment company. Read each incoming customer message and assign a priority.\n\n## Rules\n- Use only information supplied by the user or available inside this project.\n- Do not search the web for customer or transaction information.\n- Do not invent facts.\n- If important information is missing, say what is missing.\n- Keep your explanation concise.\n\n## Priority definitions\n- **LOW** — General questions, requests for information, cosmetic issues, or situations with little/no immediate customer or financial impact.\n- **MEDIUM** — A real service or payment problem affecting one customer, but with no clear sign of fraud, security risk, major financial exposure, or widespread impact.\n- **HIGH** — Suspected fraud or security risk, unknown/unauthorised transactions, multiple affected transactions, substantial or time-critical financial impact, or evidence that many customers may be affected.\n- Judge impact and risk, not tone: angry wording alone never raises the priority, and calm wording never lowers it.\n\n## Required output\nReturn the priority (`low`, `medium` or `high`) and a reason of one or two sentences."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        480,
+        -40
+      ],
+      "id": "2e799751-dd58-5335-a418-0255b8875fdd",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        420,
+        200
+      ],
+      "id": "c3c46130-ec81-5bc4-b42e-e86ec2f94840",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"priority\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"low\",\n        \"medium\",\n        \"high\"\n      ]\n    },\n    \"reason\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"priority\",\n    \"reason\"\n  ],\n  \"additionalProperties\": false\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        640,
+        200
+      ],
+      "id": "84246137-d53e-5052-bd01-b255992287f8",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6cd8f4a1-90db-5cfa-b14c-e9394c6aae03",
+                    "leftValue": "={{ $json.output.priority }}",
+                    "rightValue": "low",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Low"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "352fc029-ac0e-5bfd-ab7d-a2ed4b1417e8",
+                    "leftValue": "={{ $json.output.priority }}",
+                    "rightValue": "medium",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Medium"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b4ff6c4b-9110-5969-b686-b154cdc7ddc4",
+                    "leftValue": "={{ $json.output.priority }}",
+                    "rightValue": "high",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "High"
+            }
+          ]
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        -40
+      ],
+      "id": "ac5e3252-8d02-58d5-b22d-2ede406e20fc",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"priority\": \"low\",\n  \"reason\": {{ JSON.stringify($json.output.reason) }},\n  \"action\": \"AUTO_REPLY\",\n  \"team\": \"Self-service support\",\n  \"terminal_line\": \"Switch → low → AUTO_REPLY (Self-service support)\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        -260
+      ],
+      "id": "815876e9-370e-5370-8ed4-ebda5bdbb4d8",
+      "name": "Tray low · AUTO_REPLY"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"priority\": \"medium\",\n  \"reason\": {{ JSON.stringify($json.output.reason) }},\n  \"action\": \"INVESTIGATE\",\n  \"team\": \"Support team\",\n  \"terminal_line\": \"Switch → medium → INVESTIGATE (Support team)\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        -40
+      ],
+      "id": "8d167bfc-adab-5bfa-b7a6-d00bed580b4b",
+      "name": "Tray medium · INVESTIGATE"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"priority\": \"high\",\n  \"reason\": {{ JSON.stringify($json.output.reason) }},\n  \"action\": \"ESCALATE\",\n  \"team\": \"Payments escalation team\",\n  \"terminal_line\": \"Switch → high → ESCALATE (Payments escalation team)\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        180
+      ],
+      "id": "e92eeb1a-0696-5518-9241-19d0d5ab14b9",
+      "name": "Tray high · ESCALATE"
+    },
+    {
+      "parameters": {
+        "content": "## IN · Ticket Input\nWhat goes **in**: MSG-01, the angry receipt question.\n\nDay 4: `docs/customer-messages.md`\n\n**Not the form.**",
+        "height": 220,
+        "width": 240,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -300
+      ],
+      "id": "568d0c44-8cc5-592f-9d1c-875bced8dfda",
+      "name": "Note · Ticket Input"
+    },
+    {
+      "parameters": {
+        "content": "## System Message\n= `claude-project/CLAUDE.md`\n(Purpose · Rules · Priority definitions)\n\nRequire Specific Output Format: **on**",
+        "height": 220,
+        "width": 300,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        420,
+        -300
+      ],
+      "id": "22aca2bc-e86d-5730-8fca-1c8fcbb25712",
+      "name": "Note · AI Agent"
+    },
+    {
+      "parameters": {
+        "content": "## THE FORM · Structured Output Parser\nTwo boxes the AI must fill in:\n- `priority`: only low · medium · high\n- `reason`: one sentence why\n\nDay 4: `01-single-agent/priority-schema.mjs`\n(+ `outputFormat` in `options.mjs`)\nYou make this in Step 1a.",
+        "height": 260,
+        "width": 420,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        560,
+        380
+      ],
+      "id": "02bf0b28-548e-5d4f-b454-d81bfcaf7eaa",
+      "name": "Note · the form"
+    },
+    {
+      "parameters": {
+        "content": "## THE TRAYS · Switch, Mode: Rules\nReads `output.priority` and picks the tray. No AI.\nIgnore Case: on\n\nDay 4: `lib/switch.mjs`\nlines 1–5 = these three rules\nline 12 `toLowerCase()` = Ignore Case",
+        "height": 280,
+        "width": 320,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        900,
+        -360
+      ],
+      "id": "d5c2aedb-6edd-534f-9b8c-dcccc46428ae",
+      "name": "Note · the trays"
+    },
+    {
+      "parameters": {
+        "content": "## OUT\nEach tray = one route: action + team.\n`terminal_line` = what Day 4 prints:\n`Switch → low → AUTO_REPLY (Self-service support)`\n\n**The AI gives the label, the code picks the route.**",
+        "height": 240,
+        "width": 360,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        380
+      ],
+      "id": "36cc15a2-0a9d-5e52-9458-cf41e327be45",
+      "name": "Note · result"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Ticket Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ticket Input": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Tray low · AUTO_REPLY",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tray medium · INVESTIGATE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tray high · ESCALATE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
