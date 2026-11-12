@@ -909,7 +909,16 @@ window.SLIDES = [
       "gist": "Open your starter in Claude Code. Map each n8n node to the file that replaces it.",
       "script": [
         {
+          "do": "Use Copy. Check that doctor and verify exit 0 on every laptop."
+        },
+        {
+          "say": "Goal. Open your starter in Claude Code. Map each n8n node to the file that replaces it."
+        },
+        {
           "say": "Nobody needs trainer material for this step. The starter already has the plumbing: the runner, the read-only MCP server and the checks. Participants build only the Agent SDK parts. Every assignment today is the same loop: paste the prompt, the check goes green, one real run, Claude Code explains why. A check is red before you start a step. That is correct."
+        },
+        {
+          "say": "What you see. Both commands exit 0, and you can point to the three specialists in the n8n JSON."
         }
       ],
       "do": [
@@ -1346,7 +1355,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the specialists out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop.",
+        "prompt": "Run npm run check:1 and show what is red. Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the specialists out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop.",
         "after": "npm run check:1 passes. The real run prints a priority, a reason and the Switch route."
       },
       "Watch the check go from red to green.",
@@ -1361,7 +1370,16 @@ window.SLIDES = [
       "gist": "Claude Code fills in the Step 1 TODOs. The check tells you when the step is right.",
       "script": [
         {
+          "do": "Use Copy. Watch check:1 go from red to green, then read the real MSG-06 run."
+        },
+        {
+          "say": "Goal. Claude Code fills in the Step 1 TODOs. The check tells you when the step is right."
+        },
+        {
           "say": "Participants build three small files: options.mjs, priority-schema.mjs and CLAUDE.md. The check compares them with the reference, so everyone gets the same result. Ask one participant to read a row of the table aloud: which n8n setting became which option, and what goes wrong without it. If a check stays red, paste the failed line into Claude Code and ask for the smallest fix."
+        },
+        {
+          "say": "What you see. npm run check:1 passes. The real run prints a priority, a reason and the Switch route."
         }
       ],
       "do": [
@@ -2404,7 +2422,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the team lead chooses a specialist, why a specialist has its own context, and why neither specialist has a tool. Stop.",
+        "prompt": "Run npm run check:2 and show what is red. Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the team lead chooses a specialist, why a specialist has its own context, and why neither specialist has a tool. Stop.",
         "after": "npm run check:2 passes. The trace shows risk-agent before customer-reply-agent."
       },
       "Watch the check go from red to green.",
@@ -2419,7 +2437,16 @@ window.SLIDES = [
       "gist": "Fill in two specialist files and the team-lead options. Read the trace and the draft.",
       "script": [
         {
+          "do": "Use Copy. Watch check:2 go green, then point at the model of each specialist in the trace."
+        },
+        {
+          "say": "Goal. Fill in two specialist files and the team-lead options. Read the trace and the draft."
+        },
+        {
           "say": "Each specialist file is the n8n tool description plus the n8n system message. The description tells the team lead when to delegate. Point at the [subagent] lines in the trace: they show which model each specialist runs on. Ask: why does neither specialist have a tool? Answer: they only think and write, so they cannot look up or change anything."
+        },
+        {
+          "say": "What you see. npm run check:2 passes. The trace shows risk-agent before customer-reply-agent."
         }
       ],
       "do": [
@@ -2727,7 +2754,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Paste this prompt into Claude Code",
-        "prompt": "Read the STEP 3 TODOs in 03-mcp/options.mjs and .claude/agents/customer-context-agent.md, and the Customer Context Agent node in n8n/support-triage.json. Fill in customer-context-agent.md and 03-mcp/options.mjs. Change no other file, and do not change support-mcp/server.js. Run npm run check:3 until it passes. Run npm run lesson3 -- MSG-08 once and show the trace. Then show which facts in the answer came from get_customer and get_transaction, and explain why only customer-context-agent has these tools. Stop.",
+        "prompt": "Run npm run check:3 and show what is red. Read the STEP 3 TODOs in 03-mcp/options.mjs and .claude/agents/customer-context-agent.md, and the Customer Context Agent node in n8n/support-triage.json. Fill in customer-context-agent.md and 03-mcp/options.mjs. Change no other file, and do not change support-mcp/server.js. Run npm run check:3 until it passes. Run npm run lesson3 -- MSG-08 once and show the trace. Then show which facts in the answer came from get_customer and get_transaction, and explain why only customer-context-agent has these tools. Stop.",
         "after": "npm run check:3 passes. The trace shows Context → Risk → Reply with two tool results."
       },
       "Watch the check go from red to green.",
@@ -2742,7 +2769,16 @@ window.SLIDES = [
       "gist": "Add the context specialist and connect the read-only MCP server. Match each fact to a tool result.",
       "script": [
         {
+          "do": "Use Copy. Watch check:3 go green, then match one fact in the draft to a tool result."
+        },
+        {
+          "say": "Goal. Add the context specialist and connect the read-only MCP server. Match each fact to a tool result."
+        },
+        {
           "say": "The MCP server is already built and stays unchanged. Participants name it in mcpServers and give its two tools to one specialist. A green check proves the configuration. Only the real run proves the behavior. Keep the transaction lookup labeled as an extension to the n8n source."
+        },
+        {
+          "say": "What you see. npm run check:3 passes. The trace shows Context → Risk → Reply with two tool results."
         }
       ],
       "do": [
@@ -2989,7 +3025,16 @@ window.SLIDES = [
       "gist": "Three real runs become one acceptance table. You make the review decision.",
       "script": [
         {
+          "do": "Use Copy. Read one acceptance row from the message to the n8n node."
+        },
+        {
+          "say": "Goal. Three real runs become one acceptance table. You make the review decision."
+        },
+        {
           "say": "The three runs take a few minutes. Use that time: ask participants to predict the priority of MSG-06 before the run ends. Proof comes from real runs, the acceptance table and a human review. There is no hidden answer key."
+        },
+        {
+          "say": "What you see. Every acceptance row points to a real run or says OPEN. Nothing is sent or deployed."
         }
       ],
       "do": [
@@ -3254,7 +3299,16 @@ window.SLIDES = [
       "gist": "Read one options file and run the agent on your own login.",
       "script": [
         {
+          "do": "Use Copy. Check that the trace shows get_weather."
+        },
+        {
+          "say": "Goal. Read one options file and run the agent on your own login."
+        },
+        {
           "say": "This agent has the same parts as the support app, in one file. One difference: the tool lives inside the app with createSdkMcpServer, so there is no separate server to start. The real run takes about ten seconds."
+        },
+        {
+          "say": "What you see. npm test passes. The trace shows mcp__weather__get_weather."
         }
       ],
       "do": [
@@ -3278,11 +3332,11 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Paste the BONUS 2 prompt",
-        "prompt": "Read the BONUS 2 TODOs in src/tools/get_forecast.ts and src/options.ts. Build fetchForecast and getForecastTool, add the tool to the MCP server and to allowedTools, and add one line to instructions.md that says when to call get_forecast. Copy the shape of get_weather.ts. Change no other file. Run npm run check:tool until it passes. Run npm run live -- \"Wat is het weer de komende drie dagen in Utrecht?\" once and show the trace. Then explain in four lines: how the agent knows that the tool exists, how it knows when to call it, and what the schema protects against. Stop.",
-        "after": "npm run check:tool passes. The trace shows one mcp__weather__get_forecast call."
+        "prompt": "Run npm run live -- \"Wat is het weer de komende drie dagen in Utrecht?\" and count the get_weather calls. Read the BONUS 2 TODOs in src/tools/get_forecast.ts and src/options.ts. Build fetchForecast and getForecastTool, add the tool to the MCP server and to allowedTools, and add one line to instructions.md that says when to call get_forecast. Copy the shape of get_weather.ts. Change no other file. Run npm run check:tool until it passes. Run the same question again and show that one get_forecast call replaces them. Then explain in four lines: how the agent knows that the tool exists, how it knows when to call it, and what the schema protects against. Stop.",
+        "after": "npm run check:tool passes. Three get_weather calls became one mcp__weather__get_forecast call."
       },
       "Watch the check go from red to green.",
-      "Find get_forecast in the trace."
+      "Compare the trace before and after: three get_weather calls become one get_forecast call."
     ],
     "expected": "npm run check:tool passes. The trace shows one mcp__weather__get_forecast call.",
     "notes": "A tool has three parts. The description tells the agent when to call it, like the description of a tool node on Day 3. The schema limits the input. The handler is normal code that the check tests without a model. Watch for this: without the new line in instructions.md, the agent calls get_weather three times and never uses the new tool.",
@@ -3292,7 +3346,16 @@ window.SLIDES = [
       "gist": "Build get_forecast: a description, a schema and a handler.",
       "script": [
         {
+          "do": "Use Copy. Watch check:tool go from red to green, then find get_forecast in the trace."
+        },
+        {
+          "say": "Goal. Build get_forecast: a description, a schema and a handler."
+        },
+        {
           "say": "A tool has three parts. The description tells the agent when to call it, like the description of a tool node on Day 3. The schema limits the input. The handler is normal code that the check tests without a model. Watch for this: without the new line in instructions.md, the agent calls get_weather three times and never uses the new tool."
+        },
+        {
+          "say": "What you see. npm run check:tool passes. The trace shows one mcp__weather__get_forecast call."
         }
       ],
       "do": [
@@ -3316,7 +3379,7 @@ window.SLIDES = [
     "steps": [
       {
         "text": "Paste the BONUS 3 prompt",
-        "prompt": "Read the BONUS 3 TODOs in src/options.ts. Add packing-agent to options.agents with a description, a prompt and tools: []. It turns a forecast into a short packing list in Dutch and never guesses the weather. Set tools to ['Agent'], add 'Agent' to allowedTools, and add one line to instructions.md that says when to ask packing-agent. Change no other file. Run npm run check:agent until it passes. Run npm run live -- \"Ik ga drie dagen naar Utrecht. Wat pak ik in?\" once and show the trace. Then explain in four lines: why the specialist has no tools, what it can see of the conversation, and what the main agent does with its answer. Stop.",
+        "prompt": "Run npm run check:agent and show what is red. Read the BONUS 3 TODOs in src/options.ts. Add packing-agent to options.agents with a description, a prompt and tools: []. It turns a forecast into a short packing list in Dutch and never guesses the weather. Set tools to ['Agent'], add 'Agent' to allowedTools, and add one line to instructions.md that says when to ask packing-agent. Change no other file. Run npm run check:agent until it passes. Run npm run live -- \"Ik ga drie dagen naar Utrecht. Wat pak ik in?\" once and show the trace. Then explain in four lines: why the specialist has no tools, what it can see of the conversation, and what the main agent does with its answer. Stop.",
         "after": "npm run check:agent passes. The trace shows get_forecast before Agent → packing-agent."
       },
       "Watch the check go from red to green.",
@@ -3331,7 +3394,16 @@ window.SLIDES = [
       "gist": "Add packing-agent: a specialist that has no tools and only writes.",
       "script": [
         {
+          "do": "Use Copy. Watch check:agent go green, then find packing-agent in the trace."
+        },
+        {
+          "say": "Goal. Add packing-agent: a specialist that has no tools and only writes."
+        },
+        {
           "say": "The specialist starts with an empty context and sees only what the main agent gives it. It has no tools, so it cannot look up or change anything. This is the Step 2 pattern in a new project. Participants who finish choose an idea of their own and write the check before the prompt."
+        },
+        {
+          "say": "What you see. npm run check:agent passes. The trace shows get_forecast before Agent → packing-agent."
         }
       ],
       "do": [
@@ -3384,7 +3456,16 @@ window.SLIDES = [
       "gist": "Nothing to build before class. The solved steps are on the trainer/solution branch.",
       "script": [
         {
+          "do": "Switch to trainer/solution and run each demo once before class."
+        },
+        {
+          "say": "Goal. Nothing to build before class. The solved steps are on the trainer/solution branch."
+        },
+        {
           "say": "Trainer preparation takes ten minutes. Nothing must be built. Run each demo once, because a real run depends on your login and on your own Claude Code settings. Every run loads project and user settings. A personal CLAUDE.md can change the tone of the trace, and a large personal setup makes a run slower and more expensive."
+        },
+        {
+          "say": "What you see. All three checks pass and each demo ran once on your laptop."
         }
       ],
       "do": [
