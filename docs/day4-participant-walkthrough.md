@@ -150,6 +150,10 @@ Chosen: the `claude-code` and `sdk-login` backends copy only the `env` block fro
 agent's environment. A fake `claude` on `PATH` proved the variables now arrive. A real run kept only the
 `StructuredOutput` tool and cost $0.018. Not tested on a real Vertex account.
 
+Update 2026-11-12: this choice is reversed. The start command and every run now load `project,user`, because
+the interactive Claude Code session of a participant also needs the company login. Strict MCP stays, so
+claude.ai connectors stay off. A personal `CLAUDE.md` and hooks do load.
+
 Package PRs, one per branch: main
 [#15](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/15), step-1
 [#16](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/pull/16), step-2
