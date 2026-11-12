@@ -45,7 +45,7 @@ function showInFrame(frame, index) {
   const hash = '#' + (index + 1);
   // once the deck has loaded inside the frame, only change its hash (no reload); before that, (re)load it
   try { if (frame.dataset.ready) { frame.contentWindow.location.hash = hash; return; } } catch {}
-  frame.src = (window.DECK_PAGE || 'index.html') + '?embed=1' + hash;
+  frame.src = (window.DECK_PAGE || 'index.html') + '?embed=1' + (window.PREVIEW_OPEN ? '&open=1' : '') + hash;
 }
 [$('p-frame'), $('p-next-frame')].forEach(f => f.addEventListener('load', () => { f.dataset.ready = '1'; }));
 const ro = new ResizeObserver(entries => entries.forEach(e => fitShot(e.target)));
@@ -95,10 +95,13 @@ function renderScript(beats) {
     const li = document.createElement('li');
     // A question step reads in the order it happens: do → question → answer → what you say next.
     // The answer is `answer`, or a leading "(Answer: …)" / "(…)" in `say`.
-    let say = b.say || '', answer = b.answer || '', note = '';
+    // say may be a list of short bullets; a leading "(Answer: …)" sits in the first bullet
+    const sayList = Array.isArray(b.say) ? b.say.slice() : null;
+    let say = sayList ? (sayList[0] || '') : (b.say || ''), answer = b.answer || '', note = '';
     const m = b.ask && !answer && /^\(([^)]*)\)\s*/.exec(say);
     if (m) {
       say = say.slice(m[0].length);
+      if (sayList) { if (say) sayList[0] = say; else sayList.shift(); }
       const a = /^Answers?:\s*/.exec(m[1]);
       if (a) answer = m[1].slice(a[0].length); else note = m[1];
     }
@@ -108,8 +111,18 @@ function renderScript(beats) {
     // warn: a red reminder at the top of the beat
     if (b.warn) lines.unshift([b.warn, 't-b-warn', '⚠ ']);
     for (const [text, cls, prefix] of lines) {
+      if (cls === 't-b-say' && sayList) {
+        if (!sayList.length) continue;
+        const ul = document.createElement('ul'); ul.className = 't-b-say t-b-say-list';
+        for (const t of sayList) { const item = document.createElement('li'); teachText(item, t); ul.append(item); }
+        li.append(ul); continue;
+      }
       if (!text) continue;
       const p = document.createElement('p'); p.className = cls; teachText(p, prefix + text); li.append(p);
+    }
+    if (b.shot) {
+      // shot: a small picture of the slide at this step (what the room sees after this click)
+      const img = document.createElement('img'); img.className = 't-b-shot'; img.src = b.shot; img.alt = ''; img.loading = 'lazy'; img.title = 'Click to enlarge'; img.addEventListener('click', () => img.classList.toggle('big')); li.append(img);
     }
     if (b.copy) {
       // copy: [[label, text], …] texts to paste in this step
@@ -176,6 +189,15 @@ function renderTeach(el, t) {
   }
   const grid = document.createElement('div'); grid.className = 't-grid'; grid.append(cols.left, cols.right);
   el.replaceChildren(gist, grid);
+  if (t.changes && t.changes.length) {                          // assignments: what git status shows after each step ([step, what you see])
+    const sec = document.createElement('section'); sec.className = 't-sec t-changes';
+    const h = document.createElement('h3'); h.textContent = 'After each step: git status'; sec.append(h);
+    const ul = document.createElement('ul');
+    for (const item of t.changes) { const li = document.createElement('li');
+      if (Array.isArray(item)) { const b = document.createElement('strong'); teachText(b, item[0]); li.append(b, ' — '); teachText(li, item[1]); } else teachText(li, item);
+      ul.append(li); }
+    sec.append(ul); el.append(sec);
+  }
   if (t.next) { const n = document.createElement('p'); n.className = 't-next'; teachText(n, 'Next → ' + t.next); el.append(n); }
 }
 
@@ -203,21 +225,34 @@ function renderSlide(index) {
   }
   const promptBlock = $('p-prompt-block');
   if (s.prompt) { promptBlock.hidden = false; $('p-prompt').textContent = s.prompt; } else { promptBlock.hidden = true; }
-  const nextIndex = current + 1 < slides.length ? current + 1 : null;
-  $('p-next-title').textContent = nextIndex != null ? (nextIndex + 1) + '. ' + slides[nextIndex].title : 'This is the last slide.';
   showInFrame($('p-frame'), current);
-  showInFrame($('p-next-frame'), nextIndex);
+  // openShot: a picture of this slide with every block opened, shown under the live (closed) preview
+  { let box = $('p-open'); const src = s.teach?.openShot;
+    if (!box) { box = document.createElement('figure'); box.id = 'p-open'; box.className = 'p-open'; $('p-shot').after(box); }
+    box.hidden = !src; box.replaceChildren();
+    if (src) { const cap = document.createElement('figcaption'); cap.textContent = 'When every block is open'; const img = document.createElement('img'); img.src = src; img.alt = ''; box.append(cap, img); } }
+  renderNext();
   setupTimer(s);
+}
+function renderNext() {
+  let nextIndex = current + 1 < slides.length ? current + 1 : null;
+  if (window.PRESENTER_SKIP_HIDDEN) { nextIndex = null; for (let n = current + 1; n < slides.length; n++) if (!isHidden(n)) { nextIndex = n; break; } }   // opt-in: Next shows the slide the arrows go to (hidden ones skipped)
+  $('p-next-title').textContent = nextIndex != null ? (nextIndex + 1) + '. ' + slides[nextIndex].title : 'This is the last slide.';
+  showInFrame($('p-next-frame'), nextIndex);
 }
 
 /* ---- sync ---- */
+// ?notes=1: notes only, for the deck's Overview page. No sync with the main window: the Overview tells it which slide to show.
+const NOTES_ONLY = new URLSearchParams(location.search).has('notes');
+if (NOTES_ONLY) document.documentElement.classList.add('notes-only');
 let channel = null;
-try { if ('BroadcastChannel' in window) channel = new BroadcastChannel(PRESENTER_CHANNEL); } catch {}
+try { if (!NOTES_ONLY && 'BroadcastChannel' in window) channel = new BroadcastChannel(PRESENTER_CHANNEL); } catch {}
 if (channel) {
   channel.addEventListener('message', e => { if (e.data && e.data.type === 'slide') { setSyncStatus(true); renderSlide(e.data.index); } });
 }
 window.addEventListener('storage', e => {
-  if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { $('p-hidden').hidden = !isHidden(current); return; }
+  if (NOTES_ONLY) return;
+  if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { $('p-hidden').hidden = !isHidden(current); if (window.PRESENTER_SKIP_HIDDEN) renderNext(); return; }
   if (e.key !== PRESENTER_KEY || !e.newValue) return;
   try { const data = JSON.parse(e.newValue); setSyncStatus(true); renderSlide(data.index); } catch {}
 });
@@ -227,6 +262,7 @@ window.addEventListener('storage', e => {
   const params = new URLSearchParams(location.search);
   const fromUrl = Number(params.get('i'));
   if (Number.isInteger(fromUrl) && fromUrl >= 0 && fromUrl < slides.length) { renderSlide(fromUrl); }
+  if (NOTES_ONLY) return;
   try {
     const stored = JSON.parse(localStorage.getItem(PRESENTER_KEY) || 'null');
     if (stored && Number.isInteger(stored.index)) { renderSlide(stored.index); if (Date.now() - (stored.at || 0) < 15000) setSyncStatus(true); }

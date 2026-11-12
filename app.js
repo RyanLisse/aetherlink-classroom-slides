@@ -46,6 +46,33 @@ function showPrompt() {
 /* ---- card icons (kept from the source engine, keyword-matched) ---- */
 const ICONS = { target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>', route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/>', inbox: '<path d="M3 13l2-8h14l2 8v6H3z"/><path d="M3 13h5l2 3h4l2-3h5"/>', check: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>', cross: '<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>', gate: '<path d="M4 20V6l8-3 8 3v14"/><path d="M9 20v-7h6v7"/><path d="M4 12h16"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', users: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19a6 6 0 0 1 12 0"/><path d="M15 19a4 4 0 0 1 6-3.5"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', file: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>', cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>', search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>', bulb: '<path d="M9 18h6M10 21h4"/><path d="M8 13a5 5 0 1 1 8 0c-1 1-1.5 2-1.5 3h-5c0-1-.5-2-1.5-3z"/>', flag: '<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>', hand: '<path d="M8 12V6a1.5 1.5 0 0 1 3 0v5"/><path d="M11 11V4a1.5 1.5 0 0 1 3 0v7"/><path d="M14 11V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0v1"/>', play: '<path d="M7 5v14l11-7z"/>', repeat: '<path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/>', stop: '<path d="M8 3h8l5 5v8l-5 5H8l-5-5V8z"/>', list: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/>', dot: '<circle cx="12" cy="12" r="3"/>' };
 const ICON_RULES = [[/goal|outcome|what$/, 'target'], [/boundar|guard|scope/, 'shield'], [/^stop/, 'stop'], [/^mode|route|during/, 'route'], [/input|source|read|deliver|include|contain/, 'inbox'], [/result|check|expected/, 'check'], [/must not|negative|problem|fail/, 'cross'], [/gate|decision/, 'gate'], [/open|time|when/, 'clock'], [/rotate|repeat|loop|again/, 'repeat'], [/group|mob|roles|team|squad|users|driver|navigator/, 'users'], [/individual|analyst|developer|tester|reviewer|observer|engineer|you/, 'user'], [/packet|claim|evidence|log|record|handoff|trace|contract|file|brief|plan|note|status/, 'file'], [/model|agent|adapter|tool|harness|hook|checker|cpu|subagent|session|repo|skill|mcp/, 'cpu'], [/review|search|inspect|compare/, 'search'], [/learned|why|idea|concept/, 'bulb'], [/can do|flag|deliver|ship|transfer|required output/, 'flag'], [/pick|choose|decide/, 'hand'], [/run|demo|execute|play|watch|ask/, 'play'], [/step|list|todo|checklist/, 'list']];
+// SDLC phase tracker: six dots in the slide header; slide.sdlc = 'plan' | … | 'maintain' | 'all'; slide.sdlcLoop adds ↺ (back to the start)
+const SDLC_PHASES = [['plan', 'Plan'], ['design', 'Design'], ['build', 'Build'], ['test', 'Test'], ['deploy', 'Deploy'], ['maintain', 'Maintain']];
+function sdlcTrack(s) {
+  const p = s.sdlc; if (!p) return null;
+  const el = node('div', 'sdlc-track'); el.setAttribute('role', 'img');
+  el.setAttribute('aria-label', p === 'all' ? 'SDLC: all six phases' : 'SDLC phase: ' + (SDLC_PHASES.find(([k]) => k === p) || ['', p])[1]);
+  SDLC_PHASES.forEach(([k, label], i) => { const st = node('span', 'sdlc-step' + (p === 'all' || p === k ? ' on' : '')); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); el.append(st); });
+  if (s.sdlcLoop) el.append(node('span', 'sdlc-loop', '↺'));
+  return el;
+}
+// larger icons for the definitions layout (v.glossary)
+const GLOSS_ICONS = {
+  terminal: '<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M7 10l3 2.5L7 15M12.5 15H17"/>',
+  alert: '<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5h.01"/>',
+  replay: '<path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M4 4v4h4"/><path d="M10.5 9.2l4.5 2.8-4.5 2.8z"/>',
+  chart: '<path d="M3 20.5h18"/><path d="M4 16l4.5-4.5 4 3L20 6"/><path d="M16 6h4v4"/>',
+  trace: '<path d="M4 6h9M4 11h9M4 16h5"/><circle cx="16.5" cy="15.5" r="3.2"/><path d="M19 18l2.5 2.5"/>',
+  human: '<circle cx="12" cy="9.5" r="3"/><path d="M7 18.5a5 5 0 0 1 10 0"/><path d="M19.5 9A8 8 0 0 0 5 6.5"/><path d="M4.5 15A8 8 0 0 0 19 17.5"/><path d="M5 3.5v3h3M19 20.5v-3h-3"/>',
+  cart: '<path d="M2.5 4h2.6l2.3 10.5h10.4L20 7.5H6.2"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/>',
+  bolt: '<path d="M13.5 2.5L5 13.5h6l-1 8 8.5-11h-6z"/>',
+  open: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.8"/><path d="M12 17h.01"/>',
+  bot: '<rect x="5" y="8" width="14" height="11" rx="3"/><circle cx="9.5" cy="13" r="1.4"/><circle cx="14.5" cy="13" r="1.4"/><path d="M12 8V5M12 4.5h.01M9.5 16.5h5"/>',
+  doc: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 11h6M9 14.5h6M9 18h4"/>',
+  evidence: '<path d="M4 6h9M4 11h7M4 16h5"/><path d="M14.5 15.5l2.2 2.2 4-4.5"/>',
+  fix: '<path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5"/><path d="M4 20v-4h4"/>',
+  sign: '<path d="M4 19c2-3 3.5-4 5-2.5s3 .5 4-1.5"/><path d="M14 13l5.5-5.5a1.8 1.8 0 0 0-2.5-2.5L11.5 10.5 11 13z"/><path d="M4 21h16"/>'
+};
 function cardIcon(title) { const t = (title || '').toLowerCase(); const hit = ICON_RULES.find(([re]) => re.test(t)); const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true'); svg.innerHTML = ICONS[hit ? hit[1] : 'dot']; const wrap = node('span', 'card-icon'); wrap.append(svg); return wrap; }
 function cardBody(body) {
   const text = String(body || '');
@@ -70,6 +97,7 @@ function renderSteps(stage, s) {
     if (co && co.at === i + 1) { const c = node('div', 'step-callout'); c.append(node('span', 'step-callout-text', co.text), node('span', 'step-callout-arrow', '▼')); li.append(c); }
     const b = node('button', 'step-btn'); b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', 'Step ' + (i + 1) + ': ' + it.label);
     b.append(node('span', 'step-circle', String(i + 1))); li.append(b, node('span', 'step-label', it.label));
+    if (it.phase) li.append(node('span', 'step-phase', it.phase));
     if (it.caption) li.append(node('span', 'step-caption', it.caption));
     b.addEventListener('click', () => { active = i; els.forEach((e, k) => { e.classList.toggle('active', k === i); e.querySelector('button').setAttribute('aria-pressed', String(k === i)); }); cap.textContent = it.detail || it.caption || it.label; });
     els.push(li); row.append(li);
@@ -197,6 +225,498 @@ function renderExtras(stage, main, s, v) {
     const key = cards[v.keyLine]; key.classList.add('card-key'); const row = node('div', 'key-row'); key.replaceWith(row); row.append(key);
     const stamp = node('span', 'stamp'); stamp.append(node('span', 'stamp-in', v.stamp || 'VERIFY')); key.append(stamp); x.aim.push(stamp); x.row = row;
   }
+  if (v.sdlcIntro && cards.length >= 2) {                       // SDLC: traditional line (handovers) vs AI-native loop (phases light up, a person approves in the middle)
+    grid.classList.add('sdlc-intro');
+    const line = node('div', 'sdlc-line');
+    SDLC_PHASES.forEach(([, label], i) => { if (i) line.append(node('span', 'sdlc-hand', '→')); const c = node('span', 'sdlc-chip', label); c.style.setProperty('--i', i); line.append(c); });
+    cards[0].append(line);
+    const cx = 120, cy = 118, R = 78, pt = (deg, r) => [cx + r * Math.cos(deg * Math.PI / 180), cy + r * Math.sin(deg * Math.PI / 180)];
+    let svgTxt = '<svg class="sdlc-loop-svg" viewBox="0 0 240 236" aria-hidden="true"><defs><marker id="sdlcArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="sdlc-ah"/></marker></defs>';
+    SDLC_PHASES.forEach((_, i) => { const a = -90 + i * 60; const [x1, y1] = pt(a + 13, R), [x2, y2] = pt(a + 47, R); svgTxt += `<path class="sdlc-arc" d="M${x1.toFixed(1)},${y1.toFixed(1)} A${R},${R} 0 0 1 ${x2.toFixed(1)},${y2.toFixed(1)}" marker-end="url(#sdlcArrow)"/>`; });
+    SDLC_PHASES.forEach(([, label], i) => { const a = -90 + i * 60; const [x, y] = pt(a, R), [lx, ly] = pt(a, R + 24); const anchor = Math.abs(lx - cx) < 8 ? 'middle' : lx > cx ? 'start' : 'end';
+      svgTxt += `<circle class="sdlc-node" style="--i:${i}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8"/><text class="sdlc-lbl" x="${(anchor === 'start' ? lx - 8 : anchor === 'end' ? lx + 8 : lx).toFixed(1)}" y="${(ly + 4).toFixed(1)}" text-anchor="${anchor}">${label}</text>`; });
+    svgTxt += `<g class="sdlc-human" transform="translate(${cx - 18},${cy - 30}) scale(1.5)">${GLOSS_ICONS.human}</g><text class="sdlc-human-txt" x="${cx}" y="${cy + 22}" text-anchor="middle">a person approves</text></svg>`;
+    const holder = node('div', 'sdlc-loop-wrap'); holder.innerHTML = svgTxt;
+    cards[1].append(holder);
+  }
+  if (v.roles && cards.length >= 2) {                           // two roles side by side: builder → product (Aetherbot sits in the product card)
+    grid.classList.add('roles'); cards.forEach((c) => c.querySelector('.card-icon')?.remove());
+    const ic = node('div', 'gl-icon role-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[v.roles.icon || 'terminal']}</svg>`; cards[0].prepend(ic);
+    const arrow = node('div', 'role-arrow'); arrow.append(node('span', 'role-arrow-glyph', '→'), node('span', 'role-arrow-label', v.roles.arrow || '')); cards[0].after(arrow);
+  }
+  if (v.story) {                                                // story strip: numbered panels with a big icon, arrows between them, one example chip each
+    grid.classList.add('story');
+    cards.forEach((c, i) => { const g = v.story[i]; if (!g) return; c.classList.add('gl-card', 'story-card'); c.style.setProperty('--gl', g.color || 'var(--cyan)'); c.style.setProperty('--i', i);
+      c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[g.icon] || ICONS.dot}</svg>`;
+      c.prepend(node('span', 'story-num', String(i + 1)), ic);
+      if (g.eg) c.append(node('span', 'gl-eg', g.eg));
+      if (i < cards.length - 1) c.after(node('div', 'story-arrow', '→')); });
+  }
+  if (v.skillTrees) {                                           // skills: per card an owner icon, where the skills live (folder tree) and what each does
+    grid.classList.add('skill-trees'); if (cards.length === 1) grid.classList.add('one');
+    cards.forEach((c, i) => { const T = v.skillTrees[i]; if (!T) return; c.classList.add('sk-card'); c.style.setProperty('--gl', T.color || 'var(--cyan)');
+      c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon sk-icon');
+      if (T.icon === 'bot') { const im = document.createElement('img'); im.src = BOTS.head.src; im.alt = ''; ic.append(im); }
+      else ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[T.icon] || ICONS.dot}</svg>`;
+      c.prepend(ic);
+      const tree = node('div', 'sk-tree');
+      (T.lines || []).forEach(([depth, name, note, tag, kind]) => {
+        const row = node('div', 'sk-row' + (kind ? ' sk-' + kind : '')); row.style.setProperty('--d', depth);
+        const glyph = kind === 'more' ? '' : /\/$/.test(name) ? '📁' : '📄';
+        row.append(node('span', 'sk-name', (glyph ? glyph + ' ' : '') + name));
+        if (note) row.append(node('span', 'sk-note', note));
+        if (tag) row.append(node('span', 'sk-tag', tag));
+        tree.append(row); });
+      c.append(tree);
+      if (T.steps) { const ol = node('ol', 'sk-steps'); T.steps.forEach(t => ol.append(node('li', null, t))); c.append(ol); } });
+  }
+  const bigTrack = (onPick) => {                                // the header's six-dot SDLC line, drawn big across the slide (sdlcLine, sdlcRoute + routeLine)
+    const track = node('div', 'sdlc-track sdlc-track-big'); track.setAttribute('role', 'img'); track.setAttribute('aria-label', 'SDLC: ' + SDLC_PHASES.map(([, l]) => l).join(', '));
+    const steps = SDLC_PHASES.map(([, label], i) => { const st = node('span', 'sdlc-step'); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); st.addEventListener('click', () => onPick(i)); track.append(st); return st; });
+    return [track, steps];
+  };
+  if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots: each click lights the next phase and shows its card below it
+    grid.classList.add('sdlc-big'); let k = -1;
+    const [track, steps] = bigTrack(i => { k = i; paint(); }); grid.prepend(track);
+    cards.forEach((c, i) => { c.classList.add('sb-card'); c.querySelector('.card-icon')?.remove(); c.addEventListener('click', () => { k = i; paint(); }); });
+    const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
+    paint();
+    const next = () => { if (k < cards.length - 1) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.sdlcRoute) {                                            // the day as the SDLC: one column per phase with its assignments; → or click walks the phases, the current one is orange
+    grid.classList.add('sdlc-route'); let k = 0; let lineSteps = [];
+    let walker = null;
+    if (v.routeLine) { const [track, steps] = bigTrack(i => { k = i; paint(); }); grid.prepend(track); grid.classList.add('sr-lined'); lineSteps = steps;
+      if (v.routeBot) { walker = node('div', 'sr-walker'); walker.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; walker.append(node('span', 'aj-bot-tag', v.routeBot === true ? 'SONNY' : v.routeBot)); track.classList.add('has-walker'); track.append(walker); } }
+    cards.forEach((c, i) => { const R = v.sdlcRoute[i] || {}; c.classList.add('sr-card'); c.classList.toggle('sr-opt', !!R.optional); c.style.setProperty('--i', i);
+      c.querySelector('.card-icon')?.remove();
+      if (!v.routeLine) c.prepend(node('span', 'sr-dot', String(i + 1)));
+      const list = node('div', 'sr-items');
+      (R.items || []).forEach(([tag, text, opt]) => { const it = node('div', 'sr-item' + (opt ? ' opt' : '')); it.append(node('span', 'sr-tag', tag), node('span', 'sr-text', text)); list.append(it); });
+      c.querySelector('.card-head')?.after(list);
+      c.addEventListener('click', () => { k = i; paint(); }); });
+    const paint = () => { cards.forEach((c, i) => { c.classList.toggle('on', i === k); c.classList.toggle('done', i < k); }); lineSteps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); if (walker) walker.style.setProperty('--k', k); };
+    paint();
+    const next = () => { if (k < cards.length - 1) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.readyBuild && cards.length >= 2) {                      // project: ready blocks (dim, ✓) vs missing pieces (orange, red test)
+    grid.classList.add('ready-build');
+    cards.forEach((c, i) => { const R = v.readyBuild[i]; if (!R) return; c.classList.add(i ? 'rb-todo' : 'rb-ready'); c.querySelector('.card-icon')?.remove();
+      const box = node('div', 'rb-items');
+      R.items.forEach((it) => { const [tag, text] = Array.isArray(it) ? it : [null, it]; const b = node('div', 'rb-item');
+        b.append(node('span', 'rb-mark', i ? '●' : '✓')); if (tag) b.append(node('span', 'rb-tag', tag)); b.append(node('span', 'rb-text', text));
+        if (i) b.append(node('span', 'rb-red', 'red test')); box.append(b); });
+      c.append(box); });
+  }
+  if (v.intentFlow && cards.length >= 2) {                     // A2: you decide → intent.md (gaps orange) → Claude Code reads it before every build
+    grid.classList.add('intent-flow');
+    cards.forEach((c, i) => { const F = v.intentFlow[i]; if (!F) return; c.classList.add('if-card', 'if-' + i); c.querySelector('.card-icon')?.remove();
+      if (F.doc) { const d = node('div', 'if-doc'); d.append(node('div', 'if-doc-name', F.docName || 'intent.md'));
+        F.doc.forEach(([sec, gap, label, note]) => { const r = node('div', 'if-sec' + (gap ? ' gap' : '')); const nm = node('span', 'if-sec-name', sec); if (note) nm.append(node('small', 'if-sec-note', note)); r.append(nm, node('span', 'if-sec-state', label || (gap ? 'fill in' : '✓ filled'))); d.append(r); });   // opt-in note: what the part is for
+        c.append(d); }
+      if (F.tree) { const t = node('div', 'if-tree');                     // opt-in: where the file lives (small folder tree)
+        F.tree.forEach(([depth, name, note, hl, tag]) => { const r = node('div', 'if-tr' + (hl ? ' hl' : '')); r.style.setProperty('--d', depth); if (tag) r.append(node('span', 'if-tr-tag', tag)); r.append(node('span', 'if-tr-name', (/\/$/.test(name) ? '📁 ' : '📄 ') + name)); if (note) r.append(node('span', 'if-tr-note', note)); t.append(r); });
+        c.append(t); }
+      if (F.items) { const l = node('div', 'if-items');
+        F.items.forEach(([tag, text, cls]) => { const it = node('div', 'if-item' + (cls ? ' ' + cls : '')); if (tag) it.append(node('span', 'if-tag', tag)); it.append(node('span', 'if-text', text)); l.append(it); });
+        c.append(l); } });
+    cards.slice(0, -1).forEach((c) => c.after(node('div', 'if-arrow', '→'))); if (cards.length === 2) grid.classList.add('if-two');
+  }
+  if (v.gapCompare && cards.length >= 2) {                      // Jessy Day 5: the chain (need → how we want it → what you saw → the gap → intent.md) on top, then want vs. today per block
+    const G = v.gapCompare; grid.classList.add('gc-flow');
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('gc-chip', 'gc-' + i); if (i === G.focus) c.classList.add('gc-focus'); c.prepend(node('span', 'gc-ico', (G.icons || [])[i] || '')); });
+    cards.slice(0, -1).forEach((c) => c.after(node('div', 'gc-arrow', '→')));
+    const tbl = node('div', 'gc-table'); const hd = node('div', 'gc-row gc-head'); hd.append(node('span', null, G.head[0]), node('span', null, G.head[1]), node('span', null, '')); tbl.append(hd);
+    G.rows.forEach(([want, seen, ok], i) => { const r = node('div', 'gc-row' + (ok ? ' ok' : ' bad')); r.style.setProperty('--i', i); r.append(node('span', 'gc-want', want)); const sv = node('span', 'gc-seen'); [].concat(seen).forEach((x) => sv.append(node('code', null, x))); r.append(sv, node('span', 'gc-mark', ok ? '✓' : '✗')); tbl.append(r); });
+    grid.after(tbl); const gnote = G.note ? node('p', 'gc-note', G.note) : null; if (gnote) tbl.after(gnote);
+    if (G.reveal) {                                              // opt-in: the table opens step by step (groups of rows, then the note); a click on the gap (or on a closed row) opens the next piece, → too
+      grid.classList.add('gc-reveal'); const rows = [...tbl.querySelectorAll('.gc-row:not(.gc-head)')]; const groups = Array.isArray(G.reveal) ? G.reveal : rows.map(() => 1);
+      const stepOf = []; let s = 1; groups.forEach((n) => { for (let j = 0; j < n; j++) stepOf.push(s); s++; }); while (stepOf.length < rows.length) stepOf.push(s - 1);
+      const LAST = s - 1 + (gnote ? 1 : 0); let k = 0;
+      const paint = () => { tbl.classList.toggle('gc-open', k > 0); rows.forEach((r, i) => { r.classList.toggle('gc-hid', stepOf[i] > k); }); gnote?.classList.toggle('gc-hid', k < LAST); cards[G.focus]?.classList.toggle('gc-ask', k < LAST); };
+      paint();
+      const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
+      const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+      if (cards[G.focus]) { cards[G.focus].style.cursor = 'pointer'; cards[G.focus].addEventListener('click', next); }
+      rows.forEach((r, i) => r.addEventListener('click', () => { k = Math.max(k, stepOf[i]); paint(); })); gnote?.addEventListener('click', () => { k = LAST; paint(); });
+      window.__reveal = next; window.__revealBack = back;
+      slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+    }
+  }
+  if (v.shopDay && cards.length >= 3) {                         // the world before the incident: the shop (orders tick in), you the operator (on call), today's goal (the agent)
+    const D = v.shopDay; grid.classList.add('shop-day'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('sd-card', 'sd-' + i); });
+    const shop = node('div', 'sd-shop'); shop.append(node('div', 'wk-bar', D.shopBar || 'shop · checkout'));
+    D.orders.forEach(([where, what], i) => { const o = node('div', 'sd-order'); o.style.setProperty('--i', i); o.append(node('span', 'sd-ok', '✓'), node('b', null, where), node('span', null, what)); shop.append(o); });
+    if (D.health) shop.append(node('div', 'sd-health', D.health));
+    cards[0].querySelector('.card-head')?.after(shop);
+    const you = node('div', 'sd-figure'); you.innerHTML = `<img src="assets/aetherbot/faces/aetherbot-face-blij.webp" alt=""><span class="sd-phone">📱</span>`; you.append(node('span', 'wk-tag', D.youTag || 'YOU · THE OPERATOR'));
+    cards[1].querySelector('.card-head')?.after(you);
+    const goal = node('div', 'sd-figure sd-goal'); goal.innerHTML = `<img src="assets/aetherbot/aetherbot-think.webp" alt="">`; goal.append(node('span', 'aj-bot-tag', D.agentTag || 'ON CALL'));
+    cards[2].querySelector('.card-head')?.after(goal);
+  }
+  if (v.agentJob && cards.length >= 3) {                        // what the on-call agent does: it looks (data chips), writes a diagnosis (mini doc), waits for you (buttons)
+    const J = v.agentJob; grid.classList.add('agent-job'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('aj-card', 'aj-' + i); });
+    const look = node('div', 'aj-look');
+    const bot = node('div', 'aj-bot'); bot.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; bot.append(node('span', 'aj-bot-tag', J.botTag || 'ON CALL')); look.append(bot);
+    const chips = node('div', 'aj-chips'); J.looks.forEach(([ico, txt], i) => { const ch = node('div', 'aj-chip'); ch.style.setProperty('--i', i); ch.append(node('span', 'aj-chip-i', ico), node('span', null, txt), node('span', 'aj-tick', '✓')); chips.append(ch); });
+    look.append(chips); cards[0].querySelector('.card-head')?.after(look);
+    const doc = node('div', 'aj-doc'); doc.append(node('div', 'aj-doc-tab', J.docName || 'diagnosis'));
+    J.doc.forEach(([k, val, ev], i) => { const r = node('div', 'aj-row'); r.style.setProperty('--i', i); r.append(node('b', null, k), node('span', null, val)); if (ev) { const evs = node('span', 'aj-evs'); [].concat(ev).forEach((e) => evs.append(node('code', 'aj-ev', e))); r.append(evs); } doc.append(r); });
+    cards[1].querySelector('.card-head')?.after(doc);
+    const four = J.check && cards.length >= 4;                    // opt-in 4th block: he checks the diagnosis against fixed rules before it gets to you
+    if (four) { grid.classList.add('aj-four'); const chk = node('div', 'aj-check');
+      J.check.rules.forEach((r, i) => { const ru = node('div', 'aj-rule'); ru.style.setProperty('--i', i); ru.append(node('span', 'aj-rule-i', '📏'), node('span', null, r)); chk.append(ru); });
+      if (J.check.gate) chk.append(node('div', 'aj-gate', J.check.gate));
+      cards[2].querySelector('.card-head')?.after(chk); }
+    const ask = node('div', 'aj-ask'); ask.append(node('div', 'aj-wait', J.wait || 'waiting for the operator'));
+    const btns = node('div', 'aj-btns'); btns.append(node('span', 'aj-btn aj-yes', J.yes || 'Approve'), node('span', 'aj-btn aj-no', J.no || 'Reject')); ask.append(btns);
+    cards[four ? 3 : 2].querySelector('.card-head')?.after(ask);
+    (four ? [cards[0], cards[1], cards[2]] : [cards[0], cards[1]]).forEach((c) => c.after(node('div', 'aj-arrow', '→')));
+  }
+  if (v.contractZoom && cards.length >= 5) {                     // Jessy Day 5 "A diagnosis you can trust": slide 4's blocks on top; he looks (box) → his diagnosis (left) → the five rules (right, click to open/close, each lights what it looks at) → only if all five are met: Sonny asks you
+    const Z = v.contractZoom; grid.classList.add('cz-flow');
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('cz-chip', 'cz-' + i); c.prepend(node('span', 'cz-ico', (Z.icons || [])[i] || '')); });
+    let gate = null;
+    cards.forEach((c, i) => { if (i < cards.length - 1) { if (i === 3) { gate = node('div', 'cz-arrow cz-gate'); gate.append(node('span', 'cz-gate-t', Z.gate || 'only if every rule is met'), node('span', null, '→')); c.after(gate); } else c.after(node('div', 'cz-arrow', '→')); } });
+    // 1 · he looks: the first box of "How we want Sonny to work"
+    const look = node('div', 'cz-look'); const L = Z.look || {};
+    const lb = node('div', 'aj-bot'); lb.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; lb.append(node('span', 'aj-bot-tag', 'SONNY'));
+    const lc = node('div', 'cz-look-body'); lc.append(node('strong', 'cz-look-h', L.title || 'He looks'), node('p', 'cz-look-p', L.body || ''));
+    const chips = node('div', 'aj-chips'); (L.items || []).forEach(([ico, txt], i) => { const ch = node('div', 'aj-chip'); ch.style.setProperty('--i', i); ch.append(node('span', 'aj-chip-i', ico), node('span', null, txt), node('span', 'aj-tick', '✓')); chips.append(ch); });
+    lc.append(chips); look.append(lb, lc);
+    // 2 · his diagnosis (left)
+    const panel = node('div', 'cz-panel');
+    const doc = node('div', 'aj-doc cz-doc'); doc.append(node('div', 'aj-doc-tab', Z.docName || 'diagnosis'));
+    const marks = {}; const mark = (key, el) => { (marks[key] = marks[key] || []).push(el); el.classList.add('cz-hl-able'); };
+    let ghost = null;
+    Z.doc.forEach((R) => { const r = node('div', 'aj-row cz-row' + (R.ghost ? ' cz-ghost' : '') + (R.small ? ' cz-small' : '')); const lab = node('b', null, R.label); if (R.conf) { const cf = node('span', 'cz-conf', ' (' + R.conf + ')'); lab.append(cf); mark('conf', cf); }
+      const txt = node('span', null, R.text); r.append(lab, txt);
+      if (R.ev) { const evs = node('span', 'aj-evs'); R.ev.forEach((e) => { const ch = node('code', 'aj-ev', e); mark(e, ch); evs.append(ch); }); r.append(evs); }
+      if (R.key) mark(R.key, r); if (R.ghost) ghost = { row: r, txt, off: R.text, on: R.fixed || R.text }; doc.append(r); });
+    if (Z.docFoot) doc.append(node('div', 'cz-docfoot', Z.docFoot));
+    // 3 · the five rules (right): click to open or close; the last one has a switch "add it"
+    const side = node('div', 'cz-side'); side.append(node('div', 'cz-side-h', Z.rulesTitle || 'The contract: five rules'));
+    const open = Z.rules.map(() => false); let fixed = false; let focus = -1; let k = 0; let answer = '';
+    const okOf = (i) => i === Z.rules.length - 1 && Z.fixLabel ? fixed : !!Z.rules[i].ok;
+    const rules = Z.rules.map((R, i) => { const r = node('div', 'cz-rule'); r.tabIndex = 0; r.setAttribute('role', 'button'); r.append(node('span', 'cz-rule-mark', '?'), node('span', 'cz-rule-txt', R.text), node('span', 'cz-rule-note', ''));
+      const flip = () => { open[i] = !open[i]; focus = open[i] ? i : open.lastIndexOf(true); k = Math.max(k, 3); paint(); };
+      r.addEventListener('click', flip); r.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+      if (i === Z.rules.length - 1 && Z.fixLabel) { const sw = node('button', 'cz-switch'); sw.type = 'button'; sw.append(node('span', 'cz-switch-knob'), node('span', 'cz-switch-t', Z.fixLabel));
+        sw.addEventListener('click', (e) => { e.stopPropagation(); fixed = !fixed; open[i] = true; focus = i; answer = ''; paint(); }); r.append(sw); r._sw = sw; }
+      side.append(r); return r; });
+    const result = node('p', 'cz-result', ''); side.append(result);
+    // 4 · only if all five are met: Sonny asks you
+    const ask = node('div', 'cz-ask'); const ab = node('div', 'aj-bot'); ab.innerHTML = '<img src="assets/aetherbot/aetherbot-wave.webp" alt="">'; ab.append(node('span', 'aj-bot-tag', 'SONNY'));
+    const bubble = node('div', 'cz-bubble'); const say = node('p', 'cz-say', Z.ask?.say || 'All five rules are met. You decide.');
+    const btns = node('div', 'aj-btns'); const yes = node('button', 'aj-btn aj-yes', Z.ask?.yes || 'Approve'); const no = node('button', 'aj-btn aj-no', Z.ask?.no || 'Reject'); yes.type = no.type = 'button'; btns.append(yes, no);
+    const reply = node('p', 'cz-reply', ''); bubble.append(say, btns, reply); ask.append(ab, bubble);
+    yes.addEventListener('click', (e) => { e.stopPropagation(); answer = answer === 'yes' ? '' : 'yes'; paint(); }); no.addEventListener('click', (e) => { e.stopPropagation(); answer = answer === 'no' ? '' : 'no'; paint(); });
+    side.append(ask); panel.append(look, doc, side); grid.after(panel);
+    const n = Z.rules.length;
+    const paint = () => {
+      const allOpen = open.every(Boolean), allOk = Z.rules.every((_, i) => okOf(i)), through = allOpen && allOk;
+      cards.forEach((c, i) => c.classList.toggle('on', i === 0 ? k >= 1 : i === 1 ? k >= 1 : i === 2 ? k >= 2 : i === 3 ? k >= 3 : through));
+      grid.querySelectorAll('.cz-arrow').forEach((a, i) => a.classList.toggle('on', i === 0 ? k >= 1 : i === 1 ? k >= 2 : i === 2 ? k >= 3 : through));
+      gate?.classList.toggle('lit', through);
+      panel.classList.toggle('show-look', k === 1); panel.classList.toggle('show-doc', k >= 2); panel.classList.toggle('show-rules', k >= 3); panel.classList.toggle('through', through);
+      rules.forEach((r, i) => { const o = open[i], ok = okOf(i); r.classList.toggle('open', o); r.classList.toggle('ok', o && ok); r.classList.toggle('bad', o && !ok); r.classList.toggle('focus', i === focus);
+        r.querySelector('.cz-rule-mark').textContent = o ? (ok ? '✓' : '✗') : '?'; r.querySelector('.cz-rule-note').textContent = o ? (i === n - 1 && Z.fixLabel ? (fixed ? Z.rules[i].noteOk || 'there' : Z.rules[i].note) : Z.rules[i].note || '') : '';
+        if (r._sw) { r._sw.classList.toggle('on', fixed); r._sw.setAttribute('aria-pressed', String(fixed)); } });
+      Object.values(marks).flat().forEach((el) => el.classList.remove('cz-hl', 'cz-hl-bad'));
+      if (focus >= 0 && open[focus]) (Z.rules[focus].hl || []).forEach((key) => (marks[key] || []).forEach((el) => el.classList.add(okOf(focus) ? 'cz-hl' : 'cz-hl-bad')));
+      if (ghost) { const show = open[n - 1] || fixed; ghost.row.classList.toggle('shown', show); ghost.row.classList.toggle('fixed', fixed); ghost.txt.textContent = fixed ? ghost.on : ghost.off; }
+      result.textContent = allOpen && !allOk ? (Z.result || '') : ''; result.classList.toggle('shown', allOpen && !allOk);
+      ask.classList.toggle('shown', through); reply.textContent = answer === 'yes' ? (Z.ask?.yesReply || '') : answer === 'no' ? (Z.ask?.noReply || '') : ''; reply.classList.toggle('shown', !!answer);
+      yes.classList.toggle('picked', answer === 'yes'); no.classList.toggle('picked', answer === 'no');
+    };
+    paint();
+    // → : 1 he looks · 2 diagnosis · 3 rules appear · 4..3+n open the rules in order · then the switch (all met → Sonny asks you)
+    const next = () => { if (k < 3) { k++; paint(); return true; } const i = open.indexOf(false); if (i >= 0) { open[i] = true; focus = i; paint(); return true; } if (Z.fixLabel && !fixed) { fixed = true; focus = n - 1; paint(); return true; } return false; };
+    // ← : the same steps backwards (switch off → close the last open rule → back to the earlier block); at the start ← goes to the previous slide
+    const back = () => { if (answer) { answer = ''; paint(); return true; } if (fixed) { fixed = false; focus = open.lastIndexOf(true); paint(); return true; } const j = open.lastIndexOf(true); if (j >= 0 && k >= 3) { open[j] = false; focus = open.lastIndexOf(true); paint(); return true; } if (k > 0) { k--; paint(); return true; } return false; };
+    // the blocks on top are buttons too: alert / he looks → 1, he writes a diagnosis → 2, he checks it → 3, he asks you → only opens when all five rules are met (otherwise the gate shakes)
+    cards.forEach((c, i) => { c.classList.add('cz-click'); c.tabIndex = 0; c.setAttribute('role', 'button');
+      const go = () => { if (i <= 3) { k = Math.max(i, 1); paint(); return; } const ok = open.every(Boolean) && Z.rules.every((_, j) => okOf(j)); if (ok) return; k = Math.max(k, 3); paint(); gate?.classList.remove('shake'); void gate?.offsetWidth; gate?.classList.add('shake'); setTimeout(() => gate?.classList.remove('shake'), 600); };
+      c.addEventListener('click', go); c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.fileFlow) {                                             // Jessy Day 5 opt-in: the real path of an incident through the files, one node lit (the contract), ending in PASS / FAIL
+    const F = v.fileFlow; const wrap = node('div', 'ff-wrap'); const row = node('div', 'ff-row');
+    F.nodes.forEach((N, i) => { if (i) row.append(node('div', 'ff-arrow', '→')); const c = node('div', 'ff-node' + (N.hl ? ' hl' : '')); c.style.setProperty('--i', i);
+      c.append(node('span', 'ff-label', N.label)); [].concat(N.file || []).forEach((f) => c.append(node('code', 'ff-file', f))); if (N.note) c.append(node('span', 'ff-note', N.note)); row.append(c); });
+    if (F.end) { row.append(node('div', 'ff-arrow', '→')); const e = node('div', 'ff-end'); e.style.setProperty('--i', F.nodes.length);
+      const ok = node('div', 'ff-pass'); ok.append(node('b', null, 'PASS'), node('span', null, F.end.pass)); const no = node('div', 'ff-fail'); no.append(node('b', null, 'FAIL'), node('span', null, F.end.fail)); e.append(ok, no); row.append(e); }
+    wrap.append(row); if (F.note) wrap.append(node('p', 'ff-foot', F.note)); grid.before(wrap);
+    if (F.cardFiles) cards.forEach((c, i) => { const f = F.cardFiles[i]; if (!f) return; c.classList.add('ff-card', 'ff-c' + i); c.querySelector('.card-icon')?.remove(); c.querySelector('.card-head')?.after(node('code', 'ff-card-file', f[0])); if (f[1]) c.append(node('span', 'ff-card-who', f[1])); });
+  }
+  if (v.incidentTour && cards.length >= 6) {                     // Jessy Day 5 opt-in: follow one incident through the project. The six stops are the cards; → opens them one by one in a panel below; stop 4 (his brain) has an AI model / offline switch
+    const T = v.incidentTour; grid.classList.add('it-path');
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('it-stop', 'it-s' + i); c.prepend(node('span', 'it-ico', (T.icons || [])[i] || ''));
+      const f = (T.files || [])[i]; if (f) { const fs = node('div', 'it-files'); [].concat(f).forEach((x) => fs.append(node('code', null, x))); c.append(fs); }
+      c.tabIndex = 0; c.setAttribute('role', 'button'); if (i < cards.length - 1) c.after(node('div', 'it-arrow', '→')); });
+    const panel = node('div', 'it-panel'); grid.after(panel);
+    const foot = node('div', 'it-foot'); if (T.foot) foot.append(node('p', 'it-foot-main', T.foot)); if (T.footNote) foot.append(node('p', 'it-foot-note', T.footNote)); panel.after(foot);
+    let k = 0, off = false; const LAST = 7;                        // k: 0 nothing open · 1 alert · 2 start · 3 agent · 4 brain (AI model) · 5 brain (offline) · 6 contract · 7 you + the line at the bottom
+    const stopOf = (s) => (s <= 0 ? -1 : s <= 4 ? s - 1 : s - 2);
+    const block = (B) => {
+      if (B.split) { const w = node('div', 'it-split'); B.split.forEach((b) => w.append(block(b))); return w; }
+      if (B.stack) { const w = node('div', 'it-stack'); B.stack.forEach((b) => w.append(block(b))); return w; }
+      if (B.row) { const w = node('div', 'it-row'); B.row.forEach(([ico, t, file, txt]) => { const m = node('div', 'it-mini'); const h = node('div', 'it-mini-h'); h.append(node('span', 'it-mini-i', ico), node('b', null, t)); m.append(h); if (file) m.append(node('code', 'it-mini-f', file)); if (txt) m.append(node('span', 'it-mini-t', txt)); w.append(m); }); return w; }
+      if (B.code !== undefined) { const w = node('div', 'it-code' + (B.term ? ' term' : '') + (B.tone ? ' ' + B.tone : '')); if (B.label) w.append(node('span', 'it-code-l', B.label)); w.append(node('pre', null, B.code)); return w; }
+      if (B.steps) { const ol = node('ol', 'it-steps'); B.steps.forEach((s) => { const li = node('li'); [].concat(s).forEach((x, j) => li.append(j ? node('code', null, x) : node('span', null, x))); ol.append(li); }); return ol; }
+      if (B.checks) { const w = node('div', 'it-checks'); B.checks.forEach(([mark, t, txt, st]) => { const r = node('div', 'it-check ' + (st || 'ok')); r.append(node('span', 'it-check-m', mark), node('b', null, t), node('span', null, txt || '')); w.append(r); }); return w; }
+      if (B.chips) { const w = node('div', 'it-chips'); B.chips.forEach(([ico, t]) => { const ch = node('span', 'it-chip'); ch.append(node('span', null, ico), node('span', null, t)); w.append(ch); }); return w; }
+      if (B.note) return node('p', 'it-note' + (B.tone ? ' ' + B.tone : ''), B.note);
+      return node('span');
+    };
+    const brain = (B) => {
+      const w = node('div', 'it-brain'); const sw = node('div', 'it-switch'); sw.setAttribute('role', 'group');
+      [['model', B.model.label], ['offline', B.offline.label]].forEach(([key, label]) => { const b = node('button', 'it-sw' + ((key === 'offline') === off ? ' on' : ''), label); b.type = 'button'; b.addEventListener('click', (e) => { e.stopPropagation(); off = key === 'offline'; if (stopOf(k) === 3) k = off ? 5 : 4; paint(); }); sw.append(b); });
+      w.append(sw); const P = off ? B.offline : B.model; const body = node('div', 'it-brain-b ' + (off ? 'offline' : 'model'));
+      if (P.lead) body.append(node('p', 'it-lead', P.lead));
+      if (P.turns) { const list = node('div', 'it-turns'); P.turns.forEach(([think, tool, got], j) => { const r = node('div', 'it-turn'); r.style.setProperty('--j', j); r.append(node('span', 'it-think', think)); if (tool) { r.append(node('span', 'it-to', '→')); r.append(node('code', 'it-tool', tool)); } if (got) { r.append(node('span', 'it-to', '→')); r.append(node('span', 'it-got', got)); } list.append(r); }); body.append(list); }
+      if (P.tools) { const list = node('div', 'it-fixed'); P.tools.forEach((t, j) => { if (j) list.append(node('span', 'it-to', '→')); list.append(node('code', 'it-tool', t)); }); body.append(list); }
+      if (P.ifs) { const ul = node('div', 'it-ifs'); P.ifs.forEach(([cond, then]) => { const r = node('div', 'it-if'); r.append(node('span', null, cond), node('span', 'it-to', '→'), node('b', null, then)); ul.append(r); }); body.append(ul); }
+      if (P.tags) { const tg = node('div', 'it-tags'); P.tags.forEach((t) => tg.append(node('span', 'it-tag', t))); body.append(tg); }
+      w.append(body); if (B.same) w.append(node('p', 'it-same', B.same)); return w;
+    };
+    const paint = () => {
+      const cur = stopOf(k);
+      cards.forEach((c, i) => { c.classList.toggle('on', i === cur); c.classList.toggle('done', i < cur); });
+      grid.querySelectorAll('.it-arrow').forEach((a, i) => a.classList.toggle('lit', i < cur));
+      panel.replaceChildren(); panel.classList.toggle('empty', cur < 0);
+      if (cur < 0) panel.append(node('p', 'it-hint', T.hint || ''));
+      else { const P = T.stops[cur]; const h = node('div', 'it-ph'); h.append(node('span', 'it-num', String(cur + 1)), node('strong', null, P.title)); panel.append(h);
+        if (P.lead) panel.append(node('p', 'it-lead', P.lead)); if (P.brain) panel.append(brain(P.brain)); (P.blocks || []).forEach((b) => panel.append(block(b))); }
+      foot.classList.toggle('shown', k >= LAST);
+    };
+    const next = () => { if (k >= LAST) return false; if (k === 4 && !off) { off = true; k = 5; } else if (k === 4) k = 6; else k++; paint(); return true; };
+    const back = () => { if (k <= 0) return false; if (k === 5) { k = 4; off = false; } else if (k === 6 && !off) k = 4; else k--; paint(); return true; };
+    cards.forEach((c, i) => { const go = () => { k = i <= 2 ? i + 1 : i === 3 ? (off ? 5 : 4) : i + 2; paint(); };
+      c.addEventListener('click', go); c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
+    paint(); window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.proofQs && cards.length >= 3) {                          // Jessy Day 5 opt-in: "how do we know the contract works?" Three questions as cards, opened one by one with →; each card gets its own small picture
+    const Q = v.proofQs; grid.classList.add('pq-grid'); let k = 0;
+    cards.forEach((c, i) => { const P = Q[i] || {}; c.querySelector('.card-icon')?.remove(); c.classList.add('pq-card', 'pq-' + i); c.querySelector('.card-head')?.prepend(node('span', 'pq-num', String(i + 1)));
+      if (P.answer) c.querySelector('.card-head')?.after(node('p', 'pq-answer', P.answer));
+      if (P.rules) { const ul = node('div', 'pq-rules'); P.rules.forEach(([r, why]) => { const li = node('div', 'pq-rule'); li.append(node('b', null, r), node('span', null, why)); ul.append(li); }); c.append(ul); }
+      if (P.tests) { if (P.testsHead) c.append(node('span', 'pq-tests-h', P.testsHead)); const sb = node('div', 'pq-tests'); P.tests.forEach(([lbl, today]) => { const t = node('div', 'pq-test ' + (today ? 'ok' : 'bad')); t.append(node('span', 'pq-dot', today ? '✓' : '✗'), node('span', null, lbl)); sb.append(t); }); c.append(sb); if (P.score) { const s = node('div', 'pq-score'); P.score.forEach((x, j) => { if (j) s.append(node('span', 'pq-to', '→')); s.append(node('b', null, x)); }); c.append(s); } }
+      if (P.terms) P.terms.forEach(([lbl, txt, tone]) => { const t = node('div', 'pq-term ' + (tone || '')); t.append(node('span', 'pq-term-l', lbl), node('pre', null, txt)); c.append(t); });
+      if (P.extra) c.append(node('p', 'pq-extra', P.extra));
+      if (P.where) c.append(node('code', 'pq-where', P.where));
+      c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
+    const paint = () => cards.forEach((c, i) => c.classList.toggle('shown', i < k));
+    paint();
+    const next = () => { if (k < cards.length) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.codeRoute && cards.length) {                             // Jessy Day 5 opt-in: one path into src/contract.ts as real code snippets with arrows (Moment A: Sonny's run · Moment B: the tests). Top: the two ways in, this slide's lit. → opens the snippets one by one, then the "run it yourself" bar
+    const R = v.codeRoute; grid.classList.add('cr-grid'); let k = 0;
+    if (R.entry) {
+      const E = R.entry, en = node('div', 'cr-entry'); en.append(node('span', 'cr-entry-h', E.title || ''));
+      const row = node('div', 'cr-entry-row');
+      const door = (D, i) => { const d = node('div', 'cr-door cr-m' + D.tag + (i === E.here ? ' here' : ' other')); const h = node('div', 'cr-door-h'); h.append(node('span', 'cr-tag', D.icon || D.tag), node('b', null, D.name)); d.append(h, node('span', 'cr-when', D.when));
+        const p = node('div', 'cr-door-path'); [D.cmd, ...(D.path || [])].forEach((x, j) => { if (j) p.append(node('span', 'cr-to', '→')); p.append(node('code', null, x)); }); d.append(p); if (i !== E.here && E.otherNote) d.append(node('span', 'cr-other', E.otherNote)); return d; };
+      const tgt = node('div', 'cr-target'); tgt.append(node('code', null, E.target || 'src/contract.ts')); if (E.targetNote) tgt.append(node('span', null, E.targetNote));
+      row.append(door(E.doors[0], 0), node('span', 'cr-in', '→'), tgt, node('span', 'cr-in', '←'), door(E.doors[1], 1)); en.append(row); grid.before(en);
+    }
+    const cols = R.cols || 3;
+    cards.forEach((c, i) => { const S = (R.steps || [])[i] || {}; c.querySelector('.card-icon')?.remove(); c.classList.add('cr-card'); if (S.lit) c.classList.add('cr-lit');
+      c.style.gridRow = String(Math.floor(i / cols) * 2 + 1); c.style.gridColumn = String((i % cols) * 2 + 1);
+      c.querySelector('.card-head')?.prepend(node('span', 'cr-num', String(i + 1)));
+      const box = node('div', 'cr-code' + (S.term ? ' term' : '')); if (S.file) box.append(node('span', 'cr-file', S.file)); box.append(node('pre', null, S.code || '')); c.querySelector('.card-head')?.after(box);
+      if (S.after) { const a = node('div', 'cr-code cr-after'); a.append(node('span', 'cr-file', S.afterLabel || ''), node('pre', null, S.after)); box.after(a); }
+      c.tabIndex = 0; c.setAttribute('role', 'button'); const go = () => { k = Math.max(k, i + 1); paint(); };
+      c.addEventListener('click', go); c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      if (i < cards.length - 1) { if ((i + 1) % cols) { const a = node('div', 'cr-arrow', '→'); a.style.gridRow = c.style.gridRow; a.style.gridColumn = String((i % cols) * 2 + 2); a.dataset.after = String(i + 1); grid.append(a); }
+        else { const t = node('div', 'cr-turn'); t.style.gridRow = String(Math.floor(i / cols) * 2 + 2); t.style.gridColumn = '1 / -1'; t.dataset.after = String(i + 1); const sv = svg('0 0 1000 40', '<path d="M833 2V18H167V36" /><path class="cr-turn-head" d="M159 28L167 38L175 28" />', 'cr-turn-svg'); sv.setAttribute('preserveAspectRatio', 'none'); t.append(sv); grid.append(t); } } });
+    grid.style.gridTemplateColumns = Array.from({ length: cols }, () => 'minmax(0,1fr)').join(' auto ');
+    const bar = node('div', 'cr-run' + (R.run && !R.run.out ? ' solo' : ''));
+    if (R.run) { const left = node('div', 'cr-run-l'); left.append(node('span', 'cr-run-h', R.run.label || ''), node('code', 'cr-run-cmd', '$ ' + R.run.cmd)); if (R.run.when) left.append(node('p', 'cr-run-when', R.run.when)); bar.append(left);
+      if (R.run.out) { const o = node('div', 'cr-code term cr-run-out'); if (R.run.outLabel) o.append(node('span', 'cr-file', R.run.outLabel)); o.append(node('pre', null, R.run.out)); bar.append(o); } }
+    const foot = node('p', 'cr-foot', R.foot || '');
+    (main.querySelector('.tagline') || grid).after(bar); bar.after(foot);
+    const LAST = cards.length + 1;
+    bar.addEventListener('click', () => { k = LAST; paint(); }); foot.addEventListener('click', () => { k = LAST; paint(); });   // the bottom bar opens on a click too, not only with →
+    const paint = () => { cards.forEach((c, i) => { c.classList.toggle('shown', i < k); c.classList.toggle('now', i === k - 1 && k <= cards.length); });
+      grid.querySelectorAll('.cr-arrow,.cr-turn').forEach((a) => a.classList.toggle('shown', k > +a.dataset.after));
+      bar.classList.toggle('shown', k >= LAST); foot.classList.toggle('shown', k >= LAST && !!R.foot); };
+    paint();
+    const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.suiteMap && cards.length >= 3) {                         // Jessy Day 5 opt-in: the tests in the project as three boxes (main tests · workshop tests · type check), then the convention line, then a tested example. → opens them one by one
+    const M = v.suiteMap; grid.classList.add('sm-grid'); let k = 0;
+    cards.forEach((c, i) => { const G = M.groups[i] || {}; c.querySelector('.card-icon')?.remove(); c.classList.add('sm-card', 'sm-' + (G.tone || 'green'));
+      const h = c.querySelector('.card-head'); h?.prepend(node('span', 'sm-ico', G.icon || ''));
+      const meta = node('div', 'sm-meta'); if (G.count) meta.append(node('b', 'sm-count', G.count)); meta.append(node('span', 'sm-state', G.state || '')); h?.after(meta);
+      const where = node('div', 'sm-where'); where.append(node('code', null, G.cmd || ''), node('span', null, G.where || '')); meta.after(where);
+      if (G.files) { const t = node('div', 'sm-files'); G.files.forEach(([name, who, n, now, tone]) => { const r = node('div', 'sm-file ' + (tone || '')); r.append(node('span', 'sm-f-name', name), node('span', 'sm-f-who', who), node('span', 'sm-f-n', n), node('span', 'sm-f-now', now || '')); t.append(r); }); where.after(t); }
+      if (G.rule) c.append(node('p', 'sm-rule', G.rule));
+      c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
+    const conv = node('div', 'sm-conv'); (M.convention || []).forEach(([when, what], j) => { const p = node('div', 'sm-conv-i'); p.append(node('span', null, when), node('b', null, what)); conv.append(p); if (!j) conv.append(node('span', 'sm-conv-to', '→')); });
+    const ex = node('div', 'sm-ex'); if (M.example) { const E = M.example; ex.append(node('span', 'sm-ex-h', E.title || ''));
+      const row = node('div', 'sm-ex-row'); [E.left, E.right].forEach((P, j) => { const b = node('div', 'cr-code term ' + (j ? 'sm-bad' : 'sm-good')); b.append(node('span', 'cr-file', P.label), node('pre', null, P.lines.join('\n'))); row.append(b); if (!j) row.append(node('span', 'sm-ex-to', 'but')); });
+      ex.append(row); if (E.foot) ex.append(node('p', 'sm-ex-foot', E.foot)); }
+    grid.after(conv); conv.after(ex);
+    const LAST = cards.length + 2;
+    conv.addEventListener('click', () => { k = Math.max(k, cards.length + 1); paint(); }); ex.addEventListener('click', () => { k = LAST; paint(); });   // the bottom opens on a click too, not only with →
+    const paint = () => { cards.forEach((c, i) => c.classList.toggle('shown', i < k)); conv.classList.toggle('shown', k > cards.length); ex.classList.toggle('shown', k >= LAST); };
+    paint();
+    const next = () => { if (k < LAST) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.previewList) {                                           // Jessy Day 5 opt-in: a checklist preview of the next assignment. Rows start as ☐; → ticks them one by one; each row shows which moment (A Sonny's run / B the tests) and what you should see
+    const P = v.previewList; const wrap = node('div', 'pv-wrap'); let k = 0;
+    if (P.order) { const o = node('div', 'pv-order'); P.order.forEach(([t, tone], j) => { if (j) o.append(node('span', 'pv-to', '→')); o.append(node('span', 'pv-pill ' + (tone || ''), t)); }); wrap.append(o); }
+    const list = node('div', 'pv-list');
+    const rows = P.rows.map((Rw, i) => { const r = node('div', 'pv-row'); r.append(node('span', 'pv-box', ''), node('span', 'pv-step', Rw.step || ''));
+      const mid = node('div', 'pv-mid'); mid.append(node('span', 'pv-text', Rw.text)); if (Rw.cmd) mid.append(node('code', 'pv-cmd', Rw.cmd)); r.append(mid);
+      r.append(node('span', 'pv-moment' + (Rw.moment ? ' cr-m' + Rw.moment.replace(/[^AB]/g, '') : ' none'), Rw.label || (Rw.moment ? 'Moment ' + Rw.moment : (Rw.who || ''))));
+      r.append(node('span', 'pv-out ' + (Rw.tone || ''), Rw.out || ''));
+      r.addEventListener('click', () => { k = i + 1 > k ? i + 1 : i; paint(); }); list.append(r); return r; });
+    wrap.append(list); const foot = P.foot ? node('p', 'pv-foot', P.foot) : null; if (foot) wrap.append(foot);
+    if (grid) grid.replaceWith(wrap); else { const tg = main.querySelector('.tagline'); if (tg) tg.before(wrap); else main.append(wrap); }
+    const paint = () => { rows.forEach((r, i) => { r.classList.toggle('done', i < k); r.classList.toggle('now', i === k - 1); r.querySelector('.pv-box').textContent = i < k ? '✓' : ''; }); foot?.classList.toggle('shown', k >= rows.length); };
+    paint();
+    const next = () => { if (k < rows.length) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.guardRail) {                                             // Jessy Day 5 opt-in: guardrails. The chain alert → Sonny looks → proposes → [guardrail] → a person decides; below, the guardrails with what they stop. → reveals the guardrail, each rail, then the foot
+    const G = v.guardRail; const wrap = node('div', 'gr-wrap'); let k = 0; const steps = [];
+    if (G.chainTitle) wrap.append(node('div', 'gr-title', G.chainTitle));
+    const chain = node('div', 'gr-chain');
+    G.chain.forEach(([ico, t, sub], i) => {
+      if (i === G.chain.length - 1 && G.gate) { const gate = node('div', 'gr-gate'); gate.append(node('span', 'gr-gate-ico', '🚧'), node('span', 'gr-gate-t', G.gate)); chain.append(gate); steps.push(gate); }
+      else if (i) chain.append(node('span', 'gr-to', '→'));
+      const b = node('div', 'gr-step' + (i === G.chain.length - 1 && !G.plainChain ? ' human' : '') + ((G.brokenStep === i) ? ' broken' : '') + ((G.doneSteps || []).includes(i) ? ' done' : '')); b.append(node('span', 'gr-ico', ico), node('strong', null, t)); if (sub) b.append(node('span', 'gr-sub', sub)); chain.append(b);
+    });
+    wrap.append(chain);
+    if (G.railsTitle) { const rt = node('div', 'gr-title gr-title-rails', G.railsTitle); wrap.append(rt); steps.push(rt); }
+    const rails = node('div', 'gr-rails' + (G.railCols ? ' c' + G.railCols : ''));
+    G.rails.forEach((R) => { const c = node('div', 'gr-rail'); const h = node('div', 'gr-rail-h'); h.append(node('span', 'gr-ico', R.icon), node('strong', null, R.title)); c.append(h);
+      if (R.who) { const w = node('div', 'gr-try'); w.append(node('span', 'gr-lab', R.whoLabel || 'Who'), node('span', null, R.who)); c.append(w); }
+      if (R.try) { const tr = node('div', 'gr-try'); tr.append(node('span', 'gr-lab', R.tryLabel || 'Try'), node('span', null, R.try)); c.append(tr); }
+      const st = node('div', 'gr-stop'); st.append(node('span', 'gr-x', '✋'), node('span', null, R.stop)); c.append(st);
+      const m = node('div', 'gr-meta'); m.append(node('code', null, R.where)); if (R.today) m.append(node('span', 'gr-today', R.today)); c.append(m);
+      rails.append(c); steps.push(c); });
+    if (G.rails.length) wrap.append(rails);
+    if (G.foot) { const f = node('p', 'gr-foot', G.foot); wrap.append(f); steps.push(f); }
+    if (grid) grid.replaceWith(wrap); else { const tg = main.querySelector('.tagline'); if (tg) tg.before(wrap); else main.append(wrap); }
+    const paint = () => steps.forEach((el, i) => { el.classList.toggle('shown', i < k); el.classList.toggle('now', i === k - 1); });
+    steps.forEach((el, i) => el.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }));
+    paint();
+    const next = () => { if (k < steps.length) { k++; paint(); return true; } return false; };
+    const back = () => { if (k > 0) { k--; paint(); return true; } return false; };
+    window.__reveal = next; window.__revealBack = back;
+    slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; if (window.__revealBack === back) window.__revealBack = null; });
+  }
+  if (v.layerStrip) {                                            // Jessy Day 5 opt-in: the four layers (goal, rules, tests, code) as one row above the cards, with who writes each
+    const ls = node('div', 'ls-row');
+    v.layerStrip.forEach((L, i) => { if (i) ls.append(node('div', 'ls-arrow', '→')); const c = node('div', 'ls-card' + (L.state ? ' ' + L.state : '')); c.style.setProperty('--i', i);
+      c.append(node('span', 'ls-phase', L.phase), node('strong', 'ls-name', L.name), node('code', 'ls-file', L.file), node('span', 'ls-who', L.who)); ls.append(c); });
+    grid.before(ls);
+  }
+  if (v.trustMap && cards.length >= 5) {                         // Sonny's map: the slide 3 alert → slide 4's looks and diagnosis → the contract (zoom: five rules on that diagnosis) → you decide; then how he behaves
+    const T = v.trustMap; grid.classList.add('trust-map'); let k = 0;
+    cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('tm-card', 'tm-' + i); c.prepend(node('span', 'pl-num', String(i + 1))); c.addEventListener('click', () => { k = Math.max(k, i + 1); paint(); }); });
+    const put = (i, el) => { const h = cards[i].querySelector('.card-head'); if (h) h.after(el); else cards[i].append(el); };
+    const al = node('div', 'wk-alert tm-alert'); al.append(node('span', 'wk-dot'), node('span', 'wk-alert-txt', T.alert)); put(0, al);
+    const chips = node('div', 'aj-chips tm-chips'); T.looks.forEach(([ico, txt]) => { const ch = node('div', 'aj-chip'); ch.append(node('span', 'aj-chip-i', ico), node('span', null, txt), node('span', 'aj-tick', '✓')); chips.append(ch); }); put(1, chips);
+    const doc = node('div', 'aj-doc tm-doc'); doc.append(node('div', 'aj-doc-tab', T.docName || 'diagnosis'));
+    T.doc.forEach(([kk, val, ev]) => { const r = node('div', 'aj-row'); r.append(node('b', null, kk), node('span', null, val)); if (ev) { const evs = node('span', 'aj-evs'); [].concat(ev).forEach((e) => evs.append(node('code', 'aj-ev', e))); r.append(evs); } doc.append(r); }); put(2, doc);
+    const mini = node('div', 'tm-mini-rules'); T.rules.forEach(() => mini.append(node('span', 'tm-mini-rule'))); mini.append(node('span', 'tm-mini-txt', T.rules.length + ' rules')); put(3, mini);
+    const btns = node('div', 'aj-btns'); btns.append(node('span', 'aj-btn aj-yes', T.yes || 'Approve'), node('span', 'aj-btn aj-no', T.no || 'Reject')); put(4, btns);
+    cards.forEach((c, i) => { if (i < cards.length - 1) { if (i === 3 && T.gate) { const g = node('div', 'pl-arrow pl-gate'); g.append(node('span', 'pl-gate-text', T.gate), node('span', 'pl-gate-glyph', '→')); c.after(g); } else c.after(node('div', 'pl-arrow', '→')); } });
+    const zoom = node('div', 'tm-zoom'); zoom.append(node('div', 'tm-zoom-h', T.zoomTitle || 'Zoom: the contract'));
+    const list = node('div', 'tm-rules'); T.rules.forEach(([txt, ok, note]) => { const r = node('div', 'tm-rule ' + (ok ? 'tm-ok' : 'tm-bad')); r.append(node('span', 'tm-rule-mark', ok ? '✓' : '✗'), node('span', 'tm-rule-txt', txt), node('span', 'tm-rule-note', note || '')); list.append(r); }); zoom.append(list);
+    if (T.today) zoom.append(node('p', 'tm-today', T.today));
+    grid.after(zoom);
+    const beh = node('div', 'tm-behave'); beh.append(node('span', 'tm-behave-h', T.behave.title)); T.behave.items.forEach(([tag, txt]) => { const it = node('span', 'tm-behave-item'); it.append(node('span', 'pl-tag', tag), node('span', null, txt)); beh.append(it); }); zoom.after(beh);
+    if (v.plIntro) grid.before(node('p', 'pl-intro', v.plIntro));
+    const steps = cards.length + 1;                                // 1–5 = the five steps (the zoom opens with step 4), 6 = how he behaves
+    const paint = () => { cards.forEach((c, i) => c.classList.toggle('shown', i < k)); zoom.classList.toggle('shown', k >= 4); beh.classList.toggle('shown', k >= steps); grid.querySelectorAll('.pl-arrow').forEach((a, i) => a.classList.toggle('shown', i < k - 1)); };
+    paint();
+    const next = () => { if (k < steps) { k++; paint(); return true; } return false; };
+    window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
+  }
+  if (v.wakeUp && cards.length >= 3) {                          // 03:45 story: the operator (Aetherbot) wakes up, the screen fills with what is happening, then the question
+    const W = v.wakeUp; grid.classList.add('wake-up'); cards.forEach((c, i) => { c.querySelector('.card-icon')?.remove(); c.classList.add('wk-card', 'wk-' + i); });
+    const bot = node('div', 'wk-bot');
+    bot.innerHTML = `<span class="wk-clock">${W.clock || '03:45'}</span><img class="wk-sleep" src="assets/aetherbot/faces/aetherbot-face-slaperig.webp" alt=""><img class="wk-awake" src="assets/aetherbot/faces/aetherbot-face-verrast.webp" alt=""><span class="wk-z">z<i>z</i><b>z</b></span>`;
+    bot.append(node('span', 'wk-tag', W.tag || 'YOU · THE OPERATOR'));
+    cards[0].querySelector('.card-head')?.after(bot);
+    const scr = node('div', 'wk-screen'); scr.append(node('div', 'wk-bar', W.screen || 'on-call laptop'));
+    const al = node('div', 'wk-pop wk-alert'); al.style.setProperty('--i', 0); al.append(node('span', 'wk-dot'), node('span', 'wk-alert-txt', W.alert)); scr.append(al);
+    const C = W.chart, ch = node('div', 'wk-pop wk-chart'); ch.style.setProperty('--i', 1);
+    ch.innerHTML = `<div class="wk-chart-h"><span>${C.label}</span><b>${C.to}</b></div><svg viewBox="0 0 300 100" aria-hidden="true"><path class="wk-limit" d="M0 72H300"/><text class="wk-limit-t" x="4" y="68">limit ${C.limit}</text><path class="wk-mark" d="M196 4V88"/><text class="wk-mark-t" x="190" y="14" text-anchor="end">${C.mark}</text><path class="wk-line" d="M0 84L40 83L80 84L120 83L160 84L196 83L212 18L240 14L270 16L300 14"/><text class="wk-from" x="4" y="98">before: ${C.from}</text></svg>`;
+    scr.append(ch);
+    const wd = node('div', 'wk-pop wk-world'); wd.style.setProperty('--i', 2);
+    (W.world || []).forEach(([place, time, icon]) => { const z = node('div', 'wk-zone'); z.append(node('span', 'wk-zone-i', icon), node('b', null, place), node('span', null, time)); wd.append(z); });
+    scr.append(wd);
+    cards[1].querySelector('.card-head')?.after(scr);
+    if (W.sonny) {                                              // the on-call agent got the alert too: full-body bot + speech bubble
+      const so = node('div', 'wk-sonny'); so.append(node('div', 'wk-bubble', W.sonny.bubble || ''));
+      const fig = node('div', 'wk-sonny-fig'); fig.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; fig.append(node('span', 'aj-bot-tag', W.sonny.tag || 'ON CALL'));
+      so.append(fig); cards[2].querySelector('.card-head')?.after(so);
+    }
+  }
+  if (v.pipeline) {                                             // a row of numbered steps with arrows; each step shows its file and the assignment that builds it
+    grid.classList.add('pipeline');
+    cards.forEach((c, i) => { const P = v.pipeline[i] || {}; c.classList.add('pl-card'); c.classList.toggle('pl-hl', !!P.hl); c.querySelector('.card-icon')?.remove();
+      c.prepend(node('span', 'pl-num', String(i + 1)));
+      const meta = node('div', 'pl-meta'); if (P.file) meta.append(node('code', 'pl-file', P.file)); if (P.tag) meta.append(node('span', 'pl-tag', P.tag)); c.append(meta); if (P.warn) c.querySelector('.card-head')?.after(node('div', 'pl-warn', P.warn));
+      if (P.have) { const ul = node('div', 'pl-have'); P.have.forEach(([kind, text, tag]) => { const r = node('div', 'pl-have-row pl-' + kind); r.append(node('span', 'pl-have-mark', kind === 'ok' ? '✓' : 'missing')); if (tag) r.append(node('span', 'pl-tag', tag)); r.append(node('span', 'pl-have-text', text)); ul.append(r); }); meta.before(ul); }
+      if (i < cards.length - 1) { if (P.gate) { const g = node('div', 'pl-arrow pl-gate'); g.append(node('span', 'pl-gate-text', P.gate), node('span', 'pl-gate-glyph', '→')); c.after(g); } else c.after(node('div', 'pl-arrow', '→')); } });
+    if (v.plIntro) grid.before(node('p', 'pl-intro', v.plIntro));
+  }
+  if (v.filePair && cards.length >= 2) {                        // one file before → after, drawn as an editor: h = heading, gap = empty, new = written, keep = unchanged
+    grid.classList.add('file-pair');
+    cards.forEach((c, i) => { const F = v.filePair[i]; if (!F) return; c.classList.add('fp-card', i ? 'fp-after' : 'fp-before'); c.querySelector('.card-icon')?.remove();
+      const ed = node('div', 'fp-editor'); ed.append(node('div', 'fp-tab', F.file));
+      F.lines.forEach(([kind, text, tag]) => { const r = node('div', 'fp-line fp-' + kind); r.append(node('span', 'fp-text', text)); if (tag) r.append(node('span', 'fp-tag', tag)); ed.append(r); });
+      c.append(ed); });
+    cards[0].after(node('div', 'fp-arrow', '→'));
+  }
+  if (v.shotPair && cards.length >= 2) {                        // Jessy Day 5 opt-in: two screenshots side by side (before → after); a click opens one large
+    grid.classList.add('shot-pair');
+    cards.forEach((c, i) => { const S = v.shotPair[i]; if (!S) return; c.classList.add('sp-card'); if (S.tone) c.classList.add('sp-' + S.tone); c.querySelector('.card-icon')?.remove();
+      const im = node('img', 'sp-img'); im.src = S.src; im.alt = S.alt || ''; im.loading = 'lazy'; im.title = 'Click to open large'; im.addEventListener('click', () => window.open(S.src, '_blank'));
+      c.querySelector('.card-head')?.after(im); if (S.tag) c.querySelector('.card-head')?.prepend(node('span', 'sp-tag', S.tag)); });
+    cards[0].after(node('div', 'sp-arrow', v.shotPairArrow || '→'));
+  }
+  if (v.doors && cards.length >= 3) {                           // two ways in (door 1, door 2) → one investigation
+    grid.classList.add('doors');
+    cards.forEach((c, i) => { const D = v.doors[i]; if (!D) return; c.classList.add('door-card'); c.style.setProperty('--gl', D.color || 'var(--cyan)'); c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[D.icon] || ICONS.dot}</svg>`; c.prepend(ic);
+      if (D.mini === 'alert') { const m = node('div', 'dm-saved'); const a = node('div', 'wk-alert dm-alert'); a.append(node('span', 'wk-dot'), node('span', 'wk-alert-txt', D.alert || 'ALERT · checkout · 12% · INC-1001')); m.append(a, node('span', 'dm-stamp', D.stamp || 'SAVED · FIXTURE')); if (D.cmd) m.append(node('code', 'dm-cmd', D.cmd)); c.querySelector('.card-head')?.after(m); }
+      if (D.mini === 'shop') { const m = node('div', 'dm-shop'); (D.flow || []).forEach(([ico, txt, kind], j) => { if (j) m.append(node('span', 'dm-arrow', '→')); const st = node('span', 'dm-step' + (kind ? ' dm-' + kind : '')); st.append(node('span', 'dm-ico', ico), node('span', null, txt)); m.append(st); }); c.querySelector('.card-head')?.after(m); }
+      if (D.bot) { const f = node('div', 'dm-bot'); f.innerHTML = '<img src="assets/aetherbot/aetherbot-think.webp" alt="">'; f.append(node('span', 'aj-bot-tag', D.bot === true ? 'SONNY' : D.bot)); c.querySelector('.card-head')?.after(f); }
+      const meta = node('div', 'door-meta'); if (D.when) meta.append(node('span', 'gl-eg', D.when)); if (D.file) meta.append(node('code', 'door-file', D.file)); c.append(meta); });
+    const arrows = node('div', 'door-arrows'); arrows.innerHTML = '<span>→</span><span>→</span>'; cards[1].after(arrows);
+  }
+  if (v.glossary) {                                             // definitions: big icon, term, plain meaning, one real example
+    grid.classList.add('glossary'); if (v.glossCols) grid.style.setProperty('--gl-cols', v.glossCols);
+    cards.forEach((c, i) => { const g = v.glossary[i]; if (!g) return; c.classList.add('gl-card'); c.style.setProperty('--gl', g.color || 'var(--cyan)');
+      c.querySelector('.card-icon')?.remove();
+      const ic = node('div', 'gl-icon'); ic.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${GLOSS_ICONS[g.icon] || ICONS.dot}</svg>`; c.prepend(ic);
+      if (g.eg) c.append(node('span', 'gl-eg', g.eg)); });
+  }
   if (v.art === 'flow' && cards.length >= 3) {                  // 9: input + context -> model -> output
     grid.classList.add('flow'); const left = node('div', 'flow-in'); left.append(cards[0], cards[1]);
     const slot = node('div', 'flow-bot'); cards[2].classList.add('flow-out');
@@ -214,7 +734,7 @@ function renderExtras(stage, main, s, v) {
     if (v.answers) grid.classList.add('qa');                    // quiz: the question shows, only the answer is covered
     cards.forEach((c, i) => {
       c.classList.add('closed'); if (!v.answers) c.setAttribute('aria-hidden', 'true');
-      const cover = node('span', 'card-cover', v.answers ? '?' : String(i + 1));
+      const cover = node('span', 'card-cover', v.answers ? '?' : v.covers ? (v.covers[i] || '') : String(i + 1));
       if (v.answers) { const ans = node('div', 'qa-answer'); ans.append(c.lastElementChild, cover); c.append(ans); } else c.append(cover);
       c.addEventListener('click', () => open(i));
     });
@@ -978,6 +1498,8 @@ function openPresenterView() {
 /* ---- embed mode: presenter.html shows this page in an iframe (?embed=1) as a live preview ---- */
 const EMBED = new URLSearchParams(location.search).has('embed');
 if (EMBED) document.documentElement.classList.add('embed');
+const EMBED_OPEN = EMBED && new URLSearchParams(location.search).has('open');
+if (EMBED_OPEN) document.documentElement.classList.add('embed-open');
 
 /* ---- hide a slide for now: H toggles; arrows, Home and End skip hidden slides ---- */
 const HIDDEN_KEY = 'als:hidden:' + DECK_ID;
@@ -1010,7 +1532,7 @@ function applyStepThrough(main, s) {
 
 /* ---- assignment slides: one label, big steps, a picture of the result, timer pill top right ---- */
 function assignmentLabel(s) {
-  const m = /^Assignment (\d+[a-z]?):\s*(.*)$/.exec(s.title || '');
+  const m = /^Assignment (\d+[a-zA-Z]?):\s*(.*)$/.exec(s.title || '');
   const day = ((s.kicker || '').match(/DAY \d/) || [''])[0].replace('DAY', 'Day');
   return { label: (m ? 'Assignment ' + m[1] : 'Hands-on') + (day ? ' · ' + day : ''), title: m ? m[2] : s.title };
 }
@@ -1041,7 +1563,7 @@ function renderAssignment(stage, s) {
   eyebrow.append(node('span', 'type-chip', label));
   if (s.mode) eyebrow.append(node('span', 'mode-chip mode-' + s.mode, ({ manual: '⏵ Start in manual mode', plan: '⏸ Start in plan mode', librechat: 'In LibreChat, not Claude Code' })[s.mode] || s.mode));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
-  const right = node('div', 'asg-top-right'); right.append(timerPill(s), node('p', 'slide-count', countText(current)));
+  const right = node('div', 'asg-top-right'); const trk = sdlcTrack(s); right.append(timerPill(s)); if (trk) right.append(trk); right.append(node('p', 'slide-count', countText(current)));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
   if (s.subtitle) head.append(node('p', 'subtitle', s.subtitle));
   if (s.repo?.url) {
@@ -1058,16 +1580,33 @@ function renderAssignment(stage, s) {
     return b; };
   const inline = (s.steps || []).some(t => t.prompt && !isCmd(t.prompt));              // steps with their own prompt: no prompt box at the bottom
   (s.steps || []).forEach((t, i) => {
-    const li = node('li', 'asg-step' + (done[i] ? ' done' : '')); li.style.setProperty('--i', i); li.tabIndex = 0;
-    const text = node('span', 'asg-text', t.text ?? t);
+    const wide = !!window.ASG_WIDE;                                 // wide layout: no click-to-cross-out on steps
+    const li = node('li', 'asg-step' + (done[i] && !wide ? ' done' : '')); li.style.setProperty('--i', i); if (!wide) li.tabIndex = 0;
+    let label = t.text ?? t, where = t.where || null;              // wide layout (opt-in): "Type this in: X. Goal: …" → a where-chip [X] + the goal as the title
+    if (window.ASG_WIDE && !where && typeof label === 'string') { const m = label.match(/^Type this in:\s*([^.]+?)\.\s*(?:Goal:\s*)?([\s\S]*)$/) || label.match(/^Open in (browser):\s*([\s\S]*)$/i); if (m) { where = m[1].replace(/^browser$/i, 'Browser'); label = /^https?:/i.test(m[2]) ? m[2] : m[2].charAt(0).toUpperCase() + m[2].slice(1); label = label.replace(/^([^.]*[^.\s])\.$/, '$1'); } }
+    const text = node('span', 'asg-text');
+    if (where && window.ASG_WIDE) text.append(node('span', 'asg-where ' + (/claude/i.test(where) ? 'w-cc' : /browser/i.test(where) ? 'w-web' : 'w-term'), where));
+    text.append(document.createTextNode(where && !window.ASG_WIDE ? where + '. ' + label : label));
     const cmds = t.cmds || (t.prompt && isCmd(t.prompt) ? [t.prompt] : null);  // short commands: chips on the same line, 'then' between two
     (cmds || []).forEach((p, k) => { if (k) text.append(node('span', 'asg-cmd-then', 'then')); const c = node('span', 'asg-cmd' + (p[0] !== '!' ? ' no-copy' : '')); c.append(node('code', null, p)); if (p[0] === '!') c.append(copyBtn(p)); text.append(c); });  // only !commands get Copy; /exit, claude: just type them
-    if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); pr.append(node('pre', 'asg-prompt-text', t.prompt), copyBtn(t.prompt)); text.append(pr); }
+    if (t.prompt && !isCmd(t.prompt)) { const pr = node('div', 'asg-step-prompt'); const cb = copyBtn(t.prompt);
+      if (window.ASG_WIDE && t.prompt.length > 110) {           // wide layout: long prompts show one line; "show all" opens the whole prompt in the same box, growing down over the slide (layout stays the same); Copy copies the whole prompt
+        pr.classList.add('folded'); const more = node('button', 'asg-more', 'show all'); more.type = 'button';
+        const full = node('pre', 'asg-prompt-full', t.prompt);
+        const setOpen = (o) => { if (o) pr.dataset.open = ''; else delete pr.dataset.open; more.textContent = o ? 'show less' : 'show all'; };   // a data attribute, not a class: fit-stage does not re-zoom
+        more.addEventListener('click', (e) => { e.stopPropagation(); const o = !('open' in pr.dataset); document.querySelectorAll('.asg-step-prompt[data-open]').forEach((x) => { if (x !== pr) x.querySelector('.asg-more')?.click(); }); setOpen(o); });
+        full.addEventListener('click', (e) => e.stopPropagation());
+        if (!window.__asgPromptClose) { window.__asgPromptClose = true;
+          document.addEventListener('click', () => document.querySelectorAll('.asg-step-prompt[data-open] .asg-more').forEach((b) => b.click()));
+          document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.asg-step-prompt[data-open] .asg-more').forEach((b) => b.click()); }); }
+        const col = node('div', 'asg-prompt-btns'); col.append(cb, more); pr.append(node('pre', 'asg-prompt-text', t.prompt), col, full);
+      } else pr.append(node('pre', 'asg-prompt-text', t.prompt), cb);
+      text.append(pr); }
     if (t.parts) { const row = node('span', 'asg-parts'); t.parts.forEach(([k, v]) => { const p = node('span', 'asg-part'); p.append(node('span', 'asg-part-k', k), node('code', null, v)); row.append(p); }); text.append(row); }  // the pieces of what Claude made, labelled: moment, matcher, command
     if (t.after) text.append(node('span', 'asg-step-after' + (t.warn ? ' warn' : ''), t.after));  // what you see once Claude is done; warn: the trap in this step
     li.append(node('span', 'asg-num', String(i + 1)), text);
     const flip = () => { done[i] = !done[i]; li.classList.toggle('done', !!done[i]); saveState({ ...loadState(), done }); };
-    li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+    if (!wide) { li.addEventListener('click', flip); li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } }); }
     ol.append(li);
   });
   main.append(ol);
@@ -1085,6 +1624,19 @@ function renderAssignment(stage, s) {
     body.append(side); stage.append(body);
     renderVisual(stage, body, mini, { ...s, visual: { ...v, bot: undefined, compact: undefined, cardImages: undefined } });
     return;
+  }
+  if (window.ASG_WIDE && v.shot) {                               // opt-in per deck: steps use the full width (two columns), the picture becomes a thumbnail in the header; click = big
+    body.classList.add('solo', 'asg-wide'); head.classList.add('has-thumb');
+    const th = node('button', 'asg-thumb'); th.type = 'button'; th.title = 'Click to enlarge';
+    const img = document.createElement('img'); img.src = v.shot; img.alt = v.shotLabel || 'Expected result';
+    th.append(node('span', 'asg-thumb-k', v.shotLabel || 'What it looks like'), img, node('span', 'asg-thumb-zoom', '🔍'));
+    th.addEventListener('click', (e) => { e.stopPropagation();
+      const box = node('div', 'asg-lightbox'); const big = document.createElement('img'); big.src = v.shot; big.alt = img.alt;
+      box.append(node('p', 'asg-lightbox-k', (v.shotLabel || 'What it looks like') + ' · click or Esc to close'), big);
+      const close = () => { box.remove(); document.removeEventListener('keydown', onKey, true); };
+      const onKey = (ev) => { if (ev.key === 'Escape') { ev.stopPropagation(); ev.preventDefault(); close(); } };
+      box.addEventListener('click', close); document.addEventListener('keydown', onKey, true); document.body.append(box); });
+    head.append(th); stage.append(body); return;
   }
   if (v.shot || v.cardImages) body.append(side); else body.classList.add('solo');
   stage.append(body);
@@ -1109,7 +1661,9 @@ function render() {
   const head = node('section', 'heading'); const top = node('div', 'heading-top'); const eyebrow = node('p', 'eyebrow');
   const parts = (s.kicker || '').split('·').map(x => x.trim());
   eyebrow.append(node('span', 'type-chip', TYPE_LABEL[type]), node('span', 'kicker-text', parts.join(' · ')));
-  top.append(eyebrow, node('p', 'slide-count', countText(current)));
+  const trk = sdlcTrack(s);
+  if (trk) { const r = node('div', 'top-right'); r.append(trk, node('p', 'slide-count', countText(current))); top.append(eyebrow, r); }
+  else top.append(eyebrow, node('p', 'slide-count', countText(current)));
   if (isHidden(current)) eyebrow.append(node('span', 'hidden-chip', 'Hidden · H to show'));
   head.append(top, node('h1', null, s.title), node('p', 'subtitle', s.subtitle));
   if (s.source?.url) {
@@ -1122,6 +1676,8 @@ function render() {
   renderTagline(main, s);
   renderVisual(stage, body, main, s);
   if (!s.visual?.anatomy) applyStepThrough(main, s);
+  // ?embed=1&open=1 (presenter preview, opt-in per deck): show the slide with every click-to-open block already open
+  if (EMBED_OPEN && (s.visual?.reveal === 'click' || s.visual?.sdlcLine || s.visual?.routeLine || s.visual?.trustMap || s.visual?.contractZoom || s.visual?.codeRoute || s.visual?.previewList || s.visual?.guardRail || s.visual?.suiteMap || s.visual?.gapCompare?.reveal)) { for (let k = 0; k < 40 && window.__reveal?.(); k++); }
   const instructions = (s.visual?.anatomy || s.visual?.quiz || s.visual?.stamps || s.visual?.perCard || s.visual?.runner) ? null : renderInstructions(s);
   if (instructions) {
     const side = sideBySide(s, instructions);
@@ -1169,6 +1725,102 @@ $('chapters').addEventListener('click', () => {
   openPanel('Chapters', list);
   list.querySelector('[aria-current=true]')?.scrollIntoView({ block: 'center' });   // open where you are, not at slide 1
 });
+// Overview (only on decks whose toolbar has the button): opens in a new tab as a storyboard of every slide, all blocks open
+const OVERVIEW_PAGE = new URLSearchParams(location.search).has('overview');
+function openOverview() { window.open(DECK + '?overview=1#' + (current + 1), 'overview-' + DECK); }
+$('overview')?.addEventListener('click', openOverview);
+const EYE_ON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10.4 10.4 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.6 4.9-1.4"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
+function renderOverviewPage() {
+  document.documentElement.classList.add('ov-page'); document.title = 'Overview · ' + document.title;
+  let sel = Math.min(Math.max(Number(location.hash.slice(1)) - 1 || 0, 0), slides.length - 1);
+  const page = node('div', 'ov');
+  const head = node('div', 'ov-head'); head.append(node('h2', null, 'Overview · all ' + slides.length + ' slides'), node('span', 'ov-hint', 'Click a slide to see it big · ← → to browse · Enter or double-click shows it in the deck tab · hover a slide and click the eye (or press H) to hide it'));
+  // the big view on top (like Finder's gallery): the selected slide, all blocks open, with arrows
+  const big = node('div', 'ov-big');
+  const prev = node('button', 'ov-arrow', '←'); prev.setAttribute('aria-label', 'Previous slide');
+  const next = node('button', 'ov-arrow', '→'); next.setAttribute('aria-label', 'Next slide');
+  const screen = node('div', 'ov-screen'); const bf = document.createElement('iframe'); bf.tabIndex = -1; bf.setAttribute('aria-hidden', 'true'); bf.scrolling = 'no'; screen.append(bf);
+  const info = node('div', 'ov-info'); const title = node('strong'); const notesBtn = node('button', 'ov-deck', 'Presenter notes'); const deckBtn = node('button', 'ov-deck', 'Show in deck ↗'); info.append(title, notesBtn, deckBtn);
+  const review = node('div', 'ov-review'); review.hidden = true;   // opt-in per slide: slide.review = {to, text}, a note for a colleague, only on this page
+  const col = node('div', 'ov-bigcol'); col.append(screen, info, review);
+  // presenter notes of the selected slide, beside the big view (the presenter page in notes-only mode)
+  const notes = node('div', 'ov-notes'); let nf = null;
+  const showNotes = () => { try { nf?.contentWindow?.renderSlide?.(sel); } catch {} };
+  const setNotes = (on) => {
+    page.classList.toggle('notes-open', on); notesBtn.setAttribute('aria-pressed', String(on)); try { localStorage.setItem('als:ov-notes', on ? '1' : '0'); } catch {}
+    if (on && !nf && window.PRESENTER_PAGE) { nf = document.createElement('iframe'); nf.title = 'Presenter notes'; nf.src = window.PRESENTER_PAGE + '?notes=1&i=' + sel; nf.addEventListener('load', showNotes); notes.append(nf); }
+    if (on) showNotes();
+  };
+  notesBtn.addEventListener('click', () => setNotes(!page.classList.contains('notes-open')));
+  big.append(prev, col, next, notes);
+  const grid = node('div', 'ov-grid'); page.append(head, big, grid); document.body.append(page);
+  // chevron: fold the big view away to see more of the grid; remembered per browser
+  const fold = node('button', 'ov-fold'); fold.setAttribute('aria-controls', 'ov-big'); big.id = 'ov-big'; head.append(fold);
+  if (window.OVERVIEW_SHEET) { const sh = node('a', 'ov-sheet', 'Overview sheet ↗'); sh.href = window.OVERVIEW_SHEET; sh.target = '_blank'; sh.rel = 'noopener'; sh.title = 'The cheat sheet for this day, in a new tab'; fold.before(sh); }   // opt-in per deck: a link to the day's cheat sheet
+  const setFolded = (on) => { page.classList.toggle('big-folded', on); fold.innerHTML = '<span class="ov-chev">⌃</span> Preview'; fold.title = on ? 'Show the large preview' : 'Fold the large preview away'; fold.setAttribute('aria-expanded', String(!on)); try { localStorage.setItem('als:ov-folded', on ? '1' : '0'); } catch {} };
+  let folded = false; try { folded = localStorage.getItem('als:ov-folded') === '1'; } catch {}
+  setFolded(folded); fold.addEventListener('click', () => setFolded(!page.classList.contains('big-folded')));
+  const fitBig = () => { const w = screen.clientWidth; bf.style.transform = 'scale(' + (w / 1600) + ')'; };
+  new ResizeObserver(fitBig).observe(screen);
+  const fit = (shot) => { const f = shot.querySelector('iframe'); if (f) f.style.transform = 'scale(' + (shot.clientWidth / 1600) + ')'; };
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return; const shot = e.target; io.unobserve(shot);
+    const f = document.createElement('iframe'); f.tabIndex = -1; f.setAttribute('aria-hidden', 'true'); f.scrolling = 'no';
+    f.src = DECK + '?embed=1&open=1#' + shot.dataset.n; shot.append(f); fit(shot);
+  }), { root: grid, rootMargin: '400px' });
+  const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target)));
+  const showInDeck = (i) => {                          // the deck tab jumps to slide i and comes to the front (a named tab: Chrome ignores opener.focus())
+    const name = 'deck-' + DECK;
+    try { if (window.opener && !window.opener.closed) window.opener.name = name; } catch {}
+    const w = window.open(DECK + '#' + (i + 1), name);
+    if (!w) location.href = DECK + '#' + (i + 1);
+  };
+  const tiles = slides.map((s, i) => {
+    const tile = node('button', 'ov-tile' + (isHidden(i) ? ' is-hidden' : '')); tile.dataset.type = slideType(s);
+    const shot = node('div', 'ov-shot'); shot.dataset.n = String(i + 1);
+    const cap = node('div', 'ov-cap'); cap.append(node('span', 'ov-num', String(i + 1)), node('strong', null, s.title));
+    if (s.review) { const t = node('span', 'ov-review-tag', '✎ ' + (s.review.to || 'Review')); t.title = s.review.text; cap.append(t); }
+    // eye on hover: hide or show this slide (same list as H in the deck: the arrows skip it); a hidden slide stays visible here, darker
+    const eye = node('span', 'ov-eye'); eye.setAttribute('role', 'button'); eye.tabIndex = 0;
+    const paintEye = () => { const h = isHidden(i); tile.classList.toggle('is-hidden', h); eye.innerHTML = h ? EYE_OFF : EYE_ON; eye.title = h ? 'Hidden: click to show this slide again' : 'Hide this slide (the arrows skip it)'; eye.setAttribute('aria-label', (h ? 'Show' : 'Hide') + ' slide ' + (i + 1)); };
+    const flip = (e) => { e.stopPropagation(); e.preventDefault(); toggleHidden(i); paintEye(); if (i === sel) paintSel(); };
+    eye.addEventListener('click', flip); eye.addEventListener('dblclick', (e) => e.stopPropagation());
+    eye.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') flip(e); });
+    shot.append(eye, node('span', 'ov-hidden-tag', 'Hidden')); paintEye(); tile._paintEye = paintEye;
+    tile.append(shot, cap);
+    tile.addEventListener('click', () => { if (page.classList.contains('big-folded')) setFolded(false); select(i); });
+    tile.addEventListener('dblclick', () => showInDeck(i));
+    grid.append(tile); io.observe(shot); ro.observe(shot); return tile;
+  });
+  function paintSel() {
+    title.textContent = (sel + 1) + ' · ' + slides[sel].title + (isHidden(sel) ? '  (hidden)' : '');
+    const r = slides[sel].review; review.hidden = !r; review.replaceChildren();
+    if (r) review.append(node('strong', null, '✎ For ' + (r.to || 'review')), node('span', null, r.text));
+  }
+  function select(i) {
+    sel = Math.min(Math.max(i, 0), slides.length - 1);
+    tiles.forEach((t, k) => t.classList.toggle('is-current', k === sel));
+    paintSel();
+    try { if (bf.dataset.ready) bf.contentWindow.location.hash = String(sel + 1); else bf.src = DECK + '?embed=1&open=1#' + (sel + 1); } catch { bf.src = DECK + '?embed=1&open=1#' + (sel + 1); }
+    history.replaceState(null, '', '#' + (sel + 1));
+    prev.disabled = sel === 0; next.disabled = sel === slides.length - 1; showNotes();
+    tiles[sel].scrollIntoView({ block: 'nearest' });
+  }
+  bf.addEventListener('load', () => { bf.dataset.ready = '1'; });
+  prev.addEventListener('click', () => select(sel - 1)); next.addEventListener('click', () => select(sel + 1));
+  deckBtn.addEventListener('click', () => showInDeck(sel));
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); select(sel - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); select(sel + 1); }
+    else if (e.key === 'Enter') { e.preventDefault(); showInDeck(sel); }
+    else if (e.key === 'h' || e.key === 'H') { e.preventDefault(); toggleHidden(sel); tiles[sel]._paintEye(); paintSel(); }
+  });
+  window.addEventListener('storage', (e) => { if (e.key === HIDDEN_KEY || e.key === SHOWN_KEY) { tiles.forEach((t) => t._paintEye()); paintSel(); } });   // hidden in the deck (H) → darker here too
+  select(sel);
+  let notesOn = false; try { notesOn = localStorage.getItem('als:ov-notes') === '1'; } catch {} if (notesOn) setNotes(true);
+}
 // generic timer in the toolbar (any slide): same look as the pause slides, one shared timer
 let timerCtl = null;
 $('timer-btn')?.addEventListener('click', () => {
@@ -1180,9 +1832,11 @@ $('fullscreen').addEventListener('click', async () => { try { if (document.fulls
 document.addEventListener('fullscreenchange', () => $('fullscreen').setAttribute('aria-label', document.fullscreenElement ? 'Exit fullscreen' : 'Enter fullscreen'));
 document.addEventListener('keydown', e => {
   if (EMBED) return;
+  if (OVERVIEW_PAGE) return;
   if (panel.open || e.altKey || e.ctrlKey || e.metaKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.closest('[role=tablist]')) return;
+  if ((e.key === 'g' || e.key === 'G') && $('overview')) { e.preventDefault(); openOverview(); return; }
   if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); if (window.__reveal?.()) return; step(1); }
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); step(-1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); if (window.__revealBack?.()) return; step(-1); }   // opt-in per visual: step back inside the slide first
   if (e.key === 'Home') { e.preventDefault(); const n = visibleFrom(0, 1); if (n !== null) go(n); }
   if (e.key === 'End') { e.preventDefault(); const n = visibleFrom(slides.length - 1, -1); if (n !== null) go(n); }
   if (e.key === 'h' || e.key === 'H') { e.preventDefault(); const h = toggleHidden(current); notify(h ? 'Slide hidden — the arrows will skip it (H to show again)' : 'Slide shown again'); render(); return; }
@@ -1190,5 +1844,9 @@ document.addEventListener('keydown', e => {
   if (e.key === 's' || e.key === 'S') { e.preventDefault(); openPresenterView(); }
 });
 window.addEventListener('pagehide', () => { slideController?.abort(); });
+if (!OVERVIEW_PAGE && !EMBED && (!window.name || window.name.startsWith('deck-'))) window.name = 'deck-' + DECK;   // lets the Overview's “Show in deck” find and focus this tab
+if (OVERVIEW_PAGE) renderOverviewPage(); else {
 window.addEventListener('hashchange', fromHash);
+window.addEventListener('storage', (e) => { if (!EMBED && (e.key === HIDDEN_KEY || e.key === SHOWN_KEY)) render(); });   // hidden or shown in the Overview → progress bar and "Hidden" chip follow
 fromHash();
+}
