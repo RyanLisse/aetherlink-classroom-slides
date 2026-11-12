@@ -712,29 +712,6 @@ window.SLIDES = [
 /* ---------------------------------------------------------------------- */
 
 { // Slide 21
-  title: "Assignment: Set up and build the first slice",
-  kicker: "DAY 6 · TEAM ASSIGNMENT 3",
-  subtitle: "From canvas to something that works, end to end, however small.",
-  type: "practice",
-  layout: "exercise",
-  cards: [
-    { title: "Set up first", body: "one shared repo\nCLAUDE.md from your canvas\nsettings.json: what Claude may never do\nsecrets outside the repo" }
-  ],
-  stepsHeading: "Steps:",
-  steps: [
-    "Set up the shared repo and agree who merges.",
-    "Write CLAUDE.md from your canvas. Add your settings.json rules.",
-    "Build in short rounds: plan mode first, then create, then test.",
-    "Between rounds: a short team briefing. What works, what's next?",
-    "Test it by hand, also with wrong input.",
-    "Human review: someone who didn't build it checks it."
-  ],
-  expected: "A first slice that works end to end in a shared repo, with CLAUDE.md, settings.json and no secrets in the code.",
-  keyPoints: ["Type the minutes on the timer","Set-up before building","Short rounds in plan mode","Briefing between rounds","Review by someone else"],
-  notes: "Type the minutes on the timer. Set-up first: a shared repo, CLAUDE.md written from the canvas, and settings.json rules, just like on the teaching days. Check that no API key ends up in the code or in git. Then build in short rounds: start each round in plan mode, build a little, test it, and adjust the plan when needed. Between rounds the team holds a short briefing so everyone knows what works and what's next. The slice should work end to end, however small: one input, one AI step, one visible result. Human review by someone who didn't build that part, ideally including the security specialist for anything that touches data or secrets."
-},
-
-{ // Slide 22
   title: "Check-in",
   kicker: "DAY 6 · CHECK-IN",
   subtitle: "Every team, two minutes. Short answers.",
@@ -755,7 +732,7 @@ window.SLIDES = [
 /* DAY 6 — Closing                                                          */
 /* ---------------------------------------------------------------------- */
 
-{ // Slide 23
+{ // Slide 22
   title: "Ready for Day 7?",
   kicker: "DAY 6 · CLOSING",
   subtitle: "Next session your team shows a working AI app.",
@@ -769,7 +746,7 @@ window.SLIDES = [
   notes: "Go through the list with each team. Anything that isn't ticked becomes the first task for the start of the next session. Tell them what Day 7 looks like: finish, test, and present a working app."
 },
 
-{ // Slide 24
+{ // Slide 23
   title: "What did you learn?",
   kicker: "DAY 6 · CLOSING",
   subtitle: "Complete these statements.",
