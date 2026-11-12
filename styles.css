@@ -595,7 +595,7 @@ p.subtitle{font-weight:700}
 .term-line.out{color:#8b93b0}
 .prompt-sign{color:#28c840;font-weight:700}
 .typed{display:inline-block;overflow:hidden;vertical-align:bottom;width:0;animation:type .6s steps(var(--n)) both;animation-delay:calc(.8s + var(--i)*.9s)}
-@keyframes type{to{width:calc(var(--n)*1ch)}}
+@keyframes type{to{width:calc(var(--n)*1.06ch)}}
 .term-line.ask{margin-top:.6rem;padding:.55rem .8rem;border:2px solid var(--aether-orange);border-radius:8px;color:#fff;background:color-mix(in srgb,var(--aether-orange) 12%,transparent);white-space:normal;animation:fade-in .3s both,ask-pulse 1.6s ease-in-out infinite;animation-delay:calc(.8s + var(--i)*.9s),calc(1.4s + var(--i)*.9s)}
 @keyframes ask-pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--aether-orange) 20%,transparent)}}
 .term-wide{width:100%;max-width:1100px;margin:0 auto}

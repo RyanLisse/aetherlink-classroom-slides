@@ -70,10 +70,10 @@ window.SLIDES = [
     ],
     "keyPoints": [
       "One answer per table, per round",
-      "Connect 'wrong' to today: test, tool list, hook",
+      "Connect 'wrong' to today: check, tool list, human review",
       "Keep the goals for the close"
     ],
-    "notes": "Time: 6 minutes, three rounds of 2 minutes. Write the answers on the board. In round 2, connect each problem to today. Hard to test: focused tests and an evidence table. Every agent could do everything: a tool list per agent. No stop before a change: a hook. In round 3, keep the goals on the board and return to them at the close.",
+    "notes": "Time: 6 minutes, three rounds of 2 minutes. Write the answers on the board. In round 2, connect each problem to today. Hard to test: a check for each step and an evidence table. Every agent could do everything: a tool list per agent. No stop before a message goes out: a person reviews every draft. In round 3, keep the goals on the board and return to them at the close.",
     "teach": {
       "next": "Last session · 1. The sorting machine",
       "time": "6 min",
@@ -872,8 +872,7 @@ window.SLIDES = [
       ],
       "watch": [
         "Windows laptops: check docs/SETUP.md beforehand.",
-        "A dry run says nothing about the quality of the agent. It only checks the setup.",
-        "Every npm line shows aetherlink-day5-n8n-to-agent. That is the package's internal name: it is the right package for Day 4."
+        "A dry run says nothing about the quality of the agent. It only checks the setup."
       ]
     },
     "tagline": "Why first? If something is missing, you find out now, not halfway through an exercise."
@@ -936,57 +935,79 @@ window.SLIDES = [
     "kicker": "What you see · Step 0",
     "type": "concept",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/see-step0.png",
-      "imageLink": "Terminal: npm run verify passes, then the lesson 1 dry run"
+      "term": [
+        {
+          "c": "npm run doctor"
+        },
+        {
+          "o": "Backend: claude-code (claude -p)"
+        },
+        {
+          "o": "Claude Code: 2.1.322 (meets minimum)"
+        },
+        {
+          "c": "npm run verify"
+        },
+        {
+          "o": "ℹ pass 22"
+        },
+        {
+          "o": "ℹ fail 0"
+        },
+        {
+          "o": "{}"
+        },
+        {
+          "o": "dry run — no model call, not model evidence"
+        }
+      ]
     },
-    "subtitle": "Compare your terminal with this screenshot. Look for two things.",
+    "subtitle": "Type these two commands in a second terminal. Look for two things.",
     "keyPoints": [
-      "npm run verify: pass 9, fail 0. Your setup is correct.",
-      "Dry run: The last line says: dry run — no model call. That is correct."
+      "After npm run doctor: Look for: meets minimum. Node.js and Claude Code are ready.",
+      "After npm run verify: Look for: fail 0. The last line reads: dry run — no model call. The {} above it is the empty settings list. You fill it in Step 1."
     ],
     "cards": [
       {
-        "title": "1 · After npm run verify",
-        "body": "Look for: fail 0. Your setup is correct."
+        "title": "1 · After npm run doctor",
+        "body": "Look for: meets minimum. Node.js and Claude Code are ready."
       },
       {
-        "title": "2 · After the dry run",
-        "body": "The last line reads: dry run — no model call. That is correct: the AI has not done anything yet. The {} above it is the empty settings list."
+        "title": "2 · After npm run verify",
+        "body": "Look for: fail 0. The last line reads: dry run — no model call. The {} above it is the empty settings list. You fill it in Step 1."
       }
     ],
-    "notes": "Show this after Step 0. The first line of the dry run says how the agent runs (backend: claude-code means your login). A dry run does not call the AI, so it says nothing about how good the agent is.",
+    "notes": "Show this after SOLO 0. Participants type the same two commands themselves. Backend: claude-code means the package uses your Claude Code login. A dry run does not call the AI, so it says nothing about how good the agent is.",
     "stateId": "16:What you see · Step 0",
     "teach": {
       "next": "Coffee break",
       "time": "2 min",
-      "gist": "Compare screens: fail 0, and the last line of the dry run.",
+      "gist": "Type these two commands in a second terminal. Look for two things.",
       "script": [
         {
-          "say": "Compare your screen with this one. There are two things to look for."
+          "say": "Now test it yourself. Open a second terminal and type these two commands."
         },
         {
           "do": "Point at card 1.",
-          "say": "After verify, you should see fail 0. Then your setup is correct."
+          "say": "After doctor, you should see meets minimum."
         },
         {
           "do": "Point at card 2.",
-          "say": "After the dry run, the last line says: dry run, no model call. That is right: the AI has not done anything yet."
+          "say": "After verify, you should see fail 0. The last line says: dry run, no model call. That is right: the AI has not done anything yet."
         },
         {
           "ask": "Hands up: who has fail 0?",
-          "say": "(Not everyone there yet? Help them in the break.)"
+          "say": "(Not everyone? Fix it now, or pair that person with a neighbour.)"
         }
       ],
       "do": [
-        "Compare with the screenshot.",
-        "Count the hands: who has fail 0?"
+        "Type the commands with the group. Compare the screens."
       ],
       "done": [
         "Most of the room has fail 0. The rest get help in the break."
       ],
       "watch": [
-        "The dry run says nothing about how good the agent is. It only checks the setup."
+        "A version number can differ. Only meets minimum and fail 0 matter."
       ]
     }
   },
@@ -1239,18 +1260,18 @@ window.SLIDES = [
       },
       {
         "title": "Done when",
-        "body": "You have written down six labels and tested the tone trap."
+        "body": "npm run check:1 passes, and one real run shows the priority, the reason and the route."
       }
     ],
     "keyPoints": [
       "One agent returns a fixed priority. Code routes it."
     ],
-    "notes": "Participants paste the current SOLO 1 prompt into Claude Code. Claude builds options.mjs, CLAUDE.md and priority-schema.mjs, adds focused tests and runs MSG-01 through MSG-06. Participants choose the fictional cases, inspect the diff and judge the actual evidence.",
+    "notes": "Participants paste the SOLO 1 prompt into Claude Code. Claude Code shows the red check, fills in options.mjs, priority-schema.mjs and CLAUDE.md, and runs MSG-06 once. Participants read the table that maps each option to its n8n setting. The tone trap comes in Step 1c.",
     "stateId": "21:Step 1 · Structured priority output and chat memory",
     "teach": {
       "next": "Demo · Step 1: I show it",
       "time": "2 min",
-      "gist": "Step 1: one agent with work instructions and a form. You are done when you have six labels and have tested the tone trap.",
+      "gist": "Step 1: one agent with work instructions and a form. You are done when check:1 passes and you have read one real run.",
       "script": [
         {
           "say": "Step 1. You build one agent. You give it its work instructions, CLAUDE.md, and the form."
@@ -1261,7 +1282,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at Done when.",
-          "say": "You are done when you have written down six labels and tested the tone trap. Keep the labels, because you need them in Step 4."
+          "say": "You are done when the check passes and you have read one real run. The tone trap comes in Step 1c."
         }
       ],
       "do": [
@@ -1539,56 +1560,82 @@ window.SLIDES = [
     "kicker": "What you see · Step 1",
     "type": "concept",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/see-step1.png",
-      "imageLink": "Sample trace: the agent returns JSON, then the Switch picks a route"
+      "term": [
+        {
+          "c": "npm run check:1"
+        },
+        {
+          "o": "ℹ pass 3"
+        },
+        {
+          "o": "ℹ fail 0"
+        },
+        {
+          "c": "npm run lesson1 -- MSG-06"
+        },
+        {
+          "o": "[result] success · 2 turns"
+        },
+        {
+          "o": "Structured output:"
+        },
+        {
+          "o": "  \"priority\": \"medium\","
+        },
+        {
+          "o": "  \"reason\": \"Something is wrong, but …\""
+        },
+        {
+          "o": "Switch → medium → investigate (Support team)"
+        }
+      ]
     },
-    "subtitle": "After a real run. Look for two things.",
+    "subtitle": "Type these two commands in a second terminal. Look for two things.",
     "keyPoints": [
-      "Structured output: JSON with priority and reason.",
-      "Switch line: Switch → low → AUTO_REPLY. Code picks the route, not the model."
+      "After npm run check:1: Look for: fail 0. Your three files match the reference.",
+      "After the real run: Structured output is the completed form: priority and reason. The Switch line shows that the code picked the tray, not the AI."
     ],
     "cards": [
       {
-        "title": "1 · Structured output",
-        "body": "The completed form: priority and reason."
+        "title": "1 · After npm run check:1",
+        "body": "Look for: fail 0. Your three files match the reference."
       },
       {
-        "title": "2 · The Switch line",
-        "body": "Switch → low → AUTO_REPLY. The code picked the tray, not the AI."
+        "title": "2 · After the real run",
+        "body": "Structured output is the completed form: priority and reason. The Switch line shows that the code picked the tray, not the AI."
       }
     ],
-    "notes": "This is the labelled sample in docs/sample-trace.md. A live run shows the same labels with different text. The [result] line shows the turns, the time and the cost.",
+    "notes": "Show this after SOLO 1. Participants type the check and the real run themselves. The check is offline and free. The real run calls the model once. The [result] line shows the turns.",
     "stateId": "27:What you see · Step 1",
     "teach": {
       "next": "Discuss: who decides what?",
       "time": "2 min",
-      "gist": "Compare: the filled-in form, then the Switch line.",
+      "gist": "Type these two commands in a second terminal. Look for two things.",
       "script": [
         {
-          "say": "Compare your screen with this one. There are two things to look for."
+          "say": "Now test it yourself. Type the check first, then the real run."
         },
         {
           "do": "Point at card 1.",
-          "say": "The first is the filled-in form: the priority and the reason."
+          "say": "The check says fail 0. Your options, your schema and your CLAUDE.md are right."
         },
         {
           "do": "Point at card 2.",
-          "say": "The second is the Switch line: the code picked the tray."
+          "say": "The real run shows the filled-in form, and then the Switch line: the code picked the tray."
         },
         {
           "ask": "Your reason text is different from mine. Is that a problem?",
-          "say": "(Answer: no. The words differ on every run. The priority and the route are what matter.)"
+          "say": "(Answer: no. The words differ on every run. The form and the route stay the same.)"
         }
       ],
       "do": [
-        "Compare with the screenshot."
+        "Type the commands with the group. Compare the screens."
       ],
       "done": [
         "Everyone has found both lines."
       ],
       "watch": [
-        "This screenshot is a sample: the reason text is different on every run."
+        "A real run takes up to a minute. The model name and the words of the answer differ on every laptop."
       ]
     }
   },
@@ -2125,7 +2172,7 @@ window.SLIDES = [
       },
       {
         "title": "risk-agent = the risk expert",
-        "body": "Decides the priority and writes a short risk note."
+        "body": "Writes a short internal risk note. The team lead decides the priority."
       },
       {
         "title": "customer-reply-agent = the writer",
@@ -2321,27 +2368,27 @@ window.SLIDES = [
       },
       {
         "title": "Done when",
-        "body": "The trace shows risk first, then the reply, and you have tested a vague description."
+        "body": "npm run check:2 passes, and the trace shows risk first, then the reply."
       }
     ],
     "keyPoints": [
-      "risk-agent analyses and decides the priority.",
+      "risk-agent writes the risk note. The team lead decides the priority.",
       "customer-reply-agent writes the reply draft.",
-      "The orchestrator delegates in order and saves a file."
+      "The team lead delegates in order and returns {priority, message}."
     ],
-    "notes": "Step 2 in the package (SOLO.md, Step 2): two specialist files, a loader and the team lead. The team lead calls risk-agent first, then customer-reply-agent. Last session's n8n Description is now the description line at the top of each specialist file.",
+    "notes": "Step 2 in the package (SOLO.md, SOLO 2): two specialist files and the team-lead options. The loader is already built. The team lead calls risk-agent first, then customer-reply-agent. Last session's n8n Description is now the description line at the top of each specialist file.",
     "stateId": "42:Step 2 · Risk analysis and customer reply agents",
     "teach": {
       "next": "Demo · Step 2: I show it",
       "time": "2 min",
-      "gist": "Step 2: a team lead and two specialists. You are done when you see the right order and have done the description test.",
+      "gist": "Step 2: a team lead and two specialists. You are done when check:2 passes and you see the right order.",
       "script": [
         {
           "say": "Step 2: your agent becomes a team."
         },
         {
           "do": "Point at Done when.",
-          "say": "You are done when you see the right order, risk first and then the reply, and you have done the description test."
+          "say": "You are done when the check passes and you see the right order: risk first, then the reply."
         }
       ],
       "do": [
@@ -2389,7 +2436,7 @@ window.SLIDES = [
           "do": "Switch to the trainer/solution branch for the Step 2 demo. Nothing must be built before class."
         },
         {
-          "say": "I will show the prepared result. Just watch."
+          "say": "I will show the finished step first. Just watch."
         },
         {
           "do": "Run the real run. Point at the two Agent lines.",
@@ -2397,12 +2444,12 @@ window.SLIDES = [
           "clip": "assets/day4-teach/a16-msg05-orchestrator.mp4"
         },
         {
-          "do": "Open the draft.",
+          "do": "Point at message in the structured output.",
           "say": "And this is the draft. It waits for a person: nothing is sent."
         }
       ],
       "do": [
-        "Show the dry run and the real run, then open the draft."
+        "Show the dry run and the real run, then read the draft in message."
       ],
       "done": [
         "Everyone has seen the order: risk, then reply."
@@ -2464,47 +2511,85 @@ window.SLIDES = [
     "kicker": "What you see · Step 2",
     "type": "concept",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/see-step2.png",
-      "imageLink": "Sample trace: the orchestrator calls risk-agent, then customer-reply-agent"
+      "term": [
+        {
+          "c": "npm run check:2"
+        },
+        {
+          "o": "ℹ pass 2"
+        },
+        {
+          "o": "ℹ fail 0"
+        },
+        {
+          "c": "npm run lesson2 -- MSG-05"
+        },
+        {
+          "o": "[tool_use] Agent → risk-agent"
+        },
+        {
+          "o": "[subagent] risk-agent · model …"
+        },
+        {
+          "o": "[tool_use] Agent → customer-reply-agent"
+        },
+        {
+          "o": "[subagent] customer-reply-agent · model …"
+        },
+        {
+          "o": "  \"priority\": \"high\","
+        },
+        {
+          "o": "  \"message\": \"Hi, thank you for flagging …\""
+        },
+        {
+          "o": "Switch → high → escalate (Payments escalation team)"
+        }
+      ]
     },
-    "subtitle": "After a real run. Two things to look for.",
+    "subtitle": "Type these two commands in a second terminal. Look for two things.",
     "keyPoints": [
-      "Two Agent calls: First risk-agent, then customer-reply-agent.",
-      "The draft: It asks only for the facts that are missing."
+      "After npm run check:2: Look for: fail 0. Both specialist files and the team-lead options are right.",
+      "After the real run: Two Agent lines: first risk-agent, then customer-reply-agent. Each [subagent] line shows its model. The draft is in message."
     ],
     "cards": [
       {
-        "title": "1 · Two Agent lines",
-        "body": "First risk-agent, then customer-reply-agent."
+        "title": "1 · After npm run check:2",
+        "body": "Look for: fail 0. Both specialist files and the team-lead options are right."
       },
       {
-        "title": "2 · The draft",
-        "body": "It only asks for the missing facts. It does not make anything up."
+        "title": "2 · After the real run",
+        "body": "Two Agent lines: first risk-agent, then customer-reply-agent. Each [subagent] line shows its model. The draft is in message."
       }
     ],
-    "notes": "This is the labelled MSG-10 sample. In a live run, check each claim in the draft. If no tool gave the fact, the draft must not say it.",
+    "notes": "Show this after SOLO 2. Participants type the check and the real run themselves. In the real run, check each claim in the draft. If the ticket did not give a fact, the draft must not say it.",
     "stateId": "45:What you see · Step 2",
     "teach": {
       "next": "Discuss: who did what?",
       "time": "2 min",
-      "gist": "Compare: two Agent lines, and a draft that asks for the missing facts.",
+      "gist": "Type these two commands in a second terminal. Look for two things.",
       "script": [
         {
-          "say": "Compare. Two Agent lines, in this order. And a draft that only asks for what is missing."
+          "say": "Now test it yourself. Type the check first, then the real run."
         },
         {
-          "ask": "Does the draft say something that no tool gave it?",
+          "do": "Point at card 2.",
+          "say": "Two Agent lines, in this order. Under each one you see the model that the specialist runs on."
+        },
+        {
+          "ask": "Does the draft say something that the ticket did not give?",
           "say": "(If yes: that is made up. The draft must not say it.)"
         }
       ],
       "do": [
-        "Compare with the screenshot."
+        "Type the commands with the group. Compare the screens."
       ],
       "done": [
         "Everyone has found both Agent lines."
       ],
-      "watch": []
+      "watch": [
+        "A real run takes up to a minute. The model name and the words of the answer differ on every laptop."
+      ]
     }
   },
 {
@@ -2580,18 +2665,18 @@ window.SLIDES = [
     "subtitle": "The agent asks the desk for facts. The desk reads the customer list (docs/customer_context.csv) and the transactions spreadsheet (docs/transactions.xlsx), and hands over only what was asked for. In Step 3 it can only look things up.",
     "cards": [
       {
-        "title": "customers · get_customer",
-        "body": "Looks up a customer in the customer list."
+        "title": "get_customer",
+        "body": "Looks up one customer in the customer list."
       },
       {
-        "title": "transactions · get_transaction",
-        "body": "get_transaction and list_transactions: look up one payment, or list them."
+        "title": "get_transaction",
+        "body": "Looks up one payment in the transactions spreadsheet."
       }
     ],
     "keyPoints": [
       "The MCP server owns the data. The agent only sees what the tool returns."
     ],
-    "notes": "MCP is a standard way to give an agent a lookup desk. There are two desks: customers (reads docs/customer_context.csv) and transactions (reads docs/transactions.xlsx). They are read-only: they can look things up but not change them. Last session's Customer Context Agent with its Data Table becomes this desk.",
+    "notes": "MCP is a standard way to give an agent a lookup desk. The desk is one MCP server called support, with two tools: get_customer reads docs/customer_context.csv and get_transaction reads docs/transactions.xlsx. Both are read-only: they look things up and cannot change anything. Last session's Customer Context Agent with its Data Table becomes this desk. The server is already built in 03-mcp/support-mcp/server.js.",
     "stateId": "47:MCP: external data",
     "teach": {
       "next": "Step 3: real facts from the lookup desk",
@@ -2603,7 +2688,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at the two cards.",
-          "say": "There are two desks: one for customers and one for payments. The agent asks, and the desk looks it up and hands over only that."
+          "say": "The desk has two counters: one for customers and one for payments. The agent asks, and the desk looks it up and hands over only that."
         },
         {
           "say": "And the desk can only look things up. It cannot change anything."
@@ -2640,11 +2725,11 @@ window.SLIDES = [
         }
       ]
     },
-    "subtitle": "Your team gets two lookup desks. They can look things up, but not change them.",
+    "subtitle": "Your team gets a lookup desk and a third specialist that uses it. The desk can look things up, but not change them.",
     "cards": [
       {
         "title": "What you build",
-        "body": "Two lookup desks: customers and transactions."
+        "body": "A context specialist, and the options that connect it to the lookup desk."
       },
       {
         "title": "Why",
@@ -2652,25 +2737,25 @@ window.SLIDES = [
       },
       {
         "title": "Done when",
-        "body": "The trace shows both lookups, and you have written down three more labels."
+        "body": "npm run check:3 passes, and the trace shows both lookups."
       }
     ],
     "keyPoints": [
       "The agents get facts from tools. They cannot change data yet."
     ],
-    "notes": "There are two lookup desks: customers (reads docs/customer_context.csv, tool get_customer, used by customer-context-agent) and transactions (reads docs/transactions.xlsx, tools get_transaction and list_transactions, used by risk-agent). Both can only look things up. The package starts the desks by itself. The reply stays a draft for a person.",
+    "notes": "The desk is one MCP server with two tools: get_customer and get_transaction. Only customer-context-agent gets these tools. risk-agent and customer-reply-agent have no tools. The package starts the server by itself. The reply stays a draft for a person.",
     "stateId": "48:Step 3 · Read-only customer and transaction MCP tools",
     "teach": {
       "next": "Demo · Step 3: I show it",
       "time": "2 min",
-      "gist": "Step 3: two lookup desks. You are done when both lookups are in the trace and you have three more labels.",
+      "gist": "Step 3: a lookup desk and a context specialist. You are done when check:3 passes and both lookups are in the trace.",
       "script": [
         {
-          "say": "Step 3: your team gets the lookup desks."
+          "say": "Step 3: your team gets the lookup desk, and one specialist that may use it."
         },
         {
           "do": "Point at Done when.",
-          "say": "You are done when you see both lookups, and you have written down three more labels: MSG-07, 08 and 09. You need them in Step 4."
+          "say": "You are done when the check passes and you see both lookups in the trace."
         }
       ],
       "do": [
@@ -2692,7 +2777,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "1 · Test the desks",
-        "body": "npm run smoke:mcp\nTests both desks without the AI."
+        "body": "npm run smoke:mcp\nTests both tools without the AI."
       },
       {
         "title": "2 · A real run",
@@ -2700,12 +2785,12 @@ window.SLIDES = [
       },
       {
         "title": "3 · Where did the facts come from?",
-        "body": "In the draft, the External data section lists what each desk handed over."
+        "body": "Each fact in the draft matches a tool result in the trace."
       }
     ],
     "keyPoints": [
-      "customer-context-agent calls get_customer.",
-      "risk-agent uses get_transaction and list_transactions.",
+      "customer-context-agent calls get_customer and get_transaction.",
+      "risk-agent and customer-reply-agent have no tools.",
       "Review the customer-reply-agent draft before sending."
     ],
     "notes": "Use the trainer/solution branch. Show the smoke check, then a real MSG-08 run. Point at both lookups and at the same facts in the draft. The draft waits for a person.",
@@ -2720,21 +2805,21 @@ window.SLIDES = [
         },
         {
           "do": "Run npm run smoke:mcp.",
-          "say": "First I test the desks, without the AI. The last line says: MCP servers OK.",
+          "say": "First I test the desk, without the AI. The last line says: 2 read-only tools.",
           "clip": "assets/day4-teach/a20-1-smoke-mcp.mp4"
         },
         {
           "do": "Run npm run lesson3 -- MSG-08. Point at the two lookup lines.",
-          "say": "Now a real run. Do you see that? The agent asks the customer desk and the payment desk.",
+          "say": "Now a real run. Do you see that? The context specialist asks for the customer and for the payment.",
           "clip": "assets/day4-teach/a20-2-msg08-mcp.mp4"
         },
         {
-          "do": "Open the draft, find External data.",
-          "say": "And here it says exactly which fact came from which desk."
+          "do": "Point at one fact in message and at its tool result.",
+          "say": "And here you see which fact came from which lookup."
         }
       ],
       "do": [
-        "Do the smoke test, the real run and External data."
+        "Do the smoke test and the real run, then match one fact to a tool result."
       ],
       "done": [
         "Everyone has seen both lookups."
@@ -2796,47 +2881,95 @@ window.SLIDES = [
     "kicker": "What you see · Step 3",
     "type": "concept",
     "visual": {
-      "opener": "showcase",
-      "image": "assets/workshop-4/see-step3.png",
-      "imageLink": "Terminal: npm run smoke:mcp lists read-only tools and real lookups"
+      "term": [
+        {
+          "c": "npm run smoke:mcp"
+        },
+        {
+          "o": "MCP smoke: … 2 read-only tools"
+        },
+        {
+          "c": "npm run check:3"
+        },
+        {
+          "o": "ℹ pass 2"
+        },
+        {
+          "o": "ℹ fail 0"
+        },
+        {
+          "c": "npm run lesson3 -- MSG-08"
+        },
+        {
+          "o": "[tool_use] Agent → customer-context-agent"
+        },
+        {
+          "o": "[tool_use] mcp__support__get_customer"
+        },
+        {
+          "o": "[tool_use] mcp__support__get_transaction"
+        },
+        {
+          "o": "[tool_use] Agent → risk-agent"
+        },
+        {
+          "o": "[tool_use] Agent → customer-reply-agent"
+        },
+        {
+          "o": "  \"priority\": \"high\","
+        },
+        {
+          "o": "Switch → high → escalate (Payments escalation team)"
+        }
+      ]
     },
-    "subtitle": "After the desk test. Look for two things.",
+    "subtitle": "Type these three commands in a second terminal. Look for two things.",
     "keyPoints": [
-      "Read-only tools: get_customer and get_transaction. No write tools.",
-      "Last line: MCP servers OK. No model call."
+      "After the smoke test and the check: Look for: 2 read-only tools, and fail 0. No model was called.",
+      "After the real run: Context first, with get_customer and get_transaction. Then risk-agent, then customer-reply-agent."
     ],
     "cards": [
       {
-        "title": "1 · Only lookup tools",
-        "body": "get_customer, get_transaction and list_transactions: only lookups. No tools that change anything."
+        "title": "1 · After the smoke test and the check",
+        "body": "Look for: 2 read-only tools, and fail 0. No model was called."
       },
       {
-        "title": "2 · Last line",
-        "body": "MCP servers OK. No model was called."
+        "title": "2 · After the real run",
+        "body": "Context first, with get_customer and get_transaction. Then risk-agent, then customer-reply-agent."
       }
     ],
-    "notes": "smoke:mcp starts the MCP server and calls each tool. CUST-999 does not exist, so the tool says so. That is correct.",
+    "notes": "Show this after SOLO 3. smoke:mcp starts the MCP server and calls each tool. It also asks for a customer that does not exist, and the tool says so. That is correct. The real run shows the full order: Context, Risk, Reply.",
     "stateId": "51:What you see · Step 3",
     "teach": {
       "next": "Discuss: where did the facts come from?",
       "time": "2 min",
-      "gist": "Compare: only lookup tools, and MCP servers OK.",
+      "gist": "Type these three commands in a second terminal. Look for two things.",
       "script": [
         {
-          "say": "Compare. There should be only lookup tools, and nothing that changes data. And the last line says: MCP servers OK."
+          "say": "Now test it yourself. Three commands: the desk test, the check, and the real run."
         },
         {
-          "ask": "CUST-999 says: no customer. Is that an error?",
-          "say": "(Answer: no. That customer does not exist, and the desk says so honestly.)"
+          "do": "Point at card 1.",
+          "say": "Only lookup tools, and nothing that changes data."
+        },
+        {
+          "do": "Point at card 2.",
+          "say": "In the real run the context specialist goes first and does both lookups."
+        },
+        {
+          "ask": "Which specialist did the lookups, and why only that one?",
+          "say": "(Answer: customer-context-agent. It is the only one with the tools.)"
         }
       ],
       "do": [
-        "Compare with the screenshot."
+        "Type the commands with the group. Compare the screens."
       ],
       "done": [
         "Everyone has MCP servers OK."
       ],
-      "watch": []
+      "watch": [
+        "A real run takes up to a minute. The model name and the words of the answer differ on every laptop."
+      ]
     }
   },
 {
@@ -2866,10 +2999,10 @@ window.SLIDES = [
     ],
     "keyPoints": [
       "Use get_customer for customer context.",
-      "Use get_transaction or list_transactions for transaction facts.",
+      "Use get_transaction for transaction facts.",
       "A person reviews reply drafts before they are sent."
     ],
-    "notes": "Answers: the customer facts came from get_customer (the customer list), and the payment facts came from get_transaction (the transaction list). See the External data section. A person reads every draft before it is sent.",
+    "notes": "Answers: the customer facts came from get_customer (the customer list), and the payment facts came from get_transaction (the transaction list). Match each fact in the draft to a tool result in the trace. A person reads every draft before it is sent.",
     "stateId": "52:Discuss: tools and external data.",
     "teach": {
       "next": "Coffee break",
@@ -2878,7 +3011,7 @@ window.SLIDES = [
       "script": [
         {
           "ask": "Which facts came from a lookup desk?",
-          "say": "(Answer: the customer and payment facts. See External data in the draft.)"
+          "say": "(Answer: the customer and payment facts. Each one matches a tool result in the trace.)"
         },
         {
           "ask": "Who reads the draft before it is sent?",
@@ -2953,7 +3086,7 @@ window.SLIDES = [
         "title": "Fixed rules · code",
         "items": [
           "The Switch picks the tray",
-          "Focused tests check contracts and routes",
+          "Checks test the options and the routes",
           "The barrier checks every change",
           "Same input, always the same route"
         ]
