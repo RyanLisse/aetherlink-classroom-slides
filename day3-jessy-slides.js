@@ -426,10 +426,10 @@ return [
       { title: "Agent loop", sub: "observe, decide, act, check", cells: ["Claude Code itself", "The AI Agent node", "L2"] },
       { title: "Instructions", sub: "how to work", cells: ["CLAUDE.md and skills", "The Agent's System Message", "L2"] },
       { title: "Memory", sub: "what carries over", cells: ["The context window and memory", "Simple Memory", "L2"] },
-      { title: "Checked output", sub: "a fixed shape the next step can check", cells: ["A test that must pass", "Structured Output Parser", "L2"] },
+      { title: "Fixed output", sub: "a shape the next step can read", cells: ["The Output: line of your prompt, but enforced", "Structured Output Parser", "L2"] },
       { title: "Subagents", sub: "one job each", cells: ["Bobby, the level-checker, in its own context", "Specialist agents with a Description", "L3"] },
       { title: "Workflow", sub: "steps chained", cells: ["/build-game-levels: skills, test, Bobby", "Agents that call each other", "L3+"] },
-      { title: "You decide", sub: "human in the loop", cells: ["You approve edits and the merge", "A human gate before any reply", "Save + approve"] }
+      { title: "You decide", sub: "human in the loop", cells: ["You approve edits and the merge", "A human gate before any reply", "L1-L3+"] }
     ]
   },
   tagline: "Same ideas, new view: in n8n every part is a node, and you can open it and read it.",
@@ -456,10 +456,10 @@ return [
         say: "(Answer: the context window.)" },
       { do: "Click → row 4, Memory.",
         say: "In n8n: Simple Memory. You'll test it yourself." },
-      { ask: "Checked output: evidence, not confidence. How did you check Claude's work?",
-        say: "(Answer: a test that must pass.)" },
-      { do: "Click → row 5, Checked output.",
-        say: "In n8n: the Structured Output Parser. It forces the agent to answer in fixed fields, so the next step can check it." },
+      { ask: "Fixed output: a shape the next step can read. On Day 1, where did you tell Claude which format you wanted back?",
+        say: "(Answer: the Output: line of the prompt template.)" },
+      { do: "Click → row 5, Fixed output.",
+        say: "In n8n: the Structured Output Parser. It forces the agent to answer in fixed fields, so the next step can read them. Careful: it checks the shape, not whether the answer is right. If the agent gives WL-1026 'low', the parser lets it through. Whether it's right, we check with the test tickets and a person." },
       { ask: "Subagents: helpers with one job each. Who do you remember from Day 2?",
         say: "(Answer: Bobby, the level-checker.)" },
       { do: "Click → row 6, Subagents.",
@@ -492,7 +492,7 @@ return [
     next: "Assignment 30: everyone gets their own n8n."
   },
   keyPoints: ["Nothing today is new as an idea", "What is new: you see it happen", "Rules (L1), judgment (L2), specialists (L3)", "The human decision never moves to the machine"],
-  notes: "Say: This is the map for today. Nothing you learn today is a new idea. What is new: you see it happen.\n\nClick one row at a time and ask the room: where did you meet this on Day 1 or 2? Let them answer before you read the n8n column.\nA good result: a rule is like a test or a hook; the AI Agent node is the agent loop; the System Message plays the role of CLAUDE.md; Simple Memory is what carries over between messages; the Output Parser forces checkable output, like a test; the specialists are subagents with one job each, like Bobby.\n\nCome back to this slide whenever a level adds a node."
+  notes: "Say: This is the map for today. Nothing you learn today is a new idea. What is new: you see it happen.\n\nClick one row at a time and ask the room: where did you meet this on Day 1 or 2? Let them answer before you read the n8n column.\nA good result: a rule is like a test or a hook; the AI Agent node is the agent loop; the System Message plays the role of CLAUDE.md; Simple Memory is what carries over between messages; the Output Parser is the Output: line of the Day 1 prompt template, but enforced. It checks the shape, not whether the answer is right: WL-1026 as 'low' still passes. Whether it's right, you check with the test tickets and a person; the specialists are subagents with one job each, like Bobby.\n\nCome back to this slide whenever a level adds a node."
 },
 
 { // Slide 12
@@ -1299,7 +1299,7 @@ return [
       {
         "do": "Play the clip (or do it live in your own n8n).",
         "clip": "assets/day3-teach/a33-chat-agent.mp4",
-        "say": "Let me show you once. A new workflow. First step: search 'chat', pick 'On chat message'. Plus, AI Agent. Under Chat Model, plus, OpenAI Chat Model: see, the credential 'Gateway credits' is already filled in. Close it, click Open chat, type a question… and there's the answer. On the right, the Logs: the AI Agent, and inside it the Chat Model it asked."
+        "say": "Let me show you once. A new workflow. First step: search 'chat', pick 'On Chat Message'. Plus, AI Agent. Under Chat Model, plus, OpenAI Chat Model: see, the credential 'Gateway credits' is already filled in. Close it, click Open chat, type a question… and there's the answer. On the right, the Logs: the AI Agent, and inside it the Chat Model it asked."
       },
       {
         "do": "Go to the next slide (Assignment 33).",
@@ -1312,14 +1312,14 @@ return [
       "The chat panel: type on the left, see every step in the Logs on the right."
     ],
     "watch": [
-      "In the first-step search the trigger is called 'On chat message'; on the canvas it becomes 'When chat message received'. Same thing.",
+      "In the first-step search the trigger is called 'On Chat Message'; on the canvas it becomes 'When chat message received'. Same thing.",
       "Language Models list: pick one with the 'Free credits' badge (OpenAI Chat Model). The credential 'Gateway credits' and model gpt-5-mini are filled in by default: change nothing.",
       "After adding the trigger, the button under the canvas says 'Open chat' instead of 'Execute'. If someone can't find the chat: that button."
     ],
     "terms": [
       [
         "Chat trigger",
-        "starts the workflow every time you type a chat message (search: 'On chat message')"
+        "starts the workflow every time you type a chat message (search: 'On Chat Message')"
       ],
       [
         "Chat Model",
@@ -1341,7 +1341,7 @@ return [
   type: "concept",
   visual: { opener: 'showcase', image: SHOTS + 'chatmessage_aiagent.png', imageLink: 'n8n · When chat message received → AI Agent', stepThrough: true },
   cards: [
-    { title: "A new trigger", body: "Chat → On new Chat event starts the workflow on every chat message." },
+    { title: "A new trigger", body: "Chat → On Chat Message starts the workflow on every chat message." },
     { title: "The chat panel", body: "Type on the left, follow every run in the Logs on the right." },
     { title: "AI Agent + Chat Model", body: "The agent needs a model to think with. Ours runs on the Gateway credits from your trial." }
   ],
@@ -1359,7 +1359,8 @@ return [
         "say": "Your first agent. Three nodes, one question."
       },
       {
-        "do": "Point at the steps on the slide.",
+        "do": "Point at the steps on the slide. The clip is the same demo as on the previous slide: play it again if someone wants to see a step once more.",
+        "clip": "assets/day3-teach/a33-chat-agent.mp4",
         "say": "A new workflow called 'Day 3 · chat agent', with the chat trigger. Then an AI Agent. Then give it a model: OpenAI Chat Model, credential 'Use Gateway credits', model gpt-5-mini."
       },
       {
@@ -1409,7 +1410,7 @@ return [
   visual: { shot: SHOTS + 'chatmessage_aiagent.png', shotLabel: 'The chat trigger and the AI Agent, before the Chat Model' },
   stepsHeading: "Steps:",
   steps: [
-    { text: "A new workflow with a chat trigger", after: "Overview → Create workflow, name it Day 3 · chat agent. + → Chat → On new Chat event. On the canvas it's called When chat message received; the chat opens at the bottom." },
+    { text: "A new workflow with a chat trigger", after: "Overview → Create workflow, name it Day 3 · chat agent. + → Chat → On Chat Message. On the canvas it's called When chat message received; the chat opens at the bottom." },
     { text: "Add an AI Agent", after: "+ after the trigger → AI Agent. Under it: Chat Model (required), Memory, Tool." },
     { text: "Give it a model", parts: [["Chat Model", "OpenAI Chat Model"], ["Credential", "Use Gateway credits"], ["Model", "gpt-5-mini"]], after: "No gpt-5-mini? Any model with mini in its name works." },
     { text: "Say hello in the chat", prompt: "Hello! In one sentence: what can you do for a support team?", after: "An answer appears. In the Logs: AI Agent, then OpenAI Chat Model." }
@@ -2821,7 +2822,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
         "do": "Point at step 1. Play the new clip (swap the trigger). Narrate each move as it happens.",
         "clip": "assets/day3-teach/a41-0-swap-trigger.mp4",
         "warn": "Go slowly here: this is the step people miss. Hover a node → a small toolbar appears ABOVE it → the bin icon deletes it.",
-        "say": "Now we swap the start. Hover over the manual trigger, the first node: a small row of icons appears above it. Click the bin: gone. Same for Ticket Input: hover, bin. Now the AI Agent has nothing in front of it. Plus at the top right. n8n asks: what triggers this workflow? Type chat, click Chat, then On new Chat event. A panel opens: just close it. The new node, When chat message received, is on the canvas. Drag from its little dot on the right to the left side of the AI Agent: a line. Then open the AI Agent: Source for Prompt, change Define below back to Connected Chat Trigger Node. Close. Open Simple Memory: Session ID, also Connected Chat Trigger Node. Close. The chat box at the bottom appears by itself."
+        "say": "Now we swap the start. Hover over the manual trigger, the first node: a small row of icons appears above it. Click the bin: gone. Same for Ticket Input: hover, bin. Now the AI Agent has nothing in front of it. Plus at the top right. n8n asks: what triggers this workflow? Type chat, click Chat, then On Chat Message. A panel opens: just close it. The new node, When chat message received, is on the canvas. Drag from its little dot on the right to the left side of the AI Agent: a line. Then open the AI Agent: Source for Prompt, change Define below back to Connected Chat Trigger Node. Close. Open Simple Memory: Session ID, also Connected Chat Trigger Node. Close. The chat box at the bottom appears by itself."
       },
       {
         "do": "Point at step 2. Play clip 1 from the middle (the low/medium/high nodes).",
@@ -2850,7 +2851,7 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
     "do": [
       "… → Duplicate → 'Day 3 · chat to chat' (new tab)",
       "Hover manual trigger → bin; hover Ticket Input → bin",
-      "+ (top right) → chat → Chat → On new Chat event → close the panel",
+      "+ (top right) → chat → Chat → On Chat Message → close the panel",
       "Drag from the chat trigger's dot to the AI Agent",
       "AI Agent: Source for Prompt → Connected Chat Trigger Node",
       "Simple Memory: Session ID → Connected Chat Trigger Node",
@@ -2902,14 +2903,14 @@ Return the reply text, followed by one line that starts with "Risk note:" and su
   calm: true,
   stepsHeading: "Steps:",
   steps: [
-    { text: "Duplicate, and swap the trigger", parts: [["Source for Prompt", "Connected Chat Trigger Node"], ["Simple Memory · Session ID", "Connected Chat Trigger Node"]], after: "… → Duplicate, named Day 3 · chat to chat: it opens in a new tab. Replace the manual trigger and Ticket Input with Chat → On new Chat event. Then set the two fields above." },
+    { text: "Duplicate, and swap the trigger", parts: [["Source for Prompt", "Connected Chat Trigger Node"], ["Simple Memory · Session ID", "Connected Chat Trigger Node"]], after: "… → Duplicate, named Day 3 · chat to chat: it opens in a new tab. Replace the manual trigger and Ticket Input with Chat → On Chat Message. Then set the two fields above." },
     { text: "A reply on every path", prompt: "HIGH priority, escalate today. Draft reply for review: {{ $json.output.message }}", after: "In the low, medium and high nodes: add a field named output and switch it to Expression. This is the text for high; change the first words for the others." },
     { text: "Send a ticket in the chat", prompt: "CUST-006: My card reader arrived broken. I would like a refund or a replacement." },
     { text: "And a question", prompt: "CUST-004: Please send me a copy of my invoice. I cannot find it in the account area." },
     { text: "And the same problem, other words", prompt: "CUST-001: I paid two times for the same order." }
   ],
   expected: "You type a ticket in the chat and get a draft reply back that names its priority, and that a person still has to approve. In the next assignment the workflow saves it for that person.",
-  keyPoints: ["Duplicate first: it opens a new tab", "Chat → On new Chat event", "Prompt and memory: Connected Chat Trigger Node", "Field output, set to Expression", "Next: save every reply"],
+  keyPoints: ["Duplicate first: it opens a new tab", "Chat → On Chat Message", "Prompt and memory: Connected Chat Trigger Node", "Field output, set to Expression", "Next: save every reply"],
   notes: "Say: The final build. Everything you made today, behind one chat box.\n\nType the minutes on the timer and press start. Visit the breakout rooms, or ask everyone to type 'done' or 'stuck' in the chat and help the stuck ones first. Note one or two good workflows for the closing round.\n\nWhy now: this is what a support colleague would actually use: paste a ticket, get a priority and a draft reply.\nWhat you see: the chat answers with 'HIGH priority, escalate today. Draft reply...' and the reply. In the Logs the whole flow: agent, specialists, parser, Switch, one path.\n\nWatch for: the chat shows nothing or a block of JSON. The last node needs a field named exactly output, set to Expression. If the field stays on Fixed, the chat shows the {{ }} text literally.\nWatch for: Duplicate opens the copy in a new browser tab. Some people keep working in the old tab and break their L3 workflow. Check the workflow name at the top.\nWatch for: an error about the prompt. Step 1: with the chat trigger, the prompt and the memory both come from the Connected Chat Trigger Node again.\nWatch for: 'customer not found'. The customer ID must be in the message; the agent reads it from the text now.\n\nDone early: they help someone who is stuck, or test a ticket of their own in the chat.\n\nBackground: the human gate. Here the reply is only labelled a draft, and nothing is sent to a customer. In the next assignment the workflow saves every reply in a table where a person approves it. In production, n8n also has nodes that send a message and wait for an approval click.\n\nNext: save every reply for approval."
 },
 
