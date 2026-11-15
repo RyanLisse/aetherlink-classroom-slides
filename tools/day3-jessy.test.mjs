@@ -15,7 +15,7 @@ const exercises = slides.filter(slide => slide.layout === 'exercise');
 const assignments = exercises.filter(slide => /^Assignment \d+:/.test(slide.title));
 
 test('Day 3 runs from welcome through registration, L1, L2, L3 to proof', () => {
-  assert.equal(slides.length, 45);
+  assert.equal(slides.length, 43);
   const order = [
     'Welcome to Day 3!',
     'What do you remember from last week?',
@@ -30,7 +30,7 @@ test('Day 3 runs from welcome through registration, L1, L2, L3 to proof', () => 
     'Assignment 37: The Customer Reply Agent',
     'Assignment 40: Give the specialist the table',
     'Assignment 41: From chat to chat',
-    'Assignment 42: Save your proof',
+    'Assignment 42: Save every reply for approval',
     'What did you learn?'
   ];
   let last = -1;
@@ -75,8 +75,6 @@ test('The texts participants paste are on the slides, with a Copy button', () =>
   assert.match(JSON.stringify(tool.steps), /Operation.*Get/);
   assert.match(JSON.stringify(tool.steps), /Column.*customer_id/);
   assert.match(tool.notes, /\$fromAI\('customer_id'/);
-  const log = slides.find(slide => slide.title === 'Extra B: Let the workflow keep a log');
-  assert.ok(JSON.stringify(log.steps).includes("$('Ticket Input').item.json.ticket_id"));
   assert.doesNotMatch(JSON.stringify(slides), /flipchart|projector|neighbour/);
   for (const ticket of ['WL-1027', 'WL-9001', 'WL-9002', 'WL-1030']) {
     const json = prompts.find(prompt => prompt.includes(ticket));
@@ -96,8 +94,8 @@ test('Screenshots and downloads exist', () => {
 test('Deck and presenter load the same Day 3 source on the current Day 1 and 2 shell', () => {
   const deck = read('day3-jessy.html');
   const presenter = read('day3-jessy-presenter.html');
-  assert.ok(deck.includes('day3-jessy-slides.js?v=15'));
-  assert.ok(presenter.includes('day3-jessy-slides.js?v=15'));
+  assert.ok(deck.includes('day3-jessy-slides.js?v=37'));
+  assert.ok(presenter.includes('day3-jessy-slides.js?v=37'));
   assert.ok(deck.includes('id="timer-btn"'));
   assert.ok(deck.includes('window.ASG_PROMPT = true'));
   assert.ok(deck.includes('styles.css?v=147'));
