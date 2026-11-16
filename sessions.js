@@ -12,7 +12,8 @@ window.CLASSROOM_SESSIONS = [
   {id:'day-5-jessy',label:'Day 5 · AI-native SDLC (Jessy)',href:'day5-jessy.html#1',deck:'day5-jessy.html',start:1},
   {id:'hackathon-1',label:'Day 6 · Hackathon: thin slice (Ryan)',href:'workshop6.html#1',deck:'workshop6.html',start:1},
   {id:'day-6-team-project',label:'Day 6 · Team project (Jessy)',href:'day6-team-project.html#1',deck:'day6-team-project.html',start:1},
-  {id:'hackathon-2',label:'Day 7 · Hackathon: ship and present (Ryan)',href:'workshop7.html#1',deck:'workshop7.html',start:1}
+  {id:'hackathon-2',label:'Day 7 · Hackathon: ship and present (Ryan)',href:'workshop7.html#1',deck:'workshop7.html',start:1},
+  {id:'day-7-jessy',label:'Day 7 · Team project: finish, test, show (Jessy)',href:'day7-jessy.html#1',deck:'day7-jessy.html',start:1}
 ];
 if(!new URLSearchParams(location.search).has('embed')){
   const label=document.createElement('label'); label.className='session-picker';
