@@ -482,9 +482,9 @@ window.SLIDES = [
    "Append progress.md after each step.",
    "Compare with the reference tags only after your own attempt."
   ],
-  "notes": "Time: 3 min.\n\nWhy now: Set the rules once, so the steps can stay short.\n\nWhat you see: Four rules.\n\nWatch for: Participants who copy the step tags. The tags are for comparing after an attempt.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the OPEN rule.\n\nNext: Assignment 1",
+  "notes": "Time: 3 min.\n\nWhy now: Set the rules once, so the steps can stay short.\n\nWhat you see: Four rules.\n\nWatch for: Participants who copy the step tags. The tags are for comparing after an attempt.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the OPEN rule.\n\nNext: What is a skill?",
   "teach": {
-   "next": "Assignment 1",
+   "next": "What is a skill?",
    "time": "3 min",
    "gist": "Read CLAUDE.md, AGENTS.md, progress.md and SOLO.md before you change anything.",
    "script": [
@@ -506,6 +506,121 @@ window.SLIDES = [
    ],
    "watch": [
     "Participants who copy the step tags. The tags are for comparing after an attempt."
+   ]
+  }
+ },
+ {
+  "title": "What is a skill?",
+  "kicker": "Day 5 · SKILLS",
+  "subtitle": "A saved recipe for Claude Code. You type /name, it follows the recipe.",
+  "type": "concept",
+  "cards": [
+   {
+    "title": "A folder",
+    "body": ".claude/skills/grilling/SKILL.md\nOne file with the recipe."
+   },
+   {
+    "title": "A name",
+    "body": "Type /grilling and Claude Code loads it."
+   },
+   {
+    "title": "A recipe",
+    "body": "The steps a good colleague would follow. Every time the same."
+   }
+  ],
+  "keyPoints": [
+   "A skill is a folder with one SKILL.md.",
+   "You start it with /name.",
+   "A skill guides the work. Tests still prove it."
+  ],
+  "notes": "Time: 3 min.\n\nWhy now: Explain the idea once, before the first skill.\n\nWhat you see: Folder, name, recipe.\n\nWatch for: People who think a skill is a plugin or a model. It is text in a folder.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say where a skill lives.\n\nNext: The skills you use today",
+  "teach": {
+   "next": "The skills you use today",
+   "time": "3 min",
+   "gist": "A saved recipe for Claude Code. You type /name, it follows the recipe.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "A skill is a folder with one SKILL.md.",
+      "You start it with /name.",
+      "A skill guides the work. Tests still prove it."
+     ]
+    }
+   ],
+   "learn": [
+    "A skill is a folder with one SKILL.md.",
+    "You start it with /name.",
+    "A skill guides the work. Tests still prove it."
+   ],
+   "watch": [
+    "People who think a skill is a plugin or a model. It is text in a folder."
+   ]
+  }
+ },
+ {
+  "title": "Use the included project skills",
+  "kicker": "Day 5 · PROJECT SKILLS",
+  "subtitle": "The lab already has the skills you use today. One per assignment.",
+  "type": "concept",
+  "cards": [
+   {
+    "title": "A1 · /grilling",
+    "body": "Asks you hard questions, one at a time, until nothing is assumed."
+   },
+   {
+    "title": "A2 · /eli5",
+    "body": "Explains code simply, with the real mechanism."
+   },
+   {
+    "title": "A3 · /visual-plan",
+    "body": "Turns a plan into one HTML page you can read."
+   },
+   {
+    "title": "A4, A6 · /verify-this",
+    "body": "Proves or disproves one claim with a fresh run."
+   },
+   {
+    "title": "A5 · /show-me",
+    "body": "Draws how the code connects, without changing it."
+   },
+   {
+    "title": "A7 · /review-and-ship",
+    "body": "Reviews your branch and prepares the PR."
+   },
+   {
+    "title": "Stuck · /handoff",
+    "body": "Writes a prompt so a fresh session can continue."
+   }
+  ],
+  "keyPoints": [
+   "Type / in Claude Code to see them.",
+   "Use only these project skills during the lesson.",
+   "The full skills pack comes at the end of the day."
+  ],
+  "prompt": "/handoff Write a prompt for a fresh Claude Code session to continue from my current step. Name the step, the files, and the next proof.",
+  "notes": "Time: 3 min.\n\nWhy now: Show the tools before the first assignment.\n\nWhat you see: Seven skills, one per step.\n\nWatch for: Participants who install the full pack now. That is for the hackathon.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone can find /grilling after typing /.\n\nNext: Assignment 1",
+  "teach": {
+   "next": "Assignment 1",
+   "time": "3 min",
+   "gist": "The lab already has the skills you use today. One per assignment.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "Type / in Claude Code to see them.",
+      "Use only these project skills during the lesson.",
+      "The full skills pack comes at the end of the day."
+     ]
+    }
+   ],
+   "learn": [
+    "Type / in Claude Code to see them.",
+    "Use only these project skills during the lesson.",
+    "The full skills pack comes at the end of the day."
+   ],
+   "watch": [
+    "Participants who install the full pack now. That is for the hackathon."
    ]
   }
  },
@@ -772,6 +887,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "Challenge my weakest check with one concrete counterexample. Revise only intent.md after my answer. Show the diff and stop."
+    ],
+    [
+     "Step 4 · Skill /grilling",
+     "/grilling Grill me on my intent.md, one question at a time. Focus on the checks a neighbour cannot observe. Do not edit files."
     ]
    ],
    "script": [
@@ -802,7 +921,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /grilling.",
+     "say": [
+      "A skill is a saved recipe. /grilling asks you hard questions, one at a time, until nothing is assumed.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -867,6 +993,11 @@ window.SLIDES = [
     "where": "Claude Code",
     "text": "Improvement prompt, after you inspect the result",
     "prompt": "Challenge my weakest check with one concrete counterexample. Revise only intent.md after my answer. Show the diff and stop."
+   },
+   {
+    "where": "Skill",
+    "text": "/grilling: asks you hard questions, one at a time, until nothing is assumed",
+    "prompt": "/grilling Grill me on my intent.md, one question at a time. Focus on the checks a neighbour cannot observe. Do not edit files."
    },
    {
     "where": "Terminal",
@@ -1107,6 +1238,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "Add one invalid sample of my choice to test/schema.test.ts. Prove the schema rejects it. Show the spec row, test output, and diff. Stop before SOLO 3."
+    ],
+    [
+     "Step 4 · Skill /eli5",
+     "/eli5 Explain my schema and test/schema.test.ts as for an intelligent beginner: what each field checks and why the test was red first. Do not edit files."
     ]
    ],
    "script": [
@@ -1137,7 +1272,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /eli5.",
+     "say": [
+      "A skill is a saved recipe. /eli5 explains code simply, with the real mechanism.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -1202,6 +1344,11 @@ window.SLIDES = [
     "where": "Claude Code",
     "text": "Improvement prompt, after you inspect the result",
     "prompt": "Add one invalid sample of my choice to test/schema.test.ts. Prove the schema rejects it. Show the spec row, test output, and diff. Stop before SOLO 3."
+   },
+   {
+    "where": "Skill",
+    "text": "/eli5: explains code simply, with the real mechanism",
+    "prompt": "/eli5 Explain my schema and test/schema.test.ts as for an intelligent beginner: what each field checks and why the test was red first. Do not edit files."
    },
    {
     "where": "Terminal",
@@ -1280,6 +1427,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "After I accept the plan, save only those design documents. Challenge one assumption with the case I choose. Show the revised plan and diff. Stop before building."
+    ],
+    [
+     "Step 4 · Skill /visual-plan",
+     "/visual-plan Turn my accepted docs/plan.md into one HTML page I can read in the browser. Do not change the plan."
     ]
    ],
    "script": [
@@ -1310,7 +1461,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /visual-plan.",
+     "say": [
+      "A skill is a saved recipe. /visual-plan turns a plan into one HTML page you can read.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -1377,6 +1535,11 @@ window.SLIDES = [
     "prompt": "After I accept the plan, save only those design documents. Challenge one assumption with the case I choose. Show the revised plan and diff. Stop before building."
    },
    {
+    "where": "Skill",
+    "text": "/visual-plan: turns a plan into one HTML page you can read",
+    "prompt": "/visual-plan Turn my accepted docs/plan.md into one HTML page I can read in the browser. Do not change the plan."
+   },
+   {
     "where": "Terminal",
     "text": "Commit your reviewed work on your own branch"
    }
@@ -1417,6 +1580,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "Change one house-style rule I choose. Add a failing test first, then make it pass. Regenerate out/latest.html and show the diff. Stop so I can inspect the page and save a 1440×900 screenshot."
+    ],
+    [
+     "Step 4 · Skill /verify-this",
+     "/verify-this Prove that npm run brief:sample writes out/latest.html without a model call. Show the command, exit code and one line of output."
     ]
    ],
    "script": [
@@ -1447,7 +1614,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /verify-this.",
+     "say": [
+      "A skill is a saved recipe. /verify-this proves or disproves one claim with a fresh run.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -1512,6 +1686,11 @@ window.SLIDES = [
     "where": "Claude Code",
     "text": "Improvement prompt, after you inspect the result",
     "prompt": "Change one house-style rule I choose. Add a failing test first, then make it pass. Regenerate out/latest.html and show the diff. Stop so I can inspect the page and save a 1440×900 screenshot."
+   },
+   {
+    "where": "Skill",
+    "text": "/verify-this: proves or disproves one claim with a fresh run",
+    "prompt": "/verify-this Prove that npm run brief:sample writes out/latest.html without a model call. Show the command, exit code and one line of output."
    },
    {
     "where": "Terminal",
@@ -1720,6 +1899,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "Test one missing-source case I choose. Show the diff and observed test output. With configured credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Stop for my inspection."
+    ],
+    [
+     "Step 4 · Skill /show-me",
+     "/show-me Draw how one source reaches the brief: src/sources.ts, the tool in src/agent.ts, and src/main.ts. Only read, change nothing."
     ]
    ],
    "script": [
@@ -1750,7 +1933,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /show-me.",
+     "say": [
+      "A skill is a saved recipe. /show-me draws how the code connects, without changing it.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -1817,6 +2007,11 @@ window.SLIDES = [
     "prompt": "Test one missing-source case I choose. Show the diff and observed test output. With configured credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Stop for my inspection."
    },
    {
+    "where": "Skill",
+    "text": "/show-me: draws how the code connects, without changing it",
+    "prompt": "/show-me Draw how one source reaches the brief: src/sources.ts, the tool in src/agent.ts, and src/main.ts. Only read, change nothing."
+   },
+   {
     "where": "Terminal",
     "text": "Commit your reviewed work on your own branch"
    }
@@ -1857,6 +2052,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "Check the evidence against the extra case I choose. Show missing proof as OPEN. Stop while my reviewer reruns one command and compares the output. Record their actual name and result only afterward."
+    ],
+    [
+     "Step 4 · Skill /verify-this",
+     "/verify-this Rerun the three commands in docs/evidence.md and compare each exit code with what is written. Mark any difference OPEN."
     ]
    ],
    "script": [
@@ -1887,7 +2086,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /verify-this.",
+     "say": [
+      "A skill is a saved recipe. /verify-this reruns your evidence and compares the result.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -1954,6 +2160,11 @@ window.SLIDES = [
     "prompt": "Check the evidence against the extra case I choose. Show missing proof as OPEN. Stop while my reviewer reruns one command and compares the output. Record their actual name and result only afterward."
    },
    {
+    "where": "Skill",
+    "text": "/verify-this: reruns your evidence and compares the result",
+    "prompt": "/verify-this Rerun the three commands in docs/evidence.md and compare each exit code with what is written. Mark any difference OPEN."
+   },
+   {
     "where": "Terminal",
     "text": "Commit your reviewed work on your own branch"
    }
@@ -1994,6 +2205,10 @@ window.SLIDES = [
     [
      "Step 3 · Claude Code",
      "Use the OPEN item I choose to propose one new acceptance check. Show the gate diff and PR preview. After I decide the gate and approve publication, open the PR. Stop before merge or deployment."
+    ],
+    [
+     "Step 4 · Skill /review-and-ship",
+     "/review-and-ship Review my branch against intent.md and docs/gate.md. Run the tests. Prepare the PR, but stop before you open it and before any merge."
     ]
    ],
    "script": [
@@ -2024,7 +2239,14 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 4. Commit on your own branch. Ask two people to show their result.",
+     "do": "Step 4. The skill /review-and-ship.",
+     "say": [
+      "A skill is a saved recipe. /review-and-ship reviews your branch and prepares the PR.",
+      "Type the slash, paste the rest, read what comes back."
+     ]
+    },
+    {
+     "do": "Step 5. Commit on your own branch. Ask two people to show their result.",
      "say": [
       "Commit what you reviewed. Who wants to show theirs?"
      ]
@@ -2091,6 +2313,11 @@ window.SLIDES = [
     "prompt": "Use the OPEN item I choose to propose one new acceptance check. Show the gate diff and PR preview. After I decide the gate and approve publication, open the PR. Stop before merge or deployment."
    },
    {
+    "where": "Skill",
+    "text": "/review-and-ship: reviews your branch and prepares the PR",
+    "prompt": "/review-and-ship Review my branch against intent.md and docs/gate.md. Run the tests. Prepare the PR, but stop before you open it and before any merge."
+   },
+   {
     "where": "Terminal",
     "text": "Commit your reviewed work on your own branch"
    }
@@ -2107,9 +2334,9 @@ window.SLIDES = [
    "Tests failed first, then passed.",
    "The human made the gate decision."
   ],
-  "notes": "Time: 5 min.\n\nWhy now: Close the main route before the bonus.\n\nWhat you see: The seven steps and their proofs.\n\nWatch for: Groups that did not reach A7. They finish it with SOLO.md.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the proof of each step.\n\nNext: Bonus: Sonny",
+  "notes": "Time: 5 min.\n\nWhy now: Close the main route before the bonus.\n\nWhat you see: The seven steps and their proofs.\n\nWatch for: Groups that did not reach A7. They finish it with SOLO.md.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the proof of each step.\n\nNext: The Claude Code skills pack",
   "teach": {
-   "next": "Bonus: Sonny",
+   "next": "The Claude Code skills pack",
    "time": "5 min",
    "gist": "Intent, spec, design, build, tool, evidence, gate. Every step ended with proof.",
    "script": [
@@ -2130,6 +2357,115 @@ window.SLIDES = [
    "watch": [
     "Groups that did not reach A7. They finish it with SOLO.md."
    ]
+  }
+ },
+ {
+  "title": "The Claude Code skills pack",
+  "kicker": "Day 5 · SKILLS PACK",
+  "subtitle": "A public set of skills for everyday shipping. You pick one for the hackathon.",
+  "type": "concept",
+  "source": {
+   "url": "https://github.com/AetherLink-bv/claude-code-skills-pack",
+   "label": "github.com/AetherLink-bv/claude-code-skills-pack"
+  },
+  "cards": [
+   {
+    "title": "Understand",
+    "body": "/eli5, /show-me, /diagram, /archify"
+   },
+   {
+    "title": "Plan",
+    "body": "/grilling, /rpi, /visual-plan"
+   },
+   {
+    "title": "Prove",
+    "body": "/verify-this, /fix-ci"
+   },
+   {
+    "title": "Ship",
+    "body": "/review-and-ship, /make-pr-easy-to-review, /handoff"
+   }
+  ],
+  "keyPoints": [
+   "You used seven of them today.",
+   "Pick one more for your hackathon problem.",
+   "Install one skill, in your project only."
+  ],
+  "notes": "Time: 3 min.\n\nWhy now: Connect today to the hackathon.\n\nWhat you see: Four groups of skills.\n\nWatch for: Bulk installs. One skill, one project.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants name one skill they want.\n\nNext: Choose one skill for the hackathon",
+  "teach": {
+   "next": "Choose one skill for the hackathon",
+   "time": "3 min",
+   "gist": "A public set of skills for everyday shipping. You pick one for the hackathon.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "You used seven of them today.",
+      "Pick one more for your hackathon problem.",
+      "Install one skill, in your project only."
+     ]
+    }
+   ],
+   "learn": [
+    "You used seven of them today.",
+    "Pick one more for your hackathon problem.",
+    "Install one skill, in your project only."
+   ],
+   "watch": [
+    "Bulk installs. One skill, one project."
+   ]
+  }
+ },
+ {
+  "title": "Choose one skill for the hackathon",
+  "kicker": "Day 5 · SKILLS PACK",
+  "subtitle": "Install only the project skill that your hackathon needs.",
+  "type": "context",
+  "cards": [
+   {
+    "title": "After Day 5",
+    "body": "Keep the lesson project skills separate."
+   },
+   {
+    "title": "Start isolated",
+    "body": "Use project-only settings and no Chrome integration."
+   },
+   {
+    "title": "Choose one",
+    "body": "Inspect one skill for the hackathon problem."
+   },
+   {
+    "title": "Review first",
+    "body": "Approve the source and project-local target."
+   }
+  ],
+  "keyPoints": [
+   "Do not bulk install.",
+   "Preserve an existing skill.",
+   "Do not change global settings."
+  ],
+  "notes": "Appendix. The full pack is hackathon support, not lesson setup.",
+  "prompt": "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
+  "source": {
+   "url": "https://github.com/AetherLink-bv/claude-code-skills-pack",
+   "label": "github.com/AetherLink-bv/claude-code-skills-pack"
+  },
+  "teach": {
+   "time": "Facilitator",
+   "gist": "Install only the project skill that your hackathon needs.",
+   "script": [
+    {
+     "say": "Install only the project skill that your hackathon needs."
+    }
+   ],
+   "do": [
+    "Present Appendix · Choose one skill for the hackathon."
+   ],
+   "done": [
+    "Do not change global settings."
+   ],
+   "watch": [],
+   "next": "Appendix · Why this is an AI-native SDLC loop"
   }
  },
  {

@@ -220,7 +220,7 @@ function highlight(root, s) {
 // slides 8-13: extra layouts, all keep the slide text verbatim
 function renderExtras(stage, main, s, v) {
   const x = { aim: [] }; const cards = [...main.querySelectorAll('.card')]; const grid = main.querySelector('.cards');
-  if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots (as in the Day 5 deck); each click / → lights the next phase; cards below are optional
+  if (v.sdlcLine && !grid) {                                           // the SDLC as one straight line with six dots (as in the Day 5 deck); each click / → lights the next phase; cards below are optional
     const track = node('div', 'sdlc-track sdlc-track-big'); track.setAttribute('role', 'img'); track.setAttribute('aria-label', 'SDLC: ' + SDLC_PHASES.map(([, l]) => l).join(', '));
     let k = -1; const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
     const steps = SDLC_PHASES.map(([, label], i) => { const st = node('span', 'sdlc-step'); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); st.addEventListener('click', () => { k = i; paint(); }); track.append(st); return st; });

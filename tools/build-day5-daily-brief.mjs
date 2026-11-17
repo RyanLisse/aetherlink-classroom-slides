@@ -14,7 +14,28 @@ const byTitle = t => {
   return structuredClone(s);
 };
 
+const w5 = {window: {}};
+vm.runInNewContext(readFileSync(new URL('workshop5-slides.js', root), 'utf8'), w5);
+const fromWorkshop5 = t => {
+  const s = w5.window.SLIDES.find(x => x.title === t);
+  if (!s) throw new Error(`workshop5 has no slide titled "${t}"`);
+  return structuredClone(s);
+};
+
 const REPO = 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1';
+const PACK = {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'};
+
+// One skill per assignment. The prompts are verbatim in the lab's SOLO.md and docs/prompts.md.
+const SKILLS = {
+  1: {name: 'grilling', what: 'asks you hard questions, one at a time, until nothing is assumed', prompt: '/grilling Grill me on my intent.md, one question at a time. Focus on the checks a neighbour cannot observe. Do not edit files.'},
+  2: {name: 'eli5', what: 'explains code simply, with the real mechanism', prompt: '/eli5 Explain my schema and test/schema.test.ts as for an intelligent beginner: what each field checks and why the test was red first. Do not edit files.'},
+  3: {name: 'visual-plan', what: 'turns a plan into one HTML page you can read', prompt: '/visual-plan Turn my accepted docs/plan.md into one HTML page I can read in the browser. Do not change the plan.'},
+  4: {name: 'verify-this', what: 'proves or disproves one claim with a fresh run', prompt: '/verify-this Prove that npm run brief:sample writes out/latest.html without a model call. Show the command, exit code and one line of output.'},
+  5: {name: 'show-me', what: 'draws how the code connects, without changing it', prompt: '/show-me Draw how one source reaches the brief: src/sources.ts, the tool in src/agent.ts, and src/main.ts. Only read, change nothing.'},
+  6: {name: 'verify-this', what: 'reruns your evidence and compares the result', prompt: '/verify-this Rerun the three commands in docs/evidence.md and compare each exit code with what is written. Mark any difference OPEN.'},
+  7: {name: 'review-and-ship', what: 'reviews your branch and prepares the PR', prompt: '/review-and-ship Review my branch against intent.md and docs/gate.md. Run the tests. Prepare the PR, but stop before you open it and before any merge.'}
+};
+const HANDOFF = '/handoff Write a prompt for a fresh Claude Code session to continue from my current step. Name the step, the files, and the next proof.';
 const say = (time, why, see, watch, stop, next) =>
   `Time: ${time}.\n\nWhy now: ${why}\n\nWhat you see: ${see}\n\nWatch for: ${watch}\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: ${stop}\n\nNext: ${next}`;
 
@@ -29,13 +50,14 @@ const teachFor = (n, time, {gist, say, learn, watch, terms, done, prompt, improv
   gist,
   do: ['Check manual mode, paste the build prompt, review each stop, paste the improvement prompt, commit.'],
   done,
-  copy: [[`Step 2 · Claude Code`, prompt], [`Step 3 · Claude Code`, improve]],
+  copy: [[`Step 2 · Claude Code`, prompt], [`Step 3 · Claude Code`, improve], [`Step 4 · Skill /${SKILLS[n].name}`, SKILLS[n].prompt]],
   script: [
     {do: 'Slide appears. Read the goal and the checkpoint out loud.', say},
     {do: 'Step 1. Everyone checks “manual mode on” at the bottom of Claude Code.', say: ['Manual mode first. Claude Code asks before every change, so you stay the reviewer.']},
     {do: 'Step 2. Participants copy the build prompt. Walk the room.', say: ['Paste the build prompt. Claude Code stops at each review point. Read what it shows before you say yes.']},
     {do: 'Step 3. After the first result: the improvement prompt.', say: ['Now make it stronger. You choose the case, Claude Code makes the change and shows the diff.']},
-    {do: 'Step 4. Commit on your own branch. Ask two people to show their result.', say: ['Commit what you reviewed. Who wants to show theirs?']}
+    {do: `Step 4. The skill /${SKILLS[n].name}.`, say: [`A skill is a saved recipe. /${SKILLS[n].name} ${SKILLS[n].what}.`, 'Type the slash, paste the rest, read what comes back.']},
+    {do: 'Step 5. Commit on your own branch. Ask two people to show their result.', say: ['Commit what you reviewed. Who wants to show theirs?']}
   ],
   learn,
   watch,
@@ -65,6 +87,7 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
     {where: 'Claude Code', text: 'Check the mode: “manual mode on”', after: 'Not there? Press Shift+Tab until it is.', warn: true},
     {where: 'Claude Code', text: 'Build prompt', prompt},
     {where: 'Claude Code', text: 'Improvement prompt, after you inspect the result', prompt: improve},
+    {where: 'Skill', text: `/${SKILLS[n].name}: ${SKILLS[n].what}`, prompt: SKILLS[n].prompt},
     {where: 'Terminal', text: 'Commit your reviewed work on your own branch'}
   ],
   prompt,
@@ -231,7 +254,31 @@ const brief = [
       'Append progress.md after each step.',
       'Compare with the reference tags only after your own attempt.'
     ],
-    notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy the step tags. The tags are for comparing after an attempt.', 'Participants can name the OPEN rule.', 'Assignment 1')
+    notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy the step tags. The tags are for comparing after an attempt.', 'Participants can name the OPEN rule.', 'What is a skill?')
+  },
+  {
+    title: 'What is a skill?',
+    kicker: 'Day 5 · SKILLS',
+    subtitle: 'A saved recipe for Claude Code. You type /name, it follows the recipe.',
+    type: 'concept',
+    cards: [
+      {title: 'A folder', body: '.claude/skills/grilling/SKILL.md\nOne file with the recipe.'},
+      {title: 'A name', body: 'Type /grilling and Claude Code loads it.'},
+      {title: 'A recipe', body: 'The steps a good colleague would follow. Every time the same.'}
+    ],
+    keyPoints: ['A skill is a folder with one SKILL.md.', 'You start it with /name.', 'A skill guides the work. Tests still prove it.'],
+    notes: say('3 min', 'Explain the idea once, before the first skill.', 'Folder, name, recipe.', 'People who think a skill is a plugin or a model. It is text in a folder.', 'Participants can say where a skill lives.', 'The skills you use today')
+  },
+  {
+    title: 'Use the included project skills',
+    kicker: 'Day 5 · PROJECT SKILLS',
+    subtitle: 'The lab already has the skills you use today. One per assignment.',
+    type: 'concept',
+    cards: [1, 2, 3, 4, 5, 7].map(n => ({title: `A${n === 4 ? '4, A6' : n} · /${SKILLS[n].name}`, body: SKILLS[n].what[0].toUpperCase() + SKILLS[n].what.slice(1) + '.'}))
+      .concat({title: 'Stuck · /handoff', body: 'Writes a prompt so a fresh session can continue.'}),
+    keyPoints: ['Type / in Claude Code to see them.', 'Use only these project skills during the lesson.', 'The full skills pack comes at the end of the day.'],
+    prompt: HANDOFF,
+    notes: say('3 min', 'Show the tools before the first assignment.', 'Seven skills, one per step.', 'Participants who install the full pack now. That is for the hackathon.', 'Everyone can find /grilling after typing /.', 'Assignment 1')
   },
   {
     title: 'What Bree should do, and what she does today',
@@ -379,7 +426,7 @@ const brief = [
     kicker: 'Day 5 · Recap',
     subtitle: 'Intent, spec, design, build, tool, evidence, gate. Every step ended with proof.',
     keyPoints: ['The intent decided what done means.', 'Tests failed first, then passed.', 'The human made the gate decision.'],
-    notes: say('5 min', 'Close the main route before the bonus.', 'The seven steps and their proofs.', 'Groups that did not reach A7. They finish it with SOLO.md.', 'Participants can name the proof of each step.', 'Bonus: Sonny')
+    notes: say('5 min', 'Close the main route before the bonus.', 'The seven steps and their proofs.', 'Groups that did not reach A7. They finish it with SOLO.md.', 'Participants can name the proof of each step.', 'The Claude Code skills pack')
   },
   {
     title: 'Bonus: Sonny, the on-call SRE agent',
@@ -413,7 +460,25 @@ const withTeach = s => s.teach ? s : info(s, {
   learn: s.keyPoints,
   watch: [s.notes.match(/Watch for: ([^\n]+)/)?.[1]].filter(Boolean)
 });
-const slides = [...brief, ...bonus, close].map(withTeach);
+const pack = [
+  {
+    title: 'The Claude Code skills pack',
+    kicker: 'Day 5 · SKILLS PACK',
+    subtitle: 'A public set of skills for everyday shipping. You pick one for the hackathon.',
+    type: 'concept',
+    source: PACK,
+    cards: [
+      {title: 'Understand', body: '/eli5, /show-me, /diagram, /archify'},
+      {title: 'Plan', body: '/grilling, /rpi, /visual-plan'},
+      {title: 'Prove', body: '/verify-this, /fix-ci'},
+      {title: 'Ship', body: '/review-and-ship, /make-pr-easy-to-review, /handoff'}
+    ],
+    keyPoints: ['You used seven of them today.', 'Pick one more for your hackathon problem.', 'Install one skill, in your project only.'],
+    notes: say('3 min', 'Connect today to the hackathon.', 'Four groups of skills.', 'Bulk installs. One skill, one project.', 'Participants name one skill they want.', 'Choose one skill for the hackathon')
+  },
+  (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Choose one skill for the hackathon'; s.kicker = 'Day 5 · SKILLS PACK'; return s; })()
+];
+const slides = [...brief.slice(0, -1), ...pack, brief.at(-1), ...bonus, close].map(withTeach);
 const out = `'use strict';\n// Generated by tools/build-day5-daily-brief.mjs. Edit the generator, not this file.\nwindow.SLIDES = ${JSON.stringify(slides, null, 1)};\n`;
 writeFileSync(new URL('day5-daily-brief-slides.js', root), out);
 console.log(`day5-daily-brief-slides.js: ${slides.length} slides (${brief.length} brief, ${bonus.length} bonus, 1 close)`);
