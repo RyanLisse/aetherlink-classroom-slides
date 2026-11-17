@@ -55,7 +55,7 @@ const teachFor = (n, time, {gist, say, learn, watch, terms, done, prompt, improv
   copy: [[`Step 2 · Claude Code`, prompt], [`Step 3 · Claude Code`, improve], [`Step 4 · Skill /${SKILLS[n].name}`, SKILLS[n].prompt]],
   script: [
     {do: 'Slide appears. Read the goal and the checkpoint out loud.', say},
-    {do: 'Step 1. Everyone checks “manual mode on” at the bottom of Claude Code.', say: ['Manual mode first. Claude Code asks before every change, so you stay the reviewer.']},
+    n === 3 ? {do: 'Step 1. Everyone checks “plan mode on” at the bottom of Claude Code.', say: ['Plan mode for this one. Claude Code can read and propose, but cannot change files.']} : {do: 'Step 1. Everyone checks “manual mode on” at the bottom of Claude Code.', say: ['Manual mode first. Claude Code asks before every change, so you stay the reviewer.']},
     {do: 'Step 2. Participants copy the build prompt. Walk the room.', say: ['Paste the build prompt. Claude Code stops at each review point. Read what it shows before you say yes.']},
     {do: 'Step 3. After the first result: the improvement prompt.', say: ['Now make it stronger. You choose the case, Claude Code makes the change and shows the diff.']},
     {do: `Step 4. The skill /${SKILLS[n].name}.`, say: [`A skill is a saved recipe. /${SKILLS[n].name} ${SKILLS[n].what}.`, 'Type the slash, paste the rest, read what comes back.']},
@@ -76,7 +76,7 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
   beat: 'turn',
   sdlc: SDLC[n],
   stage: STAGE[n],
-  mode: 'manual',
+  mode: n === 3 ? 'plan' : 'manual',
   calm: true,
   expected: checkpoint.at(-1),
   repo: REPO,
@@ -86,7 +86,7 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
   keyPoints: checkpoint,
   stepsHeading: 'Build and inspect',
   steps: [
-    {where: 'Claude Code', text: 'Check the mode: “manual mode on”', after: 'Not there? Press Shift+Tab until it is.', warn: true},
+    {where: 'Claude Code', text: `Check the mode: “${n === 3 ? 'plan' : 'manual'} mode on”`, after: 'Not there? Press Shift+Tab until it is.', warn: true},
     {where: 'Claude Code', text: 'Build prompt', prompt},
     {where: 'Claude Code', text: 'Improvement prompt, after you inspect the result', prompt: improve},
     {where: 'Skill', text: `/${SKILLS[n].name}: ${SKILLS[n].what}`, prompt: SKILLS[n].prompt},
@@ -126,7 +126,7 @@ const TEACH = {
     gist: 'A red render test, then src/render.ts and a sample-only src/main.ts. npm run brief:sample writes out/latest.html. No API key and no model call.',
     say: ['The first thing you can see today: your brief as a web page.', 'Same rule: the render test fails first.', 'No model call. The sample route must work without a network.'],
     learn: ['out/latest.html is the first visible proof.', 'Escape untrusted text before it goes into HTML.', 'A style change is a test first, then the change.'],
-    watch: ['A model call in the sample path.', 'Unescaped text from the sources in the HTML.', 'Save the 1440×900 screenshot now. A6 needs it.', OPEN_SHOT],
+    watch: ['A model call in the sample path.', 'Unescaped text from the sources in the HTML.', 'Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.', OPEN_SHOT],
     terms: [['Renderer', 'src/render.ts: turns a brief into HTML'], ['brief:sample', 'the npm script that renders the sample brief, with no model call'], ['Escape', 'make text safe to put in HTML']],
     next: 'after lunch, give the agent one read-only tool.'
   },
@@ -134,7 +134,7 @@ const TEACH = {
     gist: 'The agent gets one read-only tool for one source. Tests prove the wiring and the missing-source case without a network. brief:sample keeps working.',
     say: ['Now the agent. It gets one tool, and that tool can only read.', 'No shell, no write tools. An agent is only as safe as its tools.', 'No credentials? Then the live check is OPEN, not failed.'],
     learn: ['One read-only tool is enough to prove the wiring.', 'A missing source is a normal case. Test it.', 'Never print a token.'],
-    watch: ['Shell or write tools on the brief agent.', 'Tokens in a prompt, a log or a commit.', 'brief:sample that suddenly needs a model.', OPEN_SHOT],
+    watch: ['Shell or write tools on the brief agent.', 'Tokens in a prompt, a log or a commit.', 'brief:sample that suddenly needs a model.', 'The reference tag has many tools. Today you build one.', 'run.log comes from: npm run brief 2> run.log.', OPEN_SHOT],
     terms: [['Tool', 'a function the agent may call'], ['Read-only', 'the tool can look, but cannot change anything'], ['run.log', 'the log that each claim in a live brief traces back to']],
     next: 'record the evidence.'
   },
@@ -249,7 +249,7 @@ const brief = [
   {
     title: 'Start the project',
     kicker: 'Day 5 · Setup',
-    subtitle: 'Clone the lab, make your own branch, and open Claude Code with only the project settings.',
+    subtitle: 'Clone the lab, make your own branch, and open Claude Code with the project settings and your own user settings.',
     type: 'practice',
     layout: 'exercise',
     repo: REPO,
@@ -260,7 +260,7 @@ const brief = [
       {where: 'Terminal', text: 'claude --setting-sources project,user --strict-mcp-config --no-chrome'},
       {where: 'Claude Code', text: 'Prepare your branch', prompt: 'Read README.md, CLAUDE.md, and SOLO.md. Check the documented Node version and package scripts. Preserve existing work. Prepare my own branch and install the documented dependencies after I approve the commands. Report the starting files and any blockers. Do not implement a solution yet.'}
     ],
-    keyPoints: ['Node.js 20 or newer, Git, and Claude Code signed in.', 'No API key for the classroom route.', 'Your own first name in the branch name.'],
+    keyPoints: ['Node.js 22 or newer, Git, and Claude Code signed in.', 'No API key for the classroom route.', 'Your own first name in the branch name.'],
     notes: say('10 min', 'Everyone starts from the same clean place.', 'Claude Code reports the starting files and no blockers.', 'An existing clone. Ask Claude Code to inspect git status first, and use git pull --ff-only only on a clean branch.', 'Every participant has Claude Code open on their own branch.', 'The rules for today')
   },
   {
@@ -271,7 +271,7 @@ const brief = [
       'Sample data only. No credential in a prompt or a commit.',
       'Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.',
       'Append progress.md after each step.',
-      'Compare with the reference tags only after your own attempt.'
+      'Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs.'
     ],
     notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy the step tags. The tags are for comparing after an attempt.', 'Participants can name the OPEN rule.', 'What is a skill?')
   },
@@ -363,7 +363,7 @@ const brief = [
         {label: 'Missing', text: 'none', key: 'gaps', small: true},
         {label: 'Today’s meetings', text: 'not there', fixed: '09:00 standup · 14:00 planning; room: OPEN', key: 'meetings', ghost: true}
       ],
-      docFoot: 'Always: sample data · nothing is sent',
+      docFoot: 'An example · your own fields come from the reference briefs',
       rulesTitle: 'The schema: five rules · click to check',
       fixLabel: 'what if she writes it?',
       rules: [
@@ -510,11 +510,50 @@ const pack = [
     keyPoints: ['You used seven of them today.', 'Pick one more for your hackathon problem.', 'Install one skill, in your project only.'],
     notes: say('3 min', 'Connect today to the hackathon.', 'Four groups of skills.', 'Bulk installs. One skill, one project.', 'Participants name one skill they want.', 'Choose one skill for the hackathon')
   },
-  (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Choose one skill for the hackathon'; s.kicker = 'Day 5 · SKILLS PACK'; return s; })()
+  (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Choose one skill for the hackathon'; s.kicker = 'Day 5 · SKILLS PACK'; s.cards[1].body = 'Project and user settings, no connectors, no Chrome integration.'; s.notes = 'Time: 3 min.\n\nThe full pack is hackathon support, not lesson setup.'; s.teach.time = '3 min'; return s; })()
 ];
 // Pause slides come from Jessy's deck with her stage dot. In this deck they sit between other stages.
 for (const b of brief) if (['Break', 'Lunch', 'Restart and settle'].includes(b.title)) delete b.sdlc;
-const slides = [...brief.slice(0, -1), ...pack, brief.at(-1), ...bonus, close].map(withTeach);
+
+// The bonus was written by Jessy as a full day with its own A1 to A6. Here it follows Bree's A1 to A7,
+// so it gets its own numbering, and it follows the owner rule: project and user settings.
+const BONUS_TEXT = [
+  ['--setting-sources project --strict', '--setting-sources project,user --strict'],
+  ['--setting-sources project: today only the project settings count.', '--setting-sources project,user: the project settings and your own user settings.'],
+  ['Use only this project’s settings, not your personal ones (for example permissions, hooks or connectors you added on earlier days). No browser. Everyone starts the same.', 'The project settings and your own user settings load, so your company login works. No connectors, no browser.'],
+  ['Claude Code starts with only this project’s settings.', 'Claude Code starts with the project settings and your user settings.'],
+  ['Start Claude Code with only this project’s settings.', 'Start Claude Code with the project settings and your user settings.'],
+  ['the four looks from slide 4', 'the four looks from before'],
+  ['The two shortcuts from slide 29', 'The two shortcuts from before'],
+  ['Nine skills in', 'Eight skills in']
+];
+const esc = t => JSON.stringify(t).slice(1, -1);
+for (const [from] of BONUS_TEXT) if (!JSON.stringify(bonus).includes(esc(from))) throw new Error('bonus text gone from day5-jessy: ' + from);
+const sonny = bonus.map(b => {
+  let j = JSON.stringify(b);
+  for (const [from, to] of BONUS_TEXT) j = j.split(esc(from)).join(esc(to));
+  const o = JSON.parse(j);
+  o.title = o.title.replace(/\bAssignment(s?) /, 'Sonny assignment$1 ');
+  o.kicker = o.kicker.replace(/\bA(\d)/, 'SONNY $1').replace('ASSIGNMENT 3B', 'SONNY 3B');
+  return o;
+});
+
+const divider = brief.at(-1);
+divider.subtitle = 'Self-study for who is done early: the same loop on a second agent. Sonny diagnoses a broken shop at 03:45.';
+divider.keyPoints = ['Class ends at the Close slide. The bonus is self-study.', 'Sonny has his own assignments: Sonny 1 to Sonny 6.', 'The Sonny slides were written as a full day. Read “today” as “in this bonus”.', 'Repo: sre-oncall-agent, branch workshop/start. Needs Node 22.'];
+
+const ordered = [...brief.slice(0, -1), ...pack, close, divider, ...sonny];
+// Next pointers and clocks are derived, so a reorder cannot leave a stale one behind.
+const main = ordered.length - sonny.length - 1;
+ordered.forEach((o, i) => {
+  o.notes = o.notes.replace(/Time: \d\d:\d\d · /, 'Time: ');
+  if (i >= main) return;
+  const next = i === main - 1 ? 'Day 6' : ordered[i + 1].title;
+  o.notes = /Next: /.test(o.notes) ? o.notes.replace(/Next: [^\n]*$/, 'Next: ' + next) : o.notes + '\n\nNext: ' + next;
+  if (o.teach) o.teach.next = next;
+  if (o.cards?.length === 1 && o.cards[0].title === 'Next') o.cards[0].body = next;
+});
+const slides = ordered.map(withTeach);
 const out = `'use strict';\n// Generated by tools/build-day5-daily-brief.mjs. Edit the generator, not this file.\nwindow.SLIDES = ${JSON.stringify(slides, null, 1)};\n`;
 writeFileSync(new URL('day5-daily-brief-slides.js', root), out);
 console.log(`day5-daily-brief-slides.js: ${slides.length} slides (${brief.length} brief, ${bonus.length} bonus, 1 close)`);

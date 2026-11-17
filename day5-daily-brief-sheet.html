@@ -94,7 +94,7 @@ body.no-prompts .prompt{display:none}
 </div>
 
 <script>window.DECK_PAGE = 'day5-daily-brief.html';</script>
-<script src="day5-daily-brief-slides.js?v=5"></script>
+<script src="day5-daily-brief-slides.js?v=6"></script>
 <script>
 (() => {
   const S = (window.SLIDES || []).filter((s) => !s.hidden);
@@ -109,10 +109,10 @@ body.no-prompts .prompt{display:none}
 
   // facts at the top
   const facts = [
-    ['Practice repo', '<a href="https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start" target="_blank" rel="noopener">AetherLink-bv/sre-oncall-agent</a> · branch <code>workshop/start</code>'],
-    ['Screens', 'The shop · <code>localhost:4310</code><br>The desk · <code>localhost:4320</code>'],
-    ['The agent', 'Sonny: an on-call agent. Today a script plays his brain (offline, same result for everyone).'],
-    ['Story', '03:45, bad update v2.15.0: checkouts fail. Sonny looks, writes a diagnosis, the contract checks it, a person decides.'],
+    ['Practice repo', '<a href="https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1" target="_blank" rel="noopener">AetherLink-bv/aetherlink-daily-brief-lab-s1</a> · branch <code>main</code>'],
+    ['You see', 'The brief · <code>out/latest.html</code> after <code>npm run brief:sample</code>'],
+    ['The agent', 'Bree: a daily brief agent. Sample data only, no API key.'],
+    ['Story', '08:30, four tools to read before work. Bree looks, writes one page, the schema checks it, you read it. Bonus: Sonny, the on-call agent.'],
     ['Online class', 'Every assignment is solo. Catch-up branch after A5: <code>day5-after-a5</code>.']
   ];
   document.getElementById('facts').innerHTML = facts.map(([k, v]) => `<div class="fact"><b>${k}</b>${v}</div>`).join('');

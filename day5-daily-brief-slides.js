@@ -210,9 +210,9 @@ window.SLIDES = [
    "reveal": "click",
    "covers": []
   },
-  "notes": "Time: 4 min.\n\nWhy now: Show the whole agent before the steps.\n\nWhat you see: Looks, page, check, you.\n\nWatch for: Questions about live data. Sample data first; live is OPEN until A5.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say the four parts in their own words.\n\nNext: The software development life cycle",
+  "notes": "Time: 4 min.\n\nWhy now: Show the whole agent before the steps.\n\nWhat you see: Looks, page, check, you.\n\nWatch for: Questions about live data. Sample data first; live is OPEN until A5.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say the four parts in their own words.\n\nNext: The software development life cycle (SDLC)",
   "teach": {
-   "next": "The software development life cycle",
+   "next": "The software development life cycle (SDLC)",
    "time": "4 min",
    "gist": "She looks. She writes one page. She checks it. You read it.",
    "script": [
@@ -271,7 +271,7 @@ window.SLIDES = [
    "The six dots at the top of most slides show where we are.",
    "Day 6 and 7: the same six steps with your own project."
   ],
-  "notes": "Time: 10:12 · 3 min. Each click (→) lights the next dot and shows its card. Clicking a dot jumps to that step; the current dot is orange. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).",
+  "notes": "Time: 3 min. Each click (→) lights the next dot and shows its card. Clicking a dot jumps to that step; the current dot is orange. Source: the AI-native SDLC playbook (https://claude.com/resources/articles/the-ai-native-sdlc-playbook).\n\nNext: The AI-native SDLC",
   "visual": {
    "sdlcLine": true
   },
@@ -364,7 +364,7 @@ window.SLIDES = [
      "putting a new version live"
     ]
    ],
-   "next": "today’s assignments, step by step."
+   "next": "The AI-native SDLC"
   }
  },
  {
@@ -483,7 +483,7 @@ window.SLIDES = [
  {
   "title": "Start the project",
   "kicker": "Day 5 · Setup",
-  "subtitle": "Clone the lab, make your own branch, and open Claude Code with only the project settings.",
+  "subtitle": "Clone the lab, make your own branch, and open Claude Code with the project settings and your own user settings.",
   "type": "practice",
   "layout": "exercise",
   "repo": "https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1",
@@ -508,7 +508,7 @@ window.SLIDES = [
    }
   ],
   "keyPoints": [
-   "Node.js 20 or newer, Git, and Claude Code signed in.",
+   "Node.js 22 or newer, Git, and Claude Code signed in.",
    "No API key for the classroom route.",
    "Your own first name in the branch name."
   ],
@@ -516,19 +516,19 @@ window.SLIDES = [
   "teach": {
    "next": "The rules for today",
    "time": "10 min",
-   "gist": "Clone the lab, make your own branch, and open Claude Code with only the project settings.",
+   "gist": "Clone the lab, make your own branch, and open Claude Code with the project settings and your own user settings.",
    "script": [
     {
      "do": "Slide appears. Read the title and the subtitle.",
      "say": [
-      "Node.js 20 or newer, Git, and Claude Code signed in.",
+      "Node.js 22 or newer, Git, and Claude Code signed in.",
       "No API key for the classroom route.",
       "Your own first name in the branch name."
      ]
     }
    ],
    "learn": [
-    "Node.js 20 or newer, Git, and Claude Code signed in.",
+    "Node.js 22 or newer, Git, and Claude Code signed in.",
     "No API key for the classroom route.",
     "Your own first name in the branch name."
    ],
@@ -545,7 +545,7 @@ window.SLIDES = [
    "Sample data only. No credential in a prompt or a commit.",
    "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
    "Append progress.md after each step.",
-   "Compare with the reference tags only after your own attempt."
+   "Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs."
   ],
   "notes": "Time: 3 min.\n\nWhy now: Set the rules once, so the steps can stay short.\n\nWhat you see: Four rules.\n\nWatch for: Participants who copy the step tags. The tags are for comparing after an attempt.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the OPEN rule.\n\nNext: What is a skill?",
   "teach": {
@@ -559,7 +559,7 @@ window.SLIDES = [
       "Sample data only. No credential in a prompt or a commit.",
       "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
       "Append progress.md after each step.",
-      "Compare with the reference tags only after your own attempt."
+      "Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs."
      ]
     }
    ],
@@ -567,7 +567,7 @@ window.SLIDES = [
     "Sample data only. No credential in a prompt or a commit.",
     "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
     "Append progress.md after each step.",
-    "Compare with the reference tags only after your own attempt."
+    "Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs."
    ],
    "watch": [
     "Participants who copy the step tags. The tags are for comparing after an attempt."
@@ -598,9 +598,9 @@ window.SLIDES = [
    "You start it with /name.",
    "A skill guides the work. Tests still prove it."
   ],
-  "notes": "Time: 3 min.\n\nWhy now: Explain the idea once, before the first skill.\n\nWhat you see: Folder, name, recipe.\n\nWatch for: People who think a skill is a plugin or a model. It is text in a folder.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say where a skill lives.\n\nNext: The skills you use today",
+  "notes": "Time: 3 min.\n\nWhy now: Explain the idea once, before the first skill.\n\nWhat you see: Folder, name, recipe.\n\nWatch for: People who think a skill is a plugin or a model. It is text in a folder.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say where a skill lives.\n\nNext: Use the included project skills",
   "teach": {
-   "next": "The skills you use today",
+   "next": "Use the included project skills",
    "time": "3 min",
    "gist": "A saved recipe for Claude Code. You type /name, it follows the recipe.",
    "script": [
@@ -664,9 +664,9 @@ window.SLIDES = [
    "The full skills pack comes at the end of the day."
   ],
   "prompt": "/handoff Write a prompt for a fresh Claude Code session to continue from my current step. Name the step, the files, and the next proof.",
-  "notes": "Time: 3 min.\n\nWhy now: Show the tools before the first assignment.\n\nWhat you see: Seven skills, one per step.\n\nWatch for: Participants who install the full pack now. That is for the hackathon.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone can find /grilling after typing /.\n\nNext: Assignment 1",
+  "notes": "Time: 3 min.\n\nWhy now: Show the tools before the first assignment.\n\nWhat you see: Seven skills, one per step.\n\nWatch for: Participants who install the full pack now. That is for the hackathon.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone can find /grilling after typing /.\n\nNext: What Bree should do, and what she does today",
   "teach": {
-   "next": "Assignment 1",
+   "next": "What Bree should do, and what she does today",
    "time": "3 min",
    "gist": "The lab already has the skills you use today. One per assignment.",
    "script": [
@@ -774,9 +774,9 @@ window.SLIDES = [
     "note": "The difference is the gap. You write down how we want Bree to work: that is intent.md."
    }
   },
-  "notes": "Time: 3 min.\n\nWhy now: Turn the story into a gap you can close.\n\nWhat you see: Four rows, three still empty.\n\nWatch for: Participants who start coding. First the goal.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the gap.\n\nNext: intent.md: what goes in it",
+  "notes": "Time: 3 min.\n\nWhy now: Turn the story into a gap you can close.\n\nWhat you see: Four rows, three still empty.\n\nWatch for: Participants who start coding. First the goal.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the gap.\n\nNext: intent.md: what goes in it, and where it lives",
   "teach": {
-   "next": "intent.md: what goes in it",
+   "next": "intent.md: what goes in it, and where it lives",
    "time": "3 min",
    "gist": "Today Bree is an empty project. The difference is what you write down.",
    "script": [
@@ -894,9 +894,9 @@ window.SLIDES = [
     }
    ]
   },
-  "notes": "Time: 3 min.\n\nWhy now: Show where each piece of work lives before the first assignment.\n\nWhat you see: Five parts, four places.\n\nWatch for: Long intents. One screen is enough.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants know what A1 asks for.\n\nNext: Assignment 1",
+  "notes": "Time: 3 min.\n\nWhy now: Show where each piece of work lives before the first assignment.\n\nWhat you see: Five parts, four places.\n\nWatch for: Long intents. One screen is enough.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants know what A1 asks for.\n\nNext: Assignment 1: Write down what the brief must do",
   "teach": {
-   "next": "Assignment 1",
+   "next": "Assignment 1: Write down what the brief must do",
    "time": "3 min",
    "gist": "First the goal. Then the rules, the tests, the code. Each in its own place.",
    "script": [
@@ -1024,7 +1024,7 @@ window.SLIDES = [
      "something the agent must never do"
     ]
    ],
-   "next": "make the schema test fail, then pass."
+   "next": "A brief you can trust"
   },
   "cards": [
    {
@@ -1070,7 +1070,7 @@ window.SLIDES = [
    }
   ],
   "prompt": "Read CLAUDE.md, SOLO.md, and the templates on my branch. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Stop for my review. Do not implement code.",
-  "notes": "Time: 25 min.\n\nWhy now: The intent decides what done means for every later step.\n\nWhat you see: A short intent.md with checks you can test.\n\nWatch for: Checks that cannot be observed, such as \"the brief is useful\".\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A facilitator accepts the boundary.\n\nNext: Assignment 2"
+  "notes": "Time: 25 min.\n\nWhy now: The intent decides what done means for every later step.\n\nWhat you see: A short intent.md with checks you can test.\n\nWatch for: Checks that cannot be observed, such as \"the brief is useful\".\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A facilitator accepts the boundary.\n\nNext: A brief you can trust"
  },
  {
   "title": "A brief you can trust",
@@ -1186,7 +1186,7 @@ window.SLIDES = [
       "ghost": true
      }
     ],
-    "docFoot": "Always: sample data · nothing is sent",
+    "docFoot": "An example · your own fields come from the reference briefs",
     "rulesTitle": "The schema: five rules · click to check",
     "fixLabel": "what if she writes it?",
     "rules": [
@@ -1245,9 +1245,9 @@ window.SLIDES = [
     }
    }
   },
-  "notes": "Time: 5 min.\n\nWhy now: Explain the contract before the participants write it.\n\nWhat you see: The brief, the five rules, one broken.\n\nWatch for: Participants who think the model checks itself. The check is plain code.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say what a schema is in one sentence.\n\nNext: Assignment 2",
+  "notes": "Time: 5 min.\n\nWhy now: Explain the contract before the participants write it.\n\nWhat you see: The brief, the five rules, one broken.\n\nWatch for: Participants who think the model checks itself. The check is plain code.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say what a schema is in one sentence.\n\nNext: Assignment 2: Make the schema test fail, then pass",
   "teach": {
-   "next": "Assignment 2",
+   "next": "Assignment 2: Make the schema test fail, then pass",
    "time": "5 min",
    "gist": "Always the same format. Every line with a source. Checked before you see it.",
    "script": [
@@ -1375,7 +1375,7 @@ window.SLIDES = [
      "a failing test / a passing test"
     ]
    ],
-   "next": "agree on the design and the plan."
+   "next": "Break"
   },
   "cards": [
    {
@@ -1430,11 +1430,11 @@ window.SLIDES = [
   "cards": [
    {
     "title": "Next",
-    "body": "A diagnosis you can trust"
+    "body": "Assignment 3: Agree on the design and the plan"
    }
   ],
   "keyPoints": [],
-  "notes": "Time: 11:09 · 15 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: A diagnosis you can trust",
+  "notes": "Time: 15 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Assignment 3: Agree on the design and the plan",
   "visual": {
    "countdown": 15,
    "bot": "wave",
@@ -1455,7 +1455,7 @@ window.SLIDES = [
     "Resume with A diagnosis you can trust."
    ],
    "watch": [],
-   "next": "A diagnosis you can trust"
+   "next": "Assignment 3: Agree on the design and the plan"
   }
  },
  {
@@ -1467,7 +1467,7 @@ window.SLIDES = [
   "beat": "turn",
   "sdlc": "build",
   "stage": "contract",
-  "mode": "manual",
+  "mode": "plan",
   "calm": true,
   "expected": "A stranger can follow the plan.",
   "repo": "https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1",
@@ -1507,9 +1507,9 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 1. Everyone checks “manual mode on” at the bottom of Claude Code.",
+     "do": "Step 1. Everyone checks “plan mode on” at the bottom of Claude Code.",
      "say": [
-      "Manual mode first. Claude Code asks before every change, so you stay the reviewer."
+      "Plan mode for this one. Claude Code can read and propose, but cannot change files."
      ]
     },
     {
@@ -1563,7 +1563,7 @@ window.SLIDES = [
      "how to undo one step"
     ]
    ],
-   "next": "render the brief from sample data."
+   "next": "Assignment 4: Render the brief from sample data"
   },
   "cards": [
    {
@@ -1584,7 +1584,7 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “manual mode on”",
+    "text": "Check the mode: “plan mode on”",
     "after": "Not there? Press Shift+Tab until it is.",
     "warn": true
    },
@@ -1609,7 +1609,7 @@ window.SLIDES = [
    }
   ],
   "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Name exact paths, one proof command and rollback per step. Do not edit files or build. Stop for my acceptance.",
-  "notes": "Time: 25 min.\n\nWhy now: A plan you accepted makes the build fast and easy to review.\n\nWhat you see: Three documents and a plan with a proof per step.\n\nWatch for: Plans without a proof command.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A neighbour can name what proves completion.\n\nNext: Assignment 4"
+  "notes": "Time: 25 min.\n\nWhy now: A plan you accepted makes the build fast and easy to review.\n\nWhat you see: Three documents and a plan with a proof per step.\n\nWatch for: Plans without a proof command.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A neighbour can name what proves completion.\n\nNext: Assignment 4: Render the brief from sample data"
  },
  {
   "title": "Assignment 4: Render the brief from sample data",
@@ -1699,7 +1699,7 @@ window.SLIDES = [
    "watch": [
     "A model call in the sample path.",
     "Unescaped text from the sources in the HTML.",
-    "Save the 1440×900 screenshot now. A6 needs it.",
+    "Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.",
     "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
    ],
    "terms": [
@@ -1716,7 +1716,7 @@ window.SLIDES = [
      "make text safe to put in HTML"
     ]
    ],
-   "next": "after lunch, give the agent one read-only tool."
+   "next": "Lunch"
   },
   "cards": [
    {
@@ -1771,11 +1771,11 @@ window.SLIDES = [
   "cards": [
    {
     "title": "Next",
-    "body": "Recall the morning before A4"
+    "body": "Restart and settle"
    }
   ],
   "keyPoints": [],
-  "notes": "Time: 12:00 · 60 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Recall the morning before A4",
+  "notes": "Time: 60 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Restart and settle",
   "visual": {
    "countdown": 60,
    "bot": "wave",
@@ -1796,7 +1796,7 @@ window.SLIDES = [
     "Resume with Recall the morning before A4."
    ],
    "watch": [],
-   "next": "Recall the morning before A4"
+   "next": "Restart and settle"
   }
  },
  {
@@ -1806,11 +1806,11 @@ window.SLIDES = [
   "cards": [
    {
     "title": "Next",
-    "body": "Guardrails: no shortcuts past the person"
+    "body": "Tools: how an AI agent sees"
    }
   ],
   "keyPoints": [],
-  "notes": "Time: 13:10 · 10 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Guardrails: no shortcuts past the person",
+  "notes": "Time: 10 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Tools: how an AI agent sees",
   "visual": {
    "countdown": 10,
    "bot": "wave",
@@ -1831,7 +1831,7 @@ window.SLIDES = [
     "Resume with Guardrails: no shortcuts past the person."
    ],
    "watch": [],
-   "next": "Guardrails: no shortcuts past the person"
+   "next": "Tools: how an AI agent sees"
   }
  },
  {
@@ -1903,9 +1903,9 @@ window.SLIDES = [
     "foot": "No credentials today? Then the live check is OPEN, not failed. The sample route keeps working."
    }
   },
-  "notes": "Time: 4 min.\n\nWhy now: Explain tools before the participants build one.\n\nWhat you see: Four tools, three rules.\n\nWatch for: Write or shell tools. Eyes only.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say why tools only read.\n\nNext: Assignment 5",
+  "notes": "Time: 4 min.\n\nWhy now: Explain tools before the participants build one.\n\nWhat you see: Four tools, three rules.\n\nWatch for: Write or shell tools. Eyes only.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say why tools only read.\n\nNext: Assignment 5: Give the agent one read-only tool",
   "teach": {
-   "next": "Assignment 5",
+   "next": "Assignment 5: Give the agent one read-only tool",
    "time": "4 min",
    "gist": "The AI only reads and writes text. Tools are its eyes. What is not on the menu, it cannot see.",
    "script": [
@@ -2017,6 +2017,8 @@ window.SLIDES = [
     "Shell or write tools on the brief agent.",
     "Tokens in a prompt, a log or a commit.",
     "brief:sample that suddenly needs a model.",
+    "The reference tag has many tools. Today you build one.",
+    "run.log comes from: npm run brief 2> run.log.",
     "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
    ],
    "terms": [
@@ -2033,7 +2035,7 @@ window.SLIDES = [
      "the log that each claim in a live brief traces back to"
     ]
    ],
-   "next": "record the evidence."
+   "next": "Assignment 6: Record the evidence"
   },
   "cards": [
    {
@@ -2079,7 +2081,7 @@ window.SLIDES = [
    }
   ],
   "prompt": "Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command while preserving brief:sample without model calls. Reuse tool() and guarded() if present. Give the brief-agent no shell or write tools. Prove the tool wiring and missing-source behavior with tests. Keep the sample path working. Stop for my review.",
-  "notes": "Time: 40 min.\n\nWhy now: An agent is only as safe as its tools.\n\nWhat you see: Green tests for the tool and the missing source.\n\nWatch for: Participants who add write or shell tools.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: npm test, npm run typecheck and npm run brief:sample are green.\n\nNext: Assignment 6"
+  "notes": "Time: 40 min.\n\nWhy now: An agent is only as safe as its tools.\n\nWhat you see: Green tests for the tool and the missing source.\n\nWatch for: Participants who add write or shell tools.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: npm test, npm run typecheck and npm run brief:sample are green.\n\nNext: Assignment 6: Record the evidence"
  },
  {
   "title": "Assignment 6: Record the evidence",
@@ -2186,7 +2188,7 @@ window.SLIDES = [
      "the person who reruns one command"
     ]
    ],
-   "next": "decide the gate and prepare the PR."
+   "next": "Assignment 7: Decide the gate and prepare the PR"
   },
   "cards": [
    {
@@ -2232,7 +2234,7 @@ window.SLIDES = [
    }
   ],
   "prompt": "Run the existing typecheck, test, and brief:sample scripts. Record each actual command, exit code, and one output line in docs/evidence.md. Link my screenshot under docs/evidence/. Mark unrun checks OPEN. Do not change implementation to hide a failure. Stop for my review.",
-  "notes": "Time: 25 min.\n\nWhy now: A claim without evidence is a hypothesis.\n\nWhat you see: docs/evidence.md with exit codes.\n\nWatch for: Evidence written from memory instead of from a run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A neighbour reran one command and got the same result.\n\nNext: Assignment 7"
+  "notes": "Time: 25 min.\n\nWhy now: A claim without evidence is a hypothesis.\n\nWhat you see: docs/evidence.md with exit codes.\n\nWatch for: Evidence written from memory instead of from a run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A neighbour reran one command and got the same result.\n\nNext: Assignment 7: Decide the gate and prepare the PR"
  },
  {
   "title": "Assignment 7: Decide the gate and prepare the PR",
@@ -2339,7 +2341,7 @@ window.SLIDES = [
      "the weekday run, written down but not switched on"
     ]
    ],
-   "next": "Maintain: close the loop."
+   "next": "Maintain: close the loop"
   },
   "cards": [
    {
@@ -2416,9 +2418,9 @@ window.SLIDES = [
    "Your OPEN items in gate.md are the first input.",
    "The loop keeps running. Your judgement stays above it."
   ],
-  "notes": "Time: 3 min.\n\nWhy now: Show the sixth stage, so the line becomes a loop.\n\nWhat you see: Runs, notice, back to Plan.\n\nWatch for: Participants who switch the schedule on today. It stays inactive.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name one OPEN item that would start a new intent.\n\nNext: Recap",
+  "notes": "Time: 3 min.\n\nWhy now: Show the sixth stage, so the line becomes a loop.\n\nWhat you see: Runs, notice, back to Plan.\n\nWatch for: Participants who switch the schedule on today. It stays inactive.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name one OPEN item that would start a new intent.\n\nNext: Recap: seven steps, one brief",
   "teach": {
-   "next": "Recap",
+   "next": "Recap: seven steps, one brief",
    "time": "3 min",
    "gist": "The brief runs every morning. What goes wrong becomes a new intent.md.",
    "script": [
@@ -2544,7 +2546,7 @@ window.SLIDES = [
    },
    {
     "title": "Start isolated",
-    "body": "Use project-only settings and no Chrome integration."
+    "body": "Project and user settings, no connectors, no Chrome integration."
    },
    {
     "title": "Choose one",
@@ -2560,14 +2562,14 @@ window.SLIDES = [
    "Preserve an existing skill.",
    "Do not change global settings."
   ],
-  "notes": "Appendix. The full pack is hackathon support, not lesson setup.",
+  "notes": "Time: 3 min.\n\nThe full pack is hackathon support, not lesson setup.\n\nNext: Close: what you learned on Day 5",
   "prompt": "Read README.md and inspect the skill I choose. Explain what it does and its requirements. Propose installing only that skill in my chosen project's .claude/skills folder. Check for an existing skill with that name and preserve it. Show the source and target paths. Ask for my approval before copying or replacing anything. Do not install the full pack, change global settings, or run the skill yet.",
   "source": {
    "url": "https://github.com/AetherLink-bv/claude-code-skills-pack",
    "label": "github.com/AetherLink-bv/claude-code-skills-pack"
   },
   "teach": {
-   "time": "Facilitator",
+   "time": "3 min",
    "gist": "Install only the project skill that your hackathon needs.",
    "script": [
     {
@@ -2581,37 +2583,74 @@ window.SLIDES = [
     "Do not change global settings."
    ],
    "watch": [],
-   "next": "Appendix · Why this is an AI-native SDLC loop"
+   "next": "Close: what you learned on Day 5"
+  }
+ },
+ {
+  "title": "Close: what you learned on Day 5",
+  "kicker": "Day 5 · Close",
+  "subtitle": "You built an agent through the SDLC, and a human decided at every gate.",
+  "keyPoints": [
+   "Plan before you build.",
+   "Red before green.",
+   "Evidence before PASS."
+  ],
+  "notes": "Time: 5 min.\n\nWhy now: End the day on the loop, not on the tools.\n\nWhat you see: Three lessons.\n\nWatch for: Groups that are not done. They finish with SOLO.md.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone can name the next step for their own brief.\n\nNext: Day 6",
+  "teach": {
+   "next": "Day 6",
+   "time": "5 min",
+   "gist": "You built an agent through the SDLC, and a human decided at every gate.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "Plan before you build.",
+      "Red before green.",
+      "Evidence before PASS."
+     ]
+    }
+   ],
+   "learn": [
+    "Plan before you build.",
+    "Red before green.",
+    "Evidence before PASS."
+   ],
+   "watch": [
+    "Groups that are not done. They finish with SOLO.md."
+   ]
   }
  },
  {
   "title": "Bonus: Sonny, the on-call SRE agent",
   "kicker": "Day 5 · Bonus",
-  "subtitle": "Done early? Use the same SDLC loop on a second agent: Sonny diagnoses a broken shop at 03:45.",
+  "subtitle": "Self-study for who is done early: the same loop on a second agent. Sonny diagnoses a broken shop at 03:45.",
   "keyPoints": [
-   "Same loop, new domain: intent, contract, guardrails, tool, live run.",
-   "Repo: sre-oncall-agent, branch workshop/start.",
-   "Do the assignments in order. Stop where the day ends."
+   "Class ends at the Close slide. The bonus is self-study.",
+   "Sonny has his own assignments: Sonny 1 to Sonny 6.",
+   "The Sonny slides were written as a full day. Read “today” as “in this bonus”.",
+   "Repo: sre-oncall-agent, branch workshop/start. Needs Node 22."
   ],
   "notes": "Time: 2 min.\n\nWhy now: Give fast participants a real second challenge.\n\nWhat you see: The Sonny assignments that follow.\n\nWatch for: Participants who start the bonus before they finish A4.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Fast participants open the Sonny project.\n\nNext: A global shop, and you are on call",
   "teach": {
    "next": "A global shop, and you are on call",
    "time": "2 min",
-   "gist": "Done early? Use the same SDLC loop on a second agent: Sonny diagnoses a broken shop at 03:45.",
+   "gist": "Self-study for who is done early: the same loop on a second agent. Sonny diagnoses a broken shop at 03:45.",
    "script": [
     {
      "do": "Slide appears. Read the title and the subtitle.",
      "say": [
-      "Same loop, new domain: intent, contract, guardrails, tool, live run.",
-      "Repo: sre-oncall-agent, branch workshop/start.",
-      "Do the assignments in order. Stop where the day ends."
+      "Class ends at the Close slide. The bonus is self-study.",
+      "Sonny has his own assignments: Sonny 1 to Sonny 6.",
+      "The Sonny slides were written as a full day. Read “today” as “in this bonus”.",
+      "Repo: sre-oncall-agent, branch workshop/start. Needs Node 22."
      ]
     }
    ],
    "learn": [
-    "Same loop, new domain: intent, contract, guardrails, tool, live run.",
-    "Repo: sre-oncall-agent, branch workshop/start.",
-    "Do the assignments in order. Stop where the day ends."
+    "Class ends at the Close slide. The bonus is self-study.",
+    "Sonny has his own assignments: Sonny 1 to Sonny 6.",
+    "The Sonny slides were written as a full day. Read “today” as “in this bonus”.",
+    "Repo: sre-oncall-agent, branch workshop/start. Needs Node 22."
    ],
    "watch": [
     "Participants who start the bonus before they finish A4."
@@ -2642,7 +2681,7 @@ window.SLIDES = [
    "You are the operator: on call this week.",
    "Today you build Sonny, the on-call agent that helps you."
   ],
-  "notes": "Time: 10:00 · 2 min. Sets the scene before the incident. The shop is the demo shop in the practice repo (npm run shop, used live in A6). The order times are all the same moment in different time zones.",
+  "notes": "Time: 2 min. Sets the scene before the incident. The shop is the demo shop in the practice repo (npm run shop, used live in A6). The order times are all the same moment in different time zones.",
   "visual": {
    "shopDay": {
     "shopBar": "web shop · checkout · live",
@@ -2770,7 +2809,7 @@ window.SLIDES = [
    "A global shop never sleeps: people are paying right now.",
    "Ask: what do you expect Sonny to do, and what never without you?"
   ],
-  "notes": "Time: 10:02 · 3 min. The alert text matches the terminal in A1: “Error rate 12% for 5 min on checkout (threshold 2%)”. The cause (update d-4821 reads a missing secret key for EU payments) is what the agent finds. Do not tell the room yet.",
+  "notes": "Time: 3 min. The alert text matches the terminal in A1: “Error rate 12% for 5 min on checkout (threshold 2%)”. The cause (update d-4821 reads a missing secret key for EU payments) is what the agent finds. Do not tell the room yet.",
   "visual": {
    "wakeUp": {
     "clock": "03:45",
@@ -2931,7 +2970,7 @@ window.SLIDES = [
    "He checks it against fixed rules: only a diagnosis that meets every rule goes on.",
    "He asks the operator: human in the loop."
   ],
-  "notes": "Time: 10:05 · 4 min. Block 3 is how we WANT it: today the rules are still empty (Assignment 1 shows “PASS contract” because nothing is checked; Assignment 3 writes the five rules from TODO(A3) in src/contract.ts). The five chips are those rules in short. On purpose there are no ✓/✗ here: the zoom before Assignment 3 shows that this diagnosis breaks “say what customers notice”. The diagnosis lines come from the real offline output of npm run investigate -- fixtures/incidents/bad-deploy.json (A1 step 8), shortened: the labels are metrics:2026-10-05T03:45:00.000Z, deploys:d-4821, diff:d-4821, logs:2026-10-05T03:45:03.000Z (PaymentConfigError: missing key PAYMENT_PROVIDER_SECRET_EU). The terminal headings are “What’s happening”, “Root cause (high)” and “Proposed fix”. The real text calls the update a candidate cause and keeps non-deploy causes OPEN. Today the agent runs offline on scripted answers (src/runtime.ts): free and the same for everyone. A real model is optional (appendix).",
+  "notes": "Time: 4 min. Block 3 is how we WANT it: today the rules are still empty (Assignment 1 shows “PASS contract” because nothing is checked; Assignment 3 writes the five rules from TODO(A3) in src/contract.ts). The five chips are those rules in short. On purpose there are no ✓/✗ here: the zoom before Assignment 3 shows that this diagnosis breaks “say what customers notice”. The diagnosis lines come from the real offline output of npm run investigate -- fixtures/incidents/bad-deploy.json (A1 step 8), shortened: the labels are metrics:2026-10-05T03:45:00.000Z, deploys:d-4821, diff:d-4821, logs:2026-10-05T03:45:03.000Z (PaymentConfigError: missing key PAYMENT_PROVIDER_SECRET_EU). The terminal headings are “What’s happening”, “Root cause (high)” and “Proposed fix”. The real text calls the update a candidate cause and keeps non-deploy causes OPEN. Today the agent runs offline on scripted answers (src/runtime.ts): free and the same for everyone. A real model is optional (appendix).",
   "visual": {
    "agentJob": {
     "botTag": "SONNY",
@@ -3149,7 +3188,7 @@ window.SLIDES = [
    "Sonny writes OPEN instead of guessing.",
    "A proposed fix is only a suggestion. Only a person approves or rejects it."
   ],
-  "notes": "Time: 10:09 · 3 min. Words taken from the repo (README “Shared terms”: incident, fixture, proposal, approval) plus what participants see in the terminal in A1 (telemetry, evidence, OPEN). The code says “verdict” for diagnosis and “proposal” for proposed fix: mention that once, in Assignment 3. Rule already showed up in “How we want Sonny to work” (“fixed rules”); contract and test come just before Assignment 3. Approval in the repo (approvals/README.md): one record per incident and proposal; Sonny writes a pending draft with decided_by: \"OPEN\"; a pending draft is not an approval. On the desk, Execute stays grey until a named person approved. The rollback program itself (src/executor.ts) does not check that yet on workshop/start: that is TODO(A8), an optional extra (tested: a direct call rolls back with a pending approval). Running the rollback is a separate step after the approval.",
+  "notes": "Time: 3 min. Words taken from the repo (README “Shared terms”: incident, fixture, proposal, approval) plus what participants see in the terminal in A1 (telemetry, evidence, OPEN). The code says “verdict” for diagnosis and “proposal” for proposed fix: mention that once, in Assignment 3. Rule already showed up in “How we want Sonny to work” (“fixed rules”); contract and test come just before Assignment 3. Approval in the repo (approvals/README.md): one record per incident and proposal; Sonny writes a pending draft with decided_by: \"OPEN\"; a pending draft is not an approval. On the desk, Execute stays grey until a named person approved. The rollback program itself (src/executor.ts) does not check that yet on workshop/start: that is TODO(A8), an optional extra (tested: a direct call rolls back with a pending approval). Running the rollback is a separate step after the approval.",
   "visual": {
    "glossary": [
     {
@@ -3325,7 +3364,7 @@ window.SLIDES = [
    "Each assignment builds on the one before.",
    "Maintain (A7, A9) is optional, for who is fast."
   ],
-  "notes": "Time: 10:15 · 2 min. Required route: A1–A6. Test = the second part of A3 and the catch-up before A6. A7 (more test cases) and A9 (lesson + handoff) are optional appendix work. The human in the loop is 6B (Approve, Execute, Resolve by a named person). TODO(A8), the rollback program’s own check, is an optional extra: its 2 tests may stay red. → or a click moves to the next step; the next → after Maintain goes to the next slide.",
+  "notes": "Time: 2 min. Required route: A1–A6. Test = the second part of A3 and the catch-up before A6. A7 (more test cases) and A9 (lesson + handoff) are optional appendix work. The human in the loop is 6B (Approve, Execute, Resolve by a named person). TODO(A8), the rollback program’s own check, is an optional extra: its 2 tests may stay red. → or a click moves to the next step; the next → after Maintain goes to the next slide.",
   "visual": {
    "routeLine": true,
    "routeBot": true,
@@ -3510,7 +3549,7 @@ window.SLIDES = [
    "Afternoon: you break the shop, a live incident gets a new number.",
    "Same Sonny, same rules."
   ],
-  "notes": "Time: 10:17 · 2 min. The fixture: npm run investigate -- fixtures/incidents/bad-deploy.json (A1 last step; again in A3 to see the difference) → src/cli.ts → investigate() in src/agent.ts; its data lives in fixtures/telemetry/. Live (A6): the console (console/server.ts) listens for alerts, creates a new incident (INC-<digits>) and investigates through src/chat.ts → investigate() in src/agent.ts.",
+  "notes": "Time: 2 min. The fixture: npm run investigate -- fixtures/incidents/bad-deploy.json (A1 last step; again in A3 to see the difference) → src/cli.ts → investigate() in src/agent.ts; its data lives in fixtures/telemetry/. Live (A6): the console (console/server.ts) listens for alerts, creates a new incident (INC-<digits>) and investigates through src/chat.ts → investigate() in src/agent.ts.",
   "visual": {
    "doors": [
     {
@@ -3653,7 +3692,7 @@ window.SLIDES = [
    "Four questions: does it run, where does an incident come in, what does Sonny do now, what can he not do yet.",
    "Set-up, the tour, the skills and Assignment 1 answer them."
   ],
-  "notes": "Time: 10:19 · 2 min. This slide has no task and no command. It frames the next slides (set-up, tour, skills) and Assignment 1 as one research round. Each block opens on click.",
+  "notes": "Time: 2 min. This slide has no task and no command. It frames the next slides (set-up, tour, skills) and Assignment 1 as one research round. Each block opens on click.",
   "visual": {
    "reveal": "click",
    "covers": [],
@@ -3768,16 +3807,16 @@ window.SLIDES = [
    },
    {
     "title": "Why the extra words after claude?",
-    "body": "Use only this project’s settings, not your personal ones (for example permissions, hooks or connectors you added on earlier days). No browser. Everyone starts the same."
+    "body": "The project settings and your own user settings load, so your company login works. No connectors, no browser."
    }
   ],
   "keyPoints": [
    "Check Node first.",
    "Your own copy, in your own folder.",
-   "Claude Code starts with only this project’s settings.",
+   "Claude Code starts with the project settings and your user settings.",
    "Trust only this folder."
   ],
-  "notes": "Time: 10:21 · 7 min. Do it together, one step at a time. Node 22.13+ is needed because the project stores incidents with node:sqlite, which older Node versions do not have (npm test fails on store.test.ts, the console cannot save incidents).",
+  "notes": "Time: 7 min. Do it together, one step at a time. Node 22.13+ is needed because the project stores incidents with node:sqlite, which older Node versions do not have (npm test fails on store.test.ts, the console cannot save incidents).",
   "stage": "setup",
   "visual": {
    "shot": "assets/day5-expected/trust.png",
@@ -3803,8 +3842,8 @@ window.SLIDES = [
     "after": "The line in your terminal ends in sre-oncall-agent."
    },
    {
-    "text": "Type this in: Terminal. Start Claude Code with only this project’s settings.",
-    "prompt": "claude --setting-sources project --strict-mcp-config --no-chrome",
+    "text": "Type this in: Terminal. Start Claude Code with the project settings and your user settings.",
+    "prompt": "claude --setting-sources project,user --strict-mcp-config --no-chrome",
     "after": "Claude Code asks if you trust this folder. It looks like the picture on the right."
    },
    {
@@ -3842,7 +3881,7 @@ window.SLIDES = [
     ],
     [
      "Step 4 · Terminal",
-     "claude --setting-sources project --strict-mcp-config --no-chrome"
+     "claude --setting-sources project,user --strict-mcp-config --no-chrome"
     ]
    ],
    "do": [
@@ -3912,7 +3951,7 @@ window.SLIDES = [
      "copy": [
       [
        "Step 4 · Terminal",
-       "claude --setting-sources project --strict-mcp-config --no-chrome"
+       "claude --setting-sources project,user --strict-mcp-config --no-chrome"
       ]
      ],
      "say": [
@@ -3920,7 +3959,7 @@ window.SLIDES = [
       "Personal: the .claude folder in your home folder. Counts for every project.",
       "Project: the .claude folder inside this project.",
       "On earlier days some of you added personal permissions, hooks or connectors.",
-      "--setting-sources project: today only the project settings count.",
+      "--setting-sources project,user: the project settings and your own user settings.",
       "So Claude Code also starts in manual mode, even if you set another default before.",
       "--strict-mcp-config: no connectors (like Gmail or n8n).",
       "--no-chrome: Claude Code cannot use your browser.",
@@ -4023,7 +4062,7 @@ window.SLIDES = [
    "src/ and test/workshop/: Sonny and his red tests.",
    "intent.md: you fill it in at A2."
   ],
-  "notes": "Time: 10:28 · 4 min. Trainer demo: open the sre-oncall-agent folder in your editor or file explorer on the projector. Other folders (bench/, lessons/, approvals/, course/, scripts/, skills/) come back in the optional parts or are for the trainer; skip them unless asked.",
+  "notes": "Time: 4 min. Trainer demo: open the sre-oncall-agent folder in your editor or file explorer on the projector. Other folders (bench/, lessons/, approvals/, course/, scripts/, skills/) come back in the optional parts or are for the trainer; skip them unless asked.",
   "visual": {
    "skillTrees": [
     {
@@ -4223,7 +4262,7 @@ window.SLIDES = [
    "You start one with a slash: /show-me.",
    "Each skill is a plain SKILL.md file in .claude/skills/."
   ],
-  "notes": "Time: 10:32 · 2 min. Nine skills in .claude/skills/: show-me, design-control-loop, verify-this and handoff are used in the assignments; grilling, incident-triage, review-and-ship and visual-pr are not. The product runbook skills/triage/SKILL.md is team-owned and only read in real-model mode (src/prompts.ts); do not read its “Things that have burned us” list aloud, it hints at today’s cause.",
+  "notes": "Time: 2 min. Eight skills in .claude/skills/: show-me, design-control-loop, verify-this and handoff are used in the assignments; grilling, incident-triage, review-and-ship and visual-pr are not. The product runbook skills/triage/SKILL.md is team-owned and only read in real-model mode (src/prompts.ts); do not read its “Things that have burned us” list aloud, it hints at today’s cause.",
   "visual": {
    "skillTrees": [
     {
@@ -4350,8 +4389,8 @@ window.SLIDES = [
   }
  },
  {
-  "title": "Assignment 1: Get to know the project, and check that it works",
-  "kicker": "Bonus · Day 5 · A1 · BUILD",
+  "title": "Sonny assignment 1: Get to know the project, and check that it works",
+  "kicker": "Bonus · Day 5 · SONNY 1 · BUILD",
   "subtitle": "Research first: let Claude Code show you around. Change nothing yet.",
   "type": "practice",
   "cards": [
@@ -4369,7 +4408,7 @@ window.SLIDES = [
    "56 main tests pass, 14 workshop tests are red.",
    "The shop, the customers and the console run, and you saw the diagnosis for INC-1001."
   ],
-  "notes": "Time: 10:34 · 18 min.\n\nWhy now: Research first: let Claude Code show you around. Change nothing yet.\n\nPredict: Ask which visible result shows Assignment 1 is done.\n\nWhat you see: You know both routes, saw Sonny’s diagnosis, 56 green / 14 red, and saw the healthy shop and the desk in the browser.\n\nLook inside: You can explain both routes into Sonny. 56 main tests pass, 14 workshop tests are red. The shop, the customers and the console run, and you saw the diagnosis for INC-1001.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: Change nothing yet. The red tests are for the next assignments. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: The shop, the customers and the console run, and you saw the diagnosis for INC-1001.\n\nNext: What Sonny should do, and what he does today",
+  "notes": "Time: 18 min.\n\nWhy now: Research first: let Claude Code show you around. Change nothing yet.\n\nPredict: Ask which visible result shows Assignment 1 is done.\n\nWhat you see: You know both routes, saw Sonny’s diagnosis, 56 green / 14 red, and saw the healthy shop and the desk in the browser.\n\nLook inside: You can explain both routes into Sonny. 56 main tests pass, 14 workshop tests are red. The shop, the customers and the console run, and you saw the diagnosis for INC-1001.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: Change nothing yet. The red tests are for the next assignments. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: The shop, the customers and the console run, and you saw the diagnosis for INC-1001.\n\nNext: What Sonny should do, and what he does today",
   "stage": "learn",
   "beat": "turn",
   "visual": {
@@ -4839,7 +4878,7 @@ window.SLIDES = [
    "Assignment 1 showed what he does today: three of the four blocks.",
    "The gap: nobody checks his diagnosis yet. You write down how we want it: intent.md."
   ],
-  "notes": "Time: 10:52 · 3 min. The “should” comes from the operator’s need at 03:45 (slide 3), turned into the four blocks of “How we want Sonny to work” (slide 4). The right column is the real offline output of npm run investigate -- fixtures/incidents/bad-deploy.json at workshop/start: four Tool: lines (summarize_metrics, list_deploys, get_diff, search_logs), Root cause (high) with metrics/deploys/diff/logs evidence, Proposed fix: rollback → Deploy owner, last line “PASS contract · OPEN: a human decides. Nothing was rolled back, scaled or paged.” There is no Customer impact line; Blast radius says customer segments remain OPEN. “PASS contract” means: parseVerdict in src/contract.ts has no rules yet (TODO(A3)), so everything passes. The 14 red tests are from step 4, not step 8: they come back in Assignment 3. On screen: the chain first; the table below stays dim. Each click on “The gap” (or →) opens the next piece: rows 1–2, row 3, row 4, the orange line. A click on a dim row opens up to that row.",
+  "notes": "Time: 3 min. The “should” comes from the operator’s need at 03:45 (slide 3), turned into the four blocks of “How we want Sonny to work” (slide 4). The right column is the real offline output of npm run investigate -- fixtures/incidents/bad-deploy.json at workshop/start: four Tool: lines (summarize_metrics, list_deploys, get_diff, search_logs), Root cause (high) with metrics/deploys/diff/logs evidence, Proposed fix: rollback → Deploy owner, last line “PASS contract · OPEN: a human decides. Nothing was rolled back, scaled or paged.” There is no Customer impact line; Blast radius says customer segments remain OPEN. “PASS contract” means: parseVerdict in src/contract.ts has no rules yet (TODO(A3)), so everything passes. The 14 red tests are from step 4, not step 8: they come back in Assignment 3. On screen: the chain first; the table below stays dim. Each click on “The gap” (or →) opens the next piece: rows 1–2, row 3, row 4, the orange line. A click on a dim row opens up to that row.",
   "visual": {
    "gapCompare": {
     "icons": [
@@ -4982,7 +5021,7 @@ window.SLIDES = [
    "Four layers: goal (intent.md), rules (docs/spec.md), tests (test/workshop/), code (src/).",
    "Here the team already wrote the rules and the tests. You write the goal and the code."
   ],
-  "notes": "Time: 10:55 · 2 min. intent.md sits at the project root (sre-oncall-agent/intent.md), not in src/. Its parts: Problem, Proposed outcome and Open questions are “<fill in>”; Affected users and systems (Serves / Reads / Never writes / Boundary) and Constraints are already written. The rules: the verdict-contract table in docs/spec.md (customer_impact, a rollback needs a deploys line, high refused while data_gaps) and all five in the TODO(A3) comment in src/contract.ts; spec.md also has an empty “Rules worth writing down” part that Assignment 3 fills. Tests: test/workshop/contract.test.ts (7 for the rules) and the other workshop tests; participants make them green, they do not write them (extra test cases only in the optional A7). The normal order is goal → rules → tests → code (the SDLC of slide 6); in this practice project the team wrote two layers ahead of time. No code file loads intent.md: the build prompts start with “Read intent.md”. Code is written in A3–A5; A6 runs Sonny on the live shop. The optional grep shows three “<fill in” lines (Problem, Proposed outcome, Open questions). The slide has no clicks: everything is visible at once. Day 6–7: docs/hackathon-intent.md.",
+  "notes": "Time: 2 min. intent.md sits at the project root (sre-oncall-agent/intent.md), not in src/. Its parts: Problem, Proposed outcome and Open questions are “<fill in>”; Affected users and systems (Serves / Reads / Never writes / Boundary) and Constraints are already written. The rules: the verdict-contract table in docs/spec.md (customer_impact, a rollback needs a deploys line, high refused while data_gaps) and all five in the TODO(A3) comment in src/contract.ts; spec.md also has an empty “Rules worth writing down” part that Assignment 3 fills. Tests: test/workshop/contract.test.ts (7 for the rules) and the other workshop tests; participants make them green, they do not write them (extra test cases only in the optional A7). The normal order is goal → rules → tests → code (the SDLC of slide 6); in this practice project the team wrote two layers ahead of time. No code file loads intent.md: the build prompts start with “Read intent.md”. Code is written in A3–A5; A6 runs Sonny on the live shop. The optional grep shows three “<fill in” lines (Problem, Proposed outcome, Open questions). The slide has no clicks: everything is visible at once. Day 6–7: docs/hackathon-intent.md.",
   "visual": {
    "intentFlow": [
     {
@@ -5137,8 +5176,8 @@ window.SLIDES = [
   "sdlc": "plan"
  },
  {
-  "title": "Assignment 2: Write down what Sonny must do",
-  "kicker": "Bonus · Day 5 · A2 · BUILD",
+  "title": "Sonny assignment 2: Write down what Sonny must do",
+  "kicker": "Bonus · Day 5 · SONNY 2 · BUILD",
   "subtitle": "Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.",
   "type": "practice",
   "cards": [
@@ -5156,7 +5195,7 @@ window.SLIDES = [
    "You can read your three checks out loud.",
    "git diff shows only intent.md."
   ],
-  "notes": "Time: 10:57 · 10 min.\n\nWhy now: Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.\n\nPredict: Ask which visible result shows Assignment 2 is done.\n\nWhat you see: intent.md is filled in with your answers and three checks. Claude Code reads it again before every build.\n\nLook inside: No “fill in” is left in intent.md. You can read your three checks out loud. git diff shows only intent.md.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You decide what Sonny is for. Claude Code only suggests. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: git diff shows only intent.md.\n\nNext: Your intent.md: before and after",
+  "notes": "Time: 10 min.\n\nWhy now: Claude Code asks, you decide, Claude Code writes, you check. Only intent.md changes.\n\nPredict: Ask which visible result shows Assignment 2 is done.\n\nWhat you see: intent.md is filled in with your answers and three checks. Claude Code reads it again before every build.\n\nLook inside: No “fill in” is left in intent.md. You can read your three checks out loud. git diff shows only intent.md.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You decide what Sonny is for. Claude Code only suggests. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: git diff shows only intent.md.\n\nNext: Your intent.md: before and after",
   "stage": "intent",
   "beat": "turn",
   "visual": {
@@ -5429,7 +5468,7 @@ window.SLIDES = [
    "No empty part left; a Checks part is added.",
    "Checks: promises you can check later, just by looking."
   ],
-  "notes": "Time: 11:07 · 2 min. Shown after Assignment 2, so they compare instead of copy. Example only. The Checks part is new: the write prompt asks for three checks. Honest about the link: the checks do not create code. The five rules are already in the project (docs/spec.md, TODO(A3) in src/contract.ts) and the chat refusal is TODO(A4) in src/chat.ts. Claude Code reads intent.md next to them before it builds, so your promises and the project’s rules should match.",
+  "notes": "Time: 2 min. Shown after Assignment 2, so they compare instead of copy. Example only. The Checks part is new: the write prompt asks for three checks. Honest about the link: the checks do not create code. The five rules are already in the project (docs/spec.md, TODO(A3) in src/contract.ts) and the chat refusal is TODO(A4) in src/chat.ts. Claude Code reads intent.md next to them before it builds, so your promises and the project’s rules should match.",
   "visual": {
    "filePair": [
     {
@@ -5626,7 +5665,7 @@ window.SLIDES = [
    "Only if all five rules are met does Sonny ask you.",
    "Sonny is asked to follow the rules; the contract checks them in plain code. In Assignment 3 you build the five rules."
   ],
-  "notes": "Time: 11:24 · 5 min. Clicks (→): 1 the alert and “He looks” light up, with the first box of “How we want Sonny to work” below · 2 “He writes a diagnosis”: the box goes, his full diagnosis drops in on the left · 3 “He checks it”: the five rules appear on the right, all “?” · 4–8 each → opens the next rule (✓ or ✗) and lights what it looks at in the diagnosis · 9 the switch in the last rule: Customer impact is written, all five met → “only if every rule is met” lights up, “He asks you” lights up and Sonny asks; Approve / Reject show what happens. You can also click: the blocks on top jump to that step (“He asks you” only when all five are met, otherwise the gate shakes); a rule opens and closes again; the switch goes on and off; Approve / Reject toggle. ← steps back one click at a time, and at the start goes to the previous slide. The diagnosis is the real offline run of INC-1001 (npm run investigate -- fixtures/incidents/bad-deploy.json); the Customer impact text after the switch is close to the real line after Assignment 3 (“users of checkout may see failures or slowness …; affected segments remain OPEN”). The format is VERDICT_SCHEMA in src/contract.ts; parseVerdict already checks the format today (every field there, at least one evidence line, draft_only and human_approval_required true): that is why today everything gets PASS. Not shown on the slide, because it is not one of the five rules. Where Sonny is told: with a real model, src/prompts.ts plus the schema as output format; offline, src/runtime.ts writes the diagnosis by script. Where it is checked: src/router.ts validateVerdict → parseVerdict in src/contract.ts, plain code. Breaks a rule: “FAIL contract” with the reasons; the operator never sees a repaired diagnosis. The five rules are TODO(A3) (code words: a strong proposal (anything but investigate-more / no-action) needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Approve / Reject on the slide are only to show the idea: the real approval comes in Assignment 6.",
+  "notes": "Time: 5 min. Clicks (→): 1 the alert and “He looks” light up, with the first box of “How we want Sonny to work” below · 2 “He writes a diagnosis”: the box goes, his full diagnosis drops in on the left · 3 “He checks it”: the five rules appear on the right, all “?” · 4–8 each → opens the next rule (✓ or ✗) and lights what it looks at in the diagnosis · 9 the switch in the last rule: Customer impact is written, all five met → “only if every rule is met” lights up, “He asks you” lights up and Sonny asks; Approve / Reject show what happens. You can also click: the blocks on top jump to that step (“He asks you” only when all five are met, otherwise the gate shakes); a rule opens and closes again; the switch goes on and off; Approve / Reject toggle. ← steps back one click at a time, and at the start goes to the previous slide. The diagnosis is the real offline run of INC-1001 (npm run investigate -- fixtures/incidents/bad-deploy.json); the Customer impact text after the switch is close to the real line after Assignment 3 (“users of checkout may see failures or slowness …; affected segments remain OPEN”). The format is VERDICT_SCHEMA in src/contract.ts; parseVerdict already checks the format today (every field there, at least one evidence line, draft_only and human_approval_required true): that is why today everything gets PASS. Not shown on the slide, because it is not one of the five rules. Where Sonny is told: with a real model, src/prompts.ts plus the schema as output format; offline, src/runtime.ts writes the diagnosis by script. Where it is checked: src/router.ts validateVerdict → parseVerdict in src/contract.ts, plain code. Breaks a rule: “FAIL contract” with the reasons; the operator never sees a repaired diagnosis. The five rules are TODO(A3) (code words: a strong proposal (anything but investigate-more / no-action) needs evidence from at least 2 sources; rollback needs a deploys evidence line; low confidence cannot carry a strong proposal; high confidence is refused while data_gaps is non-empty; non-empty customer_impact). Approve / Reject on the slide are only to show the idea: the real approval comes in Assignment 6.",
   "visual": {
    "contractZoom": {
     "icons": [
@@ -5931,7 +5970,7 @@ window.SLIDES = [
    "It happens on every run, automatically, also at 03:45. No test runs here.",
    "Right after the AI writes the diagnosis, the contract checks it: a hard-coded checklist in Sonny’s code, no AI."
   ],
-  "notes": "Time: 11:29 · 5 min. No SDLC tracker on this slide. Clicks (→): 1–6 open the six code blocks one by one (the arrows light up between them), 7 the orange “see it yourself” bar and the line at the bottom. Click a block to jump there; ← steps back. The strip on top stays: the two ways into src/contract.ts. Sonny’s run is lit here; the tests are dimmed and come on the next slide. Slide 19’s “He checks it” is blocks 4–5: the contract is part of Sonny’s code, a hard-coded checklist the engineers wrote, and it runs right after his AI brain writes the diagnosis. Do not split “Sonny” and “the contract” in what you say; explain it only if someone asks. All code is from workshop/start, shortened with “…”. The real path: npm run investigate = tsx src/cli.ts (package.json). cli.ts reads the incident file and fixtures/telemetry/bad-deploy.json, checks both, then resolveRuntime (src/runtime.ts): AGENT_MODEL unset → offline script, AGENT_MODEL=<model> → the Claude Agent SDK. investigate() in src/agent.ts sends one query: systemPrompt ONCALL_SYSTEM (src/prompts.ts + the runbook skills/triage/SKILL.md), the alert fenced as data plus matching lessons, the four read-only tools (permissionMode dontAsk: everything else is refused), outputFormat VERDICT_SCHEMA, maxTurns 10. Then, still in agent.ts and without anyone asking: parseJson → validateVerdict (src/router.ts) → parseVerdict (src/contract.ts; format today, the five rules are TODO(A3)) → same incident id → checkTrace (every evidence source must be a tool he really called) → routeVerdict adds the owner. cli.ts prints the trace, the diagnosis and “PASS contract · OPEN: a human decides.”, or “FAIL contract” with the reasons; without --dry-run it also writes a pending approval in approvals/. Browser path: console/server.ts → src/chat.ts (plain rules: investigate, a question, or a refused “roll back”) → the same investigate(). Output in the bar checked on workshop/start with --dry-run (offline, 5 turns, PASS).",
+  "notes": "Time: 5 min. No SDLC tracker on this slide. Clicks (→): 1–6 open the six code blocks one by one (the arrows light up between them), 7 the orange “see it yourself” bar and the line at the bottom. Click a block to jump there; ← steps back. The strip on top stays: the two ways into src/contract.ts. Sonny’s run is lit here; the tests are dimmed and come on the next slide. Slide 19’s “He checks it” is blocks 4–5: the contract is part of Sonny’s code, a hard-coded checklist the engineers wrote, and it runs right after his AI brain writes the diagnosis. Do not split “Sonny” and “the contract” in what you say; explain it only if someone asks. All code is from workshop/start, shortened with “…”. The real path: npm run investigate = tsx src/cli.ts (package.json). cli.ts reads the incident file and fixtures/telemetry/bad-deploy.json, checks both, then resolveRuntime (src/runtime.ts): AGENT_MODEL unset → offline script, AGENT_MODEL=<model> → the Claude Agent SDK. investigate() in src/agent.ts sends one query: systemPrompt ONCALL_SYSTEM (src/prompts.ts + the runbook skills/triage/SKILL.md), the alert fenced as data plus matching lessons, the four read-only tools (permissionMode dontAsk: everything else is refused), outputFormat VERDICT_SCHEMA, maxTurns 10. Then, still in agent.ts and without anyone asking: parseJson → validateVerdict (src/router.ts) → parseVerdict (src/contract.ts; format today, the five rules are TODO(A3)) → same incident id → checkTrace (every evidence source must be a tool he really called) → routeVerdict adds the owner. cli.ts prints the trace, the diagnosis and “PASS contract · OPEN: a human decides.”, or “FAIL contract” with the reasons; without --dry-run it also writes a pending approval in approvals/. Browser path: console/server.ts → src/chat.ts (plain rules: investigate, a question, or a refused “roll back”) → the same investigate(). Output in the bar checked on workshop/start with --dry-run (offline, 5 turns, PASS).",
   "visual": {
    "codeRoute": {
     "entry": {
@@ -6146,7 +6185,7 @@ window.SLIDES = [
    "Seven made-up diagnoses: one must pass, six must be refused. Today 1 of 7 right; after Assignment 3, 7 of 7.",
    "Only when someone types it: in Assignment 3 (steps 4 and 5) and 3B. Never at 03:45."
   ],
-  "notes": "Time: 11:34 · 4 min. No SDLC tracker. Clicks (→): 1–6 open the six code blocks, 7 the orange bar and the line at the bottom. Click a block to jump; ← steps back. Strip on top: the tests are lit now, Sonny’s run is dimmed. All code is from workshop/start, shortened with “…”. The path: npm run test:workshop = node scripts/test-workshop.mjs, which runs every *.test.ts in test/workshop/ with node --test (20 tests in 5 files: on workshop/start pass 6 / fail 14, that is why the bar shows the focused command). test/workshop/contract.test.ts imports only parseVerdict from src/contract.ts: nothing in src/ calls the tests, and the tests never call cli.ts or agent.ts. That is why you cannot follow the code from Sonny’s run to the tests: they only share contract.ts. The seven tests (checked on workshop/start with npx tsx --test test/workshop/contract.test.ts: pass 1 / fail 6; on tag day5-after-a3: pass 7 / fail 0): 1 complete verdict passes · 2 customer_impact required and non-empty · 3 rollback needs a deploys line · 4 a strong proposal needs 2 sources · 5 low confidence cannot carry a strong proposal · 6 at least one evidence line (already green: the format check refuses empty evidence) · 7 high confidence refused while data_gaps exist. Test 1 is red today because the contract does not know customer_impact yet (“customer_impact: unknown field”); 2–5 and 7 are red because the rules are missing. The refusal tests also check the reason text (/rollback requires a deploys/, /at least 2 sources/, /low confidence/, /data_gaps/). In Assignment 3 the step 4 prompt runs only this test before editing (red), step 5 reruns it after the build (green). Assignment 3B runs all main tests, the type check and npm run investigate, plus /verify-this. The bottom line: tests only answer “does the contract follow the rules?”. “Are these the right rules?” is the step 3 review (the team’s rules from docs/spec.md and the TODO(A3) comment, against the goal in intent.md). “Does Sonny still get through?” is Sonny’s run again: today offlineVerdict writes no customer_impact, so the A3 build also changes src/runtime.ts, src/prompts.ts and VERDICT_SCHEMA; step 6 shows it.",
+  "notes": "Time: 4 min. No SDLC tracker. Clicks (→): 1–6 open the six code blocks, 7 the orange bar and the line at the bottom. Click a block to jump; ← steps back. Strip on top: the tests are lit now, Sonny’s run is dimmed. All code is from workshop/start, shortened with “…”. The path: npm run test:workshop = node scripts/test-workshop.mjs, which runs every *.test.ts in test/workshop/ with node --test (20 tests in 5 files: on workshop/start pass 6 / fail 14, that is why the bar shows the focused command). test/workshop/contract.test.ts imports only parseVerdict from src/contract.ts: nothing in src/ calls the tests, and the tests never call cli.ts or agent.ts. That is why you cannot follow the code from Sonny’s run to the tests: they only share contract.ts. The seven tests (checked on workshop/start with npx tsx --test test/workshop/contract.test.ts: pass 1 / fail 6; on tag day5-after-a3: pass 7 / fail 0): 1 complete verdict passes · 2 customer_impact required and non-empty · 3 rollback needs a deploys line · 4 a strong proposal needs 2 sources · 5 low confidence cannot carry a strong proposal · 6 at least one evidence line (already green: the format check refuses empty evidence) · 7 high confidence refused while data_gaps exist. Test 1 is red today because the contract does not know customer_impact yet (“customer_impact: unknown field”); 2–5 and 7 are red because the rules are missing. The refusal tests also check the reason text (/rollback requires a deploys/, /at least 2 sources/, /low confidence/, /data_gaps/). In Assignment 3 the step 4 prompt runs only this test before editing (red), step 5 reruns it after the build (green). Assignment 3B runs all main tests, the type check and npm run investigate, plus /verify-this. The bottom line: tests only answer “does the contract follow the rules?”. “Are these the right rules?” is the step 3 review (the team’s rules from docs/spec.md and the TODO(A3) comment, against the goal in intent.md). “Does Sonny still get through?” is Sonny’s run again: today offlineVerdict writes no customer_impact, so the A3 build also changes src/runtime.ts, src/prompts.ts and VERDICT_SCHEMA; step 6 shows it.",
   "visual": {
    "codeRoute": {
     "entry": {
@@ -6324,8 +6363,8 @@ window.SLIDES = [
   }
  },
  {
-  "title": "Up next: Assignment 3, step by step",
-  "kicker": "Bonus · Day 5 · A3 PREVIEW",
+  "title": "Up next: Sonny assignment 3, step by step",
+  "kicker": "Bonus · Day 5 · SONNY 3 PREVIEW",
   "subtitle": "What you are about to do. Each step uses the tests or Sonny’s run from the last two slides.",
   "type": "context",
   "cards": [],
@@ -6334,7 +6373,7 @@ window.SLIDES = [
    "Steps 4 and 5 use the tests. Step 6 is Sonny’s run on the saved night, steps 7–8 Sonny live.",
    "Assignment 3B does both again, and a second check looks at the evidence."
   ],
-  "notes": "Time: 11:38 · 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row (☐ → ✓); after the last row the line at the bottom appears. Click a row to tick up to it; ← unticks. The rows follow the eight steps on the Assignment 3 slide plus 3B. Step 4 = the PROMPTS.a3Build prompt (runs only the focused A3 test: pass 1 / fail 6 on workshop/start). Step 5 = PROMPTS.a3BuildImplement (about 9 files; test 7 / 0, as on tag day5-after-a3). Step 6 output after the build: “Customer impact: checkout error_rate rose from 0.003 to 0.12; users of checkout may see failures or slowness … affected segments remain OPEN” and PASS contract (checked on day5-after-a3). 3B: the main tests, the type check and the offline investigation, then /verify-this returns VERIFIED, NOT VERIFIED or INCONCLUSIVE.",
+  "notes": "Time: 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row (☐ → ✓); after the last row the line at the bottom appears. Click a row to tick up to it; ← unticks. The rows follow the eight steps on the Assignment 3 slide plus 3B. Step 4 = the PROMPTS.a3Build prompt (runs only the focused A3 test: pass 1 / fail 6 on workshop/start). Step 5 = PROMPTS.a3BuildImplement (about 9 files; test 7 / 0, as on tag day5-after-a3). Step 6 output after the build: “Customer impact: checkout error_rate rose from 0.003 to 0.12; users of checkout may see failures or slowness … affected segments remain OPEN” and PASS contract (checked on day5-after-a3). 3B: the main tests, the type check and the offline investigation, then /verify-this returns VERIFIED, NOT VERIFIED or INCONCLUSIVE.",
   "visual": {
    "previewList": {
     "order": [
@@ -6510,8 +6549,8 @@ window.SLIDES = [
   }
  },
  {
-  "title": "Assignment 3: Agree on the rules, then build them",
-  "kicker": "Bonus · Day 5 · A3 · BUILD",
+  "title": "Sonny assignment 3: Agree on the rules, then build them",
+  "kicker": "Bonus · Day 5 · SONNY 3 · BUILD",
   "subtitle": "Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.",
   "type": "practice",
   "cards": [
@@ -6529,7 +6568,7 @@ window.SLIDES = [
    "You can name the five rules.",
    "A Customer impact line in the terminal (step 6) and on the desk (step 8)."
   ],
-  "notes": "Time: 11:40 · 25 min.\n\nWhy now: Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.\n\nPredict: Ask which visible result shows Assignment 3 is done.\n\nWhat you see: The A3 tests are green. The saved night shows a Customer impact line, and so does Sonny live on the operator’s desk.\n\nLook inside: The A3 test: 7 of 7 green. You can name the five rules. A Customer impact line in the terminal (step 6) and on the desk (step 8).\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You accept the rules and review every file change. Nothing is approved or rolled back. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: A Customer impact line in the terminal (step 6) and on the desk (step 8).\n\nNext: Done means: everything still works",
+  "notes": "Time: 25 min.\n\nWhy now: Claude Code explains the five rules, you accept them, it shows the plan, then builds them into the contract. The 7 contract tests turn green.\n\nPredict: Ask which visible result shows Assignment 3 is done.\n\nWhat you see: The A3 tests are green. The saved night shows a Customer impact line, and so does Sonny live on the operator’s desk.\n\nLook inside: The A3 test: 7 of 7 green. You can name the five rules. A Customer impact line in the terminal (step 6) and on the desk (step 8).\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You accept the rules and review every file change. Nothing is approved or rolled back. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: A Customer impact line in the terminal (step 6) and on the desk (step 8).\n\nNext: Done means: everything still works",
   "stage": "contract",
   "beat": "turn",
   "visual": {
@@ -6859,7 +6898,7 @@ window.SLIDES = [
    "Workshop tests (20): your to-do list. Red is normal until you build that piece.",
    "While you build: your own test. Before “done”: everything, plus the type check."
   ],
-  "notes": "Time: 12:05 · 3 min. SDLC tracker: Test. Clicks (→): 1 main tests · 2 workshop tests · 3 type check · 4 the convention line · 5 the tested example. Click a box to open it too; ← steps back. Builds on Assignment 1, where they saw “56 green, 14 red” without an explanation. The practice project (workshop/start) is the finished product with pieces cut out. Main tests: npm test = tsx --test test/*.test.ts, 13 files, 56 tests (agent, approval, bench, chat, console, contract format, deployWatch, executor, lessons, scan, store, telemetry, watch); 56/56 green on workshop/start and on day5-after-a3. Workshop tests: npm run test:workshop = scripts/test-workshop.mjs over test/workshop/*.test.ts, 5 files, 20 tests; each file starts with “Red on workshop/start; rebuild in src/…”. Per file on workshop/start → after A3: contract 1/7 → 7/7, chat 1/3, guard 1/2 (chat + guard = Assignment 4), tools 0/3 (Assignment 5), executor 3/5 (optional extra). Total 6/20 at the start, 12/20 after A3: the 8 still red are normal. Type check: npm run typecheck = tsc --noEmit; not a test, it checks that all files use the same data shapes. The example was run on workshop/start with only src/contract.ts taken from day5-after-a3: contract test 7/7, npm test 52/56 (agent loop, model-skips-tools, identity, a complete verdict passes), typecheck errors in src/runtime.ts, test/approval.test.ts and test/executor.test.ts (customer_impact missing), npm run investigate: FAIL contract, customer_impact: expected a non-empty string. The convention is normal in real teams: a focused test while building, the full suite before you call it done (often run automatically on every change).",
+  "notes": "Time: 3 min. SDLC tracker: Test. Clicks (→): 1 main tests · 2 workshop tests · 3 type check · 4 the convention line · 5 the tested example. Click a box to open it too; ← steps back. Builds on Assignment 1, where they saw “56 green, 14 red” without an explanation. The practice project (workshop/start) is the finished product with pieces cut out. Main tests: npm test = tsx --test test/*.test.ts, 13 files, 56 tests (agent, approval, bench, chat, console, contract format, deployWatch, executor, lessons, scan, store, telemetry, watch); 56/56 green on workshop/start and on day5-after-a3. Workshop tests: npm run test:workshop = scripts/test-workshop.mjs over test/workshop/*.test.ts, 5 files, 20 tests; each file starts with “Red on workshop/start; rebuild in src/…”. Per file on workshop/start → after A3: contract 1/7 → 7/7, chat 1/3, guard 1/2 (chat + guard = Assignment 4), tools 0/3 (Assignment 5), executor 3/5 (optional extra). Total 6/20 at the start, 12/20 after A3: the 8 still red are normal. Type check: npm run typecheck = tsc --noEmit; not a test, it checks that all files use the same data shapes. The example was run on workshop/start with only src/contract.ts taken from day5-after-a3: contract test 7/7, npm test 52/56 (agent loop, model-skips-tools, identity, a complete verdict passes), typecheck errors in src/runtime.ts, test/approval.test.ts and test/executor.test.ts (customer_impact missing), npm run investigate: FAIL contract, customer_impact: expected a non-empty string. The convention is normal in real teams: a focused test while building, the full suite before you call it done (often run automatically on every change).",
   "visual": {
    "suiteMap": {
     "groups": [
@@ -7038,8 +7077,8 @@ window.SLIDES = [
   "sdlc": "test"
  },
  {
-  "title": "Assignment 3B: Check that it really works",
-  "kicker": "Bonus · Day 5 · ASSIGNMENT 3B · TEST",
+  "title": "Sonny assignment 3B: Check that it really works",
+  "kicker": "Bonus · Day 5 · SONNY 3B · TEST",
   "subtitle": "Prove the whole Sonny still works with your new rule, not just the contract. Then a second check that does not take Claude Code’s word for it. You read the evidence yourself.",
   "type": "practice",
   "cards": [
@@ -7057,7 +7096,7 @@ window.SLIDES = [
    "You opened the evidence the second check names.",
    "VERIFIED from the second check."
   ],
-  "notes": "Time: 12:08 · 7 min.\n\nWhy now: Prove the whole Sonny still works with your new rule, not just the contract. Then a second check that does not take Claude Code’s word for it. You read the evidence yourself.\n\nPredict: Ask which evidence closes A3.\n\nWhat you see: The claim “the contract refuses a diagnosis without customer impact” is verified, with the files and output to show it.\n\nLook inside: Main tests 56 of 56 green, type check clean. You opened the evidence the second check names. VERIFIED from the second check.\n\nParticipant does: Inspect each result before continuing.\n\nWatch for: A check result approves nothing and runs nothing.\n\nIf stuck: Run only the focused check that is missing.\n\nStop: VERIFIED from the second check.\n\nNext: Pre-lunch quiz",
+  "notes": "Time: 7 min.\n\nWhy now: Prove the whole Sonny still works with your new rule, not just the contract. Then a second check that does not take Claude Code’s word for it. You read the evidence yourself.\n\nPredict: Ask which evidence closes A3.\n\nWhat you see: The claim “the contract refuses a diagnosis without customer impact” is verified, with the files and output to show it.\n\nLook inside: Main tests 56 of 56 green, type check clean. You opened the evidence the second check names. VERIFIED from the second check.\n\nParticipant does: Inspect each result before continuing.\n\nWatch for: A check result approves nothing and runs nothing.\n\nIf stuck: Run only the focused check that is missing.\n\nStop: VERIFIED from the second check.\n\nNext: Pre-lunch quiz",
   "stage": "contract",
   "visual": {
    "shot": "assets/day5-expected/a3.png",
@@ -7194,7 +7233,7 @@ window.SLIDES = [
    "A guardrail blocks a shortcut around that person, whoever takes it.",
    "Guardrails are plain code: test them by trying the shortcut."
   ],
-  "notes": "Time: 13:13 · 5 min. Replaces Ryan’s “Refuse unsafe chat actions” and the A4 example picture. Clicks (→): 1 the heading “Shortcuts…” · 2 shortcut 1 (the chat) · 3 shortcut 2 (the pass mark) · 4 the line at the bottom. The top row is the normal road, always visible: no guardrail is needed there. Facts (workshop/start): every chat message first goes through routeMessage() in src/chat.ts, plain code that sorts it by how it starts: “Investigate …” → an investigation, “Watch …” → a deployment watch, anything else → a question answered from read-only tools. The action refusal (roll back, approve, resolve, scale up) is the TODO(A4) there; test/workshop/chat.test.ts is red until built. Sonny has no tool that can roll back; rollback only runs through Approve and then Execute on the desk. The practice exam = the bench (npm run bench: Sonny on a set of saved incidents); bench/ratchet.json = {min_rate 0.7, max_harmful 0}, the minimum the bench must reach. The guard hook (.claude/hooks/guard.mjs, like Day 2) checks every Claude Code action; its TODO(A4) is the line the participant writes by hand. Tested: before A4 “Roll back now.” is treated as a question (evidence + “You asked: …”); after A4 “mutations are buttons for a named human, not chat requests”. Guard test (npx tsx --test test/workshop/guard.test.ts): pass 1 / fail 1 before the two lines (“agent cannot edit or write bench/ratchet.json”), pass 2 / fail 0 after. A case is harmful when Sonny proposes a strong action (rollback, scale, flag-off) that the answer key says is wrong (src/bench.ts).",
+  "notes": "Time: 5 min. Replaces Ryan’s “Refuse unsafe chat actions” and the A4 example picture. Clicks (→): 1 the heading “Shortcuts…” · 2 shortcut 1 (the chat) · 3 shortcut 2 (the pass mark) · 4 the line at the bottom. The top row is the normal road, always visible: no guardrail is needed there. Facts (workshop/start): every chat message first goes through routeMessage() in src/chat.ts, plain code that sorts it by how it starts: “Investigate …” → an investigation, “Watch …” → a deployment watch, anything else → a question answered from read-only tools. The action refusal (roll back, approve, resolve, scale up) is the TODO(A4) there; test/workshop/chat.test.ts is red until built. Sonny has no tool that can roll back; rollback only runs through Approve and then Execute on the desk. The practice exam = the bench (npm run bench: Sonny on a set of saved incidents); bench/ratchet.json = {min_rate 0.7, max_harmful 0}, the minimum the bench must reach. The guard hook (.claude/hooks/guard.mjs, like Day 2) checks every Claude Code action; its TODO(A4) is the line the participant writes by hand. Tested: before A4 “Roll back now.” is treated as a question (evidence + “You asked: …”); after A4 “mutations are buttons for a named human, not chat requests”. Guard test (npx tsx --test test/workshop/guard.test.ts): pass 1 / fail 1 before the two lines (“agent cannot edit or write bench/ratchet.json”), pass 2 / fail 0 after. A case is harmful when Sonny proposes a strong action (rollback, scale, flag-off) that the answer key says is wrong (src/bench.ts).",
   "visual": {
    "guardRail": {
     "chainTitle": "The normal road",
@@ -7333,8 +7372,8 @@ window.SLIDES = [
   "sdlc": "build"
  },
  {
-  "title": "Assignment 4: Try the guardrails, build them, try again",
-  "kicker": "Bonus · Day 5 · A4 · BUILD",
+  "title": "Sonny assignment 4: Try the guardrails, build them, try again",
+  "kicker": "Bonus · Day 5 · SONNY 4 · BUILD",
   "subtitle": "The two shortcuts from the last slide. For each one: try it, build the guardrail, try it again.",
   "type": "practice",
   "cards": [
@@ -7352,7 +7391,7 @@ window.SLIDES = [
    "Shortcut 2: the guard test red (step 5), then green (step 7).",
    "You wrote the guard line yourself, and can say both guardrails in your own words."
   ],
-  "notes": "Time: 13:18 · 25 min.\n\nWhy now: The two shortcuts from the last slide. For each one: try it, build the guardrail, try it again.\n\nPredict: Ask which visible result shows Assignment 4 is done.\n\nWhat you see: Both shortcuts are blocked: the chat refuses “roll back”, and Claude Code cannot change the pass mark.\n\nLook inside: Shortcut 1: the same sentence, first answered (step 1), then refused (step 4). Shortcut 2: the guard test red (step 5), then green (step 7). You wrote the guard line yourself, and can say both guardrails in your own words.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: Only you write the guard line. The chat proposes; a named person presses the buttons. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: You wrote the guard line yourself, and can say both guardrails in your own words.\n\nNext: A5 · Add one read-only tool",
+  "notes": "Time: 25 min.\n\nWhy now: The two shortcuts from the last slide. For each one: try it, build the guardrail, try it again.\n\nPredict: Ask which visible result shows Assignment 4 is done.\n\nWhat you see: Both shortcuts are blocked: the chat refuses “roll back”, and Claude Code cannot change the pass mark.\n\nLook inside: Shortcut 1: the same sentence, first answered (step 1), then refused (step 4). Shortcut 2: the guard test red (step 5), then green (step 7). You wrote the guard line yourself, and can say both guardrails in your own words.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: Only you write the guard line. The chat proposes; a named person presses the buttons. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: You wrote the guard line yourself, and can say both guardrails in your own words.\n\nNext: A5 · Add one read-only tool",
   "stage": "controls",
   "beat": "turn",
   "visual": {
@@ -7410,7 +7449,7 @@ window.SLIDES = [
   "assignmentId": "A4",
   "teach": {
    "time": "25 min",
-   "gist": "The two shortcuts from slide 29, each with the same rhythm: try it, build the guardrail, try it again. Shortcut 1 on the desk (the chat), shortcut 2 on Claude Code (the pass mark). The participant writes the second guardrail by hand.",
+   "gist": "The two shortcuts from before, each with the same rhythm: try it, build the guardrail, try it again. Shortcut 1 on the desk (the chat), shortcut 2 on Claude Code (the pass mark). The participant writes the second guardrail by hand.",
    "do": [
     "Shortcut 1: try “Roll back now.”, let Claude Code build the refusal, restart the console, try again. Shortcut 2: run the guard test (red), write the guard line by hand, run it again (green)."
    ],
@@ -7641,7 +7680,7 @@ window.SLIDES = [
    "May do: the guardrails (A4).",
    "Can see: the tools (A5, now)."
   ],
-  "notes": "Time: 13:43 · 2 min. One click shows the line at the bottom. The first three boxes have a green line (done), the fourth a dashed orange border (now). The four parts map on the assignments: intent.md (A2), the contract in src/contract.ts (A3), the chat refusal in src/chat.ts plus the guard hook (A4), the tools in src/tools.ts (A5). A recap: no new words.",
+  "notes": "Time: 2 min. One click shows the line at the bottom. The first three boxes have a green line (done), the fourth a dashed orange border (now). The four parts map on the assignments: intent.md (A2), the contract in src/contract.ts (A3), the chat refusal in src/chat.ts plus the guard hook (A4), the tools in src/tools.ts (A5). A recap: no new words.",
   "visual": {
    "guardRail": {
     "plainChain": true,
@@ -7729,12 +7768,12 @@ window.SLIDES = [
    "Only eyes, no hands: the tools only read.",
    "Every look is in the trace, so you can check the evidence."
   ],
-  "notes": "Time: 13:45 · 3 min. Clicks (→): 1 the heading · 2–4 the three cards · 5 the line at the bottom. The four tools are the four looks from slide 4 and the four trace lines from Assignment 1. In the code: the handlers in src/tools.ts, offered to a real model via the telemetry MCP server (createTelemetryServer); the offline script calls the same handlers.",
+  "notes": "Time: 3 min. Clicks (→): 1 the heading · 2–4 the three cards · 5 the line at the bottom. The four tools are the four looks from before and the four trace lines from Assignment 1. In the code: the handlers in src/tools.ts, offered to a real model via the telemetry MCP server (createTelemetryServer); the offline script calls the same handlers.",
   "visual": {
    "guardRail": {
     "plainChain": true,
     "railCols": 3,
-    "chainTitle": "Sonny’s four tools: the four looks from slide 4",
+    "chainTitle": "Sonny’s four tools: the four looks from before",
     "chain": [
      [
       "📈",
@@ -7889,7 +7928,7 @@ window.SLIDES = [
    "Sonny found v2.15.0 anyway, because the code grabs the update list past the tool, in three places.",
    "A real AI only gets the tools, so it would see no updates. And the trace is not true. Assignment 5 fixes both."
   ],
-  "notes": "Time: 13:48 · 4 min. Same visual as slide 20 (code blocks with arrows), now 3 blocks. Clicks (→): 1–3 open the blocks, 4 the orange “see it yourself” bar and the line at the bottom. Click a block to jump; ← steps back. Code from workshop/start (the version participants clone), shortened with “…”: src/tools.ts lines 39–53 (handlers; list_deploys returns [] under TODO(A5)); src/runtime.ts lines 104–106 (offlineVerdict: shortcut 1). Not on the slide: the other two shortcuts are src/runtime.ts line 230 (after A4; 226 on workshop/start) (the outputs that go in the trace: list_deploys: listDeploys(t, …)) and src/chat.ts line 63 (the desk chat). The real update list is listDeploys in src/telemetry.ts line 169: the shortcut calls that function directly, the tool should call it. A second TODO(A5) in src/tools.ts: list_deploys is not offered to a real AI at all (createTelemetryServer). Why the shortcut exists: without it Sonny would have been blind to updates in Assignments 1–3 (no v2.15.0, no 03:45 story). Tested: tools test pass 0 / fail 3 before A5, pass 3 / fail 0 after the participant’s own A5 build (tested 2026-11-10 with the deck prompts in Claude Code, from an after-A4 state). Ryan’s checkpoint day5-after-a5 adds a 4th test, so catch-up people see 4/4; npm run investigate output identical on both; main 56/56 and typecheck clean after A5.",
+  "notes": "Time: 4 min. Same visual as slide 20 (code blocks with arrows), now 3 blocks. Clicks (→): 1–3 open the blocks, 4 the orange “see it yourself” bar and the line at the bottom. Click a block to jump; ← steps back. Code from workshop/start (the version participants clone), shortened with “…”: src/tools.ts lines 39–53 (handlers; list_deploys returns [] under TODO(A5)); src/runtime.ts lines 104–106 (offlineVerdict: shortcut 1). Not on the slide: the other two shortcuts are src/runtime.ts line 230 (after A4; 226 on workshop/start) (the outputs that go in the trace: list_deploys: listDeploys(t, …)) and src/chat.ts line 63 (the desk chat). The real update list is listDeploys in src/telemetry.ts line 169: the shortcut calls that function directly, the tool should call it. A second TODO(A5) in src/tools.ts: list_deploys is not offered to a real AI at all (createTelemetryServer). Why the shortcut exists: without it Sonny would have been blind to updates in Assignments 1–3 (no v2.15.0, no 03:45 story). Tested: tools test pass 0 / fail 3 before A5, pass 3 / fail 0 after the participant’s own A5 build (tested 2026-11-10 with the deck prompts in Claude Code, from an after-A4 state). Ryan’s checkpoint day5-after-a5 adds a 4th test, so catch-up people see 4/4; npm run investigate output identical on both; main 56/56 and typecheck clean after A5.",
   "visual": {
    "codeRoute": {
     "steps": [
@@ -8017,8 +8056,8 @@ window.SLIDES = [
   "sdlc": "build"
  },
  {
-  "title": "Up next: Assignments 5A and 5B",
-  "kicker": "Bonus · Day 5 · A5 PREVIEW",
+  "title": "Up next: Sonny assignments 5A and 5B",
+  "kicker": "Bonus · Day 5 · SONNY 5 PREVIEW",
   "subtitle": "Two parts. 5A: remove the shortcuts, and see Sonny go blind. 5B: build the tool, and see him see again.",
   "type": "context",
   "cards": [],
@@ -8027,7 +8066,7 @@ window.SLIDES = [
    "5B: build the tool. Sonny sees v2.15.0 again, and the contract says PASS.",
    "The search with git grep: 3 shortcuts, then none."
   ],
-  "notes": "Time: 13:52 · 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row; after the last row the line at the bottom appears. All numbers tested 2026-11-10 in Claude Code with the deck prompts, from an after-A4 state: git grep -n \"A5 bypass\" -- src finds 3 lines (src/chat.ts:75, src/runtime.ts:105 and 230), after 5A none. A5 test 0/3 → 1/3 after 5A → 3/3 after 5B. Sonny after 5A: trace line 2 “list_deploys → []”, FAIL contract (“confidence: high is refused while data_gaps is non-empty”). After 5B: list_deploys → v2.15.0, PASS contract, output identical to before A5. Main tests: 56 → 52 after 5A (expected: the runs need the update list) → 56 after 5B. Why “-- src”: Claude Code writes a progress line in PROGRESS.md that can contain the words “A5 bypass”; -- src searches only the code.",
+  "notes": "Time: 2 min. No SDLC tracker. A preview, not the assignment: nobody types anything yet. Clicks (→): each click ticks the next row; after the last row the line at the bottom appears. All numbers tested 2026-11-10 in Claude Code with the deck prompts, from an after-A4 state: git grep -n \"A5 bypass\" -- src finds 3 lines (src/chat.ts:75, src/runtime.ts:105 and 230), after 5A none. A5 test 0/3 → 1/3 after 5A → 3/3 after 5B. Sonny after 5A: trace line 2 “list_deploys → []”, FAIL contract (“confidence: high is refused while data_gaps is non-empty”). After 5B: list_deploys → v2.15.0, PASS contract, output identical to before A5. Main tests: 56 → 52 after 5A (expected: the runs need the update list) → 56 after 5B. Why “-- src”: Claude Code writes a progress line in PROGRESS.md that can contain the words “A5 bypass”; -- src searches only the code.",
   "visual": {
    "previewList": {
     "order": [
@@ -8194,8 +8233,8 @@ window.SLIDES = [
   "sdlc": "build"
  },
  {
-  "title": "Assignment 5A: Remove the shortcuts: Sonny goes blind",
-  "kicker": "Bonus · Day 5 · A5A · BUILD",
+  "title": "Sonny assignment 5A: Remove the shortcuts: Sonny goes blind",
+  "kicker": "Bonus · Day 5 · SONNY 5A · BUILD",
   "subtitle": "Find the three shortcuts and remove them, without building the tool yet. Now Sonny has to ask the empty tool. See for yourself what he gets back, and what your contract says about it.",
   "type": "practice",
   "cards": [
@@ -8213,7 +8252,7 @@ window.SLIDES = [
    "The A5 test: 0 of 3, then 1 of 3.",
    "Sonny: list_deploys → [ ], FAIL contract."
   ],
-  "notes": "Time: 13:54 · 10 min.\n\nWhy now: Find the three shortcuts and remove them, without building the tool yet. Now Sonny has to ask the empty tool. See for yourself what he gets back, and what your contract says about it.\n\nPredict: Ask which visible result shows Assignment 5A is done.\n\nWhat you see: The shortcuts are gone. Sonny asks the empty tool, gets nothing back, and the contract stops him.\n\nLook inside: git grep: 3 shortcuts before (step 2), none after (step 6). The A5 test: 0 of 3, then 1 of 3. Sonny: list_deploys → [ ], FAIL contract.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You see for yourself what Sonny can see without the tool. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: Sonny: list_deploys → [ ], FAIL contract.\n\nNext: Assignment 5B",
+  "notes": "Time: 10 min.\n\nWhy now: Find the three shortcuts and remove them, without building the tool yet. Now Sonny has to ask the empty tool. See for yourself what he gets back, and what your contract says about it.\n\nPredict: Ask which visible result shows Assignment 5A is done.\n\nWhat you see: The shortcuts are gone. Sonny asks the empty tool, gets nothing back, and the contract stops him.\n\nLook inside: git grep: 3 shortcuts before (step 2), none after (step 6). The A5 test: 0 of 3, then 1 of 3. Sonny: list_deploys → [ ], FAIL contract.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You see for yourself what Sonny can see without the tool. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: Sonny: list_deploys → [ ], FAIL contract.\n\nNext: Assignment 5B",
   "stage": "tools",
   "beat": "turn",
   "visual": {
@@ -8458,8 +8497,8 @@ window.SLIDES = [
   "sdlc": "build"
  },
  {
-  "title": "Assignment 5B: Build the tool: Sonny sees again",
-  "kicker": "Bonus · Day 5 · A5B · BUILD",
+  "title": "Sonny assignment 5B: Build the tool: Sonny sees again",
+  "kicker": "Bonus · Day 5 · SONNY 5B · BUILD",
   "subtitle": "Fill the empty box: the tool reads the update list. That is one line of code, plus putting the tool on the menu for a real AI. Then Sonny again.",
   "type": "practice",
   "cards": [
@@ -8476,7 +8515,7 @@ window.SLIDES = [
    "The A5 test 3 of 3, the main tests 56, the type check clean.",
    "Sonny: list_deploys → v2.15.0, PASS contract."
   ],
-  "notes": "Time: 14:04 · 7 min.\n\nWhy now: Fill the empty box: the tool reads the update list. That is one line of code, plus putting the tool on the menu for a real AI. Then Sonny again.\n\nPredict: Ask which visible result shows Assignment 5B is done.\n\nWhat you see: The tool reads the update list, Sonny sees v2.15.0 through it, and the contract says PASS.\n\nLook inside: The A5 test 3 of 3, the main tests 56, the type check clean. Sonny: list_deploys → v2.15.0, PASS contract.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: A tool only reads. What it shows informs a decision; a person still makes it. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: Sonny: list_deploys → v2.15.0, PASS contract.\n\nNext: A5 catch-up checkpoint",
+  "notes": "Time: 7 min.\n\nWhy now: Fill the empty box: the tool reads the update list. That is one line of code, plus putting the tool on the menu for a real AI. Then Sonny again.\n\nPredict: Ask which visible result shows Assignment 5B is done.\n\nWhat you see: The tool reads the update list, Sonny sees v2.15.0 through it, and the contract says PASS.\n\nLook inside: The A5 test 3 of 3, the main tests 56, the type check clean. Sonny: list_deploys → v2.15.0, PASS contract.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: A tool only reads. What it shows informs a decision; a person still makes it. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: Sonny: list_deploys → v2.15.0, PASS contract.\n\nNext: A5 catch-up checkpoint",
   "stage": "tools",
   "beat": "turn",
   "visual": {
@@ -8626,7 +8665,7 @@ window.SLIDES = [
   "sdlc": "build"
  },
  {
-  "title": "Catch-up: jump to the finished Assignment 5",
+  "title": "Catch-up: jump to the finished Sonny assignment 5",
   "kicker": "Bonus · Day 5 · CATCH-UP",
   "subtitle": "Only if you are stuck or far behind. The project has a finished version of Assignments 3, 4 and 5 built in, called day5-after-a5. First you put your own work aside, then you switch to that version. Nothing is lost.",
   "type": "review",
@@ -8649,7 +8688,7 @@ window.SLIDES = [
    "First put your work aside (git stash), then switch.",
    "Nothing is lost: git stash list shows your work."
   ],
-  "notes": "Time: 14:11 · 3 min. Only for people who are stuck; the others wait or help in the chat. day5-after-a5 is a tag (a saved point) in Ryan’s practice repo with A3, A4 and A5 finished. It comes with the clone from Assignment 1. Tested 2026-11-10 in a fresh clone of workshop/start: the three commands work; git stash -u also saves new files; the new branch is at checkpoint 34e7046; package.json is the same, so no npm install is needed. Not saved by git stash (git ignores them, and they stay where they are): incidents in console/data and the shop data in demo/data. On this version the A5 test shows 4 of 4 (Ryan added a 4th test), main tests 56 of 56. Getting your own work back later: git stash list, then git stash pop on your own branch; help them one-on-one, not in the room.",
+  "notes": "Time: 3 min. Only for people who are stuck; the others wait or help in the chat. day5-after-a5 is a tag (a saved point) in Ryan’s practice repo with A3, A4 and A5 finished. It comes with the clone from Assignment 1. Tested 2026-11-10 in a fresh clone of workshop/start: the three commands work; git stash -u also saves new files; the new branch is at checkpoint 34e7046; package.json is the same, so no npm install is needed. Not saved by git stash (git ignores them, and they stay where they are): incidents in console/data and the shop data in demo/data. On this version the A5 test shows 4 of 4 (Ryan added a 4th test), main tests 56 of 56. Getting your own work back later: git stash list, then git stash pop on your own branch; help them one-on-one, not in the room.",
   "layout": "exercise",
   "stepsHeading": "Only when you are stuck",
   "steps": [
@@ -8775,7 +8814,7 @@ window.SLIDES = [
    "You push a bad update; Sonny notices by himself within about a minute.",
    "Sonny proposes a rollback; only a named person approves and executes it."
   ],
-  "notes": "Time: 14:14 · 4 min. Clicks (→): 1 the heading of the chain · 2–6 the five steps · 7 “Where you see it” · 8–10 the three screens · 11 the line at the bottom. Tested 2026-11-11 on a scratch copy after 5B: shop healthy (0.0%, Buy → “✓ paid · ord-2455 · v2.14.0”, Window 4 “5xx 0”). 💥 Bad deploy on the shop page → badge “v2.15.0 · bad-deploy”, 9.9% after 25 s, Window 4 “5xx 5 / 11 / 7”. Incident on the desk after about 60 s. Approve as Jessy → Execute → “applied: v2.14.0 is now serving”, 3 verified checkouts, checks ✓, shop back to “v2.14.0 · healthy”, Window 4 “5xx 0”. The shop page buttons do the same as npm run chaos (same /admin/deploy call). The shop writes demo/data/telemetry.json; the desk reads it every 10 s (AGENT_LISTEN_WINDOW_MIN=1: alarm after 1 minute above 2% errors).",
+  "notes": "Time: 4 min. Clicks (→): 1 the heading of the chain · 2–6 the five steps · 7 “Where you see it” · 8–10 the three screens · 11 the line at the bottom. Tested 2026-11-11 on a scratch copy after 5B: shop healthy (0.0%, Buy → “✓ paid · ord-2455 · v2.14.0”, Window 4 “5xx 0”). 💥 Bad deploy on the shop page → badge “v2.15.0 · bad-deploy”, 9.9% after 25 s, Window 4 “5xx 5 / 11 / 7”. Incident on the desk after about 60 s. Approve as Jessy → Execute → “applied: v2.14.0 is now serving”, 3 verified checkouts, checks ✓, shop back to “v2.14.0 · healthy”, Window 4 “5xx 0”. The shop page buttons do the same as npm run chaos (same /admin/deploy call). The shop writes demo/data/telemetry.json; the desk reads it every 10 s (AGENT_LISTEN_WINDOW_MIN=1: alarm after 1 minute above 2% errors).",
   "visual": {
    "guardRail": {
     "plainChain": true,
@@ -8930,7 +8969,7 @@ window.SLIDES = [
    "After: v2.15.0, bad-deploy, about 10% errors.",
    "Sonny reads the same thing from the graphs the shop writes down."
   ],
-  "notes": "Time: 14:18 · 2 min. Both pictures are real, from the test run on 2026-11-11 (healthy: 0.0%, 201 ms; broken: 9.9% after 25 s, 232 ms). Click a picture to open it large. A Buy click fails only about 1 in 8 times on v2.15.0, so one click often still says “✓ paid”: point at the error rate and the red bars instead.",
+  "notes": "Time: 2 min. Both pictures are real, from the test run on 2026-11-11 (healthy: 0.0%, 201 ms; broken: 9.9% after 25 s, 232 ms). Click a picture to open it large. A Buy click fails only about 1 in 8 times on v2.15.0, so one click often still says “✓ paid”: point at the error rate and the red bars instead.",
   "visual": {
    "shotPair": [
     {
@@ -8988,8 +9027,8 @@ window.SLIDES = [
   "sdlc": "deploy"
  },
  {
-  "title": "Assignment 6A: Break the shop, watch Sonny notice",
-  "kicker": "Bonus · Day 5 · A6A · BUILD",
+  "title": "Sonny assignment 6A: Break the shop, watch Sonny notice",
+  "kicker": "Bonus · Day 5 · SONNY 6A · BUILD",
   "subtitle": "First look at the healthy shop: that is your before. Then push the bad update yourself, and watch Sonny open an incident by himself. Read what he found.",
   "type": "practice",
   "cards": [
@@ -9007,7 +9046,7 @@ window.SLIDES = [
    "After the bad update: about 10% errors, and a new incident on the desk.",
    "In the incident: v2.15.0, Customer impact, rollback, Pending."
   ],
-  "notes": "Time: 14:20 · 12 min.\n\nWhy now: First look at the healthy shop: that is your before. Then push the bad update yourself, and watch Sonny open an incident by himself. Read what he found.\n\nPredict: Ask which visible result shows Assignment 6A is done.\n\nWhat you see: The shop is broken, Sonny opened an incident by himself, and you found the four parts in it.\n\nLook inside: Before: the shop was healthy (0%, 5xx 0). After the bad update: about 10% errors, and a new incident on the desk. In the incident: v2.15.0, Customer impact, rollback, Pending.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You break the shop, not Claude Code. Sonny only proposes. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: In the incident: v2.15.0, Customer impact, rollback, Pending.\n\nNext: Assignment 6B",
+  "notes": "Time: 12 min.\n\nWhy now: First look at the healthy shop: that is your before. Then push the bad update yourself, and watch Sonny open an incident by himself. Read what he found.\n\nPredict: Ask which visible result shows Assignment 6A is done.\n\nWhat you see: The shop is broken, Sonny opened an incident by himself, and you found the four parts in it.\n\nLook inside: Before: the shop was healthy (0%, 5xx 0). After the bad update: about 10% errors, and a new incident on the desk. In the incident: v2.15.0, Customer impact, rollback, Pending.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: You break the shop, not Claude Code. Sonny only proposes. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: In the incident: v2.15.0, Customer impact, rollback, Pending.\n\nNext: Assignment 6B",
   "stage": "live",
   "beat": "turn",
   "visual": {
@@ -9189,8 +9228,8 @@ window.SLIDES = [
   "sdlc": "deploy"
  },
  {
-  "title": "Assignment 6B: You decide: approve, roll back, close",
-  "kicker": "Bonus · Day 5 · A6B · BUILD",
+  "title": "Sonny assignment 6B: You decide: approve, roll back, close",
+  "kicker": "Bonus · Day 5 · SONNY 6B · BUILD",
   "subtitle": "Sonny proposes a rollback. Try the chat shortcut once more, then make the decision yourself with your name. Watch the shop recover, and close the incident with what you learned.",
   "type": "practice",
   "cards": [
@@ -9208,7 +9247,7 @@ window.SLIDES = [
    "Approved by your name, executed, the shop back to v2.14.0 · healthy.",
    "Resolved with notes; lessons/lessons.md has your lesson."
   ],
-  "notes": "Time: 14:32 · 15 min.\n\nWhy now: Sonny proposes a rollback. Try the chat shortcut once more, then make the decision yourself with your name. Watch the shop recover, and close the incident with what you learned.\n\nPredict: Ask which visible result shows Assignment 6B is done.\n\nWhat you see: You approved with your name, the shop is healthy again, and your notes are a lesson for next time.\n\nLook inside: The chat refused “Roll back now.”. Approved by your name, executed, the shop back to v2.14.0 · healthy. Resolved with notes; lessons/lessons.md has your lesson.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: Only a named person approves, executes and resolves. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: Resolved with notes; lessons/lessons.md has your lesson.\n\nNext: Close: what you learned on Day 5",
+  "notes": "Time: 15 min.\n\nWhy now: Sonny proposes a rollback. Try the chat shortcut once more, then make the decision yourself with your name. Watch the shop recover, and close the incident with what you learned.\n\nPredict: Ask which visible result shows Assignment 6B is done.\n\nWhat you see: You approved with your name, the shop is healthy again, and your notes are a lesson for next time.\n\nLook inside: The chat refused “Roll back now.”. Approved by your name, executed, the shop back to v2.14.0 · healthy. Resolved with notes; lessons/lessons.md has your lesson.\n\nParticipant does: Complete one step at a time. Inspect each result before continuing.\n\nWatch for: Only a named person approves, executes and resolves. The picture is an example of the end result, not their own run.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check. Do not repeat the full suite.\n\nStop: Resolved with notes; lessons/lessons.md has your lesson.\n\nNext: Close: what you learned on Day 5",
   "stage": "gate",
   "beat": "turn",
   "visual": {
@@ -9391,39 +9430,5 @@ window.SLIDES = [
    "next": "Close: what you learned on Day 5."
   },
   "sdlc": "deploy"
- },
- {
-  "title": "Close: what you learned on Day 5",
-  "kicker": "Day 5 · Close",
-  "subtitle": "You built an agent through the SDLC, and a human decided at every gate.",
-  "keyPoints": [
-   "Plan before you build.",
-   "Red before green.",
-   "Evidence before PASS."
-  ],
-  "notes": "Time: 5 min.\n\nWhy now: End the day on the loop, not on the tools.\n\nWhat you see: Three lessons.\n\nWatch for: Groups that are not done. They finish with SOLO.md.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone can name the next step for their own brief.\n\nNext: Day 6",
-  "teach": {
-   "next": "Day 6",
-   "time": "5 min",
-   "gist": "You built an agent through the SDLC, and a human decided at every gate.",
-   "script": [
-    {
-     "do": "Slide appears. Read the title and the subtitle.",
-     "say": [
-      "Plan before you build.",
-      "Red before green.",
-      "Evidence before PASS."
-     ]
-    }
-   ],
-   "learn": [
-    "Plan before you build.",
-    "Red before green.",
-    "Evidence before PASS."
-   ],
-   "watch": [
-    "Groups that are not done. They finish with SOLO.md."
-   ]
-  }
  }
 ];
