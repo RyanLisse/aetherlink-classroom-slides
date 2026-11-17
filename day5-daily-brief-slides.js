@@ -4,17 +4,17 @@ window.SLIDES = [
  {
   "title": "Welcome to Day 5!",
   "kicker": "Day 5 · AI-native SDLC",
-  "subtitle": "Today you build a daily brief agent, step by step, with Claude Code. The on-call agent Sonny is the bonus.",
+  "subtitle": "Today you build Bree, an agent that writes your morning brief. Sonny, the on-call agent, is the bonus.",
   "keyPoints": [
    "Main route: the daily brief agent, seven steps.",
    "Bonus: Sonny, the on-call SRE agent.",
    "Every step ends with proof you can show."
   ],
-  "notes": "Time: 5 min.\n\nWhy now: Set the order of the day. The brief comes first because every participant has a morning to plan.\n\nWhat you see: The two agents of the day and the order.\n\nWatch for: Questions about Sonny. Say: Sonny is the bonus after the brief.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone knows the main route and the bonus.\n\nNext: Your morning, in four tools",
+  "notes": "Time: 5 min.\n\nWhy now: Set the order of the day. The brief comes first because every participant has a morning to plan.\n\nWhat you see: The two agents of the day and the order.\n\nWatch for: Questions about Sonny. Say: Sonny is the bonus after the brief.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Everyone knows the main route and the bonus.\n\nNext: 08:30: your morning",
   "teach": {
-   "next": "Your morning, in four tools",
+   "next": "08:30: your morning",
    "time": "5 min",
-   "gist": "Today you build a daily brief agent, step by step, with Claude Code. The on-call agent Sonny is the bonus.",
+   "gist": "Today you build Bree, an agent that writes your morning brief. Sonny, the on-call agent, is the bonus.",
    "script": [
     {
      "do": "Slide appears. Read the title and the subtitle.",
@@ -36,84 +36,202 @@ window.SLIDES = [
   }
  },
  {
-  "title": "Your morning, in four tools",
-  "kicker": "Day 5 · The problem",
-  "subtitle": "Before you can work, you read GitLab, Jira, Confluence and your Outlook calendar.",
-  "keyPoints": [
-   "Four tools, four tabs, every morning.",
-   "The brief agent reads them and writes one page.",
-   "You decide what the page must show."
+  "title": "08:30: your morning",
+  "kicker": "Day 5 · THE STORY",
+  "subtitle": "Four tools, four tabs. Before you can start, you read them all.",
+  "type": "context",
+  "stage": "learn",
+  "cards": [
+   {
+    "title": "The clock",
+    "body": "08:30. Standup at 09:00."
+   },
+   {
+    "title": "On your screen",
+    "body": "Four tools, each with something new since yesterday."
+   },
+   {
+    "title": "Bree reads too",
+    "body": "What do you want on one page?\nAnd what should she never do?"
+   }
   ],
-  "notes": "Time: 4 min.\n\nWhy now: Make the problem personal before you show the solution.\n\nWhat you see: One page instead of four tabs.\n\nWatch for: People who want to connect their real accounts now. Say: today we use sample data only.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say what they would want on their own brief.\n\nNext: What you build today",
+  "keyPoints": [
+   "Every morning: GitLab, Jira, Confluence, Outlook.",
+   "Fifteen minutes of reading before real work.",
+   "Bree, your brief agent, reads them for you."
+  ],
+  "visual": {
+   "wakeUp": {
+    "clock": "08:30",
+    "tag": "YOU · BEFORE WORK",
+    "screen": "laptop · 08:30",
+    "alert": "Standup at 09:00 · 3 reviews wait · 2 tickets moved · 1 page changed",
+    "chart": {
+     "label": "tabs to read before work",
+     "from": "0",
+     "to": "4",
+     "limit": "1",
+     "mark": "standup 09:00"
+    },
+    "world": [
+     [
+      "GitLab",
+      "3 reviews",
+      "🦊"
+     ],
+     [
+      "Jira",
+      "2 tickets",
+      "🎫"
+     ],
+     [
+      "Outlook",
+      "4 meetings",
+      "📅"
+     ]
+    ],
+    "sonny": {
+     "tag": "BREE · YOUR BRIEF AGENT",
+     "bubble": "Reading your four tools…"
+    }
+   },
+   "reveal": "click",
+   "covers": []
+  },
+  "notes": "Time: 3 min.\n\nWhy now: Make the problem personal: everyone has this morning.\n\nWhat you see: The clock, the four tools, Bree.\n\nWatch for: People who want to connect real accounts. Today is sample data only.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants recognise their own morning.\n\nNext: How we want Bree to work",
   "teach": {
-   "next": "What you build today",
-   "time": "4 min",
-   "gist": "Before you can work, you read GitLab, Jira, Confluence and your Outlook calendar.",
+   "next": "How we want Bree to work",
+   "time": "3 min",
+   "gist": "Four tools, four tabs. Before you can start, you read them all.",
    "script": [
     {
      "do": "Slide appears. Read the title and the subtitle.",
      "say": [
-      "Four tools, four tabs, every morning.",
-      "The brief agent reads them and writes one page.",
-      "You decide what the page must show."
+      "Every morning: GitLab, Jira, Confluence, Outlook.",
+      "Fifteen minutes of reading before real work.",
+      "Bree, your brief agent, reads them for you."
      ]
     }
    ],
    "learn": [
-    "Four tools, four tabs, every morning.",
-    "The brief agent reads them and writes one page.",
-    "You decide what the page must show."
+    "Every morning: GitLab, Jira, Confluence, Outlook.",
+    "Fifteen minutes of reading before real work.",
+    "Bree, your brief agent, reads them for you."
    ],
    "watch": [
-    "People who want to connect their real accounts now. Say: today we use sample data only."
+    "People who want to connect real accounts. Today is sample data only."
    ]
   }
  },
  {
-  "title": "What you build today",
-  "kicker": "Day 5 · The product",
-  "subtitle": "A brief agent that writes a one-page morning brief as an HTML page.",
+  "title": "How we want Bree to work",
+  "kicker": "Day 5 · THE STORY",
+  "subtitle": "She looks. She writes one page. She checks it. You read it.",
+  "type": "context",
+  "stage": "learn",
   "cards": [
    {
-    "title": "In",
-    "body": "GitLab, Jira, Confluence and Outlook.\nOr your own GitHub, Linear and Notion."
+    "title": "She looks",
+    "body": "At four tools. She only reads."
    },
    {
-    "title": "Out",
-    "body": "out/latest.html: one page with the day in order."
+    "title": "She writes one page",
+    "body": "Always the same format. Every line with a source."
    },
    {
-    "title": "Examples",
-    "body": "reference/: the Tuesday and Wednesday brief PDFs."
+    "title": "She checks it",
+    "body": "Against fixed rules, before you see it."
+   },
+   {
+    "title": "You read it",
+    "body": "She sends nothing and changes nothing."
    }
   ],
   "keyPoints": [
-   "Sources in, one page out.",
-   "The reference PDFs show the target.",
-   "Sample data only. No live credentials."
+   "She only reads the four tools.",
+   "One page, always the same format.",
+   "Every line says where it comes from."
   ],
-  "notes": "Time: 4 min.\n\nWhy now: Show the end result first, so every step has a goal.\n\nWhat you see: The reference brief PDFs.\n\nWatch for: Live credentials. A blocked credential is written down as OPEN, not as a failure.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants have seen the target page.\n\nNext: The software development life cycle",
+  "visual": {
+   "agentJob": {
+    "botTag": "BREE",
+    "looks": [
+     [
+      "🦊",
+      "merge requests"
+     ],
+     [
+      "🎫",
+      "tickets"
+     ],
+     [
+      "📄",
+      "changed pages"
+     ],
+     [
+      "📅",
+      "your calendar"
+     ]
+    ],
+    "docName": "brief · Tuesday",
+    "doc": [
+     [
+      "First thing",
+      "standup at 09:00, then review MR !42 before 11:00",
+      [
+       "outlook:09:00",
+       "gitlab:!42"
+      ]
+     ],
+     [
+      "Watch",
+      "ticket ABC-101 moved to “blocked”",
+      "jira:ABC-101"
+     ],
+     [
+      "Read later",
+      "the release page changed yesterday",
+      "confluence:release"
+     ]
+    ],
+    "check": {
+     "rules": [
+      "Every line has a source",
+      "Times in order",
+      "Unknown? Write OPEN",
+      "No secrets on the page",
+      "One page"
+     ]
+    },
+    "wait": "ready for you to read",
+    "yes": "Read it",
+    "no": "Ask a question"
+   },
+   "reveal": "click",
+   "covers": []
+  },
+  "notes": "Time: 4 min.\n\nWhy now: Show the whole agent before the steps.\n\nWhat you see: Looks, page, check, you.\n\nWatch for: Questions about live data. Sample data first; live is OPEN until A5.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say the four parts in their own words.\n\nNext: The SDLC",
   "teach": {
-   "next": "The software development life cycle",
+   "next": "The SDLC",
    "time": "4 min",
-   "gist": "A brief agent that writes a one-page morning brief as an HTML page.",
+   "gist": "She looks. She writes one page. She checks it. You read it.",
    "script": [
     {
      "do": "Slide appears. Read the title and the subtitle.",
      "say": [
-      "Sources in, one page out.",
-      "The reference PDFs show the target.",
-      "Sample data only. No live credentials."
+      "She only reads the four tools.",
+      "One page, always the same format.",
+      "Every line says where it comes from."
      ]
     }
    ],
    "learn": [
-    "Sources in, one page out.",
-    "The reference PDFs show the target.",
-    "Sample data only. No live credentials."
+    "She only reads the four tools.",
+    "One page, always the same format.",
+    "Every line says where it comes from."
    ],
    "watch": [
-    "Live credentials. A blocked credential is written down as OPEN, not as a failure."
+    "Questions about live data. Sample data first; live is OPEN until A5."
    ]
   }
  },
@@ -392,6 +510,236 @@ window.SLIDES = [
   }
  },
  {
+  "title": "What Bree should do, and what she does today",
+  "kicker": "Day 5 · PLAN",
+  "subtitle": "Today Bree is an empty project. The difference is what you write down.",
+  "type": "concept",
+  "sdlc": "plan",
+  "cards": [
+   {
+    "title": "08:30",
+    "body": ""
+   },
+   {
+    "title": "How we want Bree",
+    "body": ""
+   },
+   {
+    "title": "The project today",
+    "body": ""
+   },
+   {
+    "title": "The gap",
+    "body": ""
+   },
+   {
+    "title": "intent.md",
+    "body": ""
+   }
+  ],
+  "keyPoints": [
+   "What Bree should do comes from your morning.",
+   "Today the project has templates, no code.",
+   "The gap is your intent.md."
+  ],
+  "visual": {
+   "gapCompare": {
+    "icons": [
+     "⏰",
+     "🧭",
+     "📁",
+     "↔️",
+     "📝"
+    ],
+    "focus": 3,
+    "reveal": [
+     2,
+     1,
+     1
+    ],
+    "head": [
+     "How we want Bree to work",
+     "What the project has today"
+    ],
+    "rows": [
+     [
+      "She reads four tools",
+      [
+       "no src/ folder"
+      ],
+      false
+     ],
+     [
+      "She writes one page, always the same format",
+      [
+       "no schema, no test"
+      ],
+      false
+     ],
+     [
+      "She checks every line has a source",
+      [
+       "no check"
+      ],
+      false
+     ],
+     [
+      "You read it before work",
+      [
+       "the reference PDFs show the target"
+      ],
+      true
+     ]
+    ],
+    "note": "The difference is the gap. You write down how we want Bree to work: that is intent.md."
+   }
+  },
+  "notes": "Time: 3 min.\n\nWhy now: Turn the story into a gap you can close.\n\nWhat you see: Four rows, three still empty.\n\nWatch for: Participants who start coding. First the goal.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the gap.\n\nNext: intent.md: what goes in it",
+  "teach": {
+   "next": "intent.md: what goes in it",
+   "time": "3 min",
+   "gist": "Today Bree is an empty project. The difference is what you write down.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "What Bree should do comes from your morning.",
+      "Today the project has templates, no code.",
+      "The gap is your intent.md."
+     ]
+    }
+   ],
+   "learn": [
+    "What Bree should do comes from your morning.",
+    "Today the project has templates, no code.",
+    "The gap is your intent.md."
+   ],
+   "watch": [
+    "Participants who start coding. First the goal."
+   ]
+  }
+ },
+ {
+  "title": "intent.md: what goes in it, and where it lives",
+  "kicker": "Day 5 · PLAN",
+  "subtitle": "First the goal. Then the rules, the tests, the code. Each in its own place.",
+  "type": "concept",
+  "sdlc": "plan",
+  "cards": [
+   {
+    "title": "What goes in intent.md",
+    "body": "One outcome, three checks, owners, a boundary, one OPEN."
+   },
+   {
+    "title": "Where it lives",
+    "body": "Goal, rules, tests, code. Each in its own place."
+   }
+  ],
+  "keyPoints": [
+   "intent.md: one outcome, three checks, owners, a boundary, one OPEN.",
+   "Goal, rules, tests, code: four places.",
+   "Today you write all four, one assignment at a time."
+  ],
+  "visual": {
+   "intentFlow": [
+    {
+     "doc": [
+      [
+       "Outcome",
+       true,
+       "",
+       "what Bree delivers each morning"
+      ],
+      [
+       "Three checks",
+       true,
+       "",
+       "what a neighbour can see"
+      ],
+      [
+       "Owners",
+       true,
+       "",
+       "who decides"
+      ],
+      [
+       "Boundary",
+       true,
+       "",
+       "what Bree may never do"
+      ],
+      [
+       "OPEN",
+       true,
+       "",
+       "what we do not know yet"
+      ]
+     ]
+    },
+    {
+     "tree": [
+      [
+       0,
+       "aetherlink-daily-brief-lab-s1/"
+      ],
+      [
+       1,
+       "intent.md",
+       "the goal · you, Assignment 1",
+       true,
+       "Plan"
+      ],
+      [
+       1,
+       "docs/spec.md",
+       "the rules: what a good brief is · Assignment 2",
+       true,
+       "Design"
+      ],
+      [
+       1,
+       "test/",
+       "the tests: red first, then green · Assignments 2, 4, 5",
+       true,
+       "Test"
+      ],
+      [
+       1,
+       "src/",
+       "the code: Bree herself · Assignments 2, 4, 5",
+       true,
+       "Build"
+      ]
+     ]
+    }
+   ]
+  },
+  "notes": "Time: 3 min.\n\nWhy now: Show where each piece of work lives before the first assignment.\n\nWhat you see: Five parts, four places.\n\nWatch for: Long intents. One screen is enough.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants know what A1 asks for.\n\nNext: Assignment 1",
+  "teach": {
+   "next": "Assignment 1",
+   "time": "3 min",
+   "gist": "First the goal. Then the rules, the tests, the code. Each in its own place.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "intent.md: one outcome, three checks, owners, a boundary, one OPEN.",
+      "Goal, rules, tests, code: four places.",
+      "Today you write all four, one assignment at a time."
+     ]
+    }
+   ],
+   "learn": [
+    "intent.md: one outcome, three checks, owners, a boundary, one OPEN.",
+    "Goal, rules, tests, code: four places.",
+    "Today you write all four, one assignment at a time."
+   ],
+   "watch": [
+    "Long intents. One screen is enough."
+   ]
+  }
+ },
+ {
   "title": "Assignment 1: Write down what the brief must do",
   "kicker": "Day 5 · A1 · SOLO 1",
   "subtitle": "Claude Code interviews you. You write intent.md. No code yet.",
@@ -527,6 +875,204 @@ window.SLIDES = [
   ],
   "prompt": "Read CLAUDE.md, SOLO.md, and the templates on my branch. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Stop for my review. Do not implement code.",
   "notes": "Time: 25 min.\n\nWhy now: The intent decides what done means for every later step.\n\nWhat you see: A short intent.md with checks you can test.\n\nWatch for: Checks that cannot be observed, such as \"the brief is useful\".\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A facilitator accepts the boundary.\n\nNext: Assignment 2"
+ },
+ {
+  "title": "A brief you can trust",
+  "kicker": "Day 5 · THE CONTRACT",
+  "subtitle": "Always the same format. Every line with a source. Checked before you see it.",
+  "type": "context",
+  "sdlc": "design",
+  "cards": [
+   {
+    "title": "08:30",
+    "body": ""
+   },
+   {
+    "title": "She looks",
+    "body": ""
+   },
+   {
+    "title": "She writes",
+    "body": ""
+   },
+   {
+    "title": "She checks",
+    "body": ""
+   },
+   {
+    "title": "You read",
+    "body": ""
+   }
+  ],
+  "keyPoints": [
+   "Same format every morning: that is the schema.",
+   "Five rules, checked in plain code.",
+   "One rule broken? You see the error, not the brief."
+  ],
+  "visual": {
+   "contractZoom": {
+    "icons": [
+     "⏰",
+     "👀",
+     "📝",
+     "📋",
+     "🧑"
+    ],
+    "gate": "only if every rule is met",
+    "look": {
+     "title": "She looks",
+     "body": "At four tools. She only reads. She changes nothing.",
+     "items": [
+      [
+       "🦊",
+       "merge requests"
+      ],
+      [
+       "🎫",
+       "tickets"
+      ],
+      [
+       "📄",
+       "changed pages"
+      ],
+      [
+       "📅",
+       "your calendar"
+      ]
+     ]
+    },
+    "docName": "Bree’s brief · Tuesday · always this format",
+    "doc": [
+     {
+      "label": "First thing",
+      "text": "standup at 09:00",
+      "ev": [
+       "outlook:09:00"
+      ],
+      "key": "first"
+     },
+     {
+      "label": "Reviews",
+      "text": "MR !42 waits for you since yesterday",
+      "ev": [
+       "gitlab:!42"
+      ],
+      "key": "reviews"
+     },
+     {
+      "label": "Tickets",
+      "text": "ABC-101 moved to “blocked”",
+      "ev": [
+       "jira:ABC-101"
+      ],
+      "key": "tickets"
+     },
+     {
+      "label": "Read later",
+      "text": "the release page changed",
+      "ev": [
+       "confluence:release"
+      ],
+      "key": "later",
+      "small": true
+     },
+     {
+      "label": "Missing",
+      "text": "none",
+      "key": "gaps",
+      "small": true
+     },
+     {
+      "label": "Today’s meetings",
+      "text": "not there",
+      "fixed": "09:00 standup · 14:00 planning; room: OPEN",
+      "key": "meetings",
+      "ghost": true
+     }
+    ],
+    "docFoot": "Always: sample data · nothing is sent",
+    "rulesTitle": "The schema: five rules · click to check",
+    "fixLabel": "what if she writes it?",
+    "rules": [
+     {
+      "text": "Every line has a source",
+      "ok": true,
+      "note": "four sources",
+      "hl": [
+       "outlook:09:00",
+       "gitlab:!42",
+       "jira:ABC-101",
+       "confluence:release"
+      ]
+     },
+     {
+      "text": "Times are in order",
+      "ok": true,
+      "note": "09:00 first",
+      "hl": [
+       "first"
+      ]
+     },
+     {
+      "text": "Unknown? Write OPEN",
+      "ok": true,
+      "note": "nothing unknown",
+      "hl": [
+       "gaps"
+      ]
+     },
+     {
+      "text": "No secrets on the page",
+      "ok": true,
+      "note": "none",
+      "hl": [
+       "later"
+      ]
+     },
+     {
+      "text": "Today’s meetings are on the page",
+      "ok": false,
+      "note": "missing",
+      "noteOk": "there",
+      "hl": [
+       "meetings"
+      ]
+     }
+    ],
+    "result": "One rule broken: this brief is stopped. You see “schema: meetings missing”, not the brief. In Assignment 2 you write this check, red first.",
+    "ask": {
+     "say": "All five rules met. Your brief is ready.",
+     "yes": "Read it",
+     "no": "Ask a question",
+     "yesReply": "You read it. Bree changed nothing.",
+     "noReply": "Ask Bree: where does this line come from?"
+    }
+   }
+  },
+  "notes": "Time: 5 min.\n\nWhy now: Explain the contract before the participants write it.\n\nWhat you see: The brief, the five rules, one broken.\n\nWatch for: Participants who think the model checks itself. The check is plain code.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say what a schema is in one sentence.\n\nNext: Assignment 2",
+  "teach": {
+   "next": "Assignment 2",
+   "time": "5 min",
+   "gist": "Always the same format. Every line with a source. Checked before you see it.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "Same format every morning: that is the schema.",
+      "Five rules, checked in plain code.",
+      "One rule broken? You see the error, not the brief."
+     ]
+    }
+   ],
+   "learn": [
+    "Same format every morning: that is the schema.",
+    "Five rules, checked in plain code.",
+    "One rule broken? You see the error, not the brief."
+   ],
+   "watch": [
+    "Participants who think the model checks itself. The check is plain code."
+   ]
+  }
  },
  {
   "title": "Assignment 2: Make the schema test fail, then pass",
@@ -1046,6 +1592,100 @@ window.SLIDES = [
    "next": "Guardrails: no shortcuts past the person"
   },
   "sdlc": "test"
+ },
+ {
+  "title": "Tools: how an AI agent sees",
+  "kicker": "Day 5 · TOOLS",
+  "subtitle": "The AI only reads and writes text. Tools are its eyes. What is not on the menu, it cannot see.",
+  "type": "context",
+  "sdlc": "build",
+  "cards": [],
+  "keyPoints": [
+   "The AI sees only through its tools.",
+   "Only eyes, no hands: tools only read.",
+   "Every look is written down in run.log."
+  ],
+  "visual": {
+   "guardRail": {
+    "plainChain": true,
+    "railCols": 3,
+    "chainTitle": "Bree’s four tools: the four looks from slide 3",
+    "chain": [
+     [
+      "🦊",
+      "Merge requests",
+      "gitlab"
+     ],
+     [
+      "🎫",
+      "Tickets",
+      "jira"
+     ],
+     [
+      "📄",
+      "Changed pages",
+      "confluence"
+     ],
+     [
+      "📅",
+      "Your calendar",
+      "outlook"
+     ]
+    ],
+    "railsTitle": "Three things must be true",
+    "rails": [
+     {
+      "icon": "👀",
+      "title": "1 · It has the eyes it needs",
+      "whoLabel": "Bree",
+      "who": "today you build one tool. The others follow the same pattern",
+      "stop": "Without the calendar, she cannot put the standup first.",
+      "where": "src/sources.ts"
+     },
+     {
+      "icon": "✋",
+      "title": "2 · Only eyes, no hands",
+      "whoLabel": "Bree",
+      "who": "no shell, no write tools",
+      "stop": "She cannot close a ticket or send a mail. That stays with you.",
+      "where": "src/agent.ts"
+     },
+     {
+      "icon": "📜",
+      "title": "3 · Every look is written down",
+      "whoLabel": "Bree",
+      "who": "run.log: each line on the page traces back to one look",
+      "stop": "So you can check where a line comes from.",
+      "where": "run.log"
+     }
+    ],
+    "foot": "No credentials today? Then the live check is OPEN, not failed. The sample route keeps working."
+   }
+  },
+  "notes": "Time: 4 min.\n\nWhy now: Explain tools before the participants build one.\n\nWhat you see: Four tools, three rules.\n\nWatch for: Write or shell tools. Eyes only.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can say why tools only read.\n\nNext: Assignment 5",
+  "teach": {
+   "next": "Assignment 5",
+   "time": "4 min",
+   "gist": "The AI only reads and writes text. Tools are its eyes. What is not on the menu, it cannot see.",
+   "script": [
+    {
+     "do": "Slide appears. Read the title and the subtitle.",
+     "say": [
+      "The AI sees only through its tools.",
+      "Only eyes, no hands: tools only read.",
+      "Every look is written down in run.log."
+     ]
+    }
+   ],
+   "learn": [
+    "The AI sees only through its tools.",
+    "Only eyes, no hands: tools only read.",
+    "Every look is written down in run.log."
+   ],
+   "watch": [
+    "Write or shell tools. Eyes only."
+   ]
+  }
  },
  {
   "title": "Assignment 5: Give the agent one read-only tool",
