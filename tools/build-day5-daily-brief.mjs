@@ -39,7 +39,9 @@ const HANDOFF = '/handoff Write a prompt for a fresh Claude Code session to cont
 const say = (time, why, see, watch, stop, next) =>
   `Time: ${time}.\n\nWhy now: ${why}\n\nWhat you see: ${see}\n\nWatch for: ${watch}\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: ${stop}\n\nNext: ${next}`;
 
-const SDLC = {1: 'plan', 2: 'plan', 3: 'design', 4: 'build', 5: 'build', 6: 'test', 7: 'deploy'};
+// Stage per assignment, as in the AI-native SDLC playbook: intent.md is Plan, spec.md is Design, plan.md is Build.
+const SDLC = {1: 'plan', 2: 'design', 3: 'build', 4: 'build', 5: 'build', 6: 'test', 7: 'deploy'};
+const PLAYBOOK = {url: 'https://claude.com/resources/articles/the-ai-native-sdlc-playbook', label: 'claude.com · The AI-native SDLC playbook'};
 const STAGE = {1: 'intent', 2: 'contract', 3: 'contract', 4: 'tools', 5: 'tools', 6: 'gate', 7: 'gate'};
 
 // The presenter view and the day sheet read `teach`. Info slides pass it in directly.
@@ -150,7 +152,7 @@ const TEACH = {
     learn: ['PASS is a human decision with evidence in front of you.', 'An OPEN item can become a new check.', 'The schedule stays inactive.'],
     watch: ['An agent that writes PASS.', 'A schedule that is switched on.', 'A merge or a deploy. Stop before both.', OPEN_SHOT],
     terms: [['Gate', 'docs/gate.md: PASS, FAIL or OPEN for each check'], ['PR', 'a pull request: your change, ready for review'], ['Inactive schedule', 'the weekday run, written down but not switched on']],
-    next: 'the recap of the day.'
+    next: 'Maintain: close the loop.'
   }
 };
 
@@ -212,19 +214,36 @@ const brief = [
       yes: 'Read it',
       no: 'Ask a question'
     }, reveal: 'click', covers: []},
-    notes: say('4 min', 'Show the whole agent before the steps.', 'Looks, page, check, you.', 'Questions about live data. Sample data first; live is OPEN until A5.', 'Participants can say the four parts in their own words.', 'The SDLC')
+    notes: say('4 min', 'Show the whole agent before the steps.', 'Looks, page, check, you.', 'Questions about live data. Sample data first; live is OPEN until A5.', 'Participants can say the four parts in their own words.', 'The software development life cycle')
   },
   byTitle('The software development life cycle (SDLC)'),
+  {
+    title: 'The AI-native SDLC',
+    kicker: 'Day 5 · WHY WE ARE HERE',
+    subtitle: 'The same six stages. The agent does the work. A person decides at every stage.',
+    type: 'concept',
+    source: PLAYBOOK,
+    cards: [
+      {title: 'One file per stage', body: 'Every stage commits a file the next stage can read.'},
+      {title: 'The agent works', body: 'Claude Code writes, tests and proposes.'},
+      {title: 'A person decides', body: 'You accept the intent, the plan and the gate.'}
+    ],
+    keyPoints: ['Bree is the example. The AI-native SDLC is the lesson.', 'One file per stage: intent.md, spec.md, plan.md, evidence.md, gate.md.', 'The agent may act up to the gate. It cannot pass it.'],
+    notes: say('4 min', 'Say what the day is for: the way of working, not the brief agent.', 'Three ideas from the playbook.', 'Participants who think the goal is a nice brief. The goal is the loop.', 'Participants can say: one file per stage, a person decides.', 'Today: build the brief through the SDLC')
+  },
   {
     title: 'Today: build the brief through the SDLC',
     kicker: 'Day 5 · Seven steps',
     subtitle: 'One step at a time. Each step has a file you write and a proof you show.',
     cards: [
-      {title: 'Morning · Plan and design', body: 'A1 intent.md\nA2 spec and schema, red then green\nA3 design, decision and plan\nA4 sample renderer: out/latest.html'},
-      {title: 'Afternoon · Build, test, gate', body: 'A5 one read-only tool\nA6 evidence: commands and exit codes\nA7 gate: PASS, FAIL or OPEN, and a PR preview'},
-      {title: 'Bonus', body: 'Sonny, the on-call SRE agent, for who is done early.'}
+      {title: 'Plan', body: 'A1 · intent.md'},
+      {title: 'Design', body: 'A2 · spec.md and the schema'},
+      {title: 'Build', body: 'A3 · plan.md, in plan mode\nA4 · the renderer\nA5 · one read-only tool'},
+      {title: 'Test', body: 'A6 · evidence.md'},
+      {title: 'Deploy', body: 'A7 · gate.md. A person decides.'},
+      {title: 'Maintain', body: 'What you learn becomes a new intent.md.'}
     ],
-    keyPoints: ['A1 to A4 before lunch.', 'A5 to A7 after lunch.', 'Sonny is the bonus.'],
+    keyPoints: ['Every stage leaves one file the next stage reads.', 'A1 to A4 before lunch, A5 to A7 after.', 'Sonny is the bonus.'],
     notes: say('5 min', 'Show the whole route before the first step.', 'The seven steps on the SDLC loop.', 'Groups that want to skip the plan. The plan is what makes the build fast.', 'Participants know where they are at every moment of the day.', 'Start the project')
   },
   {
@@ -420,12 +439,27 @@ const brief = [
     'You make every PASS decision. Open the PR only after the human review.',
     'Read intent.md, the diff, and docs/evidence.md. Draft docs/gate.md with evidence links and proposed FAIL or OPEN entries for missing checks. Leave PASS decisions to me. Prepare a PR description and weekday schedule without activating it. Do not merge, deploy, or publish. Stop for my decision.',
     'Use the OPEN item I choose to propose one new acceptance check. Show the gate diff and PR preview. After I decide the gate and approve publication, open the PR. Stop before merge or deployment.',
-    say('25 min', 'The gate is where a human decides, with the evidence in front of them.', 'docs/gate.md with a quoted line per check.', 'An agent that writes PASS. The human decides PASS.', 'Each participant has a gate decision and a PR preview.', 'Recap')),
+    say('25 min', 'The gate is where a human decides, with the evidence in front of them.', 'docs/gate.md with a quoted line per check.', 'An agent that writes PASS. The human decides PASS.', 'Each participant has a gate decision and a PR preview.', 'Maintain: close the loop')),
+  {
+    title: 'Maintain: close the loop',
+    kicker: 'Day 5 · MAINTAIN',
+    subtitle: 'The brief runs every morning. What goes wrong becomes a new intent.md.',
+    type: 'concept',
+    sdlc: 'maintain',
+    source: PLAYBOOK,
+    cards: [
+      {title: 'It runs', body: 'Every weekday morning, once you switch the schedule on.'},
+      {title: 'You notice', body: 'A wrong line, a missing source, an OPEN that stays open.'},
+      {title: 'Back to Plan', body: 'You write it down as a new intent.md. The loop starts again.'}
+    ],
+    keyPoints: ['Maintain is not a new assignment today.', 'Your OPEN items in gate.md are the first input.', 'The loop keeps running. Your judgement stays above it.'],
+    notes: say('3 min', 'Show the sixth stage, so the line becomes a loop.', 'Runs, notice, back to Plan.', 'Participants who switch the schedule on today. It stays inactive.', 'Participants can name one OPEN item that would start a new intent.', 'Recap')
+  },
   {
     title: 'Recap: seven steps, one brief',
     kicker: 'Day 5 · Recap',
-    subtitle: 'Intent, spec, design, build, tool, evidence, gate. Every step ended with proof.',
-    keyPoints: ['The intent decided what done means.', 'Tests failed first, then passed.', 'The human made the gate decision.'],
+    subtitle: 'Plan, Design, Build, Test, Deploy, Maintain. Every stage left a file and a proof.',
+    keyPoints: ['One file per stage: intent, spec, plan, evidence, gate.', 'Tests failed first, then passed.', 'A person made every decision.'],
     notes: say('5 min', 'Close the main route before the bonus.', 'The seven steps and their proofs.', 'Groups that did not reach A7. They finish it with SOLO.md.', 'Participants can name the proof of each step.', 'The Claude Code skills pack')
   },
   {
@@ -478,6 +512,8 @@ const pack = [
   },
   (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Choose one skill for the hackathon'; s.kicker = 'Day 5 · SKILLS PACK'; return s; })()
 ];
+// Pause slides come from Jessy's deck with her stage dot. In this deck they sit between other stages.
+for (const b of brief) if (['Break', 'Lunch', 'Restart and settle'].includes(b.title)) delete b.sdlc;
 const slides = [...brief.slice(0, -1), ...pack, brief.at(-1), ...bonus, close].map(withTeach);
 const out = `'use strict';\n// Generated by tools/build-day5-daily-brief.mjs. Edit the generator, not this file.\nwindow.SLIDES = ${JSON.stringify(slides, null, 1)};\n`;
 writeFileSync(new URL('day5-daily-brief-slides.js', root), out);
