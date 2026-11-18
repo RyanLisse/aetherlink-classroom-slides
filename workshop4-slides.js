@@ -3253,7 +3253,7 @@ window.SLIDES = [
       },
       {
         "title": "What today is not",
-        "body": "Not production: fictional data, nine test messages, a laptop demo. A real version needs an audit log with names and a data-handling decision."
+        "body": "Not production: fictional data, ten test messages, a laptop demo. A real version needs an audit log with names and a data-handling decision."
       }
     ],
     "notes": "Make it concrete for each squad: ask one person per table to name the flow they would pick.",
@@ -3271,7 +3271,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at the last card.",
-          "say": "And be honest about what today was: a demo with fictional data and nine messages. Not production."
+          "say": "And be honest about what today was: a demo with fictional data and ten messages. Not production."
         },
         {
           "ask": "Which flow would your squad pick?",
