@@ -18,13 +18,13 @@ test('All fourteen sessions open real decks with real assets and matching presen
   const phtml=read(presenter);assert.ok(phtml.includes(data),presenter);
   if(session.deck!=='index.html')assert.ok(phtml.includes(`window.DECK_PAGE = "${session.deck}"`),presenter);
  }
- assert.equal(sessions[0].href,'day1.html#1');assert.equal(sessions[1].href,'index.html#83');
+ assert.equal(sessions[0].href,'day1.html#1');assert.equal(sessions[1].href,'day2.html#1');
 });
 test('Day selection tracks hash navigation and opens the chosen session',()=>{
  const listeners={};let select;
  const element=tag=>({tag,children:[],append(...children){this.children.push(...children)},prepend(){},addEventListener(event,fn){this[event]=fn}});
  const ctx={window:{},URLSearchParams,location:{search:'',pathname:'/day1.html',hash:'#1'},addEventListener(event,fn){listeners[event]=fn},document:{createElement(tag){const e=element(tag);if(tag==='select')select=e;return e},querySelector(){return element('tools')}}};
- vm.runInNewContext(read('sessions.js'),ctx);assert.equal(select.value,'day-1');ctx.location.pathname='/index.html';ctx.location.hash='#83';listeners.hashchange();assert.equal(select.value,'day-2');select.value='hackathon-2';select.change();assert.equal(ctx.location.href,'workshop7.html#1');
+ vm.runInNewContext(read('sessions.js'),ctx);assert.equal(select.value,'day-1');ctx.location.pathname='/day2.html';ctx.location.hash='#1';listeners.hashchange();assert.equal(select.value,'day-2');select.value='hackathon-2';select.change();assert.equal(ctx.location.href,'workshop7.html#1');
 });
 test('Deck and presenter use separate matching channels and storage keys',()=>{
  const evaluate=(file,deck)=>{const src=read(file);const start=src.indexOf('const DECK_ID =');const end=src.indexOf(';',src.indexOf('const PRESENTER_KEY =',start))+1;const ctx={location:{pathname:'/path/'+deck},window:{DECK_PAGE:deck}};return vm.runInNewContext(src.slice(start,end)+'; ({channel:PRESENTER_CHANNEL,key:PRESENTER_KEY})',ctx)};
@@ -51,5 +51,6 @@ test('Presenter counts slides per day of its own deck',()=>{
  const src=read('presenter.js');const fn=src.slice(src.indexOf('function dayCount'),src.indexOf('const DECK_ID ='));const call=src.match(/dayCount\(current, ([^)]+)\)/)[1];
  const count=(deck,slidesFile,i)=>{const ctx={window:{DECK_PAGE:deck,CLASSROOM_SESSIONS:sessions}};vm.runInNewContext(read(slidesFile),ctx);ctx.window.CLASSROOM_SESSIONS=sessions;return vm.runInNewContext(`const slides=window.SLIDES;${fn}const DECK_ID=window.DECK_PAGE||'index.html';const current=${i};dayCount(current, ${call}).join(' / ')`,ctx)};
  assert.equal(count('workshop3.html','workshop3-slides.js',15),'16 / 47');
- assert.equal(count('index.html','slides.js',60),'61 / 82');
+ assert.equal(count('day1.html','day1-slides.js',60),'61 / 82');
+ assert.equal(count('day2.html','day2-slides.js',10),'11 / 44');
 });
