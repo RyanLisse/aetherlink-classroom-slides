@@ -5,9 +5,7 @@ import vm from 'node:vm';
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
 const contract = JSON.parse(read('tools/day4-participant-contract.json'));
-const ctx = { window: {} };
-vm.runInNewContext(read('workshop4-slides.js'), ctx);
-const slides = ctx.window.SLIDES;
+const load = (file) => { const ctx = { window: {} }; vm.runInNewContext(read(file), ctx); return ctx.window.SLIDES; };
 const strings = (slide) => {
   const found = [];
   const walk = (value, key) => {
@@ -19,7 +17,10 @@ const strings = (slide) => {
   return found;
 };
 
-test('Day 4 slides name only commands and files that the participant repositories have', () => {
+// Both decks teach the prompt-first route on main: Ryan's deck and the final deck that is generated from it.
+for (const file of ['workshop4-slides.js', 'day4-final-slides.js']) {
+const slides = load(file);
+test(`${file} names only commands and files that the participant repositories have`, () => {
   const scripts = new Set([...contract.scripts, 'ci']);
   const files = new Set(contract.files);
   const folders = new Set(contract.files.flatMap((file) => file.split('/').slice(0, -1).map((_, i, parts) => parts.slice(0, i + 1).join('/'))));
@@ -35,7 +36,7 @@ test('Day 4 slides name only commands and files that the participant repositorie
   }
 });
 
-test('Day 4 check slides show the test commands of the same step in SOLO.md', () => {
+test(`${file}: check slides show the test commands of the same step in SOLO.md`, () => {
   assert.deepEqual(Object.keys(contract.testCommands), ['0', '1', '2', '3'], 'SOLO 0 to 3 each list their test commands');
   for (const [step, commands] of Object.entries(contract.testCommands)) {
     const slide = slides.find((item) => item.kicker === `What you see · Step ${step}`);
@@ -44,9 +45,10 @@ test('Day 4 check slides show the test commands of the same step in SOLO.md', ()
   }
 });
 
-test('Day 4 slides do not describe the earlier package', () => {
+test(`${file} does not describe the earlier package`, () => {
   const text = JSON.stringify(slides.map(strings));
   for (const stale of ['list_transactions', 'MCP servers OK', 'AUTO_REPLY', 'External data section', 'evidence pack', 'prepared trainer copy', 'six labels', 'aetherlink-day5-n8n']) {
     assert.ok(!text.includes(stale), `the deck still says "${stale}"`);
   }
 });
+}
