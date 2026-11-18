@@ -16,8 +16,11 @@ Open these pairs from the same server:
 
 | Day | Projector | Trainer screen |
 | --- | --- | --- |
-| Day 4 | `http://localhost:8080/workshop4.html#1` | `http://localhost:8080/workshop4-presenter.html` |
-| Day 5 | `http://localhost:8080/workshop5.html#1` | `http://localhost:8080/workshop5-presenter.html` |
+| Day 4 | `http://localhost:8080/day4-final.html#1` | `http://localhost:8080/day4-final-presenter.html` |
+| Day 5 | `http://localhost:8080/day5-daily-brief.html#1` | `http://localhost:8080/day5-daily-brief-presenter.html` |
+
+Each of these two decks also has a day sheet: the **Day 4 sheet** or **Day 5 sheet** button in the deck. It lists
+every slide with its time, key points, warnings and prompts.
 
 Open the projector deck first. Then click **Presenter view** or press `S` in the
 same browser and origin. The presenter window follows the projector slide.
@@ -32,23 +35,54 @@ inspect the result and stop at the stated review point.
 
 ## Prepare Day 4 before class
 
-Use the exact **Trainer preparation** prompt in the participant repository's
+Teach from `day4-final.html`. Nothing must be built before class. The solved
+steps are on the `trainer/solution` branch of the participant repository. See
+the **Trainer** section of its
 [`SOLO.md`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/blob/main/SOLO.md).
-Build and review a separate read-only reference folder or evidence pack before
-SOLO 0. Do not put the completed implementation in the participant starter.
+In your own trainer clone, run:
+
+```sh
+git fetch origin trainer/solution
+git switch trainer/solution
+npm ci
+npm run check:1 && npm run check:2 && npm run check:3
+```
+
+All three checks pass on that branch. Run each demo once before class:
+`npm run lesson1 -- MSG-06`, `npm run lesson2 -- MSG-05` and
+`npm run lesson3 -- MSG-08`. A real run depends on your login and on your own
+Claude Code settings, because the lessons load project and user settings.
+
+Participants stay on `main`. On `main` the checks are red before a step. That
+is correct. A participant who falls behind pastes the prompt of the current
+step again. Nobody copies files from `trainer/solution`.
 
 Use the sanitized `n8n/support-triage.json` from the repository. Do not activate
-or modify the n8n workflow. Show the n8n screenshots before the first build
-assignment. During the memory assignment, keep curated `memory.md` files
-separate from transcripts and technical logs. Test a fresh-session readback and
-ticket isolation.
+or modify the n8n workflow. During the memory assignment, keep curated
+`memory.md` files separate from transcripts and technical logs. Test a
+fresh-session readback and ticket isolation.
 
-## Run Day 5 as the main AI-native SDLC lesson
+The day has four blocks of 60, 120, 90 and 45 minutes. It starts at 10:00.
+Lunch is from 13:15 to 14:00. The breaks are at 11:00 and 15:30.
 
+## Run Day 5: the Daily Brief agent is the main lesson
+
+Teach from `day5-daily-brief.html`. Participants use
+[`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1)
+on `main` and do all seven steps in class: A1 to A4 before lunch, A5 to A7
+after lunch. The lab uses sample data only. It needs no API key. Each step
+ends with a file and a proof. Participants open a pull request only after the
+human review in step 7. Nothing is merged or deployed.
+
+Sonny, the SRE agent, is the bonus. Its slides are the bonus block at the end of
+the same deck.
+
+## Keep Sonny, the SRE agent, as the bonus
+
+Use the bonus when a participant finishes the Daily Brief steps early.
 Participants use [`workshop/start`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start)
-and complete the required A1 through A6 route. A8 is the human gate inside A6.
-A7 and A9 are optional appendix exercises. Start with INC-1001 and the customer
-impact. Define AI-native SDLC near the start; use the appendix only for depth.
+and do the assignments in order. They stop where the day ends. Start with
+INC-1001 and the customer impact.
 
 Use any terminal at the participant clone's root and run `claude`. Review the
 displayed path. Accept trust only for the participant's own clone. Restart
@@ -88,11 +122,3 @@ Use the one-minute listener setting from A1. If port 4320 is free, start the
 console with `AGENT_LISTEN_WINDOW_MIN=1 npm run console`. If an owned console
 already uses the default five-minute window, let the human accept that wait or
 restart only that owned console.
-
-## Keep Daily Brief as the bonus
-
-Use the Daily Brief bonus after the SRE lesson when time remains. Steps 1
-through 4 form the 30 to 40 minute classroom route. Steps 5 through 7 are
-homework. Participants open a pull request only after the human review in step
-7. The bonus repository is
-[`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1).
