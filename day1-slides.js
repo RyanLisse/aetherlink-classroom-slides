@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aetherlink x Worldline — Day 1 classroom deck (Jessy): copy of Day 1 from slides.js (slides 1-82), 2026-11-18
+   Aetherlink x Worldline — Day 1 classroom deck (the Snake day). Started 2026-11-18 as a copy of slides 1-82 of slides.js; this is now the Day 1 deck
    173 slides, authored from CURRICULUM.md (2026-09-15 revision) plus its
    "Resolved alignment decisions" section, which overrides three points in
    the base document: Assignment 11's AI feedback is required and needs no

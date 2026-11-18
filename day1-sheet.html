@@ -95,8 +95,8 @@ body.no-prompts .prompt{display:none}
   <main id="slides"></main>
 </div>
 
-<script>window.DECK_PAGE = 'day1-jessy.html';</script>
-<script src="day1-jessy-slides.js?v=3"></script>
+<script>window.DECK_PAGE = 'day1.html';</script>
+<script src="day1-slides.js?v=3"></script>
 <script>
 (() => {
   const S = (window.SLIDES || []).filter((s) => !s.hidden);
@@ -138,7 +138,7 @@ body.no-prompts .prompt{display:none}
     const copyHtml = copies.length ? `<div class="blk"><h4>To paste</h4>${copies.map(([l, txt]) => promptBox(l, txt)).join('')}</div>` : '';
     const terms = t.terms && t.terms.length ? `<div class="terms">${t.terms.map(([k, v]) => `<b>${esc(k)}</b>: ${fmt(v)}`).join(' · ')}</div>` : '';
     return `<section class="slide ${esc(s.type)}" id="s${n}">
-      <div class="s-head"><span class="s-meta"><span class="n">#${n}</span> · ${clock(s) || '—'} · ${esc(t.time || '')}</span><h3>${esc(s.title)}</h3><a class="s-open" href="day1-jessy.html#${n}" target="deck-day1-jessy.html">open slide ↗</a></div>
+      <div class="s-head"><span class="s-meta"><span class="n">#${n}</span> · ${clock(s) || '—'} · ${esc(t.time || '')}</span><h3>${esc(s.title)}</h3><a class="s-open" href="day1.html#${n}" target="deck-day1.html">open slide ↗</a></div>
       ${t.gist ? `<p class="gist">${fmt(t.gist)}</p>` : ''}
       <div class="grid">
         <div>${list('', 'Key points', keys)}${list('done', 'Done when', t.done)}</div>
