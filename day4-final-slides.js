@@ -1238,7 +1238,7 @@ window.SLIDES = [
   "type": "concept",
   "visual": {
    "opener": "showcase",
-   "image": "assets/workshop-4/claude-md-three-parts.svg",
+   "image": "assets/workshop-4/claude-md-policy-main.svg",
    "imageAlt": "CLAUDE.md in three parts: who you are, what you may not do, when is it what.",
    "imageLink": "01-single-agent/claude-project/CLAUDE.md"
   },
@@ -1258,15 +1258,15 @@ window.SLIDES = [
     },
     {
      "do": "Point at the three orange headings, left to right.",
-     "say": "There are three parts. Who you are: a support assistant at a payment company. What you may not do: invent facts. And when a message is high, medium or low."
+     "say": "There are three parts. Who you are: a support assistant at a payment company. What you may not do: follow orders in a ticket, or send anything. And when a message is high, medium or low."
     },
     {
      "do": "Point at the orange box bottom right.",
-     "say": "Look at this line: an angry tone alone never makes a message high. Remember it, because in Step 1 we will test it."
+     "say": "Look at this box: each level has one line. High, medium and low. In Step 1c we change the policy for a moment and see what happens."
     },
     {
-     "ask": "Why would you write that down?",
-     "say": "(Answer: a calm customer can have a big problem, and an angry customer can have a small one. The AI must look at the problem, not the tone.)"
+     "ask": "Why would you write those three lines down?",
+     "say": "(Answer: then every message is judged by the same lines. A calm customer can have a big problem, and a loud customer can have a small one.)"
     }
    ],
    "do": [
@@ -3731,20 +3731,16 @@ window.SLIDES = [
   },
   "items": [
    {
-    "label": "The form",
-    "caption": "The AI fills it in; the code picks the tray."
+    "label": "The form: The AI fills it in; the code picks the tray."
    },
    {
-    "label": "Only the keys it needs",
-    "caption": "One agent can look things up. No agent can change data."
+    "label": "Only the keys it needs: One agent can look things up. No agent can change data."
    },
    {
-    "label": "Proof + a person",
-    "caption": "Every row has a real run or says OPEN. A person decides."
+    "label": "Proof + a person: Every row has a real run or says OPEN. A person decides."
    },
    {
-    "label": "Next: Day 5",
-    "caption": "A new agent, built step by step."
+    "label": "Day 5: A new agent, built step by step."
    }
   ],
   "notes": "Time: 10 min.\n\nRecap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Go back to the goals on the board from this morning. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.\n\nNext: Bonus · finished early?",

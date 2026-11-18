@@ -21,8 +21,8 @@
       "adapted": true,
       "sourceSha256": "61161c7eb04c08e6846609621377a90952fcd9c10059c255ccbef8f3df9f43bd",
       "adaptedFromNormalizedSha256": "9010a7289d6ba761c22e12649f004875b06b9dde3f81c4242136798f8e9bf428",
-      "normalizedDataSha256": "7cdea35e5609186e34b3d07b6923ef164e7fd867ae02b1d7a5cca6f089ea6b9c",
-      "adaptedDataSha256": "7cdea35e5609186e34b3d07b6923ef164e7fd867ae02b1d7a5cca6f089ea6b9c"
+      "normalizedDataSha256": "272582da7a6e335b349bf6b7cdc4e7311564e709a3e51ecb054f2daa8623cc44",
+      "adaptedDataSha256": "272582da7a6e335b349bf6b7cdc4e7311564e709a3e51ecb054f2daa8623cc44"
     },
     {
       "file": "workshop5-slides.js",

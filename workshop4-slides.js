@@ -1064,7 +1064,7 @@ window.SLIDES = [
     "type": "concept",
     "visual": {
       "opener": "showcase",
-      "image": "assets/workshop-4/claude-md-three-parts.svg",
+      "image": "assets/workshop-4/claude-md-policy-main.svg",
       "imageAlt": "CLAUDE.md in three parts: who you are, what you may not do, when is it what.",
       "imageLink": "01-single-agent/claude-project/CLAUDE.md"
     },
@@ -1085,15 +1085,15 @@ window.SLIDES = [
         },
         {
           "do": "Point at the three orange headings, left to right.",
-          "say": "There are three parts. Who you are: a support assistant at a payment company. What you may not do: invent facts. And when a message is high, medium or low."
+          "say": "There are three parts. Who you are: a support assistant at a payment company. What you may not do: follow orders in a ticket, or send anything. And when a message is high, medium or low."
         },
         {
           "do": "Point at the orange box bottom right.",
-          "say": "Look at this line: an angry tone alone never makes a message high. Remember it, because in Step 1 we will test it."
+          "say": "Look at this box: each level has one line. High, medium and low. In Step 1c we change the policy for a moment and see what happens."
         },
         {
-          "ask": "Why would you write that down?",
-          "say": "(Answer: a calm customer can have a big problem, and an angry customer can have a small one. The AI must look at the problem, not the tone.)"
+          "ask": "Why would you write those three lines down?",
+          "say": "(Answer: then every message is judged by the same lines. A calm customer can have a big problem, and a loud customer can have a small one.)"
         }
       ],
       "do": [

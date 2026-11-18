@@ -394,7 +394,7 @@ const day = [
     ['nine messages', 'ten messages'],
     ['it is exactly the point of the barrier.', 'it is exactly why a person reviews every draft.'])),
   reuse(4, ryan('On Monday: take this to your squad')),
-  reuse(10, ryan('Close: a person stays in charge')),
+  reuse(10, patch(ryan('Close: a person stays in charge'), ['Next: Day 5', 'Day 5'])),
   // After the day. It is not part of a block.
   reuse(0, ryan('Bonus · finished early?'))
 ];
@@ -465,6 +465,8 @@ const slides = ordered.map(({min, ...s}, i) => {
   const teach = {...s.teach, time, learn: s.teach.learn ?? s.keyPoints ?? [], terms: s.teach.terms ?? [], next};
   const slide = {...s, notes: `Time: ${time}.\n\n${s.notes}\n\nNext: ${next}`, teach};
   if (slide.type === 'pause') slide.cards = [{title: slide.cards[0].title, body: `Next: ${next}`}];
+  // The recap layout joins label and caption with an em dash. One label per item keeps the slide free of it.
+  if (slide.items) slide.items = slide.items.map(({label, caption}) => ({label: caption ? `${label}: ${caption}` : label}));
   return slide;
 });
 
