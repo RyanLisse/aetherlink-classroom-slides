@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Day 1 sheet</title>
+<meta name="description" content="Day 1 cheat sheet: every slide with time, key points, steps, prompts and notes. Built from the deck itself.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06111e;--surface:#0c1a2b;--surface2:#11233a;--border:rgba(255,255,255,.12);--text:#e8eef6;--muted:#9fb0c4;--cyan:#5ad8ff;--orange:#ff8a3d;--amber:#ffc857;--ok:#4cd38a;--red:#ff6b6b;--purple:#a78bfa;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f8fb;--surface:#fff;--surface2:#eef2f7;--border:rgba(0,0,0,.12);--text:#0d1b2a;--muted:#55657a;--cyan:#0a7fa8;--orange:#c45a12;--amber:#8a6100;--ok:#1d8a52;--red:#c43c3c;--purple:#6b4fd0}}
+:root[data-theme="light"]{--bg:#f6f8fb;--surface:#fff;--surface2:#eef2f7;--border:rgba(0,0,0,.12);--text:#0d1b2a;--muted:#55657a;--cyan:#0a7fa8;--orange:#c45a12;--amber:#8a6100;--ok:#1d8a52;--red:#c43c3c;--purple:#6b4fd0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Nunito,Inter,-apple-system,'Segoe UI',sans-serif}
+a{color:var(--cyan)}
+code{font-family:var(--mono);font-size:.86em;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:.05rem .3rem}
+.wrap{max-width:1100px;margin:0 auto;padding:1.2rem 16px 4rem}
+header.top{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:.9rem}
+h1{margin:0;font-size:1.7rem;font-weight:900}
+h1 small{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.bar{display:flex;flex-wrap:wrap;gap:.4rem}
+.bar button{font:inherit;font-weight:800;font-size:.85rem;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:.35rem .7rem;cursor:pointer}
+.bar button[aria-pressed="true"]{border-color:var(--cyan);color:var(--cyan)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.5rem;margin:1rem 0}
+.fact{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.55rem .75rem;font-size:.88rem}
+.fact b{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h2.sec{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:1.6rem 0 .5rem}
+table.agenda{width:100%;border-collapse:collapse;font-size:.9rem}
+.agenda td{padding:.28rem .5rem;border-bottom:1px solid var(--border);vertical-align:top}
+.agenda td:first-child{font-family:var(--mono);color:var(--muted);white-space:nowrap;width:4.5rem}
+.agenda td.n{color:var(--muted);width:2.5rem;text-align:right}
+.agenda td.d{color:var(--muted);white-space:nowrap;width:5rem}
+.agenda tr.practice td.t a{color:var(--orange);font-weight:900}
+.agenda tr.pause td.t{color:var(--muted);font-style:italic}
+.agenda a{text-decoration:none;color:inherit}
+.agenda a:hover{text-decoration:underline}
+.slide{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--cyan);border-radius:12px;padding:.8rem 1rem;margin:.7rem 0;scroll-margin-top:1rem}
+.slide.practice{border-left-color:var(--orange)}
+.slide.pause{border-left-color:var(--muted)}
+.slide.quiz,.slide.recap,.slide.review{border-left-color:var(--purple)}
+.s-head{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:baseline}
+.s-head h3{margin:0;font-size:1.1rem;font-weight:900;flex:1;min-width:14rem}
+.s-meta{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.s-meta .n{color:var(--text);font-weight:700}
+.s-open{font-size:.8rem;font-weight:800}
+.gist{margin:.35rem 0 .2rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.2rem 1.4rem}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.blk h4{margin:.55rem 0 .15rem;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.blk ul,.blk ol{margin:0;padding-left:1.15rem}
+.blk li{margin:.12rem 0}
+.blk.watch h4{color:var(--amber)}
+.blk.watch li::marker{content:"⚠ "}
+.blk.ask li{list-style:none;margin-left:-1.15rem}
+.blk.ask .q{font-weight:800}
+.blk.ask .a{color:var(--muted)}
+.blk.done h4{color:var(--ok)}
+.blk.done li::marker{content:"✓ ";color:var(--ok)}
+.steps{margin:.2rem 0 0;padding-left:1.3rem}
+.steps li{margin:.35rem 0}
+.steps .after{display:block;color:var(--muted);font-size:.86rem}
+.steps li.warn > .txt{color:var(--amber)}
+.where{font-size:.68rem;font-weight:900;letter-spacing:.04em;color:var(--purple);border:1px solid currentColor;border-radius:6px;padding:0 .3rem;white-space:nowrap}
+.prompt{position:relative;margin:.3rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:.45rem 4.6rem .45rem .6rem;font-family:var(--mono);font-size:.78rem;white-space:pre-wrap;word-break:break-word}
+.prompt .lbl{display:block;font-family:Nunito,sans-serif;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);font-weight:900;margin-bottom:.15rem}
+.prompt button{position:absolute;top:.35rem;right:.35rem;font:800 .72rem Nunito,sans-serif;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.2rem .5rem;cursor:pointer}
+.prompt button.ok{color:var(--ok);border-color:var(--ok)}
+.notes{margin-top:.45rem;font-size:.85rem;color:var(--muted)}.notes summary{cursor:pointer;font-weight:800;color:var(--text)}.notes p{margin:.35rem 0 0}
+.terms{font-size:.85rem;color:var(--muted);margin-top:.4rem}
+.terms b{color:var(--text)}
+.next{font-size:.82rem;color:var(--muted);margin-top:.45rem}
+body.only-asg .slide:not(.practice){display:none}
+body.no-prompts .prompt{display:none}
+@media print{
+  .notes{display:block}
+  :root{--bg:#fff;--surface:#fff;--surface2:#f3f5f8;--border:#ccd;--text:#000;--muted:#444;--cyan:#06c;--orange:#b5500e;--amber:#8a6100;--ok:#1d7a4a}
+  .bar,.prompt button,.s-open{display:none}.slide{break-inside:avoid-page}body{font-size:11pt}.wrap{padding:0}
+}
+</style></head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1><small>Aetherlink classroom · teaching cheat sheet</small>Day 1 · AI and Claude Code</h1>
+    <div class="bar" role="toolbar" aria-label="Filter">
+      <button id="f-asg" aria-pressed="false">Assignments only</button>
+      <button id="f-prompts" aria-pressed="true">Prompts shown</button>
+      <button onclick="print()">Print</button>
+    </div>
+  </header>
+
+  <div class="facts" id="facts"></div>
+
+  <h2 class="sec">The day at a glance</h2>
+  <table class="agenda" id="agenda"></table>
+
+  <h2 class="sec">Slide by slide</h2>
+  <main id="slides"></main>
+</div>
+
+<script>window.DECK_PAGE = 'day1-jessy.html';</script>
+<script src="day1-jessy-slides.js?v=1"></script>
+<script>
+(() => {
+  const S = (window.SLIDES || []).filter((s) => !s.hidden);
+  const all = window.SLIDES || [];
+  const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  // `code` → <code>, **bold** → <b>
+  const fmt = (t) => esc(t).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  const clock = (s) => (/(\d{1,2}:\d{2})/.exec(s.notes || '') || [])[1] || '';
+  const num = (s) => all.indexOf(s) + 1;
+  const list = (cls, title, items, f = (x) => '<li>' + fmt(x) + '</li>') => items && items.length ? `<div class="blk ${cls}"><h4>${title}</h4><ul>${items.map(f).join('')}</ul></div>` : '';
+  const promptBox = (label, text) => `<div class="prompt"><span class="lbl">${esc(label)}</span><button type="button" data-copy>Copy</button><span class="ptxt">${esc(text)}</span></div>`;
+
+  // facts at the top
+  const facts = [
+    ['Project', 'Everyone builds their own Snake game with Claude Code, in an empty folder <code>aether-snake</code>.'],
+    ['Morning', 'AI fundamentals (AI in three questions), then a tour of Claude Code.'],
+    ['After lunch', 'Snake step by step: plan, build, test, put it online. Each step teaches one Claude Code skill.'],
+    ['Online class', 'Every assignment is solo.']
+  ];
+  document.getElementById('facts').innerHTML = facts.map(([k, v]) => `<div class="fact"><b>${k}</b>${v}</div>`).join('');
+
+  // agenda
+  document.getElementById('agenda').innerHTML = S.map((s) => `<tr class="${esc(s.type)}"><td>${clock(s)}</td><td class="n">${num(s)}</td><td class="t"><a href="#s${num(s)}">${esc(s.title)}</a></td><td class="d">${esc((s.teach?.time || '').replace(/^\d{1,2}:\d{2}\s*·\s*/, '').replace(/\.$/, ''))}</td></tr>`).join('');
+
+  // one card per slide
+  document.getElementById('slides').innerHTML = S.map((s) => {
+    const t = s.teach || {}; const n = num(s);
+    const script = t.script || [];
+    const asks = script.filter((b) => b.ask).map((b) => { const a = [].concat(b.say || []).find((x) => /^\(/.test(x)); return {q: b.ask, a: a ? a.replace(/^\((Answer:\s*)?/, '').replace(/\)$/, '') : ''}; });
+    const keys = (s.keyPoints && s.keyPoints.length ? s.keyPoints : t.learn) || [];
+    if (s.steps) s.steps = s.steps.map((st) => typeof st === 'string' ? {text: st} : st);   // Day 1 writes some steps as plain text
+    let steps = '';
+    if (s.steps && s.steps.length) {
+      steps = `<div class="blk"><h4>Steps</h4><ol class="steps">${s.steps.map((st) => `<li class="${st.warn ? 'warn' : ''}">${st.where ? `<span class="where">${esc(st.where)}</span> ` : ''}<span class="txt">${fmt(st.text)}</span>${st.prompt ? promptBox(/claude code/i.test(st.where || st.text) ? 'Prompt for Claude Code' : 'Type this', st.prompt) : ''}${(st.parts || []).map(([l, c]) => promptBox(l, c)).join('')}${st.after ? `<span class="after">→ ${fmt(st.after)}</span>` : ''}</li>`).join('')}</ol></div>`;
+    }
+    // extra things to paste that are not already a step prompt
+    const inSteps = (s.steps || []).map((st) => [st.text, st.prompt, ...(st.parts || []).map((x) => x[1])].join('\n')).join('\n');
+    const copies = (t.copy || []).filter(([, txt]) => !inSteps.includes(String(txt).trim()));
+    const copyHtml = copies.length ? `<div class="blk"><h4>To paste</h4>${copies.map(([l, txt]) => promptBox(l, txt)).join('')}</div>` : '';
+    const terms = t.terms && t.terms.length ? `<div class="terms">${t.terms.map(([k, v]) => `<b>${esc(k)}</b>: ${fmt(v)}`).join(' · ')}</div>` : '';
+    return `<section class="slide ${esc(s.type)}" id="s${n}">
+      <div class="s-head"><span class="s-meta"><span class="n">#${n}</span> · ${clock(s) || '—'} · ${esc(t.time || '')}</span><h3>${esc(s.title)}</h3><a class="s-open" href="day1-jessy.html#${n}" target="deck-day1-jessy.html">open slide ↗</a></div>
+      ${t.gist ? `<p class="gist">${fmt(t.gist)}</p>` : ''}
+      <div class="grid">
+        <div>${list('', 'Key points', keys)}${list('done', 'Done when', t.done)}</div>
+        <div>${list('ask', 'Ask the room', asks, (x) => `<li><span class="q">${fmt(x.q)}</span>${x.a ? ` <span class="a">→ ${fmt(x.a)}</span>` : ''}</li>`)}${list('watch', 'Watch out', t.watch)}</div>
+      </div>
+      ${steps}${copyHtml}${terms}
+      ${s.prompt && !s.steps ? `<div class="blk">${promptBox('Example prompt', s.prompt)}</div>` : ''}
+      ${s.expected ? `<p class="next"><b>Expected:</b> ${fmt(s.expected)}</p>` : ''}
+      ${s.notes && !t.script ? `<details class="notes"><summary>Notes</summary><p>${fmt(s.notes).replace(/\n/g, '<br>')}</p></details>` : ''}
+    </section>`;
+  }).join('');
+
+  // copy buttons
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-copy]'); if (!b) return;
+    const txt = b.parentElement.querySelector('.ptxt').textContent;
+    navigator.clipboard?.writeText(txt).then(() => { b.textContent = 'Copied'; b.classList.add('ok'); setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('ok'); }, 1400); }).catch(() => {});
+  });
+  // filters (remembered per viewer)
+  const get = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v === '1'; } catch { return d; } };
+  const set = (k, v) => { try { localStorage.setItem(k, v ? '1' : '0'); } catch {} };
+  const fa = document.getElementById('f-asg'), fp = document.getElementById('f-prompts');
+  const apply = () => { const a = get('d1sheet-asg', false), p = get('d1sheet-prompts', true);
+    document.body.classList.toggle('only-asg', a); document.body.classList.toggle('no-prompts', !p);
+    fa.setAttribute('aria-pressed', a); fp.setAttribute('aria-pressed', p); fp.textContent = p ? 'Prompts shown' : 'Prompts hidden'; };
+  fa.onclick = () => { set('d1sheet-asg', !get('d1sheet-asg', false)); apply(); };
+  fp.onclick = () => { set('d1sheet-prompts', !get('d1sheet-prompts', true)); apply(); };
+  apply();
+  if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+})();
+</script>
+</body></html>
