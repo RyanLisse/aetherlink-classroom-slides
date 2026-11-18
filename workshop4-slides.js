@@ -329,14 +329,14 @@ window.SLIDES = [
     "keyPoints": [
       "Writer, risk expert, records desk",
       "Each specialist has one job",
-      "Today: 2 agents + 1 lookup tool"
+      "Today: 3 specialists + 1 lookup desk"
     ],
-    "notes": "Last session's team had three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? If someone's Day 3 flow was blocked, show this screenshot as the example and explain the idea. Do not say that their flow worked. Today Reply and Risk become subagents, and the Customer Context Agent becomes an MCP tool that looks up customers.",
+    "notes": "Last session's team had three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? If someone's Day 3 flow was blocked, show this screenshot as the example and explain the idea. Do not say that their flow worked. Today all three become specialists in code. In Step 3 the Customer Context specialist gets a lookup desk (MCP) with two tools.",
     "stateId": "6:Optional yesterday, explained today: specialist agents",
     "teach": {
       "next": "Today's goal",
       "time": "3 min",
-      "gist": "Three specialists, each with one job. Today we build two agents in code and one lookup tool.",
+      "gist": "Three specialists, each with one job. Today all three become agents in code. One of them gets a lookup desk with two tools.",
       "script": [
         {
           "say": "Last session's last step was a team of specialists. Just like at the office: you do not ask one person to do everything."
@@ -347,7 +347,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at the tagline.",
-          "say": "Today we build this team in code. The writer and the risk expert become two agents. The records desk becomes a lookup tool: it only looks things up and does not think."
+          "say": "Today we build this team in code. The writer, the risk expert and the record keeper become three specialists. The record keeper gets a lookup desk with two tools. The desk only looks things up and does not think."
         },
         {
           "ask": "Who called the Risk Agent in your flow last session?",
@@ -359,7 +359,7 @@ window.SLIDES = [
         "Say what they become today."
       ],
       "done": [
-        "Everyone knows that today we build two agents and one lookup tool."
+        "Everyone knows that today we build three specialists and one lookup desk."
       ],
       "watch": [
         "Did someone's Day 3 not work? Use this screenshot as the example. Nobody is behind."
@@ -376,7 +376,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "You will have built",
-        "body": "An agent team in code: one agent, a team of specialists and two lookup desks."
+        "body": "An agent team in code: a team lead, three specialists and one lookup desk with two tools."
       },
       {
         "title": "You can explain",
@@ -523,7 +523,7 @@ window.SLIDES = [
       "highlight": [
         {
           "in": "subtitle",
-          "text": "Same person at the end",
+          "text": "a person at the end",
           "tone": "orange"
         }
       ]
@@ -572,7 +572,7 @@ window.SLIDES = [
       "Only the name changes",
       "Same person at the end"
     ],
-    "notes": "Go row by row, from top to bottom. Everything they built last session comes back today, and only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes the customers MCP tool (get_customer, over customer_context.csv), and the transaction lookup becomes the transactions MCP tool (get_transaction, over transactions.xlsx).",
+    "notes": "Go row by row, from top to bottom. Everything they built last session comes back today, and only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes customer-context-agent with one lookup desk, the MCP server support. The desk has two tools: get_customer reads docs/customer_context.csv and get_transaction reads docs/transactions.xlsx.",
     "stateId": "10:n8n ↔ Agent SDK at a glance",
     "teach": {
       "next": "How does an agent work?",
@@ -715,7 +715,7 @@ window.SLIDES = [
       "Use your Claude Code login",
       "No API key needed"
     ],
-    "notes": "For you: the same agent can also run with a paid API key. Be careful: if someone has an API key set on their laptop, the package uses it by itself. In that case, add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here. Company laptops (Worldline) often run Claude Code through Vertex AI. The package reads that login from the env block in ~/.claude/settings.json, so nobody needs a .env file or an API key. If a run on such a laptop says it is not logged in, run npm run doctor: the Login settings line should name CLAUDE_CODE_USE_VERTEX. If it says none, the company sets the login somewhere else, for example in a script or alias. Then follow docs/SETUP.md, Company login: three variables in the terminal, and the lesson runs.",
+    "notes": "For you: the same agent can also run with a paid API key. Be careful: if someone has an API key set on their laptop, the package uses it by itself. In that case, add --backend claude-code to the command. The n8n trial credits from Day 3 do not work here. Company laptops (Worldline) often run Claude Code through Vertex AI. The package reads that login from the env block in ~/.claude/settings.json, so nobody needs a .env file or an API key. If a run on such a laptop says it is not logged in, run npm run doctor: the Login settings line should name CLAUDE_CODE_USE_VERTEX. If it says none, the company sets the login somewhere else, for example in a script or alias. Then follow docs/SETUP.md, Company login: three variables in the terminal, and the lesson runs.\n\nWatch for: the lessons load settingSources: ['project', 'user']. So each participant's own ~/.claude settings, CLAUDE.md, hooks and plugins come along. MCP servers and connectors stay off. A large personal setup can change the tone or format of the free-text answers in Step 2 and 3, and each run costs more. On a test laptop Step 1 cost $0.39 against $0.04, and Step 3 cost $1.48 against $0.26. If a participant sees their own style in the answers, that is the reason.",
     "stateId": "12:Two ways to run the same agent",
     "teach": {
       "next": "Words you need today",
@@ -949,7 +949,7 @@ window.SLIDES = [
           "c": "npm run verify"
         },
         {
-          "o": "ℹ pass 22"
+          "o": "ℹ pass 21"
         },
         {
           "o": "ℹ fail 0"
@@ -1073,7 +1073,7 @@ window.SLIDES = [
     "keyPoints": [
       "The system message now lives in a file next to the code."
     ],
-    "notes": "It is like the work instructions that a new colleague gets on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions and Required output. The last line of the Priority definitions is the tone trap: judge the impact, not the tone. In Step 1 they will cut that section out and see what happens.",
+    "notes": "It is like the work instructions that a new colleague gets on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions and Required output. The Priority definitions give one line for each level: high, medium and low. In Step 1c they change the policy for a moment and see what happens.",
     "stateId": "18:System prompt",
     "teach": {
       "next": "The form, now in code",
@@ -1119,7 +1119,7 @@ window.SLIDES = [
       "highlight": [
         {
           "in": "subtitle",
-          "text": "The trays (Switch) stay plain code",
+          "text": "The trays (the Switch) remain plain code",
           "tone": "orange"
         }
       ]
@@ -1266,7 +1266,7 @@ window.SLIDES = [
     "keyPoints": [
       "One agent returns a fixed priority. Code routes it."
     ],
-    "notes": "Participants paste the SOLO 1 prompt into Claude Code. Claude Code shows the red check, fills in options.mjs, priority-schema.mjs and CLAUDE.md, and runs MSG-06 once. Participants read the table that maps each option to its n8n setting. The tone trap comes in Step 1c.",
+    "notes": "Participants paste the SOLO 1 prompt into Claude Code. Claude Code shows the red check, fills in options.mjs, priority-schema.mjs and CLAUDE.md, and runs MSG-06 once. Participants read the table that maps each option to its n8n setting. The policy challenge comes in Step 1c.",
     "stateId": "21:Step 1 · Structured priority output and chat memory",
     "teach": {
       "next": "Demo · Step 1: I show it",
@@ -1282,7 +1282,7 @@ window.SLIDES = [
         },
         {
           "do": "Point at Done when.",
-          "say": "You are done when the check passes and you have read one real run. The tone trap comes in Step 1c."
+          "say": "You are done when the check passes and you have read one real run. The policy challenge comes in Step 1c."
         }
       ],
       "do": [
@@ -1457,60 +1457,60 @@ window.SLIDES = [
 {
     "lessonId": "workshop-4",
     "title": "Quiz: message 6",
-    "kicker": "Quiz · before the tone trap",
+    "kicker": "Quiz · before SOLO 1c",
     "type": "quiz",
     "subtitle": "“URGENT!!! My logo is wrong!!! Fix it NOW please.” Which priority? Vote by raising your hand.",
     "visual": {
       "quiz": {
-        "answer": 0
+        "answer": 1
     }
     },
     "cards": [
       {
         "title": "A",
-        "body": "LOW: a cosmetic issue with little customer or financial impact."
+        "body": "LOW: a question or a request for information."
       },
       {
         "title": "B",
-        "body": "MEDIUM: a real service problem for one customer."
+        "body": "MEDIUM: something is wrong, but the customer can still work."
       },
       {
         "title": "C",
         "body": "HIGH: the customer is angry and says it is urgent."
       }
     ],
-    "check": "Answer: LOW",
-    "notes": "From Maarten's Day 4 deck. Answer: LOW. An old logo in the portal is cosmetic, however loud the message is. Contrast it with message 2: polite, but three card payments the customer does not recognise is possible fraud, so HIGH. That is exactly why the work instructions say: judge impact and risk, not tone. Next: what happens without those rules.",
+    "check": "Answer: MEDIUM",
+    "notes": "From Maarten's Day 4 deck. Answer: MEDIUM. The portal shows an old logo. Something is wrong, but the customer can still work. That is the medium line of the policy in CLAUDE.md. Capitals and exclamation marks are in no line of the policy. Contrast it with message 2: polite, but three card transactions the customer does not recognise. Money may have been taken wrongly, so HIGH. Next: what happens when the policy changes.",
     "teach": {
       "next": "Your turn · Step 1c: challenge the policy",
       "time": "3 min",
-      "gist": "Quiz: the loud logo message is LOW. Impact, not tone.",
+      "gist": "Quiz: the loud logo message is MEDIUM. The policy decides, not the volume.",
       "script": [
         {
-          "say": "Before the tone trap, a quick quiz. Read the message on the screen. Hands up: low, medium or high?"
+          "say": "Before the next assignment, a quick quiz. Read the message on the screen. Hands up: low, medium or high?"
         },
         {
           "do": "Count the hands, then press → to strike the wrong answers."
         },
         {
-          "say": "The answer is LOW. An old logo is cosmetic, however loud the message is."
+          "say": "The answer is MEDIUM. Something is wrong, but the customer can still work. That is the medium line of the policy."
         },
         {
           "ask": "Message 2 was polite. Which priority did it get, and why?",
-          "say": "(Answer: HIGH. Three card payments the customer does not recognise could be fraud. Impact, not tone.)"
+          "say": "(Answer: HIGH. Three card transactions the customer does not recognise. Money may have been taken wrongly. That is the high line of the policy.)"
         },
         {
-          "say": "Now let's see what happens when we remove that rule."
+          "say": "Now let's see what happens when we change the policy."
         }
       ],
       "do": [
         "Vote, reveal, contrast with message 2."
       ],
       "done": [
-        "Everyone can say: impact, not tone."
+        "Everyone can say which line of the policy decides message 6."
       ],
       "watch": [
-        "Many people vote HIGH. That is the point: it is exactly the tone trap."
+        "Many people vote HIGH. That is the point: loud words are in no line of the policy."
       ]
     }
   },
@@ -2245,7 +2245,7 @@ window.SLIDES = [
     "keyPoints": [
       "Each agent is one file in .claude/agents/.",
       "The folder starts with a dot. Use ls -a to see it.",
-      "Before SOLO 2, your branch has no specialist files. Claude Code builds them from the prompt."
+      "Before SOLO 2, each specialist file is a TODO stub. Claude Code fills it in from the prompt."
     ],
     "notes": "Show .claude/agents on the trainer/solution branch. Claude Code and the package both read this folder. A folder called .agents or a file called AGENTS.md is different and does not define these specialists.",
     "stateId": "40:Where do the agents live?",
@@ -2274,7 +2274,7 @@ window.SLIDES = [
         "Everyone can find the folder."
       ],
       "watch": [
-        "On main the folder does not exist yet. It comes with Step 2."
+        "On main each file has only a name and TODO lines. Step 2 fills in two files. Step 3 fills in the third."
       ]
     }
   },
@@ -2289,7 +2289,7 @@ window.SLIDES = [
       "highlight": [
         {
           "in": "subtitle",
-          "text": "no import, no code",
+          "text": "the description decides who gets the task",
           "tone": "orange"
         }
       ]
@@ -2298,7 +2298,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "1 · Claude Code starts",
-        "body": "It reads .claude/agents/ in this project. User and global agent folders stay unloaded. The package reads the same project files for the SDK."
+        "body": "It reads .claude/agents/ in this project. Your own user agents load too. MCP servers and connectors stay off."
       },
       {
         "title": "2 · It reads the description",
@@ -2657,7 +2657,7 @@ window.SLIDES = [
       "highlight": [
         {
           "in": "subtitle",
-          "text": "sees only what the tool returns",
+          "text": "it can only look things up",
           "tone": "purple"
         }
       ]
@@ -2720,7 +2720,7 @@ window.SLIDES = [
       "highlight": [
         {
           "in": "subtitle",
-          "text": "cannot change data",
+          "text": "but not change them",
           "tone": "orange"
         }
       ]
@@ -2741,7 +2741,7 @@ window.SLIDES = [
       }
     ],
     "keyPoints": [
-      "The agents get facts from tools. They cannot change data yet."
+      "One agent gets facts from two read-only tools. No agent can change data."
     ],
     "notes": "The desk is one MCP server with two tools: get_customer and get_transaction. Only customer-context-agent gets these tools. risk-agent and customer-reply-agent have no tools. The package starts the server by itself. The reply stays a draft for a person.",
     "stateId": "48:Step 3 · Read-only customer and transaction MCP tools",
@@ -3007,7 +3007,7 @@ window.SLIDES = [
     "teach": {
       "next": "Coffee break",
       "time": "3 min",
-      "gist": "Discussion: the facts come from the desks, and a person reads every draft.",
+      "gist": "Discussion: the facts come from the desk, and a person reads every draft.",
       "script": [
         {
           "ask": "Which facts came from a lookup desk?",
@@ -3041,7 +3041,7 @@ window.SLIDES = [
     "cards": [
       {
         "title": "Back at 15:45",
-        "body": "Next: the assignment · let one agent change data, safely."
+        "body": "Next: Step 4 · compare with n8n and collect proof."
       }
     ],
     "keyPoints": [
@@ -3087,7 +3087,7 @@ window.SLIDES = [
         "items": [
           "The Switch picks the tray",
           "Checks test the options and the routes",
-          "The barrier checks every change",
+          "No agent has a tool that changes data",
           "Same input, always the same route"
         ]
       },
@@ -3245,7 +3245,7 @@ window.SLIDES = [
       },
       {
         "title": "2 · Write the rules first",
-        "body": "Which agent may do what, and which changes need a person. That is your barrier."
+        "body": "Which agent may do what, and which changes need a person. Write that down before you build."
       },
       {
         "title": "3 · Check with security",
@@ -3305,20 +3305,20 @@ window.SLIDES = [
       },
       {
         "label": "Only the keys it needs",
-        "caption": "Only one agent may change data."
+        "caption": "One agent can look things up. No agent can change data."
       },
       {
-        "label": "The barrier + a person",
-        "caption": "Big changes ask first. A 'no' blocks the change."
+        "label": "Proof + a person",
+        "caption": "Every row has a real run or says OPEN. A person decides."
       },
       {
         "label": "Next: Day 5",
-        "caption": "We build on this agent team."
+        "caption": "A new agent, built step by step."
       }
     ],
     "notes": "Recap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Go back to the goals on the board from this morning. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.",
     "stateId": "58:Close: keep a human in the loop.",
-    "subtitle": "One agent, a team, lookup desks and a barrier. And at the end, always a person.",
+    "subtitle": "One agent, a team, a lookup desk and proof. And at the end, always a person.",
     "teach": {
       "next": "Bonus · finished early?",
       "time": "10 min",
