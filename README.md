@@ -10,7 +10,7 @@ For Days 4 and 5, use these current routes:
 | --- | --- | --- | --- |
 | Day 4 · n8n to Claude Agent SDK (final) | [`day4-final.html`](day4-final.html) | [`day4-final-presenter.html`](day4-final-presenter.html), day sheet [`day4-final-sheet.html`](day4-final-sheet.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
 | Day 5 · Daily Brief agent (main lesson) | [`day5-daily-brief.html`](day5-daily-brief.html) | [`day5-daily-brief-presenter.html`](day5-daily-brief-presenter.html), day sheet [`day5-daily-brief-sheet.html`](day5-daily-brief-sheet.html) | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main`. All seven steps in class. |
-| Day 5 bonus · Sonny, the SRE agent | The bonus block at the end of [`day5-daily-brief.html`](day5-daily-brief.html) | The same presenter view | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
+| Day 5 bonus · Sonny, the SRE agent | Linked from the final slide; open [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
 
 The Day menu also lists earlier decks. `workshop4.html` is Ryan's Day 4 deck and the source of the final deck.
 `day4-jessy.html` and `day4-maarten-n8n-to-claude.html` teach the old step-branch route of Day 4. Do not teach

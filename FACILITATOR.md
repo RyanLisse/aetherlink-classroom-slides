@@ -77,8 +77,8 @@ after lunch. The lab uses sample data only. It needs no API key. Each step
 ends with a file and a proof. Participants open a pull request only after the
 human review in step 7. Nothing is merged or deployed.
 
-Sonny, the SRE agent, is the bonus. Its slides are the bonus block at the end of
-the same deck.
+Sonny, the SRE agent, is an optional legacy route. The final Daily Brief slide
+links to its separate deck. Open that deck only when you deliberately choose it.
 
 ## Optional legacy route: Sonny, the SRE agent
 
@@ -92,7 +92,8 @@ and follow the required A1 through A6 route. A8 is the human gate inside A6.
 A7 and A9 are optional. Start with INC-1001 and the customer impact.
 Define AI-native SDLC near the start so participants understand where a person reviews the agent’s work.
 
-Use any terminal at the participant clone's root and run `claude`. Review the
+Use any terminal at the participant clone's root and run
+`claude --setting-sources project --strict-mcp-config --no-chrome`. Review the
 displayed path. Accept trust only for the participant's own clone. Restart
 Claude Code if project skills remain missing after trust. Never bypass trust
 or approve an unfamiliar folder. Cursor is optional; if it opens **Agents**,

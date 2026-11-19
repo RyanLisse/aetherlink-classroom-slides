@@ -1,5 +1,5 @@
-// Builds day5-daily-brief-slides.js: the Daily Brief agent is the main route,
-// and Jessy's Sonny (on-call SRE) assignments follow as a bonus block.
+// Builds day5-daily-brief-slides.js: the Daily Brief agent is the main route.
+// The final slide links to the separate optional Sonny deck.
 // Rerun after day5-jessy-slides.js changes: node tools/build-day5-daily-brief.mjs
 import {readFileSync, writeFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -22,7 +22,14 @@ const fromWorkshop5 = t => {
   return structuredClone(s);
 };
 
-const REPO = 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1';
+const dailyBriefSdlc = byTitle('The software development life cycle (SDLC)');
+for (const beat of dailyBriefSdlc.teach?.script ?? []) {
+  if (beat.shot?.startsWith('assets/day5-jessy-teach/s06-')) {
+    beat.shot = beat.shot.replace('assets/day5-jessy-teach/', 'assets/day5-daily-brief-teach/');
+  }
+}
+
+const REPO = {url: 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1', label: 'github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1'};
 const PACK = {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'};
 
 // One skill per assignment. The prompts are verbatim in the lab's SOLO.md and docs/prompts.md.
@@ -33,9 +40,18 @@ const SKILLS = {
   4: {name: 'verify-this', what: 'proves or disproves one claim with a fresh run', prompt: '/verify-this Prove that npm run brief:sample writes out/latest.html without a model call. Show the command, exit code and one line of output.'},
   5: {name: 'show-me', what: 'draws how the code connects, without changing it', prompt: '/show-me Draw how one source reaches the brief: src/sources.ts, the tool in src/agent.ts, and src/main.ts. Only read, change nothing.'},
   6: {name: 'verify-this', what: 'reruns your evidence and compares the result', prompt: '/verify-this Rerun the three commands in docs/evidence.md and compare each exit code with what is written. Mark any difference OPEN.'},
-  7: {name: 'review-and-ship', what: 'reviews your branch and prepares the PR', prompt: '/review-and-ship Review my branch against intent.md and docs/gate.md. Run the tests. Prepare the PR, but stop before you open it and before any merge.'}
+  7: {name: 'review-and-ship', what: 'reviews your branch and prepares the PR', prompt: '/review-and-ship Review my work against intent.md and docs/gate.md. Run the tests. Prepare the PR, but stop before you open it and before any merge.'}
 };
 const HANDOFF = '/handoff Write a prompt for a fresh Claude Code session to continue from my current step. Name the step, the files, and the next proof.';
+const SOLO_PROMPTS = {
+  1: 'Read CLAUDE.md, SOLO.md, and the templates. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Challenge my weakest check with one concrete counterexample. Revise only after my answer. Show the diff and stop for my review. Do not implement code.',
+  2: 'Read my accepted intent.md and reference/. Draft docs/spec.md with one quoted example per field, then stop for my approval. After I approve it, write test/schema.test.ts and run it to show the expected red failure. Stop so I can inspect and commit the red test. After I confirm, build src/brief.ts and sample/brief.sample.json until the test passes. Ask me for one invalid sample and prove the schema rejects it. Show the test output and diff. Do not build a renderer or tools.',
+  3: 'In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.',
+  4: 'Use my accepted docs/plan.md. Write test/render.test.ts and show the expected red failure. Then build src/render.ts and a sample-only src/main.ts. Escape untrusted text. Run npm run brief:sample and show out/latest.html. Ask me to choose one house-style change. Add its failing test first, make it pass, regenerate the page, and show the diff. Use no API key or model call. Stop for my inspection.',
+  5: 'Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command. Preserve brief:sample without model calls. Give the brief agent no shell or write tools. Prove the tool wiring and one missing-source case I choose with tests. With credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Show the proof and diff, then stop.',
+  6: 'Run the existing typecheck, test, and brief:sample scripts. Record every command, exit code, and one output line in docs/evidence.md. Link docs/evidence/latest-1440x900.png. Mark unrun checks OPEN. Do not change code to hide a failure. Ask my reviewer to rerun one command. Record the reviewer\'s actual name and result only after the rerun. Show the evidence diff and stop.',
+  7: 'Read intent.md, the current diff, and docs/evidence.md. Draft docs/gate.md with evidence links and proposed FAIL or OPEN entries for missing checks. Leave every PASS decision to me. Prepare a PR title, description, and inactive weekday schedule. Show the diff and stop for my gate decision. Do not commit, push, open a PR, merge, deploy, or activate the schedule.'
+};
 const say = (time, why, see, watch, stop, next) =>
   `Time: ${time}.\n\nWhy now: ${why}\n\nWhat you see: ${see}\n\nWatch for: ${watch}\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: ${stop}\n\nNext: ${next}`;
 
@@ -47,19 +63,21 @@ const STAGE = {1: 'intent', 2: 'contract', 3: 'contract', 4: 'tools', 5: 'tools'
 // The presenter view and the day sheet read `teach`. Info slides pass it in directly.
 const info = (slide, teach) => ({...slide, teach: {next: teach.next ?? slide.notes.split('Next: ')[1], ...teach}});
 
-const teachFor = (n, time, {gist, say, learn, watch, terms, done, prompt, improve, next}) => ({
+const teachFor = (n, time, {gist, say, learn, watch, terms, done, prompt, next}) => ({
   time,
   gist,
-  do: ['Check manual mode, paste the build prompt, review each stop, paste the improvement prompt, commit.'],
+  do: ['Check the Claude Code mode, paste the SOLO prompt, inspect the named check, then approve or revise.'],
   done,
-  copy: [[`Step 2 · Claude Code`, prompt], [`Step 3 · Claude Code`, improve], [`Step 4 · Skill /${SKILLS[n].name}`, SKILLS[n].prompt]],
+  copy: [[`SOLO ${n} · Claude Code`, prompt], [`Project skill · /${SKILLS[n].name}`, SKILLS[n].prompt]],
   script: [
     {do: 'Slide appears. Read the goal and the checkpoint out loud.', say},
     n === 3 ? {do: 'Step 1. Everyone checks “plan mode on” at the bottom of Claude Code.', say: ['Plan mode for this one. Claude Code can read and propose, but cannot change files.']} : {do: 'Step 1. Everyone checks “manual mode on” at the bottom of Claude Code.', say: ['Manual mode first. Claude Code asks before every change, so you stay the reviewer.']},
-    {do: 'Step 2. Participants copy the build prompt. Walk the room.', say: ['Paste the build prompt. Claude Code stops at each review point. Read what it shows before you say yes.']},
-    {do: 'Step 3. After the first result: the improvement prompt.', say: ['Now make it stronger. You choose the case, Claude Code makes the change and shows the diff.']},
-    {do: `Step 4. The skill /${SKILLS[n].name}.`, say: [`A skill is a saved recipe. /${SKILLS[n].name} ${SKILLS[n].what}.`, 'Type the slash, paste the rest, read what comes back.']},
-    {do: 'Step 5. Commit on your own branch. Ask two people to show their result.', say: ['Commit what you reviewed. Who wants to show theirs?']}
+    {do: 'Step 2. Participants copy the SOLO prompt. Walk the room.', say: ['Paste this exact prompt. Claude Code stops at the review point named in the prompt.']},
+    {do: 'Step 3. Participants answer the check on the slide.', say: ['Read the result and the diff. Answer the check with yes or no. Revise if the answer is no.']},
+    {do: `Step 4. Use /${SKILLS[n].name} for the final inspection.`, say: [`This project skill ${SKILLS[n].what}. It does not replace the SOLO prompt or the checkpoint.`]},
+    n === 7
+      ? {do: 'Step 5. Approve publication only after the gate review.', say: ['Claude Code then commits the accepted gate files, pushes HEAD to a new remote branch and opens the PR. Stop before merge or activation.']}
+      : {do: 'Step 5. Save only accepted work.', say: ['Commit only after you accept the result. Ask one participant to show the visible proof.']}
   ],
   learn,
   watch,
@@ -81,16 +99,22 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
   expected: checkpoint.at(-1),
   repo: REPO,
   assignmentId: `brief-a${n}`,
-  teach: teachFor(n, notes.match(/^Time: ([^.]+)\./)[1], {prompt, improve, done: checkpoint, ...TEACH[n]}),
+  teach: teachFor(n, notes.match(/^Time: ([^.]+)\./)[1], {prompt, done: checkpoint, ...TEACH[n]}),
   cards: [{title: 'Checkpoint', body: checkpoint.join('\n')}, {title: 'Human boundary', body: boundary}],
   keyPoints: checkpoint,
-  stepsHeading: 'Build and inspect',
-  steps: [
+  stepsHeading: 'Do this',
+  steps: n === 7 ? [
+    {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 7 prompt', prompt},
+    {where: 'Claude Code', text: 'Inspect the gate diff. Make every PASS decision yourself.', after: checkpoint.at(-1)},
+    {where: 'Project skill', text: 'Run /review-and-ship before the gate decision', prompt: SKILLS[7].prompt},
+    {where: 'Terminal', text: 'After approval, commit the accepted Assignment 7 files'},
+    {where: 'Terminal', text: 'Push HEAD to a new remote branch and open the PR', prompt: 'BRANCH="my/<firstname>"\ngit push origin "HEAD:refs/heads/$BRANCH"\ngh pr create --repo AetherLink-bv/aetherlink-daily-brief-lab-s1 --base main --head "$BRANCH"', after: 'If origin is not writable, use the fork route in SOLO.md. Stop before merge, deployment or schedule activation.'}
+  ] : [
     {where: 'Claude Code', text: `Check the mode: “${n === 3 ? 'plan' : 'manual'} mode on”`, after: 'Not there? Press Shift+Tab until it is.', warn: true},
-    {where: 'Claude Code', text: 'Build prompt', prompt},
-    {where: 'Claude Code', text: 'Improvement prompt, after you inspect the result', prompt: improve},
-    {where: 'Skill', text: `/${SKILLS[n].name}: ${SKILLS[n].what}`, prompt: SKILLS[n].prompt},
-    {where: 'Terminal', text: 'Commit your reviewed work on your own branch'}
+    {where: 'Claude Code', text: `Paste the exact SOLO ${n} prompt`, prompt},
+    {where: 'Claude Code', text: 'Inspect the result and answer the checkpoint', after: checkpoint.at(-1)},
+    {where: 'Project skill', text: `Run /${SKILLS[n].name} for the final inspection`, prompt: SKILLS[n].prompt},
+    {where: 'Terminal', text: 'Commit only the work you accepted'}
   ],
   prompt,
   notes
@@ -158,11 +182,37 @@ const TEACH = {
 
 const brief = [
   {
-    title: 'Welcome to Day 5!',
-    kicker: 'Day 5 · AI-native SDLC',
-    subtitle: 'Today you build Bree, an agent that writes your morning brief. Sonny, the on-call agent, is the bonus.',
-    keyPoints: ['Main route: the daily brief agent, seven steps.', 'Bonus: Sonny, the on-call SRE agent.', 'Every step ends with proof you can show.'],
-    notes: say('5 min', 'Set the order of the day. The brief comes first because every participant has a morning to plan.', 'The two agents of the day and the order.', 'Questions about Sonny. Say: Sonny is the bonus after the brief.', 'Everyone knows the main route and the bonus.', '08:30: your morning')
+    title: 'Build Bree, your morning brief agent',
+    kicker: 'Day 5',
+    subtitle: 'Turn updates from four sources into a one-page brief you can check.',
+    keyPoints: ['Define what the brief should include.', 'Test it against the sources before you approve it.'],
+    notes: 'Time: 5 min.\n\nOn Day 4, the ticket agent drafted a reply for a person to review. Today you set the criteria for a different draft: your morning brief. Use one example: if Bree flags a ticket for standup, can you trace it to the source before you act?\n\nNext: 08:30: your morning',
+    teach: {
+      time: '5 min',
+      gist: 'The team defines what a useful brief contains and checks it before approval.',
+      script: [{do: 'Connect the ticket draft to the morning brief.', say: ['Yesterday your agent drafted a customer reply. You reviewed it before it could go out.', 'Today you decide what Bree should flag. If she says a ticket needs attention, you should be able to find the update behind that claim.']}],
+      learn: ['Set a criterion for a useful brief and check the result against its source.'],
+      next: '08:30: your morning'
+    }
+  },
+  {
+    title: 'From one reviewed draft to one reviewed brief',
+    kicker: 'Day 5 · Day 4 recap',
+    subtitle: 'The product changes. The working pattern stays the same.',
+    type: 'concept',
+    cards: [
+      {title: 'Day 4 · Ticket', body: 'Message → main agent → sub-agents → validated priority → review draft.'},
+      {title: 'Day 5 · Brief', body: 'Four sources → Bree → fixed schema → source checks → human review.'}
+    ],
+    keyPoints: ['The agent prepares a result.', 'Code checks the result.', 'A person decides what happens next.'],
+    notes: 'Time: 3 min.\n\nUse one concrete Day 4 run: MSG-05 became a high-priority review draft. The workflow did not send it. Today Bree reads four sample sources and prepares one brief. The brief is checked before a person approves it.\n\nNext: 08:30: your morning',
+    teach: {
+      time: '3 min',
+      gist: 'Day 5 reuses the Day 4 pattern with four sources and one reviewed brief.',
+      script: [{do: 'Compare one finished Day 4 ticket with today’s brief.', say: ['Yesterday MSG-05 became a validated high-priority draft for review. Nothing was sent automatically.', 'Today Bree combines four sources. Code checks the structure and source references before you review the page.']}],
+      learn: ['Agent prepares, code checks, person decides.'],
+      next: '08:30: your morning'
+    }
   },
   {
     title: '08:30: your morning',
@@ -216,7 +266,7 @@ const brief = [
     }, reveal: 'click', covers: []},
     notes: say('4 min', 'Show the whole agent before the steps.', 'Looks, page, check, you.', 'Questions about live data. Sample data first; live is OPEN until A5.', 'Participants can say the four parts in their own words.', 'The software development life cycle')
   },
-  byTitle('The software development life cycle (SDLC)'),
+  dailyBriefSdlc,
   {
     title: 'The AI-native SDLC',
     kicker: 'Day 5 · WHY WE ARE HERE',
@@ -249,19 +299,19 @@ const brief = [
   {
     title: 'Start the project',
     kicker: 'Day 5 · Setup',
-    subtitle: 'Clone the lab, make your own branch, and open Claude Code with the project settings and your own user settings.',
+    subtitle: 'Clone the lab, install the dependencies, and open Claude Code from the repository root.',
     type: 'practice',
     layout: 'exercise',
     repo: REPO,
     stepsHeading: 'Do this',
     steps: [
       {where: 'Terminal', text: 'git clone https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1.git'},
-      {where: 'Terminal', text: 'cd aetherlink-daily-brief-lab-s1 && git switch -c my/firstname'},
+      {where: 'Terminal', text: 'cd aetherlink-daily-brief-lab-s1 && npm ci'},
       {where: 'Terminal', text: 'claude --setting-sources project,user --strict-mcp-config --no-chrome'},
-      {where: 'Claude Code', text: 'Prepare your branch', prompt: 'Read README.md, CLAUDE.md, and SOLO.md. Check the documented Node version and package scripts. Preserve existing work. Prepare my own branch and install the documented dependencies after I approve the commands. Report the starting files and any blockers. Do not implement a solution yet.'}
+      {where: 'Claude Code', text: 'Inspect the starting point', prompt: 'Read README.md, CLAUDE.md, SOLO.md, AGENTS.md, intent.md, and progress.md. Report the current step, the starting files, and any blockers. Do not change files yet.'}
     ],
-    keyPoints: ['Node.js 22 or newer, Git, and Claude Code signed in.', 'No API key for the classroom route.', 'Your own first name in the branch name.'],
-    notes: say('10 min', 'Everyone starts from the same clean place.', 'Claude Code reports the starting files and no blockers.', 'An existing clone. Ask Claude Code to inspect git status first, and use git pull --ff-only only on a clean branch.', 'Every participant has Claude Code open on their own branch.', 'The rules for today')
+    keyPoints: ['Node.js 20 or newer, Git, and Claude Code signed in.', 'Keep Claude Code and Terminal in this repository root.', 'No API key is needed before Assignment 5.'],
+    notes: say('10 min', 'Everyone starts from the same clean main branch.', 'Claude Code reports the starting files and no blockers.', 'An existing clone. Ask Claude Code to inspect git status first, and use git pull --ff-only only when it is clean.', 'Every participant has Claude Code open in the repository root.', 'The rules for today')
   },
   {
     title: 'The rules for today',
@@ -339,7 +389,7 @@ const brief = [
   assignment(1, 1, 'Write down what the brief must do', 'Claude Code interviews you. You write intent.md. No code yet.',
     ['intent.md has one outcome and three checks you can observe.', 'It names the owners, one hard boundary and one OPEN.', 'A facilitator accepts the boundary.'],
     'Do not implement code. Stop for review.',
-    'Read CLAUDE.md, SOLO.md, and the templates on my branch. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Stop for my review. Do not implement code.',
+    SOLO_PROMPTS[1],
     'Challenge my weakest check with one concrete counterexample. Revise only intent.md after my answer. Show the diff and stop.',
     say('25 min', 'The intent decides what done means for every later step.', 'A short intent.md with checks you can test.', 'Checks that cannot be observed, such as "the brief is useful".', 'A facilitator accepts the boundary.', 'Assignment 2')),
   {
@@ -381,20 +431,20 @@ const brief = [
   assignment(2, 2, 'Make the schema test fail, then pass', 'From the reference briefs to a spec, a red test and a schema.',
     ['docs/spec.md has one quoted example per field.', 'test/schema.test.ts was red first, then green.', 'npm test passes.'],
     'Commit the red test before you build the schema. No renderer and no tools yet.',
-    'Read my accepted intent.md and reference/. Propose docs/spec.md with one quoted example per field. After I accept, write test/schema.test.ts and run it to show the expected red failure. Stop so I can inspect and commit the test. Then build src/brief.ts and sample/brief.sample.json until that test passes. Do not build a renderer or tools.',
+    SOLO_PROMPTS[2],
     'Add one invalid sample of my choice to test/schema.test.ts. Prove the schema rejects it. Show the spec row, test output, and diff. Stop before SOLO 3.',
     say('30 min', 'A test that failed first proves it can catch a mistake.', 'Red test output, then green.', 'A test written after the code. Ask for the red run.', 'npm test is green on the schema tests.', 'Break')),
   byTitle('Break'),
   assignment(3, 3, 'Agree on the design and the plan', 'In plan mode. Claude Code proposes, you accept. No files change until you say so.',
     ['docs/design.md, one decision under docs/decisions/ and docs/plan.md.', 'Each plan step names a path, a proof command and a rollback.', 'A stranger can follow the plan.'],
     'Stay in plan mode until you accept. Do not build.',
-    'In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Name exact paths, one proof command and rollback per step. Do not edit files or build. Stop for my acceptance.',
+    SOLO_PROMPTS[3],
     'After I accept the plan, save only those design documents. Challenge one assumption with the case I choose. Show the revised plan and diff. Stop before building.',
     say('25 min', 'A plan you accepted makes the build fast and easy to review.', 'Three documents and a plan with a proof per step.', 'Plans without a proof command.', 'A neighbour can name what proves completion.', 'Assignment 4')),
   assignment(4, 4, 'Render the brief from sample data', 'A red render test, then the renderer. No API key, no model call.',
     ['test/render.test.ts was red first, then green.', 'npm run brief:sample writes out/latest.html.', 'You chose one style change and saw its test and diff.'],
     'No model call and no credentials. Untrusted text is escaped.',
-    'Use my accepted docs/plan.md. First write test/render.test.ts and show the expected red failure. Then build src/render.ts and a sample-only src/main.ts. Escape untrusted text. Run the sample script and show out/latest.html. Use no API key or model call. Stop for my inspection.',
+    SOLO_PROMPTS[4],
     'Change one house-style rule I choose. Add a failing test first, then make it pass. Regenerate out/latest.html and show the diff. Stop so I can inspect the page and save a 1440×900 screenshot.',
     say('35 min', 'The first visible result of the day.', 'out/latest.html in the browser.', 'A model call in the sample path. The sample route must work offline.', 'out/latest.html opens and npm test passes.', 'Lunch')),
   byTitle('Lunch'),
@@ -425,19 +475,19 @@ const brief = [
   assignment(5, 5, 'Give the agent one read-only tool', 'The agent reads one source. It cannot write or run a shell.',
     ['src/agent.ts and src/sources.ts with one read-only tool.', 'Tests prove the wiring and the missing-source case without a network.', 'npm run brief:sample still works without a model call.'],
     'No shell or write tools for the brief agent. Never print tokens.',
-    'Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command while preserving brief:sample without model calls. Reuse tool() and guarded() if present. Give the brief-agent no shell or write tools. Prove the tool wiring and missing-source behavior with tests. Keep the sample path working. Stop for my review.',
+    SOLO_PROMPTS[5],
     'Test one missing-source case I choose. Show the diff and observed test output. With configured credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Stop for my inspection.',
     say('40 min', 'An agent is only as safe as its tools.', 'Green tests for the tool and the missing source.', 'Participants who add write or shell tools.', 'npm test, npm run typecheck and npm run brief:sample are green.', 'Assignment 6')),
   assignment(6, 6, 'Record the evidence', 'Real commands, real exit codes, a reviewer who reruns one.',
     ['docs/evidence.md has each command, its exit code and one output line.', 'Your screenshot is linked under docs/evidence/.', 'Unrun checks are OPEN.'],
     'Do not change the code to hide a failure.',
-    'Run the existing typecheck, test, and brief:sample scripts. Record each actual command, exit code, and one output line in docs/evidence.md. Link my screenshot under docs/evidence/. Mark unrun checks OPEN. Do not change implementation to hide a failure. Stop for my review.',
+    SOLO_PROMPTS[6],
     'Check the evidence against the extra case I choose. Show missing proof as OPEN. Stop while my reviewer reruns one command and compares the output. Record their actual name and result only afterward.',
     say('25 min', 'A claim without evidence is a hypothesis.', 'docs/evidence.md with exit codes.', 'Evidence written from memory instead of from a run.', 'A neighbour reran one command and got the same result.', 'Assignment 7')),
   assignment(7, 7, 'Decide the gate and prepare the PR', 'You decide PASS. Claude Code proposes FAIL and OPEN.',
-    ['docs/gate.md links the evidence and marks each check PASS, FAIL or OPEN.', 'A PR description and an inactive weekday schedule.', 'Nothing is merged, deployed or published.'],
+    ['docs/gate.md links the evidence and marks each check PASS, FAIL or OPEN.', 'The PR is open after your approval.', 'The schedule stays inactive. Nothing is merged or deployed.'],
     'You make every PASS decision. Open the PR only after the human review.',
-    'Read intent.md, the diff, and docs/evidence.md. Draft docs/gate.md with evidence links and proposed FAIL or OPEN entries for missing checks. Leave PASS decisions to me. Prepare a PR description and weekday schedule without activating it. Do not merge, deploy, or publish. Stop for my decision.',
+    SOLO_PROMPTS[7],
     'Use the OPEN item I choose to propose one new acceptance check. Show the gate diff and PR preview. After I decide the gate and approve publication, open the PR. Stop before merge or deployment.',
     say('25 min', 'The gate is where a human decides, with the evidence in front of them.', 'docs/gate.md with a quoted line per check.', 'An agent that writes PASS. The human decides PASS.', 'Each participant has a gate decision and a PR preview.', 'Maintain: close the loop')),
   {
@@ -471,14 +521,6 @@ const brief = [
   }
 ];
 
-const bonusTitles = jessy.slice(1, 41).map(s => s.title)
-  .filter(t => !['The software development life cycle (SDLC)', 'Break', 'Lunch', 'Restart and settle', 'Pre-lunch quiz · What is true now?'].includes(t));
-const bonus = bonusTitles.map(t => {
-  const s = byTitle(t);
-  s.kicker = `Bonus · ${s.kicker || 'Sonny'}`;
-  return s;
-});
-
 const close = {
   title: 'Close: what you learned on Day 5',
   kicker: 'Day 5 · Close',
@@ -507,7 +549,7 @@ const pack = [
       {title: 'Prove', body: '/verify-this, /fix-ci'},
       {title: 'Ship', body: '/review-and-ship, /make-pr-easy-to-review, /handoff'}
     ],
-    keyPoints: ['You used seven of them today.', 'Pick one more for your hackathon problem.', 'Install one skill, in your project only.'],
+    keyPoints: ['The seven assignments use the exact prompts from SOLO.md.', 'Pick one skill for your hackathon problem.', 'Install one skill, in your project only.'],
     notes: say('3 min', 'Connect today to the hackathon.', 'Four groups of skills.', 'Bulk installs. One skill, one project.', 'Participants name one skill they want.', 'Choose one skill for the hackathon')
   },
   (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Choose one skill for the hackathon'; s.kicker = 'Day 5 · SKILLS PACK'; s.cards[1].body = 'Project and user settings, no connectors, no Chrome integration.'; s.notes = 'Time: 3 min.\n\nThe full pack is hackathon support, not lesson setup.'; s.teach.time = '3 min'; return s; })()
@@ -515,36 +557,17 @@ const pack = [
 // Pause slides come from Jessy's deck with her stage dot. In this deck they sit between other stages.
 for (const b of brief) if (['Break', 'Lunch', 'Restart and settle'].includes(b.title)) delete b.sdlc;
 
-// The bonus was written by Jessy as a full day with its own A1 to A6. Here it follows Bree's A1 to A7,
-// so it gets its own numbering, and it follows the owner rule: project and user settings.
-const BONUS_TEXT = [
-  ['--setting-sources project --strict', '--setting-sources project,user --strict'],
-  ['--setting-sources project: today only the project settings count.', '--setting-sources project,user: the project settings and your own user settings.'],
-  ['Use only this project’s settings, not your personal ones (for example permissions, hooks or connectors you added on earlier days). No browser. Everyone starts the same.', 'The project settings and your own user settings load, so your company login works. No connectors, no browser.'],
-  ['Claude Code starts with only this project’s settings.', 'Claude Code starts with the project settings and your user settings.'],
-  ['Start Claude Code with only this project’s settings.', 'Start Claude Code with the project settings and your user settings.'],
-  ['the four looks from slide 4', 'the four looks from before'],
-  ['The two shortcuts from slide 29', 'The two shortcuts from before'],
-  ['Nine skills in', 'Eight skills in']
-];
-const esc = t => JSON.stringify(t).slice(1, -1);
-for (const [from] of BONUS_TEXT) if (!JSON.stringify(bonus).includes(esc(from))) throw new Error('bonus text gone from day5-jessy: ' + from);
-const sonny = bonus.map(b => {
-  let j = JSON.stringify(b);
-  for (const [from, to] of BONUS_TEXT) j = j.split(esc(from)).join(esc(to));
-  const o = JSON.parse(j);
-  o.title = o.title.replace(/\bAssignment(s?) /, 'Sonny assignment$1 ');
-  o.kicker = o.kicker.replace(/\bA(\d)/, 'SONNY $1').replace('ASSIGNMENT 3B', 'SONNY 3B');
-  return o;
-});
-
 const divider = brief.at(-1);
-divider.subtitle = 'Self-study for who is done early: the same loop on a second agent. Sonny diagnoses a broken shop at 03:45.';
-divider.keyPoints = ['Class ends at the Close slide. The bonus is self-study.', 'Sonny has his own assignments: Sonny 1 to Sonny 6.', 'The Sonny slides were written as a full day. Read “today” as “in this bonus”.', 'Repo: sre-oncall-agent, branch workshop/start. Needs Node 22.'];
+divider.title = 'Optional bonus: open the Sonny lesson';
+divider.subtitle = 'Continue in the separate Sonny deck when the seven Daily Brief assignments are complete.';
+divider.source = {url: 'workshop5.html', label: 'Open the optional Sonny lesson'};
+divider.keyPoints = ['Finish the Daily Brief route first.', 'Open workshop5.html for the full Sonny slides and presenter notes.', 'Use the sre-oncall-agent workshop/start branch.'];
+divider.notes = 'Time: 2 min.\n\nThis link keeps the complete verified Sonny assignment route available without mixing its catch-up commands into the Daily Brief lesson. Open workshop5.html only for optional self-study.\n\nNext: Day 6';
 
-const ordered = [...brief.slice(0, -1), ...pack, close, divider, ...sonny];
+const briefMain = brief.slice(0, -1).filter(s => s.title !== 'What is a skill?');
+const ordered = [...briefMain, ...pack, close, divider];
 // Next pointers and clocks are derived, so a reorder cannot leave a stale one behind.
-const main = ordered.length - sonny.length - 1;
+const main = ordered.length - 1;
 ordered.forEach((o, i) => {
   o.notes = o.notes.replace(/Time: \d\d:\d\d · /, 'Time: ');
   if (i >= main) return;
@@ -556,4 +579,4 @@ ordered.forEach((o, i) => {
 const slides = ordered.map(withTeach);
 const out = `'use strict';\n// Generated by tools/build-day5-daily-brief.mjs. Edit the generator, not this file.\nwindow.SLIDES = ${JSON.stringify(slides, null, 1)};\n`;
 writeFileSync(new URL('day5-daily-brief-slides.js', root), out);
-console.log(`day5-daily-brief-slides.js: ${slides.length} slides (${brief.length} brief, ${bonus.length} bonus, 1 close)`);
+console.log(`day5-daily-brief-slides.js: ${slides.length} slides (${briefMain.length} brief, 1 close)`);
