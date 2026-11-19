@@ -73,8 +73,10 @@ Lunch is from 13:15 to 14:00. The breaks are at 11:00 and 15:30.
 Teach from `day5-daily-brief.html`. Participants use
 [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1)
 on `main` and do all seven steps in class: A1 to A4 before lunch, A5 to A7
-after lunch. The lab uses sample data only. It needs no API key. Each step
-ends with a file and a proof. Participants open a pull request only after the
+after lunch. Participants can complete the sample route without an API key.
+In A5, those with configured credentials can run the live brief with one
+read-only tool. Everyone else runs the sample and records the live check as OPEN.
+Each assignment ends with a reviewed result. Participants open a pull request only after the
 human review in step 7. Nothing is merged or deployed.
 
 Sonny, the SRE agent, is an optional legacy route. The final Daily Brief slide
