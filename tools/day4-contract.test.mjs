@@ -5,6 +5,7 @@ import vm from 'node:vm';
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
 const contract = JSON.parse(read('tools/day4-participant-contract.json'));
+const lessonFiles = new Set(['n8n/day3-review-queue.json']);
 const load = (file) => { const ctx = { window: {} }; vm.runInNewContext(read(file), ctx); return ctx.window.SLIDES; };
 const strings = (slide) => {
   const found = [];
@@ -30,7 +31,7 @@ test(`${file} names only commands and files that the participant repositories ha
         assert.ok(scripts.has(name), `slide ${index + 1} "${slide.title}": npm run ${name} is not a script in the participant repositories`);
       }
       for (const [path] of text.matchAll(/(?:\.claude|0[1-3]-[a-z-]+|lib|docs|n8n|checks|src)\/[\w./-]*\w/g)) {
-        assert.ok(files.has(path) || folders.has(path), `slide ${index + 1} "${slide.title}": ${path} is not in the participant repositories`);
+        assert.ok(files.has(path) || folders.has(path) || lessonFiles.has(path), `slide ${index + 1} "${slide.title}": ${path} is not in the participant repositories or created by the lesson`);
       }
     }
   }

@@ -1688,8 +1688,13 @@ function renderAssignment(stage, s) {
   const right = node('div', 'asg-top-right'); const trk = sdlcTrack(s); right.append(timerPill(s)); if (trk) right.append(trk); right.append(node('p', 'slide-count', countText(current)));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
   if (s.subtitle) head.append(node('p', 'subtitle', s.subtitle));
-  if (s.repo?.url) {
-    const link = node('a', 'asg-repo', s.repo.label || s.repo.url); link.href = s.repo.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+  for (const resource of [s.repo, s.source]) {
+    if (!resource?.url) continue;
+    const link = node('a', 'asg-repo', resource.label || resource.url);
+    link.href = resource.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    if (resource.download) link.download = resource.download;
     head.append(link);
   }
   stage.append(head);

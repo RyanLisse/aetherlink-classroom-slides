@@ -11,6 +11,7 @@ vm.runInNewContext(read('day4-final-slides.js'), ctx);
 const slides = ctx.window.SLIDES;
 // The fenced text and sh blocks of SOLO.md and README.md on main of the participant package.
 const packageBlocks = JSON.parse(read('tools/day4-participant-contract.json')).prompts.blocks;
+const lessonBlocks = Object.values(JSON.parse(read('tools/day4-lesson-prompts.json')));
 
 // Everything a Copy button on the slide, the presenter view or the day sheet hands to a participant.
 const copyPrompts = (slide) => [
@@ -20,21 +21,23 @@ const copyPrompts = (slide) => [
   ...slide.teach.script.flatMap((beat) => (beat.copy || []).map(([, text]) => text)),
 ].filter(Boolean);
 
-test('Day 4 final: every copy prompt is verbatim in SOLO.md or README.md of the package', () => {
-  const mismatches = [...slides].flatMap((slide, index) => copyPrompts(slide).filter((prompt) => !packageBlocks.includes(prompt)).map((prompt) => `slide ${index + 1} "${slide.title}": ${prompt.slice(0, 80)}`));
-  assert.deepEqual(mismatches, [], 'a copy prompt differs from the package text');
+test('Day 4 final: every copy prompt is verbatim in the package or lesson prompt source', () => {
+  const approved = new Set([...packageBlocks, ...lessonBlocks]);
+  const mismatches = [...slides].flatMap((slide, index) => copyPrompts(slide).filter((prompt) => !approved.has(prompt)).map((prompt) => `slide ${index + 1} "${slide.title}": ${prompt.slice(0, 80)}`));
+  assert.deepEqual(mismatches, [], 'a copy prompt differs from its source');
 });
 
 test('Day 4 final: the deck has every prompt and command block that the package gives a participant', () => {
   const inDeck = new Set([...slides].flatMap(copyPrompts));
   // The one block that is not a prompt: the file tree in README.md.
-  const missing = packageBlocks.filter((block) => !block.startsWith('n8n/support-triage.json  ') && !inDeck.has(block));
+  const replacedByLesson = (block) => block.startsWith('git fetch origin trainer/solution');
+  const missing = packageBlocks.filter((block) => !block.startsWith('n8n/day3-review-queue.json  ') && !replacedByLesson(block) && !inDeck.has(block));
   assert.deepEqual(missing, []);
 });
 
 test('Day 4 final: every assignment has steps, a checkpoint, a human boundary and a full teach block', () => {
   const assignments = slides.filter((slide) => slide.layout === 'exercise');
-  assert.deepEqual(Array.from(assignments, (slide) => slide.title.match(/^Assignment (\w+):/)?.[1]), ['0', '1', '1b', '1c', '1M', '2', '3', '4']);
+  assert.deepEqual(Array.from(assignments, (slide) => slide.title.match(/^Assignment (\w+):/)?.[1]), ['0', '1', '1b', '1c', '1M', '2', '3', '4', '5']);
   for (const slide of assignments) {
     assert.ok(slide.steps.every((step) => step.text && step.where), `${slide.title}: each step says where and what`);
     assert.ok(slide.steps.some((step) => step.prompt), `${slide.title}: has a Copy prompt`);

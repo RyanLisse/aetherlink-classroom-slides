@@ -2,7 +2,7 @@
 
 > **Historical audit.** This document records an earlier 74-slide route with
 > solved step branches. Do not use it to run the current lesson. Use
-> [`workshop4.html`](../workshop4.html), the current participant repository
+> [`day4-final.html`](../day4-final.html), the current participant repository
 > [`README.md`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent)
 > and the central [`FACILITATOR.md`](../FACILITATOR.md). The current route keeps
 > participants on their own branch from the unsolved `main` starter.

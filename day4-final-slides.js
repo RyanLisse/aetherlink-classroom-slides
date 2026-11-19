@@ -11,18 +11,18 @@ window.SLIDES = [
    "bot": "wave",
    "place": "beside"
   },
-  "subtitle": "Last session you built the flow in n8n. Today you build the same flow in code.",
-  "notes": "Time: 3 min.\n\nKeep this slide on screen while people arrive. Today we build last session's n8n support flow again, this time in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages. We do not import the n8n flow. If someone's Day 3 flow did not work, that is no problem: they can use the example results in the package.\n\nNext: Look back, look ahead: three questions",
+  "subtitle": "Last session you built a support workflow in n8n. Today you’ll build it in code.",
+  "notes": "Time: 3 min.\n\nKeep this slide on screen while people arrive. Today we build last session's n8n support flow again, this time in code with the Claude Agent SDK. We start from a fresh workshop package with new customer messages. We do not import the n8n flow. If someone's Day 3 flow did not work, that is no problem: they can use the example results in the package.\n\nNext: From the n8n workflow to code",
   "teach": {
-   "next": "Look back, look ahead: three questions",
+   "next": "From the n8n workflow to code",
    "time": "3 min",
-   "gist": "Welcome. Last session you built the sorting machine from n8n blocks. Today we build the same machine in code.",
+   "gist": "Welcome. Last session you built the support workflow in n8n. Today we build the same workflow in code.",
    "script": [
     {
      "do": "Have this slide on screen while people come in."
     },
     {
-     "say": "Last session you built a sorting machine for customer messages in n8n, by connecting blocks. Today we build exactly the same machine, but in code."
+     "say": "Last session you built a support workflow in n8n, node by node. Today we build the same workflow, but in code."
     },
     {
      "say": "Why code? Because you can test it, save it and limit it. You decide what each agent may and may not do."
@@ -37,7 +37,7 @@ window.SLIDES = [
     "Name the goal: the same flow, now in code."
    ],
    "done": [
-    "Last session you built the flow in n8n. Today you build the same flow in code."
+    "Last session you built a support workflow in n8n. Today you’ll build it in code."
    ],
    "watch": [
     "Did Day 3 not work for someone? Reassure them: the starter has everything, so nobody is behind.",
@@ -46,7 +46,7 @@ window.SLIDES = [
    "copy": [
     [
      "Trainer · before class, on your own clone",
-     "git fetch origin trainer/solution\ngit switch trainer/solution\nnpm ci\nnpm run check:1 && npm run check:2 && npm run check:3"
+     "git clone --branch trainer/solution --single-branch https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git aetherlink-day4-trainer\ncd aetherlink-day4-trainer\nnpm ci\nnpm run verify\nnpm run check:1 && npm run check:2 && npm run check:3\nnode day4-sdk-parity/verify.mjs"
     ]
    ],
    "learn": [],
@@ -55,151 +55,131 @@ window.SLIDES = [
  },
  {
   "lessonId": "workshop-4",
-  "title": "Look back, look ahead: three questions",
-  "kicker": "Day 4 · Recap · 3 rounds",
+  "title": "From the n8n workflow to code",
+  "kicker": "Day 4 · Recap · 3 questions",
+  "subtitle": "Use the double-charge ticket from Day 3. Answer one question per table.",
   "type": "context",
-  "visual": {},
-  "subtitle": "Groups of 3–4 (your table). 2 minutes per round. One person shares your table's answer; you may pass.",
-  "timer": 6,
   "cards": [
    {
-    "title": "1 · What was useful?",
-    "body": "What did you learn last session that you can actually use?"
+    "title": "1 · Decide",
+    "body": "“I was charged twice.” What priority would you give this ticket?"
    },
    {
-    "title": "2 · What went wrong?",
-    "body": "What did your flow do that you did not expect?"
+    "title": "2 · Route",
+    "body": "Which node uses that priority to select low, medium or high?"
    },
    {
-    "title": "3 · Your goal",
-    "body": "What do you want to be able to do by the end of today?"
+    "title": "3 · Review",
+    "body": "Where does the draft wait for a person to review it?"
    }
   ],
   "keyPoints": [
-   "One answer per table, per round",
-   "Connect 'wrong' to today: check, tool list, human review",
-   "Keep the goals for the close"
+   "Priority from the main agent",
+   "Route from the Switch",
+   "Saved draft awaiting review"
   ],
-  "notes": "Time: 6 min.\n\nTime: 6 minutes, three rounds of 2 minutes. Write the answers on the board. In round 2, connect each problem to today. Hard to test: a check for each step and an evidence table. Every agent could do everything: a tool list per agent. No stop before a message goes out: a person reviews every draft. In round 3, keep the goals on the board and return to them at the close.\n\nNext: Last session · 1. The sorting machine",
+  "notes": "Time: 6 min.\n\nUse one familiar Day 3 ticket to retrieve the decision, route and human review. Ask for one short answer per table. The next two slides add memory, structured output, the three sub-agents and customer data.\n\nNext: Last session · the main flow",
   "teach": {
-   "next": "Last session · 1. The sorting machine",
+   "gist": "One familiar ticket retrieves the Day 3 decision, route and review before participants rebuild them in code.",
+   "script": [
+    {
+     "do": "Give each table one question.",
+     "say": "Use the double-charge ticket. Give one answer and name the node that produced it."
+    },
+    {
+     "do": "Ask one person per table to share.",
+     "say": "Listen for the main agent, the Switch and the replies table with status waiting for approval."
+    }
+   ],
+   "do": [
+    "Give each table one question.",
+    "Collect one short answer per table."
+   ],
+   "done": [
+    "The room can trace one ticket from decision to review."
+   ],
+   "learn": [
+    "The same decision, route and review return today in code."
+   ],
+   "watch": [
+    "Keep answers concrete. The next slides fill the gaps."
+   ],
+   "terms": [],
    "time": "6 min",
-   "gist": "Three short rounds: what was useful, what went wrong, and what is your goal for today.",
-   "script": [
-    {
-     "do": "Point at card 1. Start a 2-minute timer.",
-     "say": "Round one. What did you learn last session that you can really use? One answer per table."
-    },
-    {
-     "do": "Write the answers on the board. Point at card 2.",
-     "say": "Round two. What did your flow do that you did not expect?"
-    },
-    {
-     "do": "Connect each answer to today.",
-     "say": "Was it hard to test? Today you get one command that tests everything. Could every agent do everything? Today each agent gets its own list. Was there no stop before a change? Today we build a brake: a person says yes first."
-    },
-    {
-     "do": "Point at card 3.",
-     "say": "Round three. What do you want to be able to do at the end of today? Write it down. We will come back to it at the end."
-    }
-   ],
-   "do": [
-    "Three rounds of two minutes each.",
-    "Put the answers on the board."
-   ],
-   "done": [
-    "Keep the goals for the close"
-   ],
-   "watch": [
-    "Is a table quiet? Ask one person directly: what surprised you last session?",
-    "Keep it short: the real work starts in 5 minutes."
-   ],
-   "learn": [
-    "One answer per table, per round",
-    "Connect 'wrong' to today: check, tool list, human review",
-    "Keep the goals for the close"
-   ],
-   "terms": []
+   "next": "Last session · the main flow"
   }
  },
  {
   "lessonId": "workshop-4",
-  "title": "Last session · 1. The sorting machine",
-  "kicker": "Last session · the n8n flow",
-  "type": "recap",
+  "title": "Last session · the main flow",
+  "kicker": "Last session · the n8n workflow",
+  "subtitle": "Chat starts the run. The main agent decides. Structured output and the Switch select the route.",
+  "type": "concept",
   "visual": {
    "opener": "showcase",
-   "image": "assets/day3-maarten-n8n/01-basic-flow.jpeg",
-   "imageLink": "n8n · Ticket Input → Switch"
+   "image": "assets/workshop-4/day3-chat-memory.png",
+   "imageLink": "Day 3 · chat, main agent and Simple Memory"
   },
-  "subtitle": "A customer message comes in. The Switch sorts it into one of three trays: high, medium or low.",
   "cards": [
    {
-    "title": "Ticket Input",
-    "body": "A customer message comes in."
+    "title": "Chat and memory",
+    "body": "The chat receives the ticket. Simple Memory carries earlier messages in the same session."
    },
    {
-    "title": "Switch = the sorting clerk",
-    "body": "It follows fixed rules and does not think. Three trays: high, medium and low."
+    "title": "Main AI Agent",
+    "body": "The System Message defines triage. The agent returns a priority and a draft."
+   },
+   {
+    "title": "Parser and Switch",
+    "body": "The parser fixes the fields. The Switch sends low, medium and high to separate routes."
    }
   ],
   "keyPoints": [
-   "Ticket Input: One support message.",
-   "Switch: Three routes: low, medium, high."
+   "One workflow, extended step by step",
+   "The model chooses the priority",
+   "Fixed code selects the route"
   ],
-  "notes": "Time: 2 min.\n\nShow Maarten’s first flow: a manual trigger, Ticket Input, and a Switch with three routes. Say that today the Switch becomes lib/switch.mjs.\n\nNext: Last session · 4. The team of specialists",
+  "notes": "Time: 2 min.\n\nRecap the main line of the final Day 3 workflow. It started with chat, added Simple Memory, then triage instructions, structured output and the Switch. Today these parts become session history, CLAUDE.md, a JSON schema and lib/switch.mjs.\n\nNext: Last session · the team of sub-agents",
   "teach": {
-   "next": "Last session · 4. The team of specialists",
-   "time": "2 min",
-   "gist": "The Switch is the sorting clerk: the AI gives the label, and the Switch picks the tray.",
+   "gist": "The main Day 3 line becomes code today: chat and memory, triage, structured output and fixed routing.",
    "script": [
     {
-     "do": "Point at Ticket Input.",
-     "say": "A customer message comes in. That is the ticket."
+     "do": "Point from left to right.",
+     "say": "One chat message starts the workflow. The main agent decides the priority and drafts. The parser fixes the form. The Switch selects the route."
     },
     {
-     "do": "Point at Switch.",
-     "say": "Then comes the Switch. Think of the post room: a letter comes in and the clerk puts it in one of three trays: high, medium or low. The Switch is that clerk. It follows fixed rules and does not think."
-    },
-    {
-     "say": "The AI reads the message and says: this is high. The Switch then puts it in the right tray. So you always know exactly where a message goes."
-    },
-    {
-     "say": "Today this block becomes a file with code: lib/switch.mjs."
-    },
-    {
-     "ask": "Who decides the tray: the AI or the Switch?",
-     "say": "(Answer: the Switch. The AI only gives the label.)"
+     "ask": "Which part thinks, and which part follows a fixed rule?",
+     "say": "(Answer: the agent thinks. The Switch follows the fixed priority rules.)"
     }
    ],
    "do": [
-    "Show the first n8n flow.",
-    "Explain: the AI gives the label, and the Switch picks the tray."
+    "Trace the three cards from left to right."
    ],
    "done": [
-    "Switch: Three routes: low, medium, high."
-   ],
-   "watch": [
-    "People mix up the AI and the Switch. Repeat: the AI gives the label, the Switch picks the tray."
+    "Everyone can name the main line that returns in code."
    ],
    "learn": [
-    "Ticket Input: One support message.",
-    "Switch: Three routes: low, medium, high."
+    "The agent chooses a label. Fixed code routes that label."
    ],
-   "terms": []
+   "watch": [
+    "Do not call the Switch the decision maker. It routes the priority that the agent returned."
+   ],
+   "terms": [],
+   "time": "2 min",
+   "next": "Last session · the team of sub-agents"
   }
  },
  {
   "lessonId": "workshop-4",
-  "title": "Last session · 4. The team of specialists",
+  "title": "Last session · the team of sub-agents",
   "kicker": "Last session · the n8n flow",
   "type": "recap",
   "visual": {
    "opener": "showcase",
-   "image": "assets/day3-maarten-n8n/11-three-sub-agents.jpeg",
-   "imageLink": "n8n · Customer Reply, Risk and Customer Context agents"
+   "image": "assets/workshop-4/day3-final-sub-agents.svg",
+   "imageLink": "Final Day 3 workflow · one memory on the main agent and three sub-agent tools"
   },
-  "subtitle": "As in an office, everyone has one job. Today, Reply and Risk become agents in code. Customer Context comes back in Step 3, with a lookup desk (MCP).",
+  "subtitle": "The main agent delegates to Reply, Risk and Customer Context. Today the same three become sub-agents in code.",
   "cards": [
    {
     "title": "Customer Reply Agent",
@@ -207,7 +187,7 @@ window.SLIDES = [
    },
    {
     "title": "Risk Agent",
-    "body": "The risk expert: decides how risky the message is."
+    "body": "The risk expert: writes a short internal risk note."
    },
    {
     "title": "Customer Context Agent",
@@ -216,45 +196,45 @@ window.SLIDES = [
   ],
   "keyPoints": [
    "Writer, risk expert, records desk",
-   "Each specialist has one job",
-   "Today: 3 specialists + 1 lookup desk"
+   "Each sub-agent has one job",
+   "Today: 3 sub-agents + 1 lookup desk"
   ],
-  "notes": "Time: 3 min.\n\nLast session's team had three specialists, each with one job. Ask: who called the Risk Agent, and what customer information reached the Reply Agent? If someone's Day 3 flow was blocked, show this screenshot as the example and explain the idea. Do not say that their flow worked. Today all three become specialists in code. In Step 3 the Customer Context specialist gets a lookup desk (MCP) with two tools.\n\nNext: How the ticket desk should work",
+  "notes": "Time: 3 min.\n\nLast session's team had three sub-agents, each with one job. Point out that the main agent called all three tools and that only the main agent had Simple Memory. If someone's Day 3 flow was blocked, show this diagram as the final example and explain the idea. Do not say that their flow worked. Today all three become sub-agents in code. In Step 3 the Customer Context sub-agent gets a lookup desk (MCP) with two tools.\n\nNext: How the ticket desk should work",
   "teach": {
    "next": "How the ticket desk should work",
    "time": "3 min",
-   "gist": "Three specialists, each with one job. Today all three become agents in code. One of them gets a lookup desk with two tools.",
+   "gist": "Three sub-agents, each with one job. Today all three become agents in code. One of them gets a lookup desk with two tools.",
    "script": [
     {
-     "say": "Last session's last step was a team of specialists. Just like at the office: you do not ask one person to do everything."
+     "say": "Last session's last step was a team of sub-agents. Just like at the office: you do not ask one person to do everything."
     },
     {
      "do": "Point at the three agents, left to right.",
-     "say": "The writer writes the reply. The risk expert decides how risky the message is. The records desk looks up the customer."
+     "say": "The writer writes the reply. The risk expert writes an internal risk note. The records desk looks up the customer."
     },
     {
      "do": "Point at the tagline.",
-     "say": "Today we build this team in code. The writer, the risk expert and the record keeper become three specialists. The record keeper gets a lookup desk with two tools. The desk only looks things up and does not think."
+     "say": "Today we build this team in code. The writer, the risk expert and the record keeper become three sub-agents. The record keeper gets a lookup desk with two tools. The desk only looks things up and does not think."
     },
     {
-     "ask": "Who called the Risk Agent in your flow last session?",
-     "say": "(Listen to the answers. If someone's flow did not work, show this screenshot as the example.)"
+     "ask": "Which agent called Reply, Risk and Customer Context in the final flow?",
+     "say": "(Answer: the main agent. If someone’s flow did not work, show this diagram as the final example.)"
     }
    ],
    "do": [
-    "Name the three specialists and their jobs.",
+    "Name the three sub-agents and their jobs.",
     "Say what they become today."
    ],
    "done": [
-    "Today: 3 specialists + 1 lookup desk"
+    "Today: 3 sub-agents + 1 lookup desk"
    ],
    "watch": [
     "Did someone's Day 3 not work? Use this screenshot as the example. Nobody is behind."
    ],
    "learn": [
     "Writer, risk expert, records desk",
-    "Each specialist has one job",
-    "Today: 3 specialists + 1 lookup desk"
+    "Each sub-agent has one job",
+    "Today: 3 sub-agents + 1 lookup desk"
    ],
    "terms": []
   }
@@ -280,7 +260,7 @@ window.SLIDES = [
    },
    {
     "title": "A person decides",
-    "body": "The agent sends nothing."
+    "body": "Outside this app. The agent sends nothing."
    }
   ],
   "keyPoints": [
@@ -310,10 +290,9 @@ window.SLIDES = [
      ],
      [
       "message",
-      "We are checking TX-1014 for you …",
+      "Thank you for reporting the duplicate charge on TX-1014.",
       [
-       "get_customer",
-       "get_transaction"
+       "ticket message"
       ]
      ]
     ],
@@ -326,13 +305,13 @@ window.SLIDES = [
      "gate": "only if the form is right"
     },
     "wait": "a draft, ready for a person",
-    "yes": "Send it",
+    "yes": "Approve draft",
     "no": "Change it"
    },
    "reveal": "click",
    "covers": []
   },
-  "notes": "Time: 4 min.\n\nShow the whole desk before the first assignment. Last session it was four n8n flows. Today it is one small app. The ticket is fictional. The agent looks, writes one draft in a fixed form, plain code checks the form, and a person decides. Nothing is sent by the agent.\n\nNext: Today's goal",
+  "notes": "Time: 4 min.\n\nShow the whole desk before the first assignment. Last session participants extended one n8n workflow step by step. Today they rebuild the same responsibilities as one small app. The ticket is fictional. The agent looks, writes one draft in a fixed form, and plain code checks the form. A person reviews outside this app. Nothing is sent by the agent.\n\nNext: Today's goal",
   "teach": {
    "gist": "The whole ticket desk in one picture: it looks, it writes one draft, the form checks it, a person decides.",
    "script": [
@@ -387,7 +366,7 @@ window.SLIDES = [
   "cards": [
    {
     "title": "You will have built",
-    "body": "An agent team in code: a team lead, three specialists and one lookup desk with two tools."
+    "body": "An agent team in code: a main agent, three sub-agents and one lookup desk with two tools."
    },
    {
     "title": "You can explain",
@@ -403,7 +382,7 @@ window.SLIDES = [
    "Who may do what",
    "A person reviews every draft"
   ],
-  "notes": "Time: 2 min.\n\nSay the goal in one sentence: by the end of the day you will have an agent team that you built yourself, and you can explain it. Come back to this at the close, together with the goals that people wrote down this morning.\n\nNext: Today · agenda",
+  "notes": "Time: 2 min.\n\nSay the goal in one sentence: by the end of the day you will have an agent team that you built yourself, and you can explain it. Return to this at the close with the double-charge ticket from the opening.\n\nNext: Today · agenda",
   "teach": {
    "next": "Today · agenda",
    "time": "2 min",
@@ -417,7 +396,7 @@ window.SLIDES = [
      "say": "You built it. You can say which agent may do what. And you know where a person reviews before anything reaches a customer."
     },
     {
-     "say": "At the end of the day we will come back to this, and to the goals you wrote down this morning."
+     "say": "At the end of the day we return to the double-charge ticket and trace the complete result."
     },
     {
      "say": "And this is how we get there. On the next slide: the day in four blocks."
@@ -425,7 +404,7 @@ window.SLIDES = [
    ],
    "do": [
     "Say the goal in one sentence.",
-    "Link it to the goals on the board."
+    "Link it to the double-charge ticket from the opening."
    ],
    "done": [
     "A person reviews every draft"
@@ -456,11 +435,11 @@ window.SLIDES = [
    },
    {
     "title": "90 min · The team",
-    "body": "Assignment 2: two specialists.\nAssignment 3: the lookup desk."
+    "body": "Assignment 2: two sub-agents.\nAssignment 3: the lookup desk."
    },
    {
     "title": "45 min · Proof",
-    "body": "Assignment 4: compare with n8n.\nA person decides."
+    "body": "Assignment 4: compare with n8n.\nAssignment 5: save drafts for review."
    }
   ],
   "keyPoints": [
@@ -468,7 +447,7 @@ window.SLIDES = [
    "Lunch: 13:15 to 14:00.",
    "Break at 15:30. We end at 16:30."
   ],
-  "notes": "Time: 3 min.\n\nFour blocks of 60, 120, 90, 45 minutes. The morning break is at 11:00, lunch runs from 13:15 to 14:00, and the afternoon break is at 15:30. The day ends at 16:30. Participants stay on main. The workshop repository is https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.\n\nNext: The dictionary: last session's blocks, today's names",
+  "notes": "Time: 3 min.\n\nFour blocks of 60, 120, 90, 45 minutes. The morning break is at 11:00, lunch runs from 13:15 to 14:00, and the afternoon break is at 15:30. The day ends at 16:30. Participants stay on main. The workshop repository is https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.\n\nNext: The dictionary: last session's nodes, today's names",
   "teach": {
    "gist": "Four blocks, three pauses. Claude Code builds, the participant decides.",
    "script": [
@@ -494,12 +473,12 @@ window.SLIDES = [
    "watch": [],
    "time": "3 min",
    "terms": [],
-   "next": "The dictionary: last session's blocks, today's names"
+   "next": "The dictionary: last session's nodes, today's names"
   }
  },
  {
   "lessonId": "workshop-4",
-  "title": "The dictionary: last session's blocks, today's names",
+  "title": "The dictionary: last session's nodes, today's names",
   "kicker": "Concept recap · overview",
   "type": "concept",
   "layout": "compare",
@@ -512,7 +491,7 @@ window.SLIDES = [
     }
    ]
   },
-  "subtitle": "Every block from last session, with its name in code. And still a person at the end.",
+  "subtitle": "The core parts return, but responsibilities move into code. There is still a person at the end.",
   "columns": [
    {
     "title": "n8n · last session",
@@ -552,11 +531,11 @@ window.SLIDES = [
    }
   ],
   "keyPoints": [
-   "Everything from last session comes back",
-   "Only the name changes",
+   "The core parts return",
+   "Responsibilities move into code",
    "Same person at the end"
   ],
-  "notes": "Time: 4 min.\n\nGo row by row, from top to bottom. Everything they built last session comes back today, and only the name changes. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes customer-context-agent with one lookup desk, the MCP server support. The desk has two tools: get_customer reads docs/customer_context.csv and get_transaction reads docs/transactions.xlsx.\n\nNext: How does an agent work?",
+  "notes": "Time: 4 min.\n\nGo row by row, from top to bottom. The core parts return today, but the responsibility can move to a file, a sub-agent or fixed code. Every draft is still checked by a person. For you: the Customer Context Agent with its Data Table becomes customer-context-agent with one lookup desk, the MCP server support. The desk has two tools: get_customer reads docs/customer_context.csv and get_transaction reads docs/transactions.xlsx.\n\nNext: How does an agent work?",
   "teach": {
    "next": "How does an agent work?",
    "time": "4 min",
@@ -578,7 +557,7 @@ window.SLIDES = [
      "say": "(Answer: Priority Parser, json_schema.)"
     },
     {
-     "say": "Everything from last session comes back. Only the name changes. And at the end there is still a person who checks."
+     "say": "The core parts return, but not as a one-to-one rename. A person still checks the result."
     }
    ],
    "do": [
@@ -592,8 +571,8 @@ window.SLIDES = [
     "Do not explain every technical name in depth. The right column is enough for now. The details come with each step."
    ],
    "learn": [
-    "Everything from last session comes back",
-    "Only the name changes",
+    "The core parts return",
+    "Responsibilities move into code",
     "Same person at the end"
    ],
    "terms": []
@@ -763,7 +742,7 @@ window.SLIDES = [
    },
    {
     "title": "Trace",
-    "body": "The actual specialist and tool order from a real run."
+    "body": "The actual sub-agent and tool order from a real run."
    },
    {
     "title": "OPEN",
@@ -828,7 +807,7 @@ window.SLIDES = [
     "body": ""
    },
    {
-    "title": "Six assignments",
+    "title": "Nine assignments",
     "body": ""
    }
   ],
@@ -896,12 +875,12 @@ window.SLIDES = [
       true
      ]
     ],
-    "note": "The gap is six assignments. Each one starts with a red check. You paste one prompt, and the check goes green."
+    "note": "The gap is nine assignments. Each one starts with a check or a concrete proof step."
    }
   },
-  "notes": "Time: 5 min.\n\nShow what the starter already has before anyone opens it. The runner, the read-only lookup desk and the checks are built. The Agent SDK parts say TODO. On main the three specialist files exist, with only a name and TODO lines. Participants stay on main all day. They never copy files from another branch.\n\nNext: Assignment 0: Read the n8n flow",
+  "notes": "Time: 5 min.\n\nShow what the starter already has before anyone opens it. The runner, the read-only lookup desk and the checks are built. The Agent SDK parts say TODO. On main the three sub-agent files exist, with only a name and TODO lines. Participants stay on main all day. They never copy files from another branch.\n\nNext: Assignment 0: Read the n8n flow",
   "teach": {
-   "gist": "The starter has the plumbing. The Agent SDK parts say TODO. Six assignments close the gap.",
+   "gist": "The starter has the plumbing. The Agent SDK parts say TODO. Nine assignments close the gap.",
    "script": [
     {
      "do": "Slide appears. Click “The gap” to open the rows.",
@@ -960,11 +939,16 @@ window.SLIDES = [
    "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent",
    "label": "AetherLink-bv/aetherlink-day4-n8n-to-agent · branch main"
   },
-  "subtitle": "Claude Code reads the n8n export. You get one table: each node, and the file that replaces it.",
+  "source": {
+   "label": "Download the final Day 3 workflow",
+   "url": "assets/workshop-4/day3-review-queue.json",
+   "download": "day3-review-queue.json"
+  },
+  "subtitle": "Use the final Day 3 workflow. Claude Code maps each n8n node to the code you will build today.",
   "cards": [
    {
     "title": "Checkpoint",
-    "body": "npm run doctor and npm run verify exit 0.\nYou can point to the three specialists in the n8n JSON."
+    "body": "npm run doctor and npm run verify exit 0.\nYou can point to the three sub-agents in the n8n JSON."
    },
    {
     "title": "Human boundary",
@@ -973,7 +957,7 @@ window.SLIDES = [
   ],
   "keyPoints": [
    "npm run doctor and npm run verify exit 0.",
-   "You can point to the three specialists in the n8n JSON."
+   "You can point to the three sub-agents in the n8n JSON."
   ],
   "steps": [
    {
@@ -983,33 +967,38 @@ window.SLIDES = [
     "after": "The last line starts Claude Code with the project settings and your own user settings. MCP servers and connectors stay off."
    },
    {
+    "where": "You",
+    "text": "Locate the two workflows in n8n/",
+    "after": "Open day3-review-queue.json and support-triage.json. If the first file is missing, download it into n8n/."
+   },
+   {
     "where": "Claude Code",
-    "text": "Paste the SOLO 0 prompt",
-    "prompt": "Read n8n/support-triage.json and the Source contract in SOLO.md. Change no file. Show one table: each n8n node, what it does, and the file in this repository that replaces it. Mark each file as built or TODO. Then run npm run doctor and npm run verify and show the exit codes. Stop.",
-    "after": "You get one table. Each file is marked built or TODO."
+    "text": "Compare the final workflow with the starter snapshot",
+    "prompt": "Read n8n/day3-review-queue.json, n8n/support-triage.json and the Source contract in SOLO.md. Change no file. Show one comparison table with these columns: Day 3 part, final Day 3 node, starter snapshot node, and Agent SDK file that replaces it. Include chat, Simple Memory, the main AI Agent, Structured Output Parser, Switch, Customer Reply Agent, Risk Agent, Customer Context Agent, Get row(s), and all three Save draft nodes. Mark anything in the final workflow that Day 4 does not yet reproduce as OPEN. Stop.",
+    "after": "You get one table. Anything Day 4 does not yet reproduce is marked OPEN."
    },
    {
     "where": "Terminal 2",
-    "text": "Test it yourself",
+    "text": "Test it yourself from the repository root",
     "prompt": "npm run doctor\nnpm run verify",
-    "after": "doctor checks your laptop and your login. verify runs the 21 starter tests and the dry runs. It calls no model."
+    "after": "doctor checks your laptop and your login. verify runs the 24 starter tests and the dry runs. It calls no model."
    },
    {
     "where": "You",
-    "text": "Point to the three specialists in the n8n JSON",
+    "text": "Point to the three sub-agents in the n8n JSON",
     "after": "A file marked TODO is yours to build today."
    }
   ],
-  "expected": "You can point to the three specialists in the n8n JSON.",
-  "notes": "Time: 15 min.\n\nEveryone gets the starter, starts Claude Code and reads the n8n flow as one table. Done when doctor and verify exit 0.\n\nWatch for: “npm” or “git” not found: Node.js or Git is missing. See docs/SETUP.md.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes no file. Do not import or activate the n8n export. Stop after you have read the table.\n\nNext: Check: does your screen look like this?",
+  "expected": "You can point to the three sub-agents in the n8n JSON.",
+  "notes": "Time: 15 min.\n\nEveryone opens the starter and compares its two workflow snapshots as one table. Done when doctor and verify exit 0.\n\nWatch for: “npm” or “git” not found: Node.js or Git is missing. See docs/SETUP.md.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes no file. Do not import or activate the n8n export. Stop after you have read the table.\n\nNext: Check: does your screen look like this?",
   "teach": {
-   "gist": "Everyone gets the starter, starts Claude Code and reads the n8n flow as one table. Done when doctor and verify exit 0.",
+   "gist": "Everyone opens the starter and compares its two workflow snapshots as one table. Done when doctor and verify exit 0.",
    "do": [
     "Walk the room. Use the Copy buttons. Check the checkpoint on two laptops."
    ],
    "done": [
     "npm run doctor and npm run verify exit 0.",
-    "You can point to the three specialists in the n8n JSON."
+    "You can point to the three sub-agents in the n8n JSON."
    ],
    "copy": [
     [
@@ -1017,11 +1006,11 @@ window.SLIDES = [
      "git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git\ncd aetherlink-day4-n8n-to-agent\nnpm ci\nclaude --setting-sources project,user --strict-mcp-config --no-chrome"
     ],
     [
-     "Step 2 · Claude Code",
-     "Read n8n/support-triage.json and the Source contract in SOLO.md. Change no file. Show one table: each n8n node, what it does, and the file in this repository that replaces it. Mark each file as built or TODO. Then run npm run doctor and npm run verify and show the exit codes. Stop."
+     "Step 3 · Claude Code",
+     "Read n8n/day3-review-queue.json, n8n/support-triage.json and the Source contract in SOLO.md. Change no file. Show one comparison table with these columns: Day 3 part, final Day 3 node, starter snapshot node, and Agent SDK file that replaces it. Include chat, Simple Memory, the main AI Agent, Structured Output Parser, Switch, Customer Reply Agent, Risk Agent, Customer Context Agent, Get row(s), and all three Save draft nodes. Mark anything in the final workflow that Day 4 does not yet reproduce as OPEN. Stop."
     ],
     [
-     "Step 3 · Terminal 2",
+     "Step 4 · Terminal 2",
      "npm run doctor\nnpm run verify"
     ]
    ],
@@ -1029,8 +1018,8 @@ window.SLIDES = [
     {
      "do": "Slide appears. Read the goal and the checkpoint out loud.",
      "say": [
-      "Claude Code reads the n8n export. You get one table: each node, and the file that replaces it.",
-      "You are done when: npm run doctor and npm run verify exit 0. You can point to the three specialists in the n8n JSON."
+      "Use the final Day 3 workflow. Claude Code maps each n8n node to the code you will build today.",
+      "You are done when: npm run doctor and npm run verify exit 0. You can point to the three sub-agents in the n8n JSON."
      ]
     },
     {
@@ -1040,21 +1029,32 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 2 · Claude Code. Paste the SOLO 0 prompt.",
+     "do": "Step 2 · You. Locate the two workflows in n8n/.",
      "say": [
-      "Paste the prompt. Claude Code only reads. It changes no file."
+      "Show both files in the n8n folder. Earlier clones can use the download link to add day3-review-queue.json."
      ]
     },
     {
-     "do": "Step 3 · Terminal 2. Test it yourself.",
+     "do": "Step 3 · Claude Code. Compare the final workflow with the starter snapshot.",
      "say": [
-      "Open a second terminal. Type the same two commands yourself."
+      "Paste the comparison prompt. It reads both snapshots and changes no file."
      ]
     },
     {
-     "do": "Step 4 · You. Point to the three specialists in the n8n JSON.",
+     "do": "Step 4 · Terminal 2. Test it yourself from the repository root.",
      "say": [
-      "Find the three specialists in the table. They become three files today."
+      "Keep Claude Code and Terminal 2 in the cloned repository root all day. Type both commands there."
+     ]
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a0-verify.mp4",
+     "say": "This is the offline starter check on main. It must end with all tests passing, the MCP smoke check and two dry runs."
+    },
+    {
+     "do": "Step 5 · You. Point to the three sub-agents in the n8n JSON.",
+     "say": [
+      "Find the three sub-agents in the table. They become three files today."
      ]
     },
     {
@@ -1066,14 +1066,14 @@ window.SLIDES = [
     }
    ],
    "learn": [
-    "The n8n export is the source. It stays as it is.",
+    "The final Day 3 workflow is the source for today.",
     "The plumbing is built. The Agent SDK parts say TODO.",
     "Every assignment is the same loop: paste the prompt, the check goes green, one real run, read why."
    ],
    "watch": [
     "“npm” or “git” not found: Node.js or Git is missing. See docs/SETUP.md.",
     "The run says backend sdk: an API key is set on that laptop. Add --backend claude-code.",
-    "verify must show pass 21 and fail 0. A version number can differ.",
+    "verify must show pass 24 and fail 0. A version number can differ.",
     "A clone from an earlier class: make a fresh clone."
    ],
    "terms": [
@@ -1118,7 +1118,7 @@ window.SLIDES = [
      "c": "npm run verify"
     },
     {
-     "o": "ℹ pass 21"
+     "o": "ℹ pass 24"
     },
     {
      "o": "ℹ fail 0"
@@ -1166,6 +1166,11 @@ window.SLIDES = [
     {
      "ask": "Hands up: who has fail 0?",
      "say": "(Not everyone? Fix it now, or pair that person with a neighbour.)"
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a0-verify.mp4",
+     "say": "This is the offline starter check on main. It must end with all tests passing, the MCP smoke check and two dry runs."
     }
    ],
    "do": [
@@ -1242,12 +1247,12 @@ window.SLIDES = [
    "imageAlt": "CLAUDE.md in three parts: who you are, what you may not do, when is it what.",
    "imageLink": "01-single-agent/claude-project/CLAUDE.md"
   },
-  "subtitle": "Last session, the instructions lived inside the n8n block (System Message). Today, they are a file next to the code, read on top of Claude's own system prompt.",
+  "subtitle": "Last session, the instructions lived inside the n8n node (System Message). Today, they are a file next to the code, read on top of Claude's own system prompt.",
   "cards": [],
   "keyPoints": [
    "The system message now lives in a file next to the code."
   ],
-  "notes": "Time: 4 min.\n\nIt is like the work instructions that a new colleague gets on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions and Required output. The Priority definitions give one line for each level: high, medium and low. In Step 1c they change the policy for a moment and see what happens.\n\nNext: The form, now in code",
+  "notes": "Time: 4 min.\n\nThis first file is the starter baseline. Assignment 5 returns to the final Day 3 policy. It is like the work instructions that a new colleague gets on day one. The real file is 01-single-agent/claude-project/CLAUDE.md. Show it on screen: Purpose, Rules, Priority definitions and Required output. The Priority definitions give one line for each level: high, medium and low. In Step 1c they change the policy for a moment and see what happens.\n\nNext: The form, now in code",
   "teach": {
    "next": "The form, now in code",
    "time": "4 min",
@@ -1309,7 +1314,7 @@ window.SLIDES = [
    },
    {
     "title": "Today · json_schema",
-    "body": "The same form, now as a file: priority-schema.mjs. Today it has two fields: priority and reason. The AI has to fill it in."
+    "body": "The form changes slightly. Day 3 returned priority and message. Today priority-schema.mjs returns priority and reason."
    },
    {
     "title": "The trays · lib/switch.mjs",
@@ -1332,7 +1337,7 @@ window.SLIDES = [
     },
     {
      "do": "Point at the middle card.",
-     "say": "It is the same form with the same fields. The AI has to fill it in, otherwise the answer is refused."
+     "say": "It is the same idea, but not the same fields. The schema now checks priority and reason."
     },
     {
      "do": "Point at the last card.",
@@ -1371,7 +1376,7 @@ window.SLIDES = [
    "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent",
    "label": "AetherLink-bv/aetherlink-day4-n8n-to-agent · branch main"
   },
-  "subtitle": "Claude Code fills in three files. The check tells you when the step is right.",
+  "subtitle": "Build the starter baseline first. The check tells you when its three files are right.",
   "cards": [
    {
     "title": "Checkpoint",
@@ -1390,7 +1395,7 @@ window.SLIDES = [
    {
     "where": "Claude Code",
     "text": "Paste the SOLO 1 prompt",
-    "prompt": "Run npm run check:1 and show what is red. Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the specialists out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop.",
+    "prompt": "Run npm run check:1 and show what is red. Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the sub-agents out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop.",
     "after": "First the check is red. That is correct. Then Claude Code fills in options.mjs, priority-schema.mjs and CLAUDE.md."
    },
    {
@@ -1406,9 +1411,9 @@ window.SLIDES = [
    }
   ],
   "expected": "The real run prints a priority, a reason and the Switch route.",
-  "notes": "Time: 25 min.\n\nClaude Code fills in the Step 1 files from the n8n node. Done when check:1 passes and one real run shows a priority, a reason and the route.\n\nWatch for: A check that stays red: paste the failed line into Claude Code and ask for the smallest fix.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes three files and no other. The agent has no tools. You read the table before you continue.\n\nNext: Check: does your screen look like this?",
+  "notes": "Time: 25 min.\n\nClaude Code fills in the Step 1 baseline from the starter snapshot. Assignment 5 applies the final Day 3 policy and review queue.\n\nWatch for: A check that stays red: paste the failed line into Claude Code and ask for the smallest fix.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes three files and no other. The agent has no tools. You read the table before you continue.\n\nNext: Check: does your screen look like this?",
   "teach": {
-   "gist": "Claude Code fills in the Step 1 files from the n8n node. Done when check:1 passes and one real run shows a priority, a reason and the route.",
+   "gist": "Claude Code fills in the Step 1 baseline from the starter snapshot. Assignment 5 applies the final Day 3 policy and review queue.",
    "do": [
     "Walk the room. Use the Copy buttons. Check the checkpoint on two laptops."
    ],
@@ -1419,7 +1424,7 @@ window.SLIDES = [
    "copy": [
     [
      "Step 1 · Claude Code",
-     "Run npm run check:1 and show what is red. Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the specialists out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop."
+     "Run npm run check:1 and show what is red. Read the STEP 1 TODOs in 01-single-agent and the AI Agent node in n8n/support-triage.json. Fill in options.mjs, priority-schema.mjs and claude-project/CLAUDE.md. Copy the policy from the n8n system message and leave the sub-agents out. Change no other file. Run npm run check:1 until it passes. Run npm run lesson1 -- MSG-06 once and show the real output. Then show one table: each option in options.mjs, the n8n setting it replaces, and what goes wrong without it. Stop."
     ],
     [
      "Step 2 · Terminal 2",
@@ -1430,7 +1435,7 @@ window.SLIDES = [
     {
      "do": "Slide appears. Read the goal and the checkpoint out loud.",
      "say": [
-      "Claude Code fills in three files. The check tells you when the step is right.",
+      "Build the starter baseline first. The check tells you when its three files are right.",
       "You are done when: npm run check:1 passes. The real run prints a priority, a reason and the Switch route."
      ]
     },
@@ -1445,6 +1450,11 @@ window.SLIDES = [
      "say": [
       "Now the same check and the same run in your second terminal."
      ]
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a1-check.mp4",
+     "say": "This is check:1 on the reference solution. It verifies the options, the output form and CLAUDE.md without calling a model."
     },
     {
      "do": "Step 3 · You. Read the table: each option, its n8n setting, and what goes wrong without it.",
@@ -1564,6 +1574,11 @@ window.SLIDES = [
     {
      "ask": "Your reason text is different from mine. Is that a problem?",
      "say": "(Answer: no. The words differ on every run. The form and the route stay the same.)"
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a1-check.mp4",
+     "say": "This is check:1 on the reference solution. It verifies the options, the output form and CLAUDE.md without calling a model."
     }
    ],
    "do": [
@@ -1682,23 +1697,36 @@ window.SLIDES = [
     "where": "Claude Code",
     "text": "Paste the SOLO 1b prompt",
     "prompt": "Run the documented SOLO 1 dry run and point to outputFormat, priority-schema.mjs and lib/switch.mjs. Then run the documented chat memory check with two ticket_id values. Explain which output is setup evidence and which output came from a model. Show the commands and actual output. Change nothing. Stop for my review.",
-    "after": "A dry run shows the settings. It is not a model result. The chat runs are model results."
+    "after": "Claude Code explains what to inspect. It changes no file."
+   },
+   {
+    "where": "Terminal 2 · repository root",
+    "text": "Run the dry run",
+    "prompt": "npm run lesson1 -- MSG-01 --dry-run",
+    "after": "The output shows the configuration. It is not a model answer."
+   },
+   {
+    "where": "Terminal 2 · repository root",
+    "text": "Start the first live chat",
+    "prompt": "npm run chat",
+    "after": "Identify the ticket as T-101. Give it a harmless marker. Ask for that marker in the same chat."
+   },
+   {
+    "where": "Terminal 2 · repository root",
+    "text": "Exit and start a second live chat",
+    "prompt": "npm run chat",
+    "after": "Identify this ticket as T-202. Ask for the marker from T-101. It must not know it."
    },
    {
     "where": "You",
-    "text": "Find the form and the route in the output",
-    "after": "The model returns a label. lib/switch.mjs picks the route. That is plain code."
-   },
-   {
-    "where": "You",
-    "text": "Check the memory",
-    "after": "The same conversation recalls its marker. A new conversation for another ticket does not."
+    "text": "Label the evidence",
+    "after": "The dry run is configuration evidence. The chats are live model evidence. docs/sample-trace.md is sample evidence only."
    }
   ],
   "expected": "You can say which output is setup evidence and which came from a model.",
-  "notes": "Time: 15 min.\n\nParticipants look inside: the form, the fixed route, and the chat memory with two tickets. Done when they can say which output is setup evidence and which came from a model.\n\nWatch for: Dry-run output called “the answer of the AI”. No model was called.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes nothing. You decide which output counts as evidence.\n\nNext: Quiz: message 6",
+  "notes": "Time: 15 min.\n\nParticipants run one dry run and two separate chats from the repository root. Done when T-101 remembers its marker, T-202 does not, and every output has the right evidence label.\n\nWatch for: Dry-run output called “the answer of the AI”. No model was called.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes nothing. You decide which output counts as evidence.\n\nNext: Quiz: message 6",
   "teach": {
-   "gist": "Participants look inside: the form, the fixed route, and the chat memory with two tickets. Done when they can say which output is setup evidence and which came from a model.",
+   "gist": "Participants run one dry run and two separate chats from the repository root. Done when T-101 remembers its marker, T-202 does not, and every output has the right evidence label.",
    "do": [
     "Walk the room. Use the Copy buttons. Check the checkpoint on two laptops."
    ],
@@ -1711,6 +1739,18 @@ window.SLIDES = [
     [
      "Step 1 · Claude Code",
      "Run the documented SOLO 1 dry run and point to outputFormat, priority-schema.mjs and lib/switch.mjs. Then run the documented chat memory check with two ticket_id values. Explain which output is setup evidence and which output came from a model. Show the commands and actual output. Change nothing. Stop for my review."
+    ],
+    [
+     "Step 2 · Terminal 2 · repository root",
+     "npm run lesson1 -- MSG-01 --dry-run"
+    ],
+    [
+     "Step 3 · Terminal 2 · repository root",
+     "npm run chat"
+    ],
+    [
+     "Step 4 · Terminal 2 · repository root",
+     "npm run chat"
     ]
    ],
    "script": [
@@ -1724,19 +1764,36 @@ window.SLIDES = [
     {
      "do": "Step 1 · Claude Code. Paste the SOLO 1b prompt.",
      "say": [
-      "Paste the prompt. Claude Code runs a dry run first, then the chat with two tickets."
+      "Paste the prompt. Keep the three kinds of evidence separate."
      ]
     },
     {
-     "do": "Step 2 · You. Find the form and the route in the output.",
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a1b-dry-run.mp4",
+     "say": "This guide shows the documented dry runs. They prove the setup only. Participants still need the live chat to prove session memory."
+    },
+    {
+     "do": "Step 2 · Terminal 2 · repository root. Run the dry run.",
      "say": [
-      "Point to the form. Then point to the route. Who made each one?"
+      "Point to outputFormat and the route. Call this configuration evidence."
      ]
     },
     {
-     "do": "Step 3 · You. Check the memory.",
+     "do": "Step 3 · Terminal 2 · repository root. Start the first live chat.",
      "say": [
-      "Did the second ticket know the marker of the first? It must not."
+      "This is live model evidence. Use a harmless marker, not personal data."
+     ]
+    },
+    {
+     "do": "Step 4 · Terminal 2 · repository root. Exit and start a second live chat.",
+     "say": [
+      "Exit the first chat before you start this command again."
+     ]
+    },
+    {
+     "do": "Step 5 · You. Label the evidence.",
+     "say": [
+      "Name each output. A sample trace is never proof of your own run."
      ]
     },
     {
@@ -1805,7 +1862,7 @@ window.SLIDES = [
    }
   ],
   "check": "Answer: MEDIUM",
-  "notes": "Time: 4 min.\n\nFrom Maarten's Day 4 deck. Answer: MEDIUM. The portal shows an old logo. Something is wrong, but the customer can still work. That is the medium line of the policy in CLAUDE.md. Capitals and exclamation marks are in no line of the policy. Contrast it with message 2: polite, but three card transactions the customer does not recognise. Money may have been taken wrongly, so HIGH. Next: what happens when the policy changes.\n\nNext: Assignment 1c: Challenge the policy",
+  "notes": "Time: 4 min.\n\nFrom Maarten's Day 4 deck. Answer: MEDIUM. The portal shows an old logo. Something is wrong, but the customer can still work. That is medium in both the starter baseline and the final Day 3 policy. Capitals and exclamation marks are in no line of the policy. Contrast it with message 2: polite, but three card transactions the customer does not recognise. Money may have been taken wrongly, so HIGH. Next: what happens when the policy changes.\n\nNext: Assignment 1c: Challenge the policy",
   "teach": {
    "next": "Assignment 1c: Challenge the policy",
    "time": "4 min",
@@ -1857,7 +1914,7 @@ window.SLIDES = [
   "cards": [
    {
     "title": "Checkpoint",
-    "body": "The before and after evidence uses the same messages.\nThe accepted policy is restored and npm run verify passes."
+    "body": "The before and after evidence uses the same messages.\nOnly the temporary policy edit is gone. The completed SOLO 1 files remain and npm run verify passes."
    },
    {
     "title": "Human boundary",
@@ -1866,7 +1923,7 @@ window.SLIDES = [
   ],
   "keyPoints": [
    "The before and after evidence uses the same messages.",
-   "The accepted policy is restored and npm run verify passes."
+   "Only the temporary policy edit is gone. The completed SOLO 1 files remain and npm run verify passes."
   ],
   "steps": [
    {
@@ -1882,11 +1939,11 @@ window.SLIDES = [
    },
    {
     "where": "You",
-    "text": "Inspect the restored policy",
-    "after": "The diff is clean and npm run verify passes."
+    "text": "Restore only the temporary policy edit",
+    "after": "Keep the completed SOLO 1 files. Restore the policy to its exact pre-experiment text. Inspect the diff before and after. Then run npm run verify."
    }
   ],
-  "expected": "The accepted policy is restored and npm run verify passes.",
+  "expected": "Only the temporary policy edit is gone. The completed SOLO 1 files remain and npm run verify passes.",
   "notes": "Time: 20 min.\n\nOne experiment on the policy: does a loud message get another label when the policy changes? Done when the policy is restored and verify is green.\n\nWatch for: A temporary change that stays in the file. Check the diff before you continue.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code waits for your approval before the temporary change. You inspect the restored diff.\n\nNext: Discuss: who decides what?",
   "teach": {
    "gist": "One experiment on the policy: does a loud message get another label when the policy changes? Done when the policy is restored and verify is green.",
@@ -1895,7 +1952,7 @@ window.SLIDES = [
    ],
    "done": [
     "The before and after evidence uses the same messages.",
-    "The accepted policy is restored and npm run verify passes."
+    "Only the temporary policy edit is gone. The completed SOLO 1 files remain and npm run verify passes."
    ],
    "copy": [
     [
@@ -1908,7 +1965,7 @@ window.SLIDES = [
      "do": "Slide appears. Read the goal and the checkpoint out loud.",
      "say": [
       "Claude Code proposes one temporary change. You approve it, compare, and check that the policy is back.",
-      "You are done when: The before and after evidence uses the same messages. The accepted policy is restored and npm run verify passes."
+      "You are done when: The before and after evidence uses the same messages. Only the temporary policy edit is gone. The completed SOLO 1 files remain and npm run verify passes."
      ]
     },
     {
@@ -1924,10 +1981,15 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 3 · You. Inspect the restored policy.",
+     "do": "Step 3 · You. Restore only the temporary policy edit.",
      "say": [
-      "Check that the policy is back. The diff must be clean."
+      "Do not revert the whole SOLO 1 diff. Remove only the temporary experiment."
      ]
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a1c-restore.mp4",
+     "say": "This guide proves the accepted policy is restored and check:1 passes. The before and after labels must still come from the participant’s own live runs."
     },
     {
      "do": "Ask two people to show their result.",
@@ -1940,11 +2002,11 @@ window.SLIDES = [
    "learn": [
     "The policy text decides the label. Change the text and the label can change.",
     "The label can also stay the same. The policy is still what you rely on.",
-    "After an experiment, the diff must be clean."
+    "After the experiment, only its temporary edit must disappear."
    ],
    "watch": [
     "A temporary change that stays in the file. Check the diff before you continue.",
-    "Claude Code that changes lib/switch.mjs. The fixed route stays as it is.",
+    "A participant who reverts the completed SOLO 1 files. Restore only the temporary policy edit.",
     "Participants who expect one fixed outcome. Labels can differ between runs."
    ],
    "terms": [
@@ -2195,7 +2257,7 @@ window.SLIDES = [
    },
    {
     "title": "Human boundary",
-    "body": "You approve each memory file before it is written. You compare the two files yourself. No UI and no model call are added."
+    "body": "You approve each memory file before it is written. You compare the two files yourself. No UI and no app model call are added."
    }
   ],
   "keyPoints": [
@@ -2211,10 +2273,22 @@ window.SLIDES = [
     "after": "Read the proposal and approve it. Then Claude Code writes tickets/T-001/memory.md and stops."
    },
    {
+    "where": "Terminal · repository root",
+    "text": "Exit Claude Code and start a fresh session",
+    "prompt": "claude --setting-sources project,user --strict-mcp-config --no-chrome",
+    "after": "The new session has not seen Session 1."
+   },
+   {
     "where": "Claude Code",
     "text": "Session 2, a fresh one: resume T-001 from the file",
     "prompt": "This is a fresh Claude Code session. Read only tickets/T-001/memory.md. Do not read a transcript, technical log, T-002 source, or T-002 memory. Summarize the confirmed facts, decisions, open questions, and next step with their source references. State that you read this file explicitly and that it was not loaded automatically. Propose no implementation. Stop after the summary.",
     "after": "The summary comes only from the file. Claude Code says that it read the file because you asked."
+   },
+   {
+    "where": "Terminal · repository root",
+    "text": "Exit Claude Code and start another fresh session",
+    "prompt": "claude --setting-sources project,user --strict-mcp-config --no-chrome",
+    "after": "The new session has not seen Session 1 or Session 2."
    },
    {
     "where": "Claude Code",
@@ -2229,7 +2303,7 @@ window.SLIDES = [
    }
   ],
   "expected": "T-002 contains no T-001 fact.",
-  "notes": "Time: 25 min.\n\nClaude Code itself is the chat. Participants build a small reviewed memory file for T-001, resume from it in a fresh session, and prove that T-002 stays separate.\n\nWatch for: A continued session is not a fresh session. Start a new one.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: You approve each memory file before it is written. You compare the two files yourself. No UI and no model call are added.\n\nNext: Lunch",
+  "notes": "Time: 25 min.\n\nClaude Code itself is the chat. Participants build a small reviewed memory file for T-001, resume from it in a fresh session, and prove that T-002 stays separate.\n\nWatch for: A continued session is not a fresh session. Start a new one.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: You approve each memory file before it is written. You compare the two files yourself. No UI and no app model call are added.\n\nNext: Lunch",
   "teach": {
    "gist": "Claude Code itself is the chat. Participants build a small reviewed memory file for T-001, resume from it in a fresh session, and prove that T-002 stays separate.",
    "do": [
@@ -2246,11 +2320,19 @@ window.SLIDES = [
      "Use Claude Code itself as our chat. Do not build a UI, add a model API call, or change the Agent SDK flow. Read docs/memory-lab/T-001.md only. No conversation or technical log exists for this exercise, so do not invent either one. Explain the difference between conversation/session resume, append-only technical logging, and a curated ticket memory file.\n\nPropose tickets/T-001/memory.md with exactly these headings: Confirmed facts, Decisions, Open questions, and Next step. Map every item to a stable T-001 source label. Preserve uncertain source claims as OPEN: under Open questions. Keep only durable ticket context. Do not include credentials, authentication data, tokens, personal data, a transcript dump, or speculation. Show the proposed file and wait for my approval. After I approve, create only tickets/T-001/memory.md and show the diff. Stop and tell me to open a fresh Claude Code session."
     ],
     [
-     "Step 2 · Claude Code",
-     "This is a fresh Claude Code session. Read only tickets/T-001/memory.md. Do not read a transcript, technical log, T-002 source, or T-002 memory. Summarize the confirmed facts, decisions, open questions, and next step with their source references. State that you read this file explicitly and that it was not loaded automatically. Propose no implementation. Stop after the summary."
+     "Step 2 · Terminal · repository root",
+     "claude --setting-sources project,user --strict-mcp-config --no-chrome"
     ],
     [
      "Step 3 · Claude Code",
+     "This is a fresh Claude Code session. Read only tickets/T-001/memory.md. Do not read a transcript, technical log, T-002 source, or T-002 memory. Summarize the confirmed facts, decisions, open questions, and next step with their source references. State that you read this file explicitly and that it was not loaded automatically. Propose no implementation. Stop after the summary."
+    ],
+    [
+     "Step 4 · Terminal · repository root",
+     "claude --setting-sources project,user --strict-mcp-config --no-chrome"
+    ],
+    [
+     "Step 5 · Claude Code",
      "This is another fresh Claude Code session. Read docs/memory-lab/T-002.md only. Do not read docs/memory-lab/T-001.md or tickets/T-001/memory.md. Propose tickets/T-002/memory.md with exactly these headings: Confirmed facts, Decisions, Open questions, and Next step. Map every item to a stable T-002 source label. Preserve uncertain source claims as OPEN: under Open questions. Do not include credentials, authentication data, tokens, personal data, a transcript dump, or speculation. Show the proposal and wait for my approval. After I approve, create only tickets/T-002/memory.md and show the diff. Do not create or rewrite technical logs. Stop for my isolation review."
     ]
    ],
@@ -2263,25 +2345,42 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a1m-sources.mp4",
+     "say": "This guide shows the two real starter sources and the empty state before approval. It shows no invented memory file or model output."
+    },
+    {
      "do": "Step 1 · Claude Code. Session 1: build the T-001 memory.",
      "say": [
       "Claude Code itself is the chat. Paste, read the proposal, approve."
      ]
     },
     {
-     "do": "Step 2 · Claude Code. Session 2, a fresh one: resume T-001 from the file.",
+     "do": "Step 2 · Terminal · repository root. Exit Claude Code and start a fresh session.",
+     "say": [
+      "Stay in the repository root. Exit Claude Code, then run this command."
+     ]
+    },
+    {
+     "do": "Step 3 · Claude Code. Session 2, a fresh one: resume T-001 from the file.",
      "say": [
       "Open a new Claude Code session. It knows nothing. Now it reads the file."
      ]
     },
     {
-     "do": "Step 3 · Claude Code. Session 3, another fresh one: build the T-002 memory.",
+     "do": "Step 4 · Terminal · repository root. Exit Claude Code and start another fresh session.",
+     "say": [
+      "Exit again. Stay in the repository root and run the same command."
+     ]
+    },
+    {
+     "do": "Step 5 · Claude Code. Session 3, another fresh one: build the T-002 memory.",
      "say": [
       "One more new session, for the second ticket."
      ]
     },
     {
-     "do": "Step 4 · You. Compare the two files yourself.",
+     "do": "Step 6 · You. Compare the two files yourself.",
      "say": [
       "Open both files next to each other. Is anything of T-001 in T-002?"
      ]
@@ -2290,7 +2389,7 @@ window.SLIDES = [
      "do": "Ask two people to show their result.",
      "say": [
       "Who wants to show the checkpoint on their screen?",
-      "And the boundary for this step: You approve each memory file before it is written. You compare the two files yourself. No UI and no model call are added."
+      "And the boundary for this step: You approve each memory file before it is written. You compare the two files yourself. No UI and no app model call are added."
      ]
     }
    ],
@@ -2401,9 +2500,9 @@ window.SLIDES = [
   "keyPoints": [
    "In code you state exactly which tools exist and which are allowed."
   ],
-  "notes": "Time: 5 min.\n\nIt works like a key ring. tools says which keys exist, allowedTools says which doors open without asking, and disallowedTools says which doors stay locked. In Step 1, tools is empty, and WebSearch, WebFetch and Bash are forbidden. Step 3 adds the read-only lookup tools.\n\nNext: The team: a team lead and two specialists",
+  "notes": "Time: 5 min.\n\nIt works like a key ring. tools says which keys exist, allowedTools says which doors open without asking, and disallowedTools says which doors stay locked. In Step 1, tools is empty, and WebSearch, WebFetch and Bash are forbidden. Step 3 adds the read-only lookup tools.\n\nNext: The team: a main agent and two sub-agents",
   "teach": {
-   "next": "The team: a team lead and two specialists",
+   "next": "The team: a main agent and two sub-agents",
    "time": "5 min",
    "gist": "The key ring: tools, allowedTools and disallowedTools.",
    "script": [
@@ -2434,42 +2533,42 @@ window.SLIDES = [
  },
  {
   "lessonId": "workshop-4",
-  "title": "The team: a team lead and two specialists",
+  "title": "The team: a main agent and two sub-agents",
   "kicker": "Concept · Subagents",
   "type": "concept",
   "visual": {
    "swap": true
   },
-  "subtitle": "The team lead hands out the work. The risk expert goes first, and its result goes to the writer.",
+  "subtitle": "The main agent delegates to Risk and then Reply. In Step 2, both return separately to the main agent.",
   "cards": [
    {
-    "title": "Orchestrator = the team lead",
+    "title": "Orchestrator = the main agent",
     "body": "Receives the ticket and hands out the work."
    },
    {
     "title": "risk-agent = the risk expert",
-    "body": "Writes a short internal risk note. The team lead decides the priority."
+    "body": "Writes a short internal risk note. The main agent decides the priority."
    },
    {
     "title": "customer-reply-agent = the writer",
-    "body": "Writes the draft reply, using the risk note."
+    "body": "Writes the draft reply from the ticket and priority. Step 3 can add the risk note to the handoff."
    }
   ],
   "keyPoints": [
-   "The orchestrator delegates. Each specialist does one task."
+   "The orchestrator delegates. Each sub-agent does one task."
   ],
-  "notes": "Time: 5 min.\n\nStep 2: the orchestrator delegates to risk-agent first, and then passes that result to customer-reply-agent. In the trace you see this as Agent → risk-agent, then Agent → customer-reply-agent. Last session in n8n the Risk Agent was wired as a tool of the Reply Agent. Step 3 adds a third agent: customer-context-agent.\n\nNext: Each specialist is one file",
+  "notes": "Time: 5 min.\n\nStep 2: the orchestrator delegates to risk-agent first, then separately delegates to customer-reply-agent. In the trace you see this as Agent → risk-agent, then Agent → customer-reply-agent. In the main Day 3 workflow, the main agent called Risk and then Reply. The optional extra nested Risk under Reply. Step 3 adds a third agent: customer-context-agent.\n\nNext: Each sub-agent is one file",
   "teach": {
-   "next": "Each specialist is one file",
+   "next": "Each sub-agent is one file",
    "time": "5 min",
-   "gist": "The team lead hands out the work: risk first, then the writer.",
+   "gist": "The main agent delegates to Risk and then Reply; both return to the main agent.",
    "script": [
     {
-     "say": "Step 2: our agent gets a team. One team lead and two specialists."
+     "say": "Step 2: our agent gets a team. One main agent and two sub-agents."
     },
     {
      "do": "Point at the cards left to right.",
-     "say": "The team lead gets the ticket. The risk expert goes first. The writer gets the risk note and writes the draft."
+     "say": "The main agent gets the ticket. The risk expert goes first. The writer gets the ticket and priority. Step 3 can add the risk note."
     },
     {
      "ask": "Why risk first?",
@@ -2480,18 +2579,18 @@ window.SLIDES = [
     "Name the three roles and the order."
    ],
    "done": [
-    "The orchestrator delegates. Each specialist does one task."
+    "The orchestrator delegates. Each sub-agent does one task."
    ],
    "watch": [],
    "learn": [
-    "The orchestrator delegates. Each specialist does one task."
+    "The orchestrator delegates. Each sub-agent does one task."
    ],
    "terms": []
   }
  },
  {
   "lessonId": "workshop-4",
-  "title": "Each specialist is one file",
+  "title": "Each sub-agent is one file",
   "kicker": "Concept · Agent files",
   "type": "concept",
   "visual": {
@@ -2510,7 +2609,7 @@ window.SLIDES = [
   "cards": [
    {
     "title": ".claude/agents/risk-agent.md",
-    "body": "One file = one specialist."
+    "body": "One file = one sub-agent."
    },
    {
     "title": "Top: name and description · below: instructions",
@@ -2524,20 +2623,20 @@ window.SLIDES = [
   "keyPoints": [
    "Each agent is one file in .claude/agents/.",
    "The folder starts with a dot. Use ls -a to see it.",
-   "Before SOLO 2, each specialist file is a TODO stub. Claude Code fills it in from the prompt."
+   "Before SOLO 2, each sub-agent file is a TODO stub. Claude Code fills it in from the prompt."
   ],
-  "notes": "Time: 4 min.\n\nShow .claude/agents on the trainer/solution branch. Claude Code and the package both read this folder. A folder called .agents or a file called AGENTS.md is different and does not define these specialists.\n\nNext: Put the file in the folder: Claude finds it",
+  "notes": "Time: 4 min.\n\nShow .claude/agents on the trainer/solution branch. Claude Code and the package both read this folder. A folder called .agents or a file called AGENTS.md is different and does not define these sub-agents.\n\nNext: Put the file in the folder: Claude finds it",
   "teach": {
    "next": "Put the file in the folder: Claude finds it",
    "time": "4 min",
-   "gist": "There is one file per specialist, in .claude/agents/.",
+   "gist": "There is one file per sub-agent, in .claude/agents/.",
    "script": [
     {
-     "say": "Where do the specialists live? Each one is one file, in the folder .claude/agents."
+     "say": "Where do the sub-agents live? Each one is one file, in the folder .claude/agents."
     },
     {
      "do": "Point at the middle card.",
-     "say": "At the top are the name and the description: when should this specialist be used? Below that are its work instructions, just like CLAUDE.md. Which tools it may use, we set in code."
+     "say": "At the top are the name and the description: when should this sub-agent be used? Below that are its work instructions, just like CLAUDE.md. Which tools it may use, we set in code."
     },
     {
      "do": "Point at the last card.",
@@ -2549,7 +2648,7 @@ window.SLIDES = [
     "The top says who it is, and the text gives the instructions."
    ],
    "done": [
-    "Before SOLO 2, each specialist file is a TODO stub. Claude Code fills it in from the prompt."
+    "Before SOLO 2, each sub-agent file is a TODO stub. Claude Code fills it in from the prompt."
    ],
    "watch": [
     "On main each file has only a name and TODO lines. Step 2 fills in two files. Step 3 fills in the third."
@@ -2557,7 +2656,7 @@ window.SLIDES = [
    "learn": [
     "Each agent is one file in .claude/agents/.",
     "The folder starts with a dot. Use ls -a to see it.",
-    "Before SOLO 2, each specialist file is a TODO stub. Claude Code fills it in from the prompt."
+    "Before SOLO 2, each sub-agent file is a TODO stub. Claude Code fills it in from the prompt."
    ],
    "terms": []
   }
@@ -2598,14 +2697,14 @@ window.SLIDES = [
    "The description decides when Claude uses the agent.",
    "The SDK reads the same folder: 'project' in settingSources: ['project', 'user']."
   ],
-  "notes": "Time: 3 min.\n\nA specialist is one file. Claude Code fills in the files from the SOLO 2 prompt. The package reads the same folder through lib/agents.mjs. on the trainer/solution branch, show risk-agent.md and its description line.\n\nNext: Assignment 2: A team lead and two specialists",
+  "notes": "Time: 3 min.\n\nA sub-agent is one file. Claude Code fills in the files from the SOLO 2 prompt. The package reads the same folder through lib/agents.mjs. on the trainer/solution branch, show risk-agent.md and its description line.\n\nNext: Assignment 2: A main agent and two sub-agents",
   "teach": {
-   "next": "Assignment 2: A team lead and two specialists",
+   "next": "Assignment 2: A main agent and two sub-agents",
    "time": "3 min",
    "gist": "Claude reads the folder, and the description is the job advert.",
    "script": [
     {
-     "say": "How does Claude know that the specialists exist? You put the file in the folder. In Claude Code that is all. In our package, a small loader reads the same folder for the SDK."
+     "say": "How does Claude know that the sub-agents exist? You put the file in the folder. In Claude Code that is all. In our package, a small loader reads the same folder for the SDK."
     },
     {
      "do": "Point at card 2.",
@@ -2633,7 +2732,7 @@ window.SLIDES = [
  },
  {
   "lessonId": "workshop-4",
-  "title": "Assignment 2: A team lead and two specialists",
+  "title": "Assignment 2: A main agent and two sub-agents",
   "kicker": "Day 4 · SOLO 2",
   "type": "practice",
   "layout": "exercise",
@@ -2643,7 +2742,7 @@ window.SLIDES = [
    "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent",
    "label": "AetherLink-bv/aetherlink-day4-n8n-to-agent · branch main"
   },
-  "subtitle": "Claude Code fills in two specialist files and the team-lead options. You read the trace and the draft.",
+  "subtitle": "Claude Code fills in two sub-agent files and the main-agent options. You read the trace and the draft.",
   "cards": [
    {
     "title": "Checkpoint",
@@ -2651,7 +2750,7 @@ window.SLIDES = [
    },
    {
     "title": "Human boundary",
-    "body": "Neither specialist has a tool. The reply in message is a draft. Nothing is sent."
+    "body": "Neither sub-agent has a tool. The reply in message is a draft. Nothing is sent."
    }
   ],
   "keyPoints": [
@@ -2662,19 +2761,19 @@ window.SLIDES = [
    {
     "where": "Claude Code",
     "text": "Paste the SOLO 2 prompt",
-    "prompt": "Run npm run check:2 and show what is red. Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the team lead chooses a specialist, why a specialist has its own context, and why neither specialist has a tool. Stop.",
+    "prompt": "Run npm run check:2 and show what is red. Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the main agent chooses a sub-agent, why a sub-agent has its own context, and why neither sub-agent has a tool. Stop.",
     "after": "The check goes from red to green. Then one real run with MSG-05."
    },
    {
     "where": "Terminal 2",
     "text": "Test it yourself",
     "prompt": "npm run check:2\nnpm run lesson2 -- MSG-05",
-    "after": "check:2 compares your two specialist files and the team-lead options with the reference. lesson2 runs the team on one ticket."
+    "after": "check:2 compares your two sub-agent files and the main-agent options with the reference. lesson2 runs the team on one ticket."
    },
    {
     "where": "You",
     "text": "Find risk-agent before customer-reply-agent in the trace",
-    "after": "The writer needs the risk note first."
+    "after": "Both sub-agents return separately to the main agent."
    },
    {
     "where": "You",
@@ -2683,7 +2782,7 @@ window.SLIDES = [
    }
   ],
   "expected": "The trace shows risk-agent before customer-reply-agent.",
-  "notes": "Time: 25 min.\n\nThe single agent becomes a team. Done when check:2 passes and the trace shows risk-agent before customer-reply-agent.\n\nWatch for: A draft with a fact that the ticket did not give. No specialist can look anything up yet.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Neither specialist has a tool. The reply in message is a draft. Nothing is sent.\n\nNext: Check: does your screen look like this?",
+  "notes": "Time: 25 min.\n\nThe single agent becomes a team. Done when check:2 passes and the trace shows risk-agent before customer-reply-agent.\n\nWatch for: A draft with a fact that the ticket did not give. No sub-agent can look anything up yet.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Neither sub-agent has a tool. The reply in message is a draft. Nothing is sent.\n\nNext: Check: does your screen look like this?",
   "teach": {
    "gist": "The single agent becomes a team. Done when check:2 passes and the trace shows risk-agent before customer-reply-agent.",
    "do": [
@@ -2696,7 +2795,7 @@ window.SLIDES = [
    "copy": [
     [
      "Step 1 · Claude Code",
-     "Run npm run check:2 and show what is red. Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the team lead chooses a specialist, why a specialist has its own context, and why neither specialist has a tool. Stop."
+     "Run npm run check:2 and show what is red. Read the STEP 2 TODOs in 02-subagents/options.mjs and .claude/agents, and the Risk Agent and Customer Reply Agent nodes in n8n/support-triage.json. Fill in risk-agent.md, customer-reply-agent.md and 02-subagents/options.mjs. Copy each n8n tool description and system message. Change no other file. Run npm run check:2 until it passes. Run npm run lesson2 -- MSG-05 once and show the trace. Then explain in five lines: how the main agent chooses a sub-agent, why a sub-agent has its own context, and why neither sub-agent has a tool. Stop."
     ],
     [
      "Step 2 · Terminal 2",
@@ -2707,14 +2806,14 @@ window.SLIDES = [
     {
      "do": "Slide appears. Read the goal and the checkpoint out loud.",
      "say": [
-      "Claude Code fills in two specialist files and the team-lead options. You read the trace and the draft.",
+      "Claude Code fills in two sub-agent files and the main-agent options. You read the trace and the draft.",
       "You are done when: npm run check:2 passes. The trace shows risk-agent before customer-reply-agent."
      ]
     },
     {
      "do": "Step 1 · Claude Code. Paste the SOLO 2 prompt.",
      "say": [
-      "Paste the prompt. Two files and the team-lead options."
+      "Paste the prompt. Two files and the main-agent options."
      ]
     },
     {
@@ -2724,9 +2823,14 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a2-check.mp4",
+     "say": "This is check:2 on the reference solution. It verifies both sub-agent files and the main-agent options without calling a model."
+    },
+    {
      "do": "Step 3 · You. Find risk-agent before customer-reply-agent in the trace.",
      "say": [
-      "Which specialist ran first? Why that order?"
+      "Which sub-agent ran first? Where did each result return?"
      ]
     },
     {
@@ -2739,17 +2843,17 @@ window.SLIDES = [
      "do": "Ask two people to show their result.",
      "say": [
       "Who wants to show the checkpoint on their screen?",
-      "And the boundary for this step: Neither specialist has a tool. The reply in message is a draft. Nothing is sent."
+      "And the boundary for this step: Neither sub-agent has a tool. The reply in message is a draft. Nothing is sent."
      ]
     }
    ],
    "learn": [
-    "The description of an agent file tells the team lead when to delegate.",
-    "Each specialist starts with an empty context and returns only its answer.",
-    "The team lead has one tool: Agent. It can delegate and do nothing else."
+    "The description of a sub-agent tells the main agent when to delegate.",
+    "Each sub-agent starts with an empty context and returns only its answer.",
+    "In Step 2, the main agent delegates to Risk and Reply separately."
    ],
    "watch": [
-    "A draft with a fact that the ticket did not give. No specialist can look anything up yet.",
+    "A draft with a fact that the ticket did not give. No sub-agent can look anything up yet.",
     "The wrong order in the trace: read the description line of both files.",
     "A personal style in the answers: your own user settings load too."
    ],
@@ -2764,11 +2868,11 @@ window.SLIDES = [
     ],
     [
      "Trace",
-     "the order of specialists and tools in one real run"
+     "the order of sub-agents and tools in one real run"
     ],
     [
      "Agent tool",
-     "the tool the team lead uses to hand a task to a specialist"
+     "the tool the main agent uses to hand a task to a sub-agent"
     ],
     [
      "description",
@@ -2823,13 +2927,13 @@ window.SLIDES = [
   },
   "subtitle": "Type these two commands in a second terminal. Look for two things.",
   "keyPoints": [
-   "After npm run check:2: Look for: fail 0. Both specialist files and the team-lead options are right.",
+   "After npm run check:2: Look for: fail 0. Both sub-agent files and the main-agent options are right.",
    "After the real run: Two Agent lines: first risk-agent, then customer-reply-agent. Each [subagent] line shows its model. The draft is in message."
   ],
   "cards": [
    {
     "title": "1 · After npm run check:2",
-    "body": "Look for: fail 0. Both specialist files and the team-lead options are right."
+    "body": "Look for: fail 0. Both sub-agent files and the main-agent options are right."
    },
    {
     "title": "2 · After the real run",
@@ -2847,11 +2951,16 @@ window.SLIDES = [
     },
     {
      "do": "Point at card 2.",
-     "say": "Two Agent lines, in this order. Under each one you see the model that the specialist runs on."
+     "say": "Two Agent lines, in this order. Under each one you see the model that the sub-agent runs on."
     },
     {
      "ask": "Does the draft say something that the ticket did not give?",
      "say": "(If yes: that is made up. The draft must not say it.)"
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a2-check.mp4",
+     "say": "This is check:2 on the reference solution. It verifies both sub-agent files and the main-agent options without calling a model."
     }
    ],
    "do": [
@@ -2864,7 +2973,7 @@ window.SLIDES = [
     "A real run takes up to a minute. The model name and the words of the answer differ on every laptop."
    ],
    "learn": [
-    "After npm run check:2: Look for: fail 0. Both specialist files and the team-lead options are right.",
+    "After npm run check:2: Look for: fail 0. Both sub-agent files and the main-agent options are right.",
     "After the real run: Two Agent lines: first risk-agent, then customer-reply-agent. Each [subagent] line shows its model. The draft is in message."
    ],
    "terms": []
@@ -2896,19 +3005,19 @@ window.SLIDES = [
    }
   ],
   "keyPoints": [
-   "risk-agent provides the priority and risk analysis.",
-   "customer-reply-agent uses the original message and risk-agent result.",
+   "risk-agent provides an internal risk analysis.",
+   "customer-reply-agent uses the original message and priority in Step 2.",
    "A human reviews every draft before it goes to a customer."
   ],
-  "notes": "Time: 5 min.\n\nAnswers: the risk expert goes first, because the writer needs its risk note. The n8n Description is now the description line at the top of the agent file in .claude/agents/.\n\nNext: MCP: the lookup desk",
+  "notes": "Time: 5 min.\n\nAnswers: Risk runs first, but both sub-agents return separately to the main agent in Step 2. The n8n Description is now the description line at the top of the agent file in .claude/agents/.\n\nNext: MCP: the lookup desk",
   "teach": {
    "next": "MCP: the lookup desk",
    "time": "5 min",
-   "gist": "Discussion: the order (risk first) and where the Description lives now.",
+   "gist": "Discussion: the order, the return to the main agent and where the Description lives now.",
    "script": [
     {
      "ask": "Which agent runs first, and why?",
-     "say": "(Answer: risk. The writer needs to know how serious it is.)"
+     "say": "(Answer: Risk runs first. Both results return separately to the main agent.)"
     },
     {
      "ask": "Where is last session's n8n Description now?",
@@ -2923,8 +3032,8 @@ window.SLIDES = [
    ],
    "watch": [],
    "learn": [
-    "risk-agent provides the priority and risk analysis.",
-    "customer-reply-agent uses the original message and risk-agent result.",
+    "risk-agent provides an internal risk analysis.",
+    "customer-reply-agent uses the original message and priority in Step 2.",
     "A human reviews every draft before it goes to a customer."
    ],
    "terms": []
@@ -2963,7 +3072,7 @@ window.SLIDES = [
   "teach": {
    "next": "Assignment 3: Real facts from the lookup desk",
    "time": "5 min",
-   "gist": "MCP is the lookup desk. It is read-only: it looks things up and never changes them.",
+   "gist": "The support MCP server is a read-only lookup desk. Other MCP tools can write, such as the draft tool later.",
    "script": [
     {
      "say": "Step 3 adds outside data. Think of a lookup desk."
@@ -2973,7 +3082,7 @@ window.SLIDES = [
      "say": "The desk has two counters: one for customers and one for payments. The agent asks, and the desk looks it up and hands over only that."
     },
     {
-     "say": "And the desk can only look things up. It cannot change anything."
+     "say": "This support desk can only look things up. It cannot change anything."
     },
     {
      "ask": "Why do we want facts from a desk instead of from the AI itself?",
@@ -2982,7 +3091,7 @@ window.SLIDES = [
    ],
    "do": [
     "Explain the lookup desk.",
-    "It is read-only."
+    "This support desk is read-only."
    ],
    "done": [
     "The MCP server owns the data. The agent only sees what the tool returns."
@@ -3006,7 +3115,7 @@ window.SLIDES = [
    "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent",
    "label": "AetherLink-bv/aetherlink-day4-n8n-to-agent · branch main"
   },
-  "subtitle": "Claude Code adds the context specialist and connects the lookup desk. You match each fact to a tool result.",
+  "subtitle": "Claude Code adds the Customer Context sub-agent and connects the lookup desk. You match each fact to a tool result.",
   "cards": [
    {
     "title": "Checkpoint",
@@ -3014,7 +3123,7 @@ window.SLIDES = [
    },
    {
     "title": "Human boundary",
-    "body": "The lookup desk only reads. Only one specialist has its tools. You match each fact to a tool result."
+    "body": "The lookup desk only reads. Only the Customer Context sub-agent has its tools. You match each fact to a tool result."
    }
   ],
   "keyPoints": [
@@ -3046,9 +3155,9 @@ window.SLIDES = [
    }
   ],
   "expected": "The trace shows Context, then Risk, then Reply, with two tool results.",
-  "notes": "Time: 25 min.\n\nThe team gets a third specialist and one lookup desk with two read-only tools. Done when check:3 passes and the trace shows Context, Risk, Reply with two tool results.\n\nWatch for: A change to 03-mcp/support-mcp/server.js. The desk is built and stays as it is.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: The lookup desk only reads. Only one specialist has its tools. You match each fact to a tool result.\n\nNext: Check: does your screen look like this?",
+  "notes": "Time: 25 min.\n\nThe team gets a third sub-agent and one lookup desk with two read-only tools. Done when check:3 passes and the trace shows Context, Risk, Reply with two tool results.\n\nWatch for: A change to 03-mcp/support-mcp/server.js. The desk is built and stays as it is.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: The lookup desk only reads. Only the Customer Context sub-agent has its tools. You match each fact to a tool result.\n\nNext: Check: does your screen look like this?",
   "teach": {
-   "gist": "The team gets a third specialist and one lookup desk with two read-only tools. Done when check:3 passes and the trace shows Context, Risk, Reply with two tool results.",
+   "gist": "The team gets a third sub-agent and one lookup desk with two read-only tools. Done when check:3 passes and the trace shows Context, Risk, Reply with two tool results.",
    "do": [
     "Walk the room. Use the Copy buttons. Check the checkpoint on two laptops."
    ],
@@ -3070,14 +3179,14 @@ window.SLIDES = [
     {
      "do": "Slide appears. Read the goal and the checkpoint out loud.",
      "say": [
-      "Claude Code adds the context specialist and connects the lookup desk. You match each fact to a tool result.",
+      "Claude Code adds the Customer Context sub-agent and connects the lookup desk. You match each fact to a tool result.",
       "You are done when: npm run check:3 passes. The trace shows Context, then Risk, then Reply, with two tool results."
      ]
     },
     {
      "do": "Step 1 · Claude Code. Paste the SOLO 3 prompt.",
      "say": [
-      "Paste the prompt. One more specialist file, and the options that connect the desk."
+      "Paste the prompt. One more sub-agent file, and the options that connect the desk."
      ]
     },
     {
@@ -3087,9 +3196,14 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a3-check.mp4",
+     "say": "This is check:3 followed by the MCP smoke check. Both are offline checks. The live ticket run is separate model evidence."
+    },
+    {
      "do": "Step 3 · You. Find get_customer and get_transaction in the trace.",
      "say": [
-      "Find the two lookups. Which specialist made them?"
+      "Find the two lookups. Which sub-agent made them?"
      ]
     },
     {
@@ -3102,13 +3216,13 @@ window.SLIDES = [
      "do": "Ask two people to show their result.",
      "say": [
       "Who wants to show the checkpoint on their screen?",
-      "And the boundary for this step: The lookup desk only reads. Only one specialist has its tools. You match each fact to a tool result."
+      "And the boundary for this step: The lookup desk only reads. Only the Customer Context sub-agent has its tools. You match each fact to a tool result."
      ]
     }
    ],
    "learn": [
     "An MCP server gives an agent tools from outside the SDK.",
-    "You name the server in mcpServers and give its tools to one specialist.",
+    "You name the server in mcpServers and give its tools to one sub-agent.",
     "The other agents cannot look up or change data. They have no tool for it."
    ],
    "watch": [
@@ -3221,11 +3335,16 @@ window.SLIDES = [
     },
     {
      "do": "Point at card 2.",
-     "say": "In the real run the context specialist goes first and does both lookups."
+     "say": "In the real run the context sub-agent goes first and does both lookups."
     },
     {
-     "ask": "Which specialist did the lookups, and why only that one?",
+     "ask": "Which sub-agent did the lookups, and why only that one?",
      "say": "(Answer: customer-context-agent. It is the only one with the tools.)"
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a3-check.mp4",
+     "say": "This is check:3 followed by the MCP smoke check. Both are offline checks. The live ticket run is separate model evidence."
     }
    ],
    "do": [
@@ -3266,7 +3385,7 @@ window.SLIDES = [
    },
    {
     "title": "Review",
-    "body": "Who reads the draft before it is sent?"
+    "body": "Who reviews the draft before anything reaches a customer?"
    }
   ],
   "keyPoints": [
@@ -3274,7 +3393,7 @@ window.SLIDES = [
    "Use get_transaction for transaction facts.",
    "A person reviews reply drafts before they are sent."
   ],
-  "notes": "Time: 5 min.\n\nAnswers: the customer facts came from get_customer (the customer list), and the payment facts came from get_transaction (the transaction list). Match each fact in the draft to a tool result in the trace. A person reads every draft before it is sent.\n\nNext: Coffee break",
+  "notes": "Time: 5 min.\n\nAnswers: the customer facts came from get_customer (the customer list), and the payment facts came from get_transaction (the transaction list). Match each fact in the draft to a tool result in the trace. A person reviews every draft before anything reaches a customer.\n\nNext: Coffee break",
   "teach": {
    "next": "Coffee break",
    "time": "5 min",
@@ -3285,7 +3404,7 @@ window.SLIDES = [
      "say": "(Answer: the customer and payment facts. Each one matches a tool result in the trace.)"
     },
     {
-     "ask": "Who reads the draft before it is sent?",
+     "ask": "Who reviews the draft before anything reaches a customer?",
      "say": "(Answer: a person. Always.)"
     }
    ],
@@ -3373,7 +3492,7 @@ window.SLIDES = [
     "title": "Thinking · the agent",
     "items": [
      "Reads what the customer means: its label can differ between runs",
-     "The team lead picks a specialist",
+     "The main agent picks a sub-agent",
      "The writer writes the draft",
      "A person checks the result"
     ]
@@ -3382,7 +3501,7 @@ window.SLIDES = [
   "keyPoints": [
    "Code where it must. The agent chooses where it may. Always a human at the end."
   ],
-  "notes": "Time: 4 min.\n\nFixed code checks contracts and routes for the same input. The team lead decides which specialist to call. A person reviews the result and the observed evidence. Use fixed code for anything that must be exact or safe.\n\nNext: Assignment 4: Compare with n8n and collect proof",
+  "notes": "Time: 4 min.\n\nFixed code checks contracts and routes for the same input. The main agent decides which sub-agent to call. A person reviews the result and the observed evidence. Use fixed code for anything that must be exact or safe.\n\nNext: Assignment 4: Compare with n8n and collect proof",
   "teach": {
    "next": "Assignment 4: Compare with n8n and collect proof",
    "time": "4 min",
@@ -3392,7 +3511,7 @@ window.SLIDES = [
      "say": "There are two kinds of work. Fixed rules, like the Switch and the check: the same input always gives the same answer."
     },
     {
-     "say": "And thinking, like the team lead deciding who gets the work. And at the end: a person."
+     "say": "And thinking, like the main agent deciding who gets the work. And at the end: a person."
     },
     {
      "ask": "Would you let the AI decide the route of a fraud message?",
@@ -3419,7 +3538,7 @@ window.SLIDES = [
   "type": "practice",
   "layout": "exercise",
   "calm": true,
-  "timer": 18,
+  "timer": 12,
   "repo": {
    "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent",
    "label": "AetherLink-bv/aetherlink-day4-n8n-to-agent · branch main"
@@ -3442,9 +3561,9 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Paste the SOLO 4 prompt",
-    "prompt": "Run npm run lesson3 for MSG-01, MSG-06 and MSG-09. Create participant-output/acceptance-table.md with one row for each message: observed priority, route, order of the specialists, facts that came from a tool, and the n8n node that gave this behavior. Use only output from these runs. Write OPEN where you did not observe the behavior. Change no source file. Then name one difference between the n8n flow and this app. Stop.",
-    "after": "Claude Code runs MSG-01, MSG-06 and MSG-09 and writes participant-output/acceptance-table.md."
+    "text": "Paste the final Day 3 comparison prompt",
+    "prompt": "Run npm run lesson3 for MSG-01, MSG-06 and MSG-09. Read n8n/day3-review-queue.json as the final Day 3 source. Create participant-output/acceptance-table.md with one row for each message: observed priority, route, order of the sub-agents, facts that came from a tool, and the final Day 3 node that gave this behavior. Use only output from these runs. Write OPEN where you did not observe the behavior. Change no source file. Then name one difference between the final Day 3 workflow and this app. Stop.",
+    "after": "Claude Code runs MSG-01, MSG-06 and MSG-09 and writes participant-output/acceptance-table.md against n8n/day3-review-queue.json."
    },
    {
     "where": "You",
@@ -3463,7 +3582,7 @@ window.SLIDES = [
    }
   ],
   "expected": "You named one difference with n8n and the file you would change.",
-  "notes": "Time: 18 min.\n\nProof, not opinion: three real runs, one table, one difference with n8n. Done when every row points to a real run or says OPEN.\n\nWatch for: Rows filled in from memory. Ask for the run.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes no source file. You make the review decision. Nothing is sent or deployed.\n\nNext: Check: does your evidence look like this?",
+  "notes": "Time: 12 min.\n\nProof, not opinion: three real runs, one table, one difference with n8n. Done when every row points to a real run or says OPEN.\n\nWatch for: Rows filled in from memory. Ask for the run.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Claude Code changes no source file. You make the review decision. Nothing is sent or deployed.\n\nNext: Check: does your evidence look like this?",
   "teach": {
    "gist": "Proof, not opinion: three real runs, one table, one difference with n8n. Done when every row points to a real run or says OPEN.",
    "do": [
@@ -3476,7 +3595,7 @@ window.SLIDES = [
    "copy": [
     [
      "Step 1 · Claude Code",
-     "Run npm run lesson3 for MSG-01, MSG-06 and MSG-09. Create participant-output/acceptance-table.md with one row for each message: observed priority, route, order of the specialists, facts that came from a tool, and the n8n node that gave this behavior. Use only output from these runs. Write OPEN where you did not observe the behavior. Change no source file. Then name one difference between the n8n flow and this app. Stop."
+     "Run npm run lesson3 for MSG-01, MSG-06 and MSG-09. Read n8n/day3-review-queue.json as the final Day 3 source. Create participant-output/acceptance-table.md with one row for each message: observed priority, route, order of the sub-agents, facts that came from a tool, and the final Day 3 node that gave this behavior. Use only output from these runs. Write OPEN where you did not observe the behavior. Change no source file. Then name one difference between the final Day 3 workflow and this app. Stop."
     ]
    ],
    "script": [
@@ -3488,7 +3607,12 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Step 1 · Claude Code. Paste the SOLO 4 prompt.",
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a4-dry-runs.mp4",
+     "say": "This guide shows the exact three inputs and the full dry-run configuration. A dry run is not acceptance evidence. Use live output or write OPEN."
+    },
+    {
+     "do": "Step 1 · Claude Code. Paste the final Day 3 comparison prompt.",
      "say": [
       "Paste the prompt. Three real runs take a few minutes."
      ]
@@ -3543,7 +3667,7 @@ window.SLIDES = [
      "behavior you did not observe in a real run"
     ]
    ],
-   "time": "18 min",
+   "time": "12 min",
    "next": "Check: does your evidence look like this?"
   }
  },
@@ -3563,7 +3687,7 @@ window.SLIDES = [
    },
    {
     "title": "Observed trace",
-    "body": "Each label and external-data claim points to an actual run, saved draft or tool result."
+    "body": "Each route and customer-data claim points to a run or tool result."
    },
    {
     "title": "One difference",
@@ -3579,18 +3703,23 @@ window.SLIDES = [
    "Missing evidence stays OPEN.",
    "A human makes the review decision."
   ],
-  "notes": "Time: 4 min.\n\nShow the participant's acceptance table and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key.\n\nNext: Discuss: who is accountable?",
+  "notes": "Time: 4 min.\n\nShow the acceptance table and one real trace. Read one row end to end. If evidence is absent, the row says OPEN.\n\nNext: Assignment 5: Save three drafts for human review",
   "teach": {
-   "next": "Discuss: who is accountable?",
+   "next": "Assignment 5: Save three drafts for human review",
    "time": "4 min",
    "gist": "Every row points to observed evidence or says OPEN.",
    "script": [
     {
-     "do": "Show the participant's acceptance table and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key."
+     "do": "Show the acceptance table and one real trace. Read one row end to end. If evidence is absent, the row says OPEN."
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a4-dry-runs.mp4",
+     "say": "This guide shows the exact three inputs and the full dry-run configuration. A dry run is not acceptance evidence. Use live output or write OPEN."
     }
    ],
    "do": [
-    "Show the participant's acceptance table and one real trace. Read one row end to end. If the evidence is absent, the row says OPEN. Do not compare against a hidden answer key."
+    "Show the acceptance table and one real trace. Read one row end to end. If evidence is absent, the row says OPEN."
    ],
    "done": [
     "A human makes the review decision."
@@ -3602,6 +3731,156 @@ window.SLIDES = [
     "A human makes the review decision."
    ],
    "terms": []
+  }
+ },
+ {
+  "lessonId": "workshop-4",
+  "title": "Assignment 5: Save three drafts for human review",
+  "kicker": "Day 4 · SOLO 5",
+  "type": "practice",
+  "layout": "exercise",
+  "calm": true,
+  "timer": 12,
+  "repo": {
+   "url": "https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent",
+   "label": "AetherLink-bv/aetherlink-day4-n8n-to-agent · branch main"
+  },
+  "source": {
+   "url": "assets/day4-sdk-parity.zip",
+   "label": "Download the Day 4 SDK exercise",
+   "download": "day4-sdk-parity.zip"
+  },
+  "subtitle": "Add the Day 3 review queue: three routes save a draft, but nothing is sent.",
+  "cards": [
+   {
+    "title": "Checkpoint",
+    "body": "Low, medium and high each produce a saved draft.\nEvery draft waits for human review and keeps the internal risk note out of the reply."
+   },
+   {
+    "title": "Human boundary",
+    "body": "Nothing is sent. A person approves every draft. The internal risk note stays outside the customer reply."
+   }
+  ],
+  "keyPoints": [
+   "Low, medium and high each produce a saved draft.",
+   "Every draft waits for human review and keeps the internal risk note out of the reply."
+  ],
+  "steps": [
+   {
+    "where": "You",
+    "text": "Open day4-sdk-parity/ in your project",
+    "after": "Read the priority rules in CLAUDE.md. If the folder is missing, unpack the download in your project root."
+   },
+   {
+    "where": "Terminal · project root",
+    "text": "Run the offline parity check",
+    "prompt": "node day4-sdk-parity/verify.mjs",
+    "after": "The check verifies the output schema, three routes and review-only draft storage without calling a model."
+   },
+   {
+    "where": "Terminal · project root",
+    "text": "Run one low, medium and high ticket",
+    "prompt": "node day4-sdk-parity/run.mjs MSG-01\nnode day4-sdk-parity/run.mjs MSG-06\nnode day4-sdk-parity/run.mjs MSG-05",
+    "after": "Context and Risk advise. The main agent decides priority. Reply writes text. Code validates, routes and saves the draft."
+   },
+   {
+    "where": "You",
+    "text": "Inspect the files in day4-sdk-parity/review-drafts",
+    "after": "Each file contains priority, route, subject and body, and waits for review. The body contains no internal risk note or unsupported promise."
+   }
+  ],
+  "expected": "Every draft waits for human review and keeps the internal risk note out of the reply.",
+  "notes": "Time: 12 min.\n\nThe companion exercise adds the Day 3 review queue: three routes save a draft without sending it. Session memory was practised separately in Assignment 1b.\n\nWatch for: The zip unpacked outside the completed project.\n\nIf stuck: give Claude Code the failed line and ask for the smallest fix.\n\nStop: Nothing is sent. A person approves every draft. The internal risk note stays outside the customer reply.\n\nNext: Discuss: who is accountable?",
+  "teach": {
+   "gist": "The companion exercise adds the Day 3 review queue: three routes save a draft without sending it. Session memory was practised separately in Assignment 1b.",
+   "do": [
+    "Walk the room. Use the Copy buttons. Check the checkpoint on two laptops."
+   ],
+   "done": [
+    "Low, medium and high each produce a saved draft.",
+    "Every draft waits for human review and keeps the internal risk note out of the reply."
+   ],
+   "copy": [
+    [
+     "Step 2 · Terminal · project root",
+     "node day4-sdk-parity/verify.mjs"
+    ],
+    [
+     "Step 3 · Terminal · project root",
+     "node day4-sdk-parity/run.mjs MSG-01\nnode day4-sdk-parity/run.mjs MSG-06\nnode day4-sdk-parity/run.mjs MSG-05"
+    ]
+   ],
+   "script": [
+    {
+     "do": "Slide appears. Read the goal and the checkpoint out loud.",
+     "say": [
+      "Add the Day 3 review queue: three routes save a draft, but nothing is sent.",
+      "You are done when: Low, medium and high each produce a saved draft. Every draft waits for human review and keeps the internal risk note out of the reply."
+     ]
+    },
+    {
+     "do": "Step 1 · You. Open day4-sdk-parity/ in your project.",
+     "say": [
+      "Show day4-sdk-parity/ next to package.json. For an earlier clone, use the ZIP on this slide."
+     ]
+    },
+    {
+     "do": "Play the short terminal guide. Then let participants compare it with their own output.",
+     "clip": "assets/day4-final-teach/a5-parity.mp4",
+     "say": "This offline check verifies main-owned priority, three fixed routes, three saved drafts and rejection of invalid output. It sends nothing and does not test model behavior."
+    },
+    {
+     "do": "Step 2 · Terminal · project root. Run the offline parity check.",
+     "say": [
+      "Run this from the project root. It proves the wiring before a live model run."
+     ]
+    },
+    {
+     "do": "Step 3 · Terminal · project root. Run one low, medium and high ticket.",
+     "say": [
+      "Run these from the project root. Read the route and saved file after each run."
+     ]
+    },
+    {
+     "do": "Step 4 · You. Inspect the files in day4-sdk-parity/review-drafts.",
+     "say": [
+      "Open the three saved drafts. Check the status and the customer-facing text."
+     ]
+    },
+    {
+     "do": "Ask two people to show their result.",
+     "say": [
+      "Who wants to show the checkpoint on their screen?",
+      "And the boundary for this step: Nothing is sent. A person approves every draft. The internal risk note stays outside the customer reply."
+     ]
+    }
+   ],
+   "learn": [
+    "The companion uses the final Day 3 priority definitions.",
+    "Context, Risk and Reply each return to the main agent.",
+    "The app validates, routes and saves the draft, but sends nothing."
+   ],
+   "watch": [
+    "The zip unpacked outside the completed project.",
+    "A failed offline check. Fix that before running the model.",
+    "A customer reply that contains the internal risk note or promises an action. Mark it FAIL."
+   ],
+   "terms": [
+    [
+     "Parity",
+     "the Day 4 app reproduces the observable outcome from the final Day 3 workflow"
+    ],
+    [
+     "validateOutput",
+     "code checks priority and message before it routes or saves anything"
+    ],
+    [
+     "review-drafts",
+     "the local folder where drafts wait for a person"
+    ]
+   ],
+   "time": "12 min",
+   "next": "Discuss: who is accountable?"
   }
  },
  {
@@ -3734,7 +4013,7 @@ window.SLIDES = [
     "label": "The form: The AI fills it in; the code picks the tray."
    },
    {
-    "label": "Only the keys it needs: One agent can look things up. No agent can change data."
+    "label": "Narrow tools: The support tool only reads. The draft tool only saves for review."
    },
    {
     "label": "Proof + a person: Every row has a real run or says OPEN. A person decides."
@@ -3743,19 +4022,19 @@ window.SLIDES = [
     "label": "Day 5: A new agent, built step by step."
    }
   ],
-  "notes": "Time: 10 min.\n\nRecap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Go back to the goals on the board from this morning. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.\n\nNext: Bonus · finished early?",
+  "notes": "Time: 4 min.\n\nRecap round: everyone shows one result in one minute (a trace, a draft, the check output or the chat). Return to the concrete Day 3 ticket from the opening. Ask: what was easier in n8n, and what was easier in code? Where must a person still decide? An extra for fast people: chat in, chat out with npm run chat -- --lesson 3.\n\nNext: Bonus · finished early?",
   "subtitle": "One agent, a team, a lookup desk and proof. And at the end, always a person.",
   "teach": {
    "next": "Bonus · finished early?",
-   "time": "10 min",
-   "gist": "Close: one result each, back to this morning's goals, and a bridge to Workshop 5.",
+   "time": "4 min",
+   "gist": "Close: one result each, back to the opening ticket, and a bridge to Workshop 5.",
    "script": [
     {
-     "say": "This morning we started with a sorting machine in n8n blocks. Now you have a team of agents in code. And at the end there is always a person."
+     "say": "This morning we started with the support workflow from Day 3. Now you have a team of agents in code. And at the end there is always a person."
     },
     {
-     "do": "Point at the goals on the board from this morning.",
-     "say": "Look at the goal you wrote down this morning. Who got there?"
+     "do": "Point back to the double-charge ticket from the opening.",
+     "say": "Can you now trace this ticket from chat to a saved draft that waits for review?"
     },
     {
      "ask": "What was easier in n8n, and what was easier in code?",
@@ -3766,7 +4045,7 @@ window.SLIDES = [
     }
    ],
    "do": [
-    "Ask for one result each, and go back to the goals."
+    "Ask for one result each, and return to the opening ticket."
    ],
    "done": [
     "One agent, a team, a lookup desk and proof. And at the end, always a person."
@@ -3781,7 +4060,7 @@ window.SLIDES = [
   "title": "Bonus · finished early?",
   "kicker": "Bonus · build on your own",
   "type": "concept",
-  "subtitle": "Extend a small weather agent with one tool and one specialist. Same loop, your own pace.",
+  "subtitle": "Extend a small weather agent with one tool and one sub-agent. Same loop, your own pace.",
   "visual": {
    "bot": "point",
    "place": "beside"
@@ -3797,14 +4076,14 @@ window.SLIDES = [
    },
    {
     "title": "3 · Then your own idea",
-    "body": "A new tool, a new specialist or a JSON answer. Write the check first."
+    "body": "A new tool, a new sub-agent or a JSON answer. Write the check first."
    }
   ],
   "notes": "Time: after the day.\n\nOptional. Use it when a participant finishes the required route early. It repeats the patterns of the first three days in a new project. Day 1: instructions live in a file, here instructions.md. Day 2: a check says when you are done, here npm run check:tool and check:agent. Day 3: a tool has a description that tells the agent when to use it. Today: options decide what an agent may do. The bonus runs on the Claude Code login, so nobody needs an API key.\n\nNext: End of Day 4",
   "teach": {
    "next": "End of Day 4",
    "time": "after the day",
-   "gist": "Extend a small weather agent with one tool and one specialist. Same loop, your own pace.",
+   "gist": "Extend a small weather agent with one tool and one sub-agent. Same loop, your own pace.",
    "script": [
     {
      "say": "Finished early? Then you build on your own. The project is a small weather agent."
@@ -3820,7 +4099,7 @@ window.SLIDES = [
     "Open BONUS.md in the weather-agent-sdk repository."
    ],
    "done": [
-    "Extend a small weather agent with one tool and one specialist. Same loop, your own pace."
+    "Extend a small weather agent with one tool and one sub-agent. Same loop, your own pace."
    ],
    "watch": [
     "Do not start the bonus before SOLO 4 is reviewed."

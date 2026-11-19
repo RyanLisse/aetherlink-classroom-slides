@@ -131,10 +131,13 @@ function renderScript(beats) {
       li.append(box);
     }
     if (b.clip) {
-      // a short screen recording of this step; click opens it full size in a new tab
       const v = document.createElement('video');
-      Object.assign(v, { src: b.clip, muted: true, loop: true, autoplay: true, playsInline: true, preload: 'metadata', className: 't-clip', title: 'Click to open full size' });
-      v.addEventListener('click', () => window.open(b.clip, '_blank'));
+      const controls = window.DECK_PAGE === 'day4-final.html';
+      Object.assign(v, { src: b.clip, muted: true, loop: true, autoplay: true, controls, playsInline: true, preload: 'metadata', className: 't-clip' });
+      if (!controls) {
+        v.title = 'Click to open full size';
+        v.addEventListener('click', () => window.open(b.clip, '_blank'));
+      }
       li.append(v);
     }
     ol.append(li);

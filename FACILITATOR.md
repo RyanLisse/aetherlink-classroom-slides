@@ -39,16 +39,18 @@ Teach from `day4-final.html`. Nothing must be built before class. The solved
 steps are on the `trainer/solution` branch of the participant repository. See
 the **Trainer** section of its
 [`SOLO.md`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent/blob/main/SOLO.md).
-In your own trainer clone, run:
+Create a separate trainer clone. Do not switch the participant clone. Run:
 
 ```sh
-git fetch origin trainer/solution
-git switch trainer/solution
+git clone --branch trainer/solution --single-branch https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git aetherlink-day4-trainer
+cd aetherlink-day4-trainer
 npm ci
+npm run verify
 npm run check:1 && npm run check:2 && npm run check:3
+node day4-sdk-parity/verify.mjs
 ```
 
-All three checks pass on that branch. Run each demo once before class:
+The verify command reports 24 passing tests. All three checks pass on that branch. Run each demo once before class:
 `npm run lesson1 -- MSG-06`, `npm run lesson2 -- MSG-05` and
 `npm run lesson3 -- MSG-08`. A real run depends on your login and on your own
 Claude Code settings, because the lessons load project and user settings.
@@ -57,10 +59,11 @@ Participants stay on `main`. On `main` the checks are red before a step. That
 is correct. A participant who falls behind pastes the prompt of the current
 step again. Nobody copies files from `trainer/solution`.
 
-Use the sanitized `n8n/support-triage.json` from the repository. Do not activate
-or modify the n8n workflow. During the memory assignment, keep curated
+Use the [final Day 3 workflow](assets/workshop-4/day3-review-queue.json) to trace one chat message through to a saved draft. The starter has an older reference at `n8n/support-triage.json` used by its tests. Keep both files. For the extra exercise, the [Day 3 consultation workflow](assets/workshop-4/day3-extra-consult.json) shows the Risk Agent connected to the Customer Reply Agent. During the memory assignment, keep curated
 `memory.md` files separate from transcripts and technical logs. Test a
 fresh-session readback and ticket isolation.
+
+For Assignment 5, open the included `day4-sdk-parity/` folder. For an earlier clone, unpack the [SDK exercise](assets/day4-sdk-parity.zip) in the project root. Run `node day4-sdk-parity/verify.mjs`. The offline check exercises draft storage. During a live run, inspect the saved customer reply before recording the result. If the account has reached its model limit, record the live outcome as OPEN.
 
 The day has four blocks of 60, 120, 90 and 45 minutes. It starts at 10:00.
 Lunch is from 13:15 to 14:00. The breaks are at 11:00 and 15:30.

@@ -417,16 +417,16 @@ Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only
 The main Day 5 lesson is now `day5-daily-brief.html` (the Daily Brief agent). `workshop5.html` stays as the earlier
 deck. Its last slide points to the Daily Brief deck.
 
-## Day 4 deck (n8n to Claude Agent SDK, final, 18 Nov 2026)
+## Day 4 deck (n8n to Claude Agent SDK, final, 19 Nov 2026)
 
-`day4-final.html` is the one deck for Day 4. It loads `day4-final-slides.js` (47 slides), which
+`day4-final.html` is the one deck for Day 4. It loads `day4-final-slides.js`, which
 `tools/build-day4-final.mjs` generates. Do not edit the generated file. Presenter view with teach cards:
 `day4-final-presenter.html`. Day sheet: `day4-final-sheet.html`.
 
 - Route: participants clone `https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent` and stay on `main`.
-  Each assignment is one prompt from `SOLO.md`. A check (`npm run check:1`, `check:2`, `check:3`) is red before the
-  step and green after it. The trainer demos from the `trainer/solution` branch. All data in the package is fictional.
-- Prompts: every Copy prompt comes from `tools/day4-participant-contract.json`, which pins the fenced blocks of
+  Participants compare the final Day 3 chat export with the starter snapshot and finish by saving drafts for review. A check (`npm run check:1`, `check:2`, `check:3`) is red before the
+  step and green after it. The trainer uses a separate clone of the `trainer/solution` branch. All data in the package is fictional.
+- Prompts: lesson-specific additions are in `tools/day4-lesson-prompts.json`. Package prompts come from `tools/day4-participant-contract.json`, which pins the fenced blocks of
   `SOLO.md` and `README.md` on package `main`. Refresh it with `tools/day4-contract.mjs` after a package change.
 - Slides: the generator reuses slides from `workshop4-slides.js` (Ryan, 63 slides) and `day4-jessy-slides.js` by
   title. Fix a reused slide in its source deck, then run `node tools/build-day4-final.mjs`.

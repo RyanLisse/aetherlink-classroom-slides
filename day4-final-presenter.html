@@ -77,7 +77,7 @@
   .t-b-answer{color:var(--ok);font-weight:700;padding-left:1rem}
   .t-b-warn{color:#fff;background:#d93838;font-weight:800;font-size:.95rem;padding:.35rem .6rem;border-radius:6px;margin-bottom:.35rem}
   .t-b-note{color:var(--muted);font-style:italic;padding-left:1rem}
-  .t-clip{display:block;width:100%;max-width:520px;margin-top:.5rem;border:1px solid var(--border);border-radius:8px;cursor:zoom-in;background:#000}
+  .t-clip{display:block;width:100%;max-width:520px;margin-top:.5rem;border:1px solid var(--border);border-radius:8px;background:#000}
   .t-script code{font-size:.9em;padding:.05rem .3rem;border-radius:5px;background:var(--surface);border:1px solid var(--border)}
   .t-grid > div{display:flex;flex-direction:column;gap:.9rem}
   .t-sec{--c:var(--cyan);border-left:4px solid var(--c);padding:.15rem 0 .15rem .8rem}
@@ -149,27 +149,7 @@
       </div>
     </div>
   </div>
-  <script>window.DECK_PAGE = "day4-final.html"; window.PRESENTER_SKIP_HIDDEN = true;</script><script src="day4-final-slides.js?v=1" defer></script>
+  <script>window.DECK_PAGE = "day4-final.html"; window.PRESENTER_SKIP_HIDDEN = true;</script><script src="day4-final-slides.js?v=2" defer></script>
   <script src="timers.js?v=92" defer></script>
-  <script>
-    const upgradeDay5Clip = video => {
-      const mp4 = video.getAttribute('src');
-      if (!mp4?.startsWith('assets/day5-teach/') || !mp4.endsWith('.mp4')) return;
-      video.removeAttribute('src');
-      const webm = document.createElement('source');
-      webm.src = mp4.replace(/\.mp4$/, '.webm');
-      webm.type = 'video/webm';
-      const fallback = document.createElement('source');
-      fallback.src = mp4;
-      fallback.type = 'video/mp4';
-      video.append(webm, fallback);
-      video.load();
-    };
-    new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
-      if (node.nodeType !== Node.ELEMENT_NODE) return;
-      if (node.matches?.('video.t-clip')) upgradeDay5Clip(node);
-      node.querySelectorAll?.('video.t-clip').forEach(upgradeDay5Clip);
-    }))).observe(document.documentElement, {childList: true, subtree: true});
-  </script>
-  <script src="presenter.js?v=120" defer></script>
+  <script src="presenter.js?v=121" defer></script>
 </body></html>

@@ -94,7 +94,7 @@ body.no-prompts .prompt{display:none}
 </div>
 
 <script>window.DECK_PAGE = 'day4-final.html';</script>
-<script src="day4-final-slides.js?v=1"></script>
+<script src="day4-final-slides.js?v=2"></script>
 <script>
 (() => {
   const S = (window.SLIDES || []).filter((s) => !s.hidden);
@@ -111,9 +111,9 @@ body.no-prompts .prompt{display:none}
   const facts = [
     ['Practice repo', '<a href="https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent" target="_blank" rel="noopener">AetherLink-bv/aetherlink-day4-n8n-to-agent</a> · branch <code>main</code>'],
     ['You see', 'A check that goes green, then one real run: <code>npm run check:1</code>, <code>npm run lesson1 -- MSG-06</code>'],
-    ['The agent', 'A ticket desk: a team lead, three specialists and one read-only lookup desk. All data is fictional.'],
-    ['Story', 'Last session you built the ticket desk in n8n. Today you build the same desk in code, one checked step at a time.'],
-    ['Class', 'Every assignment is solo. Participants stay on <code>main</code>. The trainer demos from <code>trainer/solution</code>.']
+    ['The agent', 'The main agent delegates work to sub-agents. A read-only tool supplies fictional customer data.'],
+    ['Story', 'Follow a ticket from the Day 3 chat through triage to a draft reply. Rebuild that behaviour in the Claude Agent SDK.'],
+    ['Class', 'Every assignment is solo. Participants stay on <code>main</code>. The trainer uses a separate <code>trainer/solution</code> clone.']
   ];
   document.getElementById('facts').innerHTML = facts.map(([k, v]) => `<div class="fact"><b>${k}</b>${v}</div>`).join('');
 
@@ -123,7 +123,11 @@ body.no-prompts .prompt{display:none}
   // one card per slide
   document.getElementById('slides').innerHTML = S.map((s) => {
     const t = s.teach || {}; const n = num(s);
+    const source = s.source?.url ? `<p><a href="${esc(s.source.url)}"${s.source.download ? ' download="' + esc(s.source.download) + '"' : ''}>${esc(s.source.label || s.source.url)}</a></p>` : '';
     const script = t.script || [];
+    const clips = script.filter(beat => beat.clip).map(beat =>
+      `<p><a href="${esc(beat.clip)}" target="_blank" rel="noopener">Watch the walkthrough</a></p>`
+    ).join('');
     const asks = script.filter((b) => b.ask).map((b) => { const a = [].concat(b.say || []).find((x) => /^\(/.test(x)); return {q: b.ask, a: a ? a.replace(/^\((Answer:\s*)?/, '').replace(/\)$/, '') : ''}; });
     const keys = (s.keyPoints && s.keyPoints.length ? s.keyPoints : t.learn) || [];
     let steps = '';
@@ -142,7 +146,7 @@ body.no-prompts .prompt{display:none}
         <div>${list('', 'Key points', keys)}${list('done', 'Done when', t.done)}</div>
         <div>${list('ask', 'Ask the room', asks, (x) => `<li><span class="q">${fmt(x.q)}</span>${x.a ? ` <span class="a">→ ${fmt(x.a)}</span>` : ''}</li>`)}${list('watch', 'Watch out', t.watch)}</div>
       </div>
-      ${steps}${copyHtml}${terms}
+      ${source}${steps}${clips}${copyHtml}${terms}
     </section>`;
   }).join('');
 
