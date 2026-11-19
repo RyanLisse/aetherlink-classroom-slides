@@ -80,12 +80,17 @@ human review in step 7. Nothing is merged or deployed.
 Sonny, the SRE agent, is the bonus. Its slides are the bonus block at the end of
 the same deck.
 
-## Keep Sonny, the SRE agent, as the bonus
+## Optional legacy route: Sonny, the SRE agent
 
-Use the bonus when a participant finishes the Daily Brief steps early.
+This is the earlier Day 5 route. It is not the current main lesson. Open
+`workshop5.html` on the projector and `workshop5-presenter.html` on the trainer
+screen only when you deliberately choose the legacy SRE deck or use it as a
+bonus after the Daily Brief steps.
+
 Participants use [`workshop/start`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start)
-and do the assignments in order. They stop where the day ends. Start with
-INC-1001 and the customer impact.
+and follow the required A1 through A6 route. A8 is the human gate inside A6.
+A7 and A9 are optional. Start with INC-1001 and the customer impact.
+Define AI-native SDLC near the start so participants understand where a person reviews the agent’s work.
 
 Use any terminal at the participant clone's root and run `claude`. Review the
 displayed path. Accept trust only for the participant's own clone. Restart
