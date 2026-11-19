@@ -330,7 +330,7 @@ const day5Slides = [
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a5Build, after: 'Claude Code shows the red focused test and the three bypasses.'},
       {text: 'Human review. Approve only the handler and bypass-removal scope.', after: 'The implementation stays read-only.'},
       {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run test:workshop -- --test-name-pattern=A5:', after: 'Only the focused A5 checks run and pass.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json --offline', after: 'The trace shows list_deploys and exact arguments.'},
+      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'npm run investigate -- fixtures/incidents/bad-deploy.json', after: 'The trace shows list_deploys and exact arguments.'},
       {text: 'Human review. Compare the result with the trace.', after: 'Every deploy claim has a tool reference.'}
     ],
     after: 'The deploy tool is read-only, traced, and used by every investigation route.',
