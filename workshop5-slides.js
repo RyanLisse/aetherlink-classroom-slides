@@ -277,9 +277,7 @@ const day5Slides = [
       {text: 'Type this in: Claude Code', prompt: PROMPTS.a3Verify, after: 'Claude Code returns VERIFIED, NOT VERIFIED, or INCONCLUSIVE.'},
       {text: 'Human review. Open every cited file and output.', after: 'Each reference supports the stated verdict.'},
       {text: 'Open in browser: http://localhost:4320', after: 'The visible customer impact matches the verified claim.'},
-      {text: 'If you are blocked, type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git status --short', after: 'You can see every local change before recovery.'},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git stash push -u -m "before Day 5 A3 catch-up"', after: 'Tracked and untracked participant work is saved.', warn: true},
-      {text: 'Type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git switch -c day5-catch-up-a3 day5-after-a3', after: 'A new branch starts at the reviewed A3 checkpoint.'}
+      {text: 'If you are blocked, type this in: Terminal 2 (Git Bash on Windows)', prompt: 'git status --short\ngit stash push -u -m "before Day 5 A3 catch-up"\ngit switch -c day5-catch-up-a3 day5-after-a3', after: 'Your changes are visible, saved in the stash, and a new branch starts at the reviewed A3 checkpoint.', warn: true}
     ],
     after: 'The A3 claim is verified with file and output references.',
     checks: ['Read the verification verdict.', 'Open the cited evidence.', 'Show green typecheck and main tests.'],
