@@ -3,6 +3,7 @@
 // Rerun after day5-jessy-slides.js changes: node tools/build-day5-daily-brief.mjs
 import {readFileSync, writeFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {addDay5LessonMedia} from './day5-lesson-media.mjs';
 
 const root = new URL('../', import.meta.url);
 const ctx = {window: {}};
@@ -119,13 +120,12 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
   notes
 });
 
-const OPEN_SHOT = 'OPEN: no recording yet. Show a participant result only after its own check passes.';
 const TEACH = {
   1: {
     gist: 'Claude Code interviews the participant. The answer is intent.md: one outcome, three checks you can see, owners, a hard boundary and one OPEN.',
     say: ['Before we write code, we write down what done means.', 'Claude Code asks you one question at a time. You answer, it writes intent.md.', 'A check you cannot see is not a check. “Useful” is not a check. “Shows my first meeting at the top” is.'],
     learn: ['The intent decides what done means for every later step.', 'A check must be something a neighbour can observe.', 'One OPEN is fine. It is a known unknown, written down.'],
-    watch: ['Checks like “useful” or “clear”. Ask: how would your neighbour see that?', 'Claude Code that starts on code. Say: stop, intent only.', 'Live accounts. Today is sample data only.', OPEN_SHOT],
+    watch: ['Checks like “useful” or “clear”. Ask: how would your neighbour see that?', 'Claude Code that starts on code. Say: stop, intent only.', 'Live accounts. Today is sample data only.'],
     terms: [['intent.md', 'the file that says what the brief must do and how you check it'], ['OPEN', 'a question or check that is not answered yet, written down on purpose'], ['Boundary', 'something the agent must never do']],
     next: 'make the schema test fail, then pass.'
   },
@@ -133,7 +133,7 @@ const TEACH = {
     gist: 'From the reference brief PDFs to a spec with one quoted example per field. A schema test that is red first, then the schema that makes it green.',
     say: ['The spec says which fields a brief has. Each field gets one real example from the reference PDFs.', 'Then a test. It must fail first. A test that never failed has not proved it can catch anything.', 'Only then the schema. Green means the schema matches the spec.'],
     learn: ['Red first proves the test can catch a mistake.', 'Commit the red test before the schema.', 'npm test green on the schema tests is the proof.'],
-    watch: ['A test written after the code. Ask for the red run.', 'Fields without a quoted example in docs/spec.md.', 'Someone who starts a renderer. That is A4.', OPEN_SHOT],
+    watch: ['A test written after the code. Ask for the red run.', 'Fields without a quoted example in docs/spec.md.', 'Someone who starts a renderer. That is A4.'],
     terms: [['Spec', 'docs/spec.md: the fields of a brief, each with a quoted example'], ['Schema', 'src/brief.ts: code that checks a brief has the right fields'], ['Red / green', 'a failing test / a passing test']],
     next: 'agree on the design and the plan.'
   },
@@ -141,7 +141,7 @@ const TEACH = {
     gist: 'Plan mode. Claude Code proposes the design, one decision record and a plan with a path, a proof command and a rollback per step. Nothing changes until the participant accepts.',
     say: ['Now Claude Code only proposes. It cannot change files in plan mode.', 'Each step in the plan names three things: which file, which command proves it, how to undo it.', 'You accept the plan. That is a human decision.'],
     learn: ['A plan with a proof per step makes the build easy to review.', 'Plan mode keeps the agent from building too early.', 'A decision record says why, not only what.'],
-    watch: ['Plan steps without a proof command.', 'Someone who leaves plan mode before accepting. Press Shift+Tab back.', 'Very long plans. Ask for one screen.', OPEN_SHOT],
+    watch: ['Plan steps without a proof command.', 'Someone who leaves plan mode before accepting. Press Shift+Tab back.', 'Very long plans. Ask for one screen.'],
     terms: [['Plan mode', 'Claude Code proposes, but cannot edit files'], ['ADR', 'a short decision record under docs/decisions/'], ['Rollback', 'how to undo one step']],
     next: 'render the brief from sample data.'
   },
@@ -149,7 +149,7 @@ const TEACH = {
     gist: 'A red render test, then src/render.ts and a sample-only src/main.ts. npm run brief:sample writes out/latest.html. No API key and no model call.',
     say: ['The first thing you can see today: your brief as a web page.', 'Same rule: the render test fails first.', 'No model call. The sample route must work without a network.'],
     learn: ['out/latest.html is the first visible proof.', 'Escape untrusted text before it goes into HTML.', 'A style change is a test first, then the change.'],
-    watch: ['A model call in the sample path.', 'Unescaped text from the sources in the HTML.', 'Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.', OPEN_SHOT],
+    watch: ['A model call in the sample path.', 'Unescaped text from the sources in the HTML.', 'Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.'],
     terms: [['Renderer', 'src/render.ts: turns a brief into HTML'], ['brief:sample', 'the npm script that renders the sample brief, with no model call'], ['Escape', 'make text safe to put in HTML']],
     next: 'after lunch, give the agent one read-only tool.'
   },
@@ -157,7 +157,7 @@ const TEACH = {
     gist: 'The agent gets one read-only tool for one source. Tests prove the wiring and the missing-source case without a network. brief:sample keeps working.',
     say: ['Now the agent. It gets one tool, and that tool can only read.', 'No shell, no write tools. An agent is only as safe as its tools.', 'No credentials? Then the live check is OPEN, not failed.'],
     learn: ['One read-only tool is enough to prove the wiring.', 'A missing source is a normal case. Test it.', 'Never print a token.'],
-    watch: ['Shell or write tools on the brief agent.', 'Tokens in a prompt, a log or a commit.', 'brief:sample that suddenly needs a model.', 'The reference tag has many tools. Today you build one.', 'run.log comes from: npm run brief 2> run.log.', OPEN_SHOT],
+    watch: ['Shell or write tools on the brief agent.', 'Tokens in a prompt, a log or a commit.', 'brief:sample that suddenly needs a model.', 'Keep the scope to exactly one read-only tool.', 'run.log comes from: npm run brief 2> run.log.'],
     terms: [['Tool', 'a function the agent may call'], ['Read-only', 'the tool can look, but cannot change anything'], ['run.log', 'the log that each claim in a live brief traces back to']],
     next: 'record the evidence.'
   },
@@ -165,7 +165,7 @@ const TEACH = {
     gist: 'Run typecheck, test and brief:sample. Write each real command, its exit code and one output line in docs/evidence.md. A neighbour reruns one.',
     say: ['A claim without evidence is a hypothesis.', 'Write down the real command and the real exit code. Not from memory.', 'Your neighbour reruns one command. Same result? Then it counts.'],
     learn: ['Evidence is a command, an exit code and an output line.', 'An unrun check is OPEN.', 'A reviewer is a real person with a real name.'],
-    watch: ['Evidence typed from memory.', 'Code changed to hide a failure.', 'A reviewer name filled in before the rerun.', OPEN_SHOT],
+    watch: ['Evidence typed from memory.', 'Code changed to hide a failure.', 'A reviewer name filled in before the rerun.'],
     terms: [['Exit code', '0 means the command passed; anything else means it failed'], ['Evidence', 'docs/evidence.md: what you ran and what came out'], ['Reviewer', 'the person who reruns one command']],
     next: 'decide the gate and prepare the PR.'
   },
@@ -173,7 +173,7 @@ const TEACH = {
     gist: 'Claude Code drafts docs/gate.md and a PR preview. The participant decides PASS, commits, then opens the PR. The schedule stays inactive.',
     say: ['The gate is where a human decides.', 'Claude Code may propose FAIL or OPEN. Only you write PASS.', 'After approval, commit and open the PR. Do not merge, deploy or activate the schedule.'],
     learn: ['PASS is a human decision with evidence in front of you.', 'An OPEN item can become a new check.', 'The schedule stays inactive.'],
-    watch: ['An agent that writes PASS.', 'A schedule that is switched on.', 'A merge or a deploy. Stop before both.', OPEN_SHOT],
+    watch: ['An agent that writes PASS.', 'A schedule that is switched on.', 'A merge or a deploy. Stop before both.'],
     terms: [['Gate', 'docs/gate.md: PASS, FAIL or OPEN for each check'], ['PR', 'a pull request: your change, ready for review'], ['Inactive schedule', 'the weekday run, written down but not switched on']],
     next: 'Maintain: close the loop.'
   }
@@ -320,9 +320,9 @@ const brief = [
       'Sample data only. No credential in a prompt or a commit.',
       'Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.',
       'Append progress.md after each step.',
-      'Use your own diff and the named check. Do not copy files from the legacy reference tags.'
+      'Use your own diff and the named check. Do not copy solution files.'
     ],
-    notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy the step tags. The tags are for comparing after an attempt.', 'Participants can name the OPEN rule.', 'What is a skill?')
+    notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy solution files. Ask them to use their own diff and named check.', 'Participants can name the OPEN rule.', 'What is a skill?')
   },
   {
     title: 'What is a skill?',
@@ -579,7 +579,7 @@ ordered.forEach((o, i) => {
   if (o.teach) o.teach.next = next;
   if (o.cards?.length === 1 && o.cards[0].title === 'Next') o.cards[0].body = next;
 });
-const slides = ordered.map(withTeach);
+const slides = addDay5LessonMedia(ordered.map(withTeach));
 const out = `'use strict';\n// Generated by tools/build-day5-daily-brief.mjs. Edit the generator, not this file.\nwindow.SLIDES = ${JSON.stringify(slides, null, 1)};\n`;
 writeFileSync(new URL('day5-daily-brief-slides.js', root), out);
 console.log(`day5-daily-brief-slides.js: ${slides.length} slides (${briefMain.length} brief, 1 close)`);

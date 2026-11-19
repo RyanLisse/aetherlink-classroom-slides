@@ -580,9 +580,9 @@ window.SLIDES = [
    "Sample data only. No credential in a prompt or a commit.",
    "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
    "Append progress.md after each step.",
-   "Use your own diff and the named check. Do not copy files from the legacy reference tags."
+   "Use your own diff and the named check. Do not copy solution files."
   ],
-  "notes": "Time: 3 min.\n\nWhy now: Set the rules once, so the steps can stay short.\n\nWhat you see: Four rules.\n\nWatch for: Participants who copy the step tags. The tags are for comparing after an attempt.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the OPEN rule.\n\nNext: Use the included project skills",
+  "notes": "Time: 3 min.\n\nWhy now: Set the rules once, so the steps can stay short.\n\nWhat you see: Four rules.\n\nWatch for: Participants who copy solution files. Ask them to use their own diff and named check.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the OPEN rule.\n\nNext: Use the included project skills",
   "teach": {
    "next": "Use the included project skills",
    "time": "3 min",
@@ -594,7 +594,7 @@ window.SLIDES = [
       "Sample data only. No credential in a prompt or a commit.",
       "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
       "Append progress.md after each step.",
-      "Use your own diff and the named check. Do not copy files from the legacy reference tags."
+      "Use your own diff and the named check. Do not copy solution files."
      ]
     }
    ],
@@ -602,10 +602,10 @@ window.SLIDES = [
     "Sample data only. No credential in a prompt or a commit.",
     "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
     "Append progress.md after each step.",
-    "Use your own diff and the named check. Do not copy files from the legacy reference tags."
+    "Use your own diff and the named check. Do not copy solution files."
    ],
    "watch": [
-    "Participants who copy the step tags. The tags are for comparing after an attempt."
+    "Participants who copy solution files. Ask them to use their own diff and named check."
    ]
   }
  },
@@ -953,6 +953,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a1-guide.mp4",
+     "say": "This guide shows the published Assignment 1 prompt and the intent.md diff to inspect. It is instruction, not a participant result."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -979,8 +984,7 @@ window.SLIDES = [
    "watch": [
     "Checks like “useful” or “clear”. Ask: how would your neighbour see that?",
     "Claude Code that starts on code. Say: stop, intent only.",
-    "Live accounts. Today is sample data only.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "Live accounts. Today is sample data only."
    ],
    "terms": [
     [
@@ -1298,6 +1302,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a2-guide.mp4",
+     "say": "This guide shows the published Assignment 2 prompt and the npm test proof action. It does not claim a red or green run happened."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -1324,8 +1333,7 @@ window.SLIDES = [
    "watch": [
     "A test written after the code. Ask for the red run.",
     "Fields without a quoted example in docs/spec.md.",
-    "Someone who starts a renderer. That is A4.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "Someone who starts a renderer. That is A4."
    ],
    "terms": [
     [
@@ -1480,6 +1488,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a3-guide.mp4",
+     "say": "This guide shows the published Assignment 3 prompt, plan mode and the design diff to inspect. It does not show an accepted plan."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -1506,8 +1519,7 @@ window.SLIDES = [
    "watch": [
     "Plan steps without a proof command.",
     "Someone who leaves plan mode before accepting. Press Shift+Tab back.",
-    "Very long plans. Ask for one screen.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "Very long plans. Ask for one screen."
    ],
    "terms": [
     [
@@ -1627,6 +1639,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a4-guide.mp4",
+     "say": "This guide shows the published Assignment 4 prompt and the later brief:sample proof action. It does not run an unfinished renderer."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -1653,8 +1670,7 @@ window.SLIDES = [
    "watch": [
     "A model call in the sample path.",
     "Unescaped text from the sources in the HTML.",
-    "Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it."
    ],
    "terms": [
     [
@@ -1938,6 +1954,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a5-guide.mp4",
+     "say": "This guide shows the published Assignment 5 prompt and the offline sample action. It uses no credentials and makes no live-model claim."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -1965,9 +1986,8 @@ window.SLIDES = [
     "Shell or write tools on the brief agent.",
     "Tokens in a prompt, a log or a commit.",
     "brief:sample that suddenly needs a model.",
-    "The reference tag has many tools. Today you build one.",
-    "run.log comes from: npm run brief 2> run.log.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "Keep the scope to exactly one read-only tool.",
+    "run.log comes from: npm run brief 2> run.log."
    ],
    "terms": [
     [
@@ -2087,6 +2107,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a6-guide.mp4",
+     "say": "This guide shows the published Assignment 6 prompt and the three commands whose real exit codes must be recorded. It invents no evidence."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -2113,8 +2138,7 @@ window.SLIDES = [
    "watch": [
     "Evidence typed from memory.",
     "Code changed to hide a failure.",
-    "A reviewer name filled in before the rerun.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "A reviewer name filled in before the rerun."
    ],
    "terms": [
     [
@@ -2234,6 +2258,11 @@ window.SLIDES = [
      ]
     },
     {
+     "do": "Play the short terminal guide. Then compare it with the published prompt and the participant’s own proof.",
+     "clip": "assets/day5-daily-brief-teach/a7-guide.mp4",
+     "say": "This guide shows the published Assignment 7 prompt and the gate review. It performs no commit, push, pull request, merge or deployment."
+    },
+    {
      "do": "Step 3. Participants answer the check on the slide.",
      "say": [
       "Read the result and the diff. Answer the check with yes or no. Revise if the answer is no."
@@ -2260,8 +2289,7 @@ window.SLIDES = [
    "watch": [
     "An agent that writes PASS.",
     "A schedule that is switched on.",
-    "A merge or a deploy. Stop before both.",
-    "OPEN: no recording yet. Show a participant result only after its own check passes."
+    "A merge or a deploy. Stop before both."
    ],
    "terms": [
     [
