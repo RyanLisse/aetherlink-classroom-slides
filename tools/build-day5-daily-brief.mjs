@@ -46,7 +46,7 @@ const HANDOFF = '/handoff Write a prompt for a fresh Claude Code session to cont
 const SOLO_PROMPTS = {
   1: 'Read CLAUDE.md, SOLO.md, and the templates. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Challenge my weakest check with one concrete counterexample. Revise only after my answer. Show the diff and stop for my review. Do not implement code.',
   2: 'Read my accepted intent.md and reference/. Draft docs/spec.md with one quoted example per field, then stop for my approval. After I approve it, write test/schema.test.ts and run it to show the expected red failure. Stop so I can inspect and commit the red test. After I confirm, build src/brief.ts and sample/brief.sample.json until the test passes. Ask me for one invalid sample and prove the schema rejects it. Show the test output and diff. Do not build a renderer or tools.',
-  3: 'In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.',
+  3: 'In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, tell me to press Shift+Tab until manual mode is on. Then save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.',
   4: 'Use my accepted docs/plan.md. Write test/render.test.ts and show the expected red failure. Then build src/render.ts and a sample-only src/main.ts. Escape untrusted text. Run npm run brief:sample and show out/latest.html. Ask me to choose one house-style change. Add its failing test first, make it pass, regenerate the page, and show the diff. Use no API key or model call. Stop for my inspection.',
   5: 'Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command. Preserve brief:sample without model calls. Give the brief agent no shell or write tools. Prove the tool wiring and one missing-source case I choose with tests. With credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Show the proof and diff, then stop.',
   6: 'Run the existing typecheck, test, and brief:sample scripts. Record every command, exit code, and one output line in docs/evidence.md. Link docs/evidence/latest-1440x900.png. Mark unrun checks OPEN. Do not change code to hide a failure. Ask my reviewer to rerun one command. Record the reviewer\'s actual name and result only after the rerun. Show the evidence diff and stop.',
@@ -111,7 +111,7 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
     {where: 'Terminal', text: 'Push HEAD to a new remote branch and open the PR', prompt: 'BRANCH="my/<firstname>"\ngit push origin "HEAD:refs/heads/$BRANCH"\ngh pr create --repo AetherLink-bv/aetherlink-daily-brief-lab-s1 --base main --head "$BRANCH"', after: 'If origin is not writable, use the fork route in SOLO.md. Stop before merge, deployment or schedule activation.'}
   ] : [
     {where: 'Claude Code', text: `In ${n === 3 ? 'plan' : 'manual'} mode, paste the exact SOLO ${n} prompt`, prompt, after: 'Not in the right mode? Press Shift+Tab first.', warn: true},
-    {where: 'Claude Code', text: 'Inspect the result and answer the checkpoint', after: checkpoint.at(-1)},
+    {where: 'Claude Code', text: n === 3 ? 'After approval, return to manual mode. Then inspect the saved documents.' : 'Inspect the result and answer the checkpoint', after: checkpoint.at(-1)},
     {where: 'Project skill', text: `Run /${SKILLS[n].name} for the final inspection`, prompt: SKILLS[n].prompt},
     {where: 'Terminal', text: 'Commit only the work you accepted'}
   ],
@@ -170,8 +170,8 @@ const TEACH = {
     next: 'decide the gate and prepare the PR.'
   },
   7: {
-    gist: 'Claude Code drafts docs/gate.md with FAIL and OPEN where proof is missing. The participant makes every PASS decision. A PR preview and an inactive schedule, nothing published.',
-    say: ['The gate is where a human decides.', 'Claude Code may propose FAIL or OPEN. Only you write PASS.', 'Open the PR only after the human review. Nothing is merged or deployed today.'],
+    gist: 'Claude Code drafts docs/gate.md and a PR preview. The participant decides PASS, commits, then opens the PR. The schedule stays inactive.',
+    say: ['The gate is where a human decides.', 'Claude Code may propose FAIL or OPEN. Only you write PASS.', 'After approval, commit and open the PR. Do not merge, deploy or activate the schedule.'],
     learn: ['PASS is a human decision with evidence in front of you.', 'An OPEN item can become a new check.', 'The schedule stays inactive.'],
     watch: ['An agent that writes PASS.', 'A schedule that is switched on.', 'A merge or a deploy. Stop before both.', OPEN_SHOT],
     terms: [['Gate', 'docs/gate.md: PASS, FAIL or OPEN for each check'], ['PR', 'a pull request: your change, ready for review'], ['Inactive schedule', 'the weekday run, written down but not switched on']],
@@ -492,7 +492,7 @@ const brief = [
     'You make every PASS decision. Open the PR only after the human review.',
     SOLO_PROMPTS[7],
     'Use the OPEN item I choose to propose one new acceptance check. Show the gate diff and PR preview. After I decide the gate and approve publication, open the PR. Stop before merge or deployment.',
-    say('25 min', 'The gate is where a human decides, with the evidence in front of them.', 'docs/gate.md with a quoted line per check.', 'An agent that writes PASS. The human decides PASS.', 'Each participant has a gate decision and a PR preview.', 'Maintain: close the loop')),
+    say('25 min', 'The gate is where a human decides, with the evidence in front of them.', 'docs/gate.md with a quoted line per check.', 'An agent that writes PASS. The human decides PASS.', 'Each participant has a gate decision and opens the PR only after approval.', 'Maintain: close the loop')),
   {
     title: 'Maintain: close the loop',
     kicker: 'Day 5 · MAINTAIN',

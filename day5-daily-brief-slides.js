@@ -1451,7 +1451,7 @@ window.SLIDES = [
    "copy": [
     [
      "SOLO 3 · Claude Code",
-     "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop."
+     "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, tell me to press Shift+Tab until manual mode is on. Then save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop."
     ],
     [
      "Project skill · /visual-plan",
@@ -1545,13 +1545,13 @@ window.SLIDES = [
    {
     "where": "Claude Code",
     "text": "In plan mode, paste the exact SOLO 3 prompt",
-    "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.",
+    "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, tell me to press Shift+Tab until manual mode is on. Then save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.",
     "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
    },
    {
     "where": "Claude Code",
-    "text": "Inspect the result and answer the checkpoint",
+    "text": "After approval, return to manual mode. Then inspect the saved documents.",
     "after": "A stranger can follow the plan."
    },
    {
@@ -1564,7 +1564,7 @@ window.SLIDES = [
     "text": "Commit only the work you accepted"
    }
   ],
-  "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.",
+  "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, tell me to press Shift+Tab until manual mode is on. Then save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.",
   "notes": "Time: 25 min.\n\nWhy now: A plan you accepted makes the build fast and easy to review.\n\nWhat you see: Three documents and a plan with a proof per step.\n\nWatch for: Plans without a proof command.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: A neighbour can name what proves completion.\n\nNext: Assignment 4: Render the brief from sample data"
  },
  {
@@ -2193,7 +2193,7 @@ window.SLIDES = [
   "assignmentId": "brief-a7",
   "teach": {
    "time": "25 min",
-   "gist": "Claude Code drafts docs/gate.md with FAIL and OPEN where proof is missing. The participant makes every PASS decision. A PR preview and an inactive schedule, nothing published.",
+   "gist": "Claude Code drafts docs/gate.md and a PR preview. The participant decides PASS, commits, then opens the PR. The schedule stays inactive.",
    "do": [
     "Check the Claude Code mode, paste the SOLO prompt, inspect the named check, then approve or revise."
    ],
@@ -2218,7 +2218,7 @@ window.SLIDES = [
      "say": [
       "The gate is where a human decides.",
       "Claude Code may propose FAIL or OPEN. Only you write PASS.",
-      "Open the PR only after the human review. Nothing is merged or deployed today."
+      "After approval, commit and open the PR. Do not merge, deploy or activate the schedule."
      ]
     },
     {
@@ -2323,7 +2323,7 @@ window.SLIDES = [
    }
   ],
   "prompt": "Read intent.md, the current diff, and docs/evidence.md. Draft docs/gate.md with evidence links and proposed FAIL or OPEN entries for missing checks. Leave every PASS decision to me. Prepare a PR title, description, and inactive weekday schedule. Show the diff and stop for my gate decision. Do not commit, push, open a PR, merge, deploy, or activate the schedule.",
-  "notes": "Time: 25 min.\n\nWhy now: The gate is where a human decides, with the evidence in front of them.\n\nWhat you see: docs/gate.md with a quoted line per check.\n\nWatch for: An agent that writes PASS. The human decides PASS.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Each participant has a gate decision and a PR preview.\n\nNext: Maintain: close the loop"
+  "notes": "Time: 25 min.\n\nWhy now: The gate is where a human decides, with the evidence in front of them.\n\nWhat you see: docs/gate.md with a quoted line per check.\n\nWatch for: An agent that writes PASS. The human decides PASS.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Each participant has a gate decision and opens the PR only after approval.\n\nNext: Maintain: close the loop"
  },
  {
   "title": "Maintain: close the loop",
