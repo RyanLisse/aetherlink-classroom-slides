@@ -28,7 +28,7 @@ const block = start => {
   return hits[0];
 };
 const P = {
-  start: block('git clone'), trainer: lessonPrompts.trainerStart,
+  start: block('git clone https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent.git'), trainer: lessonPrompts.trainerStart,
   test0: block('npm run doctor'),
   solo1: block('Run npm run check:1 and show'), test1: block('npm run check:1\n'),
   solo1b: block('Run the documented SOLO 1 dry run'), solo1c: block('Read my SOLO 1 diff'),
