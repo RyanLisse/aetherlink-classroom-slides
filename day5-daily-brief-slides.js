@@ -580,7 +580,7 @@ window.SLIDES = [
    "Sample data only. No credential in a prompt or a commit.",
    "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
    "Append progress.md after each step.",
-   "Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs."
+   "Use your own diff and the named check. Do not copy files from the legacy reference tags."
   ],
   "notes": "Time: 3 min.\n\nWhy now: Set the rules once, so the steps can stay short.\n\nWhat you see: Four rules.\n\nWatch for: Participants who copy the step tags. The tags are for comparing after an attempt.\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: Participants can name the OPEN rule.\n\nNext: Use the included project skills",
   "teach": {
@@ -594,7 +594,7 @@ window.SLIDES = [
       "Sample data only. No credential in a prompt or a commit.",
       "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
       "Append progress.md after each step.",
-      "Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs."
+      "Use your own diff and the named check. Do not copy files from the legacy reference tags."
      ]
     }
    ],
@@ -602,7 +602,7 @@ window.SLIDES = [
     "Sample data only. No credential in a prompt or a commit.",
     "Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.",
     "Append progress.md after each step.",
-    "Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs."
+    "Use your own diff and the named check. Do not copy files from the legacy reference tags."
    ],
    "watch": [
     "Participants who copy the step tags. The tags are for comparing after an attempt."
@@ -616,32 +616,20 @@ window.SLIDES = [
   "type": "concept",
   "cards": [
    {
-    "title": "A1 · /grilling",
-    "body": "Asks you hard questions, one at a time, until nothing is assumed."
+    "title": "A1–A2",
+    "body": "/grilling challenges the intent. /eli5 explains the schema."
    },
    {
-    "title": "A2 · /eli5",
-    "body": "Explains code simply, with the real mechanism."
+    "title": "A3–A4",
+    "body": "/visual-plan shows the plan. /verify-this checks the sample."
    },
    {
-    "title": "A3 · /visual-plan",
-    "body": "Turns a plan into one HTML page you can read."
+    "title": "A5–A6",
+    "body": "/show-me traces the tool. /verify-this checks the evidence."
    },
    {
-    "title": "A4, A6 · /verify-this",
-    "body": "Proves or disproves one claim with a fresh run."
-   },
-   {
-    "title": "A5 · /show-me",
-    "body": "Draws how the code connects, without changing it."
-   },
-   {
-    "title": "A7 · /review-and-ship",
-    "body": "Reviews your branch and prepares the PR."
-   },
-   {
-    "title": "Stuck · /handoff",
-    "body": "Writes a prompt so a fresh session can continue."
+    "title": "A7 and handoff",
+    "body": "/review-and-ship reviews the gate. /handoff continues later."
    }
   ],
   "keyPoints": [
@@ -992,7 +980,7 @@ window.SLIDES = [
     "Checks like “useful” or “clear”. Ask: how would your neighbour see that?",
     "Claude Code that starts on code. Say: stop, intent only.",
     "Live accounts. Today is sample data only.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [
@@ -1029,14 +1017,10 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “manual mode on”",
-    "after": "Not there? Press Shift+Tab until it is.",
+    "text": "In manual mode, paste the exact SOLO 1 prompt",
+    "prompt": "Read CLAUDE.md, SOLO.md, and the templates. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Challenge my weakest check with one concrete counterexample. Revise only after my answer. Show the diff and stop for my review. Do not implement code.",
+    "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
-   },
-   {
-    "where": "Claude Code",
-    "text": "Paste the exact SOLO 1 prompt",
-    "prompt": "Read CLAUDE.md, SOLO.md, and the templates. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Challenge my weakest check with one concrete counterexample. Revise only after my answer. Show the diff and stop for my review. Do not implement code."
    },
    {
     "where": "Claude Code",
@@ -1341,7 +1325,7 @@ window.SLIDES = [
     "A test written after the code. Ask for the red run.",
     "Fields without a quoted example in docs/spec.md.",
     "Someone who starts a renderer. That is A4.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [
@@ -1378,14 +1362,10 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “manual mode on”",
-    "after": "Not there? Press Shift+Tab until it is.",
+    "text": "In manual mode, paste the exact SOLO 2 prompt",
+    "prompt": "Read my accepted intent.md and reference/. Draft docs/spec.md with one quoted example per field, then stop for my approval. After I approve it, write test/schema.test.ts and run it to show the expected red failure. Stop so I can inspect and commit the red test. After I confirm, build src/brief.ts and sample/brief.sample.json until the test passes. Ask me for one invalid sample and prove the schema rejects it. Show the test output and diff. Do not build a renderer or tools.",
+    "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
-   },
-   {
-    "where": "Claude Code",
-    "text": "Paste the exact SOLO 2 prompt",
-    "prompt": "Read my accepted intent.md and reference/. Draft docs/spec.md with one quoted example per field, then stop for my approval. After I approve it, write test/schema.test.ts and run it to show the expected red failure. Stop so I can inspect and commit the red test. After I confirm, build src/brief.ts and sample/brief.sample.json until the test passes. Ask me for one invalid sample and prove the schema rejects it. Show the test output and diff. Do not build a renderer or tools."
    },
    {
     "where": "Claude Code",
@@ -1527,7 +1507,7 @@ window.SLIDES = [
     "Plan steps without a proof command.",
     "Someone who leaves plan mode before accepting. Press Shift+Tab back.",
     "Very long plans. Ask for one screen.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [
@@ -1564,14 +1544,10 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “plan mode on”",
-    "after": "Not there? Press Shift+Tab until it is.",
+    "text": "In plan mode, paste the exact SOLO 3 prompt",
+    "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.",
+    "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
-   },
-   {
-    "where": "Claude Code",
-    "text": "Paste the exact SOLO 3 prompt",
-    "prompt": "In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop."
    },
    {
     "where": "Claude Code",
@@ -1678,7 +1654,7 @@ window.SLIDES = [
     "A model call in the sample path.",
     "Unescaped text from the sources in the HTML.",
     "Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [
@@ -1715,14 +1691,10 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “manual mode on”",
-    "after": "Not there? Press Shift+Tab until it is.",
+    "text": "In manual mode, paste the exact SOLO 4 prompt",
+    "prompt": "Use my accepted docs/plan.md. Write test/render.test.ts and show the expected red failure. Then build src/render.ts and a sample-only src/main.ts. Escape untrusted text. Run npm run brief:sample and show out/latest.html. Ask me to choose one house-style change. Add its failing test first, make it pass, regenerate the page, and show the diff. Use no API key or model call. Stop for my inspection.",
+    "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
-   },
-   {
-    "where": "Claude Code",
-    "text": "Paste the exact SOLO 4 prompt",
-    "prompt": "Use my accepted docs/plan.md. Write test/render.test.ts and show the expected red failure. Then build src/render.ts and a sample-only src/main.ts. Escape untrusted text. Run npm run brief:sample and show out/latest.html. Ask me to choose one house-style change. Add its failing test first, make it pass, regenerate the page, and show the diff. Use no API key or model call. Stop for my inspection."
    },
    {
     "where": "Claude Code",
@@ -1995,7 +1967,7 @@ window.SLIDES = [
     "brief:sample that suddenly needs a model.",
     "The reference tag has many tools. Today you build one.",
     "run.log comes from: npm run brief 2> run.log.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [
@@ -2032,14 +2004,10 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “manual mode on”",
-    "after": "Not there? Press Shift+Tab until it is.",
+    "text": "In manual mode, paste the exact SOLO 5 prompt",
+    "prompt": "Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command. Preserve brief:sample without model calls. Give the brief agent no shell or write tools. Prove the tool wiring and one missing-source case I choose with tests. With credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Show the proof and diff, then stop.",
+    "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
-   },
-   {
-    "where": "Claude Code",
-    "text": "Paste the exact SOLO 5 prompt",
-    "prompt": "Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command. Preserve brief:sample without model calls. Give the brief agent no shell or write tools. Prove the tool wiring and one missing-source case I choose with tests. With credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Show the proof and diff, then stop."
    },
    {
     "where": "Claude Code",
@@ -2146,7 +2114,7 @@ window.SLIDES = [
     "Evidence typed from memory.",
     "Code changed to hide a failure.",
     "A reviewer name filled in before the rerun.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [
@@ -2183,14 +2151,10 @@ window.SLIDES = [
   "steps": [
    {
     "where": "Claude Code",
-    "text": "Check the mode: “manual mode on”",
-    "after": "Not there? Press Shift+Tab until it is.",
+    "text": "In manual mode, paste the exact SOLO 6 prompt",
+    "prompt": "Run the existing typecheck, test, and brief:sample scripts. Record every command, exit code, and one output line in docs/evidence.md. Link docs/evidence/latest-1440x900.png. Mark unrun checks OPEN. Do not change code to hide a failure. Ask my reviewer to rerun one command. Record the reviewer's actual name and result only after the rerun. Show the evidence diff and stop.",
+    "after": "Not in the right mode? Press Shift+Tab first.",
     "warn": true
-   },
-   {
-    "where": "Claude Code",
-    "text": "Paste the exact SOLO 6 prompt",
-    "prompt": "Run the existing typecheck, test, and brief:sample scripts. Record every command, exit code, and one output line in docs/evidence.md. Link docs/evidence/latest-1440x900.png. Mark unrun checks OPEN. Do not change code to hide a failure. Ask my reviewer to rerun one command. Record the reviewer's actual name and result only after the rerun. Show the evidence diff and stop."
    },
    {
     "where": "Claude Code",
@@ -2297,7 +2261,7 @@ window.SLIDES = [
     "An agent that writes PASS.",
     "A schedule that is switched on.",
     "A merge or a deploy. Stop before both.",
-    "OPEN: no recording yet. Show the reference tag on the facilitator branch instead."
+    "OPEN: no recording yet. Show a participant result only after its own check passes."
    ],
    "terms": [
     [

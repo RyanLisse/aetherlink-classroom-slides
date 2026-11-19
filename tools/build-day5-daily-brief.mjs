@@ -110,8 +110,7 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
     {where: 'Terminal', text: 'After approval, commit the accepted Assignment 7 files'},
     {where: 'Terminal', text: 'Push HEAD to a new remote branch and open the PR', prompt: 'BRANCH="my/<firstname>"\ngit push origin "HEAD:refs/heads/$BRANCH"\ngh pr create --repo AetherLink-bv/aetherlink-daily-brief-lab-s1 --base main --head "$BRANCH"', after: 'If origin is not writable, use the fork route in SOLO.md. Stop before merge, deployment or schedule activation.'}
   ] : [
-    {where: 'Claude Code', text: `Check the mode: “${n === 3 ? 'plan' : 'manual'} mode on”`, after: 'Not there? Press Shift+Tab until it is.', warn: true},
-    {where: 'Claude Code', text: `Paste the exact SOLO ${n} prompt`, prompt},
+    {where: 'Claude Code', text: `In ${n === 3 ? 'plan' : 'manual'} mode, paste the exact SOLO ${n} prompt`, prompt, after: 'Not in the right mode? Press Shift+Tab first.', warn: true},
     {where: 'Claude Code', text: 'Inspect the result and answer the checkpoint', after: checkpoint.at(-1)},
     {where: 'Project skill', text: `Run /${SKILLS[n].name} for the final inspection`, prompt: SKILLS[n].prompt},
     {where: 'Terminal', text: 'Commit only the work you accepted'}
@@ -120,7 +119,7 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
   notes
 });
 
-const OPEN_SHOT = 'OPEN: no recording yet. Show the reference tag on the facilitator branch instead.';
+const OPEN_SHOT = 'OPEN: no recording yet. Show a participant result only after its own check passes.';
 const TEACH = {
   1: {
     gist: 'Claude Code interviews the participant. The answer is intent.md: one outcome, three checks you can see, owners, a hard boundary and one OPEN.',
@@ -321,7 +320,7 @@ const brief = [
       'Sample data only. No credential in a prompt or a commit.',
       'Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.',
       'Append progress.md after each step.',
-      'Compare with the reference tags only after your own attempt, by path: git diff main step-2-spec -- src test docs.'
+      'Use your own diff and the named check. Do not copy files from the legacy reference tags.'
     ],
     notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy the step tags. The tags are for comparing after an attempt.', 'Participants can name the OPEN rule.', 'What is a skill?')
   },
@@ -343,8 +342,12 @@ const brief = [
     kicker: 'Day 5 · PROJECT SKILLS',
     subtitle: 'The lab already has the skills you use today. One per assignment.',
     type: 'concept',
-    cards: [1, 2, 3, 4, 5, 7].map(n => ({title: `A${n === 4 ? '4, A6' : n} · /${SKILLS[n].name}`, body: SKILLS[n].what[0].toUpperCase() + SKILLS[n].what.slice(1) + '.'}))
-      .concat({title: 'Stuck · /handoff', body: 'Writes a prompt so a fresh session can continue.'}),
+    cards: [
+      {title: 'A1–A2', body: '/grilling challenges the intent. /eli5 explains the schema.'},
+      {title: 'A3–A4', body: '/visual-plan shows the plan. /verify-this checks the sample.'},
+      {title: 'A5–A6', body: '/show-me traces the tool. /verify-this checks the evidence.'},
+      {title: 'A7 and handoff', body: '/review-and-ship reviews the gate. /handoff continues later.'}
+    ],
     keyPoints: ['Type / in Claude Code to see them.', 'Use only these project skills during the lesson.', 'The full skills pack comes at the end of the day.'],
     prompt: HANDOFF,
     notes: say('3 min', 'Show the tools before the first assignment.', 'Seven skills, one per step.', 'Participants who install the full pack now. That is for the hackathon.', 'Everyone can find /grilling after typing /.', 'Assignment 1')
