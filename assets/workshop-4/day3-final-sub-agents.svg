@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img" aria-labelledby="title desc">
+  <title id="title">Day 3 final workflow: main agent and three sub-agents</title>
+  <desc id="desc">Diagram derived from the exported Day 3 workflow. The main agent has one Simple Memory, one output parser and three sub-agents. Only the Customer Context Agent can use the data table lookup tool.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#69e2f2"/></marker>
+    <style>
+      .bg{fill:#06111e}.box{fill:#0d1e31;stroke:#69e2f2;stroke-width:3}.agent{stroke:#9b7bff}.main{stroke:#ffae42;stroke-width:4}.tool{stroke:#40d39c}.route{stroke:#ffae42}.line{fill:none;stroke:#69e2f2;stroke-width:3;marker-end:url(#arrow)}.tool-line{stroke:#9b7bff;stroke-dasharray:9 7}.text{fill:#edf4ff;font:700 26px system-ui,sans-serif}.small{fill:#b8c8df;font:500 18px system-ui,sans-serif}.label{fill:#69e2f2;font:700 16px system-ui,sans-serif;letter-spacing:1.5px}.note{fill:#ffca72;font:700 19px system-ui,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="720" rx="24"/>
+  <text class="label" x="54" y="52">DERIVED FROM THE FINAL DAY 3 WORKFLOW EXPORT</text>
+
+  <rect class="box" x="55" y="105" width="235" height="100" rx="18"/>
+  <text class="text" x="173" y="150" text-anchor="middle">Chat message</text>
+  <text class="small" x="173" y="180" text-anchor="middle">starts the run</text>
+
+  <rect class="box main" x="430" y="90" width="330" height="130" rx="18"/>
+  <text class="text" x="595" y="142" text-anchor="middle">Main AI Agent</text>
+  <text class="small" x="595" y="175" text-anchor="middle">own model • one Simple Memory</text>
+  <text class="small" x="595" y="201" text-anchor="middle">structured output parser</text>
+
+  <rect class="box route" x="905" y="105" width="230" height="100" rx="18"/>
+  <text class="text" x="1020" y="150" text-anchor="middle">Switch</text>
+  <text class="small" x="1020" y="180" text-anchor="middle">routes by priority</text>
+
+  <rect class="box route" x="1215" y="105" width="145" height="100" rx="18"/>
+  <text class="text" x="1288" y="143" text-anchor="middle">Save draft</text>
+  <text class="small" x="1288" y="174" text-anchor="middle">low • medium</text>
+  <text class="small" x="1288" y="197" text-anchor="middle">high</text>
+
+  <path class="line" d="M290 155H430"/><path class="line" d="M760 155H905"/><path class="line" d="M1135 155H1215"/>
+
+  <text class="note" x="595" y="278" text-anchor="middle">The main agent can call each sub-agent as a tool</text>
+
+  <rect class="box agent" x="75" y="340" width="320" height="120" rx="18"/>
+  <text class="text" x="235" y="390" text-anchor="middle">Customer Reply Agent</text>
+  <text class="small" x="235" y="426" text-anchor="middle">own model • drafts the reply</text>
+
+  <rect class="box agent" x="540" y="340" width="320" height="120" rx="18"/>
+  <text class="text" x="700" y="390" text-anchor="middle">Risk Agent</text>
+  <text class="small" x="700" y="426" text-anchor="middle">own model • returns a risk note</text>
+
+  <rect class="box agent" x="1005" y="340" width="320" height="120" rx="18"/>
+  <text class="text" x="1165" y="390" text-anchor="middle">Customer Context Agent</text>
+  <text class="small" x="1165" y="426" text-anchor="middle">own model • looks up facts</text>
+
+  <path class="line tool-line" d="M235 340V300H535V220"/>
+  <path class="line tool-line" d="M700 340V220"/>
+  <path class="line tool-line" d="M1165 340V300H655V220"/>
+
+  <rect class="box tool" x="1010" y="560" width="310" height="105" rx="18"/>
+  <text class="text" x="1165" y="603" text-anchor="middle">Get row(s)</text>
+  <text class="small" x="1165" y="637" text-anchor="middle">read-only data table tool</text>
+  <path class="line" d="M1165 560V460"/>
+
+  <rect x="80" y="555" width="670" height="110" rx="18" fill="#0a1727" stroke="#314963" stroke-width="2"/>
+  <text class="label" x="110" y="594">MEMORY BOUNDARY</text>
+  <text class="small" x="110" y="630">Simple Memory is connected to the main agent only.</text>
+  <text class="small" x="110" y="657">The three sub-agents receive a task and return their result.</text>
+</svg>

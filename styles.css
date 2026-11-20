@@ -68,6 +68,15 @@ a{color:var(--cyan)}
 .tools button{font-size:.85rem}
 .presenter-btn{background:linear-gradient(105deg,var(--aether-purple),var(--aether-orange));color:#fff;border-color:transparent;font-weight:700;text-shadow:0 1px 1px rgba(0,0,0,.25)}
 
+/* Keep the complete teaching toolbar on one row on smaller laptop screens. */
+@media (min-width:901px) and (max-width:1250px){
+  .toolbar{padding-inline:1.5rem;gap:.5rem}
+  .tools{flex-wrap:nowrap;gap:.35rem}
+  .tools button{padding-inline:.72rem;font-size:.78rem}
+  .brand{font-size:.9rem;letter-spacing:.07em}
+  .brand small{font-size:.6rem}
+}
+
 #stage{width:min(1280px,92vw);margin:auto;flex:1;padding:clamp(1.2rem,4vh,3rem) 0;display:flex;flex-direction:column;justify-content:center;outline:none;border-radius:22px;transition:box-shadow .25s,border-color .25s}
 .heading{margin-bottom:1.5rem;animation:enter .45s both}
 .heading-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
@@ -1250,6 +1259,7 @@ html.embed body{min-height:100vh}
 .mode-chip{padding:.2rem .7rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;white-space:nowrap;color:var(--text);border:1.5px solid var(--muted);background:var(--surface)}
 .mode-chip.mode-plan{border-color:var(--cyan);color:var(--cyan)}.mode-chip.mode-manual{border-color:var(--amber);color:var(--amber)}
 .asg-repo{display:inline-block;margin-top:.45rem;color:var(--cyan);font-size:clamp(.9rem,1.25vw,1.05rem);font-weight:800;text-decoration-thickness:2px;text-underline-offset:.22em;overflow-wrap:anywhere}
+.asg-repo + .asg-repo{margin-inline-start:1rem}
 .asg-repo:hover{color:var(--text)}
 .asg-top-right{display:flex;align-items:center;gap:1rem}
 .tpill-wrap{position:relative}
@@ -1918,6 +1928,7 @@ body[data-opener="team"] .flip-front .team-avatar{margin-bottom:.6rem}
 .aj-row{display:grid;grid-template-columns:auto 1fr;column-gap:.5rem;row-gap:.1rem;font-size:.82rem;line-height:1.3;opacity:0;animation:wkPop .35s ease-out forwards;animation-delay:calc(.3s + var(--i) * .45s)}
 .aj-row b{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;padding-top:.12rem}
 .aj-ev{grid-column:2;justify-self:start;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.68rem;color:var(--cyan);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);border-radius:6px;padding:0 .35rem}
+.day5-daily-brief .cards.agent-job .aj-ev{font-size:.75rem}
 .aj-ask{display:grid;gap:.5rem;margin-bottom:.7rem;justify-items:start}
 .aj-wait{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--aether-orange);display:flex;align-items:center;gap:.4rem}
 .aj-wait::before{content:'';width:.6rem;height:.6rem;border-radius:50%;background:var(--aether-orange);animation:wkPulse 1s ease-in-out infinite}
@@ -2151,6 +2162,7 @@ html.ov-page body{min-height:100vh;background:var(--bg)}
 .cz-result.shown{opacity:1}
 .cz-decide{margin:.8rem 0 0;text-align:center;font-weight:900;font-size:1.05rem;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
 .cz-decide.shown{opacity:1;transform:none}
+.day5-daily-brief #stage:has(.cz-flow){padding-block:1.2rem}
 @media (max-width:900px){.cards.cz-flow{flex-wrap:wrap}.cz-panel{grid-template-columns:1fr}}
 /* assignment slides, wide (opt-in: window.ASG_WIDE): steps in two columns over the full width, the picture as a thumbnail in the header (click = big) */
 .asg-head.has-thumb{position:relative}

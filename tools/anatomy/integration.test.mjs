@@ -109,9 +109,9 @@ test('Day 5 keeps six core assignments, the A8 gate, and optional A7/A9 without 
  assert.deepEqual([...slides[scope].cards.map(card=>card.title)],['Ready','You change','You prove']);
 
  const appendix=slides.findIndex(slide=>slide.kicker==='Day 5 · APPENDIX · OPTIONAL LIVE MODEL');
- const bonus=slides.findIndex(slide=>slide.kicker==='Day 5 · BONUS');
- assert.ok(close>0&&appendix>close&&bonus>appendix,'the main SRE route closes before appendix and bonus');
- assert.match(slides[bonus].repo.url,/aetherlink-daily-brief-lab-s1$/,'Daily Brief remains the bonus');
+ const mainLesson=slides.findIndex(slide=>slide.kicker==='Day 5 · MAIN LESSON');
+ assert.ok(close>0&&appendix>close&&mainLesson>appendix,'the legacy SRE route closes before its appendix and link to the main lesson');
+ assert.match(slides[mainLesson].repo.url,/aetherlink-daily-brief-lab-s1$/,'the main lesson links to the Daily Brief starter');
  for(const slide of slides.filter(item=>item.beat==='turn'))assert.match(slide.repo.url,/sre-oncall-agent\/tree\/workshop\/start$/,'main exercises use the SRE starter');
 });
 

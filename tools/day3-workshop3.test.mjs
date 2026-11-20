@@ -9,10 +9,21 @@ const load = file => { const c = { window: {} }; vm.runInNewContext(readFileSync
 const slides = load('workshop3-slides.js');
 const titles = Array.from(slides, s => s.title);
 
-test('workshop3 keeps every Jessy slide, in her order', () => {
+test('workshop3 keeps Jessy\'s route in order with the reviewed title adaptations', () => {
   const jessy = Array.from(load("day3-jessy-slides.js"), s => s.title);
-  assert.deepEqual(titles.filter(t => jessy.includes(t)), jessy);
-  assert.equal(slides.length, jessy.length + 2);
+  const adapted = new Map([
+    ['Extra A: Let specialists consult each other', 'Extra: Let specialists consult each other'],
+    ['Assignment 42: Save your proof', 'Assignment 42: Save every reply for approval']
+  ]);
+  const normalized = titles.map(title => adapted.get(title) || title);
+  assert.deepEqual(normalized.filter(title => jessy.includes(title)), jessy);
+  assert.deepEqual(titles.filter(title => !jessy.includes(title) && !adapted.has(title)), [
+    'We are team AetherLink',
+    'Warm-up: build your first workflow',
+    'Explore: what can you create in n8n?',
+    'Extra B: Let the workflow keep a log'
+  ]);
+  assert.equal(slides.length, jessy.length + 4);
 });
 
 test('the warm-up sits between the tour and the L1 → L3 ladder', () => {

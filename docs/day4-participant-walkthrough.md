@@ -2,7 +2,7 @@
 
 > **Historical audit.** This document records an earlier 74-slide route with
 > solved step branches. Do not use it to run the current lesson. Use
-> [`workshop4.html`](../workshop4.html), the current participant repository
+> [`day4-final.html`](../day4-final.html), the current participant repository
 > [`README.md`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent)
 > and the central [`FACILITATOR.md`](../FACILITATOR.md). The current route keeps
 > participants on their own branch from the unsolved `main` starter.
@@ -149,6 +149,19 @@ personal assistant persona, and the run cost $5.08 against $0.04.
 Chosen: the `claude-code` and `sdk-login` backends copy only the `env` block from the user settings into the
 agent's environment. A fake `claude` on `PATH` proved the variables now arrive. A real run kept only the
 `StructuredOutput` tool and cost $0.018. Not tested on a real Vertex account.
+
+Changed on 2026-11-05: every lesson now loads `settingSources: ['project', 'user']`, on the owner's decision. The
+`env` copy stays. MCP servers and connectors stay off, because the package passes a strict MCP config. Measured on
+one laptop with a large personal setup (Claude Code 2.1.318):
+
+| Run | settingSources | Cost | Leakage |
+|---|---|---|---|
+| Step 1 MSG-01 | project | $0.0395 | None |
+| Step 1 MSG-01 | project, user | $0.392 | None. Structured output kept the JSON correct. |
+| Step 3 MSG-08 | project | $0.264 | None |
+| Step 3 MSG-08 | project, user | $1.484 | Yes. The personal response format appeared in the agent messages. |
+
+The slide "Which login do we use?" tells the trainer what to watch for.
 
 Update 2026-11-12: this choice is reversed. The start command and every run now load `project,user`, because
 the interactive Claude Code session of a participant also needs the company login. Strict MCP stays, so

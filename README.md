@@ -8,9 +8,13 @@ For Days 4 and 5, use these current routes:
 
 | Day | Participant slides | Presenter notes | Participant repository |
 | --- | --- | --- | --- |
-| Day 4 · n8n to Claude Agent SDK | [`workshop4.html`](workshop4.html) | [`workshop4-presenter.html`](workshop4-presenter.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
-| Day 5 · AI-native SDLC | [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
-| Day 5 bonus · Daily Brief | Final slide in [`workshop5.html`](workshop5.html#57) | Open the final slide first, then use **Presenter view** | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main` |
+| Day 4 · n8n to Claude Agent SDK (final) | [`day4-final.html`](day4-final.html) | [`day4-final-presenter.html`](day4-final-presenter.html), day sheet [`day4-final-sheet.html`](day4-final-sheet.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
+| Day 5 · Daily Brief agent (main lesson) | [`day5-daily-brief.html`](day5-daily-brief.html) | [`day5-daily-brief-presenter.html`](day5-daily-brief-presenter.html), day sheet [`day5-daily-brief-sheet.html`](day5-daily-brief-sheet.html) | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main`. All seven steps in class. |
+| Day 5 bonus · Sonny, the SRE agent | Linked from the final slide; open [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
+
+The Day menu also lists earlier decks. `workshop4.html` is Ryan's Day 4 deck and the source of the final deck.
+`day4-jessy.html` and `day4-maarten-n8n-to-claude.html` teach the old step-branch route of Day 4. Do not teach
+from them. `workshop5.html` is the earlier Day 5 deck with the SRE agent as the main lesson.
 
 Facilitators should start with [`FACILITATOR.md`](FACILITATOR.md). The slides
 set the lesson order. The participant repositories provide the matching
@@ -421,15 +425,27 @@ Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
 
-## Day 4 deck (Claude Agent SDK, revised 4 Nov 2026)
+The main Day 5 lesson is now `day5-daily-brief.html` (the Daily Brief agent). `workshop5.html` stays as the earlier
+deck. Its last slide points to the Daily Brief deck.
 
-`workshop4.html` loads `workshop4-slides.js` (74 slides) with the shared `app.js`, `styles.css`, `timers.js` and
-`fit-stage.js` (shrinks a tall slide to fit the screen). Presenter view with teach cards: `workshop4-presenter.html`.
-Base: Ryan's 69-slide deck, rewritten in the Day 1-2 style (title = intent, copy-button steps, "Look for" and
-"Done when", a teach card on every slide), with Jessy's teach-card renderer and real-run clips in
-`assets/day4-teach/`, and Maarten's message-6 quiz. Own diagrams: `assets/workshop-4/*.svg` (Nunito embedded).
-Participants clone the public package `https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent`; the
-assignment lives in its `SOLO.md` on branch `step-4` ("Assignment · Extend the MCP"). All data in the package is
-fictional. Checks: `node --test tools/day4-basis.test.mjs` (the manifest digest in
-`tools/session-source-manifest.json` must be updated after every slide edit). This repo
+## Day 4 deck (n8n to Claude Agent SDK, final, 19 Nov 2026)
+
+`day4-final.html` is the one deck for Day 4. It loads `day4-final-slides.js`, which
+`tools/build-day4-final.mjs` generates. Do not edit the generated file. Presenter view with teach cards:
+`day4-final-presenter.html`. Day sheet: `day4-final-sheet.html`.
+
+- Route: participants clone `https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent` and stay on `main`.
+  Participants compare the final Day 3 chat export with the starter snapshot and finish by saving drafts for review. A check (`npm run check:1`, `check:2`, `check:3`) is red before the
+  step and green after it. The trainer uses a separate clone of the `trainer/solution` branch. All data in the package is fictional.
+- Prompts: lesson-specific additions are in `tools/day4-lesson-prompts.json`. Package prompts come from `tools/day4-participant-contract.json`, which pins the fenced blocks of
+  `SOLO.md` and `README.md` on package `main`. Refresh it with `tools/day4-contract.mjs` after a package change.
+- Slides: the generator reuses slides from `workshop4-slides.js` (Ryan, 63 slides) and `day4-jessy-slides.js` by
+  title. Fix a reused slide in its source deck, then run `node tools/build-day4-final.mjs`.
+- Timing: four blocks of 60, 120, 90 and 45 minutes, with pauses of 15, 45 and 15 minutes. The generator stops when
+  a block does not add up.
+- Checks: `node --test tools/day4-final.test.mjs tools/day4-contract.test.mjs tools/day4-basis.test.mjs`. After an
+  edit to `workshop4-slides.js`, update its digest in `tools/session-source-manifest.json`.
+
+`workshop4.html` (Ryan's deck) follows the same route and stays as the source of the reused slides.
+`day4-jessy.html` and `day4-maarten-n8n-to-claude.html` teach the old step-branch route. This repo
 (`AetherLink-bv/aetherlink-classroom-slides`) is the single source for the classroom decks.

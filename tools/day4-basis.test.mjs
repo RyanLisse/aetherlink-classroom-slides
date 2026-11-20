@@ -43,7 +43,7 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(html,/styles\.css\?v=147/);
  assert.match(html,/demo-fallback\.js\?v=94/);
  assert.match(html,/timers\.js\?v=92/);
- assert.match(html,/sessions\.js\?v=19/);
+ assert.match(html,/sessions\.js\?v=23/);
  assert.match(html,/app\.js\?v=129/);
  assert.match(html,/id="timer-btn"/);
  assert.match(presenter,/styles\.css\?v=129/);
@@ -56,8 +56,8 @@ test('Both Day 4 decks use the current Day 1 and 2 shell',()=>{
  assert.match(w4,/app\.js\?v=130/);
  assert.match(w4,/fit-stage\.js\?v=1/);
  assert.match(w4,/id="timer-btn"/);
- assert.match(w4,/workshop4-slides\.js\?v=31/);
- assert.match(w4p,/workshop4-slides\.js\?v=31/);
+ assert.match(w4,/workshop4-slides\.js\?v=32/);
+ assert.match(w4p,/workshop4-slides\.js\?v=32/);
  assert.match(w4p,/presenter\.js\?v=106/);
 });
 

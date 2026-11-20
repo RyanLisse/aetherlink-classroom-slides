@@ -220,7 +220,7 @@ function highlight(root, s) {
 // slides 8-13: extra layouts, all keep the slide text verbatim
 function renderExtras(stage, main, s, v) {
   const x = { aim: [] }; const cards = [...main.querySelectorAll('.card')]; const grid = main.querySelector('.cards');
-  if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots (as in the Day 5 deck); each click / → lights the next phase; cards below are optional
+  if (v.sdlcLine && !grid) {                                           // the SDLC as one straight line with six dots (as in the Day 5 deck); each click / → lights the next phase; cards below are optional
     const track = node('div', 'sdlc-track sdlc-track-big'); track.setAttribute('role', 'img'); track.setAttribute('aria-label', 'SDLC: ' + SDLC_PHASES.map(([, l]) => l).join(', '));
     let k = -1; const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
     const steps = SDLC_PHASES.map(([, label], i) => { const st = node('span', 'sdlc-step'); st.style.setProperty('--i', i); st.append(node('span', 'sdlc-dot'), node('span', 'sdlc-label', label)); st.addEventListener('click', () => { k = i; paint(); }); track.append(st); return st; });
@@ -1688,8 +1688,13 @@ function renderAssignment(stage, s) {
   const right = node('div', 'asg-top-right'); const trk = sdlcTrack(s); right.append(timerPill(s)); if (trk) right.append(trk); right.append(node('p', 'slide-count', countText(current)));
   top.append(eyebrow, right); head.append(top, node('h1', null, title));
   if (s.subtitle) head.append(node('p', 'subtitle', s.subtitle));
-  if (s.repo?.url) {
-    const link = node('a', 'asg-repo', s.repo.label || s.repo.url); link.href = s.repo.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+  for (const resource of [s.repo, s.source]) {
+    if (!resource?.url) continue;
+    const link = node('a', 'asg-repo', resource.label || resource.url);
+    link.href = resource.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    if (resource.download) link.download = resource.download;
     head.append(link);
   }
   stage.append(head);
