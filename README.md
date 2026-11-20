@@ -22,6 +22,17 @@ starter files and assignments.
 
 ## Day 1 and Day 2 curriculum decisions
 
+**Day 1 now has its own deck: `day1.html`** (`day1-slides.js`, `day1-presenter.html`,
+`day1-sheet.html`), the Snake day with the Overview (G) and the Day 1 sheet. The day
+picker opens it for Day 1. It started on 2026-11-18 as a copy of slides 1–82 of
+`slides.js` and was checked in a real Claude Code run. Edit Day 1 there.
+
+**Day 2 has its own deck too: `day2.html`** (`day2-slides.js`, `day2-presenter.html`,
+`day2-sheet.html`), with the same Overview and a Day 2 sheet. It started on 2026-11-18
+as a copy of slides 83–189 of `slides.js` (44 slides plus the hidden Parked ones).
+Edit Day 2 there. `index.html`/`slides.js` stay as the old two-day deck; the day
+picker no longer opens it.
+
 `index.html` contains the original 109-slide Day 1 and Day 2 deck built around
 the **Aether Library** practice project. Its content source is `CURRICULUM.md`,
 including its "Resolved alignment decisions" section. Those decisions override
