@@ -94,6 +94,6 @@ test('Deck and presenter load the same current Day 3 source', () => {
   assert.ok(deck.includes('app.js?v=129'));
   assert.ok(presenter.includes('styles.css?v=129'));
   assert.ok(presenter.includes('timers.js?v=92'));
-  assert.ok(presenter.includes('sessions.js?v=19'));
+  assert.ok(presenter.includes('sessions.js?v=23'));
   assert.ok(presenter.includes('presenter.js?v=106'));
 });
