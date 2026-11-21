@@ -86,6 +86,10 @@ test('every published Daily Brief assignment part links a class demo before indi
         : 'beec03ff9c1232704f74651e57e2da132874758e');
       assert.match(recorded?.evidenceSource ?? '', /saved (?:participant checkpoint|trainer reference)/i);
       assert.match(recorded?.disclaimer ?? '', /not a (?:new|live) /i);
+      assert.equal(recorded?.expectedExit, 0);
+      assert.ok(recorded?.command, `${slide.assignmentId} records its captured action`);
+      assert.match(recorded?.sourceArchive ?? '', /^\.github\/capture-input\/.+\.tar\.gz$/);
+      assert.match(recorded?.sourceArchiveSha256 ?? '', /^[a-f0-9]{64}$/);
     }
     const firstParticipantAction = script.findIndex(beat => slide.assignmentId.startsWith('brief-voice')
       ? /^(?:Paste Part|Hand control)/.test(beat.do)
