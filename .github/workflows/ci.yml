@@ -1,38 +1,197 @@
-name: Test classroom decks
+name: Temporary Day 5 lesson recovery proof
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      assignment_ids:
+        description: Comma-separated guide IDs without the brief- prefix
+        required: true
+        default: a4-p1
+      slide_numbers:
+        description: Comma-separated Day 5 slide numbers for screenshots and notes
+        required: true
+        default: 10,21,22,23
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: temporary-day5-lesson-recovery-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+  review:
+    runs-on: macos-latest
+    timeout-minutes: 35
+    env:
+      ASSIGNMENT_IDS: ${{ inputs.assignment_ids }}
+      SLIDE_NUMBERS: ${{ inputs.slide_numbers }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-      - name: Test classroom decks
-        run: node --test --test-concurrency=2 tools/anatomy/bottleneck/model.test.mjs tools/anatomy/integration.test.mjs tools/day*-*.test.mjs tools/sessions.test.mjs
-      - name: Prepare static site
-        run: node tools/publish-site.mjs
-      - name: Check publish boundary
+          node-version: 24
+
+      - name: Run lesson checks before rendering
+        run: node --test --test-concurrency=2 tools/day5-feedback.test.mjs
+
+      - name: Ensure ffmpeg is available
+        run: brew list ffmpeg >/dev/null 2>&1 || brew install ffmpeg
+
+      - name: Confirm the affected guide set
         run: |
-          test -f dist/index.html
-          test -f dist/styles.css
-          test ! -e dist/.git
-          test ! -e dist/.omc
-          test ! -e dist/tools
-          test -z "$(find dist -mindepth 1 -maxdepth 1 ! -name assets ! -name styles.css ! -name '*.html' ! -name '*.js' -print -quit)"
-          test -z "$(find dist/assets -type d \( -name node_modules -o -name tools -o -name vendor \) -print -quit)"
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {readFileSync, writeFileSync} from 'node:fs';
+          import vm from 'node:vm';
+
+          const requested = [...new Set(process.env.ASSIGNMENT_IDS.split(',').map(value => value.trim()).filter(Boolean))];
+          assert.ok(requested.length > 0, 'at least one assignment ID is required');
+          for (const id of requested) assert.match(id, /^(?:a[1-7](?:-p[1-3])?|voice-p[12])$/);
+          const context = {window: {}};
+          vm.runInNewContext(readFileSync('day5-daily-brief-slides.js', 'utf8'), context);
+          const guided = context.window.SLIDES.filter(slide => /^(?:brief-a[1-7](?:-p[1-3])?|brief-voice-p[12])$/.test(slide.assignmentId ?? ''));
+          const fingerprint = slide => createHash('sha256').update(JSON.stringify({
+            title: slide.title,
+            subtitle: slide.subtitle,
+            steps: slide.steps,
+            expected: slide.expected,
+            prompt: slide.prompt,
+            copy: slide.teach?.copy
+          })).digest('hex').slice(0, 16);
+          const manifestPath = 'assets/day5-daily-brief-teach/manifest.json';
+          const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+          const changed = guided.filter(slide => manifest.guides.find(guide => guide.assignmentId === slide.assignmentId)?.fingerprint !== fingerprint(slide));
+          const changedIds = changed.map(slide => slide.assignmentId.slice(6)).sort();
+          const unexpected = changedIds.filter(id => !requested.includes(id));
+          assert.deepEqual(unexpected, [], `changed guides omitted from assignment_ids: ${unexpected.join(', ')}`);
+          for (const id of requested) {
+            const slide = guided.find(candidate => candidate.assignmentId === `brief-${id}`);
+            assert.ok(slide, `missing guided slide ${id}`);
+            const guide = manifest.guides.find(candidate => candidate.assignmentId === slide.assignmentId);
+            assert.ok(guide, `missing manifest entry ${id}`);
+            guide.fingerprint = fingerprint(slide);
+          }
+          writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+          writeFileSync('requested-guides.json', `${JSON.stringify({requested, changed: changedIds}, null, 2)}\n`);
+          JS
+
+      - name: Render only the affected walkthroughs
+        run: |
+          node --input-type=module <<'JS' > "$RUNNER_TEMP/assignment-ids.txt"
+          for (const id of process.env.ASSIGNMENT_IDS.split(',').map(value => value.trim()).filter(Boolean)) console.log(id);
+          JS
+          while IFS= read -r assignment; do
+            node tools/render-day5-guide-videos.mjs "--assignment=$assignment"
+          done < "$RUNNER_TEMP/assignment-ids.txt"
+          mkdir -p day5-rendered-evidence
+          while IFS= read -r assignment; do
+            cp "assets/day5-daily-brief-teach/$assignment-guide.mp4" day5-rendered-evidence/
+          done < "$RUNNER_TEMP/assignment-ids.txt"
+          cp assets/day5-daily-brief-teach/manifest.json requested-guides.json day5-rendered-evidence/
+
+      - name: Upload rendered walkthroughs
+        uses: actions/upload-artifact@v4
+        with:
+          name: day5-affected-walkthroughs
+          path: day5-rendered-evidence/
+          if-no-files-found: error
+
+      - name: Verify lesson and rendered media
+        run: |
+          node --test --test-concurrency=2 tools/day5-lesson-media.test.mjs
+          node --test --test-concurrency=2 tools/anatomy/bottleneck/model.test.mjs tools/anatomy/integration.test.mjs tools/day*-*.test.mjs tools/sessions.test.mjs
+
+      - name: Install temporary browser runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@latest
+          npx playwright install chromium
+
+      - name: Capture changed slides and presenter notes
+        run: |
+          mkdir -p day5-review-evidence
+          python3 serve.py 8765 > "$RUNNER_TEMP/day5-http.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..40}; do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:8765/day5-daily-brief.html; then break; fi
+            sleep 0.25
+          done
+          curl --fail --silent --output /dev/null http://127.0.0.1:8765/day5-daily-brief.html
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {writeFile} from 'node:fs/promises';
+          import {chromium} from 'playwright';
+
+          const base = 'http://127.0.0.1:8765';
+          const selected = [...new Set(process.env.SLIDE_NUMBERS.split(',').map(value => Number(value.trim())).filter(Number.isInteger))];
+          assert.ok(selected.length > 0, 'at least one slide number is required');
+          const errors = [];
+          const report = {viewport: {width: 1499, height: 878}, slides: [], notes: []};
+          const browser = await chromium.launch();
+          try {
+            const page = await browser.newPage({viewport: report.viewport, reducedMotion: 'reduce'});
+            await page.addInitScript(() => {
+              HTMLMediaElement.prototype.play = () => Promise.resolve();
+            });
+            page.on('pageerror', error => errors.push(`pageerror: ${error.message}`));
+            page.on('console', message => {
+              if (message.type() === 'error') errors.push(`console: ${message.text()}`);
+            });
+            page.on('requestfailed', request => errors.push(`request: ${request.url()} ${request.failure()?.errorText ?? ''}`));
+            page.on('response', response => {
+              if (response.status() >= 400) errors.push(`response: ${response.status()} ${response.url()}`);
+            });
+
+            await page.goto(`${base}/day5-daily-brief.html#1`, {waitUntil: 'networkidle'});
+            const slides = await page.evaluate(() => window.SLIDES.map(slide => {
+              const match = /^Assignment (\d+[a-zA-Z]?):\s*(.*)$/.exec(slide.title || '');
+              return {sourceTitle: slide.title, visibleTitle: match ? match[2] : slide.title};
+            }));
+            assert.equal(slides.length, 46, 'Day 5 must contain 46 slides');
+            const navigation = page.locator('#progress button');
+            assert.equal(await navigation.count(), 46, 'progress navigation must expose all slides');
+            for (let index = 0; index < slides.length; index += 1) {
+              const number = index + 1;
+              const source = slides[index];
+              assert.equal(await navigation.nth(index).getAttribute('aria-label'), `${number}. ${source.sourceTitle}`);
+              await page.goto(`${base}/day5-daily-brief.html#${number}`, {waitUntil: 'networkidle'});
+              const heading = page.locator('.heading h1, .asg-head h1').first();
+              await heading.waitFor({state: 'visible'});
+              const actualTitle = (await heading.textContent()).trim();
+              assert.equal(actualTitle, source.visibleTitle, `slide ${number} rendered title`);
+              const width = await page.evaluate(() => ({scroll: document.documentElement.scrollWidth, viewport: innerWidth}));
+              assert.ok(width.scroll <= width.viewport, `slide ${number} has horizontal overflow: ${JSON.stringify(width)}`);
+              if (selected.includes(number)) {
+                report.slides.push({number, sourceTitle: source.sourceTitle, visibleTitle: actualTitle});
+                await page.screenshot({path: `day5-review-evidence/slide-${String(number).padStart(2, '0')}-1499x878.png`});
+              }
+            }
+            for (const number of selected) {
+              assert.ok(number >= 1 && number <= slides.length, `invalid slide number ${number}`);
+              await page.goto(`${base}/day5-daily-brief-presenter.html?notes=1&i=${number - 1}`, {waitUntil: 'networkidle'});
+              const title = page.locator('#p-title');
+              const notes = page.locator('#p-notes');
+              await title.waitFor({state: 'visible'});
+              assert.equal((await title.textContent()).trim(), slides[number - 1].sourceTitle, `presenter title ${number}`);
+              assert.ok((await notes.textContent()).trim().length > 0, `presenter notes ${number}`);
+              report.notes.push({number, title: (await title.textContent()).trim(), present: true});
+              await page.screenshot({path: `day5-review-evidence/notes-${String(number).padStart(2, '0')}-1499x878.png`});
+            }
+          } finally {
+            await browser.close();
+          }
+          assert.deepEqual(errors, []);
+          await writeFile('day5-review-evidence/report.json', `${JSON.stringify(report, null, 2)}\n`);
+          JS
+
+      - name: Upload visual review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: day5-lesson-recovery-visuals
+          path: |
+            day5-review-evidence/
+            ${{ runner.temp }}/day5-http.log
+          if-no-files-found: warn

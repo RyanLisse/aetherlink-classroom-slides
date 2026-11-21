@@ -757,7 +757,7 @@ window.SLIDES = [
    "The synthetic A1–A4 session loads no MCP server.",
    "A5 restarts with the organisation-provided Jira-only MCP configuration."
   ],
-  "notes": "Time: 10 min.\n\nWhy now: Start everyone from the same clean local project and introduce the bundled project skills before A1.\n\nWhat you see: Claude Code starts in Manual mode, reads the starting files and names the bundled skills. The strict synthetic session loads no MCP server; A5 has a separate approved Jira-only restart.\n\nWatch for: Treating a skill as connector access, relying on local settings or switching to an unapproved personal account.\n\nStop: Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.\n\nNext: Ground rules: protect work data",
+  "notes": "Time: 10 min.\n\nWhy now: Start everyone from the same clean local project and introduce the bundled project skills before A1.\n\nWhat you see: Claude Code starts in Manual mode, reads the starting files and names the bundled skills. The strict synthetic session loads no MCP server; A5 has a separate approved Jira-only restart.\n\nWatch for: Treating a skill as connector access, relying on local settings or switching to an unapproved personal account.\n\nStop: Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.\n\nNext: Ground rules: protect work data\n\nBefore A1, preserve synthetic red and green command output with actual exit codes. Never reconstruct historical raw logs or record live connector contents.",
   "teach": {
    "time": "10 min",
    "gist": "Open the local project and identify the bundled skill for the next step.",
@@ -1857,7 +1857,7 @@ window.SLIDES = [
   "stage": "tools",
   "mode": "manual",
   "calm": true,
-  "expected": "The opened page matches the contract, shows provenance and escapes long untrusted text.",
+  "expected": "The opened page matches the contract, shows provenance and keeps the fixed public illustration outside the data contract.",
   "repo": {
    "url": "https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1",
    "label": "github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1"
@@ -1870,14 +1870,14 @@ window.SLIDES = [
     "Demo 5 min · Individual build 19 min · Class check 4 min"
    ],
    "done": [
-    "npm run test:render passes for every DailyBrief section and OPEN state.",
+    "npm run test:render passes for every DailyBrief section, OPEN state and image-failure fallback.",
     "npm run brief:sample writes out/latest.html.",
-    "The opened page matches the contract, shows provenance and escapes long untrusted text."
+    "The opened page matches the contract, shows provenance and keeps the fixed public illustration outside the data contract."
    ],
    "copy": [
     [
      "SOLO 4 · Claude Code",
-     "Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop."
+     "Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Include the fixed public illustration https://picsum.photos/seed/bree-morning/1200/400 with empty alt text, referrerpolicy=\"no-referrer\", and stable visible fallback text. Keep it outside the DailyBrief contract, put no work data in its URL, and keep the brief usable when the image fails. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop."
     ]
    ],
    "script": [
@@ -1900,7 +1900,7 @@ window.SLIDES = [
      "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
      "clip": "assets/day5-daily-brief-teach/a4-p1-guide.mp4",
      "mediaKind": "instruction-walkthrough",
-     "mediaFingerprint": "4c07d434d0cda6f1"
+     "mediaFingerprint": "fae5486f839bf229"
     },
     {
      "do": "Step 1. Check that manual mode is on.",
@@ -1930,7 +1930,7 @@ window.SLIDES = [
    "learn": [
     "The synthetic page proves the full schema and renderer.",
     "Long untrusted text and source labels are escaped.",
-    "Optional visual polish follows function and evidence."
+    "The fixed public illustration stays outside the data contract and has a text fallback."
    ],
    "watch": [
     "A model call in the sample path.",
@@ -1956,7 +1956,7 @@ window.SLIDES = [
   "cards": [
    {
     "title": "Checkpoint",
-    "body": "npm run test:render passes for every DailyBrief section and OPEN state.\nnpm run brief:sample writes out/latest.html.\nThe opened page matches the contract, shows provenance and escapes long untrusted text."
+    "body": "npm run test:render passes for every DailyBrief section, OPEN state and image-failure fallback.\nnpm run brief:sample writes out/latest.html.\nThe opened page matches the contract, shows provenance and keeps the fixed public illustration outside the data contract."
    },
    {
     "title": "Human boundary",
@@ -1964,16 +1964,16 @@ window.SLIDES = [
    }
   ],
   "keyPoints": [
-   "npm run test:render passes for every DailyBrief section and OPEN state.",
+   "npm run test:render passes for every DailyBrief section, OPEN state and image-failure fallback.",
    "npm run brief:sample writes out/latest.html.",
-   "The opened page matches the contract, shows provenance and escapes long untrusted text."
+   "The opened page matches the contract, shows provenance and keeps the fixed public illustration outside the data contract."
   ],
   "stepsHeading": "Do this",
   "steps": [
    {
     "where": "Claude Code",
     "text": "Paste SOLO 4 · Part 1",
-    "prompt": "Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop."
+    "prompt": "Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Include the fixed public illustration https://picsum.photos/seed/bree-morning/1200/400 with empty alt text, referrerpolicy=\"no-referrer\", and stable visible fallback text. Keep it outside the DailyBrief contract, put no work data in its URL, and keep the brief usable when the image fails. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop."
    },
    {
     "where": "Terminal",
@@ -1988,11 +1988,11 @@ window.SLIDES = [
    {
     "where": "Browser",
     "text": "Open out/latest.html and inspect every section",
-    "after": "Trace every READY or CONFLICT item to resolved sourceIds. Confirm missing evidence remains OPEN."
+    "after": "Trace every READY or CONFLICT item to resolved sourceIds. Confirm missing evidence remains OPEN and the brief stays readable without the decorative image."
    }
   ],
-  "prompt": "Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop.",
-  "notes": "Time: 28 min.\n\nWhy now: Turn the approved contract into the complete editorial page with synthetic data.\n\nWhat you see: A green renderer test and out/latest.html with every contract section, provenance, OPEN and CONFLICT states.\n\nWatch for: A partial page, model call, live credentials or generated HTML nobody inspected.\n\nStop: The complete synthetic page opens and resolves every READY or CONFLICT sourceId.\n\nNext: Assignment 4 · Part 2: Improve the house style"
+  "prompt": "Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Include the fixed public illustration https://picsum.photos/seed/bree-morning/1200/400 with empty alt text, referrerpolicy=\"no-referrer\", and stable visible fallback text. Keep it outside the DailyBrief contract, put no work data in its URL, and keep the brief usable when the image fails. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop.",
+  "notes": "Time: 28 min.\n\nWhy now: Turn the approved contract into the complete editorial page with synthetic data.\n\nWhat you see: A green renderer test and out/latest.html with every contract section, provenance, OPEN and CONFLICT states, plus the fixed public illustration and stable text fallback.\n\nWatch for: A partial page, work data in an image URL, a model call, live credentials or generated HTML nobody inspected.\n\nStop: The complete synthetic page opens, resolves every READY or CONFLICT sourceId and remains usable when the image fails.\n\nNext: Assignment 4 · Part 2: Improve the house style"
  },
  {
   "title": "Assignment 4 · Part 2: Improve the house style",
@@ -2077,7 +2077,7 @@ window.SLIDES = [
    "learn": [
     "The synthetic page proves the full schema and renderer.",
     "Long untrusted text and source labels are escaped.",
-    "Optional visual polish follows function and evidence."
+    "The fixed public illustration stays outside the data contract and has a text fallback."
    ],
    "watch": [
     "A model call in the sample path.",

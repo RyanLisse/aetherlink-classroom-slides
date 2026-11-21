@@ -67,6 +67,9 @@ assert.match(groupText(5), /Claude Agent SDK|claude-agent-sdk|query\(/, 'A5 must
 assert.match(groupText(5), /\bmcp\b/i, 'A5 must name the approved MCP source.');
 assert.match(groupText(2), /reference\/dia-to-bree\.md/, 'A2 must reverse engineer the safe brief structure.');
 assert.match(groupText(4), /out\/latest\.html/, 'A4 must produce the complete synthetic HTML artifact.');
+assert.match(groupText(4), /https:\/\/picsum\.photos\/seed\/bree-morning\/1200\/400/, 'A4 must use the fixed public Picsum seed.');
+assert.match(groupText(4), /referrerpolicy=\\"no-referrer\\"/, 'A4 must not send a private brief referrer to Picsum.');
+assert.match(groupText(4), /outside the DailyBrief contract/, 'A4 must keep presentation outside the data shape.');
 assert.match(groupText(5), /~\/\.bree\/briefs\/YYYY-MM-DD\.html/, 'A5 must produce private dated HTML.');
 assert.doesNotMatch(groupText(5), /terminal[- ]only|print .*only to the terminal/i, 'A5 must not retain terminal-only output.');
 assert.match(groupText(5), /npm run brief:live\b/, 'A5 must invoke the live route.');

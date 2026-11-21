@@ -5,6 +5,16 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import vm from 'node:vm';
 
+const cliArguments = process.argv.slice(2);
+if (cliArguments.length > 1) throw new Error('Expected at most one --assignment option');
+if (cliArguments[0] && !cliArguments[0].startsWith('--assignment=')) {
+  throw new Error(`Unknown option: ${cliArguments[0]}`);
+}
+const requested = cliArguments[0]?.slice('--assignment='.length);
+if (cliArguments[0] && !/^(?:a[1-7](?:-p[1-3])?|voice-p[12])$/.test(requested)) {
+  throw new Error(`Unknown assignment selector: ${requested}`);
+}
+
 const root = new URL('../', import.meta.url);
 const context = {window: {}};
 vm.runInNewContext(readFileSync(new URL('day5-daily-brief-slides.js', root), 'utf8'), context);
@@ -77,8 +87,6 @@ const fingerprint = slide => createHash('sha256').update(JSON.stringify({
 })).digest('hex').slice(0, 16);
 
 const manifestUrl = new URL('assets/day5-daily-brief-teach/manifest.json', root);
-const requested = process.argv.find(argument => argument.startsWith('--assignment='))?.split('=')[1];
-if (requested && !/^(?:a[1-7](?:-p[1-3])?|voice-p[12])$/.test(requested)) throw new Error(`Unknown assignment selector: ${requested}`);
 const selectedAssignments = requested
   ? guidedSlides.filter(slide => slide.assignmentId === `brief-${requested}`)
   : guidedSlides;

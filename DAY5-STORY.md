@@ -67,7 +67,7 @@ The Aetherbot represents the participant or illustrates Bree only when labelled.
 | A1 | Who reads this line and what must they decide? | Fixture, red-green mini test and one sourced line. |
 | A2 | Which editorial sections make the brief useful and safe? | Approved full schema, red-green test and rejected invalid sample. |
 | A3 | Do fixtures and the live route reach the same product contract? | `/visual-plan`, accepted design, exact paths, proof and rollback. |
-| A4 | Can you open the complete synthetic HTML and trace every item? | Renderer test and `out/latest.html`. |
+| A4 | Can you open the complete synthetic HTML, trace every item and still use it when the decorative image fails? | Renderer test and `out/latest.html` with the fixed Picsum seed and stable text fallback. |
 | A5 | Which exact Jira tool may Bree use, and who writes the file? | Approved Jira-only restart, `/status`, `/mcp`, explicit SDK `mcpServers`, `live:check`, host write boundary and artifact `PASS` or `OPEN`. |
 | A6 | Can another person repeat the full proof and review future delivery? | Verification skill, journey, worktrees and an uninstalled trigger proposal. |
 | A7 | Which bounded mission can you now build yourself? | Own user, decision, boundary, proof and failure case. |
@@ -109,7 +109,7 @@ Long assignments are split without changing their outcome. A1, A2 and A4 use two
 ## Keep the promise within the lesson
 
 - A1 is a learning slice, not the finished agent.
-- A4 proves the complete synthetic product path, not Jira access.
+- A4 proves the complete synthetic product path, including the data-independent Picsum presentation default. It does not prove Jira access.
 - A5 uses one exact approved Jira tool and host-owned file writing.
 - A6 makes the proof repeatable and proposes, but does not enable, a scheduler.
 - CI, pull requests and public deployment remain outside the lesson.

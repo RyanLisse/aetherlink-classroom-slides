@@ -1,8 +1,36 @@
 import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {existsSync, readFileSync, statSync} from 'node:fs';
+import {chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {test} from 'node:test';
 import vm from 'node:vm';
+
+test('the guide renderer rejects unknown arguments before invoking media tools', () => {
+  const fakeBin = mkdtempSync(join(tmpdir(), 'day5-media-cli-'));
+  const marker = join(fakeBin, 'media-tool-ran');
+  try {
+    for (const command of ['sips', 'ffmpeg']) {
+      const path = join(fakeBin, command);
+      writeFileSync(path, `#!/bin/sh\ntouch "${marker}"\nexit 91\n`);
+      chmodSync(path, 0o755);
+    }
+    for (const [argument, message] of [['--check', 'Unknown option: --check'], ['--assignment=', 'Unknown assignment selector:']]) {
+      const result = spawnSync(process.execPath, ['tools/render-day5-guide-videos.mjs', argument], {
+        cwd: new URL('../', import.meta.url),
+        encoding: 'utf8',
+        env: {...process.env, PATH: fakeBin},
+        timeout: 5_000,
+      });
+      assert.notEqual(result.status, 0);
+      assert.match(`${result.stdout}${result.stderr}`, new RegExp(message));
+    }
+    assert.equal(existsSync(marker), false, 'unknown arguments must not invoke sips or ffmpeg');
+  } finally {
+    rmSync(fakeBin, {recursive: true, force: true});
+  }
+});
 
 test('every published Daily Brief assignment part links a class demo before individual work', () => {
   const context = {window: {}};

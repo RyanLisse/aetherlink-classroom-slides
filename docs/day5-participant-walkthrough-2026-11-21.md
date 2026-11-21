@@ -158,9 +158,58 @@ The A2 review accepted the complete contract after adding one rule: every `sourc
 - The organisation-approved Jira-only MCP configuration, exact read-only tool, and confirmed structured result schema.
 - The private live Jira brief and dated artifact.
 - Optional ElevenLabs paid request, voice quality, quota, and account setup.
-- The eight dependency audit findings reported by the clean starter installation.
+- The initial eight dependency findings were closed in the follow-up below. Their original installation output remains historical evidence.
 - Historical A1 through A7 command transcripts were not redirected to files. New A5 through A7 hardening output is preserved separately under `evidence/`; `evidence/commands.md` remains a historical summary.
 
 ## Result
 
 All fourteen core assignment parts were executed synthetically in order. Focused local checks passed with schema 3, live boundary 8, full evaluation 6, and A7 tool 3 tests. Remote run `44863044663` passed the full suite, detached recovery, browser capture, cleanup, and artifact inspection. The corrected starter is merged. The lesson now documents Manual mode, explicit MCP configuration, the SDK boundary, and the A7 test convention. No live Claude, Vertex, Jira, private brief, or audio result is claimed.
+
+## Follow-up: close recoverable findings
+
+Date: 2026-11-21, after the walkthrough above. This section records new work; it does not replace historical observations or reconstruct missing command transcripts.
+
+### Dependencies and install scripts
+
+The smallest compatible lockfile update closed all eight affected package nodes. Direct dependency ranges and the Node `>=20.12` requirement stayed unchanged.
+
+| Package | Before | After |
+| --- | --- | --- |
+| `@hono/node-server` | 2.1.1 | 2.1.11 |
+| `@modelcontextprotocol/sdk` | 1.30.0 | 1.32.2 |
+| `body-parser` | 2.3.0 | 2.4.0 |
+| `fast-uri` | 3.1.8 | 3.1.9 |
+| `hono` | 4.13.8 | 4.13.19 |
+| `ip-address` | 10.7.1 | 10.7.6 |
+| `qs` | 6.16.0 | 6.17.1 |
+| `zod` | 4.6.5 | 4.6.7 |
+
+Zod validates untrusted output directly. MCP client fixes matter before an approved live connection is used. HTTP server transitive paths are not imported by Bree, but their compatible fixes remove the affected graph without new application code. See the [Zod advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) and [MCP advisory](https://github.com/advisories/GHSA-6prh-2h8m-c8cw).
+
+The two blocked scripts came from npm 12's install policy. The project now explicitly permits only `esbuild@0.28.2`, the version required by the existing `tsx` toolchain. It explicitly denies optional `fsevents`; this lesson does not use watch mode. This follows the [npm project policy](https://docs.npmjs.com/cli/v12/configuring-npm/package-json#allowscripts). It does not change global npm settings.
+
+Fresh isolated macOS installs completed for starter and trainer with npm 12. Their logs show the expected esbuild postinstall, zero audit findings, and no unresolved blocked script warning. `npm install-scripts ls --json` reported no unreviewed scripts. npm 12 was checked on a supported Node 24 runtime; the minimum Node 20.12 route uses its bundled npm. Starter and trainer package and lockfiles are byte-identical.
+
+Local evidence is retained outside the repositories under `/tmp/day5-recovery-20261121/`: before/after audit JSON files, clean-install logs in `dependency-clean/`, and script-policy readbacks. These are new follow-up outputs, not the missing historical A1–A7 transcripts.
+
+### Self-contained visual planning
+
+The bundled visual-plan skill no longer requires missing `/diagram` or `/archify` skills. Its small diagram uses inline SVG inside the existing offline HTML artifact. It uses the actual project progress file instead of assuming uppercase `PROGRESS.md`. Pack, starter, and trainer carry identical skill files.
+
+A skill-local checker rejects missing local skill dependencies. Positive checks passed, and a temporary missing-skill fixture failed as expected. A synthetic offline plan was followed manually and inspected visually. This is instruction proof, not a claim that Claude executed the skill.
+
+Independent review approved the repair. [Skills pack PR 12](https://github.com/AetherLink-bv/claude-code-skills-pack/pull/12) merged as [`fbf0822`](https://github.com/AetherLink-bv/claude-code-skills-pack/commit/fbf0822d45a2a93df9873ae3d6288b2f2801b8e4). The pack has no configured Actions workflow; its checker and the downstream docs checks provide the recorded verification.
+
+### Picsum as the default illustration
+
+Ryan selected a fixed public Lorem Picsum illustration for A4: `https://picsum.photos/seed/bree-morning/1200/400`. The seed is constant and contains no work data. The renderer needs no key, dependency, schema field, or image configuration.
+
+The image is decorative, uses an empty alternative text and a no-referrer policy, and leaves every brief section in ordinary HTML. A failed image request must not hide the brief. The original A4 attempt above skipped an optional photo; this new requirement is verified separately rather than attributed to that historical run.
+
+### Evidence discipline
+
+The lesson now asks participants to capture synthetic red and green command output when each command runs. It records exit codes and forbids reconstructing old logs. Live brief content, credentials, and customer data remain outside repository evidence.
+
+The video-render command now rejects unsupported arguments and empty assignment selectors before launching media tools. A bounded regression test uses stub tools, so checking this failure mode cannot accidentally start an expensive render.
+
+Approved Claude/Vertex, Jira, private live-brief, and ElevenLabs proof remain `OPEN`. Dependency repair and synthetic rendering do not close those external gates.

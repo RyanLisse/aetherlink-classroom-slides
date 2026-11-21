@@ -75,7 +75,7 @@ const SOLO_PARTS = {
     'Propose one organisation-approved local daily trigger with its command, working directory, logs, rollback, and owner, but do not install or activate a scheduler. Mark the live connector and dated artifact OPEN unless you privately ran them with approved access. Show the evidence diff and stop for approval. Do not publish anything.'
   ],
   4: [
-    'Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop.',
+    'Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Include the fixed public illustration https://picsum.photos/seed/bree-morning/1200/400 with empty alt text, referrerpolicy="no-referrer", and stable visible fallback text. Keep it outside the DailyBrief contract, put no work data in its URL, and keep the brief usable when the image fails. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Show the proof and diff, then stop.',
     'Ask me for one small house-style change. Write its failing renderer test first. Make the smallest change that passes it. Run npm run test:render and npm run brief:sample again. Open out/latest.html. Show the changed detail and confirm the complete brief still renders. Show the proof and diff, then stop.'
   ]
 };
@@ -183,7 +183,7 @@ const TEACH = {
   4: {
     gist: 'Build the complete synthetic DailyBrief as one readable HTML page. It proves the product path, not a live connector.',
     say: ['Open the editorial page you saw at the start.', 'Trace every section and OPEN state to local sample data.', 'Open out/latest.html and compare it with the accepted contract and plan.'],
-    learn: ['The synthetic page proves the full schema and renderer.', 'Long untrusted text and source labels are escaped.', 'Optional visual polish follows function and evidence.'],
+    learn: ['The synthetic page proves the full schema and renderer.', 'Long untrusted text and source labels are escaped.', 'The fixed public illustration stays outside the data contract and has a text fallback.'],
     watch: ['A model call in the sample path.', 'Live credentials.', 'A generated file that is not opened and inspected.'],
     terms: [['Renderer', 'src/render.ts: turns a brief into HTML'], ['brief:sample', 'the npm script that renders the sample brief, with no model call'], ['Escape', 'make text safe to put in HTML']],
     next: 'after lunch, add one read-only tool and find the fault.'
@@ -424,7 +424,7 @@ const brief = [
       {where: 'Claude Code', text: 'Inspect the starting point', prompt: 'Read README.md, CLAUDE.md, SOLO.md, AGENTS.md, intent.md, progress.md, and .claude/skills/README.md. Report the current step, the starting files, and any blockers. Then answer this read-only question: which bundled project skill fits the next step, and why? Do not change files yet.'}
     ],
     keyPoints: ['Node.js 20.12 or newer, Git, and Claude Code on the organization-approved model route.', 'Manual mode keeps each edit behind participant approval.', 'The synthetic A1–A4 session loads no MCP server.', 'A5 restarts with the organisation-provided Jira-only MCP configuration.'],
-    notes: say('10 min', 'Start everyone from the same clean local project and introduce the bundled project skills before A1.', 'Claude Code starts in Manual mode, reads the starting files and names the bundled skills. The strict synthetic session loads no MCP server; A5 has a separate approved Jira-only restart.', 'Treating a skill as connector access, relying on local settings or switching to an unapproved personal account.', 'Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.', 'Ground rules: protect work data'),
+    notes: `${say('10 min', 'Start everyone from the same clean local project and introduce the bundled project skills before A1.', 'Claude Code starts in Manual mode, reads the starting files and names the bundled skills. The strict synthetic session loads no MCP server; A5 has a separate approved Jira-only restart.', 'Treating a skill as connector access, relying on local settings or switching to an unapproved personal account.', 'Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.', 'Ground rules: protect work data')}\n\nBefore A1, preserve synthetic red and green command output with actual exit codes. Never reconstruct historical raw logs or record live connector contents.`,
     teach: {
       time: '10 min',
       gist: 'Open the local project and identify the bundled skill for the next step.',
@@ -613,16 +613,16 @@ const brief = [
     n: 4,
     part: 1,
     title: 'Build the complete synthetic HTML brief',
-    checkpoint: ['npm run test:render passes for every DailyBrief section and OPEN state.', 'npm run brief:sample writes out/latest.html.', 'The opened page matches the contract, shows provenance and escapes long untrusted text.'],
+    checkpoint: ['npm run test:render passes for every DailyBrief section, OPEN state and image-failure fallback.', 'npm run brief:sample writes out/latest.html.', 'The opened page matches the contract, shows provenance and keeps the fixed public illustration outside the data contract.'],
     boundary: 'Use local sample data only. No model call and no live credentials.',
     prompt: SOLO_PARTS[4][0],
     steps: [
       {where: 'Claude Code', text: 'Paste SOLO 4 · Part 1', prompt: SOLO_PARTS[4][0]},
       {where: 'Terminal', text: 'Run the renderer test', prompt: 'npm run test:render'},
       {where: 'Terminal', text: 'Build the complete synthetic DailyBrief', prompt: 'npm run brief:sample'},
-      {where: 'Browser', text: 'Open out/latest.html and inspect every section', after: 'Trace every READY or CONFLICT item to resolved sourceIds. Confirm missing evidence remains OPEN.'}
+      {where: 'Browser', text: 'Open out/latest.html and inspect every section', after: 'Trace every READY or CONFLICT item to resolved sourceIds. Confirm missing evidence remains OPEN and the brief stays readable without the decorative image.'}
     ],
-    notes: say('28 min', 'Turn the approved contract into the complete editorial page with synthetic data.', 'A green renderer test and out/latest.html with every contract section, provenance, OPEN and CONFLICT states.', 'A partial page, model call, live credentials or generated HTML nobody inspected.', 'The complete synthetic page opens and resolves every READY or CONFLICT sourceId.', 'Assignment 4 · Part 2: improve the house style')
+    notes: say('28 min', 'Turn the approved contract into the complete editorial page with synthetic data.', 'A green renderer test and out/latest.html with every contract section, provenance, OPEN and CONFLICT states, plus the fixed public illustration and stable text fallback.', 'A partial page, work data in an image URL, a model call, live credentials or generated HTML nobody inspected.', 'The complete synthetic page opens, resolves every READY or CONFLICT sourceId and remains usable when the image fails.', 'Assignment 4 · Part 2: improve the house style')
   }),
   assignment({
     n: 4,
