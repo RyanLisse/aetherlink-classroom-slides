@@ -48,6 +48,8 @@ test('every published Daily Brief assignment part links a class demo before indi
   const voiceBonus = context.window.SLIDES.filter(slide => /^brief-voice-p[12]$/.test(slide.assignmentId));
   const guidedSlides = [...assignments, ...voiceBonus];
   const manifest = JSON.parse(readFileSync(new URL('../assets/day5-daily-brief-teach/manifest.json', import.meta.url), 'utf8'));
+  assert.equal(manifest.format, 2, 'published media requires the evidence-demonstration manifest');
+  assert.equal(manifest.kind, 'evidence-demonstration');
   assert.deepEqual(
     Array.from(new Set(assignments.map(slide => slide.assignmentId.match(/^brief-(a[1-7])/)[1]))),
     ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
@@ -80,17 +82,15 @@ test('every published Daily Brief assignment part links a class demo before indi
     assert.equal(recorded?.file, path);
     assert.equal(recorded?.fingerprint, currentFingerprint, `${slide.assignmentId} video is stale; run node tools/render-day5-guide-videos.mjs`);
     assert.equal(guides[0].mediaFingerprint, currentFingerprint);
-    if (manifest.format === 2) {
-      assert.equal(recorded?.evidenceRevision, /^(?:brief-a[1-4])/.test(slide.assignmentId)
-        ? 'b54a19851bda3b885b1ef087169744db664110c7'
-        : 'beec03ff9c1232704f74651e57e2da132874758e');
-      assert.match(recorded?.evidenceSource ?? '', /saved (?:participant checkpoint|trainer reference)/i);
-      assert.match(recorded?.disclaimer ?? '', /not a (?:new|live) /i);
-      assert.equal(recorded?.expectedExit, 0);
-      assert.ok(recorded?.command, `${slide.assignmentId} records its captured action`);
-      assert.match(recorded?.sourceArchive ?? '', /^\.github\/capture-input\/.+\.tar\.gz$/);
-      assert.match(recorded?.sourceArchiveSha256 ?? '', /^[a-f0-9]{64}$/);
-    }
+    assert.equal(recorded?.evidenceRevision, /^(?:brief-a[1-4])/.test(slide.assignmentId)
+      ? 'b54a19851bda3b885b1ef087169744db664110c7'
+      : 'beec03ff9c1232704f74651e57e2da132874758e');
+    assert.match(recorded?.evidenceSource ?? '', /saved (?:participant checkpoint|trainer reference)/i);
+    assert.match(recorded?.disclaimer ?? '', /not a (?:new|live) /i);
+    assert.equal(recorded?.expectedExit, 0);
+    assert.ok(recorded?.command, `${slide.assignmentId} records its captured action`);
+    assert.match(recorded?.sourceArchive ?? '', /^\.github\/capture-input\/.+\.tar\.gz$/);
+    assert.match(recorded?.sourceArchiveSha256 ?? '', /^[a-f0-9]{64}$/);
     const firstParticipantAction = script.findIndex(beat => slide.assignmentId.startsWith('brief-voice')
       ? /^(?:Paste Part|Hand control)/.test(beat.do)
       : beat.do.startsWith('Step 1.'));

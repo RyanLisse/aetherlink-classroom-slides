@@ -16,18 +16,18 @@ const root = new URL('../', import.meta.url);
 const work = new URL('.day5-video-work/', root);
 
 const demos = {
-  'a1-p1': {source: 'participant', command: "grep -nE 'Maya|09:00|decision' intent.md sample/calendar-item.sample.json | head -10", result: 'CHECK: the offline human choice must agree with the synthetic fixture.'},
+  'a1-p1': {source: 'participant', command: "grep -nE 'Maya|09:00|decision' intent.md sample/calendar-item.sample.json > /tmp/a1-choice.log; test $(wc -l < /tmp/a1-choice.log) -ge 3; head -10 /tmp/a1-choice.log", result: 'CHECK: the offline human choice must agree with the synthetic fixture.'},
   'a1-p2': {source: 'participant', command: "mv src/mini.ts src/mini.ts.saved; npm run test:mini >/tmp/a1-red.log 2>&1; red=$?; mv src/mini.ts.saved src/mini.ts; if [ $red -eq 0 ]; then exit 1; fi; printf 'RED exit: %s\\n' $red; grep -E 'ERR_MODULE_NOT_FOUND|fail ' /tmp/a1-red.log | tail -2; npm run test:mini && npm run mini", result: 'CHECK: a real isolated red run must be followed by the green decision line.'},
   'a2-p1': {source: 'participant', command: "sed -n '1,22p' docs/spec.md", result: 'CHECK: show the accepted DailyBrief contract.'},
   'a2-p2': {source: 'participant', command: "mv src/brief.ts src/brief.ts.saved; npm run test:schema >/tmp/a2-red.log 2>&1; red=$?; mv src/brief.ts.saved src/brief.ts; if [ $red -eq 0 ]; then exit 1; fi; printf 'RED exit: %s\\n' $red; grep -E 'ERR_MODULE_NOT_FOUND|fail ' /tmp/a2-red.log | tail -2; npm run test:schema", result: 'CHECK: a real isolated red run must be followed by the green schema result.'},
-  a3: {source: 'participant', command: "grep -nE 'fixture|schema|renderer|OPEN' docs/design.md | head -8", result: 'CHECK: the offline plan must retain its OPEN live gate.'},
-  'a4-p2': {source: 'participant', command: "grep -q 'EXIT_CODE=1' evidence/a4-picsum-replay/a4-red.log && grep -E 'not ok|fail |EXIT_CODE' evidence/a4-picsum-replay/a4-red.log | tail -4; npm run test:render && npm run brief:sample && grep -c 'status open' out/latest.html", result: 'CHECK: labeled saved red evidence must precede a new green render.'},
+  a3: {source: 'participant', command: "grep -nE 'fixture|schema|renderer|OPEN' docs/design.md > /tmp/a3-plan.log; grep -q 'schema' /tmp/a3-plan.log; grep -q 'OPEN' /tmp/a3-plan.log; head -8 /tmp/a3-plan.log", result: 'CHECK: the offline plan must retain its OPEN live gate.'},
+  'a4-p2': {source: 'participant', command: "if ! grep -q 'EXIT_CODE=1' evidence/a4-picsum-replay/a4-red.log; then exit 1; fi; grep -E 'not ok|fail |EXIT_CODE' evidence/a4-picsum-replay/a4-red.log | tail -4; npm run test:render && npm run brief:sample && grep -c 'status open' out/latest.html", result: 'CHECK: labeled saved red evidence must precede a new green render.'},
   'a5-p1': {source: 'trainer', command: "set -o pipefail; npm run test:live 2>&1 | grep -E '✔|tests |pass |fail ' | tail -10", result: 'The synthetic boundary tests pass; live access stays OPEN.'},
   'a5-p2': {source: 'trainer', command: "set -o pipefail; npm run typecheck && npm run test:live 2>&1 | grep -E 'tests |pass |fail '", result: 'The bounded host route typechecks and passes.'},
-  'a5-p3': {source: 'trainer', command: "npm run live:check; code=$?; printf 'Expected OPEN exit code: %s\\n' $code", result: 'No private configuration means OPEN; no live brief is written.'},
+  'a5-p3': {source: 'trainer', command: "npm run live:check; code=$?; if [ $code -ne 1 ]; then exit 1; fi; printf 'Expected OPEN exit code: %s\\n' $code", result: 'No private configuration means OPEN; no live brief is written.'},
   'a6-p1': {source: 'trainer', command: 'npm run eval', result: 'READY, OPEN and CONFLICT cases all pass.'},
   'a6-p2': {source: 'trainer', command: "npm run docs:check && npm run typecheck && npm run eval", result: 'CHECK: the targeted repeatable synthetic journey must pass.'},
-  'a6-p3': {source: 'trainer', command: "grep -nE 'scheduler|daily trigger' docs/plan.md docs/gate.md | head -6", result: 'The local trigger remains a proposal; nothing is installed.'},
+  'a6-p3': {source: 'trainer', command: "grep -nE 'scheduler|daily trigger' docs/plan.md docs/gate.md > /tmp/a6-trigger.log; grep -q 'never installs or activates a scheduler' /tmp/a6-trigger.log; head -6 /tmp/a6-trigger.log", result: 'The local trigger remains a proposal; nothing is installed.'},
   a7: {source: 'trainer', command: 'npm run test:tool', result: 'The bounded synthetic Outlook tool journey passes.'},
   'voice-p1': {source: 'trainer', command: "touch .env.local && git check-ignore .env.local && ! git status --short --untracked-files=all | grep -q '.env.local' && echo 'PASS: ignored key file is absent from Git status'", result: 'The personal key file stays outside Git.'},
   'voice-p2': {source: 'trainer', command: 'npm run test:voice', result: 'Mocked fetch passes without a paid request.'}
@@ -65,7 +65,8 @@ const trainer = new URL('trainer-reference/', work);
 const run = (command, commandArgs, options = {}) => execFileSync(command, commandArgs, {stdio: 'inherit', ...options});
 const prepare = (directory, branch, revision, archiveName) => {
   const archive = new URL(`.github/capture-input/${archiveName}`, root);
-  if (!existsSync(directory) && existsSync(archive)) {
+  rmSync(directory, {recursive: true, force: true});
+  if (existsSync(archive)) {
     const expectedHash = Object.values(SOURCE_ARCHIVES).find(source => source.file.endsWith(archiveName))?.sha256;
     const actualHash = createHash('sha256').update(readFileSync(archive)).digest('hex');
     if (actualHash !== expectedHash) throw new Error(`${archiveName} source hash mismatch`);
@@ -74,7 +75,7 @@ const prepare = (directory, branch, revision, archiveName) => {
     run('git', ['init', '-q'], {cwd: directory});
     run('git', ['add', '.'], {cwd: directory});
     run('git', ['-c', 'user.name=Capture', '-c', 'user.email=capture@example.invalid', 'commit', '-qm', `Exact tracked source from ${revision}`], {cwd: directory});
-  } else if (!existsSync(directory)) {
+  } else {
     run('git', ['clone', '--depth=80', '--branch', branch, REPOSITORY, directory.pathname]);
     run('git', ['fetch', '--depth=80', 'origin', revision], {cwd: directory});
     run('git', ['checkout', '--detach', revision], {cwd: directory});
