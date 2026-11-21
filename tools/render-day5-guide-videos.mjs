@@ -117,9 +117,9 @@ const renderTerminal = id => {
   const output = `assets/day5-daily-brief-teach/${id}-guide.mp4`;
   const marker = `/tmp/bree-capture-${id}.exit`;
   rmSync(marker, {force: true});
-  run('zsh', ['-lc', demo.command], {cwd: new URL(`${directory}/`, work)});
+  run('bash', ['-lc', demo.command], {cwd: new URL(`${directory}/`, work)});
   writeFileSync(tape, `Output "${output}"
-Set Shell "zsh"
+Set Shell "bash"
 Set FontSize 28
 Set Width 1148
 Set Height 780
