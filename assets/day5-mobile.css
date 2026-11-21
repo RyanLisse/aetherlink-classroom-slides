@@ -1,4 +1,204 @@
+/* Daily Brief concept slides use open editorial layouts instead of repeated panels. */
+body.day5-daily-brief .editorial .card{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+body.day5-daily-brief .editorial-focus .cards{
+  grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);
+  align-items:end;
+  gap:clamp(2rem,6vw,7rem);
+  margin-top:clamp(1.5rem,6vh,4rem);
+}
+body.day5-daily-brief .editorial-focus .card{padding:0}
+body.day5-daily-brief .editorial-focus .card:first-child{border-bottom:3px solid var(--aether-purple-text)}
+body.day5-daily-brief .editorial-focus .card:last-child{border-bottom:3px solid var(--cyan)}
+body.day5-daily-brief .editorial-focus .card-head h2{font-size:clamp(.8rem,1vw,1rem)}
+body.day5-daily-brief .editorial-focus .card p:last-child{
+  max-width:16ch;
+  font-size:clamp(1.8rem,3.4vw,3.5rem);
+  line-height:1.05;
+}
+body.day5-daily-brief .editorial-words .cards{counter-reset:editorial;gap:0}
+body.day5-daily-brief .editorial-words .card{
+  counter-increment:editorial;
+  min-height:0;
+  padding:1.25rem 1.5rem 1.25rem 4rem;
+  border-top:1px solid color-mix(in srgb,var(--cyan) 42%,transparent);
+  position:relative;
+}
+body.day5-daily-brief .editorial-words .card::before{
+  content:"0" counter(editorial);
+  position:absolute;
+  top:1.15rem;
+  left:0;
+  color:var(--aether-orange);
+  font:800 clamp(1.2rem,2vw,2rem)/1 Nunito, sans-serif;
+}
+body.day5-daily-brief .editorial-words .card-icon{display:none}
+body.day5-daily-brief .editorial-words .card-head h2{
+  color:var(--text);
+  font-size:clamp(1.1rem,1.8vw,1.7rem);
+}
+body.day5-daily-brief .editorial-words .card p:last-child{max-width:36ch}
+body.day5-daily-brief .editorial-flow .cards.pipeline{gap:1.2rem}
+body.day5-daily-brief .editorial-flow .pl-card{
+  min-height:10rem;
+  padding:1.2rem .4rem;
+  border:0;
+  border-top:3px solid var(--aether-purple-text);
+  border-radius:0;
+  background:transparent;
+}
+body.day5-daily-brief .editorial-flow .pl-card.pl-hl{border-color:var(--aether-orange);box-shadow:none}
+body.day5-daily-brief .editorial-flow .pl-num{font-size:1.35rem}
+body.day5-daily-brief .editorial-flow .pl-arrow{font-size:2rem}
+body.day5-daily-brief .editorial-flow.step-through .pl-arrow{
+  visibility:hidden;
+  opacity:0;
+  transform:translateX(-.25rem);
+  transition:opacity .3s ease,transform .3s ease;
+}
+body.day5-daily-brief .editorial-flow.step-through .pl-card.st-shown + .pl-arrow:has(+ .pl-card.st-shown){
+  visibility:visible;
+  opacity:1;
+  transform:none;
+}
+body.day5-daily-brief .editorial-route .sr-card{
+  min-height:15rem;
+  padding:1rem .8rem 0;
+  border:0;
+  border-top:2px solid color-mix(in srgb,var(--muted) 55%,transparent);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.day5-daily-brief .editorial-route .sr-item{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:.35rem 0;
+}
+body.day5-daily-brief .editorial-route .sr-card.on{
+  border-color:var(--aether-orange);
+  box-shadow:none;
+}
+body.day5-daily-brief .editorial-route .sr-card.on .card-head h2,
+body.day5-daily-brief .editorial-route .sr-card.on .sr-text{color:var(--text)}
+body.day5-daily-brief .slide-main.with-showcase .card{
+  align-self:center;
+  padding:1rem 0 1rem 1.4rem;
+  border:0;
+  border-left:3px solid var(--aether-purple-text);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+body.day5-daily-brief .sdlc-big.sdlc-artifacts .sdlc-stage-card p{
+  display:block;
+  margin:.35rem 0 0;
+  color:var(--text);
+  font-size:1rem;
+  line-height:1.25;
+}
+
+/* Morning story: one concrete moment, one agenda item, one decision and its source. */
+body.day5-daily-brief .mb-scene{
+  display:grid;
+  grid-template-columns:minmax(10rem,.7fr) minmax(3rem,.25fr) minmax(17rem,1.15fr) auto minmax(15rem,1fr);
+  align-items:center;
+  gap:clamp(.7rem,1.8vw,1.6rem);
+  margin-top:clamp(1.2rem,5vh,3.5rem);
+}
+body.day5-daily-brief .mb-now{display:grid;align-content:center;justify-items:start}
+body.day5-daily-brief .mb-k{font-size:.72rem;font-weight:900;letter-spacing:.14em;color:var(--muted)}
+body.day5-daily-brief .mb-time{
+  font:900 clamp(3.7rem,7vw,7rem)/.9 Nunito,sans-serif;
+  letter-spacing:-.06em;
+  color:var(--aether-purple-text);
+}
+body.day5-daily-brief .mb-wait{margin-top:.7rem;color:var(--muted);font-weight:700}
+body.day5-daily-brief .mb-line{display:flex;align-items:center;min-width:4rem}
+body.day5-daily-brief .mb-line-run{height:3px;flex:1;background:linear-gradient(90deg,var(--aether-purple-text),var(--cyan))}
+body.day5-daily-brief .mb-line-arrow,
+body.day5-daily-brief .mb-next{color:var(--cyan);font-size:2.1rem;font-weight:900}
+body.day5-daily-brief .mb-agenda{
+  position:relative;
+  display:grid;
+  gap:.4rem;
+  min-height:11rem;
+  padding:2.8rem 1.5rem 1.3rem;
+  border:2px solid var(--cyan);
+  border-radius:0 0 1rem 1rem;
+  background:color-mix(in srgb,var(--cyan) 6%,var(--surface));
+  box-shadow:0 1rem 2.5rem -2rem var(--cyan);
+}
+body.day5-daily-brief .mb-cal-top{
+  position:absolute;
+  inset:0 0 auto;
+  padding:.55rem 1rem;
+  background:var(--cyan);
+  color:#06111e;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+body.day5-daily-brief .mb-cal-title{font-size:clamp(1.35rem,2vw,2rem);line-height:1.08}
+body.day5-daily-brief .mb-cal-note{color:var(--muted)}
+body.day5-daily-brief .mb-source{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin-top:auto}
+body.day5-daily-brief .mb-source-pin{font-size:.65rem;font-weight:900;letter-spacing:.12em;color:var(--aether-orange)}
+body.day5-daily-brief .mb-source code{font-size:.68rem;color:var(--muted);overflow-wrap:anywhere}
+body.day5-daily-brief .mb-choice{display:grid;justify-items:center;gap:.7rem}
+body.day5-daily-brief .mb-bubble{
+  position:relative;
+  display:grid;
+  gap:.35rem;
+  padding:1rem 1.2rem;
+  border-radius:1rem;
+  background:var(--aether-orange);
+  color:#06111e;
+}
+body.day5-daily-brief .mb-bubble::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-.65rem;
+  border:.7rem solid transparent;
+  border-bottom:0;
+  border-top-color:var(--aether-orange);
+}
+body.day5-daily-brief .mb-bubble .mb-k{color:#06111e}
+body.day5-daily-brief .mb-bubble strong{max-width:14ch;font-size:clamp(1.2rem,1.8vw,1.7rem);line-height:1.15}
+body.day5-daily-brief .mb-bot{position:relative;width:clamp(7rem,11vw,10rem)}
+body.day5-daily-brief .mb-bot img{display:block;width:100%}
+body.day5-daily-brief .mb-bot .aj-bot-tag{left:50%;bottom:.2rem;transform:translateX(-50%)}
+
+@media print{
+  body.day5-daily-brief .mb-scene .st-pending,
+  body.day5-daily-brief .mb-scene .st-shown,
+  body.day5-daily-brief .editorial.step-through .st-pending,
+  body.day5-daily-brief .editorial.step-through .st-shown{
+    visibility:visible;
+    animation:none!important;
+    transform:none;
+  }
+  body.day5-daily-brief .editorial-flow.step-through .pl-arrow{
+    visibility:visible;
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.day5-daily-brief .mb-scene .st-pending{
+    visibility:visible;
+  }
+}
+
 @media (max-width:800px){
+  body.day5-mobile .mb-scene{grid-template-columns:minmax(0,1fr);justify-items:stretch}
+  body.day5-mobile .mb-line{min-height:2rem;transform:rotate(90deg);justify-self:center;width:3rem}
+  body.day5-mobile .mb-next{transform:rotate(90deg);justify-self:center}
   body.day5-mobile{display:block;min-height:100svh}
   body.day5-mobile #stage{width:92vw;margin:0 auto;padding:1.25rem 0;justify-content:flex-start;zoom:1!important}
   body.day5-mobile .heading{margin-bottom:1rem}
@@ -60,4 +260,5 @@
   body.day5-mobile .stamps{width:100%;max-width:100%;min-width:0}
   body.day5-mobile .stamp-btn{min-width:0;max-width:100%;white-space:normal}
   body.day5-mobile .sp-pair{grid-template-columns:minmax(0,1fr)}
+  body.day5-mobile .editorial-focus .cards{grid-template-columns:minmax(0,1fr);gap:1.2rem}
 }

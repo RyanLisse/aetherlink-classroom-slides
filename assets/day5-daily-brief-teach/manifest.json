@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "kind": "instruction-walkthrough",
+  "generatedFrom": "day5-daily-brief-slides.js",
+  "guides": [
+    {
+      "assignmentId": "brief-a1",
+      "file": "assets/day5-daily-brief-teach/a1-guide.mp4",
+      "fingerprint": "3e490bb269b4a311",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a2",
+      "file": "assets/day5-daily-brief-teach/a2-guide.mp4",
+      "fingerprint": "d9f256de56e247af",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a3",
+      "file": "assets/day5-daily-brief-teach/a3-guide.mp4",
+      "fingerprint": "1ad515a14398a10b",
+      "frameCount": 8,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a4",
+      "file": "assets/day5-daily-brief-teach/a4-guide.mp4",
+      "fingerprint": "6c29fe3ca439dc9a",
+      "frameCount": 8,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a5",
+      "file": "assets/day5-daily-brief-teach/a5-guide.mp4",
+      "fingerprint": "48f1376fd66e8ba2",
+      "frameCount": 10,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a6",
+      "file": "assets/day5-daily-brief-teach/a6-guide.mp4",
+      "fingerprint": "719a09d8d3deaaa1",
+      "frameCount": 11,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a7",
+      "file": "assets/day5-daily-brief-teach/a7-guide.mp4",
+      "fingerprint": "05f38c0e2cb49f11",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    }
+  ]
+}

@@ -229,6 +229,18 @@ function renderExtras(stage, main, s, v) {
     const next = () => { if (k < steps.length - 1) { k++; paint(); return true; } return false; };
     window.__reveal = next; slideController.signal.addEventListener('abort', () => { if (window.__reveal === next) window.__reveal = null; });
   }
+  if (v.morningBrief && grid) {                                // Daily Brief: now → next agenda item → decision, with the local source attached
+    const M = v.morningBrief; const scene = node('div', 'mb-scene'); scene.setAttribute('role', 'img');
+    scene.setAttribute('aria-label', `${M.now}. Next: ${M.event} ${M.title}. Decision: ${M.decision}. Source: ${M.source}.`);
+    const now = node('div', 'mb-now'); now.append(node('span', 'mb-k', 'NOW'), node('strong', 'mb-time', M.now), node('span', 'mb-wait', M.wait || '30 minutes to stand-up'));
+    const line = node('div', 'mb-line'); line.append(node('span', 'mb-line-run'), node('span', 'mb-line-arrow', '→'));
+    const agenda = node('div', 'mb-agenda'); agenda.append(node('span', 'mb-cal-top', M.event), node('strong', 'mb-cal-title', M.title));
+    if (M.note) agenda.append(node('span', 'mb-cal-note', M.note));
+    const source = node('div', 'mb-source'); source.append(node('span', 'mb-source-pin', 'SOURCE'), node('code', null, M.source)); agenda.append(source);
+    const choice = node('div', 'mb-choice'); const bubble = node('div', 'mb-bubble'); bubble.append(node('span', 'mb-k', 'YOUR DECISION'), node('strong', null, M.decision));
+    const bot = node('div', 'mb-bot'); const img = document.createElement('img'); img.src = 'assets/aetherbot/aetherbot-think.webp'; img.alt = ''; bot.append(img, node('span', 'aj-bot-tag', M.bot || 'BREE')); choice.append(bubble, bot);
+    scene.append(now, line, agenda, node('span', 'mb-next', '→'), choice); grid.replaceWith(scene);
+  }
   if (v.toolWall && grid) {                                     // toolbox wall: per card a small picture of the tool (terminal, file, folder tree, screenshot, code, plug, bots, SDLC dots) + the day it came from
     grid.classList.add('tool-wall');
     const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -399,9 +411,9 @@ function renderExtras(stage, main, s, v) {
     return [track, steps];
   };
   if (v.sdlcLine) {                                             // the SDLC as one straight line with six dots: each click lights the next phase and shows its card below it
-    grid.classList.add('sdlc-big'); let k = -1;
+    grid.classList.add('sdlc-big'); if (v.sdlcArtifacts) grid.classList.add('sdlc-artifacts'); let k = -1;
     const [track, steps] = bigTrack(i => { k = i; paint(); }); grid.prepend(track);
-    cards.forEach((c, i) => { c.classList.add('sb-card'); c.querySelector('.card-icon')?.remove(); c.addEventListener('click', () => { k = i; paint(); }); });
+    cards.forEach((c, i) => { c.classList.add('sb-card'); if (v.sdlcArtifacts) c.classList.add('sdlc-stage-card'); c.querySelector('.card-icon')?.remove(); c.addEventListener('click', () => { k = i; paint(); }); });
     const paint = () => { steps.forEach((st, i) => { st.classList.toggle('on', i <= k); st.classList.toggle('cur', i === k); }); cards.forEach((c, i) => { c.classList.toggle('shown', i <= k); c.classList.toggle('cur', i === k); }); };
     paint();
     const next = () => { if (k < cards.length - 1) { k++; paint(); return true; } return false; };
@@ -1437,6 +1449,7 @@ function renderVisual(stage, body, main, s) {
   if (v.pillarIcons) main.querySelectorAll('.pillar').forEach((p, i) => p.prepend(svg('0 0 24 24', PILLAR_ICONS[i % PILLAR_ICONS.length], 'pillar-icon')));
   if (v.stagger) main.classList.add('stagger-' + v.stagger);
   if (v.compact) main.classList.add('compact-cards');
+  if (v.editorial) main.classList.add('editorial', 'editorial-' + v.editorial);
   if (v.oneCol) main.querySelector('.cards')?.classList.add('one-col', 'full-col');
   if (v.hero != null) { main.classList.add('has-hero'); main.querySelectorAll('.card')[v.hero]?.classList.add('card-hero'); }
   let popRow = null, nest = null; const ex = renderExtras(stage, main, s, v);

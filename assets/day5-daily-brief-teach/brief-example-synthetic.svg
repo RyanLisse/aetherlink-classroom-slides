@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Synthetic editorial example of Maya's daily brief</title>
+  <desc id="desc">A fictional dated daily brief with a greeting, one focus, to-dos, updates, agenda, sources and an OPEN item.</desc>
+  <rect width="1600" height="1000" fill="#f5f1e8"/>
+  <rect x="240" y="0" width="1120" height="1000" fill="#fffdf8"/>
+
+  <text x="800" y="62" text-anchor="middle" fill="#8a8176" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4">BREE · SYNTHETIC DAILY BRIEF</text>
+  <text x="800" y="119" text-anchor="middle" fill="#231f1a" font-family="Georgia, serif" font-size="51">Tuesday, 24 November</text>
+  <text x="800" y="154" text-anchor="middle" fill="#8a8176" font-family="Arial, sans-serif" font-size="19">Prepared at 08:30 · fictional data only</text>
+  <line x1="355" y1="184" x2="1245" y2="184" stroke="#d9d0c4" stroke-width="2"/>
+
+  <text x="355" y="232" fill="#231f1a" font-family="Georgia, serif" font-size="36">Good morning, Maya.</text>
+  <text x="355" y="270" fill="#6e655b" font-family="Georgia, serif" font-size="22" font-style="italic">Your clearest move is to bring one blocker to the 09:00 stand-up.</text>
+
+  <text x="355" y="330" fill="#a54d25" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="2">PUSH YOUR WORK FORWARD</text>
+  <text x="355" y="372" fill="#231f1a" font-family="Georgia, serif" font-size="31">Surface the API migration blocker.</text>
+  <text x="355" y="405" fill="#514941" font-family="Arial, sans-serif" font-size="19">Ask the team to confirm an owner before the meeting ends.</text>
+  <text x="355" y="434" fill="#8a8176" font-family="Arial, sans-serif" font-size="16">Source: JIRA-DEMO-101 · synthetic fixture</text>
+
+  <line x1="355" y1="470" x2="1245" y2="470" stroke="#e5ddd2"/>
+  <text x="355" y="510" fill="#231f1a" font-family="Georgia, serif" font-size="26">Top to-dos</text>
+  <text x="355" y="548" fill="#514941" font-family="Arial, sans-serif" font-size="19">01  Prepare the blocker summary for stand-up.</text>
+  <text x="355" y="580" fill="#514941" font-family="Arial, sans-serif" font-size="19">02  Confirm the migration owner after the meeting.</text>
+
+  <text x="835" y="510" fill="#231f1a" font-family="Georgia, serif" font-size="26">New updates</text>
+  <text x="835" y="548" fill="#514941" font-family="Arial, sans-serif" font-size="19">The migration remains in progress.</text>
+  <text x="835" y="580" fill="#9b5d23" font-family="Arial, sans-serif" font-size="19">OPEN · No owner appears in the source.</text>
+
+  <line x1="355" y1="620" x2="1245" y2="620" stroke="#e5ddd2"/>
+  <text x="355" y="660" fill="#231f1a" font-family="Georgia, serif" font-size="26">Your day</text>
+  <text x="355" y="700" fill="#514941" font-family="Arial, sans-serif" font-size="19">09:00  Daily stand-up</text>
+  <text x="355" y="732" fill="#8a8176" font-family="Arial, sans-serif" font-size="16">Source: CAL-DEMO-001 · synthetic fixture</text>
+
+  <text x="835" y="660" fill="#231f1a" font-family="Georgia, serif" font-size="26">Made for you</text>
+  <text x="835" y="700" fill="#514941" font-family="Arial, sans-serif" font-size="19">Focus on the blocker first.</text>
+  <text x="835" y="732" fill="#514941" font-family="Arial, sans-serif" font-size="19">Keep missing evidence visible.</text>
+
+  <line x1="355" y1="778" x2="1245" y2="778" stroke="#e5ddd2"/>
+  <text x="355" y="820" fill="#231f1a" font-family="Georgia, serif" font-size="24">Sources</text>
+  <text x="355" y="854" fill="#8a8176" font-family="Arial, sans-serif" font-size="16">JIRA-DEMO-101 · CAL-DEMO-001 · local synthetic fixtures</text>
+  <text x="355" y="888" fill="#8a8176" font-family="Arial, sans-serif" font-size="16">No live connector proof. A person decides what to use.</text>
+
+  <text x="800" y="954" text-anchor="middle" fill="#a3998d" font-family="Arial, sans-serif" font-size="15" letter-spacing="1">ILLUSTRATIVE TARGET · NOT CUSTOMER DATA · NOT A LIVE BRIEF</text>
+</svg>

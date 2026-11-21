@@ -132,8 +132,9 @@ function renderScript(beats) {
     }
     if (b.clip) {
       const v = document.createElement('video');
-      const controls = window.DECK_PAGE === 'day4-final.html';
-      Object.assign(v, { src: b.clip, muted: true, loop: true, autoplay: true, controls, playsInline: true, preload: 'metadata', className: 't-clip' });
+      const dailyBrief = window.DECK_PAGE === 'day5-daily-brief.html';
+      const controls = dailyBrief || window.DECK_PAGE === 'day4-final.html';
+      Object.assign(v, { src: b.clip, muted: true, loop: !dailyBrief, autoplay: !dailyBrief, controls, playsInline: true, preload: 'metadata', className: 't-clip' });
       if (!controls) {
         v.title = 'Click to open full size';
         v.addEventListener('click', () => window.open(b.clip, '_blank'));

@@ -9,8 +9,8 @@ For Days 4 and 5, use these current routes:
 | Day | Participant slides | Presenter notes | Participant repository |
 | --- | --- | --- | --- |
 | Day 4 · n8n to Claude Agent SDK (final) | [`day4-final.html`](day4-final.html) | [`day4-final-presenter.html`](day4-final-presenter.html), day sheet [`day4-final-sheet.html`](day4-final-sheet.html) | [`AetherLink-bv/aetherlink-day4-n8n-to-agent`](https://github.com/AetherLink-bv/aetherlink-day4-n8n-to-agent) on `main` |
-| Day 5 · Daily Brief agent (main lesson) | [`day5-daily-brief.html`](day5-daily-brief.html) | [`day5-daily-brief-presenter.html`](day5-daily-brief-presenter.html), day sheet [`day5-daily-brief-sheet.html`](day5-daily-brief-sheet.html) | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main`. All seven steps in class. |
-| Day 5 bonus · Sonny, the SRE agent | Linked from the final slide; open [`workshop5.html`](workshop5.html) | [`workshop5-presenter.html`](workshop5-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
+| Day 5 · Daily Brief agent (main lesson) | [`day5-daily-brief.html`](day5-daily-brief.html) | [`day5-daily-brief-presenter.html`](day5-daily-brief-presenter.html), day sheet [`day5-daily-brief-sheet.html`](day5-daily-brief-sheet.html) | [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1) on `main`. Seven AI-native SDLC assignments; complete dated private HTML; one approved Jira MCP source; no CI, PR or enabled scheduler. |
+| Day 5 bonus · Sonny, the on-call SRE agent | Linked after the Daily Brief close; open [`day5-jessy.html`](day5-jessy.html) | [`day5-jessy-presenter.html`](day5-jessy-presenter.html) | [`AetherLink-bv/sre-oncall-agent`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start) on `workshop/start` |
 
 The Day menu also lists earlier decks. `workshop4.html` is Ryan's Day 4 deck and the source of the final deck.
 `day4-jessy.html` and `day4-maarten-n8n-to-claude.html` teach the old step-branch route of Day 4. Do not teach
@@ -425,8 +425,15 @@ Run `python3 serve.py` and open `http://localhost:8080/workshop5.html`. The only
 `presenter.js` read `window.PRESENTER_PAGE` / `window.DECK_PAGE`, so each deck opens its own presenter page
 (default stays `presenter.html` / `index.html`).
 
-The main Day 5 lesson is now `day5-daily-brief.html` (the Daily Brief agent). `workshop5.html` stays as the earlier
-deck. Its last slide points to the Daily Brief deck.
+The main Day 5 lesson is `day5-daily-brief.html`. It starts with a synthetic
+calendar learning slice, reverse engineers a full Dia-style Daily Brief and
+ends with a participant-chosen small application. A4 renders the complete
+synthetic HTML. A5 connects one existing approved read-only Jira MCP tool
+through the Claude Agent SDK and lets the host write validated dated private
+HTML. A6 creates reusable verification, runs one synthetic app journey, proves
+both detached worktrees and reviews a daily trigger proposal without enabling
+it. Live source and dated artifact evidence stay separate as PASS or OPEN. The skills pack is an
+appendix. `day5-jessy.html` is the separate optional on-call SRE lesson.
 
 ## Day 4 deck (n8n to Claude Agent SDK, final, 19 Nov 2026)
 

@@ -9,7 +9,7 @@ slides set the lesson order and contain the prompts that you share in class.
 2. In an existing clean trainer clone, run `git status --short`.
 3. If the output is empty, run `git pull --ff-only`.
 4. If the output is not empty, preserve the work and make a fresh sibling clone.
-5. Check Node.js 22 or newer, Git and a signed-in Claude Code session.
+5. Check Node.js 20 or newer, Git and a signed-in Claude Code session.
 6. Reuse an existing slide server. If none is running, run `python3 serve.py 8080`.
 
 Open these pairs from the same server:
@@ -25,9 +25,8 @@ every slide with its time, key points, warnings and prompts.
 Open the projector deck first. Then click **Presenter view** or press `S` in the
 same browser and origin. The presenter window follows the projector slide.
 
-The participant deck stays on the projector. The presenter notes include the
-video clips. They also provide the predict, play, pause and participant-proof
-cues for the trainer.
+The participant deck stays on the projector. The presenter notes provide the
+timing, questions, reveal cues and participant-proof checks for the trainer.
 
 Share each copy-ready prompt in the class chat. Participants follow the slide's
 **Type this in** label: Claude Code, Terminal 2, or the browser agent chat. They
@@ -70,24 +69,150 @@ Lunch is from 13:15 to 14:00. The breaks are at 11:00 and 15:30.
 
 ## Run Day 5: the Daily Brief agent is the main lesson
 
+Use the [Day 5 story script](DAY5-STORY.md) for the opening, assignment
+transitions and closing. As in Sonny, begin with the participant's situation
+before introducing the tools. The participant builds and accepts the result.
+The trainer guides the practice. Bree is the application they build today.
+
+Use the right arrow or click to reveal the scene one beat at a time.
+Ask the question before revealing the answer. The Aetherbot guides attention
+or represents the participant, as its label states. Bree is the application. Follow the slide titles rather than
+fixed slide numbers. Assignment slides remain fully readable.
+
 Teach from `day5-daily-brief.html`. Participants use
 [`AetherLink-bv/aetherlink-daily-brief-lab-s1`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1)
-on `main` and do all seven steps in class: A1 to A4 before lunch, A5 to A7
-after lunch. Participants can complete the sample route without an API key.
-In A5, those with configured credentials can run the live brief with one
-read-only tool. Everyone else runs the sample and records the live check as OPEN.
-Each assignment ends with a reviewed result. Participants open a pull request only after the
-human review in step 7. Nothing is merged or deployed.
+on `main` and complete A1 to A4 before lunch and A5 to A7 after lunch.
+Open the presenter view and a separate demo checkout before class.
+The lab includes `/visual-plan` and `/create-verification-skill` under
+`.claude/skills/`. Introduce each skill before its first use.
 
-Sonny, the SRE agent, is an optional legacy route. The final Daily Brief slide
-links to its separate deck. Open that deck only when you deliberately choose it.
+Before A5, confirm the organization-approved model route and the existing
+approved Jira MCP are available. Participants inspect the existing setup with
+`/mcp`. They do not install a connector. Their live scope is limited to their
+own permitted Jira work items. Work email is not allowed. Missing approval,
+authentication, configuration, access or evidence stays `OPEN`.
+Start by asking what participants need to decide before their first meeting.
+Let them answer the Day 4 recap before revealing the cards. In the demo checkout,
+run `npm run brief:sample`. Open `out/latest.html` next to the fictional
+calendar fixture and trace the example 09:00 stand-up line. State that A1 is a
+synthetic learning slice, not the finished Bree agent.
 
-## Optional legacy route: Sonny, the SRE agent
+Teach the two ground-rule slides before A1. Keep Bree private and individual.
+Do not use customer data. Do not store credentials, internal connector URLs or
+raw Jira responses. The host may store only validated dated HTML under
+`~/.bree/briefs/` with private permissions. Do not record, project or commit
+that live artifact. A local process can still send permitted source data to the
+approved company model route.
+
+Use this phase map when participants ask where they are. It follows the six
+stages in the official AI-native SDLC playbook, but keeps delivery local:
+
+| Phase | Artifact | Proof in class |
+| --- | --- | --- |
+| Plan | A1 accepts `intent.md`; A7 applies the same problem framing to a new small application | The A1 line and one visible A7 result |
+| Design | Accepted `docs/spec.md` | The same schema test red and green |
+| Build | Accepted visual plan, full HTML renderer and one exact Jira MCP tool | Human approval, focused tests, `live:check` and dated artifact `PASS` or `OPEN` |
+| Test | `.claude/skills/verify-bree/` and `docs/evidence.md` | Complete, `OPEN`, `CONFLICT` and one complete synthetic app journey |
+| Deploy | Accepted A5 and A6 commits plus an uninstalled trigger proposal | Dated private HTML, current and previous versions, command, logs, rollback and owner |
+| Maintain | One observed A6 result becomes a new intent and check | The command, one output line and human acceptance |
+
+A3 starts Build because the official playbook starts Build in plan mode. A6 is
+only a local Deploy exercise. Do not describe it as CI, publication or a
+production release.
+
+Prepare the isolated demonstration snapshots. Use the same finished brief for A4.
+Each assignment reserves time for a short demo, an individual build and a
+four-minute class check. Repeat the prepared demo when the class needs it again.
+Give participants their own build time and ask everyone to verify their own
+result. Invite one person to share the visible result during the class check.
+For A7, demonstrate how to scope a problem and read the criteria aloud.
+
+Before the route, use the source link on “A brief worth opening” to open
+`assets/day5-daily-brief-teach/bree-example.html`. Scroll every section from
+title and date through sources. Point to `OPEN` and `CONFLICT`, then return to
+the slide. This full synthetic page is the product target, not live proof.
+
+After A4 passes completely, you may demonstrate one optional decorative image
+with `https://picsum.photos/id/1015/1200/400`. It requires no key or account.
+It is public network content, not AI generation, source evidence or a new tool
+permission. Add alt text. Keep a local placeholder or omit the photo when
+offline; the complete brief must still render.
+
+The seven clips are illustrative demonstrations. They do not prove live Jira
+access or current model behaviour. Keep fixtures synthetic and never record
+live work data. Each clip shows the matching local step and evidence boundary:
+
+| Clip | Recorded demonstration |
+| --- | --- |
+| A1 | Inspect intent, fixture and test; run the test red; apply the accepted `mini.ts`; rerun green; show the decision line. |
+| A2 | Inspect the contract and schema test; run red; apply the accepted schema and sample; rerun green, including rejection of the missing `start`. |
+| A3 | Run `/visual-plan`; inspect fixtures and one exact Jira tool feeding the same schema, renderer and dated private HTML; review the ADR and plan. |
+| A4 | Run the renderer test red; apply the complete DailyBrief renderer; rerun green; add one house-style test red; rerun green; open every HTML section. |
+| A5 | Inspect `/mcp`, ignored local configuration, `live:check`, SDK options and the host write boundary. Do not show internal URLs, raw Jira data or the private artifact. |
+| A6 | Run `/create-verification-skill`, inspect the full feature map, execute one synthetic journey, review the uninstalled trigger proposal, then compare `HEAD^` and `HEAD`. |
+| A7 | Choose one bounded Jira, GitLab, Confluence or mock Outlook mission; run one synthetic test red and green; show the source boundary and visible result. |
+
+Regenerate the seven illustrative clips from the current deck and solution:
+
+```sh
+node tools/render-day5-guide-videos.mjs
+```
+
+The renderer uses synthetic data. It must not capture live Jira output,
+credentials, internal URLs or the trainer-only connector appendix.
+
+A1 ends with one synthetic calendar item becoming one useful line. A2 reverse
+engineers the safe Dia-style structure and shows the same schema check red and
+green. A3 saves the visual plan and design files only after approval. A4 builds
+and opens every section of the complete synthetic HTML brief. A5 connects one
+exact read-only Jira MCP tool through the Claude Agent SDK.
+Run `npm run live:check` before any private live run. Run `npm run brief:live`
+only after approval. The agent returns validated DailyBrief data. The host
+writes only the validated artifact to `~/.bree/briefs/YYYY-MM-DD.html` with
+private permissions. Provider and client retention follow company policy.
+
+A6 creates `.claude/skills/verify-bree/`, runs complete, missing and conflict
+cases, executes one complete synthetic app journey, then reviews a local daily
+trigger proposal. The proposal names the command, working directory, private
+logs, rollback and owner. Do not install or enable a scheduler. Then A6 runs
+HEAD and HEAD^ in separate detached worktrees. HEAD^ is the recovery proof. Before A7, each
+participant chooses one result they actually saw in A6. They add a separate
+`## Next iteration` section to `intent.md` with the command, one output line,
+what worked, the risk, one intended improvement and its next check. They do not
+overwrite the accepted first intent.
+A person accepts or revises that next iteration. Do not invent a bug or claim
+autonomous monitoring. A7 is a small transfer to an application chosen by the
+participant, not a second complete lifecycle. Do not supply an implementation prompt for A7. Close with Show,
+Tell, Ask. Have participants show a result, tell what it helps someone decide,
+and ask a peer about their next check.
+
+In A2, approve the proposed specification before Claude Code writes the test
+and implementation. In A5, inspect the SDK options and exact allowlisted Jira
+tool before any live run. Keep synthetic and live evidence separate.
+After accepting A5, commit its working result before starting A6. Then commit
+the accepted A6 result. Check both commit identities before the recovery demo.
+
+The participant route uses no CI and opens no pull request. Keep delivery and
+rollback local. The skills pack appears only in the appendix and is not needed
+for Assignments 1 through 7.
+
+If the managed Jira MCP is missing or cannot authenticate, stop the live step.
+Do not expose internal registry URLs on the projector. Use the local trainer
+appendix `trainer-private/day5-mcp-troubleshooting.md` privately. Repair only
+the managed setup. The participant records live proof as `OPEN` and continues
+with synthetic verification.
+
+After the Daily Brief close, use the scene transition from the 08:30 meeting
+to the 03:45 incident. The same SDLC now supports an on-call SRE agent.
+The scope and responsibility change: participants inspect an incident and
+review a proposed action. They do not reuse Bree as an incident agent.
+Open the separate Jessy deck only when the class chooses the bonus.
+
+## Optional bonus: Sonny, the on-call SRE agent
 
 This is the earlier Day 5 route. It is not the current main lesson. Open
-`workshop5.html` on the projector and `workshop5-presenter.html` on the trainer
-screen only when you deliberately choose the legacy SRE deck or use it as a
-bonus after the Daily Brief steps.
+`day5-jessy.html` on the projector and `day5-jessy-presenter.html` on the trainer
+screen for the optional on-call SRE bonus after the Daily Brief steps.
 
 Participants use [`workshop/start`](https://github.com/AetherLink-bv/sre-oncall-agent/tree/workshop/start)
 and follow the required A1 through A6 route. A8 is the human gate inside A6.

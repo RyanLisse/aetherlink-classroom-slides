@@ -25,7 +25,6 @@ h1 small{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:upper
 h2.sec{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:1.6rem 0 .5rem}
 table.agenda{width:100%;border-collapse:collapse;font-size:.9rem}
 .agenda td{padding:.28rem .5rem;border-bottom:1px solid var(--border);vertical-align:top}
-.agenda td:first-child{font-family:var(--mono);color:var(--muted);white-space:nowrap;width:4.5rem}
 .agenda td.n{color:var(--muted);width:2.5rem;text-align:right}
 .agenda td.d{color:var(--muted);white-space:nowrap;width:5rem}
 .agenda tr.practice td.t a{color:var(--orange);font-weight:900}
@@ -94,7 +93,7 @@ body.no-prompts .prompt{display:none}
 </div>
 
 <script>window.DECK_PAGE = 'day5-daily-brief.html';</script>
-<script src="day5-daily-brief-slides.js?v=7"></script>
+<script src="day5-daily-brief-slides.js?v=8"></script>
 <script>
 (() => {
   const S = (window.SLIDES || []).filter((s) => !s.hidden);
@@ -102,7 +101,6 @@ body.no-prompts .prompt{display:none}
   const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   // `code` → <code>, **bold** → <b>
   const fmt = (t) => esc(t).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
-  const clock = (s) => (/(\d{1,2}:\d{2})/.exec(s.notes || '') || [])[1] || '';
   const num = (s) => all.indexOf(s) + 1;
   const list = (cls, title, items, f = (x) => '<li>' + fmt(x) + '</li>') => items && items.length ? `<div class="blk ${cls}"><h4>${title}</h4><ul>${items.map(f).join('')}</ul></div>` : '';
   const promptBox = (label, text) => `<div class="prompt"><span class="lbl">${esc(label)}</span><button type="button" data-copy>Copy</button><span class="ptxt">${esc(text)}</span></div>`;
@@ -110,15 +108,15 @@ body.no-prompts .prompt{display:none}
   // facts at the top
   const facts = [
     ['Practice repo', '<a href="https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1" target="_blank" rel="noopener">AetherLink-bv/aetherlink-daily-brief-lab-s1</a> · branch <code>main</code>'],
-    ['You see', 'The brief · <code>out/latest.html</code> after <code>npm run brief:sample</code>'],
-    ['The agent', 'Bree: a daily brief agent. Sample data only, no API key.'],
-    ['Story', '08:30, four tools to read before work. Bree looks, writes one page, the schema checks it, you read it. The separate Sonny lesson is optional.'],
-    ['Online class', 'Every assignment is solo. Catch-up branch after A5: <code>day5-after-a5</code>.']
+    ['You see', 'Complete synthetic HTML at <code>out/latest.html</code>; approved live HTML at <code>~/.bree/briefs/YYYY-MM-DD.html</code>'],
+    ['The agent', 'Bree: a private daily brief agent. Fixtures and one approved Jira tool feed the same complete DailyBrief schema. The host writes validated HTML.'],
+    ['Story', 'Start with a synthetic learning slice. Define the contract, approve a visual plan, build the renderer, connect Jira and make verification repeatable.'],
+    ['Delivery', 'A6 runs one complete synthetic journey, proves both local versions and reviews a daily trigger proposal without enabling it.']
   ];
   document.getElementById('facts').innerHTML = facts.map(([k, v]) => `<div class="fact"><b>${k}</b>${v}</div>`).join('');
 
   // agenda
-  document.getElementById('agenda').innerHTML = S.map((s) => `<tr class="${esc(s.type)}"><td>${clock(s)}</td><td class="n">${num(s)}</td><td class="t"><a href="#s${num(s)}">${esc(s.title)}</a></td><td class="d">${esc((s.teach?.time || '').replace(/^\d{1,2}:\d{2}\s*·\s*/, '').replace(/\.$/, ''))}</td></tr>`).join('');
+  document.getElementById('agenda').innerHTML = S.map((s) => `<tr class="${esc(s.type)}"><td class="n">${num(s)}</td><td class="t"><a href="#s${num(s)}">${esc(s.title)}</a></td><td class="d">${esc((s.teach?.time || '').replace(/^\d{1,2}:\d{2}\s*·\s*/, '').replace(/\.$/, ''))}</td></tr>`).join('');
 
   // one card per slide
   document.getElementById('slides').innerHTML = S.map((s) => {
@@ -136,10 +134,10 @@ body.no-prompts .prompt{display:none}
     const copyHtml = copies.length ? `<div class="blk"><h4>To paste</h4>${copies.map(([l, txt]) => promptBox(l, txt)).join('')}</div>` : '';
     const terms = t.terms && t.terms.length ? `<div class="terms">${t.terms.map(([k, v]) => `<b>${esc(k)}</b>: ${fmt(v)}`).join(' · ')}</div>` : '';
     return `<section class="slide ${esc(s.type)}" id="s${n}">
-      <div class="s-head"><span class="s-meta"><span class="n">#${n}</span> · ${clock(s) || '—'} · ${esc(t.time || '')}</span><h3>${esc(s.title)}</h3><a class="s-open" href="day5-daily-brief.html#${n}" target="day5-deck">open slide ↗</a></div>
+      <div class="s-head"><span class="s-meta"><span class="n">#${n}</span> · ${esc(t.time || '')}</span><h3>${esc(s.title)}</h3><a class="s-open" href="day5-daily-brief.html#${n}" target="day5-deck">open slide ↗</a></div>
       ${t.gist ? `<p class="gist">${fmt(t.gist)}</p>` : ''}
       <div class="grid">
-        <div>${list('', 'Key points', keys)}${list('done', 'Done when', t.done)}</div>
+        <div>${list('', 'Classroom pacing', (t.do || []).filter(step => step.startsWith('Demo ')))}${list('', 'Key points', keys)}${list('done', 'Done when', t.done)}</div>
         <div>${list('ask', 'Ask the room', asks, (x) => `<li><span class="q">${fmt(x.q)}</span>${x.a ? ` <span class="a">→ ${fmt(x.a)}</span>` : ''}</li>`)}${list('watch', 'Watch out', t.watch)}</div>
       </div>
       ${steps}${copyHtml}${terms}

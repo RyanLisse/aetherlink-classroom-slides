@@ -24,6 +24,23 @@ const fromWorkshop5 = t => {
 };
 
 const dailyBriefSdlc = byTitle('The software development life cycle (SDLC)');
+dailyBriefSdlc.subtitle = 'Six stages from idea to maintenance.';
+const sdlcTitles = ['Choose the goal', 'Design the behaviour', 'Approve the plan and build', 'Test the agreement', 'Prepare delivery', 'Learn and restart'];
+const sdlcArtifacts = ['Artifact: intent.md', 'Artifact: docs/spec.md', 'Artifacts: accepted plan + code', 'Artifact: test evidence', 'Artifacts: local version + live status', 'Artifact: observation → next intent'];
+for (const [index, card] of (dailyBriefSdlc.cards ?? []).entries()) {
+  card.title = sdlcTitles[index];
+  card.body = sdlcArtifacts[index];
+}
+dailyBriefSdlc.visual.sdlcArtifacts = true;
+dailyBriefSdlc.keyPoints = ['Plan, Design, Build, Test, Deploy, Maintain.', 'Each phase leaves an artifact you can inspect.', 'Today delivery is a dated private HTML brief. Live source proof is PASS or OPEN.'];
+const sdlcArtifactSays = ['Artifact: intent.md.', 'Artifact: docs/spec.md.', 'Artifacts: the accepted plan and code.', 'Artifact: test evidence.', 'Today the artifacts are a running local version and an honest live-connector status.', 'Artifact: an observation that becomes the next intent.'];
+for (const [index, line] of sdlcArtifactSays.entries()) {
+  const beat = dailyBriefSdlc.teach?.script?.[index + 1];
+  if (beat?.say) beat.say.push(line);
+}
+dailyBriefSdlc.teach.script[3].say = ['Build: approve the plan, then write the code.', 'Artifacts: the accepted plan and code.'];
+dailyBriefSdlc.teach.script[5].say = ['Deploy: release an accepted version. Today that is a dated private HTML brief.', 'Preview a daily trigger, but do not enable it. Record live source proof separately as PASS or OPEN.'];
+dailyBriefSdlc.teach.script[6].say = ['Maintain: learn from observed behaviour and start the next Plan.', 'Artifact: an observation that becomes the next intent.'];
 for (const beat of dailyBriefSdlc.teach?.script ?? []) {
   if (beat.shot?.startsWith('assets/day5-jessy-teach/s06-')) {
     beat.shot = beat.shot.replace('assets/day5-jessy-teach/', 'assets/day5-daily-brief-teach/');
@@ -33,52 +50,53 @@ for (const beat of dailyBriefSdlc.teach?.script ?? []) {
 const REPO = {url: 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1', label: 'github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1'};
 const PACK = {url: 'https://github.com/AetherLink-bv/claude-code-skills-pack', label: 'github.com/AetherLink-bv/claude-code-skills-pack'};
 
-// One skill per assignment. The prompts are verbatim in the lab's SOLO.md and docs/prompts.md.
-const SKILLS = {
-  1: {name: 'grilling', what: 'asks you hard questions, one at a time, until nothing is assumed', prompt: '/grilling Grill me on my intent.md, one question at a time. Focus on the checks a neighbour cannot observe. Do not edit files.'},
-  2: {name: 'eli5', what: 'explains code simply, with the real mechanism', prompt: '/eli5 Explain my schema and test/schema.test.ts as for an intelligent beginner: what each field checks and why the test was red first. Do not edit files.'},
-  3: {name: 'visual-plan', what: 'turns a plan into one HTML page you can read', prompt: '/visual-plan Turn my accepted docs/plan.md into one HTML page I can read in the browser. Do not change the plan.'},
-  4: {name: 'verify-this', what: 'proves or disproves one claim with a fresh run', prompt: '/verify-this Prove that npm run brief:sample writes out/latest.html without a model call. Show the command, exit code and one line of output.'},
-  5: {name: 'show-me', what: 'draws how the code connects, without changing it', prompt: '/show-me Draw how one source reaches the brief: src/sources.ts, the tool in src/agent.ts, and src/main.ts. Only read, change nothing.'},
-  6: {name: 'verify-this', what: 'reruns your evidence and compares the result', prompt: '/verify-this Rerun the three commands in docs/evidence.md and compare each exit code with what is written. Mark any difference OPEN.'},
-  7: {name: 'review-and-ship', what: 'reviews your branch and prepares the PR', prompt: '/review-and-ship Review my work against intent.md and docs/gate.md. Run the tests. Prepare the PR, but stop before you open it and before any merge.'}
-};
-const HANDOFF = '/handoff Write a prompt for a fresh Claude Code session to continue from my current step. Name the step, the files, and the next proof.';
+// A1-A6 are copied verbatim from the participant lab. A7 is deliberately open:
+// participants define their own problem, boundary and proof instead of pasting an implementation prompt.
 const SOLO_PROMPTS = {
-  1: 'Read CLAUDE.md, SOLO.md, and the templates. Interview me one question at a time. Draft intent.md with one outcome, three observable checks, owners, a hard boundary, and one OPEN. Challenge my weakest check with one concrete counterexample. Revise only after my answer. Show the diff and stop for my review. Do not implement code.',
-  2: 'Read my accepted intent.md and reference/. Draft docs/spec.md with one quoted example per field, then stop for my approval. After I approve it, write test/schema.test.ts and run it to show the expected red failure. Stop so I can inspect and commit the red test. After I confirm, build src/brief.ts and sample/brief.sample.json until the test passes. Ask me for one invalid sample and prove the schema rejects it. Show the test output and diff. Do not build a renderer or tools.',
-  3: 'In plan mode, read intent.md, docs/spec.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md. Give every plan step an exact path, proof command, and rollback. Do not edit files or build. Stop for my approval. After I approve the plan, tell me to press Shift+Tab until manual mode is on. Then save only those design documents, challenge one assumption with a case I choose, show the revised diff, and stop.',
-  4: 'Use my accepted docs/plan.md. Write test/render.test.ts and show the expected red failure. Then build src/render.ts and a sample-only src/main.ts. Escape untrusted text. Run npm run brief:sample and show out/latest.html. Ask me to choose one house-style change. Add its failing test first, make it pass, regenerate the page, and show the diff. Use no API key or model call. Stop for my inspection.',
-  5: 'Read my accepted plan and schema. Build src/agent.ts, src/sources.ts, and test/agent.test.ts for one read-only tool. Connect src/main.ts to the agent for the live brief command. Preserve brief:sample without model calls. Give the brief agent no shell or write tools. Prove the tool wiring and one missing-source case I choose with tests. With credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Show the proof and diff, then stop.',
-  6: 'Run the existing typecheck, test, and brief:sample scripts. Record every command, exit code, and one output line in docs/evidence.md. Link docs/evidence/latest-1440x900.png. Mark unrun checks OPEN. Do not change code to hide a failure. Ask my reviewer to rerun one command. Record the reviewer\'s actual name and result only after the rerun. Show the evidence diff and stop.',
-  7: 'Read intent.md, the current diff, and docs/evidence.md. Draft docs/gate.md with evidence links and proposed FAIL or OPEN entries for missing checks. Leave every PASS decision to me. Prepare a PR title, description, and inactive weekday schedule. Show the diff and stop for my gate decision. Do not commit, push, open a PR, merge, deploy, or activate the schedule.'
+  1: 'Read CLAUDE.md, SOLO.md, intent.md, progress.md, and sample/calendar-item.sample.json. Interview me one question at a time until I choose one user and one morning decision. After I approve the wording, update the User and decision section of intent.md and the matching synthetic fixture fields. Write test/mini.test.ts first for one exact line in the form `<start> <title> — decide: <decision>`. Run npm run test:mini and show the expected red failure. Build src/mini.ts, run npm run test:mini and npm run mini, show the green proof and diff, then stop. State clearly that this synthetic line is a learning slice, not the finished agent.',
+  2: 'Read the accepted intent.md, reference/dia-to-bree.md, reference/brief-example.md, and sample/brief.sample.json. Reverse engineer only the safe structural pattern: title, date, greeting, summary, one move-work-forward action, top todos, new updates, your day, and sources. Draft docs/spec.md with the complete DailyBrief schema. Title and greeting are strings; date uses YYYY-MM-DD. Summary and moveWorkForward are single items. TopTodos, newUpdates, and yourDay are non-empty item arrays. Every item has status READY, OPEN, or CONFLICT, text, and sourceIds. READY and CONFLICT items have at least one source ID; OPEN may have none. Every sourceId resolves in sources, whose entries have id and label. OPEN text starts OPEN; CONFLICT text starts CONFLICT. Stop for my approval. After approval, write test/schema.test.ts first and run npm run test:schema to show the expected red failure. Build src/brief.ts and sample/brief.sample.json until the full valid sample passes. Add one invalid synthetic sample and prove the schema rejects it. Show the red and green evidence and the diff, then stop. Do not build the renderer, SDK route, or connector.',
+  3: 'In plan mode, read the accepted intent.md, docs/spec.md, reference/dia-to-bree.md, AGENTS.md, and the current diff. Propose docs/design.md, one decision under docs/decisions/, and docs/plan.md for the smallest complete Bree route: synthetic fixtures → DailyBrief schema → full HTML renderer, plus one approved read-only MCP tool → Claude Agent SDK → the same schema → dated private HTML under ~/.bree/briefs/. Give every plan step exact root-relative paths, one proof command, and a reversible rollback. Include OPEN sections, host-owned file writing, human approval points, and separate synthetic proof from live source proof. Do not edit files or build. Stop for my approval. After I approve the plan, tell me to return to manual mode. Save only the accepted design documents, show the diff, and stop.',
+  4: 'Read the accepted docs/plan.md, docs/spec.md, and reference/dia-to-bree.md. Write test/render.test.ts first and run npm run test:render to show the expected red failure. Build src/render.ts and a sample-only src/main.ts. Render the complete DailyBrief schema as one readable HTML page with title, date, greeting, summary, move-work-forward action, top todos, new updates, your day, sources, and visible OPEN states. Escape long untrusted text and source labels. Run npm run test:render and npm run brief:sample. Prove that out/latest.html contains every section, source provenance, and no invented fact. Ask me for one small house-style change, add its failing test first, make it pass, regenerate the page, show the proof and diff, then stop.',
+  5: 'Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the provided Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection and identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Build the smallest Claude Agent SDK route through the organisation-approved model provider. Permit only that Jira read tool, map available source data into the complete DailyBrief schema, leave unavailable sections OPEN, and reject unvalidated output. Live source IDs must be exact Jira issue keys extracted from the successful structured tool result; reject invented or transformed IDs and unstructured output. The host application may write only the validated HTML artifact to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check as the preflight and npm run brief:live as the explicit live run. Deny every other agent tool. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check, show the SDK boundary and host write boundary, show the diff, and stop before the live run.',
+  6: 'Read docs/spec.md, the synthetic evaluation fixtures, package.json, and the current application routes. Write test/eval.test.ts for a complete brief, missing evidence with OPEN items, and conflicting evidence with CONFLICT items. Run npm run eval and fix only mismatches with the accepted spec. Then use the project-local create-verification-skill to generate .claude/skills/verify-bree/ from commands, routes, selectors, and outputs that exist in this repository. Its feature map must cover every synthetic HTML section, long-text escaping, resolved sourceIds, OPEN and CONFLICT behavior, the dated private artifact path, and the private live preflight without storing live contents. Run one complete synthetic user journey through launch, doctor, drive, evidence, and cleanup. Then run npm run typecheck, npm test, npm run eval, npm run brief:sample, and npm run live:check. Record real commands and exit codes in docs/evidence.md. Propose one organisation-approved local daily trigger with its command, working directory, logs, rollback, and owner, but do not install or activate a scheduler. Mark the live connector and dated artifact OPEN unless you privately ran them with approved access. Show the evidence diff and stop for approval. Do not publish anything.'
 };
 const say = (time, why, see, watch, stop, next) =>
-  `Time: ${time}.\n\nWhy now: ${why}\n\nWhat you see: ${see}\n\nWatch for: ${watch}\n\nIf stuck: Ask Claude Code to state the blocker and the next focused check.\n\nStop: ${stop}\n\nNext: ${next}`;
+  `Time: ${time}.\n\nWhy now: ${why}\n\nWhat you see: ${see}\n\nWatch for: ${watch}\n\nStop: ${stop}\n\nNext: ${next}`;
 
 // Stage per assignment, as in the AI-native SDLC playbook: intent.md is Plan, spec.md is Design, plan.md is Build.
-const SDLC = {1: 'plan', 2: 'design', 3: 'build', 4: 'build', 5: 'build', 6: 'test', 7: 'deploy'};
+const SDLC = {1: 'plan', 2: 'design', 3: 'build', 4: 'build', 5: 'build', 6: 'test', 7: 'plan'};
 const PLAYBOOK = {url: 'https://claude.com/resources/articles/the-ai-native-sdlc-playbook', label: 'claude.com · The AI-native SDLC playbook'};
-const STAGE = {1: 'intent', 2: 'contract', 3: 'contract', 4: 'tools', 5: 'tools', 6: 'gate', 7: 'gate'};
+const STAGE = {1: 'intent', 2: 'contract', 3: 'contract', 4: 'tools', 5: 'tools', 6: 'gate', 7: 'learn'};
 
 // The presenter view and the day sheet read `teach`. Info slides pass it in directly.
 const info = (slide, teach) => ({...slide, teach: {next: teach.next ?? slide.notes.split('Next: ')[1], ...teach}});
 
+// Each pair reserves time for the demo and the final check inside the slide timer.
+const CLASS_DEMO = {
+  1: [5, 'Open the calendar fixture. Run npm run mini in the demo checkout. Ask who uses the line and what they decide.'],
+  2: [5, 'Show the schema check failing in the demo checkout. Add the missing schema and rerun the same command.'],
+  3: [4, 'Switch to plan mode. Run /visual-plan. Trace fixtures and the approved source into the same schema, then to dated private HTML.'],
+  4: [5, 'Run npm run brief:sample. Open out/latest.html and trace each section to its synthetic source.'],
+  5: [6, 'Run npm run live:check. Show the exact tool and host-owned dated HTML path, then explain why live proof is PASS or OPEN.'],
+  6: [5, 'Run npm run eval. Use /create-verification-skill, execute one synthetic journey and review the trigger proposal without enabling it.'],
+  7: [4, 'Give one example of a user and a decision. Read the criteria. Have everyone pick their own problem before they open Claude Code.']
+};
+
 const teachFor = (n, time, {gist, say, learn, watch, terms, done, prompt, next}) => ({
   time,
   gist,
-  do: ['Check the Claude Code mode, paste the SOLO prompt, inspect the named check, then approve or revise.'],
+  do: [`Demo ${CLASS_DEMO[n][0]} min · Individual build ${parseInt(time, 10) - CLASS_DEMO[n][0] - 4} min · Class check 4 min`],
   done,
-  copy: [[`SOLO ${n} · Claude Code`, prompt], [`Project skill · /${SKILLS[n].name}`, SKILLS[n].prompt]],
+  copy: prompt ? [[`SOLO ${n} · Claude Code`, prompt]] : [],
   script: [
-    {do: 'Slide appears. Read the goal and the checkpoint out loud.', say},
-    n === 3 ? {do: 'Step 1. Everyone checks “plan mode on” at the bottom of Claude Code.', say: ['Plan mode for this one. Claude Code can read and propose, but cannot change files.']} : {do: 'Step 1. Everyone checks “manual mode on” at the bottom of Claude Code.', say: ['Manual mode first. Claude Code asks before every change, so you stay the reviewer.']},
-    {do: 'Step 2. Participants copy the SOLO prompt. Walk the room.', say: ['Paste this exact prompt. Claude Code stops at the review point named in the prompt.']},
-    {do: 'Step 3. Participants answer the check on the slide.', say: ['Read the result and the diff. Answer the check with yes or no. Revise if the answer is no.']},
-    {do: `Step 4. Use /${SKILLS[n].name} for the final inspection.`, say: [`This project skill ${SKILLS[n].what}. It does not replace the SOLO prompt or the checkpoint.`]},
-    n === 7
-      ? {do: 'Step 5. Approve publication only after the gate review.', say: ['Claude Code then commits the accepted gate files, pushes HEAD to a new remote branch and opens the PR. Stop before merge or activation.']}
-      : {do: 'Step 5. Save only accepted work.', say: ['Commit only after you accept the result. Ask one participant to show the visible proof.']}
+    {do: 'Read the goal and checkpoint.', say},
+    {do: 'Demo the path or play the guide.', say: [CLASS_DEMO[n][1]]},
+    n === 3 ? {do: 'Step 1. Check that plan mode is on.', say: ['Claude Code may propose, but may not change files.']} : {do: 'Step 1. Check that manual mode is on.', say: ['Claude Code asks before changes. You review them.']},
+    prompt
+      ? {do: 'Participants paste the SOLO prompt.', say: ['Use the exact prompt. Stop at its review point.']}
+      : {do: 'Participants choose their own small application.', say: ['Name the user, decision, boundary and visible proof. Do not provide an implementation prompt.']},
+    {do: 'Check the result and diff.', say: ['Revise if the checkpoint fails.']},
+    {do: 'Class check. Ask one participant to show the result.', say: ['Everyone marks PASS or OPEN. Use the watch list if blocked.']}
   ],
   learn,
   watch,
@@ -86,9 +104,9 @@ const teachFor = (n, time, {gist, say, learn, watch, terms, done, prompt, next})
   next
 });
 
-const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, improve, notes, teach) => ({
+const assignment = ({n, title, subtitle, checkpoint, boundary, prompt, steps, notes}) => ({
   title: `Assignment ${n}: ${title}`,
-  kicker: `Day 5 · A${n} · SOLO ${step}`,
+  kicker: `Day 5 · A${n}${n < 7 ? ` · SOLO ${n}` : ' · YOUR TURN'}`,
   subtitle,
   type: 'practice',
   layout: 'exercise',
@@ -104,196 +122,264 @@ const assignment = (n, step, title, subtitle, checkpoint, boundary, prompt, impr
   cards: [{title: 'Checkpoint', body: checkpoint.join('\n')}, {title: 'Human boundary', body: boundary}],
   keyPoints: checkpoint,
   stepsHeading: 'Do this',
-  steps: n === 7 ? [
-    {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 7 prompt', prompt},
-    {where: 'Claude Code', text: 'Inspect the gate diff. Make every PASS decision yourself.', after: checkpoint.at(-1)},
-    {where: 'Project skill', text: 'Run /review-and-ship before the gate decision', prompt: SKILLS[7].prompt},
-    {where: 'Terminal', text: 'After approval, commit the accepted Assignment 7 files'},
-    {where: 'Terminal', text: 'Push HEAD to a new remote branch and open the PR', prompt: 'BRANCH="my/<firstname>"\ngit push origin "HEAD:refs/heads/$BRANCH"\ngh pr create --repo AetherLink-bv/aetherlink-daily-brief-lab-s1 --base main --head "$BRANCH"', after: 'If origin is not writable, use the fork route in SOLO.md. Stop before merge, deployment or schedule activation.'}
-  ] : [
-    {where: 'Claude Code', text: `In ${n === 3 ? 'plan' : 'manual'} mode, paste the exact SOLO ${n} prompt`, prompt, after: 'Not in the right mode? Press Shift+Tab first.', warn: true},
-    {where: 'Claude Code', text: n === 3 ? 'After approval, return to manual mode. Then inspect the saved documents.' : 'Inspect the result and answer the checkpoint', after: checkpoint.at(-1)},
-    {where: 'Project skill', text: `Run /${SKILLS[n].name} for the final inspection`, prompt: SKILLS[n].prompt},
-    {where: 'Terminal', text: 'Commit only the work you accepted'}
-  ],
+  steps,
   prompt,
   notes
 });
 
 const TEACH = {
   1: {
-    gist: 'Claude Code interviews the participant. The answer is intent.md: one outcome, three checks you can see, owners, a hard boundary and one OPEN.',
-    say: ['Before we write code, we write down what done means.', 'Claude Code asks you one question at a time. You answer, it writes intent.md.', 'A check you cannot see is not a check. “Useful” is not a check. “Shows my first meeting at the top” is.'],
-    learn: ['The intent decides what done means for every later step.', 'A check must be something a neighbour can observe.', 'One OPEN is fine. It is a known unknown, written down.'],
-    watch: ['Checks like “useful” or “clear”. Ask: how would your neighbour see that?', 'Claude Code that starts on code. Say: stop, intent only.', 'Live accounts. Today is sample data only.'],
-    terms: [['intent.md', 'the file that says what the brief must do and how you check it'], ['OPEN', 'a question or check that is not answered yet, written down on purpose'], ['Boundary', 'something the agent must never do']],
-    next: 'make the schema test fail, then pass.'
+    gist: 'Choose one user and one morning decision. Prove a thin synthetic learning slice before any live source is connected.',
+    say: ['Start with one person and one decision before lunch.', 'The first path is deliberately small: one local agenda item in, one useful line out.', 'This is working software, not a document about future software.'],
+    learn: ['A user and a decision make the output concrete.', 'A synthetic thin slice proves the project shape.', 'A1 is a test fixture, not the finished Bree agent.'],
+    watch: ['More than one source. Keep A1 to the local calendar item.', 'A generic user such as “everyone”. Ask who decides what before lunch.', 'A design document without a running command.'],
+    terms: [['Thin path', 'the smallest complete route from input to visible output'], ['Decision', 'what the user can decide after reading the line'], ['Synthetic fixture', 'fictional test data in the repository; it is not connector proof']],
+    next: 'make the schema fail, then pass.'
   },
   2: {
-    gist: 'From the reference brief PDFs to a spec with one quoted example per field. A schema test that is red first, then the schema that makes it green.',
-    say: ['The spec says which fields a brief has. Each field gets one real example from the reference PDFs.', 'Then a test. It must fail first. A test that never failed has not proved it can catch anything.', 'Only then the schema. Green means the schema matches the spec.'],
-    learn: ['Red first proves the test can catch a mistake.', 'Commit the red test before the schema.', 'npm test green on the schema tests is the proof.'],
-    watch: ['A test written after the code. Ask for the red run.', 'Fields without a quoted example in docs/spec.md.', 'Someone who starts a renderer. That is A4.'],
-    terms: [['Spec', 'docs/spec.md: the fields of a brief, each with a quoted example'], ['Schema', 'src/brief.ts: code that checks a brief has the right fields'], ['Red / green', 'a failing test / a passing test']],
+    gist: 'Reverse engineer the safe editorial structure into a full DailyBrief contract. Missing evidence stays visibly OPEN.',
+    say: ['The mini-path worked. Now extract structure, not private content, from the reference.', 'Review and approve the complete DailyBrief schema first.', 'Claude Code then captures red, implements the schema and captures green. You inspect that evidence and rerun the green check independently.'],
+    learn: ['The contract includes every section and resolved sourceIds.', 'READY, OPEN and CONFLICT prevent unsupported certainty.', 'The same command must show red and green.'],
+    watch: ['A test that was never seen red.', 'Different commands for red and green.', 'Renderer or tool work. Those come later.'],
+    terms: [['Schema', 'the code that checks the shape of a complete brief'], ['Red', 'the expected failing test before the schema exists'], ['Green', 'the same test passing after the schema exists']],
     next: 'agree on the design and the plan.'
   },
   3: {
-    gist: 'Plan mode. Claude Code proposes the design, one decision record and a plan with a path, a proof command and a rollback per step. Nothing changes until the participant accepts.',
-    say: ['Now Claude Code only proposes. It cannot change files in plan mode.', 'Each step in the plan names three things: which file, which command proves it, how to undo it.', 'You accept the plan. That is a human decision.'],
-    learn: ['A plan with a proof per step makes the build easy to review.', 'Plan mode keeps the agent from building too early.', 'A decision record says why, not only what.'],
+    gist: 'Use /visual-plan to map fixtures and one approved source into the same schema and dated private HTML. Nothing changes until approval.',
+    say: ['The visual plan shows both routes before code changes.', 'Trace fixtures and the approved MCP tool into the same schema, renderer, dated output, proof and rollback.', 'You accept the plan. That is a human decision.'],
+    learn: ['The live boundary is visible before implementation.', 'Synthetic tests and live connector proof remain separate.', 'A decision record says why, not only what.'],
     watch: ['Plan steps without a proof command.', 'Someone who leaves plan mode before accepting. Press Shift+Tab back.', 'Very long plans. Ask for one screen.'],
-    terms: [['Plan mode', 'Claude Code proposes, but cannot edit files'], ['ADR', 'a short decision record under docs/decisions/'], ['Rollback', 'how to undo one step']],
+    terms: [['Visual plan', 'a diagram of source, schema, renderer, private output and proof'], ['ADR', 'a short decision record under docs/decisions/'], ['Rollback', 'how to undo one step']],
     next: 'render the brief from sample data.'
   },
   4: {
-    gist: 'A red render test, then src/render.ts and a sample-only src/main.ts. npm run brief:sample writes out/latest.html. No API key and no model call.',
-    say: ['The first thing you can see today: your brief as a web page.', 'Same rule: the render test fails first.', 'No model call. The sample route must work without a network.'],
-    learn: ['out/latest.html is the first visible proof.', 'Escape untrusted text before it goes into HTML.', 'A style change is a test first, then the change.'],
-    watch: ['A model call in the sample path.', 'Unescaped text from the sources in the HTML.', 'Save the 1440×900 screenshot now as docs/evidence/latest-1440x900.png. A6 needs it.'],
+    gist: 'Build the complete synthetic DailyBrief as one readable HTML page. It proves the product path, not a live connector.',
+    say: ['Open the editorial page you saw at the start.', 'Trace every section and OPEN state to local sample data.', 'Open out/latest.html and compare it with the accepted contract and plan.'],
+    learn: ['The synthetic page proves the full schema and renderer.', 'Long untrusted text and source labels are escaped.', 'Optional visual polish follows function and evidence.'],
+    watch: ['A model call in the sample path.', 'Live credentials.', 'A generated file that is not opened and inspected.'],
     terms: [['Renderer', 'src/render.ts: turns a brief into HTML'], ['brief:sample', 'the npm script that renders the sample brief, with no model call'], ['Escape', 'make text safe to put in HTML']],
-    next: 'after lunch, give the agent one read-only tool.'
+    next: 'after lunch, add one read-only tool and find the fault.'
   },
   5: {
-    gist: 'The agent gets one read-only tool for one source. Tests prove the wiring and the missing-source case without a network. brief:sample keeps working.',
-    say: ['Now the agent. It gets one tool, and that tool can only read.', 'No shell, no write tools. An agent is only as safe as its tools.', 'No credentials? Then the live check is OPEN, not failed.'],
-    learn: ['One read-only tool is enough to prove the wiring.', 'A missing source is a normal case. Test it.', 'Never print a token.'],
-    watch: ['Shell or write tools on the brief agent.', 'Tokens in a prompt, a log or a commit.', 'brief:sample that suddenly needs a model.', 'Keep the scope to exactly one read-only tool.', 'run.log comes from: npm run brief 2> run.log.'],
-    terms: [['Tool', 'a function the agent may call'], ['Read-only', 'the tool can look, but cannot change anything'], ['run.log', 'the log that each claim in a live brief traces back to']],
-    next: 'record the evidence.'
+    gist: 'Connect one approved Jira tool, validate the same schema and let the host write one dated private HTML artifact.',
+    say: ['Use the organization-approved company model route and existing Jira MCP.', 'Run live:check before any live read.', 'Run brief:live only after authorization. Open the dated private HTML yourself.', 'Mark the live result PASS or OPEN. Never fake source or file evidence.'],
+    learn: ['The live path uses the Agent SDK and one exact approved MCP tool.', 'The agent returns validated data; the host owns the private file write.', 'Unavailable sections remain visibly OPEN.'],
+    watch: ['A personal or unapproved account.', 'More than one live source.', 'Agent file tools, raw source storage, committed live HTML or customer data.'],
+    terms: [['Approved MCP', 'an organization-approved read-only connection'], ['Host write', 'application code writes the validated HTML, not the agent'], ['OPEN', 'live source or dated artifact evidence was not verified']],
+    next: 'create reusable verification and deliver locally.'
   },
   6: {
-    gist: 'Run typecheck, test and brief:sample. Write each real command, its exit code and one output line in docs/evidence.md. A neighbour reruns one.',
-    say: ['A claim without evidence is a hypothesis.', 'Write down the real command and the real exit code. Not from memory.', 'Your neighbour reruns one command. Same result? Then it counts.'],
-    learn: ['Evidence is a command, an exit code and an output line.', 'An unrun check is OPEN.', 'A reviewer is a real person with a real name.'],
-    watch: ['Evidence typed from memory.', 'Code changed to hide a failure.', 'A reviewer name filled in before the rerun.'],
-    terms: [['Exit code', '0 means the command passed; anything else means it failed'], ['Evidence', 'docs/evidence.md: what you ran and what came out'], ['Reviewer', 'the person who reruns one command']],
-    next: 'decide the gate and prepare the PR.'
+    gist: 'Make the full HTML proof repeatable, verify both versions and propose a daily trigger without enabling it.',
+    say: ['One happy path is not enough.', 'Generate the feature map and verification skill before the journey.', 'Run complete, missing and conflicting synthetic cases.', 'Record live source and dated artifact evidence separately as PASS or OPEN.', 'Review a local daily trigger proposal. Do not install or activate it.'],
+    learn: ['The verification skill covers every HTML section and private output path.', 'Synthetic, live source and dated artifact evidence have separate status.', 'A trigger proposal needs a command, working directory, logs, rollback and owner.'],
+    watch: ['Running both versions in the main working tree.', 'Creating the worktrees before the accepted A6 commit.', 'Removing the wrong worktree or not opening both pages.'],
+    terms: [['Verification skill', 'project instructions that map features to repeatable checks'], ['Synthetic journey', 'a safe app flow using fictional data'], ['Trigger proposal', 'a reviewed schedule design that is not installed or enabled']],
+    next: 'build your own small application.'
   },
   7: {
-    gist: 'Claude Code drafts docs/gate.md and a PR preview. The participant decides PASS, commits, then opens the PR. The schedule stays inactive.',
-    say: ['The gate is where a human decides.', 'Claude Code may propose FAIL or OPEN. Only you write PASS.', 'After approval, commit and open the PR. Do not merge, deploy or activate the schedule.'],
-    learn: ['PASS is a human decision with evidence in front of you.', 'An OPEN item can become a new check.', 'The schedule stays inactive.'],
-    watch: ['An agent that writes PASS.', 'A schedule that is switched on.', 'A merge or a deploy. Stop before both.'],
-    terms: [['Gate', 'docs/gate.md: PASS, FAIL or OPEN for each check'], ['PR', 'a pull request: your change, ready for review'], ['Inactive schedule', 'the weekday run, written down but not switched on']],
-    next: 'Maintain: close the loop.'
+    gist: 'Apply the same loop to a new small problem. The participant chooses the user, decision, boundary and visible proof without an implementation prompt.',
+    say: ['This assignment is yours.', 'Keep it small enough to finish one complete path.', 'Explain the problem and proof before you ask Claude Code for help.', 'Write one failing test before the fix, rerun it until green, and show one failure case.'],
+    learn: ['The method transfers to another small application.', 'The user and decision come before the implementation.', 'The participant owns the boundary, red-green proof and failure case.'],
+    watch: ['A solution copied from Bree.', 'A project too large for one visible path.', 'An implementation prompt supplied by the trainer.'],
+    terms: [['Application', 'one small working path for a user'], ['Boundary', 'what the application must not do'], ['Proof', 'the visible output and command that show it works']],
+    next: 'recap the day.'
   }
 };
 
 const brief = [
   {
-    title: 'Build Bree, your morning brief agent',
-    kicker: 'Day 5',
-    subtitle: 'Turn updates from four sources into a one-page brief you can check.',
-    keyPoints: ['Define what the brief should include.', 'Test it against the sources before you approve it.'],
-    notes: 'Time: 5 min.\n\nOn Day 4, the ticket agent drafted a reply for a person to review. Today you set the criteria for a different draft: your morning brief. Use one example: if Bree flags a ticket for standup, can you trace it to the source before you act?\n\nNext: 08:30: your morning',
+    title: 'Welcome to Day 5!',
+    kicker: 'AETHERLINK × WORLDLINE · DAY 5',
+    visual: {opener: 'welcome', bot: 'wave', place: 'beside'},
+    keyPoints: ['Build and verify one local application.', 'Apply the method to a problem you choose.'],
+    notes: 'Time: 1 min.\n\nWelcome the participants to Day 5.\n\nOn Day 4, you rebuilt a support workflow with the Agents SDK. Today, you choose the goal and use Claude Code to design, build, test and deliver a local application. You check both the current and previous version. Then you repeat the method for a problem you choose.\n\nNext: What do you bring into Day 5?',
     teach: {
-      time: '5 min',
-      gist: 'The team defines what a useful brief contains and checks it before approval.',
-      script: [{do: 'Connect the ticket draft to the morning brief.', say: ['Yesterday your agent drafted a customer reply. You reviewed it before it could go out.', 'Today you decide what Bree should flag. If she says a ticket needs attention, you should be able to find the update behind that claim.']}],
-      learn: ['Set a criterion for a useful brief and check the result against its source.'],
-      next: '08:30: your morning'
+      time: '1 min',
+      gist: 'Build one local application, prove it, and repeat the method.',
+      script: [
+        {do: 'Welcome the participants and state the route.', say: ['Welcome to Day 5!', 'On Day 4, you rebuilt a support workflow with the Agents SDK.', 'Today, you take one personal work problem through the full AI-native SDLC.', 'You build Bree with synthetic tests and one approved read-only source.', 'Then you apply the method to a problem you choose.']}
+      ],
+      learn: ['Explain the complete Bree build route and repeat it on a new small application.']
     }
   },
   {
-    title: 'From one reviewed draft to one reviewed brief',
-    kicker: 'Day 5 · Day 4 recap',
-    subtitle: 'The product changes. The working pattern stays the same.',
-    type: 'concept',
+    title: 'What do you bring into Day 5?',
+    kicker: 'Day 5 · Recap',
+    type: 'recap',
+    visual: {guardRail: {
+      plainChain: true,
+      chainTitle: 'From the parts to a complete AI application',
+      chain: [['🧰', 'What you bring', 'prompts · context · tools · agents'], ['🛠', 'What you build', 'one private application'], ['✅', 'How you prove it', 'synthetic proof + honest live status']],
+      rails: [],
+      foot: 'Write one result you want to build, demonstrate and verify today.'
+    }},
+    keyPoints: ['Use what you know. Build the whole route. Define your own evidence.'],
+    notes: 'Time: 4 min.\n\nAsk before explaining: what do you bring from the previous days? Take several answers. Point to prompts, context, tools and agents as recap categories, not as a complete history.\n\nAsk: what do you want to be able to make yourself today? Take two answers. Explain that participants choose the goal, design, build and test one local application. They use evidence to deliver and improve it locally.\n\nClick once. Give everyone 30 seconds to write one result they can build, demonstrate and verify today. Take two examples.\n\nNext: Imagine: 30 minutes to stand-up',
+    teach: {
+      time: '4 min',
+      gist: 'Recall the building blocks, name what you want to make and define visible proof of success.',
+      script: [
+        {do: 'Ask the room before explaining the chain.', say: ['What do you bring from the previous days?']},
+        {do: 'Point to the three moments and ask a second open question.', say: ['You already have building blocks. What do you want to be able to make yourself today?']},
+        {do: 'Connect the answers to the learning goal.', say: ['Today you choose the goal, design, build and test one local application. Then you use evidence to deliver and improve it locally.']},
+        {do: 'Click once and pause for individual writing.', say: ['Write one result you can build, demonstrate and verify today.']}
+      ],
+      learn: ['Recall prompts, context, tools and agents as building blocks.', 'State one personal success criterion with visible evidence.']
+    }
+  },
+  {
+    title: 'Imagine: 30 minutes to stand-up',
+    kicker: 'Day 5 · THE STORY',
+    type: 'context',
+    stage: 'learn',
+    visual: {morningBrief: {now: '08:30', event: '09:00', title: 'Daily stand-up', decision: 'Bring the top blocker.', source: 'Illustrative calendar item', bot: 'AETHERBOT · YOUR GUIDE'}, stepThrough: '.mb-now, .mb-agenda, .mb-choice'},
     cards: [
-      {title: 'Day 4 · Ticket', body: 'Message → main agent → sub-agents → validated priority → review draft.'},
-      {title: 'Day 5 · Brief', body: 'Four sources → Bree → fixed schema → source checks → human review.'}
+      {title: 'Your role', body: 'You are a team member preparing for the 09:00 stand-up.'},
+      {title: 'Your decision', body: 'What will you bring to the meeting, and what source supports it?'}
     ],
-    keyPoints: ['The agent prepares a result.', 'Code checks the result.', 'A person decides what happens next.'],
-    notes: 'Time: 3 min.\n\nUse one concrete Day 4 run: MSG-05 became a high-priority review draft. The workflow did not send it. Today Bree reads four sample sources and prepares one brief. The brief is checked before a person approves it.\n\nNext: 08:30: your morning',
+    keyPoints: ['Name the decision before you choose the data.', 'Do not take a claim into stand-up if you cannot explain its source.'],
+    notes: 'Time: 3 min.\n\nOpen with: Imagine it is 08:30. Your stand-up starts in 30 minutes. What do you need to know before you join?\n\nUse click or → to reveal 08:30, then the 09:00 Daily stand-up and source, then the decision. Ask pairs what they will bring. Take one answer. An unsupported claim stays unaccepted.\n\nNext: Meet Bree',
     teach: {
       time: '3 min',
-      gist: 'Day 5 reuses the Day 4 pattern with four sources and one reviewed brief.',
-      script: [{do: 'Compare one finished Day 4 ticket with today’s brief.', say: ['Yesterday MSG-05 became a validated high-priority draft for review. Nothing was sent automatically.', 'Today Bree combines four sources. Code checks the structure and source references before you review the page.']}],
-      learn: ['Agent prepares, code checks, person decides.'],
-      next: '08:30: your morning'
+      gist: 'At 08:30, a team member needs one decision and a source they can explain at stand-up.',
+      script: [
+        {do: 'Reveal 08:30, then the 09:00 Daily stand-up and source.', say: ['Imagine it is 08:30. Your stand-up starts in 30 minutes.', 'What do you need to know before you join?']},
+        {do: 'Reveal the decision. Give pairs 30 seconds, then ask for one answer.', say: ['What will you bring to the meeting? Which approved source could support it?']},
+        {do: 'Name the risk after the answer.', say: ['If the answer sounds right but has no source, you may repeat a claim you cannot explain.']}
+      ],
+      learn: ['Choose a source that supports a real decision.', 'Explain why an unsupported answer stays unaccepted.']
     }
   },
   {
-    title: '08:30: your morning',
-    kicker: 'Day 5 · THE STORY',
-    subtitle: 'Four tools, four tabs. Before you can start, you read them all.',
+    title: 'Meet Bree',
+    kicker: 'Day 5 · YOUR APPLICATION',
+    subtitle: 'Your personal daily brief agent.',
     type: 'context',
-    stage: 'learn',
-    cards: [
-      {title: 'The clock', body: '08:30. Standup at 09:00.'},
-      {title: 'On your screen', body: 'Four tools, each with something new since yesterday.'},
-      {title: 'Bree reads too', body: 'What do you want on one page?\nAnd what should she never do?'}
-    ],
-    keyPoints: ['Every morning: GitLab, Jira, Confluence, Outlook.', 'Fifteen minutes of reading before real work.', 'Bree, your brief agent, reads them for you.'],
-    visual: {wakeUp: {
-      clock: '08:30',
-      tag: 'YOU · BEFORE WORK',
-      screen: 'laptop · 08:30',
-      alert: 'Standup at 09:00 · 3 reviews wait · 2 tickets moved · 1 page changed',
-      chart: {label: 'tabs to read before work', from: '0', to: '4', limit: '1', mark: 'standup 09:00'},
-      world: [['GitLab', '3 reviews', '🦊'], ['Jira', '2 tickets', '🎫'], ['Outlook', '4 meetings', '📅']],
-      sonny: {tag: 'BREE · YOUR BRIEF AGENT', bubble: 'Reading your four tools…'}
-    }, reveal: 'click', covers: []},
-    notes: say('3 min', 'Make the problem personal: everyone has this morning.', 'The clock, the four tools, Bree.', 'People who want to connect real accounts. Today is sample data only.', 'Participants recognise their own morning.', 'How we want Bree to work')
+    visual: {bot: 'wave', place: 'beside', botTag: 'BREE · YOUR DAILY BRIEF AGENT', hero: 0},
+    cards: [{title: 'A clear start to your day', body: 'Know what needs your attention before your first meeting.'}],
+    keyPoints: ['Claude Code is the builder. Bree is the application. You are the user and reviewer.'],
+    notes: 'Time: 2 min.\n\nIntroduce Bree as your personal daily brief agent. The Aetherbot is an illustrative avatar for Bree. Claude Code helps build the application. Bree is the application participants create. The participant is the user and reviewer.\n\nKeep this introduction short. Do not show the example brief or the build route yet.\n\nNext: A brief worth opening',
+    teach: {
+      time: '2 min',
+      gist: 'Meet Bree and separate the builder, the application and the user.',
+      script: [
+        {do: 'Introduce the illustrated Bree.', say: ['Meet Bree, your personal daily brief agent.', 'Bree helps you see what needs attention before your first meeting.']},
+        {do: 'Name the three roles.', say: ['Claude Code helps you build. Bree is the application. You are the user and reviewer.']}
+      ],
+      learn: ['Distinguish Claude Code, Bree and the participant.']
+    }
   },
   {
-    title: 'How we want Bree to work',
-    kicker: 'Day 5 · THE STORY',
-    subtitle: 'She looks. She writes one page. She checks it. You read it.',
+    title: 'A brief worth opening',
+    kicker: 'Day 5 · THE REFERENCE',
+    type: 'demo',
+    source: {url: 'assets/day5-daily-brief-teach/bree-example.html', label: 'Open the full example brief'},
+    visual: {opener: 'showcase', image: 'assets/day5-daily-brief-teach/brief-example-synthetic.svg', imageLink: 'Bree · full synthetic example'},
+    cards: [{title: 'Your turn', body: 'What would you act on first?'}],
+    keyPoints: ['Reverse engineer the structure, not private content.', 'This full dated HTML page is today’s product target.'],
+    notes: 'Time: 5 min.\n\nUse the source link to open the actual full synthetic HTML. Scroll from title and date through greeting, summary, move-work-forward action, top to-dos, new updates, your day and sources. Point to visible OPEN and CONFLICT states. Return to the slide after the full page.\n\nAsk: what would you act on first? Take one answer. Then ask which repeated sections make the page useful.\n\nThis is a fictional editorial reference. It contains no live work data and is not connector proof. Participants reverse engineer only its safe structure, then build the same complete schema as dated private HTML.\n\nNext: How Bree will work',
+    teach: {
+      time: '5 min',
+      gist: 'Read the full reference, choose one action and identify the reusable editorial structure.',
+      script: [
+        {do: 'Open the full synthetic HTML and scroll every section.', say: ['Start with the title, date and greeting. Continue through summary, move-work-forward, to-dos, updates, day and sources.', 'Point to visible OPEN and CONFLICT states, then return to the slide.']},
+        {do: 'Ask one question and take one answer.', say: ['What would you act on first?']},
+        {do: 'Ask for the repeated structure.', say: ['Which sections should every Bree brief contain, even when some evidence is missing?']},
+        {do: 'State the evidence boundary.', say: ['This is our full product target, but it uses fictional data.', 'We copy the structure, not private content. Live source proof remains separate.']}
+      ],
+      learn: ['Name the full DailyBrief structure.', 'Distinguish an editorial target from live source proof.']
+    }
+  },
+  {
+    title: 'How Bree will work',
+    kicker: 'Day 5 · DESIRED BEHAVIOUR',
     type: 'context',
-    stage: 'learn',
-    cards: [
-      {title: 'She looks', body: 'At four tools. She only reads.'},
-      {title: 'She writes one page', body: 'Always the same format. Every line with a source.'},
-      {title: 'She checks it', body: 'Against fixed rules, before you see it.'},
-      {title: 'You read it', body: 'She sends nothing and changes nothing.'}
-    ],
-    keyPoints: ['She only reads the four tools.', 'One page, always the same format.', 'Every line says where it comes from.'],
     visual: {agentJob: {
       botTag: 'BREE',
-      looks: [['🦊', 'merge requests'], ['🎫', 'tickets'], ['📄', 'changed pages'], ['📅', 'your calendar']],
-      docName: 'brief · Tuesday',
-      doc: [
-        ['First thing', 'standup at 09:00, then review MR !42 before 11:00', ['outlook:09:00', 'gitlab:!42']],
-        ['Watch', 'ticket ABC-101 moved to “blocked”', 'jira:ABC-101'],
-        ['Read later', 'the release page changed yesterday', 'confluence:release']
-      ],
-      check: {rules: ['Every line has a source', 'Times in order', 'Unknown? Write OPEN', 'No secrets on the page', 'One page']},
-      wait: 'ready for you to read',
-      yes: 'Read it',
-      no: 'Ask a question'
+      looks: [['👤', 'Maya'], ['🗓', 'CAL-001'], ['🕘', '09:00']],
+      docName: 'DailyBrief · 2026-11-24',
+      doc: [['focus', 'Move work forward'], ['todos', 'READY / OPEN'], ['updates', 'READY / OPEN'], ['day', 'READY / OPEN']],
+      check: {rules: ['Every item has text, sourceIds and status', 'Missing → OPEN · disagreement → CONFLICT', 'Renderer escapes long source text'], gate: 'only a valid DailyBrief becomes HTML'},
+      wait: '~/.bree/briefs/2026-11-24.html',
+      yes: 'Open it',
+      no: 'Stay OPEN'
     }, reveal: 'click', covers: []},
-    notes: say('4 min', 'Show the whole agent before the steps.', 'Looks, page, check, you.', 'Questions about live data. Sample data first; live is OPEN until A5.', 'Participants can say the four parts in their own words.', 'The software development life cycle')
+    cards: [
+      {title: 'Bree reads', body: 'One approved read-only work source.'},
+      {title: 'Bree prepares', body: 'The complete DailyBrief schema with source provenance.'},
+      {title: 'Code checks', body: 'Every section is valid. Missing evidence stays OPEN.'},
+      {title: 'The host writes', body: 'One dated private HTML file. You open and review it.'}
+    ],
+    keyPoints: ['This is the behaviour participants will build and prove step by step.'],
+    notes: 'Time: 4 min.\n\nReveal the four blocks one by one. Maya and CAL-001 are synthetic teaching data. The final agent reads one approved read-only source through MCP and maps available evidence into the same complete DailyBrief schema.\n\nKeep the checks precise. Every content item needs text, sourceIds and READY, OPEN or CONFLICT. Missing evidence stays OPEN. Disagreement stays CONFLICT. Only validated data reaches the renderer. The host application writes the dated HTML file with private permissions; the agent receives no file tools.\n\nThe final buttons illustrate human review. Bree takes no automatic action. This is desired behaviour, not proof that a connector or dated artifact already works.\n\nNext: The software development life cycle (SDLC)',
+    teach: {
+      time: '4 min',
+      gist: 'Bree maps one approved source into a full schema. The host writes dated private HTML for human review.',
+      script: [
+        {do: 'Reveal “Bree reads” and “Bree prepares”.', say: ['The final Bree reads one approved source through MCP and the Agent SDK.', 'Synthetic fixtures produce the same DailyBrief schema for repeatable tests.']},
+        {do: 'Reveal “Code checks”.', say: ['Every item needs text, sourceIds and READY, OPEN or CONFLICT.', 'Missing stays OPEN. Disagreement stays CONFLICT. These checks do not prove truth.']},
+        {do: 'Reveal “The host writes”.', say: ['The host writes one validated dated HTML file with private permissions.', 'The agent receives no file tools. You open and review the result.']},
+        {do: 'Name the status of the picture.', say: ['This is the behaviour you will build and prove step by step. It is not all present at the start.']}
+      ],
+      learn: ['Explain Bree’s desired read, prepare, check and review loop.', 'Distinguish schema checks, eval outcomes and human review.']
+    }
   },
   dailyBriefSdlc,
   {
     title: 'The AI-native SDLC',
     kicker: 'Day 5 · WHY WE ARE HERE',
-    subtitle: 'The same six stages. The agent does the work. A person decides at every stage.',
     type: 'concept',
     source: PLAYBOOK,
+    visual: {sdlcIntro: true, stepThrough: '.card'},
     cards: [
-      {title: 'One file per stage', body: 'Every stage commits a file the next stage can read.'},
-      {title: 'The agent works', body: 'Claude Code writes, tests and proposes.'},
-      {title: 'A person decides', body: 'You accept the intent, the plan and the gate.'}
+      {title: 'Each step leaves an artifact', body: 'Intent, contract, plan, code, test evidence or a local version.'},
+      {title: 'You accept or revise it', body: 'Claude Code helps build. A person checks the evidence and starts the next loop.'}
     ],
-    keyPoints: ['Bree is the example. The AI-native SDLC is the lesson.', 'One file per stage: intent.md, spec.md, plan.md, evidence.md, gate.md.', 'The agent may act up to the gate. It cannot pass it.'],
-    notes: say('4 min', 'Say what the day is for: the way of working, not the brief agent.', 'Three ideas from the playbook.', 'Participants who think the goal is a nice brief. The goal is the loop.', 'Participants can say: one file per stage, a person decides.', 'Today: build the brief through the SDLC')
+    keyPoints: ['Claude Code helps produce each artifact. You accept or revise it.'],
+    notes: say('4 min', 'Follow the artifacts through one repeatable loop. Use click or → for both cards.', 'Each SDLC step leaves something reviewable. Claude Code helps build it; the participant accepts or revises it using evidence.', 'Participants who accept fluent output without checking its artifact or proof.', 'Participants can name one artifact and the evidence required to accept it.', 'Your build in seven steps'),
+    teach: {
+      time: '4 min',
+      gist: 'Every step leaves a reviewable artifact. Human acceptance connects one step to the next.',
+      script: [
+        {do: 'Reveal “Each step leaves an artifact”.', say: ['What can you inspect after this step: intent, contract, plan, code, evidence or a local version?']},
+        {do: 'Reveal “You accept or revise it”.', say: ['Claude Code helps produce the artifact. You check its evidence and accept or revise it.']},
+        {do: 'Close the loop.', say: ['An accepted result can expose a new observation. That becomes the next intent, and the loop starts again.']}
+      ],
+      learn: ['Name one artifact per step.', 'Explain why a person accepts or revises it before the loop continues.']
+    }
   },
   {
-    title: 'Today: build the brief through the SDLC',
+    title: 'Your build in seven steps',
     kicker: 'Day 5 · Seven steps',
-    subtitle: 'One step at a time. Each step has a file you write and a proof you show.',
+    subtitle: 'Start with one useful line. End by building something of your own.',
     cards: [
-      {title: 'Plan', body: 'A1 · intent.md'},
-      {title: 'Design', body: 'A2 · spec.md and the schema'},
-      {title: 'Build', body: 'A3 · plan.md, in plan mode\nA4 · the renderer\nA5 · one read-only tool'},
-      {title: 'Test', body: 'A6 · evidence.md'},
-      {title: 'Deploy', body: 'A7 · gate.md. A person decides.'},
-      {title: 'Maintain', body: 'What you learn becomes a new intent.md.'}
+      {title: 'Plan', body: 'Choose one user and one decision.'},
+      {title: 'Design', body: 'Agree the contract.'},
+      {title: 'Build', body: 'Accept the plan, render the full HTML and add one tool.'},
+      {title: 'Test', body: 'Prove complete, missing and conflicting evidence.'},
+      {title: 'Local delivery', body: 'Open the dated HTML. Preview, but do not enable, a daily trigger.'},
+      {title: 'Maintain', body: 'Choose the next check. Repeat with your own application.'}
     ],
-    keyPoints: ['Every stage leaves one file the next stage reads.', 'A1 to A4 before lunch, A5 to A7 after.', 'Sonny is the bonus.'],
-    notes: say('5 min', 'Show the whole route before the first step.', 'The seven steps on the SDLC loop.', 'Groups that want to skip the plan. The plan is what makes the build fast.', 'Participants know where they are at every moment of the day.', 'Start the project')
+    visual: {routeLine: true, routeBot: 'YOU · THE BUILDER', editorial: 'route', sdlcRoute: [
+      {items: [['A1', 'One useful line'], ['A7', 'Apply the method']]},
+      {items: [['A2', 'The brief contract']]},
+      {items: [['A3', 'Visual plan'], ['A4', 'Full synthetic HTML'], ['A5', 'Dated private HTML']]},
+      {items: [['A6', 'Reusable verification']]},
+      {items: [['A6', 'Delivery, recovery, trigger preview']]},
+      {items: [['A6', 'Observed risk → next intent']]}
+    ]},
+    keyPoints: ['A1 produces working software before lunch.', 'Each next assignment adds one risk and one proof.', 'A7 transfers the method to a problem you choose.'],
+    teach: {
+      time: '5 min',
+      gist: 'Seven assignments follow the six SDLC phases. Delivery stays local and live evidence stays explicit.',
+      script: [
+        {do: 'Click each phase on the route. Follow the Aetherbot as the participant.', say: ['The Aetherbot is you, the builder. Bree is the application you build.', 'A1 builds and tests one tiny path to check the idea. A2 defines the contract. A3 is Build in plan mode: accept the plan before A4 and A5 implement the brief and tool.']},
+        {do: 'Pause at Test and Local delivery.', say: ['A5 connects one approved source and creates one dated private HTML artifact.', 'A6 makes the checks repeatable, proves current and previous versions, and reviews a daily trigger without enabling it.']},
+        {do: 'Finish at Maintain.', say: ['Turn one observed result into the next intent and check. A7 then applies the method to your own application.', 'We demo together. You build individually. Then everyone checks their own result.']}
+      ],
+      learn: ['Find each assignment on the SDLC route.', 'Explain why delivery stays local.']
+    },
+    notes: say('5 min', 'Show the complete route before the first step.', 'The walking Aetherbot represents the participant. Bree is the application. Click through the six phases. A3 belongs to Build because plan mode produces the accepted build plan. A6 covers testing and local delivery. Maintain turns one observation into the next intent and check; A7 applies the method to a new application.', 'Groups that want to start with the full agent. Keep A1 to one local item and one line.', 'Participants can name the artifact for A1, A2, A3 and A6.', 'Start the project')
   },
   {
     title: 'Start the project',
@@ -307,274 +393,522 @@ const brief = [
       {where: 'Terminal', text: 'git clone https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1.git'},
       {where: 'Terminal', text: 'cd aetherlink-daily-brief-lab-s1 && npm ci'},
       {where: 'Terminal', text: 'claude --setting-sources project,user --strict-mcp-config --no-chrome'},
-      {where: 'Claude Code', text: 'Inspect the starting point', prompt: 'Read README.md, CLAUDE.md, SOLO.md, AGENTS.md, intent.md, and progress.md. Report the current step, the starting files, and any blockers. Do not change files yet.'}
+      {where: 'Claude Code', text: 'Inspect the starting point', prompt: 'Read README.md, CLAUDE.md, SOLO.md, AGENTS.md, intent.md, progress.md, and .claude/skills/README.md. Report the current step, the starting files, and any blockers. Then answer this read-only question: which bundled project skill fits the next step, and why? Do not change files yet.'}
     ],
-    keyPoints: ['Node.js 20 or newer, Git, and Claude Code signed in.', 'Keep Claude Code and Terminal in this repository root.', 'No API key is needed before Assignment 5.'],
-    notes: say('10 min', 'Everyone starts from the same clean main branch.', 'Claude Code reports the starting files and no blockers.', 'An existing clone. Ask Claude Code to inspect git status first, and use git pull --ff-only only when it is clean.', 'Every participant has Claude Code open in the repository root.', 'The rules for today')
-  },
-  {
-    title: 'The rules for today',
-    kicker: 'Day 5 · Rules',
-    subtitle: 'Read CLAUDE.md, AGENTS.md, progress.md and SOLO.md before you change anything.',
-    keyPoints: [
-      'Sample data only. No credential in a prompt or a commit.',
-      'Every claim needs a source, a check and a reviewer. Otherwise it is OPEN.',
-      'Append progress.md after each step.',
-      'Use your own diff and the named check. Do not copy solution files.'
-    ],
-    notes: say('3 min', 'Set the rules once, so the steps can stay short.', 'Four rules.', 'Participants who copy solution files. Ask them to use their own diff and named check.', 'Participants can name the OPEN rule.', 'What is a skill?')
-  },
-  {
-    title: 'What is a skill?',
-    kicker: 'Day 5 · SKILLS',
-    subtitle: 'A saved recipe for Claude Code. You type /name, it follows the recipe.',
-    type: 'concept',
-    cards: [
-      {title: 'A folder', body: '.claude/skills/grilling/SKILL.md\nOne file with the recipe.'},
-      {title: 'A name', body: 'Type /grilling and Claude Code loads it.'},
-      {title: 'A recipe', body: 'The steps a good colleague would follow. Every time the same.'}
-    ],
-    keyPoints: ['A skill is a folder with one SKILL.md.', 'You start it with /name.', 'A skill guides the work. Tests still prove it.'],
-    notes: say('3 min', 'Explain the idea once, before the first skill.', 'Folder, name, recipe.', 'People who think a skill is a plugin or a model. It is text in a folder.', 'Participants can say where a skill lives.', 'The skills you use today')
-  },
-  {
-    title: 'Use the included project skills',
-    kicker: 'Day 5 · PROJECT SKILLS',
-    subtitle: 'The lab already has the skills you use today. One per assignment.',
-    type: 'concept',
-    cards: [
-      {title: 'A1–A2', body: '/grilling challenges the intent. /eli5 explains the schema.'},
-      {title: 'A3–A4', body: '/visual-plan shows the plan. /verify-this checks the sample.'},
-      {title: 'A5–A6', body: '/show-me traces the tool. /verify-this checks the evidence.'},
-      {title: 'A7 and handoff', body: '/review-and-ship reviews the gate. /handoff continues later.'}
-    ],
-    keyPoints: ['Type / in Claude Code to see them.', 'Use only these project skills during the lesson.', 'The full skills pack comes at the end of the day.'],
-    prompt: HANDOFF,
-    notes: say('3 min', 'Show the tools before the first assignment.', 'Seven skills, one per step.', 'Participants who install the full pack now. That is for the hackathon.', 'Everyone can find /grilling after typing /.', 'Assignment 1')
-  },
-  {
-    title: 'What Bree should do, and what she does today',
-    kicker: 'Day 5 · PLAN',
-    subtitle: 'Today Bree is an empty project. The difference is what you write down.',
-    type: 'concept',
-    sdlc: 'plan',
-    cards: [{title: '08:30', body: ''}, {title: 'How we want Bree', body: ''}, {title: 'The project today', body: ''}, {title: 'The gap', body: ''}, {title: 'intent.md', body: ''}],
-    keyPoints: ['What Bree should do comes from your morning.', 'Today the project has templates, no code.', 'The gap is your intent.md.'],
-    visual: {gapCompare: {
-      icons: ['⏰', '🧭', '📁', '↔️', '📝'],
-      focus: 3,
-      reveal: [2, 1, 1],
-      head: ['How we want Bree to work', 'What the project has today'],
-      rows: [
-        ['She reads four tools', ['no src/ folder'], false],
-        ['She writes one page, always the same format', ['no schema, no test'], false],
-        ['She checks every line has a source', ['no check'], false],
-        ['You read it before work', ['the reference PDFs show the target'], true]
+    keyPoints: ['Node.js 20 or newer, Git, and Claude Code on the organization-approved model route.', 'The bundled /visual-plan and /create-verification-skill are ready before first use.', 'Project skills add instructions, not connector access.', 'A5 uses the existing approved read-only Jira MCP.'],
+    notes: say('10 min', 'Start everyone from the same clean local project and introduce the bundled project skills before A1.', 'Claude Code reads the starting files and .claude/skills/README.md, then names /visual-plan and /create-verification-skill. State that A5 uses the existing approved read-only Jira MCP and organization-approved model route.', 'Treating a skill as connector access, installing a new connector or switching to an unapproved personal account.', 'Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.', 'Ground rules: protect work data'),
+    teach: {
+      time: '10 min',
+      gist: 'Open the local project and identify the bundled skill for the next step.',
+      script: [
+        {do: 'Complete the three setup commands.', say: ['Keep Claude Code and Terminal at the repository root.']},
+        {do: 'Run the read-only inspection prompt.', say: ['Read .claude/skills/README.md and name the bundled project skill that fits the next step. Do not change files yet.']},
+        {do: 'Explain the boundary.', say: ['Bundled skills are reusable project instructions. They add no access to services.', 'A5 uses the existing approved Jira MCP. Missing approval or access stays OPEN.']}
       ],
-      note: 'The difference is the gap. You write down how we want Bree to work: that is intent.md.'
-    }},
-    notes: say('3 min', 'Turn the story into a gap you can close.', 'Four rows, three still empty.', 'Participants who start coding. First the goal.', 'Participants can name the gap.', 'intent.md: what goes in it')
+      learn: ['Open the project, inspect its starting state and identify the next bundled skill without changing files.']
+    }
   },
   {
-    title: 'intent.md: what goes in it, and where it lives',
+    title: 'Ground rules: protect work data',
+    kicker: 'Day 5 · Ground rules',
+    visual: {editorial: 'words'},
+    cards: [
+      {title: 'Approved access only', body: 'Use the existing read-only Jira MCP and approved company model route.'},
+      {title: 'Private use only', body: 'Do not publish, share or record your personal brief.'},
+      {title: 'No customer data', body: 'Do not store customer data in prompts, fixtures, output or commits.'},
+      {title: 'Local is not offline', body: 'A local app can still send permitted source data to Claude.'}
+    ],
+    keyPoints: ['Use approved corporate access only.', 'Keep Bree private and individual.', 'Do not use or store customer data.', 'Local execution can still send data to the model.'],
+    notes: say('3 min', 'Set the data boundary before any live source appears.', 'Four rules for accounts, privacy, customer data and local model calls.', '“It runs locally” treated as “no data leaves the laptop”. Correct this immediately.', 'Participants can explain what may enter Bree and what may never be stored or shared.', 'Ground rules: approve every boundary')
+  },
+  {
+    title: 'Ground rules: approve every boundary',
+    kicker: 'Day 5 · Ground rules',
+    visual: {guardRail: {
+      plainChain: true,
+      chainTitle: 'Human approval controls every live boundary',
+      chain: [['👤', 'You approve', 'account · connector · exact tool'], ['🔒', 'Bree reads', 'one approved source'], ['🧾', 'You verify', 'source · output · PASS or OPEN']],
+      rails: [],
+      foot: 'If approval, access or evidence is missing, stop and record OPEN.'
+    }},
+    keyPoints: ['Read the requested permission before approval.', 'Allow one exact read-only tool.', 'Never work around a blocked connector or policy.', 'Keep credentials, endpoints and live output out of Git.'],
+    notes: say('3 min', 'Make human approval part of the system boundary.', 'The participant approves the account, connector and exact read-only tool. They verify source and output afterward.', 'Broad permissions, unapproved personal accounts or a workaround after a policy block.', 'Participants can name the exact approved tool and when the live status remains OPEN.', 'The first complete path')
+  },
+  {
+    title: 'The first complete path',
     kicker: 'Day 5 · PLAN',
-    subtitle: 'First the goal. Then the rules, the tests, the code. Each in its own place.',
     type: 'concept',
     sdlc: 'plan',
-    cards: [{title: 'What goes in intent.md', body: 'One outcome, three checks, owners, a boundary, one OPEN.'}, {title: 'Where it lives', body: 'Goal, rules, tests, code. Each in its own place.'}],
-    keyPoints: ['intent.md: one outcome, three checks, owners, a boundary, one OPEN.', 'Goal, rules, tests, code: four places.', 'Today you write all four, one assignment at a time.'],
-    visual: {intentFlow: [
-      {doc: [['Outcome', true, '', 'what Bree delivers each morning'], ['Three checks', true, '', 'what a neighbour can see'], ['Owners', true, '', 'who decides'], ['Boundary', true, '', 'what Bree may never do'], ['OPEN', true, '', 'what we do not know yet']]},
-      {tree: [[0, 'aetherlink-daily-brief-lab-s1/'], [1, 'intent.md', 'the goal · you, Assignment 1', true, 'Plan'], [1, 'docs/spec.md', 'the rules: what a good brief is · Assignment 2', true, 'Design'], [1, 'test/', 'the tests: red first, then green · Assignments 2, 4, 5', true, 'Test'], [1, 'src/', 'the code: Bree herself · Assignments 2, 4, 5', true, 'Build']]}
-    ]},
-    notes: say('3 min', 'Show where each piece of work lives before the first assignment.', 'Five parts, four places.', 'Long intents. One screen is enough.', 'Participants know what A1 asks for.', 'Assignment 1')
+    visual: {editorial: 'focus', stepThrough: '.card'},
+    cards: [
+      {title: 'Choose the reader', body: 'Who needs this before stand-up?'},
+      {title: 'Choose the decision', body: 'What should that person decide?'}
+    ],
+    keyPoints: ['Run one local item. Explain its result and source.'],
+    notes: say('3 min', 'Make A1 concrete before the prompt appears. Use click or → for both choices.', 'First choose the reader. Then choose the decision that the line must support.', 'Several sources, a generic user or a copied solution. Keep one calendar item and make the participant explain the result.', 'Participants can say who uses the line, what they decide and how they will prove it.', 'Show one working line'),
+    teach: {
+      time: '3 min',
+      gist: 'Choose the reader before you define the decision.',
+      script: [
+        {do: 'Reveal “Choose the reader”.', say: ['Who needs this line before stand-up? Name one person or role.']},
+        {do: 'Reveal “Choose the decision”.', say: ['What should that person decide after reading it?']},
+        {do: 'Connect both choices to the proof.', say: ['Can that reader explain the result and point to its local source?']}
+      ],
+      learn: ['Name one reader, one decision and the proof that connects the line to its source.']
+    }
   },
-  assignment(1, 1, 'Write down what the brief must do', 'Claude Code interviews you. You write intent.md. No code yet.',
-    ['intent.md has one outcome and three checks you can observe.', 'It names the owners, one hard boundary and one OPEN.', 'A facilitator accepts the boundary.'],
-    'Do not implement code. Stop for review.',
-    SOLO_PROMPTS[1],
-    'Challenge my weakest check with one concrete counterexample. Revise only intent.md after my answer. Show the diff and stop.',
-    say('25 min', 'The intent decides what done means for every later step.', 'A short intent.md with checks you can test.', 'Checks that cannot be observed, such as "the brief is useful".', 'A facilitator accepts the boundary.', 'Assignment 2')),
   {
-    title: 'A brief you can trust',
+    title: 'Show one working line',
+    kicker: 'Day 5 · PLAN',
+    type: 'concept',
+    sdlc: 'plan',
+    cards: [
+      {title: 'Input', body: 'One item from the local calendar fixture.'},
+      {title: 'Run', body: 'npm run mini'},
+      {title: 'Visible result', body: '<start> <title> — decide: <decision>'}
+    ],
+    visual: {pipeline: [{file: 'sample/calendar-item.sample.json'}, {}, {hl: true}], editorial: 'flow', stepThrough: '.pl-card'},
+    keyPoints: ['Read the line aloud. Point to its source.'],
+    notes: say('3 min', 'Show the exact scope before Assignment 1. Use click or → for Input, Run and Visible result.', 'First show the local fixture. Then run npm run mini. Finally read the visible line and trace it back to the fixture.', 'A document-only result. A1 is complete only when the command runs.', 'Participants can describe the expected line.', 'Assignment 1'),
+    teach: {
+      time: '3 min',
+      gist: 'Follow one item from local input to visible result.',
+      script: [
+        {do: 'Reveal “Input”.', say: ['Which local file supplies the item?']},
+        {do: 'Reveal “Run”.', say: ['Which command moves that item through the mini-path?']},
+        {do: 'Reveal “Visible result”.', say: ['Read the line aloud. Which fields can you trace to the fixture?']}
+      ],
+      learn: ['Explain the order: local fixture, command, visible sourced line.']
+    }
+  },
+  assignment({
+    n: 1,
+    title: 'Choose the user and build one line',
+    checkpoint: ['intent.md and the fixture name one user and one decision.', 'npm run mini reads sample/calendar-item.sample.json.', 'The output is exactly: <start> <title> — decide: <decision>.'],
+    boundary: 'Use one local item. Do not connect an account or build the full brief.',
+    prompt: SOLO_PROMPTS[1],
+    steps: [
+      {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 1 prompt', prompt: SOLO_PROMPTS[1]},
+      {where: 'Terminal', text: 'Run the mini-path test', prompt: 'npm run test:mini'},
+      {where: 'Terminal', text: 'Run one local agenda item through the path', prompt: 'npm run mini'},
+      {where: 'Human check', text: 'Read the line. Can the chosen user decide what to do before lunch?', after: 'Show the actual command and the single output line.'}
+    ],
+    notes: say('35 min', 'Start with a working vertical slice, not a full architecture.', 'One chosen user, one morning decision and one local item becoming one line.', 'More than one source or a document-only result.', 'The mini command prints one useful sourced line.', 'Assignment 2')
+  }),
+  {
+    title: 'The full DailyBrief contract',
     kicker: 'Day 5 · THE CONTRACT',
-    subtitle: 'Always the same format. Every line with a source. Checked before you see it.',
-    type: 'context',
+    subtitle: 'Every section shows evidence. Missing stays OPEN. Disagreement stays CONFLICT.',
+    type: 'concept',
     sdlc: 'design',
-    cards: [{title: '08:30', body: ''}, {title: 'She looks', body: ''}, {title: 'She writes', body: ''}, {title: 'She checks', body: ''}, {title: 'You read', body: ''}],
-    keyPoints: ['Same format every morning: that is the schema.', 'Five rules, checked in plain code.', 'One rule broken? You see the error, not the brief.'],
-    visual: {contractZoom: {
-      icons: ['⏰', '👀', '📝', '📋', '🧑'],
-      gate: 'only if every rule is met',
-      look: {title: 'She looks', body: 'At four tools. She only reads. She changes nothing.', items: [['🦊', 'merge requests'], ['🎫', 'tickets'], ['📄', 'changed pages'], ['📅', 'your calendar']]},
-      docName: 'Bree’s brief · Tuesday · always this format',
-      doc: [
-        {label: 'First thing', text: 'standup at 09:00', ev: ['outlook:09:00'], key: 'first'},
-        {label: 'Reviews', text: 'MR !42 waits for you since yesterday', ev: ['gitlab:!42'], key: 'reviews'},
-        {label: 'Tickets', text: 'ABC-101 moved to “blocked”', ev: ['jira:ABC-101'], key: 'tickets'},
-        {label: 'Read later', text: 'the release page changed', ev: ['confluence:release'], key: 'later', small: true},
-        {label: 'Missing', text: 'none', key: 'gaps', small: true},
-        {label: 'Today’s meetings', text: 'not there', fixed: '09:00 standup · 14:00 planning; room: OPEN', key: 'meetings', ghost: true}
+    cards: [
+      {title: 'Complete evidence', body: 'Every READY item has text and resolved sourceIds.'},
+      {title: 'Missing evidence', body: 'Keep the affected section visibly OPEN.'},
+      {title: 'Conflicting evidence', body: 'Show CONFLICT with its supporting sourceIds. Let the reader decide.'}
+    ],
+    visual: {reveal: 'click', answers: true},
+    keyPoints: ['The schema checks the shape of the brief.', 'The tests check whether missing and conflicting facts stay explicit.'],
+    notes: 'Time: 5 min.\n\nReturn to Maya’s decision line. Ask what she can safely do if the stand-up entry is missing or two entries disagree. Reveal the three expected outcomes only after the class answers. A fluent answer may hide that the source cannot support it. In A2 participants define and test the contract. In A6 they run all three outcomes.\n\nNext: Assignment 2',
+    teach: {
+      time: '5 min',
+      gist: 'Define what the brief must show when the source supports, misses or contradicts an answer.',
+      script: [
+        {do: 'Ask what happens if the agenda is empty or two entries disagree.', say: ['If the source cannot tell Maya what to bring to stand-up, what should the brief say?']},
+        {do: 'Click each card after the class answers.', say: ['READY has resolved sourceIds. OPEN means evidence is missing. CONFLICT means supported sources disagree.', 'Your application shows uncertainty inside the affected section.']},
+        {do: 'Connect the cases to the next assignment.', say: ['Use the synthetic reference brief to define the schema and test what every complete brief must show.']}
       ],
-      docFoot: 'An example · your own fields come from the reference briefs',
-      rulesTitle: 'The schema: five rules · click to check',
-      fixLabel: 'what if she writes it?',
-      rules: [
-        {text: 'Every line has a source', ok: true, note: 'four sources', hl: ['outlook:09:00', 'gitlab:!42', 'jira:ABC-101', 'confluence:release']},
-        {text: 'Times are in order', ok: true, note: '09:00 first', hl: ['first']},
-        {text: 'Unknown? Write OPEN', ok: true, note: 'nothing unknown', hl: ['gaps']},
-        {text: 'No secrets on the page', ok: true, note: 'none', hl: ['later']},
-        {text: 'Today’s meetings are on the page', ok: false, note: 'missing', noteOk: 'there', hl: ['meetings']}
-      ],
-      result: 'One rule broken: this brief is stopped. You see “schema: meetings missing”, not the brief. In Assignment 2 you write this check, red first.',
-      ask: {say: 'All five rules met. Your brief is ready.', yes: 'Read it', no: 'Ask a question', yesReply: 'You read it. Bree changed nothing.', noReply: 'Ask Bree: where does this line come from?'}
-    }},
-    notes: say('5 min', 'Explain the contract before the participants write it.', 'The brief, the five rules, one broken.', 'Participants who think the model checks itself. The check is plain code.', 'Participants can say what a schema is in one sentence.', 'Assignment 2')
+      learn: ['Explain the difference between the brief’s shape and its behaviour for each case.', 'Explain why missing facts must not become confident claims.']
+    }
   },
-  assignment(2, 2, 'Make the schema test fail, then pass', 'From the reference briefs to a spec, a red test and a schema.',
-    ['docs/spec.md has one quoted example per field.', 'test/schema.test.ts was red first, then green.', 'npm test passes.'],
-    'Commit the red test before you build the schema. No renderer and no tools yet.',
-    SOLO_PROMPTS[2],
-    'Add one invalid sample of my choice to test/schema.test.ts. Prove the schema rejects it. Show the spec row, test output, and diff. Stop before SOLO 3.',
-    say('30 min', 'A test that failed first proves it can catch a mistake.', 'Red test output, then green.', 'A test written after the code. Ask for the red run.', 'npm test is green on the schema tests.', 'Break')),
+  assignment({
+    n: 2,
+    title: 'Make the schema fail, then pass',
+    checkpoint: ['docs/spec.md defines every DailyBrief section and item status.', 'npm run test:schema is red before src/brief.ts exists.', 'The same command is green for the full valid sample and rejects one invalid sample.'],
+    boundary: 'Do not build the renderer or a tool. Keep both red and green output visible.',
+    prompt: SOLO_PROMPTS[2],
+    steps: [
+      {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 2 prompt', prompt: SOLO_PROMPTS[2]},
+      {where: 'Human check', text: 'Review and approve docs/spec.md', after: 'Claude Code writes the test, shows red, implements the schema and reruns green.'},
+      {where: 'Human check', text: 'Inspect the captured red and green output and the schema diff'},
+      {where: 'Terminal', text: 'Independently rerun the schema test', prompt: 'npm run test:schema', after: 'Expect green and confirm the invalid local sample is rejected.'}
+    ],
+    notes: say('30 min', 'Turn the Dia-style reference into an explicit data contract before implementation.', 'The approved section list, text/sourceIds/status items, resolved source rules, captured red and green output, rejected invalid sample and an independent rerun.', 'Copying private content, leaving sections implicit or approving after implementation.', 'The trainer sees the complete DailyBrief schema, both captured outputs and the independent green rerun.', 'Break')
+  }),
   byTitle('Break'),
-  assignment(3, 3, 'Agree on the design and the plan', 'In plan mode. Claude Code proposes, you accept. No files change until you say so.',
-    ['docs/design.md, one decision under docs/decisions/ and docs/plan.md.', 'Each plan step names a path, a proof command and a rollback.', 'A stranger can follow the plan.'],
-    'Stay in plan mode until you accept. Do not build.',
-    SOLO_PROMPTS[3],
-    'After I accept the plan, save only those design documents. Challenge one assumption with the case I choose. Show the revised plan and diff. Stop before building.',
-    say('25 min', 'A plan you accepted makes the build fast and easy to review.', 'Three documents and a plan with a proof per step.', 'Plans without a proof command.', 'A neighbour can name what proves completion.', 'Assignment 4')),
-  assignment(4, 4, 'Render the brief from sample data', 'A red render test, then the renderer. No API key, no model call.',
-    ['test/render.test.ts was red first, then green.', 'npm run brief:sample writes out/latest.html.', 'You chose one style change and saw its test and diff.'],
-    'No model call and no credentials. Untrusted text is escaped.',
-    SOLO_PROMPTS[4],
-    'Change one house-style rule I choose. Add a failing test first, then make it pass. Regenerate out/latest.html and show the diff. Stop so I can inspect the page and save a 1440×900 screenshot.',
-    say('35 min', 'The first visible result of the day.', 'out/latest.html in the browser.', 'A model call in the sample path. The sample route must work offline.', 'out/latest.html opens and npm test passes.', 'Lunch')),
+  assignment({
+    n: 3,
+    title: 'Agree on the design and the plan',
+    subtitle: 'Plan mode. Approve before any file changes.',
+    checkpoint: ['The plan maps fixtures and one exact MCP tool into the same DailyBrief schema.', 'The renderer creates out/latest.html and dated private HTML under ~/.bree/briefs/.', 'Every step names a path, proof command and rollback; files are saved only after approval.'],
+    boundary: 'Stay in plan mode until the human approves. Do not build.',
+    prompt: SOLO_PROMPTS[3],
+    steps: [
+      {where: 'Claude Code', text: 'Press Shift+Tab until plan mode is on. Run /visual-plan.'},
+      {where: 'Claude Code', text: 'Paste the exact SOLO 3 prompt', prompt: SOLO_PROMPTS[3]},
+      {where: 'Human check', text: 'Trace both routes to the same schema and renderer. Approve or revise.'},
+      {where: 'Claude Code', text: 'After approval, press Shift+Tab until manual mode is on'},
+      {where: 'Claude Code', text: 'Save only the accepted design documents. Inspect the diff.', after: 'A neighbour can name the proof and rollback for every plan step.'}
+    ],
+    notes: say('25 min', 'Design one product with synthetic and live inputs before changing files.', 'A plan-mode proposal that ends in the complete schema and renderer. The live path uses one exact tool and host-owned private file writing.', 'Agent file tools, separate schemas, files saved before approval or implementation started early.', 'The approved plan names both output paths, one proof and one rollback per step.', 'Assignment 4')
+  }),
+  assignment({
+    n: 4,
+    title: 'Build the complete synthetic HTML brief',
+    checkpoint: ['npm run test:render passes for every DailyBrief section and OPEN state.', 'npm run brief:sample writes out/latest.html.', 'The opened page matches the contract, shows provenance and escapes long untrusted text.'],
+    boundary: 'Use local sample data only. No model call and no live credentials.',
+    prompt: SOLO_PROMPTS[4],
+    steps: [
+      {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 4 prompt', prompt: SOLO_PROMPTS[4]},
+      {where: 'Terminal', text: 'Run the renderer test', prompt: 'npm run test:render'},
+      {where: 'Terminal', text: 'Build the complete synthetic DailyBrief', prompt: 'npm run brief:sample'},
+      {where: 'Browser', text: 'Open out/latest.html and inspect every section', after: 'Trace every READY or CONFLICT item to resolved sourceIds. Confirm missing evidence remains OPEN.'}
+    ],
+    notes: say('40 min', 'Turn the approved contract into the complete dated editorial page with synthetic data.', 'A green renderer test and out/latest.html with title, date, greeting, summary, move-work-forward action, to-dos, updates, day, sources, OPEN and CONFLICT states. Optional after the full brief passes: add the fixed decorative image https://picsum.photos/id/1015/1200/400 with alt text. It is public network content, not AI generation or business evidence. Keep a local placeholder or omit the photo when offline; the complete brief must still render.', 'A partial page, required network image, model call, live credentials or generated HTML nobody inspected.', 'The complete synthetic page opens, matches the contract and resolves every READY or CONFLICT sourceId.', 'Lunch')
+  }),
   byTitle('Lunch'),
   byTitle('Restart and settle'),
   {
-    title: 'Tools: how an AI agent sees',
+    title: 'Two inputs, one DailyBrief product',
     kicker: 'Day 5 · TOOLS',
-    subtitle: 'The AI only reads and writes text. Tools are its eyes. What is not on the menu, it cannot see.',
+    subtitle: 'Both routes use the same schema, renderer and visible OPEN states.',
     type: 'context',
     sdlc: 'build',
     cards: [],
-    keyPoints: ['The AI sees only through its tools.', 'Only eyes, no hands: tools only read.', 'Every look is written down in run.log.'],
+    keyPoints: ['Fixtures create out/latest.html for deterministic proof.', 'The live SDK route allows one exact read-only Jira MCP tool.', 'Only the host writes validated dated HTML under ~/.bree/briefs/.'],
     visual: {guardRail: {
       plainChain: true,
-      railCols: 3,
-      chainTitle: 'Bree’s four tools: the four looks from slide 3',
-      chain: [['🦊', 'Merge requests', 'gitlab'], ['🎫', 'Tickets', 'jira'], ['📄', 'Changed pages', 'confluence'], ['📅', 'Your calendar', 'outlook']],
+      railCols: 4,
+      chainTitle: 'Live path: one source, one exact tool, one private artifact',
+      chain: [['👤', 'Your work', 'own permitted Jira items'], ['👀', 'Jira MCP', 'one exact read-only tool'], ['🤖', 'Agent SDK', 'validated DailyBrief'], ['📝', 'Host write', '~/.bree/briefs/YYYY-MM-DD.html']],
       railsTitle: 'Three things must be true',
       rails: [
-        {icon: '👀', title: '1 · It has the eyes it needs', whoLabel: 'Bree', who: 'today you build one tool. The others follow the same pattern', stop: 'Without the calendar, she cannot put the standup first.', where: 'src/sources.ts'},
-        {icon: '✋', title: '2 · Only eyes, no hands', whoLabel: 'Bree', who: 'no shell, no write tools', stop: 'She cannot close a ticket or send a mail. That stays with you.', where: 'src/agent.ts'},
-        {icon: '📜', title: '3 · Every look is written down', whoLabel: 'Bree', who: 'run.log: each line on the page traces back to one look', stop: 'So you can check where a line comes from.', where: 'run.log'}
+        {icon: '🧪', title: '1 · Synthetic proof', whoLabel: 'Tests', who: 'fixtures cover complete, OPEN and CONFLICT', stop: 'This does not prove live Jira access.', where: 'sample/eval/'},
+        {icon: '✋', title: '2 · One exact tool', whoLabel: 'Bree', who: 'read-only Jira MCP tool, no built-in tools', stop: 'Every other tool is denied.', where: 'src/live.ts'},
+        {icon: '🔎', title: '3 · Host-owned artifact', whoLabel: 'Human', who: 'open the dated private HTML', stop: 'Missing source or file evidence stays OPEN.', where: '~/.bree/briefs/'}
       ],
-      foot: 'No credentials today? Then the live check is OPEN, not failed. The sample route keeps working.'
+      foot: 'Synthetic PASS and live OPEN can both be correct. Never turn missing evidence into a claim.'
     }},
-    notes: say('4 min', 'Explain tools before the participants build one.', 'Four tools, three rules.', 'Write or shell tools. Eyes only.', 'Participants can say why tools only read.', 'Assignment 5')
+    notes: say('4 min', 'Connect the deterministic and live inputs to one product contract before A5.', 'Fixtures create out/latest.html. The live route uses the Agent SDK and one exact Jira MCP tool, validates the same DailyBrief schema and lets only the host write dated private HTML.', 'Treating synthetic PASS as live proof, giving the agent file tools or assuming local execution means no permitted data reaches the model.', 'Participants can explain the shared schema and separate source, artifact and synthetic evidence.', 'Assignment 5'),
+    teach: {
+      time: '4 min',
+      gist: 'Use one DailyBrief product contract for deterministic and approved live inputs.',
+      script: [
+        {do: 'Trace the synthetic path.', say: ['Fixtures create the complete DailyBrief and out/latest.html. They do not prove Jira access.']},
+        {do: 'Trace the live path.', say: ['Bree uses the Agent SDK and one exact read-only Jira MCP tool.', 'The host validates the same schema and writes only the dated private HTML artifact.']},
+        {do: 'State the evidence boundary.', say: ['Synthetic PASS, live source OPEN and dated artifact OPEN can all be honest outcomes.']}
+      ],
+      learn: ['Explain the difference between deterministic tests and approved live connector proof.']
+    }
   },
-  assignment(5, 5, 'Give the agent one read-only tool', 'The agent reads one source. It cannot write or run a shell.',
-    ['src/agent.ts and src/sources.ts with one read-only tool.', 'Tests prove the wiring and the missing-source case without a network.', 'npm run brief:sample still works without a model call.'],
-    'No shell or write tools for the brief agent. Never print tokens.',
-    SOLO_PROMPTS[5],
-    'Test one missing-source case I choose. Show the diff and observed test output. With configured credentials, run the brief and trace each factual claim to run.log. Without credentials, run the sample and mark the live check OPEN. Never print tokens. Stop for my inspection.',
-    say('40 min', 'An agent is only as safe as its tools.', 'Green tests for the tool and the missing source.', 'Participants who add write or shell tools.', 'npm test, npm run typecheck and npm run brief:sample are green.', 'Assignment 6')),
-  assignment(6, 6, 'Record the evidence', 'Real commands, real exit codes, a reviewer who reruns one.',
-    ['docs/evidence.md has each command, its exit code and one output line.', 'Your screenshot is linked under docs/evidence/.', 'Unrun checks are OPEN.'],
-    'Do not change the code to hide a failure.',
-    SOLO_PROMPTS[6],
-    'Check the evidence against the extra case I choose. Show missing proof as OPEN. Stop while my reviewer reruns one command and compares the output. Record their actual name and result only afterward.',
-    say('25 min', 'A claim without evidence is a hypothesis.', 'docs/evidence.md with exit codes.', 'Evidence written from memory instead of from a run.', 'A neighbour reran one command and got the same result.', 'Assignment 7')),
-  assignment(7, 7, 'Decide the gate and prepare the PR', 'You decide PASS. Claude Code proposes FAIL and OPEN.',
-    ['docs/gate.md links the evidence and marks each check PASS, FAIL or OPEN.', 'The PR is open after your approval.', 'The schedule stays inactive. Nothing is merged or deployed.'],
-    'You make every PASS decision. Open the PR only after the human review.',
-    SOLO_PROMPTS[7],
-    'Use the OPEN item I choose to propose one new acceptance check. Show the gate diff and PR preview. After I decide the gate and approve publication, open the PR. Stop before merge or deployment.',
-    say('25 min', 'The gate is where a human decides, with the evidence in front of them.', 'docs/gate.md with a quoted line per check.', 'An agent that writes PASS. The human decides PASS.', 'Each participant has a gate decision and opens the PR only after approval.', 'Maintain: close the loop')),
+  assignment({
+    n: 5,
+    title: 'Create one dated private live brief',
+    checkpoint: ['npm run live:check validates the ignored local configuration and private output boundary.', 'The SDK allows one exact read-only Jira MCP tool and no built-in or file tools.', 'The host validates the full schema and writes ~/.bree/briefs/YYYY-MM-DD.html, or missing evidence stays OPEN.'],
+    boundary: 'Use the existing approved company route. Store only validated private HTML, never raw Jira data or credentials.',
+    prompt: SOLO_PROMPTS[5],
+    steps: [
+      {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 5 prompt', prompt: SOLO_PROMPTS[5]},
+      {where: 'Claude Code', text: 'Inspect the existing approved MCP setup', prompt: '/mcp', after: 'Choose the existing Jira MCP and its exact read-only tool. Do not install a connector.'},
+      {where: 'Terminal', text: 'Create ignored local configuration and run preflight', prompt: 'cp .bree.example.json .bree.local.json\nnpm run live:check'},
+      {where: 'Human check', text: 'Confirm one exact tool, full schema validation and host-owned file writing'},
+      {where: 'Terminal', text: 'Only after approval, create the dated private live brief', prompt: 'npm run brief:live', after: 'Open ~/.bree/briefs/YYYY-MM-DD.html privately. Do not record or commit it. Mark source and artifact evidence PASS or OPEN.'}
+    ],
+    notes: say('45 min', 'Connect the real SDK route and produce the same complete product without broadening permissions.', 'The participant runs /mcp, copies the ignored config, runs live:check and inspects the exact tool, schema validation and host write boundary. brief:live runs only after approval. The host writes only validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Provider and client retention follow company policy.', 'Do not teach connector installation or expose internal URLs. If Jira, approved authentication or output-path proof is unavailable, stop the live step. Use the private trainer appendix only to inspect the managed setup. The participant records the source and dated artifact as OPEN and continues.', 'The trainer sees preflight, SDK options, host write boundary and PASS or OPEN status. Do not project raw source data or the private brief.', 'Assignment 6')
+  }),
+  assignment({
+    n: 6,
+    title: 'Make the proof repeatable',
+    checkpoint: ['.claude/skills/verify-bree covers every HTML section, resolved sourceIds, OPEN, CONFLICT and the private path.', 'One complete synthetic app journey reaches cleanup.', 'The daily trigger is only a reviewed proposal; live source and dated artifact evidence stay separately PASS or OPEN.'],
+    boundary: 'No CI, pull request or enabled scheduler. Both worktrees and the trigger preview stay local.',
+    prompt: SOLO_PROMPTS[6],
+    steps: [
+      {where: 'Claude Code', text: 'In manual mode, paste the exact SOLO 6 prompt', prompt: SOLO_PROMPTS[6]},
+      {where: 'Claude Code', text: 'Run /create-verification-skill', after: 'Generate .claude/skills/verify-bree and its feature map from real project commands.'},
+      {where: 'Terminal', text: 'Run complete, missing and conflicting cases plus one synthetic journey', prompt: 'npm run eval', after: 'Follow launch, doctor, drive, evidence and cleanup from the generated skill.'},
+      {where: 'Terminal', text: 'Run the full local gate', prompt: 'npm run typecheck\nnpm test\nnpm run eval\nnpm run brief:sample\nnpm run live:check'},
+      {where: 'Human check', text: 'Review the local daily trigger proposal', after: 'Confirm its command, working directory, logs, rollback and owner. Do not install or activate it.'},
+      {where: 'Terminal', text: 'Commit only the accepted A6 result'},
+      {where: 'Terminal', text: 'Continue on the next slide with previous and current worktrees', after: 'Do not publish anything. Keep both proofs local.'}
+    ],
+    notes: say('35 min', 'Turn today’s evidence into a project-local verification skill and review future daily delivery.', 'The feature map, complete/missing/conflicting checks, every HTML section, one synthetic journey, the full local gate and a trigger proposal. Live source and dated artifact evidence remain separate PASS or OPEN lines.', 'A generated skill that names commands or selectors that do not exist, a live claim based only on synthetic evidence or an enabled scheduler.', 'The trainer sees the feature map, journey cleanup, full gate, separate statuses and an uninstalled trigger proposal with owner and rollback.', 'Preview the daily delivery')
+  }),
+  {
+    title: 'Preview the daily delivery',
+    kicker: 'Day 5 · A6 · DELIVERY PREVIEW',
+    subtitle: 'Review the schedule now. Enable it only through an approved process later.',
+    type: 'concept',
+    sdlc: 'deploy',
+    visual: {guardRail: {
+      plainChain: true,
+      chainTitle: 'One proposed local daily run',
+      chain: [['🕗', 'Approved trigger', 'not installed today'], ['▶', 'npm run brief:live', 'approved working directory'], ['📄', 'Dated private HTML', '~/.bree/briefs/YYYY-MM-DD.html'], ['👤', 'Human review', 'open and accept or revise']],
+      railsTitle: 'Before anyone enables it',
+      rails: [
+        {icon: '🧾', title: 'Command and logs', whoLabel: 'Proposal', who: 'names the exact command and private log location', stop: 'No raw source or brief content in logs.', where: 'docs/evidence.md'},
+        {icon: '↩', title: 'Rollback and owner', whoLabel: 'Human', who: 'names who may disable or repair the trigger', stop: 'No owner means no schedule.', where: 'docs/plan.md'},
+        {icon: '◯', title: 'Honest status', whoLabel: 'Today', who: 'preview only', stop: 'Unavailable auth or source remains OPEN.', where: 'not enabled'}
+      ],
+      foot: 'Today you prove the command and artifact. You do not claim an automatic daily run.'
+    }},
+    keyPoints: ['Preview and enabled schedule are different states.', 'Missing approval, authentication or source access remains OPEN.', 'A person owns activation, logs and rollback.'],
+    notes: say('4 min', 'Separate a safe delivery proposal from an automatic claim.', 'A local trigger proposal with command, working directory, logs, rollback and owner. The dated private artifact remains the result.', 'Installing or enabling a scheduler during class, logging private contents or claiming it runs every day.', 'Participants can explain what is proven today and what still requires approval.', 'A6 check: previous and current worktrees'),
+    teach: {
+      time: '4 min',
+      gist: 'Review a complete delivery proposal without activating it.',
+      script: [
+        {do: 'Trace the proposed run.', say: ['An approved local trigger would run brief:live from one working directory and create one dated private HTML file.']},
+        {do: 'Check the operating boundary.', say: ['The proposal names private logs, rollback and an owner. It stores no raw source or brief content in logs.']},
+        {do: 'State today’s status.', say: ['This is a preview, not an enabled schedule. Missing approval, authentication or source access remains OPEN.']}
+      ],
+      learn: ['Distinguish a trigger proposal from an enabled daily schedule.']
+    }
+  },
+  {
+    title: 'A6 check: previous and current worktrees',
+    kicker: 'Day 5 · A6 · LOCAL DELIVERY',
+    type: 'practice',
+    layout: 'exercise',
+    beat: 'turn',
+    sdlc: 'deploy',
+    stage: 'gate',
+    calm: true,
+    repo: REPO,
+    cards: [
+      {title: 'Previous commit', body: 'HEAD^ still renders its accepted local HTML: this is the recovery proof.'},
+      {title: 'Current commit', body: 'HEAD renders every section and runs the complete, missing and conflicting evaluations.'}
+    ],
+    keyPoints: ['Create detached worktrees for HEAD^ and HEAD.', 'Run the documented checks in both.', 'Remove only the two temporary worktrees and inspect the list.'],
+    stepsHeading: 'Do this',
+    steps: [
+      {where: 'Terminal', text: 'Create detached worktrees for the previous and current commit', prompt: 'git worktree add --detach ../daily-brief-previous HEAD^\ngit worktree add --detach ../daily-brief-current HEAD'},
+      {where: 'Browser', text: 'Open and compare both generated pages', after: 'Open ../daily-brief-previous/out/latest.html and ../daily-brief-current/out/latest.html from your browser or file manager.'},
+      {where: 'Terminal', text: 'Remove only the temporary worktrees', prompt: 'git worktree remove ../daily-brief-previous\ngit worktree remove ../daily-brief-current\ngit worktree list', after: 'Both versions ran and only your main working tree remains.'}
+    ],
+    notes: say('20 min', 'Separate product proof from local delivery proof.', 'The current and previous versions running in separate temporary worktrees.', 'Running rollback in the participant working folder or treating a dirty status as success.', 'Both local pages open, then the two temporary worktrees are removed.', 'Maintain: close the loop'),
+    teach: {
+      time: '20 min',
+      gist: 'The previous and current commit run in detached worktrees. HEAD^ is the recovery proof; HEAD is the accepted delivery.',
+      do: ['Demo 5 min · Individual run 11 min · Class check 4 min', 'Run the terminal steps in Bash or Zsh. On Windows, use Git Bash.'],
+      done: ['Both worktrees pass their named checks.', 'Both pages open.', 'The temporary worktrees are removed safely.'],
+      copy: [
+        ['Create and run both worktrees', 'git worktree add --detach ../daily-brief-previous HEAD^\ngit worktree add --detach ../daily-brief-current HEAD\n(cd ../daily-brief-previous && npm ci && npm run typecheck && npm test && npm run brief:sample)\n(cd ../daily-brief-current && npm ci && npm run typecheck && npm test && npm run eval && npm run brief:sample)'],
+        ['Remove temporary worktrees', 'git worktree remove ../daily-brief-previous\ngit worktree remove ../daily-brief-current\ngit worktree list']
+      ],
+      script: [
+        {do: 'Class demo. Show git log -2 and open the recovered brief.', say: ['Point to the two commits. Show how each checkout has its own output folder.']},
+        {do: 'Step 1. Confirm the accepted A6 result is committed.', say: ['HEAD is the accepted delivery. HEAD^ is the working previous version. Nothing is published.']},
+        {do: 'Step 2. Create both detached worktrees.', say: ['These are separate checkouts. Do not switch or reset your main working tree.']},
+        {do: 'Step 3. Run and open both versions.', say: ['The previous version is the recovery proof. The current version adds the three evaluation cases.']},
+        {do: 'Step 4. Remove only the two temporary worktrees.', say: ['Read git worktree list before you finish. Your main working tree must remain.']},
+        {do: 'Class check. Ask everyone to show both pages and their worktree list.'}
+      ],
+      learn: ['Two detached worktrees prove both delivery and recovery.', 'HEAD^ is a real runnable rollback target.'],
+      watch: ['Running the commands before the A6 commit.', 'Removing the main working tree.', 'Comparing exit codes without opening the pages.'],
+      terms: [['Worktree', 'another checkout of the same repository'], ['Recovery proof', 'the previous accepted commit still runs']],
+      next: 'Maintain: close the loop'
+    }
+  },
+  assignment({
+    n: 7,
+    title: 'Build your own small MCP mission',
+    subtitle: 'Choose one useful decision. Use one approved source and one exact read-only tool.',
+    checkpoint: ['You name one user and one decision.', 'You state one hard boundary and one visible proof.', 'The proof is green, one failure case is visible, and you can explain both.'],
+    boundary: 'Keep the application small. Use synthetic data or one approved source. Never request broader access or connector setup.',
+    steps: [
+      {where: 'Your choice', text: 'Choose one mission: Jira, GitLab, Confluence or mock Outlook', after: 'Jira: find your top blocker. GitLab: find one merge request that needs your review. Confluence: retrieve one agreed decision and its context. Mock Outlook: rank action items from sample/outlook-email.sample.json.'},
+      {where: 'Human check', text: 'Write down the user, decision, boundary and visible proof before implementation'},
+      {where: 'Claude Code', text: 'Inspect the existing approved MCP and choose one exact read-only tool', prompt: '/mcp', after: 'Do not install a connector or request broader permissions.'},
+      {where: 'Claude Code', text: 'Work in short steps. Ask for help in your own words.', after: 'Write one failing synthetic test before the fix. Rerun it until green.'},
+      {where: 'Human check', text: 'Run the proof and explain what changed', after: 'Show the working path and one failure case.'}
+    ],
+    notes: say('50 min', 'Transfer the method to one useful mission the participant owns.', 'Offer four bounded choices: their Jira blocker, a GitLab merge request that needs their review, an agreed Confluence decision with context, or action items from sample/outlook-email.sample.json. Jira, GitLab and Confluence use one existing approved source and one exact read-only tool. Mock Outlook stays fully local and synthetic; it uses no connector. The proof includes one red-to-green synthetic test and one visible failure case.', 'A large project, combined sources, broader permissions, connector setup, real work email or a trainer-written implementation prompt.', 'Each participant demonstrates the working path, the source boundary, the green proof and one failure case.', 'Recap: seven steps, one brief')
+  }),
   {
     title: 'Maintain: close the loop',
     kicker: 'Day 5 · MAINTAIN',
-    subtitle: 'The brief runs every morning. What goes wrong becomes a new intent.md.',
     type: 'concept',
     sdlc: 'maintain',
     source: PLAYBOOK,
     cards: [
-      {title: 'It runs', body: 'Every weekday morning, once you switch the schedule on.'},
-      {title: 'You notice', body: 'A wrong line, a missing source, an OPEN that stays open.'},
-      {title: 'Back to Plan', body: 'You write it down as a new intent.md. The loop starts again.'}
+      {title: 'Observe', body: 'Choose one complete, missing or conflicting result.'},
+      {title: 'Record intent', body: 'Add the command, output, what worked and the risk under “Next iteration” in intent.md.'},
+      {title: 'Name the next check', body: 'Write one improvement and the check that would prove it.'},
+      {title: 'Return to Plan', body: 'A person accepts or revises the new intent.'}
     ],
-    keyPoints: ['Maintain is not a new assignment today.', 'Your OPEN items in gate.md are the first input.', 'The loop keeps running. Your judgement stays above it.'],
-    notes: say('3 min', 'Show the sixth stage, so the line becomes a loop.', 'Runs, notice, back to Plan.', 'Participants who switch the schedule on today. It stays inactive.', 'Participants can name one OPEN item that would start a new intent.', 'Recap')
+    visual: {pipeline: [{}, {}, {}, {hl: true}], editorial: 'flow', stepThrough: '.pl-card'},
+    keyPoints: ['Use an observed local result; do not invent an incident.', 'Keep the accepted initial intent; add a “Next iteration” section.', 'Name one improvement and its next check.', 'A person accepts the next intent before Plan starts again.'],
+    notes: say('3 min', 'Close the Bree loop before participants apply the method themselves. Use click or → for each step.', 'Choose one complete, missing or conflicting result. Under “Next iteration” in intent.md, record its command, output, what worked and the risk. Keep the accepted initial intent. Add one improvement and next check. A person accepts or revises the new intent.', 'Inventing a bug, overwriting the initial intent or claiming autonomous monitoring. Use only observed local output.', 'Participants show the new intent and its accepted next check.', 'Assignment 7'),
+    teach: {
+      time: '3 min',
+      gist: 'Turn one observed local result into an accepted next intent.',
+      script: [
+        {do: 'Reveal “Observe”.', say: ['Choose one complete, missing or conflicting result. What command and output produced it?']},
+        {do: 'Reveal “Record intent”.', say: ['Keep the accepted initial intent. Add the command, output, what worked and the risk under “Next iteration” in intent.md. Do not invent an incident.']},
+        {do: 'Reveal “Name the next check”.', say: ['Write one improvement and the check that would prove it.']},
+        {do: 'Reveal “Return to Plan”.', say: ['A person accepts or revises this new intent before the next Plan begins.']}
+      ],
+      learn: ['Name the order: observed output, intent.md, next check, human acceptance, Plan.']
+    }
   },
   {
     title: 'Recap: seven steps, one brief',
     kicker: 'Day 5 · Recap',
-    subtitle: 'Plan, Design, Build, Test, Deploy, Maintain. Every stage left a file and a proof.',
-    keyPoints: ['One file per stage: intent, spec, plan, evidence, gate.', 'Tests failed first, then passed.', 'A person made every decision.'],
-    notes: say('5 min', 'Close the main route before the bonus.', 'The seven steps and their proofs.', 'Groups that did not reach A7. They finish it with SOLO.md.', 'Participants can name the proof of each step.', 'The Claude Code skills pack')
+    visual: {pipeline: [{}, {}, {hl: true}], editorial: 'flow', stepThrough: '.pl-card'},
+    cards: [
+      {title: 'A line that runs', body: 'A1 · One agenda item becomes one decision.'},
+      {title: 'A reviewed product path', body: 'A2–A5 · Contract, design, full HTML and read-only source are checked.'},
+      {title: 'A version you can recover', body: 'A6 · Both versions run. The daily trigger remains a reviewed preview.'}
+    ],
+    keyPoints: ['A1 chose the user and produced one working line.', 'A2–A5 produced the full DailyBrief and one dated private artifact path.', 'A6 proved three cases, both worktrees and an uninstalled trigger proposal.', 'A7 applied the loop to a problem the participant chose.'],
+    notes: say('5 min', 'Turn the completed Bree route into a method participants can name and repeat.', 'The A1, A2–A5, A6 and A7 proofs from their own local work.', 'A result described without its command, output or source.', 'Participants can show one proof and explain how they would repeat the method.', 'Close: what you learned on Day 5')
   },
   {
-    title: 'Bonus: Sonny, the on-call SRE agent',
+    title: 'The same loop, now at 03:45',
+    kicker: 'Day 5 · FROM BREE TO SONNY',
+    subtitle: 'At 08:30 you checked a local brief. In the bonus, you are the operator when a global shop breaks at night.',
+    type: 'context',
+    cards: [
+      {title: 'You are on call', body: 'Your phone wakes you. The risk is no longer one unsupported brief.'},
+      {title: 'Checkout is failing', body: '12 of every 100 payments fail, directly after an update.'},
+      {title: 'Sonny got the alert too', body: 'What should the on-call SRE agent investigate, and what must a person decide?'}
+    ],
+    visual: {wakeUp: {
+      clock: '03:45',
+      tag: 'YOU · THE OPERATOR',
+      screen: 'on-call laptop · 03:45',
+      alert: 'ALERT · checkout · error rate 12% for 5 min (limit 2%) · INC-1001',
+      chart: {label: 'checkout · failed payments', from: '0.3%', to: '12%', limit: '2%', mark: 'update 03:43'},
+      world: [['Here', '03:45 · night', '🌙'], ['Singapore', 'late morning', '☀️'], ['New York', 'evening', '🌆']],
+      sonny: {tag: 'SONNY · ON CALL', bubble: 'I will investigate. You decide what happens.'}
+    }, reveal: 'click', covers: []},
+    keyPoints: ['The actor changes from team member to on-call operator.', 'The risk changes from an unsupported brief to customers who cannot pay.', 'The SDLC stays the same: artifacts, evidence and human acceptance.'],
+    notes: say('3 min', 'Turn the finished 08:30 story into the optional 03:45 on-call challenge.', 'Reveal the operator, the live incident and Sonny. Name the changed actor and risk. Ask what Sonny may investigate and what a person must still decide. The SDLC does not change.', 'Teaching the Sonny implementation here. This slide only opens the new scene.', 'Participants can name the changed actor, risk and retained human decision.', 'Optional bonus: open the on-call SRE lesson'),
+    teach: {
+      time: '3 min',
+      gist: 'The same SDLC moves from a local morning brief to a higher-risk on-call incident.',
+      script: [
+        {do: 'Reveal the sleeping operator.', say: ['At 08:30, you checked one local brief. Now it is 03:45 and you are the operator on call.']},
+        {do: 'Reveal the incident screen.', say: ['Checkout failures jumped from 0.3% to 12% after an update. Somewhere customers are trying to pay now.']},
+        {do: 'Reveal Sonny.', say: ['Sonny may investigate and propose. A person still decides whether anything changes.', 'The domain and risk changed. The SDLC did not.']}
+      ],
+      learn: ['Compare the Bree and Sonny situations.', 'Explain why human acceptance remains part of the loop.']
+    }
+  },
+  {
+    title: 'Optional bonus: open the on-call SRE lesson',
     kicker: 'Day 5 · Bonus',
-    subtitle: 'Done early? Use the same SDLC loop on a second agent: Sonny diagnoses a broken shop at 03:45.',
-    keyPoints: ['Same loop, new domain: intent, contract, guardrails, tool, live run.', 'Repo: sre-oncall-agent, branch workshop/start.', 'Do the assignments in order. Stop where the day ends.'],
-    notes: say('2 min', 'Give fast participants a real second challenge.', 'The Sonny assignments that follow.', 'Participants who start the bonus before they finish A4.', 'Fast participants open the Sonny project.', 'A global shop, and you are on call')
+    visual: {opener: 'welcome'},
+    keyPoints: ['Finish the Daily Brief route first.', 'Continue with the full Sonny story and assignments.', 'Use the same SDLC questions: what is the artifact, the evidence and the human decision?'],
+    notes: say('2 min', 'Open the full Jessy lesson only after the Daily Brief route.', 'The full Sonny story, assignments and presenter notes.', 'Participants who treat a higher-risk domain as permission for the agent to act without a person.', 'Fast participants open the on-call SRE lesson and start at its first story slide.', 'Appendix: the Claude Code skills pack')
   }
 ];
+
+const maintainIndex = brief.findIndex(slide => slide.title === 'Maintain: close the loop');
+const assignment7Index = brief.findIndex(slide => slide.assignmentId === 'brief-a7');
+const [maintainSlide] = brief.splice(maintainIndex, 1);
+brief.splice(assignment7Index, 0, maintainSlide);
+
+const proofGate = {
+  title: 'Before local delivery: you decide what counts as proof',
+  kicker: 'Day 5 · TEST → ACCEPT',
+  type: 'concept',
+  sdlc: 'test',
+  cards: [
+    {title: 'Make the weak case fail', body: 'Missing stays OPEN. Conflicting evidence stays CONFLICT.'},
+    {title: 'Run the named checks', body: 'The same focused test turns green, then the full local suite stays green.'},
+    {title: 'Would you accept this brief?', body: ''}
+  ],
+  visual: {
+    proofQs: [
+      {answer: 'FAIL', terms: [['missing source', '$ npm test\n1 failing', 'fail']], where: 'complete · missing · conflicting'},
+      {answer: 'CHECK', testsHead: 'same path, then the full suite', tests: [['focused test: red → green', true], ['all local checks: green', true]], score: ['red', 'green', 'full suite']},
+      {answer: 'Open the brief. Trace the claim.'}
+    ],
+    bot: 'happy',
+    place: 'in',
+    botIn: '.pq-2',
+    botTag: 'YOU · REVIEWER'
+  },
+  keyPoints: ['A failing case proves the boundary is real.', 'A named check proves the implementation.', 'A person accepts or revises the visible result.'],
+  notes: say('3 min', 'Set the acceptance gate before A6.', 'Reveal failure, checks and the participant decision. The Aetherbot represents the participant, not Bree. A green command is evidence, but the participant also inspects the visible brief.', 'Calling one green test complete proof or letting Bree accept its own output.', 'Participants can name the failure case, command and visible result they will inspect.', 'Assignment 6: Prove three cases and deliver locally'),
+  teach: {
+    time: '3 min',
+    gist: 'Proof has three parts: a real failure, a named check and a human decision.',
+    script: [
+      {do: 'Reveal the failing case.', say: ['First prove that missing or conflicting data does not become a confident brief.']},
+      {do: 'Reveal the checks.', say: ['Run the focused test again, then run the full local suite.']},
+      {do: 'Reveal the participant.', say: ['The Aetherbot is you, the reviewer. Open the result, trace its claim and accept or revise it. Bree does not accept its own work.']}
+    ],
+    learn: ['Name the three-part gate: failure case, check and human acceptance.']
+  }
+};
+const assignment6Index = brief.findIndex(slide => slide.assignmentId === 'brief-a6');
+brief.splice(assignment6Index, 0, proofGate);
 
 const close = {
   title: 'Close: what you learned on Day 5',
   kicker: 'Day 5 · Close',
-  subtitle: 'You built an agent through the SDLC, and a human decided at every gate.',
-  keyPoints: ['Plan before you build.', 'Red before green.', 'Evidence before PASS.'],
-  notes: say('5 min', 'End the day on the loop, not on the tools.', 'Three lessons.', 'Groups that are not done. They finish with SOLO.md.', 'Everyone can name the next step for their own brief.', 'Day 6')
+  visual: {editorial: 'words', stepThrough: '.card'},
+  cards: [
+    {title: 'Show', body: 'Point to a result and the input or test behind it.'},
+    {title: 'Tell', body: 'Who uses your application? What can they decide?'},
+    {title: 'Ask', body: 'What should I check next, and what will I build next?'}
+  ],
+  keyPoints: ['Show one result and point to the input or test behind it.', 'Name the user and decision in your own application.', 'Ask for feedback on your next check and next application.'],
+  teach: {
+    time: '5 min',
+    gist: 'Show the local proof, explain the decision, and choose the next problem you will take through the loop.',
+    script: [
+      {do: 'Reveal “Show”. Give pairs one minute.', say: ['Show one result. Point to the input or test behind it.']},
+      {do: 'Reveal “Tell”. Give pairs one minute.', say: ['Who uses your own application? What can they decide?']},
+      {do: 'Reveal “Ask”. Give pairs one minute.', say: ['What should your partner check next? What will they build next?']},
+      {do: 'Return to the 08:30 opening.', say: ['At the start, you needed one answer before stand-up. What can you now build and prove without copying Bree?']},
+      {do: 'Invite one participant to answer the final question.', say: ['Which small work problem will you take through this loop next?']}
+    ],
+    learn: ['Explain how the same method helps you build another local application.', 'Name the next problem and proof without help from the trainer.']
+  },
+  notes: say('5 min', 'Return to the 08:30 opening. Use click or → for Show, Tell and Ask.', 'First participants show proof. Then they explain the user and decision. Finally they ask for the next check and name the next problem.', 'Participants who describe progress without showing the command or output, or who propose copying Bree for the next task.', 'Everyone names the small work problem they will take through this loop next.', 'The same loop, now at 03:45')
 };
 
 const withTeach = s => s.teach ? s : info(s, {
   time: s.notes.match(/^Time: ([^.]+)\./)?.[1] ?? '',
-  gist: s.subtitle,
-  script: [{do: 'Slide appears. Read the title and the subtitle.', say: s.keyPoints}],
+  gist: s.subtitle || s.title,
+  script: [{do: 'Ask the question or explain the step on the slide.', say: s.keyPoints}],
   learn: s.keyPoints,
   watch: [s.notes.match(/Watch for: ([^\n]+)/)?.[1]].filter(Boolean)
 });
 const pack = [
   {
-    title: 'The Claude Code skills pack',
-    kicker: 'Day 5 · SKILLS PACK',
-    subtitle: 'A public set of skills for everyday shipping. You pick one for the hackathon.',
+    title: 'Appendix: the Claude Code skills pack',
+    kicker: 'Day 5 · APPENDIX · SKILLS PACK',
     type: 'concept',
     source: PACK,
+    visual: {editorial: 'words'},
     cards: [
       {title: 'Understand', body: '/eli5, /show-me, /diagram, /archify'},
       {title: 'Plan', body: '/grilling, /rpi, /visual-plan'},
       {title: 'Prove', body: '/verify-this, /fix-ci'},
       {title: 'Ship', body: '/review-and-ship, /make-pr-easy-to-review, /handoff'}
     ],
-    keyPoints: ['The seven assignments use the exact prompts from SOLO.md.', 'Pick one skill for your hackathon problem.', 'Install one skill, in your project only.'],
-    notes: say('3 min', 'Connect today to the hackathon.', 'Four groups of skills.', 'Bulk installs. One skill, one project.', 'Participants name one skill they want.', 'Choose one skill for the hackathon')
+    keyPoints: ['This appendix is not required for A1–A7.', 'Pick one skill only when it supports your own next step.', 'Install it in your project, not globally.'],
+    notes: say('3 min', 'Connect today to the hackathon.', 'Four groups of skills.', 'Bulk installs. One skill, one project.', 'Participants name one skill they want.', 'Appendix: choose one skill for the hackathon')
   },
-  (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Choose one skill for the hackathon'; s.kicker = 'Day 5 · SKILLS PACK'; s.cards[1].body = 'Project and user settings, no connectors, no Chrome integration.'; s.notes = 'Time: 3 min.\n\nThe full pack is hackathon support, not lesson setup.'; s.teach.time = '3 min'; return s; })()
+  (() => { const s = fromWorkshop5('Appendix · Choose one skill for the hackathon'); s.title = 'Appendix: choose one skill for the hackathon'; s.kicker = 'Day 5 · APPENDIX · SKILLS PACK'; delete s.subtitle; s.cards[1].body = 'Project and user settings, no connectors, no Chrome integration.'; s.visual = {...s.visual, editorial: 'words'}; s.notes = 'Time: 3 min.\n\nOptional support after the main lesson. Keep it project-local.\n\nNext: Day 6'; s.teach.time = '3 min'; s.teach.gist = 'Choose one project skill.'; s.teach.next = 'Day 6'; return s; })()
 ];
 // Pause slides come from Jessy's deck with her stage dot. In this deck they sit between other stages.
 for (const b of brief) if (['Break', 'Lunch', 'Restart and settle'].includes(b.title)) delete b.sdlc;
 
 const divider = brief.at(-1);
-divider.title = 'Optional bonus: open the Sonny lesson';
-divider.subtitle = 'Continue in the separate Sonny deck when the seven Daily Brief assignments are complete.';
-divider.source = {url: 'workshop5.html', label: 'Open the optional Sonny lesson'};
-divider.keyPoints = ['Finish the Daily Brief route first.', 'Open workshop5.html for the full Sonny slides and presenter notes.', 'Use the sre-oncall-agent workshop/start branch.'];
-divider.notes = 'Time: 2 min.\n\nThis link keeps the complete verified Sonny assignment route available without mixing its catch-up commands into the Daily Brief lesson. Open workshop5.html only for optional self-study.\n\nNext: Day 6';
+divider.source = {url: 'day5-jessy.html', label: 'Open the full on-call SRE lesson'};
+divider.notes = 'Time: 2 min.\n\nOpen day5-jessy.html only after the Daily Brief route. Start with its story before opening the repository.\n\nNext: Day 6';
 
-const briefMain = brief.slice(0, -1).filter(s => s.title !== 'What is a skill?');
-const ordered = [...briefMain, ...pack, close, divider];
+const transition = brief.at(-2);
+const briefMain = brief.slice(0, -2).filter(s => !['What is a skill?', 'Use the included project skills'].includes(s.title));
+const ordered = [...briefMain, close, transition, divider, ...pack];
 // Next pointers and clocks are derived, so a reorder cannot leave a stale one behind.
-const main = ordered.length - 1;
 ordered.forEach((o, i) => {
   o.notes = o.notes.replace(/Time: \d\d:\d\d · /, 'Time: ');
-  if (i >= main) return;
-  const next = i === main - 1 ? 'Day 6' : ordered[i + 1].title;
+  const next = i === ordered.length - 1 ? 'Day 6' : ordered[i + 1].title;
   o.notes = /Next: /.test(o.notes) ? o.notes.replace(/Next: [^\n]*$/, 'Next: ' + next) : o.notes + '\n\nNext: ' + next;
   if (o.teach) o.teach.next = next;
   if (o.cards?.length === 1 && o.cards[0].title === 'Next') o.cards[0].body = next;

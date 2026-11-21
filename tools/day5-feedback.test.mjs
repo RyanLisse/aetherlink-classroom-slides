@@ -14,7 +14,7 @@ for (const consumer of ['app.js', 'presenter.js']) {
   });
 }
 
-test('Daily Brief assignments use a clickable starter link and need no branch switch', () => {
+test('Daily Brief assignments use a clickable starter link and end in independent local work', () => {
   const context = {window: {}};
   vm.runInNewContext(read('day5-daily-brief-slides.js'), context);
   const slides = context.window.SLIDES;
@@ -24,16 +24,15 @@ test('Daily Brief assignments use a clickable starter link and need no branch sw
   ]);
   for (const slide of assignments) {
     assert.equal(slide.repo?.url, 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1');
-    assert.equal(slide.teach.copy.length, 2, `${slide.assignmentId} has one SOLO prompt and one project skill`);
-    assert.match(slide.steps.map(step => step.text).join(' '), /SOLO \d|SOLO 7/);
+    assert.ok(slide.steps.length, `${slide.assignmentId} contains participant steps`);
   }
   assert.doesNotMatch(JSON.stringify(slides), /\bgit\s+switch\b/i);
-  assert.ok(slides.some(s => s.title === 'From one reviewed draft to one reviewed brief'));
+  assert.ok(slides.some(s => s.title === 'What do you bring into Day 5?'));
   assert.match(JSON.stringify(slides.find(s => s.title === 'Start the project')), /--setting-sources project,user --strict-mcp-config --no-chrome/);
   const a7 = assignments.at(-1);
-  assert.match(a7.prompt, /Do not commit, push, open a PR/);
-  assert.ok(a7.steps.findIndex(step => /commit/i.test(step.text)) < a7.steps.findIndex(step => /Push HEAD/i.test(step.text)));
-  assert.equal(slides.at(-1).source?.url, 'workshop5.html');
+  assert.ok(!a7.prompt, 'A7 leaves the implementation prompt to the participant');
+  assert.doesNotMatch(JSON.stringify(a7.steps), /git push|gh pr create/);
+  assert.ok(slides.some(slide => slide.source?.url === 'day5-jessy.html'), 'The Sonny bonus remains reachable');
 });
 
 test('Daily Brief SDLC presenter stills omit the historical slide number', () => {
