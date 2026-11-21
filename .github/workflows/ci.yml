@@ -89,6 +89,11 @@ jobs:
           while IFS= read -r assignment; do
             cp "assets/day5-daily-brief-teach/$assignment-guide.mp4" day5-rendered-evidence/
           done < "$RUNNER_TEMP/assignment-ids.txt"
+          if grep -qx 'a4-p1' "$RUNNER_TEMP/assignment-ids.txt"; then
+            ffmpeg -hide_banner -loglevel error -y -ss 4 \
+              -i assets/day5-daily-brief-teach/a4-p1-guide.mp4 \
+              -frames:v 1 day5-rendered-evidence/a4-p1-instruction-frame.png
+          fi
           cp assets/day5-daily-brief-teach/manifest.json requested-guides.json day5-rendered-evidence/
 
       - name: Upload rendered walkthroughs

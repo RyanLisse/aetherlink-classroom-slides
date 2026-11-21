@@ -7,6 +7,13 @@ import {join} from 'node:path';
 import {test} from 'node:test';
 import vm from 'node:vm';
 
+test('the A4 Part 1 guide includes the fixed Picsum and blocked-image check', () => {
+  const source = readFileSync(new URL('render-day5-guide-videos.mjs', import.meta.url), 'utf8');
+  assert.match(source, /slide\.assignmentId === 'brief-a4-p1'/);
+  assert.match(source, /https:\/\/picsum\.photos\/seed\/bree-morning\/1200\/400/);
+  assert.match(source, /Block the image/i);
+});
+
 test('the guide renderer rejects unknown arguments before invoking media tools', () => {
   const fakeBin = mkdtempSync(join(tmpdir(), 'day5-media-cli-'));
   const marker = join(fakeBin, 'media-tool-ran');

@@ -122,10 +122,11 @@ try {
         body: 'Run /mcp in Claude Code. Inspect the approved Jira connection and choose its exact read-only tool. Do not add a connector.',
         footer: 'Run live:check before any approved private read · keep the live output private'
       })] : []),
-      ...(slide.assignmentId === 'brief-a4' ? [frame({
+      ...(slide.assignmentId === 'brief-a4-p1' ? [frame({
         label: 'BRIEF-A4 · LOCAL SYNTHETIC ARTIFACT',
-        title: 'Open out/latest.html',
-        body: 'Inspect every brief section, source label and visible OPEN state. Compare the generated page with the accepted contract and plan.',
+        title: 'Check the public illustration',
+        body: 'Use this fixed public photo. Block the image; the text and complete brief must remain readable.',
+        code: 'https://picsum.photos/seed/bree-morning/1200/400',
         footer: 'Instruction frame · not a captured participant result or live-source artifact'
       })] : []),
       ...(slide.assignmentId.startsWith('brief-a5') && /brief:live/.test(stepText) ? [frame({
