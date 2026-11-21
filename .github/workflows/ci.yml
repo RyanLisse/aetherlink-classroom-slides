@@ -65,7 +65,7 @@ jobs:
           const changed = guided.filter(slide => manifest.guides.find(guide => guide.assignmentId === slide.assignmentId)?.fingerprint !== fingerprint(slide));
           const changedIds = changed.map(slide => slide.assignmentId.slice(6)).sort();
           const unexpected = changedIds.filter(id => !requested.includes(id));
-          assert.deepEqual(unexpected, [], `changed guides omitted from assignment_ids: ${unexpected.join(', ')}`);
+          assert.equal(unexpected.length, 0, `changed guides omitted from assignment_ids: ${unexpected.join(', ')}`);
           for (const id of requested) {
             const slide = guided.find(candidate => candidate.assignmentId === `brief-${id}`);
             assert.ok(slide, `missing guided slide ${id}`);
