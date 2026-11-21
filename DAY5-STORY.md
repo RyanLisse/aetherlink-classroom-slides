@@ -51,6 +51,7 @@ The Aetherbot represents the participant or illustrates Bree only when labelled.
 ## Data and permission boundary
 
 - Use the existing organization-approved Jira MCP and approved model route.
+- On **Restart with the approved source**, ask the trainer to make the existing Jira-only MCP path available privately. Run the file check before restarting Manual mode. Confirm the Vertex route with `/status`; A5 then inspects the tool with `/mcp`.
 - Limit the live source to the participant's own permitted work items.
 - Permit one exact read-only tool. Deny built-in and file tools.
 - Let the host write only validated private HTML with private permissions.
@@ -67,7 +68,7 @@ The Aetherbot represents the participant or illustrates Bree only when labelled.
 | A2 | Which editorial sections make the brief useful and safe? | Approved full schema, red-green test and rejected invalid sample. |
 | A3 | Do fixtures and the live route reach the same product contract? | `/visual-plan`, accepted design, exact paths, proof and rollback. |
 | A4 | Can you open the complete synthetic HTML and trace every item? | Renderer test and `out/latest.html`. |
-| A5 | Which exact Jira tool may Bree use, and who writes the file? | `/mcp`, `live:check`, SDK boundary, host write boundary and artifact `PASS` or `OPEN`. |
+| A5 | Which exact Jira tool may Bree use, and who writes the file? | Approved Jira-only restart, `/status`, `/mcp`, explicit SDK `mcpServers`, `live:check`, host write boundary and artifact `PASS` or `OPEN`. |
 | A6 | Can another person repeat the full proof and review future delivery? | Verification skill, journey, worktrees and an uninstalled trigger proposal. |
 | A7 | Which bounded mission can you now build yourself? | Own user, decision, boundary, proof and failure case. |
 

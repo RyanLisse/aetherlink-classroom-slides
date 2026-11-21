@@ -27,7 +27,16 @@ test('Daily Brief assignments use a clickable starter link and end in independen
   }
   assert.doesNotMatch(JSON.stringify(slides), /\bgit\s+switch\b/i);
   assert.ok(slides.some(s => s.title === 'What do you bring into Day 5?'));
-  assert.match(JSON.stringify(slides.find(s => s.title === 'Start the project')), /--setting-sources project,user --strict-mcp-config --no-chrome/);
+  const start = JSON.stringify(slides.find(s => s.title === 'Start the project'));
+  assert.match(start, /Node\.js 20\.12 or newer/);
+  assert.match(start, /--setting-sources project,user --permission-mode default --strict-mcp-config --no-chrome/);
+  assert.match(start, /\/status/);
+  const restart = JSON.stringify(slides.find(s => s.title === 'Restart with the approved source'));
+  assert.match(restart, /AETHERLINK_JIRA_MCP_CONFIG/);
+  assert.match(restart, /--strict-mcp-config --mcp-config/);
+  const a5 = JSON.stringify(assignments.filter(s => s.assignmentId?.startsWith('brief-a5')));
+  assert.match(a5, /strict MCP config/);
+  assert.match(a5, /canUseTool/);
   const a7 = assignments.at(-1);
   assert.ok(!a7.prompt, 'A7 leaves the implementation prompt to the participant');
   assert.doesNotMatch(JSON.stringify(a7.steps), /git push|gh pr create/);

@@ -70,6 +70,12 @@ assert.match(groupText(4), /out\/latest\.html/, 'A4 must produce the complete sy
 assert.match(groupText(5), /~\/\.bree\/briefs\/YYYY-MM-DD\.html/, 'A5 must produce private dated HTML.');
 assert.doesNotMatch(groupText(5), /terminal[- ]only|print .*only to the terminal/i, 'A5 must not retain terminal-only output.');
 assert.match(groupText(5), /npm run brief:live\b/, 'A5 must invoke the live route.');
+const approvedRestart = JSON.stringify(context.window.SLIDES.find(slide => slide.title === 'Restart with the approved source'));
+assert.match(approvedRestart, /AETHERLINK_JIRA_MCP_CONFIG/, 'The A5 restart must use the privately supplied Jira-only MCP config path.');
+assert.match(approvedRestart, /--strict-mcp-config --mcp-config/, 'The A5 restart must load only the approved Jira MCP config.');
+assert.match(groupText(5), /mcpServers option/, 'The A5 SDK route must explicitly load its approved server definition.');
+assert.match(groupText(5), /built-in tools to none/, 'The A5 SDK route must remove built-in tools.');
+assert.match(groupText(5), /canUseTool/, 'The A5 SDK route must deny unexpected tool requests.');
 assert.match(groupText(6), /\/(?:pstack:)?create-verification-skill\b/, 'A6 must include the verification generator.');
 for (const [number, skill] of [[1, 'grilling'], [2, 'eli5'], [3, 'visual-plan'], [4, 'verify-this'], [5, 'eli5'], [6, 'create-verification-skill'], [7, 'handoff']]) {
   assert.ok(groupText(number).includes(`/${skill}`), `A${number} must use its named project skill.`);

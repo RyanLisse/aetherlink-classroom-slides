@@ -66,8 +66,8 @@ const SOLO_PARTS = {
     'After I approve docs/spec.md, write test/schema.test.ts first and run npm run test:schema to show the expected red failure. Build src/brief.ts and sample/brief.sample.json until the full valid sample passes. Add one invalid synthetic sample and prove the schema rejects it. Show the red and green evidence and the diff, then stop. Do not build the renderer, SDK route, or connector.'
   ],
   5: [
-    'Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Show the expected red failure and stop for my approval.',
-    'After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Permit only the chosen Jira read tool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Deny every other agent tool. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run.'
+    'Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Include rejection cases for a failed or unstructured tool result, an unknown source ID, and any unexpected tool. Show the expected red failure and stop for my approval.',
+    'After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Read only the selected server definition from the existing Jira-only config at AETHERLINK_JIRA_MCP_CONFIG and pass it explicitly as the SDK mcpServers option; a new SDK process does not inherit the CLI session configuration. Permit only the chosen Jira read tool. Set built-in tools to none, enable strict MCP config, and deny every other request in canUseTool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run.'
   ],
   6: [
     'Read docs/spec.md, the synthetic evaluation fixtures, package.json, and the current application routes. Write test/eval.test.ts for a complete brief, missing evidence with OPEN items, and conflicting evidence with CONFLICT items. Run npm run eval. Fix only mismatches with the accepted spec. Show the three outcomes and diff, then stop.',
@@ -198,9 +198,9 @@ const TEACH = {
   },
   6: {
     gist: 'Make the full HTML proof repeatable, verify both versions and propose a daily trigger without enabling it.',
-    say: ['One happy path is not enough.', 'Generate the feature map and verification skill before the journey.', 'Run complete, missing and conflicting synthetic cases.', 'Record live source and dated artifact evidence separately as PASS or OPEN.', 'Review a local daily trigger proposal. Do not install or activate it.'],
+    say: ['One happy path is not enough.', 'Generate the feature map and verification skill before the journey.', 'Run ordinary-brief.json, missing-brief.json and conflict-brief.json through the real schema and renderer.', 'Record live source and dated artifact evidence separately as PASS or OPEN.', 'Review a local daily trigger proposal. Do not install or activate it.'],
     learn: ['The verification skill covers every HTML section and private output path.', 'Synthetic, live source and dated artifact evidence have separate status.', 'A trigger proposal needs a command, working directory, logs, rollback and owner.'],
-    watch: ['Running both versions in the main working tree.', 'Creating the worktrees before the accepted A6 commit.', 'Removing the wrong worktree or not opening both pages.'],
+    watch: ['Rendering the same completed sample three times instead of the three full brief fixtures.', 'Running both versions in the main working tree.', 'Creating the worktrees before the accepted A6 commit.', 'Removing the wrong worktree or not opening both pages.'],
     terms: [['Verification skill', 'project instructions that map features to repeatable checks'], ['Synthetic journey', 'a safe app flow using fictional data'], ['Trigger proposal', 'a reviewed schedule design that is not installed or enabled']],
     next: 'build your own small application.'
   },
@@ -419,18 +419,19 @@ const brief = [
     steps: [
       {where: 'Terminal', text: 'git clone https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1.git'},
       {where: 'Terminal', text: 'cd aetherlink-daily-brief-lab-s1 && npm ci'},
-      {where: 'Terminal', text: 'claude --setting-sources project,user --strict-mcp-config --no-chrome'},
+      {where: 'Terminal', text: 'claude --setting-sources project,user --permission-mode default --strict-mcp-config --no-chrome'},
+      {where: 'Claude Code', text: 'Confirm the organisation-approved Vertex route', prompt: '/status', after: 'Do not paste the first prompt when the approved route is unavailable. Keep model-assisted work OPEN.'},
       {where: 'Claude Code', text: 'Inspect the starting point', prompt: 'Read README.md, CLAUDE.md, SOLO.md, AGENTS.md, intent.md, progress.md, and .claude/skills/README.md. Report the current step, the starting files, and any blockers. Then answer this read-only question: which bundled project skill fits the next step, and why? Do not change files yet.'}
     ],
-    keyPoints: ['Node.js 20 or newer, Git, and Claude Code on the organization-approved model route.', 'The bundled /visual-plan and /create-verification-skill are ready before first use.', 'Project skills add instructions, not connector access.', 'A5 uses the existing approved read-only Jira MCP.'],
-    notes: say('10 min', 'Start everyone from the same clean local project and introduce the bundled project skills before A1.', 'Claude Code reads the starting files and .claude/skills/README.md, then names /visual-plan and /create-verification-skill. State that A5 uses the existing approved read-only Jira MCP and organization-approved model route.', 'Treating a skill as connector access, installing a new connector or switching to an unapproved personal account.', 'Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.', 'Ground rules: protect work data'),
+    keyPoints: ['Node.js 20.12 or newer, Git, and Claude Code on the organization-approved model route.', 'Manual mode keeps each edit behind participant approval.', 'The synthetic A1–A4 session loads no MCP server.', 'A5 restarts with the organisation-provided Jira-only MCP configuration.'],
+    notes: say('10 min', 'Start everyone from the same clean local project and introduce the bundled project skills before A1.', 'Claude Code starts in Manual mode, reads the starting files and names the bundled skills. The strict synthetic session loads no MCP server; A5 has a separate approved Jira-only restart.', 'Treating a skill as connector access, relying on local settings or switching to an unapproved personal account.', 'Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.', 'Ground rules: protect work data'),
     teach: {
       time: '10 min',
       gist: 'Open the local project and identify the bundled skill for the next step.',
       script: [
-        {do: 'Complete the three setup commands.', say: ['Keep Claude Code and Terminal at the repository root.']},
+        {do: 'Complete the setup commands and run /status.', say: ['Keep Claude Code and Terminal at the repository root.', 'Do not run a model-assisted prompt until /status shows the approved Vertex route. Manual synthetic checks can continue when it does not.']},
         {do: 'Run the read-only inspection prompt.', say: ['Read .claude/skills/README.md and name the bundled project skill that fits the next step. Do not change files yet.']},
-        {do: 'Explain the boundary.', say: ['Bundled skills are reusable project instructions. They add no access to services.', 'A5 uses the existing approved Jira MCP. Missing approval or access stays OPEN.']}
+        {do: 'Explain the boundary.', say: ['Bundled skills are reusable project instructions. They add no access to services.', 'This strict session loads no MCP server. A5 restarts with the organisation-provided Jira-only config. Missing approval or access stays OPEN.']}
       ],
       learn: ['Open the project, inspect its starting state and identify the next bundled skill without changing files.']
     }
@@ -639,7 +640,35 @@ const brief = [
     notes: say('12 min', 'Practice a controlled change without weakening the contract.', 'One failing style test, the smallest passing change and the unchanged complete product path.', 'Changing the schema, adding live data or accepting a screenshot without rerunning the build.', 'The participant shows the changed detail and the complete brief.', 'Lunch')
   }),
   byTitle('Lunch'),
-  byTitle('Restart and settle'),
+  (() => {
+    const s = byTitle('Restart and settle');
+    s.title = 'Restart with the approved source';
+    s.kicker = 'Day 5 · SETUP · 10 MIN';
+    s.subtitle = 'Ask the trainer to make the existing Jira-only MCP config path available privately.';
+    s.type = 'practice';
+    s.layout = 'exercise';
+    s.stepsHeading = 'Do this';
+    s.steps = [
+      {where: 'Terminal', text: 'Check the privately supplied config path', prompt: 'test -n "${AETHERLINK_JIRA_MCP_CONFIG:-}" && test -f "$AETHERLINK_JIRA_MCP_CONFIG"', after: 'If this fails, keep live access OPEN. Do not start the live session.'},
+      {where: 'Terminal', text: 'Start Manual mode with only that approved MCP config', prompt: 'claude --setting-sources project,user --permission-mode default --strict-mcp-config --mcp-config "$AETHERLINK_JIRA_MCP_CONFIG" --no-chrome'},
+      {where: 'Claude Code', text: 'Confirm the approved Vertex route', prompt: '/status', after: 'If this fails, keep model-assisted and live work OPEN. Manual synthetic checks can continue.'}
+    ];
+    s.keyPoints = ['The trainer supplies the path to an existing approved Jira-only config.', 'The file check must pass before Claude Code restarts.', 'Local settings are excluded.', 'A5 starts only after /status confirms the approved Vertex route.'];
+    s.notes = say('10 min', 'Move from synthetic work to the approved source boundary.', 'A checked Jira-only MCP path, a new Manual session and the approved Vertex route in /status.', 'Creating a connector, exposing the private path, relying on local settings or continuing after a failed check.', 'The approved restart is ready, or live and model-assisted work are marked OPEN.', 'Two inputs, one DailyBrief product');
+    s.teach = {
+      time: '10 min',
+      gist: 'Restart with only the approved source configuration.',
+      script: [
+        {do: 'Ask the trainer to make the approved path available privately.', say: ['Do not project the path or copy the MCP file into the repository.']},
+        {do: 'Run the file check before the restart.', say: ['A failed check leaves the live route OPEN.']},
+        {do: 'Start Manual mode and run /status.', say: ['Local settings are excluded. Continue to A5 only when the approved Vertex route is visible.']}
+      ],
+      learn: ['Load one approved source without broadening access.']
+    };
+    delete s.visual;
+    delete s.cards;
+    return s;
+  })(),
   {
     title: 'Two inputs, one DailyBrief product',
     kicker: 'Day 5 · TOOLS',
@@ -686,7 +715,7 @@ const brief = [
       {where: 'Claude Code', text: 'Explain the boundary before approval', prompt: "/eli5 Explain Bree's source boundary from Jira through one read-only tool and the Agent SDK to validated private HTML. Name what each boundary prevents. Do not edit files or expose live data."},
       {where: 'Human check', text: 'Approve the tool and failing tests', after: 'Continue only when the source boundary is accepted.'}
     ],
-    notes: say('18 min', 'Agree the exact source boundary before implementation.', 'One approved read-only tool, four focused failing tests and a human decision.', 'Connector installation, broad tools, tokens or a live run before approval.', 'The trainer sees only the tool name and synthetic failing tests.', 'Assignment 5 · Part 2: build and check the bounded route')
+    notes: say('18 min', 'Agree the exact source boundary after the approved restart.', '/mcp exposes one exact read-only tool. Focused tests reject failed or unstructured results, unknown source IDs and unexpected tools.', 'Connector installation, broad tools, tokens or a live run before approval.', 'The trainer sees only the tool name and synthetic failing tests. Missing access remains OPEN.', 'Assignment 5 · Part 2: build and check the bounded route')
   }),
   assignment({
     n: 5,
@@ -698,7 +727,7 @@ const brief = [
     steps: [
       {where: 'Claude Code', text: 'Paste SOLO 5 · Part 2 after approval', prompt: SOLO_PARTS[5][1]},
       {where: 'Terminal', text: 'Create the ignored config only when it is absent', prompt: 'test -f .bree.local.json || cp .bree.example.json .bree.local.json'},
-      {where: 'Private editor', text: 'Fill the approved server and exact tool from the repository guide', after: 'Do not project internal values. Confirm .bree.local.json is ignored.'},
+      {where: 'Private editor', text: 'Fill the runtime approvals and exact tool from the repository guide', after: '.bree.local.json is ignored and is not MCP server configuration. Do not project internal values.'},
       {where: 'Terminal', text: 'Run the synthetic checks and preflight', prompt: 'npm test\nnpm run live:check', after: 'Inspect the allowed tool, schema check and host-write boundary. Stop before brief:live.'}
     ],
     notes: say('20 min', 'Build the approved route and prove its boundaries without reading live work data.', 'The participant builds the route, preserves an existing private config and runs synthetic checks plus live:check.', 'Overwriting an existing config, projecting internal values or running brief:live early.', 'The trainer sees only preflight status, SDK options and host-write boundary.', 'Assignment 5 · Part 3: create the private brief')
@@ -730,7 +759,7 @@ const brief = [
       {where: 'Human check', text: 'Inspect the three outputs'},
       {where: 'Human check', text: 'Approve or revise', after: 'Each status must match its synthetic evidence.'}
     ],
-    notes: say('10 min', 'Test the accepted contract against complete, missing and conflicting evidence.', 'Three synthetic outcomes with explicit READY, OPEN and CONFLICT behavior.', 'Fixing the test to match unsupported output or treating synthetic proof as live proof.', 'The trainer sees all three outputs and the accepted status rules.', 'Assignment 6 · Part 2: make proof repeatable')
+    notes: say('10 min', 'Test the accepted contract against complete, missing and conflicting evidence.', 'Parse and render ordinary-brief.json, missing-brief.json and conflict-brief.json through the real schema and renderer.', 'Rendering the same completed sample three times, fixing the test to match unsupported output or treating synthetic proof as live proof.', 'The trainer sees three distinct full-brief outputs and the accepted status rules.', 'Assignment 6 · Part 2: make proof repeatable')
   }),
   assignment({
     n: 6,

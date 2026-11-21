@@ -737,7 +737,13 @@ window.SLIDES = [
    },
    {
     "where": "Terminal",
-    "text": "claude --setting-sources project,user --strict-mcp-config --no-chrome"
+    "text": "claude --setting-sources project,user --permission-mode default --strict-mcp-config --no-chrome"
+   },
+   {
+    "where": "Claude Code",
+    "text": "Confirm the organisation-approved Vertex route",
+    "prompt": "/status",
+    "after": "Do not paste the first prompt when the approved route is unavailable. Keep model-assisted work OPEN."
    },
    {
     "where": "Claude Code",
@@ -746,20 +752,21 @@ window.SLIDES = [
    }
   ],
   "keyPoints": [
-   "Node.js 20 or newer, Git, and Claude Code on the organization-approved model route.",
-   "The bundled /visual-plan and /create-verification-skill are ready before first use.",
-   "Project skills add instructions, not connector access.",
-   "A5 uses the existing approved read-only Jira MCP."
+   "Node.js 20.12 or newer, Git, and Claude Code on the organization-approved model route.",
+   "Manual mode keeps each edit behind participant approval.",
+   "The synthetic A1–A4 session loads no MCP server.",
+   "A5 restarts with the organisation-provided Jira-only MCP configuration."
   ],
-  "notes": "Time: 10 min.\n\nWhy now: Start everyone from the same clean local project and introduce the bundled project skills before A1.\n\nWhat you see: Claude Code reads the starting files and .claude/skills/README.md, then names /visual-plan and /create-verification-skill. State that A5 uses the existing approved read-only Jira MCP and organization-approved model route.\n\nWatch for: Treating a skill as connector access, installing a new connector or switching to an unapproved personal account.\n\nStop: Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.\n\nNext: Ground rules: protect work data",
+  "notes": "Time: 10 min.\n\nWhy now: Start everyone from the same clean local project and introduce the bundled project skills before A1.\n\nWhat you see: Claude Code starts in Manual mode, reads the starting files and names the bundled skills. The strict synthetic session loads no MCP server; A5 has a separate approved Jira-only restart.\n\nWatch for: Treating a skill as connector access, relying on local settings or switching to an unapproved personal account.\n\nStop: Every participant has Claude Code open at the repository root. Missing live access is recorded OPEN and does not block synthetic work.\n\nNext: Ground rules: protect work data",
   "teach": {
    "time": "10 min",
    "gist": "Open the local project and identify the bundled skill for the next step.",
    "script": [
     {
-     "do": "Complete the three setup commands.",
+     "do": "Complete the setup commands and run /status.",
      "say": [
-      "Keep Claude Code and Terminal at the repository root."
+      "Keep Claude Code and Terminal at the repository root.",
+      "Do not run a model-assisted prompt until /status shows the approved Vertex route. Manual synthetic checks can continue when it does not."
      ]
     },
     {
@@ -772,7 +779,7 @@ window.SLIDES = [
      "do": "Explain the boundary.",
      "say": [
       "Bundled skills are reusable project instructions. They add no access to services.",
-      "A5 uses the existing approved Jira MCP. Missing approval or access stays OPEN."
+      "This strict session loads no MCP server. A5 restarts with the organisation-provided Jira-only config. Missing approval or access stays OPEN."
      ]
     }
    ],
@@ -2141,11 +2148,11 @@ window.SLIDES = [
   "cards": [
    {
     "title": "Next",
-    "body": "Restart and settle"
+    "body": "Restart with the approved source"
    }
   ],
   "keyPoints": [],
-  "notes": "Time: 60 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Restart and settle",
+  "notes": "Time: 60 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Restart with the approved source",
   "visual": {
    "countdown": 60,
    "bot": "wave",
@@ -2166,43 +2173,71 @@ window.SLIDES = [
     "Resume with Recall the morning before A4."
    ],
    "watch": [],
-   "next": "Restart and settle"
+   "next": "Restart with the approved source"
   }
  },
  {
-  "title": "Restart and settle",
-  "kicker": "Day 5 · 10 MIN",
-  "type": "pause",
-  "cards": [
+  "title": "Restart with the approved source",
+  "kicker": "Day 5 · SETUP · 10 MIN",
+  "subtitle": "Ask the trainer to make the existing Jira-only MCP config path available privately.",
+  "type": "practice",
+  "keyPoints": [
+   "The trainer supplies the path to an existing approved Jira-only config.",
+   "The file check must pass before Claude Code restarts.",
+   "Local settings are excluded.",
+   "A5 starts only after /status confirms the approved Vertex route."
+  ],
+  "notes": "Time: 10 min.\n\nWhy now: Move from synthetic work to the approved source boundary.\n\nWhat you see: A checked Jira-only MCP path, a new Manual session and the approved Vertex route in /status.\n\nWatch for: Creating a connector, exposing the private path, relying on local settings or continuing after a failed check.\n\nStop: The approved restart is ready, or live and model-assisted work are marked OPEN.\n\nNext: Two inputs, one DailyBrief product",
+  "layout": "exercise",
+  "stepsHeading": "Do this",
+  "steps": [
    {
-    "title": "Next",
-    "body": "Two inputs, one DailyBrief product"
+    "where": "Terminal",
+    "text": "Check the privately supplied config path",
+    "prompt": "test -n \"${AETHERLINK_JIRA_MCP_CONFIG:-}\" && test -f \"$AETHERLINK_JIRA_MCP_CONFIG\"",
+    "after": "If this fails, keep live access OPEN. Do not start the live session."
+   },
+   {
+    "where": "Terminal",
+    "text": "Start Manual mode with only that approved MCP config",
+    "prompt": "claude --setting-sources project,user --permission-mode default --strict-mcp-config --mcp-config \"$AETHERLINK_JIRA_MCP_CONFIG\" --no-chrome"
+   },
+   {
+    "where": "Claude Code",
+    "text": "Confirm the approved Vertex route",
+    "prompt": "/status",
+    "after": "If this fails, keep model-assisted and live work OPEN. Manual synthetic checks can continue."
    }
   ],
-  "keyPoints": [],
-  "notes": "Time: 10 min.\n\nStart the timer. Help only with the current checkpoint.\n\nNext: Two inputs, one DailyBrief product",
-  "visual": {
-   "countdown": 10,
-   "bot": "wave",
-   "place": "beside"
-  },
   "teach": {
    "time": "10 min",
-   "gist": "Restart and settle",
+   "gist": "Restart with only the approved source configuration.",
    "script": [
     {
-     "do": "Start the timer."
+     "do": "Ask the trainer to make the approved path available privately.",
+     "say": [
+      "Do not project the path or copy the MCP file into the repository."
+     ]
+    },
+    {
+     "do": "Run the file check before the restart.",
+     "say": [
+      "A failed check leaves the live route OPEN."
+     ]
+    },
+    {
+     "do": "Start Manual mode and run /status.",
+     "say": [
+      "Local settings are excluded. Continue to A5 only when the approved Vertex route is visible."
+     ]
     }
    ],
-   "do": [
-    "Start the timer."
+   "learn": [
+    "Load one approved source without broadening access."
    ],
-   "done": [
-    "Resume with Guardrails: no shortcuts past the person."
-   ],
-   "watch": [],
    "next": "Two inputs, one DailyBrief product"
-  }
+  },
+  "sdlc": "test"
  },
  {
   "title": "Two inputs, one DailyBrief product",
@@ -2334,7 +2369,7 @@ window.SLIDES = [
    "copy": [
     [
      "SOLO 5 · Claude Code",
-     "Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Show the expected red failure and stop for my approval."
+     "Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Include rejection cases for a failed or unstructured tool result, an unknown source ID, and any unexpected tool. Show the expected red failure and stop for my approval."
     ]
    ],
    "script": [
@@ -2358,7 +2393,7 @@ window.SLIDES = [
      "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
      "clip": "assets/day5-daily-brief-teach/a5-p1-guide.mp4",
      "mediaKind": "instruction-walkthrough",
-     "mediaFingerprint": "cd5e60cbad7d32bb"
+     "mediaFingerprint": "d67bb072ddb547ac"
     },
     {
      "do": "Step 1. Check that manual mode is on.",
@@ -2437,7 +2472,7 @@ window.SLIDES = [
    {
     "where": "Claude Code",
     "text": "Paste SOLO 5 · Part 1",
-    "prompt": "Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Show the expected red failure and stop for my approval."
+    "prompt": "Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Include rejection cases for a failed or unstructured tool result, an unknown source ID, and any unexpected tool. Show the expected red failure and stop for my approval."
    },
    {
     "where": "Claude Code",
@@ -2450,8 +2485,8 @@ window.SLIDES = [
     "after": "Continue only when the source boundary is accepted."
    }
   ],
-  "prompt": "Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Show the expected red failure and stop for my approval.",
-  "notes": "Time: 18 min.\n\nWhy now: Agree the exact source boundary before implementation.\n\nWhat you see: One approved read-only tool, four focused failing tests and a human decision.\n\nWatch for: Connector installation, broad tools, tokens or a live run before approval.\n\nStop: The trainer sees only the tool name and synthetic failing tests.\n\nNext: Assignment 5 · Part 2: Build and check the bounded route"
+  "prompt": "Read the accepted design, plan, DailyBrief contract, AGENTS.md, and the Bree config example. Use /mcp to inspect the existing organisation-approved Jira connection. Identify one exact read-only tool for my own permitted work items. Do not install a connector or create a token. Write focused tests first for the live configuration boundary, exact allowed tool, schema validation, and private output path. Include rejection cases for a failed or unstructured tool result, an unknown source ID, and any unexpected tool. Show the expected red failure and stop for my approval.",
+  "notes": "Time: 18 min.\n\nWhy now: Agree the exact source boundary after the approved restart.\n\nWhat you see: /mcp exposes one exact read-only tool. Focused tests reject failed or unstructured results, unknown source IDs and unexpected tools.\n\nWatch for: Connector installation, broad tools, tokens or a live run before approval.\n\nStop: The trainer sees only the tool name and synthetic failing tests. Missing access remains OPEN.\n\nNext: Assignment 5 · Part 2: Build and check the bounded route"
  },
  {
   "title": "Assignment 5 · Part 2: Build and check the bounded route",
@@ -2483,7 +2518,7 @@ window.SLIDES = [
    "copy": [
     [
      "SOLO 5 · Claude Code",
-     "After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Permit only the chosen Jira read tool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Deny every other agent tool. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run."
+     "After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Read only the selected server definition from the existing Jira-only config at AETHERLINK_JIRA_MCP_CONFIG and pass it explicitly as the SDK mcpServers option; a new SDK process does not inherit the CLI session configuration. Permit only the chosen Jira read tool. Set built-in tools to none, enable strict MCP config, and deny every other request in canUseTool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run."
     ]
    ],
    "script": [
@@ -2507,7 +2542,7 @@ window.SLIDES = [
      "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
      "clip": "assets/day5-daily-brief-teach/a5-p2-guide.mp4",
      "mediaKind": "instruction-walkthrough",
-     "mediaFingerprint": "149cfa2b0253cac7"
+     "mediaFingerprint": "644d6109f48d83b4"
     },
     {
      "do": "Step 1. Check that manual mode is on.",
@@ -2580,7 +2615,7 @@ window.SLIDES = [
    {
     "where": "Claude Code",
     "text": "Paste SOLO 5 · Part 2 after approval",
-    "prompt": "After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Permit only the chosen Jira read tool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Deny every other agent tool. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run."
+    "prompt": "After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Read only the selected server definition from the existing Jira-only config at AETHERLINK_JIRA_MCP_CONFIG and pass it explicitly as the SDK mcpServers option; a new SDK process does not inherit the CLI session configuration. Permit only the chosen Jira read tool. Set built-in tools to none, enable strict MCP config, and deny every other request in canUseTool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run."
    },
    {
     "where": "Terminal",
@@ -2589,8 +2624,8 @@ window.SLIDES = [
    },
    {
     "where": "Private editor",
-    "text": "Fill the approved server and exact tool from the repository guide",
-    "after": "Do not project internal values. Confirm .bree.local.json is ignored."
+    "text": "Fill the runtime approvals and exact tool from the repository guide",
+    "after": ".bree.local.json is ignored and is not MCP server configuration. Do not project internal values."
    },
    {
     "where": "Terminal",
@@ -2599,7 +2634,7 @@ window.SLIDES = [
     "after": "Inspect the allowed tool, schema check and host-write boundary. Stop before brief:live."
    }
   ],
-  "prompt": "After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Permit only the chosen Jira read tool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Deny every other agent tool. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run.",
+  "prompt": "After I approve the tests and boundary, build the smallest Claude Agent SDK route through the approved model provider. Read only the selected server definition from the existing Jira-only config at AETHERLINK_JIRA_MCP_CONFIG and pass it explicitly as the SDK mcpServers option; a new SDK process does not inherit the CLI session configuration. Permit only the chosen Jira read tool. Set built-in tools to none, enable strict MCP config, and deny every other request in canUseTool. Map available data into the complete DailyBrief schema. Keep unavailable sections OPEN and reject unvalidated output. Accept only exact Jira keys from the successful structured tool result as live source IDs. Let only the host write validated HTML to ~/.bree/briefs/YYYY-MM-DD.html with private permissions. Add npm run live:check and npm run brief:live. Never store raw connector output or expose credentials, customer data, or work email. Run the synthetic tests and live:check. Show the boundaries and diff, then stop before the live run.",
   "notes": "Time: 20 min.\n\nWhy now: Build the approved route and prove its boundaries without reading live work data.\n\nWhat you see: The participant builds the route, preserves an existing private config and runs synthetic checks plus live:check.\n\nWatch for: Overwriting an existing config, projecting internal values or running brief:live early.\n\nStop: The trainer sees only preflight status, SDK options and host-write boundary.\n\nNext: Assignment 5 · Part 3: Create the private live brief"
  },
  {
@@ -2878,7 +2913,7 @@ window.SLIDES = [
      "say": [
       "One happy path is not enough.",
       "Generate the feature map and verification skill before the journey.",
-      "Run complete, missing and conflicting synthetic cases.",
+      "Run ordinary-brief.json, missing-brief.json and conflict-brief.json through the real schema and renderer.",
       "Record live source and dated artifact evidence separately as PASS or OPEN.",
       "Review a local daily trigger proposal. Do not install or activate it."
      ]
@@ -2927,6 +2962,7 @@ window.SLIDES = [
     "A trigger proposal needs a command, working directory, logs, rollback and owner."
    ],
    "watch": [
+    "Rendering the same completed sample three times instead of the three full brief fixtures.",
     "Running both versions in the main working tree.",
     "Creating the worktrees before the accepted A6 commit.",
     "Removing the wrong worktree or not opening both pages."
@@ -2985,7 +3021,7 @@ window.SLIDES = [
    }
   ],
   "prompt": "Read docs/spec.md, the synthetic evaluation fixtures, package.json, and the current application routes. Write test/eval.test.ts for a complete brief, missing evidence with OPEN items, and conflicting evidence with CONFLICT items. Run npm run eval. Fix only mismatches with the accepted spec. Show the three outcomes and diff, then stop.",
-  "notes": "Time: 10 min.\n\nWhy now: Test the accepted contract against complete, missing and conflicting evidence.\n\nWhat you see: Three synthetic outcomes with explicit READY, OPEN and CONFLICT behavior.\n\nWatch for: Fixing the test to match unsupported output or treating synthetic proof as live proof.\n\nStop: The trainer sees all three outputs and the accepted status rules.\n\nNext: Assignment 6 · Part 2: Make proof repeatable"
+  "notes": "Time: 10 min.\n\nWhy now: Test the accepted contract against complete, missing and conflicting evidence.\n\nWhat you see: Parse and render ordinary-brief.json, missing-brief.json and conflict-brief.json through the real schema and renderer.\n\nWatch for: Rendering the same completed sample three times, fixing the test to match unsupported output or treating synthetic proof as live proof.\n\nStop: The trainer sees three distinct full-brief outputs and the accepted status rules.\n\nNext: Assignment 6 · Part 2: Make proof repeatable"
  },
  {
   "title": "Assignment 6 · Part 2: Make proof repeatable",
@@ -3026,7 +3062,7 @@ window.SLIDES = [
      "say": [
       "One happy path is not enough.",
       "Generate the feature map and verification skill before the journey.",
-      "Run complete, missing and conflicting synthetic cases.",
+      "Run ordinary-brief.json, missing-brief.json and conflict-brief.json through the real schema and renderer.",
       "Record live source and dated artifact evidence separately as PASS or OPEN.",
       "Review a local daily trigger proposal. Do not install or activate it."
      ]
@@ -3075,6 +3111,7 @@ window.SLIDES = [
     "A trigger proposal needs a command, working directory, logs, rollback and owner."
    ],
    "watch": [
+    "Rendering the same completed sample three times instead of the three full brief fixtures.",
     "Running both versions in the main working tree.",
     "Creating the worktrees before the accepted A6 commit.",
     "Removing the wrong worktree or not opening both pages."
@@ -3175,7 +3212,7 @@ window.SLIDES = [
      "say": [
       "One happy path is not enough.",
       "Generate the feature map and verification skill before the journey.",
-      "Run complete, missing and conflicting synthetic cases.",
+      "Run ordinary-brief.json, missing-brief.json and conflict-brief.json through the real schema and renderer.",
       "Record live source and dated artifact evidence separately as PASS or OPEN.",
       "Review a local daily trigger proposal. Do not install or activate it."
      ]
@@ -3224,6 +3261,7 @@ window.SLIDES = [
     "A trigger proposal needs a command, working directory, logs, rollback and owner."
    ],
    "watch": [
+    "Rendering the same completed sample three times instead of the three full brief fixtures.",
     "Running both versions in the main working tree.",
     "Creating the worktrees before the accepted A6 commit.",
     "Removing the wrong worktree or not opening both pages."

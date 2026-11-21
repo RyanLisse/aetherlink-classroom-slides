@@ -9,7 +9,7 @@ slides set the lesson order and contain the prompts that you share in class.
 2. In an existing clean trainer clone, run `git status --short`.
 3. If the output is empty, run `git pull --ff-only`.
 4. If the output is not empty, preserve the work and make a fresh sibling clone.
-5. Check Node.js 20 or newer, Git and a signed-in Claude Code session.
+5. Check Node.js 20.12 or newer, Git and a signed-in Claude Code session.
 6. Reuse an existing slide server. If none is running, run `python3 serve.py 8080`.
 
 Open these pairs from the same server:
@@ -91,6 +91,15 @@ approved Jira MCP are available. Participants inspect the existing setup with
 `/mcp`. They do not install a connector. Their live scope is limited to their
 own permitted Jira work items. Work email is not allowed. Missing approval,
 authentication, configuration, access or evidence stays `OPEN`.
+On **Restart with the approved source**, make `AETHERLINK_JIRA_MCP_CONFIG`
+available privately as the path to an existing approved Jira-only MCP
+configuration. Participants close the synthetic-only session and run the file
+check before restarting with `--permission-mode default --strict-mcp-config
+--mcp-config "$AETHERLINK_JIRA_MCP_CONFIG"`. They confirm the approved Vertex
+route with `/status` before `/mcp`. The selected setting sources exclude local
+settings. `.bree.local.json` records runtime approvals; it is not MCP server
+configuration. The SDK process must load the selected server definition again
+through `mcpServers`; it does not inherit the interactive CLI session.
 Start by asking what participants need to decide before their first meeting.
 Let them answer the Day 4 recap before revealing the cards. In the demo checkout,
 run `npm run brief:sample`. Open `out/latest.html` next to the fictional
@@ -151,10 +160,11 @@ live work data. Each clip shows the matching local step and evidence boundary:
 | A3 | Run `/visual-plan`; inspect fixtures and one exact Jira tool feeding the same schema, renderer and dated private HTML; review the ADR and plan. |
 | A4 Part 1 | Run the renderer test red, build the complete brief, rerun green and open every section. |
 | A4 Part 2 | Add one house-style test red, make the smallest change and prove the full brief still opens. |
-| A5 Part 1 | Inspect `/mcp`, select one exact tool and approve focused failing boundary tests. |
+| Restart with the approved source | Check the private Jira-only config path, restart Manual mode, and confirm the approved route with `/status`. |
+| A5 Part 1 | Inspect `/mcp`, select one exact tool and approve focused failing boundary tests, including failed results and unexpected tools. |
 | A5 Part 2 | Preserve the private config, build the bounded SDK route and run `live:check`. |
 | A5 Part 3 | Let the participant run `brief:live` privately and record only `PASS` or `OPEN`. |
-| A6 Part 1 | Run the complete, missing and conflicting evaluation cases. |
+| A6 Part 1 | Parse and render `ordinary-brief.json`, `missing-brief.json` and `conflict-brief.json` through the real schema and renderer. Do not render the same completed sample three times. |
 | A6 Part 2 | Run `/create-verification-skill`, one synthetic journey and the complete local gate. |
 | A6 Part 3 | Review the uninstalled trigger proposal, then continue to the worktree proof. |
 | A7 | Choose one bounded Jira, GitLab, Confluence or mock Outlook mission; run one synthetic test red and green; show the source boundary and visible result. |
@@ -178,9 +188,10 @@ only after approval. The agent returns validated DailyBrief data. The host
 writes only the validated artifact to `~/.bree/briefs/YYYY-MM-DD.html` with
 private permissions. Provider and client retention follow company policy.
 
-A6 creates `.claude/skills/verify-bree/`, runs complete, missing and conflict
-cases, executes one complete synthetic app journey, then reviews a local daily
-trigger proposal. The proposal names the command, working directory, private
+A6 creates `.claude/skills/verify-bree/`. Its three full fixtures run through
+the real schema and renderer; the same completed sample is not rendered three
+times. A6 then executes one complete synthetic app journey and reviews a local
+daily trigger proposal. The proposal names the command, working directory, private
 logs, rollback and owner. Do not install or enable a scheduler. Then A6 runs
 HEAD and HEAD^ in separate detached worktrees. HEAD^ is the recovery proof. Before A7, each
 participant chooses one result they actually saw in A6. They add a separate
