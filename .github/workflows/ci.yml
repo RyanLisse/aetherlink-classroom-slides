@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  render-bree-sample:
+  render-bree-demonstrations:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -34,14 +34,13 @@ jobs:
           go install github.com/charmbracelet/vhs@v0.10.0
           npm install --no-save --package-lock=false playwright@1.64.0
           npx --no-install playwright install --with-deps chromium
-      - name: Render representative Bree demonstrations
-        run: node tools/render-day5-guide-videos.mjs --sample
+      - name: Render all Bree demonstrations
+        run: node tools/render-day5-guide-videos.mjs
       - uses: actions/upload-artifact@v4
         with:
-          name: bree-demonstration-sample
+          name: bree-demonstrations
           path: |
-            assets/day5-daily-brief-teach/a4-p1-guide.mp4
-            assets/day5-daily-brief-teach/voice-p2-guide.mp4
+            assets/day5-daily-brief-teach/*-guide.mp4
             assets/day5-daily-brief-teach/manifest.json
   build:
     runs-on: ubuntu-latest
