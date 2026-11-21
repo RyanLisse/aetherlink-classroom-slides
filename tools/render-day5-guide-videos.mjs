@@ -176,6 +176,15 @@ const renderBrowser = async () => {
     await page.route('https://picsum.photos/**', route => route.abort('blockedbyclient'));
     await page.reload();
     await page.evaluate(() => scrollTo(0, 0));
+    const blockedState = await page.evaluate(() => ({
+      imageFailed: [...document.images].some(image => image.src.startsWith('https://picsum.photos/') && image.complete && image.naturalWidth === 0),
+      fallbackVisible: [...document.querySelectorAll('body *')].some(node => node.textContent?.trim() === 'The brief remains available if the illustration cannot load.' && getComputedStyle(node).display !== 'none'),
+      sections: [...document.querySelectorAll('h2')].map(node => node.textContent?.trim())
+    }));
+    const requiredSections = ['Summary', 'Push your work forward', 'Top to-dos', 'New updates', 'Your day', 'Sources'];
+    if (!blockedState.imageFailed || !blockedState.fallbackVisible || requiredSections.some(section => !blockedState.sections.includes(section))) {
+      throw new Error(`Blocked image result is incomplete: ${JSON.stringify(blockedState)}`);
+    }
     await label('SAME REVISION · CONTROLLED IMAGE FAILURE · BRIEF REMAINS USABLE');
     await page.waitForTimeout(4000);
     await page.mouse.wheel(0, 520);
@@ -207,6 +216,7 @@ try {
       sourceArchiveSha256: SOURCE_ARCHIVES[demo.source].sha256,
       command: id === 'a4-p1' ? 'real browser: loaded image, controlled block, usable brief' : demos[id].command,
       expectedExit: 0,
+      videoSha256: createHash('sha256').update(readFileSync(new URL(`assets/day5-daily-brief-teach/${id}-guide.mp4`, root))).digest('hex'),
       disclaimer: demo.source === 'participant'
         ? 'Offline synthetic demonstration — not a new Claude or connector execution'
         : 'Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution'
