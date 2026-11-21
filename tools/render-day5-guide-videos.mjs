@@ -199,8 +199,56 @@ const renderBrowser = async () => {
   }
 };
 
+const renderPlanBrowser = async () => {
+  const server = spawn('python3', ['-m', 'http.server', '4174', '--bind', '127.0.0.1', '--directory', participant.pathname], {stdio: 'ignore'});
+  try {
+    for (let attempt = 0; attempt < 40; attempt++) {
+      try { if ((await fetch('http://127.0.0.1:4174/docs/visual/2026-11-21-plan-bree.html')).ok) break; } catch {}
+      await new Promise(resolve => setTimeout(resolve, 250));
+    }
+    const {chromium} = await import('playwright');
+    const executablePath = process.env.CHROME_PATH || undefined;
+    const browser = await chromium.launch(executablePath ? {executablePath} : {});
+    const context = await browser.newContext({viewport: {width: 1148, height: 780}, recordVideo: {dir: temporary, size: {width: 1148, height: 780}}});
+    const page = await context.newPage();
+    const label = async text => page.evaluate(value => {
+      document.querySelector('#capture-label')?.remove();
+      const node = document.createElement('div');
+      node.id = 'capture-label';
+      node.textContent = value;
+      Object.assign(node.style, {position:'fixed',zIndex:'9999',top:'12px',left:'12px',padding:'10px 14px',background:'#061523',color:'#63d5e8',font:'700 18px Arial',border:'2px solid #63d5e8',borderRadius:'8px'});
+      document.body.append(node);
+    }, text);
+    await page.goto('http://127.0.0.1:4174/docs/visual/2026-11-21-plan-bree.html');
+    const planState = await page.evaluate(() => ({
+      title: document.querySelector('h1')?.textContent?.trim(),
+      text: document.body.innerText
+    }));
+    const requiredText = ['Synthetic fixtures', 'DailyBrief contract', 'HTML renderer', 'Approved source', 'Bounded Agent SDK', 'Private artifact', 'Proof after every step'];
+    if (planState.title !== 'Bree delivery plan' || requiredText.some(text => !planState.text.includes(text)) || !planState.text.includes('Live access is OPEN')) {
+      throw new Error(`Visual plan is incomplete: ${JSON.stringify(planState)}`);
+    }
+    await label('SAVED PARTICIPANT CHECKPOINT · b54a198 · VISUAL PLAN');
+    await page.waitForTimeout(4000);
+    await label('ACTION · REVIEW THE ACCEPTED PLAN AND OPEN GATES');
+    await page.waitForTimeout(1800);
+    await page.mouse.wheel(0, 500);
+    await page.waitForTimeout(3500);
+    await label('RESULT · LOCAL PLAN VISIBLE · LIVE ACCESS REMAINS OPEN');
+    await page.waitForTimeout(4000);
+    const video = page.video();
+    await page.close();
+    await context.close();
+    await browser.close();
+    const source = await video.path();
+    run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-i', source, '-vf', 'fps=20,format=yuv420p', '-c:v', 'libx264', '-preset', 'veryfast', '-threads', '1', 'assets/day5-daily-brief-teach/a3-guide.mp4'], {cwd: root});
+  } finally {
+    server.kill('SIGTERM');
+  }
+};
+
 try {
-  for (const id of selected) id === 'a4-p1' ? await renderBrowser() : renderTerminal(id);
+  for (const id of selected) id === 'a4-p1' ? await renderBrowser() : id === 'a3' ? await renderPlanBrowser() : renderTerminal(id);
   for (const id of selected) {
     const slide = slides.find(candidate => candidate.assignmentId === `brief-${id}`);
     const demo = id === 'a4-p1' ? {source: 'participant'} : demos[id];
@@ -213,7 +261,9 @@ try {
       evidenceSource: demo.source === 'participant' ? 'saved participant checkpoint' : 'saved trainer reference',
       sourceArchive: SOURCE_ARCHIVES[demo.source].file,
       sourceArchiveSha256: SOURCE_ARCHIVES[demo.source].sha256,
-      command: id === 'a4-p1' ? 'real browser: loaded image, controlled block, usable brief' : demos[id].command,
+      command: id === 'a4-p1'
+        ? 'real browser: loaded image, controlled block, usable brief'
+        : id === 'a3' ? 'real browser: inspect accepted visual plan and OPEN live gate' : demos[id].command,
       expectedExit: 0,
       videoSha256: createHash('sha256').update(readFileSync(new URL(`assets/day5-daily-brief-teach/${id}-guide.mp4`, root))).digest('hex'),
       disclaimer: demo.source === 'participant'

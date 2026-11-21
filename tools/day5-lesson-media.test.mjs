@@ -7,9 +7,12 @@ import {join} from 'node:path';
 import {test} from 'node:test';
 import vm from 'node:vm';
 
-test('the A4 Part 1 demo records the real browser and controlled blocked-image check', () => {
+test('the A3 and A4 demos record real browser evidence', () => {
   const source = readFileSync(new URL('render-day5-guide-videos.mjs', import.meta.url), 'utf8');
   assert.match(source, /recordVideo/);
+  assert.match(source, /2026-11-21-plan-bree\.html/);
+  assert.match(source, /REVIEW THE ACCEPTED PLAN AND OPEN GATES/);
+  assert.match(source, /Live access is OPEN/);
   assert.match(source, /picsum\.photos\/\*\*/);
   assert.match(source, /CONTROLLED IMAGE FAILURE/);
   assert.match(source, /PARTICIPANT_REVISION/);
