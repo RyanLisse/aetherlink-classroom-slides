@@ -1,119 +1,215 @@
 {
-  "format": 1,
-  "kind": "instruction-walkthrough",
+  "format": 2,
+  "kind": "evidence-demonstration",
   "generatedFrom": "day5-daily-brief-slides.js",
   "guides": [
     {
       "assignmentId": "brief-a1-p1",
       "file": "assets/day5-daily-brief-teach/a1-p1-guide.mp4",
       "fingerprint": "7d454932196f3933",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "grep -nE 'Maya|09:00|decision' intent.md sample/calendar-item.sample.json > /tmp/a1-choice.log; test $(wc -l < /tmp/a1-choice.log) -ge 3; head -10 /tmp/a1-choice.log",
+      "expectedExit": 0,
+      "videoSha256": "8c26aba1e38349cae4943b3733bb27f3fa61b3e94e993d3732be57fc81e37a8d",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a1-p2",
       "file": "assets/day5-daily-brief-teach/a1-p2-guide.mp4",
       "fingerprint": "8728a8a847513409",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "mv src/mini.ts src/mini.ts.saved; npm run test:mini >/tmp/a1-red.log 2>&1; red=$?; mv src/mini.ts.saved src/mini.ts; if [ $red -eq 0 ]; then exit 1; fi; printf 'RED exit: %s\\n' $red; grep -E 'ERR_MODULE_NOT_FOUND|fail ' /tmp/a1-red.log | tail -2; npm run test:mini && npm run mini",
+      "expectedExit": 0,
+      "videoSha256": "dbe1f4d05f05e03c3e49516f045552f2663bc5c6871daf82f46f8ed4a95428a9",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a2-p1",
       "file": "assets/day5-daily-brief-teach/a2-p1-guide.mp4",
       "fingerprint": "2c698a47ad774e0b",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "sed -n '3p;7p' docs/spec.md; printf '\\nField | Type\\n'; grep -E '^\\| (`(title|date|greeting|summary|moveWorkForward|topTodos|newUpdates|yourDay|sources)`|Content item)' docs/spec.md | cut -d'|' -f2-3 | sed 's/`//g'",
+      "expectedExit": 0,
+      "videoSha256": "4d3c0ea6ada75aef3ac243a1b4e5fffaa3919a6e5402a2c5d0de70fbf5652eac",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a2-p2",
       "file": "assets/day5-daily-brief-teach/a2-p2-guide.mp4",
       "fingerprint": "55c4d70893ddab6e",
-      "frameCount": 6,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "mv src/brief.ts src/brief.ts.saved; npm run test:schema >/tmp/a2-red.log 2>&1; red=$?; mv src/brief.ts.saved src/brief.ts; if [ $red -eq 0 ]; then exit 1; fi; printf 'RED exit: %s\\n' $red; grep -E 'ERR_MODULE_NOT_FOUND|fail ' /tmp/a2-red.log | tail -2; npm run test:schema",
+      "expectedExit": 0,
+      "videoSha256": "99119c453722b01def5f5ac924b2099cd35c16c8272c5fb160d2d6e78ae39a54",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a3",
       "file": "assets/day5-daily-brief-teach/a3-guide.mp4",
       "fingerprint": "e9e33959df5c8ca5",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "real browser: inspect accepted visual plan and OPEN live gate",
+      "expectedExit": 0,
+      "videoSha256": "b8535e981f8b234cae247fe5b8c0c200bac99a67637476c0367b04d915801fa0",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a4-p1",
       "file": "assets/day5-daily-brief-teach/a4-p1-guide.mp4",
       "fingerprint": "fae5486f839bf229",
-      "frameCount": 8,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "real browser: loaded image, controlled block, usable brief",
+      "expectedExit": 0,
+      "videoSha256": "529a30ed61311e8aa0b238f1c7d1e70f6e39210e1cc1d7f7cef1e75aa12510c1",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a4-p2",
       "file": "assets/day5-daily-brief-teach/a4-p2-guide.mp4",
       "fingerprint": "6a430614deca106b",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "b54a19851bda3b885b1ef087169744db664110c7",
+      "evidenceSource": "saved participant checkpoint",
+      "sourceArchive": ".github/capture-input/participant-b54a198.tar.gz",
+      "sourceArchiveSha256": "f76f7bf18296d3c2ec18cd0e481895bb793b35caa91703f67853bc86a49eaab0",
+      "command": "if ! grep -q 'EXIT_CODE=1' evidence/a4-picsum-replay/a4-red.log; then exit 1; fi; grep -E 'not ok|fail |EXIT_CODE' evidence/a4-picsum-replay/a4-red.log | tail -4; npm run test:render && npm run brief:sample && grep -c 'status open' out/latest.html",
+      "expectedExit": 0,
+      "videoSha256": "3845aba38ea5d967937423d03f35360f537b7fc8a9f343e4afe43dd01b0a83c4",
+      "disclaimer": "Offline synthetic demonstration — not a new Claude or connector execution"
     },
     {
       "assignmentId": "brief-a5-p1",
       "file": "assets/day5-daily-brief-teach/a5-p1-guide.mp4",
       "fingerprint": "d67bb072ddb547ac",
-      "frameCount": 8,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "set -o pipefail; npm run test:live 2>&1 | grep -E '✔|tests |pass |fail ' | tail -10",
+      "expectedExit": 0,
+      "videoSha256": "3357bf56063f7a7393571eb5f805953cb7a415a601e5a4f8cec7ace454e08e5f",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-a5-p2",
       "file": "assets/day5-daily-brief-teach/a5-p2-guide.mp4",
       "fingerprint": "644d6109f48d83b4",
-      "frameCount": 8,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "set -o pipefail; npm run typecheck && npm run test:live 2>&1 | grep -E 'tests |pass |fail '",
+      "expectedExit": 0,
+      "videoSha256": "90bb9a4e1ba592b80cd694a098f5bb1eb3853e851f2f4fd44d9f86477c322ed3",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-a5-p3",
       "file": "assets/day5-daily-brief-teach/a5-p3-guide.mp4",
       "fingerprint": "6485ea41ebd5979b",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "npm run live:check; code=$?; if [ $code -ne 1 ]; then exit 1; fi; printf 'Expected OPEN exit code: %s\\n' $code",
+      "expectedExit": 0,
+      "videoSha256": "12c4dc0ac703618cf29bdaafa165b26f888e9517014b7e6d4fcd2a1061256b1c",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-a6-p1",
       "file": "assets/day5-daily-brief-teach/a6-p1-guide.mp4",
       "fingerprint": "1c063517d3bef420",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "npm run eval",
+      "expectedExit": 0,
+      "videoSha256": "2576a2f51f1fcaf591c570633f9fa7714ead6dc567bb4136fb8963ee6fc5a706",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-a6-p2",
       "file": "assets/day5-daily-brief-teach/a6-p2-guide.mp4",
       "fingerprint": "88a90c05562c79a0",
-      "frameCount": 7,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "npm run docs:check && npm run typecheck && npm run eval",
+      "expectedExit": 0,
+      "videoSha256": "ef049318f6564154528b99cb301d4f14e4fb63b4a3d03423cf3c4313fb46dbd5",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-a6-p3",
       "file": "assets/day5-daily-brief-teach/a6-p3-guide.mp4",
       "fingerprint": "d34af2d0503c7ba3",
-      "frameCount": 8,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "grep -nE 'scheduler|daily trigger' docs/plan.md docs/gate.md > /tmp/a6-trigger.log; grep -q 'never installs or activates a scheduler' /tmp/a6-trigger.log; head -6 /tmp/a6-trigger.log",
+      "expectedExit": 0,
+      "videoSha256": "d428608958d48c0010bf8b02451537b75bad7e247e89d728f966b062ba999977",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-a7",
       "file": "assets/day5-daily-brief-teach/a7-guide.mp4",
       "fingerprint": "baba8b09a6085175",
-      "frameCount": 6,
-      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "npm run test:tool",
+      "expectedExit": 0,
+      "videoSha256": "29e8a7cc5bc5025cab4bc368562ffc35eb84f7873eecf712cfc1ed19473449ad",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-voice-p1",
       "file": "assets/day5-daily-brief-teach/voice-p1-guide.mp4",
       "fingerprint": "d73da41d89d70b78",
-      "frameCount": 8,
-      "disclaimer": "Instruction walkthrough — not a live ElevenLabs account or API recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "touch .env.local && git check-ignore .env.local && ! git status --short --untracked-files=all | grep -q '.env.local' && echo 'PASS: ignored key file is absent from Git status'",
+      "expectedExit": 0,
+      "videoSha256": "cd0d5658966fe03a7765faebfd49566c4364740157e2929d903301c506eac2c5",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     },
     {
       "assignmentId": "brief-voice-p2",
       "file": "assets/day5-daily-brief-teach/voice-p2-guide.mp4",
       "fingerprint": "383f9ef6f0a5afba",
-      "frameCount": 10,
-      "disclaimer": "Instruction walkthrough — not a live ElevenLabs account or API recording"
+      "evidenceRevision": "beec03ff9c1232704f74651e57e2da132874758e",
+      "evidenceSource": "saved trainer reference",
+      "sourceArchive": ".github/capture-input/trainer-beec03f.tar.gz",
+      "sourceArchiveSha256": "3967b737bb6ad65c1cf2f482d9880a3b89dfcf09f0455e7fe1a51caf03c02c06",
+      "command": "npm run test:voice",
+      "expectedExit": 0,
+      "videoSha256": "419d3fcd1822af400c98a857b1cc6de0f9cc1d0435b05dd3830d317c01362ce9",
+      "disclaimer": "Saved trainer reference with synthetic fixtures — not a live Claude, connector, or ElevenLabs execution"
     }
   ]
 }

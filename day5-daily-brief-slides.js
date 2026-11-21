@@ -4033,7 +4033,7 @@ window.SLIDES = [
     },
     {
      "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
-     "say": "This is a saved synthetic trainer reference with a mocked request. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.",
+     "say": "This saved synthetic trainer reference checks that the personal key file stays outside Git. No key or live request is shown. It is not a live ElevenLabs account or API recording.",
      "clip": "assets/day5-daily-brief-teach/voice-p1-guide.mp4",
      "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "d73da41d89d70b78"
