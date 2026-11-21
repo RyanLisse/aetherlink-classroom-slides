@@ -127,10 +127,7 @@ Set TypingSpeed 12ms
 
 Type "cd .day5-video-work/${directory}"
 Enter
-Sleep 300ms
-Type "clear; printf '\\033[1;36m${label}\\033[0m\\n${demo.result}\\n\\n'"
-Enter
-Sleep 900ms
+Sleep 700ms
 Type "${demo.command.replaceAll('"', '\\"')}"
 Enter
 Sleep 6s
@@ -185,6 +182,8 @@ const renderBrowser = async () => {
     if (!blockedState.imageFailed || !blockedState.fallbackVisible || requiredSections.some(section => !blockedState.sections.includes(section))) {
       throw new Error(`Blocked image result is incomplete: ${JSON.stringify(blockedState)}`);
     }
+    await page.evaluate(() => scrollTo(0, 0));
+    await page.waitForTimeout(300);
     await label('SAME REVISION · CONTROLLED IMAGE FAILURE · BRIEF REMAINS USABLE');
     await page.waitForTimeout(4000);
     await page.mouse.wheel(0, 520);
