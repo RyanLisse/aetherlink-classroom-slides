@@ -15,6 +15,7 @@ test('the A3 and A4 demos record real browser evidence', () => {
   assert.match(source, /Live access is OPEN/);
   assert.match(source, /documentElement\.style\.zoom = '1\.7'/);
   assert.match(source, /Field \| Type/);
+  assert.match(source, /title\|date\|greeting\|summary/);
   assert.match(source, /picsum\.photos\/\*\*/);
   assert.match(source, /CONTROLLED IMAGE FAILURE/);
   assert.match(source, /PARTICIPANT_REVISION/);

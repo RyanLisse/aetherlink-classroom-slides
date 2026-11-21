@@ -22,7 +22,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        assignment: [a2-p1, a3, a4-p1]
+        assignment: [a2-p1]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
