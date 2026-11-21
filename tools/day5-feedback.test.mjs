@@ -31,12 +31,18 @@ test('Daily Brief assignments use a clickable starter link and end in independen
   assert.match(start, /Node\.js 20\.12 or newer/);
   assert.match(start, /--setting-sources project,user --permission-mode default --strict-mcp-config --no-chrome/);
   assert.match(start, /\/status/);
+  assert.match(start, /preserve synthetic red and green command output with actual exit codes/);
+  assert.match(start, /Never reconstruct historical raw logs or record live connector contents/);
   const restart = JSON.stringify(slides.find(s => s.title === 'Restart with the approved source'));
   assert.match(restart, /AETHERLINK_JIRA_MCP_CONFIG/);
   assert.match(restart, /--strict-mcp-config --mcp-config/);
   const a5 = JSON.stringify(assignments.filter(s => s.assignmentId?.startsWith('brief-a5')));
   assert.match(a5, /strict MCP config/);
   assert.match(a5, /canUseTool/);
+  const a4 = JSON.stringify(assignments.filter(s => s.assignmentId?.startsWith('brief-a4')));
+  assert.match(a4, /https:\/\/picsum\.photos\/seed\/bree-morning\/1200\/400/);
+  assert.match(a4, /referrerpolicy=\\"no-referrer\\"/);
+  assert.match(a4, /stable visible fallback text/);
   const a7 = assignments.at(-1);
   assert.ok(!a7.prompt, 'A7 leaves the implementation prompt to the participant');
   assert.doesNotMatch(JSON.stringify(a7.steps), /git push|gh pr create/);

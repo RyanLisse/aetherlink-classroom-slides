@@ -141,11 +141,12 @@ Before the route, use the source link on “A brief worth opening” to open
 title and date through sources. Point to `OPEN` and `CONFLICT`, then return to
 the slide. This full synthetic page is the product target, not live proof.
 
-After A4 passes completely, you may demonstrate one optional decorative image
-with `https://picsum.photos/id/1015/1200/400`. It requires no key or account.
-It is public network content, not AI generation, source evidence or a new tool
-permission. Add alt text. Keep a local placeholder or omit the photo when
-offline; the complete brief must still render.
+A4 includes the default decorative image at
+`https://picsum.photos/seed/bree-morning/1200/400`. It requires no key or
+account. The fixed public seed contains no work data. Render it with empty alt
+text, `referrerpolicy="no-referrer"`, and stable visible text that remains when
+the image fails. Keep it outside the DailyBrief contract. It is public network
+content, not AI generation, source evidence or a new tool permission.
 
 The assignment clips are illustrative demonstrations. They do not prove live Jira
 access or current model behaviour. Keep fixtures synthetic and never record
@@ -158,7 +159,7 @@ live work data. Each clip shows the matching local step and evidence boundary:
 | A2 Part 1 | Reverse engineer and approve the complete contract. |
 | A2 Part 2 | Run the schema test red and green, including one rejected invalid sample. |
 | A3 | Run `/visual-plan`; inspect fixtures and one exact Jira tool feeding the same schema, renderer and dated private HTML; review the ADR and plan. |
-| A4 Part 1 | Run the renderer test red, build the complete brief, rerun green and open every section. |
+| A4 Part 1 | Run the renderer test red, build the complete brief with the fixed Picsum illustration and text fallback, rerun green and open every section. |
 | A4 Part 2 | Add one house-style test red, make the smallest change and prove the full brief still opens. |
 | Restart with the approved source | Check the private Jira-only config path, restart Manual mode, and confirm the approved route with `/status`. |
 | A5 Part 1 | Inspect `/mcp`, select one exact tool and approve focused failing boundary tests, including failed results and unexpected tools. |

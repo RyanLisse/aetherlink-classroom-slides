@@ -5,6 +5,16 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import vm from 'node:vm';
 
+const cliArguments = process.argv.slice(2);
+if (cliArguments.length > 1) throw new Error('Expected at most one --assignment option');
+if (cliArguments[0] && !cliArguments[0].startsWith('--assignment=')) {
+  throw new Error(`Unknown option: ${cliArguments[0]}`);
+}
+const requested = cliArguments[0]?.slice('--assignment='.length);
+if (cliArguments[0] && !/^(?:a[1-7](?:-p[1-3])?|voice-p[12])$/.test(requested)) {
+  throw new Error(`Unknown assignment selector: ${requested}`);
+}
+
 const root = new URL('../', import.meta.url);
 const context = {window: {}};
 vm.runInNewContext(readFileSync(new URL('day5-daily-brief-slides.js', root), 'utf8'), context);
@@ -77,8 +87,6 @@ const fingerprint = slide => createHash('sha256').update(JSON.stringify({
 })).digest('hex').slice(0, 16);
 
 const manifestUrl = new URL('assets/day5-daily-brief-teach/manifest.json', root);
-const requested = process.argv.find(argument => argument.startsWith('--assignment='))?.split('=')[1];
-if (requested && !/^(?:a[1-7](?:-p[1-3])?|voice-p[12])$/.test(requested)) throw new Error(`Unknown assignment selector: ${requested}`);
 const selectedAssignments = requested
   ? guidedSlides.filter(slide => slide.assignmentId === `brief-${requested}`)
   : guidedSlides;
@@ -114,10 +122,11 @@ try {
         body: 'Run /mcp in Claude Code. Inspect the approved Jira connection and choose its exact read-only tool. Do not add a connector.',
         footer: 'Run live:check before any approved private read · keep the live output private'
       })] : []),
-      ...(slide.assignmentId === 'brief-a4' ? [frame({
+      ...(slide.assignmentId === 'brief-a4-p1' ? [frame({
         label: 'BRIEF-A4 · LOCAL SYNTHETIC ARTIFACT',
-        title: 'Open out/latest.html',
-        body: 'Inspect every brief section, source label and visible OPEN state. Compare the generated page with the accepted contract and plan.',
+        title: 'Check the public illustration',
+        body: 'Use this fixed public photo. Block the image; the text and complete brief must remain readable.',
+        code: 'https://picsum.photos/seed/bree-morning/1200/400',
         footer: 'Instruction frame · not a captured participant result or live-source artifact'
       })] : []),
       ...(slide.assignmentId.startsWith('brief-a5') && /brief:live/.test(stepText) ? [frame({

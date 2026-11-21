@@ -158,9 +158,84 @@ The A2 review accepted the complete contract after adding one rule: every `sourc
 - The organisation-approved Jira-only MCP configuration, exact read-only tool, and confirmed structured result schema.
 - The private live Jira brief and dated artifact.
 - Optional ElevenLabs paid request, voice quality, quota, and account setup.
-- The eight dependency audit findings reported by the clean starter installation.
+- The initial eight dependency findings were closed in the follow-up below. Their original installation output remains historical evidence.
 - Historical A1 through A7 command transcripts were not redirected to files. New A5 through A7 hardening output is preserved separately under `evidence/`; `evidence/commands.md` remains a historical summary.
 
 ## Result
 
 All fourteen core assignment parts were executed synthetically in order. Focused local checks passed with schema 3, live boundary 8, full evaluation 6, and A7 tool 3 tests. Remote run `44863044663` passed the full suite, detached recovery, browser capture, cleanup, and artifact inspection. The corrected starter is merged. The lesson now documents Manual mode, explicit MCP configuration, the SDK boundary, and the A7 test convention. No live Claude, Vertex, Jira, private brief, or audio result is claimed.
+
+## Follow-up: close recoverable findings
+
+Date: 2026-11-21, after the walkthrough above. This section records new work; it does not replace historical observations or reconstruct missing command transcripts.
+
+### Dependencies and install scripts
+
+The smallest compatible lockfile update closed all eight affected package nodes: five moderate and three high findings. Direct dependency ranges and the Node `>=20.12` requirement stayed unchanged.
+
+| Package | Before | After |
+| --- | --- | --- |
+| `@hono/node-server` | 2.1.1 | 2.1.11 |
+| `@modelcontextprotocol/sdk` | 1.30.0 | 1.32.2 |
+| `body-parser` | 2.3.0 | 2.4.0 |
+| `fast-uri` | 3.1.8 | 3.1.9 |
+| `hono` | 4.13.8 | 4.13.19 |
+| `ip-address` | 10.7.1 | 10.7.6 |
+| `qs` | 6.16.0 | 6.17.1 |
+| `zod` | 4.6.5 | 4.6.7 |
+
+Zod validates untrusted output directly. MCP client fixes matter before an approved live connection is used. HTTP server transitive paths are not imported by Bree, but their compatible fixes remove the affected graph without new application code. See the [Zod advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) and [MCP advisory](https://github.com/advisories/GHSA-6prh-2h8m-c8cw).
+
+The two blocked scripts came from npm 12's install policy. The project now explicitly permits only `esbuild@0.28.2`, the version required by the existing `tsx` toolchain. It explicitly denies optional `fsevents`; this lesson does not use watch mode. This follows the [npm project policy](https://docs.npmjs.com/cli/v12/configuring-npm/package-json#allowscripts). It does not change global npm settings.
+
+Fresh isolated macOS installs completed for starter and trainer with npm 12. Their logs show the expected esbuild postinstall, zero audit findings, and no unresolved blocked script warning. `npm install-scripts ls --json` reported no unreviewed scripts. npm 12 was checked on a supported Node 24 runtime; the minimum Node 20.12 route uses its bundled npm. Starter and trainer package and lockfiles are byte-identical.
+
+Local evidence is retained outside the repositories under `/tmp/day5-recovery-20261121/`: before/after audit JSON files, clean-install logs in `dependency-clean/`, and script-policy readbacks. These are new follow-up outputs, not the missing historical A1–A7 transcripts.
+
+### Self-contained visual planning
+
+The bundled visual-plan skill no longer requires missing `/diagram` or `/archify` skills. Its small diagram uses inline SVG inside the existing offline HTML artifact. It uses the actual project progress file instead of assuming uppercase `PROGRESS.md`. Pack, starter, and trainer carry identical skill files.
+
+A skill-local checker rejects missing local skill dependencies. Positive checks passed, and a temporary missing-skill fixture failed as expected. A synthetic offline plan was followed manually and inspected visually. This is instruction proof, not a claim that Claude executed the skill.
+
+Independent review approved the repair. [Skills pack PR 12](https://github.com/AetherLink-bv/claude-code-skills-pack/pull/12) merged as [`fbf0822`](https://github.com/AetherLink-bv/claude-code-skills-pack/commit/fbf0822d45a2a93df9873ae3d6288b2f2801b8e4). The pack has no configured Actions workflow; its checker and the downstream docs checks provide the recorded verification.
+
+### Picsum as the default illustration
+
+Ryan selected a fixed public Lorem Picsum illustration for A4: `https://picsum.photos/seed/bree-morning/1200/400`. The seed is constant and contains no work data. The renderer needs no key, dependency, schema field, or image configuration.
+
+The image is decorative, uses an empty alternative text and a no-referrer policy, and leaves every brief section in ordinary HTML. A failed image request must not hide the brief. The original A4 attempt above skipped an optional photo; this new requirement is verified separately rather than attributed to that historical run.
+
+An independent synthetic participant replay started at the participant's own accepted A4 checkpoint `329fe43647cf57b608a7d9255005e9b31bb20f5d`. It copied the current participant instructions and references, preserved the accepted plan and specification, and did not read trainer code. The human review choice was Ryan's fixed public illustration requirement.
+
+The new image assertion failed first with exit code 1 because the fixed URL was absent. After the participant implementation, all three renderer tests passed, typecheck passed, and `brief:sample` wrote 2,472 bytes. Static checks confirmed seven synthetic items, three source labels, `OPEN`, and the fallback. The local replay checkpoint is `0464f74e251d3848c2ea1662bc6b3ceeae4d7b22`. Raw red/green logs, patch, valid Git bundle, HTML, and the instruction hashes are retained under `/tmp/day5-recovery-20261121/picsum-replay-evidence/`.
+
+The implementation and actual text logs are also published on the separate [replay evidence branch](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/tree/codex/ryan-picsum-replay), ending at documentation-only commit [`b54a198`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/commit/b54a19851bda3b885b1ef087169744db664110c7). It has no PR and must never merge into the starter.
+
+This replay used the historical participant dependency graph; its install warnings are not evidence about the repaired starter lockfile. The separate clean installs above verify that repair. The replay itself made no model or image request. Browser and public-network evidence are separate checks.
+
+### Remote follow-up verification
+
+[Trainer recovery run `44891190068`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/actions/runs/44891190068) passed on both Node 20.12.2 with npm 10.5.0 and Node 24.22.3 with npm 12.0.1. Each runtime completed a clean install, a zero-finding audit, docs checks, typecheck, all 41 tests, all six evaluations, and the synthetic sample render. The npm 12 policy readback contained no unreviewed install scripts.
+
+The same run captured the synthetic brief at 1499×878 in three distinct image states: the actual public Picsum request loaded, a deterministic mocked image loaded, and an explicitly blocked request left the caption and every brief section visible. The downloaded report and screenshots were inspected. The failed-image view retains the reserved image area; it does not hide brief content. Artifacts and logs are retained under `/tmp/day5-recovery-20261121/remote-tools/trainer-run-44891190068/` and in the linked Actions run.
+
+The temporary trainer proof workflow was removed after verification. The permanent workflow retains only the new audit command. Final trainer head is [`2f421f0`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/commit/2f421f008822ebcfec5d4af2b1d69a47686ae9f6), still on draft PR 13. Compared with tested head `beec03ff9c1232704f74651e57e2da132874758e`, only workflow restoration changed; application, dependencies, tests, and lesson documents are identical. No separate status check is attached to the cleanup-only head.
+
+[Starter PR 17](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/pull/17) passed [branch CI `44891255130`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/actions/runs/44891255130), merged as [`9971adc`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/commit/9971adc60028b359de7bcde445386a9b0cea7f1b), and passed [main CI `44891545467`](https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1/actions/runs/44891545467).
+
+[Final slides recovery run `44891924832`](https://github.com/AetherLink-bv/aetherlink-classroom-slides/actions/runs/44891924832) passed the media checks and 51 classroom checks. It rendered only `a4-p1`, recorded fingerprint `fae5486f839bf229`, and produced eight instruction frames. It checked all 46 slide titles and navigation entries, then captured slides 10, 21, 22, and 23 plus their presenter notes at 1499×878. The downloaded screenshots and the explicit Picsum instruction frame were inspected and readable. The local MP4 is byte-identical to the remote artifact, SHA-256 `f6b7a49fc140102ddbf3bcd8534efc466cda2ce511d1993c668702fb895e0319`.
+
+The [first temporary harness run `44891330313`](https://github.com/AetherLink-bv/aetherlink-classroom-slides/actions/runs/44891330313) failed before rendering because it compared arrays from different JavaScript contexts by prototype. That harness assertion was corrected. The final run above, rather than the failed attempt or an intermediate video, supplies the published media proof.
+
+After importing the final video, both required local lesson test files passed together: seven tests, zero failures. Alignment again passed with 14 parts and 12 exact prompts. Both docs checks include the new local skill dependency check. The normal slides CI workflow was restored without a net workflow change.
+
+### Evidence discipline
+
+The lesson now asks participants to capture synthetic red and green command output when each command runs. It records exit codes and forbids reconstructing old logs. Live brief content, credentials, and customer data remain outside repository evidence.
+
+The video-render command now rejects unsupported arguments and empty assignment selectors before launching media tools. A bounded regression test uses stub tools, so checking this failure mode cannot accidentally start an expensive render.
+
+Review also found that the existing A4-specific instruction frame still matched the obsolete `brief-a4` identifier. It now matches `brief-a4-p1` and explicitly shows the fixed Picsum URL and blocked-image check. A focused lesson-media assertion guards that instruction.
+
+Approved Claude/Vertex, Jira, private live-brief, and ElevenLabs proof remain `OPEN`. Dependency repair and synthetic rendering do not close those external gates.
