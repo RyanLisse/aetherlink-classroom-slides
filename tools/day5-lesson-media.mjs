@@ -16,13 +16,18 @@ export const addDay5LessonMedia = slides => slides.map(slide => {
   const [intro, demo, ...buildAndCheck] = slide.teach.script;
   const id = slide.assignmentId.slice(6);
   const voice = id.startsWith('voice-');
+  const trainerReference = /^(?:a[5-7]|voice-)/.test(id);
   const guide = {
-    do: 'Play the instruction walkthrough. Then demonstrate the real step and let participants run it.',
+    do: trainerReference
+      ? 'Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.'
+      : 'Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.',
     say: voice
-      ? 'This video explains the optional synthetic voice route. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.'
-      : 'This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.',
+      ? 'This is a saved synthetic trainer reference with a mocked request. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.'
+      : trainerReference
+        ? 'This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.'
+        : 'This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.',
     clip: `assets/day5-daily-brief-teach/${id}-guide.mp4`,
-    mediaKind: 'instruction-walkthrough',
+    mediaKind: 'evidence-demonstration',
     mediaFingerprint: fingerprint(slide)
   };
   return {

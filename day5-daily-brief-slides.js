@@ -1073,10 +1073,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a1-p1-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "7d454932196f3933"
     },
     {
@@ -1219,10 +1219,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a1-p2-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "8728a8a847513409"
     },
     {
@@ -1426,10 +1426,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a2-p1-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "2c698a47ad774e0b"
     },
     {
@@ -1572,10 +1572,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a2-p2-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "55c4d70893ddab6e"
     },
     {
@@ -1750,10 +1750,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a3-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "e9e33959df5c8ca5"
     },
     {
@@ -1896,10 +1896,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a4-p1-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "fae5486f839bf229"
     },
     {
@@ -2043,10 +2043,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the saved participant checkpoint. Point at the real action and its visible result, then let participants run their own step.",
+     "say": "This is a saved participant checkpoint with synthetic fixtures. It is not a new Claude or connector run. Reproduce the action and result in your own checkout.",
      "clip": "assets/day5-daily-brief-teach/a4-p2-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "6a430614deca106b"
     },
     {
@@ -2389,10 +2389,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a5-p1-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "d67bb072ddb547ac"
     },
     {
@@ -2538,10 +2538,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a5-p2-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "644d6109f48d83b4"
     },
     {
@@ -2682,10 +2682,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a5-p3-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "6485ea41ebd5979b"
     },
     {
@@ -2925,10 +2925,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a6-p1-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "1c063517d3bef420"
     },
     {
@@ -3074,10 +3074,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a6-p2-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "88a90c05562c79a0"
     },
     {
@@ -3224,10 +3224,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a6-p3-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "d34af2d0503c7ba3"
     },
     {
@@ -3673,10 +3673,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains where each action happens and what evidence to show. It uses synthetic content and is not a live Claude or connector recording. Record any live connector proof separately.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is saved trainer evidence from synthetic fixtures. It is not a live Claude or connector run. Keep every unavailable live proof OPEN.",
      "clip": "assets/day5-daily-brief-teach/a7-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "baba8b09a6085175"
     },
     {
@@ -4032,10 +4032,10 @@ window.SLIDES = [
      ]
     },
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains the optional synthetic voice route. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is a saved synthetic trainer reference with a mocked request. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.",
      "clip": "assets/day5-daily-brief-teach/voice-p1-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "d73da41d89d70b78"
     },
     {
@@ -4111,10 +4111,10 @@ window.SLIDES = [
    "gist": "Test without credits. Let the participant decide whether to make one synthetic API request.",
    "script": [
     {
-     "do": "Play the instruction walkthrough. Then demonstrate the real step and let participants run it.",
-     "say": "This video explains the optional synthetic voice route. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.",
+     "do": "Play the labeled synthetic trainer reference. Point at the real command and its visible result, then let participants run their own step.",
+     "say": "This is a saved synthetic trainer reference with a mocked request. It is not a live ElevenLabs account or API recording. Run the free mocked check before any explicit credit-using request.",
      "clip": "assets/day5-daily-brief-teach/voice-p2-guide.mp4",
-     "mediaKind": "instruction-walkthrough",
+     "mediaKind": "evidence-demonstration",
      "mediaFingerprint": "383f9ef6f0a5afba"
     },
     {

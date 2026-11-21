@@ -7,23 +7,24 @@ import {join} from 'node:path';
 import {test} from 'node:test';
 import vm from 'node:vm';
 
-test('the A4 Part 1 guide includes the fixed Picsum and blocked-image check', () => {
+test('the A4 Part 1 demo records the real browser and controlled blocked-image check', () => {
   const source = readFileSync(new URL('render-day5-guide-videos.mjs', import.meta.url), 'utf8');
-  assert.match(source, /slide\.assignmentId === 'brief-a4-p1'/);
-  assert.match(source, /https:\/\/picsum\.photos\/seed\/bree-morning\/1200\/400/);
-  assert.match(source, /Block the image/i);
+  assert.match(source, /recordVideo/);
+  assert.match(source, /picsum\.photos\/\*\*/);
+  assert.match(source, /CONTROLLED IMAGE FAILURE/);
+  assert.match(source, /PARTICIPANT_REVISION/);
 });
 
 test('the guide renderer rejects unknown arguments before invoking media tools', () => {
   const fakeBin = mkdtempSync(join(tmpdir(), 'day5-media-cli-'));
   const marker = join(fakeBin, 'media-tool-ran');
   try {
-    for (const command of ['sips', 'ffmpeg']) {
+    for (const command of ['vhs', 'ffmpeg']) {
       const path = join(fakeBin, command);
       writeFileSync(path, `#!/bin/sh\ntouch "${marker}"\nexit 91\n`);
       chmodSync(path, 0o755);
     }
-    for (const [argument, message] of [['--check', 'Unknown option: --check'], ['--assignment=', 'Unknown assignment selector:']]) {
+    for (const [argument, message] of [['--unknown', 'Unknown option: --unknown'], ['--assignment=', 'Unknown assignment selector:']]) {
       const result = spawnSync(process.execPath, ['tools/render-day5-guide-videos.mjs', argument], {
         cwd: new URL('../', import.meta.url),
         encoding: 'utf8',
@@ -63,10 +64,10 @@ test('every published Daily Brief assignment part links a class demo before indi
     assert.ok(existsSync(video), path);
     assert.ok(statSync(video).size > 10_000, `${path} contains a rendered video`);
     assert.equal(readFileSync(video).subarray(4, 8).toString(), 'ftyp', `${path} is a playable MP4 container`);
-    assert.equal(guides[0].mediaKind, 'instruction-walkthrough');
+    assert.equal(guides[0].mediaKind, 'evidence-demonstration');
     assert.match(guides[0].say, slide.assignmentId.startsWith('brief-voice')
       ? /not a live ElevenLabs account or API recording/i
-      : /not a live Claude or connector recording/i);
+      : /not a (?:new|live) Claude or connector (?:run|recording)/i);
     const currentFingerprint = createHash('sha256').update(JSON.stringify({
       title: slide.title,
       subtitle: slide.subtitle,
@@ -79,9 +80,13 @@ test('every published Daily Brief assignment part links a class demo before indi
     assert.equal(recorded?.file, path);
     assert.equal(recorded?.fingerprint, currentFingerprint, `${slide.assignmentId} video is stale; run node tools/render-day5-guide-videos.mjs`);
     assert.equal(guides[0].mediaFingerprint, currentFingerprint);
-    assert.match(recorded?.disclaimer ?? '', slide.assignmentId.startsWith('brief-voice')
-      ? /not a live ElevenLabs account or API recording/i
-      : /not a live Claude or connector recording/i);
+    if (manifest.format === 2) {
+      assert.equal(recorded?.evidenceRevision, /^(?:brief-a[1-4])/.test(slide.assignmentId)
+        ? 'b54a19851bda3b885b1ef087169744db664110c7'
+        : 'beec03ff9c1232704f74651e57e2da132874758e');
+      assert.match(recorded?.evidenceSource ?? '', /saved (?:participant checkpoint|trainer reference)/i);
+      assert.match(recorded?.disclaimer ?? '', /not a (?:new|live) /i);
+    }
     const firstParticipantAction = script.findIndex(beat => slide.assignmentId.startsWith('brief-voice')
       ? /^(?:Paste Part|Hand control)/.test(beat.do)
       : beat.do.startsWith('Step 1.'));
