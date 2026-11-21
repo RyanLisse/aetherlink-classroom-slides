@@ -8,14 +8,18 @@ import vm from 'node:vm';
 const root = new URL('../', import.meta.url);
 const context = {window: {}};
 vm.runInNewContext(readFileSync(new URL('day5-daily-brief-slides.js', root), 'utf8'), context);
-const assignments = context.window.SLIDES.filter(slide => /^brief-a[1-7]$/.test(slide.assignmentId ?? ''));
-if (assignments.length !== 7) throw new Error(`Expected seven assignments, found ${assignments.length}`);
+const assignments = context.window.SLIDES.filter(slide => /^brief-a[1-7](?:-p[1-3])?$/.test(slide.assignmentId ?? ''));
+const voiceBonus = context.window.SLIDES.filter(slide => /^brief-voice-p[12]$/.test(slide.assignmentId ?? ''));
+const guidedSlides = [...assignments, ...voiceBonus];
+const groups = new Set(assignments.map(slide => slide.assignmentId.match(/^brief-(a[1-7])/)[1]));
+if (groups.size !== 7) throw new Error(`Expected seven assignment groups, found ${groups.size}`);
+if (voiceBonus.length !== 2) throw new Error(`Expected two voice bonus parts, found ${voiceBonus.length}`);
 
-const assignmentText = JSON.stringify(assignments);
+const assignmentText = JSON.stringify(guidedSlides);
 if (/outlook\s+(?:connector|mcp)|(?:connector|mcp)[^.;]{0,40}outlook|microsoft\s+graph|live\s+(?:outlook|mailbox)/i.test(assignmentText)) {
   throw new Error('Assignment videos may use the synthetic Outlook fixture, but must not teach a live Outlook connector route');
 }
-const teachesInstallation = assignments.some(slide => slide.steps.some(step =>
+const teachesInstallation = guidedSlides.some(slide => slide.steps.some(step =>
   /^(?:install|add)\b.*\b(?:mcp|connector)\b/i.test(step.text?.trim() ?? '') ||
   /(?:npm|pnpm|yarn)\s+(?:i|install)\b|brew\s+install\b/i.test(step.prompt ?? '')
 ));
@@ -74,15 +78,15 @@ const fingerprint = slide => createHash('sha256').update(JSON.stringify({
 
 const manifestUrl = new URL('assets/day5-daily-brief-teach/manifest.json', root);
 const requested = process.argv.find(argument => argument.startsWith('--assignment='))?.split('=')[1];
-if (requested && !/^a[1-7]$/.test(requested)) throw new Error(`Unknown assignment selector: ${requested}`);
+if (requested && !/^(?:a[1-7](?:-p[1-3])?|voice-p[12])$/.test(requested)) throw new Error(`Unknown assignment selector: ${requested}`);
 const selectedAssignments = requested
-  ? assignments.filter(slide => slide.assignmentId === `brief-${requested}`)
-  : assignments;
+  ? guidedSlides.filter(slide => slide.assignmentId === `brief-${requested}`)
+  : guidedSlides;
 const manifest = requested
   ? JSON.parse(readFileSync(manifestUrl, 'utf8'))
   : {format: 1, kind: 'instruction-walkthrough', generatedFrom: 'day5-daily-brief-slides.js', guides: []};
 if (requested) {
-  for (const slide of assignments.filter(candidate => candidate.assignmentId !== `brief-${requested}`)) {
+  for (const slide of guidedSlides.filter(candidate => candidate.assignmentId !== `brief-${requested}`)) {
     const recorded = manifest.guides.find(guide => guide.assignmentId === slide.assignmentId);
     if (recorded?.fingerprint !== fingerprint(slide)) {
       throw new Error(`${slide.assignmentId} also changed; run a full media render instead of an assignment-only render`);
@@ -94,14 +98,17 @@ const temporary = mkdtempSync(join(tmpdir(), 'day5-guides-'));
 try {
   for (const slide of selectedAssignments) {
     const id = slide.assignmentId.slice(6);
+    const stepText = JSON.stringify(slide.steps);
     const frames = [
       frame({
         label: `${slide.assignmentId.toUpperCase()} · INSTRUCTION WALKTHROUGH`,
         title: slide.title,
         body: slide.subtitle || 'Follow the assignment steps in the participant repository.',
-        footer: 'Prepared with synthetic content · not a live Claude or connector recording'
+        footer: slide.assignmentId.startsWith('brief-voice')
+          ? 'Prepared with synthetic content · not a live ElevenLabs account or API recording'
+          : 'Prepared with synthetic content · not a live Claude or connector recording'
       }),
-      ...(slide.assignmentId === 'brief-a5' ? [frame({
+      ...(slide.assignmentId === 'brief-a5-p1' ? [frame({
         label: 'BRIEF-A5 · EXISTING APPROVED CONNECTION',
         title: 'Use the existing Jira MCP',
         body: 'Run /mcp in Claude Code. Inspect the approved Jira connection and choose its exact read-only tool. Do not add a connector.',
@@ -113,17 +120,29 @@ try {
         body: 'Inspect every brief section, source label and visible OPEN state. Compare the generated page with the accepted contract and plan.',
         footer: 'Instruction frame · not a captured participant result or live-source artifact'
       })] : []),
-      ...(slide.assignmentId === 'brief-a5' ? [frame({
+      ...(slide.assignmentId.startsWith('brief-a5') && /brief:live/.test(stepText) ? [frame({
         label: 'BRIEF-A5 · PRIVATE LIVE ARTIFACT',
         title: 'Keep the validated HTML private',
         body: 'Only the host application may write the validated artifact to ~/.bree/briefs/YYYY-MM-DD.html. Do not store raw connector output.',
         footer: 'The dated artifact stays OPEN unless an approved private run produced it'
       })] : []),
-      ...(slide.assignmentId === 'brief-a6' ? [frame({
+      ...(slide.assignmentId.startsWith('brief-a6') && /trigger|scheduler/i.test(stepText) ? [frame({
         label: 'BRIEF-A6 · TRIGGER PROPOSAL',
         title: 'Propose the daily trigger',
         body: 'Document its command, working directory, logs, rollback and owner. Review the proposal without installing or enabling a schedule.',
         footer: 'No scheduler is installed or activated in this walkthrough'
+      })] : []),
+      ...(slide.assignmentId === 'brief-voice-p1' ? [frame({
+        label: 'VOICE BONUS · PERSONAL KEY',
+        title: 'Keep the key outside chat and Git',
+        body: 'Use a personal account. Restrict the key to Text to Speech, set a small credit limit and save it only in the ignored .env.local file.',
+        footer: 'Synthetic brief only · skip this optional bonus when an external account is unavailable'
+      })] : []),
+      ...(slide.assignmentId === 'brief-voice-p2' ? [frame({
+        label: 'VOICE BONUS · FREE CHECK FIRST',
+        title: 'Test with a mocked response',
+        body: 'Run test:voice before the explicit API call. The test sends no network request and uses no credits. The HTML brief remains unchanged.',
+        footer: 'Instruction frame · no ElevenLabs request or live account recording'
       })] : []),
       ...(slide.teach?.copy ?? []).map(([name]) => frame({
         label: `${slide.assignmentId.toUpperCase()} · COPY-READY INPUT`,
@@ -169,7 +188,9 @@ try {
       file: `assets/day5-daily-brief-teach/${id}-guide.mp4`,
       fingerprint: fingerprint(slide),
       frameCount: frames.length,
-      disclaimer: 'Instruction walkthrough — not a live Claude or connector recording'
+      disclaimer: id.startsWith('voice-')
+        ? 'Instruction walkthrough — not a live ElevenLabs account or API recording'
+        : 'Instruction walkthrough — not a live Claude or connector recording'
     });
   }
   manifest.guides.sort((left, right) => left.assignmentId.localeCompare(right.assignmentId));

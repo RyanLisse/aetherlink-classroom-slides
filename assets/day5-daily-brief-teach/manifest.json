@@ -4,53 +4,116 @@
   "generatedFrom": "day5-daily-brief-slides.js",
   "guides": [
     {
-      "assignmentId": "brief-a1",
-      "file": "assets/day5-daily-brief-teach/a1-guide.mp4",
-      "fingerprint": "3e490bb269b4a311",
+      "assignmentId": "brief-a1-p1",
+      "file": "assets/day5-daily-brief-teach/a1-p1-guide.mp4",
+      "fingerprint": "7d454932196f3933",
       "frameCount": 7,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
     },
     {
-      "assignmentId": "brief-a2",
-      "file": "assets/day5-daily-brief-teach/a2-guide.mp4",
-      "fingerprint": "d9f256de56e247af",
+      "assignmentId": "brief-a1-p2",
+      "file": "assets/day5-daily-brief-teach/a1-p2-guide.mp4",
+      "fingerprint": "8728a8a847513409",
       "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a2-p1",
+      "file": "assets/day5-daily-brief-teach/a2-p1-guide.mp4",
+      "fingerprint": "2c698a47ad774e0b",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a2-p2",
+      "file": "assets/day5-daily-brief-teach/a2-p2-guide.mp4",
+      "fingerprint": "55c4d70893ddab6e",
+      "frameCount": 6,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
     },
     {
       "assignmentId": "brief-a3",
       "file": "assets/day5-daily-brief-teach/a3-guide.mp4",
-      "fingerprint": "1ad515a14398a10b",
+      "fingerprint": "e9e33959df5c8ca5",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a4-p1",
+      "file": "assets/day5-daily-brief-teach/a4-p1-guide.mp4",
+      "fingerprint": "4c07d434d0cda6f1",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a4-p2",
+      "file": "assets/day5-daily-brief-teach/a4-p2-guide.mp4",
+      "fingerprint": "6a430614deca106b",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a5-p1",
+      "file": "assets/day5-daily-brief-teach/a5-p1-guide.mp4",
+      "fingerprint": "cd5e60cbad7d32bb",
       "frameCount": 8,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
     },
     {
-      "assignmentId": "brief-a4",
-      "file": "assets/day5-daily-brief-teach/a4-guide.mp4",
-      "fingerprint": "6c29fe3ca439dc9a",
+      "assignmentId": "brief-a5-p2",
+      "file": "assets/day5-daily-brief-teach/a5-p2-guide.mp4",
+      "fingerprint": "149cfa2b0253cac7",
       "frameCount": 8,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
     },
     {
-      "assignmentId": "brief-a5",
-      "file": "assets/day5-daily-brief-teach/a5-guide.mp4",
-      "fingerprint": "48f1376fd66e8ba2",
-      "frameCount": 10,
+      "assignmentId": "brief-a5-p3",
+      "file": "assets/day5-daily-brief-teach/a5-p3-guide.mp4",
+      "fingerprint": "6485ea41ebd5979b",
+      "frameCount": 7,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
     },
     {
-      "assignmentId": "brief-a6",
-      "file": "assets/day5-daily-brief-teach/a6-guide.mp4",
-      "fingerprint": "719a09d8d3deaaa1",
-      "frameCount": 11,
+      "assignmentId": "brief-a6-p1",
+      "file": "assets/day5-daily-brief-teach/a6-p1-guide.mp4",
+      "fingerprint": "1c063517d3bef420",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a6-p2",
+      "file": "assets/day5-daily-brief-teach/a6-p2-guide.mp4",
+      "fingerprint": "88a90c05562c79a0",
+      "frameCount": 7,
+      "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-a6-p3",
+      "file": "assets/day5-daily-brief-teach/a6-p3-guide.mp4",
+      "fingerprint": "d34af2d0503c7ba3",
+      "frameCount": 8,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
     },
     {
       "assignmentId": "brief-a7",
       "file": "assets/day5-daily-brief-teach/a7-guide.mp4",
-      "fingerprint": "05f38c0e2cb49f11",
-      "frameCount": 7,
+      "fingerprint": "baba8b09a6085175",
+      "frameCount": 6,
       "disclaimer": "Instruction walkthrough — not a live Claude or connector recording"
+    },
+    {
+      "assignmentId": "brief-voice-p1",
+      "file": "assets/day5-daily-brief-teach/voice-p1-guide.mp4",
+      "fingerprint": "d73da41d89d70b78",
+      "frameCount": 8,
+      "disclaimer": "Instruction walkthrough — not a live ElevenLabs account or API recording"
+    },
+    {
+      "assignmentId": "brief-voice-p2",
+      "file": "assets/day5-daily-brief-teach/voice-p2-guide.mp4",
+      "fingerprint": "383f9ef6f0a5afba",
+      "frameCount": 10,
+      "disclaimer": "Instruction walkthrough — not a live ElevenLabs account or API recording"
     }
   ]
 }

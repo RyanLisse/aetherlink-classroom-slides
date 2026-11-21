@@ -19,9 +19,8 @@ test('Daily Brief assignments use a clickable starter link and end in independen
   vm.runInNewContext(read('day5-daily-brief-slides.js'), context);
   const slides = context.window.SLIDES;
   const assignments = slides.filter(s => s.assignmentId?.startsWith('brief-a'));
-  assert.deepEqual(Array.from(assignments, s => s.assignmentId), [
-    'brief-a1', 'brief-a2', 'brief-a3', 'brief-a4', 'brief-a5', 'brief-a6', 'brief-a7'
-  ]);
+  assert.deepEqual([...new Set(Array.from(assignments, s => Number(s.assignmentId.match(/^brief-a([1-7])/)[1])))], [1, 2, 3, 4, 5, 6, 7]);
+  assert.equal(new Set(assignments.map(s => s.assignmentId)).size, assignments.length);
   for (const slide of assignments) {
     assert.equal(slide.repo?.url, 'https://github.com/AetherLink-bv/aetherlink-daily-brief-lab-s1');
     assert.ok(slide.steps.length, `${slide.assignmentId} contains participant steps`);

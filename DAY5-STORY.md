@@ -20,8 +20,9 @@ Use this with the Daily Brief deck and presenter notes. The participant builds a
 4. Open the full synthetic editorial brief.
 5. Reverse engineer its structure: title, date, greeting, summary, one move-work-forward action, top to-dos, new updates, your day and sources.
 6. Show fixtures and one approved source producing the same `DailyBrief` schema and HTML renderer.
-7. Build Bree through A1 to A6. Apply the method independently in A7.
-8. Close Bree before opening Sonny as the optional bonus.
+7. Build Bree through A1 to A6. Each long assignment uses short reviewable parts.
+8. Apply the method independently in A7 and close the core lesson.
+9. Optionally add synthetic voice, then open Sonny as the separate on-call bonus.
 
 The Aetherbot represents the participant or illustrates Bree only when labelled. The example brief, calendar fixture and mock Outlook mail are fictional. They are instructional examples, not live connector proof.
 
@@ -70,6 +71,20 @@ The Aetherbot represents the participant or illustrates Bree only when labelled.
 | A6 | Can another person repeat the full proof and review future delivery? | Verification skill, journey, worktrees and an uninstalled trigger proposal. |
 | A7 | Which bounded mission can you now build yourself? | Own user, decision, boundary, proof and failure case. |
 
+Long assignments are split without changing their outcome. A1, A2 and A4 use two parts. A5 and A6 use three parts. A3 and A7 remain single assignments. A5 Part 3 is a human-controlled terminal step, not a Claude Code prompt.
+
+## Optional voice change request
+
+- Keep the accepted HTML brief as the product.
+- Use only `sample/brief.sample.json` for voice.
+- Send only the validated summary and top todos.
+- Preserve `OPEN` and `CONFLICT` in speech.
+- Use a participant-owned restricted ElevenLabs Text to Speech key.
+- Store the key only in ignored `.env.local`.
+- Mock `fetch` in tests so tests use no credits.
+- Run `npm run brief:voice` only as an explicit participant decision.
+- Keep a failed or skipped voice artifact `OPEN`; the HTML result remains accepted.
+
 ## Trainer opening
 
 > Imagine it is 08:30. Your first meeting starts in 30 minutes. What needs your attention, and which source supports that answer?
@@ -98,3 +113,4 @@ The Aetherbot represents the participant or illustrates Bree only when labelled.
 - A6 makes the proof repeatable and proposes, but does not enable, a scheduler.
 - CI, pull requests and public deployment remain outside the lesson.
 - A7 proves independent transfer. It does not repeat the entire Bree lifecycle.
+- Voice is optional. It never reads live connectors, private briefs or work data.

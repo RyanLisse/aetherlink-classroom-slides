@@ -34,6 +34,8 @@ Reviewed on 21 November 2026. The Daily Brief deck is the main lesson. Jessy's S
 | A6 | Generate reusable verification, run one synthetic journey, prove both versions and review a daily trigger proposal. | No scheduler is installed or enabled. |
 | A7 | Apply the method to one bounded Jira, GitLab, Confluence or mock Outlook mission. | One source, one exact tool, or the local synthetic Outlook fixture. |
 
+The deck splits long work into short review points: A1, A2 and A4 have two parts; A5 and A6 have three parts. A3 and A7 remain single assignments. A5 Part 3 is run by the participant in a private terminal.
+
 ## Product and safety alignment
 
 - Every content item uses `status`, `text` and `sourceIds`.
@@ -48,7 +50,7 @@ Reviewed on 21 November 2026. The Daily Brief deck is the main lesson. Jessy's S
 
 ## Materials alignment
 
-- Slides contain the exact six prompts from the participant lab.
+- Slides contain the exact prompts from the participant lab, split at the same human review points.
 - Presenter notes use the same commands, paths and checkpoints.
 - `/visual-plan` appears before A3.
 - `/create-verification-skill` appears before A6.
@@ -56,6 +58,8 @@ Reviewed on 21 November 2026. The Daily Brief deck is the main lesson. Jessy's S
 - A6 covers every HTML section, resolved source IDs, `OPEN`, `CONFLICT`, the dated path and an uninstalled trigger proposal.
 - Illustrative screenshots and clips do not claim live connector proof.
 - Trainer-only connector repair details stay outside the public repository.
+- The optional voice extension uses the exact two prompts from `docs/voice-extension.md`.
+- Voice tests mock the network. Only the participant may choose one explicit credit-using synthetic run.
 
 ## Deliberate limits
 
@@ -63,3 +67,4 @@ Reviewed on 21 November 2026. The Daily Brief deck is the main lesson. Jessy's S
 - GitLab and Confluence are optional A7 missions, not required Bree sources.
 - A7 is a transfer check, not a second complete lifecycle.
 - Sonny is a separate optional lesson with a higher-risk incident scenario.
+- ElevenLabs voice is a separate optional change request before Sonny. It never reads live work data.

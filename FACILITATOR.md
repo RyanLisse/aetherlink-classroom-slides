@@ -138,21 +138,28 @@ It is public network content, not AI generation, source evidence or a new tool
 permission. Add alt text. Keep a local placeholder or omit the photo when
 offline; the complete brief must still render.
 
-The seven clips are illustrative demonstrations. They do not prove live Jira
+The assignment clips are illustrative demonstrations. They do not prove live Jira
 access or current model behaviour. Keep fixtures synthetic and never record
 live work data. Each clip shows the matching local step and evidence boundary:
 
 | Clip | Recorded demonstration |
 | --- | --- |
-| A1 | Inspect intent, fixture and test; run the test red; apply the accepted `mini.ts`; rerun green; show the decision line. |
-| A2 | Inspect the contract and schema test; run red; apply the accepted schema and sample; rerun green, including rejection of the missing `start`. |
+| A1 Part 1 | Choose and approve one user and morning decision. |
+| A1 Part 2 | Run the mini test red, implement `mini.ts`, rerun green and show the decision line. |
+| A2 Part 1 | Reverse engineer and approve the complete contract. |
+| A2 Part 2 | Run the schema test red and green, including one rejected invalid sample. |
 | A3 | Run `/visual-plan`; inspect fixtures and one exact Jira tool feeding the same schema, renderer and dated private HTML; review the ADR and plan. |
-| A4 | Run the renderer test red; apply the complete DailyBrief renderer; rerun green; add one house-style test red; rerun green; open every HTML section. |
-| A5 | Inspect `/mcp`, ignored local configuration, `live:check`, SDK options and the host write boundary. Do not show internal URLs, raw Jira data or the private artifact. |
-| A6 | Run `/create-verification-skill`, inspect the full feature map, execute one synthetic journey, review the uninstalled trigger proposal, then compare `HEAD^` and `HEAD`. |
+| A4 Part 1 | Run the renderer test red, build the complete brief, rerun green and open every section. |
+| A4 Part 2 | Add one house-style test red, make the smallest change and prove the full brief still opens. |
+| A5 Part 1 | Inspect `/mcp`, select one exact tool and approve focused failing boundary tests. |
+| A5 Part 2 | Preserve the private config, build the bounded SDK route and run `live:check`. |
+| A5 Part 3 | Let the participant run `brief:live` privately and record only `PASS` or `OPEN`. |
+| A6 Part 1 | Run the complete, missing and conflicting evaluation cases. |
+| A6 Part 2 | Run `/create-verification-skill`, one synthetic journey and the complete local gate. |
+| A6 Part 3 | Review the uninstalled trigger proposal, then continue to the worktree proof. |
 | A7 | Choose one bounded Jira, GitLab, Confluence or mock Outlook mission; run one synthetic test red and green; show the source boundary and visible result. |
 
-Regenerate the seven illustrative clips from the current deck and solution:
+Regenerate the illustrative clips from the current deck and solution:
 
 ```sh
 node tools/render-day5-guide-videos.mjs
@@ -193,8 +200,10 @@ After accepting A5, commit its working result before starting A6. Then commit
 the accepted A6 result. Check both commit identities before the recovery demo.
 
 The participant route uses no CI and opens no pull request. Keep delivery and
-rollback local. The skills pack appears only in the appendix and is not needed
-for Assignments 1 through 7.
+rollback local. Use one project skill only when it supports the current proof:
+`/grilling` in A1, `/eli5` in A2 and A5, `/visual-plan` in A3,
+`/verify-this` in A4, `/create-verification-skill` in A6 and `/handoff` in A7.
+Do not run `/review-and-ship` during the lesson.
 
 If the managed Jira MCP is missing or cannot authenticate, stop the live step.
 Do not expose internal registry URLs on the projector. Use the local trainer
@@ -202,7 +211,16 @@ appendix `trainer-private/day5-mcp-troubleshooting.md` privately. Repair only
 the managed setup. The participant records live proof as `OPEN` and continues
 with synthetic verification.
 
-After the Daily Brief close, use the scene transition from the 08:30 meeting
+After the Daily Brief close, offer the optional synthetic voice change request.
+Participants may skip it without losing the accepted core result. Use a personal
+free ElevenLabs account and a restricted Text to Speech key. Save the key only
+in ignored `.env.local`. Never use a shared trainer key. Never show the key.
+Tests mock `fetch` and use no credits. Only the participant may choose to run
+`npm run brief:voice`; it sends synthetic summary and top todos and may consume
+credits. Keep the HTML route unchanged. If account or API access fails, mark
+audio `OPEN` and continue. Do not claim the lesson author live-tested audio.
+
+After the optional voice change request, use the scene transition from the 08:30 meeting
 to the 03:45 incident. The same SDLC now supports an on-call SRE agent.
 The scope and responsibility change: participants inspect an incident and
 review a proposed action. They do not reuse Bree as an incident agent.
