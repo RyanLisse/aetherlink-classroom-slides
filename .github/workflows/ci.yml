@@ -15,10 +15,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  render-bree-a3:
+  render-bree-selected:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      max-parallel: 2
+      matrix:
+        assignment: [a2-p1, a3, a4-p1]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,13 +38,13 @@ jobs:
           go install github.com/charmbracelet/vhs@v0.10.0
           npm install --no-save --package-lock=false playwright@1.64.0
           npx --no-install playwright install --with-deps chromium
-      - name: Render the visual-plan demonstration
-        run: node tools/render-day5-guide-videos.mjs --assignment=a3
+      - name: Render the selected demonstration
+        run: node tools/render-day5-guide-videos.mjs --assignment=${{ matrix.assignment }}
       - uses: actions/upload-artifact@v4
         with:
-          name: bree-a3-demonstration
+          name: bree-${{ matrix.assignment }}-demonstration
           path: |
-            assets/day5-daily-brief-teach/a3-guide.mp4
+            assets/day5-daily-brief-teach/${{ matrix.assignment }}-guide.mp4
             assets/day5-daily-brief-teach/manifest.json
   build:
     runs-on: ubuntu-latest
